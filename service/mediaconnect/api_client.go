@@ -19,7 +19,7 @@ import (
 const ServiceID = "MediaConnect"
 const ServiceAPIVersion = "2018-11-14"
 
-// API for AWS Elemental MediaConnect
+// Client provides the API client to make operations call for AWS MediaConnect.
 type Client struct {
 	options Options
 }

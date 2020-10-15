@@ -20,7 +20,7 @@ import (
 // deployment or that failed to deploy. Related Topics
 //
 //     *
-// DeleteEnvironmentConfiguration ()
+// DeleteEnvironmentConfiguration
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSettingsInput{}
@@ -63,7 +63,7 @@ type DescribeConfigurationSettingsInput struct {
 // environment.
 type DescribeConfigurationSettingsOutput struct {
 
-	// A list of ConfigurationSettingsDescription ().
+	// A list of ConfigurationSettingsDescription.
 	ConfigurationSettings []*types.ConfigurationSettingsDescription
 
 	// Metadata pertaining to the operation's result.

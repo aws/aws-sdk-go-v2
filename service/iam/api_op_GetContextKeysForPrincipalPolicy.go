@@ -16,14 +16,14 @@ import (
 // policies attached to groups that the user is a member of. You can optionally
 // include a list of one or more additional policies, specified as strings. If you
 // want to include only a list of policies by string, use
-// GetContextKeysForCustomPolicy () instead. Note: This API discloses information
+// GetContextKeysForCustomPolicy instead. Note: This API discloses information
 // about the permissions granted to other users. If you do not want users to see
 // other user's permissions, then consider allowing them to use
-// GetContextKeysForCustomPolicy () instead. Context keys are variables maintained
-// by AWS and its services that provide details about the context of an API query
+// GetContextKeysForCustomPolicy instead. Context keys are variables maintained by
+// AWS and its services that provide details about the context of an API query
 // request. Context keys can be evaluated by testing against a value in an IAM
-// policy. Use GetContextKeysForPrincipalPolicy () to understand what key names and
-// values you must supply when you call SimulatePrincipalPolicy ().
+// policy. Use GetContextKeysForPrincipalPolicy to understand what key names and
+// values you must supply when you call SimulatePrincipalPolicy.
 func (c *Client) GetContextKeysForPrincipalPolicy(ctx context.Context, params *GetContextKeysForPrincipalPolicyInput, optFns ...func(*Options)) (*GetContextKeysForPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &GetContextKeysForPrincipalPolicyInput{}
@@ -73,8 +73,8 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	PolicyInputList []*string
 }
 
-// Contains the response to a successful GetContextKeysForPrincipalPolicy () or
-// GetContextKeysForCustomPolicy () request.
+// Contains the response to a successful GetContextKeysForPrincipalPolicy or
+// GetContextKeysForCustomPolicy request.
 type GetContextKeysForPrincipalPolicyOutput struct {
 
 	// The list of context keys that are referenced in the input policies.

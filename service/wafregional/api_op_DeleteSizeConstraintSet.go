@@ -16,21 +16,21 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes a SizeConstraintSet (). You can't delete a
+// global use. Permanently deletes a SizeConstraintSet. You can't delete a
 // SizeConstraintSet if it's still used in any Rules or if it still includes any
-// SizeConstraint () objects (any filters). If you just want to remove a
-// SizeConstraintSet from a Rule, use UpdateRule (). To permanently delete a
+// SizeConstraint objects (any filters). If you just want to remove a
+// SizeConstraintSet from a Rule, use UpdateRule. To permanently delete a
 // SizeConstraintSet, perform the following steps:
 //
 //     * Update the
 // SizeConstraintSet to remove filters, if any. For more information, see
-// UpdateSizeConstraintSet ().
+// UpdateSizeConstraintSet.
 //
-//     * Use GetChangeToken () to get the change token
-// that you provide in the ChangeToken parameter of a DeleteSizeConstraintSet
-// request.
+//     * Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of a DeleteSizeConstraintSet request.
 //
-//     * Submit a DeleteSizeConstraintSet request.
+//
+// * Submit a DeleteSizeConstraintSet request.
 func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSizeConstraintSetInput, optFns ...func(*Options)) (*DeleteSizeConstraintSetOutput, error) {
 	if params == nil {
 		params = &DeleteSizeConstraintSetInput{}
@@ -48,14 +48,14 @@ func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSize
 
 type DeleteSizeConstraintSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The SizeConstraintSetId of the SizeConstraintSet () that you want to delete.
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
-	// ListSizeConstraintSets ().
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to delete.
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by
+	// ListSizeConstraintSets.
 	//
 	// This member is required.
 	SizeConstraintSetId *string
@@ -65,7 +65,7 @@ type DeleteSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus ().
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

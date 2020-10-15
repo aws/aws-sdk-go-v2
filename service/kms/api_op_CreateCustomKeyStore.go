@@ -24,12 +24,11 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)
 // in the AWS Key Management Service Developer Guide. When the operation completes
 // successfully, it returns the ID of the new custom key store. Before you can use
-// your new custom key store, you need to use the ConnectCustomKeyStore ()
-// operation to connect the new key store to its AWS CloudHSM cluster. Even if you
-// are not going to use your custom key store immediately, you might want to
-// connect it to verify that all settings are correct and then disconnect it until
-// you are ready to use it. For help with failures, see Troubleshooting a Custom
-// Key Store
+// your new custom key store, you need to use the ConnectCustomKeyStore operation
+// to connect the new key store to its AWS CloudHSM cluster. Even if you are not
+// going to use your custom key store immediately, you might want to connect it to
+// verify that all settings are correct and then disconnect it until you are ready
+// to use it. For help with failures, see Troubleshooting a Custom Key Store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomKeyStoreInput, optFns ...func(*Options)) (*CreateCustomKeyStoreOutput, error) {

@@ -14,7 +14,7 @@ import (
 // Modifies many of the details of the specified secret. If you include a
 // ClientRequestToken and either SecretString or SecretBinary then it also creates
 // a new version attached to the secret. To modify the rotation configuration of a
-// secret, use RotateSecret () instead. The Secrets Manager console uses only the
+// secret, use RotateSecret instead. The Secrets Manager console uses only the
 // SecretString parameter and therefore limits you to encrypting and storing only a
 // text string. To encrypt and store binary data as part of the version of a
 // secret, you must use either the AWS CLI or one of the AWS SDKs.
@@ -67,16 +67,16 @@ import (
 // Related operations
 //
 //     * To create a new
-// secret, use CreateSecret ().
+// secret, use CreateSecret.
 //
 //     * To add only a new version to an existing
-// secret, use PutSecretValue ().
+// secret, use PutSecretValue.
 //
 //     * To get the details for a secret, use
-// DescribeSecret ().
+// DescribeSecret.
 //
 //     * To list the versions contained in a secret, use
-// ListSecretVersionIds ().
+// ListSecretVersionIds.
 func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, optFns ...func(*Options)) (*UpdateSecretOutput, error) {
 	if params == nil {
 		params = &UpdateSecretInput{}

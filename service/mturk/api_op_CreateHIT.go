@@ -21,14 +21,12 @@ import (
 // description and reward amount each time. An alternative way to create HITs is to
 // first generate a HITTypeID using the CreateHITType operation and then call the
 // CreateHITWithHITType operation. This is the recommended best practice for
-// Requesters who are creating large numbers of HITs.  <p>CreateHIT also supports
-// several ways to provide question data: by providing a value for the
-// <code>Question</code> parameter that fully specifies the contents of the HIT, or
-// by providing a <code>HitLayoutId</code> and associated
-// <code>HitLayoutParameters</code>. </p> <note> <p> If a HIT is created with 10 or
+// Requesters who are creating large numbers of HITs. CreateHIT also supports
+// several ways to provide question data: by providing a value for the Question
+// parameter that fully specifies the contents of the HIT, or by providing a
+// HitLayoutId and associated HitLayoutParameters. If a HIT is created with 10 or
 // more maximum assignments, there is an additional fee. For more information, see
-// <a href="https://requester.mturk.com/pricing">Amazon Mechanical Turk
-// Pricing</a>.</p> </note>
+// Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing).
 func (c *Client) CreateHIT(ctx context.Context, params *CreateHITInput, optFns ...func(*Options)) (*CreateHITOutput, error) {
 	if params == nil {
 		params = &CreateHITInput{}

@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the XssMatchSet () that is specified by XssMatchSetId.
+// global use. Returns the XssMatchSet that is specified by XssMatchSetId.
 func (c *Client) GetXssMatchSet(ctx context.Context, params *GetXssMatchSetInput, optFns ...func(*Options)) (*GetXssMatchSetOutput, error) {
 	if params == nil {
 		params = &GetXssMatchSetInput{}
@@ -33,30 +33,30 @@ func (c *Client) GetXssMatchSet(ctx context.Context, params *GetXssMatchSetInput
 	return out, nil
 }
 
-// A request to get an XssMatchSet ().
+// A request to get an XssMatchSet.
 type GetXssMatchSetInput struct {
 
-	// The XssMatchSetId of the XssMatchSet () that you want to get. XssMatchSetId is
-	// returned by CreateXssMatchSet () and by ListXssMatchSets ().
+	// The XssMatchSetId of the XssMatchSet that you want to get. XssMatchSetId is
+	// returned by CreateXssMatchSet and by ListXssMatchSets.
 	//
 	// This member is required.
 	XssMatchSetId *string
 }
 
-// The response to a GetXssMatchSet () request.
+// The response to a GetXssMatchSet request.
 type GetXssMatchSetOutput struct {
 
-	// Information about the XssMatchSet () that you specified in the GetXssMatchSet
+	// Information about the XssMatchSet that you specified in the GetXssMatchSet
 	// request. For more information, see the following topics:
 	//
-	//     * XssMatchSet ():
+	//     * XssMatchSet:
 	// Contains Name, XssMatchSetId, and an array of XssMatchTuple objects
 	//
 	//     *
-	// XssMatchTuple (): Each XssMatchTuple object contains FieldToMatch and
+	// XssMatchTuple: Each XssMatchTuple object contains FieldToMatch and
 	// TextTransformation
 	//
-	//     * FieldToMatch (): Contains Data and Type
+	//     * FieldToMatch: Contains Data and Type
 	XssMatchSet *types.XssMatchSet
 
 	// Metadata pertaining to the operation's result.

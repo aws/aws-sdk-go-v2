@@ -13,7 +13,7 @@ import (
 )
 
 // Lists notebook instance lifestyle configurations created with the
-// CreateNotebookInstanceLifecycleConfig () API.
+// CreateNotebookInstanceLifecycleConfig API.
 func (c *Client) ListNotebookInstanceLifecycleConfigs(ctx context.Context, params *ListNotebookInstanceLifecycleConfigsInput, optFns ...func(*Options)) (*ListNotebookInstanceLifecycleConfigsOutput, error) {
 	if params == nil {
 		params = &ListNotebookInstanceLifecycleConfigsInput{}

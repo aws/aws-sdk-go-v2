@@ -13,9 +13,8 @@ import (
 
 // Updates the automatic tape creation policy of a gateway. Use this to update the
 // policy with a new set of automatic tape creation rules. This is only supported
-// for tape gateways.  <p>By default, there is no automatic tape creation
-// policy.</p> <note> <p>A gateway can have only one automatic tape creation
-// policy.</p> </note>
+// for tape gateways. By default, there is no automatic tape creation policy. A
+// gateway can have only one automatic tape creation policy.
 func (c *Client) UpdateAutomaticTapeCreationPolicy(ctx context.Context, params *UpdateAutomaticTapeCreationPolicyInput, optFns ...func(*Options)) (*UpdateAutomaticTapeCreationPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateAutomaticTapeCreationPolicyInput{}
@@ -39,8 +38,8 @@ type UpdateAutomaticTapeCreationPolicyInput struct {
 	// This member is required.
 	AutomaticTapeCreationRules []*types.AutomaticTapeCreationRule
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -48,8 +47,8 @@ type UpdateAutomaticTapeCreationPolicyInput struct {
 
 type UpdateAutomaticTapeCreationPolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

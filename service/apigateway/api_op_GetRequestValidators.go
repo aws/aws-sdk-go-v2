@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets the RequestValidators () collection of a given RestApi ().
+// Gets the RequestValidators collection of a given RestApi.
 func (c *Client) GetRequestValidators(ctx context.Context, params *GetRequestValidatorsInput, optFns ...func(*Options)) (*GetRequestValidatorsOutput, error) {
 	if params == nil {
 		params = &GetRequestValidatorsInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetRequestValidators(ctx context.Context, params *GetRequestVal
 	return out, nil
 }
 
-// Gets the RequestValidators () collection of a given RestApi ().
+// Gets the RequestValidators collection of a given RestApi.
 type GetRequestValidatorsInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -51,8 +51,8 @@ type GetRequestValidatorsInput struct {
 	Title *string
 }
 
-// A collection of RequestValidator () resources of a given RestApi (). In OpenAPI,
-// the RequestValidators () of an API is defined by the
+// A collection of RequestValidator resources of a given RestApi. In OpenAPI, the
+// RequestValidators of an API is defined by the
 // x-amazon-apigateway-request-validators
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html)
 // extension. Enable Basic Request Validation in API Gateway

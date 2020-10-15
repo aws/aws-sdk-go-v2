@@ -86,12 +86,11 @@ type ExecuteStatementOutput struct {
 	// Metadata for the columns included in the results.
 	ColumnMetadata []*types.ColumnMetadata
 
-	// Values for fields generated during the request.  <note> <p>The
-	// <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get
-	// the values of generated fields, use the <code>RETURNING</code> clause. For more
-	// information, see <a
-	// href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From
-	// Modified Rows</a> in the PostgreSQL documentation.</p> </note>
+	// Values for fields generated during the request. The generatedFields data isn't
+	// supported by Aurora PostgreSQL. To get the values of generated fields, use the
+	// RETURNING clause. For more information, see Returning Data From Modified Rows
+	// (https://www.postgresql.org/docs/10/dml-returning.html) in the PostgreSQL
+	// documentation.
 	GeneratedFields []types.Field
 
 	// The number of records updated by the request.

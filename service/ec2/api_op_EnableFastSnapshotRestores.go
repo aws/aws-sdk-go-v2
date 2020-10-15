@@ -14,9 +14,9 @@ import (
 // Enables fast snapshot restores for the specified snapshots in the specified
 // Availability Zones. You get the full benefit of fast snapshot restores after
 // they enter the enabled state. To get the current state of fast snapshot
-// restores, use DescribeFastSnapshotRestores (). To disable fast snapshot
-// restores, use DisableFastSnapshotRestores (). For more information, see Amazon
-// EBS Fast Snapshot Restore
+// restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores,
+// use DisableFastSnapshotRestores. For more information, see Amazon EBS Fast
+// Snapshot Restore
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) EnableFastSnapshotRestores(ctx context.Context, params *EnableFastSnapshotRestoresInput, optFns ...func(*Options)) (*EnableFastSnapshotRestoresOutput, error) {

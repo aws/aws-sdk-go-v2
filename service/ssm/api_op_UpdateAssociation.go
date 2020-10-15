@@ -14,7 +14,7 @@ import (
 // Updates an association. You can update the association name and version, the
 // document version, schedule, parameters, and Amazon S3 output. In order to call
 // this API action, your IAM user account, group, or role must be configured with
-// permission to call the DescribeAssociation () API action. If you don't have
+// permission to call the DescribeAssociation API action. If you don't have
 // permission to call DescribeAssociation, then you receive the following error: An
 // error occurred (AccessDeniedException) when calling the UpdateAssociation
 // operation: User: is not authorized to perform: ssm:DescribeAssociation on
@@ -122,10 +122,10 @@ type UpdateAssociationInput struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems () API action. In
-	// this case, compliance data is not managed by State Manager. It is managed by
-	// your direct call to the PutComplianceItems () API action. By default, all
-	// associations use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API action. In this
+	// case, compliance data is not managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API action. By default, all associations
+	// use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
 	// The targets of the association.

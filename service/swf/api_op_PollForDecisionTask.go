@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Used by deciders to get a DecisionTask () from the specified decision taskList.
-// A decision task may be returned for any open workflow execution that is using
-// the specified task list. The task includes a paginated view of the history of
-// the workflow execution. The decider should use the workflow type and the history
-// to determine how to properly handle the task. This action initiates a long poll,
+// Used by deciders to get a DecisionTask from the specified decision taskList. A
+// decision task may be returned for any open workflow execution that is using the
+// specified task list. The task includes a paginated view of the history of the
+// workflow execution. The decider should use the workflow type and the history to
+// determine how to properly handle the task. This action initiates a long poll,
 // where the service holds the HTTP connection open and responds as soon a task
 // becomes available. If no decision task is available in the specified task list
 // before the timeout of 60 seconds expires, an empty result is returned. An empty
@@ -70,11 +70,10 @@ type PollForDecisionTaskInput struct {
 	// This member is required.
 	Domain *string
 
-	// Specifies the task list to poll for decision tasks.  <p>The specified string
-	// must not start or end with whitespace. It must not contain a <code>:</code>
-	// (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control
-	// characters (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it
-	// must not <i>be</i> the literal string <code>arn</code>.</p>
+	// Specifies the task list to poll for decision tasks. The specified string must
+	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
+	// (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also,
+	// it must not be the literal string arn.
 	//
 	// This member is required.
 	TaskList *types.TaskList
@@ -94,14 +93,12 @@ type PollForDecisionTaskInput struct {
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 60 seconds. Using an expired
 	// pagination token will return a 400 error: "Specified token has exceeded its
-	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
-	// how many results can be returned in a single call. </p> <note> <p>The
-	// <code>nextPageToken</code> returned by this action cannot be used with
-	// <a>GetWorkflowExecutionHistory</a> to get the next page. You must call
-	// <a>PollForDecisionTask</a> again (with the <code>nextPageToken</code>) to
-	// retrieve the next page of history records. Calling <a>PollForDecisionTask</a>
-	// with a <code>nextPageToken</code> doesn't return a new decision task.</p>
-	// </note>
+	// maximum lifetime". The configured maximumPageSize determines how many results
+	// can be returned in a single call. The nextPageToken returned by this action
+	// cannot be used with GetWorkflowExecutionHistory to get the next page. You must
+	// call PollForDecisionTask again (with the nextPageToken) to retrieve the next
+	// page of history records. Calling PollForDecisionTask with a nextPageToken
+	// doesn't return a new decision task.
 	NextPageToken *string
 
 	// When set to true, returns the events in reverse order. By default the results

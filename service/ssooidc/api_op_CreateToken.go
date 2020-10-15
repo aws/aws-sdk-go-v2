@@ -30,20 +30,20 @@ func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optF
 type CreateTokenInput struct {
 
 	// The unique identifier string for each client. This value should come from the
-	// persisted result of the RegisterClient () API.
+	// persisted result of the RegisterClient API.
 	//
 	// This member is required.
 	ClientId *string
 
 	// A secret string generated for the client. This value should come from the
-	// persisted result of the RegisterClient () API.
+	// persisted result of the RegisterClient API.
 	//
 	// This member is required.
 	ClientSecret *string
 
 	// Used only when calling this API for the device code grant type. This short-term
 	// code is used to identify this authentication attempt. This should come from an
-	// in-memory reference to the result of the StartDeviceAuthorization () API.
+	// in-memory reference to the result of the StartDeviceAuthorization API.
 	//
 	// This member is required.
 	DeviceCode *string

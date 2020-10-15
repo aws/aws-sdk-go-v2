@@ -86,7 +86,7 @@ type GetPartitionsInput struct {
 	// If an invalid type is encountered, an
 	// exception is thrown. The following list shows the valid operators on each type.
 	// When you define a crawler, the partitionKey type is created as a STRING, to be
-	// compatible with the catalog partitions.  <p> <i>Sample API Call</i>: </p>
+	// compatible with the catalog partitions. Sample API Call:
 	Expression *string
 
 	// The maximum number of partitions to return in a single response.

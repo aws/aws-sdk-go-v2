@@ -41,7 +41,7 @@ type DiscoverInputSchemaInput struct {
 	// This member is required.
 	ServiceExecutionRole *string
 
-	// The InputProcessingConfiguration () to use to preprocess the records before
+	// The InputProcessingConfiguration to use to preprocess the records before
 	// discovering the schema of the records.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 

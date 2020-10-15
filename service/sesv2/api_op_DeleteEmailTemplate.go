@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an email template.  <p>You can execute this operation no more than once
-// per second.</p>
+// Deletes an email template. You can execute this operation no more than once per
+// second.
 func (c *Client) DeleteEmailTemplate(ctx context.Context, params *DeleteEmailTemplateInput, optFns ...func(*Options)) (*DeleteEmailTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteEmailTemplateInput{}

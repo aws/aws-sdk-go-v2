@@ -11,9 +11,8 @@ import (
 )
 
 // Deletes the specified collection. Note that this operation removes all faces in
-// the collection. For an example, see delete-collection-procedure ().  <p>This
-// operation requires permissions to perform the
-// <code>rekognition:DeleteCollection</code> action.</p>
+// the collection. For an example, see delete-collection-procedure. This operation
+// requires permissions to perform the rekognition:DeleteCollection action.
 func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionInput, optFns ...func(*Options)) (*DeleteCollectionOutput, error) {
 	if params == nil {
 		params = &DeleteCollectionInput{}

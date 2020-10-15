@@ -52,7 +52,7 @@ type StartMedicalTranscriptionJobInput struct {
 	// The Amazon S3 location where the transcription is stored. You must set
 	// OutputBucketName for Amazon Transcribe Medical to store the transcription
 	// results. Your transcript appears in the S3 location you specify. When you call
-	// the GetMedicalTranscriptionJob (), the operation returns this location in the
+	// the GetMedicalTranscriptionJob, the operation returns this location in the
 	// TranscriptFileUri field. The S3 bucket must have permissions that allow Amazon
 	// Transcribe Medical to put files in the bucket. For more information, see
 	// Permissions Required for IAM User Roles
@@ -91,20 +91,20 @@ type StartMedicalTranscriptionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
 	// to encrypt the output of the transcription job. The user calling the
-	// StartMedicalTranscriptionJob () operation must have permission to use the
-	// specified KMS key. You use either of the following to identify a KMS key in the
-	// current account:
+	// StartMedicalTranscriptionJob operation must have permission to use the specified
+	// KMS key. You use either of the following to identify a KMS key in the current
+	// account:
 	//
 	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
+	//     * KMS
+	// Key Alias: "alias/ExampleAlias"
 	//
-	// * KMS Key Alias: "alias/ExampleAlias"
+	// You can use either of the following to identify
+	// a KMS key in the current account or another account:
 	//
-	// You can use either of the following to
-	// identify a KMS key in the current account or another account:
-	//
-	//     * Amazon
-	// Resource Name (ARN) of a KMS key in the current account or another account:
+	//     * Amazon Resource Name
+	// (ARN) of a KMS key in the current account or another account:
 	// "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	//     *

@@ -31,14 +31,17 @@ import (
 // on Outposts endpoint hostname prefix and the outpost-id derived using the access
 // point ARN, see the  Example
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples)
-// section below.  <p>For more information about object expiration, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions">
-// Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p>
-// <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html">PutBucketLifecycleConfiguration</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html">GetBucketLifecycleConfiguration</a>
-// </p> </li> </ul>
+// section below. For more information about object expiration, see  Elements to
+// Describe Lifecycle Actions
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions).
+// Related actions include:
+//
+//     * PutBucketLifecycleConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
+//
+//
+// * GetBucketLifecycleConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
 func (c *Client) DeleteBucketLifecycleConfiguration(ctx context.Context, params *DeleteBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*DeleteBucketLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteBucketLifecycleConfigurationInput{}

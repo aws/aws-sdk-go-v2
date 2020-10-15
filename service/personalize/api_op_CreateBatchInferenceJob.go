@@ -13,7 +13,7 @@ import (
 
 // Creates a batch inference job. The operation can handle up to 50 million records
 // and the input file must be in JSON format. For more information, see
-// recommendations-batch ().
+// recommendations-batch.
 func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatchInferenceJobInput, optFns ...func(*Options)) (*CreateBatchInferenceJobOutput, error) {
 	if params == nil {
 		params = &CreateBatchInferenceJobInput{}

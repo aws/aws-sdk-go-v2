@@ -100,7 +100,7 @@ type DeleteConnectionOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

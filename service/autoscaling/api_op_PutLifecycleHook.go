@@ -31,10 +31,10 @@ import (
 //
 //     * If you need more time, record the lifecycle action heartbeat
 // to keep the instance in a pending state using the RecordLifecycleActionHeartbeat
-// () API call.
+// API call.
 //
 //     * If you finish before the timeout period ends, complete the
-// lifecycle action using the CompleteLifecycleAction () API call.
+// lifecycle action using the CompleteLifecycleAction API call.
 //
 // For more
 // information, see Amazon EC2 Auto Scaling Lifecycle Hooks
@@ -42,8 +42,8 @@ import (
 // the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
 // lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.
 // You can view the lifecycle hooks for an Auto Scaling group using the
-// DescribeLifecycleHooks () API call. If you are no longer using a lifecycle hook,
-// you can delete it by calling the DeleteLifecycleHook () API.
+// DescribeLifecycleHooks API call. If you are no longer using a lifecycle hook,
+// you can delete it by calling the DeleteLifecycleHook API.
 func (c *Client) PutLifecycleHook(ctx context.Context, params *PutLifecycleHookInput, optFns ...func(*Options)) (*PutLifecycleHookOutput, error) {
 	if params == nil {
 		params = &PutLifecycleHookInput{}
@@ -80,7 +80,7 @@ type PutLifecycleHookInput struct {
 	// out. The range is from 30 to 7200 seconds. The default value is 3600 seconds (1
 	// hour). If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
 	// action that you specified in the DefaultResult parameter. You can prevent the
-	// lifecycle hook from timing out by calling the RecordLifecycleActionHeartbeat ()
+	// lifecycle hook from timing out by calling the RecordLifecycleActionHeartbeat
 	// API.
 	HeartbeatTimeout *int32
 

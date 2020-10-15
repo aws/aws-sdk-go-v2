@@ -409,9 +409,8 @@ type MetricAlarm struct {
 
 	// An array of MetricDataQuery structures, used in an alarm based on a metric math
 	// expression. Each structure either retrieves a metric or performs a math
-	// expression.  One item in the Metrics array is the math expression that the alarm
-	// watches. This expression by designated by having <code>ReturnValue</code> set to
-	// true.</p>
+	// expression. One item in the Metrics array is the math expression that the alarm
+	// watches. This expression by designated by having ReturnValue set to true.
 	Metrics []*MetricDataQuery
 
 	// The namespace of the metric associated with the alarm.
@@ -469,14 +468,13 @@ type MetricAlarm struct {
 // and as many as 10 structures that contain the Expression parameter to perform a
 // math expression. Of those Expression structures, one must have True as the value
 // for ReturnData. The result of this expression is the value the alarm watches.
-// <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a
-// single time series. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric
-// Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
-// <p>Some of the parameters of this structure also have different uses whether you
-// are using this structure in a <code>GetMetricData</code> operation or a
-// <code>PutMetricAlarm</code> operation. These differences are explained in the
-// following parameter list.</p>
+// Any expression used in a PutMetricAlarm operation must return a single time
+// series. For more information, see Metric Math Syntax and Functions
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
+// in the Amazon CloudWatch User Guide. Some of the parameters of this structure
+// also have different uses whether you are using this structure in a GetMetricData
+// operation or a PutMetricAlarm operation. These differences are explained in the
+// following parameter list.
 type MetricDataQuery struct {
 
 	// A short name used to tie this object to the results in the response. This name

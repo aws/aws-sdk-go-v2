@@ -19,22 +19,7 @@ import (
 const ServiceID = "Lightsail"
 const ServiceAPIVersion = "2016-11-28"
 
-// Amazon Lightsail is the easiest way to get started with Amazon Web Services
-// (AWS) for developers who need to build websites or web applications. It includes
-// everything you need to launch your project quickly – instances (virtual private
-// servers), managed databases, SSD-based block storage, static IP addresses, load
-// balancers, content delivery network (CDN) distributions, DNS management of
-// registered domains, and snapshots (backups) – for a low, predictable monthly
-// price.  <p>You can manage your Lightsail resources using the Lightsail console,
-// Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more
-// information about Lightsail concepts and tasks, see the <a
-// href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail
-// Dev Guide</a>.</p> <p>This API Reference provides detailed information about the
-// actions, data types, parameters, and errors of the Lightsail service. For more
-// information about the supported AWS Regions, endpoints, and service quotas for
-// the Lightsail service, see <a
-// href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon
-// Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>
+// Client provides the API client to make operations call for Amazon Lightsail.
 type Client struct {
 	options Options
 }

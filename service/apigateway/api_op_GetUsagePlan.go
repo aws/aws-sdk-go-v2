@@ -30,7 +30,7 @@ func (c *Client) GetUsagePlan(ctx context.Context, params *GetUsagePlanInput, op
 // The GET request to get a usage plan of a given plan identifier.
 type GetUsagePlanInput struct {
 
-	// [Required] The identifier of the UsagePlan () resource to be retrieved.
+	// [Required] The identifier of the UsagePlan resource to be retrieved.
 	//
 	// This member is required.
 	UsagePlanId *string
@@ -57,7 +57,7 @@ type GetUsagePlanOutput struct {
 	// The description of a usage plan.
 	Description *string
 
-	// The identifier of a UsagePlan () resource.
+	// The identifier of a UsagePlan resource.
 	Id *string
 
 	// The name of a usage plan.

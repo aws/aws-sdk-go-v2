@@ -542,7 +542,7 @@ type EnvironmentVariable struct {
 	// This member is required.
 	Value *string
 
-	// (Optional) Whether the variable's value will be returned by the DescribeApps ()
+	// (Optional) Whether the variable's value will be returned by the DescribeApps
 	// action. To conceal an environment variable's value, set Secure to true.
 	// DescribeApps then returns *****FILTERED***** instead of the actual value. The
 	// default value for Secure is false.
@@ -605,10 +605,10 @@ type Instance struct {
 
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. If this value is set to false, you must then update
-	// your instances manually by using CreateDeployment () to run the
-	// update_dependencies stack command or by manually running yum (Amazon Linux) or
-	// apt-get (Ubuntu) on the instances. We strongly recommend using the default value
-	// of true, to ensure that your instances have the latest security updates.
+	// your instances manually by using CreateDeployment to run the update_dependencies
+	// stack command or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on
+	// the instances. We strongly recommend using the default value of true, to ensure
+	// that your instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
 	// The instance ID.
@@ -623,7 +623,7 @@ type Instance struct {
 	InstanceType *string
 
 	// The ID of the last service error. For more information, call
-	// DescribeServiceErrors ().
+	// DescribeServiceErrors.
 	LastServiceErrorId *string
 
 	// An array containing the instance layer IDs.
@@ -866,10 +866,10 @@ type Layer struct {
 
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. If this value is set to false, you must then update
-	// your instances manually by using CreateDeployment () to run the
-	// update_dependencies stack command or manually running yum (Amazon Linux) or
-	// apt-get (Ubuntu) on the instances. We strongly recommend using the default value
-	// of true, to ensure that your instances have the latest security updates.
+	// your instances manually by using CreateDeployment to run the update_dependencies
+	// stack command or manually running yum (Amazon Linux) or apt-get (Ubuntu) on the
+	// instances. We strongly recommend using the default value of true, to ensure that
+	// your instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
 	// The layer ID.
@@ -1087,11 +1087,11 @@ type RdsDbInstance struct {
 // of standard recipes for each event. In addition, you can provide custom recipes
 // for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes
 // after the standard recipes. LayerCustomRecipes specifies the custom recipes for
-// a particular layer to be run in response to each of the five events.  <p>To
-// specify a recipe, use the cookbook's directory name in the repository followed
-// by two colons and the recipe name, which is the recipe's file name without the
-// .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in
-// the repository's phpapp2 folder.</p>
+// a particular layer to be run in response to each of the five events. To specify
+// a recipe, use the cookbook's directory name in the repository followed by two
+// colons and the recipe name, which is the recipe's file name without the .rb
+// extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the
+// repository's phpapp2 folder.
 type Recipes struct {
 
 	// An array of custom recipe names to be run following a configure event.

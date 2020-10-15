@@ -15,28 +15,26 @@ import (
 // returns a plaintext copy of the data key and a copy that is encrypted under a
 // customer master key (CMK) that you specify. You can use the plaintext key to
 // encrypt your data outside of AWS KMS and store the encrypted data key with the
-// encrypted data.  <p> <code>GenerateDataKey</code> returns a unique data key for
-// each request. The bytes in the plaintext key are not related to the caller or
-// the CMK.</p> <p>To generate a data key, specify the symmetric CMK that will be
-// used to encrypt the data key. You cannot use an asymmetric CMK to generate data
-// keys. To get the type of your CMK, use the <a>DescribeKey</a> operation. You
-// must also specify the length of the data key. Use either the
-// <code>KeySpec</code> or <code>NumberOfBytes</code> parameters (but not both).
-// For 128-bit and 256-bit data keys, use the <code>KeySpec</code> parameter. </p>
-// <p>To get only an encrypted copy of the data key, use
-// <a>GenerateDataKeyWithoutPlaintext</a>. To generate an asymmetric data key pair,
-// use the <a>GenerateDataKeyPair</a> or <a>GenerateDataKeyPairWithoutPlaintext</a>
-// operation. To get a cryptographically secure random byte string, use
-// <a>GenerateRandom</a>.</p> <p>You can use the optional encryption context to add
-// additional security to the encryption operation. If you specify an
-// <code>EncryptionContext</code>, you must specify the same encryption context (a
+// encrypted data. GenerateDataKey returns a unique data key for each request. The
+// bytes in the plaintext key are not related to the caller or the CMK. To generate
+// a data key, specify the symmetric CMK that will be used to encrypt the data key.
+// You cannot use an asymmetric CMK to generate data keys. To get the type of your
+// CMK, use the DescribeKey operation. You must also specify the length of the data
+// key. Use either the KeySpec or NumberOfBytes parameters (but not both). For
+// 128-bit and 256-bit data keys, use the KeySpec parameter. To get only an
+// encrypted copy of the data key, use GenerateDataKeyWithoutPlaintext. To generate
+// an asymmetric data key pair, use the GenerateDataKeyPair or
+// GenerateDataKeyPairWithoutPlaintext operation. To get a cryptographically secure
+// random byte string, use GenerateRandom. You can use the optional encryption
+// context to add additional security to the encryption operation. If you specify
+// an EncryptionContext, you must specify the same encryption context (a
 // case-sensitive exact match) when decrypting the encrypted data key. Otherwise,
-// the request to decrypt fails with an <code>InvalidCiphertextException</code>.
-// For more information, see <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption
-// Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>The
-// CMK that you use for this operation must be in a compatible key state. For
-// details, see How Key State Affects Use of a Customer Master Key
+// the request to decrypt fails with an InvalidCiphertextException. For more
+// information, see Encryption Context
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// in the AWS Key Management Service Developer Guide. The CMK that you use for this
+// operation must be in a compatible key state. For details, see How Key State
+// Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. How to use your data key We
 // recommend that you use the following pattern to encrypt data locally in your
@@ -62,8 +60,8 @@ import (
 //
 // To decrypt data outside of AWS KMS:
 //
-//     * Use the Decrypt () operation
-// to decrypt the encrypted data key. The operation returns a plaintext copy of the
+//     * Use the Decrypt operation to
+// decrypt the encrypted data key. The operation returns a plaintext copy of the
 // data key.
 //
 //     * Use the plaintext data key to decrypt data outside of AWS KMS,
@@ -85,18 +83,26 @@ func (c *Client) GenerateDataKey(ctx context.Context, params *GenerateDataKeyInp
 
 type GenerateDataKeyInput struct {
 
-	// Identifies the symmetric CMK that encrypts the data key.  <p>To specify a CMK,
-	// use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using
-	// an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a
-	// different AWS account, you must use the key ARN or alias ARN.</p> <p>For
-	// example:</p> <ul> <li> <p>Key ID:
-	// <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN:
-	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
-	// </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li>
-	// <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
-	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
-	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
-	// <a>ListAliases</a>.</p>
+	// Identifies the symmetric CMK that encrypts the data key. To specify a CMK, use
+	// its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
+	// account, you must use the key ARN or alias ARN. For example:
+	//
+	//     * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//     * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//
+	// * Alias name: alias/ExampleAlias
+	//
+	//     * Alias ARN:
+	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

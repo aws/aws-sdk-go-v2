@@ -13,50 +13,49 @@ import (
 
 // Retrieves utilization statistics for one or more fleets. These statistics
 // provide insight into how available hosting resources are currently being used.
-// To get statistics on available hosting resources, see DescribeFleetCapacity ().
-// You can request utilization data for all fleets, or specify a list of one or
-// more fleet IDs. When requesting multiple fleets, use the pagination parameters
-// to retrieve results as a set of sequential pages. If successful, a
-// FleetUtilization () object is returned for each requested fleet ID, unless the
-// fleet identifier is not found. Some API actions may limit the number of fleet
-// IDs allowed in one request. If a request exceeds this limit, the request fails
-// and the error message includes the maximum allowed. Learn more Setting up
-// GameLift Fleets
+// To get statistics on available hosting resources, see DescribeFleetCapacity. You
+// can request utilization data for all fleets, or specify a list of one or more
+// fleet IDs. When requesting multiple fleets, use the pagination parameters to
+// retrieve results as a set of sequential pages. If successful, a FleetUtilization
+// object is returned for each requested fleet ID, unless the fleet identifier is
+// not found. Some API actions may limit the number of fleet IDs allowed in one
+// request. If a request exceeds this limit, the request fails and the error
+// message includes the maximum allowed. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
 // Metrics for Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * Describe fleets:
 //
-//         * DescribeFleetAttributes ()
+// * Describe fleets:
 //
-//         *
-// DescribeFleetCapacity ()
-//
-//         * DescribeFleetPortSettings ()
+//         * DescribeFleetAttributes
 //
 //         *
-// DescribeFleetUtilization ()
+// DescribeFleetCapacity
 //
-//         * DescribeRuntimeConfiguration ()
+//         * DescribeFleetPortSettings
 //
+//         *
+// DescribeFleetUtilization
 //
-// * DescribeEC2InstanceLimits ()
+//         * DescribeRuntimeConfiguration
 //
-//         * DescribeFleetEvents ()
+//         *
+// DescribeEC2InstanceLimits
+//
+//         * DescribeFleetEvents
 //
 //     *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//     * StartFleetActions () or StopFleetActions ()
+//     * StartFleetActions or StopFleetActions
 func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeFleetUtilizationInput, optFns ...func(*Options)) (*DescribeFleetUtilizationOutput, error) {
 	if params == nil {
 		params = &DescribeFleetUtilizationInput{}

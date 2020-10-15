@@ -11,18 +11,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a Classic Load Balancer.  <p>You can add listeners, security groups,
+// Creates a Classic Load Balancer. You can add listeners, security groups,
 // subnets, and tags when you create your load balancer, or you can add them later
-// using <a>CreateLoadBalancerListeners</a>,
-// <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>,
-// and <a>AddTags</a>.</p> <p>To describe your current load balancers, see
-// <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you
-// can delete it using <a>DeleteLoadBalancer</a>.</p> <p>You can create up to 20
+// using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer,
+// AttachLoadBalancerToSubnets, and AddTags. To describe your current load
+// balancers, see DescribeLoadBalancers. When you are finished with a load
+// balancer, you can delete it using DeleteLoadBalancer. You can create up to 20
 // load balancers per region per account. You can request an increase for the
-// number of load balancers for your account. For more information, see <a
-// href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits
-// for Your Classic Load Balancer</a> in the <i>Classic Load Balancers
-// Guide</i>.</p>
+// number of load balancers for your account. For more information, see Limits for
+// Your Classic Load Balancer
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
+// in the Classic Load Balancers Guide.
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerInput{}
@@ -58,8 +57,7 @@ type CreateLoadBalancerInput struct {
 
 	// One or more Availability Zones from the same region as the load balancer. You
 	// must specify at least one Availability Zone. You can add more Availability Zones
-	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer
-	// ().
+	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer.
 	AvailabilityZones []*string
 
 	// The type of a load balancer. Valid only for load balancers in a VPC. By default,

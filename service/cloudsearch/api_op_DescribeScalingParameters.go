@@ -31,7 +31,7 @@ func (c *Client) DescribeScalingParameters(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Container for the parameters to the DescribeScalingParameters () operation.
+// Container for the parameters to the DescribeScalingParameters operation.
 // Specifies the name of the domain you want to describe.
 type DescribeScalingParametersInput struct {
 

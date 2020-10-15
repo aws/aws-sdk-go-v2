@@ -28,7 +28,7 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 	return out, nil
 }
 
-// Represents the input to DescribeEventCategories ().
+// Represents the input to DescribeEventCategories.
 type DescribeEventCategoriesInput struct {
 
 	// This parameter is not currently supported.
@@ -39,7 +39,7 @@ type DescribeEventCategoriesInput struct {
 	SourceType *string
 }
 
-// Represents the output of DescribeEventCategories ().
+// Represents the output of DescribeEventCategories.
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event category maps.

@@ -818,7 +818,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteActionTargetInput(v *DeleteAction
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ActionTargetArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ActionTargetArn must not be empty")}
+	}
 	if v.ActionTargetArn != nil {
+		if len(*v.ActionTargetArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ActionTargetArn must not be empty")}
+		}
 		if err := encoder.SetURI("ActionTargetArn").String(*v.ActionTargetArn); err != nil {
 			return err
 		}
@@ -878,7 +884,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteInsightInput(v *DeleteInsightInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InsightArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+	}
 	if v.InsightArn != nil {
+		if len(*v.InsightArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+		}
 		if err := encoder.SetURI("InsightArn").String(*v.InsightArn); err != nil {
 			return err
 		}
@@ -1363,7 +1375,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeStandardsControlsInput(v *Descr
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
+	if v.StandardsSubscriptionArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member StandardsSubscriptionArn must not be empty")}
+	}
 	if v.StandardsSubscriptionArn != nil {
+		if len(*v.StandardsSubscriptionArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member StandardsSubscriptionArn must not be empty")}
+		}
 		if err := encoder.SetURI("StandardsSubscriptionArn").String(*v.StandardsSubscriptionArn); err != nil {
 			return err
 		}
@@ -1423,7 +1441,13 @@ func awsRestjson1_serializeOpHttpBindingsDisableImportFindingsForProductInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProductSubscriptionArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ProductSubscriptionArn must not be empty")}
+	}
 	if v.ProductSubscriptionArn != nil {
+		if len(*v.ProductSubscriptionArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ProductSubscriptionArn must not be empty")}
+		}
 		if err := encoder.SetURI("ProductSubscriptionArn").String(*v.ProductSubscriptionArn); err != nil {
 			return err
 		}
@@ -1988,7 +2012,13 @@ func awsRestjson1_serializeOpHttpBindingsGetInsightResultsInput(v *GetInsightRes
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InsightArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+	}
 	if v.InsightArn != nil {
+		if len(*v.InsightArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+		}
 		if err := encoder.SetURI("InsightArn").String(*v.InsightArn); err != nil {
 			return err
 		}
@@ -2573,7 +2603,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -2644,7 +2680,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -2718,7 +2760,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -2798,7 +2846,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateActionTargetInput(v *UpdateAction
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ActionTargetArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ActionTargetArn must not be empty")}
+	}
 	if v.ActionTargetArn != nil {
+		if len(*v.ActionTargetArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ActionTargetArn must not be empty")}
+		}
 		if err := encoder.SetURI("ActionTargetArn").String(*v.ActionTargetArn); err != nil {
 			return err
 		}
@@ -2973,7 +3027,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateInsightInput(v *UpdateInsightInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InsightArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+	}
 	if v.InsightArn != nil {
+		if len(*v.InsightArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member InsightArn must not be empty")}
+		}
 		if err := encoder.SetURI("InsightArn").String(*v.InsightArn); err != nil {
 			return err
 		}
@@ -3141,7 +3201,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateStandardsControlInput(v *UpdateSt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.StandardsControlArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member StandardsControlArn must not be empty")}
+	}
 	if v.StandardsControlArn != nil {
+		if len(*v.StandardsControlArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member StandardsControlArn must not be empty")}
+		}
 		if err := encoder.SetURI("StandardsControlArn").String(*v.StandardsControlArn); err != nil {
 			return err
 		}

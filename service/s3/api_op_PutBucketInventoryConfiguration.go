@@ -36,22 +36,42 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
-// Amazon Simple Storage Service Developer Guide.  <p class="title"> <b>Special
-// Errors</b> </p> <ul> <li> <p class="title"> <b>HTTP 400 Bad Request Error</b>
-// </p> <ul> <li> <p> <i>Code:</i> InvalidArgument</p> </li> <li> <p> <i>Cause:</i>
-// Invalid Argument</p> </li> </ul> </li> <li> <p class="title"> <b>HTTP 400 Bad
-// Request Error</b> </p> <ul> <li> <p> <i>Code:</i> TooManyConfigurations</p>
-// </li> <li> <p> <i>Cause:</i> You are attempting to create a new configuration
-// but have already reached the 1,000-configuration limit. </p> </li> </ul> </li>
-// <li> <p class="title"> <b>HTTP 403 Forbidden Error</b> </p> <ul> <li> <p>
-// <i>Code:</i> AccessDenied</p> </li> <li> <p> <i>Cause:</i> You are not the owner
-// of the specified bucket, or you do not have the
-// <code>s3:PutInventoryConfiguration</code> bucket permission to set the
-// configuration on the bucket. </p> </li> </ul> </li> </ul> <p class="title">
-// <b>Related Resources</b> </p> <ul> <li> <p>
-// <a>GetBucketInventoryConfiguration</a> </p> </li> <li> <p>
-// <a>DeleteBucketInventoryConfiguration</a> </p> </li> <li> <p>
-// <a>ListBucketInventoryConfigurations</a> </p> </li> </ul>
+// Amazon Simple Storage Service Developer Guide. Special Errors
+//
+//     * HTTP 400
+// Bad Request Error
+//
+//         * Code: InvalidArgument
+//
+//         * Cause: Invalid
+// Argument
+//
+//     * HTTP 400 Bad Request Error
+//
+//         * Code:
+// TooManyConfigurations
+//
+//         * Cause: You are attempting to create a new
+// configuration but have already reached the 1,000-configuration limit.
+//
+//     *
+// HTTP 403 Forbidden Error
+//
+//         * Code: AccessDenied
+//
+//         * Cause: You are
+// not the owner of the specified bucket, or you do not have the
+// s3:PutInventoryConfiguration bucket permission to set the configuration on the
+// bucket.
+//
+// Related Resources
+//
+//     * GetBucketInventoryConfiguration
+//
+//     *
+// DeleteBucketInventoryConfiguration
+//
+//     * ListBucketInventoryConfigurations
 func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *PutBucketInventoryConfigurationInput, optFns ...func(*Options)) (*PutBucketInventoryConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketInventoryConfigurationInput{}

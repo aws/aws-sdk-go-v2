@@ -14,17 +14,16 @@ import (
 // apply the policy at the function level, or specify a qualifier to restrict
 // access to a single version or alias. If you use a qualifier, the invoker must
 // use the full Amazon Resource Name (ARN) of that version or alias to invoke the
-// function.  <p>To grant permission to another account, specify the account ID as
-// the <code>Principal</code>. For AWS services, the principal is a domain-style
-// identifier defined by the service, like <code>s3.amazonaws.com</code> or
-// <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN
-// of the associated resource as the <code>SourceArn</code>. If you grant
-// permission to a service principal without specifying the source, other accounts
-// could potentially configure resources in their account to invoke your Lambda
-// function.</p> <p>This action adds a statement to a resource-based permissions
-// policy for the function. For more information about function policies, see <a
-// href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda
-// Function Policies</a>. </p>
+// function. To grant permission to another account, specify the account ID as the
+// Principal. For AWS services, the principal is a domain-style identifier defined
+// by the service, like s3.amazonaws.com or sns.amazonaws.com. For AWS services,
+// you can also specify the ARN of the associated resource as the SourceArn. If you
+// grant permission to a service principal without specifying the source, other
+// accounts could potentially configure resources in their account to invoke your
+// Lambda function. This action adds a statement to a resource-based permissions
+// policy for the function. For more information about function policies, see
+// Lambda Function Policies
+// (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html).
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
 		params = &AddPermissionInput{}

@@ -119,10 +119,10 @@ type CreateAssociationInput struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems () API action. In
-	// this case, compliance data is not managed by State Manager. It is managed by
-	// your direct call to the PutComplianceItems () API action. By default, all
-	// associations use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API action. In this
+	// case, compliance data is not managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API action. By default, all associations
+	// use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
 	// The targets for the association. You can target instances by using tags, AWS

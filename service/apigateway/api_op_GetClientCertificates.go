@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets a collection of ClientCertificate () resources.
+// Gets a collection of ClientCertificate resources.
 func (c *Client) GetClientCertificates(ctx context.Context, params *GetClientCertificatesInput, optFns ...func(*Options)) (*GetClientCertificatesOutput, error) {
 	if params == nil {
 		params = &GetClientCertificatesInput{}
@@ -27,8 +27,7 @@ func (c *Client) GetClientCertificates(ctx context.Context, params *GetClientCer
 	return out, nil
 }
 
-// A request to get information about a collection of ClientCertificate ()
-// resources.
+// A request to get information about a collection of ClientCertificate resources.
 type GetClientCertificatesInput struct {
 
 	// The maximum number of returned results per page. The default value is 25 and the
@@ -47,7 +46,7 @@ type GetClientCertificatesInput struct {
 	Title *string
 }
 
-// Represents a collection of ClientCertificate () resources. Use Client-Side
+// Represents a collection of ClientCertificate resources. Use Client-Side
 // Certificate
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type GetClientCertificatesOutput struct {

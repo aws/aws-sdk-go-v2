@@ -26,7 +26,7 @@ func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput
 	return out, nil
 }
 
-// Contains the inputs for the DeleteSnapshot () operation.
+// Contains the inputs for the DeleteSnapshot operation.
 type DeleteSnapshotInput struct {
 
 	// The identifier of the directory snapshot to be deleted.
@@ -35,7 +35,7 @@ type DeleteSnapshotInput struct {
 	SnapshotId *string
 }
 
-// Contains the results of the DeleteSnapshot () operation.
+// Contains the results of the DeleteSnapshot operation.
 type DeleteSnapshotOutput struct {
 
 	// The identifier of the directory snapshot that was deleted.

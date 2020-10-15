@@ -14,17 +14,17 @@ import (
 // to identify the custom key store you want to edit. Use the remaining parameters
 // to change the properties of the custom key store. You can only update a custom
 // key store that is disconnected. To disconnect the custom key store, use
-// DisconnectCustomKeyStore (). To reconnect the custom key store after the update
-// completes, use ConnectCustomKeyStore (). To find the connection state of a
-// custom key store, use the DescribeCustomKeyStores () operation. Use the
-// parameters of UpdateCustomKeyStore to edit your keystore settings.
+// DisconnectCustomKeyStore. To reconnect the custom key store after the update
+// completes, use ConnectCustomKeyStore. To find the connection state of a custom
+// key store, use the DescribeCustomKeyStores operation. Use the parameters of
+// UpdateCustomKeyStore to edit your keystore settings.
 //
-//     * Use
-// the NewCustomKeyStoreName parameter to change the friendly name of the custom
-// key store to the value that you specify.
+//     * Use the
+// NewCustomKeyStoreName parameter to change the friendly name of the custom key
+// store to the value that you specify.
 //
-//     * Use the KeyStorePassword
-// parameter tell AWS KMS the current password of the kmsuser crypto user (CU)
+//     * Use the KeyStorePassword parameter
+// tell AWS KMS the current password of the kmsuser crypto user (CU)
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
 // in the associated AWS CloudHSM cluster. You can use this parameter to fix
 // connection failures
@@ -63,7 +63,7 @@ type UpdateCustomKeyStoreInput struct {
 
 	// Identifies the custom key store that you want to update. Enter the ID of the
 	// custom key store. To find the ID of a custom key store, use the
-	// DescribeCustomKeyStores () operation.
+	// DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

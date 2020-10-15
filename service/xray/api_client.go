@@ -19,8 +19,7 @@ import (
 const ServiceID = "XRay"
 const ServiceAPIVersion = "2016-04-12"
 
-// AWS X-Ray provides APIs for managing debug traces and retrieving service maps
-// and other data created by processing those traces.
+// Client provides the API client to make operations call for AWS X-Ray.
 type Client struct {
 	options Options
 }

@@ -23,7 +23,7 @@ import (
 //     * ModelName - Identifies
 // the model to use. ModelName must be the name of an existing Amazon SageMaker
 // model in the same AWS Region and AWS account. For information on creating a
-// model, see CreateModel ().
+// model, see CreateModel.
 //
 //     * TransformInput - Describes the dataset to be
 // transformed and the Amazon S3 location where it is stored.
@@ -111,12 +111,12 @@ type CreateTransformJobInput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob ()
+	//     * CreateProcessingJob
 	//
 	//     *
-	// CreateTrainingJob ()
+	// CreateTrainingJob
 	//
-	//     * CreateTransformJob ()
+	//     * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a

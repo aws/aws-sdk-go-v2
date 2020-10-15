@@ -21,10 +21,7 @@ import (
 const ServiceID = "mq"
 const ServiceAPIVersion = "2017-11-27"
 
-// Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it
-// easy to set up and operate message brokers in the cloud. A message broker allows
-// software applications and components to communicate using various programming
-// languages, operating systems, and formal messaging protocols.
+// Client provides the API client to make operations call for AmazonMQ.
 type Client struct {
 	options Options
 }

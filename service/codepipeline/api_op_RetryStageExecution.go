@@ -34,7 +34,7 @@ func (c *Client) RetryStageExecution(ctx context.Context, params *RetryStageExec
 type RetryStageExecutionInput struct {
 
 	// The ID of the pipeline execution in the failed stage to be retried. Use the
-	// GetPipelineState () action to retrieve the current pipelineExecutionId of the
+	// GetPipelineState action to retrieve the current pipelineExecutionId of the
 	// failed stage
 	//
 	// This member is required.

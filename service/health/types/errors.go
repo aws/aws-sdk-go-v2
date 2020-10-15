@@ -7,9 +7,9 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
-// EnableHealthServiceAccessForOrganization () is already in progress. Wait for the
+// EnableHealthServiceAccessForOrganization is already in progress. Wait for the
 // action to complete before trying again. To get the current status, use the
-// DescribeHealthServiceStatusForOrganization () operation.
+// DescribeHealthServiceStatusForOrganization operation.
 type ConcurrentModificationException struct {
 	Message *string
 }

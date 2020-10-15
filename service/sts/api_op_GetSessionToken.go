@@ -103,7 +103,7 @@ type GetSessionTokenInput struct {
 	TokenCode *string
 }
 
-// Contains the response to a successful GetSessionToken () request, including
+// Contains the response to a successful GetSessionToken request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type GetSessionTokenOutput struct {
 

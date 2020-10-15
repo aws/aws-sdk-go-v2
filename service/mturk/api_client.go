@@ -19,7 +19,8 @@ import (
 const ServiceID = "MTurk"
 const ServiceAPIVersion = "2017-01-17"
 
-// Amazon Mechanical Turk API Reference
+// Client provides the API client to make operations call for Amazon Mechanical
+// Turk.
 type Client struct {
 	options Options
 }

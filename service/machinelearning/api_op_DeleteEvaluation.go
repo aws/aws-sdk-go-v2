@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to an Evaluation, rendering it unusable.  <p>After
-// invoking the <code>DeleteEvaluation</code> operation, you can use the
-// <code>GetEvaluation</code> operation to verify that the status of the
-// <code>Evaluation</code> changed to <code>DELETED</code>.</p> <p> <b>Caution:</b>
-// The results of the <code>DeleteEvaluation</code> operation are irreversible.</p>
+// Assigns the DELETED status to an Evaluation, rendering it unusable. After
+// invoking the DeleteEvaluation operation, you can use the GetEvaluation operation
+// to verify that the status of the Evaluation changed to DELETED. Caution: The
+// results of the DeleteEvaluation operation are irreversible.
 func (c *Client) DeleteEvaluation(ctx context.Context, params *DeleteEvaluationInput, optFns ...func(*Options)) (*DeleteEvaluationOutput, error) {
 	if params == nil {
 		params = &DeleteEvaluationInput{}

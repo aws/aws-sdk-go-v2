@@ -30,19 +30,29 @@ func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *Descr
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
 }
 
-// A JSON object containing the following fields:  <ul> <li> <p>
-// <a>DescribeMaintenanceStartTimeOutput$DayOfMonth</a> </p> </li> <li> <p>
-// <a>DescribeMaintenanceStartTimeOutput$DayOfWeek</a> </p> </li> <li> <p>
-// <a>DescribeMaintenanceStartTimeOutput$HourOfDay</a> </p> </li> <li> <p>
-// <a>DescribeMaintenanceStartTimeOutput$MinuteOfHour</a> </p> </li> <li> <p>
-// <a>DescribeMaintenanceStartTimeOutput$Timezone</a> </p> </li> </ul>
+// A JSON object containing the following fields:
+//
+//     *
+// DescribeMaintenanceStartTimeOutput$DayOfMonth
+//
+//     *
+// DescribeMaintenanceStartTimeOutput$DayOfWeek
+//
+//     *
+// DescribeMaintenanceStartTimeOutput$HourOfDay
+//
+//     *
+// DescribeMaintenanceStartTimeOutput$MinuteOfHour
+//
+//     *
+// DescribeMaintenanceStartTimeOutput$Timezone
 type DescribeMaintenanceStartTimeOutput struct {
 
 	// The day of the month component of the maintenance start time represented as an
@@ -55,8 +65,8 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// of the gateway.
 	DayOfWeek *int32
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// The hour component of the maintenance start time represented as hh, where hh is

@@ -40,7 +40,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//
 	//     * Specified in the Unix time
 	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
-	// UTC, then you input 1538424000 as the end time.  </li> </ul>
+	// UTC, then you input 1538424000 as the end time.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -99,7 +99,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//
 	//     * Specified in the Unix
 	// time format. For example, if you wish to use a start time of October 1, 2018, at
-	// 8 PM UTC, then you input 1538424000 as the start time.  </li> </ul>
+	// 8 PM UTC, then you input 1538424000 as the start time.
 	//
 	// This member is required.
 	StartTime *time.Time

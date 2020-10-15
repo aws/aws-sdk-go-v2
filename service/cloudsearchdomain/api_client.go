@@ -19,16 +19,8 @@ import (
 const ServiceID = "CloudSearch Domain"
 const ServiceAPIVersion = "2013-01-01"
 
-// You use the AmazonCloudSearch2013 API to upload documents to a search domain and
-// search those documents.  <p>The endpoints for submitting
-// <code>UploadDocuments</code>, <code>Search</code>, and <code>Suggest</code>
-// requests are domain-specific and require the <code>--endpoint-url</code> option.
-// To get the endpoints for your domain, use the Amazon CloudSearch configuration
-// service <code>DescribeDomains</code> action. The endpoints are also available on
-// the domain dashboard in the Amazon CloudSearch console. You submit suggest
-// requests to the search endpoint.</p> <p>For more information, see the <a
-// href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide">Amazon
-// CloudSearch Developer Guide</a>.</p>
+// Client provides the API client to make operations call for Amazon CloudSearch
+// Domain.
 type Client struct {
 	options Options
 }

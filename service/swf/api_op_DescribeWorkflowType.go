@@ -72,7 +72,7 @@ type DescribeWorkflowTypeInput struct {
 type DescribeWorkflowTypeOutput struct {
 
 	// Configuration settings of the workflow type registered through
-	// RegisterWorkflowType ()
+	// RegisterWorkflowType
 	//
 	// This member is required.
 	Configuration *types.WorkflowTypeConfiguration
@@ -85,9 +85,8 @@ type DescribeWorkflowTypeOutput struct {
 	// should be running.
 	//
 	//     * DEPRECATED – The type was deprecated using
-	// DeprecateWorkflowType (), but is still in use. You should keep workers
-	// supporting this type running. You cannot create new workflow executions of this
-	// type.
+	// DeprecateWorkflowType, but is still in use. You should keep workers supporting
+	// this type running. You cannot create new workflow executions of this type.
 	//
 	// This member is required.
 	TypeInfo *types.WorkflowTypeInfo

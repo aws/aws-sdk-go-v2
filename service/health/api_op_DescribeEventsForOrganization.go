@@ -15,14 +15,14 @@ import (
 // meeting the specified filter criteria. Events are returned in a summary form and
 // do not include the accounts impacted, detailed description, any additional
 // metadata that depends on the event type, or any affected resources. To retrieve
-// that information, use the DescribeAffectedAccountsForOrganization (),
-// DescribeEventDetailsForOrganization (), and
-// DescribeAffectedEntitiesForOrganization () operations. If no filter criteria are
-// specified, all events across your organization are returned. Results are sorted
-// by lastModifiedTime, starting with the most recent. Before you can call this
-// operation, you must first enable Health to work with AWS Organizations. To do
-// this, call the EnableHealthServiceAccessForOrganization () operation from your
-// organization's master account.
+// that information, use the DescribeAffectedAccountsForOrganization,
+// DescribeEventDetailsForOrganization, and DescribeAffectedEntitiesForOrganization
+// operations. If no filter criteria are specified, all events across your
+// organization are returned. Results are sorted by lastModifiedTime, starting with
+// the most recent. Before you can call this operation, you must first enable
+// Health to work with AWS Organizations. To do this, call the
+// EnableHealthServiceAccessForOrganization operation from your organization's
+// master account.
 func (c *Client) DescribeEventsForOrganization(ctx context.Context, params *DescribeEventsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventsForOrganizationInput{}

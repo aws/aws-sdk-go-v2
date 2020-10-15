@@ -16,8 +16,8 @@ import (
 // minimum required duration of 1,200 hours per year. For example, the minimum
 // daily schedule is 4 hours, the minimum weekly schedule is 24 hours, and the
 // minimum monthly schedule is 100 hours. After you find a schedule that meets your
-// needs, call PurchaseScheduledInstances () to purchase Scheduled Instances with
-// that schedule.
+// needs, call PurchaseScheduledInstances to purchase Scheduled Instances with that
+// schedule.
 func (c *Client) DescribeScheduledInstanceAvailability(ctx context.Context, params *DescribeScheduledInstanceAvailabilityInput, optFns ...func(*Options)) (*DescribeScheduledInstanceAvailabilityOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledInstanceAvailabilityInput{}

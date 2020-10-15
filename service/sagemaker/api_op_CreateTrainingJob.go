@@ -16,36 +16,48 @@ import (
 // choose to host your model using Amazon SageMaker hosting services, you can use
 // the resulting model artifacts as part of the model. You can also use the
 // artifacts in a machine learning service other than Amazon SageMaker, provided
-// that you know how to use them for inferences.  </p> <p>In the request body, you
-// provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> -
-// Identifies the training algorithm to use. </p> </li> <li> <p>
-// <code>HyperParameters</code> - Specify these algorithm-specific parameters to
+// that you know how to use them for inferences. In the request body, you provide
+// the following:
+//
+//     * AlgorithmSpecification - Identifies the training algorithm
+// to use.
+//
+//     * HyperParameters - Specify these algorithm-specific parameters to
 // enable the estimation of model parameters during training. Hyperparameters can
 // be tuned to optimize this learning process. For a list of hyperparameters for
-// each training algorithm provided by Amazon SageMaker, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>.
-// </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training
-// dataset and the Amazon S3, EFS, or FSx location where it is stored.</p> </li>
-// <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where
-// you want Amazon SageMaker to save the results of model training. </p> <p></p>
-// </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML
-// compute instances, and ML storage volumes to deploy for model training. In
-// distributed training, you specify more than one instance. </p> </li> <li> <p>
-// <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine
-// learning models by up to 80% by using Amazon EC2 Spot instances. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html">Managed
-// Spot Training</a>. </p> </li> <li> <p> <code>RoleARN</code> - The Amazon
-// Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your
-// behalf during model training. You must grant this role the necessary permissions
-// so that Amazon SageMaker can successfully complete model training. </p> </li>
-// <li> <p> <code>StoppingCondition</code> - To help cap training costs, use
-// <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use
-// <code>MaxWaitTimeInSeconds</code> to specify how long you are willing to wait
-// for a managed spot training job to complete. </p> </li> </ul> <p> For more
-// information about Amazon SageMaker, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It
-// Works</a>. </p>
+// each training algorithm provided by Amazon SageMaker, see Algorithms
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
+//
+//     *
+// InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx
+// location where it is stored.
+//
+//     * OutputDataConfig - Identifies the Amazon S3
+// bucket where you want Amazon SageMaker to save the results of model training.
+//
+//
+// * ResourceConfig - Identifies the resources, ML compute instances, and ML
+// storage volumes to deploy for model training. In distributed training, you
+// specify more than one instance.
+//
+//     * EnableManagedSpotTraining - Optimize the
+// cost of training machine learning models by up to 80% by using Amazon EC2 Spot
+// instances. For more information, see Managed Spot Training
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
+//
+//
+// * RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
+// perform tasks on your behalf during model training. You must grant this role the
+// necessary permissions so that Amazon SageMaker can successfully complete model
+// training.
+//
+//     * StoppingCondition - To help cap training costs, use
+// MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds
+// to specify how long you are willing to wait for a managed spot training job to
+// complete.
+//
+// For more information about Amazon SageMaker, see How It Works
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJobInput, optFns ...func(*Options)) (*CreateTrainingJobOutput, error) {
 	if params == nil {
 		params = &CreateTrainingJobInput{}
@@ -161,12 +173,12 @@ type CreateTrainingJobInput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob ()
+	//     * CreateProcessingJob
 	//
 	//     *
-	// CreateTrainingJob ()
+	// CreateTrainingJob
 	//
-	//     * CreateTransformJob ()
+	//     * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// Algorithm-specific parameters that influence the quality of the model. You set
@@ -179,31 +191,29 @@ type CreateTrainingJobInput struct {
 	HyperParameters map[string]*string
 
 	// An array of Channel objects. Each channel is a named input source.
-	// InputDataConfig
-	//     describes the input data and its location. </p>
-	// <p>Algorithms can accept input data from one or more channels. For example, an
-	// algorithm might have two channels of input data, <code>training_data</code> and
-	// <code>validation_data</code>. The configuration for each channel provides the
-	// S3, EFS, or FSx location where the input data is stored. It also provides
-	// information about the stored data: the MIME type, compression method, and
-	// whether the data is wrapped in RecordIO format. </p> <p>Depending on the input
-	// mode that the algorithm supports, Amazon SageMaker either copies input data
-	// files from an S3 bucket to a local directory in the Docker container, or makes
-	// it available as input streams. For example, if you specify an EFS location,
-	// input data files will be made available as input streams. They do not need to be
-	// downloaded.</p>
+	// InputDataConfig describes the input data and its location. Algorithms can accept
+	// input data from one or more channels. For example, an algorithm might have two
+	// channels of input data, training_data and validation_data. The configuration for
+	// each channel provides the S3, EFS, or FSx location where the input data is
+	// stored. It also provides information about the stored data: the MIME type,
+	// compression method, and whether the data is wrapped in RecordIO format.
+	// Depending on the input mode that the algorithm supports, Amazon SageMaker either
+	// copies input data files from an S3 bucket to a local directory in the Docker
+	// container, or makes it available as input streams. For example, if you specify
+	// an EFS location, input data files will be made available as input streams. They
+	// do not need to be downloaded.
 	InputDataConfig []*types.Channel
 
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.  </p>
+	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
 
 	// Configuration of storage locations for TensorBoard output.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
-	// A VpcConfig () object that specifies the VPC that you want your training job to
+	// A VpcConfig object that specifies the VPC that you want your training job to
 	// connect to. Control access to and from your training container by configuring
 	// the VPC. For more information, see Protect Training Jobs by Using an Amazon
 	// Virtual Private Cloud

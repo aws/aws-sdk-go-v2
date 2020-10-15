@@ -57,16 +57,16 @@ import (
 // Related operations
 //
 //     * To list the secrets in your account, use
-// ListSecrets ().
+// ListSecrets.
 //
 //     * To get the details for a version of a secret, use
-// DescribeSecret ().
+// DescribeSecret.
 //
-//     * To create a new version of a secret, use CreateSecret
-// ().
+//     * To create a new version of a secret, use CreateSecret.
 //
-//     * To attach staging labels to or remove staging labels from a version
-// of a secret, use UpdateSecretVersionStage ().
+//
+// * To attach staging labels to or remove staging labels from a version of a
+// secret, use UpdateSecretVersionStage.
 func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, optFns ...func(*Options)) (*RotateSecretOutput, error) {
 	if params == nil {
 		params = &RotateSecretInput{}

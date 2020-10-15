@@ -38,7 +38,7 @@ type DescribeBackupsInput struct {
 	// backupIds filter to return only the specified backups. Specify backups by their
 	// backup identifier (ID). Use the sourceBackupIds filter to return only the
 	// backups created from a source backup. The sourceBackupID of a source backup is
-	// returned by the CopyBackupToRegion () operation. Use the clusterIds filter to
+	// returned by the CopyBackupToRegion operation. Use the clusterIds filter to
 	// return only the backups for the specified clusters. Specify clusters by their
 	// cluster identifier (ID). Use the states filter to return only backups that match
 	// the specified state.

@@ -14,18 +14,14 @@ import (
 // Creates a DataSource object from an  Amazon Relational Database Service
 // (http://aws.amazon.com/rds/) (Amazon RDS). A DataSource references data that can
 // be used to perform CreateMLModel, CreateEvaluation, or CreateBatchPrediction
-// operations.  <p> <code>CreateDataSourceFromRDS</code> is an asynchronous
-// operation. In response to <code>CreateDataSourceFromRDS</code>, Amazon Machine
-// Learning (Amazon ML) immediately returns and sets the <code>DataSource</code>
-// status to <code>PENDING</code>. After the <code>DataSource</code> is created and
-// ready for use, Amazon ML sets the <code>Status</code> parameter to
-// <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or
-// <code>PENDING</code> state can be used only to perform
-// <code>>CreateMLModel</code>>, <code>CreateEvaluation</code>, or
-// <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML cannot
-// accept the input source, it sets the <code>Status</code> parameter to
-// <code>FAILED</code> and includes an error message in the <code>Message</code>
-// attribute of the <code>GetDataSource</code> operation response. </p>
+// operations. CreateDataSourceFromRDS is an asynchronous operation. In response to
+// CreateDataSourceFromRDS, Amazon Machine Learning (Amazon ML) immediately returns
+// and sets the DataSource status to PENDING. After the DataSource is created and
+// ready for use, Amazon ML sets the Status parameter to COMPLETED. DataSource in
+// the COMPLETED or PENDING state can be used only to perform >CreateMLModel>,
+// CreateEvaluation, or CreateBatchPrediction operations. If Amazon ML cannot
+// accept the input source, it sets the Status parameter to FAILED and includes an
+// error message in the Message attribute of the GetDataSource operation response.
 func (c *Client) CreateDataSourceFromRDS(ctx context.Context, params *CreateDataSourceFromRDSInput, optFns ...func(*Options)) (*CreateDataSourceFromRDSOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceFromRDSInput{}

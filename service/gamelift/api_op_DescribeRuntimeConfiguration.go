@@ -14,7 +14,7 @@ import (
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
 // tells Amazon GameLift which server processes to run (and how) on each instance
 // in the fleet. To get a runtime configuration, specify the fleet's unique
-// identifier. If successful, a RuntimeConfiguration () object is returned for the
+// identifier. If successful, a RuntimeConfiguration object is returned for the
 // requested fleet. If the requested fleet has been deleted, the result set is
 // empty. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Running
@@ -22,36 +22,36 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * Describe fleets:
 //
-//         * DescribeFleetAttributes ()
+// * Describe fleets:
 //
-//         *
-// DescribeFleetCapacity ()
-//
-//         * DescribeFleetPortSettings ()
+//         * DescribeFleetAttributes
 //
 //         *
-// DescribeFleetUtilization ()
+// DescribeFleetCapacity
 //
-//         * DescribeRuntimeConfiguration ()
+//         * DescribeFleetPortSettings
 //
+//         *
+// DescribeFleetUtilization
 //
-// * DescribeEC2InstanceLimits ()
+//         * DescribeRuntimeConfiguration
 //
-//         * DescribeFleetEvents ()
+//         *
+// DescribeEC2InstanceLimits
+//
+//         * DescribeFleetEvents
 //
 //     *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//     * StartFleetActions () or StopFleetActions ()
+//     * StartFleetActions or StopFleetActions
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}

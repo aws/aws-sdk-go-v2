@@ -68,18 +68,17 @@ type CopyDBClusterSnapshotInput struct {
 
 	// The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is
 	// the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the
-	// KMS encryption key.  <p>If you copy an encrypted DB cluster snapshot from your
-	// AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the
-	// copy with a new KMS encryption key. If you don't specify a value for
-	// <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted
-	// with the same KMS key as the source DB cluster snapshot.</p> <p>If you copy an
-	// encrypted DB cluster snapshot that is shared from another AWS account, then you
-	// must specify a value for <code>KmsKeyId</code>.</p> <p> KMS encryption keys are
-	// specific to the AWS Region that they are created in, and you can't use
-	// encryption keys from one AWS Region in another AWS Region.</p> <p>You cannot
-	// encrypt an unencrypted DB cluster snapshot when you copy it. If you try to copy
-	// an unencrypted DB cluster snapshot and specify a value for the KmsKeyId
-	// parameter, an error is returned.</p>
+	// KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS
+	// account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS
+	// encryption key. If you don't specify a value for KmsKeyId, then the copy of the
+	// DB cluster snapshot is encrypted with the same KMS key as the source DB cluster
+	// snapshot. If you copy an encrypted DB cluster snapshot that is shared from
+	// another AWS account, then you must specify a value for KmsKeyId. KMS encryption
+	// keys are specific to the AWS Region that they are created in, and you can't use
+	// encryption keys from one AWS Region in another AWS Region. You cannot encrypt an
+	// unencrypted DB cluster snapshot when you copy it. If you try to copy an
+	// unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter,
+	// an error is returned.
 	KmsKeyId *string
 
 	// Not currently supported.
@@ -92,7 +91,7 @@ type CopyDBClusterSnapshotInput struct {
 type CopyDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type is
-	// used as a response element in the DescribeDBClusterSnapshots () action.
+	// used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

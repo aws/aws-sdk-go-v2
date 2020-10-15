@@ -12,9 +12,9 @@ import (
 )
 
 // Describes a file transfer protocol-enabled server that you specify by passing
-// the ServerId parameter.  <p>The response contains a description of a server's
-// properties. When you set <code>EndpointType</code> to VPC, the response will
-// contain the <code>EndpointDetails</code>.</p>
+// the ServerId parameter. The response contains a description of a server's
+// properties. When you set EndpointType to VPC, the response will contain the
+// EndpointDetails.
 func (c *Client) DescribeServer(ctx context.Context, params *DescribeServerInput, optFns ...func(*Options)) (*DescribeServerOutput, error) {
 	if params == nil {
 		params = &DescribeServerInput{}

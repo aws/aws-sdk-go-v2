@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the specified policy from the specified certificate. Note: This API is
-// deprecated. Please use DetachPolicy () instead.
+// deprecated. Please use DetachPolicy instead.
 func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrincipalPolicyInput, optFns ...func(*Options)) (*DetachPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &DetachPrincipalPolicyInput{}

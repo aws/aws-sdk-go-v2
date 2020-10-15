@@ -11,9 +11,9 @@ import (
 )
 
 // Returns information about the upload buffer of a gateway. This operation is
-// supported for the stored volume, cached volume, and tape gateway types.  <p>The
+// supported for the stored volume, cached volume, and tape gateway types. The
 // response includes disk IDs that are configured as upload buffer space, and it
-// includes the amount of upload buffer space allocated and used.</p>
+// includes the amount of upload buffer space allocated and used.
 func (c *Client) DescribeUploadBuffer(ctx context.Context, params *DescribeUploadBufferInput, optFns ...func(*Options)) (*DescribeUploadBufferOutput, error) {
 	if params == nil {
 		params = &DescribeUploadBufferInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeUploadBuffer(ctx context.Context, params *DescribeUploa
 
 type DescribeUploadBufferInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -46,8 +46,8 @@ type DescribeUploadBufferOutput struct {
 	// DiskIds array is empty.
 	DiskIds []*string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// The total number of bytes allocated in the gateway's as upload buffer.

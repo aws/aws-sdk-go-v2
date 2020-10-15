@@ -281,9 +281,9 @@ type EndpointGroup struct {
 	HealthCheckPath *string
 
 	// The port that Global Accelerator uses to perform health checks on endpoints that
-	// are part of this endpoint group.  <p>The default port is the port for the
-	// listener that this endpoint group is associated with. If the listener port is a
-	// list, Global Accelerator uses the first specified port in the list of ports.</p>
+	// are part of this endpoint group. The default port is the port for the listener
+	// that this endpoint group is associated with. If the listener port is a list,
+	// Global Accelerator uses the first specified port in the list of ports.
 	HealthCheckPort *int32
 
 	// The protocol that Global Accelerator uses to perform health checks on endpoints

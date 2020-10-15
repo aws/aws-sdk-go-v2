@@ -68,7 +68,7 @@ type UploadSigningCertificateInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful UploadSigningCertificate () request.
+// Contains the response to a successful UploadSigningCertificate request.
 type UploadSigningCertificateOutput struct {
 
 	// Information about the certificate.

@@ -19,8 +19,7 @@ import (
 const ServiceID = "AppSync"
 const ServiceAPIVersion = "2017-07-25"
 
-// AWS AppSync provides API actions for creating and interacting with data sources
-// using GraphQL from your application.
+// Client provides the API client to make operations call for AWS AppSync.
 type Client struct {
 	options Options
 }

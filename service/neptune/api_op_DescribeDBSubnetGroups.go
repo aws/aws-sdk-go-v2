@@ -52,7 +52,7 @@ type DescribeDBSubnetGroupsInput struct {
 
 type DescribeDBSubnetGroupsOutput struct {
 
-	// A list of DBSubnetGroup () instances.
+	// A list of DBSubnetGroup instances.
 	DBSubnetGroups []*types.DBSubnetGroup
 
 	// An optional pagination token provided by a previous request. If this parameter

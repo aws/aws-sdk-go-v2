@@ -180,11 +180,11 @@ type BulkEmailDestinationStatus struct {
 	// that does not exist.
 	//
 	//     * AccountSendingPaused: Email sending for the Amazon
-	// SES account was disabled using the UpdateAccountSendingEnabled () operation.
+	// SES account was disabled using the UpdateAccountSendingEnabled operation.
 	//
-	//
-	// * ConfigurationSetSendingPaused: Email sending for this configuration set was
-	// disabled using the UpdateConfigurationSetSendingEnabled () operation.
+	//     *
+	// ConfigurationSetSendingPaused: Email sending for this configuration set was
+	// disabled using the UpdateConfigurationSetSendingEnabled operation.
 	//
 	//     *
 	// InvalidParameterValue: One or more of the parameters you specified when calling
@@ -886,7 +886,7 @@ type ReputationOptions struct {
 	// The date and time at which the reputation metrics for the configuration set were
 	// last reset. Resetting these metrics is known as a fresh start. When you disable
 	// email sending for a configuration set using UpdateConfigurationSetSendingEnabled
-	// () and later re-enable it, the reputation metrics for the configuration set (but
+	// and later re-enable it, the reputation metrics for the configuration set (but
 	// not for the entire Amazon SES account) are reset. If email sending for the
 	// configuration set has never been disabled and later re-enabled, the value of
 	// this attribute is null.
@@ -902,7 +902,7 @@ type ReputationOptions struct {
 	// set. If the value is true, then Amazon SES will send emails that use the
 	// configuration set. If the value is false, Amazon SES will not send emails that
 	// use the configuration set. The default value is true. You can change this
-	// setting using UpdateConfigurationSetSendingEnabled ().
+	// setting using UpdateConfigurationSetSendingEnabled.
 	SendingEnabled *bool
 }
 

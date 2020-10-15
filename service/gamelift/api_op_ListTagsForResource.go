@@ -39,12 +39,12 @@ import (
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related operations
 //
-//     * TagResource ()
+//     * TagResource
 //
-//     * UntagResource ()
+//     * UntagResource
 //
 //     *
-// ListTagsForResource ()
+// ListTagsForResource
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

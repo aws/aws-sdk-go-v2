@@ -15,8 +15,8 @@ import (
 // stop recording an ongoing call, you can't use StartContactRecording to restart
 // it. For scenarios where the recording has started and you want to suspend it for
 // sensitive information (for example, to collect a credit card number), and then
-// restart it, use SuspendContactRecording and ResumeContactRecording.  <p>Only
-// voice recordings are supported at this time.</p>
+// restart it, use SuspendContactRecording and ResumeContactRecording. Only voice
+// recordings are supported at this time.
 func (c *Client) StopContactRecording(ctx context.Context, params *StopContactRecordingInput, optFns ...func(*Options)) (*StopContactRecordingOutput, error) {
 	if params == nil {
 		params = &StopContactRecordingInput{}

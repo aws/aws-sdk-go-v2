@@ -12,8 +12,8 @@ import (
 )
 
 // Updates an existing Amazon Lightsail content delivery network (CDN)
-// distribution.  <p>Use this action to update the configuration of your existing
-// distribution</p>
+// distribution. Use this action to update the configuration of your existing
+// distribution
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}
@@ -31,9 +31,8 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 type UpdateDistributionInput struct {
 
-	// The name of the distribution to update.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
+	// The name of the distribution to update. Use the GetDistributions action to get a
+	// list of distribution names that you can specify.
 	//
 	// This member is required.
 	DistributionName *string
@@ -54,8 +53,8 @@ type UpdateDistributionInput struct {
 	IsEnabled *bool
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
-	// serves content from the origin.</p>
+	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
+	// content from the origin.
 	Origin *types.InputOrigin
 }
 

@@ -26,10 +26,10 @@ import (
 // (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
 // parameter when specifying any "VM" related value.
 //
-//     <note> <p>Because this is
-// an asynchronous call, it will always return 200, whether an association occurs
-// or not. To confirm if an association was found based on the provided details,
-// call <code>ListDiscoveredResources</code>.</p> </note>
+// Because this is an
+// asynchronous call, it will always return 200, whether an association occurs or
+// not. To confirm if an association was found based on the provided details, call
+// ListDiscoveredResources.
 func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceAttributesInput, optFns ...func(*Options)) (*PutResourceAttributesOutput, error) {
 	if params == nil {
 		params = &PutResourceAttributesInput{}
@@ -66,18 +66,18 @@ type PutResourceAttributesInput struct {
 	// MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up to 256
 	// characters.
 	//
-	//     * <p>If any "VM" related value is set for a
-	// <code>ResourceAttribute</code> object, it is required that
-	// <code>VM_MANAGER_ID</code>, as a minimum, is always set. If
-	// <code>VM_MANAGER_ID</code> is not set, then all "VM" fields will be discarded
-	// and "VM" fields will not be used for matching the migration task to a server in
-	// Application Discovery Service repository. See the <a
-	// href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples">Example</a>
-	// section below for a use case of specifying "VM" related values.</p> </li> <li>
-	// <p> If a server you are trying to match has multiple IP or MAC addresses, you
-	// should provide as many as you know in separate type/value pairs passed to the
-	// <code>ResourceAttributeList</code> parameter to maximize the chances of
-	// matching.</p> </li> </ul> </important>
+	//     * If any "VM" related value is set for a ResourceAttribute
+	// object, it is required that VM_MANAGER_ID, as a minimum, is always set. If
+	// VM_MANAGER_ID is not set, then all "VM" fields will be discarded and "VM" fields
+	// will not be used for matching the migration task to a server in Application
+	// Discovery Service repository. See the Example
+	// (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
+	// section below for a use case of specifying "VM" related values.
+	//
+	//     * If a
+	// server you are trying to match has multiple IP or MAC addresses, you should
+	// provide as many as you know in separate type/value pairs passed to the
+	// ResourceAttributeList parameter to maximize the chances of matching.
 	//
 	// This member is required.
 	ResourceAttributeList []*types.ResourceAttribute

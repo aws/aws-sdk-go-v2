@@ -17,11 +17,10 @@ import (
 // response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients
 // must manually connect to the returned websocket URL and subscribe to the desired
 // topic. For chat, you need to publish the following on the established websocket
-// connection:  <p>
-// <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code> </p>
-// <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry
-// parameter, clients need to call this API again to obtain a new websocket URL and
-// perform the same steps as before.</p>
+// connection: {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}} Upon
+// websocket URL expiry, as specified in the response ConnectionExpiry parameter,
+// clients need to call this API again to obtain a new websocket URL and perform
+// the same steps as before.
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
 		params = &CreateParticipantConnectionInput{}

@@ -142,7 +142,7 @@ type CreateStackSetInput struct {
 	// specify an execution role, AWS CloudFormation uses the
 	// AWSCloudFormationStackSetExecutionRole role for the stack set operation. Specify
 	// an IAM role only if you are using customized execution roles to control which
-	// stack resources users and groups can include in their stack sets.  </p>
+	// stack resources users and groups can include in their stack sets.
 	ExecutionRoleName *string
 
 	// The input parameters for the stack set template.

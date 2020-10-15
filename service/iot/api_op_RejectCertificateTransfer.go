@@ -12,10 +12,10 @@ import (
 
 // Rejects a pending certificate transfer. After AWS IoT rejects a certificate
 // transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To
-// check for pending certificate transfers, call ListCertificates () to enumerate
-// your certificates. This operation can only be called by the transfer
-// destination. After it is called, the certificate will be returned to the
-// source's account in the INACTIVE state.
+// check for pending certificate transfers, call ListCertificates to enumerate your
+// certificates. This operation can only be called by the transfer destination.
+// After it is called, the certificate will be returned to the source's account in
+// the INACTIVE state.
 func (c *Client) RejectCertificateTransfer(ctx context.Context, params *RejectCertificateTransferInput, optFns ...func(*Options)) (*RejectCertificateTransferOutput, error) {
 	if params == nil {
 		params = &RejectCertificateTransferInput{}

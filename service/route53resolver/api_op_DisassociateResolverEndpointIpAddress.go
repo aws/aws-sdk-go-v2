@@ -14,7 +14,7 @@ import (
 // Removes IP addresses from an inbound or an outbound resolver endpoint. If you
 // want to remove more than one IP address, submit one
 // DisassociateResolverEndpointIpAddress request for each IP address. To add an IP
-// address to an endpoint, see AssociateResolverEndpointIpAddress ().
+// address to an endpoint, see AssociateResolverEndpointIpAddress.
 func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, params *DisassociateResolverEndpointIpAddressInput, optFns ...func(*Options)) (*DisassociateResolverEndpointIpAddressOutput, error) {
 	if params == nil {
 		params = &DisassociateResolverEndpointIpAddressInput{}

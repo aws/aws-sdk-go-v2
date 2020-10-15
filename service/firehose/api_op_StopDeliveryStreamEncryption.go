@@ -17,11 +17,11 @@ import (
 // status is DISABLING. It can take up to 5 seconds after the encryption status
 // changes to DISABLED before all records written to the delivery stream are no
 // longer subject to encryption. To find out whether a record or a batch of records
-// was encrypted, check the response elements PutRecordOutput$Encrypted () and
-// PutRecordBatchOutput$Encrypted (), respectively. To check the encryption state
-// of a delivery stream, use DescribeDeliveryStream (). If SSE is enabled using a
-// customer managed CMK and then you invoke StopDeliveryStreamEncryption, Kinesis
-// Data Firehose schedules the related KMS grant for retirement and then retires it
+// was encrypted, check the response elements PutRecordOutput$Encrypted and
+// PutRecordBatchOutput$Encrypted, respectively. To check the encryption state of a
+// delivery stream, use DescribeDeliveryStream. If SSE is enabled using a customer
+// managed CMK and then you invoke StopDeliveryStreamEncryption, Kinesis Data
+// Firehose schedules the related KMS grant for retirement and then retires it
 // after it ensures that it is finished delivering records to the destination. The
 // StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a
 // combined limit of 25 calls per delivery stream per 24 hours. For example, you

@@ -17,25 +17,23 @@ import (
 // Amazon CloudWatch event when your RefreshCache operation completes. For more
 // information, see Getting notified about file operations
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
-// in the AWS Storage Gateway User Guide.  <p>When this API is called, it only
+// in the AWS Storage Gateway User Guide. When this API is called, it only
 // initiates the refresh operation. When the API call completes and returns a
 // success code, it doesn't necessarily mean that the file refresh has completed.
 // You should use the refresh-complete notification to determine that the operation
 // has completed before you check for new files on the gateway file share. You can
-// subscribe to be notified through an CloudWatch event when your
-// <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API
-// is asynchronous so the gateway will accept no more than two refreshes at any
-// time. We recommend using the refresh-complete CloudWatch event notification
-// before issuing additional requests. For more information, see <a
-// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting
-// notified about file operations</a> in the <i>AWS Storage Gateway User
-// Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are
-// already being processed, any new request will cause an
-// <code>InvalidGatewayRequestException</code> error because too many requests were
-// sent to the server.</p> <p>For more information, see <a
-// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting
-// notified about file operations</a> in the <i>AWS Storage Gateway User
-// Guide</i>.</p>
+// subscribe to be notified through an CloudWatch event when your RefreshCache
+// operation completes. Throttle limit: This API is asynchronous so the gateway
+// will accept no more than two refreshes at any time. We recommend using the
+// refresh-complete CloudWatch event notification before issuing additional
+// requests. For more information, see Getting notified about file operations
+// (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when
+// two requests are already being processed, any new request will cause an
+// InvalidGatewayRequestException error because too many requests were sent to the
+// server. For more information, see Getting notified about file operations
+// (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// in the AWS Storage Gateway User Guide.
 func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, optFns ...func(*Options)) (*RefreshCacheOutput, error) {
 	if params == nil {
 		params = &RefreshCacheInput{}
@@ -70,8 +68,8 @@ type RefreshCacheInput struct {
 	// the folder's contents. If this value set to true, each folder that is listed in
 	// FolderList is recursively updated. Otherwise, subfolders listed in FolderList
 	// are not refreshed. Only objects that are in folders listed directly under
-	// FolderList are found and used for the update. The default is true.  <p>Valid
-	// Values: <code>true</code> | <code>false</code> </p>
+	// FolderList are found and used for the update. The default is true. Valid Values:
+	// true | false
 	Recursive *bool
 }
 

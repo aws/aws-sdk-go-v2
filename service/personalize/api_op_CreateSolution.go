@@ -13,11 +13,11 @@ import (
 
 // Creates the configuration for training a model. A trained model is known as a
 // solution. After the configuration is created, you train the model (create a
-// solution) by calling the CreateSolutionVersion () operation. Every time you call
+// solution) by calling the CreateSolutionVersion operation. Every time you call
 // CreateSolutionVersion, a new version of the solution is created. After creating
-// a solution version, you check its accuracy by calling GetSolutionMetrics ().
-// When you are satisfied with the version, you deploy it using CreateCampaign ().
-// The campaign provides recommendations to a client through the GetRecommendations
+// a solution version, you check its accuracy by calling GetSolutionMetrics. When
+// you are satisfied with the version, you deploy it using CreateCampaign. The
+// campaign provides recommendations to a client through the GetRecommendations
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // API. To train a model, Amazon Personalize requires training data and a recipe.
 // The training data comes from the dataset group that you provide in the request.
@@ -33,13 +33,22 @@ import (
 //     * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
-// To get the status of the solution, call DescribeSolution (). Wait
-// until the status shows as ACTIVE before calling CreateSolutionVersion.  <p
-// class="title"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListSolutions</a> </p>
-// </li> <li> <p> <a>CreateSolutionVersion</a> </p> </li> <li> <p>
-// <a>DescribeSolution</a> </p> </li> <li> <p> <a>DeleteSolution</a> </p> </li>
-// </ul> <ul> <li> <p> <a>ListSolutionVersions</a> </p> </li> <li> <p>
-// <a>DescribeSolutionVersion</a> </p> </li> </ul>
+// To get the status of the solution, call DescribeSolution. Wait
+// until the status shows as ACTIVE before calling CreateSolutionVersion. Related
+// APIs
+//
+//     * ListSolutions
+//
+//     * CreateSolutionVersion
+//
+//     * DescribeSolution
+//
+//
+// * DeleteSolution
+//
+//     * ListSolutionVersions
+//
+//     * DescribeSolutionVersion
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionInput{}

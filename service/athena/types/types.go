@@ -305,21 +305,21 @@ type ResultConfiguration struct {
 	// client-side setting. If workgroup settings override client-side settings, then
 	// the query uses the encryption configuration that is specified for the workgroup,
 	// and also uses the location for storing query results specified in the workgroup.
-	// See WorkGroupConfiguration$EnforceWorkGroupConfiguration () and Workgroup
-	// Settings Override Client-Side Settings
+	// See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
+	// Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The location in Amazon S3 where your query results are stored, such as
 	// s3://path/to/query/bucket/. To run the query, you must specify the query results
 	// location using one of the ways: either for individual queries using either this
-	// setting (client-side), or in the workgroup, using WorkGroupConfiguration (). If
+	// setting (client-side), or in the workgroup, using WorkGroupConfiguration. If
 	// none of them is set, Athena issues an error that no output location is provided.
 	// For more information, see Query Results
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html). If workgroup
 	// settings override client-side settings, then the query uses the settings
 	// specified for the workgroup. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 }
 
@@ -337,7 +337,7 @@ type ResultConfigurationUpdates struct {
 	// query results and the encryption configuration that are specified for the
 	// workgroup. The "workgroup settings override" is specified in
 	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 
 	// If set to "true", indicates that the previously-specified encryption
@@ -363,7 +363,7 @@ type ResultConfigurationUpdates struct {
 
 // The metadata and rows that comprise a query result set. The metadata describes
 // the column structure and data types. To return a ResultSet object, use
-// GetQueryResults ().
+// GetQueryResults.
 type ResultSet struct {
 
 	// The metadata that describes the column structure and data types of a table of
@@ -375,7 +375,7 @@ type ResultSet struct {
 }
 
 // The metadata that describes the column structure and data types of a table of
-// query results. To return a ResultSetMetadata object, use GetQueryResults ().
+// query results. To return a ResultSetMetadata object, use GetQueryResults.
 type ResultSetMetadata struct {
 
 	// Information about the columns returned in a query result metadata.
@@ -473,14 +473,14 @@ type UnprocessedQueryExecutionId struct {
 }
 
 // A workgroup, which contains a name, description, creation time, state, and other
-// configuration, listed under WorkGroup$Configuration (). Each workgroup enables
-// you to isolate queries for you or your group of users from other queries in the
-// same account, to configure the query results location and the encryption
+// configuration, listed under WorkGroup$Configuration. Each workgroup enables you
+// to isolate queries for you or your group of users from other queries in the same
+// account, to configure the query results location and the encryption
 // configuration (known as workgroup settings), to enable sending query metrics to
 // Amazon CloudWatch, and to establish per-query data usage control limits for all
 // queries in a workgroup. The workgroup settings override is specified in
 // EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
-// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 type WorkGroup struct {
 
 	// The workgroup name.
@@ -495,7 +495,7 @@ type WorkGroup struct {
 	// data usage limits for the amount of data scanned per query or per workgroup. The
 	// workgroup settings override is specified in EnforceWorkGroupConfiguration
 	// (true/false) in the WorkGroupConfiguration. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	Configuration *WorkGroupConfiguration
 
 	// The date and time the workgroup was created.
@@ -515,7 +515,7 @@ type WorkGroup struct {
 // for the amount of data scanned per query or per workgroup. The workgroup
 // settings override is specified in EnforceWorkGroupConfiguration (true/false) in
 // the WorkGroupConfiguration. See
-// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 type WorkGroupConfiguration struct {
 
 	// The upper data usage limit (cutoff) for the amount of bytes a single query in a
@@ -544,9 +544,9 @@ type WorkGroupConfiguration struct {
 	// where query results are stored and the encryption option, if any, used for query
 	// results. To run the query, you must specify the query results location using one
 	// of the ways: either in the workgroup using this setting, or for individual
-	// queries (client-side), using ResultConfiguration$OutputLocation (). If none of
-	// them is set, Athena issues an error that no output location is provided. For
-	// more information, see Query Results
+	// queries (client-side), using ResultConfiguration$OutputLocation. If none of them
+	// is set, Athena issues an error that no output location is provided. For more
+	// information, see Query Results
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html).
 	ResultConfiguration *ResultConfiguration
 }
@@ -574,7 +574,7 @@ type WorkGroupConfigurationUpdates struct {
 	PublishCloudWatchMetricsEnabled *bool
 
 	// Indicates that the data usage control limit per query is removed.
-	// WorkGroupConfiguration$BytesScannedCutoffPerQuery ()
+	// WorkGroupConfiguration$BytesScannedCutoffPerQuery
 	RemoveBytesScannedCutoffPerQuery *bool
 
 	// If set to true, allows members assigned to a workgroup to specify Amazon S3

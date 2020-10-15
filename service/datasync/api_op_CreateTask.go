@@ -77,7 +77,7 @@ type CreateTaskInput struct {
 
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. The schedule should be specified in UTC time. For more
-	// information, see task-scheduling ().
+	// information, see task-scheduling.
 	Schedule *types.TaskSchedule
 
 	// The key-value pair that represents the tag that you want to add to the resource.

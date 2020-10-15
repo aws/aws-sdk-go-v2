@@ -21,11 +21,8 @@ import (
 const ServiceID = "ConnectParticipant"
 const ServiceAPIVersion = "2018-09-07"
 
-// Amazon Connect is a cloud-based contact center solution that makes it easy to
-// set up and manage a customer contact center and provide reliable customer
-// engagement at any scale. Amazon Connect enables customer contacts through voice
-// or chat.  <p>The APIs described here are used by chat participants, such as
-// agents and customers.</p>
+// Client provides the API client to make operations call for Amazon Connect
+// Participant Service.
 type Client struct {
 	options Options
 }

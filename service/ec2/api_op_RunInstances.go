@@ -50,14 +50,14 @@ import (
 // You can create a launch template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html),
 // which is a resource that contains the parameters to launch an instance. When you
-// launch an instance using RunInstances (), you can specify the launch template
+// launch an instance using RunInstances, you can specify the launch template
 // instead of specifying the launch parameters. To ensure faster instance launches,
 // break up large requests into smaller batches. For example, create five separate
 // launch requests for 100 instances each instead of one launch request for 500
 // instances. An instance is ready for you to use when it's in the running state.
-// You can check the state of your instance using DescribeInstances (). You can tag
+// You can check the state of your instance using DescribeInstances. You can tag
 // instances and EBS volumes during launch, after launch, or both. For more
-// information, see CreateTags () and Tagging your Amazon EC2 resources
+// information, see CreateTags and Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html). Linux
 // instances have access to the public key of the key pair at boot. You can use
 // this key to provide secure access to the instance. Amazon EC2 public images use
@@ -125,9 +125,10 @@ type RunInstancesInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, a randomly generated token is
-	// used for the request to ensure idempotency.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring
-	// Idempotency</a>.</p> <p>Constraints: Maximum 64 ASCII characters</p>
+	// used for the request to ensure idempotency. For more information, see Ensuring
+	// Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Constraints: Maximum 64 ASCII characters
 	ClientToken *string
 
 	// The CPU options for the instance. For more information, see Optimizing CPU
@@ -200,9 +201,9 @@ type RunInstancesInput struct {
 	// Default: stop
 	InstanceInitiatedShutdownBehavior types.ShutdownBehavior
 
-	// The market (purchasing) option for the instances. For RunInstances (),
-	// persistent Spot Instance requests are only supported when
-	// InstanceInterruptionBehavior is set to either hibernate or stop.
+	// The market (purchasing) option for the instances. For RunInstances, persistent
+	// Spot Instance requests are only supported when InstanceInterruptionBehavior is
+	// set to either hibernate or stop.
 	InstanceMarketOptions *types.InstanceMarketOptionsRequest
 
 	// The instance type. For more information, see Instance types
@@ -240,8 +241,8 @@ type RunInstancesInput struct {
 	KeyName *string
 
 	// The launch template to use to launch the instances. Any parameters that you
-	// specify in RunInstances () override the same parameters in the launch template.
-	// You can specify either the name or ID of a launch template, but not both.
+	// specify in RunInstances override the same parameters in the launch template. You
+	// can specify either the name or ID of a launch template, but not both.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The license configurations.

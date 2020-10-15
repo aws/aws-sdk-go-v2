@@ -345,7 +345,7 @@ func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smit
 
 // The specified branch name is not valid because it is a tag name. Enter the name
 // of a branch in the repository. For a list of valid branch names, use
-// ListBranches ().
+// ListBranches.
 type BranchNameIsTagNameException struct {
 	Message *string
 }
@@ -1553,7 +1553,7 @@ func (e *InvalidFileLocationException) ErrorCode() string             { return "
 func (e *InvalidFileLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified file mode permission is not valid. For a list of valid file mode
-// permissions, see PutFile ().
+// permissions, see PutFile.
 type InvalidFileModeException struct {
 	Message *string
 }
@@ -1953,10 +1953,9 @@ func (e *InvalidRepositoryDescriptionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A specified repository name is not valid.  <note> <p>This exception occurs only
-// when a specified repository name is not valid. Other exceptions occur when a
-// required repository parameter is missing, or when a specified repository does
-// not exist.</p> </note>
+// A specified repository name is not valid. This exception occurs only when a
+// specified repository name is not valid. Other exceptions occur when a required
+// repository parameter is missing, or when a specified repository does not exist.
 type InvalidRepositoryNameException struct {
 	Message *string
 }
@@ -2755,7 +2754,7 @@ func (e *ParentCommitDoesNotExistException) ErrorFault() smithy.ErrorFault { ret
 
 // The file could not be added because the provided parent commit ID is not the
 // current tip of the specified branch. To view the full commit ID of the current
-// head of the branch, use GetBranch ().
+// head of the branch, use GetBranch.
 type ParentCommitIdOutdatedException struct {
 	Message *string
 }
@@ -2775,8 +2774,7 @@ func (e *ParentCommitIdOutdatedException) ErrorCode() string {
 func (e *ParentCommitIdOutdatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parent commit ID is required. To view the full commit ID of a branch in a
-// repository, use GetBranch () or a Git command (for example, git pull or git
-// log).
+// repository, use GetBranch or a Git command (for example, git pull or git log).
 type ParentCommitIdRequiredException struct {
 	Message *string
 }

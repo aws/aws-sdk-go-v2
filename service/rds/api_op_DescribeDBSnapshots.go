@@ -73,7 +73,7 @@ type DescribeDBSnapshotsInput struct {
 	// A value that indicates whether to include manual DB cluster snapshots that are
 	// public and can be copied or restored by any AWS account. By default, the public
 	// snapshots are not included. You can share a manual DB snapshot as public by
-	// using the ModifyDBSnapshotAttribute () API.
+	// using the ModifyDBSnapshotAttribute API.
 	IncludePublic *bool
 
 	// A value that indicates whether to include shared manual DB cluster snapshots

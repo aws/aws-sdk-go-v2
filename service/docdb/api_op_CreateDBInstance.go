@@ -27,7 +27,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 	return out, nil
 }
 
-// Represents the input to CreateDBInstance ().
+// Represents the input to CreateDBInstance.
 type CreateDBInstanceInput struct {
 
 	// The identifier of the cluster that the instance will belong to.

@@ -30,7 +30,7 @@ func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumenta
 // name, or path of API entities (targets).
 type GetDocumentationPartsInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -40,8 +40,8 @@ type GetDocumentationPartsInput struct {
 	Limit *int32
 
 	// The status of the API documentation parts to retrieve. Valid values are
-	// DOCUMENTED for retrieving DocumentationPart () resources with content and
-	// UNDOCUMENTED for DocumentationPart () resources without content.
+	// DOCUMENTED for retrieving DocumentationPart resources with content and
+	// UNDOCUMENTED for DocumentationPart resources without content.
 	LocationStatus types.LocationStatusType
 
 	Name *string
@@ -67,7 +67,7 @@ type GetDocumentationPartsInput struct {
 
 // The collection of documentation parts of an API. Documenting an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart ()
+// DocumentationPart
 type GetDocumentationPartsOutput struct {
 
 	// The current page of elements from this collection.

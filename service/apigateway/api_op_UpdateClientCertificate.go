@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Changes information about an ClientCertificate () resource.
+// Changes information about an ClientCertificate resource.
 func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClientCertificateInput, optFns ...func(*Options)) (*UpdateClientCertificateOutput, error) {
 	if params == nil {
 		params = &UpdateClientCertificateInput{}
@@ -28,10 +28,10 @@ func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClie
 	return out, nil
 }
 
-// A request to change information about an ClientCertificate () resource.
+// A request to change information about an ClientCertificate resource.
 type UpdateClientCertificateInput struct {
 
-	// [Required] The identifier of the ClientCertificate () resource to be updated.
+	// [Required] The identifier of the ClientCertificate resource to be updated.
 	//
 	// This member is required.
 	ClientCertificateId *string
@@ -52,8 +52,8 @@ type UpdateClientCertificateInput struct {
 // Represents a client certificate used to configure client-side SSL authentication
 // while sending requests to the integration endpoint. Client certificates are used
 // to authenticate an API by the backend server. To authenticate an API client (or
-// user), use IAM roles and policies, a custom Authorizer () or an Amazon Cognito
-// user pool. Use Client-Side Certificate
+// user), use IAM roles and policies, a custom Authorizer or an Amazon Cognito user
+// pool. Use Client-Side Certificate
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type UpdateClientCertificateOutput struct {
 

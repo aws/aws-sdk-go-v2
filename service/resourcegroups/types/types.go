@@ -19,12 +19,12 @@ type FailedResource struct {
 // group by associating either of the following elements with the group:
 //
 //     *
-// ResourceQuery () - Use a resource query to specify a set of tag keys and values.
+// ResourceQuery - Use a resource query to specify a set of tag keys and values.
 // All resources in the same AWS Region and AWS account that have those keys with
 // the same values are included in the group. You can add a resource query when you
 // create the group.
 //
-//     * GroupConfiguration () - Use a service configuration to
+//     * GroupConfiguration - Use a service configuration to
 // associate the group with an AWS service. The configuration specifies which
 // resource types can be included in the group.
 type Group struct {
@@ -96,7 +96,7 @@ type GroupConfigurationParameter struct {
 	// AWS::ResourceGroups::Generic:
 	//
 	//         * allowed-resource-types Specifies the
-	// types of resources that you can add to this group by using the GroupResources ()
+	// types of resources that you can add to this group by using the GroupResources
 	// operation.
 	//
 	//     * For configuration item type

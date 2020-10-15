@@ -29,28 +29,30 @@ import (
 //     * If you delete a queue, you must wait at least 60 seconds
 // before creating a queue with the same name.
 //
-//     <p>To successfully create a new
-// queue, you must provide a queue name that adheres to the <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html">limits
-// related to queues</a> and is unique within the scope of your queues.</p> <note>
-// <p>After you create a queue, you must wait at least one second after the queue
-// is created to be able to use the queue.</p> </note> <p>To get the queue URL, use
-// the <code> <a>GetQueueUrl</a> </code> action. <code> <a>GetQueueUrl</a> </code>
-// requires only the <code>QueueName</code> parameter. be aware of existing queue
-// names:</p> <ul> <li> <p>If you provide the name of an existing queue along with
-// the exact names and values of all the queue's attributes,
-// <code>CreateQueue</code> returns the queue URL for the existing queue.</p> </li>
-// <li> <p>If the queue name, attribute names, or attribute values don't match an
-// existing queue, <code>CreateQueue</code> returns an error.</p> </li> </ul>
-// <p>Some actions take lists of parameters. These lists are specified using the
-// <code>param.n</code> notation. Values of <code>n</code> are integers starting
-// from 1. For example, a parameter list with two elements looks like this:</p> <p>
-// <code>&AttributeName.1=first</code> </p> <p>
-// <code>&AttributeName.2=second</code> </p> <note> <p>Cross-account permissions
-// don't apply to this action. For more information, see <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant
-// Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple
-// Queue Service Developer Guide</i>.</p> </note>
+// To successfully create a new queue,
+// you must provide a queue name that adheres to the limits related to queues
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html)
+// and is unique within the scope of your queues. After you create a queue, you
+// must wait at least one second after the queue is created to be able to use the
+// queue. To get the queue URL, use the GetQueueUrl action. GetQueueUrl requires
+// only the QueueName parameter. be aware of existing queue names:
+//
+//     * If you
+// provide the name of an existing queue along with the exact names and values of
+// all the queue's attributes, CreateQueue returns the queue URL for the existing
+// queue.
+//
+//     * If the queue name, attribute names, or attribute values don't
+// match an existing queue, CreateQueue returns an error.
+//
+// Some actions take lists
+// of parameters. These lists are specified using the param.n notation. Values of n
+// are integers starting from 1. For example, a parameter list with two elements
+// looks like this: &AttributeName.1=first&AttributeName.2=second Cross-account
+// permissions don't apply to this action. For more information, see Grant
+// Cross-Account Permissions to a Role and a User Name
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optFns ...func(*Options)) (*CreateQueueOutput, error) {
 	if params == nil {
 		params = &CreateQueueInput{}
@@ -110,7 +112,7 @@ type CreateQueueInput struct {
 	// Amazon IAM User Guide.
 	//
 	//     * ReceiveMessageWaitTimeSeconds – The length of
-	// time, in seconds, for which a ReceiveMessage () action waits for a message to
+	// time, in seconds, for which a ReceiveMessage action waits for a message to
 	// arrive. Valid values: An integer from 0 to 20 (seconds). Default: 0.
 	//
 	//     *
@@ -142,83 +144,107 @@ type CreateQueueInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
-	//     <p>The following
-	// attributes apply only to <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html">server-side-encryption</a>:</p>
-	// <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer
-	// master key (CMK) for Amazon SQS or a custom CMK. For more information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms">Key
-	// Terms</a>. While the alias of the AWS-managed CMK for Amazon SQS is always
-	// <code>alias/aws/sqs</code>, the alias of a custom CMK can, for example, be
-	// <code>alias/<i>MyAlias</i> </code>. For more examples, see <a
-	// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a>
-	// in the <i>AWS Key Management Service API Reference</i>. </p> </li> <li> <p>
-	// <code>KmsDataKeyReusePeriodSeconds</code> – The length of time, in seconds, for
-	// which Amazon SQS can reuse a <a
-	// href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys">data
-	// key</a> to encrypt or decrypt messages before calling AWS KMS again. An integer
+	// The following attributes
+	// apply only to server-side-encryption
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
+	//
+	//
+	// * KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
+	// SQS or a custom CMK. For more information, see Key Terms
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
+	// While the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs,
+	// the alias of a custom CMK can, for example, be alias/MyAlias . For more
+	// examples, see KeyId
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	// in the AWS Key Management Service API Reference.
+	//
+	//     *
+	// KmsDataKeyReusePeriodSeconds – The length of time, in seconds, for which Amazon
+	// SQS can reuse a data key
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
+	// to encrypt or decrypt messages before calling AWS KMS again. An integer
 	// representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24
 	// hours). Default: 300 (5 minutes). A shorter time period provides better security
 	// but results in more calls to KMS which might incur charges after Free Tier. For
-	// more information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work">How
-	// Does the Data Key Reuse Period Work?</a>. </p> </li> </ul> <p>The following
-	// attributes apply only to <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html">FIFO
-	// (first-in-first-out) queues</a>:</p> <ul> <li> <p> <code>FifoQueue</code> –
-	// Designates a queue as FIFO. Valid values: <code>true</code>, <code>false</code>.
-	// If you don't specify the <code>FifoQueue</code> attribute, Amazon SQS creates a
-	// standard queue. You can provide this attribute only during queue creation. You
-	// can't change it for an existing queue. When you set this attribute, you must
-	// also provide the <code>MessageGroupId</code> for your messages explicitly.</p>
-	// <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic">FIFO
-	// Queue Logic</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>
-	// </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based
-	// deduplication. Valid values: <code>true</code>, <code>false</code>. For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing">Exactly-Once
-	// Processing</a> in the <i>Amazon Simple Queue Service Developer Guide</i>. </p>
-	// <ul> <li> <p>Every message must have a unique
-	// <code>MessageDeduplicationId</code>,</p> <ul> <li> <p>You may provide a
-	// <code>MessageDeduplicationId</code> explicitly.</p> </li> <li> <p>If you aren't
-	// able to provide a <code>MessageDeduplicationId</code> and you enable
-	// <code>ContentBasedDeduplication</code> for your queue, Amazon SQS uses a SHA-256
-	// hash to generate the <code>MessageDeduplicationId</code> using the body of the
-	// message (but not the attributes of the message). </p> </li> <li> <p>If you don't
-	// provide a <code>MessageDeduplicationId</code> and the queue doesn't have
-	// <code>ContentBasedDeduplication</code> set, the action fails with an error.</p>
-	// </li> <li> <p>If the queue has <code>ContentBasedDeduplication</code> set, your
-	// <code>MessageDeduplicationId</code> overrides the generated one.</p> </li> </ul>
-	// </li> <li> <p>When <code>ContentBasedDeduplication</code> is in effect, messages
-	// with identical content sent within the deduplication interval are treated as
-	// duplicates and only one copy of the message is delivered.</p> </li> <li> <p>If
-	// you send one message with <code>ContentBasedDeduplication</code> enabled and
-	// then another message with a <code>MessageDeduplicationId</code> that is the same
-	// as the one generated for the first <code>MessageDeduplicationId</code>, the two
-	// messages are treated as duplicates and only one copy of the message is
-	// delivered. </p> </li> </ul> </li> </ul>
+	// more information, see How Does the Data Key Reuse Period Work?
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
+	//
+	// The
+	// following attributes apply only to FIFO (first-in-first-out) queues
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
+	//
+	//
+	// * FifoQueue – Designates a queue as FIFO. Valid values: true, false. If you
+	// don't specify the FifoQueue attribute, Amazon SQS creates a standard queue. You
+	// can provide this attribute only during queue creation. You can't change it for
+	// an existing queue. When you set this attribute, you must also provide the
+	// MessageGroupId for your messages explicitly. For more information, see FIFO
+	// Queue Logic
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
+	// in the Amazon Simple Queue Service Developer Guide.
+	//
+	//     *
+	// ContentBasedDeduplication – Enables content-based deduplication. Valid values:
+	// true, false. For more information, see Exactly-Once Processing
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// in the Amazon Simple Queue Service Developer Guide.
+	//
+	//         * Every message
+	// must have a unique MessageDeduplicationId,
+	//
+	//             * You may provide a
+	// MessageDeduplicationId explicitly.
+	//
+	//             * If you aren't able to provide
+	// a MessageDeduplicationId and you enable ContentBasedDeduplication for your
+	// queue, Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId
+	// using the body of the message (but not the attributes of the message).
+	//
+	//
+	// * If you don't provide a MessageDeduplicationId and the queue doesn't have
+	// ContentBasedDeduplication set, the action fails with an error.
+	//
+	//             * If
+	// the queue has ContentBasedDeduplication set, your MessageDeduplicationId
+	// overrides the generated one.
+	//
+	//         * When ContentBasedDeduplication is in
+	// effect, messages with identical content sent within the deduplication interval
+	// are treated as duplicates and only one copy of the message is delivered.
+	//
+	//
+	// * If you send one message with ContentBasedDeduplication enabled and then
+	// another message with a MessageDeduplicationId that is the same as the one
+	// generated for the first MessageDeduplicationId, the two messages are treated as
+	// duplicates and only one copy of the message is delivered.
 	Attributes map[string]*string
 
 	// Add cost allocation tags to the specified Amazon SQS queue. For an overview, see
 	// Tagging Your Amazon SQS Queues
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html)
-	// in the Amazon Simple Queue Service Developer Guide.  <p>When you use queue tags,
-	// keep the following guidelines in mind:</p> <ul> <li> <p>Adding more than 50 tags
-	// to a queue isn't recommended.</p> </li> <li> <p>Tags don't have any semantic
-	// meaning. Amazon SQS interprets tags as character strings.</p> </li> <li> <p>Tags
-	// are case-sensitive.</p> </li> <li> <p>A new tag with a key identical to that of
-	// an existing tag overwrites the existing tag.</p> </li> </ul> <p>For a full list
-	// of tag restrictions, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues">Limits
-	// Related to Queues</a> in the <i>Amazon Simple Queue Service Developer
-	// Guide</i>.</p> <note> <p>To be able to tag a queue on creation, you must have
-	// the <code>sqs:CreateQueue</code> and <code>sqs:TagQueue</code> permissions.</p>
-	// <p>Cross-account permissions don't apply to this action. For more information,
-	// see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name">Grant
-	// Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple
-	// Queue Service Developer Guide</i>.</p> </note>
+	// in the Amazon Simple Queue Service Developer Guide. When you use queue tags,
+	// keep the following guidelines in mind:
+	//
+	//     * Adding more than 50 tags to a
+	// queue isn't recommended.
+	//
+	//     * Tags don't have any semantic meaning. Amazon SQS
+	// interprets tags as character strings.
+	//
+	//     * Tags are case-sensitive.
+	//
+	//     * A
+	// new tag with a key identical to that of an existing tag overwrites the existing
+	// tag.
+	//
+	// For a full list of tag restrictions, see Limits Related to Queues
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
+	// in the Amazon Simple Queue Service Developer Guide. To be able to tag a queue on
+	// creation, you must have the sqs:CreateQueue and sqs:TagQueue permissions.
+	// Cross-account permissions don't apply to this action. For more information, see
+	// Grant Cross-Account Permissions to a Role and a User Name
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+	// in the Amazon Simple Queue Service Developer Guide.
 	Tags map[string]*string
 }
 

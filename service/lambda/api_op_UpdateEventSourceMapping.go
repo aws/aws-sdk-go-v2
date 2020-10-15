@@ -110,7 +110,7 @@ type UpdateEventSourceMappingInput struct {
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
-// CreateEventSourceMapping () for details.
+// CreateEventSourceMapping for details.
 type UpdateEventSourceMappingOutput struct {
 
 	// The maximum number of items to retrieve in a single batch.

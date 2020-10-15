@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Enables the specified LoggingConfiguration (), to start logging from a web ACL,
+// Enables the specified LoggingConfiguration, to start logging from a web ACL,
 // according to the configuration provided. You can access information about all
 // traffic that AWS WAF inspects using the following steps:
 //
@@ -30,12 +30,12 @@ import (
 //     * Associate that firehose to your web ACL
 // using a PutLoggingConfiguration request.
 //
-//     <p>When you successfully enable
-// logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will
-// create a service linked role with the necessary permissions to write logs to the
-// Amazon Kinesis Data Firehose. For more information, see <a
-// href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging
-// Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>
+// When you successfully enable logging
+// using a PutLoggingConfiguration request, AWS WAF will create a service linked
+// role with the necessary permissions to write logs to the Amazon Kinesis Data
+// Firehose. For more information, see Logging Web ACL Traffic Information
+// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the AWS
+// WAF Developer Guide.
 func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLoggingConfigurationInput, optFns ...func(*Options)) (*PutLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLoggingConfigurationInput{}

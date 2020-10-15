@@ -50,7 +50,7 @@ type CreateClusterInput struct {
 
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
-	// ID, use DescribeBackups ().
+	// ID, use DescribeBackups.
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.

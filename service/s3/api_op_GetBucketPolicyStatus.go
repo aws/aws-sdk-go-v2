@@ -16,14 +16,22 @@ import (
 // s3:GetBucketPolicyStatus permission. For more information about Amazon S3
 // permissions, see Specifying Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-// <p> For more information about when Amazon S3 considers a bucket public, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The
-// Meaning of "Public"</a>. </p> <p>The following operations are related to
-// <code>GetBucketPolicyStatus</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using
-// Amazon S3 Block Public Access</a> </p> </li> <li> <p>
-// <a>GetPublicAccessBlock</a> </p> </li> <li> <p> <a>PutPublicAccessBlock</a> </p>
-// </li> <li> <p> <a>DeletePublicAccessBlock</a> </p> </li> </ul>
+// For more information about when Amazon S3 considers a bucket public, see The
+// Meaning of "Public"
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status).
+// The following operations are related to GetBucketPolicyStatus:
+//
+//     * Using
+// Amazon S3 Block Public Access
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+//
+//
+// * GetPublicAccessBlock
+//
+//     * PutPublicAccessBlock
+//
+//     *
+// DeletePublicAccessBlock
 func (c *Client) GetBucketPolicyStatus(ctx context.Context, params *GetBucketPolicyStatusInput, optFns ...func(*Options)) (*GetBucketPolicyStatusOutput, error) {
 	if params == nil {
 		params = &GetBucketPolicyStatusInput{}

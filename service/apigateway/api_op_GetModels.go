@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes existing Models () defined for a RestApi () resource.
+// Describes existing Models defined for a RestApi resource.
 func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns ...func(*Options)) (*GetModelsOutput, error) {
 	if params == nil {
 		params = &GetModelsInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 	return out, nil
 }
 
-// Request to list existing Models () defined for a RestApi () resource.
+// Request to list existing Models defined for a RestApi resource.
 type GetModelsInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -51,8 +51,8 @@ type GetModelsInput struct {
 	Title *string
 }
 
-// Represents a collection of Model () resources. Method (), MethodResponse (),
-// Models and Mappings
+// Represents a collection of Model resources. Method, MethodResponse, Models and
+// Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type GetModelsOutput struct {
 

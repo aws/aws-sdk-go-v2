@@ -555,7 +555,7 @@ type TagFilter struct {
 }
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
-// with ScalingInstruction () and ScalingPolicy ().
+// with ScalingInstruction and ScalingPolicy.
 type TargetTrackingConfiguration struct {
 
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108

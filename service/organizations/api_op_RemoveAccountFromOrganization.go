@@ -16,8 +16,8 @@ import (
 // organization's master account is no longer charged for any expenses accrued by
 // the member account after it's removed from the organization. This operation can
 // be called only from the organization's master account. Member accounts can
-// remove themselves with LeaveOrganization () instead. You can remove an account
-// from your organization only if the account is configured with the information
+// remove themselves with LeaveOrganization instead. You can remove an account from
+// your organization only if the account is configured with the information
 // required to operate as a standalone account. When you create an account in an
 // organization using the AWS Organizations console, API, or CLI commands, the
 // information required of standalone accounts is not automatically collected. For

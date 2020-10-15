@@ -14,17 +14,17 @@ import (
 // Decrypts ciphertext that was encrypted by a AWS KMS customer master key (CMK)
 // using any of the following operations:
 //
-//     * Encrypt ()
+//     * Encrypt
 //
 //     * GenerateDataKey
-// ()
-//
-//     * GenerateDataKeyPair ()
-//
-//     * GenerateDataKeyWithoutPlaintext ()
 //
 //
-// * GenerateDataKeyPairWithoutPlaintext ()
+// * GenerateDataKeyPair
+//
+//     * GenerateDataKeyWithoutPlaintext
+//
+//     *
+// GenerateDataKeyPairWithoutPlaintext
 //
 // You can use this operation to decrypt
 // ciphertext that was encrypted under a symmetric or asymmetric CMK. When the CMK
@@ -129,8 +129,8 @@ type DecryptInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
-	// alias ARN, use ListAliases ().
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	KeyId *string
 }
 

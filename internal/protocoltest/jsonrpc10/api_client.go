@@ -17,6 +17,7 @@ import (
 const ServiceID = "JSON RPC 10"
 const ServiceAPIVersion = "2020-07-14"
 
+// Client provides the API client to make operations call for the API.
 type Client struct {
 	options Options
 }

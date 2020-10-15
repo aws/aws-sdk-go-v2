@@ -54,7 +54,7 @@ type GetGroupInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful GetGroup () request.
+// Contains the response to a successful GetGroup request.
 type GetGroupOutput struct {
 
 	// A structure that contains details about the group.

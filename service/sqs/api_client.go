@@ -19,36 +19,8 @@ import (
 const ServiceID = "SQS"
 const ServiceAPIVersion = "2012-11-05"
 
-// Welcome to the Amazon Simple Queue Service API Reference. Amazon Simple Queue
-// Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing
-// messages as they travel between applications or microservices. Amazon SQS moves
-// data between distributed application components and helps you decouple these
-// components. You can use AWS SDKs (http://aws.amazon.com/tools/#sdk) to access
-// Amazon SQS using your favorite programming language. The SDKs perform tasks such
-// as the following automatically:
-//
-//     * Cryptographically sign your service
-// requests
-//
-//     * Retry requests
-//
-//     * Handle error responses
-//
-//     <p>
-// <b>Additional Information</b> </p> <ul> <li> <p> <a
-// href="http://aws.amazon.com/sqs/">Amazon SQS Product Page</a> </p> </li> <li>
-// <p> <i>Amazon Simple Queue Service Developer Guide</i> </p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html">Making
-// API Requests</a> </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html">Amazon
-// SQS Message Attributes</a> </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">Amazon
-// SQS Dead-Letter Queues</a> </p> </li> </ul> </li> <li> <p> <a
-// href="http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html">Amazon SQS
-// in the <i>AWS CLI Command Reference</i> </a> </p> </li> <li> <p> <i>Amazon Web
-// Services General Reference</i> </p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region">Regions
-// and Endpoints</a> </p> </li> </ul> </li> </ul>
+// Client provides the API client to make operations call for Amazon Simple Queue
+// Service.
 type Client struct {
 	options Options
 }

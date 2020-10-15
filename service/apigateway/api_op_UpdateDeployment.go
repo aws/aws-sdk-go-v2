@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Changes information about a Deployment () resource.
+// Changes information about a Deployment resource.
 func (c *Client) UpdateDeployment(ctx context.Context, params *UpdateDeploymentInput, optFns ...func(*Options)) (*UpdateDeploymentOutput, error) {
 	if params == nil {
 		params = &UpdateDeploymentInput{}
@@ -28,16 +28,16 @@ func (c *Client) UpdateDeployment(ctx context.Context, params *UpdateDeploymentI
 	return out, nil
 }
 
-// Requests API Gateway to change information about a Deployment () resource.
+// Requests API Gateway to change information about a Deployment resource.
 type UpdateDeploymentInput struct {
 
-	// The replacement identifier for the Deployment () resource to change information
+	// The replacement identifier for the Deployment resource to change information
 	// about.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -55,19 +55,19 @@ type UpdateDeploymentInput struct {
 	Title *string
 }
 
-// An immutable representation of a RestApi () resource that can be called by users
-// using Stages (). A deployment must be associated with a Stage () for it to be
-// callable over the Internet. To create a deployment, call POST on the Deployments
-// () resource of a RestApi (). To view, update, or delete a deployment, call GET,
-// PATCH, or DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi (), Deployments
-// (), Stage (), AWS CLI
+// An immutable representation of a RestApi resource that can be called by users
+// using Stages. A deployment must be associated with a Stage for it to be callable
+// over the Internet. To create a deployment, call POST on the Deployments resource
+// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
+// DELETE on the specified deployment resource
+// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
+// Stage, AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type UpdateDeploymentOutput struct {
 
-	// A summary of the RestApi () at the date and time that the deployment resource
-	// was created.
+	// A summary of the RestApi at the date and time that the deployment resource was
+	// created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
 
 	// The date and time that the deployment resource was created.

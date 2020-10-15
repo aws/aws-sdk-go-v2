@@ -11,7 +11,7 @@ import (
 )
 
 // Changes the password for the specified IAM user. IAM users can change their own
-// passwords by calling ChangePassword (). For more information about modifying
+// passwords by calling ChangePassword. For more information about modifying
 // passwords, see Managing Passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.
@@ -56,7 +56,7 @@ type UpdateLoginProfileInput struct {
 	//
 	// However, the format can be further
 	// restricted by the account administrator by setting a password policy on the AWS
-	// account. For more information, see UpdateAccountPasswordPolicy ().
+	// account. For more information, see UpdateAccountPasswordPolicy.
 	Password *string
 
 	// Allows this new password to be used only once by requiring the specified IAM

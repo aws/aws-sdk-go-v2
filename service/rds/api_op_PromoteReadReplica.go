@@ -24,8 +24,6 @@ import (
 //
 //     * This command doesn't apply
 // to Aurora MySQL and Aurora PostgreSQL.
-//
-//     </note>
 func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadReplicaInput, optFns ...func(*Options)) (*PromoteReadReplicaOutput, error) {
 	if params == nil {
 		params = &PromoteReadReplicaInput{}

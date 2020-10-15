@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Creates a RateBasedRule (). The RateBasedRule contains a RateLimit,
+// global use. Creates a RateBasedRule. The RateBasedRule contains a RateLimit,
 // which specifies the maximum number of requests that AWS WAF allows from a
 // specified IP address in a five-minute period. The RateBasedRule also contains
 // the IPSet objects, ByteMatchSet objects, and other predicates that identify the
@@ -40,32 +40,47 @@ import (
 // two conditions must be received at a rate of more than 1,000 requests every five
 // minutes. If both conditions are met and the rate is exceeded, AWS WAF blocks the
 // requests. If the rate drops below 1,000 for a five-minute period, AWS WAF no
-// longer blocks the requests.  <p>As a second example, suppose you want to limit
+// longer blocks the requests. As a second example, suppose you want to limit
 // requests to a particular page on your site. To do this, you could add the
-// following to a <code>RateBasedRule</code>:</p> <ul> <li> <p>A
-// <code>ByteMatchSet</code> with <code>FieldToMatch</code> of <code>URI</code>
-// </p> </li> <li> <p>A <code>PositionalConstraint</code> of
-// <code>STARTS_WITH</code> </p> </li> <li> <p>A <code>TargetString</code> of
-// <code>login</code> </p> </li> </ul> <p>Further, you specify a
-// <code>RateLimit</code> of 1,000.</p> <p>By adding this
-// <code>RateBasedRule</code> to a <code>WebACL</code>, you could limit requests to
-// your login page without affecting the rest of your site.</p> <p>To create and
-// configure a <code>RateBasedRule</code>, perform the following steps:</p> <ol>
-// <li> <p>Create and update the predicates that you want to include in the rule.
-// For more information, see <a>CreateByteMatchSet</a>, <a>CreateIPSet</a>, and
-// <a>CreateSqlInjectionMatchSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a>
-// to get the change token that you provide in the <code>ChangeToken</code>
-// parameter of a <code>CreateRule</code> request.</p> </li> <li> <p>Submit a
-// <code>CreateRateBasedRule</code> request.</p> </li> <li> <p>Use
-// <code>GetChangeToken</code> to get the change token that you provide in the
-// <code>ChangeToken</code> parameter of an <a>UpdateRule</a> request.</p> </li>
-// <li> <p>Submit an <code>UpdateRateBasedRule</code> request to specify the
-// predicates that you want to include in the rule.</p> </li> <li> <p>Create and
-// update a <code>WebACL</code> that contains the <code>RateBasedRule</code>. For
-// more information, see <a>CreateWebACL</a>.</p> </li> </ol> <p>For more
+// following to a RateBasedRule:
+//
+//     * A ByteMatchSet with FieldToMatch of URI
+//
+//
+// * A PositionalConstraint of STARTS_WITH
+//
+//     * A TargetString of login
+//
+// Further,
+// you specify a RateLimit of 1,000. By adding this RateBasedRule to a WebACL, you
+// could limit requests to your login page without affecting the rest of your site.
+// To create and configure a RateBasedRule, perform the following steps:
+//
+//     *
+// Create and update the predicates that you want to include in the rule. For more
+// information, see CreateByteMatchSet, CreateIPSet, and
+// CreateSqlInjectionMatchSet.
+//
+//     * Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of a CreateRule request.
+//
+//     *
+// Submit a CreateRateBasedRule request.
+//
+//     * Use GetChangeToken to get the
+// change token that you provide in the ChangeToken parameter of an UpdateRule
+// request.
+//
+//     * Submit an UpdateRateBasedRule request to specify the predicates
+// that you want to include in the rule.
+//
+//     * Create and update a WebACL that
+// contains the RateBasedRule. For more information, see CreateWebACL.
+//
+// For more
 // information about how to use the AWS WAF API to allow or block HTTP requests,
-// see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF
-// Developer Guide</a>.</p>
+// see the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRateBasedRule(ctx context.Context, params *CreateRateBasedRuleInput, optFns ...func(*Options)) (*CreateRateBasedRuleOutput, error) {
 	if params == nil {
 		params = &CreateRateBasedRuleInput{}
@@ -85,7 +100,7 @@ type CreateRateBasedRuleInput struct {
 
 	// The ChangeToken that you used to submit the CreateRateBasedRule request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus ().
+	// see GetChangeTokenStatus.
 	//
 	// This member is required.
 	ChangeToken *string
@@ -99,8 +114,8 @@ type CreateRateBasedRuleInput struct {
 	// This member is required.
 	MetricName *string
 
-	// A friendly name or description of the RateBasedRule (). You can't change the
-	// name of a RateBasedRule after you create it.
+	// A friendly name or description of the RateBasedRule. You can't change the name
+	// of a RateBasedRule after you create it.
 	//
 	// This member is required.
 	Name *string
@@ -129,10 +144,10 @@ type CreateRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRateBasedRule request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus ().
+	// see GetChangeTokenStatus.
 	ChangeToken *string
 
-	// The RateBasedRule () that is returned in the CreateRateBasedRule response.
+	// The RateBasedRule that is returned in the CreateRateBasedRule response.
 	Rule *types.RateBasedRule
 
 	// Metadata pertaining to the operation's result.

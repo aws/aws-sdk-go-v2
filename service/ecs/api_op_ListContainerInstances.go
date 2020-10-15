@@ -65,7 +65,7 @@ type ListContainerInstancesInput struct {
 
 	// Filters the container instances by status. For example, if you specify the
 	// DRAINING status, the results include only container instances that have been set
-	// to DRAINING using UpdateContainerInstancesState (). If you do not specify this
+	// to DRAINING using UpdateContainerInstancesState. If you do not specify this
 	// parameter, the default is to include container instances set to all states other
 	// than INACTIVE.
 	Status types.ContainerInstanceStatus

@@ -30,7 +30,7 @@ func (c *Client) ValidateTemplate(ctx context.Context, params *ValidateTemplateI
 	return out, nil
 }
 
-// The input for ValidateTemplate () action.
+// The input for ValidateTemplate action.
 type ValidateTemplateInput struct {
 
 	// Structure containing the template body with a minimum length of 1 byte and a
@@ -49,15 +49,15 @@ type ValidateTemplateInput struct {
 	TemplateURL *string
 }
 
-// The output for ValidateTemplate () action.
+// The output for ValidateTemplate action.
 type ValidateTemplateOutput struct {
 
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for
-	// this parameter when you use the CreateStack () or UpdateStack () actions with
-	// your template; otherwise, those actions return an InsufficientCapabilities
-	// error. For more information, see Acknowledging IAM Resources in AWS
-	// CloudFormation Templates
+	// this parameter when you use the CreateStack or UpdateStack actions with your
+	// template; otherwise, those actions return an InsufficientCapabilities error. For
+	// more information, see Acknowledging IAM Resources in AWS CloudFormation
+	// Templates
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	Capabilities []types.Capability
 

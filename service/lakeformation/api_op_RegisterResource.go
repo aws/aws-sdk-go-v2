@@ -10,20 +10,19 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Registers the resource as managed by the Data Catalog.  <p>To add or update
-// data, Lake Formation needs read/write access to the chosen Amazon S3 path.
-// Choose a role that you know has permission to do this, or choose the
+// Registers the resource as managed by the Data Catalog. To add or update data,
+// Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a
+// role that you know has permission to do this, or choose the
 // AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register
 // the first Amazon S3 path, the service-linked role and a new inline policy are
 // created on your behalf. Lake Formation adds the first path to the inline policy
 // and attaches it to the service-linked role. When you register subsequent paths,
-// Lake Formation adds the path to the existing policy.</p> <p>The following
-// request registers a new location and gives AWS Lake Formation permission to use
-// the service-linked role to access that location.</p> <p> <code>ResourceArn =
-// arn:aws:s3:::my-bucket  UseServiceLinkedRole = true  <p>If
-// <code>UseServiceLinkedRole</code> is not set to true, you must provide or set
-// the <code>RoleArn</code>:</p> <p>
-// <code>arn:aws:iam::12345:role/my-data-access-role</code> </p>
+// Lake Formation adds the path to the existing policy. The following request
+// registers a new location and gives AWS Lake Formation permission to use the
+// service-linked role to access that location. ResourceArn =
+// arn:aws:s3:::my-bucket UseServiceLinkedRole = true If UseServiceLinkedRole is
+// not set to true, you must provide or set the RoleArn:
+// arn:aws:iam::12345:role/my-data-access-role
 func (c *Client) RegisterResource(ctx context.Context, params *RegisterResourceInput, optFns ...func(*Options)) (*RegisterResourceOutput, error) {
 	if params == nil {
 		params = &RegisterResourceInput{}
@@ -51,10 +50,9 @@ type RegisterResourceInput struct {
 
 	// Designates an AWS Identity and Access Management (IAM) service-linked role by
 	// registering this role with the Data Catalog. A service-linked role is a unique
-	// type of IAM role that is linked directly to Lake Formation.  <p>For more
-	// information, see <a
-	// href="https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html">Using
-	// Service-Linked Roles for Lake Formation</a>.</p>
+	// type of IAM role that is linked directly to Lake Formation. For more
+	// information, see Using Service-Linked Roles for Lake Formation
+	// (https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html).
 	UseServiceLinkedRole *bool
 }
 

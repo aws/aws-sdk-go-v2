@@ -27,7 +27,7 @@ func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to DeletePackage () operation.
+// Container for request parameters to DeletePackage operation.
 type DeletePackageInput struct {
 
 	// Internal ID of the package that you want to delete. Use DescribePackages to find
@@ -37,7 +37,7 @@ type DeletePackageInput struct {
 	PackageID *string
 }
 
-// Container for response parameters to DeletePackage () operation.
+// Container for response parameters to DeletePackage operation.
 type DeletePackageOutput struct {
 
 	// PackageDetails

@@ -14,8 +14,8 @@ import (
 // Returns information about events that meet the specified filter criteria. Events
 // are returned in a summary form and do not include the detailed description, any
 // additional metadata that depends on the event type, or any affected resources.
-// To retrieve that information, use the DescribeEventDetails () and
-// DescribeAffectedEntities () operations. If no filter criteria are specified, all
+// To retrieve that information, use the DescribeEventDetails and
+// DescribeAffectedEntities operations. If no filter criteria are specified, all
 // events are returned. Results are sorted by lastModifiedTime, starting with the
 // most recent.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {

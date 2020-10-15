@@ -48,20 +48,20 @@ type UpdateTaskInput struct {
 	Name *string
 
 	// Represents the options that are available to control the behavior of a
-	// StartTaskExecution () operation. Behavior includes preserving metadata such as
-	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
-	// in the destination, data integrity verification, and so on. A task has a set of
+	// StartTaskExecution operation. Behavior includes preserving metadata such as user
+	// ID (UID), group ID (GID), and file permissions, and also overwriting files in
+	// the destination, data integrity verification, and so on. A task has a set of
 	// default options associated with it. If you don't specify an option in
-	// StartTaskExecution (), the default value is used. You can override the defaults
+	// StartTaskExecution, the default value is used. You can override the defaults
 	// options on each task execution by specifying an overriding Options value to
-	// StartTaskExecution ().
+	// StartTaskExecution.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. You can configure your task to execute hourly, daily,
 	// weekly or on specific days of the week. You control when in the day or hour you
 	// want the task to execute. The time you specify is UTC time. For more
-	// information, see task-scheduling ().
+	// information, see task-scheduling.
 	Schedule *types.TaskSchedule
 }
 

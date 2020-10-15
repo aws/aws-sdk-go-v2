@@ -17,7 +17,7 @@ import (
 // Scheduling Tasks
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide. Alternatively, you can
-// use StartTask () to use your own scheduler or place tasks manually on specific
+// use StartTask to use your own scheduler or place tasks manually on specific
 // container instances. The Amazon ECS API follows an eventual consistency model,
 // due to the distributed nature of the system supporting the API. This means that
 // the result of an API command you run that affects your Amazon ECS resources
@@ -63,7 +63,7 @@ type RunTaskInput struct {
 	// The capacity provider strategy to use for the task. A capacity provider strategy
 	// consists of one or more capacity providers along with the base and weight to
 	// assign to them. A capacity provider must be associated with the cluster to be
-	// used in a capacity provider strategy. The PutClusterCapacityProviders () API is
+	// used in a capacity provider strategy. The PutClusterCapacityProviders API is
 	// used to associate a capacity provider with a cluster. Only capacity providers
 	// with an ACTIVE or UPDATING status can be used. If a capacityProviderStrategy is
 	// specified, the launchType parameter must be omitted. If no
@@ -71,11 +71,11 @@ type RunTaskInput struct {
 	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
 	// capacity provider that uses an Auto Scaling group, the capacity provider must
 	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider () API operation. To use a AWS Fargate capacity provider,
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
 	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
 	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders () API operation is
-	// used to update the list of available capacity providers for a cluster after the
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
+	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
 
@@ -142,8 +142,8 @@ type RunTaskInput struct {
 	// Specifies whether to propagate the tags from the task definition to the task. If
 	// no value is specified, the tags are not propagated. Tags can only be propagated
 	// to the task during task creation. To add tags to a task after task creation, use
-	// the TagResource () API action. An error will be received if you specify the
-	// SERVICE option when running a task.
+	// the TagResource API action. An error will be received if you specify the SERVICE
+	// option when running a task.
 	PropagateTags types.PropagateTags
 
 	// The reference ID to use for the task.
@@ -153,7 +153,7 @@ type RunTaskInput struct {
 	// automatically trigger a task to run a batch process job, you could apply a
 	// unique identifier for that job to your task with the startedBy parameter. You
 	// can then identify which tasks belong to that job by filtering the results of a
-	// ListTasks () call with the startedBy value. Up to 36 letters (uppercase and
+	// ListTasks call with the startedBy value. Up to 36 letters (uppercase and
 	// lowercase), numbers, hyphens, and underscores are allowed. If a task is started
 	// by an Amazon ECS service, then the startedBy parameter contains the deployment
 	// ID of the service that starts it.

@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Generates a ClientCertificate () resource.
+// Generates a ClientCertificate resource.
 func (c *Client) GenerateClientCertificate(ctx context.Context, params *GenerateClientCertificateInput, optFns ...func(*Options)) (*GenerateClientCertificateOutput, error) {
 	if params == nil {
 		params = &GenerateClientCertificateInput{}
@@ -27,10 +27,10 @@ func (c *Client) GenerateClientCertificate(ctx context.Context, params *Generate
 	return out, nil
 }
 
-// A request to generate a ClientCertificate () resource.
+// A request to generate a ClientCertificate resource.
 type GenerateClientCertificateInput struct {
 
-	// The description of the ClientCertificate ().
+	// The description of the ClientCertificate.
 	Description *string
 
 	Name *string
@@ -50,8 +50,8 @@ type GenerateClientCertificateInput struct {
 // Represents a client certificate used to configure client-side SSL authentication
 // while sending requests to the integration endpoint. Client certificates are used
 // to authenticate an API by the backend server. To authenticate an API client (or
-// user), use IAM roles and policies, a custom Authorizer () or an Amazon Cognito
-// user pool. Use Client-Side Certificate
+// user), use IAM roles and policies, a custom Authorizer or an Amazon Cognito user
+// pool. Use Client-Side Certificate
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type GenerateClientCertificateOutput struct {
 

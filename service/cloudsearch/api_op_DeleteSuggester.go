@@ -29,7 +29,7 @@ func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInp
 	return out, nil
 }
 
-// Container for the parameters to the DeleteSuggester () operation. Specifies the
+// Container for the parameters to the DeleteSuggester operation. Specifies the
 // name of the domain you want to update and name of the suggester you want to
 // delete.
 type DeleteSuggesterInput struct {

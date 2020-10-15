@@ -11,18 +11,18 @@ import (
 )
 
 // Updates the gateway virtual machine (VM) software. The request immediately
-// triggers the software update.  <note> <p>When you make this request, you get a
-// <code>200 OK</code> success response immediately. However, it might take some
-// time for the update to complete. You can call <a>DescribeGatewayInformation</a>
-// to verify the gateway is in the <code>STATE_RUNNING</code> state.</p> </note>
-// <important> <p>A software update forces a system restart of your gateway. You
-// can minimize the chance of any disruption to your applications by increasing
-// your iSCSI Initiators' timeouts. For more information about increasing iSCSI
-// Initiator timeouts for Windows and Linux, see <a
-// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings">Customizing
-// your Windows iSCSI settings</a> and <a
-// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings">Customizing
-// your Linux iSCSI settings</a>, respectively.</p> </important>
+// triggers the software update. When you make this request, you get a 200 OK
+// success response immediately. However, it might take some time for the update to
+// complete. You can call DescribeGatewayInformation to verify the gateway is in
+// the STATE_RUNNING state. A software update forces a system restart of your
+// gateway. You can minimize the chance of any disruption to your applications by
+// increasing your iSCSI Initiators' timeouts. For more information about
+// increasing iSCSI Initiator timeouts for Windows and Linux, see Customizing your
+// Windows iSCSI settings
+// (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings)
+// and Customizing your Linux iSCSI settings
+// (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings),
+// respectively.
 func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGatewaySoftwareNowInput, optFns ...func(*Options)) (*UpdateGatewaySoftwareNowOutput, error) {
 	if params == nil {
 		params = &UpdateGatewaySoftwareNowInput{}
@@ -42,8 +42,8 @@ func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGat
 // update.
 type UpdateGatewaySoftwareNowInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,8 +53,8 @@ type UpdateGatewaySoftwareNowInput struct {
 // updated.
 type UpdateGatewaySoftwareNowOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

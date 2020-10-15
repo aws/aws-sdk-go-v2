@@ -59,7 +59,7 @@ type DescribeTypeOutput struct {
 
 	// The ID of the default version of the type. The default version is used when the
 	// type version is not specified. To set the default version of a type, use
-	// SetTypeDefaultVersion ().
+	// SetTypeDefaultVersion.
 	DefaultVersionId *string
 
 	// The deprecation status of the type. Valid values include:

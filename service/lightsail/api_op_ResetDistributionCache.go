@@ -13,9 +13,8 @@ import (
 )
 
 // Deletes currently cached content from your Amazon Lightsail content delivery
-// network (CDN) distribution.  <p>After resetting the cache, the next time a
-// content request is made, your distribution pulls, serves, and caches it from the
-// origin.</p>
+// network (CDN) distribution. After resetting the cache, the next time a content
+// request is made, your distribution pulls, serves, and caches it from the origin.
 func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistributionCacheInput, optFns ...func(*Options)) (*ResetDistributionCacheOutput, error) {
 	if params == nil {
 		params = &ResetDistributionCacheInput{}
@@ -33,9 +32,8 @@ func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistri
 
 type ResetDistributionCacheInput struct {
 
-	// The name of the distribution for which to reset cache.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
+	// The name of the distribution for which to reset cache. Use the GetDistributions
+	// action to get a list of distribution names that you can specify.
 	DistributionName *string
 }
 

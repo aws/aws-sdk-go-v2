@@ -34,7 +34,7 @@ type DeleteApplicationVpcConfigurationInput struct {
 	ApplicationName *string
 
 	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication ().
+	// using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

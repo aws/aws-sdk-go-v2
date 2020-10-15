@@ -104,10 +104,13 @@ type AddIpRoutesInput struct {
 	//     * Type: All ICMP, Protocol: All, Range: N/A,
 	// Source: 0.0.0.0/0
 	//
-	//     <p></p> <p>Outbound:</p> <ul> <li> <p>Type: All traffic,
-	// Protocol: All, Range: All, Destination: 0.0.0.0/0</p> </li> </ul> <p>These
-	// security rules impact an internal network interface that is not exposed
-	// publicly.</p>
+	// Outbound:
+	//
+	//     * Type: All traffic, Protocol: All, Range:
+	// All, Destination: 0.0.0.0/0
+	//
+	// These security rules impact an internal network
+	// interface that is not exposed publicly.
 	UpdateSecurityGroupForDirectoryControllers *bool
 }
 

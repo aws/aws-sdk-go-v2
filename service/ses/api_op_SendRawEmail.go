@@ -11,71 +11,94 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Composes an email message and immediately queues it for sending.  <p>This
-// operation is more flexible than the <code>SendEmail</code> API operation. When
-// you use the <code>SendRawEmail</code> operation, you can specify the headers of
-// the message as well as its content. This flexibility is useful, for example,
-// when you want to send a multipart MIME email (such a message that contains both
-// a text and an HTML version). You can also use this operation to send messages
-// that include attachments.</p> <p>The <code>SendRawEmail</code> operation has the
-// following requirements:</p> <ul> <li> <p>You can only send email from <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html">verified
-// email addresses or domains</a>. If you try to send email from an address that
-// isn't verified, the operation results in an "Email address not verified"
-// error.</p> </li> <li> <p>If your account is still in the <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html">Amazon
-// SES sandbox</a>, you can only send email to other verified addresses in your
-// account, or to addresses that are associated with the <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html">Amazon
-// SES mailbox simulator</a>.</p> </li> <li> <p>The maximum message size, including
-// attachments, is 10 MB.</p> </li> <li> <p>Each message has to include at least
-// one recipient address. A recipient address includes any address on the To:, CC:,
-// or BCC: lines.</p> </li> <li> <p>If you send a single message to more than one
-// recipient address, and one of the recipient addresses isn't in a valid format
-// (that is, it's not in the format
-// <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), Amazon SES rejects the
-// entire message, even if the other addresses are valid.</p> </li> <li> <p>Each
-// message can include up to 50 recipient addresses across the To:, CC:, or BCC:
-// lines. If you need to send a single message to more than 50 recipients, you have
-// to split the list of recipient addresses into groups of less than 50 recipients,
-// and send separate messages to each group.</p> </li> <li> <p>Amazon SES allows
-// you to specify 8-bit Content-Transfer-Encoding for MIME message parts. However,
-// if Amazon SES has to modify the contents of your message (for example, if you
-// use open and click tracking), 8-bit content isn't preserved. For this reason, we
-// highly recommend that you encode all content that isn't 7-bit ASCII. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding">MIME
-// Encoding</a> in the <i>Amazon SES Developer Guide</i>.</p> </li> </ul>
-// <p>Additionally, keep the following considerations in mind when using the
-// <code>SendRawEmail</code> operation:</p> <ul> <li> <p>Although you can customize
-// the message headers when using the <code>SendRawEmail</code> operation, Amazon
-// SES will automatically apply its own <code>Message-ID</code> and
-// <code>Date</code> headers; if you passed these headers when creating the
-// message, they will be overwritten by the values that Amazon SES provides.</p>
-// </li> <li> <p>If you are using sending authorization to send on behalf of
-// another user, <code>SendRawEmail</code> enables you to specify the cross-account
-// identity for the email's Source, From, and Return-Path parameters in one of two
-// ways: you can pass optional parameters <code>SourceArn</code>,
-// <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can
-// include the following X-headers in the header of your raw email:</p> <ul> <li>
-// <p> <code>X-SES-SOURCE-ARN</code> </p> </li> <li> <p>
-// <code>X-SES-FROM-ARN</code> </p> </li> <li> <p>
-// <code>X-SES-RETURN-PATH-ARN</code> </p> </li> </ul> <important> <p>Don't include
-// these X-headers in the DKIM signature. Amazon SES removes these before it sends
-// the email.</p> </important> <p>If you only specify the
-// <code>SourceIdentityArn</code> parameter, Amazon SES sets the From and
-// Return-Path addresses to the same identity that you specified.</p> <p>For more
-// information about sending authorization, see the <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Using
-// Sending Authorization with Amazon SES</a> in the <i>Amazon SES Developer
-// Guide.</i> </p> </li> <li> <p>For every message that you send, the total number
-// of recipients (including each recipient in the To:, CC: and BCC: fields) is
-// counted against the maximum number of emails you can send in a 24-hour period
-// (your <i>sending quota</i>). For more information about sending quotas in Amazon
-// SES, see <a
-// href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html">Managing
-// Your Amazon SES Sending Limits</a> in the <i>Amazon SES Developer Guide.</i>
-// </p> </li> </ul>
+// Composes an email message and immediately queues it for sending. This operation
+// is more flexible than the SendEmail API operation. When you use the SendRawEmail
+// operation, you can specify the headers of the message as well as its content.
+// This flexibility is useful, for example, when you want to send a multipart MIME
+// email (such a message that contains both a text and an HTML version). You can
+// also use this operation to send messages that include attachments. The
+// SendRawEmail operation has the following requirements:
+//
+//     * You can only send
+// email from verified email addresses or domains
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+// If you try to send email from an address that isn't verified, the operation
+// results in an "Email address not verified" error.
+//
+//     * If your account is
+// still in the Amazon SES sandbox
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html),
+// you can only send email to other verified addresses in your account, or to
+// addresses that are associated with the Amazon SES mailbox simulator
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html).
+//
+//
+// * The maximum message size, including attachments, is 10 MB.
+//
+//     * Each message
+// has to include at least one recipient address. A recipient address includes any
+// address on the To:, CC:, or BCC: lines.
+//
+//     * If you send a single message to
+// more than one recipient address, and one of the recipient addresses isn't in a
+// valid format (that is, it's not in the format
+// UserName@[SubDomain.]Domain.TopLevelDomain), Amazon SES rejects the entire
+// message, even if the other addresses are valid.
+//
+//     * Each message can include
+// up to 50 recipient addresses across the To:, CC:, or BCC: lines. If you need to
+// send a single message to more than 50 recipients, you have to split the list of
+// recipient addresses into groups of less than 50 recipients, and send separate
+// messages to each group.
+//
+//     * Amazon SES allows you to specify 8-bit
+// Content-Transfer-Encoding for MIME message parts. However, if Amazon SES has to
+// modify the contents of your message (for example, if you use open and click
+// tracking), 8-bit content isn't preserved. For this reason, we highly recommend
+// that you encode all content that isn't 7-bit ASCII. For more information, see
+// MIME Encoding
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding)
+// in the Amazon SES Developer Guide.
+//
+// Additionally, keep the following
+// considerations in mind when using the SendRawEmail operation:
+//
+//     * Although
+// you can customize the message headers when using the SendRawEmail operation,
+// Amazon SES will automatically apply its own Message-ID and Date headers; if you
+// passed these headers when creating the message, they will be overwritten by the
+// values that Amazon SES provides.
+//
+//     * If you are using sending authorization
+// to send on behalf of another user, SendRawEmail enables you to specify the
+// cross-account identity for the email's Source, From, and Return-Path parameters
+// in one of two ways: you can pass optional parameters SourceArn, FromArn, and/or
+// ReturnPathArn to the API, or you can include the following X-headers in the
+// header of your raw email:
+//
+//         * X-SES-SOURCE-ARN
+//
+//         *
+// X-SES-FROM-ARN
+//
+//         * X-SES-RETURN-PATH-ARN
+//
+//     Don't include these
+// X-headers in the DKIM signature. Amazon SES removes these before it sends the
+// email. If you only specify the SourceIdentityArn parameter, Amazon SES sets the
+// From and Return-Path addresses to the same identity that you specified. For more
+// information about sending authorization, see the Using Sending Authorization
+// with Amazon SES
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// in the Amazon SES Developer Guide.
+//
+//     * For every message that you send, the
+// total number of recipients (including each recipient in the To:, CC: and BCC:
+// fields) is counted against the maximum number of emails you can send in a
+// 24-hour period (your sending quota). For more information about sending quotas
+// in Amazon SES, see Managing Your Amazon SES Sending Limits
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
+// in the Amazon SES Developer Guide.
 func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, optFns ...func(*Options)) (*SendRawEmailOutput, error) {
 	if params == nil {
 		params = &SendRawEmailInput{}
@@ -177,11 +200,10 @@ type SendRawEmailInput struct {
 	// friendly name) may contain non-ASCII characters. These characters must be
 	// encoded using MIME encoded-word syntax, as described in RFC 2047
 	// (https://tools.ietf.org/html/rfc2047). MIME encoded-word syntax uses the
-	// following form: =?charset?encoding?encoded-text?=.  <p>If you specify the
-	// <code>Source</code> parameter and have feedback forwarding enabled, then bounces
-	// and complaints will be sent to this email address. This takes precedence over
-	// any Return-Path header that you might include in the raw text of the
-	// message.</p>
+	// following form: =?charset?encoding?encoded-text?=. If you specify the Source
+	// parameter and have feedback forwarding enabled, then bounces and complaints will
+	// be sent to this email address. This takes precedence over any Return-Path header
+	// that you might include in the raw text of the message.
 	Source *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the

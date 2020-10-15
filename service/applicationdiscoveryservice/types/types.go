@@ -155,37 +155,50 @@ type ContinuousExportDescription struct {
 	Status ContinuousExportStatus
 
 	// Contains information about any errors that have occurred. This data type can
-	// have the following values:  <ul> <li> <p>ACCESS_DENIED - You don’t have
-	// permission to start Data Exploration in Amazon Athena. Contact your AWS
-	// administrator for help. For more information, see <a
-	// href="http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html">Setting
-	// Up AWS Application Discovery Service</a> in the Application Discovery Service
-	// User Guide.</p> </li> <li> <p>DELIVERY_STREAM_LIMIT_FAILURE - You reached the
-	// limit for Amazon Kinesis Data Firehose delivery streams. Reduce the number of
-	// streams or request a limit increase and try again. For more information, see <a
-	// href="http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html">Kinesis
-	// Data Streams Limits</a> in the Amazon Kinesis Data Streams Developer Guide.</p>
-	// </li> <li> <p>FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an
-	// error state because your IAM User is missing the
-	// AWSApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in Amazon
-	// Athena and try again. For more information, see <a
-	// href="http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy">Step
-	// 3: Provide Application Discovery Service Access to Non-Administrator Users by
-	// Attaching Policies</a> in the Application Discovery Service User Guide.</p>
-	// </li> <li> <p>FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is
-	// in an error state because your IAM User is missing one or more of the Kinesis
-	// data delivery streams.</p> </li> <li> <p>INTERNAL_FAILURE - The Data Exploration
-	// feature is in an error state because of an internal failure. Try again later. If
-	// this problem persists, contact AWS Support.</p> </li> <li>
-	// <p>S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce
-	// the number of Amazon S3 buckets or request a limit increase and try again. For
-	// more information, see <a
-	// href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Bucket
-	// Restrictions and Limitations</a> in the Amazon Simple Storage Service Developer
-	// Guide.</p> </li> <li> <p>S3_NOT_SIGNED_UP - Your account is not signed up for
-	// the Amazon S3 service. You must sign up before you can use Amazon S3. You can
-	// sign up at the following URL: <a
-	// href="https://aws.amazon.com/s3">https://aws.amazon.com/s3</a>.</p> </li> </ul>
+	// have the following values:
+	//
+	//     * ACCESS_DENIED - You don’t have permission to
+	// start Data Exploration in Amazon Athena. Contact your AWS administrator for
+	// help. For more information, see Setting Up AWS Application Discovery Service
+	// (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
+	// in the Application Discovery Service User Guide.
+	//
+	//     *
+	// DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data
+	// Firehose delivery streams. Reduce the number of streams or request a limit
+	// increase and try again. For more information, see Kinesis Data Streams Limits
+	// (http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html) in
+	// the Amazon Kinesis Data Streams Developer Guide.
+	//
+	//     * FIREHOSE_ROLE_MISSING -
+	// The Data Exploration feature is in an error state because your IAM User is
+	// missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data
+	// Exploration in Amazon Athena and try again. For more information, see Step 3:
+	// Provide Application Discovery Service Access to Non-Administrator Users by
+	// Attaching Policies
+	// (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy)
+	// in the Application Discovery Service User Guide.
+	//
+	//     *
+	// FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error
+	// state because your IAM User is missing one or more of the Kinesis data delivery
+	// streams.
+	//
+	//     * INTERNAL_FAILURE - The Data Exploration feature is in an error
+	// state because of an internal failure. Try again later. If this problem persists,
+	// contact AWS Support.
+	//
+	//     * S3_BUCKET_LIMIT_FAILURE - You reached the limit for
+	// Amazon S3 buckets. Reduce the number of Amazon S3 buckets or request a limit
+	// increase and try again. For more information, see Bucket Restrictions and
+	// Limitations
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) in the
+	// Amazon Simple Storage Service Developer Guide.
+	//
+	//     * S3_NOT_SIGNED_UP - Your
+	// account is not signed up for the Amazon S3 service. You must sign up before you
+	// can use Amazon S3. You can sign up at the following URL:
+	// https://aws.amazon.com/s3 (https://aws.amazon.com/s3).
 	StatusDetail *string
 
 	// The timestamp that represents when this continuous export was stopped.
@@ -387,12 +400,12 @@ type ImportTask struct {
 	// log and a file of failed records. You can use these two files to quickly
 	// identify records that failed, why they failed, and correct those records.
 	// Afterward, you can upload the corrected file to your Amazon S3 bucket and create
-	// another import task request.  <p>This field also includes authorization
-	// information so you can confirm the authenticity of the compressed archive before
-	// you download it.</p> <p>If some records failed to be imported we recommend that
-	// you correct the records in the failed entries file and then imports that failed
-	// entries file. This prevents you from having to correct and update the larger
-	// original file and attempt importing it again.</p>
+	// another import task request. This field also includes authorization information
+	// so you can confirm the authenticity of the compressed archive before you
+	// download it. If some records failed to be imported we recommend that you correct
+	// the records in the failed entries file and then imports that failed entries
+	// file. This prevents you from having to correct and update the larger original
+	// file and attempt importing it again.
 	ErrorsAndFailedEntriesZip *string
 
 	// The time that the import task request finished, presented in the Unix time stamp
@@ -436,9 +449,8 @@ type ImportTask struct {
 }
 
 // A name-values pair of elements you can use to filter the results when querying
-// your import tasks. Currently, wildcards are not supported for filters.  <note>
-// <p>When filtering by import status, all other filter values are ignored.</p>
-// </note>
+// your import tasks. Currently, wildcards are not supported for filters. When
+// filtering by import status, all other filter values are ignored.
 type ImportTaskFilter struct {
 
 	// The name, status, or import task ID for a specific import task.

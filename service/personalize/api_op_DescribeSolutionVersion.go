@@ -12,7 +12,7 @@ import (
 )
 
 // Describes a specific version of a solution. For more information on solutions,
-// see CreateSolution ().
+// see CreateSolution.
 func (c *Client) DescribeSolutionVersion(ctx context.Context, params *DescribeSolutionVersionInput, optFns ...func(*Options)) (*DescribeSolutionVersionOutput, error) {
 	if params == nil {
 		params = &DescribeSolutionVersionInput{}

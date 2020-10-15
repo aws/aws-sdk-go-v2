@@ -65,14 +65,13 @@ type CreateJobInput struct {
 	// settings for this job.
 	Notification *types.Notification
 
-	// Defines the Amazon S3 buckets associated with this job.  <p>With
-	// <code>IMPORT</code> jobs, you specify the bucket or buckets that your
-	// transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs,
-	// you specify the bucket or buckets that your transferred data will be exported
-	// from. Optionally, you can also specify a <code>KeyRange</code> value. If you
+	// Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you
+	// specify the bucket or buckets that your transferred data will be imported into.
+	// With EXPORT jobs, you specify the bucket or buckets that your transferred data
+	// will be exported from. Optionally, you can also specify a KeyRange value. If you
 	// choose to export a range, you define the length of the range by providing either
-	// an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code>
-	// value, or both. Ranges are UTF-8 binary sorted.</p>
+	// an inclusive BeginMarker value, an inclusive EndMarker value, or both. Ranges
+	// are UTF-8 binary sorted.
 	Resources *types.JobResource
 
 	// The RoleARN that you want to associate with this job. RoleArns are created using
@@ -83,15 +82,22 @@ type CreateJobInput struct {
 
 	// The shipping speed for this job. This speed doesn't dictate how soon you'll get
 	// the Snowball, rather it represents how quickly the Snowball moves to its
-	// destination while in transit. Regional shipping speeds are as follows:  <ul>
-	// <li> <p>In Australia, you have access to express shipping. Typically, Snowballs
-	// shipped express are delivered in about a day.</p> </li> <li> <p>In the European
-	// Union (EU), you have access to express shipping. Typically, Snowballs shipped
-	// express are delivered in about a day. In addition, most countries in the EU have
-	// access to standard shipping, which typically takes less than a week, one
-	// way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven
-	// days.</p> </li> <li> <p>In the US, you have access to one-day shipping and
-	// two-day shipping.</p> </li> </ul>
+	// destination while in transit. Regional shipping speeds are as follows:
+	//
+	//     * In
+	// Australia, you have access to express shipping. Typically, Snowballs shipped
+	// express are delivered in about a day.
+	//
+	//     * In the European Union (EU), you
+	// have access to express shipping. Typically, Snowballs shipped express are
+	// delivered in about a day. In addition, most countries in the EU have access to
+	// standard shipping, which typically takes less than a week, one way.
+	//
+	//     * In
+	// India, Snowballs are delivered in one to seven days.
+	//
+	//     * In the US, you have
+	// access to one-day shipping and two-day shipping.
 	ShippingOption types.ShippingOption
 
 	// If your job is being created in one of the US regions, you have the option of

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets the Tags () collection for a given resource.
+// Gets the Tags collection for a given resource.
 func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...func(*Options)) (*GetTagsOutput, error) {
 	if params == nil {
 		params = &GetTagsInput{}
@@ -26,7 +26,7 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Gets the Tags () collection for a given resource.
+// Gets the Tags collection for a given resource.
 type GetTagsInput struct {
 
 	// [Required] The ARN of a resource that can be tagged.

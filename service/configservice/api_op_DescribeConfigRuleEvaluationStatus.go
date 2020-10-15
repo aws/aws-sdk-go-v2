@@ -38,11 +38,12 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// AWS managed Config rules that you use.
 	ConfigRuleNames []*string
 
-	// The number of rule evaluation results that you want returned.  <p>This parameter
-	// is required if the rule limit for your account is more than the default of 150
-	// rules.</p> <p>For information about requesting a rule limit increase, see <a
-	// href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config">AWS
-	// Config Limits</a> in the <i>AWS General Reference Guide</i>.</p>
+	// The number of rule evaluation results that you want returned. This parameter is
+	// required if the rule limit for your account is more than the default of 150
+	// rules. For information about requesting a rule limit increase, see AWS Config
+	// Limits
+	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// in the AWS General Reference Guide.
 	Limit *int32
 
 	// The nextToken string returned on a previous page that you use to get the next

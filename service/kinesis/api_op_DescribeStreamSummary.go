@@ -40,7 +40,7 @@ type DescribeStreamSummaryInput struct {
 
 type DescribeStreamSummaryOutput struct {
 
-	// A StreamDescriptionSummary () containing information about the stream.
+	// A StreamDescriptionSummary containing information about the stream.
 	//
 	// This member is required.
 	StreamDescriptionSummary *types.StreamDescriptionSummary

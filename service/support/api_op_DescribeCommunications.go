@@ -67,7 +67,7 @@ type DescribeCommunicationsInput struct {
 	NextToken *string
 }
 
-// The communications returned by the DescribeCommunications () operation.
+// The communications returned by the DescribeCommunications operation.
 type DescribeCommunicationsOutput struct {
 
 	// The communications for the case.

@@ -14,9 +14,9 @@ import (
 // your account in this Region. AWS creates a unique AWS managed CMK in each Region
 // for use with encryption by default. If you change the default CMK to a symmetric
 // customer managed CMK, it is used instead of the AWS managed CMK. To reset the
-// default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId ().
-// Amazon EBS does not support asymmetric CMKs. If you delete or disable the
-// customer managed CMK that you specified for use with encryption by default, your
+// default CMK to the AWS managed CMK for EBS, use ResetEbsDefaultKmsKeyId. Amazon
+// EBS does not support asymmetric CMKs. If you delete or disable the customer
+// managed CMK that you specified for use with encryption by default, your
 // instances will fail to launch. For more information, see Amazon EBS Encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide.

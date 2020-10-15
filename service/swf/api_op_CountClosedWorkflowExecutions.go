@@ -98,7 +98,7 @@ type CountClosedWorkflowExecutionsInput struct {
 }
 
 // Contains the count of workflow executions returned from
-// CountOpenWorkflowExecutions () or CountClosedWorkflowExecutions ()
+// CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
 type CountClosedWorkflowExecutionsOutput struct {
 
 	// The number of workflow executions.

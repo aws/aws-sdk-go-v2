@@ -33,7 +33,7 @@ type DescribeImageAttributeInput struct {
 
 	// The AMI attribute. Note: Depending on your account privileges, the
 	// blockDeviceMapping attribute may return a Client.AuthFailure error. If this
-	// happens, use DescribeImages () to get information about the block device mapping
+	// happens, use DescribeImages to get information about the block device mapping
 	// for the AMI.
 	//
 	// This member is required.

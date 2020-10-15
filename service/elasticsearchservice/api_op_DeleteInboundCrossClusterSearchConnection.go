@@ -28,7 +28,7 @@ func (c *Client) DeleteInboundCrossClusterSearchConnection(ctx context.Context, 
 	return out, nil
 }
 
-// Container for the parameters to the DeleteInboundCrossClusterSearchConnection ()
+// Container for the parameters to the DeleteInboundCrossClusterSearchConnection
 // operation.
 type DeleteInboundCrossClusterSearchConnectionInput struct {
 
@@ -38,12 +38,11 @@ type DeleteInboundCrossClusterSearchConnectionInput struct {
 	CrossClusterSearchConnectionId *string
 }
 
-// The result of a DeleteInboundCrossClusterSearchConnection () operation. Contains
+// The result of a DeleteInboundCrossClusterSearchConnection operation. Contains
 // details of deleted inbound connection.
 type DeleteInboundCrossClusterSearchConnectionOutput struct {
 
-	// Specifies the InboundCrossClusterSearchConnection () of deleted inbound
-	// connection.
+	// Specifies the InboundCrossClusterSearchConnection of deleted inbound connection.
 	CrossClusterSearchConnection *types.InboundCrossClusterSearchConnection
 
 	// Metadata pertaining to the operation's result.

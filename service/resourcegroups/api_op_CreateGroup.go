@@ -41,7 +41,7 @@ type CreateGroupInput struct {
 
 	// A configuration associates the resource group with an AWS service and specifies
 	// how the service can interact with the resources in the group. A configuration is
-	// an array of GroupConfigurationItem () elements. You can specify either a
+	// an array of GroupConfigurationItem elements. You can specify either a
 	// Configuration or a ResourceQuery in a group, but not both.
 	Configuration []*types.GroupConfigurationItem
 

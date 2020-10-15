@@ -13,13 +13,22 @@ import (
 
 // Creates a new identity pool. The identity pool is a store of user identity
 // information that is specific to your AWS account. The keys for
-// SupportedLoginProviders are as follows:  <ul> <li> <p>Facebook:
-// <code>graph.facebook.com</code> </p> </li> <li> <p>Google:
-// <code>accounts.google.com</code> </p> </li> <li> <p>Amazon:
-// <code>www.amazon.com</code> </p> </li> <li> <p>Twitter:
-// <code>api.twitter.com</code> </p> </li> <li> <p>Digits:
-// <code>www.digits.com</code> </p> </li> </ul> <p>You must use AWS Developer
-// credentials to call this API.</p>
+// SupportedLoginProviders are as follows:
+//
+//     * Facebook: graph.facebook.com
+//
+//
+// * Google: accounts.google.com
+//
+//     * Amazon: www.amazon.com
+//
+//     * Twitter:
+// api.twitter.com
+//
+//     * Digits: www.digits.com
+//
+// You must use AWS Developer
+// credentials to call this API.
 func (c *Client) CreateIdentityPool(ctx context.Context, params *CreateIdentityPoolInput, optFns ...func(*Options)) (*CreateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &CreateIdentityPoolInput{}

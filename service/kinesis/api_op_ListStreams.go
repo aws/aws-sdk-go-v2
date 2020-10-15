@@ -20,7 +20,7 @@ import (
 // returned by the ListStreams request in the ExclusiveStartStreamName parameter in
 // a subsequent request to ListStreams. The group of stream names returned by the
 // subsequent request is then added to the list. You can continue this process
-// until all the stream names have been collected in the list. ListStreams () has a
+// until all the stream names have been collected in the list. ListStreams has a
 // limit of five transactions per second per account.
 func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optFns ...func(*Options)) (*ListStreamsOutput, error) {
 	if params == nil {

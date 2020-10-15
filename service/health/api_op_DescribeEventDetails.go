@@ -13,11 +13,10 @@ import (
 
 // Returns detailed information about one or more specified events. Information
 // includes standard event data (region, service, and so on, as returned by
-// DescribeEvents ()), a detailed event description, and possible additional
-// metadata that depends upon the nature of the event. Affected entities are not
-// included; to retrieve those, use the DescribeAffectedEntities () operation. If a
-// specified event cannot be retrieved, an error message is returned for that
-// event.
+// DescribeEvents), a detailed event description, and possible additional metadata
+// that depends upon the nature of the event. Affected entities are not included;
+// to retrieve those, use the DescribeAffectedEntities operation. If a specified
+// event cannot be retrieved, an error message is returned for that event.
 func (c *Client) DescribeEventDetails(ctx context.Context, params *DescribeEventDetailsInput, optFns ...func(*Options)) (*DescribeEventDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeEventDetailsInput{}

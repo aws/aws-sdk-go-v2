@@ -40,7 +40,7 @@ type GetLoginProfileInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful GetLoginProfile () request.
+// Contains the response to a successful GetLoginProfile request.
 type GetLoginProfileOutput struct {
 
 	// A structure containing the user name and password create date for the user.

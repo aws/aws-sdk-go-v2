@@ -13,8 +13,8 @@ import (
 
 // Returns the results for the AWS Trusted Advisor check summaries for the check
 // IDs that you specified. You can get the check IDs by calling the
-// DescribeTrustedAdvisorChecks () operation. The response contains an array of
-// TrustedAdvisorCheckSummary () objects.
+// DescribeTrustedAdvisorChecks operation. The response contains an array of
+// TrustedAdvisorCheckSummary objects.
 //
 //     * You must have a Business or
 // Enterprise support plan to use the AWS Support API.
@@ -48,7 +48,7 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 }
 
 // The summaries of the Trusted Advisor checks returned by the
-// DescribeTrustedAdvisorCheckSummaries () operation.
+// DescribeTrustedAdvisorCheckSummaries operation.
 type DescribeTrustedAdvisorCheckSummariesOutput struct {
 
 	// The summary information for the requested Trusted Advisor checks.

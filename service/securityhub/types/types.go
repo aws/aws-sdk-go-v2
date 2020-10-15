@@ -2587,7 +2587,7 @@ type StandardsSubscription struct {
 type StandardsSubscriptionRequest struct {
 
 	// The ARN of the standard that you want to enable. To view the list of available
-	// standards and their ARNs, use the DescribeStandards () operation.
+	// standards and their ARNs, use the DescribeStandards operation.
 	//
 	// This member is required.
 	StandardsArn *string

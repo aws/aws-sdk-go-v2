@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists tags for the specified resource.  <p>Currently, you can list tags on an
-// account in AWS Organizations.</p> <p>This operation can be called only from the
+// Lists tags for the specified resource. Currently, you can list tags on an
+// account in AWS Organizations. This operation can be called only from the
 // organization's master account or by a member account that is a delegated
-// administrator for an AWS service.</p>
+// administrator for an AWS service.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

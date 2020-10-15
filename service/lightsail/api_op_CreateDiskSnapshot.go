@@ -29,11 +29,10 @@ import (
 // volume, just define the instance name parameter when issuing the snapshot
 // command, and a snapshot of the defined instance's system volume will be created.
 // After the snapshot is available, you can create a block storage disk from the
-// snapshot and attach it to a running instance to access the data on the disk.
-// <p>The <code>create disk snapshot</code> operation supports tag-based access
-// control via request tags. For more information, see the <a
-// href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail
-// Dev Guide</a>.</p>
+// snapshot and attach it to a running instance to access the data on the disk. The
+// create disk snapshot operation supports tag-based access control via request
+// tags. For more information, see the Lightsail Dev Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnapshotInput, optFns ...func(*Options)) (*CreateDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDiskSnapshotInput{}

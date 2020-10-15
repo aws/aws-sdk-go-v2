@@ -19,7 +19,8 @@ import (
 const ServiceID = "Elastic Inference"
 const ServiceAPIVersion = "2017-07-25"
 
-// Elastic Inference public APIs.
+// Client provides the API client to make operations call for Amazon Elastic
+// Inference.
 type Client struct {
 	options Options
 }

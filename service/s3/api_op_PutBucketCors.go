@@ -42,10 +42,14 @@ import (
 // For more information about CORS, go to Enabling
 // Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
-// Storage Service Developer Guide.  <p class="title"> <b>Related Resources</b>
-// </p> <ul> <li> <p> <a>GetBucketCors</a> </p> </li> <li> <p>
-// <a>DeleteBucketCors</a> </p> </li> <li> <p> <a>RESTOPTIONSobject</a> </p> </li>
-// </ul>
+// Storage Service Developer Guide. Related Resources
+//
+//     * GetBucketCors
+//
+//     *
+// DeleteBucketCors
+//
+//     * RESTOPTIONSobject
 func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, optFns ...func(*Options)) (*PutBucketCorsOutput, error) {
 	if params == nil {
 		params = &PutBucketCorsInput{}

@@ -16,11 +16,11 @@ import (
 // gateway. For example, an error can occur when a disk is corrupted or removed
 // from the gateway. When a cache is reset, the gateway loses its cache storage. At
 // this point, you can reconfigure the disks as cache disks. This operation is only
-// supported in the cached volume and tape types.  <important> <p>If the cache disk
-// you are resetting contains data that has not been uploaded to Amazon S3 yet,
-// that data can be lost. After you reset cache disks, there will be no configured
-// cache disks left in the gateway, so you must configure at least one new cache
-// disk for your gateway to function properly.</p> </important>
+// supported in the cached volume and tape types. If the cache disk you are
+// resetting contains data that has not been uploaded to Amazon S3 yet, that data
+// can be lost. After you reset cache disks, there will be no configured cache
+// disks left in the gateway, so you must configure at least one new cache disk for
+// your gateway to function properly.
 func (c *Client) ResetCache(ctx context.Context, params *ResetCacheInput, optFns ...func(*Options)) (*ResetCacheOutput, error) {
 	if params == nil {
 		params = &ResetCacheInput{}
@@ -38,8 +38,8 @@ func (c *Client) ResetCache(ctx context.Context, params *ResetCacheInput, optFns
 
 type ResetCacheInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -47,8 +47,8 @@ type ResetCacheInput struct {
 
 type ResetCacheOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

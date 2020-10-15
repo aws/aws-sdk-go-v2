@@ -32,7 +32,7 @@ func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSe
 	return out, nil
 }
 
-// The input for the DescribeChangeSet () action.
+// The input for the DescribeChangeSet action.
 type DescribeChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
@@ -41,8 +41,8 @@ type DescribeChangeSetInput struct {
 	// This member is required.
 	ChangeSetName *string
 
-	// A string (provided by the DescribeChangeSet () response output) that identifies
-	// the next page of information that you want to retrieve.
+	// A string (provided by the DescribeChangeSet response output) that identifies the
+	// next page of information that you want to retrieve.
 	NextToken *string
 
 	// If you specified the name of a change set, specify the stack name or ID (ARN) of
@@ -50,7 +50,7 @@ type DescribeChangeSetInput struct {
 	StackName *string
 }
 
-// The output for the DescribeChangeSet () action.
+// The output for the DescribeChangeSet action.
 type DescribeChangeSetOutput struct {
 
 	// If you execute the change set, the list of capabilities that were explicitly

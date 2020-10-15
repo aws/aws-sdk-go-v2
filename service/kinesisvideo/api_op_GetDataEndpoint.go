@@ -15,9 +15,8 @@ import (
 // endpoint in your application to read from the specified stream (using the
 // GetMedia or GetMediaForFragmentList operations) or write to it (using the
 // PutMedia operation). The returned endpoint does not have the API name appended.
-// The client needs to add the API name to the returned endpoint.  <p>In the
-// request, specify the stream either by <code>StreamName</code> or
-// <code>StreamARN</code>.</p>
+// The client needs to add the API name to the returned endpoint. In the request,
+// specify the stream either by StreamName or StreamARN.
 func (c *Client) GetDataEndpoint(ctx context.Context, params *GetDataEndpointInput, optFns ...func(*Options)) (*GetDataEndpointOutput, error) {
 	if params == nil {
 		params = &GetDataEndpointInput{}

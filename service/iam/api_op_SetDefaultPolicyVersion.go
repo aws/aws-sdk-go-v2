@@ -13,8 +13,8 @@ import (
 // Sets the specified version of the specified policy as the policy's default
 // (operative) version. This operation affects all users, groups, and roles that
 // the policy is attached to. To list the users, groups, and roles that the policy
-// is attached to, use the ListEntitiesForPolicy () API. For information about
-// managed policies, see Managed Policies and Inline Policies
+// is attached to, use the ListEntitiesForPolicy API. For information about managed
+// policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefaultPolicyVersionInput, optFns ...func(*Options)) (*SetDefaultPolicyVersionOutput, error) {

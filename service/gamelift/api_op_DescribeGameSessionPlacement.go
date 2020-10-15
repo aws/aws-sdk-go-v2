@@ -13,31 +13,31 @@ import (
 
 // Retrieves properties and current status of a game session placement request. To
 // get game session placement details, specify the placement ID. If successful, a
-// GameSessionPlacement () object is returned.
+// GameSessionPlacement object is returned.
 //
-//     * CreateGameSession ()
-//
-//     *
-// DescribeGameSessions ()
-//
-//     * DescribeGameSessionDetails ()
+//     * CreateGameSession
 //
 //     *
-// SearchGameSessions ()
+// DescribeGameSessions
 //
-//     * UpdateGameSession ()
+//     * DescribeGameSessionDetails
+//
+//     *
+// SearchGameSessions
+//
+//     * UpdateGameSession
 //
 //     * GetGameSessionLogUrl
-// ()
 //
-//     * Game session placements
+//     *
+// Game session placements
 //
-//         * StartGameSessionPlacement ()
+//         * StartGameSessionPlacement
 //
+//         *
+// DescribeGameSessionPlacement
 //
-// * DescribeGameSessionPlacement ()
-//
-//         * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *DescribeGameSessionPlacementInput, optFns ...func(*Options)) (*DescribeGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionPlacementInput{}

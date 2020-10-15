@@ -24,9 +24,9 @@ type CharacterSet struct {
 }
 
 // The configuration setting for the log types to be enabled for export to
-// CloudWatch Logs for a specific DB instance or DB cluster.  <p>The
-// <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine
-// which logs will be exported (or not exported) to CloudWatch Logs.</p>
+// CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes and
+// DisableLogTypes arrays determine which logs will be exported (or not exported)
+// to CloudWatch Logs.
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
@@ -37,7 +37,7 @@ type CloudwatchLogsExportConfiguration struct {
 }
 
 // Contains the details of an Amazon Neptune DB cluster. This data type is used as
-// a response element in the DescribeDBClusters () action.
+// a response element in the DescribeDBClusters action.
 type DBCluster struct {
 
 	// AllocatedStorage always returns 1, because Neptune DB cluster storage size is
@@ -210,7 +210,7 @@ type DBClusterOptionGroupStatus struct {
 }
 
 // Contains the details of an Amazon Neptune DB cluster parameter group. This data
-// type is used as a response element in the DescribeDBClusterParameterGroups ()
+// type is used as a response element in the DescribeDBClusterParameterGroups
 // action.
 type DBClusterParameterGroup struct {
 
@@ -253,7 +253,7 @@ type DBClusterRole struct {
 }
 
 // Contains the details for an Amazon Neptune DB cluster snapshot This data type is
-// used as a response element in the DescribeDBClusterSnapshots () action.
+// used as a response element in the DescribeDBClusterSnapshots action.
 type DBClusterSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
@@ -275,17 +275,16 @@ type DBClusterSnapshot struct {
 	DBClusterSnapshotArn *string
 
 	// Specifies the identifier for a DB cluster snapshot. Must match the identifier of
-	// an existing snapshot.  <p>After you restore a DB cluster using a
-	// <code>DBClusterSnapshotIdentifier</code>, you must specify the same
-	// <code>DBClusterSnapshotIdentifier</code> for any future updates to the DB
-	// cluster. When you specify this property for an update, the DB cluster is not
-	// restored from the snapshot again, and the data in the database is not
-	// changed.</p> <p>However, if you don't specify the
-	// <code>DBClusterSnapshotIdentifier</code>, an empty DB cluster is created, and
-	// the original DB cluster is deleted. If you specify a property that is different
-	// from the previous snapshot restore property, the DB cluster is restored from the
-	// snapshot specified by the <code>DBClusterSnapshotIdentifier</code>, and the
-	// original DB cluster is deleted.</p>
+	// an existing snapshot. After you restore a DB cluster using a
+	// DBClusterSnapshotIdentifier, you must specify the same
+	// DBClusterSnapshotIdentifier for any future updates to the DB cluster. When you
+	// specify this property for an update, the DB cluster is not restored from the
+	// snapshot again, and the data in the database is not changed. However, if you
+	// don't specify the DBClusterSnapshotIdentifier, an empty DB cluster is created,
+	// and the original DB cluster is deleted. If you specify a property that is
+	// different from the previous snapshot restore property, the DB cluster is
+	// restored from the snapshot specified by the DBClusterSnapshotIdentifier, and the
+	// original DB cluster is deleted.
 	DBClusterSnapshotIdentifier *string
 
 	// Specifies the name of the database engine.
@@ -340,13 +339,13 @@ type DBClusterSnapshot struct {
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
 // DB cluster snapshot attributes are used to authorize other AWS accounts to
 // restore a manual DB cluster snapshot. For more information, see the
-// ModifyDBClusterSnapshotAttribute () API action.
+// ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttribute struct {
 
 	// The name of the manual DB cluster snapshot attribute. The attribute named
 	// restore refers to the list of AWS accounts that have permission to copy or
 	// restore the manual DB cluster snapshot. For more information, see the
-	// ModifyDBClusterSnapshotAttribute () API action.
+	// ModifyDBClusterSnapshotAttribute API action.
 	AttributeName *string
 
 	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
@@ -358,10 +357,10 @@ type DBClusterSnapshotAttribute struct {
 }
 
 // Contains the results of a successful call to the
-// DescribeDBClusterSnapshotAttributes () API action. Manual DB cluster snapshot
+// DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
 // attributes are used to authorize other AWS accounts to copy or restore a manual
 // DB cluster snapshot. For more information, see the
-// ModifyDBClusterSnapshotAttribute () API action.
+// ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the manual DB cluster snapshot.
@@ -372,7 +371,7 @@ type DBClusterSnapshotAttributesResult struct {
 }
 
 // This data type is used as a response element in the action
-// DescribeDBEngineVersions ().
+// DescribeDBEngineVersions.
 type DBEngineVersion struct {
 
 	// The description of the database engine.
@@ -416,7 +415,7 @@ type DBEngineVersion struct {
 }
 
 // Contains the details of an Amazon Neptune DB instance. This data type is used as
-// a response element in the DescribeDBInstances () action.
+// a response element in the DescribeDBInstances action.
 type DBInstance struct {
 
 	// Specifies the allocated storage size specified in gibibytes.
@@ -627,7 +626,7 @@ type DBInstanceStatusInfo struct {
 }
 
 // Contains the details of an Amazon Neptune DB parameter group. This data type is
-// used as a response element in the DescribeDBParameterGroups () action.
+// used as a response element in the DescribeDBParameterGroups action.
 type DBParameterGroup struct {
 
 	// The Amazon Resource Name (ARN) for the DB parameter group.
@@ -647,14 +646,14 @@ type DBParameterGroup struct {
 // The status of the DB parameter group. This data type is used as a response
 // element in the following actions:
 //
-//     * CreateDBInstance ()
+//     * CreateDBInstance
 //
 //     *
-// DeleteDBInstance ()
+// DeleteDBInstance
 //
-//     * ModifyDBInstance ()
+//     * ModifyDBInstance
 //
-//     * RebootDBInstance ()
+//     * RebootDBInstance
 type DBParameterGroupStatus struct {
 
 	// The name of the DP parameter group.
@@ -675,7 +674,7 @@ type DBSecurityGroupMembership struct {
 }
 
 // Contains the details of an Amazon Neptune DB subnet group. This data type is
-// used as a response element in the DescribeDBSubnetGroups () action.
+// used as a response element in the DescribeDBSubnetGroups action.
 type DBSubnetGroup struct {
 
 	// The Amazon Resource Name (ARN) for the DB subnet group.
@@ -690,7 +689,7 @@ type DBSubnetGroup struct {
 	// Provides the status of the DB subnet group.
 	SubnetGroupStatus *string
 
-	// Contains a list of Subnet () elements.
+	// Contains a list of Subnet elements.
 	Subnets []*Subnet
 
 	// Provides the VpcId of the DB subnet group.
@@ -739,7 +738,7 @@ type Endpoint struct {
 }
 
 // Contains the result of a successful invocation of the
-// DescribeEngineDefaultParameters () action.
+// DescribeEngineDefaultParameters action.
 type EngineDefaults struct {
 
 	// Specifies the name of the DB parameter group family that the engine default
@@ -755,7 +754,7 @@ type EngineDefaults struct {
 	Parameters []*Parameter
 }
 
-// This data type is used as a response element in the DescribeEvents () action.
+// This data type is used as a response element in the DescribeEvents action.
 type Event struct {
 
 	// Specifies the date and time of the event.
@@ -778,7 +777,7 @@ type Event struct {
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
-// () action.
+// action.
 type EventCategoriesMap struct {
 
 	// The event categories for the specified source type
@@ -789,7 +788,7 @@ type EventCategoriesMap struct {
 }
 
 // Contains the results of a successful invocation of the
-// DescribeEventSubscriptions () action.
+// DescribeEventSubscriptions action.
 type EventSubscription struct {
 
 	// The event notification subscription Id.
@@ -855,7 +854,7 @@ type OptionGroupMembership struct {
 }
 
 // Contains a list of available options for a DB instance. This data type is used
-// as a response element in the DescribeOrderableDBInstanceOptions () action.
+// as a response element in the DescribeOrderableDBInstanceOptions action.
 type OrderableDBInstanceOption struct {
 
 	// A list of Availability Zones for a DB instance.
@@ -983,7 +982,7 @@ type PendingMaintenanceAction struct {
 
 	// The effective date when the pending maintenance action is applied to the
 	// resource. This date takes into account opt-in requests received from the
-	// ApplyPendingMaintenanceAction () API, the AutoAppliedAfterDate, and the
+	// ApplyPendingMaintenanceAction API, the AutoAppliedAfterDate, and the
 	// ForcedApplyDate. This value is blank if an opt-in request has not been received
 	// and nothing has been specified as AutoAppliedAfterDate or ForcedApplyDate.
 	CurrentApplyDate *time.Time
@@ -1001,7 +1000,7 @@ type PendingMaintenanceAction struct {
 	OptInStatus *string
 }
 
-// This data type is used as a response element in the ModifyDBInstance () action.
+// This data type is used as a response element in the ModifyDBInstance action.
 type PendingModifiedValues struct {
 
 	// Contains the new AllocatedStorage size for the DB instance that will be applied
@@ -1082,7 +1081,7 @@ type ResourcePendingMaintenanceActions struct {
 }
 
 // Specifies a subnet. This data type is used as a response element in the
-// DescribeDBSubnetGroups () action.
+// DescribeDBSubnetGroups action.
 type Subnet struct {
 
 	// Specifies the EC2 Availability Zone that the subnet is in.
@@ -1111,7 +1110,7 @@ type Tag struct {
 	Value *string
 }
 
-// A time zone associated with a DBInstance ().
+// A time zone associated with a DBInstance.
 type Timezone struct {
 
 	// The name of the time zone.
@@ -1140,8 +1139,8 @@ type UpgradeTarget struct {
 
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the
-// DescribeValidDBInstanceModifications () action. You can use this information
-// when you call ModifyDBInstance ().
+// DescribeValidDBInstanceModifications action. You can use this information when
+// you call ModifyDBInstance.
 type ValidDBInstanceModificationsMessage struct {
 
 	// Valid storage options for your DB instance.
@@ -1150,7 +1149,7 @@ type ValidDBInstanceModificationsMessage struct {
 
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the
-// DescribeValidDBInstanceModifications () action.
+// DescribeValidDBInstanceModifications action.
 type ValidStorageOptions struct {
 
 	// The valid range of Provisioned IOPS to gibibytes of storage multiplier. For

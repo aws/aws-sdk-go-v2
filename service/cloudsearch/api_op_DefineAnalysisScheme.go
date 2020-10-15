@@ -31,7 +31,7 @@ func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysi
 	return out, nil
 }
 
-// Container for the parameters to the DefineAnalysisScheme () operation. Specifies
+// Container for the parameters to the DefineAnalysisScheme operation. Specifies
 // the name of the domain you want to update and the analysis scheme configuration.
 type DefineAnalysisSchemeInput struct {
 
@@ -52,7 +52,7 @@ type DefineAnalysisSchemeInput struct {
 	DomainName *string
 }
 
-// The result of a DefineAnalysisScheme () request. Contains the status of the
+// The result of a DefineAnalysisScheme request. Contains the status of the
 // newly-configured analysis scheme.
 type DefineAnalysisSchemeOutput struct {
 

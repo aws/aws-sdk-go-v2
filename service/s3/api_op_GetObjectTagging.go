@@ -12,19 +12,18 @@ import (
 )
 
 // Returns the tag-set of an object. You send the GET request against the tagging
-// subresource associated with the object.  <p>To use this operation, you must have
-// permission to perform the <code>s3:GetObjectTagging</code> action. By default,
-// the GET operation returns information about current version of an object. For a
+// subresource associated with the object. To use this operation, you must have
+// permission to perform the s3:GetObjectTagging action. By default, the GET
+// operation returns information about current version of an object. For a
 // versioned bucket, you can have multiple versions of an object in your bucket. To
 // retrieve tags of any other version, use the versionId query parameter. You also
-// need permission for the <code>s3:GetObjectVersionTagging</code> action.</p> <p>
-// By default, the bucket owner has this permission and can grant this permission
-// to others.</p> <p> For information about the Amazon S3 object tagging feature,
-// see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object
-// Tagging</a>.</p> <p>The following operation is related to
-// <code>GetObjectTagging</code>:</p> <ul> <li> <p> <a>PutObjectTagging</a> </p>
-// </li> </ul>
+// need permission for the s3:GetObjectVersionTagging action. By default, the
+// bucket owner has this permission and can grant this permission to others. For
+// information about the Amazon S3 object tagging feature, see Object Tagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). The
+// following operation is related to GetObjectTagging:
+//
+//     * PutObjectTagging
 func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingInput, optFns ...func(*Options)) (*GetObjectTaggingOutput, error) {
 	if params == nil {
 		params = &GetObjectTaggingInput{}

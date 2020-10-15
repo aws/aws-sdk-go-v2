@@ -19,10 +19,7 @@ import (
 const ServiceID = "CloudFront"
 const ServiceAPIVersion = "2020-05-31"
 
-// Amazon CloudFront This is the Amazon CloudFront API Reference. This guide is for
-// developers who need detailed information about CloudFront API actions, data
-// types, and errors. For detailed information about CloudFront features, see the
-// Amazon CloudFront Developer Guide.
+// Client provides the API client to make operations call for Amazon CloudFront.
 type Client struct {
 	options Options
 }

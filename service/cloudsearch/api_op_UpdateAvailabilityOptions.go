@@ -33,7 +33,7 @@ func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAv
 	return out, nil
 }
 
-// Container for the parameters to the UpdateAvailabilityOptions () operation.
+// Container for the parameters to the UpdateAvailabilityOptions operation.
 // Specifies the name of the domain you want to update and the Multi-AZ
 // availability option.
 type UpdateAvailabilityOptionsInput struct {

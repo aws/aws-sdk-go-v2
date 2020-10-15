@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Provides information about a stream processor created by CreateStreamProcessor
-// (). You can get information about the input and output streams, the input
-// parameters for the face recognition being performed, and the current status of
-// the stream processor.
+// Provides information about a stream processor created by CreateStreamProcessor.
+// You can get information about the input and output streams, the input parameters
+// for the face recognition being performed, and the current status of the stream
+// processor.
 func (c *Client) DescribeStreamProcessor(ctx context.Context, params *DescribeStreamProcessorInput, optFns ...func(*Options)) (*DescribeStreamProcessorOutput, error) {
 	if params == nil {
 		params = &DescribeStreamProcessorInput{}

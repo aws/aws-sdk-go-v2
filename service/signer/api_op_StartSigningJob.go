@@ -34,9 +34,9 @@ import (
 // * You must also specify a request token that identifies your request to code
 // signing.
 //
-// You can call the DescribeSigningJob () and the ListSigningJobs ()
-// actions after you call StartSigningJob. For a Java example that shows how to use
-// this action, see http://docs.aws.amazon.com/acm/latest/userguide/
+// You can call the DescribeSigningJob and the ListSigningJobs actions
+// after you call StartSigningJob. For a Java example that shows how to use this
+// action, see http://docs.aws.amazon.com/acm/latest/userguide/
 // (http://docs.aws.amazon.com/acm/latest/userguide/)
 func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInput, optFns ...func(*Options)) (*StartSigningJobOutput, error) {
 	if params == nil {

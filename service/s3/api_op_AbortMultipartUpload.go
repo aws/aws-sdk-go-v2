@@ -18,23 +18,23 @@ import (
 // result, it might be necessary to abort a given multipart upload multiple times
 // in order to completely free all storage consumed by all parts. To verify that
 // all parts have been removed, so you don't get charged for the part storage, you
-// should call the ListParts () operation and ensure that the parts list is empty.
-// For information about permissions required to use the multipart upload API, see
+// should call the ListParts operation and ensure that the parts list is empty. For
+// information about permissions required to use the multipart upload API, see
 // Multipart Upload API and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
 // following operations are related to AbortMultipartUpload:
 //
 //     *
-// CreateMultipartUpload ()
+// CreateMultipartUpload
 //
-//     * UploadPart ()
+//     * UploadPart
 //
 //     * CompleteMultipartUpload
-// ()
 //
-//     * ListParts ()
+//     *
+// ListParts
 //
-//     * ListMultipartUploads ()
+//     * ListMultipartUploads
 func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipartUploadInput, optFns ...func(*Options)) (*AbortMultipartUploadOutput, error) {
 	if params == nil {
 		params = &AbortMultipartUploadInput{}

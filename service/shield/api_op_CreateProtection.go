@@ -72,7 +72,7 @@ type CreateProtectionInput struct {
 
 type CreateProtectionOutput struct {
 
-	// The unique identifier (ID) for the Protection () object that is created.
+	// The unique identifier (ID) for the Protection object that is created.
 	ProtectionId *string
 
 	// Metadata pertaining to the operation's result.

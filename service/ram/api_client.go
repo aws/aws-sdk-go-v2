@@ -19,13 +19,8 @@ import (
 const ServiceID = "RAM"
 const ServiceAPIVersion = "2018-01-04"
 
-// Use AWS Resource Access Manager to share AWS resources between AWS accounts. To
-// share a resource, you create a resource share, associate the resource with the
-// resource share, and specify the principals that can access the resources
-// associated with the resource share. The following principals are supported: AWS
-// accounts, organizational units (OU) from AWS Organizations, and organizations
-// from AWS Organizations. For more information, see the AWS Resource Access
-// Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/).
+// Client provides the API client to make operations call for AWS Resource Access
+// Manager.
 type Client struct {
 	options Options
 }

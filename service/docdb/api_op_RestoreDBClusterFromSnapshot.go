@@ -32,7 +32,7 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 	return out, nil
 }
 
-// Represents the input to RestoreDBClusterFromSnapshot ().
+// Represents the input to RestoreDBClusterFromSnapshot.
 type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the cluster to create from the snapshot or cluster snapshot. This

@@ -14,13 +14,13 @@ import (
 // Lists virtual tapes in your virtual tape library (VTL) and your virtual tape
 // shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon
 // Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all
-// virtual tapes in both your VTL and VTS.  <p>This operation supports pagination.
-// By default, the operation returns a maximum of up to 100 tapes. You can
-// optionally specify the <code>Limit</code> parameter in the body to limit the
-// number of tapes in the response. If the number of tapes returned in the response
-// is truncated, the response includes a <code>Marker</code> element that you can
-// use in your subsequent request to retrieve the next set of tapes. This operation
-// is only supported in the tape gateway type.</p>
+// virtual tapes in both your VTL and VTS. This operation supports pagination. By
+// default, the operation returns a maximum of up to 100 tapes. You can optionally
+// specify the Limit parameter in the body to limit the number of tapes in the
+// response. If the number of tapes returned in the response is truncated, the
+// response includes a Marker element that you can use in your subsequent request
+// to retrieve the next set of tapes. This operation is only supported in the tape
+// gateway type.
 func (c *Client) ListTapes(ctx context.Context, params *ListTapesInput, optFns ...func(*Options)) (*ListTapesOutput, error) {
 	if params == nil {
 		params = &ListTapesInput{}
@@ -36,9 +36,14 @@ func (c *Client) ListTapes(ctx context.Context, params *ListTapesInput, optFns .
 	return out, nil
 }
 
-// A JSON object that contains one or more of the following fields:  <ul> <li> <p>
-// <a>ListTapesInput$Limit</a> </p> </li> <li> <p> <a>ListTapesInput$Marker</a>
-// </p> </li> <li> <p> <a>ListTapesInput$TapeARNs</a> </p> </li> </ul>
+// A JSON object that contains one or more of the following fields:
+//
+//     *
+// ListTapesInput$Limit
+//
+//     * ListTapesInput$Marker
+//
+//     * ListTapesInput$TapeARNs
 type ListTapesInput struct {
 
 	// An optional number limit for the tapes in the list returned by this call.
@@ -53,9 +58,12 @@ type ListTapesInput struct {
 	TapeARNs []*string
 }
 
-// A JSON object containing the following fields:  <ul> <li> <p>
-// <a>ListTapesOutput$Marker</a> </p> </li> <li> <p>
-// <a>ListTapesOutput$VolumeInfos</a> </p> </li> </ul>
+// A JSON object containing the following fields:
+//
+//     * ListTapesOutput$Marker
+//
+//
+// * ListTapesOutput$VolumeInfos
 type ListTapesOutput struct {
 
 	// A string that indicates the position at which to begin returning the next list
@@ -64,7 +72,7 @@ type ListTapesOutput struct {
 	// body.
 	Marker *string
 
-	// An array of TapeInfo () objects, where each object describes a single tape. If
+	// An array of TapeInfo objects, where each object describes a single tape. If
 	// there are no tapes in the tape library or VTS, then the TapeInfos is an empty
 	// array.
 	TapeInfos []*types.TapeInfo

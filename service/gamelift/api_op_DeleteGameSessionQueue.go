@@ -11,20 +11,20 @@ import (
 )
 
 // Deletes a game session queue. This action means that any
-// StartGameSessionPlacement () requests that reference this queue will fail. To
+// StartGameSessionPlacement requests that reference this queue will fail. To
 // delete a queue, specify the queue name. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
 // Related operations
 //
-//     * CreateGameSessionQueue ()
+//     * CreateGameSessionQueue
 //
 //     *
-// DescribeGameSessionQueues ()
+// DescribeGameSessionQueues
 //
-//     * UpdateGameSessionQueue ()
+//     * UpdateGameSessionQueue
 //
 //     *
-// DeleteGameSessionQueue ()
+// DeleteGameSessionQueue
 func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameSessionQueueInput, optFns ...func(*Options)) (*DeleteGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &DeleteGameSessionQueueInput{}

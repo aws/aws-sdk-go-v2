@@ -19,19 +19,18 @@ import (
 // recommendations using the CodeGuru Reviewer console. For more information, see
 // Recommendations in Amazon CodeGuru Reviewer
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html)
-// in the Amazon CodeGuru Reviewer User Guide.  <p>If you associate a CodeCommit
+// in the Amazon CodeGuru Reviewer User Guide. If you associate a CodeCommit
 // repository, it must be in the same AWS Region and AWS account where its CodeGuru
-// Reviewer code reviews are configured.</p> <p> Bitbucket and GitHub Enterprise
-// Server repositories are managed by AWS CodeStar Connections to connect to
-// CodeGuru Reviewer. For more information, see <a
-// href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider">Connect
-// to a repository source provider</a> in the <i>Amazon CodeGuru Reviewer User
-// Guide.</i> </p> <note> <p> You cannot use the CodeGuru Reviewer SDK or the AWS
-// CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate
-// a GitHub repository, use the console. For more information, see <a
-// href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html">Getting
-// started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>
-// </p> </note>
+// Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server
+// repositories are managed by AWS CodeStar Connections to connect to CodeGuru
+// Reviewer. For more information, see Connect to a repository source provider
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider)
+// in the Amazon CodeGuru Reviewer User Guide. You cannot use the CodeGuru Reviewer
+// SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru
+// Reviewer. To associate a GitHub repository, use the console. For more
+// information, see Getting started with CodeGuru Reviewer
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html)
+// in the CodeGuru Reviewer User Guide.
 func (c *Client) AssociateRepository(ctx context.Context, params *AssociateRepositoryInput, optFns ...func(*Options)) (*AssociateRepositoryOutput, error) {
 	if params == nil {
 		params = &AssociateRepositoryInput{}
@@ -57,17 +56,17 @@ type AssociateRepositoryInput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. To add a new repository association, this parameter specifies a
 	// unique identifier for the new repository association that helps ensure
-	// idempotency.  <p>If you use the AWS CLI or one of the AWS SDKs to call this
+	// idempotency. If you use the AWS CLI or one of the AWS SDKs to call this
 	// operation, you can leave this parameter empty. The CLI or SDK generates a random
 	// UUID for you and includes that in the request. If you don't use the SDK and
 	// instead generate a raw HTTP request to the Secrets Manager service endpoint, you
 	// must generate a ClientRequestToken yourself for new versions and include that
-	// value in the request.</p> <p>You typically interact with this value if you
-	// implement your own retry logic and want to ensure that a given repository
-	// association is not created twice. We recommend that you generate a UUID-type
-	// value to ensure uniqueness within the specified repository association.</p>
-	// <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation
-	// of duplicate repository associations if there are failures and retries. </p>
+	// value in the request. You typically interact with this value if you implement
+	// your own retry logic and want to ensure that a given repository association is
+	// not created twice. We recommend that you generate a UUID-type value to ensure
+	// uniqueness within the specified repository association. Amazon CodeGuru Reviewer
+	// uses this value to prevent the accidental creation of duplicate repository
+	// associations if there are failures and retries.
 	ClientRequestToken *string
 }
 

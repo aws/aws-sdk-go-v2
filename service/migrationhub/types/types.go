@@ -104,13 +104,10 @@ type ProgressUpdateStreamSummary struct {
 }
 
 // Attribute associated with a resource. Note the corresponding format required per
-// type listed below:  <dl> <dt>IPV4</dt> <dd> <p> <code>x.x.x.x</code> </p> <p>
-// <i>where x is an integer in the range [0,255]</i> </p> </dd> <dt>IPV6</dt> <dd>
-// <p> <code>y : y : y : y : y : y : y : y</code> </p> <p> <i>where y is a
-// hexadecimal between 0 and FFFF. [0, FFFF]</i> </p> </dd> <dt>MAC_ADDRESS</dt>
-// <dd> <p> <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code> </p> </dd>
-// <dt>FQDN</dt> <dd> <p> <code>^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$</code> </p>
-// </dd> </dl>
+// type listed below: IPV4 x.x.x.x where x is an integer in the range [0,255] IPV6
+// y : y : y : y : y : y : y : y where y is a hexadecimal between 0 and FFFF. [0,
+// FFFF] MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$ FQDN
+// ^[^<>{}\\/?,=\p{Cntrl}]{1,256}$
 type ResourceAttribute struct {
 
 	// Type of resource.

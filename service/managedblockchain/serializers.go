@@ -76,7 +76,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateMemberInput(v *CreateMemberInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -285,13 +291,25 @@ func awsRestjson1_serializeOpHttpBindingsCreateNodeInput(v *CreateNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -381,7 +399,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateProposalInput(v *CreateProposalIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -470,13 +494,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMemberInput(v *DeleteMemberInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -536,19 +572,37 @@ func awsRestjson1_serializeOpHttpBindingsDeleteNodeInput(v *DeleteNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.NodeId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+	}
 	if v.NodeId != nil {
+		if len(*v.NodeId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+		}
 		if err := encoder.SetURI("NodeId").String(*v.NodeId); err != nil {
 			return err
 		}
@@ -608,13 +662,25 @@ func awsRestjson1_serializeOpHttpBindingsGetMemberInput(v *GetMemberInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -674,7 +740,13 @@ func awsRestjson1_serializeOpHttpBindingsGetNetworkInput(v *GetNetworkInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -734,19 +806,37 @@ func awsRestjson1_serializeOpHttpBindingsGetNodeInput(v *GetNodeInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.NodeId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+	}
 	if v.NodeId != nil {
+		if len(*v.NodeId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+		}
 		if err := encoder.SetURI("NodeId").String(*v.NodeId); err != nil {
 			return err
 		}
@@ -806,13 +896,25 @@ func awsRestjson1_serializeOpHttpBindingsGetProposalInput(v *GetProposalInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.ProposalId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+	}
 	if v.ProposalId != nil {
+		if len(*v.ProposalId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+		}
 		if err := encoder.SetURI("ProposalId").String(*v.ProposalId); err != nil {
 			return err
 		}
@@ -946,7 +1048,13 @@ func awsRestjson1_serializeOpHttpBindingsListMembersInput(v *ListMembersInput, e
 		encoder.SetQuery("name").String(*v.Name)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -1092,13 +1200,25 @@ func awsRestjson1_serializeOpHttpBindingsListNodesInput(v *ListNodesInput, encod
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -1170,7 +1290,13 @@ func awsRestjson1_serializeOpHttpBindingsListProposalsInput(v *ListProposalsInpu
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -1238,7 +1364,13 @@ func awsRestjson1_serializeOpHttpBindingsListProposalVotesInput(v *ListProposalV
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -1248,7 +1380,13 @@ func awsRestjson1_serializeOpHttpBindingsListProposalVotesInput(v *ListProposalV
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.ProposalId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+	}
 	if v.ProposalId != nil {
+		if len(*v.ProposalId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+		}
 		if err := encoder.SetURI("ProposalId").String(*v.ProposalId); err != nil {
 			return err
 		}
@@ -1308,7 +1446,13 @@ func awsRestjson1_serializeOpHttpBindingsRejectInvitationInput(v *RejectInvitati
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InvitationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InvitationId must not be empty")}
+	}
 	if v.InvitationId != nil {
+		if len(*v.InvitationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member InvitationId must not be empty")}
+		}
 		if err := encoder.SetURI("InvitationId").String(*v.InvitationId); err != nil {
 			return err
 		}
@@ -1379,13 +1523,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMemberInput(v *UpdateMemberInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
@@ -1470,19 +1626,37 @@ func awsRestjson1_serializeOpHttpBindingsUpdateNodeInput(v *UpdateNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MemberId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+	}
 	if v.MemberId != nil {
+		if len(*v.MemberId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
+		}
 		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
 			return err
 		}
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.NodeId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+	}
 	if v.NodeId != nil {
+		if len(*v.NodeId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NodeId must not be empty")}
+		}
 		if err := encoder.SetURI("NodeId").String(*v.NodeId); err != nil {
 			return err
 		}
@@ -1567,13 +1741,25 @@ func awsRestjson1_serializeOpHttpBindingsVoteOnProposalInput(v *VoteOnProposalIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.NetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+	}
 	if v.NetworkId != nil {
+		if len(*v.NetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("NetworkId").String(*v.NetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.ProposalId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+	}
 	if v.ProposalId != nil {
+		if len(*v.ProposalId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ProposalId must not be empty")}
+		}
 		if err := encoder.SetURI("ProposalId").String(*v.ProposalId); err != nil {
 			return err
 		}

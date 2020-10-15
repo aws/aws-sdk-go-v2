@@ -46,16 +46,15 @@ import (
 // (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sqs).
 // For FIFO queues, there can be a maximum of 20,000 inflight messages (received
 // from a queue by a consumer, but not yet deleted from the queue). If you reach
-// this limit, Amazon SQS returns no error messages.  <important> <p>If you attempt
-// to set the <code>VisibilityTimeout</code> to a value greater than the maximum
-// time left, Amazon SQS returns an error. Amazon SQS doesn't automatically
-// recalculate and increase the timeout to the maximum remaining time.</p>
-// <p>Unlike with a queue, when you change the visibility timeout for a specific
-// message the timeout value is applied immediately but isn't saved in memory for
-// that message. If you don't delete a message after it is received, the visibility
-// timeout for the message reverts to the original timeout value (not to the value
-// you set using the <code>ChangeMessageVisibility</code> action) the next time the
-// message is received.</p> </important>
+// this limit, Amazon SQS returns no error messages. If you attempt to set the
+// VisibilityTimeout to a value greater than the maximum time left, Amazon SQS
+// returns an error. Amazon SQS doesn't automatically recalculate and increase the
+// timeout to the maximum remaining time. Unlike with a queue, when you change the
+// visibility timeout for a specific message the timeout value is applied
+// immediately but isn't saved in memory for that message. If you don't delete a
+// message after it is received, the visibility timeout for the message reverts to
+// the original timeout value (not to the value you set using the
+// ChangeMessageVisibility action) the next time the message is received.
 func (c *Client) ChangeMessageVisibility(ctx context.Context, params *ChangeMessageVisibilityInput, optFns ...func(*Options)) (*ChangeMessageVisibilityOutput, error) {
 	if params == nil {
 		params = &ChangeMessageVisibilityInput{}
@@ -80,7 +79,7 @@ type ChangeMessageVisibilityInput struct {
 	QueueUrl *string
 
 	// The receipt handle associated with the message whose visibility timeout is
-	// changed. This parameter is returned by the ReceiveMessage () action.
+	// changed. This parameter is returned by the ReceiveMessage action.
 	//
 	// This member is required.
 	ReceiptHandle *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets the VpcLinks () collection under the caller's account in a selected region.
+// Gets the VpcLinks collection under the caller's account in a selected region.
 func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optFns ...func(*Options)) (*GetVpcLinksOutput, error) {
 	if params == nil {
 		params = &GetVpcLinksInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optF
 	return out, nil
 }
 
-// Gets the VpcLinks () collection under the caller's account in a selected region.
+// Gets the VpcLinks collection under the caller's account in a selected region.
 type GetVpcLinksInput struct {
 
 	// The maximum number of returned results per page. The default value is 25 and the
@@ -51,7 +51,6 @@ type GetVpcLinksInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html),
 // Set up Private Integrations
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html)
-// </div>
 type GetVpcLinksOutput struct {
 
 	// The current page of elements from this collection.

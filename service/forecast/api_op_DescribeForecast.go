@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Describes a forecast created using the CreateForecast () operation. In addition
-// to listing the properties provided in the CreateForecast request, this operation
+// Describes a forecast created using the CreateForecast operation. In addition to
+// listing the properties provided in the CreateForecast request, this operation
 // lists the following properties:
 //
 //     * DatasetGroupArn - The dataset group that

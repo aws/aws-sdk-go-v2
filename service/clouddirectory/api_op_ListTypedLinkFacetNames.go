@@ -31,7 +31,7 @@ func (c *Client) ListTypedLinkFacetNames(ctx context.Context, params *ListTypedL
 type ListTypedLinkFacetNamesInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns ().
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string

@@ -30,22 +30,21 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup ()
+//     * CreateGameServerGroup
 //
 //     * ListGameServerGroups
-// ()
 //
-//     * DescribeGameServerGroup ()
 //
-//     * UpdateGameServerGroup ()
+// * DescribeGameServerGroup
 //
-//     *
-// DeleteGameServerGroup ()
-//
-//     * ResumeGameServerGroup ()
+//     * UpdateGameServerGroup
 //
 //     *
-// SuspendGameServerGroup ()
+// DeleteGameServerGroup
+//
+//     * ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
 func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameServerGroupInput, optFns ...func(*Options)) (*DeleteGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGameServerGroupInput{}
@@ -64,7 +63,7 @@ func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameSe
 type DeleteGameServerGroupInput struct {
 
 	// The unique identifier of the game server group to delete. Use either the
-	// GameServerGroup () name or ARN value.
+	// GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

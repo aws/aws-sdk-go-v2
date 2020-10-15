@@ -57,7 +57,7 @@ type ListGroupsInput struct {
 	PathPrefix *string
 }
 
-// Contains the response to a successful ListGroups () request.
+// Contains the response to a successful ListGroups request.
 type ListGroupsOutput struct {
 
 	// A list of groups.

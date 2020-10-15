@@ -101,7 +101,13 @@ func awsRestxml_serializeOpHttpBindingsCreateAccessPointInput(v *CreateAccessPoi
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -230,7 +236,13 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -554,7 +566,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointInput(v *DeleteAccessPoi
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -631,7 +649,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyInput(v *DeleteAcc
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -708,7 +732,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -785,7 +815,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleConfigurationInput(v
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -862,7 +898,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -939,7 +981,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1016,7 +1064,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteJobTaggingInput(v *DeleteJobTagging
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1164,7 +1218,13 @@ func awsRestxml_serializeOpHttpBindingsDescribeJobInput(v *DescribeJobInput, enc
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1241,7 +1301,13 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointInput(v *GetAccessPointInpu
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1318,7 +1384,13 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyInput(v *GetAccessPoi
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1395,7 +1467,13 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusInput(v *GetAcc
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1472,7 +1550,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInput(v *GetBucketInput, encoder
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1549,7 +1633,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1626,7 +1716,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1703,7 +1799,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1780,7 +1882,13 @@ func awsRestxml_serializeOpHttpBindingsGetJobTaggingInput(v *GetJobTaggingInput,
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2199,7 +2307,13 @@ func awsRestxml_serializeOpHttpBindingsPutAccessPointPolicyInput(v *PutAccessPoi
 		}
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -2314,7 +2428,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2408,7 +2528,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2528,7 +2654,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		}
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2622,7 +2754,13 @@ func awsRestxml_serializeOpHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput,
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2810,7 +2948,13 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriori
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2891,7 +3035,13 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusIn
 		}
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}

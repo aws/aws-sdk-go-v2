@@ -27,7 +27,7 @@ func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableE
 	return out, nil
 }
 
-// Represents the input for DisableEnhancedMonitoring ().
+// Represents the input for DisableEnhancedMonitoring.
 type DisableEnhancedMonitoringInput struct {
 
 	// List of shard-level metrics to disable. The following are the valid shard-level
@@ -66,8 +66,8 @@ type DisableEnhancedMonitoringInput struct {
 	StreamName *string
 }
 
-// Represents the output for EnableEnhancedMonitoring () and
-// DisableEnhancedMonitoring ().
+// Represents the output for EnableEnhancedMonitoring and
+// DisableEnhancedMonitoring.
 type DisableEnhancedMonitoringOutput struct {
 
 	// Represents the current state of the metrics that are in the enhanced state

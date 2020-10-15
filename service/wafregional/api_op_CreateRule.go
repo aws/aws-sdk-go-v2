@@ -36,28 +36,28 @@ import (
 //
 //     * Create and
 // update the predicates that you want to include in the Rule. For more
-// information, see CreateByteMatchSet (), CreateIPSet (), and
-// CreateSqlInjectionMatchSet ().
-//
-//     * Use GetChangeToken () to get the change
-// token that you provide in the ChangeToken parameter of a CreateRule request.
-//
-//
-// * Submit a CreateRule request.
+// information, see CreateByteMatchSet, CreateIPSet, and
+// CreateSqlInjectionMatchSet.
 //
 //     * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of an UpdateRule () request.
+// that you provide in the ChangeToken parameter of a CreateRule request.
 //
+//     *
+// Submit a CreateRule request.
 //
-// * Submit an UpdateRule request to specify the predicates that you want to
-// include in the Rule.
+//     * Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of an UpdateRule request.
 //
-//     * Create and update a WebACL that contains the Rule.
-// For more information, see CreateWebACL ().
+//     *
+// Submit an UpdateRule request to specify the predicates that you want to include
+// in the Rule.
 //
-// For more information about how to
-// use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer
-// Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
+//     * Create and update a WebACL that contains the Rule. For more
+// information, see CreateWebACL.
+//
+// For more information about how to use the AWS
+// WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}
@@ -75,7 +75,7 @@ func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns
 
 type CreateRuleInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
@@ -89,8 +89,8 @@ type CreateRuleInput struct {
 	// This member is required.
 	MetricName *string
 
-	// A friendly name or description of the Rule (). You can't change the name of a
-	// Rule after you create it.
+	// A friendly name or description of the Rule. You can't change the name of a Rule
+	// after you create it.
 	//
 	// This member is required.
 	Name *string
@@ -103,10 +103,10 @@ type CreateRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRule request. You can also use
 	// this value to query the status of the request. For more information, see
-	// GetChangeTokenStatus ().
+	// GetChangeTokenStatus.
 	ChangeToken *string
 
-	// The Rule () returned in the CreateRule response.
+	// The Rule returned in the CreateRule response.
 	Rule *types.Rule
 
 	// Metadata pertaining to the operation's result.

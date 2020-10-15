@@ -13,16 +13,16 @@ import (
 
 // Starts asynchronous detection of unsafe content in a stored video. Amazon
 // Rekognition Video can moderate content in a video stored in an Amazon S3 bucket.
-// Use Video () to specify the bucket name and the filename of the video.
+// Use Video to specify the bucket name and the filename of the video.
 // StartContentModeration returns a job identifier (JobId) which you use to get the
 // results of the analysis. When unsafe content analysis is finished, Amazon
 // Rekognition Video publishes a completion status to the Amazon Simple
 // Notification Service topic that you specify in NotificationChannel. To get the
 // results of the unsafe content analysis, first check that the status value
 // published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration
-// () and pass the job identifier (JobId) from the initial call to
-// StartContentModeration.  <p>For more information, see Detecting Unsafe Content
-// in the Amazon Rekognition Developer Guide.</p>
+// and pass the job identifier (JobId) from the initial call to
+// StartContentModeration. For more information, see Detecting Unsafe Content in
+// the Amazon Rekognition Developer Guide.
 func (c *Client) StartContentModeration(ctx context.Context, params *StartContentModerationInput, optFns ...func(*Options)) (*StartContentModerationOutput, error) {
 	if params == nil {
 		params = &StartContentModerationInput{}

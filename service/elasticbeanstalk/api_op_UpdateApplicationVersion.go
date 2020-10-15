@@ -51,7 +51,7 @@ type UpdateApplicationVersionInput struct {
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
 
-	// The ApplicationVersionDescription () of the application version.
+	// The ApplicationVersionDescription of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 
 	// Metadata pertaining to the operation's result.

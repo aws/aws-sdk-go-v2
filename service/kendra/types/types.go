@@ -19,7 +19,7 @@ type AclConfiguration struct {
 
 	// A list of groups, separated by semi-colons, that filters a query response based
 	// on user context. The document is only returned to users that are in one of the
-	// groups specified in the UserContext field of the Query () operation.
+	// groups specified in the UserContext field of the Query operation.
 	//
 	// This member is required.
 	AllowedGroupsColumnName *string
@@ -99,7 +99,7 @@ type AttributeFilter struct {
 }
 
 // Provides information about documents that could not be removed from an index by
-// the BatchDeleteDocument () operation.
+// the BatchDeleteDocument operation.
 type BatchDeleteDocumentResponseFailedDocument struct {
 
 	// The error code for why the document couldn't be removed from the index.
@@ -143,7 +143,7 @@ type CapacityUnitsConfiguration struct {
 }
 
 // Gathers information about when a particular result was clicked by a user. Your
-// application uses the SubmitFeedback () operation to provide click information.
+// application uses the SubmitFeedback operation to provide click information.
 type ClickFeedback struct {
 
 	// The Unix timestamp of the date and time that the result was clicked.
@@ -181,7 +181,7 @@ type ColumnConfiguration struct {
 
 	// An array of objects that map database column names to the corresponding fields
 	// in an index. You must first create the fields in the index using the UpdateIndex
-	// () operation.
+	// operation.
 	FieldMappings []*DataSourceToIndexFieldMapping
 }
 
@@ -374,7 +374,7 @@ type DataSourceSyncJobMetricTarget struct {
 }
 
 // Maps a column or attribute in the data source to an index field. You must first
-// create the fields in the index using the UpdateIndex () operation.
+// create the fields in the index using the UpdateIndex operation.
 type DataSourceToIndexFieldMapping struct {
 
 	// The name of the column or attribute in the data source.
@@ -783,7 +783,7 @@ type Relevance struct {
 }
 
 // Provides feedback on how relevant a document is to a search. Your application
-// uses the SubmitFeedback () operation to provide relevance information.
+// uses the SubmitFeedback operation to provide relevance information.
 type RelevanceFeedback struct {
 
 	// Whether to document was relevant or not relevant to the search.

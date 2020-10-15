@@ -11,24 +11,24 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This operation aborts a multipart upload identified by the upload ID.  <p>After
-// the Abort Multipart Upload request succeeds, you cannot upload any more parts to
-// the multipart upload or complete the multipart upload. Aborting a completed
-// upload fails. However, aborting an already-aborted upload will succeed, for a
-// short time. For more information about uploading a part and completing a
-// multipart upload, see <a>UploadMultipartPart</a> and
-// <a>CompleteMultipartUpload</a>.</p> <p>This operation is idempotent.</p> <p>An
-// AWS account has full permission to perform all operations (actions). However,
-// AWS Identity and Access Management (IAM) users don't have any permissions by
-// default. You must grant them explicit permission to perform specific actions.
-// For more information, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access
-// Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For
-// conceptual information and underlying REST API, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working
-// with Archives in Amazon S3 Glacier</a> and <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort
-// Multipart Upload</a> in the <i>Amazon Glacier Developer Guide</i>. </p>
+// This operation aborts a multipart upload identified by the upload ID. After the
+// Abort Multipart Upload request succeeds, you cannot upload any more parts to the
+// multipart upload or complete the multipart upload. Aborting a completed upload
+// fails. However, aborting an already-aborted upload will succeed, for a short
+// time. For more information about uploading a part and completing a multipart
+// upload, see UploadMultipartPart and CompleteMultipartUpload. This operation is
+// idempotent. An AWS account has full permission to perform all operations
+// (actions). However, AWS Identity and Access Management (IAM) users don't have
+// any permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see Access Control Using AWS Identity
+// and Access Management (IAM)
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// For conceptual information and underlying REST API, see Working with Archives in
+// Amazon S3 Glacier
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
+// and Abort Multipart Upload
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html)
+// in the Amazon Glacier Developer Guide.
 func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipartUploadInput, optFns ...func(*Options)) (*AbortMultipartUploadOutput, error) {
 	if params == nil {
 		params = &AbortMultipartUploadInput{}
@@ -44,12 +44,11 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 	return out, nil
 }
 
-// Provides options to abort a multipart upload identified by the upload ID.
-// <p>For information about the underlying REST API, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html">Abort
-// Multipart Upload</a>. For conceptual information, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working
-// with Archives in Amazon S3 Glacier</a>.</p>
+// Provides options to abort a multipart upload identified by the upload ID. For
+// information about the underlying REST API, see Abort Multipart Upload
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html).
+// For conceptual information, see Working with Archives in Amazon S3 Glacier
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
 type AbortMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.

@@ -12,7 +12,7 @@ import (
 
 // Removes tags from the specified Kinesis data stream. Removed tags are deleted
 // and cannot be recovered after this operation successfully completes. If you
-// specify a tag that does not exist, it is ignored. RemoveTagsFromStream () has a
+// specify a tag that does not exist, it is ignored. RemoveTagsFromStream has a
 // limit of five transactions per second per account.
 func (c *Client) RemoveTagsFromStream(ctx context.Context, params *RemoveTagsFromStreamInput, optFns ...func(*Options)) (*RemoveTagsFromStreamOutput, error) {
 	if params == nil {

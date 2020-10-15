@@ -14,9 +14,9 @@ import (
 // Creates a new version of the specified managed policy. To update a managed
 // policy, you create a new policy version. A managed policy can have up to five
 // versions. If the policy has five versions, you must delete an existing version
-// using DeletePolicyVersion () before you create a new version. Optionally, you
-// can set the new version as the policy's default version. The default version is
-// the version that is in effect for the IAM users, groups, and roles to which the
+// using DeletePolicyVersion before you create a new version. Optionally, you can
+// set the new version as the policy's default version. The default version is the
+// version that is in effect for the IAM users, groups, and roles to which the
 // policy is attached. For more information about managed policy versions, see
 // Versioning for Managed Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
@@ -78,7 +78,7 @@ type CreatePolicyVersionInput struct {
 	SetAsDefault *bool
 }
 
-// Contains the response to a successful CreatePolicyVersion () request.
+// Contains the response to a successful CreatePolicyVersion request.
 type CreatePolicyVersionOutput struct {
 
 	// A structure containing details about the new policy version.

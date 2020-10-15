@@ -28,10 +28,10 @@ func (c *Client) UpdateRestApi(ctx context.Context, params *UpdateRestApiInput, 
 	return out, nil
 }
 
-// Request to update an existing RestApi () resource in your collection.
+// Request to update an existing RestApi resource in your collection.
 type UpdateRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -63,8 +63,8 @@ type UpdateRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
@@ -73,7 +73,7 @@ type UpdateRestApiOutput struct {
 	// The API's description.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -92,7 +92,7 @@ type UpdateRestApiOutput struct {
 	Name *string
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.

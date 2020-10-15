@@ -42,7 +42,7 @@ type CreateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule. For a list of
-	// allowed events, see EventTypeSummary ().
+	// allowed events, see EventTypeSummary.
 	//
 	// This member is required.
 	EventTypeIds []*string

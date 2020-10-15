@@ -12,31 +12,29 @@ import (
 )
 
 // Gets the face search results for Amazon Rekognition Video face search started by
-// StartFaceSearch (). The search returns faces in a collection that match the
-// faces of persons detected in a video. It also includes the time(s) that faces
-// are matched in the video. Face search in a video is an asynchronous operation.
-// You start face search by calling to StartFaceSearch () which returns a job
-// identifier (JobId). When the search operation finishes, Amazon Rekognition Video
-// publishes a completion status to the Amazon Simple Notification Service topic
-// registered in the initial call to StartFaceSearch. To get the search results,
-// first check that the status value published to the Amazon SNS topic is
-// SUCCEEDED. If so, call GetFaceSearch and pass the job identifier (JobId) from
-// the initial call to StartFaceSearch.  <p>For more information, see Searching
-// Faces in a Collection in the Amazon Rekognition Developer Guide.</p> <p>The
-// search results are retured in an array, <code>Persons</code>, of
-// <a>PersonMatch</a> objects. Each<code>PersonMatch</code> element contains
-// details about the matching faces in the input collection, person information
-// (facial attributes, bounding boxes, and person identifer) for the matched
-// person, and the time the person was matched in the video.</p> <note> <p>
-// <code>GetFaceSearch</code> only returns the default facial attributes
-// (<code>BoundingBox</code>, <code>Confidence</code>, <code>Landmarks</code>,
-// <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed
-// in the <code>Face</code> object of the following response syntax are not
-// returned. For more information, see FaceDetail in the Amazon Rekognition
-// Developer Guide. </p> </note> <p>By default, the <code>Persons</code> array is
-// sorted by the time, in milliseconds from the start of the video, persons are
-// matched. You can also sort by persons by specifying <code>INDEX</code> for the
-// <code>SORTBY</code> input parameter.</p>
+// StartFaceSearch. The search returns faces in a collection that match the faces
+// of persons detected in a video. It also includes the time(s) that faces are
+// matched in the video. Face search in a video is an asynchronous operation. You
+// start face search by calling to StartFaceSearch which returns a job identifier
+// (JobId). When the search operation finishes, Amazon Rekognition Video publishes
+// a completion status to the Amazon Simple Notification Service topic registered
+// in the initial call to StartFaceSearch. To get the search results, first check
+// that the status value published to the Amazon SNS topic is SUCCEEDED. If so,
+// call GetFaceSearch and pass the job identifier (JobId) from the initial call to
+// StartFaceSearch. For more information, see Searching Faces in a Collection in
+// the Amazon Rekognition Developer Guide. The search results are retured in an
+// array, Persons, of PersonMatch objects. EachPersonMatch element contains details
+// about the matching faces in the input collection, person information (facial
+// attributes, bounding boxes, and person identifer) for the matched person, and
+// the time the person was matched in the video. GetFaceSearch only returns the
+// default
+//
+// facial attributes (BoundingBox, Confidence, Landmarks, Pose, and
+// Quality). The other facial attributes listed in the Face object of the following
+// response syntax are not returned. For more information, see FaceDetail in the
+// Amazon Rekognition Developer Guide. By default, the Persons array is sorted by
+// the time, in milliseconds from the start of the video, persons are matched. You
+// can also sort by persons by specifying INDEX for the SORTBY input parameter.
 func (c *Client) GetFaceSearch(ctx context.Context, params *GetFaceSearchInput, optFns ...func(*Options)) (*GetFaceSearchOutput, error) {
 	if params == nil {
 		params = &GetFaceSearchInput{}
@@ -85,12 +83,12 @@ type GetFaceSearchOutput struct {
 	// results.
 	NextToken *string
 
-	// An array of persons, PersonMatch (), in the video whose face(s) match the
-	// face(s) in an Amazon Rekognition collection. It also includes time information
-	// for when persons are matched in the video. You specify the input collection in
-	// an initial call to StartFaceSearch. Each Persons element includes a time the
-	// person was matched, face match details (FaceMatches) for matching faces in the
-	// collection, and person information (Person) for the matched person.
+	// An array of persons, PersonMatch, in the video whose face(s) match the face(s)
+	// in an Amazon Rekognition collection. It also includes time information for when
+	// persons are matched in the video. You specify the input collection in an initial
+	// call to StartFaceSearch. Each Persons element includes a time the person was
+	// matched, face match details (FaceMatches) for matching faces in the collection,
+	// and person information (Person) for the matched person.
 	Persons []*types.PersonMatch
 
 	// If the job fails, StatusMessage provides a descriptive error message.

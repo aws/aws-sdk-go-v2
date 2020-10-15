@@ -14,15 +14,15 @@ import (
 // Requests an ACM certificate for use with other AWS services. To request an ACM
 // certificate, you must specify a fully qualified domain name (FQDN) in the
 // DomainName parameter. You can also specify additional FQDNs in the
-// SubjectAlternativeNames parameter.  <p>If you are requesting a private
-// certificate, domain validation is not required. If you are requesting a public
-// certificate, each domain name that you specify must be validated to verify that
-// you own or control the domain. You can use <a
-// href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">DNS
-// validation</a> or <a
-// href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">email
-// validation</a>. We recommend that you use DNS validation. ACM issues public
-// certificates after receiving approval from the domain owner. </p>
+// SubjectAlternativeNames parameter. If you are requesting a private certificate,
+// domain validation is not required. If you are requesting a public certificate,
+// each domain name that you specify must be validated to verify that you own or
+// control the domain. You can use DNS validation
+// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html) or
+// email validation
+// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
+// We recommend that you use DNS validation. ACM issues public certificates after
+// receiving approval from the domain owner.
 func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertificateInput, optFns ...func(*Options)) (*RequestCertificateOutput, error) {
 	if params == nil {
 		params = &RequestCertificateInput{}
@@ -44,9 +44,9 @@ type RequestCertificateInput struct {
 	// secure with an ACM certificate. Use an asterisk (*) to create a wildcard
 	// certificate that protects several sites in the same domain. For example,
 	// *.example.com protects www.example.com, site.example.com, and
-	// images.example.com.  <p> The first domain name you enter cannot exceed 64
-	// octets, including periods. Each subsequent Subject Alternative Name (SAN),
-	// however, can be up to 253 octets in length. </p>
+	// images.example.com. The first domain name you enter cannot exceed 64 octets,
+	// including periods. Each subsequent Subject Alternative Name (SAN), however, can
+	// be up to 253 octets in length.
 	//
 	// This member is required.
 	DomainName *string
@@ -57,9 +57,8 @@ type RequestCertificateInput struct {
 	// certificate. For more information about private CAs, see the AWS Certificate
 	// Manager Private Certificate Authority (PCA)
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html) user
-	// guide. The ARN must have the following form:  <p>
-	// <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>
-	// </p>
+	// guide. The ARN must have the following form:
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
 
 	// The domain name that you want ACM to use to send you emails so that you can
@@ -89,17 +88,22 @@ type RequestCertificateInput struct {
 	// using either name. The maximum number of domain names that you can add to an ACM
 	// certificate is 100. However, the initial quota is 10 domain names. If you need
 	// more than 10 names, you must request a quota increase. For more information, see
-	// Quotas (https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).  <p>
-	// The maximum length of a SAN DNS name is 253 octets. The name is made up of
-	// multiple labels separated by periods. No label can be longer than 63 octets.
-	// Consider the following examples: </p> <ul> <li> <p> <code>(63 octets).(63
-	// octets).(63 octets).(61 octets)</code> is legal because the total length is 253
-	// octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.</p> </li> <li> <p>
-	// <code>(64 octets).(63 octets).(63 octets).(61 octets)</code> is not legal
-	// because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first
-	// label exceeds 63 octets.</p> </li> <li> <p> <code>(63 octets).(63 octets).(63
-	// octets).(62 octets)</code> is not legal because the total length of the DNS name
-	// (63+1+63+1+63+1+62) exceeds 253 octets.</p> </li> </ul>
+	// Quotas (https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html). The
+	// maximum length of a SAN DNS name is 253 octets. The name is made up of multiple
+	// labels separated by periods. No label can be longer than 63 octets. Consider the
+	// following examples:
+	//
+	//     * (63 octets).(63 octets).(63 octets).(61 octets) is
+	// legal because the total length is 253 octets (63+1+63+1+63+1+61) and no label
+	// exceeds 63 octets.
+	//
+	//     * (64 octets).(63 octets).(63 octets).(61 octets) is not
+	// legal because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the
+	// first label exceeds 63 octets.
+	//
+	//     * (63 octets).(63 octets).(63 octets).(62
+	// octets) is not legal because the total length of the DNS name
+	// (63+1+63+1+63+1+62) exceeds 253 octets.
 	SubjectAlternativeNames []*string
 
 	// One or more resource tags to associate with the certificate.

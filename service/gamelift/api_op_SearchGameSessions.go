@@ -20,8 +20,8 @@ import (
 //
 //     *
 // gameSessionName -- Name assigned to a game session. This value is set when
-// requesting a new game session with CreateGameSession () or updating with
-// UpdateGameSession (). Game session names do not need to be unique to a game
+// requesting a new game session with CreateGameSession or updating with
+// UpdateGameSession. Game session names do not need to be unique to a game
 // session.
 //
 //     * gameSessionProperties -- Custom data defined in a game session's
@@ -34,59 +34,59 @@ import (
 //
 //     * maximumSessions -- Maximum number of player sessions allowed for
 // a game session. This value is set when requesting a new game session with
-// CreateGameSession () or updating with UpdateGameSession ().
+// CreateGameSession or updating with UpdateGameSession.
+//
+//     * creationTimeMillis
+// -- Value indicating when a game session was created. It is expressed in Unix
+// time as milliseconds.
+//
+//     * playerSessionCount -- Number of players currently
+// connected to a game session. This value changes rapidly as players join the
+// session or drop out.
+//
+//     * hasAvailablePlayerSessions -- Boolean value
+// indicating whether a game session has reached its maximum number of players. It
+// is highly recommended that all search requests include this filter attribute to
+// optimize search performance and return only sessions that players can
+// join.
+//
+// Returned values for playerSessionCount and hasAvailablePlayerSessions
+// change quickly as players join sessions and others drop out. Results should be
+// considered a snapshot in time. Be sure to refresh search results often, and
+// handle sessions that fill up before a player can join. To search or sort,
+// specify either a fleet ID or an alias ID, and provide a search filter
+// expression, a sort expression, or both. If successful, a collection of
+// GameSession objects matching the request is returned. Use the pagination
+// parameters to retrieve results as a set of sequential pages. You can search for
+// game sessions one fleet at a time only. To find game sessions across multiple
+// fleets, you must search each fleet separately and combine the results. This
+// search feature finds only game sessions that are in ACTIVE status. To locate
+// games in statuses other than active, use DescribeGameSessionDetails.
 //
 //     *
-// creationTimeMillis -- Value indicating when a game session was created. It is
-// expressed in Unix time as milliseconds.
+// CreateGameSession
 //
-//     * playerSessionCount -- Number of
-// players currently connected to a game session. This value changes rapidly as
-// players join the session or drop out.
-//
-//     * hasAvailablePlayerSessions --
-// Boolean value indicating whether a game session has reached its maximum number
-// of players. It is highly recommended that all search requests include this
-// filter attribute to optimize search performance and return only sessions that
-// players can join.
-//
-// Returned values for playerSessionCount and
-// hasAvailablePlayerSessions change quickly as players join sessions and others
-// drop out. Results should be considered a snapshot in time. Be sure to refresh
-// search results often, and handle sessions that fill up before a player can join.
-// To search or sort, specify either a fleet ID or an alias ID, and provide a
-// search filter expression, a sort expression, or both. If successful, a
-// collection of GameSession () objects matching the request is returned. Use the
-// pagination parameters to retrieve results as a set of sequential pages. You can
-// search for game sessions one fleet at a time only. To find game sessions across
-// multiple fleets, you must search each fleet separately and combine the results.
-// This search feature finds only game sessions that are in ACTIVE status. To
-// locate games in statuses other than active, use DescribeGameSessionDetails ().
-//
-//
-// * CreateGameSession ()
-//
-//     * DescribeGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// DescribeGameSessionDetails ()
+// DescribeGameSessionDetails
 //
-//     * SearchGameSessions ()
+//     * SearchGameSessions
 //
-//     *
-// UpdateGameSession ()
+//     * UpdateGameSession
 //
-//     * GetGameSessionLogUrl ()
 //
-//     * Game session
-// placements
+// * GetGameSessionLogUrl
 //
-//         * StartGameSessionPlacement ()
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessionsInput, optFns ...func(*Options)) (*SearchGameSessionsOutput, error) {
 	if params == nil {
 		params = &SearchGameSessionsInput{}

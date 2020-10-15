@@ -14,11 +14,11 @@ import (
 // Creates a domain. CodeArtifact domains make it easier to manage multiple
 // repositories across an organization. You can use a domain to apply permissions
 // across many repositories owned by different AWS accounts. An asset is stored
-// only once in a domain, even if it's in multiple repositories.  <p>Although you
-// can have multiple domains, we recommend a single production domain that contains
-// all published artifacts so that your development teams can find and share
-// packages. You can use a second pre-production domain to test changes to the
-// production domain configuration. </p>
+// only once in a domain, even if it's in multiple repositories. Although you can
+// have multiple domains, we recommend a single production domain that contains all
+// published artifacts so that your development teams can find and share packages.
+// You can use a second pre-production domain to test changes to the production
+// domain configuration.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}

@@ -40,7 +40,7 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the ModifyHsm () operation.
+// Contains the inputs for the ModifyHsm operation.
 type ModifyHsmInput struct {
 
 	// The ARN of the HSM to modify.
@@ -68,7 +68,7 @@ type ModifyHsmInput struct {
 	SyslogIp *string
 }
 
-// Contains the output of the ModifyHsm () operation.
+// Contains the output of the ModifyHsm operation.
 type ModifyHsmOutput struct {
 
 	// The ARN of the HSM.

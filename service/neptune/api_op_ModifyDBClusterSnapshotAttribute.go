@@ -24,7 +24,7 @@ import (
 // You can't use all as a value for that parameter in this case. To view which AWS
 // accounts have access to copy or restore a manual DB cluster snapshot, or whether
 // a manual DB cluster snapshot public or private, use the
-// DescribeDBClusterSnapshotAttributes () API action.
+// DescribeDBClusterSnapshotAttributes API action.
 func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *ModifyDBClusterSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBClusterSnapshotAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterSnapshotAttributeInput{}
@@ -75,10 +75,10 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 type ModifyDBClusterSnapshotAttributeOutput struct {
 
 	// Contains the results of a successful call to the
-	// DescribeDBClusterSnapshotAttributes () API action. Manual DB cluster snapshot
+	// DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
 	// attributes are used to authorize other AWS accounts to copy or restore a manual
 	// DB cluster snapshot. For more information, see the
-	// ModifyDBClusterSnapshotAttribute () API action.
+	// ModifyDBClusterSnapshotAttribute API action.
 	DBClusterSnapshotAttributesResult *types.DBClusterSnapshotAttributesResult
 
 	// Metadata pertaining to the operation's result.

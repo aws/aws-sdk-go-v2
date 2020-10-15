@@ -15,12 +15,13 @@ import (
 // Return torrent files from a bucket. BitTorrent can save you bandwidth when
 // you're distributing large files. For more information about BitTorrent, see
 // Amazon S3 Torrent
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html).  <note> <p>You
-// can get torrent only for objects that are less than 5 GB in size and that are
-// not encrypted using server-side encryption with customer-provided encryption
-// key.</p> </note> <p>To use GET, you must have READ access to the object.</p>
-// <p>The following operation is related to <code>GetObjectTorrent</code>:</p> <ul>
-// <li> <p> <a>GetObject</a> </p> </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html). You can get
+// torrent only for objects that are less than 5 GB in size and that are not
+// encrypted using server-side encryption with customer-provided encryption key. To
+// use GET, you must have READ access to the object. The following operation is
+// related to GetObjectTorrent:
+//
+//     * GetObject
 func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentInput, optFns ...func(*Options)) (*GetObjectTorrentOutput, error) {
 	if params == nil {
 		params = &GetObjectTorrentInput{}

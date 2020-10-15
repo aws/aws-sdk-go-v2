@@ -34,7 +34,7 @@ func (c *Client) GetCredentialReport(ctx context.Context, params *GetCredentialR
 type GetCredentialReportInput struct {
 }
 
-// Contains the response to a successful GetCredentialReport () request.
+// Contains the response to a successful GetCredentialReport request.
 type GetCredentialReportOutput struct {
 
 	// Contains the credential report. The report is Base64-encoded.

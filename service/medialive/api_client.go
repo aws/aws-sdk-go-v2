@@ -21,7 +21,8 @@ import (
 const ServiceID = "MediaLive"
 const ServiceAPIVersion = "2017-10-14"
 
-// API for AWS Elemental MediaLive
+// Client provides the API client to make operations call for AWS Elemental
+// MediaLive.
 type Client struct {
 	options Options
 }

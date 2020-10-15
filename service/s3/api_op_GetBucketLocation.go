@@ -13,10 +13,13 @@ import (
 
 // Returns the Region the bucket resides in. You set the bucket's Region using the
 // LocationConstraint request parameter in a CreateBucket request. For more
-// information, see CreateBucket ().  <p> To use this implementation of the
-// operation, you must be the bucket owner.</p> <p>The following operations are
-// related to <code>GetBucketLocation</code>:</p> <ul> <li> <p> <a>GetObject</a>
-// </p> </li> <li> <p> <a>CreateBucket</a> </p> </li> </ul>
+// information, see CreateBucket. To use this implementation of the operation, you
+// must be the bucket owner. The following operations are related to
+// GetBucketLocation:
+//
+//     * GetObject
+//
+//     * CreateBucket
 func (c *Client) GetBucketLocation(ctx context.Context, params *GetBucketLocationInput, optFns ...func(*Options)) (*GetBucketLocationOutput, error) {
 	if params == nil {
 		params = &GetBucketLocationInput{}

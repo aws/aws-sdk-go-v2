@@ -91,8 +91,8 @@ type CustomKeyStoresListEntry struct {
 	// Indicates whether the custom key store is connected to its AWS CloudHSM cluster.
 	// You can create and use CMKs in your custom key stores only when its connection
 	// state is CONNECTED. The value is DISCONNECTED if the key store has never been
-	// connected or you use the DisconnectCustomKeyStore () operation to disconnect it.
-	// If the value is CONNECTED but you are having trouble using the custom key store,
+	// connected or you use the DisconnectCustomKeyStore operation to disconnect it. If
+	// the value is CONNECTED but you are having trouble using the custom key store,
 	// make sure that its associated AWS CloudHSM cluster is active and contains at
 	// least one active HSM. A value of FAILED indicates that an attempt to connect was
 	// unsuccessful. The ConnectionErrorCode field in the response indicates the cause
@@ -129,7 +129,7 @@ type CustomKeyStoresListEntry struct {
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
 // Grant constraints are not applied to operations that do not support an
 // encryption context, such as cryptographic operations with asymmetric CMKs and
-// management operations, such as DescribeKey () or ScheduleKeyDeletion (). In a
+// management operations, such as DescribeKey or ScheduleKeyDeletion. In a
 // cryptographic operation, the encryption context in the decryption operation must
 // be an exact, case-sensitive match for the keys and values in the encryption
 // context of the encryption operation. Only the order of the pairs can vary.
@@ -188,7 +188,7 @@ type GrantListEntry struct {
 	KeyId *string
 
 	// The friendly name that identifies the grant. If a name was provided in the
-	// CreateGrant () request, that name is returned. Otherwise this value is null.
+	// CreateGrant request, that name is returned. Otherwise this value is null.
 	Name *string
 
 	// The list of operations permitted by the grant.
@@ -209,7 +209,7 @@ type KeyListEntry struct {
 }
 
 // Contains metadata about a customer master key (CMK). This data type is used as a
-// response element for the CreateKey () and DescribeKey () operations.
+// response element for the CreateKey and DescribeKey operations.
 type KeyMetadata struct {
 
 	// The globally unique identifier for the CMK.

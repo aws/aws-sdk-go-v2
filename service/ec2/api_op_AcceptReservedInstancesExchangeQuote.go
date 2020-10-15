@@ -12,7 +12,7 @@ import (
 )
 
 // Accepts the Convertible Reserved Instance exchange quote described in the
-// GetReservedInstancesExchangeQuote () call.
+// GetReservedInstancesExchangeQuote call.
 func (c *Client) AcceptReservedInstancesExchangeQuote(ctx context.Context, params *AcceptReservedInstancesExchangeQuoteInput, optFns ...func(*Options)) (*AcceptReservedInstancesExchangeQuoteOutput, error) {
 	if params == nil {
 		params = &AcceptReservedInstancesExchangeQuoteInput{}

@@ -175,7 +175,7 @@ func (e *UnknownResourceFault) ErrorMessage() string {
 func (e *UnknownResourceFault) ErrorCode() string             { return "UnknownResourceFault" }
 func (e *UnknownResourceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned by StartWorkflowExecution () when an open execution with the same
+// Returned by StartWorkflowExecution when an open execution with the same
 // workflowId is already running in the specified domain.
 type WorkflowExecutionAlreadyStartedFault struct {
 	Message *string

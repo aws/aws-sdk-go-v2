@@ -14,9 +14,8 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation (). Adds a streaming source to your Amazon
-// Kinesis application. For conceptual information, see Configuring Application
-// Input
+// Analytics API V2 Documentation. Adds a streaming source to your Amazon Kinesis
+// application. For conceptual information, see Configuring Application Input
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 // You can add a streaming source either when you create an application or you can
 // use this operation to add a streaming source after you create an application.

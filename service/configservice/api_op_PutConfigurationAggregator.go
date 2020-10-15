@@ -40,7 +40,7 @@ type PutConfigurationAggregatorInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// A list of AccountAggregationSource object.  </p>
+	// A list of AccountAggregationSource object.
 	AccountAggregationSources []*types.AccountAggregationSource
 
 	// An OrganizationAggregationSource object.

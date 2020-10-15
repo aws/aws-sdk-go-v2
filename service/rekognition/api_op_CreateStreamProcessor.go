@@ -20,9 +20,9 @@ import (
 // containing faces that you want to recognize. Use Name to assign an identifier
 // for the stream processor. You use Name to manage the stream processor. For
 // example, you can start processing the source video by calling
-// StartStreamProcessor () with the Name field. After you have finished analyzing a
-// streaming video, use StopStreamProcessor () to stop processing. You can delete
-// the stream processor by calling DeleteStreamProcessor ().
+// StartStreamProcessor with the Name field. After you have finished analyzing a
+// streaming video, use StopStreamProcessor to stop processing. You can delete the
+// stream processor by calling DeleteStreamProcessor.
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}
@@ -48,7 +48,7 @@ type CreateStreamProcessorInput struct {
 
 	// An identifier you assign to the stream processor. You can use Name to manage the
 	// stream processor. For example, you can get the current status of the stream
-	// processor by calling DescribeStreamProcessor (). Name is idempotent.
+	// processor by calling DescribeStreamProcessor. Name is idempotent.
 	//
 	// This member is required.
 	Name *string

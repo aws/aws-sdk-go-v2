@@ -32,7 +32,7 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 	return out, nil
 }
 
-// Represents the input to RestoreDBClusterToPointInTime ().
+// Represents the input to RestoreDBClusterToPointInTime.
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new cluster to be created. Constraints:

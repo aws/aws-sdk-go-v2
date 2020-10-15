@@ -56,21 +56,20 @@ import (
 // PutItem in the AWS SDK for Ruby V2
 // (http://docs.aws.amazon.com/goto/SdkForRubyV2/dynamodb-2012-08-10/PutItem)
 //
-//
-// <p>When you add an item, the primary key attributes are the only required
-// attributes. Attribute values cannot be null.</p> <p>Empty String and Binary
-// attribute values are allowed. Attribute values of type String and Binary must
-// have a length greater than zero if the attribute is used as a key attribute for
-// a table or index. Set type attributes cannot be empty. </p> <p>Invalid Requests
-// with empty values will be rejected with a <code>ValidationException</code>
-// exception.</p> <note> <p>To prevent a new item from replacing an existing item,
-// use a conditional expression that contains the <code>attribute_not_exists</code>
-// function with the name of the attribute being used as the partition key for the
-// table. Since every record must contain that attribute, the
-// <code>attribute_not_exists</code> function will only succeed if no matching item
-// exists.</p> </note> <p>For more information about <code>PutItem</code>, see <a
-// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html">Working
-// with Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
+// When
+// you add an item, the primary key attributes are the only required attributes.
+// Attribute values cannot be null. Empty String and Binary attribute values are
+// allowed. Attribute values of type String and Binary must have a length greater
+// than zero if the attribute is used as a key attribute for a table or index. Set
+// type attributes cannot be empty. Invalid Requests with empty values will be
+// rejected with a ValidationException exception. To prevent a new item from
+// replacing an existing item, use a conditional expression that contains the
+// attribute_not_exists function with the name of the attribute being used as the
+// partition key for the table. Since every record must contain that attribute, the
+// attribute_not_exists function will only succeed if no matching item exists. For
+// more information about PutItem, see Working with Items
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html)
+// in the Amazon DynamoDB Developer Guide.
 func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...func(*Options)) (*PutItemOutput, error) {
 	if params == nil {
 		params = &PutItemInput{}
@@ -99,11 +98,11 @@ type PutItemInput struct {
 	// attributes must match those of the schema in the table's attribute definition.
 	// Empty String and Binary attribute values are allowed. Attribute values of type
 	// String and Binary must have a length greater than zero if the attribute is used
-	// as a key attribute for a table or index.  <p>For more information about primary
-	// keys, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey">Primary
-	// Key</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>Each element in
-	// the <code>Item</code> map is an <code>AttributeValue</code> object.</p>
+	// as a key attribute for a table or index. For more information about primary
+	// keys, see Primary Key
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey)
+	// in the Amazon DynamoDB Developer Guide. Each element in the Item map is an
+	// AttributeValue object.
 	//
 	// This member is required.
 	Item map[string]*types.AttributeValue

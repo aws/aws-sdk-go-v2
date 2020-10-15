@@ -38,7 +38,7 @@ type AcceptReservedNodeExchangeInput struct {
 
 	// The unique identifier of the DC2 Reserved Node offering to be used for the
 	// exchange. You can obtain the value for the parameter by calling
-	// GetReservedNodeExchangeOfferings ()
+	// GetReservedNodeExchangeOfferings
 	//
 	// This member is required.
 	TargetReservedNodeOfferingId *string

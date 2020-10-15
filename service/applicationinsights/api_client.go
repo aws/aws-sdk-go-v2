@@ -19,19 +19,8 @@ import (
 const ServiceID = "Application Insights"
 const ServiceAPIVersion = "2018-11-25"
 
-// Amazon CloudWatch Application Insights for .NET and SQL Server Amazon CloudWatch
-// Application Insights for .NET and SQL Server is a service that helps you detect
-// common problems with your .NET and SQL Server-based applications. It enables you
-// to pinpoint the source of issues in your applications (built with technologies
-// such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key
-// insights into detected problems. After you onboard your application, CloudWatch
-// Application Insights for .NET and SQL Server identifies, recommends, and sets up
-// metrics and logs. It continuously analyzes and correlates your metrics and logs
-// for unusual behavior to surface actionable problems with your application. For
-// example, if your application is slow and unresponsive and leading to HTTP 500
-// errors in your Application Load Balancer (ALB), Application Insights informs you
-// that a memory pressure problem with your SQL Server database is occurring. It
-// bases this analysis on impactful metrics and log errors.
+// Client provides the API client to make operations call for Amazon CloudWatch
+// Application Insights.
 type Client struct {
 	options Options
 }

@@ -29,7 +29,7 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 	return out, nil
 }
 
-// Represents the input to DeleteDBCluster ().
+// Represents the input to DeleteDBCluster.
 type DeleteDBClusterInput struct {
 
 	// The cluster identifier for the cluster to be deleted. This parameter isn't case

@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Describes a predictor created using the CreatePredictor () operation. In
-// addition to listing the properties provided in the CreatePredictor request, this
+// Describes a predictor created using the CreatePredictor operation. In addition
+// to listing the properties provided in the CreatePredictor request, this
 // operation lists the following properties:
 //
 //     * DatasetImportJobArns - The
@@ -139,7 +139,7 @@ type DescribePredictorOutput struct {
 	// The default training parameters or overrides selected during model training. If
 	// using the AutoML algorithm or if HPO is turned on while using the DeepAR+
 	// algorithms, the optimized values for the chosen hyperparameters are returned.
-	// For more information, see aws-forecast-choosing-recipes ().
+	// For more information, see aws-forecast-choosing-recipes.
 	TrainingParameters map[string]*string
 
 	// Metadata pertaining to the operation's result.

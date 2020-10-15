@@ -46,7 +46,7 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 	// The key to group the resource counts.
 	GroupByKey types.ResourceCountGroupKey
 
-	// The maximum number of GroupedResourceCount () objects returned on each page. The
+	// The maximum number of GroupedResourceCount objects returned on each page. The
 	// default is 1000. You cannot specify a number greater than 1000. If you specify
 	// 0, AWS Config uses the default.
 	Limit *int32

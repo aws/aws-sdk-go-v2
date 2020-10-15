@@ -33,8 +33,8 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains () operation. By default
-// shows the status of all domains. To restrict the response to particular domains,
+// Container for the parameters to the DescribeDomains operation. By default shows
+// the status of all domains. To restrict the response to particular domains,
 // specify the names of the domains you want to describe.
 type DescribeDomainsInput struct {
 

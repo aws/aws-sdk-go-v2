@@ -12,9 +12,9 @@ import (
 
 // Deletes the specified certificate. A certificate cannot be deleted if it has a
 // policy or IoT thing attached to it or if its status is set to ACTIVE. To delete
-// a certificate, first use the DetachPrincipalPolicy () API to detach all
-// policies. Next, use the UpdateCertificate () API to set the certificate to the
-// INACTIVE status.
+// a certificate, first use the DetachPrincipalPolicy API to detach all policies.
+// Next, use the UpdateCertificate API to set the certificate to the INACTIVE
+// status.
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateInput{}

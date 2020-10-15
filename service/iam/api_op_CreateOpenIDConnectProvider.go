@@ -29,7 +29,7 @@ import (
 // You get all of this
 // information from the OIDC IdP that you want to use to access AWS. The trust for
 // the OIDC provider is derived from the IAM provider that this operation creates.
-// Therefore, it is best to limit access to the CreateOpenIDConnectProvider ()
+// Therefore, it is best to limit access to the CreateOpenIDConnectProvider
 // operation to highly privileged users.
 func (c *Client) CreateOpenIDConnectProvider(ctx context.Context, params *CreateOpenIDConnectProviderInput, optFns ...func(*Options)) (*CreateOpenIDConnectProviderOutput, error) {
 	if params == nil {
@@ -91,11 +91,11 @@ type CreateOpenIDConnectProviderInput struct {
 	ClientIDList []*string
 }
 
-// Contains the response to a successful CreateOpenIDConnectProvider () request.
+// Contains the response to a successful CreateOpenIDConnectProvider request.
 type CreateOpenIDConnectProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that is
-	// created. For more information, see OpenIDConnectProviderListEntry ().
+	// created. For more information, see OpenIDConnectProviderListEntry.
 	OpenIDConnectProviderArn *string
 
 	// Metadata pertaining to the operation's result.

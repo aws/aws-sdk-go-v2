@@ -18,11 +18,11 @@ import (
 // example, if you use Java, you can use the decode method of the
 // java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
 // provide similar functionality. To list the available versions for a policy, use
-// ListPolicyVersions (). This API retrieves information about managed policies. To
+// ListPolicyVersions. This API retrieves information about managed policies. To
 // retrieve information about an inline policy that is embedded in a user, group,
-// or role, use the GetUserPolicy (), GetGroupPolicy (), or GetRolePolicy () API.
-// For more information about the types of policies, see Managed Policies and
-// Inline Policies
+// or role, use the GetUserPolicy, GetGroupPolicy, or GetRolePolicy API. For more
+// information about the types of policies, see Managed Policies and Inline
+// Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about managed policy versions, see
 // Versioning for Managed Policies
@@ -63,7 +63,7 @@ type GetPolicyVersionInput struct {
 	VersionId *string
 }
 
-// Contains the response to a successful GetPolicyVersion () request.
+// Contains the response to a successful GetPolicyVersion request.
 type GetPolicyVersionOutput struct {
 
 	// A structure containing details about the policy version.

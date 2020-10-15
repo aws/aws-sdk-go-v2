@@ -26,10 +26,10 @@ func (c *Client) GetSdkType(ctx context.Context, params *GetSdkTypeInput, optFns
 	return out, nil
 }
 
-// Get an SdkType () instance.
+// Get an SdkType instance.
 type GetSdkTypeInput struct {
 
-	// [Required] The identifier of the queried SdkType () instance.
+	// [Required] The identifier of the queried SdkType instance.
 	//
 	// This member is required.
 	Id *string
@@ -46,16 +46,16 @@ type GetSdkTypeInput struct {
 // A type of SDK that API Gateway can generate.
 type GetSdkTypeOutput struct {
 
-	// A list of configuration properties of an SdkType ().
+	// A list of configuration properties of an SdkType.
 	ConfigurationProperties []*types.SdkConfigurationProperty
 
-	// The description of an SdkType ().
+	// The description of an SdkType.
 	Description *string
 
-	// The user-friendly name of an SdkType () instance.
+	// The user-friendly name of an SdkType instance.
 	FriendlyName *string
 
-	// The identifier of an SdkType () instance.
+	// The identifier of an SdkType instance.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

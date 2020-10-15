@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the DomainName () resource.
+// Deletes the DomainName resource.
 func (c *Client) DeleteDomainName(ctx context.Context, params *DeleteDomainNameInput, optFns ...func(*Options)) (*DeleteDomainNameOutput, error) {
 	if params == nil {
 		params = &DeleteDomainNameInput{}
@@ -26,10 +26,10 @@ func (c *Client) DeleteDomainName(ctx context.Context, params *DeleteDomainNameI
 	return out, nil
 }
 
-// A request to delete the DomainName () resource.
+// A request to delete the DomainName resource.
 type DeleteDomainNameInput struct {
 
-	// [Required] The name of the DomainName () resource to be deleted.
+	// [Required] The name of the DomainName resource to be deleted.
 	//
 	// This member is required.
 	DomainName *string

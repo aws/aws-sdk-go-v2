@@ -19,12 +19,8 @@ import (
 const ServiceID = "DAX"
 const ServiceAPIVersion = "2017-04-19"
 
-// DAX is a managed caching service engineered for Amazon DynamoDB. DAX
-// dramatically speeds up database reads by caching frequently-accessed data from
-// DynamoDB, so applications can access that data with sub-millisecond latency. You
-// can create a DAX cluster easily, using the AWS Management Console. With a few
-// simple modifications to your code, your application can begin taking advantage
-// of the DAX cluster and realize significant improvements in read performance.
+// Client provides the API client to make operations call for Amazon DynamoDB
+// Accelerator (DAX).
 type Client struct {
 	options Options
 }

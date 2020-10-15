@@ -12,8 +12,8 @@ import (
 )
 
 // Updates a manual DB snapshot with a new engine version. The snapshot can be
-// encrypted or unencrypted, but not shared or public.  </p> <p>Amazon RDS supports
-// upgrading DB snapshots for MySQL, Oracle, and PostgreSQL. </p>
+// encrypted or unencrypted, but not shared or public. Amazon RDS supports
+// upgrading DB snapshots for MySQL, Oracle, and PostgreSQL.
 func (c *Client) ModifyDBSnapshot(ctx context.Context, params *ModifyDBSnapshotInput, optFns ...func(*Options)) (*ModifyDBSnapshotOutput, error) {
 	if params == nil {
 		params = &ModifyDBSnapshotInput{}
@@ -36,25 +36,34 @@ type ModifyDBSnapshotInput struct {
 	// This member is required.
 	DBSnapshotIdentifier *string
 
-	// The engine version to upgrade the DB snapshot to.  <p>The following are the
-	// database engines and engine versions that are available when you upgrade a DB
-	// snapshot. </p> <p> <b>MySQL</b> </p> <ul> <li> <p> <code>5.5.46</code>
-	// (supported for 5.1 DB snapshots)</p> </li> </ul> <p> <b>Oracle</b> </p> <ul>
-	// <li> <p> <code>12.1.0.2.v8</code> (supported for 12.1.0.1 DB snapshots)</p>
-	// </li> <li> <p> <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB
-	// snapshots)</p> </li> <li> <p> <code>11.2.0.4.v11</code> (supported for 11.2.0.3
-	// DB snapshots)</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>For the list of
-	// engine versions that are available for upgrading a DB snapshot, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion">
-	// Upgrading the PostgreSQL DB Engine for Amazon RDS</a>. </p>
+	// The engine version to upgrade the DB snapshot to. The following are the database
+	// engines and engine versions that are available when you upgrade a DB snapshot.
+	// MySQL
+	//
+	//     * 5.5.46 (supported for 5.1 DB snapshots)
+	//
+	// Oracle
+	//
+	//     * 12.1.0.2.v8
+	// (supported for 12.1.0.1 DB snapshots)
+	//
+	//     * 11.2.0.4.v12 (supported for
+	// 11.2.0.2 DB snapshots)
+	//
+	//     * 11.2.0.4.v11 (supported for 11.2.0.3 DB
+	// snapshots)
+	//
+	// PostgreSQL For the list of engine versions that are available for
+	// upgrading a DB snapshot, see  Upgrading the PostgreSQL DB Engine for Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion).
 	EngineVersion *string
 
-	// The option group to identify with the upgraded DB snapshot.  <p>You can specify
-	// this parameter when you upgrade an Oracle DB snapshot. The same option group
+	// The option group to identify with the upgraded DB snapshot. You can specify this
+	// parameter when you upgrade an Oracle DB snapshot. The same option group
 	// considerations apply when upgrading a DB snapshot as when upgrading a DB
-	// instance. For more information, see <a
-	// href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG">Option
-	// Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>
+	// instance. For more information, see Option Group Considerations
+	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG)
+	// in the Amazon RDS User Guide.
 	OptionGroupName *string
 }
 

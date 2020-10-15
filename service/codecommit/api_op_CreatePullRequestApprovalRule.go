@@ -62,7 +62,7 @@ type CreatePullRequestApprovalRuleInput struct {
 	// For more information about IAM ARNs, wildcards, and formats, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
-	// the IAM User Guide.  </note>
+	// the IAM User Guide.
 	//
 	// This member is required.
 	ApprovalRuleContent *string

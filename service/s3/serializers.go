@@ -67,13 +67,25 @@ func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -164,13 +176,25 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -244,7 +268,13 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -370,7 +400,13 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -555,7 +591,13 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -660,7 +702,13 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -734,7 +782,13 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -882,7 +936,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -942,7 +1002,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketAnalyticsConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1006,7 +1072,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketCorsInput(v *DeleteBucketCors
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1066,7 +1138,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketEncryptionInput(v *DeleteBuck
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1126,7 +1204,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInventoryConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1190,7 +1274,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleInput(v *DeleteBucke
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1250,7 +1340,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketMetricsConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1314,7 +1410,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1374,7 +1476,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(v *DeleteBuc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1434,7 +1542,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1494,7 +1608,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketWebsiteInput(v *DeleteBucketW
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1554,7 +1674,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1565,7 +1691,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -1663,7 +1795,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1740,13 +1878,25 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectTaggingInput(v *DeleteObjectT
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -1810,7 +1960,13 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1870,7 +2026,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAccelerateConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1930,7 +2092,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAclInput(v *GetBucketAclInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1990,7 +2158,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAnalyticsConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2054,7 +2228,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketCorsInput(v *GetBucketCorsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2114,7 +2294,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketEncryptionInput(v *GetBucketEncr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2174,7 +2360,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInventoryConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2238,7 +2430,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2298,7 +2496,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLocationInput(v *GetBucketLocati
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2358,7 +2562,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLoggingInput(v *GetBucketLogging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2418,7 +2628,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketMetricsConfigurationInput(v *Get
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2482,7 +2698,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketNotificationConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2542,7 +2764,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2602,7 +2830,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyStatusInput(v *GetBucketPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2662,7 +2896,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(v *GetBucketRep
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2722,7 +2962,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketRequestPaymentInput(v *GetBucket
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2782,7 +3028,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2842,7 +3094,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(v *GetBucketVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2902,7 +3160,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketWebsiteInput(v *GetBucketWebsite
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2962,7 +3226,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2992,7 +3262,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.IfUnmodifiedSince))
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3117,13 +3393,25 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3192,13 +3480,25 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegal
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3267,7 +3567,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLockConfigurationInput(v *GetObj
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3327,13 +3633,25 @@ func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectReten
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3402,13 +3720,25 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTaggingInput(v *GetObjectTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3472,13 +3802,25 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrent
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3543,7 +3885,13 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3603,7 +3951,13 @@ func awsRestxml_serializeOpHttpBindingsHeadBucketInput(v *HeadBucketInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3663,7 +4017,13 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3693,7 +4053,13 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.IfUnmodifiedSince))
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -3794,7 +4160,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketAnalyticsConfigurationsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3858,7 +4230,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketInventoryConfigurationsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -3922,7 +4300,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketMetricsConfigurationsInput(v *L
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4036,7 +4420,13 @@ func awsRestxml_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultipar
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4120,7 +4510,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4205,7 +4601,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4298,7 +4700,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectVersionsInput(v *ListObjectVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4382,13 +4790,25 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -4487,7 +4907,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAccelerateConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4574,7 +5000,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4698,7 +5130,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAnalyticsConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4784,7 +5222,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketCorsInput(v *PutBucketCorsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4873,7 +5317,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketEncryptionInput(v *PutBucketEncr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -4962,7 +5412,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketInventoryConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5048,7 +5504,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5130,7 +5592,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLoggingInput(v *PutBucketLogging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5219,7 +5687,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketMetricsConfigurationInput(v *Put
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5305,7 +5779,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketNotificationConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5382,7 +5862,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5492,7 +5978,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketRep
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5588,7 +6080,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketRequestPaymentInput(v *PutBucket
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5677,7 +6175,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5766,7 +6270,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5862,7 +6372,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketWebsiteInput(v *PutBucketWebsite
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -5945,7 +6461,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6031,7 +6553,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6206,7 +6734,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6254,7 +6788,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6345,7 +6885,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6358,7 +6904,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6449,7 +7001,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLockConfigurationInput(v *PutObj
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6550,7 +7108,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6568,7 +7132,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6659,7 +7229,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6672,7 +7248,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6758,7 +7340,13 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6847,13 +7435,25 @@ func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -6933,7 +7533,13 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -6951,7 +7557,13 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}
@@ -7045,7 +7657,13 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
 	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -7110,7 +7728,13 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 		}
 	}
 
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
 	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
 		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
 			return err
 		}

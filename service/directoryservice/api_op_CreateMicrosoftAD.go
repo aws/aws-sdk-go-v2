@@ -47,13 +47,12 @@ type CreateMicrosoftADInput struct {
 
 	// The password for the default administrative user named Admin. If you need to
 	// change the password for the administrator account, you can use the
-	// ResetUserPassword () API call.
+	// ResetUserPassword API call.
 	//
 	// This member is required.
 	Password *string
 
-	// Contains VPC information for the CreateDirectory () or CreateMicrosoftAD ()
-	// operation.
+	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 	//
 	// This member is required.
 	VpcSettings *types.DirectoryVpcSettings

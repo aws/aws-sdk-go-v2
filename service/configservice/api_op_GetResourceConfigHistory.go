@@ -39,7 +39,7 @@ func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResour
 	return out, nil
 }
 
-// The input for the GetResourceConfigHistory () action.
+// The input for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryInput struct {
 
 	// The ID of the resource (for example., sg-xxxxxx).
@@ -75,7 +75,7 @@ type GetResourceConfigHistoryInput struct {
 	NextToken *string
 }
 
-// The output for the GetResourceConfigHistory () action.
+// The output for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryOutput struct {
 
 	// A list that contains the configuration history of one or more resources.

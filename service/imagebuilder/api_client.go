@@ -21,10 +21,7 @@ import (
 const ServiceID = "imagebuilder"
 const ServiceAPIVersion = "2019-12-02"
 
-// EC2 Image Builder is a fully managed AWS service that makes it easier to
-// automate the creation, management, and deployment of customized, secure, and
-// up-to-date “golden” server images that are pre-installed and pre-configured with
-// software and settings to meet specific IT standards.
+// Client provides the API client to make operations call for EC2 Image Builder.
 type Client struct {
 	options Options
 }

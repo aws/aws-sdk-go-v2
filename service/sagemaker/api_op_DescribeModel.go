@@ -69,7 +69,7 @@ type DescribeModelOutput struct {
 	// environment map that the inference code uses when it is deployed in production.
 	PrimaryContainer *types.ContainerDefinition
 
-	// A VpcConfig () object that specifies the VPC that this model has access to. For
+	// A VpcConfig object that specifies the VPC that this model has access to. For
 	// more information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	VpcConfig *types.VpcConfig

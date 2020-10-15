@@ -41,7 +41,7 @@ type AddApplicationReferenceDataSourceInput struct {
 	ApplicationName *string
 
 	// The version of the application for which you are adding the reference data
-	// source. You can use the DescribeApplication () operation to get the current
+	// source. You can use the DescribeApplication operation to get the current
 	// application version. If the version specified is not the current version, the
 	// ConcurrentModificationException is returned.
 	//
@@ -66,7 +66,7 @@ type AddApplicationReferenceDataSourceOutput struct {
 	// this ID when the application is updated.
 	ApplicationVersionId *int64
 
-	// Describes reference data sources configured for the application. </p>
+	// Describes reference data sources configured for the application.
 	ReferenceDataSourceDescriptions []*types.ReferenceDataSourceDescription
 
 	// Metadata pertaining to the operation's result.

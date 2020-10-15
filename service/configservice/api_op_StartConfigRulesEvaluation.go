@@ -15,24 +15,30 @@ import (
 // you want to test that a rule you updated is working as expected.
 // StartConfigRulesEvaluation does not re-record the latest configuration state for
 // your resources. It re-runs an evaluation against the last known state of your
-// resources. You can specify up to 25 AWS Config rules per request.  <p>An
-// existing <code>StartConfigRulesEvaluation</code> call for the specified rules
-// must complete before you can call the API again. If you chose to have AWS Config
-// stream to an Amazon SNS topic, you will receive a
-// <code>ConfigRuleEvaluationStarted</code> notification when the evaluation
-// starts.</p> <note> <p>You don't need to call the
-// <code>StartConfigRulesEvaluation</code> API to run an evaluation for a new rule.
-// When you create a rule, AWS Config evaluates your resources against the rule
-// automatically. </p> </note> <p>The <code>StartConfigRulesEvaluation</code> API
-// is useful if you want to run on-demand evaluations, such as the following
-// example:</p> <ol> <li> <p>You have a custom rule that evaluates your IAM
-// resources every 24 hours.</p> </li> <li> <p>You update your Lambda function to
-// add additional conditions to your rule.</p> </li> <li> <p>Instead of waiting for
-// the next periodic evaluation, you call the
-// <code>StartConfigRulesEvaluation</code> API.</p> </li> <li> <p>AWS Config
-// invokes your Lambda function and evaluates your IAM resources.</p> </li> <li>
-// <p>Your custom rule will still run periodic evaluations every 24 hours.</p>
-// </li> </ol>
+// resources. You can specify up to 25 AWS Config rules per request. An existing
+// StartConfigRulesEvaluation call for the specified rules must complete before you
+// can call the API again. If you chose to have AWS Config stream to an Amazon SNS
+// topic, you will receive a ConfigRuleEvaluationStarted notification when the
+// evaluation starts. You don't need to call the StartConfigRulesEvaluation API to
+// run an evaluation for a new rule. When you create a rule, AWS Config evaluates
+// your resources against the rule automatically. The StartConfigRulesEvaluation
+// API is useful if you want to run on-demand evaluations, such as the following
+// example:
+//
+//     * You have a custom rule that evaluates your IAM resources every
+// 24 hours.
+//
+//     * You update your Lambda function to add additional conditions to
+// your rule.
+//
+//     * Instead of waiting for the next periodic evaluation, you call
+// the StartConfigRulesEvaluation API.
+//
+//     * AWS Config invokes your Lambda
+// function and evaluates your IAM resources.
+//
+//     * Your custom rule will still
+// run periodic evaluations every 24 hours.
 func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartConfigRulesEvaluationInput, optFns ...func(*Options)) (*StartConfigRulesEvaluationOutput, error) {
 	if params == nil {
 		params = &StartConfigRulesEvaluationInput{}

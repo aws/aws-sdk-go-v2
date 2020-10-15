@@ -12,12 +12,12 @@ import (
 )
 
 // Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the
-// stop-db-cluster AWS CLI command, or the StopDBCluster action.  <p>For more
-// information, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html">
-// Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User
-// Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p>
-// </note>
+// stop-db-cluster AWS CLI command, or the StopDBCluster action. For more
+// information, see
+//
+// Stopping and Starting an Aurora Cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
+// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput, optFns ...func(*Options)) (*StartDBClusterOutput, error) {
 	if params == nil {
 		params = &StartDBClusterInput{}

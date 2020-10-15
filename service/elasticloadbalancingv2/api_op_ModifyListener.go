@@ -63,8 +63,7 @@ type ModifyListenerInput struct {
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
-	// do not set IsDefault. To create a certificate list, use AddListenerCertificates
-	// ().
+	// do not set IsDefault. To create a certificate list, use AddListenerCertificates.
 	Certificates []*types.Certificate
 
 	// The actions for the default rule. The rule must include one forward action or

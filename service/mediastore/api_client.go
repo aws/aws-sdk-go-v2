@@ -19,8 +19,8 @@ import (
 const ServiceID = "MediaStore"
 const ServiceAPIVersion = "2017-09-01"
 
-// An AWS Elemental MediaStore container is a namespace that holds folders and
-// objects. You use a container endpoint to create, read, and delete objects.
+// Client provides the API client to make operations call for AWS Elemental
+// MediaStore.
 type Client struct {
 	options Options
 }

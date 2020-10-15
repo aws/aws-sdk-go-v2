@@ -18,9 +18,8 @@ import (
 // update both the release and configuration is not allowed and AWS Elastic
 // Beanstalk returns an InvalidParameterCombination error. When updating the
 // configuration settings to a new template or individual settings, a draft
-// configuration is created and DescribeConfigurationSettings () for this
-// environment returns two setting descriptions with different DeploymentStatus
-// values.
+// configuration is created and DescribeConfigurationSettings for this environment
+// returns two setting descriptions with different DeploymentStatus values.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}
@@ -179,14 +178,22 @@ type UpdateEnvironmentOutput struct {
 	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
 
-	// The current operational status of the environment:  <ul> <li> <p>
-	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
-	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
-	// its configuration settings or application version.</p> </li> <li> <p>
-	// <code>Ready</code>: Environment is available to have an action performed on it,
-	// such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>:
-	// Environment is in the shut-down process.</p> </li> <li> <p>
-	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
+	// The current operational status of the environment:
+	//
+	//     * Launching: Environment
+	// is in the process of initial deployment.
+	//
+	//     * Updating: Environment is in the
+	// process of updating its configuration settings or application version.
+	//
+	//     *
+	// Ready: Environment is available to have an action performed on it, such as
+	// update or terminate.
+	//
+	//     * Terminating: Environment is in the shut-down
+	// process.
+	//
+	//     * Terminated: Environment is not running.
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

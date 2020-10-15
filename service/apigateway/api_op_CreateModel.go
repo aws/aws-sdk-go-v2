@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds a new Model () resource to an existing RestApi () resource.
+// Adds a new Model resource to an existing RestApi resource.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -26,7 +26,7 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 	return out, nil
 }
 
-// Request to add a new Model () to an existing RestApi () resource.
+// Request to add a new Model to an existing RestApi resource.
 type CreateModelInput struct {
 
 	// [Required] The content-type for the model.
@@ -39,7 +39,7 @@ type CreateModelInput struct {
 	// This member is required.
 	Name *string
 
-	// [Required] The RestApi () identifier under which the Model () will be created.
+	// [Required] The RestApi identifier under which the Model will be created.
 	//
 	// This member is required.
 	RestApiId *string
@@ -64,7 +64,7 @@ type CreateModelInput struct {
 // the back end. Although not required, models are useful for mapping payloads
 // between the front end and back end. A model is used for generating an API's SDK,
 // validating the input request body, and creating a skeletal mapping template.
-// Method (), MethodResponse (), Models and Mappings
+// Method, MethodResponse, Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type CreateModelOutput struct {
 

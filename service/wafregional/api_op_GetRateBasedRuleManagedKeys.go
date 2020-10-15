@@ -17,7 +17,7 @@ import (
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Returns an array of IP addresses currently being blocked by the
-// RateBasedRule () that is specified by the RuleId. The maximum number of managed
+// RateBasedRule that is specified by the RuleId. The maximum number of managed
 // keys that will be blocked is 10,000. If more than 10,000 addresses exceed the
 // rate limit, the 10,000 addresses with the highest rates will be blocked.
 func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRateBasedRuleManagedKeysInput, optFns ...func(*Options)) (*GetRateBasedRuleManagedKeysOutput, error) {
@@ -37,9 +37,8 @@ func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRat
 
 type GetRateBasedRuleManagedKeysInput struct {
 
-	// The RuleId of the RateBasedRule () for which you want to get a list of
-	// ManagedKeys. RuleId is returned by CreateRateBasedRule () and by
-	// ListRateBasedRules ().
+	// The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys.
+	// RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -51,7 +50,7 @@ type GetRateBasedRuleManagedKeysInput struct {
 type GetRateBasedRuleManagedKeysOutput struct {
 
 	// An array of IP addresses that currently are blocked by the specified
-	// RateBasedRule ().
+	// RateBasedRule.
 	ManagedKeys []*string
 
 	// A null value and not currently used.

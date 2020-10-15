@@ -13,12 +13,11 @@ import (
 // Configures one or more gateway local disks as working storage for a gateway.
 // This operation is only supported in the stored volume gateway type. This
 // operation is deprecated in cached volume API version 20120630. Use
-// AddUploadBuffer () instead.  <note> <p>Working storage is also referred to as
-// upload buffer. You can also use the <a>AddUploadBuffer</a> operation to add
-// upload buffer to a stored volume gateway.</p> </note> <p>In the request, you
-// specify the gateway Amazon Resource Name (ARN) to which you want to add working
-// storage, and one or more disk IDs that you want to configure as working
-// storage.</p>
+// AddUploadBuffer instead. Working storage is also referred to as upload buffer.
+// You can also use the AddUploadBuffer operation to add upload buffer to a stored
+// volume gateway. In the request, you specify the gateway Amazon Resource Name
+// (ARN) to which you want to add working storage, and one or more disk IDs that
+// you want to configure as working storage.
 func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorageInput, optFns ...func(*Options)) (*AddWorkingStorageOutput, error) {
 	if params == nil {
 		params = &AddWorkingStorageInput{}
@@ -34,19 +33,21 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 	return out, nil
 }
 
-// A JSON object containing one or more of the following fields:  <ul> <li> <p>
-// <a>AddWorkingStorageInput$DiskIds</a> </p> </li> </ul>
+// A JSON object containing one or more of the following fields:
+//
+//     *
+// AddWorkingStorageInput$DiskIds
 type AddWorkingStorageInput struct {
 
 	// An array of strings that identify disks that are to be configured as working
 	// storage. Each string has a minimum length of 1 and maximum length of 300. You
-	// can get the disk IDs from the ListLocalDisks () API.
+	// can get the disk IDs from the ListLocalDisks API.
 	//
 	// This member is required.
 	DiskIds []*string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -56,8 +57,8 @@ type AddWorkingStorageInput struct {
 // working storage was configured.
 type AddWorkingStorageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

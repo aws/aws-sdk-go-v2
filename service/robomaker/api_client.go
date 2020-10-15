@@ -21,7 +21,7 @@ import (
 const ServiceID = "RoboMaker"
 const ServiceAPIVersion = "2018-06-29"
 
-// This section provides documentation for the AWS RoboMaker API operations.
+// Client provides the API client to make operations call for AWS RoboMaker.
 type Client struct {
 	options Options
 }

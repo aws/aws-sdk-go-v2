@@ -21,7 +21,7 @@ import (
 const ServiceID = "S3 Control"
 const ServiceAPIVersion = "2018-08-20"
 
-// AWS S3 Control provides access to Amazon S3 control plane operations.  </p>
+// Client provides the API client to make operations call for AWS S3 Control.
 type Client struct {
 	options Options
 }

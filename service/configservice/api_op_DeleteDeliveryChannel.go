@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the delivery channel. Before you can delete the delivery channel, you
-// must stop the configuration recorder by using the StopConfigurationRecorder ()
+// must stop the configuration recorder by using the StopConfigurationRecorder
 // action.
 func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDeliveryChannelInput, optFns ...func(*Options)) (*DeleteDeliveryChannelOutput, error) {
 	if params == nil {
@@ -28,8 +28,8 @@ func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDelive
 	return out, nil
 }
 
-// The input for the DeleteDeliveryChannel () action. The action accepts the
-// following data, in JSON format.
+// The input for the DeleteDeliveryChannel action. The action accepts the following
+// data, in JSON format.
 type DeleteDeliveryChannelInput struct {
 
 	// The name of the delivery channel to delete.

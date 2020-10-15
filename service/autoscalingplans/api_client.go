@@ -19,15 +19,8 @@ import (
 const ServiceID = "Auto Scaling Plans"
 const ServiceAPIVersion = "2018-01-06"
 
-// AWS Auto Scaling Use AWS Auto Scaling to quickly discover all the scalable AWS
-// resources for your application and configure dynamic scaling and predictive
-// scaling for your resources using scaling plans. Use this service in conjunction
-// with the Amazon EC2 Auto Scaling, Application Auto Scaling, Amazon CloudWatch,
-// and AWS CloudFormation services. Currently, predictive scaling is only available
-// for Amazon EC2 Auto Scaling groups. For more information about AWS Auto Scaling,
-// including information about granting IAM users required permissions for AWS Auto
-// Scaling actions, see the AWS Auto Scaling User Guide
-// (https://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html).
+// Client provides the API client to make operations call for AWS Auto Scaling
+// Plans.
 type Client struct {
 	options Options
 }

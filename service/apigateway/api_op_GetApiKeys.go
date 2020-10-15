@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about the current ApiKeys () resource.
+// Gets information about the current ApiKeys resource.
 func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns ...func(*Options)) (*GetApiKeysOutput, error) {
 	if params == nil {
 		params = &GetApiKeysInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns
 	return out, nil
 }
 
-// A request to get information about the current ApiKeys () resource.
+// A request to get information about the current ApiKeys resource.
 type GetApiKeysInput struct {
 
 	// The identifier of a customer in AWS Marketplace or an external system, such as a
@@ -57,8 +57,8 @@ type GetApiKeysInput struct {
 	Title *string
 }
 
-// Represents a collection of API keys as represented by an ApiKeys () resource.
-// Use API Keys
+// Represents a collection of API keys as represented by an ApiKeys resource. Use
+// API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type GetApiKeysOutput struct {
 

@@ -48,7 +48,7 @@ type GetRelationalDatabaseLogEventsInput struct {
 	//
 	//     * Specified in the Unix time
 	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
-	// UTC, then you input 1538424000 as the end time.  </li> </ul>
+	// UTC, then you input 1538424000 as the end time.
 	EndTime *time.Time
 
 	// The token to advance to the next or previous page of results from your request.

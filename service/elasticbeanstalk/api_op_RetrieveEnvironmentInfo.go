@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves the compiled information from a RequestEnvironmentInfo () request.
+// Retrieves the compiled information from a RequestEnvironmentInfo request.
 // Related Topics
 //
-//     * RequestEnvironmentInfo ()
+//     * RequestEnvironmentInfo
 func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEnvironmentInfoInput, optFns ...func(*Options)) (*RetrieveEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RetrieveEnvironmentInfoInput{}
@@ -30,7 +30,7 @@ func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEn
 	return out, nil
 }
 
-// Request to download logs retrieved with RequestEnvironmentInfo ().
+// Request to download logs retrieved with RequestEnvironmentInfo.
 type RetrieveEnvironmentInfoInput struct {
 
 	// The type of information to retrieve.
@@ -54,7 +54,7 @@ type RetrieveEnvironmentInfoInput struct {
 // Result message containing a description of the requested environment info.
 type RetrieveEnvironmentInfoOutput struct {
 
-	// The EnvironmentInfoDescription () of the environment.
+	// The EnvironmentInfoDescription of the environment.
 	EnvironmentInfo []*types.EnvironmentInfoDescription
 
 	// Metadata pertaining to the operation's result.

@@ -40,8 +40,7 @@ type CreateWorkGroupInput struct {
 	// the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if
 	// it is specified, and whether workgroup's settings (specified with
 	// EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override
-	// client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration
-	// ().
+	// client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	Configuration *types.WorkGroupConfiguration
 
 	// The workgroup description.

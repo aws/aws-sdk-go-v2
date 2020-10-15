@@ -12,7 +12,7 @@ import (
 
 // Deletes a stack set. Before you can delete a stack set, all of its member stack
 // instances must be deleted. For more information about how to do this, see
-// DeleteStackInstances ().
+// DeleteStackInstances.
 func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput, optFns ...func(*Options)) (*DeleteStackSetOutput, error) {
 	if params == nil {
 		params = &DeleteStackSetInput{}
@@ -31,7 +31,7 @@ func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput
 type DeleteStackSetInput struct {
 
 	// The name or unique ID of the stack set that you're deleting. You can obtain this
-	// value by running ListStackSets ().
+	// value by running ListStackSets.
 	//
 	// This member is required.
 	StackSetName *string

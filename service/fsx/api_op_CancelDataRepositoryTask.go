@@ -59,8 +59,8 @@ type CancelDataRepositoryTaskOutput struct {
 	//
 	//     * FAILED - Amazon FSx was not able to complete the task. For
 	// example, there may be files the task failed to process. The
-	// DataRepositoryTaskFailureDetails () property provides more information about
-	// task failures.
+	// DataRepositoryTaskFailureDetails property provides more information about task
+	// failures.
 	//
 	//     * SUCCEEDED - FSx completed the task successfully.
 	//

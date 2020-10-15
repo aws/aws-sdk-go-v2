@@ -18,33 +18,32 @@ import (
 // Drift Detection on a Stack Set
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html).
 // DetectStackSetDrift returns the OperationId of the stack set drift detection
-// operation. Use this operation id with DescribeStackSetOperation () to monitor
-// the progress of the drift detection operation. The drift detection operation may
+// operation. Use this operation id with DescribeStackSetOperation to monitor the
+// progress of the drift detection operation. The drift detection operation may
 // take some time, depending on the number of stack instances included in the stack
 // set, as well as the number of resources included in each stack. Once the
 // operation has completed, use the following actions to return drift
 // information:
 //
-//     * Use DescribeStackSet () to return detailed informaiton about
+//     * Use DescribeStackSet to return detailed informaiton about
 // the stack set, including detailed information about the last completed drift
 // operation performed on the stack set. (Information about drift operations that
 // are in progress is not included.)
 //
-//     * Use ListStackInstances () to return a
-// list of stack instances belonging to the stack set, including the drift status
-// and last drift time checked of each instance.
+//     * Use ListStackInstances to return a list
+// of stack instances belonging to the stack set, including the drift status and
+// last drift time checked of each instance.
 //
-//     * Use DescribeStackInstance
-// () to return detailed information about a specific stack instance, including its
-// drift status and last drift time checked.
+//     * Use DescribeStackInstance to
+// return detailed information about a specific stack instance, including its drift
+// status and last drift time checked.
 //
-// For more information on performing a
-// drift detection operation on a stack set, see Detecting Unmanaged Changes in
-// Stack Sets
+// For more information on performing a drift
+// detection operation on a stack set, see Detecting Unmanaged Changes in Stack
+// Sets
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html).
 // You can only run a single drift detection operation on a given stack set at one
-// time. To stop a drift detection stack set operation, use StopStackSetOperation
-// ().
+// time. To stop a drift detection stack set operation, use StopStackSetOperation.
 func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSetDriftInput, optFns ...func(*Options)) (*DetectStackSetDriftOutput, error) {
 	if params == nil {
 		params = &DetectStackSetDriftInput{}
@@ -80,7 +79,7 @@ type DetectStackSetDriftInput struct {
 type DetectStackSetDriftOutput struct {
 
 	// The ID of the drift detection stack set operation. you can use this operation id
-	// with DescribeStackSetOperation () to monitor the progress of the drift detection
+	// with DescribeStackSetOperation to monitor the progress of the drift detection
 	// operation.
 	OperationId *string
 

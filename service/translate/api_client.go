@@ -21,8 +21,7 @@ import (
 const ServiceID = "Translate"
 const ServiceAPIVersion = "2017-07-01"
 
-// Provides translation between one source language and another of the same set of
-// languages.
+// Client provides the API client to make operations call for Amazon Translate.
 type Client struct {
 	options Options
 }

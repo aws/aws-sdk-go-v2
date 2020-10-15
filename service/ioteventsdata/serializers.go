@@ -215,7 +215,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDetectorInput(v *DescribeDetect
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -279,7 +285,13 @@ func awsRestjson1_serializeOpHttpBindingsListDetectorsInput(v *ListDetectorsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}

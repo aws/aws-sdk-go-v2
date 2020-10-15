@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes a forecast export job created using the CreateForecastExportJob ()
+// Describes a forecast export job created using the CreateForecastExportJob
 // operation. In addition to listing the properties provided by the user in the
 // CreateForecastExportJob request, this operation lists the following
 // properties:

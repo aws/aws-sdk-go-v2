@@ -17,15 +17,15 @@ import (
 //
 //     * The call must refer
 // to an existing email template. You can create email templates using the
-// CreateTemplate () operation.
+// CreateTemplate operation.
 //
-//     * The message must be sent from a verified
-// email address or domain.
+//     * The message must be sent from a verified email
+// address or domain.
 //
-//     * If your account is still in the Amazon SES
-// sandbox, you may only send to verified addresses or domains, or to email
-// addresses associated with the Amazon SES Mailbox Simulator. For more
-// information, see Verifying Email Addresses and Domains
+//     * If your account is still in the Amazon SES sandbox,
+// you may only send to verified addresses or domains, or to email addresses
+// associated with the Amazon SES Mailbox Simulator. For more information, see
+// Verifying Email Addresses and Domains
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 // in the Amazon SES Developer Guide.
 //

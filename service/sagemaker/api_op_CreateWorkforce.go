@@ -13,20 +13,19 @@ import (
 
 // Use this operation to create a workforce. This operation will return an error if
 // a workforce already exists in the AWS Region that you specify. You can only
-// create one workforce in each AWS Region.  <p>If you want to create a new
-// workforce in an AWS Region where the a workforce already exists, use the API
-// operation to delete the existing workforce and then use this operation to create
-// a new workforce.</p> <p>To create a private workforce using Amazon Cognito, you
-// must specify a Cognito user pool in <code>CognitoConfig</code>. You can also
-// create an Amazon Cognito workforce using the Amazon SageMaker console. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html">
-// Create a Private Workforce (Amazon Cognito)</a>.</p> <p>To create a private
-// workforce using your own OIDC Identity Provider (IdP), specify your IdP
-// configuration in <code>OidcConfig</code>. You must create a OIDC IdP workforce
-// using this API operation. For more information, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html">
-// Create a Private Workforce (OIDC IdP)</a>.</p>
+// create one workforce in each AWS Region. If you want to create a new workforce
+// in an AWS Region where the a workforce already exists, use the API operation to
+// delete the existing workforce and then use this operation to create a new
+// workforce. To create a private workforce using Amazon Cognito, you must specify
+// a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito
+// workforce using the Amazon SageMaker console. For more information, see  Create
+// a Private Workforce (Amazon Cognito)
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
+// To create a private workforce using your own OIDC Identity Provider (IdP),
+// specify your IdP configuration in OidcConfig. You must create a OIDC IdP
+// workforce using this API operation. For more information, see  Create a Private
+// Workforce (OIDC IdP)
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html).
 func (c *Client) CreateWorkforce(ctx context.Context, params *CreateWorkforceInput, optFns ...func(*Options)) (*CreateWorkforceOutput, error) {
 	if params == nil {
 		params = &CreateWorkforceInput{}
@@ -53,8 +52,7 @@ type CreateWorkforceInput struct {
 	// Cognito workforce is created using and corresponds to a single  Amazon Cognito
 	// user pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
-	// <p>Do not use <code>OidcConfig</code> if you specify values for
-	// <code>CognitoConfig</code>.</p>
+	// Do not use OidcConfig if you specify values for CognitoConfig.
 	CognitoConfig *types.CognitoConfig
 
 	// Use this parameter to configure a private workforce using your own OIDC Identity

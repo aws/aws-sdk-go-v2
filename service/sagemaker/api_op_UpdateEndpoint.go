@@ -16,14 +16,13 @@ import (
 // the previous EndpointConfig (there is no availability loss). When Amazon
 // SageMaker receives the request, it sets the endpoint status to Updating. After
 // updating the endpoint, it sets the status to InService. To check the status of
-// an endpoint, use the DescribeEndpoint () API.  </p> <note> <p>You must not
-// delete an <code>EndpointConfig</code> in use by an endpoint that is live or
-// while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code> operations
-// are being performed on the endpoint. To update an endpoint, you must create a
-// new <code>EndpointConfig</code>.</p> <p>If you delete the
-// <code>EndpointConfig</code> of an endpoint that is active or being created or
-// updated you may lose visibility into the instance type the endpoint is using.
-// The endpoint must be deleted in order to stop incurring charges.</p> </note>
+// an endpoint, use the DescribeEndpoint API. You must not delete an EndpointConfig
+// in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint
+// operations are being performed on the endpoint. To update an endpoint, you must
+// create a new EndpointConfig. If you delete the EndpointConfig of an endpoint
+// that is active or being created or updated you may lose visibility into the
+// instance type the endpoint is using. The endpoint must be deleted in order to
+// stop incurring charges.
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}
@@ -52,9 +51,9 @@ type UpdateEndpointInput struct {
 	EndpointName *string
 
 	// When you are updating endpoint resources with
-	// UpdateEndpointInput$RetainAllVariantProperties (), whose value is set to true,
-	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty ()
-	// to override with the values provided by EndpointConfig. If you don't specify a
+	// UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true,
+	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty to
+	// override with the values provided by EndpointConfig. If you don't specify a
 	// value for ExcludeAllVariantProperties, no variant properties are overridden.
 	ExcludeRetainedVariantProperties []*types.VariantProperty
 

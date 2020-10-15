@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deprecated. Use DescribeLoa () instead. Gets the LOA-CFA for a connection. The
+// Deprecated. Use DescribeLoa instead. Gets the LOA-CFA for a connection. The
 // Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document
 // that your APN partner or service provider uses when establishing your cross
 // connect to AWS at the colocation facility. For more information, see Requesting

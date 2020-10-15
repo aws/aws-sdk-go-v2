@@ -16,13 +16,12 @@ import (
 // MariaDB, Oracle, PostgreSQL, or SQL Server. For more information, see Working
 // with Read Replicas
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in
-// the Amazon RDS User Guide.  <p>Amazon Aurora doesn't support this action. Call
-// the <code>CreateDBInstance</code> action to create a DB instance for an Aurora
-// DB cluster.</p> <p>All read replica DB instances are created with backups
-// disabled. All other DB instance attributes (including DB security groups and DB
-// parameter groups) are inherited from the source DB instance, except as
-// specified.</p> <important> <p>Your source DB instance must have backup retention
-// enabled. </p> </important>
+// the Amazon RDS User Guide. Amazon Aurora doesn't support this action. Call the
+// CreateDBInstance action to create a DB instance for an Aurora DB cluster. All
+// read replica DB instances are created with backups disabled. All other DB
+// instance attributes (including DB security groups and DB parameter groups) are
+// inherited from the source DB instance, except as specified. Your source DB
+// instance must have backup retention enabled.
 func (c *Client) CreateDBInstanceReadReplica(ctx context.Context, params *CreateDBInstanceReadReplicaInput, optFns ...func(*Options)) (*CreateDBInstanceReadReplicaOutput, error) {
 	if params == nil {
 		params = &CreateDBInstanceReadReplicaInput{}
@@ -186,11 +185,11 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance ().  <p>For
-	// more information about IAM database authentication, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
-	// User Guide.</i> </p>
+	// For information about the supported DB engines, see CreateDBInstance. For more
+	// information about IAM database authentication, see  IAM Database Authentication
+	// for MySQL and PostgreSQL
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the read
@@ -205,15 +204,14 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The AWS KMS key ID for an encrypted read replica. The KMS key ID is the Amazon
 	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
-	// encryption key.  <p>If you create an encrypted read replica in the same AWS
-	// Region as the source DB instance, then you do not have to specify a value for
-	// this parameter. The read replica is encrypted with the same KMS key as the
-	// source DB instance.</p> <p>If you create an encrypted read replica in a
-	// different AWS Region, then you must specify a KMS key for the destination AWS
-	// Region. KMS encryption keys are specific to the AWS Region that they are created
-	// in, and you can't use encryption keys from one AWS Region in another AWS
-	// Region.</p> <p>You can't create an encrypted read replica from an unencrypted DB
-	// instance.</p>
+	// encryption key. If you create an encrypted read replica in the same AWS Region
+	// as the source DB instance, then you do not have to specify a value for this
+	// parameter. The read replica is encrypted with the same KMS key as the source DB
+	// instance. If you create an encrypted read replica in a different AWS Region,
+	// then you must specify a KMS key for the destination AWS Region. KMS encryption
+	// keys are specific to the AWS Region that they are created in, and you can't use
+	// encryption keys from one AWS Region in another AWS Region. You can't create an
+	// encrypted read replica from an unencrypted DB instance.
 	KmsKeyId *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -232,11 +230,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
 
-	// A value that indicates whether the read replica is in a Multi-AZ deployment.
-	// <p>You can create a read replica as a Multi-AZ DB instance. RDS creates a
-	// standby of your replica in another Availability Zone for failover support for
-	// the replica. Creating your read replica as a Multi-AZ DB instance is independent
-	// of whether the source database is a Multi-AZ DB instance. </p>
+	// A value that indicates whether the read replica is in a Multi-AZ deployment. You
+	// can create a read replica as a Multi-AZ DB instance. RDS creates a standby of
+	// your replica in another Availability Zone for failover support for the replica.
+	// Creating your read replica as a Multi-AZ DB instance is independent of whether
+	// the source database is a Multi-AZ DB instance.
 	MultiAZ *bool
 
 	// The option group the DB instance is associated with. If omitted, the option
@@ -262,47 +260,50 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The URL that contains a Signature Version 4 signed request for the
 	// CreateDBInstanceReadReplica API action in the source AWS Region that contains
-	// the source DB instance.  <p>You must specify this parameter when you create an
+	// the source DB instance. You must specify this parameter when you create an
 	// encrypted read replica from another AWS Region by using the Amazon RDS API.
-	// Don't specify <code>PreSignedUrl</code> when you are creating an encrypted read
-	// replica in the same AWS Region.</p> <p>The presigned URL must be a valid request
-	// for the <code>CreateDBInstanceReadReplica</code> API action that can be executed
-	// in the source AWS Region that contains the encrypted source DB instance. The
-	// presigned URL request must contain the following parameter values: </p> <ul>
-	// <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted read
-	// replica is created in. This AWS Region is the same one where the
-	// <code>CreateDBInstanceReadReplica</code> action is called that contains this
-	// presigned URL.</p> <p>For example, if you create an encrypted DB instance in the
+	// Don't specify PreSignedUrl when you are creating an encrypted read replica in
+	// the same AWS Region. The presigned URL must be a valid request for the
+	// CreateDBInstanceReadReplica API action that can be executed in the source AWS
+	// Region that contains the encrypted source DB instance. The presigned URL request
+	// must contain the following parameter values:
+	//
+	//     * DestinationRegion - The AWS
+	// Region that the encrypted read replica is created in. This AWS Region is the
+	// same one where the CreateDBInstanceReadReplica action is called that contains
+	// this presigned URL. For example, if you create an encrypted DB instance in the
 	// us-west-1 AWS Region, from a source DB instance in the us-east-2 AWS Region,
-	// then you call the <code>CreateDBInstanceReadReplica</code> action in the
-	// us-east-1 AWS Region and provide a presigned URL that contains a call to the
-	// <code>CreateDBInstanceReadReplica</code> action in the us-west-2 AWS Region. For
-	// this example, the <code>DestinationRegion</code> in the presigned URL must be
-	// set to the us-east-1 AWS Region. </p> </li> <li> <p> <code>KmsKeyId</code> - The
-	// AWS KMS key identifier for the key to use to encrypt the read replica in the
-	// destination AWS Region. This is the same identifier for both the
-	// <code>CreateDBInstanceReadReplica</code> action that is called in the
-	// destination AWS Region, and the action contained in the presigned URL. </p>
-	// </li> <li> <p> <code>SourceDBInstanceIdentifier</code> - The DB instance
-	// identifier for the encrypted DB instance to be replicated. This identifier must
-	// be in the Amazon Resource Name (ARN) format for the source AWS Region. For
-	// example, if you are creating an encrypted read replica from a DB instance in the
-	// us-west-2 AWS Region, then your <code>SourceDBInstanceIdentifier</code> looks
-	// like the following example:
-	// <code>arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115</code>.
-	// </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed
-	// request, see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">Authenticating
-	// Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature
-	// Version 4 Signing Process</a>. </p> <note> <p>If you are using an AWS SDK tool
-	// or the AWS CLI, you can specify <code>SourceRegion</code> (or
-	// <code>--source-region</code> for the AWS CLI) instead of specifying
-	// <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code>
-	// autogenerates a presigned URL that is a valid request for the operation that can
-	// be executed in the source AWS Region.</p> <p> <code>SourceRegion</code> isn't
-	// supported for SQL Server, because SQL Server on Amazon RDS doesn't support
-	// cross-region read replicas.</p> </note>
+	// then you call the CreateDBInstanceReadReplica action in the us-east-1 AWS Region
+	// and provide a presigned URL that contains a call to the
+	// CreateDBInstanceReadReplica action in the us-west-2 AWS Region. For this
+	// example, the DestinationRegion in the presigned URL must be set to the us-east-1
+	// AWS Region.
+	//
+	//     * KmsKeyId - The AWS KMS key identifier for the key to use to
+	// encrypt the read replica in the destination AWS Region. This is the same
+	// identifier for both the CreateDBInstanceReadReplica action that is called in the
+	// destination AWS Region, and the action contained in the presigned URL.
+	//
+	//     *
+	// SourceDBInstanceIdentifier - The DB instance identifier for the encrypted DB
+	// instance to be replicated. This identifier must be in the Amazon Resource Name
+	// (ARN) format for the source AWS Region. For example, if you are creating an
+	// encrypted read replica from a DB instance in the us-west-2 AWS Region, then your
+	// SourceDBInstanceIdentifier looks like the following example:
+	// arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115.
+	//
+	// To learn
+	// how to generate a Signature Version 4 signed request, see Authenticating
+	// Requests: Using Query Parameters (AWS Signature Version 4)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// and Signature Version 4 Signing Process
+	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). If you
+	// are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion (or
+	// --source-region for the AWS CLI) instead of specifying PreSignedUrl manually.
+	// Specifying SourceRegion autogenerates a presigned URL that is a valid request
+	// for the operation that can be executed in the source AWS Region. SourceRegion
+	// isn't supported for SQL Server, because SQL Server on Amazon RDS doesn't support
+	// cross-region read replicas.
 	PreSignedUrl *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
@@ -317,7 +318,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// permitted if the security group assigned to the DB instance doesn't permit it.
 	// When the DB instance isn't publicly accessible, it is an internal DB instance
 	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance ().
+	// CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// Specifies the storage type to be associated with the read replica. Valid values:

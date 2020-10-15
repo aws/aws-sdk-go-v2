@@ -14,8 +14,8 @@ import (
 
 // Disassociates a connection from a link aggregation group (LAG). The connection
 // is interrupted and re-established as a standalone connection (the connection is
-// not deleted; to delete the connection, use the DeleteConnection () request). If
-// the LAG has associated virtual interfaces or hosted connections, they remain
+// not deleted; to delete the connection, use the DeleteConnection request). If the
+// LAG has associated virtual interfaces or hosted connections, they remain
 // associated with the LAG. A disassociated connection owned by an AWS Direct
 // Connect Partner is automatically converted to an interconnect. If disassociating
 // the connection would cause the LAG to fall below its setting for minimum number
@@ -111,7 +111,7 @@ type DisassociateConnectionFromLagOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

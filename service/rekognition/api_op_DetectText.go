@@ -17,7 +17,7 @@ import (
 // operations, you must pass it as a reference to an image in an Amazon S3 bucket.
 // For the AWS CLI, passing image bytes is not supported. The image must be either
 // a .png or .jpeg formatted file. The DetectText operation returns text in an
-// array of TextDetection () elements, TextDetections. Each TextDetection element
+// array of TextDetection elements, TextDetections. Each TextDetection element
 // provides information about a single word or line of text that was detected in
 // the image. A word is one or more ISO basic latin script characters that are not
 // separated by spaces. DetectText can detect up to 50 words in an image. A line is
@@ -30,8 +30,8 @@ import (
 // spans multiple lines, the DetectText operation returns multiple lines. To
 // determine whether a TextDetection element is a line of text or a word, use the
 // TextDetection object Type field. To be detected, text must be within +/- 90
-// degrees orientation of the horizontal axis.  <p>For more information, see
-// DetectText in the Amazon Rekognition Developer Guide.</p>
+// degrees orientation of the horizontal axis. For more information, see DetectText
+// in the Amazon Rekognition Developer Guide.
 func (c *Client) DetectText(ctx context.Context, params *DetectTextInput, optFns ...func(*Options)) (*DetectTextOutput, error) {
 	if params == nil {
 		params = &DetectTextInput{}

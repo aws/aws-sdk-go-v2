@@ -29,105 +29,119 @@ import (
 // an error when Amazon S3 receives the copy request or while Amazon S3 is copying
 // the files. If the error occurs before the copy operation starts, you receive a
 // standard Amazon S3 error. If the error occurs during the copy operation, the
-// error response is embedded in the <code>200 OK</code> response. This means that
-// a <code>200 OK</code> response can contain either a success or an error. Design
-// your application to parse the contents of the response and handle it
-// appropriately.</p> <p>If the copy is successful, you receive a response with
-// information about the copied object.</p> <note> <p>If the request is an HTTP 1.1
-// request, the response is chunk encoded. If it were not, it would not contain the
-// content-length, and you would need to read the entire body.</p> </note> <p>The
-// copy request charge is based on the storage class and Region that you specify
-// for the destination object. For pricing information, see <a
-// href="https://aws.amazon.com/s3/pricing/">Amazon S3 pricing</a>.</p> <important>
-// <p>Amazon S3 transfer acceleration does not support cross-Region copies. If you
-// request a cross-Region copy using a transfer acceleration endpoint, you get a
-// 400 <code>Bad Request</code> error. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html">Transfer
-// Acceleration</a>.</p> </important> <p> <b>Metadata</b> </p> <p>When copying an
-// object, you can preserve all metadata (default) or specify new metadata.
-// However, the ACL is not preserved and is set to private for the user making the
-// request. To override the default ACL setting, specify a new ACL when generating
-// a copy request. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html">Using
-// ACLs</a>. </p> <p>To specify whether you want the object metadata copied from
-// the source object or replaced with metadata provided in the request, you can
-// optionally add the <code>x-amz-metadata-directive</code> header. When you grant
-// permissions, you can use the <code>s3:x-amz-metadata-directive</code> condition
-// key to enforce certain metadata behavior when objects are uploaded. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html">Specifying
-// Conditions in a Policy</a> in the <i>Amazon S3 Developer Guide</i>. For a
-// complete list of Amazon S3-specific condition keys, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html">Actions,
-// Resources, and Condition Keys for Amazon S3</a>.</p> <p> <b>
-// <code>x-amz-copy-source-if</code> Headers</b> </p> <p>To only copy an object
-// under certain conditions, such as whether the <code>Etag</code> matches or
-// whether the object was modified before or after a specified date, use the
-// following request parameters:</p> <ul> <li> <p>
-// <code>x-amz-copy-source-if-match</code> </p> </li> <li> <p>
-// <code>x-amz-copy-source-if-none-match</code> </p> </li> <li> <p>
-// <code>x-amz-copy-source-if-unmodified-since</code> </p> </li> <li> <p>
-// <code>x-amz-copy-source-if-modified-since</code> </p> </li> </ul> <p> If both
-// the <code>x-amz-copy-source-if-match</code> and
-// <code>x-amz-copy-source-if-unmodified-since</code> headers are present in the
-// request and evaluate as follows, Amazon S3 returns <code>200 OK</code> and
-// copies the data:</p> <ul> <li> <p> <code>x-amz-copy-source-if-match</code>
-// condition evaluates to true</p> </li> <li> <p>
-// <code>x-amz-copy-source-if-unmodified-since</code> condition evaluates to
-// false</p> </li> </ul> <p>If both the
-// <code>x-amz-copy-source-if-none-match</code> and
-// <code>x-amz-copy-source-if-modified-since</code> headers are present in the
-// request and evaluate as follows, Amazon S3 returns the <code>412 Precondition
-// Failed</code> response code:</p> <ul> <li> <p>
-// <code>x-amz-copy-source-if-none-match</code> condition evaluates to false</p>
-// </li> <li> <p> <code>x-amz-copy-source-if-modified-since</code> condition
-// evaluates to true</p> </li> </ul> <note> <p>All headers with the
-// <code>x-amz-</code> prefix, including <code>x-amz-copy-source</code>, must be
-// signed.</p> </note> <p> <b>Encryption</b> </p> <p>The source object that you are
+// error response is embedded in the 200 OK response. This means that a 200 OK
+// response can contain either a success or an error. Design your application to
+// parse the contents of the response and handle it appropriately. If the copy is
+// successful, you receive a response with information about the copied object. If
+// the request is an HTTP 1.1 request, the response is chunk encoded. If it were
+// not, it would not contain the content-length, and you would need to read the
+// entire body. The copy request charge is based on the storage class and Region
+// that you specify for the destination object. For pricing information, see Amazon
+// S3 pricing (https://aws.amazon.com/s3/pricing/). Amazon S3 transfer acceleration
+// does not support cross-Region copies. If you request a cross-Region copy using a
+// transfer acceleration endpoint, you get a 400 Bad Request error. For more
+// information, see Transfer Acceleration
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+// Metadata When copying an object, you can preserve all metadata (default) or
+// specify new metadata. However, the ACL is not preserved and is set to private
+// for the user making the request. To override the default ACL setting, specify a
+// new ACL when generating a copy request. For more information, see Using ACLs
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html). To
+// specify whether you want the object metadata copied from the source object or
+// replaced with metadata provided in the request, you can optionally add the
+// x-amz-metadata-directive header. When you grant permissions, you can use the
+// s3:x-amz-metadata-directive condition key to enforce certain metadata behavior
+// when objects are uploaded. For more information, see Specifying Conditions in a
+// Policy
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html) in
+// the Amazon S3 Developer Guide. For a complete list of Amazon S3-specific
+// condition keys, see Actions, Resources, and Condition Keys for Amazon S3
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html).
+// x-amz-copy-source-if Headers To only copy an object under certain conditions,
+// such as whether the Etag matches or whether the object was modified before or
+// after a specified date, use the following request parameters:
+//
+//     *
+// x-amz-copy-source-if-match
+//
+//     * x-amz-copy-source-if-none-match
+//
+//     *
+// x-amz-copy-source-if-unmodified-since
+//
+//     *
+// x-amz-copy-source-if-modified-since
+//
+// If both the x-amz-copy-source-if-match and
+// x-amz-copy-source-if-unmodified-since headers are present in the request and
+// evaluate as follows, Amazon S3 returns 200 OK and copies the data:
+//
+//     *
+// x-amz-copy-source-if-match condition evaluates to true
+//
+//     *
+// x-amz-copy-source-if-unmodified-since condition evaluates to false
+//
+// If both the
+// x-amz-copy-source-if-none-match and x-amz-copy-source-if-modified-since headers
+// are present in the request and evaluate as follows, Amazon S3 returns the 412
+// Precondition Failed response code:
+//
+//     * x-amz-copy-source-if-none-match
+// condition evaluates to false
+//
+//     * x-amz-copy-source-if-modified-since
+// condition evaluates to true
+//
+// All headers with the x-amz- prefix, including
+// x-amz-copy-source, must be signed. Encryption The source object that you are
 // copying can be encrypted or unencrypted. The source object can be encrypted with
 // server-side encryption using AWS managed encryption keys (SSE-S3 or SSE-KMS) or
 // by using a customer-provided encryption key. With server-side encryption, Amazon
 // S3 encrypts your data as it writes it to disks in its data centers and decrypts
-// the data when you access it. </p> <p>You can optionally use the appropriate
+// the data when you access it. You can optionally use the appropriate
 // encryption-related headers to request server-side encryption for the target
 // object. You have the option to provide your own encryption key or use SSE-S3 or
 // SSE-KMS, regardless of the form of server-side encryption that was used to
 // encrypt the source object. You can even request encryption if the source object
-// was not encrypted. For more information about server-side encryption, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
-// Server-Side Encryption</a>.</p> <p> <b>Access Control List (ACL)-Specific
-// Request Headers</b> </p> <p>When copying an object, you can optionally use
-// headers to grant ACL-based permissions. By default, all objects are private.
-// Only the owner has full access control. When adding a new object, you can grant
-// permissions to individual AWS accounts or to predefined groups defined by Amazon
-// S3. These permissions are then added to the ACL on the object. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access
-// Control List (ACL) Overview</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html">Managing
-// ACLs Using the REST API</a>. </p> <p> <b>Storage Class Options</b> </p> <p>You
-// can use the <code>CopyObject</code> operation to change the storage class of an
-// object that is already stored in Amazon S3 using the <code>StorageClass</code>
-// parameter. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
-// Classes</a> in the <i>Amazon S3 Service Developer Guide</i>.</p> <p>
-// <b>Versioning</b> </p> <p>By default, <code>x-amz-copy-source</code> identifies
-// the current version of an object to copy. If the current version is a delete
-// marker, Amazon S3 behaves as if the object was deleted. To copy a different
-// version, use the <code>versionId</code> subresource.</p> <p>If you enable
-// versioning on the target bucket, Amazon S3 generates a unique version ID for the
-// object being copied. This version ID is different from the version ID of the
-// source object. Amazon S3 returns the version ID of the copied object in the
-// <code>x-amz-version-id</code> response header in the response.</p> <p>If you do
-// not enable versioning or suspend it on the target bucket, the version ID that
-// Amazon S3 generates is always null.</p> <p>If the source object's storage class
-// is GLACIER, you must restore a copy of this object before you can use it as a
-// source object for the copy operation. For more information, see .</p> <p>The
-// following operations are related to <code>CopyObject</code>:</p> <ul> <li> <p>
-// <a>PutObject</a> </p> </li> <li> <p> <a>GetObject</a> </p> </li> </ul> <p>For
-// more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html">Copying
-// Objects</a>.</p>
+// was not encrypted. For more information about server-side encryption, see Using
+// Server-Side Encryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
+// Access Control List (ACL)-Specific Request Headers
+//
+// When copying an object, you
+// can optionally use headers to grant ACL-based permissions. By default, all
+// objects are private. Only the owner has full access control. When adding a new
+// object, you can grant permissions to individual AWS accounts or to predefined
+// groups defined by Amazon S3. These permissions are then added to the ACL on the
+// object. For more information, see Access Control List (ACL) Overview
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
+// ACLs Using the REST API
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
+// Storage Class Options You can use the CopyObject operation to change the storage
+// class of an object that is already stored in Amazon S3 using the StorageClass
+// parameter. For more information, see Storage Classes
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
+// the Amazon S3 Service Developer Guide. Versioning By default, x-amz-copy-source
+// identifies the current version of an object to copy. If the current version is a
+// delete marker, Amazon S3 behaves as if the object was deleted. To copy a
+// different version, use the versionId subresource. If you enable versioning on
+// the target bucket, Amazon S3 generates a unique version ID for the object being
+// copied. This version ID is different from the version ID of the source object.
+// Amazon S3 returns the version ID of the copied object in the x-amz-version-id
+// response header in the response. If you do not enable versioning or suspend it
+// on the target bucket, the version ID that Amazon S3 generates is always null. If
+// the source object's storage class is GLACIER, you must restore a copy of this
+// object before you can use it as a source object for the copy operation. For more
+// information, see . The following operations are related to CopyObject:
+//
+//     *
+// PutObject
+//
+//     * GetObject
+//
+// For more information, see Copying Objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html).
 func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns ...func(*Options)) (*CopyObjectOutput, error) {
 	if params == nil {
 		params = &CopyObjectInput{}

@@ -19,26 +19,25 @@ import (
 // record(s), specify only one of the following: a player session ID, a game
 // session ID, or a player ID. You can filter this request by player session
 // status. Use the pagination parameters to retrieve results as a set of sequential
-// pages. If successful, a PlayerSession () object is returned for each session
+// pages. If successful, a PlayerSession object is returned for each session
 // matching the request. Available in Amazon GameLift Local.
 //
 //     *
-// CreatePlayerSession ()
+// CreatePlayerSession
 //
-//     * CreatePlayerSessions ()
+//     * CreatePlayerSessions
 //
-//     *
-// DescribePlayerSessions ()
+//     * DescribePlayerSessions
 //
-//     * Game session placements
+//
+// * Game session placements
+//
+//         * StartGameSessionPlacement
 //
 //         *
-// StartGameSessionPlacement ()
+// DescribeGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement ()
-//
-//
-// * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}

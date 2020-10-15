@@ -12,7 +12,7 @@ import (
 )
 
 // Trains or retrains an active solution. A solution is created using the
-// CreateSolution () operation and must be in the ACTIVE state before calling
+// CreateSolution operation and must be in the ACTIVE state before calling
 // CreateSolutionVersion. A new version of the solution is created every time you
 // call this operation. Status A solution version can be in one of the following
 // states:
@@ -20,24 +20,24 @@ import (
 //     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 // FAILED
 //
-// To get the status of the version, call DescribeSolutionVersion (). Wait
+// To get the status of the version, call DescribeSolutionVersion. Wait
 // until the status shows as ACTIVE before calling CreateCampaign. If the status
 // shows as CREATE FAILED, the response includes a failureReason key, which
 // describes why the job failed. Related APIs
 //
-//     * ListSolutionVersions ()
+//     * ListSolutionVersions
 //
 //     *
-// DescribeSolutionVersion ()
+// DescribeSolutionVersion
 //
-//     * ListSolutions ()
+//     * ListSolutions
 //
-//     * CreateSolution ()
+//     * CreateSolution
 //
+//     *
+// DescribeSolution
 //
-// * DescribeSolution ()
-//
-//     * DeleteSolution ()
+//     * DeleteSolution
 func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSolutionVersionInput, optFns ...func(*Options)) (*CreateSolutionVersionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionVersionInput{}
@@ -68,7 +68,7 @@ type CreateSolutionVersionInput struct {
 	// incrementally update your solution version instead of creating an entirely new
 	// one. The UPDATE option can only be used when you already have an active solution
 	// version created from the input solution using the FULL option and the input
-	// solution was trained with the native-recipe-hrnn-coldstart () recipe.
+	// solution was trained with the native-recipe-hrnn-coldstart recipe.
 	TrainingMode types.TrainingMode
 }
 

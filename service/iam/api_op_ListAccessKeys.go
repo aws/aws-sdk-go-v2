@@ -60,7 +60,7 @@ type ListAccessKeysInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful ListAccessKeys () request.
+// Contains the response to a successful ListAccessKeys request.
 type ListAccessKeysOutput struct {
 
 	// A list of objects containing metadata about the access keys.

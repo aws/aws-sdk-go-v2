@@ -71,7 +71,7 @@ type CreateInstanceInput struct {
 	// The default setting is INHERIT. To specify an agent
 	// version, you must use the complete version number, not the abbreviated number
 	// shown on the console. For a list of available agent version numbers, call
-	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2.
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
 	AgentVersion *string
 
 	// A custom AMI ID to be used to create the instance. The AMI should be based on
@@ -110,9 +110,9 @@ type CreateInstanceInput struct {
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
-	// () to run the update_dependencies stack command or by manually running yum
-	// (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using
-	// the default value of true to ensure that your instances have the latest security
+	// to run the update_dependencies stack command or by manually running yum (Amazon
+	// Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the
+	// default value of true to ensure that your instances have the latest security
 	// updates.
 	InstallUpdatesOnBoot *bool
 
@@ -143,8 +143,8 @@ type CreateInstanceInput struct {
 	// about the supported operating systems, see AWS OpsWorks Stacks Operating Systems
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html).
 	// The default option is the current Amazon Linux version. If you set this
-	// parameter to Custom, you must use the CreateInstance () action's AmiId parameter
-	// to specify the custom AMI that you want to use. Block device mappings are not
+	// parameter to Custom, you must use the CreateInstance action's AmiId parameter to
+	// specify the custom AMI that you want to use. Block device mappings are not
 	// supported if the value is Custom. For more information about supported operating
 	// systems, see Operating Systems
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html)For

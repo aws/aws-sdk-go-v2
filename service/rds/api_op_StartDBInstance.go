@@ -12,13 +12,13 @@ import (
 )
 
 // Starts an Amazon RDS DB instance that was stopped using the AWS console, the
-// stop-db-instance AWS CLI command, or the StopDBInstance action.  <p>For more
-// information, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html">
-// Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the
-// <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn't apply to
-// Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use
-// <code>StartDBCluster</code> instead. </p> </note>
+// stop-db-instance AWS CLI command, or the StopDBInstance action. For more
+// information, see
+//
+// Starting an Amazon RDS DB instance That Was Previously Stopped
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
+// in the Amazon RDS User Guide. This command doesn't apply to Aurora MySQL and
+// Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.
 func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInput, optFns ...func(*Options)) (*StartDBInstanceOutput, error) {
 	if params == nil {
 		params = &StartDBInstanceInput{}

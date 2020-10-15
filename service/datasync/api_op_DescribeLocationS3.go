@@ -50,9 +50,9 @@ type DescribeLocationS3Output struct {
 	LocationUri *string
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that is used to access an Amazon S3 bucket.  <p>For detailed information
-	// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
-	// DataSync User Guide</i>.</p>
+	// role that is used to access an Amazon S3 bucket. For detailed information about
+	// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
+	// User Guide.
 	S3Config *types.S3Config
 
 	// The Amazon S3 storage class that you chose to store your files in when this
@@ -60,7 +60,7 @@ type DescribeLocationS3Output struct {
 	// classes, see Amazon S3 Storage Classes
 	// (https://aws.amazon.com/s3/storage-classes/) in the Amazon Simple Storage
 	// Service Developer Guide. Some storage classes have behaviors that can affect
-	// your S3 storage cost. For detailed information, see using-storage-classes ().
+	// your S3 storage cost. For detailed information, see using-storage-classes.
 	S3StorageClass types.S3StorageClass
 
 	// Metadata pertaining to the operation's result.

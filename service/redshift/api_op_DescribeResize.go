@@ -14,8 +14,8 @@ import (
 // If no resize operation has ever been initiated for the specified cluster, a HTTP
 // 404 error is returned. If a resize operation was initiated and completed, the
 // status of the resize remains as SUCCEEDED until the next resize. A resize
-// operation can be requested using ModifyCluster () and specifying a different
-// number or type of nodes for the cluster.
+// operation can be requested using ModifyCluster and specifying a different number
+// or type of nodes for the cluster.
 func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput, optFns ...func(*Options)) (*DescribeResizeOutput, error) {
 	if params == nil {
 		params = &DescribeResizeInput{}

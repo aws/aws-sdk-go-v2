@@ -12,15 +12,17 @@ import (
 
 // Removes the entire tag set from the specified object. For more information about
 // managing object tags, see  Object Tagging
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).  <p>To
-// use this operation, you must have permission to perform the
-// <code>s3:DeleteObjectTagging</code> action.</p> <p>To delete tags of a specific
-// object version, add the <code>versionId</code> query parameter in the request.
-// You will need permission for the <code>s3:DeleteObjectVersionTagging</code>
-// action.</p> <p>The following operations are related to
-// <code>DeleteBucketMetricsConfiguration</code>:</p> <ul> <li> <p>
-// <a>PutObjectTagging</a> </p> </li> <li> <p> <a>GetObjectTagging</a> </p> </li>
-// </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). To use
+// this operation, you must have permission to perform the s3:DeleteObjectTagging
+// action. To delete tags of a specific object version, add the versionId query
+// parameter in the request. You will need permission for the
+// s3:DeleteObjectVersionTagging action. The following operations are related to
+// DeleteBucketMetricsConfiguration:
+//
+//     * PutObjectTagging
+//
+//     *
+// GetObjectTagging
 func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTaggingInput, optFns ...func(*Options)) (*DeleteObjectTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteObjectTaggingInput{}

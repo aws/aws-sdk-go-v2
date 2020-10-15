@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a new Facet () in a schema. Facet creation is allowed only in
-// development or applied schemas.
+// Creates a new Facet in a schema. Facet creation is allowed only in development
+// or applied schemas.
 func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optFns ...func(*Options)) (*CreateFacetOutput, error) {
 	if params == nil {
 		params = &CreateFacetInput{}
@@ -30,18 +30,18 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 
 type CreateFacetInput struct {
 
-	// The name of the Facet (), which is unique for a given schema.
+	// The name of the Facet, which is unique for a given schema.
 	//
 	// This member is required.
 	Name *string
 
-	// The schema ARN in which the new Facet () will be created. For more information,
-	// see arns ().
+	// The schema ARN in which the new Facet will be created. For more information, see
+	// arns.
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// The attributes that are associated with the Facet ().
+	// The attributes that are associated with the Facet.
 	Attributes []*types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static

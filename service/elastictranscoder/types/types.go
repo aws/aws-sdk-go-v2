@@ -41,31 +41,38 @@ type Artwork struct {
 	// and MaxHeight.
 	PaddingPolicy *string
 
-	// Specify one of the following values to control scaling of the output album art:
-	// <ul> <li> <p> <code>Fit:</code> Elastic Transcoder scales the output art so it
-	// matches the value that you specified in either <code>MaxWidth</code> or
-	// <code>MaxHeight</code> without exceeding the other value.</p> </li> <li> <p>
-	// <code>Fill:</code> Elastic Transcoder scales the output art so it matches the
-	// value that you specified in either <code>MaxWidth</code> or
-	// <code>MaxHeight</code> and matches or exceeds the other value. Elastic
-	// Transcoder centers the output art and then crops it in the dimension (if any)
-	// that exceeds the maximum value. </p> </li> <li> <p> <code>Stretch:</code>
-	// Elastic Transcoder stretches the output art to match the values that you
-	// specified for <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative
-	// proportions of the input art and the output art are different, the output art
-	// will be distorted.</p> </li> <li> <p> <code>Keep:</code> Elastic Transcoder does
-	// not scale the output art. If either dimension of the input art exceeds the
-	// values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>,
-	// Elastic Transcoder crops the output art.</p> </li> <li> <p>
-	// <code>ShrinkToFit:</code> Elastic Transcoder scales the output art down so that
-	// its dimensions match the values that you specified for at least one of
-	// <code>MaxWidth</code> and <code>MaxHeight</code> without exceeding either value.
-	// If you specify this option, Elastic Transcoder does not scale the art up.</p>
-	// </li> <li> <p> <code>ShrinkToFill</code> Elastic Transcoder scales the output
-	// art down so that its dimensions match the values that you specified for at least
-	// one of <code>MaxWidth</code> and <code>MaxHeight</code> without dropping below
-	// either value. If you specify this option, Elastic Transcoder does not scale the
-	// art up.</p> </li> </ul>
+	// Specify one of the following values to control scaling of the output album
+	// art:
+	//
+	//     * Fit: Elastic Transcoder scales the output art so it matches the
+	// value that you specified in either MaxWidth or MaxHeight without exceeding the
+	// other value.
+	//
+	//     * Fill: Elastic Transcoder scales the output art so it matches
+	// the value that you specified in either MaxWidth or MaxHeight and matches or
+	// exceeds the other value. Elastic Transcoder centers the output art and then
+	// crops it in the dimension (if any) that exceeds the maximum value.
+	//
+	//     *
+	// Stretch: Elastic Transcoder stretches the output art to match the values that
+	// you specified for MaxWidth and MaxHeight. If the relative proportions of the
+	// input art and the output art are different, the output art will be distorted.
+	//
+	//
+	// * Keep: Elastic Transcoder does not scale the output art. If either dimension of
+	// the input art exceeds the values that you specified for MaxWidth and MaxHeight,
+	// Elastic Transcoder crops the output art.
+	//
+	//     * ShrinkToFit: Elastic Transcoder
+	// scales the output art down so that its dimensions match the values that you
+	// specified for at least one of MaxWidth and MaxHeight without exceeding either
+	// value. If you specify this option, Elastic Transcoder does not scale the art
+	// up.
+	//
+	//     * ShrinkToFill Elastic Transcoder scales the output art down so that
+	// its dimensions match the values that you specified for at least one of MaxWidth
+	// and MaxHeight without dropping below either value. If you specify this option,
+	// Elastic Transcoder does not scale the art up.
 	SizingPolicy *string
 }
 
@@ -122,67 +129,109 @@ type AudioParameters struct {
 	// specify the number of tracks and their relation to the channels. If you do not
 	// specify an Audio:AudioPackingMode, Elastic Transcoder uses SingleTrack. The
 	// following values are valid: SingleTrack, OneChannelPerTrack, and
-	// OneChannelPerTrackWithMosTo8Tracks
-	//     <p>When you specify
-	// <code>SingleTrack</code>, Elastic Transcoder creates a single track for your
-	// output. The track can have up to eight channels. Use <code>SingleTrack</code>
-	// for all non-<code>mxf</code> containers.</p> <p>The outputs of
-	// <code>SingleTrack</code> for a specific channel value and inputs are as
-	// follows:</p> <ul> <li> <p> <code>0</code> <b> channels with any input:</b> Audio
-	// omitted from the output</p> </li> <li> <p> <code>1, 2, or auto </code>
-	// <b>channels with no audio input:</b> Audio omitted from the output</p> </li>
-	// <li> <p> <code>1 </code> <b>channel with any input with audio:</b> One track
-	// with one channel, downmixed if necessary</p> </li> <li> <p> <code>2 </code>
-	// <b>channels with one track with one channel:</b> One track with two identical
-	// channels</p> </li> <li> <p> <code>2 or auto </code> <b>channels with two tracks
-	// with one channel each:</b> One track with two channels</p> </li> <li> <p>
-	// <code>2 or auto </code> <b>channels with one track with two channels:</b> One
-	// track with two channels</p> </li> <li> <p> <code>2 </code> <b>channels with one
-	// track with multiple channels:</b> One track with two channels</p> </li> <li> <p>
-	// <code>auto </code> <b>channels with one track with one channel:</b> One track
-	// with one channel</p> </li> <li> <p> <code>auto </code> <b>channels with one
-	// track with multiple channels:</b> One track with multiple channels</p> </li>
-	// </ul> <p>When you specify <code>OneChannelPerTrack</code>, Elastic Transcoder
-	// creates a new track for every channel in your output. Your output can have up to
-	// eight single-channel tracks.</p> <p>The outputs of
-	// <code>OneChannelPerTrack</code> for a specific channel value and inputs are as
-	// follows:</p> <ul> <li> <p> <code>0 </code> <b>channels with any input:</b> Audio
-	// omitted from the output</p> </li> <li> <p> <code>1, 2, or auto </code>
-	// <b>channels with no audio input:</b> Audio omitted from the output</p> </li>
-	// <li> <p> <code>1 </code> <b>channel with any input with audio:</b> One track
-	// with one channel, downmixed if necessary</p> </li> <li> <p> <code>2 </code>
-	// <b>channels with one track with one channel:</b> Two tracks with one identical
-	// channel each</p> </li> <li> <p> <code>2 or auto </code> <b>channels with two
-	// tracks with one channel each:</b> Two tracks with one channel each</p> </li>
-	// <li> <p> <code>2 or auto </code> <b>channels with one track with two
-	// channels:</b> Two tracks with one channel each</p> </li> <li> <p> <code>2
-	// </code> <b>channels with one track with multiple channels:</b> Two tracks with
-	// one channel each</p> </li> <li> <p> <code>auto </code> <b>channels with one
-	// track with one channel:</b> One track with one channel</p> </li> <li> <p>
-	// <code>auto </code> <b>channels with one track with multiple channels:</b> Up to
-	// eight tracks with one channel each</p> </li> </ul> <p>When you specify
-	// <code>OneChannelPerTrackWithMosTo8Tracks</code>, Elastic Transcoder creates
-	// eight single-channel tracks for your output. All tracks that do not contain
-	// audio data from an input channel are MOS, or Mit Out Sound, tracks.</p> <p>The
-	// outputs of <code>OneChannelPerTrackWithMosTo8Tracks</code> for a specific
-	// channel value and inputs are as follows:</p> <ul> <li> <p> <code>0 </code>
-	// <b>channels with any input:</b> Audio omitted from the output</p> </li> <li> <p>
-	// <code>1, 2, or auto </code> <b>channels with no audio input:</b> Audio omitted
-	// from the output</p> </li> <li> <p> <code>1 </code> <b>channel with any input
-	// with audio:</b> One track with one channel, downmixed if necessary, plus six MOS
-	// tracks</p> </li> <li> <p> <code>2 </code> <b>channels with one track with one
-	// channel:</b> Two tracks with one identical channel each, plus six MOS tracks</p>
-	// </li> <li> <p> <code>2 or auto </code> <b>channels with two tracks with one
-	// channel each:</b> Two tracks with one channel each, plus six MOS tracks</p>
-	// </li> <li> <p> <code>2 or auto </code> <b>channels with one track with two
-	// channels:</b> Two tracks with one channel each, plus six MOS tracks</p> </li>
-	// <li> <p> <code>2 </code> <b>channels with one track with multiple channels:</b>
-	// Two tracks with one channel each, plus six MOS tracks</p> </li> <li> <p>
-	// <code>auto </code> <b>channels with one track with one channel:</b> One track
-	// with one channel, plus seven MOS tracks</p> </li> <li> <p> <code>auto </code>
-	// <b>channels with one track with multiple channels:</b> Up to eight tracks with
-	// one channel each, plus MOS tracks until there are eight tracks in all</p> </li>
-	// </ul>
+	// OneChannelPerTrackWithMosTo8Tracks When you specify SingleTrack, Elastic
+	// Transcoder creates a single track for your output. The track can have up to
+	// eight channels. Use SingleTrack for all non-mxf containers. The outputs of
+	// SingleTrack for a specific channel value and inputs are as follows:
+	//
+	//     * 0
+	// channels with any input: Audio omitted from the output
+	//
+	//     * 1, 2, or auto
+	// channels with no audio input: Audio omitted from the output
+	//
+	//     * 1  channel
+	// with any input with audio: One track with one channel, downmixed if necessary
+	//
+	//
+	// * 2  channels with one track with one channel: One track with two identical
+	// channels
+	//
+	//     * 2 or auto  channels with two tracks with one channel each: One
+	// track with two channels
+	//
+	//     * 2 or auto  channels with one track with two
+	// channels: One track with two channels
+	//
+	//     * 2  channels with one track with
+	// multiple channels: One track with two channels
+	//
+	//     * auto  channels with one
+	// track with one channel: One track with one channel
+	//
+	//     * auto  channels with
+	// one track with multiple channels: One track with multiple channels
+	//
+	// When you
+	// specify OneChannelPerTrack, Elastic Transcoder creates a new track for every
+	// channel in your output. Your output can have up to eight single-channel tracks.
+	// The outputs of OneChannelPerTrack for a specific channel value and inputs are as
+	// follows:
+	//
+	//     * 0  channels with any input: Audio omitted from the output
+	//
+	//     *
+	// 1, 2, or auto  channels with no audio input: Audio omitted from the output
+	//
+	//
+	// * 1  channel with any input with audio: One track with one channel, downmixed if
+	// necessary
+	//
+	//     * 2  channels with one track with one channel: Two tracks with
+	// one identical channel each
+	//
+	//     * 2 or auto  channels with two tracks with one
+	// channel each: Two tracks with one channel each
+	//
+	//     * 2 or auto  channels with
+	// one track with two channels: Two tracks with one channel each
+	//
+	//     * 2  channels
+	// with one track with multiple channels: Two tracks with one channel each
+	//
+	//     *
+	// auto  channels with one track with one channel: One track with one channel
+	//
+	//
+	// * auto  channels with one track with multiple channels: Up to eight tracks with
+	// one channel each
+	//
+	// When you specify OneChannelPerTrackWithMosTo8Tracks, Elastic
+	// Transcoder creates eight single-channel tracks for your output. All tracks that
+	// do not contain audio data from an input channel are MOS, or Mit Out Sound,
+	// tracks. The outputs of OneChannelPerTrackWithMosTo8Tracks for a specific channel
+	// value and inputs are as follows:
+	//
+	//     * 0  channels with any input: Audio
+	// omitted from the output
+	//
+	//     * 1, 2, or auto  channels with no audio input:
+	// Audio omitted from the output
+	//
+	//     * 1  channel with any input with audio: One
+	// track with one channel, downmixed if necessary, plus six MOS tracks
+	//
+	//     * 2
+	// channels with one track with one channel: Two tracks with one identical channel
+	// each, plus six MOS tracks
+	//
+	//     * 2 or auto  channels with two tracks with one
+	// channel each: Two tracks with one channel each, plus six MOS tracks
+	//
+	//     * 2 or
+	// auto  channels with one track with two channels: Two tracks with one channel
+	// each, plus six MOS tracks
+	//
+	//     * 2  channels with one track with multiple
+	// channels: Two tracks with one channel each, plus six MOS tracks
+	//
+	//     * auto
+	// channels with one track with one channel: One track with one channel, plus seven
+	// MOS tracks
+	//
+	//     * auto  channels with one track with multiple channels: Up to
+	// eight tracks with one channel each, plus MOS tracks until there are eight tracks
+	// in all
 	AudioPackingMode *string
 
 	// The bit rate of the audio stream in the output file, in kilobits/second. Enter
@@ -195,16 +244,24 @@ type AudioParameters struct {
 	// speaker, and the other channel to the right speaker. The output channels are
 	// organized into tracks. If you want Elastic Transcoder to automatically detect
 	// the number of audio channels in the input file and use that value for the output
-	// file, select auto.  <p>The output of a specific channel value and inputs are as
-	// follows:</p> <ul> <li> <p> <code>auto</code> <b> channel specified, with any
-	// input:</b> Pass through up to eight input channels.</p> </li> <li> <p>
-	// <code>0</code> <b> channels specified, with any input:</b> Audio omitted from
-	// the output.</p> </li> <li> <p> <code>1</code> <b> channel specified, with at
-	// least one input channel:</b> Mono sound.</p> </li> <li> <p> <code>2</code> <b>
-	// channels specified, with any input:</b> Two identical mono channels or stereo.
-	// For more information about tracks, see <code>Audio:AudioPackingMode.</code> </p>
-	// </li> </ul> <p> For more information about how Elastic Transcoder organizes
-	// channels and tracks, see <code>Audio:AudioPackingMode</code>.</p>
+	// file, select auto. The output of a specific channel value and inputs are as
+	// follows:
+	//
+	//     * auto channel specified, with any input: Pass through up to eight
+	// input channels.
+	//
+	//     * 0 channels specified, with any input: Audio omitted from
+	// the output.
+	//
+	//     * 1 channel specified, with at least one input channel: Mono
+	// sound.
+	//
+	//     * 2 channels specified, with any input: Two identical mono channels
+	// or stereo. For more information about tracks, see Audio:AudioPackingMode.
+	//
+	// For
+	// more information about how Elastic Transcoder organizes channels and tracks, see
+	// Audio:AudioPackingMode.
 	Channels *string
 
 	// The audio codec for the output file. Valid values include aac, flac, mp2, mp3,
@@ -439,14 +496,13 @@ type CreateJobOutput struct {
 	// seconds. For HLSv3 format playlists, each media segment is stored in a separate
 	// .ts file. For HLSv4 and Smooth playlists, all media segments for an output are
 	// stored in a single file. Each segment is approximately the length of the
-	// SegmentDuration, though individual segments might be shorter or longer.  <p>The
+	// SegmentDuration, though individual segments might be shorter or longer. The
 	// range of valid values is 1 to 60 seconds. If the duration of the video is not
-	// evenly divisible by <code>SegmentDuration</code>, the duration of the last
-	// segment is the remainder of total length/SegmentDuration.</p> <p>Elastic
-	// Transcoder creates an output-specific playlist for each output <code>HLS</code>
-	// output that you specify in OutputKeys. To add an output to the master playlist
-	// for this job, include it in the <code>OutputKeys</code> of the associated
-	// playlist.</p>
+	// evenly divisible by SegmentDuration, the duration of the last segment is the
+	// remainder of total length/SegmentDuration. Elastic Transcoder creates an
+	// output-specific playlist for each output HLS output that you specify in
+	// OutputKeys. To add an output to the master playlist for this job, include it in
+	// the OutputKeys of the associated playlist.
 	SegmentDuration *string
 
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
@@ -532,15 +588,14 @@ type CreateJobPlaylist struct {
 	// _iframe.m3u8: OutputKeyPrefixOutputs:Key_v4.m3u8
 	// OutputKeyPrefixOutputs:Key_iframe.m3u8 OutputKeyPrefixOutputs:Key.ts
 	//
-	//
-	// <p>Elastic Transcoder automatically appends the relevant file extension to the
-	// file name. If you include a file extension in Output Key, the file name will
-	// have two extensions.</p> <p>If you include more than one output in a playlist,
-	// any segment duration settings, clip settings, or caption settings must be the
-	// same for all outputs in the playlist. For <code>Smooth</code> playlists, the
-	// <code>Audio:Profile</code>, <code>Video:Profile</code>, and
-	// <code>Video:FrameRate</code> to <code>Video:KeyframesMaxDist</code> ratio must
-	// be the same for all outputs.</p>
+	// Elastic
+	// Transcoder automatically appends the relevant file extension to the file name.
+	// If you include a file extension in Output Key, the file name will have two
+	// extensions. If you include more than one output in a playlist, any segment
+	// duration settings, clip settings, or caption settings must be the same for all
+	// outputs in the playlist. For Smooth playlists, the Audio:Profile, Video:Profile,
+	// and Video:FrameRate to Video:KeyframesMaxDist ratio must be the same for all
+	// outputs.
 	OutputKeys []*string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
@@ -793,14 +848,21 @@ type JobAlbumArt struct {
 	Artwork []*Artwork
 
 	// A policy that determines how Elastic Transcoder handles the existence of
-	// multiple album artwork files.  <ul> <li> <p> <code>Replace:</code> The specified
-	// album art replaces any existing album art.</p> </li> <li> <p>
-	// <code>Prepend:</code> The specified album art is placed in front of any existing
-	// album art.</p> </li> <li> <p> <code>Append:</code> The specified album art is
-	// placed after any existing album art.</p> </li> <li> <p> <code>Fallback:</code>
-	// If the original input file contains artwork, Elastic Transcoder uses that
-	// artwork for the output. If the original input does not contain artwork, Elastic
-	// Transcoder uses the specified album art file.</p> </li> </ul>
+	// multiple album artwork files.
+	//
+	//     * Replace: The specified album art replaces
+	// any existing album art.
+	//
+	//     * Prepend: The specified album art is placed in
+	// front of any existing album art.
+	//
+	//     * Append: The specified album art is
+	// placed after any existing album art.
+	//
+	//     * Fallback: If the original input file
+	// contains artwork, Elastic Transcoder uses that artwork for the output. If the
+	// original input does not contain artwork, Elastic Transcoder uses the specified
+	// album art file.
 	MergePolicy *string
 }
 
@@ -997,14 +1059,13 @@ type JobOutput struct {
 	// seconds. For HLSv3 format playlists, each media segment is stored in a separate
 	// .ts file. For HLSv4, MPEG-DASH, and Smooth playlists, all media segments for an
 	// output are stored in a single file. Each segment is approximately the length of
-	// the SegmentDuration, though individual segments might be shorter or longer.
-	// <p>The range of valid values is 1 to 60 seconds. If the duration of the video is
-	// not evenly divisible by <code>SegmentDuration</code>, the duration of the last
-	// segment is the remainder of total length/SegmentDuration.</p> <p>Elastic
-	// Transcoder creates an output-specific playlist for each output <code>HLS</code>
-	// output that you specify in OutputKeys. To add an output to the master playlist
-	// for this job, include it in the <code>OutputKeys</code> of the associated
-	// playlist.</p>
+	// the SegmentDuration, though individual segments might be shorter or longer. The
+	// range of valid values is 1 to 60 seconds. If the duration of the video is not
+	// evenly divisible by SegmentDuration, the duration of the last segment is the
+	// remainder of total length/SegmentDuration. Elastic Transcoder creates an
+	// output-specific playlist for each output HLS output that you specify in
+	// OutputKeys. To add an output to the master playlist for this job, include it in
+	// the OutputKeys of the associated playlist.
 	SegmentDuration *string
 
 	// The status of one output in a job. If you specified only one output for the job,
@@ -1435,15 +1496,16 @@ type Playlist struct {
 	// _iframe.m3u8: OutputKeyPrefixOutputs:Key_v4.m3u8
 	// OutputKeyPrefixOutputs:Key_iframe.m3u8 OutputKeyPrefixOutputs:Key.ts
 	//
+	// Elastic
+	// Transcoder automatically appends the relevant file extension to the file name.
+	// If you include a file extension in Output Key, the file name will have two
+	// extensions.
 	//
-	// <p>Elastic Transcoder automatically appends the relevant file extension to the
-	// file name. If you include a file extension in Output Key, the file name will
-	// have two extensions.</p> <p>If you include more than one output in a playlist,
-	// any segment duration settings, clip settings, or caption settings must be the
-	// same for all outputs in the playlist. For <code>Smooth</code> playlists, the
-	// <code>Audio:Profile</code>, <code>Video:Profile</code>, and
-	// <code>Video:FrameRate</code> to <code>Video:KeyframesMaxDist</code> ratio must
-	// be the same for all outputs.</p>
+	// If you include more than one output in a playlist, any segment
+	// duration settings, clip settings, or caption settings must be the same for all
+	// outputs in the playlist. For Smooth playlists, the Audio:Profile, Video:Profile,
+	// and Video:FrameRate to Video:KeyframesMaxDist ratio must be the same for all
+	// outputs.
 	OutputKeys []*string
 
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
@@ -1697,9 +1759,9 @@ type PresetWatermark struct {
 	// beyond the top or bottom border and Elastic Transcoder has not added black bars,
 	// the watermark is cropped. If Elastic Transcoder has added black bars, the
 	// watermark extends into the black bars. If the watermark extends beyond the black
-	// bars, it is cropped.  <p>Use the value of <code>Target</code> to specify whether
-	// you want Elastic Transcoder to include the black bars that are added by Elastic
-	// Transcoder, if any, in the offset calculation.</p>
+	// bars, it is cropped. Use the value of Target to specify whether you want Elastic
+	// Transcoder to include the black bars that are added by Elastic Transcoder, if
+	// any, in the offset calculation.
 	VerticalOffset *string
 }
 
@@ -1746,31 +1808,39 @@ type Thumbnails struct {
 	// in the Video:Resolution object.
 	Resolution *string
 
-	// Specify one of the following values to control scaling of thumbnails:  <ul> <li>
-	// <p> <code>Fit</code>: Elastic Transcoder scales thumbnails so they match the
-	// value that you specified in thumbnail MaxWidth or MaxHeight settings without
-	// exceeding the other value. </p> </li> <li> <p> <code>Fill</code>: Elastic
-	// Transcoder scales thumbnails so they match the value that you specified in
-	// thumbnail <code>MaxWidth</code> or <code>MaxHeight</code> settings and matches
+	// Specify one of the following values to control scaling of thumbnails:
+	//
+	//     *
+	// Fit: Elastic Transcoder scales thumbnails so they match the value that you
+	// specified in thumbnail MaxWidth or MaxHeight settings without exceeding the
+	// other value.
+	//
+	//     * Fill: Elastic Transcoder scales thumbnails so they match the
+	// value that you specified in thumbnail MaxWidth or MaxHeight settings and matches
 	// or exceeds the other value. Elastic Transcoder centers the image in thumbnails
-	// and then crops in the dimension (if any) that exceeds the maximum value.</p>
-	// </li> <li> <p> <code>Stretch</code>: Elastic Transcoder stretches thumbnails to
-	// match the values that you specified for thumbnail <code>MaxWidth</code> and
-	// <code>MaxHeight</code> settings. If the relative proportions of the input video
-	// and thumbnails are different, the thumbnails will be distorted.</p> </li> <li>
-	// <p> <code>Keep</code>: Elastic Transcoder does not scale thumbnails. If either
-	// dimension of the input video exceeds the values that you specified for thumbnail
-	// <code>MaxWidth</code> and <code>MaxHeight</code> settings, Elastic Transcoder
-	// crops the thumbnails.</p> </li> <li> <p> <code>ShrinkToFit</code>: Elastic
-	// Transcoder scales thumbnails down so that their dimensions match the values that
-	// you specified for at least one of thumbnail <code>MaxWidth</code> and
-	// <code>MaxHeight</code> without exceeding either value. If you specify this
-	// option, Elastic Transcoder does not scale thumbnails up.</p> </li> <li> <p>
-	// <code>ShrinkToFill</code>: Elastic Transcoder scales thumbnails down so that
-	// their dimensions match the values that you specified for at least one of
-	// <code>MaxWidth</code> and <code>MaxHeight</code> without dropping below either
-	// value. If you specify this option, Elastic Transcoder does not scale thumbnails
-	// up.</p> </li> </ul>
+	// and then crops in the dimension (if any) that exceeds the maximum value.
+	//
+	//     *
+	// Stretch: Elastic Transcoder stretches thumbnails to match the values that you
+	// specified for thumbnail MaxWidth and MaxHeight settings. If the relative
+	// proportions of the input video and thumbnails are different, the thumbnails will
+	// be distorted.
+	//
+	//     * Keep: Elastic Transcoder does not scale thumbnails. If
+	// either dimension of the input video exceeds the values that you specified for
+	// thumbnail MaxWidth and MaxHeight settings, Elastic Transcoder crops the
+	// thumbnails.
+	//
+	//     * ShrinkToFit: Elastic Transcoder scales thumbnails down so
+	// that their dimensions match the values that you specified for at least one of
+	// thumbnail MaxWidth and MaxHeight without exceeding either value. If you specify
+	// this option, Elastic Transcoder does not scale thumbnails up.
+	//
+	//     *
+	// ShrinkToFill: Elastic Transcoder scales thumbnails down so that their dimensions
+	// match the values that you specified for at least one of MaxWidth and MaxHeight
+	// without dropping below either value. If you specify this option, Elastic
+	// Transcoder does not scale thumbnails up.
 	SizingPolicy *string
 }
 
@@ -1967,10 +2037,9 @@ type VideoParameters struct {
 	// sampling pattern for the chroma (color) channels of the output video. Valid
 	// values include yuv420p and yuv422p. yuv420p samples the chroma information of
 	// every other horizontal and every other vertical line, yuv422p samples the color
-	// information of every horizontal line and every other vertical line.  <p>
-	// <b>LoopCount (Gif Only)</b> </p> <p>The number of times you want the output gif
-	// to loop. Valid values include <code>Infinite</code> and integers between
-	// <code>0</code> and <code>100</code>, inclusive.</p>
+	// information of every horizontal line and every other vertical line. LoopCount
+	// (Gif Only) The number of times you want the output gif to loop. Valid values
+	// include Infinite and integers between 0 and 100, inclusive.
 	CodecOptions map[string]*string
 
 	// The value that Elastic Transcoder adds to the metadata in the output file.
@@ -2143,30 +2212,37 @@ type VideoParameters struct {
 	Resolution *string
 
 	// Specify one of the following values to control scaling of the output video:
-	// <ul> <li> <p> <code>Fit</code>: Elastic Transcoder scales the output video so it
-	// matches the value that you specified in either <code>MaxWidth</code> or
-	// <code>MaxHeight</code> without exceeding the other value.</p> </li> <li> <p>
-	// <code>Fill</code>: Elastic Transcoder scales the output video so it matches the
-	// value that you specified in either <code>MaxWidth</code> or
-	// <code>MaxHeight</code> and matches or exceeds the other value. Elastic
-	// Transcoder centers the output video and then crops it in the dimension (if any)
-	// that exceeds the maximum value.</p> </li> <li> <p> <code>Stretch</code>: Elastic
-	// Transcoder stretches the output video to match the values that you specified for
-	// <code>MaxWidth</code> and <code>MaxHeight</code>. If the relative proportions of
-	// the input video and the output video are different, the output video will be
-	// distorted.</p> </li> <li> <p> <code>Keep</code>: Elastic Transcoder does not
-	// scale the output video. If either dimension of the input video exceeds the
-	// values that you specified for <code>MaxWidth</code> and <code>MaxHeight</code>,
-	// Elastic Transcoder crops the output video.</p> </li> <li> <p>
-	// <code>ShrinkToFit</code>: Elastic Transcoder scales the output video down so
-	// that its dimensions match the values that you specified for at least one of
-	// <code>MaxWidth</code> and <code>MaxHeight</code> without exceeding either value.
-	// If you specify this option, Elastic Transcoder does not scale the video up.</p>
-	// </li> <li> <p> <code>ShrinkToFill</code>: Elastic Transcoder scales the output
+	//
+	//
+	// * Fit: Elastic Transcoder scales the output video so it matches the value that
+	// you specified in either MaxWidth or MaxHeight without exceeding the other
+	// value.
+	//
+	//     * Fill: Elastic Transcoder scales the output video so it matches the
+	// value that you specified in either MaxWidth or MaxHeight and matches or exceeds
+	// the other value. Elastic Transcoder centers the output video and then crops it
+	// in the dimension (if any) that exceeds the maximum value.
+	//
+	//     * Stretch:
+	// Elastic Transcoder stretches the output video to match the values that you
+	// specified for MaxWidth and MaxHeight. If the relative proportions of the input
+	// video and the output video are different, the output video will be distorted.
+	//
+	//
+	// * Keep: Elastic Transcoder does not scale the output video. If either dimension
+	// of the input video exceeds the values that you specified for MaxWidth and
+	// MaxHeight, Elastic Transcoder crops the output video.
+	//
+	//     * ShrinkToFit:
+	// Elastic Transcoder scales the output video down so that its dimensions match the
+	// values that you specified for at least one of MaxWidth and MaxHeight without
+	// exceeding either value. If you specify this option, Elastic Transcoder does not
+	// scale the video up.
+	//
+	//     * ShrinkToFill: Elastic Transcoder scales the output
 	// video down so that its dimensions match the values that you specified for at
-	// least one of <code>MaxWidth</code> and <code>MaxHeight</code> without dropping
-	// below either value. If you specify this option, Elastic Transcoder does not
-	// scale the video up.</p> </li> </ul>
+	// least one of MaxWidth and MaxHeight without dropping below either value. If you
+	// specify this option, Elastic Transcoder does not scale the video up.
 	SizingPolicy *string
 
 	// Settings for the size, location, and opacity of graphics that you want Elastic

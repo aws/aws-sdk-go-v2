@@ -10,7 +10,7 @@ import (
 // Organizations entity last attempted to access an AWS service. A principal can be
 // an IAM user, an IAM role, or the AWS account root user within the reported
 // Organizations entity. This data type is a response element in the
-// GetOrganizationsAccessReport () operation.
+// GetOrganizationsAccessReport operation.
 type AccessDetail struct {
 
 	// The name of the service in which access was attempted.
@@ -60,9 +60,9 @@ type AccessDetail struct {
 }
 
 // Contains information about an AWS access key. This data type is used as a
-// response element in the CreateAccessKey () and ListAccessKeys () operations. The
-// SecretAccessKey value is returned only in response to CreateAccessKey (). You
-// can get a secret access key only when you first create an access key; you cannot
+// response element in the CreateAccessKey and ListAccessKeys operations. The
+// SecretAccessKey value is returned only in response to CreateAccessKey. You can
+// get a secret access key only when you first create an access key; you cannot
 // recover the secret access key later. If you lose a secret access key, you must
 // create a new access key.
 type AccessKey struct {
@@ -94,7 +94,7 @@ type AccessKey struct {
 
 // Contains information about the last time an AWS access key was used since IAM
 // began tracking this information on April 22, 2015. This data type is used as a
-// response element in the GetAccessKeyLastUsed () operation.
+// response element in the GetAccessKeyLastUsed operation.
 type AccessKeyLastUsed struct {
 
 	// The date and time, in ISO 8601 date-time format
@@ -149,7 +149,7 @@ type AccessKeyLastUsed struct {
 }
 
 // Contains information about an AWS access key, without its secret key. This data
-// type is used as a response element in the ListAccessKeys () operation.
+// type is used as a response element in the ListAccessKeys operation.
 type AccessKeyMetadata struct {
 
 	// The ID for this access key.
@@ -185,9 +185,9 @@ type AttachedPermissionsBoundary struct {
 
 // Contains information about an attached policy. An attached policy is a managed
 // policy that has been attached to a user, group, or role. This data type is used
-// as a response element in the ListAttachedGroupPolicies (),
-// ListAttachedRolePolicies (), ListAttachedUserPolicies (), and
-// GetAccountAuthorizationDetails () operations. For more information about managed
+// as a response element in the ListAttachedGroupPolicies,
+// ListAttachedRolePolicies, ListAttachedUserPolicies, and
+// GetAccountAuthorizationDetails operations. For more information about managed
 // policies, refer to Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
@@ -208,7 +208,7 @@ type AttachedPolicy struct {
 // key and specifies the value (or values, if the context key supports multiple
 // values) to use in the simulation. This information is used when evaluating the
 // Condition elements of the input policies. This data type is used as an input
-// parameter to SimulateCustomPolicy () and SimulatePrincipalPolicy ().
+// parameter to SimulateCustomPolicy and SimulatePrincipalPolicy.
 type ContextEntry struct {
 
 	// The full name of a condition context key, including the service prefix. For
@@ -226,7 +226,7 @@ type ContextEntry struct {
 }
 
 // The reason that the service-linked role deletion failed. This data type is used
-// as a response element in the GetServiceLinkedRoleDeletionStatus () operation.
+// as a response element in the GetServiceLinkedRoleDeletionStatus operation.
 type DeletionTaskFailureReasonType struct {
 
 	// A short description of the reason that the service-linked role deletion failed.
@@ -243,7 +243,7 @@ type DeletionTaskFailureReasonType struct {
 
 // An object that contains details about when the IAM entities (users or roles)
 // were last used in an attempt to access the specified AWS service. This data type
-// is a response element in the GetServiceLastAccessedDetailsWithEntities ()
+// is a response element in the GetServiceLastAccessedDetailsWithEntities
 // operation.
 type EntityDetails struct {
 
@@ -261,7 +261,7 @@ type EntityDetails struct {
 }
 
 // Contains details about the specified entity (user or role). This data type is an
-// element of the EntityDetails () object.
+// element of the EntityDetails object.
 type EntityInfo struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
@@ -296,9 +296,9 @@ type EntityInfo struct {
 }
 
 // Contains information about the reason that the operation failed. This data type
-// is used as a response element in the GetOrganizationsAccessReport (),
-// GetServiceLastAccessedDetails (), and GetServiceLastAccessedDetailsWithEntities
-// () operations.
+// is used as a response element in the GetOrganizationsAccessReport,
+// GetServiceLastAccessedDetails, and GetServiceLastAccessedDetailsWithEntities
+// operations.
 type ErrorDetails struct {
 
 	// The error code associated with the operation failure.
@@ -313,7 +313,7 @@ type ErrorDetails struct {
 }
 
 // Contains the results of a simulation. This data type is used by the return
-// parameter of SimulateCustomPolicy () and SimulatePrincipalPolicy ().
+// parameter of SimulateCustomPolicy and SimulatePrincipalPolicy.
 type EvaluationResult struct {
 
 	// The name of the API operation tested on the indicated resource.
@@ -359,7 +359,7 @@ type EvaluationResult struct {
 	// parameter blank. If you include a list of resources, then any missing context
 	// values are instead included under the ResourceSpecificResults section. To
 	// discover the context keys used by a set of policies, you can call
-	// GetContextKeysForCustomPolicy () or GetContextKeysForPrincipalPolicy ().
+	// GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
 	MissingContextValues []*string
 
 	// A structure that details how Organizations and its service control policies
@@ -379,12 +379,12 @@ type EvaluationResult struct {
 // Contains information about an IAM group entity. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateGroup ()
+//     * CreateGroup
 //
 //     *
-// GetGroup ()
+// GetGroup
 //
-//     * ListGroups ()
+//     * ListGroups
 type Group struct {
 
 	// The Amazon Resource Name (ARN) specifying the group. For more information about
@@ -424,7 +424,7 @@ type Group struct {
 
 // Contains information about an IAM group, including all of the group's policies.
 // This data type is used as a response element in the
-// GetAccountAuthorizationDetails () operation.
+// GetAccountAuthorizationDetails operation.
 type GroupDetail struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
@@ -462,15 +462,15 @@ type GroupDetail struct {
 // Contains information about an instance profile. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateInstanceProfile ()
+//     * CreateInstanceProfile
 //
 //
-// * GetInstanceProfile ()
+// * GetInstanceProfile
 //
-//     * ListInstanceProfiles ()
+//     * ListInstanceProfiles
 //
 //     *
-// ListInstanceProfilesForRole ()
+// ListInstanceProfilesForRole
 type InstanceProfile struct {
 
 	// The Amazon Resource Name (ARN) specifying the instance profile. For more
@@ -515,7 +515,7 @@ type InstanceProfile struct {
 
 // Contains details about the permissions policies that are attached to the
 // specified identity (user, group, or role). This data type is used as a response
-// element in the ListPoliciesGrantingServiceAccess () operation.
+// element in the ListPoliciesGrantingServiceAccess operation.
 type ListPoliciesGrantingServiceAccessEntry struct {
 
 	// The PoliciesGrantingServiceAccess object that contains details about the policy.
@@ -534,7 +534,7 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 }
 
 // Contains the user name and password create date for a user. This data type is
-// used as a response element in the CreateLoginProfile () and GetLoginProfile ()
+// used as a response element in the CreateLoginProfile and GetLoginProfile
 // operations.
 type LoginProfile struct {
 
@@ -556,7 +556,7 @@ type LoginProfile struct {
 // Contains information about a managed policy, including the policy's ARN,
 // versions, and the number of principal entities (users, groups, and roles) that
 // the policy is attached to. This data type is used as a response element in the
-// GetAccountAuthorizationDetails () operation. For more information about managed
+// GetAccountAuthorizationDetails operation. For more information about managed
 // policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
@@ -623,7 +623,7 @@ type ManagedPolicyDetail struct {
 }
 
 // Contains information about an MFA device. This data type is used as a response
-// element in the ListMFADevices () operation.
+// element in the ListMFADevices operation.
 type MFADevice struct {
 
 	// The date when the MFA device was enabled for the user.
@@ -664,7 +664,7 @@ type OrganizationsDecisionDetail struct {
 }
 
 // Contains information about the account password policy. This data type is used
-// as a response element in the GetAccountPasswordPolicy () operation.
+// as a response element in the GetAccountPasswordPolicy operation.
 type PasswordPolicy struct {
 
 	// Specifies whether IAM users are allowed to change their own password.
@@ -718,9 +718,9 @@ type PermissionsBoundaryDecisionDetail struct {
 }
 
 // Contains information about a managed policy. This data type is used as a
-// response element in the CreatePolicy (), GetPolicy (), and ListPolicies ()
-// operations. For more information about managed policies, refer to Managed
-// Policies and Inline Policies
+// response element in the CreatePolicy, GetPolicy, and ListPolicies operations.
+// For more information about managed policies, refer to Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type Policy struct {
@@ -744,8 +744,8 @@ type Policy struct {
 	DefaultVersionId *string
 
 	// A friendly description of the policy. This element is included in the response
-	// to the GetPolicy () operation. It is not included in the response to the
-	// ListPolicies () operation.
+	// to the GetPolicy operation. It is not included in the response to the
+	// ListPolicies operation.
 	Description *string
 
 	// Specifies whether the policy can be attached to an IAM user, group, or role.
@@ -781,7 +781,7 @@ type Policy struct {
 }
 
 // Contains information about an IAM policy, including the policy document. This
-// data type is used as a response element in the GetAccountAuthorizationDetails ()
+// data type is used as a response element in the GetAccountAuthorizationDetails
 // operation.
 type PolicyDetail struct {
 
@@ -794,7 +794,7 @@ type PolicyDetail struct {
 
 // Contains details about the permissions policies that are attached to the
 // specified identity (user, group, or role). This data type is an element of the
-// ListPoliciesGrantingServiceAccessEntry () object.
+// ListPoliciesGrantingServiceAccessEntry object.
 type PolicyGrantingServiceAccess struct {
 
 	// The policy name.
@@ -834,9 +834,9 @@ type PolicyGrantingServiceAccess struct {
 }
 
 // Contains information about a group that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy ()
-// operation. For more information about managed policies, refer to Managed
-// Policies and Inline Policies
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyGroup struct {
@@ -852,9 +852,9 @@ type PolicyGroup struct {
 }
 
 // Contains information about a role that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy ()
-// operation. For more information about managed policies, refer to Managed
-// Policies and Inline Policies
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyRole struct {
@@ -870,9 +870,9 @@ type PolicyRole struct {
 }
 
 // Contains information about a user that a managed policy is attached to. This
-// data type is used as a response element in the ListEntitiesForPolicy ()
-// operation. For more information about managed policies, refer to Managed
-// Policies and Inline Policies
+// data type is used as a response element in the ListEntitiesForPolicy operation.
+// For more information about managed policies, refer to Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 type PolicyUser struct {
@@ -888,9 +888,9 @@ type PolicyUser struct {
 }
 
 // Contains information about a version of a managed policy. This data type is used
-// as a response element in the CreatePolicyVersion (), GetPolicyVersion (),
-// ListPolicyVersions (), and GetAccountAuthorizationDetails () operations. For
-// more information about managed policies, refer to Managed Policies and Inline
+// as a response element in the CreatePolicyVersion, GetPolicyVersion,
+// ListPolicyVersions, and GetAccountAuthorizationDetails operations. For more
+// information about managed policies, refer to Managed Policies and Inline
 // Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
@@ -901,8 +901,8 @@ type PolicyVersion struct {
 	CreateDate *time.Time
 
 	// The policy document. The policy document is returned in the response to the
-	// GetPolicyVersion () and GetAccountAuthorizationDetails () operations. It is not
-	// returned in the response to the CreatePolicyVersion () or ListPolicyVersions ()
+	// GetPolicyVersion and GetAccountAuthorizationDetails operations. It is not
+	// returned in the response to the CreatePolicyVersion or ListPolicyVersions
 	// operations. The policy document returned in this structure is URL-encoded
 	// compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a URL
 	// decoding method to convert the policy back to plain JSON text. For example, if
@@ -920,7 +920,7 @@ type PolicyVersion struct {
 }
 
 // Contains the row and column of a location of a Statement element in a policy
-// document. This data type is used as a member of the Statement () type.
+// document. This data type is used as a member of the Statement type.
 type Position struct {
 
 	// The column in the line containing the specified position in the document.
@@ -931,8 +931,7 @@ type Position struct {
 }
 
 // Contains the result of the simulation of a single API operation call on a single
-// resource. This data type is used by a member of the EvaluationResult () data
-// type.
+// resource. This data type is used by a member of the EvaluationResult data type.
 type ResourceSpecificResult struct {
 
 	// The result of the simulation of the simulated API operation on the resource
@@ -965,8 +964,8 @@ type ResourceSpecificResult struct {
 	// specify individual resources, by setting ResourceArns to "*" or by not including
 	// the ResourceArns parameter, then any missing context values are instead included
 	// under the EvaluationResults section. To discover the context keys used by a set
-	// of policies, you can call GetContextKeysForCustomPolicy () or
-	// GetContextKeysForPrincipalPolicy ().
+	// of policies, you can call GetContextKeysForCustomPolicy or
+	// GetContextKeysForPrincipalPolicy.
 	MissingContextValues []*string
 
 	// Contains information about the effect that a permissions boundary has on a
@@ -1049,7 +1048,7 @@ type Role struct {
 
 // Contains information about an IAM role, including all of the role's policies.
 // This data type is used as a response element in the
-// GetAccountAuthorizationDetails () operation.
+// GetAccountAuthorizationDetails operation.
 type RoleDetail struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
@@ -1123,7 +1122,7 @@ type RoleDetail struct {
 // Where Data Is Tracked
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period)
 // in the IAM User Guide. This data type is returned as a response element in the
-// GetRole () and GetAccountAuthorizationDetails () operations.
+// GetRole and GetAccountAuthorizationDetails operations.
 type RoleLastUsed struct {
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
@@ -1140,7 +1139,7 @@ type RoleLastUsed struct {
 
 // An object that contains details about how a service-linked role is used, if that
 // information is returned by the service. This data type is used as a response
-// element in the GetServiceLinkedRoleDeletionStatus () operation.
+// element in the GetServiceLinkedRoleDeletionStatus operation.
 type RoleUsageType struct {
 
 	// The name of the Region where the service-linked role is being used.
@@ -1164,7 +1163,7 @@ type SAMLProviderListEntry struct {
 }
 
 // Contains information about a server certificate. This data type is used as a
-// response element in the GetServerCertificate () operation.
+// response element in the GetServerCertificate operation.
 type ServerCertificate struct {
 
 	// The contents of the public key certificate.
@@ -1184,7 +1183,7 @@ type ServerCertificate struct {
 
 // Contains information about a server certificate without its certificate body,
 // certificate chain, and private key. This data type is used as a response element
-// in the UploadServerCertificate () and ListServerCertificates () operations.
+// in the UploadServerCertificate and ListServerCertificates operations.
 type ServerCertificateMetadata struct {
 
 	// The Amazon Resource Name (ARN) specifying the server certificate. For more
@@ -1224,7 +1223,7 @@ type ServerCertificateMetadata struct {
 }
 
 // Contains details about the most recent attempt to access the service. This data
-// type is used as a response element in the GetServiceLastAccessedDetails ()
+// type is used as a response element in the GetServiceLastAccessedDetails
 // operation.
 type ServiceLastAccessed struct {
 
@@ -1281,7 +1280,7 @@ type ServiceLastAccessed struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	// This field is also null if the report was generated at the service level and not
 	// the action level. For more information, see the Granularity field in
-	// GenerateServiceLastAccessedDetails ().
+	// GenerateServiceLastAccessedDetails.
 	TrackedActionsLastAccessed []*TrackedActionLastAccessed
 }
 
@@ -1368,8 +1367,8 @@ type ServiceSpecificCredentialMetadata struct {
 }
 
 // Contains information about an X.509 signing certificate. This data type is used
-// as a response element in the UploadSigningCertificate () and
-// ListSigningCertificates () operations.
+// as a response element in the UploadSigningCertificate and
+// ListSigningCertificates operations.
 type SigningCertificate struct {
 
 	// The contents of the signing certificate.
@@ -1398,7 +1397,7 @@ type SigningCertificate struct {
 }
 
 // Contains information about an SSH public key. This data type is used as a
-// response element in the GetSSHPublicKey () and UploadSSHPublicKey () operations.
+// response element in the GetSSHPublicKey and UploadSSHPublicKey operations.
 type SSHPublicKey struct {
 
 	// The MD5 message digest of the SSH public key.
@@ -1435,7 +1434,7 @@ type SSHPublicKey struct {
 
 // Contains information about an SSH public key, without the key's body or
 // fingerprint. This data type is used as a response element in the
-// ListSSHPublicKeys () operation.
+// ListSSHPublicKeys operation.
 type SSHPublicKeyMetadata struct {
 
 	// The unique identifier for the SSH public key.
@@ -1464,7 +1463,7 @@ type SSHPublicKeyMetadata struct {
 
 // Contains a reference to a Statement element in a policy document that determines
 // the result of the simulation. This data type is used by the MatchedStatements
-// member of the EvaluationResult () type.
+// member of the EvaluationResult type.
 type Statement struct {
 
 	// The row and column of the end of a Statement in an IAM policy.
@@ -1508,7 +1507,7 @@ type Tag struct {
 
 // Contains details about the most recent attempt to access an action within the
 // service. This data type is used as a response element in the
-// GetServiceLastAccessedDetails () operation.
+// GetServiceLastAccessedDetails operation.
 type TrackedActionLastAccessed struct {
 
 	// The name of the tracked action to which access was attempted. Tracked actions
@@ -1541,12 +1540,12 @@ type TrackedActionLastAccessed struct {
 // Contains information about an IAM user entity. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateUser ()
+//     * CreateUser
 //
-//     *
-// GetUser ()
+//     * GetUser
 //
-//     * ListUsers ()
+//
+// * ListUsers
 type User struct {
 
 	// The Amazon Resource Name (ARN) that identifies the user. For more information
@@ -1602,7 +1601,7 @@ type User struct {
 	// A null value does not mean that the user never had a password. Also, if
 	// the user does not currently have a password but had one in the past, then this
 	// field contains the date and time the most recent password was used. This value
-	// is returned only in the GetUser () and ListUsers () operations.
+	// is returned only in the GetUser and ListUsers operations.
 	PasswordLastUsed *time.Time
 
 	// The ARN of the policy used to set the permissions boundary for the user. For
@@ -1621,7 +1620,7 @@ type User struct {
 
 // Contains information about an IAM user, including all the user's policies and
 // all the IAM groups the user is in. This data type is used as a response element
-// in the GetAccountAuthorizationDetails () operation.
+// in the GetAccountAuthorizationDetails operation.
 type UserDetail struct {
 
 	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.

@@ -17,7 +17,7 @@ import (
 // In this case, the response includes a token. To get the next set of containers,
 // send the command again, this time with the NextToken parameter (with the
 // returned token as its value). The next set of responses appears, with a token if
-// there are still more containers to receive. See also DescribeContainer (), which
+// there are still more containers to receive. See also DescribeContainer, which
 // gets the properties of one container.
 func (c *Client) ListContainers(ctx context.Context, params *ListContainersInput, optFns ...func(*Options)) (*ListContainersOutput, error) {
 	if params == nil {

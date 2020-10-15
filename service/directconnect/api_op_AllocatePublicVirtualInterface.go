@@ -15,11 +15,11 @@ import (
 // The owner of a connection calls this function to provision a public virtual
 // interface to be owned by the specified AWS account. Virtual interfaces created
 // using this function must be confirmed by the owner using
-// ConfirmPublicVirtualInterface (). Until this step has been completed, the
-// virtual interface is in the confirming state and is not available to handle
-// traffic. When creating an IPv6 public virtual interface, omit the Amazon address
-// and customer address. IPv6 addresses are automatically assigned from the Amazon
-// pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
+// ConfirmPublicVirtualInterface. Until this step has been completed, the virtual
+// interface is in the confirming state and is not available to handle traffic.
+// When creating an IPv6 public virtual interface, omit the Amazon address and
+// customer address. IPv6 addresses are automatically assigned from the Amazon pool
+// of IPv6 addresses; you cannot specify custom IPv6 addresses.
 func (c *Client) AllocatePublicVirtualInterface(ctx context.Context, params *AllocatePublicVirtualInterfaceInput, optFns ...func(*Options)) (*AllocatePublicVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocatePublicVirtualInterfaceInput{}
@@ -150,18 +150,18 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
 	// The type of virtual interface. The possible values are private and public.

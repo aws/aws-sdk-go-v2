@@ -19,8 +19,7 @@ import (
 const ServiceID = "Braket"
 const ServiceAPIVersion = "2019-09-01"
 
-// The Amazon Braket API Reference provides information about the operations and
-// structures supported in Amazon Braket.
+// Client provides the API client to make operations call for Braket.
 type Client struct {
 	options Options
 }

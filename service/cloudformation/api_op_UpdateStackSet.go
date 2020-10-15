@@ -15,7 +15,7 @@ import (
 // Updates the stack set, and associated stack instances in the specified accounts
 // and Regions. Even if the stack set operation created by updating the stack set
 // fails (completely or partially, below or above a specified failure tolerance),
-// the stack set is updated with your changes. Subsequent CreateStackInstances ()
+// the stack set is updated with your changes. Subsequent CreateStackInstances
 // calls on the specified stack set use the updated stack set.
 func (c *Client) UpdateStackSet(ctx context.Context, params *UpdateStackSetInput, optFns ...func(*Options)) (*UpdateStackSetOutput, error) {
 	if params == nil {

@@ -26,19 +26,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
 //
-//     * UpdateFleetAttributes ()
+// * DescribeFleetAttributes
 //
-//     *
-// StartFleetActions () or StopFleetActions ()
+//     * UpdateFleetAttributes
+//
+//     * StartFleetActions
+// or StopFleetActions
 func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *DescribeEC2InstanceLimitsInput, optFns ...func(*Options)) (*DescribeEC2InstanceLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeEC2InstanceLimitsInput{}

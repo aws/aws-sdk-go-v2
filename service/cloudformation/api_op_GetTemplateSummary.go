@@ -34,7 +34,7 @@ func (c *Client) GetTemplateSummary(ctx context.Context, params *GetTemplateSumm
 	return out, nil
 }
 
-// The input for the GetTemplateSummary () action.
+// The input for the GetTemplateSummary action.
 type GetTemplateSummaryInput struct {
 
 	// The name or the stack ID that is associated with the stack, which are not always
@@ -66,15 +66,15 @@ type GetTemplateSummaryInput struct {
 	TemplateURL *string
 }
 
-// The output for the GetTemplateSummary () action.
+// The output for the GetTemplateSummary action.
 type GetTemplateSummaryOutput struct {
 
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for
-	// this parameter when you use the CreateStack () or UpdateStack () actions with
-	// your template; otherwise, those actions return an InsufficientCapabilities
-	// error. For more information, see Acknowledging IAM Resources in AWS
-	// CloudFormation Templates
+	// this parameter when you use the CreateStack or UpdateStack actions with your
+	// template; otherwise, those actions return an InsufficientCapabilities error. For
+	// more information, see Acknowledging IAM Resources in AWS CloudFormation
+	// Templates
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	Capabilities []types.Capability
 

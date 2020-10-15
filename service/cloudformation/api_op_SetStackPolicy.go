@@ -26,7 +26,7 @@ func (c *Client) SetStackPolicy(ctx context.Context, params *SetStackPolicyInput
 	return out, nil
 }
 
-// The input for the SetStackPolicy () action.
+// The input for the SetStackPolicy action.
 type SetStackPolicyInput struct {
 
 	// The name or unique stack ID that you want to associate a policy with.

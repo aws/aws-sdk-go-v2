@@ -14,7 +14,7 @@ import (
 // Returns information about all available AWS Trusted Advisor checks, including
 // the name, ID, category, description, and metadata. You must specify a language
 // code. The AWS Support API currently supports English ("en") and Japanese ("ja").
-// The response contains a TrustedAdvisorCheckDescription () object for each check.
+// The response contains a TrustedAdvisorCheckDescription object for each check.
 // You must set the AWS Region to us-east-1.
 //
 //     * You must have a Business or
@@ -51,7 +51,7 @@ type DescribeTrustedAdvisorChecksInput struct {
 }
 
 // Information about the Trusted Advisor checks returned by the
-// DescribeTrustedAdvisorChecks () operation.
+// DescribeTrustedAdvisorChecks operation.
 type DescribeTrustedAdvisorChecksOutput struct {
 
 	// Information about all available Trusted Advisor checks.

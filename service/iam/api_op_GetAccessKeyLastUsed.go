@@ -39,9 +39,9 @@ type GetAccessKeyLastUsedInput struct {
 	AccessKeyId *string
 }
 
-// Contains the response to a successful GetAccessKeyLastUsed () request. It is
-// also returned as a member of the AccessKeyMetaData () structure returned by the
-// ListAccessKeys () action.
+// Contains the response to a successful GetAccessKeyLastUsed request. It is also
+// returned as a member of the AccessKeyMetaData structure returned by the
+// ListAccessKeys action.
 type GetAccessKeyLastUsedOutput struct {
 
 	// Contains information about the last time the access key was used.

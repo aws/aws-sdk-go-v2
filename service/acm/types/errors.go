@@ -41,7 +41,7 @@ func (e *InvalidArnException) ErrorMessage() string {
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more values in the DomainValidationOption () structure is incorrect.
+// One or more values in the DomainValidationOption structure is incorrect.
 type InvalidDomainValidationOptionsException struct {
 	Message *string
 }

@@ -29,7 +29,7 @@ func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInp
 	return out, nil
 }
 
-// Represents the input to ModifyDBCluster ().
+// Represents the input to ModifyDBCluster.
 type ModifyDBClusterInput struct {
 
 	// The cluster identifier for the cluster that is being modified. This parameter is

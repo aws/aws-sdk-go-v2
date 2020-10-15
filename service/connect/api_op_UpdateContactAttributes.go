@@ -19,13 +19,13 @@ import (
 // the data with the contact in Amazon Connect. You could also flag calls for
 // additional analysis, such as legal review or identifying abusive callers.
 // Contact attributes are available in Amazon Connect for 24 months, and are then
-// deleted.  <p> <b>Important:</b> You cannot use the operation to update
-// attributes for contacts that occurred prior to the release of the API, September
-// 12, 2018. You can update attributes only for contacts that started after the
-// release of the API. If you attempt to update attributes for a contact that
-// occurred prior to the release of the API, a 400 error is returned. This applies
-// also to queued callbacks that were initiated prior to the release of the API but
-// are still active in your instance.
+// deleted. Important: You cannot use the operation to update attributes for
+// contacts that occurred prior to the release of the API, September 12, 2018. You
+// can update attributes only for contacts that started after the release of the
+// API. If you attempt to update attributes for a contact that occurred prior to
+// the release of the API, a 400 error is returned. This applies also to queued
+// callbacks that were initiated prior to the release of the API but are still
+// active in your instance.
 func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateContactAttributesInput, optFns ...func(*Options)) (*UpdateContactAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateContactAttributesInput{}

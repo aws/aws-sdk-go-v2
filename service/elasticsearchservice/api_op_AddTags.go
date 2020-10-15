@@ -30,8 +30,8 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Container for the parameters to the AddTags () operation. Specify the tags that
-// you want to attach to the Elasticsearch domain.
+// Container for the parameters to the AddTags operation. Specify the tags that you
+// want to attach to the Elasticsearch domain.
 type AddTagsInput struct {
 
 	// Specify the ARN for which you want to add the tags.

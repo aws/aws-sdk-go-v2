@@ -29,7 +29,7 @@ func (c *Client) EstimateTemplateCost(ctx context.Context, params *EstimateTempl
 	return out, nil
 }
 
-// The input for an EstimateTemplateCost () action.
+// The input for an EstimateTemplateCost action.
 type EstimateTemplateCostInput struct {
 
 	// A list of Parameter structures that specify input parameters.
@@ -51,7 +51,7 @@ type EstimateTemplateCostInput struct {
 	TemplateURL *string
 }
 
-// The output for a EstimateTemplateCost () action.
+// The output for a EstimateTemplateCost action.
 type EstimateTemplateCostOutput struct {
 
 	// An AWS Simple Monthly Calculator URL with a query string that describes the

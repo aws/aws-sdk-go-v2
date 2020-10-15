@@ -66,7 +66,7 @@ type ListTypeRegistrationsOutput struct {
 	// all results, NextToken is set to null.
 	NextToken *string
 
-	// A list of type registration tokens. Use DescribeTypeRegistration () to return
+	// A list of type registration tokens. Use DescribeTypeRegistration to return
 	// detailed information about a type registration request.
 	RegistrationTokenList []*string
 

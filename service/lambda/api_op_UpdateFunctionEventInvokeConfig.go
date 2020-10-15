@@ -14,7 +14,7 @@ import (
 
 // Updates the configuration for asynchronous invocation for a function, version,
 // or alias. To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig ().
+// PutFunctionEventInvokeConfig.
 func (c *Client) UpdateFunctionEventInvokeConfig(ctx context.Context, params *UpdateFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*UpdateFunctionEventInvokeConfigOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionEventInvokeConfigInput{}

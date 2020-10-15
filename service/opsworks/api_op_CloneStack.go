@@ -40,8 +40,7 @@ type CloneStackInput struct {
 	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you
 	// create a stack by using the AWS OpsWorks Stacks console, it creates the role for
 	// you. You can obtain an existing stack's IAM ARN programmatically by calling
-	// DescribePermissions (). For more information about IAM ARNs, see Using
-	// Identifiers
+	// DescribePermissions. For more information about IAM ARNs, see Using Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html). You
 	// must set this parameter to a valid service role ARN or the action will fail;
 	// there is no default value. You can specify the source stack's service role ARN,
@@ -70,7 +69,7 @@ type CloneStackInput struct {
 	// The default setting is LATEST. To specify an
 	// agent version, you must use the complete version number, not the abbreviated
 	// number shown on the console. For a list of available agent version numbers, call
-	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2. You can also
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2. You can also
 	// specify an agent version when you create or update an instance, which overrides
 	// the stack's default setting.
 	AgentVersion *string

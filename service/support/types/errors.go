@@ -129,7 +129,7 @@ func (e *CaseIdNotFound) ErrorMessage() string {
 func (e *CaseIdNotFound) ErrorCode() string             { return "CaseIdNotFound" }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The limit for the number of DescribeAttachment () requests in a short period of
+// The limit for the number of DescribeAttachment requests in a short period of
 // time has been exceeded.
 type DescribeAttachmentLimitExceeded struct {
 	Message *string

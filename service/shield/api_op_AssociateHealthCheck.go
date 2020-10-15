@@ -42,7 +42,7 @@ type AssociateHealthCheckInput struct {
 	// This member is required.
 	HealthCheckArn *string
 
-	// The unique identifier (ID) for the Protection () object to add the health check
+	// The unique identifier (ID) for the Protection object to add the health check
 	// association to.
 	//
 	// This member is required.

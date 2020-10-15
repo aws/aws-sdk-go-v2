@@ -19,7 +19,8 @@ import (
 const ServiceID = "IoT 1Click Projects"
 const ServiceAPIVersion = "2018-05-14"
 
-// The AWS IoT 1-Click Projects API Reference
+// Client provides the API client to make operations call for AWS IoT 1-Click
+// Projects Service.
 type Client struct {
 	options Options
 }

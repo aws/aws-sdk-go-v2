@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Simulate the execution of a Method () in your RestApi () with headers,
-// parameters, and an incoming request body.
+// Simulate the execution of a Method in your RestApi with headers, parameters, and
+// an incoming request body.
 func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodInput, optFns ...func(*Options)) (*TestInvokeMethodOutput, error) {
 	if params == nil {
 		params = &TestInvokeMethodInput{}
@@ -27,7 +27,7 @@ func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodI
 	return out, nil
 }
 
-// Make a request to simulate the execution of a Method ().
+// Make a request to simulate the execution of a Method.
 type TestInvokeMethodInput struct {
 
 	// [Required] Specifies a test invoke method request's HTTP method.
@@ -40,7 +40,7 @@ type TestInvokeMethodInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -48,8 +48,8 @@ type TestInvokeMethodInput struct {
 	// The simulated request body of an incoming invocation request.
 	Body *string
 
-	// A ClientCertificate () identifier to use in the test invocation. API Gateway
-	// will use the certificate when making the HTTPS request to the defined back-end
+	// A ClientCertificate identifier to use in the test invocation. API Gateway will
+	// use the certificate when making the HTTPS request to the defined back-end
 	// endpoint.
 	ClientCertificateId *string
 
@@ -64,8 +64,8 @@ type TestInvokeMethodInput struct {
 	// this to specify path parameters and query string parameters.
 	PathWithQueryString *string
 
-	// A key-value map of stage variables to simulate an invocation on a deployed Stage
-	// ().
+	// A key-value map of stage variables to simulate an invocation on a deployed
+	// Stage.
 	StageVariables map[string]*string
 }
 

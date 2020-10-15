@@ -18,12 +18,11 @@ import (
 // address, and that you've given Amazon Pinpoint permission to send email from the
 // address. When you verify an email address, Amazon Pinpoint sends an email to the
 // address. Your email address is verified as soon as you follow the link in the
-// verification email.  </p> <p>When you verify a domain, this operation provides a
-// set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME
-// tokens to the DNS configuration for your domain. Your domain is verified when
-// Amazon Pinpoint detects these records in the DNS configuration for your domain.
-// It usually takes around 72 hours to complete the domain verification
-// process.</p>
+// verification email. When you verify a domain, this operation provides a set of
+// DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens
+// to the DNS configuration for your domain. Your domain is verified when Amazon
+// Pinpoint detects these records in the DNS configuration for your domain. It
+// usually takes around 72 hours to complete the domain verification process.
 func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIdentityInput, optFns ...func(*Options)) (*CreateEmailIdentityOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityInput{}

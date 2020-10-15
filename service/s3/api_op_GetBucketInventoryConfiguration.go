@@ -12,21 +12,24 @@ import (
 )
 
 // Returns an inventory configuration (identified by the inventory configuration
-// ID) from the bucket.  <p>To use this operation, you must have permissions to
-// perform the <code>s3:GetInventoryConfiguration</code> action. The bucket owner
-// has this permission by default and can grant this permission to others. For more
-// information about permissions, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
-// Related to Bucket Subresource Operations</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing
-// Access Permissions to Your Amazon S3 Resources</a>.</p> <p>For information about
-// the Amazon S3 inventory feature, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html">Amazon
-// S3 Inventory</a>.</p> <p>The following operations are related to
-// <code>GetBucketInventoryConfiguration</code>:</p> <ul> <li> <p>
-// <a>DeleteBucketInventoryConfiguration</a> </p> </li> <li> <p>
-// <a>ListBucketInventoryConfigurations</a> </p> </li> <li> <p>
-// <a>PutBucketInventoryConfiguration</a> </p> </li> </ul>
+// ID) from the bucket. To use this operation, you must have permissions to perform
+// the s3:GetInventoryConfiguration action. The bucket owner has this permission by
+// default and can grant this permission to others. For more information about
+// permissions, see Permissions Related to Bucket Subresource Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). For
+// information about the Amazon S3 inventory feature, see Amazon S3 Inventory
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html). The
+// following operations are related to GetBucketInventoryConfiguration:
+//
+//     *
+// DeleteBucketInventoryConfiguration
+//
+//     * ListBucketInventoryConfigurations
+//
+//
+// * PutBucketInventoryConfiguration
 func (c *Client) GetBucketInventoryConfiguration(ctx context.Context, params *GetBucketInventoryConfigurationInput, optFns ...func(*Options)) (*GetBucketInventoryConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketInventoryConfigurationInput{}

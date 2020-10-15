@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of RuleSummary () objects.
+// global use. Returns an array of RuleSummary objects.
 func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns ...func(*Options)) (*ListRulesOutput, error) {
 	if params == nil {
 		params = &ListRulesInput{}
@@ -56,7 +56,7 @@ type ListRulesOutput struct {
 	// the NextMarker value in the next request.
 	NextMarker *string
 
-	// An array of RuleSummary () objects.
+	// An array of RuleSummary objects.
 	Rules []*types.RuleSummary
 
 	// Metadata pertaining to the operation's result.

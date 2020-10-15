@@ -51,7 +51,7 @@ type CreateImageInput struct {
 
 	// The block device mappings. This parameter cannot be used to modify the
 	// encryption status of existing volumes or snapshots. To create an AMI with
-	// encrypted snapshots, use the CopyImage () action.
+	// encrypted snapshots, use the CopyImage action.
 	BlockDeviceMappings []*types.BlockDeviceMapping
 
 	// A description for the new image.

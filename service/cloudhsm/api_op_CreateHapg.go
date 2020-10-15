@@ -37,7 +37,7 @@ func (c *Client) CreateHapg(ctx context.Context, params *CreateHapgInput, optFns
 	return out, nil
 }
 
-// Contains the inputs for the CreateHapgRequest () action.
+// Contains the inputs for the CreateHapgRequest action.
 type CreateHapgInput struct {
 
 	// The label of the new high-availability partition group.
@@ -46,7 +46,7 @@ type CreateHapgInput struct {
 	Label *string
 }
 
-// Contains the output of the CreateHAPartitionGroup () action.
+// Contains the output of the CreateHAPartitionGroup action.
 type CreateHapgOutput struct {
 
 	// The ARN of the high-availability partition group.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about provisioned DB clusters, and supports pagination.
-// <note> <p>This operation can also return information for Amazon RDS clusters and
-// Amazon DocDB clusters.</p> </note>
+// Returns information about provisioned DB clusters, and supports pagination. This
+// operation can also return information for Amazon RDS clusters and Amazon DocDB
+// clusters.
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
 	if params == nil {
 		params = &DescribeDBClustersInput{}
@@ -50,14 +50,14 @@ type DescribeDBClustersInput struct {
 	// engine name (such as neptune), and restricts the results list to DB clusters
 	// created by that engine.
 	//
-	//     <p>For example, to invoke this API from the AWS CLI
-	// and filter so that only Neptune DB clusters are returned, you could use the
-	// following command:</p>
+	// For example, to invoke this API from the AWS CLI and
+	// filter so that only Neptune DB clusters are returned, you could use the
+	// following command:
 	Filters []*types.Filter
 
-	// An optional pagination token provided by a previous DescribeDBClusters ()
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
+	// An optional pagination token provided by a previous DescribeDBClusters request.
+	// If this parameter is specified, the response includes only records beyond the
+	// marker, up to the value specified by MaxRecords.
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist

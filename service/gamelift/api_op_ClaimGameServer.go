@@ -33,29 +33,29 @@ import (
 // successfully claimed, connection information is returned. A claimed game
 // server's utilization status remains AVAILABLE, while the claim status is set to
 // CLAIMED for up to 60 seconds. This time period allows the game server to be
-// prompted to update its status to UTILIZED (using UpdateGameServer ()). If the
-// game server's status is not updated within 60 seconds, the game server reverts
-// to unclaimed status and is available to be claimed by another request. If you
-// try to claim a specific game server, this request will fail in the following
-// cases: (1) if the game server utilization status is UTILIZED, (2) if the game
-// server claim status is CLAIMED, or (3) if the instance that the game server is
-// running on is flagged as draining. Learn more GameLift FleetIQ Guide
+// prompted to update its status to UTILIZED (using UpdateGameServer). If the game
+// server's status is not updated within 60 seconds, the game server reverts to
+// unclaimed status and is available to be claimed by another request. If you try
+// to claim a specific game server, this request will fail in the following cases:
+// (1) if the game server utilization status is UTILIZED, (2) if the game server
+// claim status is CLAIMED, or (3) if the instance that the game server is running
+// on is flagged as draining. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer ()
+//     * RegisterGameServer
 //
-//     * ListGameServers ()
+//     * ListGameServers
 //
 //     *
-// ClaimGameServer ()
+// ClaimGameServer
 //
-//     * DescribeGameServer ()
+//     * DescribeGameServer
 //
-//     * UpdateGameServer ()
+//     * UpdateGameServer
 //
-//
-// * DeregisterGameServer ()
+//     *
+// DeregisterGameServer
 func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInput, optFns ...func(*Options)) (*ClaimGameServerOutput, error) {
 	if params == nil {
 		params = &ClaimGameServerInput{}
@@ -76,8 +76,8 @@ type ClaimGameServerInput struct {
 	// An identifier for the game server group. When claiming a specific game server,
 	// this is the game server group whether the game server is located. When
 	// requesting that GameLift FleetIQ locate an available game server, this is the
-	// game server group to search on. You can use either the GameServerGroup () name
-	// or ARN value.
+	// game server group to search on. You can use either the GameServerGroup name or
+	// ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

@@ -29,16 +29,16 @@ import (
 //     * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
-// To get the status of the event tracker, call DescribeEventTracker
-// (). The event tracker must be in the ACTIVE state before using the tracking ID.
+// To get the status of the event tracker, call DescribeEventTracker.
+// The event tracker must be in the ACTIVE state before using the tracking ID.
 // Related APIs
 //
-//     * ListEventTrackers ()
+//     * ListEventTrackers
 //
-//     * DescribeEventTracker ()
+//     * DescribeEventTracker
 //
 //     *
-// DeleteEventTracker ()
+// DeleteEventTracker
 func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrackerInput, optFns ...func(*Options)) (*CreateEventTrackerOutput, error) {
 	if params == nil {
 		params = &CreateEventTrackerInput{}

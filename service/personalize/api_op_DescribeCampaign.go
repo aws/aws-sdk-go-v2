@@ -21,7 +21,7 @@ import (
 //
 // When the status is
 // CREATE FAILED, the response includes the failureReason key, which describes why.
-// For more information on campaigns, see CreateCampaign ().
+// For more information on campaigns, see CreateCampaign.
 func (c *Client) DescribeCampaign(ctx context.Context, params *DescribeCampaignInput, optFns ...func(*Options)) (*DescribeCampaignOutput, error) {
 	if params == nil {
 		params = &DescribeCampaignInput{}

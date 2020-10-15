@@ -33,7 +33,7 @@ func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterSnapshotAttributes ().
+// Represents the input to DescribeDBClusterSnapshotAttributes.
 type DescribeDBClusterSnapshotAttributesInput struct {
 
 	// The identifier for the cluster snapshot to describe the attributes for.

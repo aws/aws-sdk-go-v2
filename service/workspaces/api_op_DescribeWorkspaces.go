@@ -52,9 +52,9 @@ type DescribeWorkspacesInput struct {
 	UserName *string
 
 	// The identifiers of the WorkSpaces. You cannot combine this parameter with any
-	// other filter. Because the CreateWorkspaces () operation is asynchronous, the
+	// other filter. Because the CreateWorkspaces operation is asynchronous, the
 	// identifier it returns is not immediately available. If you immediately call
-	// DescribeWorkspaces () with this identifier, no information is returned.
+	// DescribeWorkspaces with this identifier, no information is returned.
 	WorkspaceIds []*string
 }
 
@@ -64,7 +64,7 @@ type DescribeWorkspacesOutput struct {
 	// are available.
 	NextToken *string
 
-	// Information about the WorkSpaces. Because CreateWorkspaces () is an asynchronous
+	// Information about the WorkSpaces. Because CreateWorkspaces is an asynchronous
 	// operation, some of the returned information could be incomplete.
 	Workspaces []*types.Workspace
 

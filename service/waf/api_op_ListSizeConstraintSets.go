@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of SizeConstraintSetSummary () objects.
+// global use. Returns an array of SizeConstraintSetSummary objects.
 func (c *Client) ListSizeConstraintSets(ctx context.Context, params *ListSizeConstraintSetsInput, optFns ...func(*Options)) (*ListSizeConstraintSetsOutput, error) {
 	if params == nil {
 		params = &ListSizeConstraintSetsInput{}
@@ -58,7 +58,7 @@ type ListSizeConstraintSetsOutput struct {
 	// next request.
 	NextMarker *string
 
-	// An array of SizeConstraintSetSummary () objects.
+	// An array of SizeConstraintSetSummary objects.
 	SizeConstraintSets []*types.SizeConstraintSetSummary
 
 	// Metadata pertaining to the operation's result.

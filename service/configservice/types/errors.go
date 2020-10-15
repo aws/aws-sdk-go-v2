@@ -328,8 +328,8 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorFault() smithy.ErrorFaul
 }
 
 // For StartConfigRulesEvaluation API, this exception is thrown if an evaluation is
-// in progress or if you call the StartConfigRulesEvaluation () API more than once
-// per minute. For PutConfigurationAggregator API, this exception is thrown if the
+// in progress or if you call the StartConfigRulesEvaluation API more than once per
+// minute. For PutConfigurationAggregator API, this exception is thrown if the
 // number of accounts and aggregators exceeds the limit.
 type LimitExceededException struct {
 	Message *string

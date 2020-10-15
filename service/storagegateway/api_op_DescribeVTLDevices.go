@@ -13,7 +13,7 @@ import (
 
 // Returns a description of virtual tape library (VTL) devices for the specified
 // tape gateway. In the response, AWS Storage Gateway returns VTL device
-// information.  <p>This operation is only supported in the tape gateway type.</p>
+// information. This operation is only supported in the tape gateway type.
 func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevicesInput, optFns ...func(*Options)) (*DescribeVTLDevicesOutput, error) {
 	if params == nil {
 		params = &DescribeVTLDevicesInput{}
@@ -32,8 +32,8 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 // DescribeVTLDevicesInput
 type DescribeVTLDevicesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -47,17 +47,17 @@ type DescribeVTLDevicesInput struct {
 	Marker *string
 
 	// An array of strings, where each string represents the Amazon Resource Name (ARN)
-	// of a VTL device.  <note> <p>All of the specified VTL devices must be from the
-	// same gateway. If no VTL devices are specified, the result will contain all
-	// devices on the specified gateway.</p> </note>
+	// of a VTL device. All of the specified VTL devices must be from the same gateway.
+	// If no VTL devices are specified, the result will contain all devices on the
+	// specified gateway.
 	VTLDeviceARNs []*string
 }
 
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the VTL devices that were

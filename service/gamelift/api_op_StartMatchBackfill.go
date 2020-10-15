@@ -28,7 +28,7 @@ import (
 // matches, allowing only one backfill ticket per potential match. Once the a match
 // is formed, the matchmaker creates player sessions for the new players. All
 // tickets in the match are updated with the game session's connection information,
-// and the GameSession () object is updated to include matchmaker data on the new
+// and the GameSession object is updated to include matchmaker data on the new
 // players. For more detail on how match backfill requests are processed, see  How
 // Amazon GameLift FlexMatch Works
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html).
@@ -38,16 +38,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
 // Related operations
 //
-//     * StartMatchmaking ()
+//     * StartMatchmaking
 //
-//     * DescribeMatchmaking ()
+//     * DescribeMatchmaking
 //
+//     *
+// StopMatchmaking
 //
-// * StopMatchmaking ()
+//     * AcceptMatch
 //
-//     * AcceptMatch ()
-//
-//     * StartMatchBackfill ()
+//     * StartMatchBackfill
 func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackfillInput, optFns ...func(*Options)) (*StartMatchBackfillOutput, error) {
 	if params == nil {
 		params = &StartMatchBackfillInput{}
@@ -68,7 +68,7 @@ type StartMatchBackfillInput struct {
 
 	// Name of the matchmaker to use for this request. You can use either the
 	// configuration name or ARN value. The ARN of the matchmaker that was used with
-	// the original game session is listed in the GameSession () object, MatchmakerData
+	// the original game session is listed in the GameSession object, MatchmakerData
 	// property.
 	//
 	// This member is required.
@@ -87,7 +87,7 @@ type StartMatchBackfillInput struct {
 	// them to the existing game.
 	//
 	//     * PlayerID, PlayerAttributes, Team -\\- This
-	// information is maintained in the GameSession () object, MatchmakerData property,
+	// information is maintained in the GameSession object, MatchmakerData property,
 	// for all players who are currently assigned to the game session. The matchmaker
 	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).

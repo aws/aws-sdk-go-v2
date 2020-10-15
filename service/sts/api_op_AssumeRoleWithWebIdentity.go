@@ -78,58 +78,61 @@ import (
 // keys can’t exceed 128 characters and the values can’t exceed 256 characters. For
 // these and additional limits, see IAM and STS Character Limits
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
-// in the IAM User Guide.  <note> <p>An AWS conversion compresses the passed
-// session policies and session tags into a packed binary format that has a
-// separate limit. Your request can fail for this limit even if your plain text
-// meets the other requirements. The <code>PackedPolicySize</code> response element
-// indicates by percentage how close the policies and tags for your request are to
-// the upper size limit. </p> </note> <p>You can pass a session tag with the same
-// key as a tag that is attached to the role. When you do, the session tag
-// overrides the role tag with the same key.</p> <p>An administrator must grant you
-// the permissions necessary to pass session tags. The administrator can also
-// create granular permissions to allow you to pass only specific session tags. For
-// more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html">Tutorial:
-// Using Tags for Attribute-Based Access Control</a> in the <i>IAM User
-// Guide</i>.</p> <p>You can set the session tags as transitive. Transitive tags
-// persist during role chaining. For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining">Chaining
-// Roles with Session Tags</a> in the <i>IAM User Guide</i>.</p> <p>
-// <b>Identities</b> </p> <p>Before your application can call
-// <code>AssumeRoleWithWebIdentity</code>, you must have an identity token from a
-// supported identity provider and create a role that the application can assume.
-// The role that your application assumes must trust the identity provider that is
+// in the IAM User Guide. An AWS conversion compresses the passed session policies
+// and session tags into a packed binary format that has a separate limit. Your
+// request can fail for this limit even if your plain text meets the other
+// requirements. The PackedPolicySize response element indicates by percentage how
+// close the policies and tags for your request are to the upper size limit. You
+// can pass a session tag with the same key as a tag that is attached to the role.
+// When you do, the session tag overrides the role tag with the same key. An
+// administrator must grant you the permissions necessary to pass session tags. The
+// administrator can also create granular permissions to allow you to pass only
+// specific session tags. For more information, see Tutorial: Using Tags for
+// Attribute-Based Access Control
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html)
+// in the IAM User Guide. You can set the session tags as transitive. Transitive
+// tags persist during role chaining. For more information, see Chaining Roles with
+// Session Tags
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
+// in the IAM User Guide. Identities Before your application can call
+// AssumeRoleWithWebIdentity, you must have an identity token from a supported
+// identity provider and create a role that the application can assume. The role
+// that your application assumes must trust the identity provider that is
 // associated with the identity token. In other words, the identity provider must
-// be specified in the role's trust policy. </p> <important> <p>Calling
-// <code>AssumeRoleWithWebIdentity</code> can result in an entry in your AWS
-// CloudTrail logs. The entry includes the <a
-// href="http://openid.net/specs/openid-connect-core-1_0.html#Claims">Subject</a>
-// of the provided Web Identity Token. We recommend that you avoid using any
-// personally identifiable information (PII) in this field. For example, you could
-// instead use a GUID or a pairwise identifier, as <a
-// href="http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes">suggested
-// in the OIDC specification</a>.</p> </important> <p>For more information about
-// how to use web identity federation and the
-// <code>AssumeRoleWithWebIdentity</code> API, see the following resources: </p>
-// <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html">Using
-// Web Identity Federation API Operations for Mobile Apps</a> and <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity">Federation
-// Through a Web-based Identity Provider</a>. </p> </li> <li> <p> <a
-// href="https://web-identity-federation-playground.s3.amazonaws.com/index.html">
-// Web Identity Federation Playground</a>. Walk through the process of
-// authenticating through Login with Amazon, Facebook, or Google, getting temporary
-// security credentials, and then using those credentials to make a request to AWS.
-// </p> </li> <li> <p> <a href="http://aws.amazon.com/sdkforios/">AWS SDK for iOS
-// Developer Guide</a> and <a href="http://aws.amazon.com/sdkforandroid/">AWS SDK
-// for Android Developer Guide</a>. These toolkits contain sample apps that show
-// how to invoke the identity providers. The toolkits then show how to use the
-// information from these providers to get and use temporary security credentials.
-// </p> </li> <li> <p> <a
-// href="http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications">Web
-// Identity Federation with Mobile Applications</a>. This article discusses web
-// identity federation and shows an example of how to use web identity federation
-// to get access to content in Amazon S3. </p> </li> </ul>
+// be specified in the role's trust policy. Calling AssumeRoleWithWebIdentity can
+// result in an entry in your AWS CloudTrail logs. The entry includes the Subject
+// (http://openid.net/specs/openid-connect-core-1_0.html#Claims) of the provided
+// Web Identity Token. We recommend that you avoid using any personally
+// identifiable information (PII) in this field. For example, you could instead use
+// a GUID or a pairwise identifier, as suggested in the OIDC specification
+// (http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes). For more
+// information about how to use web identity federation and the
+// AssumeRoleWithWebIdentity API, see the following resources:
+//
+//     * Using Web
+// Identity Federation API Operations for Mobile Apps
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html)
+// and Federation Through a Web-based Identity Provider
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity).
+//
+//
+// * Web Identity Federation Playground
+// (https://web-identity-federation-playground.s3.amazonaws.com/index.html). Walk
+// through the process of authenticating through Login with Amazon, Facebook, or
+// Google, getting temporary security credentials, and then using those credentials
+// to make a request to AWS.
+//
+//     * AWS SDK for iOS Developer Guide
+// (http://aws.amazon.com/sdkforios/) and AWS SDK for Android Developer Guide
+// (http://aws.amazon.com/sdkforandroid/). These toolkits contain sample apps that
+// show how to invoke the identity providers. The toolkits then show how to use the
+// information from these providers to get and use temporary security
+// credentials.
+//
+//     * Web Identity Federation with Mobile Applications
+// (http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications).
+// This article discusses web identity federation and shows an example of how to
+// use web identity federation to get access to content in Amazon S3.
 func (c *Client) AssumeRoleWithWebIdentity(ctx context.Context, params *AssumeRoleWithWebIdentityInput, optFns ...func(*Options)) (*AssumeRoleWithWebIdentityOutput, error) {
 	if params == nil {
 		params = &AssumeRoleWithWebIdentityInput{}
@@ -224,15 +227,15 @@ type AssumeRoleWithWebIdentityInput struct {
 	// Your request can fail for this limit even if your plain text meets the other
 	// requirements. The PackedPolicySize response element indicates by percentage how
 	// close the policies and tags for your request are to the upper size limit.
-	// <p>Passing policies to this operation returns new temporary credentials. The
+	// Passing policies to this operation returns new temporary credentials. The
 	// resulting session's permissions are the intersection of the role's
 	// identity-based policy and the session policies. You can use the role's temporary
 	// credentials in subsequent AWS API calls to access resources in the account that
 	// owns the role. You cannot use session policies to grant more permissions than
 	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
-	// Policies</a> in the <i>IAM User Guide</i>.</p>
+	// For more information, see Session Policies
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// in the IAM User Guide.
 	PolicyArns []*types.PolicyDescriptorType
 
 	// The fully qualified host component of the domain name of the identity provider.
@@ -243,7 +246,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	ProviderId *string
 }
 
-// Contains the response to a successful AssumeRoleWithWebIdentity () request,
+// Contains the response to a successful AssumeRoleWithWebIdentity request,
 // including temporary AWS credentials that can be used to make AWS requests.
 type AssumeRoleWithWebIdentityOutput struct {
 

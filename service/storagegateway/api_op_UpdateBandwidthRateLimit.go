@@ -13,12 +13,11 @@ import (
 // Updates the bandwidth rate limits of a gateway. You can update both the upload
 // and download bandwidth rate limit or specify only one of the two. If you don't
 // set a bandwidth rate limit, the existing rate limit remains. This operation is
-// supported for the stored volume, cached volume, and tape gateway types.  <p>By
+// supported for the stored volume, cached volume, and tape gateway types. By
 // default, a gateway's bandwidth rate limits are not set. If you don't set any
 // limit, the gateway does not have any limitations on its bandwidth usage and
-// could potentially use the maximum available bandwidth.</p> <p>To specify which
-// gateway to update, use the Amazon Resource Name (ARN) of the gateway in your
-// request.</p>
+// could potentially use the maximum available bandwidth. To specify which gateway
+// to update, use the Amazon Resource Name (ARN) of the gateway in your request.
 func (c *Client) UpdateBandwidthRateLimit(ctx context.Context, params *UpdateBandwidthRateLimitInput, optFns ...func(*Options)) (*UpdateBandwidthRateLimitOutput, error) {
 	if params == nil {
 		params = &UpdateBandwidthRateLimitInput{}
@@ -34,15 +33,17 @@ func (c *Client) UpdateBandwidthRateLimit(ctx context.Context, params *UpdateBan
 	return out, nil
 }
 
-// A JSON object containing one or more of the following fields:  <ul> <li> <p>
-// <a>UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec</a> </p>
-// </li> <li> <p>
-// <a>UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec</a> </p>
-// </li> </ul>
+// A JSON object containing one or more of the following fields:
+//
+//     *
+// UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec
+//
+//     *
+// UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec
 type UpdateBandwidthRateLimitInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -58,8 +59,8 @@ type UpdateBandwidthRateLimitInput struct {
 // throttle information was updated.
 type UpdateBandwidthRateLimitOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

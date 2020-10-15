@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an empty cluster. Each cluster supports five nodes. You use the
-// CreateJob () action separately to create the jobs for each of these nodes. The
+// CreateJob action separately to create the jobs for each of these nodes. The
 // cluster does not ship until these five node jobs have been created.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
@@ -76,14 +76,19 @@ type CreateClusterInput struct {
 	// States of America (US), you have access to one-day shipping and two-day
 	// shipping.
 	//
-	//     <ul> <li> <p>In Australia, you have access to express shipping.
-	// Typically, devices shipped express are delivered in about a day.</p> </li> <li>
-	// <p>In the European Union (EU), you have access to express shipping. Typically,
-	// Snowball Edges shipped express are delivered in about a day. In addition, most
-	// countries in the EU have access to standard shipping, which typically takes less
-	// than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered
-	// in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day
-	// shipping and two-day shipping.</p> </li> </ul>
+	//     * In Australia, you have access to express shipping. Typically,
+	// devices shipped express are delivered in about a day.
+	//
+	//     * In the European
+	// Union (EU), you have access to express shipping. Typically, Snowball Edges
+	// shipped express are delivered in about a day. In addition, most countries in the
+	// EU have access to standard shipping, which typically takes less than a week, one
+	// way.
+	//
+	//     * In India, Snowball Edges are delivered in one to seven days.
+	//
+	//     *
+	// In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption
@@ -106,9 +111,8 @@ type CreateClusterInput struct {
 	// this cluster.
 	Notification *types.Notification
 
-	// The type of AWS Snowball device to use for this cluster. </p> <note> <p>For
-	// cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device
-	// type.</p> </note>
+	// The type of AWS Snowball device to use for this cluster. For cluster jobs, AWS
+	// Snowball currently supports only the EDGE device type.
 	SnowballType types.SnowballType
 
 	// The tax documents required in your AWS Region.

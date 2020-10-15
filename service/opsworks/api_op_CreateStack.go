@@ -92,9 +92,9 @@ type CreateStackInput struct {
 	// The default setting is the most recent
 	// release of the agent. To specify an agent version, you must use the complete
 	// version number, not the abbreviated number shown on the console. For a list of
-	// available agent version numbers, call DescribeAgentVersions (). AgentVersion
-	// cannot be set to Chef 12.2. You can also specify an agent version when you
-	// create or update an instance, which overrides the stack's default setting.
+	// available agent version numbers, call DescribeAgentVersions. AgentVersion cannot
+	// be set to Chef 12.2. You can also specify an agent version when you create or
+	// update an instance, which overrides the stack's default setting.
 	AgentVersion *string
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.

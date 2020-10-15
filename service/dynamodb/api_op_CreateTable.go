@@ -69,15 +69,14 @@ type CreateTableInput struct {
 	// partitions, based on their partition key values. The sort key of an item is also
 	// known as its range attribute. The term "range attribute" derives from the way
 	// DynamoDB stores items with the same partition key physically close together, in
-	// sorted order by the sort key value.  <p>For a simple primary key (partition
-	// key), you must provide exactly one element with a <code>KeyType</code> of
-	// <code>HASH</code>.</p> <p>For a composite primary key (partition key and sort
-	// key), you must provide exactly two elements, in this order: The first element
-	// must have a <code>KeyType</code> of <code>HASH</code>, and the second element
-	// must have a <code>KeyType</code> of <code>RANGE</code>.</p> <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key">Working
-	// with Tables</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
+	// sorted order by the sort key value. For a simple primary key (partition key),
+	// you must provide exactly one element with a KeyType of HASH. For a composite
+	// primary key (partition key and sort key), you must provide exactly two elements,
+	// in this order: The first element must have a KeyType of HASH, and the second
+	// element must have a KeyType of RANGE. For more information, see Working with
+	// Tables
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key)
+	// in the Amazon DynamoDB Developer Guide.
 	//
 	// This member is required.
 	KeySchema []*types.KeySchemaElement

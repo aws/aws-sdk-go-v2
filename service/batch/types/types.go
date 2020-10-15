@@ -235,10 +235,10 @@ type ComputeResource struct {
 	ImageId *string
 
 	// The launch template to use for your compute resources. Any other compute
-	// resource parameters that you specify in a CreateComputeEnvironment () API
-	// operation override the same parameters in the launch template. You must specify
-	// either the launch template ID or launch template name in the request, but not
-	// both. For more information, see Launch Template Support
+	// resource parameters that you specify in a CreateComputeEnvironment API operation
+	// override the same parameters in the launch template. You must specify either the
+	// launch template ID or launch template name in the request, but not both. For
+	// more information, see Launch Template Support
 	// (https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in
 	// the AWS Batch User Guide.
 	LaunchTemplate *LaunchTemplateSpecification
@@ -686,9 +686,8 @@ type JobDetail struct {
 
 	// The Unix timestamp (in seconds and milliseconds) for when the job was created.
 	// For non-array jobs and parent array jobs, this is when the job entered the
-	// SUBMITTED state (at the time SubmitJob () was called). For array child jobs,
-	// this is when the child job was spawned by its parent and entered the PENDING
-	// state.
+	// SUBMITTED state (at the time SubmitJob was called). For array child jobs, this
+	// is when the child job was spawned by its parent and entered the PENDING state.
 	CreatedAt *int64
 
 	// A list of job IDs on which this job depends.
@@ -782,7 +781,7 @@ type JobSummary struct {
 
 	// The Unix timestamp for when the job was created. For non-array jobs and parent
 	// array jobs, this is when the job entered the SUBMITTED state (at the time
-	// SubmitJob () was called). For array child jobs, this is when the child job was
+	// SubmitJob was called). For array child jobs, this is when the child job was
 	// spawned by its parent and entered the PENDING state.
 	CreatedAt *int64
 
@@ -898,7 +897,7 @@ type NodeDetails struct {
 }
 
 // Object representing any node overrides to a job definition that is used in a
-// SubmitJob () API operation.
+// SubmitJob API operation.
 type NodeOverrides struct {
 
 	// The node property overrides for the job.
@@ -959,7 +958,7 @@ type NodePropertiesSummary struct {
 }
 
 // Object representing any node overrides to a job definition that is used in a
-// SubmitJob () API operation.
+// SubmitJob API operation.
 type NodePropertyOverride struct {
 
 	// The range of nodes, using node index values, with which to override. A range of

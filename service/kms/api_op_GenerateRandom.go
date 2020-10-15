@@ -37,8 +37,7 @@ type GenerateRandomInput struct {
 	// Generates the random byte string in the AWS CloudHSM cluster that is associated
 	// with the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-	// To find the ID of a custom key store, use the DescribeCustomKeyStores ()
-	// operation.
+	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	CustomKeyStoreId *string
 
 	// The length of the byte string.

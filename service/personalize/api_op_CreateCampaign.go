@@ -15,28 +15,37 @@ import (
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // and GetPersonalizedRanking
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
-// APIs, a campaign is specified in the request.  <p> <b>Minimum Provisioned TPS
-// and Auto-Scaling</b> </p> <p>A transaction is a single
-// <code>GetRecommendations</code> or <code>GetPersonalizedRanking</code> call.
-// Transactions per second (TPS) is the throughput and unit of billing for Amazon
-// Personalize. The minimum provisioned TPS (<code>minProvisionedTPS</code>)
-// specifies the baseline throughput provisioned by Amazon Personalize, and thus,
-// the minimum billing charge. If your TPS increases beyond
-// <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned
-// capacity up and down, but never below <code>minProvisionedTPS</code>, to
-// maintain a 70% utilization. There's a short time delay while the capacity is
-// increased that might cause loss of transactions. It's recommended to start with
-// a low <code>minProvisionedTPS</code>, track your usage using Amazon CloudWatch
-// metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p>
-// <p> <b>Status</b> </p> <p>A campaign can be in one of the following states:</p>
-// <ul> <li> <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-// </li> <li> <p>DELETE PENDING > DELETE IN_PROGRESS</p> </li> </ul> <p>To get the
-// campaign status, call <a>DescribeCampaign</a>.</p> <note> <p>Wait until the
-// <code>status</code> of the campaign is <code>ACTIVE</code> before asking the
-// campaign for recommendations.</p> </note> <p class="title"> <b>Related APIs</b>
-// </p> <ul> <li> <p> <a>ListCampaigns</a> </p> </li> <li> <p>
-// <a>DescribeCampaign</a> </p> </li> <li> <p> <a>UpdateCampaign</a> </p> </li>
-// <li> <p> <a>DeleteCampaign</a> </p> </li> </ul>
+// APIs, a campaign is specified in the request. Minimum Provisioned TPS and
+// Auto-Scaling A transaction is a single GetRecommendations or
+// GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and
+// unit of billing for Amazon Personalize. The minimum provisioned TPS
+// (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon
+// Personalize, and thus, the minimum billing charge. If your TPS increases beyond
+// minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up
+// and down, but never below minProvisionedTPS, to maintain a 70% utilization.
+// There's a short time delay while the capacity is increased that might cause loss
+// of transactions. It's recommended to start with a low minProvisionedTPS, track
+// your usage using Amazon CloudWatch metrics, and then increase the
+// minProvisionedTPS as necessary. Status A campaign can be in one of the following
+// states:
+//
+//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//
+//
+// * DELETE PENDING > DELETE IN_PROGRESS
+//
+// To get the campaign status, call
+// DescribeCampaign. Wait until the status of the campaign is ACTIVE before asking
+// the campaign for recommendations. Related APIs
+//
+//     * ListCampaigns
+//
+//     *
+// DescribeCampaign
+//
+//     * UpdateCampaign
+//
+//     * DeleteCampaign
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}

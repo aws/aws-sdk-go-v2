@@ -19,8 +19,8 @@ import (
 const ServiceID = "WorkMailMessageFlow"
 const ServiceAPIVersion = "2019-05-01"
 
-// The WorkMail Message Flow API provides access to email messages as they are
-// being sent and received by a WorkMail organization.
+// Client provides the API client to make operations call for Amazon WorkMail
+// Message Flow.
 type Client struct {
 	options Options
 }

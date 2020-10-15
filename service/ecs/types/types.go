@@ -97,8 +97,8 @@ type AutoScalingGroupProvider struct {
 type AwsVpcConfiguration struct {
 
 	// The subnets associated with the task or service. There is a limit of 16 subnets
-	// that can be specified per AwsVpcConfiguration.  <note> <p>All specified subnets
-	// must be from the same VPC.</p> </note>
+	// that can be specified per AwsVpcConfiguration. All specified subnets must be
+	// from the same VPC.
 	//
 	// This member is required.
 	Subnets []*string
@@ -109,8 +109,8 @@ type AwsVpcConfiguration struct {
 
 	// The security groups associated with the task or service. If you do not specify a
 	// security group, the default security group for the VPC is used. There is a limit
-	// of 5 security groups that can be specified per AwsVpcConfiguration.  <note>
-	// <p>All specified security groups must be from the same VPC.</p> </note>
+	// of 5 security groups that can be specified per AwsVpcConfiguration. All
+	// specified security groups must be from the same VPC.
 	SecurityGroups []*string
 }
 
@@ -206,7 +206,7 @@ type CapacityProviderStrategyItem struct {
 type Cluster struct {
 
 	// The number of services that are running on the cluster in an ACTIVE state. You
-	// can view these services with ListServices ().
+	// can view these services with ListServices.
 	ActiveServicesCount *int32
 
 	// The resources attached to a cluster. When using a capacity provider with a
@@ -332,8 +332,8 @@ type ClusterSetting struct {
 	// disabled. If enabled is specified, CloudWatch Container Insights will be enabled
 	// for the cluster, otherwise it will be disabled unless the containerInsights
 	// account setting is enabled. If a cluster value is specified, it will override
-	// the containerInsights value set with PutAccountSetting () or
-	// PutAccountSettingDefault ().
+	// the containerInsights value set with PutAccountSetting or
+	// PutAccountSettingDefault.
 	Value *string
 }
 
@@ -675,8 +675,8 @@ type ContainerDefinition struct {
 	Links []*string
 
 	// Linux-specific modifications that are applied to the container, such as Linux
-	// kernel capabilities. For more information see KernelCapabilities (). This
-	// parameter is not supported for Windows containers.
+	// kernel capabilities. For more information see KernelCapabilities. This parameter
+	// is not supported for Windows containers.
 	LinuxParameters *LinuxParameters
 
 	// The log configuration specification for the container. This parameter maps to
@@ -693,7 +693,7 @@ type ContainerDefinition struct {
 	// information on the options for different supported log drivers, see Configure
 	// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
 	// Docker documentation. Amazon ECS currently supports a subset of the logging
-	// drivers available to the Docker daemon (shown in the LogConfiguration () data
+	// drivers available to the Docker daemon (shown in the LogConfiguration data
 	// type). Additional log drivers may be available in future releases of the Amazon
 	// ECS container agent. This parameter requires version 1.18 of the Docker Remote
 	// API or greater on your container instance. To check the Docker Remote API
@@ -789,7 +789,7 @@ type ContainerDefinition struct {
 	// port mapping. After a task reaches the RUNNING status, manual and automatic host
 	// and container port assignments are visible in the Network Bindings section of a
 	// container description for a selected task in the Amazon ECS console. The
-	// assignments are also visible in the networkBindings section DescribeTasks ()
+	// assignments are also visible in the networkBindings section DescribeTasks
 	// responses.
 	PortMappings []*PortMapping
 
@@ -904,7 +904,7 @@ type ContainerDefinition struct {
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --ulimit option to docker run (https://docs.docker.com/engine/reference/run/).
-	// Valid naming values are displayed in the Ulimit () data type. This parameter
+	// Valid naming values are displayed in the Ulimit data type. This parameter
 	// requires version 1.18 of the Docker Remote API or greater on your container
 	// instance. To check the Docker Remote API version on your container instance, log
 	// in to your container instance and run the following command: sudo docker version
@@ -1020,7 +1020,7 @@ type ContainerInstance struct {
 	Attachments []*Attachment
 
 	// The attributes set for the container instance, either by the Amazon ECS
-	// container agent at instance registration or manually with the PutAttributes ()
+	// container agent at instance registration or manually with the PutAttributes
 	// operation.
 	Attributes []*Attribute
 
@@ -1312,7 +1312,7 @@ type DeploymentController struct {
 	// of containers Amazon ECS adds or removes from the service during a rolling
 	// update is controlled by adjusting the minimum and maximum number of healthy
 	// tasks allowed during a service deployment, as specified in the
-	// DeploymentConfiguration (). CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment
+	// DeploymentConfiguration. CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment
 	// type uses the blue/green deployment model powered by AWS CodeDeploy, which
 	// allows you to verify a new deployment of a service before sending production
 	// traffic to it. EXTERNAL The external (EXTERNAL) deployment type enables you to
@@ -1599,7 +1599,7 @@ type HealthCheck struct {
 }
 
 // Hostnames and IP address entries that are added to the /etc/hosts file of a
-// container via the extraHosts parameter of its ContainerDefinition ().
+// container via the extraHosts parameter of its ContainerDefinition.
 type HostEntry struct {
 
 	// The hostname to use in the /etc/hosts entry.
@@ -1635,7 +1635,7 @@ type HostVolumeProperties struct {
 type InferenceAccelerator struct {
 
 	// The Elastic Inference accelerator device name. The deviceName must also be
-	// referenced in a container definition as a ResourceRequirement ().
+	// referenced in a container definition as a ResourceRequirement.
 	//
 	// This member is required.
 	DeviceName *string
@@ -1719,7 +1719,7 @@ type KeyValuePair struct {
 }
 
 // Linux-specific options that are applied to the container, such as Linux
-// KernelCapabilities ().
+// KernelCapabilities.
 type LinuxParameters struct {
 
 	// The Linux capabilities for the container that are added to or dropped from the
@@ -1947,7 +1947,7 @@ type MountPoint struct {
 // Details on the network bindings between a container and its host container
 // instance. After a task reaches the RUNNING status, manual and automatic host and
 // container port assignments are visible in the networkBindings section of
-// DescribeTasks () API responses.
+// DescribeTasks API responses.
 type NetworkBinding struct {
 
 	// The IP address that the container is bound to on the container instance.
@@ -2053,8 +2053,8 @@ type PlatformDevice struct {
 // network mode, exposed ports should be specified using containerPort. The
 // hostPort can be left blank or it must be the same value as the containerPort.
 // After a task reaches the RUNNING status, manual and automatic host and container
-// port assignments are visible in the networkBindings section of DescribeTasks ()
-// API responses.
+// port assignments are visible in the networkBindings section of DescribeTasks API
+// responses.
 type PortMapping struct {
 
 	// The port number on the container that is bound to the user-specified or
@@ -2088,7 +2088,7 @@ type PortMapping struct {
 	// ports 51678-51680. Any host port that was previously specified in a running task
 	// is also reserved while the task is running (after a task stops, the host port is
 	// released). The current reserved ports are displayed in the remainingResources of
-	// DescribeContainerInstances () output. A container instance can have up to 100
+	// DescribeContainerInstances output. A container instance can have up to 100
 	// reserved ports at a time, including the default reserved ports. Automatically
 	// assigned ports don't count toward the 100 reserved ports limit.
 	HostPort *int32
@@ -2213,7 +2213,7 @@ type ResourceRequirement struct {
 	// container. The number of GPUs reserved for all containers in a task should not
 	// exceed the number of available GPUs on the container instance the task is
 	// launched on. If the InferenceAccelerator type is used, the value should match
-	// the deviceName for an InferenceAccelerator () specified in a task definition.
+	// the deviceName for an InferenceAccelerator specified in a task definition.
 	//
 	// This member is required.
 	Value *string
@@ -2292,7 +2292,7 @@ type Service struct {
 
 	// The desired number of instantiations of the task definition to keep running on
 	// the service. This value is specified when the service is created with
-	// CreateService (), and it can be modified with UpdateService ().
+	// CreateService, and it can be modified with UpdateService.
 	DesiredCount *int32
 
 	// Specifies whether to enable Amazon ECS managed tags for the tasks in the
@@ -2426,8 +2426,8 @@ type Service struct {
 	Tags []*Tag
 
 	// The task definition to use for tasks in the service. This value is specified
-	// when the service is created with CreateService (), and it can be modified with
-	// UpdateService ().
+	// when the service is created with CreateService, and it can be modified with
+	// UpdateService.
 	TaskDefinition *string
 
 	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
@@ -2902,7 +2902,7 @@ type TaskDefinition struct {
 	// host port (for the host network mode) or the attached elastic network interface
 	// port (for the awsvpc network mode), so you cannot take advantage of dynamic host
 	// port mappings. If the network mode is awsvpc, the task is allocated an elastic
-	// network interface, and you must specify a NetworkConfiguration () value when you
+	// network interface, and you must specify a NetworkConfiguration value when you
 	// create a service or run a task with the task definition. For more information,
 	// see Task Networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)

@@ -12,21 +12,19 @@ import (
 )
 
 // Starts the asynchronous analysis of an input document for relationships between
-// detected items such as key-value pairs, tables, and selection elements.  <p>
-// <code>StartDocumentAnalysis</code> can analyze text in documents that are in
-// JPEG, PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use
-// <a>DocumentLocation</a> to specify the bucket name and file name of the
-// document. </p> <p> <code>StartDocumentAnalysis</code> returns a job identifier
-// (<code>JobId</code>) that you use to get the results of the operation. When text
-// analysis is finished, Amazon Textract publishes a completion status to the
-// Amazon Simple Notification Service (Amazon SNS) topic that you specify in
-// <code>NotificationChannel</code>. To get the results of the text analysis
-// operation, first check that the status value published to the Amazon SNS topic
-// is <code>SUCCEEDED</code>. If so, call <a>GetDocumentAnalysis</a>, and pass the
-// job identifier (<code>JobId</code>) from the initial call to
-// <code>StartDocumentAnalysis</code>.</p> <p>For more information, see <a
-// href="https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html">Document
-// Text Analysis</a>.</p>
+// detected items such as key-value pairs, tables, and selection elements.
+// StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, and
+// PDF format. The documents are stored in an Amazon S3 bucket. Use
+// DocumentLocation to specify the bucket name and file name of the document.
+// StartDocumentAnalysis returns a job identifier (JobId) that you use to get the
+// results of the operation. When text analysis is finished, Amazon Textract
+// publishes a completion status to the Amazon Simple Notification Service (Amazon
+// SNS) topic that you specify in NotificationChannel. To get the results of the
+// text analysis operation, first check that the status value published to the
+// Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job
+// identifier (JobId) from the initial call to StartDocumentAnalysis. For more
+// information, see Document Text Analysis
+// (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
 func (c *Client) StartDocumentAnalysis(ctx context.Context, params *StartDocumentAnalysisInput, optFns ...func(*Options)) (*StartDocumentAnalysisOutput, error) {
 	if params == nil {
 		params = &StartDocumentAnalysisInput{}

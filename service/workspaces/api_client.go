@@ -19,8 +19,7 @@ import (
 const ServiceID = "WorkSpaces"
 const ServiceAPIVersion = "2015-04-08"
 
-// Amazon WorkSpaces Service Amazon WorkSpaces enables you to provision virtual,
-// cloud-based Microsoft Windows and Amazon Linux desktops for your users.
+// Client provides the API client to make operations call for Amazon WorkSpaces.
 type Client struct {
 	options Options
 }

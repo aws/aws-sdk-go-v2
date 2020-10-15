@@ -9,7 +9,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation (). Provides a description of the application,
+// Analytics API V2 Documentation. Provides a description of the application,
 // including the application Amazon Resource Name (ARN), status, latest version,
 // and input and output configuration.
 type ApplicationDetail struct {
@@ -53,7 +53,6 @@ type ApplicationDetail struct {
 	// Describes the application input configuration. For more information, see
 	// Configuring Application Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-	// </p>
 	InputDescriptions []*InputDescription
 
 	// Time stamp when the application was last updated.
@@ -62,20 +61,18 @@ type ApplicationDetail struct {
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-	// </p>
 	OutputDescriptions []*OutputDescription
 
-	// Describes reference data sources configured for the application.  For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring
-	// Application Input</a>. </p>
+	// Describes reference data sources configured for the application. For more
+	// information, see Configuring Application Input
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription
 }
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation (). Provides application summary information,
+// Analytics API V2 Documentation. Provides application summary information,
 // including the application Amazon Resource Name (ARN), name, and status.
 type ApplicationSummary struct {
 
@@ -170,8 +167,8 @@ type CloudWatchLoggingOptionUpdate struct {
 // Provides additional mapping information when the record format uses delimiters,
 // such as CSV. For example, the following sample records use CSV format, where the
 // records use the '\n' as the row delimiter and a comma (",") as the column
-// delimiter:  <p> <code>"name1", "address1"</code> </p> <p> <code>"name2",
-// "address2"</code> </p>
+// delimiter: "name1", "address1"
+//     "name2", "address2"
 type CSVMappingParameters struct {
 
 	// Column delimiter. For example, in a CSV format, a comma (",") is the typical
@@ -189,7 +186,6 @@ type CSVMappingParameters struct {
 // Describes the data format when records are written to the destination. For more
 // information, see Configuring Application Output
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-// </p>
 type DestinationSchema struct {
 
 	// Specifies the format of the records on the output stream.
@@ -319,7 +315,7 @@ type InputLambdaProcessor struct {
 	// operates on records in the stream. To specify an earlier version of the Lambda
 	// function than the latest, include the Lambda function version in the Lambda
 	// function ARN. For more information about Lambda ARNs, see Example ARNs: AWS
-	// Lambda ()
+	// Lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -353,7 +349,7 @@ type InputLambdaProcessorUpdate struct {
 	// (https://docs.aws.amazon.com/lambda/) function that is used to preprocess the
 	// records in the stream. To specify an earlier version of the Lambda function than
 	// the latest, include the Lambda function version in the Lambda function ARN. For
-	// more information about Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// more information about Lambda ARNs, see Example ARNs: AWS Lambda
 	ResourceARNUpdate *string
 
 	// The ARN of the new IAM role that is used to access the AWS Lambda function.
@@ -435,11 +431,15 @@ type InputStartingPositionConfiguration struct {
 	//
 	//     * NOW - Start reading just after the
 	// most recent record in the stream, start at the request time stamp that the
-	// customer issued.  </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at
-	// the last untrimmed record in the stream, which is the oldest record available in
-	// the stream. This option is not available for an Amazon Kinesis Firehose delivery
-	// stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume reading from
-	// where the application last stopped reading.</p> </li> </ul>
+	// customer issued.
+	//
+	//     * TRIM_HORIZON - Start reading at the last untrimmed
+	// record in the stream, which is the oldest record available in the stream. This
+	// option is not available for an Amazon Kinesis Firehose delivery stream.
+	//
+	//     *
+	// LAST_STOPPED_POINT - Resume reading from where the application last stopped
+	// reading.
 	InputStartingPosition InputStartingPosition
 }
 
@@ -671,7 +671,7 @@ type LambdaOutput struct {
 	// Amazon Resource Name (ARN) of the destination Lambda function to write to. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// Lambda ARNs, see Example ARNs: AWS Lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -705,7 +705,7 @@ type LambdaOutputUpdate struct {
 	// Amazon Resource Name (ARN) of the destination Lambda function. To specify an
 	// earlier version of the Lambda function than the latest, include the Lambda
 	// function version in the Lambda function ARN. For more information about Lambda
-	// ARNs, see Example ARNs: AWS Lambda ()
+	// ARNs, see Example ARNs: AWS Lambda
 	ResourceARNUpdate *string
 
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
@@ -732,10 +732,9 @@ type MappingParameters struct {
 // Describes application output configuration in which you identify an
 // in-application stream and a destination where you want the in-application stream
 // data to be written. The destination can be an Amazon Kinesis stream or an Amazon
-// Kinesis Firehose delivery stream.  <p></p> <p>For limits on how many
-// destinations an application can write and other limitations, see <a
-// href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>.
-// </p>
+// Kinesis Firehose delivery stream. For limits on how many destinations an
+// application can write and other limitations, see Limits
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
 type Output struct {
 
 	// Describes the data format when records are written to the destination. For more
@@ -874,9 +873,9 @@ type ReferenceDataSource struct {
 
 	// Identifies the S3 bucket and object that contains the reference data. Also
 	// identifies the IAM role Amazon Kinesis Analytics can assume to read this object
-	// on your behalf.  An Amazon Kinesis Analytics application loads reference data
-	// only once. If the data changes, you call the <code>UpdateApplication</code>
-	// operation to trigger reloading of data into your application. </p>
+	// on your behalf. An Amazon Kinesis Analytics application loads reference data
+	// only once. If the data changes, you call the UpdateApplication operation to
+	// trigger reloading of data into your application.
 	S3ReferenceDataSource *S3ReferenceDataSource
 }
 

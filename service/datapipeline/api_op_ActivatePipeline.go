@@ -15,8 +15,8 @@ import (
 // Validates the specified pipeline and starts processing pipeline tasks. If the
 // pipeline does not pass validation, activation fails. If you need to pause the
 // pipeline to investigate an issue with a component, such as a data source or
-// script, call DeactivatePipeline (). To activate a finished pipeline, modify the
-// end date for the pipeline and then activate it. If you activate an on-demand
+// script, call DeactivatePipeline. To activate a finished pipeline, modify the end
+// date for the pipeline and then activate it. If you activate an on-demand
 // pipeline that is already running, it will cancel all running objects and re-run
 // the pipeline. StartTimestamp does not apply to on-demand pipelines.
 func (c *Client) ActivatePipeline(ctx context.Context, params *ActivatePipelineInput, optFns ...func(*Options)) (*ActivatePipelineOutput, error) {

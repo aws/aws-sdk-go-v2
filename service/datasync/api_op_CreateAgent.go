@@ -21,9 +21,9 @@ import (
 // over the public Internet. You can use an agent for more than one location. If a
 // task uses multiple agents, all of them need to have status AVAILABLE for the
 // task to run. If you use multiple agents for a source location, the status of all
-// the agents must be AVAILABLE for the task to run.  <p>Agents are automatically
+// the agents must be AVAILABLE for the task to run. Agents are automatically
 // updated by AWS on a regular basis, using a mechanism that ensures minimal
-// interruption to your tasks.</p> <p></p>
+// interruption to your tasks.
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -48,9 +48,8 @@ type CreateAgentInput struct {
 	// redirect URL returned in the response provides you the activation key for your
 	// agent in the query string parameter activationKey. It might also include other
 	// activation-related parameters; however, these are merely defaults. The arguments
-	// you pass to this API call determine the actual configuration of your agent.
-	// <p>For more information, see Activating an Agent in the <i>AWS DataSync User
-	// Guide.</i> </p>
+	// you pass to this API call determine the actual configuration of your agent. For
+	// more information, see Activating an Agent in the AWS DataSync User Guide.
 	//
 	// This member is required.
 	ActivationKey *string
@@ -60,7 +59,7 @@ type CreateAgentInput struct {
 	AgentName *string
 
 	// The ARNs of the security groups used to protect your data transfer task subnets.
-	// See CreateAgentRequest$SubnetArns ().
+	// See CreateAgentRequest$SubnetArns.
 	SecurityGroupArns []*string
 
 	// The Amazon Resource Names (ARNs) of the subnets in which DataSync will create

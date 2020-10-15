@@ -117,8 +117,8 @@ type PutParameterInput struct {
 	Overwrite *bool
 
 	// One or more policies to apply to a parameter. This action takes a JSON array.
-	// Parameter Store supports the following policy types:  <p>Expiration: This policy
-	// deletes the parameter after it expires. When you create the policy,  you specify
+	// Parameter Store supports the following policy types: Expiration: This policy
+	// deletes the parameter after it expires. When you create the policy, you specify
 	// the expiration date. You can update the expiration date and time by updating the
 	// policy. Updating the parameter does not affect the expiration date and time.
 	// When the expiration time is reached, Parameter Store deletes the parameter.
@@ -128,9 +128,9 @@ type PutParameterInput struct {
 	// days or hours. NoChangeNotification: This policy triggers a CloudWatch event if
 	// a parameter has not been modified for a specified period of time. This policy
 	// type is useful when, for example, a secret needs to be changed within a period
-	// of time, but it has not been changed.  <p>All existing policies are preserved
-	// until you send new policies or an empty policy. For more  information about
-	// parameter policies, see Assigning parameter policies
+	// of time, but it has not been changed. All existing policies are preserved until
+	// you send new policies or an empty policy. For more information about parameter
+	// policies, see Assigning parameter policies
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
 	Policies *string
 
@@ -139,11 +139,17 @@ type PutParameterInput struct {
 	// example, you might want to tag a Systems Manager parameter to identify the type
 	// of resource to which it applies, the environment, or the type of configuration
 	// data referenced by the parameter. In this case, you could specify the following
-	// key name/value pairs:  <ul> <li> <p> <code>Key=Resource,Value=S3bucket</code>
-	// </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p>
-	// <code>Key=ParameterType,Value=LicenseKey</code> </p> </li> </ul> <note> <p>To
-	// add tags to an existing Systems Manager parameter, use the
-	// <a>AddTagsToResource</a> action.</p> </note>
+	// key name/value pairs:
+	//
+	//     * Key=Resource,Value=S3bucket
+	//
+	//     *
+	// Key=OS,Value=Windows
+	//
+	//     * Key=ParameterType,Value=LicenseKey
+	//
+	// To add tags to
+	// an existing Systems Manager parameter, use the AddTagsToResource action.
 	Tags []*types.Tag
 
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard

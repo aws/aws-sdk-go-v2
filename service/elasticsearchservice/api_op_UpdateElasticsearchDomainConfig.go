@@ -28,7 +28,7 @@ func (c *Client) UpdateElasticsearchDomainConfig(ctx context.Context, params *Up
 	return out, nil
 }
 
-// Container for the parameters to the UpdateElasticsearchDomain () operation.
+// Container for the parameters to the UpdateElasticsearchDomain operation.
 // Specifies the type and number of instances in the domain cluster.
 type UpdateElasticsearchDomainConfigInput struct {
 

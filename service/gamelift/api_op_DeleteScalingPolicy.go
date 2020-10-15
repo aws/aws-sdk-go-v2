@@ -13,33 +13,33 @@ import (
 // Deletes a fleet scaling policy. This action means that the policy is no longer
 // in force and removes all record of it. To delete a scaling policy, specify both
 // the scaling policy name and the fleet ID it is associated with. To temporarily
-// suspend scaling policies, call StopFleetActions (). This operation suspends all
+// suspend scaling policies, call StopFleetActions. This operation suspends all
 // policies for the fleet.
 //
-//     * DescribeFleetCapacity ()
+//     * DescribeFleetCapacity
 //
 //     *
-// UpdateFleetCapacity ()
+// UpdateFleetCapacity
 //
-//     * DescribeEC2InstanceLimits ()
+//     * DescribeEC2InstanceLimits
 //
 //     * Manage scaling
 // policies:
 //
-//         * PutScalingPolicy () (auto-scaling)
+//         * PutScalingPolicy (auto-scaling)
 //
 //         *
-// DescribeScalingPolicies () (auto-scaling)
+// DescribeScalingPolicies (auto-scaling)
 //
-//         * DeleteScalingPolicy ()
+//         * DeleteScalingPolicy
 // (auto-scaling)
 //
 //     * Manage fleet actions:
 //
-//         * StartFleetActions ()
+//         * StartFleetActions
 //
 //
-// * StopFleetActions ()
+// * StopFleetActions
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteScalingPolicyInput{}

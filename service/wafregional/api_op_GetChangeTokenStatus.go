@@ -18,7 +18,7 @@ import (
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Returns the status of a ChangeToken that you got by calling
-// GetChangeToken (). ChangeTokenStatus is one of the following values:
+// GetChangeToken. ChangeTokenStatus is one of the following values:
 //
 //     *
 // PROVISIONED: You requested the change token by calling GetChangeToken, but you

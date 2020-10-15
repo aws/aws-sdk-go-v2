@@ -13,10 +13,10 @@ import (
 
 // Creates an Amazon Chime Voice Connector under the administrator's AWS account.
 // You can choose to create an Amazon Chime Voice Connector in a specific AWS
-// Region. Enabling CreateVoiceConnectorRequest$RequireEncryption () configures
-// your Amazon Chime Voice Connector to use TLS transport for SIP signaling and
-// Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted
-// outbound calls are blocked.
+// Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your
+// Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure
+// RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound
+// calls are blocked.
 func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceConnectorInput, optFns ...func(*Options)) (*CreateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorInput{}

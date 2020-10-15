@@ -29,7 +29,7 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 	return out, nil
 }
 
-// The input for the ListChangeSets () action.
+// The input for the ListChangeSets action.
 type ListChangeSetsInput struct {
 
 	// The name or the Amazon Resource Name (ARN) of the stack for which you want to
@@ -38,12 +38,12 @@ type ListChangeSetsInput struct {
 	// This member is required.
 	StackName *string
 
-	// A string (provided by the ListChangeSets () response output) that identifies the
+	// A string (provided by the ListChangeSets response output) that identifies the
 	// next page of change sets that you want to retrieve.
 	NextToken *string
 }
 
-// The output for the ListChangeSets () action.
+// The output for the ListChangeSets action.
 type ListChangeSetsOutput struct {
 
 	// If the output exceeds 1 MB, a string that identifies the next page of change

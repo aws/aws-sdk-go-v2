@@ -17,13 +17,12 @@ import (
 // outcome and provides a summary so that you know how effective the MLModel
 // functions on the test data. Evaluation generates a relevant performance metric,
 // such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the
-// corresponding MLModelType: BINARY, REGRESSION or MULTICLASS.  </p> <p>
-// <code>CreateEvaluation</code> is an asynchronous operation. In response to
-// <code>CreateEvaluation</code>, Amazon Machine Learning (Amazon ML) immediately
-// returns and sets the evaluation status to <code>PENDING</code>. After the
-// <code>Evaluation</code> is created and ready for use, Amazon ML sets the status
-// to <code>COMPLETED</code>. </p> <p>You can use the <code>GetEvaluation</code>
-// operation to check progress of the evaluation during the creation operation.</p>
+// corresponding MLModelType: BINARY, REGRESSION or MULTICLASS. CreateEvaluation is
+// an asynchronous operation. In response to CreateEvaluation, Amazon Machine
+// Learning (Amazon ML) immediately returns and sets the evaluation status to
+// PENDING. After the Evaluation is created and ready for use, Amazon ML sets the
+// status to COMPLETED. You can use the GetEvaluation operation to check progress
+// of the evaluation during the creation operation.
 func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationInput, optFns ...func(*Options)) (*CreateEvaluationOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationInput{}

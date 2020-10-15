@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Changes information about a Resource () resource.
+// Changes information about a Resource resource.
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}
@@ -27,15 +27,15 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 	return out, nil
 }
 
-// Request to change information about a Resource () resource.
+// Request to change information about a Resource resource.
 type UpdateResourceInput struct {
 
-	// [Required] The identifier of the Resource () resource.
+	// [Required] The identifier of the Resource resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

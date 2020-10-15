@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of RegexPatternSetSummary () objects.
+// global use. Returns an array of RegexPatternSetSummary objects.
 func (c *Client) ListRegexPatternSets(ctx context.Context, params *ListRegexPatternSetsInput, optFns ...func(*Options)) (*ListRegexPatternSetsOutput, error) {
 	if params == nil {
 		params = &ListRegexPatternSetsInput{}
@@ -59,7 +59,7 @@ type ListRegexPatternSetsOutput struct {
 	// next request.
 	NextMarker *string
 
-	// An array of RegexPatternSetSummary () objects.
+	// An array of RegexPatternSetSummary objects.
 	RegexPatternSets []*types.RegexPatternSetSummary
 
 	// Metadata pertaining to the operation's result.

@@ -14,18 +14,18 @@ import (
 // Adds one or more tags to an ACM certificate. Tags are labels that you can use to
 // identify and organize your AWS resources. Each tag consists of a key and an
 // optional value. You specify the certificate on input by its Amazon Resource Name
-// (ARN). You specify the tag by using a key-value pair.  <p>You can apply a tag to
+// (ARN). You specify the tag by using a key-value pair. You can apply a tag to
 // just one certificate if you want to identify a specific characteristic of that
 // certificate, or you can apply the same tag to multiple certificates if you want
 // to filter for a common relationship among those certificates. Similarly, you can
 // apply the same tag to multiple resources if you want to specify a relationship
 // among those resources. For example, you can add the same tag to an ACM
 // certificate and an Elastic Load Balancing load balancer to indicate that they
-// are both used by the same website. For more information, see <a
-// href="https://docs.aws.amazon.com/acm/latest/userguide/tags.html">Tagging ACM
-// certificates</a>. </p> <p>To remove one or more tags, use the
-// <a>RemoveTagsFromCertificate</a> action. To view all of the tags that have been
-// applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>
+// are both used by the same website. For more information, see Tagging ACM
+// certificates (https://docs.aws.amazon.com/acm/latest/userguide/tags.html). To
+// remove one or more tags, use the RemoveTagsFromCertificate action. To view all
+// of the tags that have been applied to the certificate, use the
+// ListTagsForCertificate action.
 func (c *Client) AddTagsToCertificate(ctx context.Context, params *AddTagsToCertificateInput, optFns ...func(*Options)) (*AddTagsToCertificateOutput, error) {
 	if params == nil {
 		params = &AddTagsToCertificateInput{}
@@ -44,11 +44,11 @@ func (c *Client) AddTagsToCertificate(ctx context.Context, params *AddTagsToCert
 type AddTagsToCertificateInput struct {
 
 	// String that contains the ARN of the ACM certificate to which the tag is to be
-	// applied. This must be of the form:  <p>
-	// <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>
-	// </p> <p>For more information about ARNs, see <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces</a>. </p>
+	// applied. This must be of the form:
+	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
 	CertificateArn *string

@@ -29,8 +29,8 @@ type Asset struct {
 }
 
 // Metadata information about an audio stream. An array of AudioMetadata objects
-// for the audio streams found in a stored video is returned by GetSegmentDetection
-// ().
+// for the audio streams found in a stored video is returned by
+// GetSegmentDetection.
 type AudioMetadata struct {
 
 	// The audio codec used to encode or decode the audio stream.
@@ -87,7 +87,7 @@ type BoundingBox struct {
 	Width *float32
 }
 
-// Provides information about a celebrity recognized by the RecognizeCelebrities ()
+// Provides information about a celebrity recognized by the RecognizeCelebrities
 // operation.
 type Celebrity struct {
 
@@ -204,7 +204,7 @@ type ContentModerationDetection struct {
 	Timestamp *int64
 }
 
-// A custom label detected in an image by a call to DetectCustomLabels ().
+// A custom label detected in an image by a call to DetectCustomLabels.
 type CustomLabel struct {
 
 	// The confidence that the model has in the detection of the custom label. The
@@ -328,10 +328,10 @@ type Face struct {
 // Structure containing attributes of the face that the algorithm detected. A
 // FaceDetail object contains either the default facial attributes or all facial
 // attributes. The default attributes are BoundingBox, Confidence, Landmarks, Pose,
-// and Quality. GetFaceDetection () is the only Amazon Rekognition Video stored
-// video operation that can return a FaceDetail object with all attributes. To
-// specify which attributes to return, use the FaceAttributes input parameter for
-// StartFaceDetection (). The following Amazon Rekognition Video operations return
+// and Quality. GetFaceDetection is the only Amazon Rekognition Video stored video
+// operation that can return a FaceDetail object with all attributes. To specify
+// which attributes to return, use the FaceAttributes input parameter for
+// StartFaceDetection. The following Amazon Rekognition Video operations return
 // only the default attributes. The corresponding Start operations don't have a
 // FaceAttributes input parameter.
 //
@@ -343,9 +343,9 @@ type Face struct {
 //     * GetFaceSearch
 //
 // The Amazon Rekognition Image DetectFaces
-// () and IndexFaces () operations can return all facial attributes. To specify
-// which attributes to return, use the Attributes input parameter for DetectFaces.
-// For IndexFaces, use the DetectAttributes input parameter.
+// and IndexFaces operations can return all facial attributes. To specify which
+// attributes to return, use the Attributes input parameter for DetectFaces. For
+// IndexFaces, use the DetectAttributes input parameter.
 type FaceDetail struct {
 
 	// The estimated age range, in years, for the face. Low represents the lowest
@@ -444,7 +444,7 @@ type FaceRecord struct {
 }
 
 // Input face recognition parameters for an Amazon Rekognition stream processor.
-// FaceRecognitionSettings is a request parameter for CreateStreamProcessor ().
+// FaceRecognitionSettings is a request parameter for CreateStreamProcessor.
 type FaceSearchSettings struct {
 
 	// The ID of a collection that contains faces that you want to search for.
@@ -456,18 +456,18 @@ type FaceSearchSettings struct {
 	FaceMatchThreshold *float32
 }
 
-// The predicted gender of a detected face.  <p>Amazon Rekognition makes gender
-// binary (male/female) predictions based on the physical appearance of a face in a
+// The predicted gender of a detected face. Amazon Rekognition makes gender binary
+// (male/female) predictions based on the physical appearance of a face in a
 // particular image. This kind of prediction is not designed to categorize a
 // person’s gender identity, and you shouldn't use Amazon Rekognition to make such
 // a determination. For example, a male actor wearing a long-haired wig and
-// earrings for a role might be predicted as female.</p> <p>Using Amazon
-// Rekognition to make gender binary predictions is best suited for use cases where
-// aggregate gender distribution statistics need to be analyzed without identifying
-// specific users. For example, the percentage of female users compared to male
-// users on a social media platform. </p> <p>We don't recommend using gender binary
-// predictions to make decisions that impact  an individual's rights, privacy, or
-// access to services.</p>
+// earrings for a role might be predicted as female. Using Amazon Rekognition to
+// make gender binary predictions is best suited for use cases where aggregate
+// gender distribution statistics need to be analyzed without identifying specific
+// users. For example, the percentage of female users compared to male users on a
+// social media platform. We don't recommend using gender binary predictions to
+// make decisions that impact  an individual's rights, privacy, or access to
+// services.
 type Gender struct {
 
 	// Level of confidence in the prediction.
@@ -477,8 +477,8 @@ type Gender struct {
 	Value GenderType
 }
 
-// Information about where an object (DetectCustomLabels ()) or text (DetectText
-// ()) is located on an image.
+// Information about where an object (DetectCustomLabels) or text (DetectText) is
+// located on an image.
 type Geometry struct {
 
 	// An axis-aligned coarse representation of the detected item's location on the
@@ -494,9 +494,9 @@ type GroundTruthManifest struct {
 
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
 	// containing the S3 object must match the region you use for Amazon Rekognition
-	// operations.  <p>For Amazon Rekognition to process an S3 object, the user must
-	// have permission to access the S3 object. For more information, see
-	// Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>
+	// operations. For Amazon Rekognition to process an S3 object, the user must have
+	// permission to access the S3 object. For more information, see Resource-Based
+	// Policies in the Amazon Rekognition Developer Guide.
 	S3Object *S3Object
 }
 
@@ -551,18 +551,18 @@ type HumanLoopDataAttributes struct {
 // you would use the Bytes property to pass an image loaded from a local file
 // system. Image bytes passed by using the Bytes property must be base64-encoded.
 // Your code may not need to encode image bytes if you are using an AWS SDK to call
-// Amazon Rekognition API operations.  <p>For more information, see Analyzing an
-// Image Loaded from a Local File System in the Amazon Rekognition Developer
-// Guide.</p> <p> You pass images stored in an S3 bucket to an Amazon Rekognition
-// API operation by using the <code>S3Object</code> property. Images stored in an
-// S3 bucket do not need to be base64-encoded.</p> <p>The region for the S3 bucket
-// containing the S3 object must match the region you use for Amazon Rekognition
-// operations.</p> <p>If you use the AWS CLI to call Amazon Rekognition operations,
-// passing image bytes using the Bytes property is not supported. You must first
-// upload the image to an Amazon S3 bucket and then call the operation using the
-// S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the
-// user must have permission to access the S3 object. For more information, see
-// Resource Based Policies in the Amazon Rekognition Developer Guide. </p>
+// Amazon Rekognition API operations. For more information, see Analyzing an Image
+// Loaded from a Local File System in the Amazon Rekognition Developer Guide. You
+// pass images stored in an S3 bucket to an Amazon Rekognition API operation by
+// using the S3Object property. Images stored in an S3 bucket do not need to be
+// base64-encoded. The region for the S3 bucket containing the S3 object must match
+// the region you use for Amazon Rekognition operations. If you use the AWS CLI to
+// call Amazon Rekognition operations, passing image bytes using the Bytes property
+// is not supported. You must first upload the image to an Amazon S3 bucket and
+// then call the operation using the S3Object property. For Amazon Rekognition to
+// process an S3 object, the user must have permission to access the S3 object. For
+// more information, see Resource Based Policies in the Amazon Rekognition
+// Developer Guide.
 type Image struct {
 
 	// Blob of image bytes up to 5 MBs.
@@ -584,8 +584,8 @@ type ImageQuality struct {
 	Sharpness *float32
 }
 
-// An instance of a label returned by Amazon Rekognition Image (DetectLabels ()) or
-// by Amazon Rekognition Video (GetLabelDetection ()).
+// An instance of a label returned by Amazon Rekognition Image (DetectLabels) or by
+// Amazon Rekognition Video (GetLabelDetection).
 type Instance struct {
 
 	// The position of the label instance on the image.
@@ -704,7 +704,7 @@ type Mustache struct {
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
 // publishes the completion status of a video analysis operation. For more
-// information, see api-video ().
+// information, see api-video.
 type NotificationChannel struct {
 
 	// The ARN of an IAM role that gives Amazon Rekognition publishing permissions to
@@ -754,8 +754,8 @@ type PersonDetail struct {
 // Details and path tracking information for a single time a person's path is
 // tracked in a video. Amazon Rekognition operations that track people's paths
 // return an array of PersonDetection objects with elements for each time a
-// person's path is tracked in a video.  <p>For more information, see
-// GetPersonTracking in the Amazon Rekognition Developer Guide. </p>
+// person's path is tracked in a video. For more information, see GetPersonTracking
+// in the Amazon Rekognition Developer Guide.
 type PersonDetection struct {
 
 	// Details about a person whose path was tracked in a video.
@@ -768,9 +768,9 @@ type PersonDetection struct {
 
 // Information about a person whose face matches a face(s) in an Amazon Rekognition
 // collection. Includes information about the faces in the Amazon Rekognition
-// collection (FaceMatch ()), information about the person (PersonDetail ()), and
-// the time stamp for when the person was detected in a video. An array of
-// PersonMatch objects is returned by GetFaceSearch ().
+// collection (FaceMatch), information about the person (PersonDetail), and the
+// time stamp for when the person was detected in a video. An array of PersonMatch
+// objects is returned by GetFaceSearch.
 type PersonMatch struct {
 
 	// Information about the faces in the input collection that match the face of a
@@ -788,11 +788,10 @@ type PersonMatch struct {
 // The X and Y coordinates of a point on an image. The X and Y values returned are
 // ratios of the overall image size. For example, if the input image is 700x200 and
 // the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel
-// coordinate on the image.  <p>An array of <code>Point</code> objects,
-// <code>Polygon</code>, is returned by <a>DetectText</a> and by
-// <a>DetectCustomLabels</a>. <code>Polygon</code> represents a fine-grained
-// polygon around a detected item. For more information, see Geometry in the Amazon
-// Rekognition Developer Guide. </p>
+// coordinate on the image. An array of Point objects, Polygon, is returned by
+// DetectText and by DetectCustomLabels. Polygon represents a fine-grained polygon
+// around a detected item. For more information, see Geometry in the Amazon
+// Rekognition Developer Guide.
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon.
@@ -843,7 +842,7 @@ type ProjectVersionDescription struct {
 	EvaluationResult *EvaluationResult
 
 	// The minimum number of inference units used by the model. For more information,
-	// see StartProjectVersion ().
+	// see StartProjectVersion.
 	MinInferenceUnits *int32
 
 	// The location where training results are saved.
@@ -881,9 +880,9 @@ type RegionOfInterest struct {
 
 // Provides the S3 bucket name and object name. The region for the S3 bucket
 // containing the S3 object must match the region you use for Amazon Rekognition
-// operations.  <p>For Amazon Rekognition to process an S3 object, the user must
-// have permission to access the S3 object. For more information, see
-// Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>
+// operations. For Amazon Rekognition to process an S3 object, the user must have
+// permission to access the S3 object. For more information, see Resource-Based
+// Policies in the Amazon Rekognition Developer Guide.
 type S3Object struct {
 
 	// Name of the S3 bucket.
@@ -898,7 +897,7 @@ type S3Object struct {
 
 // A technical cue or shot detection segment detected in a video. An array of
 // SegmentDetection objects containing all segments detected in a stored video is
-// returned by GetSegmentDetection ().
+// returned by GetSegmentDetection.
 type SegmentDetection struct {
 
 	// The duration of the detected segment in milliseconds.
@@ -937,8 +936,8 @@ type SegmentDetection struct {
 }
 
 // Information about the type of a segment requested in a call to
-// StartSegmentDetection (). An array of SegmentTypeInfo objects is returned by the
-// response from GetSegmentDetection ().
+// StartSegmentDetection. An array of SegmentTypeInfo objects is returned by the
+// response from GetSegmentDetection.
 type SegmentTypeInfo struct {
 
 	// The version of the model used to detect segments.
@@ -949,7 +948,7 @@ type SegmentTypeInfo struct {
 }
 
 // Information about a shot detection segment detected in a video. For more
-// information, see SegmentDetection ().
+// information, see SegmentDetection.
 type ShotSegment struct {
 
 	// The confidence that Amazon Rekognition Video has in the accuracy of the detected
@@ -972,7 +971,7 @@ type Smile struct {
 }
 
 // Filters applied to the technical cue or shot detection segments. For more
-// information, see StartSegmentDetection ().
+// information, see StartSegmentDetection.
 type StartSegmentDetectionFilters struct {
 
 	// Filters that are specific to shot detections.
@@ -983,7 +982,7 @@ type StartSegmentDetectionFilters struct {
 }
 
 // Filters for the shot detection segments returned by GetSegmentDetection. For
-// more information, see StartSegmentDetectionFilters ().
+// more information, see StartSegmentDetectionFilters.
 type StartShotDetectionFilter struct {
 
 	// Specifies the minimum confidence that Amazon Rekognition Video must have in
@@ -996,8 +995,8 @@ type StartShotDetectionFilter struct {
 	MinSegmentConfidence *float32
 }
 
-// Filters for the technical segments returned by GetSegmentDetection (). For more
-// information, see StartSegmentDetectionFilters ().
+// Filters for the technical segments returned by GetSegmentDetection. For more
+// information, see StartSegmentDetectionFilters.
 type StartTechnicalCueDetectionFilter struct {
 
 	// Specifies the minimum confidence that Amazon Rekognition Video must have in
@@ -1025,10 +1024,10 @@ type StartTextDetectionFilters struct {
 }
 
 // An object that recognizes faces in a streaming video. An Amazon Rekognition
-// stream processor is created by a call to CreateStreamProcessor (). The request
+// stream processor is created by a call to CreateStreamProcessor. The request
 // parameters for CreateStreamProcessor describe the Kinesis video stream source
 // for the streaming video, face recognition parameters, and where to stream the
-// analysis resullts.  </p>
+// analysis resullts.
 type StreamProcessor struct {
 
 	// Name of the Amazon Rekognition stream processor.
@@ -1067,14 +1066,14 @@ type StreamProcessorSettings struct {
 // The S3 bucket that contains the training summary. The training summary includes
 // aggregated evaluation metrics for the entire testing dataset and metrics for
 // each individual label. You get the training summary S3 bucket location by
-// calling DescribeProjectVersions ().
+// calling DescribeProjectVersions.
 type Summary struct {
 
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
 	// containing the S3 object must match the region you use for Amazon Rekognition
-	// operations.  <p>For Amazon Rekognition to process an S3 object, the user must
-	// have permission to access the S3 object. For more information, see
-	// Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>
+	// operations. For Amazon Rekognition to process an S3 object, the user must have
+	// permission to access the S3 object. For more information, see Resource-Based
+	// Policies in the Amazon Rekognition Developer Guide.
 	S3Object *S3Object
 }
 
@@ -1090,7 +1089,7 @@ type Sunglasses struct {
 }
 
 // Information about a technical cue segment. For more information, see
-// SegmentDetection ().
+// SegmentDetection.
 type TechnicalCueSegment struct {
 
 	// The confidence that Amazon Rekognition Video has in the accuracy of the detected
@@ -1126,13 +1125,13 @@ type TestingDataResult struct {
 	Output *TestingData
 }
 
-// Information about a word or line of text detected by DetectText (). The
+// Information about a word or line of text detected by DetectText. The
 // DetectedText field contains the text that Amazon Rekognition detected in the
 // image. Every word and line has an identifier (Id). Each word belongs to a line
 // and has a parent identifier (ParentId) that identifies the line of text in which
 // the word appears. The word Id is also an index for the word within a line of
-// words.  <p>For more information, see Detecting Text in the Amazon Rekognition
-// Developer Guide.</p>
+// words. For more information, see Detecting Text in the Amazon Rekognition
+// Developer Guide.
 type TextDetection struct {
 
 	// The confidence that Amazon Rekognition has in the accuracy of the detected text
@@ -1192,7 +1191,7 @@ type TrainingDataResult struct {
 	Output *TrainingData
 }
 
-// A face that IndexFaces () detected, but didn't index. Use the Reasons response
+// A face that IndexFaces detected, but didn't index. Use the Reasons response
 // attribute to determine why a face wasn't indexed.
 type UnindexedFace struct {
 
@@ -1224,7 +1223,7 @@ type UnindexedFace struct {
 }
 
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-// operations such as StartLabelDetection () use Video to specify a video for
+// operations such as StartLabelDetection use Video to specify a video for
 // analysis. The supported file formats are .mp4, .mov and .avi.
 type Video struct {
 

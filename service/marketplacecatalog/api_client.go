@@ -19,12 +19,8 @@ import (
 const ServiceID = "Marketplace Catalog"
 const ServiceAPIVersion = "2018-09-17"
 
-// Catalog API actions allow you to manage your entities through list, describe,
-// and update capabilities. An entity can be a product or an offer on AWS
-// Marketplace.  <p>You can automate your entity update process by integrating the
-// AWS Marketplace Catalog API with your AWS Marketplace product build or
-// deployment pipelines. You can also create your own applications on top of the
-// Catalog API to manage your products on AWS Marketplace.</p>
+// Client provides the API client to make operations call for AWS Marketplace
+// Catalog Service.
 type Client struct {
 	options Options
 }

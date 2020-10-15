@@ -14,7 +14,7 @@ import (
 // Creates an endpoint configuration that Amazon SageMaker hosting services uses to
 // deploy models. In the configuration, you identify one or more models, created
 // using the CreateModel API, to deploy and the resources that you want Amazon
-// SageMaker to provision. Then you call the CreateEndpoint () API. Use this API if
+// SageMaker to provision. Then you call the CreateEndpoint API. Use this API if
 // you want to use Amazon SageMaker hosting services to deploy models into
 // production. In the request, you define a ProductionVariant, for each model that
 // you want to deploy. Each ProductionVariant parameter also describes the
@@ -28,7 +28,7 @@ import (
 // hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS
 // SDK for Python (Boto 3)).
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
-// When you call CreateEndpoint (), a load call is made to DynamoDB to verify that
+// When you call CreateEndpoint, a load call is made to DynamoDB to verify that
 // your endpoint configuration exists. When you read data from a DynamoDB table
 // supporting Eventually Consistent Reads
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html),
@@ -37,8 +37,8 @@ import (
 // are not yet in DynamoDB, this causes a validation error. If you repeat your read
 // request after a short time, the response should return the latest data. So retry
 // logic is recommended to handle these possible issues. We also recommend that
-// customers call DescribeEndpointConfig () before calling CreateEndpoint () to
-// minimize the potential impact of a DynamoDB eventually consistent read.
+// customers call DescribeEndpointConfig before calling CreateEndpoint to minimize
+// the potential impact of a DynamoDB eventually consistent read.
 func (c *Client) CreateEndpointConfig(ctx context.Context, params *CreateEndpointConfigInput, optFns ...func(*Options)) (*CreateEndpointConfigOutput, error) {
 	if params == nil {
 		params = &CreateEndpointConfigInput{}
@@ -57,7 +57,7 @@ func (c *Client) CreateEndpointConfig(ctx context.Context, params *CreateEndpoin
 type CreateEndpointConfigInput struct {
 
 	// The name of the endpoint configuration. You specify this name in a
-	// CreateEndpoint () request.
+	// CreateEndpoint request.
 	//
 	// This member is required.
 	EndpointConfigName *string

@@ -14,15 +14,14 @@ import (
 // Adds or overwrites only the specified tags for the specified Amazon EC2 resource
 // or resources. When you specify an existing tag key, the value is overwritten
 // with the new value. Each resource can have a maximum of 50 tags. Each tag
-// consists of a key and optional value. Tag keys must be unique per resource.
-// <p>For more information about tags, see <a
-// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging
-// Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For
-// more information about creating IAM policies that control users' access to
-// resources based on tags, see <a
-// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html">Supported
-// Resource-Level Permissions for Amazon EC2 API Actions</a> in the <i>Amazon
-// Elastic Compute Cloud User Guide</i>.</p>
+// consists of a key and optional value. Tag keys must be unique per resource. For
+// more information about tags, see Tagging Your Resources
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
+// Amazon Elastic Compute Cloud User Guide. For more information about creating IAM
+// policies that control users' access to resources based on tags, see Supported
+// Resource-Level Permissions for Amazon EC2 API Actions
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns ...func(*Options)) (*CreateTagsOutput, error) {
 	if params == nil {
 		params = &CreateTagsInput{}

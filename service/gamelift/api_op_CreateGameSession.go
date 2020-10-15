@@ -17,7 +17,7 @@ import (
 // can be created in it. To create a game session, specify either fleet ID or alias
 // ID and indicate a maximum number of players to allow in the game session. You
 // can also provide a name and game-specific properties for this game session. If
-// successful, a GameSession () object is returned containing the game session
+// successful, a GameSession object is returned containing the game session
 // properties and other settings you specified. Idempotency tokens. You can add a
 // token that uniquely identifies game session requests. This is useful for
 // ensuring that game session requests are idempotent. Multiple requests with the
@@ -28,35 +28,35 @@ import (
 // you must specify a creator ID. Without this ID, Amazon GameLift has no way to
 // evaluate the policy for this new game session request. Player acceptance policy.
 // By default, newly created game sessions are open to new players. You can
-// restrict new player access by using UpdateGameSession () to change the game
+// restrict new player access by using UpdateGameSession to change the game
 // session's player session creation policy. Game session logs. Logs are retained
 // for all active game sessions for 14 days. To access the logs, call
-// GetGameSessionLogUrl () to download the log files. Available in Amazon GameLift
+// GetGameSessionLogUrl to download the log files. Available in Amazon GameLift
 // Local.
 //
-//     * CreateGameSession ()
+//     * CreateGameSession
 //
-//     * DescribeGameSessions ()
-//
-//     *
-// DescribeGameSessionDetails ()
-//
-//     * SearchGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// UpdateGameSession ()
+// DescribeGameSessionDetails
 //
-//     * GetGameSessionLogUrl ()
+//     * SearchGameSessions
 //
-//     * Game session
-// placements
+//     * UpdateGameSession
 //
-//         * StartGameSessionPlacement ()
+//
+// * GetGameSessionLogUrl
+//
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessionInput, optFns ...func(*Options)) (*CreateGameSessionOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionInput{}
@@ -97,14 +97,14 @@ type CreateGameSessionInput struct {
 	FleetId *string
 
 	// Set of custom properties for a game session, formatted as key:value pairs. These
-	// properties are passed to a game server process in the GameSession () object with
-	// a request to start a new game session (see Start a Game Session
+	// properties are passed to a game server process in the GameSession object with a
+	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []*types.GameProperty
 
 	// Set of custom game session properties, formatted as a single string value. This
-	// data is passed to a game server process in the GameSession () object with a
-	// request to start a new game session (see Start a Game Session
+	// data is passed to a game server process in the GameSession object with a request
+	// to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 

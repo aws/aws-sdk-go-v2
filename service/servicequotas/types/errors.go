@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The action you attempted is not allowed unless Service Access with Service
 // Quotas is enabled in your organization. To enable, call
-// AssociateServiceQuotaTemplate ().
+// AssociateServiceQuotaTemplate.
 type AWSServiceAccessNotEnabledException struct {
 	Message *string
 }
@@ -232,7 +232,7 @@ func (e *ServiceException) ErrorCode() string             { return "ServiceExcep
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The quota request template is not associated with your organization. To use the
-// template, call AssociateServiceQuotaTemplate ().
+// template, call AssociateServiceQuotaTemplate.
 type ServiceQuotaTemplateNotInUseException struct {
 	Message *string
 }

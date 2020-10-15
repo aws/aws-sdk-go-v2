@@ -17,36 +17,35 @@ import (
 // attaches a DeletionDate stamp to the secret that specifies the end of the
 // recovery window. At the end of the recovery window, Secrets Manager deletes the
 // secret permanently. At any time before recovery window ends, you can use
-// RestoreSecret () to remove the DeletionDate and cancel the deletion of the
-// secret. You cannot access the encrypted secret information in any secret that is
+// RestoreSecret to remove the DeletionDate and cancel the deletion of the secret.
+// You cannot access the encrypted secret information in any secret that is
 // scheduled for deletion. If you need to access that information, you must cancel
-// the deletion with RestoreSecret () and then retrieve the information.
+// the deletion with RestoreSecret and then retrieve the information.
 //
-//     *
-// There is no explicit operation to delete a version of a secret. Instead, remove
-// all staging labels from the VersionStage field of a version. That marks the
-// version as deprecated and allows Secrets Manager to delete it as needed.
-// Versions that do not have any staging labels do not show up in
-// ListSecretVersionIds () unless you specify IncludeDeprecated.
+//     * There
+// is no explicit operation to delete a version of a secret. Instead, remove all
+// staging labels from the VersionStage field of a version. That marks the version
+// as deprecated and allows Secrets Manager to delete it as needed. Versions that
+// do not have any staging labels do not show up in ListSecretVersionIds unless you
+// specify IncludeDeprecated.
 //
-//     * The
-// permanent secret deletion at the end of the waiting period is performed as a
-// background task with low priority. There is no guarantee of a specific time
-// after the recovery window for the actual delete operation to occur.
+//     * The permanent secret deletion at the end of
+// the waiting period is performed as a background task with low priority. There is
+// no guarantee of a specific time after the recovery window for the actual delete
+// operation to occur.
 //
-// Minimum
-// permissions To run this command, you must have the following permissions:
+// Minimum permissions To run this command, you must have the
+// following permissions:
 //
-//     *
-// secretsmanager:DeleteSecret
+//     * secretsmanager:DeleteSecret
 //
 // Related operations
 //
-//     * To create a secret, use
-// CreateSecret ().
 //
-//     * To cancel deletion of a version of a secret before the
-// recovery window has expired, use RestoreSecret ().
+// * To create a secret, use CreateSecret.
+//
+//     * To cancel deletion of a version
+// of a secret before the recovery window has expired, use RestoreSecret.
 func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, optFns ...func(*Options)) (*DeleteSecretOutput, error) {
 	if params == nil {
 		params = &DeleteSecretInput{}

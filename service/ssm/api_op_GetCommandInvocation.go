@@ -125,34 +125,52 @@ type GetCommandInvocationOutput struct {
 	// Understanding command statuses
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
-	// values:  <ul> <li> <p>Pending: The command has not been sent to the
-	// instance.</p> </li> <li> <p>In Progress: The command has been sent to the
-	// instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The
-	// system attempted to send the command to the target, but the target was not
-	// available. The instance might not be available because of network issues,
-	// because the instance was stopped, or for similar reasons. The system will try to
-	// send the command again.</p> </li> <li> <p>Success: The command or plugin ran
-	// successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out:
-	// The command was not delivered to the instance before the delivery timeout
-	// expired. Delivery timeouts do not count against the parent command's MaxErrors
-	// limit, but they do contribute to whether the parent command status is Success or
-	// Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The
+	// values:
+	//
+	//     * Pending: The command has not been sent to the instance.
+	//
+	//     * In
+	// Progress: The command has been sent to the instance but has not reached a
+	// terminal state.
+	//
+	//     * Delayed: The system attempted to send the command to the
+	// target, but the target was not available. The instance might not be available
+	// because of network issues, because the instance was stopped, or for similar
+	// reasons. The system will try to send the command again.
+	//
+	//     * Success: The
+	// command or plugin ran successfully. This is a terminal state.
+	//
+	//     * Delivery
+	// Timed Out: The command was not delivered to the instance before the delivery
+	// timeout expired. Delivery timeouts do not count against the parent command's
+	// MaxErrors limit, but they do contribute to whether the parent command status is
+	// Success or Incomplete. This is a terminal state.
+	//
+	//     * Execution Timed Out: The
 	// command started to run on the instance, but the execution was not complete
 	// before the timeout expired. Execution timeouts count against the MaxErrors limit
-	// of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The
-	// command wasn't run successfully on the instance. For a plugin, this indicates
-	// that the result code was not zero. For a command invocation, this indicates that
-	// the result code for one or more plugins was not zero. Invocation failures count
-	// against the MaxErrors limit of the parent command. This is a terminal state.</p>
-	// </li> <li> <p>Canceled: The command was terminated before it was completed. This
-	// is a terminal state.</p> </li> <li> <p>Undeliverable: The command can't be
-	// delivered to the instance. The instance might not exist or might not be
-	// responding. Undeliverable invocations don't count against the parent command's
-	// MaxErrors limit and don't contribute to whether the parent command status is
-	// Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated:
-	// The parent command exceeded its MaxErrors limit and subsequent command
-	// invocations were canceled by the system. This is a terminal state.</p> </li>
-	// </ul>
+	// of the parent command. This is a terminal state.
+	//
+	//     * Failed: The command
+	// wasn't run successfully on the instance. For a plugin, this indicates that the
+	// result code was not zero. For a command invocation, this indicates that the
+	// result code for one or more plugins was not zero. Invocation failures count
+	// against the MaxErrors limit of the parent command. This is a terminal state.
+	//
+	//
+	// * Canceled: The command was terminated before it was completed. This is a
+	// terminal state.
+	//
+	//     * Undeliverable: The command can't be delivered to the
+	// instance. The instance might not exist or might not be responding. Undeliverable
+	// invocations don't count against the parent command's MaxErrors limit and don't
+	// contribute to whether the parent command status is Success or Incomplete. This
+	// is a terminal state.
+	//
+	//     * Terminated: The parent command exceeded its
+	// MaxErrors limit and subsequent command invocations were canceled by the system.
+	// This is a terminal state.
 	StatusDetails *string
 
 	// Metadata pertaining to the operation's result.

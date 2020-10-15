@@ -89,8 +89,8 @@ type DataLakeSettings struct {
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the
-	// resource owner's AWS CloudTrail log.  <p>You may want to specify this property
-	// when you are in a high-trust boundary, such as the same team or company. </p>
+	// resource owner's AWS CloudTrail log. You may want to specify this property when
+	// you are in a high-trust boundary, such as the same team or company.
 	TrustedResourceOwners []*string
 }
 
@@ -217,9 +217,8 @@ type TableResource struct {
 	// The name of the table.
 	Name *string
 
-	// A wildcard object representing every table under a database.  <p>At least one of
-	// <code>TableResource$Name</code> or <code>TableResource$TableWildcard</code> is
-	// required.</p>
+	// A wildcard object representing every table under a database. At least one of
+	// TableResource$Name or TableResource$TableWildcard is required.
 	TableWildcard *TableWildcard
 }
 

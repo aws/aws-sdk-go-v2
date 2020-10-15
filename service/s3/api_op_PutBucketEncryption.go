@@ -19,7 +19,7 @@ import (
 // Amazon S3 Default Bucket Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html). This
 // operation requires AWS Signature Version 4. For more information, see
-// Authenticating Requests (AWS Signature Version 4) (). To use this operation, you
+// Authenticating Requests (AWS Signature Version 4). To use this operation, you
 // must have permissions to perform the s3:PutEncryptionConfiguration action. The
 // bucket owner has this permission by default. The bucket owner can grant this
 // permission to others. For more information about permissions, see Permissions
@@ -27,9 +27,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
-// Amazon Simple Storage Service Developer Guide.  <p class="title"> <b>Related
-// Resources</b> </p> <ul> <li> <p> <a>GetBucketEncryption</a> </p> </li> <li> <p>
-// <a>DeleteBucketEncryption</a> </p> </li> </ul>
+// Amazon Simple Storage Service Developer Guide. Related Resources
+//
+//     *
+// GetBucketEncryption
+//
+//     * DeleteBucketEncryption
 func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncryptionInput, optFns ...func(*Options)) (*PutBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &PutBucketEncryptionInput{}

@@ -53,7 +53,7 @@ type GetIntentOutput struct {
 	ConclusionStatement *types.Statement
 
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
-	// fulfilling the user's request. For more information, see PutIntent ().
+	// fulfilling the user's request. For more information, see PutIntent.
 	ConfirmationPrompt *types.Prompt
 
 	// The date that the intent was created.
@@ -63,14 +63,14 @@ type GetIntentOutput struct {
 	Description *string
 
 	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each
-	// user input. For more information, see PutIntent ().
+	// user input. For more information, see PutIntent.
 	DialogCodeHook *types.CodeHook
 
 	// If defined in the bot, Amazon Lex uses this prompt to solicit additional user
-	// activity after the intent is fulfilled. For more information, see PutIntent ().
+	// activity after the intent is fulfilled. For more information, see PutIntent.
 	FollowUpPrompt *types.FollowUpPrompt
 
-	// Describes how the intent is fulfilled. For more information, see PutIntent ().
+	// Describes how the intent is fulfilled. For more information, see PutIntent.
 	FulfillmentActivity *types.FulfillmentActivity
 
 	// Configuration information, if any, to connect to an Amazon Kendra index with the

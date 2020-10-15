@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the list bundles that can be applied to you Amazon Lightsail content
-// delivery network (CDN) distributions.  <p>A distribution bundle specifies the
-// monthly network transfer quota and monthly cost of your dsitribution.</p>
+// delivery network (CDN) distributions. A distribution bundle specifies the
+// monthly network transfer quota and monthly cost of your dsitribution.
 func (c *Client) GetDistributionBundles(ctx context.Context, params *GetDistributionBundlesInput, optFns ...func(*Options)) (*GetDistributionBundlesOutput, error) {
 	if params == nil {
 		params = &GetDistributionBundlesInput{}

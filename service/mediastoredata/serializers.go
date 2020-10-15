@@ -62,7 +62,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Path == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+	}
 	if v.Path != nil {
+		if len(*v.Path) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
@@ -122,7 +128,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeObjectInput(v *DescribeObjectIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Path == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+	}
 	if v.Path != nil {
+		if len(*v.Path) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
@@ -182,7 +194,13 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Path == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+	}
 	if v.Path != nil {
+		if len(*v.Path) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}
@@ -340,7 +358,13 @@ func awsRestjson1_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encod
 		}
 	}
 
+	if v.Path == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+	}
 	if v.Path != nil {
+		if len(*v.Path) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Path must not be empty")}
+		}
 		if err := encoder.SetURI("Path").String(*v.Path); err != nil {
 			return err
 		}

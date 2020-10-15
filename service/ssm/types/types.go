@@ -181,10 +181,10 @@ type AssociationDescription struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems () API action. In
-	// this case, compliance data is not managed by State Manager. It is managed by
-	// your direct call to the PutComplianceItems () API action. By default, all
-	// associations use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API action. In this
+	// case, compliance data is not managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API action. By default, all associations
+	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
 	// The instances targeted by the request.
@@ -406,10 +406,10 @@ type AssociationVersionInfo struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems () API action. In
-	// this case, compliance data is not managed by State Manager. It is managed by
-	// your direct call to the PutComplianceItems () API action. By default, all
-	// associations use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API action. In this
+	// case, compliance data is not managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API action. By default, all associations
+	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
 	// The targets specified for the association when the association version was
@@ -592,7 +592,7 @@ type AutomationExecutionMetadata struct {
 	// The status of the execution.
 	AutomationExecutionStatus AutomationExecutionStatus
 
-	// Use this filter with DescribeAutomationExecutions (). Specify either Local or
+	// Use this filter with DescribeAutomationExecutions. Specify either Local or
 	// CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions
 	// and accounts. For more information, see Running Automation workflows in multiple
 	// AWS Regions and accounts
@@ -1289,10 +1289,10 @@ type CreateAssociationBatchRequestEntry struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems () API action. In
-	// this case, compliance data is not managed by State Manager. It is managed by
-	// your direct call to the PutComplianceItems () API action. By default, all
-	// associations use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API action. In this
+	// case, compliance data is not managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API action. By default, all associations
+	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
 	// The instances targeted by the request.
@@ -1404,7 +1404,7 @@ type DocumentDescription struct {
 	VersionName *string
 }
 
-// This data type is deprecated. Instead, use DocumentKeyValuesFilter ().
+// This data type is deprecated. Instead, use DocumentKeyValuesFilter.
 type DocumentFilter struct {
 
 	// The name of the filter.
@@ -1733,10 +1733,10 @@ type InstanceInformation struct {
 
 	// The name assigned to an on-premises server or virtual machine (VM) when it is
 	// activated as a Systems Manager managed instance. The name is specified as the
-	// DefaultInstanceName property using the CreateActivation () command. It is
-	// applied to the managed instance by specifying the Activation Code and Activation
-	// ID when you install SSM Agent on the instance, as explained in Install SSM Agent
-	// for a hybrid environment (Linux)
+	// DefaultInstanceName property using the CreateActivation command. It is applied
+	// to the managed instance by specifying the Activation Code and Activation ID when
+	// you install SSM Agent on the instance, as explained in Install SSM Agent for a
+	// hybrid environment (Linux)
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html)
 	// and Install SSM Agent for a hybrid environment (Windows)
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html).
@@ -1770,7 +1770,7 @@ type InstanceInformation struct {
 // Describes a filter for a specific list of instances. You can filter instances
 // information by using tags. You specify tags by using a key-value mapping. Use
 // this action instead of the
-// DescribeInstanceInformationRequest$InstanceInformationFilterList () method. The
+// DescribeInstanceInformationRequest$InstanceInformationFilterList method. The
 // InstanceInformationFilterList method is a legacy method and does not support
 // tags.
 type InstanceInformationFilter struct {
@@ -2169,7 +2169,7 @@ type InventoryResultItem struct {
 // OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options for
 // the supported maintenance window task types, see
-// MaintenanceWindowTaskInvocationParameters ().
+// MaintenanceWindowTaskInvocationParameters.
 type LoggingInfo struct {
 
 	// The name of an S3 bucket where execution logs are stored .
@@ -2192,21 +2192,18 @@ type MaintenanceWindowAutomationParameters struct {
 	// The version of an Automation document to use during task execution.
 	DocumentVersion *string
 
-	// The parameters for the AUTOMATION task.  <p>For information about specifying and
-	// updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and
-	// <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has
-	// been deprecated. To specify an S3 bucket to contain logs, instead use the
-	// <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in
-	// the <code>TaskInvocationParameters</code> structure. For information about how
+	// The parameters for the AUTOMATION task. For information about specifying and
+	// updating task parameters, see RegisterTaskWithMaintenanceWindow and
+	// UpdateMaintenanceWindowTask. LoggingInfo has been deprecated. To specify an S3
+	// bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix
+	// options in the TaskInvocationParameters structure. For information about how
 	// Systems Manager handles these options for the supported maintenance window task
-	// types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>
-	// <code>TaskParameters</code> has been deprecated. To specify parameters to pass
-	// to a task when it runs, instead use the <code>Parameters</code> option in the
-	// <code>TaskInvocationParameters</code> structure. For information about how
-	// Systems Manager handles these options for the supported maintenance window task
-	// types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For
-	// AUTOMATION task types, Systems Manager ignores any values specified for these
-	// parameters.</p> </note>
+	// types, see MaintenanceWindowTaskInvocationParameters. TaskParameters has been
+	// deprecated. To specify parameters to pass to a task when it runs, instead use
+	// the Parameters option in the TaskInvocationParameters structure. For information
+	// about how Systems Manager handles these options for the supported maintenance
+	// window task types, see MaintenanceWindowTaskInvocationParameters. For AUTOMATION
+	// task types, Systems Manager ignores any values specified for these parameters.
 	Parameters map[string][]*string
 }
 
@@ -2375,18 +2372,18 @@ type MaintenanceWindowIdentityForTarget struct {
 }
 
 // The parameters for a LAMBDA task type. For information about specifying and
-// updating task parameters, see RegisterTaskWithMaintenanceWindow () and
-// UpdateMaintenanceWindowTask (). LoggingInfo has been deprecated. To specify an
-// S3 bucket to contain logs, instead use the OutputS3BucketName and
-// OutputS3KeyPrefix options in the TaskInvocationParameters structure. For
-// information about how Systems Manager handles these options for the supported
-// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
-// TaskParameters has been deprecated. To specify parameters to pass to a task when
-// it runs, instead use the Parameters option in the TaskInvocationParameters
-// structure. For information about how Systems Manager handles these options for
-// the supported maintenance window task types, see
-// MaintenanceWindowTaskInvocationParameters (). For Lambda tasks, Systems Manager
-// ignores any values specified for TaskParameters and LoggingInfo.
+// updating task parameters, see RegisterTaskWithMaintenanceWindow and
+// UpdateMaintenanceWindowTask. LoggingInfo has been deprecated. To specify an S3
+// bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix
+// options in the TaskInvocationParameters structure. For information about how
+// Systems Manager handles these options for the supported maintenance window task
+// types, see MaintenanceWindowTaskInvocationParameters. TaskParameters has been
+// deprecated. To specify parameters to pass to a task when it runs, instead use
+// the Parameters option in the TaskInvocationParameters structure. For information
+// about how Systems Manager handles these options for the supported maintenance
+// window task types, see MaintenanceWindowTaskInvocationParameters. For Lambda
+// tasks, Systems Manager ignores any values specified for TaskParameters and
+// LoggingInfo.
 type MaintenanceWindowLambdaParameters struct {
 
 	// Pass client-specific information to the Lambda function that you are invoking.
@@ -2405,19 +2402,18 @@ type MaintenanceWindowLambdaParameters struct {
 }
 
 // The parameters for a RUN_COMMAND task type. For information about specifying and
-// updating task parameters, see RegisterTaskWithMaintenanceWindow () and
-// UpdateMaintenanceWindowTask (). LoggingInfo has been deprecated. To specify an
-// S3 bucket to contain logs, instead use the OutputS3BucketName and
-// OutputS3KeyPrefix options in the TaskInvocationParameters structure. For
-// information about how Systems Manager handles these options for the supported
-// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
-// TaskParameters has been deprecated. To specify parameters to pass to a task when
-// it runs, instead use the Parameters option in the TaskInvocationParameters
-// structure. For information about how Systems Manager handles these options for
-// the supported maintenance window task types, see
-// MaintenanceWindowTaskInvocationParameters (). For Run Command tasks, Systems
-// Manager uses specified values for TaskParameters and LoggingInfo only if no
-// values are specified for TaskInvocationParameters.
+// updating task parameters, see RegisterTaskWithMaintenanceWindow and
+// UpdateMaintenanceWindowTask. LoggingInfo has been deprecated. To specify an S3
+// bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix
+// options in the TaskInvocationParameters structure. For information about how
+// Systems Manager handles these options for the supported maintenance window task
+// types, see MaintenanceWindowTaskInvocationParameters. TaskParameters has been
+// deprecated. To specify parameters to pass to a task when it runs, instead use
+// the Parameters option in the TaskInvocationParameters structure. For information
+// about how Systems Manager handles these options for the supported maintenance
+// window task types, see MaintenanceWindowTaskInvocationParameters. For Run
+// Command tasks, Systems Manager uses specified values for TaskParameters and
+// LoggingInfo only if no values are specified for TaskInvocationParameters.
 type MaintenanceWindowRunCommandParameters struct {
 
 	// Configuration options for sending command output to CloudWatch Logs.
@@ -2464,18 +2460,18 @@ type MaintenanceWindowRunCommandParameters struct {
 }
 
 // The parameters for a STEP_FUNCTIONS task. For information about specifying and
-// updating task parameters, see RegisterTaskWithMaintenanceWindow () and
-// UpdateMaintenanceWindowTask (). LoggingInfo has been deprecated. To specify an
-// S3 bucket to contain logs, instead use the OutputS3BucketName and
-// OutputS3KeyPrefix options in the TaskInvocationParameters structure. For
-// information about how Systems Manager handles these options for the supported
-// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
-// TaskParameters has been deprecated. To specify parameters to pass to a task when
-// it runs, instead use the Parameters option in the TaskInvocationParameters
-// structure. For information about how Systems Manager handles these options for
-// the supported maintenance window task types, see
-// MaintenanceWindowTaskInvocationParameters (). For Step Functions tasks, Systems
-// Manager ignores any values specified for TaskParameters and LoggingInfo.
+// updating task parameters, see RegisterTaskWithMaintenanceWindow and
+// UpdateMaintenanceWindowTask. LoggingInfo has been deprecated. To specify an S3
+// bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix
+// options in the TaskInvocationParameters structure. For information about how
+// Systems Manager handles these options for the supported maintenance window task
+// types, see MaintenanceWindowTaskInvocationParameters. TaskParameters has been
+// deprecated. To specify parameters to pass to a task when it runs, instead use
+// the Parameters option in the TaskInvocationParameters structure. For information
+// about how Systems Manager handles these options for the supported maintenance
+// window task types, see MaintenanceWindowTaskInvocationParameters. For Step
+// Functions tasks, Systems Manager ignores any values specified for TaskParameters
+// and LoggingInfo.
 type MaintenanceWindowStepFunctionsParameters struct {
 
 	// The inputs for the STEP_FUNCTIONS task.
@@ -2524,7 +2520,7 @@ type MaintenanceWindowTask struct {
 	// OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options for
 	// the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters ().
+	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo
 
 	// The maximum number of targets this task can be run for, in parallel.
@@ -2559,7 +2555,7 @@ type MaintenanceWindowTask struct {
 	// has been deprecated. To specify parameters to pass to a task when it runs,
 	// instead use the Parameters option in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
-	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
@@ -2729,13 +2725,13 @@ type OpsItem struct {
 	// amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm. You can choose to make the
 	// data searchable by other users in the account or you can restrict search access.
 	// Searchable data means that all users with access to the OpsItem Overview page
-	// (as provided by the DescribeOpsItems () API action) can view and search on the
+	// (as provided by the DescribeOpsItems API action) can view and search on the
 	// specified data. Operational data that is not searchable is only viewable by
-	// users who have access to the OpsItem (as provided by the GetOpsItem () API
-	// action).  <p>Use the <code>/aws/resources</code> key in OperationalData to
-	// specify a related resource in  the request. Use the /aws/automations key in
-	// OperationalData to associate an Automation runbook with the OpsItem. To view AWS
-	// CLI example commands that use these keys, see Creating OpsItems manually
+	// users who have access to the OpsItem (as provided by the GetOpsItem API action).
+	// Use the /aws/resources key in OperationalData to specify a related resource in
+	// the request. Use the /aws/automations key in OperationalData to associate an
+	// Automation runbook with the OpsItem. To view AWS CLI example commands that use
+	// these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]*OpsItemDataValue
@@ -3016,7 +3012,7 @@ type ParameterMetadata struct {
 	Version *int64
 }
 
-// This data type is deprecated. Instead, use ParameterStringFilter ().
+// This data type is deprecated. Instead, use ParameterStringFilter.
 type ParametersFilter struct {
 
 	// The name of the filter.
@@ -3031,11 +3027,11 @@ type ParametersFilter struct {
 }
 
 // One or more filters. Use a filter to return a more specific list of results. The
-// ParameterStringFilter object is used by the DescribeParameters () and
-// GetParametersByPath () API actions. However, not all of the pattern values
-// listed for Key can be used with both actions. For DescribeActions, all of the
-// listed patterns are valid, with the exception of Label. For GetParametersByPath,
-// the following patterns listed for Key are not valid: Name, Path, and Tier. For
+// ParameterStringFilter object is used by the DescribeParameters and
+// GetParametersByPath API actions. However, not all of the pattern values listed
+// for Key can be used with both actions. For DescribeActions, all of the listed
+// patterns are valid, with the exception of Label. For GetParametersByPath, the
+// following patterns listed for Key are not valid: Name, Path, and Tier. For
 // examples of CLI commands demonstrating valid parameter filter constructions, see
 // Searching for Systems Manager parameters
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html)
@@ -3047,10 +3043,10 @@ type ParameterStringFilter struct {
 	// This member is required.
 	Key *string
 
-	// For all filters used with DescribeParameters (), valid options include Equals
-	// and BeginsWith. The Name filter additionally supports the Contains option.
+	// For all filters used with DescribeParameters, valid options include Equals and
+	// BeginsWith. The Name filter additionally supports the Contains option.
 	// (Exception: For filters using the key Path, valid options include Recursive and
-	// OneLevel.) For filters used with GetParametersByPath (), valid options include
+	// OneLevel.) For filters used with GetParametersByPath, valid options include
 	// Equals and BeginsWith. (Exception: For filters using the key Label, the only
 	// valid option is Equals.)
 	Option *string
@@ -3177,16 +3173,16 @@ type PatchComplianceData struct {
 // property given as a key, or a wildcard (*), which matches all values. You can
 // view lists of valid values for the patch properties by running the
 // DescribePatchProperties command. For information about which patch properties
-// can be used with each major operating system, see DescribePatchProperties ().
+// can be used with each major operating system, see DescribePatchProperties.
 type PatchFilter struct {
 
-	// The key for the filter. Run the DescribePatchProperties () command to view lists
-	// of valid keys for each operating system type.
+	// The key for the filter. Run the DescribePatchProperties command to view lists of
+	// valid keys for each operating system type.
 	//
 	// This member is required.
 	Key PatchFilterKey
 
-	// The value for the filter key. Run the DescribePatchProperties () command to view
+	// The value for the filter key. Run the DescribePatchProperties command to view
 	// lists of valid values for each key based on operating system type.
 	//
 	// This member is required.
@@ -3283,7 +3279,7 @@ type PatchSource struct {
 
 	// The specific operating system versions a patch repository applies to, such as
 	// "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
-	// For lists of supported product values, see PatchFilter ().
+	// For lists of supported product values, see PatchFilter.
 	//
 	// This member is required.
 	Products []*string
@@ -3506,13 +3502,12 @@ type ResourceDataSyncSource struct {
 }
 
 // The data type name for including resource data sync state. There are four sync
-// states:  <p> <code>OrganizationNotExists</code> (Your organization doesn't
-// exist)</p> <p> <code>NoPermissions</code> (The system can't locate the
-// service-linked role. This role is  automatically created when a user creates a
-// resource data sync in Explorer.) InvalidOrganizationalUnit (You specified or
-// selected an invalid unit in the resource data sync configuration.)
-// TrustedAccessDisabled (You disabled Systems Manager access in the organization
-// in AWS Organizations.)
+// states: OrganizationNotExists (Your organization doesn't exist) NoPermissions
+// (The system can't locate the service-linked role. This role is automatically
+// created when a user creates a resource data sync in Explorer.)
+// InvalidOrganizationalUnit (You specified or selected an invalid unit in the
+// resource data sync configuration.) TrustedAccessDisabled (You disabled Systems
+// Manager access in the organization in AWS Organizations.)
 type ResourceDataSyncSourceWithState struct {
 
 	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
@@ -3532,13 +3527,12 @@ type ResourceDataSyncSourceWithState struct {
 	SourceType *string
 
 	// The data type name for including resource data sync state. There are four sync
-	// states:  <p> <code>OrganizationNotExists</code>: Your organization doesn't
-	// exist.</p> <p> <code>NoPermissions</code>: The system can't locate the
-	// service-linked role. This role is  automatically created when a user creates a
-	// resource data sync in Explorer. InvalidOrganizationalUnit: You specified or
-	// selected an invalid unit in the resource data sync configuration.
-	// TrustedAccessDisabled: You disabled Systems Manager access in the organization
-	// in AWS Organizations.
+	// states: OrganizationNotExists: Your organization doesn't exist. NoPermissions:
+	// The system can't locate the service-linked role. This role is automatically
+	// created when a user creates a resource data sync in Explorer.
+	// InvalidOrganizationalUnit: You specified or selected an invalid unit in the
+	// resource data sync configuration. TrustedAccessDisabled: You disabled Systems
+	// Manager access in the organization in AWS Organizations.
 	State *string
 }
 
@@ -3587,18 +3581,18 @@ type ScheduledWindowExecution struct {
 	WindowId *string
 }
 
-// The service setting data structure.  <p> <code>ServiceSetting</code> is an
-// account-level setting for an AWS service. This setting  defines how a user
-// interacts with or uses a service or a feature of a service. For example, if an
-// AWS service charges money to the account based on feature or service usage, then
-// the AWS service team might create a default setting of "false". This means the
-// user can't use this feature unless they change the setting to "true" and
-// intentionally opt in for a paid feature. Services map a SettingId object to a
-// setting value. AWS services teams define the default value for a SettingId. You
-// can't create a new SettingId, but you can overwrite the default value if you
-// have the ssm:UpdateServiceSetting permission for the setting. Use the
-// UpdateServiceSetting () API action to change the default setting. Or, use the
-// ResetServiceSetting () to change the value back to the original value defined by
+// The service setting data structure. ServiceSetting is an account-level setting
+// for an AWS service. This setting defines how a user interacts with or uses a
+// service or a feature of a service. For example, if an AWS service charges money
+// to the account based on feature or service usage, then the AWS service team
+// might create a default setting of "false". This means the user can't use this
+// feature unless they change the setting to "true" and intentionally opt in for a
+// paid feature. Services map a SettingId object to a setting value. AWS services
+// teams define the default value for a SettingId. You can't create a new
+// SettingId, but you can overwrite the default value if you have the
+// ssm:UpdateServiceSetting permission for the setting. Use the
+// UpdateServiceSetting API action to change the default setting. Or, use the
+// ResetServiceSetting to change the value back to the original value defined by
 // the AWS service team.
 type ServiceSetting struct {
 

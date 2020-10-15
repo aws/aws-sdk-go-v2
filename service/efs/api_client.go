@@ -21,12 +21,8 @@ import (
 const ServiceID = "EFS"
 const ServiceAPIVersion = "2015-02-01"
 
-// Amazon Elastic File System Amazon Elastic File System (Amazon EFS) provides
-// simple, scalable file storage for use with Amazon EC2 instances in the AWS
-// Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking
-// automatically as you add and remove files, so your applications have the storage
-// they need, when they need it. For more information, see the User Guide
-// (https://docs.aws.amazon.com/efs/latest/ug/api-reference.html).
+// Client provides the API client to make operations call for Amazon Elastic File
+// System.
 type Client struct {
 	options Options
 }

@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of LoggingConfiguration () objects.
+// global use. Returns an array of LoggingConfiguration objects.
 func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLoggingConfigurationsInput, optFns ...func(*Options)) (*ListLoggingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListLoggingConfigurationsInput{}
@@ -52,7 +52,7 @@ type ListLoggingConfigurationsInput struct {
 
 type ListLoggingConfigurationsOutput struct {
 
-	// An array of LoggingConfiguration () objects.
+	// An array of LoggingConfiguration objects.
 	LoggingConfigurations []*types.LoggingConfiguration
 
 	// If you have more LoggingConfigurations than the number that you specified for

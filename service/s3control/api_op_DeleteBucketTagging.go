@@ -16,22 +16,24 @@ import (
 // in the Amazon Simple Storage Service API. Deletes the tags from the Outposts
 // bucket. For more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide.  <p>To use this operation, you must have
-// permission to perform the <code>PutBucketTagging</code> action. By default, the
-// bucket owner has this permission and can grant this permission to others. </p>
-// <p>All Amazon S3 on Outposts REST API requests for this action require an
-// additional parameter of outpost-id to be passed with the request and an S3 on
-// Outposts endpoint hostname prefix instead of s3-control. For an example of the
-// request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
-// hostname prefix and the outpost-id derived using the access point ARN, see the
-// <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples">
-// Example</a> section below.</p> <p>The following actions are related to
-// <code>DeleteBucketTagging</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html">GetBucketTagging</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html">PutBucketTagging</a>
-// </p> </li> </ul>
+// Simple Storage Service Developer Guide. To use this operation, you must have
+// permission to perform the PutBucketTagging action. By default, the bucket owner
+// has this permission and can grant this permission to others. All Amazon S3 on
+// Outposts REST API requests for this action require an additional parameter of
+// outpost-id to be passed with the request and an S3 on Outposts endpoint hostname
+// prefix instead of s3-control. For an example of the request syntax for Amazon S3
+// on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+// outpost-id derived using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
+// section below. The following actions are related to DeleteBucketTagging:
+//
+//     *
+// GetBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
+//
+//
+// * PutBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteBucketTaggingInput{}

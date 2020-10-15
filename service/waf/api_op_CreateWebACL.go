@@ -26,31 +26,29 @@ import (
 //
 //     *
 // Create and update the ByteMatchSet objects and other predicates that you want to
-// include in Rules. For more information, see CreateByteMatchSet (),
-// UpdateByteMatchSet (), CreateIPSet (), UpdateIPSet (),
-// CreateSqlInjectionMatchSet (), and UpdateSqlInjectionMatchSet ().
+// include in Rules. For more information, see CreateByteMatchSet,
+// UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and
+// UpdateSqlInjectionMatchSet.
 //
-//     * Create
-// and update the Rules that you want to include in the WebACL. For more
-// information, see CreateRule () and UpdateRule ().
+//     * Create and update the Rules that you want to
+// include in the WebACL. For more information, see CreateRule and UpdateRule.
 //
-//     * Use GetChangeToken ()
-// to get the change token that you provide in the ChangeToken parameter of a
-// CreateWebACL request.
+//
+// * Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a CreateWebACL request.
 //
 //     * Submit a CreateWebACL request.
 //
-//     * Use
-// GetChangeToken to get the change token that you provide in the ChangeToken
-// parameter of an UpdateWebACL () request.
 //
-//     * Submit an UpdateWebACL ()
-// request to specify the Rules that you want to include in the WebACL, to specify
-// the default action, and to associate the WebACL with a CloudFront
-// distribution.
+// * Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateWebACL request.
 //
-// For more information about how to use the AWS WAF API, see the
-// AWS WAF Developer Guide
+//     * Submit an UpdateWebACL request to
+// specify the Rules that you want to include in the WebACL, to specify the default
+// action, and to associate the WebACL with a CloudFront distribution.
+//
+// For more
+// information about how to use the AWS WAF API, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, optFns ...func(*Options)) (*CreateWebACLOutput, error) {
 	if params == nil {
@@ -69,7 +67,7 @@ func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, op
 
 type CreateWebACLInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
@@ -90,7 +88,7 @@ type CreateWebACLInput struct {
 	// This member is required.
 	MetricName *string
 
-	// A friendly name or description of the WebACL (). You can't change Name after you
+	// A friendly name or description of the WebACL. You can't change Name after you
 	// create the WebACL.
 	//
 	// This member is required.
@@ -104,10 +102,10 @@ type CreateWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the CreateWebACL request. You can also
 	// use this value to query the status of the request. For more information, see
-	// GetChangeTokenStatus ().
+	// GetChangeTokenStatus.
 	ChangeToken *string
 
-	// The WebACL () returned in the CreateWebACL response.
+	// The WebACL returned in the CreateWebACL response.
 	WebACL *types.WebACL
 
 	// Metadata pertaining to the operation's result.

@@ -39,13 +39,13 @@ type GetKeyPolicyInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
 	// Specifies the name of the key policy. The only valid name is default. To get the
-	// names of key policies, use ListKeyPolicies ().
+	// names of key policies, use ListKeyPolicies.
 	//
 	// This member is required.
 	PolicyName *string

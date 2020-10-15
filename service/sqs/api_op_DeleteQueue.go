@@ -14,7 +14,7 @@ import (
 // Be careful with the DeleteQueue action: When you delete a queue, any messages in
 // the queue are no longer available. When you delete a queue, the deletion process
 // takes up to 60 seconds. Requests you send involving that queue during the 60
-// seconds might succeed. For example, a SendMessage () request might succeed, but
+// seconds might succeed. For example, a SendMessage request might succeed, but
 // after 60 seconds the queue and the message you sent no longer exist. When you
 // delete a queue, you must wait at least 60 seconds before creating a queue with
 // the same name. Cross-account permissions don't apply to this action. For more

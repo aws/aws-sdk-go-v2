@@ -28,11 +28,11 @@ func (c *Client) DescribeInboundCrossClusterSearchConnections(ctx context.Contex
 }
 
 // Container for the parameters to the DescribeInboundCrossClusterSearchConnections
-// () operation.
+// operation.
 type DescribeInboundCrossClusterSearchConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster search
-	// connection. Available Filter () names for this operation are:
+	// connection. Available Filter names for this operation are:
 	//
 	//     *
 	// cross-cluster-search-connection-id
@@ -57,12 +57,12 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 	NextToken *string
 }
 
-// The result of a DescribeInboundCrossClusterSearchConnections () request.
-// Contains the list of connections matching the filter criteria.
+// The result of a DescribeInboundCrossClusterSearchConnections request. Contains
+// the list of connections matching the filter criteria.
 type DescribeInboundCrossClusterSearchConnectionsOutput struct {
 
-	// Consists of list of InboundCrossClusterSearchConnection () matching the
-	// specified filter criteria.
+	// Consists of list of InboundCrossClusterSearchConnection matching the specified
+	// filter criteria.
 	CrossClusterSearchConnections []*types.InboundCrossClusterSearchConnection
 
 	// If more results are available and NextToken is present, make the next request to

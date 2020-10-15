@@ -62,7 +62,7 @@ type CreateCertificateAuthorityInput struct {
 	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will
 	// write the CRL, and an optional CNAME alias that you can use to hide the name of
 	// your bucket in the CRL Distribution Points extension of your CA certificate. For
-	// more information, see the CrlConfiguration () structure.
+	// more information, see the CrlConfiguration structure.
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Key-value pairs that will be attached to the new private CA. You can associate

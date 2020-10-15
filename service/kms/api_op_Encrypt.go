@@ -26,45 +26,61 @@ import (
 // to Region B. When necessary, you can decrypt the encrypted data key and the
 // encrypted data entirely within in Region B.
 //
-// <p>You don't need to use the
-// <code>Encrypt</code> operation to encrypt a data key. The <a>GenerateDataKey</a>
-// and <a>GenerateDataKeyPair</a> operations return a plaintext data key and an
-// encrypted copy of that data key.</p> <p>When you encrypt data, you must specify
-// a symmetric or asymmetric CMK to use in the encryption operation. The CMK must
-// have a <code>KeyUsage</code> value of <code>ENCRYPT_DECRYPT.</code> To find the
-// <code>KeyUsage</code> of a CMK, use the <a>DescribeKey</a> operation. </p> <p>If
-// you use a symmetric CMK, you can use an encryption context to add additional
-// security to your encryption operation. If you specify an
-// <code>EncryptionContext</code> when encrypting data, you must specify the same
-// encryption context (a case-sensitive exact match) when decrypting the data.
-// Otherwise, the request to decrypt fails with an
-// <code>InvalidCiphertextException</code>. For more information, see <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption
-// Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>If
-// you specify an asymmetric CMK, you must also specify the encryption algorithm.
-// The algorithm must be compatible with the CMK type.</p> <important> <p>When you
-// use an asymmetric CMK to encrypt or reencrypt data, be sure to record the CMK
-// and encryption algorithm that you choose. You will be required to provide the
-// same CMK and encryption algorithm when you decrypt the data. If the CMK and
-// algorithm do not match the values used to encrypt the data, the decrypt
-// operation fails.</p> <p>You are not required to supply the CMK ID and encryption
-// algorithm when you decrypt with symmetric CMKs because AWS KMS stores this
-// information in the ciphertext blob. AWS KMS cannot store metadata in ciphertext
-// generated with asymmetric keys. The standard format for asymmetric key
-// ciphertext does not include configurable fields.</p> </important> <p>The maximum
-// size of the data that you can encrypt varies with the type of CMK and the
-// encryption algorithm that you choose.</p> <ul> <li> <p>Symmetric CMKs</p> <ul>
-// <li> <p> <code>SYMMETRIC_DEFAULT</code>: 4096 bytes</p> </li> </ul> </li> <li>
-// <p> <code>RSA_2048</code> </p> <ul> <li> <p> <code>RSAES_OAEP_SHA_1</code>: 214
-// bytes</p> </li> <li> <p> <code>RSAES_OAEP_SHA_256</code>: 190 bytes</p> </li>
-// </ul> </li> <li> <p> <code>RSA_3072</code> </p> <ul> <li> <p>
-// <code>RSAES_OAEP_SHA_1</code>: 342 bytes</p> </li> <li> <p>
-// <code>RSAES_OAEP_SHA_256</code>: 318 bytes</p> </li> </ul> </li> <li> <p>
-// <code>RSA_4096</code> </p> <ul> <li> <p> <code>RSAES_OAEP_SHA_1</code>: 470
-// bytes</p> </li> <li> <p> <code>RSAES_OAEP_SHA_256</code>: 446 bytes</p> </li>
-// </ul> </li> </ul> <p>The CMK that you use for this operation must be in a
-// compatible key state. For  details, see How Key State Affects Use of a Customer
-// Master Key
+// You don't need to use the Encrypt
+// operation to encrypt a data key. The GenerateDataKey and GenerateDataKeyPair
+// operations return a plaintext data key and an encrypted copy of that data key.
+// When you encrypt data, you must specify a symmetric or asymmetric CMK to use in
+// the encryption operation. The CMK must have a KeyUsage value of ENCRYPT_DECRYPT.
+// To find the KeyUsage of a CMK, use the DescribeKey operation. If you use a
+// symmetric CMK, you can use an encryption context to add additional security to
+// your encryption operation. If you specify an EncryptionContext when encrypting
+// data, you must specify the same encryption context (a case-sensitive exact
+// match) when decrypting the data. Otherwise, the request to decrypt fails with an
+// InvalidCiphertextException. For more information, see Encryption Context
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// in the AWS Key Management Service Developer Guide. If you specify an asymmetric
+// CMK, you must also specify the encryption algorithm. The algorithm must be
+// compatible with the CMK type. When you use an asymmetric CMK to encrypt or
+// reencrypt data, be sure to record the CMK and encryption algorithm that you
+// choose. You will be required to provide the same CMK and encryption algorithm
+// when you decrypt the data. If the CMK and algorithm do not match the values used
+// to encrypt the data, the decrypt operation fails. You are not required to supply
+// the CMK ID and encryption algorithm when you decrypt with symmetric CMKs because
+// AWS KMS stores this information in the ciphertext blob. AWS KMS cannot store
+// metadata in ciphertext generated with asymmetric keys. The standard format for
+// asymmetric key ciphertext does not include configurable fields. The maximum size
+// of the data that you can encrypt varies with the type of CMK and the encryption
+// algorithm that you choose.
+//
+//     * Symmetric CMKs
+//
+//         * SYMMETRIC_DEFAULT:
+// 4096 bytes
+//
+//     * RSA_2048
+//
+//         * RSAES_OAEP_SHA_1: 214 bytes
+//
+//         *
+// RSAES_OAEP_SHA_256: 190 bytes
+//
+//     * RSA_3072
+//
+//         * RSAES_OAEP_SHA_1: 342
+// bytes
+//
+//         * RSAES_OAEP_SHA_256: 318 bytes
+//
+//     * RSA_4096
+//
+//         *
+// RSAES_OAEP_SHA_1: 470 bytes
+//
+//         * RSAES_OAEP_SHA_256: 446 bytes
+//
+// The CMK
+// that you use for this operation must be in a compatible key state. For details,
+// see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. To perform this operation on a CMK
 // in a different AWS account, specify the key ARN or alias ARN in the value of the
@@ -104,8 +120,8 @@ type EncryptInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
-	// alias ARN, use ListAliases ().
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

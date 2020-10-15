@@ -30,11 +30,12 @@ import (
 // the default database defined by the character_set_database parameter. You can
 // use the Parameter Groups option of the Amazon RDS console
 // (https://console.aws.amazon.com/rds/) or the DescribeDBClusterParameters action
-// to verify that your DB cluster parameter group has been created or modified.
-// <p>For more information on Amazon Aurora, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html">
-// What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note>
-// <p>This action only applies to Aurora DB clusters.</p> </note>
+// to verify that your DB cluster parameter group has been created or modified. For
+// more information on Amazon Aurora, see
+//
+// What Is Amazon Aurora?
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *CreateDBClusterParameterGroupInput, optFns ...func(*Options)) (*CreateDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterParameterGroupInput{}

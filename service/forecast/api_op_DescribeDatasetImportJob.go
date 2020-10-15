@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes a dataset import job created using the CreateDatasetImportJob ()
+// Describes a dataset import job created using the CreateDatasetImportJob
 // operation. In addition to listing the parameters provided in the
 // CreateDatasetImportJob request, this operation includes the following
 // properties:

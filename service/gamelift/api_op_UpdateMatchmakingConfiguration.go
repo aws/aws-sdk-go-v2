@@ -18,25 +18,25 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
 // Related operations
 //
-//     * CreateMatchmakingConfiguration ()
+//     * CreateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingConfigurations ()
+// DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration ()
-//
-//
-// * DeleteMatchmakingConfiguration ()
-//
-//     * CreateMatchmakingRuleSet ()
+//     * UpdateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingRuleSets ()
+// DeleteMatchmakingConfiguration
 //
-//     * ValidateMatchmakingRuleSet ()
+//     * CreateMatchmakingRuleSet
 //
 //     *
-// DeleteMatchmakingRuleSet ()
+// DescribeMatchmakingRuleSets
+//
+//     * ValidateMatchmakingRuleSet
+//
+//     *
+// DeleteMatchmakingRuleSet
 func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *UpdateMatchmakingConfigurationInput, optFns ...func(*Options)) (*UpdateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMatchmakingConfigurationInput{}
@@ -79,9 +79,9 @@ type UpdateMatchmakingConfigurationInput struct {
 	// The method that is used to backfill game sessions created with this matchmaking
 	// configuration. Specify MANUAL when your game manages backfill requests manually
 	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
-	// create a StartMatchBackfill () request whenever a game session has one or more
-	// open slots. Learn more about manual and automatic backfill in Backfill Existing
-	// Games with FlexMatch
+	// create a StartMatchBackfill request whenever a game session has one or more open
+	// slots. Learn more about manual and automatic backfill in Backfill Existing Games
+	// with FlexMatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
 	BackfillMode types.BackfillMode
 
@@ -92,18 +92,18 @@ type UpdateMatchmakingConfigurationInput struct {
 	Description *string
 
 	// A set of custom properties for a game session, formatted as key-value pairs.
-	// These properties are passed to a game server process in the GameSession ()
-	// object with a request to start a new game session (see Start a Game Session
+	// These properties are passed to a game server process in the GameSession object
+	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession () object that is created for a
+	// This information is added to the new GameSession object that is created for a
 	// successful match.
 	GameProperties []*types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession () object with a
+	// This data is passed to a game server process in the GameSession object with a
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession () object that is created for a
+	// This information is added to the new GameSession object that is created for a
 	// successful match.
 	GameSessionData *string
 

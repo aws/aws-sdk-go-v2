@@ -17,13 +17,13 @@ import (
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Returns the web ACL capacity unit (WCU) requirements for a specified scope and
 // set of rules. You can use this to check the capacity requirements for the rules
-// you want to use in a RuleGroup () or WebACL (). AWS WAF uses WCUs to calculate
-// and control the operating resources that are used to run your rules, rule
-// groups, and web ACLs. AWS WAF calculates capacity differently for each rule
-// type, to reflect the relative cost of each rule. Simple rules that cost little
-// to run use fewer WCUs than more complex rules that use more processing power.
-// Rule group capacity is fixed at creation, which helps users plan their web ACL
-// WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500.
+// you want to use in a RuleGroup or WebACL. AWS WAF uses WCUs to calculate and
+// control the operating resources that are used to run your rules, rule groups,
+// and web ACLs. AWS WAF calculates capacity differently for each rule type, to
+// reflect the relative cost of each rule. Simple rules that cost little to run use
+// fewer WCUs than more complex rules that use more processing power. Rule group
+// capacity is fixed at creation, which helps users plan their web ACL WCU usage
+// when they use a rule group. The WCU limit for web ACLs is 1,500.
 func (c *Client) CheckCapacity(ctx context.Context, params *CheckCapacityInput, optFns ...func(*Options)) (*CheckCapacityOutput, error) {
 	if params == nil {
 		params = &CheckCapacityInput{}
@@ -41,7 +41,7 @@ func (c *Client) CheckCapacity(ctx context.Context, params *CheckCapacityInput, 
 
 type CheckCapacityInput struct {
 
-	// An array of Rule () that you're configuring to use in a rule group or web ACL.
+	// An array of Rule that you're configuring to use in a rule group or web ACL.
 	//
 	// This member is required.
 	Rules []*types.Rule

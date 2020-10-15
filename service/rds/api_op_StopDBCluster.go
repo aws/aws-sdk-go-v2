@@ -14,11 +14,11 @@ import (
 // Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains
 // the DB cluster's metadata, including its endpoints and DB parameter groups.
 // Aurora also retains the transaction logs so you can do a point-in-time restore
-// if necessary.  <p>For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html">
-// Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User
-// Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p>
-// </note>
+// if necessary. For more information, see
+//
+// Stopping and Starting an Aurora Cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
+// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, optFns ...func(*Options)) (*StopDBClusterOutput, error) {
 	if params == nil {
 		params = &StopDBClusterInput{}

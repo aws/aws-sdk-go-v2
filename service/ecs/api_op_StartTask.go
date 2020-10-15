@@ -12,7 +12,7 @@ import (
 )
 
 // Starts a new task from the specified task definition on the specified container
-// instance or instances. Alternatively, you can use RunTask () to place tasks for
+// instance or instances. Alternatively, you can use RunTask to place tasks for
 // you. For more information, see Scheduling Tasks
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide.
@@ -86,7 +86,7 @@ type StartTaskInput struct {
 	// automatically trigger a task to run a batch process job, you could apply a
 	// unique identifier for that job to your task with the startedBy parameter. You
 	// can then identify which tasks belong to that job by filtering the results of a
-	// ListTasks () call with the startedBy value. Up to 36 letters (uppercase and
+	// ListTasks call with the startedBy value. Up to 36 letters (uppercase and
 	// lowercase), numbers, hyphens, and underscores are allowed. If a task is started
 	// by an Amazon ECS service, then the startedBy parameter contains the deployment
 	// ID of the service that starts it.

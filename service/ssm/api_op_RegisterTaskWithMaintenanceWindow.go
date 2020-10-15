@@ -73,7 +73,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the
 	// TaskInvocationParameters structure. For information about how Systems Manager
 	// handles these options for the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters ().
+	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
 	// An optional name for the task.
@@ -109,7 +109,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// has been deprecated. To specify parameters to pass to a task when it runs,
 	// instead use the Parameters option in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
-	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
 }
 

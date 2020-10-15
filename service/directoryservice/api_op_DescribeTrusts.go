@@ -41,8 +41,8 @@ type DescribeTrustsInput struct {
 	// The maximum number of objects to return.
 	Limit *int32
 
-	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts
-	// (). Pass null if this is the first call.
+	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts.
+	// Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of the trust relationships for which to obtain the
@@ -56,7 +56,7 @@ type DescribeTrustsInput struct {
 type DescribeTrustsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeTrusts () to retrieve the next set of
+	// parameter in a subsequent call to DescribeTrusts to retrieve the next set of
 	// items.
 	NextToken *string
 

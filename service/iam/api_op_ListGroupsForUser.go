@@ -54,7 +54,7 @@ type ListGroupsForUserInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListGroupsForUser () request.
+// Contains the response to a successful ListGroupsForUser request.
 type ListGroupsForUserOutput struct {
 
 	// A list of groups.

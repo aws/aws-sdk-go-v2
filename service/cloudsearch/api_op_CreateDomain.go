@@ -29,8 +29,8 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 	return out, nil
 }
 
-// Container for the parameters to the CreateDomain () operation. Specifies a name
-// for the new search domain.
+// Container for the parameters to the CreateDomain operation. Specifies a name for
+// the new search domain.
 type CreateDomainInput struct {
 
 	// A name for the domain you are creating. Allowed characters are a-z (lower-case

@@ -53,7 +53,7 @@ type ListVirtualMFADevicesInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListVirtualMFADevices () request.
+// Contains the response to a successful ListVirtualMFADevices request.
 type ListVirtualMFADevicesOutput struct {
 
 	// The list of virtual MFA devices in the current account that match the

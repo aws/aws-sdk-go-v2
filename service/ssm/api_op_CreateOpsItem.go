@@ -70,13 +70,13 @@ type CreateOpsItemInput struct {
 	// amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm. You can choose to make the
 	// data searchable by other users in the account or you can restrict search access.
 	// Searchable data means that all users with access to the OpsItem Overview page
-	// (as provided by the DescribeOpsItems () API action) can view and search on the
+	// (as provided by the DescribeOpsItems API action) can view and search on the
 	// specified data. Operational data that is not searchable is only viewable by
-	// users who have access to the OpsItem (as provided by the GetOpsItem () API
-	// action).  <p>Use the <code>/aws/resources</code> key in OperationalData to
-	// specify a related resource in  the request. Use the /aws/automations key in
-	// OperationalData to associate an Automation runbook with the OpsItem. To view AWS
-	// CLI example commands that use these keys, see Creating OpsItems manually
+	// users who have access to the OpsItem (as provided by the GetOpsItem API action).
+	// Use the /aws/resources key in OperationalData to specify a related resource in
+	// the request. Use the /aws/automations key in OperationalData to associate an
+	// Automation runbook with the OpsItem. To view AWS CLI example commands that use
+	// these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]*types.OpsItemDataValue
@@ -97,8 +97,8 @@ type CreateOpsItemInput struct {
 	// information, see Getting started with OpsCenter
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
 	// in the AWS Systems Manager User Guide. Tags use a key-value pair. For example:
-	// <p> <code>Key=Department,Value=Finance</code> </p> <note> <p>To add tags to an
-	// existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>
+	// Key=Department,Value=Finance To add tags to an existing OpsItem, use the
+	// AddTagsToResource action.
 	Tags []*types.Tag
 }
 

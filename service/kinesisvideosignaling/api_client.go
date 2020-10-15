@@ -19,9 +19,8 @@ import (
 const ServiceID = "Kinesis Video Signaling"
 const ServiceAPIVersion = "2019-12-04"
 
-// Kinesis Video Streams Signaling Service is a intermediate service that
-// establishes a communication channel for discovering peers, transmitting offers
-// and answers in order to establish peer-to-peer connection in webRTC technology.
+// Client provides the API client to make operations call for Amazon Kinesis Video
+// Signaling Channels.
 type Client struct {
 	options Options
 }

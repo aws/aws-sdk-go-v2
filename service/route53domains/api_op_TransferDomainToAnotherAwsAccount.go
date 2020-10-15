@@ -28,22 +28,22 @@ import (
 // RejectDomainTransferFromAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_RejectDomainTransferFromAnotherAwsAccount.html).
 //
-//
-// <important> <p>When you transfer a domain from one AWS account to another, Route
-// 53 doesn't transfer the hosted zone that is associated with the domain. DNS
-// resolution isn't affected if the domain and the hosted zone are owned by
-// separate accounts, so transferring the hosted zone is optional. For information
-// about transferring the hosted zone to another AWS account, see <a
-// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-migrating.html">Migrating
-// a Hosted Zone to a Different AWS Account</a> in the <i>Amazon Route 53 Developer
-// Guide</i>.</p> </important> <p>Use either <a
-// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html">ListOperations</a>
-// or <a
-// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>
-// to determine whether the operation succeeded. <a
-// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a>
-// provides additional information, for example, <code>Domain Transfer from Aws
-// Account 111122223333 has been cancelled</code>. </p>
+// When
+// you transfer a domain from one AWS account to another, Route 53 doesn't transfer
+// the hosted zone that is associated with the domain. DNS resolution isn't
+// affected if the domain and the hosted zone are owned by separate accounts, so
+// transferring the hosted zone is optional. For information about transferring the
+// hosted zone to another AWS account, see Migrating a Hosted Zone to a Different
+// AWS Account
+// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-migrating.html)
+// in the Amazon Route 53 Developer Guide. Use either ListOperations
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
+// or GetOperationDetail
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// to determine whether the operation succeeded. GetOperationDetail
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// provides additional information, for example, Domain Transfer from Aws Account
+// 111122223333 has been cancelled.
 func (c *Client) TransferDomainToAnotherAwsAccount(ctx context.Context, params *TransferDomainToAnotherAwsAccountInput, optFns ...func(*Options)) (*TransferDomainToAnotherAwsAccountOutput, error) {
 	if params == nil {
 		params = &TransferDomainToAnotherAwsAccountInput{}

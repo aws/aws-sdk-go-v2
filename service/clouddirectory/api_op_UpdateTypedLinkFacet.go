@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates a TypedLinkFacet (). For more information, see Typed Links
+// Updates a TypedLinkFacet. For more information, see Typed Links
 // (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 func (c *Client) UpdateTypedLinkFacet(ctx context.Context, params *UpdateTypedLinkFacetInput, optFns ...func(*Options)) (*UpdateTypedLinkFacetOutput, error) {
 	if params == nil {
@@ -54,7 +54,7 @@ type UpdateTypedLinkFacetInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns ().
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string

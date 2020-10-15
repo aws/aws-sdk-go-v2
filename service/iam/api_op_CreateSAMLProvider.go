@@ -67,7 +67,7 @@ type CreateSAMLProviderInput struct {
 	SAMLMetadataDocument *string
 }
 
-// Contains the response to a successful CreateSAMLProvider () request.
+// Contains the response to a successful CreateSAMLProvider request.
 type CreateSAMLProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new SAML provider resource in IAM.

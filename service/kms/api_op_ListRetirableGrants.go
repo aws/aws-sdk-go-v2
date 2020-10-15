@@ -13,7 +13,7 @@ import (
 
 // Returns a list of all grants for which the grant's RetiringPrincipal matches the
 // one specified. A typical use is to list all grants that you are able to retire.
-// To retire a grant, use RetireGrant ().
+// To retire a grant, use RetireGrant.
 func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableGrantsInput, optFns ...func(*Options)) (*ListRetirableGrantsOutput, error) {
 	if params == nil {
 		params = &ListRetirableGrantsInput{}

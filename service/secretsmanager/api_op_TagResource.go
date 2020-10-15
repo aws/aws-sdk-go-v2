@@ -14,35 +14,35 @@ import (
 // Attaches one or more tags, each consisting of a key name and a value, to the
 // specified secret. Tags are part of the secret's overall metadata, and are not
 // associated with any specific version of the secret. This operation only appends
-// tags to the existing list of tags. To remove tags, you must use UntagResource
-// (). The following basic restrictions apply to tags:
+// tags to the existing list of tags. To remove tags, you must use UntagResource.
+// The following basic restrictions apply to tags:
 //
-//     * Maximum number of
-// tags per secret—50
+//     * Maximum number of tags
+// per secret—50
 //
 //     * Maximum key length—127 Unicode characters in UTF-8
 //
+//     *
+// Maximum value length—255 Unicode characters in UTF-8
 //
-// * Maximum value length—255 Unicode characters in UTF-8
+//     * Tag keys and values
+// are case sensitive.
 //
-//     * Tag keys and
-// values are case sensitive.
+//     * Do not use the aws: prefix in your tag names or
+// values because AWS reserves it for AWS use. You can't edit or delete tag names
+// or values with this prefix. Tags with this prefix do not count against your tags
+// per secret limit.
 //
-//     * Do not use the aws: prefix in your tag names
-// or values because AWS reserves it for AWS use. You can't edit or delete tag
-// names or values with this prefix. Tags with this prefix do not count against
-// your tags per secret limit.
+//     * If you use your tagging schema across multiple services
+// and resources, remember other services might have restrictions on allowed
+// characters. Generally allowed characters: letters, spaces, and numbers
+// representable in UTF-8, plus the following special characters: + - = . _ : /
+// @.
 //
-//     * If you use your tagging schema across
-// multiple services and resources, remember other services might have restrictions
-// on allowed characters. Generally allowed characters: letters, spaces, and
-// numbers representable in UTF-8, plus the following special characters: + - = . _
-// : / @.
-//
-// If you use tags as part of your security strategy, then adding or
-// removing a tag can change permissions. If successfully completing this operation
-// would result in you losing your permissions for this secret, then the operation
-// is blocked and returns an Access Denied error. Minimum permissions To run this
+// If you use tags as part of your security strategy, then adding or removing a
+// tag can change permissions. If successfully completing this operation would
+// result in you losing your permissions for this secret, then the operation is
+// blocked and returns an Access Denied error. Minimum permissions To run this
 // command, you must have the following permissions:
 //
 //     *
@@ -51,10 +51,10 @@ import (
 // Related operations
 //
 //     * To remove one or more tags
-// from the collection attached to a secret, use UntagResource ().
+// from the collection attached to a secret, use UntagResource.
 //
-//     * To view
-// the list of tags attached to a secret, use DescribeSecret ().
+//     * To view the
+// list of tags attached to a secret, use DescribeSecret.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

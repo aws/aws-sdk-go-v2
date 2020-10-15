@@ -12,13 +12,13 @@ import (
 )
 
 // Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network
-// (CDN) distribution.  <p>After the certificate is created, use the
-// <code>AttachCertificateToDistribution</code> action to attach the certificate to
-// your distribution.</p> <important> <p>Only certificates created in the
-// <code>us-east-1</code> AWS Region can be attached to Lightsail distributions.
-// Lightsail distributions are global resources that can reference an origin in any
-// AWS Region, and distribute its content globally. However, all distributions are
-// located in the <code>us-east-1</code> Region.</p> </important>
+// (CDN) distribution. After the certificate is created, use the
+// AttachCertificateToDistribution action to attach the certificate to your
+// distribution. Only certificates created in the us-east-1 AWS Region can be
+// attached to Lightsail distributions. Lightsail distributions are global
+// resources that can reference an origin in any AWS Region, and distribute its
+// content globally. However, all distributions are located in the us-east-1
+// Region.
 func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificateInput, optFns ...func(*Options)) (*CreateCertificateOutput, error) {
 	if params == nil {
 		params = &CreateCertificateInput{}
@@ -47,15 +47,13 @@ type CreateCertificateInput struct {
 	DomainName *string
 
 	// An array of strings that specify the alternate domains (e.g., example2.com) and
-	// subdomains (e.g., blog.example.com) for the certificate.  <p>You can specify a
-	// maximum of nine alternate domains (in addition to the primary domain name).</p>
-	// <p>Wildcard domain entries (e.g., <code>*.example.com</code>) are not
-	// supported.</p>
+	// subdomains (e.g., blog.example.com) for the certificate. You can specify a
+	// maximum of nine alternate domains (in addition to the primary domain name).
+	// Wildcard domain entries (e.g., *.example.com) are not supported.
 	SubjectAlternativeNames []*string
 
-	// The tag keys and optional values to add to the certificate during create.
-	// <p>Use the <code>TagResource</code> action to tag a resource after it's
-	// created.</p>
+	// The tag keys and optional values to add to the certificate during create. Use
+	// the TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
 }
 

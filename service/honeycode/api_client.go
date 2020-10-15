@@ -19,10 +19,7 @@ import (
 const ServiceID = "Honeycode"
 const ServiceAPIVersion = "2020-03-01"
 
-// Amazon Honeycode is a fully managed service that allows you to quickly build
-// mobile and web apps for teams—without programming. Build Honeycode apps for
-// managing almost anything, like projects, customers, operations, approvals,
-// resources, and even your team.
+// Client provides the API client to make operations call for Amazon Honeycode.
 type Client struct {
 	options Options
 }

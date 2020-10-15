@@ -68,8 +68,8 @@ type ListHandshakesForOrganizationInput struct {
 
 type ListHandshakesForOrganizationOutput struct {
 
-	// A list of Handshake () objects with details about each of the handshakes that
-	// are associated with an organization.
+	// A list of Handshake objects with details about each of the handshakes that are
+	// associated with an organization.
 	Handshakes []*types.Handshake
 
 	// If present, indicates that more output is available than is included in the

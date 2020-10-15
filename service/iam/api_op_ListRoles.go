@@ -60,7 +60,7 @@ type ListRolesInput struct {
 	PathPrefix *string
 }
 
-// Contains the response to a successful ListRoles () request.
+// Contains the response to a successful ListRoles request.
 type ListRolesOutput struct {
 
 	// A list of roles.

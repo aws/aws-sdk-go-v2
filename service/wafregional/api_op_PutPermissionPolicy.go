@@ -26,20 +26,29 @@ import (
 //     * The policy
 // must include an Effect, Action and Principal.
 //
-//     * <p> <code>Effect</code>
-// must specify <code>Allow</code>.</p> </li> <li> <p>The <code>Action</code> in
-// the policy must be <code>waf:UpdateWebACL</code>,
-// <code>waf-regional:UpdateWebACL</code>, <code>waf:GetRuleGroup</code> and
-// <code>waf-regional:GetRuleGroup</code> . Any extra or wildcard actions in the
-// policy will be rejected.</p> </li> <li> <p>The policy cannot include a
-// <code>Resource</code> parameter.</p> </li> <li> <p>The ARN in the request must
-// be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same
-// region.</p> </li> <li> <p>The user making the request must be the owner of the
-// RuleGroup.</p> </li> <li> <p>Your policy must be composed using IAM Policy
-// version 2012-10-17.</p> </li> </ul> <p>For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">IAM
-// Policies</a>. </p> <p>An example of a valid policy parameter is shown in the
-// Examples section below.</p>
+//     * Effect must specify
+// Allow.
+//
+//     * The Action in the policy must be waf:UpdateWebACL,
+// waf-regional:UpdateWebACL, waf:GetRuleGroup and waf-regional:GetRuleGroup . Any
+// extra or wildcard actions in the policy will be rejected.
+//
+//     * The policy
+// cannot include a Resource parameter.
+//
+//     * The ARN in the request must be a
+// valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.
+//
+//     *
+// The user making the request must be the owner of the RuleGroup.
+//
+//     * Your
+// policy must be composed using IAM Policy version 2012-10-17.
+//
+// For more
+// information, see IAM Policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html). An
+// example of a valid policy parameter is shown in the Examples section below.
 func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionPolicyInput, optFns ...func(*Options)) (*PutPermissionPolicyOutput, error) {
 	if params == nil {
 		params = &PutPermissionPolicyInput{}

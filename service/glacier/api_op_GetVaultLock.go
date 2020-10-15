@@ -26,17 +26,16 @@ import (
 //     * When the vault lock was initiated and put into the
 // InProgress state.
 //
-//     <p>A vault lock is put into the <code>InProgress</code>
-// state by calling <a>InitiateVaultLock</a>. A vault lock is put into the
-// <code>Locked</code> state by calling <a>CompleteVaultLock</a>. You can abort the
-// vault locking process by calling <a>AbortVaultLock</a>. For more information
-// about the vault locking process, <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html">Amazon
-// Glacier Vault Lock</a>. </p> <p>If there is no vault lock policy set on the
-// vault, the operation returns a <code>404 Not found</code> error. For more
-// information about vault lock policies, <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html">Amazon
-// Glacier Access Control with Vault Lock Policies</a>. </p>
+// A vault lock is put into the InProgress state by calling
+// InitiateVaultLock. A vault lock is put into the Locked state by calling
+// CompleteVaultLock. You can abort the vault locking process by calling
+// AbortVaultLock. For more information about the vault locking process, Amazon
+// Glacier Vault Lock
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html). If there
+// is no vault lock policy set on the vault, the operation returns a 404 Not found
+// error. For more information about vault lock policies, Amazon Glacier Access
+// Control with Vault Lock Policies
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
 func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, optFns ...func(*Options)) (*GetVaultLockOutput, error) {
 	if params == nil {
 		params = &GetVaultLockInput{}

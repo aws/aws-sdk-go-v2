@@ -80,7 +80,7 @@ type StartAutomationExecutionInput struct {
 	//     * Key=OS,Value=Windows
 	//
 	// To add tags to an
-	// existing patch baseline, use the AddTagsToResource () action.
+	// existing patch baseline, use the AddTagsToResource action.
 	Tags []*types.Tag
 
 	// A location is a combination of AWS Regions and/or AWS accounts where you want to

@@ -442,12 +442,11 @@ type DeleteMarkerEntry struct {
 // contain only Disabled. For an example configuration, see Basic Rule
 // Configuration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
-// <note> <p> If you don't specify the <code>Filter</code> element, Amazon S3
-// assumes that the replication configuration is the earlier version, V1. In the
-// earlier version, Amazon S3 handled replication of delete markers differently.
-// For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward
-// Compatibility</a>.</p> </note>
+// If you don't specify the Filter element, Amazon S3 assumes that the replication
+// configuration is the earlier version, V1. In the earlier version, Amazon S3
+// handled replication of delete markers differently. For more information, see
+// Backward Compatibility
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 type DeleteMarkerReplication struct {
 
 	// Indicates whether to replicate delete markers. In the current implementation,
@@ -2413,12 +2412,11 @@ type ReplicationRule struct {
 	// contain only Disabled. For an example configuration, see Basic Rule
 	// Configuration
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
-	// <note> <p> If you don't specify the <code>Filter</code> element, Amazon S3
-	// assumes that the replication configuration is the earlier version, V1. In the
-	// earlier version, Amazon S3 handled replication of delete markers differently.
-	// For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward
-	// Compatibility</a>.</p> </note>
+	// If you don't specify the Filter element, Amazon S3 assumes that the replication
+	// configuration is the earlier version, V1. In the earlier version, Amazon S3
+	// handled replication of delete markers differently. For more information, see
+	// Backward Compatibility
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 	DeleteMarkerReplication *DeleteMarkerReplication
 
 	//

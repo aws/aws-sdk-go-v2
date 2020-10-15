@@ -28,7 +28,7 @@ func (c *Client) DescribePackages(ctx context.Context, params *DescribePackagesI
 	return out, nil
 }
 
-// Container for request parameters to DescribePackage () operation.
+// Container for request parameters to DescribePackage operation.
 type DescribePackagesInput struct {
 
 	// Only returns packages that match the DescribePackagesFilterList values.
@@ -42,7 +42,7 @@ type DescribePackagesInput struct {
 	NextToken *string
 }
 
-// Container for response returned by DescribePackages () operation.
+// Container for response returned by DescribePackages operation.
 type DescribePackagesOutput struct {
 	NextToken *string
 

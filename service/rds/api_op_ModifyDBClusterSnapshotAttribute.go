@@ -24,7 +24,7 @@ import (
 // You can't use all as a value for that parameter in this case. To view which AWS
 // accounts have access to copy or restore a manual DB cluster snapshot, or whether
 // a manual DB cluster snapshot is public or private, use the
-// DescribeDBClusterSnapshotAttributes () API action. The accounts are returned as
+// DescribeDBClusterSnapshotAttributes API action. The accounts are returned as
 // values for the restore attribute. This action only applies to Aurora DB
 // clusters.
 func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *ModifyDBClusterSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBClusterSnapshotAttributeOutput, error) {
@@ -48,7 +48,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// The name of the DB cluster snapshot attribute to modify. To manage authorization
 	// for other AWS accounts to copy or restore a manual DB cluster snapshot, set this
 	// value to restore. To view the list of attributes available to modify, use the
-	// DescribeDBClusterSnapshotAttributes () API action.
+	// DescribeDBClusterSnapshotAttributes API action.
 	//
 	// This member is required.
 	AttributeName *string

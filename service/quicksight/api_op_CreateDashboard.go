@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate () API operation. A dashboard is an entity in QuickSight that
+// CreateTemplate API operation. A dashboard is an entity in QuickSight that
 // identifies QuickSight reports, created from analyses. You can share QuickSight
 // dashboards. With the right permissions, you can create scheduled email reports
 // from them. The CreateDashboard, DescribeDashboard, and ListDashboardsByUser API
@@ -54,12 +54,12 @@ type CreateDashboardInput struct {
 	// SourceEntity, you specify the type of object you're using as source. You can
 	// only create a dashboard from a template, so you use a SourceTemplate entity. If
 	// you need to create a dashboard from an analysis, first convert the analysis to a
-	// template by using the CreateTemplate () API operation. For SourceTemplate,
-	// specify the Amazon Resource Name (ARN) of the source template. The
-	// SourceTemplateARN can contain any AWS Account and any QuickSight-supported AWS
-	// Region. Use the DataSetReferences entity within SourceTemplate to list the
-	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder.
+	// template by using the CreateTemplate API operation. For SourceTemplate, specify
+	// the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can
+	// contain any AWS Account and any QuickSight-supported AWS Region. Use the
+	// DataSetReferences entity within SourceTemplate to list the replacement datasets
+	// for the placeholders listed in the original. The schema in each dataset must
+	// match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity

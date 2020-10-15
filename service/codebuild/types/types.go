@@ -831,7 +831,7 @@ type Project struct {
 	// Information about the build badge for the build project.
 	Badge *ProjectBadge
 
-	// A ProjectBuildBatchConfig () object that defines the batch build options for the
+	// A ProjectBuildBatchConfig object that defines the batch build options for the
 	// project.
 	BuildBatchConfig *ProjectBuildBatchConfig
 

@@ -7,7 +7,7 @@ import (
 )
 
 // Contains metadata about an ACM certificate. This structure is returned in the
-// response to a DescribeCertificate () request.
+// response to a DescribeCertificate request.
 type CertificateDetail struct {
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
@@ -30,7 +30,7 @@ type CertificateDetail struct {
 	DomainName *string
 
 	// Contains information about the initial validation of each domain name that
-	// occurs as a result of the RequestCertificate () request. This field exists only
+	// occurs as a result of the RequestCertificate request. This field exists only
 	// when the certificate type is AMAZON_ISSUED.
 	DomainValidationOptions []*DomainValidation
 
@@ -84,8 +84,7 @@ type CertificateDetail struct {
 	Options *CertificateOptions
 
 	// Specifies whether the certificate is eligible for renewal. At this time, only
-	// exported private certificates can be renewed with the RenewCertificate ()
-	// command.
+	// exported private certificates can be renewed with the RenewCertificate command.
 	RenewalEligibility RenewalEligibility
 
 	// Contains information about the status of ACM's managed renewal
@@ -122,8 +121,8 @@ type CertificateDetail struct {
 	SubjectAlternativeNames []*string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
-	// AMAZON_ISSUED. For certificates that you imported with ImportCertificate (),
-	// this value is IMPORTED. ACM does not provide managed renewal
+	// AMAZON_ISSUED. For certificates that you imported with ImportCertificate, this
+	// value is IMPORTED. ACM does not provide managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) for imported
 	// certificates. For more information about the differences between certificates
 	// that you import and those that ACM provides, see Importing Certificates
@@ -147,14 +146,14 @@ type CertificateOptions struct {
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
 }
 
-// This structure is returned in the response object of ListCertificates () action.
+// This structure is returned in the response object of ListCertificates action.
 type CertificateSummary struct {
 
-	// Amazon Resource Name (ARN) of the certificate. This is of the form:  <p>
-	// <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>
-	// </p> <p>For more information about ARNs, see <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces</a>. </p>
+	// Amazon Resource Name (ARN) of the certificate. This is of the form:
+	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	CertificateArn *string
 
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
@@ -192,8 +191,13 @@ type DomainValidation struct {
 	ValidationMethod ValidationMethod
 
 	// The validation status of the domain name. This can be one of the following
-	// values:  <ul> <li> <p> <code>PENDING_VALIDATION</code> </p> </li> <li> <p>
-	// <code></code>SUCCESS</p> </li> <li> <p> <code></code>FAILED</p> </li> </ul>
+	// values:
+	//
+	//     * PENDING_VALIDATION
+	//
+	//     * SUCCESS
+	//
+	//     * FAILED
 	ValidationStatus DomainStatus
 }
 
@@ -239,24 +243,37 @@ type ExtendedKeyUsage struct {
 
 	// An object identifier (OID) for the extension value. OIDs are strings of numbers
 	// separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280.
-	// <ul> <li> <p> <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code>
-	// </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.2
-	// (TLS_WEB_CLIENT_AUTHENTICATION)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code> </p> </li> <li> <p>
-	// <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code> </p> </li> </ul>
+	//
+	//
+	// * 1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)
+	//
+	//     * 1.3.6.1.5.5.7.3.2
+	// (TLS_WEB_CLIENT_AUTHENTICATION)
+	//
+	//     * 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
+	//
+	//     *
+	// 1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)
+	//
+	//     * 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
+	//
+	//
+	// * 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
+	//
+	//     * 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
+	//
+	//
+	// * 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
+	//
+	//     * 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
 	OID *string
 }
 
-// This structure can be used in the ListCertificates () action to filter the
-// output of the certificate list.
+// This structure can be used in the ListCertificates action to filter the output
+// of the certificate list.
 type Filters struct {
 
-	// Specify one or more ExtendedKeyUsage () extension values.
+	// Specify one or more ExtendedKeyUsage extension values.
 	ExtendedKeyUsage []ExtendedKeyUsageName
 
 	// Specify one or more algorithms that can be used to generate key pairs. Default
@@ -266,7 +283,7 @@ type Filters struct {
 	// certificates.
 	KeyTypes []KeyAlgorithm
 
-	// Specify one or more KeyUsage () extension values.
+	// Specify one or more KeyUsage extension values.
 	KeyUsage []KeyUsageName
 }
 
@@ -288,8 +305,8 @@ type RenewalSummary struct {
 	// certificate, as it pertains to ACM's managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html). This is
 	// different from the initial validation that occurs as a result of the
-	// RequestCertificate () request. This field exists only when the certificate type
-	// is AMAZON_ISSUED.
+	// RequestCertificate request. This field exists only when the certificate type is
+	// AMAZON_ISSUED.
 	//
 	// This member is required.
 	DomainValidationOptions []*DomainValidation
@@ -311,7 +328,7 @@ type RenewalSummary struct {
 }
 
 // Contains a DNS record value that you can use to can use to validate ownership or
-// control of a domain. This is used by the DescribeCertificate () action.
+// control of a domain. This is used by the DescribeCertificate action.
 type ResourceRecord struct {
 
 	// The name of the DNS record to create in your domain. This is supplied by ACM.

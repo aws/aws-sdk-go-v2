@@ -195,12 +195,12 @@ type AssumeRoleInput struct {
 	// session policies can't exceed 2,048 characters. The JSON policy characters can
 	// be any ASCII character from the space character to the end of the valid
 	// character list (\u0020 through \u00FF). It can also include the tab (\u0009),
-	// linefeed (\u000A), and carriage return (\u000D) characters.  <note> <p>An AWS
-	// conversion compresses the passed session policies and session tags into a packed
-	// binary format that has a separate limit. Your request can fail for this limit
-	// even if your plain text meets the other requirements. The
-	// <code>PackedPolicySize</code> response element indicates by percentage how close
-	// the policies and tags for your request are to the upper size limit. </p> </note>
+	// linefeed (\u000A), and carriage return (\u000D) characters. An AWS conversion
+	// compresses the passed session policies and session tags into a packed binary
+	// format that has a separate limit. Your request can fail for this limit even if
+	// your plain text meets the other requirements. The PackedPolicySize response
+	// element indicates by percentage how close the policies and tags for your request
+	// are to the upper size limit.
 	Policy *string
 
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
@@ -210,20 +210,20 @@ type AssumeRoleInput struct {
 	// policies can't exceed 2,048 characters. For more information about ARNs, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.  <note> <p>An AWS conversion compresses the passed
-	// session policies and session tags into a packed binary format that has a
-	// separate limit. Your request can fail for this limit even if your plain text
-	// meets the other requirements. The <code>PackedPolicySize</code> response element
-	// indicates by percentage how close the policies and tags for your request are to
-	// the upper size limit. </p> </note> <p>Passing policies to this operation returns
-	// new temporary credentials. The resulting session's permissions are the
-	// intersection of the role's identity-based policy and the session policies. You
-	// can use the role's temporary credentials in subsequent AWS API calls to access
-	// resources in the account that owns the role. You cannot use session policies to
-	// grant more permissions than those allowed by the identity-based policy of the
-	// role that is being assumed. For more information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
-	// Policies</a> in the <i>IAM User Guide</i>.</p>
+	// the AWS General Reference. An AWS conversion compresses the passed session
+	// policies and session tags into a packed binary format that has a separate limit.
+	// Your request can fail for this limit even if your plain text meets the other
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit.
+	// Passing policies to this operation returns new temporary credentials. The
+	// resulting session's permissions are the intersection of the role's
+	// identity-based policy and the session policies. You can use the role's temporary
+	// credentials in subsequent AWS API calls to access resources in the account that
+	// owns the role. You cannot use session policies to grant more permissions than
+	// those allowed by the identity-based policy of the role that is being assumed.
+	// For more information, see Session Policies
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// in the IAM User Guide.
 	PolicyArns []*types.PolicyDescriptorType
 
 	// The identification number of the MFA device that is associated with the user who
@@ -246,27 +246,25 @@ type AssumeRoleInput struct {
 	// can’t exceed 256 characters. For these and additional limits, see IAM and STS
 	// Character Limits
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
-	// in the IAM User Guide.  <note> <p>An AWS conversion compresses the passed
-	// session policies and session tags into a packed binary format that has a
-	// separate limit. Your request can fail for this limit even if your plain text
-	// meets the other requirements. The <code>PackedPolicySize</code> response element
-	// indicates by percentage how close the policies and tags for your request are to
-	// the upper size limit. </p> </note> <p>You can pass a session tag with the same
-	// key as a tag that is already attached to the role. When you do, session tags
-	// override a role tag with the same key. </p> <p>Tag key–value pairs are not case
-	// sensitive, but case is preserved. This means that you cannot have separate
-	// <code>Department</code> and <code>department</code> tag keys. Assume that the
-	// role has the <code>Department</code>=<code>Marketing</code> tag and you pass the
-	// <code>department</code>=<code>engineering</code> session tag.
-	// <code>Department</code> and <code>department</code> are not saved as separate
-	// tags, and the session tag passed in the request takes precedence over the role
-	// tag.</p> <p>Additionally, if you used temporary credentials to perform this
-	// operation, the new session inherits any transitive session tags from the calling
-	// session. If you pass a session tag with the same key as an inherited tag, the
-	// operation fails. To view the inherited tags for a session, see the AWS
-	// CloudTrail logs. For more information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs">Viewing
-	// Session Tags in CloudTrail</a> in the <i>IAM User Guide</i>.</p>
+	// in the IAM User Guide. An AWS conversion compresses the passed session policies
+	// and session tags into a packed binary format that has a separate limit. Your
+	// request can fail for this limit even if your plain text meets the other
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit. You
+	// can pass a session tag with the same key as a tag that is already attached to
+	// the role. When you do, session tags override a role tag with the same key. Tag
+	// key–value pairs are not case sensitive, but case is preserved. This means that
+	// you cannot have separate Department and department tag keys. Assume that the
+	// role has the Department=Marketing tag and you pass the department=engineering
+	// session tag. Department and department are not saved as separate tags, and the
+	// session tag passed in the request takes precedence over the role tag.
+	// Additionally, if you used temporary credentials to perform this operation, the
+	// new session inherits any transitive session tags from the calling session. If
+	// you pass a session tag with the same key as an inherited tag, the operation
+	// fails. To view the inherited tags for a session, see the AWS CloudTrail logs.
+	// For more information, see Viewing Session Tags in CloudTrail
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs)
+	// in the IAM User Guide.
 	Tags []*types.Tag
 
 	// The value provided by the MFA device, if the trust policy of the role being
@@ -289,7 +287,7 @@ type AssumeRoleInput struct {
 	TransitiveTagKeys []*string
 }
 
-// Contains the response to a successful AssumeRole () request, including temporary
+// Contains the response to a successful AssumeRole request, including temporary
 // AWS credentials that can be used to make AWS requests.
 type AssumeRoleOutput struct {
 

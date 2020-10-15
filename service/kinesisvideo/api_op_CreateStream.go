@@ -10,14 +10,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a new Kinesis video stream.  <p>When you create a new stream, Kinesis
-// Video Streams assigns it a version number. When you change the stream's
-// metadata, Kinesis Video Streams updates the version. </p> <p>
-// <code>CreateStream</code> is an asynchronous operation.</p> <p>For information
-// about how the service works, see <a
-// href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html">How
-// it Works</a>. </p> <p>You must have permissions for the
-// <code>KinesisVideo:CreateStream</code> action.</p>
+// Creates a new Kinesis video stream. When you create a new stream, Kinesis Video
+// Streams assigns it a version number. When you change the stream's metadata,
+// Kinesis Video Streams updates the version. CreateStream is an asynchronous
+// operation. For information about how the service works, see How it Works
+// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html).
+// You must have permissions for the KinesisVideo:CreateStream action.
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamInput{}
@@ -65,10 +63,9 @@ type CreateStreamInput struct {
 	// when processing the stream. For more information about media types, see Media
 	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If you
 	// choose to specify the MediaType, see Naming Requirements
-	// (https://tools.ietf.org/html/rfc6838#section-4.2) for guidelines.  <p>Example
-	// valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This
-	// parameter is optional; the default value is <code>null</code> (or empty in
-	// JSON).</p>
+	// (https://tools.ietf.org/html/rfc6838#section-4.2) for guidelines. Example valid
+	// values include "video/h264" and "video/h264,audio/aac". This parameter is
+	// optional; the default value is null (or empty in JSON).
 	MediaType *string
 
 	// A list of tags to associate with the specified stream. Each tag is a key-value

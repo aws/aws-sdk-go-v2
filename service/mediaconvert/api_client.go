@@ -21,7 +21,8 @@ import (
 const ServiceID = "MediaConvert"
 const ServiceAPIVersion = "2017-08-29"
 
-// AWS Elemental MediaConvert
+// Client provides the API client to make operations call for AWS Elemental
+// MediaConvert.
 type Client struct {
 	options Options
 }

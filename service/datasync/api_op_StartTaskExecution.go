@@ -14,9 +14,9 @@ import (
 // Starts a specific invocation of a task. A TaskExecution value represents an
 // individual run of a task. Each task can have at most one TaskExecution at a
 // time. TaskExecution has the following transition phases: INITIALIZING |
-// PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  <p>For detailed
+// PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. For detailed
 // information, see the Task Execution section in the Components and Terminology
-// topic in the <i>AWS DataSync User Guide</i>.</p>
+// topic in the AWS DataSync User Guide.
 func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecutionInput, optFns ...func(*Options)) (*StartTaskExecutionOutput, error) {
 	if params == nil {
 		params = &StartTaskExecutionInput{}
@@ -47,13 +47,13 @@ type StartTaskExecutionInput struct {
 	Includes []*types.FilterRule
 
 	// Represents the options that are available to control the behavior of a
-	// StartTaskExecution () operation. Behavior includes preserving metadata such as
-	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
-	// in the destination, data integrity verification, and so on. A task has a set of
+	// StartTaskExecution operation. Behavior includes preserving metadata such as user
+	// ID (UID), group ID (GID), and file permissions, and also overwriting files in
+	// the destination, data integrity verification, and so on. A task has a set of
 	// default options associated with it. If you don't specify an option in
-	// StartTaskExecution (), the default value is used. You can override the defaults
+	// StartTaskExecution, the default value is used. You can override the defaults
 	// options on each task execution by specifying an overriding Options value to
-	// StartTaskExecution ().
+	// StartTaskExecution.
 	OverrideOptions *types.Options
 }
 

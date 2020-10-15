@@ -14,28 +14,27 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation ().  <p> Creates an Amazon Kinesis Analytics
-// application. You can configure each application with one streaming source as
-// input, application code to process the input, and up to three destinations where
-// you want Amazon Kinesis Analytics to write the output data from your
-// application. For an overview, see <a
-// href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html">How
-// it Works</a>. </p> <p>In the input configuration, you map the streaming source
-// to an in-application stream, which you can think of as a constantly updating
-// table. In the mapping, you must provide a schema for the in-application stream
-// and map each data column in the in-application stream to a data element in the
-// streaming source.</p> <p>Your application code is one or more SQL statements
-// that read input data, transform it, and generate output. Your application code
-// can create one or more SQL artifacts like SQL streams or pumps.</p> <p>In the
-// output configuration, you can configure the application to write data from
-// in-application streams created in your applications to up to three
-// destinations.</p> <p> To read data from your source stream or write data to
-// destination streams, Amazon Kinesis Analytics needs your permissions. You grant
-// these permissions by creating IAM roles. This operation requires permissions to
-// perform the <code>kinesisanalytics:CreateApplication</code> action. </p> <p> For
-// introductory exercises to create an Amazon Kinesis Analytics application, see <a
-// href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html">Getting
-// Started</a>. </p>
+// Analytics API V2 Documentation. Creates an Amazon Kinesis Analytics application.
+// You can configure each application with one streaming source as input,
+// application code to process the input, and up to three destinations where you
+// want Amazon Kinesis Analytics to write the output data from your application.
+// For an overview, see How it Works
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html). In
+// the input configuration, you map the streaming source to an in-application
+// stream, which you can think of as a constantly updating table. In the mapping,
+// you must provide a schema for the in-application stream and map each data column
+// in the in-application stream to a data element in the streaming source. Your
+// application code is one or more SQL statements that read input data, transform
+// it, and generate output. Your application code can create one or more SQL
+// artifacts like SQL streams or pumps. In the output configuration, you can
+// configure the application to write data from in-application streams created in
+// your applications to up to three destinations. To read data from your source
+// stream or write data to destination streams, Amazon Kinesis Analytics needs your
+// permissions. You grant these permissions by creating IAM roles. This operation
+// requires permissions to perform the kinesisanalytics:CreateApplication action.
+// For introductory exercises to create an Amazon Kinesis Analytics application,
+// see Getting Started
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -66,13 +65,12 @@ type CreateApplicationInput struct {
 	// in-application stream using pumps. For more information about the typical
 	// pattern, see Application Code
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html).
-	// <p>You can provide such series of SQL statements, where output of one statement
-	// can be used as the input for the next statement. You store intermediate results
-	// by creating in-application streams and pumps.</p> <p>Note that the application
-	// code must create the streams with names specified in the <code>Outputs</code>.
-	// For example, if your <code>Outputs</code> defines output streams named
-	// <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then
-	// your application code must create these streams. </p>
+	// You can provide such series of SQL statements, where output of one statement can
+	// be used as the input for the next statement. You store intermediate results by
+	// creating in-application streams and pumps. Note that the application code must
+	// create the streams with names specified in the Outputs. For example, if your
+	// Outputs defines output streams named ExampleOutputStream1 and
+	// ExampleOutputStream2, then your application code must create these streams.
 	ApplicationCode *string
 
 	// Summary description of the application.

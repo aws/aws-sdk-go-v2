@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new virtual MFA device for the AWS account. After creating the virtual
-// MFA, use EnableMFADevice () to attach the MFA device to an IAM user. For more
+// MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more
 // information about creating and working with virtual MFA devices, go to Using a
 // Virtual MFA Device
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
@@ -63,7 +63,7 @@ type CreateVirtualMFADeviceInput struct {
 	Path *string
 }
 
-// Contains the response to a successful CreateVirtualMFADevice () request.
+// Contains the response to a successful CreateVirtualMFADevice request.
 type CreateVirtualMFADeviceOutput struct {
 
 	// A structure containing details about the new virtual MFA device.

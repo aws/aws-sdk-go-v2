@@ -28,10 +28,9 @@ import (
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource type
 // versions registered at a time. This maximum is per account and per region. Use
-// DeregisterType () to deregister specific resource type versions if necessary.
-// Once you have initiated a registration request using RegisterType (), you can
-// use DescribeTypeRegistration () to monitor the progress of the registration
-// request.
+// DeregisterType to deregister specific resource type versions if necessary. Once
+// you have initiated a registration request using RegisterType, you can use
+// DescribeTypeRegistration to monitor the progress of the registration request.
 func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, optFns ...func(*Options)) (*RegisterTypeOutput, error) {
 	if params == nil {
 		params = &RegisterTypeInput{}
@@ -112,8 +111,8 @@ type RegisterTypeInput struct {
 type RegisterTypeOutput struct {
 
 	// The identifier for this registration request. Use this registration token when
-	// calling DescribeTypeRegistration (), which returns information about the status
-	// and IDs of the type registration.
+	// calling DescribeTypeRegistration, which returns information about the status and
+	// IDs of the type registration.
 	RegistrationToken *string
 
 	// Metadata pertaining to the operation's result.

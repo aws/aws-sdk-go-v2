@@ -27,7 +27,7 @@ func (c *Client) UpdateModel(ctx context.Context, params *UpdateModelInput, optF
 	return out, nil
 }
 
-// Request to update an existing model in an existing RestApi () resource.
+// Request to update an existing model in an existing RestApi resource.
 type UpdateModelInput struct {
 
 	// [Required] The name of the model to update.
@@ -35,7 +35,7 @@ type UpdateModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -59,7 +59,7 @@ type UpdateModelInput struct {
 // the back end. Although not required, models are useful for mapping payloads
 // between the front end and back end. A model is used for generating an API's SDK,
 // validating the input request body, and creating a skeletal mapping template.
-// Method (), MethodResponse (), Models and Mappings
+// Method, MethodResponse, Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type UpdateModelOutput struct {
 

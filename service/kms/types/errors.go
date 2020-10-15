@@ -50,37 +50,43 @@ func (e *CloudHsmClusterInUseException) ErrorCode() string             { return 
 func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the associated AWS CloudHSM cluster did not
-// meet the configuration requirements for a custom key store.  <ul> <li> <p>The
-// cluster must be configured with private subnets in at least two different
-// Availability Zones in the Region.</p> </li> <li> <p>The <a
-// href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html">security
-// group for the cluster</a> (cloudhsm-cluster-<i><cluster-id></i>-sg) must include
-// inbound rules and outbound rules that allow TCP traffic on ports 2223-2225. The
-// <b>Source</b> in the inbound rules and the <b>Destination</b> in the outbound
-// rules must match the security group ID. These rules are set by default when you
-// create the cluster. Do not delete or change them. To get information about a
-// particular security group, use the <a
-// href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html">DescribeSecurityGroups</a>
-// operation.</p> </li> <li> <p>The cluster must contain at least as many HSMs as
-// the operation requires. To add HSMs, use the AWS CloudHSM <a
-// href="https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html">CreateHsm</a>
-// operation.</p> <p>For the <a>CreateCustomKeyStore</a>,
-// <a>UpdateCustomKeyStore</a>, and <a>CreateKey</a> operations, the AWS CloudHSM
-// cluster must have at least two active HSMs, each in a different Availability
-// Zone. For the <a>ConnectCustomKeyStore</a> operation, the AWS CloudHSM must
-// contain at least one active HSM.</p> </li> </ul> <p>For information about the
+// meet the configuration requirements for a custom key store.
+//
+//     * The cluster
+// must be configured with private subnets in at least two different Availability
+// Zones in the Region.
+//
+//     * The security group for the cluster
+// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html)
+// (cloudhsm-cluster--sg) must include inbound rules and outbound rules that allow
+// TCP traffic on ports 2223-2225. The Source in the inbound rules and the
+// Destination in the outbound rules must match the security group ID. These rules
+// are set by default when you create the cluster. Do not delete or change them. To
+// get information about a particular security group, use the
+// DescribeSecurityGroups
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)
+// operation.
+//
+//     * The cluster must contain at least as many HSMs as the
+// operation requires. To add HSMs, use the AWS CloudHSM CreateHsm
+// (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
+// operation. For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
+// operations, the AWS CloudHSM cluster must have at least two active HSMs, each in
+// a different Availability Zone. For the ConnectCustomKeyStore operation, the AWS
+// CloudHSM must contain at least one active HSM.
+//
+// For information about the
 // requirements for an AWS CloudHSM cluster that is associated with a custom key
-// store, see <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore">Assemble
-// the Prerequisites</a> in the <i>AWS Key Management Service Developer Guide</i>.
-// For information about creating a private subnet for an AWS CloudHSM cluster, see
-// <a
-// href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/create-subnets.html">Create
-// a Private Subnet</a> in the <i>AWS CloudHSM User Guide</i>. For information
-// about cluster security groups, see <a
-// href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html">Configure
-// a Default Security Group</a> in the <i> <i>AWS CloudHSM User Guide</i> </i>.
-// </p>
+// store, see Assemble the Prerequisites
+// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)
+// in the AWS Key Management Service Developer Guide. For information about
+// creating a private subnet for an AWS CloudHSM cluster, see Create a Private
+// Subnet
+// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/create-subnets.html) in
+// the AWS CloudHSM User Guide. For information about cluster security groups, see
+// Configure a Default Security Group
+// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html) in the
+// AWS CloudHSM User Guide .
 type CloudHsmClusterInvalidConfigurationException struct {
 	Message *string
 }
@@ -176,7 +182,7 @@ func (e *CloudHsmClusterNotRelatedException) ErrorFault() smithy.ErrorFault {
 
 // The request was rejected because the custom key store contains AWS KMS customer
 // master keys (CMKs). After verifying that you do not need to use the CMKs, use
-// the ScheduleKeyDeletion () operation to delete the CMKs. After they are deleted,
+// the ScheduleKeyDeletion operation to delete the CMKs. After they are deleted,
 // you can delete the custom key store.
 type CustomKeyStoreHasCMKsException struct {
 	Message *string
@@ -196,22 +202,21 @@ func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return
 
 // The request was rejected because of the ConnectionState of the custom key store.
 // To get the ConnectionState of a custom key store, use the
-// DescribeCustomKeyStores () operation. This exception is thrown under the
-// following conditions:
+// DescribeCustomKeyStores operation. This exception is thrown under the following
+// conditions:
 //
-//     * You requested the CreateKey () or GenerateRandom ()
-// operation in a custom key store that is not connected. These operations are
-// valid only when the custom key store ConnectionState is CONNECTED.
-//
-//     * You
-// requested the UpdateCustomKeyStore () or DeleteCustomKeyStore () operation on a
-// custom key store that is not disconnected. This operation is valid only when the
-// custom key store ConnectionState is DISCONNECTED.
+//     * You requested the CreateKey or GenerateRandom operation in a
+// custom key store that is not connected. These operations are valid only when the
+// custom key store ConnectionState is CONNECTED.
 //
 //     * You requested the
-// ConnectCustomKeyStore () operation on a custom key store with a ConnectionState
-// of DISCONNECTING or FAILED. This operation is valid for all other
-// ConnectionState values.
+// UpdateCustomKeyStore or DeleteCustomKeyStore operation on a custom key store
+// that is not disconnected. This operation is valid only when the custom key store
+// ConnectionState is DISCONNECTED.
+//
+//     * You requested the ConnectCustomKeyStore
+// operation on a custom key store with a ConnectionState of DISCONNECTING or
+// FAILED. This operation is valid for all other ConnectionState values.
 type CustomKeyStoreInvalidStateException struct {
 	Message *string
 }
@@ -309,7 +314,7 @@ func (e *DisabledException) ErrorCode() string             { return "DisabledExc
 func (e *DisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified import token is expired. Use
-// GetParametersForImport () to get a new import token and public key, use the new
+// GetParametersForImport to get a new import token and public key, use the new
 // public key to encrypt the key material, and then try the request again.
 type ExpiredImportTokenException struct {
 	Message *string
@@ -328,7 +333,7 @@ func (e *ExpiredImportTokenException) ErrorCode() string             { return "E
 func (e *ExpiredImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified CMK cannot decrypt the data. The
-// KeyId in a Decrypt () request and the SourceKeyId in a ReEncrypt () request must
+// KeyId in a Decrypt request and the SourceKeyId in a ReEncrypt request must
 // identify the same CMK that was used to encrypt the ciphertext.
 type IncorrectKeyException struct {
 	Message *string
@@ -421,11 +426,11 @@ func (e *InvalidArnException) ErrorMessage() string {
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// From the Decrypt () or ReEncrypt () operation, the request was rejected because
-// the specified ciphertext, or additional authenticated data incorporated into the
+// From the Decrypt or ReEncrypt operation, the request was rejected because the
+// specified ciphertext, or additional authenticated data incorporated into the
 // ciphertext, such as the encryption context, is corrupted, missing, or otherwise
-// invalid. From the ImportKeyMaterial () operation, the request was rejected
-// because AWS KMS could not decrypt the encrypted (wrapped) key material.
+// invalid. From the ImportKeyMaterial operation, the request was rejected because
+// AWS KMS could not decrypt the encrypted (wrapped) key material.
 type InvalidCiphertextException struct {
 	Message *string
 }
@@ -506,9 +511,9 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 // For encrypting,
 // decrypting, re-encrypting, and generating data keys, the KeyUsage must be
 // ENCRYPT_DECRYPT. For signing and verifying, the KeyUsage must be SIGN_VERIFY. To
-// find the KeyUsage of a CMK, use the DescribeKey () operation. To find the
+// find the KeyUsage of a CMK, use the DescribeKey operation. To find the
 // encryption or signing algorithms supported for a particular CMK, use the
-// DescribeKey () operation.
+// DescribeKey operation.
 type InvalidKeyUsageException struct {
 	Message *string
 }

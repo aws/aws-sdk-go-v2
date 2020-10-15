@@ -12,10 +12,10 @@ import (
 )
 
 // Returns a description of the gateway volumes specified in the request. This
-// operation is only supported in the cached volume gateway types.  <p>The list of
+// operation is only supported in the cached volume gateway types. The list of
 // gateway volumes in the request must be from one gateway. In the response, AWS
 // Storage Gateway returns volume information sorted by volume Amazon Resource Name
-// (ARN).</p>
+// (ARN).
 func (c *Client) DescribeCachediSCSIVolumes(ctx context.Context, params *DescribeCachediSCSIVolumesInput, optFns ...func(*Options)) (*DescribeCachediSCSIVolumesOutput, error) {
 	if params == nil {
 		params = &DescribeCachediSCSIVolumesInput{}
@@ -35,7 +35,7 @@ type DescribeCachediSCSIVolumesInput struct {
 
 	// An array of strings where each string represents the Amazon Resource Name (ARN)
 	// of a cached volume. All of the specified cached volumes must be from the same
-	// gateway. Use ListVolumes () to get volume ARNs for a gateway.
+	// gateway. Use ListVolumes to get volume ARNs for a gateway.
 	//
 	// This member is required.
 	VolumeARNs []*string

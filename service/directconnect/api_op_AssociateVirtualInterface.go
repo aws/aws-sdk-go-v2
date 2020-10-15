@@ -17,7 +17,7 @@ import (
 // virtual interface with a conflicting VLAN number or a conflicting IP address,
 // the operation fails. Virtual interfaces associated with a hosted connection
 // cannot be associated with a LAG; hosted connections must be migrated along with
-// their virtual interfaces using AssociateHostedConnection (). To reassociate a
+// their virtual interfaces using AssociateHostedConnection. To reassociate a
 // virtual interface to a new connection or LAG, the requester must own either the
 // virtual interface itself or the connection to which the virtual interface is
 // currently associated. Additionally, the requester must own the connection or LAG
@@ -147,18 +147,18 @@ type AssociateVirtualInterfaceOutput struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
 	// The type of virtual interface. The possible values are private and public.

@@ -13,7 +13,7 @@ import (
 
 // Gets the definition of the specified pipeline. You can call
 // GetPipelineDefinition to retrieve the pipeline definition that you provided
-// using PutPipelineDefinition ().
+// using PutPipelineDefinition.
 func (c *Client) GetPipelineDefinition(ctx context.Context, params *GetPipelineDefinitionInput, optFns ...func(*Options)) (*GetPipelineDefinitionOutput, error) {
 	if params == nil {
 		params = &GetPipelineDefinitionInput{}

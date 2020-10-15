@@ -14,11 +14,11 @@ import (
 
 // Starts an asynchronous batch translation job. Batch translation jobs can be used
 // to translate large volumes of text across multiple documents at once. For more
-// information, see async ().  <p>Batch translation jobs can be described with the
-// <a>DescribeTextTranslationJob</a> operation, listed with the
-// <a>ListTextTranslationJobs</a> operation, and stopped with the
-// <a>StopTextTranslationJob</a> operation.</p> <note> <p>Amazon Translate does not
-// support batch translation of multiple source languages at once.</p> </note>
+// information, see async. Batch translation jobs can be described with the
+// DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs
+// operation, and stopped with the StopTextTranslationJob operation. Amazon
+// Translate does not support batch translation of multiple source languages at
+// once.
 func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextTranslationJobInput, optFns ...func(*Options)) (*StartTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StartTextTranslationJobInput{}
@@ -38,15 +38,15 @@ type StartTextTranslationJobInput struct {
 
 	// The client token of the EC2 instance calling the request. This token is
 	// auto-generated when using the Amazon Translate SDK. Otherwise, use the
-	// DescribeInstances () EC2 operation to retreive an instance's client token. For
-	// more information, see Client Tokens () in the EC2 User Guide.
+	// DescribeInstances EC2 operation to retreive an instance's client token. For more
+	// information, see Client Tokens in the EC2 User Guide.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
 	// role that grants Amazon Translate read access to your input data. For more
-	// nformation, see identity-and-access-management ().
+	// nformation, see identity-and-access-management.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -63,7 +63,7 @@ type StartTextTranslationJobInput struct {
 	OutputDataConfig *types.OutputDataConfig
 
 	// The language code of the input language. For a list of language codes, see
-	// what-is-languages (). Amazon Translate does not automatically detect a source
+	// what-is-languages. Amazon Translate does not automatically detect a source
 	// language during batch translation jobs.
 	//
 	// This member is required.
@@ -78,14 +78,14 @@ type StartTextTranslationJobInput struct {
 	JobName *string
 
 	// The name of the terminology to use in the batch translation job. For a list of
-	// available terminologies, use the ListTerminologies () operation.
+	// available terminologies, use the ListTerminologies operation.
 	TerminologyNames []*string
 }
 
 type StartTextTranslationJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this ID
-	// with the DescribeTextTranslationJob () operation.
+	// with the DescribeTextTranslationJob operation.
 	JobId *string
 
 	// The status of the job. Possible values include:
@@ -104,7 +104,7 @@ type StartTextTranslationJobOutput struct {
 	//
 	//
 	// * FAILED - The job did not complete. To get details, use the
-	// DescribeTextTranslationJob () operation.
+	// DescribeTextTranslationJob operation.
 	//
 	//     * STOP_REQUESTED - The user who
 	// started the job has requested that it be stopped.

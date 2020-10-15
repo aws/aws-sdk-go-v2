@@ -13,13 +13,21 @@ import (
 
 // Returns the tag set associated with the bucket. To use this operation, you must
 // have permission to perform the s3:GetBucketTagging action. By default, the
-// bucket owner has this permission and can grant this permission to others.  <p>
-// <code>GetBucketTagging</code> has the following special error:</p> <ul> <li>
-// <p>Error code: <code>NoSuchTagSetError</code> </p> <ul> <li> <p>Description:
-// There is no tag set associated with the bucket.</p> </li> </ul> </li> </ul>
-// <p>The following operations are related to <code>GetBucketTagging</code>:</p>
-// <ul> <li> <p> <a>PutBucketTagging</a> </p> </li> <li> <p>
-// <a>DeleteBucketTagging</a> </p> </li> </ul>
+// bucket owner has this permission and can grant this permission to others.
+// GetBucketTagging has the following special error:
+//
+//     * Error code:
+// NoSuchTagSetError
+//
+//         * Description: There is no tag set associated with
+// the bucket.
+//
+// The following operations are related to GetBucketTagging:
+//
+//     *
+// PutBucketTagging
+//
+//     * DeleteBucketTagging
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {
 	if params == nil {
 		params = &GetBucketTaggingInput{}

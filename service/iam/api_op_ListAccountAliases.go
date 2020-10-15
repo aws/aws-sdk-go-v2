@@ -48,7 +48,7 @@ type ListAccountAliasesInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListAccountAliases () request.
+// Contains the response to a successful ListAccountAliases request.
 type ListAccountAliasesOutput struct {
 
 	// A list of aliases associated with the account. AWS supports only one alias per

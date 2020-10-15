@@ -13,7 +13,7 @@ import (
 )
 
 // Returns details about an event source mapping. You can get the identifier of a
-// mapping from the output of ListEventSourceMappings ().
+// mapping from the output of ListEventSourceMappings.
 func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSourceMappingInput, optFns ...func(*Options)) (*GetEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &GetEventSourceMappingInput{}
@@ -38,7 +38,7 @@ type GetEventSourceMappingInput struct {
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
-// CreateEventSourceMapping () for details.
+// CreateEventSourceMapping for details.
 type GetEventSourceMappingOutput struct {
 
 	// The maximum number of items to retrieve in a single batch.

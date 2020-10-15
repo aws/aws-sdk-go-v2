@@ -11,7 +11,7 @@ import (
 )
 
 // Returns details about the reserved concurrency configuration for a function. To
-// set a concurrency limit for a function, use PutFunctionConcurrency ().
+// set a concurrency limit for a function, use PutFunctionConcurrency.
 func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunctionConcurrencyInput, optFns ...func(*Options)) (*GetFunctionConcurrencyOutput, error) {
 	if params == nil {
 		params = &GetFunctionConcurrencyInput{}

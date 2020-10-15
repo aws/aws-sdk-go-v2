@@ -14,12 +14,11 @@ import (
 // Enable or disable the Deliverability dashboard. When you enable the
 // Deliverability dashboard, you gain access to reputation, deliverability, and
 // other metrics for the domains that you use to send email. You also gain the
-// ability to perform predictive inbox placement tests.  <p>When you use the
+// ability to perform predictive inbox placement tests. When you use the
 // Deliverability dashboard, you pay a monthly subscription charge, in addition to
 // any other fees that you accrue by using Amazon SES and other AWS services. For
 // more information about the features and cost of a Deliverability dashboard
-// subscription, see <a href="http://aws.amazon.com/ses/pricing/">Amazon SES
-// Pricing</a>.</p>
+// subscription, see Amazon SES Pricing (http://aws.amazon.com/ses/pricing/).
 func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *PutDeliverabilityDashboardOptionInput, optFns ...func(*Options)) (*PutDeliverabilityDashboardOptionOutput, error) {
 	if params == nil {
 		params = &PutDeliverabilityDashboardOptionInput{}

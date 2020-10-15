@@ -59,7 +59,7 @@ type CreateProjectInput struct {
 	// badge.
 	BadgeEnabled *bool
 
-	// A ProjectBuildBatchConfig () object that defines the batch build options for the
+	// A ProjectBuildBatchConfig object that defines the batch build options for the
 	// project.
 	BuildBatchConfig *types.ProjectBuildBatchConfig
 

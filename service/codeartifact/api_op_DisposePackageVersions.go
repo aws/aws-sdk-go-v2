@@ -13,17 +13,17 @@ import (
 
 // Deletes the assets in package versions and sets the package versions' status to
 // Disposed. A disposed package version cannot be restored in your repository
-// because its assets are deleted.  <p> To view all disposed package versions in a
-// repository, use <code> <a
-// href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListackageVersions</a>
-// </code> and set the <code> <a
-// href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax">status</a>
-// </code> parameter to <code>Disposed</code>. </p> <p> To view information about a
-// disposed package version, use <code> <a
-// href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a>
-// </code> and set the <code> <a
-// href="https://docs.aws.amazon.com/API_ListPackageVersions.html#codeartifact-ListPackageVersions-response-status">status</a>
-// </code> parameter to <code>Disposed</code>. </p>
+// because its assets are deleted. To view all disposed package versions in a
+// repository, use ListackageVersions
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
+// and set the status
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
+// parameter to Disposed. To view information about a disposed package version, use
+// ListPackageVersions
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
+// and set the status
+// (https://docs.aws.amazon.com/API_ListPackageVersions.html#codeartifact-ListPackageVersions-response-status)
+// parameter to Disposed.
 func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePackageVersionsInput, optFns ...func(*Options)) (*DisposePackageVersionsOutput, error) {
 	if params == nil {
 		params = &DisposePackageVersionsInput{}

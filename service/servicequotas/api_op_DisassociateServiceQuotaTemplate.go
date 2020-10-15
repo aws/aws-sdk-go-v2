@@ -13,10 +13,13 @@ import (
 // Disables the Service Quotas template. Once the template is disabled, it does not
 // request quota increases for new accounts in your organization. Disabling the
 // quota template does not apply the quota increase requests from the template.
-// <p> <b>Related operations</b> </p> <ul> <li> <p>To enable the quota template,
-// call <a>AssociateServiceQuotaTemplate</a>. </p> </li> <li> <p>To delete a
-// specific service quota from the template, use
-// <a>DeleteServiceQuotaIncreaseRequestFromTemplate</a>.</p> </li> </ul>
+// Related operations
+//
+//     * To enable the quota template, call
+// AssociateServiceQuotaTemplate.
+//
+//     * To delete a specific service quota from
+// the template, use DeleteServiceQuotaIncreaseRequestFromTemplate.
 func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *DisassociateServiceQuotaTemplateInput, optFns ...func(*Options)) (*DisassociateServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &DisassociateServiceQuotaTemplateInput{}

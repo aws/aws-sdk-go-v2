@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds one or more tags to the specified resource.  <p>Currently, you can tag and
-// untag accounts in AWS Organizations.</p> <p>This operation can be called only
-// from the organization's master account.</p>
+// Adds one or more tags to the specified resource. Currently, you can tag and
+// untag accounts in AWS Organizations. This operation can be called only from the
+// organization's master account.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

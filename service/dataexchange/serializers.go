@@ -65,7 +65,13 @@ func awsRestjson1_serializeOpHttpBindingsCancelJobInput(v *CancelJobInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -306,7 +312,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateRevisionInput(v *CreateRevisionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -385,19 +397,37 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetInput(v *DeleteAssetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+	}
 	if v.AssetId != nil {
+		if len(*v.AssetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+		}
 		if err := encoder.SetURI("AssetId").String(*v.AssetId); err != nil {
 			return err
 		}
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -457,7 +487,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDataSetInput(v *DeleteDataSetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -517,13 +553,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRevisionInput(v *DeleteRevisionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -583,19 +631,37 @@ func awsRestjson1_serializeOpHttpBindingsGetAssetInput(v *GetAssetInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+	}
 	if v.AssetId != nil {
+		if len(*v.AssetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+		}
 		if err := encoder.SetURI("AssetId").String(*v.AssetId); err != nil {
 			return err
 		}
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -655,7 +721,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDataSetInput(v *GetDataSetInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -715,7 +787,13 @@ func awsRestjson1_serializeOpHttpBindingsGetJobInput(v *GetJobInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -775,13 +853,25 @@ func awsRestjson1_serializeOpHttpBindingsGetRevisionInput(v *GetRevisionInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -841,7 +931,13 @@ func awsRestjson1_serializeOpHttpBindingsListDataSetRevisionsInput(v *ListDataSe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -1045,7 +1141,13 @@ func awsRestjson1_serializeOpHttpBindingsListRevisionAssetsInput(v *ListRevision
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -1059,7 +1161,13 @@ func awsRestjson1_serializeOpHttpBindingsListRevisionAssetsInput(v *ListRevision
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -1119,7 +1227,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1179,7 +1293,13 @@ func awsRestjson1_serializeOpHttpBindingsStartJobInput(v *StartJobInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1250,7 +1370,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1324,7 +1450,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1404,19 +1536,37 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetInput(v *UpdateAssetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+	}
 	if v.AssetId != nil {
+		if len(*v.AssetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member AssetId must not be empty")}
+		}
 		if err := encoder.SetURI("AssetId").String(*v.AssetId); err != nil {
 			return err
 		}
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}
@@ -1499,7 +1649,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDataSetInput(v *UpdateDataSetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
@@ -1587,13 +1743,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRevisionInput(v *UpdateRevisionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+	}
 	if v.DataSetId != nil {
+		if len(*v.DataSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DataSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DataSetId").String(*v.DataSetId); err != nil {
 			return err
 		}
 	}
 
+	if v.RevisionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+	}
 	if v.RevisionId != nil {
+		if len(*v.RevisionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RevisionId must not be empty")}
+		}
 		if err := encoder.SetURI("RevisionId").String(*v.RevisionId); err != nil {
 			return err
 		}

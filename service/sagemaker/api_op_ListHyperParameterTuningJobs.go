@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets a list of HyperParameterTuningJobSummary () objects that describe the
+// Gets a list of HyperParameterTuningJobSummary objects that describe the
 // hyperparameter tuning jobs launched in your account.
 func (c *Client) ListHyperParameterTuningJobs(ctx context.Context, params *ListHyperParameterTuningJobsInput, optFns ...func(*Options)) (*ListHyperParameterTuningJobsOutput, error) {
 	if params == nil {
@@ -71,8 +71,8 @@ type ListHyperParameterTuningJobsInput struct {
 
 type ListHyperParameterTuningJobsOutput struct {
 
-	// A list of HyperParameterTuningJobSummary () objects that describe the tuning
-	// jobs that the ListHyperParameterTuningJobs request returned.
+	// A list of HyperParameterTuningJobSummary objects that describe the tuning jobs
+	// that the ListHyperParameterTuningJobs request returned.
 	//
 	// This member is required.
 	HyperParameterTuningJobSummaries []*types.HyperParameterTuningJobSummary

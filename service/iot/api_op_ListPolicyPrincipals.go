@@ -11,7 +11,7 @@ import (
 )
 
 // Lists the principals associated with the specified policy. Note: This API is
-// deprecated. Please use ListTargetsForPolicy () instead.
+// deprecated. Please use ListTargetsForPolicy instead.
 func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPrincipalsInput, optFns ...func(*Options)) (*ListPolicyPrincipalsOutput, error) {
 	if params == nil {
 		params = &ListPolicyPrincipalsInput{}

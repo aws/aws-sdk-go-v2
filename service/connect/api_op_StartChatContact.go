@@ -16,8 +16,8 @@ import (
 // API provides a token required to obtain credentials from the
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-// API in the Amazon Connect Participant Service.  <p>When a new chat contact is
-// successfully created, clients need to subscribe to the  participant’s connection
+// API in the Amazon Connect Participant Service. When a new chat contact is
+// successfully created, clients need to subscribe to the participant’s connection
 // for the created chat within 5 minutes. This is achieved by invoking
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)

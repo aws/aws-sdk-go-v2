@@ -14,15 +14,15 @@ import (
 // Defines a new matchmaking configuration for use with FlexMatch. A matchmaking
 // configuration sets out guidelines for matching players and getting the matches
 // into games. You can set up multiple matchmaking configurations to handle the
-// scenarios needed for your game. Each matchmaking ticket (StartMatchmaking () or
-// StartMatchBackfill ()) specifies a configuration for the match and provides
-// player attributes to support the configuration being used. To create a
-// matchmaking configuration, at a minimum you must specify the following:
-// configuration name; a rule set that governs how to evaluate players and find
-// acceptable matches; a game session queue to use when placing a new game session
-// for the match; and the maximum time allowed for a matchmaking attempt. There are
-// two ways to track the progress of matchmaking tickets: (1) polling ticket status
-// with DescribeMatchmaking (); or (2) receiving notifications with Amazon Simple
+// scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or
+// StartMatchBackfill) specifies a configuration for the match and provides player
+// attributes to support the configuration being used. To create a matchmaking
+// configuration, at a minimum you must specify the following: configuration name;
+// a rule set that governs how to evaluate players and find acceptable matches; a
+// game session queue to use when placing a new game session for the match; and the
+// maximum time allowed for a matchmaking attempt. There are two ways to track the
+// progress of matchmaking tickets: (1) polling ticket status with
+// DescribeMatchmaking; or (2) receiving notifications with Amazon Simple
 // Notification Service (SNS). To use notifications, you first need to set up an
 // SNS topic to receive the notifications, and provide the topic ARN in the
 // matchmaking configuration. Since notifications promise only "best effort"
@@ -33,25 +33,25 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
 // Related operations
 //
-//     * CreateMatchmakingConfiguration ()
+//     * CreateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingConfigurations ()
+// DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration ()
-//
-//
-// * DeleteMatchmakingConfiguration ()
-//
-//     * CreateMatchmakingRuleSet ()
+//     * UpdateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingRuleSets ()
+// DeleteMatchmakingConfiguration
 //
-//     * ValidateMatchmakingRuleSet ()
+//     * CreateMatchmakingRuleSet
 //
 //     *
-// DeleteMatchmakingRuleSet ()
+// DescribeMatchmakingRuleSets
+//
+//     * ValidateMatchmakingRuleSet
+//
+//     *
+// DeleteMatchmakingRuleSet
 func (c *Client) CreateMatchmakingConfiguration(ctx context.Context, params *CreateMatchmakingConfigurationInput, optFns ...func(*Options)) (*CreateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingConfigurationInput{}
@@ -120,8 +120,8 @@ type CreateMatchmakingConfigurationInput struct {
 	// The method used to backfill game sessions that are created with this matchmaking
 	// configuration. Specify MANUAL when your game manages backfill requests manually
 	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
-	// create a StartMatchBackfill () request whenever a game session has one or more
-	// open slots. Learn more about manual and automatic backfill in  Backfill Existing
+	// create a StartMatchBackfill request whenever a game session has one or more open
+	// slots. Learn more about manual and automatic backfill in  Backfill Existing
 	// Games with FlexMatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
 	BackfillMode types.BackfillMode
@@ -133,18 +133,18 @@ type CreateMatchmakingConfigurationInput struct {
 	Description *string
 
 	// A set of custom properties for a game session, formatted as key-value pairs.
-	// These properties are passed to a game server process in the GameSession ()
-	// object with a request to start a new game session (see Start a Game Session
+	// These properties are passed to a game server process in the GameSession object
+	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession () object that is created for a
+	// This information is added to the new GameSession object that is created for a
 	// successful match.
 	GameProperties []*types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession () object with a
+	// This data is passed to a game server process in the GameSession object with a
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession () object that is created for a
+	// This information is added to the new GameSession object that is created for a
 	// successful match.
 	GameSessionData *string
 
@@ -156,8 +156,8 @@ type CreateMatchmakingConfigurationInput struct {
 	// resource management, access management and cost allocation. For more
 	// information, see  Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource (),
-	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
+	// General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag

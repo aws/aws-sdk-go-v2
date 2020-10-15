@@ -16,10 +16,10 @@ import (
 // application server log files of every Amazon EC2 instance in your environment.
 // Setting the InfoType to bundle compresses the application server log files for
 // every Amazon EC2 instance into a .zip file. Legacy and .NET containers do not
-// support bundle logs. Use RetrieveEnvironmentInfo () to obtain the set of logs.
+// support bundle logs. Use RetrieveEnvironmentInfo to obtain the set of logs.
 // Related Topics
 //
-//     * RetrieveEnvironmentInfo ()
+//     * RetrieveEnvironmentInfo
 func (c *Client) RequestEnvironmentInfo(ctx context.Context, params *RequestEnvironmentInfoInput, optFns ...func(*Options)) (*RequestEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RequestEnvironmentInfoInput{}

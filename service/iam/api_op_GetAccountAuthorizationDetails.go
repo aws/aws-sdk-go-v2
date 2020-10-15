@@ -61,7 +61,7 @@ type GetAccountAuthorizationDetailsInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful GetAccountAuthorizationDetails () request.
+// Contains the response to a successful GetAccountAuthorizationDetails request.
 type GetAccountAuthorizationDetailsOutput struct {
 
 	// A list containing information about IAM groups.

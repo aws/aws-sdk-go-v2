@@ -217,21 +217,37 @@ type InputTransformer struct {
 	// Input template where you specify placeholders that will be filled with the
 	// values of the keys from InputPathsMap to customize the data sent to the target.
 	// Enclose each InputPathsMaps value in brackets: <value> The InputTemplate must be
-	// valid JSON.  <p>If <code>InputTemplate</code> is a JSON object (surrounded by
-	// curly braces), the following restrictions apply:</p> <ul> <li> <p>The
-	// placeholder cannot be used as an object key.</p> </li> <li> <p>Object values
-	// cannot include quote marks.</p> </li> </ul> <p>The following example shows the
-	// syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p>
-	// <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p>
-	// <code>"InputPathsMap": {"instance": "$.detail.instance","status":
-	// "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "<instance> is in
-	// state <status>"</code> </p> <p> <code>}</code> </p> <p>To have the
-	// <code>InputTemplate</code> include quote marks within a JSON string, escape each
-	// quote marks with a slash, as in the following example:</p> <p> <code>
-	// "InputTransformer":</code> </p> <p> <code>{</code> </p> <p>
-	// <code>"InputPathsMap": {"instance": "$.detail.instance","status":
-	// "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "<instance> is in
-	// state \"<status>\""</code> </p> <p> <code>}</code> </p>
+	// valid JSON. If InputTemplate is a JSON object (surrounded by curly braces), the
+	// following restrictions apply:
+	//
+	//     * The placeholder cannot be used as an object
+	// key.
+	//
+	//     * Object values cannot include quote marks.
+	//
+	// The following example
+	// shows the syntax for using InputPathsMap and InputTemplate.
+	// "InputTransformer":
+	//     {
+	//
+	//     "InputPathsMap": {"instance":
+	// "$.detail.instance","status": "$.detail.status"},
+	//
+	//     "InputTemplate": " is in
+	// state "
+	//
+	// } To have the InputTemplate include quote marks within a JSON string,
+	// escape each quote marks with a slash, as in the following example:
+	// "InputTransformer":
+	//     {
+	//
+	//     "InputPathsMap": {"instance":
+	// "$.detail.instance","status": "$.detail.status"},
+	//
+	//     "InputTemplate": " is in
+	// state """
+	//
+	//     }
 	//
 	// This member is required.
 	InputTemplate *string
@@ -324,7 +340,7 @@ type PutEventsRequestEntry struct {
 
 	// The time stamp of the event, per RFC3339
 	// (https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is provided, the
-	// time stamp of the PutEvents () call is used.
+	// time stamp of the PutEvents call is used.
 	Time *time.Time
 }
 
@@ -491,15 +507,14 @@ type Tag struct {
 }
 
 // Targets are the resources to be invoked when a rule is triggered. For a complete
-// list of services and resources that can be set as a target, see PutTargets ().
-// <p>If you are setting the event bus of another account as the target, and that
-// account granted permission to your account through an organization instead of
-// directly by the account ID, then you must specify a <code>RoleArn</code> with
-// proper permissions in the <code>Target</code> structure. For more information,
-// see <a
-// href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending
-// and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User
-// Guide</i>.</p>
+// list of services and resources that can be set as a target, see PutTargets. If
+// you are setting the event bus of another account as the target, and that account
+// granted permission to your account through an organization instead of directly
+// by the account ID, then you must specify a RoleArn with proper permissions in
+// the Target structure. For more information, see Sending and Receiving Events
+// Between AWS Accounts
+// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// in the Amazon EventBridge User Guide.
 type Target struct {
 
 	// The Amazon Resource Name (ARN) of the target.

@@ -14,7 +14,7 @@ import (
 // Returns information about cluster or replication group snapshots. By default,
 // DescribeSnapshots lists all of your snapshots; it can optionally describe a
 // single snapshot, or just the snapshots associated with a particular cache
-// cluster.  <note> <p>This operation is valid for Redis only.</p> </note>
+// cluster. This operation is valid for Redis only.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}

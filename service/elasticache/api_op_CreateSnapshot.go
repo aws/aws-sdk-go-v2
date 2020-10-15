@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a copy of an entire cluster or replication group at a specific moment in
-// time.  <note> <p>This operation is valid for Redis only.</p> </note>
+// time. This operation is valid for Redis only.
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}

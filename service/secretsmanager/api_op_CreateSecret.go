@@ -68,24 +68,24 @@ import (
 //
 // Related operations
 //
-//     * To delete a secret, use DeleteSecret ().
+//     * To delete a secret, use DeleteSecret.
 //
 //
-// * To modify an existing secret, use UpdateSecret ().
+// * To modify an existing secret, use UpdateSecret.
 //
-//     * To create a new
-// version of a secret, use PutSecretValue ().
+//     * To create a new version
+// of a secret, use PutSecretValue.
 //
-//     * To retrieve the encrypted
-// secure string and secure binary values, use GetSecretValue ().
+//     * To retrieve the encrypted secure string
+// and secure binary values, use GetSecretValue.
 //
-//     * To
-// retrieve all other details for a secret, use DescribeSecret (). This does not
-// include the encrypted secure string and secure binary values.
+//     * To retrieve all other
+// details for a secret, use DescribeSecret. This does not include the encrypted
+// secure string and secure binary values.
 //
-//     * To retrieve
-// the list of secret versions associated with the current secret, use
-// DescribeSecret () and examine the SecretVersionsToStages response value.
+//     * To retrieve the list of secret
+// versions associated with the current secret, use DescribeSecret and examine the
+// SecretVersionsToStages response value.
 func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, optFns ...func(*Options)) (*CreateSecretOutput, error) {
 	if params == nil {
 		params = &CreateSecretInput{}
@@ -138,8 +138,8 @@ type CreateSecretInput struct {
 	//     * If a version with
 	// this value already exists and that version's SecretString and SecretBinary
 	// values are different from those in the request then the request fails because
-	// you cannot modify an existing version. Instead, use PutSecretValue () to create
-	// a new version.
+	// you cannot modify an existing version. Instead, use PutSecretValue to create a
+	// new version.
 	//
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
@@ -191,7 +191,7 @@ type CreateSecretInput struct {
 	// (Optional) Specifies a list of user-defined tags that are attached to the
 	// secret. Each tag is a "Key" and "Value" pair of strings. This operation only
 	// appends tags to the existing list of tags. To remove tags, you must use
-	// UntagResource ().
+	// UntagResource.
 	//
 	//     * Secrets Manager tag key names are case sensitive. A tag
 	// with the key "ABC" is a different tag from one with key "abc".

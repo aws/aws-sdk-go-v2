@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of ActivatedRule () objects.
+// global use. Returns an array of ActivatedRule objects.
 func (c *Client) ListActivatedRulesInRuleGroup(ctx context.Context, params *ListActivatedRulesInRuleGroupInput, optFns ...func(*Options)) (*ListActivatedRulesInRuleGroupOutput, error) {
 	if params == nil {
 		params = &ListActivatedRulesInRuleGroupInput{}
@@ -48,8 +48,8 @@ type ListActivatedRulesInRuleGroupInput struct {
 	// previous response to get information about another batch of ActivatedRules.
 	NextMarker *string
 
-	// The RuleGroupId of the RuleGroup () for which you want to get a list of
-	// ActivatedRule () objects.
+	// The RuleGroupId of the RuleGroup for which you want to get a list of
+	// ActivatedRule objects.
 	RuleGroupId *string
 }
 

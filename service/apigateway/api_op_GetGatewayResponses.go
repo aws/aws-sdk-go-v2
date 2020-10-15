@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets the GatewayResponses () collection on the given RestApi (). If an API
-// developer has not added any definitions for gateway responses, the result will
-// be the API Gateway-generated default GatewayResponses () collection for the
-// supported response types.
+// Gets the GatewayResponses collection on the given RestApi. If an API developer
+// has not added any definitions for gateway responses, the result will be the API
+// Gateway-generated default GatewayResponses collection for the supported response
+// types.
 func (c *Client) GetGatewayResponses(ctx context.Context, params *GetGatewayResponsesInput, optFns ...func(*Options)) (*GetGatewayResponsesOutput, error) {
 	if params == nil {
 		params = &GetGatewayResponsesInput{}
@@ -30,25 +30,25 @@ func (c *Client) GetGatewayResponses(ctx context.Context, params *GetGatewayResp
 	return out, nil
 }
 
-// Gets the GatewayResponses () collection on the given RestApi (). If an API
-// developer has not added any definitions for gateway responses, the result will
-// be the API Gateway-generated default GatewayResponses () collection for the
-// supported response types.
+// Gets the GatewayResponses collection on the given RestApi. If an API developer
+// has not added any definitions for gateway responses, the result will be the API
+// Gateway-generated default GatewayResponses collection for the supported response
+// types.
 type GetGatewayResponsesInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500. The GatewayResponses () collection does not support
+	// maximum value is 500. The GatewayResponses collection does not support
 	// pagination and the limit does not apply here.
 	Limit *int32
 
 	Name *string
 
-	// The current pagination position in the paged result set. The GatewayResponse ()
+	// The current pagination position in the paged result set. The GatewayResponse
 	// collection does not support pagination and the position does not apply here.
 	Position *string
 
@@ -59,8 +59,8 @@ type GetGatewayResponsesInput struct {
 	Title *string
 }
 
-// The collection of the GatewayResponse () instances of a RestApi () as a
-// responseType-to-GatewayResponse () object map of key-value pairs. As such,
+// The collection of the GatewayResponse instances of a RestApi as a
+// responseType-to-GatewayResponse object map of key-value pairs. As such,
 // pagination is not supported for querying this collection. For more information
 // about valid gateway response types, see Gateway Response Types Supported by API
 // Gateway
@@ -71,7 +71,7 @@ type GetGatewayResponsesInput struct {
 // Request
 //
 // This example request
-// shows how to retrieve the GatewayResponses () collection from an API. GET
+// shows how to retrieve the GatewayResponses collection from an API. GET
 // /restapis/o81lxisefl/gatewayresponses HTTP/1.1 Host:
 // beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json
 // X-Amz-Date: 20170503T220604Z Authorization: AWS4-HMAC-SHA256
@@ -269,17 +269,15 @@ type GetGatewayResponsesInput struct {
 // "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE" } },
 // "defaultResponse": true, "responseParameters": {}, "responseTemplates": {
 // "application/json": "{\"message\":$context.error.messageString}" },
-// "responseType": "AUTHORIZER_FAILURE", "statusCode": "500" } ] } }
-//     </div>
-// <div class="seeAlso"> <a
-// href="https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html">Customize
-// Gateway Responses</a> </div>
+// "responseType": "AUTHORIZER_FAILURE", "statusCode": "500" } ] } }Customize
+// Gateway Responses
+// (https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html)
 type GetGatewayResponsesOutput struct {
 
 	// Returns the entire collection, because of no pagination support.
 	Items []*types.GatewayResponse
 
-	// The current pagination position in the paged result set. The GatewayResponse ()
+	// The current pagination position in the paged result set. The GatewayResponse
 	// collection does not support pagination and the position does not apply here.
 	Position *string
 

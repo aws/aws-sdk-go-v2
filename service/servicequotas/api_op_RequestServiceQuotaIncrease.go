@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the details of a service quota increase request. The response to this
-// command provides the details in the RequestedServiceQuotaChange () object.
+// command provides the details in the RequestedServiceQuotaChange object.
 func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *RequestServiceQuotaIncreaseInput, optFns ...func(*Options)) (*RequestServiceQuotaIncreaseOutput, error) {
 	if params == nil {
 		params = &RequestServiceQuotaIncreaseInput{}

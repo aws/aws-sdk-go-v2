@@ -12,44 +12,43 @@ import (
 	"io"
 )
 
-// This operation downloads the output of the job you initiated using InitiateJob
-// (). Depending on the job type you specified when you initiated the job, the
-// output will be either the content of an archive or a vault inventory.  <p>You
-// can download all the job output or download a portion of the output by
-// specifying a byte range. In the case of an archive retrieval job, depending on
-// the byte range you specify, Amazon S3 Glacier (Glacier) returns the checksum for
-// the portion of the data. You can compute the checksum on the client and verify
-// that the values match to ensure the portion you downloaded is the correct
-// data.</p> <p>A job ID will not expire for at least 24 hours after Glacier
-// completes the job. That a byte range. For both archive and inventory retrieval
-// jobs, you should verify the downloaded size against the size returned in the
-// headers from the <b>Get Job Output</b> response.</p> <p>For archive retrieval
-// jobs, you should also verify that the size is what you expected. If you download
-// a portion of the output, the expected size is based on the range of bytes you
-// specified. For example, if you specify a range of <code>bytes=0-1048575</code>,
-// you should verify your download size is 1,048,576 bytes. If you download an
-// entire archive, the expected size is the size of the archive when you uploaded
-// it to Amazon S3 Glacier The expected size is also returned in the headers from
-// the <b>Get Job Output</b> response.</p> <p>In the case of an archive retrieval
-// job, depending on the byte range you specify, Glacier returns the checksum for
-// the portion of the data. To ensure the portion you downloaded is the correct
-// data, compute the checksum on the client, verify that the values match, and
-// verify that the size is what you expected.</p> <p>A job ID does not expire for
-// at least 24 hours after Glacier completes the job. That is, you can download the
-// job output within the 24 hours period after Amazon Glacier completes the
-// job.</p> <p>An AWS account has full permission to perform all operations
-// (actions). However, AWS Identity and Access Management (IAM) users don't have
-// any permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access
-// Control Using AWS Identity and Access Management (IAM)</a>.</p> <p>For
-// conceptual information and the underlying REST API, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html">Downloading
-// a Vault Inventory</a>, <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html">Downloading
-// an Archive</a>, and <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html">Get
-// Job Output </a> </p>
+// This operation downloads the output of the job you initiated using InitiateJob.
+// Depending on the job type you specified when you initiated the job, the output
+// will be either the content of an archive or a vault inventory. You can download
+// all the job output or download a portion of the output by specifying a byte
+// range. In the case of an archive retrieval job, depending on the byte range you
+// specify, Amazon S3 Glacier (Glacier) returns the checksum for the portion of the
+// data. You can compute the checksum on the client and verify that the values
+// match to ensure the portion you downloaded is the correct data. A job ID will
+// not expire for at least 24 hours after Glacier completes the job. That a byte
+// range. For both archive and inventory retrieval jobs, you should verify the
+// downloaded size against the size returned in the headers from the Get Job Output
+// response. For archive retrieval jobs, you should also verify that the size is
+// what you expected. If you download a portion of the output, the expected size is
+// based on the range of bytes you specified. For example, if you specify a range
+// of bytes=0-1048575, you should verify your download size is 1,048,576 bytes. If
+// you download an entire archive, the expected size is the size of the archive
+// when you uploaded it to Amazon S3 Glacier The expected size is also returned in
+// the headers from the Get Job Output response. In the case of an archive
+// retrieval job, depending on the byte range you specify, Glacier returns the
+// checksum for the portion of the data. To ensure the portion you downloaded is
+// the correct data, compute the checksum on the client, verify that the values
+// match, and verify that the size is what you expected. A job ID does not expire
+// for at least 24 hours after Glacier completes the job. That is, you can download
+// the job output within the 24 hours period after Amazon Glacier completes the
+// job. An AWS account has full permission to perform all operations (actions).
+// However, AWS Identity and Access Management (IAM) users don't have any
+// permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see Access Control Using AWS Identity
+// and Access Management (IAM)
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// For conceptual information and the underlying REST API, see Downloading a Vault
+// Inventory
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html),
+// Downloading an Archive
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html),
+// and Get Job Output
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
 func (c *Client) GetJobOutput(ctx context.Context, params *GetJobOutputInput, optFns ...func(*Options)) (*GetJobOutputOutput, error) {
 	if params == nil {
 		params = &GetJobOutputInput{}
@@ -89,26 +88,33 @@ type GetJobOutputInput struct {
 
 	// The range of bytes to retrieve from the output. For example, if you want to
 	// download the first 1,048,576 bytes, specify the range as bytes=0-1048575. By
-	// default, this operation downloads the entire output.  <p>If the job output is
-	// large, then you can use a range to retrieve a portion of the output. This allows
-	// you to download the entire output in smaller chunks of bytes. For example,
-	// suppose you have 1 GB of job output you want to download and you decide to
-	// download 128 MB chunks of data at a time, which is a total of eight Get Job
-	// Output requests. You use the following process to download the job output:</p>
-	// <ol> <li> <p>Download a 128 MB chunk of output by specifying the appropriate
-	// byte range. Verify that all 128 MB of data was received.</p> </li> <li> <p>Along
-	// with the data, the response includes a SHA256 tree hash of the payload. You
-	// compute the checksum of the payload on the client and compare it with the
-	// checksum you received in the response to ensure you received all the expected
-	// data.</p> </li> <li> <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of
-	// output data, each time specifying the appropriate byte range.</p> </li> <li>
-	// <p>After downloading all the parts of the job output, you have a list of eight
+	// default, this operation downloads the entire output. If the job output is large,
+	// then you can use a range to retrieve a portion of the output. This allows you to
+	// download the entire output in smaller chunks of bytes. For example, suppose you
+	// have 1 GB of job output you want to download and you decide to download 128 MB
+	// chunks of data at a time, which is a total of eight Get Job Output requests. You
+	// use the following process to download the job output:
+	//
+	//     * Download a 128 MB
+	// chunk of output by specifying the appropriate byte range. Verify that all 128 MB
+	// of data was received.
+	//
+	//     * Along with the data, the response includes a SHA256
+	// tree hash of the payload. You compute the checksum of the payload on the client
+	// and compare it with the checksum you received in the response to ensure you
+	// received all the expected data.
+	//
+	//     * Repeat steps 1 and 2 for all the eight
+	// 128 MB chunks of output data, each time specifying the appropriate byte range.
+	//
+	//
+	// * After downloading all the parts of the job output, you have a list of eight
 	// checksum values. Compute the tree hash of these values to find the checksum of
-	// the entire output. Using the <a>DescribeJob</a> API, obtain job information of
-	// the job that provided you the output. The response includes the checksum of the
-	// entire archive stored in Amazon S3 Glacier. You compare this value with the
-	// checksum you computed to ensure you have downloaded the entire archive content
-	// with no errors.</p> <p></p> </li> </ol>
+	// the entire output. Using the DescribeJob API, obtain job information of the job
+	// that provided you the output. The response includes the checksum of the entire
+	// archive stored in Amazon S3 Glacier. You compare this value with the checksum
+	// you computed to ensure you have downloaded the entire archive content with no
+	// errors.
 	Range *string
 }
 

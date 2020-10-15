@@ -84,7 +84,7 @@ type CreateModelInput struct {
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
 
-	// A VpcConfig () object that specifies the VPC that you want your model to connect
+	// A VpcConfig object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.
 	// VpcConfig is used in hosting services and in batch transform. For more
 	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud

@@ -14,10 +14,10 @@ import (
 // Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics
 // application. You can add a streaming source when you create an application, or
 // you can use this operation to add a streaming source after you create an
-// application. For more information, see CreateApplication (). Any configuration
+// application. For more information, see CreateApplication. Any configuration
 // update, including adding a streaming source using this operation, results in a
-// new version of the application. You can use the DescribeApplication () operation
-// to find the current application version.
+// new version of the application. You can use the DescribeApplication operation to
+// find the current application version.
 func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplicationInputInput, optFns ...func(*Options)) (*AddApplicationInputOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputInput{}
@@ -41,13 +41,13 @@ type AddApplicationInputInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current version of your application. You can use the DescribeApplication ()
+	// The current version of your application. You can use the DescribeApplication
 	// operation to find the current application version.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
-	// The Input () to add.
+	// The Input to add.
 	//
 	// This member is required.
 	Input *types.Input
@@ -61,7 +61,7 @@ type AddApplicationInputOutput struct {
 	// Provides the current application version.
 	ApplicationVersionId *int64
 
-	// Describes the application input configuration. </p>
+	// Describes the application input configuration.
 	InputDescriptions []*types.InputDescription
 
 	// Metadata pertaining to the operation's result.

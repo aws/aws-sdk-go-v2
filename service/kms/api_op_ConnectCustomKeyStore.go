@@ -29,19 +29,19 @@ import (
 // does not wait for it to complete. When it succeeds, this operation quickly
 // returns an HTTP 200 response and a JSON object with no properties. However, this
 // response does not indicate that the custom key store is connected. To get the
-// connection state of the custom key store, use the DescribeCustomKeyStores ()
+// connection state of the custom key store, use the DescribeCustomKeyStores
 // operation. During the connection process, AWS KMS finds the AWS CloudHSM cluster
 // that is associated with the custom key store, creates the connection
 // infrastructure, connects to the cluster, logs into the AWS CloudHSM client as
 // the kmsuser CU, and rotates its password. The ConnectCustomKeyStore operation
 // might fail for various reasons. To find the reason, use the
-// DescribeCustomKeyStores () operation and see the ConnectionErrorCode in the
+// DescribeCustomKeyStores operation and see the ConnectionErrorCode in the
 // response. For help interpreting the ConnectionErrorCode, see
-// CustomKeyStoresListEntry (). To fix the failure, use the
-// DisconnectCustomKeyStore () operation to disconnect the custom key store,
-// correct the error, use the UpdateCustomKeyStore () operation if necessary, and
-// then use ConnectCustomKeyStore again. If you are having trouble connecting or
-// disconnecting a custom key store, see Troubleshooting a Custom Key Store
+// CustomKeyStoresListEntry. To fix the failure, use the DisconnectCustomKeyStore
+// operation to disconnect the custom key store, correct the error, use the
+// UpdateCustomKeyStore operation if necessary, and then use ConnectCustomKeyStore
+// again. If you are having trouble connecting or disconnecting a custom key store,
+// see Troubleshooting a Custom Key Store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) ConnectCustomKeyStore(ctx context.Context, params *ConnectCustomKeyStoreInput, optFns ...func(*Options)) (*ConnectCustomKeyStoreOutput, error) {
@@ -62,7 +62,7 @@ func (c *Client) ConnectCustomKeyStore(ctx context.Context, params *ConnectCusto
 type ConnectCustomKeyStoreInput struct {
 
 	// Enter the key store ID of the custom key store that you want to connect. To find
-	// the ID of a custom key store, use the DescribeCustomKeyStores () operation.
+	// the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

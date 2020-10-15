@@ -195,25 +195,23 @@ type GetFederationTokenInput struct {
 	// exceed 256 characters. For these and additional limits, see IAM and STS
 	// Character Limits
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
-	// in the IAM User Guide.  <note> <p>An AWS conversion compresses the passed
-	// session policies and session tags into a packed binary format that has a
-	// separate limit. Your request can fail for this limit even if your plain text
-	// meets the other requirements. The <code>PackedPolicySize</code> response element
-	// indicates by percentage how close the policies and tags for your request are to
-	// the upper size limit. </p> </note> <p>You can pass a session tag with the same
-	// key as a tag that is already attached to the user you are federating. When you
-	// do, session tags override a user tag with the same key. </p> <p>Tag key–value
-	// pairs are not case sensitive, but case is preserved. This means that you cannot
-	// have separate <code>Department</code> and <code>department</code> tag keys.
-	// Assume that the role has the <code>Department</code>=<code>Marketing</code> tag
-	// and you pass the <code>department</code>=<code>engineering</code> session tag.
-	// <code>Department</code> and <code>department</code> are not saved as separate
-	// tags, and the session tag passed in the request takes precedence over the role
-	// tag.</p>
+	// in the IAM User Guide. An AWS conversion compresses the passed session policies
+	// and session tags into a packed binary format that has a separate limit. Your
+	// request can fail for this limit even if your plain text meets the other
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit. You
+	// can pass a session tag with the same key as a tag that is already attached to
+	// the user you are federating. When you do, session tags override a user tag with
+	// the same key. Tag key–value pairs are not case sensitive, but case is preserved.
+	// This means that you cannot have separate Department and department tag keys.
+	// Assume that the role has the Department=Marketing tag and you pass the
+	// department=engineering session tag. Department and department are not saved as
+	// separate tags, and the session tag passed in the request takes precedence over
+	// the role tag.
 	Tags []*types.Tag
 }
 
-// Contains the response to a successful GetFederationToken () request, including
+// Contains the response to a successful GetFederationToken request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type GetFederationTokenOutput struct {
 

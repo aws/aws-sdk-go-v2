@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the private certificate authorities that you created by using the
-// CreateCertificateAuthority () action.
+// CreateCertificateAuthority action.
 func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
 	if params == nil {
 		params = &ListCertificateAuthoritiesInput{}

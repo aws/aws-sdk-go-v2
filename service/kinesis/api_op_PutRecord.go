@@ -42,8 +42,8 @@ import (
 // involved in the request, PutRecord throws
 // ProvisionedThroughputExceededException. By default, data records are accessible
 // for 24 hours from the time that they are added to a stream. You can use
-// IncreaseStreamRetentionPeriod () or DecreaseStreamRetentionPeriod () to modify
-// this retention period.
+// IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to modify this
+// retention period.
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
 	if params == nil {
 		params = &PutRecordInput{}

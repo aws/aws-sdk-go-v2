@@ -12,9 +12,9 @@ import (
 )
 
 // Gets the text detection results of a Amazon Rekognition Video analysis started
-// by StartTextDetection (). Text detection with Amazon Rekognition Video is an
+// by StartTextDetection. Text detection with Amazon Rekognition Video is an
 // asynchronous operation. You start text detection by calling StartTextDetection
-// () which returns a job identifier (JobId) When the text detection operation
+// which returns a job identifier (JobId) When the text detection operation
 // finishes, Amazon Rekognition publishes a completion status to the Amazon Simple
 // Notification Service topic registered in the initial call to StartTextDetection.
 // To get the results of the text detection operation, first check that the status

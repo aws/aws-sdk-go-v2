@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Deprecated. Use AllocateHostedConnection () instead. Creates a hosted connection
-// on an interconnect. Allocates a VLAN number and a specified amount of bandwidth
-// for use by a hosted connection on the specified interconnect. Intended for use
-// by AWS Direct Connect Partners only.
+// Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on
+// an interconnect. Allocates a VLAN number and a specified amount of bandwidth for
+// use by a hosted connection on the specified interconnect. Intended for use by
+// AWS Direct Connect Partners only.
 func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *AllocateConnectionOnInterconnectInput, optFns ...func(*Options)) (*AllocateConnectionOnInterconnectOutput, error) {
 	if params == nil {
 		params = &AllocateConnectionOnInterconnectInput{}
@@ -124,7 +124,7 @@ type AllocateConnectionOnInterconnectOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

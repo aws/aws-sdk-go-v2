@@ -14,12 +14,12 @@ import (
 // Creates a new rule set for FlexMatch matchmaking. A rule set describes the type
 // of match to create, such as the number and size of teams. It also sets the
 // parameters for acceptable player matches, such as minimum skill level or
-// character type. A rule set is used by a MatchmakingConfiguration (). To create a
+// character type. A rule set is used by a MatchmakingConfiguration. To create a
 // matchmaking rule set, provide unique rule set name and the rule set body in JSON
 // format. Rule sets must be defined in the same Region as the matchmaking
 // configuration they are used with. Since matchmaking rule sets cannot be edited,
 // it is a good idea to check the rule set syntax using ValidateMatchmakingRuleSet
-// () before creating a new rule set. Learn more
+// before creating a new rule set. Learn more
 //
 //     * Build a Rule Set
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
@@ -35,25 +35,25 @@ import (
 // Related
 // operations
 //
-//     * CreateMatchmakingConfiguration ()
+//     * CreateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingConfigurations ()
+// DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration ()
-//
-//
-// * DeleteMatchmakingConfiguration ()
-//
-//     * CreateMatchmakingRuleSet ()
+//     * UpdateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingRuleSets ()
+// DeleteMatchmakingConfiguration
 //
-//     * ValidateMatchmakingRuleSet ()
+//     * CreateMatchmakingRuleSet
 //
 //     *
-// DeleteMatchmakingRuleSet ()
+// DescribeMatchmakingRuleSets
+//
+//     * ValidateMatchmakingRuleSet
+//
+//     *
+// DeleteMatchmakingRuleSet
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingRuleSetInput{}
@@ -90,8 +90,8 @@ type CreateMatchmakingRuleSetInput struct {
 	// management, access management and cost allocation. For more information, see
 	// Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource (),
-	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
+	// General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag

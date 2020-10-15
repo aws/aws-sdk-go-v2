@@ -13,7 +13,7 @@ import (
 
 // Task runners call ReportTaskProgress when assigned a task to acknowledge that it
 // has the task. If the web service does not receive this acknowledgement within 2
-// minutes, it assigns the task in a subsequent PollForTask () call. After this
+// minutes, it assigns the task in a subsequent PollForTask call. After this
 // initial acknowledgement, the task runner only needs to report progress every 15
 // minutes to maintain its ownership of the task. You can change this reporting
 // time from 15 minutes by specifying a reportProgressTimeout field in your
@@ -37,7 +37,7 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 type ReportTaskProgressInput struct {
 
 	// The ID of the task assigned to the task runner. This value is provided in the
-	// response for PollForTask ().
+	// response for PollForTask.
 	//
 	// This member is required.
 	TaskId *string
@@ -51,7 +51,7 @@ type ReportTaskProgressInput struct {
 type ReportTaskProgressOutput struct {
 
 	// If true, the calling task runner should cancel processing of the task. The task
-	// runner does not need to call SetTaskStatus () for canceled tasks.
+	// runner does not need to call SetTaskStatus for canceled tasks.
 	//
 	// This member is required.
 	Canceled *bool

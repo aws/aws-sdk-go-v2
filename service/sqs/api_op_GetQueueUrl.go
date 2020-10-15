@@ -14,7 +14,7 @@ import (
 // to another AWS account, use the QueueOwnerAWSAccountId parameter to specify the
 // account ID of the queue's owner. The queue's owner must grant you permission to
 // access the queue. For more information about shared queue access, see
-// AddPermission () or see Allow Developers to Write Messages to a Shared Queue
+// AddPermission or see Allow Developers to Write Messages to a Shared Queue
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optFns ...func(*Options)) (*GetQueueUrlOutput, error) {

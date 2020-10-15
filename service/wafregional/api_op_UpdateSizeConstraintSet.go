@@ -17,8 +17,8 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Inserts or deletes SizeConstraint () objects (filters) in a
-// SizeConstraintSet (). For each SizeConstraint object, you specify the following
+// global use. Inserts or deletes SizeConstraint objects (filters) in a
+// SizeConstraintSet. For each SizeConstraint object, you specify the following
 // values:
 //
 //     * Whether to insert or delete the object from the array. If you
@@ -50,20 +50,19 @@ import (
 // the following steps:
 //
 //     * Create a SizeConstraintSet. For more information,
-// see CreateSizeConstraintSet ().
+// see CreateSizeConstraintSet.
 //
-//     * Use GetChangeToken () to get the change
-// token that you provide in the ChangeToken parameter of an
-// UpdateSizeConstraintSet request.
+//     * Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of an UpdateSizeConstraintSet
+// request.
 //
-//     * Submit an UpdateSizeConstraintSet
-// request to specify the part of the request that you want AWS WAF to inspect (for
-// example, the header or the URI) and the value that you want AWS WAF to watch
-// for.
+//     * Submit an UpdateSizeConstraintSet request to specify the part of
+// the request that you want AWS WAF to inspect (for example, the header or the
+// URI) and the value that you want AWS WAF to watch for.
 //
-// For more information about how to use the AWS WAF API to allow or block
-// HTTP requests, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// For more information
+// about how to use the AWS WAF API to allow or block HTTP requests, see the AWS
+// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSizeConstraintSetInput, optFns ...func(*Options)) (*UpdateSizeConstraintSetOutput, error) {
 	if params == nil {
 		params = &UpdateSizeConstraintSetInput{}
@@ -81,30 +80,29 @@ func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSize
 
 type UpdateSizeConstraintSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The SizeConstraintSetId of the SizeConstraintSet () that you want to update.
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
-	// ListSizeConstraintSets ().
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to update.
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by
+	// ListSizeConstraintSets.
 	//
 	// This member is required.
 	SizeConstraintSetId *string
 
 	// An array of SizeConstraintSetUpdate objects that you want to insert into or
-	// delete from a SizeConstraintSet (). For more information, see the applicable
-	// data types:
+	// delete from a SizeConstraintSet. For more information, see the applicable data
+	// types:
 	//
-	//     * SizeConstraintSetUpdate (): Contains Action and
-	// SizeConstraint
+	//     * SizeConstraintSetUpdate: Contains Action and SizeConstraint
 	//
-	//     * SizeConstraint (): Contains FieldToMatch,
-	// TextTransformation, ComparisonOperator, and Size
+	//     *
+	// SizeConstraint: Contains FieldToMatch, TextTransformation, ComparisonOperator,
+	// and Size
 	//
-	//     * FieldToMatch ():
-	// Contains Data and Type
+	//     * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
 	Updates []*types.SizeConstraintSetUpdate
@@ -114,7 +112,7 @@ type UpdateSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateSizeConstraintSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus ().
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

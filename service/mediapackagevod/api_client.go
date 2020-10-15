@@ -19,7 +19,8 @@ import (
 const ServiceID = "MediaPackage Vod"
 const ServiceAPIVersion = "2018-11-07"
 
-// AWS Elemental MediaPackage VOD
+// Client provides the API client to make operations call for AWS Elemental
+// MediaPackage VOD.
 type Client struct {
 	options Options
 }

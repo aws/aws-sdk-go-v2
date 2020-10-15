@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Lists models created with the CreateModel () API.
+// Lists models created with the CreateModel API.
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}

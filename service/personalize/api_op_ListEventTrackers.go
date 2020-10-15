@@ -14,7 +14,7 @@ import (
 // Returns the list of event trackers associated with the account. The response
 // provides the properties for each event tracker, including the Amazon Resource
 // Name (ARN) and tracking ID. For more information on event trackers, see
-// CreateEventTracker ().
+// CreateEventTracker.
 func (c *Client) ListEventTrackers(ctx context.Context, params *ListEventTrackersInput, optFns ...func(*Options)) (*ListEventTrackersOutput, error) {
 	if params == nil {
 		params = &ListEventTrackersInput{}

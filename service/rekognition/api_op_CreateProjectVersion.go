@@ -15,10 +15,10 @@ import (
 // of an Amazon Rekognition Custom Labels project. You can specify one training
 // dataset and one testing dataset. The response from CreateProjectVersion is an
 // Amazon Resource Name (ARN) for the version of the model. Training takes a while
-// to complete. You can get the current status by calling DescribeProjectVersions
-// (). Once training has successfully completed, call DescribeProjectVersions () to
-// get the training results and evaluate the model. After evaluating the model, you
-// start the model by calling StartProjectVersion (). This operation requires
+// to complete. You can get the current status by calling DescribeProjectVersions.
+// Once training has successfully completed, call DescribeProjectVersions to get
+// the training results and evaluate the model. After evaluating the model, you
+// start the model by calling StartProjectVersion. This operation requires
 // permissions to perform the rekognition:CreateProjectVersion action.
 func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProjectVersionInput, optFns ...func(*Options)) (*CreateProjectVersionOutput, error) {
 	if params == nil {

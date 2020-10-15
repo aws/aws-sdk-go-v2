@@ -82,15 +82,16 @@ type RegisterUserInput struct {
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Currently, custom permissions profile names are
 	// assigned to permissions profiles in the QuickSight console. You use this API to
-	// assign the named set of permissions to a QuickSight user.  <p>Customizing
+	// assign the named set of permissions to a QuickSight user. Customizing
 	// permissions in the QuickSight UI allows you to control a user's access to the
-	// following operations:</p> <ul> <li> <p></p> </li> <li> <p></p> </li> <li>
-	// <p></p> </li> <li> <p></p> </li> </ul> <p>QuickSight custom permissions are
-	// applied through IAM policies. Therefore, they override the permissions typically
-	// granted by assigning QuickSight users to one of the default security cohorts
-	// (admin, author, reader) in QuickSight.</p> <p>This feature is available only to
-	// QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation
-	// for Single Sign-On (SSO).</p>
+	// following operations:
+	//
+	// QuickSight custom permissions are applied through IAM
+	// policies. Therefore, they override the permissions typically granted by
+	// assigning QuickSight users to one of the default security cohorts (admin,
+	// author, reader) in QuickSight. This feature is available only to QuickSight
+	// Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single
+	// Sign-On (SSO).
 	CustomPermissionsName *string
 
 	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.

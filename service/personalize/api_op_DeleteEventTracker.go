@@ -12,7 +12,7 @@ import (
 
 // Deletes the event tracker. Does not delete the event-interactions dataset from
 // the associated dataset group. For more information on event trackers, see
-// CreateEventTracker ().
+// CreateEventTracker.
 func (c *Client) DeleteEventTracker(ctx context.Context, params *DeleteEventTrackerInput, optFns ...func(*Options)) (*DeleteEventTrackerOutput, error) {
 	if params == nil {
 		params = &DeleteEventTrackerInput{}

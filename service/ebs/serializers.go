@@ -87,7 +87,13 @@ func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapsh
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
+	if v.SnapshotId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+	}
 	if v.SnapshotId != nil {
+		if len(*v.SnapshotId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -147,6 +153,9 @@ func awsRestjson1_serializeOpHttpBindingsGetSnapshotBlockInput(v *GetSnapshotBlo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BlockIndex == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BlockIndex must not be empty")}
+	}
 	if v.BlockIndex != nil {
 		if err := encoder.SetURI("BlockIndex").Integer(*v.BlockIndex); err != nil {
 			return err
@@ -157,7 +166,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSnapshotBlockInput(v *GetSnapshotBlo
 		encoder.SetQuery("blockToken").String(*v.BlockToken)
 	}
 
+	if v.SnapshotId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+	}
 	if v.SnapshotId != nil {
+		if len(*v.SnapshotId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -229,7 +244,13 @@ func awsRestjson1_serializeOpHttpBindingsListChangedBlocksInput(v *ListChangedBl
 		encoder.SetQuery("pageToken").String(*v.NextToken)
 	}
 
+	if v.SecondSnapshotId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SecondSnapshotId must not be empty")}
+	}
 	if v.SecondSnapshotId != nil {
+		if len(*v.SecondSnapshotId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SecondSnapshotId must not be empty")}
+		}
 		if err := encoder.SetURI("SecondSnapshotId").String(*v.SecondSnapshotId); err != nil {
 			return err
 		}
@@ -301,7 +322,13 @@ func awsRestjson1_serializeOpHttpBindingsListSnapshotBlocksInput(v *ListSnapshot
 		encoder.SetQuery("pageToken").String(*v.NextToken)
 	}
 
+	if v.SnapshotId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+	}
 	if v.SnapshotId != nil {
+		if len(*v.SnapshotId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -376,6 +403,9 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BlockIndex == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BlockIndex must not be empty")}
+	}
 	if v.BlockIndex != nil {
 		if err := encoder.SetURI("BlockIndex").Integer(*v.BlockIndex); err != nil {
 			return err
@@ -404,7 +434,13 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 		encoder.SetHeader(locationName).Integer(*v.Progress)
 	}
 
+	if v.SnapshotId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+	}
 	if v.SnapshotId != nil {
+		if len(*v.SnapshotId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
+		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}

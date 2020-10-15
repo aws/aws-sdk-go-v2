@@ -26,11 +26,21 @@ type DataPoint struct {
 // db.sql.id, db.sql.db_id, db.sql.statement, and db.sql.tokenized_id.
 type DimensionGroup struct {
 
-	// The name of the dimension group. Valid values are:  <ul> <li> <p>
-	// <code>db.user</code> </p> </li> <li> <p> <code>db.host</code> </p> </li> <li>
-	// <p> <code>db.sql</code> </p> </li> <li> <p> <code>db.sql_tokenized</code> </p>
-	// </li> <li> <p> <code>db.wait_event</code> </p> </li> <li> <p>
-	// <code>db.wait_event_type</code> </p> </li> </ul>
+	// The name of the dimension group. Valid values are:
+	//
+	//     * db.user
+	//
+	//     *
+	// db.host
+	//
+	//     * db.sql
+	//
+	//     * db.sql_tokenized
+	//
+	//     * db.wait_event
+	//
+	//     *
+	// db.wait_event_type
 	//
 	// This member is required.
 	Group *string
@@ -111,10 +121,13 @@ type MetricKeyDataPoints struct {
 type MetricQuery struct {
 
 	// The name of a Performance Insights metric to be measured. Valid values for
-	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
-	// the number of active sessions for the database engine.</p> </li> <li> <p>
-	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
-	// database engine.</p> </li> </ul>
+	// Metric are:
+	//
+	//     * db.load.avg - a scaled representation of the number of active
+	// sessions for the database engine.
+	//
+	//     * db.sampledload.avg - the raw number of
+	// active sessions for the database engine.
 	//
 	// This member is required.
 	Metric *string
@@ -151,10 +164,13 @@ type ResponsePartitionKey struct {
 type ResponseResourceMetricKey struct {
 
 	// The name of a Performance Insights metric to be measured. Valid values for
-	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
-	// the number of active sessions for the database engine.</p> </li> <li> <p>
-	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
-	// database engine.</p> </li> </ul>
+	// Metric are:
+	//
+	//     * db.load.avg - a scaled representation of the number of active
+	// sessions for the database engine.
+	//
+	//     * db.sampledload.avg - the raw number of
+	// active sessions for the database engine.
 	//
 	// This member is required.
 	Metric *string

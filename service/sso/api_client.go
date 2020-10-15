@@ -19,21 +19,7 @@ import (
 const ServiceID = "SSO"
 const ServiceAPIVersion = "2019-06-10"
 
-// AWS Single Sign-On Portal is a web service that makes it easy for you to assign
-// user access to AWS SSO resources such as the user portal. Users can get AWS
-// account applications and roles assigned to them and get federated into the
-// application.  <p>For general information about AWS SSO, see <a
-// href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">What
-// is AWS Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p> <p>This API
-// reference guide describes the AWS SSO Portal operations that you can call
-// programatically and includes detailed information on data types and errors.</p>
-// <note> <p>AWS provides SDKs that consist of libraries and sample code for
-// various programming languages and platforms, such as Java, Ruby, .Net, iOS, or
-// Android. The SDKs provide a convenient way to create programmatic access to AWS
-// SSO and other AWS services. For more information about the AWS SDKs, including
-// how to download and install them, see <a
-// href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p>
-// </note>
+// Client provides the API client to make operations call for AWS Single Sign-On.
 type Client struct {
 	options Options
 }

@@ -40,7 +40,7 @@ type GetIntegrationInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -61,8 +61,8 @@ type GetIntegrationInput struct {
 type GetIntegrationOutput struct {
 
 	// A list of request parameters whose values API Gateway caches. To be valid values
-	// for cacheKeyParameters, these parameters must also be specified for Method
-	// ()requestParameters.
+	// for cacheKeyParameters, these parameters must also be specified for
+	// MethodrequestParameters.
 	CacheKeyParameters []*string
 
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
@@ -73,8 +73,8 @@ type GetIntegrationOutput struct {
 
 	// The (id
 	// (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id)) of
-	// the VpcLink () used for the integration when connectionType=VPC_LINK and
-	// undefined, otherwise.
+	// the VpcLink used for the integration when connectionType=VPC_LINK and undefined,
+	// otherwise.
 	ConnectionId *string
 
 	// The type of the network connection to the integration endpoint. The valid value
@@ -219,7 +219,7 @@ type GetIntegrationOutput struct {
 	// HTTP and HTTP proxy integrations, each integration can specify a protocol
 	// (http/https), port and path. Standard 80 and 443 ports are supported as well as
 	// custom ports above 1024. An HTTP or HTTP proxy integration with a connectionType
-	// of VPC_LINK is referred to as a private integration and uses a VpcLink () to
+	// of VPC_LINK is referred to as a private integration and uses a VpcLink to
 	// connect API Gateway to a network load balancer of a VPC.
 	Type types.IntegrationType
 

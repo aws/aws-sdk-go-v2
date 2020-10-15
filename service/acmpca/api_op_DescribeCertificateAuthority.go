@@ -57,7 +57,7 @@ func (c *Client) DescribeCertificateAuthority(ctx context.Context, params *Descr
 type DescribeCertificateAuthorityInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (). This must be of the form:
+	// CreateCertificateAuthority. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
 	//
@@ -67,7 +67,7 @@ type DescribeCertificateAuthorityInput struct {
 
 type DescribeCertificateAuthorityOutput struct {
 
-	// A CertificateAuthority () structure that contains information about your private
+	// A CertificateAuthority structure that contains information about your private
 	// CA.
 	CertificateAuthority *types.CertificateAuthority
 

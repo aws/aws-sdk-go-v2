@@ -56,10 +56,13 @@ type DescribeDimensionKeysInput struct {
 	Identifier *string
 
 	// The name of a Performance Insights metric to be measured. Valid values for
-	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
-	// the number of active sessions for the database engine.</p> </li> <li> <p>
-	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
-	// database engine.</p> </li> </ul>
+	// Metric are:
+	//
+	//     * db.load.avg - a scaled representation of the number of active
+	// sessions for the database engine.
+	//
+	//     * db.sampledload.avg - the raw number of
+	// active sessions for the database engine.
 	//
 	// This member is required.
 	Metric *string
@@ -104,12 +107,22 @@ type DescribeDimensionKeysInput struct {
 
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
-	// seconds). Valid values are:  <ul> <li> <p> <code>1</code> (one second)</p> </li>
-	// <li> <p> <code>60</code> (one minute)</p> </li> <li> <p> <code>300</code> (five
-	// minutes)</p> </li> <li> <p> <code>3600</code> (one hour)</p> </li> <li> <p>
-	// <code>86400</code> (twenty-four hours)</p> </li> </ul> <p>If you don't specify
-	// <code>PeriodInSeconds</code>, then Performance Insights will choose a value for
-	// you, with a goal of returning roughly 100-200 data points in the response.</p>
+	// seconds). Valid values are:
+	//
+	//     * 1 (one second)
+	//
+	//     * 60 (one minute)
+	//
+	//     *
+	// 300 (five minutes)
+	//
+	//     * 3600 (one hour)
+	//
+	//     * 86400 (twenty-four hours)
+	//
+	// If
+	// you don't specify PeriodInSeconds, then Performance Insights will choose a value
+	// for you, with a goal of returning roughly 100-200 data points in the response.
 	PeriodInSeconds *int32
 }
 

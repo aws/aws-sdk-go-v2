@@ -14,8 +14,7 @@ import (
 // Returns a list of Lambda functions, with the version-specific configuration of
 // each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to
 // include all published versions of each function in addition to the unpublished
-// version. To get more information about a function or version, use GetFunction
-// ().
+// version. To get more information about a function or version, use GetFunction.
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
 		params = &ListFunctionsInput{}

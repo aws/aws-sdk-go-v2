@@ -42,7 +42,7 @@ import (
 // contact AWS Support
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html). You can
 // use DescribeStream to check the stream status, which is returned in
-// StreamStatus. CreateStream () has a limit of five transactions per second per
+// StreamStatus. CreateStream has a limit of five transactions per second per
 // account.
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
 	if params == nil {

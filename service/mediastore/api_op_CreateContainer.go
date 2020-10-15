@@ -59,7 +59,7 @@ type CreateContainerOutput struct {
 	// container, the status is CREATING. When an endpoint is available, the status
 	// changes to ACTIVE. The return value does not include the container's endpoint.
 	// To make downstream requests, you must obtain this value by using
-	// DescribeContainer () or ListContainers ().
+	// DescribeContainer or ListContainers.
 	//
 	// This member is required.
 	Container *types.Container

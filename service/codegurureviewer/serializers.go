@@ -145,7 +145,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCodeReviewInput(v *DescribeCode
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CodeReviewArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+	}
 	if v.CodeReviewArn != nil {
+		if len(*v.CodeReviewArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+		}
 		if err := encoder.SetURI("CodeReviewArn").String(*v.CodeReviewArn); err != nil {
 			return err
 		}
@@ -205,7 +211,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRecommendationFeedbackInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CodeReviewArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+	}
 	if v.CodeReviewArn != nil {
+		if len(*v.CodeReviewArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+		}
 		if err := encoder.SetURI("CodeReviewArn").String(*v.CodeReviewArn); err != nil {
 			return err
 		}
@@ -273,7 +285,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRepositoryAssociationInput(v *D
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssociationArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssociationArn must not be empty")}
+	}
 	if v.AssociationArn != nil {
+		if len(*v.AssociationArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member AssociationArn must not be empty")}
+		}
 		if err := encoder.SetURI("AssociationArn").String(*v.AssociationArn); err != nil {
 			return err
 		}
@@ -333,7 +351,13 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateRepositoryInput(v *Disassoc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssociationArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssociationArn must not be empty")}
+	}
 	if v.AssociationArn != nil {
+		if len(*v.AssociationArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member AssociationArn must not be empty")}
+		}
 		if err := encoder.SetURI("AssociationArn").String(*v.AssociationArn); err != nil {
 			return err
 		}
@@ -480,7 +504,13 @@ func awsRestjson1_serializeOpHttpBindingsListRecommendationFeedbackInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CodeReviewArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+	}
 	if v.CodeReviewArn != nil {
+		if len(*v.CodeReviewArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+		}
 		if err := encoder.SetURI("CodeReviewArn").String(*v.CodeReviewArn); err != nil {
 			return err
 		}
@@ -566,7 +596,13 @@ func awsRestjson1_serializeOpHttpBindingsListRecommendationsInput(v *ListRecomme
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CodeReviewArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+	}
 	if v.CodeReviewArn != nil {
+		if len(*v.CodeReviewArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CodeReviewArn must not be empty")}
+		}
 		if err := encoder.SetURI("CodeReviewArn").String(*v.CodeReviewArn); err != nil {
 			return err
 		}

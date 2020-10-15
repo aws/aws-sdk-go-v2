@@ -12,7 +12,7 @@ import (
 
 // Deletes the evaluation results for the specified AWS Config rule. You can
 // specify one AWS Config rule per request. After you delete the evaluation
-// results, you can call the StartConfigRulesEvaluation () API to start evaluating
+// results, you can call the StartConfigRulesEvaluation API to start evaluating
 // your AWS resources against the rule.
 func (c *Client) DeleteEvaluationResults(ctx context.Context, params *DeleteEvaluationResultsInput, optFns ...func(*Options)) (*DeleteEvaluationResultsOutput, error) {
 	if params == nil {

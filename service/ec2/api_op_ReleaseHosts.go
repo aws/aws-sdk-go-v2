@@ -19,7 +19,7 @@ import (
 // released, it may take some time for them to stop counting toward your limit and
 // you may receive capacity errors when trying to allocate new Dedicated Hosts.
 // Wait a few minutes and then try again. Released hosts still appear in a
-// DescribeHosts () response.
+// DescribeHosts response.
 func (c *Client) ReleaseHosts(ctx context.Context, params *ReleaseHostsInput, optFns ...func(*Options)) (*ReleaseHostsOutput, error) {
 	if params == nil {
 		params = &ReleaseHostsInput{}

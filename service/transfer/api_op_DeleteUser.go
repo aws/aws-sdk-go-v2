@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the user belonging to a file transfer protocol-enabled server you
-// specify.  <p>No response returns from this operation.</p> <note> <p>When you
-// delete a user from a server, the user's information is lost.</p> </note>
+// specify. No response returns from this operation. When you delete a user from a
+// server, the user's information is lost.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of ByteMatchSetSummary () objects.
+// global use. Returns an array of ByteMatchSetSummary objects.
 func (c *Client) ListByteMatchSets(ctx context.Context, params *ListByteMatchSetsInput, optFns ...func(*Options)) (*ListByteMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListByteMatchSetsInput{}
@@ -51,7 +51,7 @@ type ListByteMatchSetsInput struct {
 
 type ListByteMatchSetsOutput struct {
 
-	// An array of ByteMatchSetSummary () objects.
+	// An array of ByteMatchSetSummary objects.
 	ByteMatchSets []*types.ByteMatchSetSummary
 
 	// If you have more ByteMatchSet objects than the number that you specified for

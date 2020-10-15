@@ -50,14 +50,14 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups listed by
-	// NodeGroupsToRemove from the cluster. </p>
+	// NodeGroupsToRemove from the cluster.
 	GlobalNodeGroupsToRemove []*string
 
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups listed by
-	// NodeGroupsToRemove from the cluster. </p>
+	// NodeGroupsToRemove from the cluster.
 	GlobalNodeGroupsToRetain []*string
 }
 
@@ -66,9 +66,10 @@ type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
-	// secondary cluster.  <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b>
-	// represents the name of the Global Datastore, which is what you use to associate
-	// a secondary cluster.</p> </li> </ul>
+	// secondary cluster.
+	//
+	//     * The GlobalReplicationGroupIdSuffix represents the name
+	// of the Global Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

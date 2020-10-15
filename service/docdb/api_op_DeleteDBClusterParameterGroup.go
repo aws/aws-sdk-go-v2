@@ -27,7 +27,7 @@ func (c *Client) DeleteDBClusterParameterGroup(ctx context.Context, params *Dele
 	return out, nil
 }
 
-// Represents the input to DeleteDBClusterParameterGroup ().
+// Represents the input to DeleteDBClusterParameterGroup.
 type DeleteDBClusterParameterGroupInput struct {
 
 	// The name of the cluster parameter group. Constraints:

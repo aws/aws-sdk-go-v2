@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified listener. Alternatively, your listener is deleted when you
-// delete the load balancer to which it is attached, using DeleteLoadBalancer ().
+// delete the load balancer to which it is attached, using DeleteLoadBalancer.
 func (c *Client) DeleteListener(ctx context.Context, params *DeleteListenerInput, optFns ...func(*Options)) (*DeleteListenerOutput, error) {
 	if params == nil {
 		params = &DeleteListenerInput{}

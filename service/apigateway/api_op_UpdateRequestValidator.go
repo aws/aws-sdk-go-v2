@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates a RequestValidator () of a given RestApi ().
+// Updates a RequestValidator of a given RestApi.
 func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateRequestValidatorInput, optFns ...func(*Options)) (*UpdateRequestValidatorOutput, error) {
 	if params == nil {
 		params = &UpdateRequestValidatorInput{}
@@ -27,15 +27,15 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 	return out, nil
 }
 
-// Updates a RequestValidator () of a given RestApi ().
+// Updates a RequestValidator of a given RestApi.
 type UpdateRequestValidatorInput struct {
 
-	// [Required] The identifier of RequestValidator () to be updated.
+	// [Required] The identifier of RequestValidator to be updated.
 	//
 	// This member is required.
 	RequestValidatorId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -53,8 +53,8 @@ type UpdateRequestValidatorInput struct {
 	Title *string
 }
 
-// A set of validation rules for incoming Method () requests. In OpenAPI, a
-// RequestValidator () of an API is defined by the
+// A set of validation rules for incoming Method requests. In OpenAPI, a
+// RequestValidator of an API is defined by the
 // x-amazon-apigateway-request-validators.requestValidator
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
 // object. It the referenced using the x-amazon-apigateway-request-validator
@@ -63,14 +63,14 @@ type UpdateRequestValidatorInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
 type UpdateRequestValidatorOutput struct {
 
-	// The identifier of this RequestValidator ().
+	// The identifier of this RequestValidator.
 	Id *string
 
-	// The name of this RequestValidator ()
+	// The name of this RequestValidator
 	Name *string
 
 	// A Boolean flag to indicate whether to validate a request body according to the
-	// configured Model () schema.
+	// configured Model schema.
 	ValidateRequestBody *bool
 
 	// A Boolean flag to indicate whether to validate request parameters (true) or not

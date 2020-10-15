@@ -19,9 +19,8 @@ import (
 const ServiceID = "MediaStore Data"
 const ServiceAPIVersion = "2017-09-01"
 
-// An AWS Elemental MediaStore asset is an object, similar to an object in the
-// Amazon S3 service. Objects are the fundamental entities that are stored in AWS
-// Elemental MediaStore.
+// Client provides the API client to make operations call for AWS Elemental
+// MediaStore Data Plane.
 type Client struct {
 	options Options
 }

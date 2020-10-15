@@ -17,15 +17,15 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Inserts or deletes RegexPatternString objects in a RegexPatternSet
-// (). For each RegexPatternString object, you specify the following values:
+// global use. Inserts or deletes RegexPatternString objects in a RegexPatternSet.
+// For each RegexPatternString object, you specify the following values:
 //
 //     *
 // Whether to insert or delete the RegexPatternString.
 //
 //     * The regular
 // expression pattern that you want to insert or delete. For more information, see
-// RegexPatternSet ().
+// RegexPatternSet.
 //
 // For example, you can create a RegexPatternString such as
 // B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:
@@ -43,10 +43,10 @@ import (
 // perform the following steps:
 //
 //     * Create a RegexPatternSet. For more
-// information, see CreateRegexPatternSet ().
+// information, see CreateRegexPatternSet.
 //
-//     * Use GetChangeToken () to get
-// the change token that you provide in the ChangeToken parameter of an
+//     * Use GetChangeToken to get the
+// change token that you provide in the ChangeToken parameter of an
 // UpdateRegexPatternSet request.
 //
 //     * Submit an UpdateRegexPatternSet request to
@@ -73,20 +73,20 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 
 type UpdateRegexPatternSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RegexPatternSetId of the RegexPatternSet () that you want to update.
-	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
-	// ListRegexPatternSets ().
+	// The RegexPatternSetId of the RegexPatternSet that you want to update.
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by
+	// ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
 
 	// An array of RegexPatternSetUpdate objects that you want to insert into or delete
-	// from a RegexPatternSet ().
+	// from a RegexPatternSet.
 	//
 	// This member is required.
 	Updates []*types.RegexPatternSetUpdate
@@ -96,7 +96,7 @@ type UpdateRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus ().
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

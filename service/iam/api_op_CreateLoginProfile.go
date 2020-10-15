@@ -59,7 +59,7 @@ type CreateLoginProfileInput struct {
 	PasswordResetRequired *bool
 }
 
-// Contains the response to a successful CreateLoginProfile () request.
+// Contains the response to a successful CreateLoginProfile request.
 type CreateLoginProfileOutput struct {
 
 	// A structure containing the user name and password create date.

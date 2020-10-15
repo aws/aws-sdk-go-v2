@@ -17,9 +17,9 @@ import (
 // belong to the current account are returned. This operation supports pagination
 // with the use of the NextToken request and response parameters. If more results
 // are available, the DescribeDirectoriesResult.NextToken member contains a token
-// that you pass in the next call to DescribeDirectories () to retrieve the next
-// set of items. You can also specify a maximum number of return results with the
-// Limit parameter.
+// that you pass in the next call to DescribeDirectories to retrieve the next set
+// of items. You can also specify a maximum number of return results with the Limit
+// parameter.
 func (c *Client) DescribeDirectories(ctx context.Context, params *DescribeDirectoriesInput, optFns ...func(*Options)) (*DescribeDirectoriesOutput, error) {
 	if params == nil {
 		params = &DescribeDirectoriesInput{}
@@ -35,7 +35,7 @@ func (c *Client) DescribeDirectories(ctx context.Context, params *DescribeDirect
 	return out, nil
 }
 
-// Contains the inputs for the DescribeDirectories () operation.
+// Contains the inputs for the DescribeDirectories operation.
 type DescribeDirectoriesInput struct {
 
 	// A list of identifiers of the directories for which to obtain the information. If
@@ -48,14 +48,14 @@ type DescribeDirectoriesInput struct {
 	Limit *int32
 
 	// The DescribeDirectoriesResult.NextToken value from a previous call to
-	// DescribeDirectories (). Pass null if this is the first call.
+	// DescribeDirectories. Pass null if this is the first call.
 	NextToken *string
 }
 
-// Contains the results of the DescribeDirectories () operation.
+// Contains the results of the DescribeDirectories operation.
 type DescribeDirectoriesOutput struct {
 
-	// The list of DirectoryDescription () objects that were retrieved. It is possible
+	// The list of DirectoryDescription objects that were retrieved. It is possible
 	// that this list contains less than the number of items specified in the Limit
 	// member of the request. This occurs if there are less than the requested number
 	// of items left to retrieve, or if the limitations of the operation have been
@@ -63,8 +63,8 @@ type DescribeDirectoriesOutput struct {
 	DirectoryDescriptions []*types.DirectoryDescription
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeDirectories () to retrieve the next
-	// set of items.
+	// parameter in a subsequent call to DescribeDirectories to retrieve the next set
+	// of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

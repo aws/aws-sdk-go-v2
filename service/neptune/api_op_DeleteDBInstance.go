@@ -79,7 +79,7 @@ type DeleteDBInstanceInput struct {
 type DeleteDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used as
-	// a response element in the DescribeDBInstances () action.
+	// a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

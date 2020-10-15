@@ -13,7 +13,7 @@ import (
 
 // Creates an endpoint using the endpoint configuration specified in the request.
 // Amazon SageMaker uses the endpoint to provision resources and deploy models. You
-// create the endpoint configuration with the CreateEndpointConfig () API. Use this
+// create the endpoint configuration with the CreateEndpointConfig API. Use this
 // API to deploy models using Amazon SageMaker hosting services. For an example
 // that calls this method when deploying a model to Amazon SageMaker hosting
 // services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS SDK for
@@ -24,31 +24,30 @@ import (
 // the endpoint. To update an endpoint, you must create a new EndpointConfig. The
 // endpoint name must be unique within an AWS Region in your AWS account. When it
 // receives the request, Amazon SageMaker creates the endpoint, launches the
-// resources (ML compute instances), and deploys the model(s) on them.  <note>
-// <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to
-// verify that your endpoint configuration exists. When you read data from a
-// DynamoDB table supporting <a
-// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html">
-// <code>Eventually Consistent Reads</code> </a>, the response might not reflect
-// the results of a recently completed write operation. The response might include
-// some stale data. If the dependent entities are not yet in DynamoDB, this causes
-// a validation error. If you repeat your read request after a short time, the
-// response should return the latest data. So retry logic is recommended to handle
-// these possible issues. We also recommend that customers call
-// <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize
-// the potential impact of a DynamoDB eventually consistent read.</p> </note>
-// <p>When Amazon SageMaker receives the request, it sets the endpoint status to
-// <code>Creating</code>. After it creates the endpoint, it sets the status to
-// <code>InService</code>. Amazon SageMaker can then process incoming requests for
-// inferences. To check the status of an endpoint, use the <a>DescribeEndpoint</a>
-// API.</p> <p>If any of the models hosted at this endpoint get model data from an
-// Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download
-// model artifacts from the S3 path you provided. AWS STS is activated in your IAM
-// user account by default. If you previously deactivated AWS STS for a region, you
-// need to reactivate AWS STS for that region. For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
-// and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access
-// Management User Guide</i>.</p>
+// resources (ML compute instances), and deploys the model(s) on them. When you
+// call CreateEndpoint, a load call is made to DynamoDB to verify that your
+// endpoint configuration exists. When you read data from a DynamoDB table
+// supporting Eventually Consistent Reads
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html),
+// the response might not reflect the results of a recently completed write
+// operation. The response might include some stale data. If the dependent entities
+// are not yet in DynamoDB, this causes a validation error. If you repeat your read
+// request after a short time, the response should return the latest data. So retry
+// logic is recommended to handle these possible issues. We also recommend that
+// customers call DescribeEndpointConfig before calling CreateEndpoint to minimize
+// the potential impact of a DynamoDB eventually consistent read. When Amazon
+// SageMaker receives the request, it sets the endpoint status to Creating. After
+// it creates the endpoint, it sets the status to InService. Amazon SageMaker can
+// then process incoming requests for inferences. To check the status of an
+// endpoint, use the DescribeEndpoint API. If any of the models hosted at this
+// endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS
+// Security Token Service to download model artifacts from the S3 path you
+// provided. AWS STS is activated in your IAM user account by default. If you
+// previously deactivated AWS STS for a region, you need to reactivate AWS STS for
+// that region. For more information, see Activating and Deactivating AWS STS in an
+// AWS Region
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide.
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -67,7 +66,7 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 type CreateEndpointInput struct {
 
 	// The name of an endpoint configuration. For more information, see
-	// CreateEndpointConfig ().
+	// CreateEndpointConfig.
 	//
 	// This member is required.
 	EndpointConfigName *string
@@ -81,7 +80,7 @@ type CreateEndpointInput struct {
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)in
-	// the AWS Billing and Cost Management User Guide.  </p>
+	// the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
 }
 

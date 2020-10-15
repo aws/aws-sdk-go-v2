@@ -15,13 +15,13 @@ import (
 // period, specified in days, before deletion occurs. If you do not provide a
 // waiting period, the default period of 30 days is used. When this operation is
 // successful, the key state of the CMK changes to PendingDeletion. Before the
-// waiting period ends, you can use CancelKeyDeletion () to cancel the deletion of
-// the CMK. After the waiting period ends, AWS KMS deletes the CMK and all AWS KMS
-// data associated with it, including all aliases that refer to it. Deleting a CMK
-// is a destructive and potentially dangerous operation. When a CMK is deleted, all
-// data that was encrypted under the CMK is unrecoverable. To prevent the use of a
-// CMK without deleting it, use DisableKey (). If you schedule deletion of a CMK
-// from a custom key store
+// waiting period ends, you can use CancelKeyDeletion to cancel the deletion of the
+// CMK. After the waiting period ends, AWS KMS deletes the CMK and all AWS KMS data
+// associated with it, including all aliases that refer to it. Deleting a CMK is a
+// destructive and potentially dangerous operation. When a CMK is deleted, all data
+// that was encrypted under the CMK is unrecoverable. To prevent the use of a CMK
+// without deleting it, use DisableKey. If you schedule deletion of a CMK from a
+// custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 // when the waiting period expires, ScheduleKeyDeletion deletes the CMK from AWS
 // KMS. Then AWS KMS makes a best effort to delete the key material from the
@@ -54,13 +54,17 @@ func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDel
 
 type ScheduleKeyDeletionInput struct {
 
-	// The unique identifier of the customer master key (CMK) to delete.  <p>Specify
-	// the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p>
-	// <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p>
-	// </li> <li> <p>Key ARN:
-	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
-	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
-	// or <a>DescribeKey</a>.</p>
+	// The unique identifier of the customer master key (CMK) to delete. Specify the
+	// key ID or the Amazon Resource Name (ARN) of the CMK. For example:
+	//
+	//     * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//     * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

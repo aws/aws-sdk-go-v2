@@ -84,8 +84,8 @@ type DescribeActivityTypeOutput struct {
 	// should be running.
 	//
 	//     * DEPRECATED – The type was deprecated using
-	// DeprecateActivityType (), but is still in use. You should keep workers
-	// supporting this type running. You cannot create new tasks of this type.
+	// DeprecateActivityType, but is still in use. You should keep workers supporting
+	// this type running. You cannot create new tasks of this type.
 	//
 	// This member is required.
 	TypeInfo *types.ActivityTypeInfo

@@ -19,6 +19,8 @@ import (
 const ServiceID = "Json Protocol"
 const ServiceAPIVersion = "2018-01-01"
 
+// Client provides the API client to make operations call for Sample Json 1.1
+// Protocol Service.
 type Client struct {
 	options Options
 }

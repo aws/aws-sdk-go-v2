@@ -232,20 +232,18 @@ type CreateFileSystemLustreConfiguration struct {
 	// Choose SCRATCH_1 and SCRATCH_2 deployment types when you need temporary storage
 	// and shorter-term processing of data. The SCRATCH_2 deployment type provides
 	// in-transit encryption of data and higher burst throughput capacity than
-	// SCRATCH_1.  <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term
-	// storage and workloads and encryption of data in transit. To learn more about
-	// deployment types, see <a
-	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html">
-	// FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is
-	// automatically enabled when you access a <code>SCRATCH_2</code> or
-	// <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a
-	// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
-	// protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>)
-	// </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and
-	// <code>PERSISTENT_1</code> deployment types is supported when accessed from
-	// supported instance types in supported AWS Regions. To learn more, <a
-	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting
-	// Data in Transit</a>.</p>
+	// SCRATCH_1. Choose PERSISTENT_1 deployment type for longer-term storage and
+	// workloads and encryption of data in transit. To learn more about deployment
+	// types, see  FSx for Lustre Deployment Options
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html).
+	// Encryption of data in-transit is automatically enabled when you access a
+	// SCRATCH_2 or PERSISTENT_1 file system from Amazon EC2 instances that support
+	// this feature (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
+	// protection.html). (Default = SCRATCH_1) Encryption of data in-transit for
+	// SCRATCH_2 and PERSISTENT_1 deployment types is supported when accessed from
+	// supported instance types in supported AWS Regions. To learn more, Encrypting
+	// Data in Transit
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html).
 	DeploymentType LustreDeploymentType
 
 	// (Optional) The path in Amazon S3 where the root of your Amazon FSx file system
@@ -254,14 +252,14 @@ type CreateFileSystemLustreConfiguration struct {
 	// to be exported from your Amazon FSx for Lustre file system. If an ExportPath
 	// value is not provided, Amazon FSx sets a default export path,
 	// s3://import-bucket/FSxLustre[creation-timestamp]. The timestamp is in UTC
-	// format, for example s3://import-bucket/FSxLustre20181105T222312Z.  <p>The Amazon
-	// S3 export bucket must be the same as the import bucket specified by
-	// <code>ImportPath</code>. If you only specify a bucket name, such as
-	// <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to
-	// S3 bucket objects. This mapping means that the input data in S3 is overwritten
-	// on export. If you provide a custom prefix in the export path, such as
-	// <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the
-	// contents of your file system to that export prefix in the Amazon S3 bucket.</p>
+	// format, for example s3://import-bucket/FSxLustre20181105T222312Z. The Amazon S3
+	// export bucket must be the same as the import bucket specified by ImportPath. If
+	// you only specify a bucket name, such as s3://import-bucket, you get a 1:1
+	// mapping of file system objects to S3 bucket objects. This mapping means that the
+	// input data in S3 is overwritten on export. If you provide a custom prefix in the
+	// export path, such as s3://import-bucket/[custom-optional-prefix], Amazon FSx
+	// exports the contents of your file system to that export prefix in the Amazon S3
+	// bucket.
 	ExportPath *string
 
 	// (Optional) The path to the Amazon S3 bucket (including the optional prefix) that
@@ -275,9 +273,9 @@ type CreateFileSystemLustreConfiguration struct {
 	// (Optional) For files imported from a data repository, this value determines the
 	// stripe count and maximum amount of data per file (in MiB) stored on a single
 	// physical disk. The maximum number of disks that a single file can be striped
-	// across is limited by the total number of disks that make up the file system.
-	// <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
-	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>
+	// across is limited by the total number of disks that make up the file system. The
+	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
+	// GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// Required for the PERSISTENT_1 deployment type, describes the amount of read and
@@ -389,10 +387,11 @@ type DataRepositoryConfiguration struct {
 	// repository that do not currently exist in the FSx file system are automatically
 	// imported. Changes to existing FSx files in the linked repository are also
 	// automatically imported to the FSx file system. Files deleted from the linked
-	// data repository are not deleted from the FSx file system.  </li> </ul> <p>For
-	// more information, see <a
-	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically
-	// import updates from your S3 bucket</a>.</p>
+	// data repository are not deleted from the FSx file system.
+	//
+	// For more information,
+	// see Automatically import updates from your S3 bucket
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html).
 	AutoImportPolicy AutoImportPolicyType
 
 	// The export path to the Amazon S3 bucket (and prefix) that you are using to store
@@ -412,9 +411,9 @@ type DataRepositoryConfiguration struct {
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
 	// disk. The maximum number of disks that a single file can be striped across is
-	// limited by the total number of disks that make up the file system.  <p>The
-	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
-	// GiB). Amazon S3 objects have a maximum size of 5 TB.</p>
+	// limited by the total number of disks that make up the file system. The default
+	// chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB).
+	// Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// Describes the state of the file system's S3 durable data repository, if it is
@@ -473,8 +472,8 @@ type DataRepositoryTask struct {
 	//
 	//     * FAILED - Amazon FSx was not able to complete the task. For
 	// example, there may be files the task failed to process. The
-	// DataRepositoryTaskFailureDetails () property provides more information about
-	// task failures.
+	// DataRepositoryTaskFailureDetails property provides more information about task
+	// failures.
 	//
 	//     * SUCCEEDED - FSx completed the task successfully.
 	//
@@ -715,9 +714,9 @@ type FileSystem struct {
 	// VPC that the Amazon FSx file system was created in. For more information, see
 	// Elastic Network Interfaces
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the
-	// Amazon EC2 User Guide.  <p>For an Amazon FSx for Windows File Server file
-	// system, you can have one network interface ID. For an Amazon FSx for Lustre file
-	// system, you can have more than one.</p>
+	// Amazon EC2 User Guide. For an Amazon FSx for Windows File Server file system,
+	// you can have one network interface ID. For an Amazon FSx for Lustre file system,
+	// you can have more than one.
 	NetworkInterfaceIds []*string
 
 	// The AWS account that created the file system. If the file system was created by
@@ -820,7 +819,6 @@ type LustreFileSystemConfiguration struct {
 	// You use the MountName value when mounting the file system. For the SCRATCH_1
 	// deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1
 	// deployment types, this value is a string that is unique within an AWS Region.
-	// </p>
 	MountName *string
 
 	// Per unit storage throughput represents the megabytes per second of read or write

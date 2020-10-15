@@ -19,10 +19,8 @@ import (
 const ServiceID = "Firehose"
 const ServiceAPIVersion = "2015-08-04"
 
-// Amazon Kinesis Data Firehose API Reference Amazon Kinesis Data Firehose is a
-// fully managed service that delivers real-time streaming data to destinations
-// such as Amazon Simple Storage Service (Amazon S3), Amazon Elasticsearch Service
-// (Amazon ES), Amazon Redshift, and Splunk.
+// Client provides the API client to make operations call for Amazon Kinesis
+// Firehose.
 type Client struct {
 	options Options
 }

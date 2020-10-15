@@ -215,16 +215,24 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 //     * The policy must include
 // an Effect, Action and Principal.
 //
-//     * <p> <code>Effect</code> must specify
-// <code>Allow</code>.</p> </li> <li> <p>The <code>Action</code> in the policy must
-// be <code>waf:UpdateWebACL</code>, <code>waf-regional:UpdateWebACL</code>,
-// <code>waf:GetRuleGroup</code> and <code>waf-regional:GetRuleGroup</code> . Any
-// extra or wildcard actions in the policy will be rejected.</p> </li> <li> <p>The
-// policy cannot include a <code>Resource</code> parameter.</p> </li> <li> <p>The
-// ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must
-// exist in the same region.</p> </li> <li> <p>The user making the request must be
-// the owner of the RuleGroup.</p> </li> <li> <p>Your policy must be composed using
-// IAM Policy version 2012-10-17.</p> </li> </ul>
+//     * Effect must specify Allow.
+//
+//     * The
+// Action in the policy must be waf:UpdateWebACL, waf-regional:UpdateWebACL,
+// waf:GetRuleGroup and waf-regional:GetRuleGroup . Any extra or wildcard actions
+// in the policy will be rejected.
+//
+//     * The policy cannot include a Resource
+// parameter.
+//
+//     * The ARN in the request must be a valid WAF RuleGroup ARN and
+// the RuleGroup must exist in the same region.
+//
+//     * The user making the request
+// must be the owner of the RuleGroup.
+//
+//     * Your policy must be composed using
+// IAM Policy version 2012-10-17.
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
 }

@@ -148,21 +148,25 @@ import (
 // (https://aws.amazon.com/pricing/). Charges for both HLS sessions and outgoing
 // AWS data apply. For more information about HLS, see HTTP Live Streaming
 // (https://developer.apple.com/streaming/) on the Apple Developer site
-// (https://developer.apple.com).  <important> <p>If an error is thrown after
-// invoking a Kinesis Video Streams archived media API, in addition to the HTTP
-// status code and the response body, it includes the following pieces of
-// information: </p> <ul> <li> <p> <code>x-amz-ErrorType</code> HTTP header –
-// contains a more specific error type in addition to what the HTTP status code
-// provides. </p> </li> <li> <p> <code>x-amz-RequestId</code> HTTP header – if you
+// (https://developer.apple.com). If an error is thrown after invoking a Kinesis
+// Video Streams archived media API, in addition to the HTTP status code and the
+// response body, it includes the following pieces of information:
+//
+//     *
+// x-amz-ErrorType HTTP header – contains a more specific error type in addition to
+// what the HTTP status code provides.
+//
+//     * x-amz-RequestId HTTP header – if you
 // want to report an issue to AWS, the support team can better diagnose the problem
-// if given the Request Id.</p> </li> </ul> <p>Both the HTTP status code and the
-// ErrorType header can be utilized to make programmatic decisions about whether
-// errors are retry-able and under what conditions, as well as provide information
-// on what actions the client programmer might need to take in order to
-// successfully try again.</p> <p>For more information, see the <b>Errors</b>
-// section at the bottom of this topic, as well as <a
-// href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html">Common
-// Errors</a>. </p> </important>
+// if given the Request Id.
+//
+// Both the HTTP status code and the ErrorType header can
+// be utilized to make programmatic decisions about whether errors are retry-able
+// and under what conditions, as well as provide information on what actions the
+// client programmer might need to take in order to successfully try again. For
+// more information, see the Errors section at the bottom of this topic, as well as
+// Common Errors
+// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetHLSStreamingSessionURL(ctx context.Context, params *GetHLSStreamingSessionURLInput, optFns ...func(*Options)) (*GetHLSStreamingSessionURLOutput, error) {
 	if params == nil {
 		params = &GetHLSStreamingSessionURLInput{}
@@ -193,18 +197,18 @@ type GetHLSStreamingSessionURLInput struct {
 	// Specifies when flags marking discontinuities between fragments are added to the
 	// media playlists. Media players typically build a timeline of media content to
 	// play, based on the timestamps of each fragment. This means that if there is any
-	// overlap or gap between fragments (as is typical if HLSFragmentSelector () is set
-	// to SERVER_TIMESTAMP), the media player timeline will also have small gaps
-	// between fragments in some places, and will overwrite frames in other places.
-	// Gaps in the media player timeline can cause playback to stall and overlaps can
-	// cause playback to be jittery. When there are discontinuity flags between
-	// fragments, the media player is expected to reset the timeline, resulting in the
-	// next fragment being played immediately after the previous fragment. The
-	// following modes are supported:
+	// overlap or gap between fragments (as is typical if HLSFragmentSelector is set to
+	// SERVER_TIMESTAMP), the media player timeline will also have small gaps between
+	// fragments in some places, and will overwrite frames in other places. Gaps in the
+	// media player timeline can cause playback to stall and overlaps can cause
+	// playback to be jittery. When there are discontinuity flags between fragments,
+	// the media player is expected to reset the timeline, resulting in the next
+	// fragment being played immediately after the previous fragment. The following
+	// modes are supported:
 	//
-	//     * ALWAYS: a discontinuity marker is placed
-	// between every fragment in the HLS media playlist. It is recommended to use a
-	// value of ALWAYS if the fragment timestamps are not accurate.
+	//     * ALWAYS: a discontinuity marker is placed between
+	// every fragment in the HLS media playlist. It is recommended to use a value of
+	// ALWAYS if the fragment timestamps are not accurate.
 	//
 	//     * NEVER: no
 	// discontinuity markers are placed anywhere. It is recommended to use a value of
@@ -218,7 +222,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// the media timeline (e.g. a missing fragment).
 	//
 	// The default is ALWAYS when
-	// HLSFragmentSelector () is set to SERVER_TIMESTAMP, and NEVER when it is set to
+	// HLSFragmentSelector is set to SERVER_TIMESTAMP, and NEVER when it is set to
 	// PRODUCER_TIMESTAMP.
 	DiscontinuityMode types.HLSDiscontinuityMode
 
@@ -229,9 +233,9 @@ type GetHLSStreamingSessionURLInput struct {
 	// players might report the current playhead as an absolute time based on the
 	// fragment timestamps. This can be useful for creating a playback experience that
 	// shows viewers the wall-clock time of the media. The default is NEVER. When
-	// HLSFragmentSelector () is SERVER_TIMESTAMP, the timestamps will be the server
-	// start timestamps. Similarly, when HLSFragmentSelector () is PRODUCER_TIMESTAMP,
-	// the timestamps will be the producer start timestamps.
+	// HLSFragmentSelector is SERVER_TIMESTAMP, the timestamps will be the server start
+	// timestamps. Similarly, when HLSFragmentSelector is PRODUCER_TIMESTAMP, the
+	// timestamps will be the producer start timestamps.
 	DisplayFragmentTimestamp types.HLSDisplayFragmentTimestamp
 
 	// The time in seconds until the requested session expires. This value can be

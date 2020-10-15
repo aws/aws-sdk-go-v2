@@ -13,23 +13,41 @@ import (
 // Imports a signed private CA certificate into ACM Private CA. This action is used
 // when you are using a chain of trust whose root is located outside ACM Private
 // CA. Before you can call this action, the following preparations must in place:
-// <ol> <li> <p>In ACM Private CA, call the <a>CreateCertificateAuthority</a>
-// action to create the private CA that that you plan to back with the imported
-// certificate.</p> </li> <li> <p>Call the <a>GetCertificateAuthorityCsr</a> action
-// to generate a certificate signing request (CSR).</p> </li> <li> <p>Sign the CSR
-// using a root or intermediate CA hosted either by an on-premises PKI hierarchy or
-// a commercial CA..</p> </li> <li> <p>Create a certificate chain and copy the
-// signed certificate and the certificate chain to your working directory.</p>
-// </li> </ol> <p>The following requirements apply when you import a CA
-// certificate.</p> <ul> <li> <p>You cannot import a non-self-signed certificate
-// for use as a root CA.</p> </li> <li> <p>You cannot import a self-signed
-// certificate for use as a subordinate CA.</p> </li> <li> <p>Your certificate
-// chain must not include the private CA certificate that you are importing.</p>
-// </li> <li> <p>Your ACM Private CA-hosted or on-premises CA certificate must be
-// the last certificate in your chain. The subordinate certificate, if any, that
+//
+//
+// * In ACM Private CA, call the CreateCertificateAuthority action to create the
+// private CA that that you plan to back with the imported certificate.
+//
+//     * Call
+// the GetCertificateAuthorityCsr action to generate a certificate signing request
+// (CSR).
+//
+//     * Sign the CSR using a root or intermediate CA hosted either by an
+// on-premises PKI hierarchy or a commercial CA..
+//
+//     * Create a certificate chain
+// and copy the signed certificate and the certificate chain to your working
+// directory.
+//
+// The following requirements apply when you import a CA certificate.
+//
+//
+// * You cannot import a non-self-signed certificate for use as a root CA.
+//
+//     *
+// You cannot import a self-signed certificate for use as a subordinate CA.
+//
+//     *
+// Your certificate chain must not include the private CA certificate that you are
+// importing.
+//
+//     * Your ACM Private CA-hosted or on-premises CA certificate must
+// be the last certificate in your chain. The subordinate certificate, if any, that
 // your root CA signed must be next to last. The subordinate certificate signed by
 // the preceding subordinate CA must come next, and so on until your chain is
-// built. </p> </li> <li> <p>The chain must be PEM-encoded.</p> </li> </ul>
+// built.
+//
+//     * The chain must be PEM-encoded.
 func (c *Client) ImportCertificateAuthorityCertificate(ctx context.Context, params *ImportCertificateAuthorityCertificateInput, optFns ...func(*Options)) (*ImportCertificateAuthorityCertificateOutput, error) {
 	if params == nil {
 		params = &ImportCertificateAuthorityCertificateInput{}
@@ -55,7 +73,7 @@ type ImportCertificateAuthorityCertificateInput struct {
 	Certificate []byte
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (). This must be of the form:
+	// CreateCertificateAuthority. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.

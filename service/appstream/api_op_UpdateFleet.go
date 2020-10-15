@@ -67,11 +67,10 @@ type UpdateFleetInput struct {
 	// API operation and passes the ARN of the role to use. The operation creates a new
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the AppStream_Machine_Role credential profile on the
-	// instance.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using
-	// an IAM Role to Grant Permissions to Applications and Scripts Running on
-	// AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0
-	// Administration Guide</i>.</p>
+	// instance. For more information, see Using an IAM Role to Grant Permissions to
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -85,14 +84,14 @@ type UpdateFleetInput struct {
 	// activity. If users continue to be idle after the time interval in
 	// IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users
 	// from being disconnected due to inactivity, specify a value of 0. Otherwise,
-	// specify a value between 60 and 3600. The default value is 0.  <note> <p>If you
-	// enable this feature, we recommend that you specify a value that corresponds
-	// exactly to a whole number of minutes (for example, 60, 120, and 180). If you
-	// don't do this, the value is rounded to the nearest minute. For example, if you
-	// specify a value of 70, users are disconnected after 1 minute of inactivity. If
-	// you specify a value that is at the midpoint between two different minutes, the
-	// value is rounded up. For example, if you specify a value of 90, users are
-	// disconnected after 2 minutes of inactivity. </p> </note>
+	// specify a value between 60 and 3600. The default value is 0. If you enable this
+	// feature, we recommend that you specify a value that corresponds exactly to a
+	// whole number of minutes (for example, 60, 120, and 180). If you don't do this,
+	// the value is rounded to the nearest minute. For example, if you specify a value
+	// of 70, users are disconnected after 1 minute of inactivity. If you specify a
+	// value that is at the midpoint between two different minutes, the value is
+	// rounded up. For example, if you specify a value of 90, users are disconnected
+	// after 2 minutes of inactivity.
 	IdleDisconnectTimeoutInSeconds *int32
 
 	// The ARN of the public, private, or shared image to use.

@@ -36,8 +36,8 @@ type UpdateClusterSettingsInput struct {
 
 	// The setting to use by default for a cluster. This parameter is used to enable
 	// CloudWatch Container Insights for a cluster. If this value is specified, it will
-	// override the containerInsights value set with PutAccountSetting () or
-	// PutAccountSettingDefault ().
+	// override the containerInsights value set with PutAccountSetting or
+	// PutAccountSettingDefault.
 	//
 	// This member is required.
 	Settings []*types.ClusterSetting

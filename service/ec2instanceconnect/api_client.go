@@ -19,10 +19,8 @@ import (
 const ServiceID = "EC2 Instance Connect"
 const ServiceAPIVersion = "2018-04-02"
 
-// AWS EC2 Connect Service is a service that enables system administrators to
-// publish temporary SSH keys to their EC2 instances in order to establish
-// connections to their instances without leaving a permanent authentication
-// option.
+// Client provides the API client to make operations call for AWS EC2 Instance
+// Connect.
 type Client struct {
 	options Options
 }

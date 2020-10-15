@@ -139,7 +139,7 @@ type BatchGetItemInput struct {
 	// legacy parameter. Use ProjectionExpression instead. For more information, see
 	// AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
-	// in the Amazon DynamoDB Developer Guide.  </p> </li> </ul>
+	// in the Amazon DynamoDB Developer Guide.
 	//
 	// This member is required.
 	RequestItems map[string]*types.KeysAndAttributes

@@ -72,15 +72,23 @@ type Operator struct {
 	//     *
 	// @actualEndTime
 	//
-	//     <p> The comparison operators <code>GE</code>,
-	// <code>LE</code>, and <code>BETWEEN</code> act on the following fields: </p> <ul>
-	// <li> <p>@scheduledStartTime</p> </li> <li> <p>@scheduledEndTime</p> </li> <li>
-	// <p>@actualStartTime</p> </li> <li> <p>@actualEndTime</p> </li> </ul> <p>Note
-	// that fields beginning with the at sign (@) are read-only and set by the web
-	// service. When you name fields, you should choose names containing only
-	// alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
-	// User-defined fields that you add to a pipeline should prefix their name with the
-	// string "my".</p>
+	// The comparison operators GE, LE, and BETWEEN act on the
+	// following fields:
+	//
+	//     * @scheduledStartTime
+	//
+	//     * @scheduledEndTime
+	//
+	//     *
+	// @actualStartTime
+	//
+	//     * @actualEndTime
+	//
+	// Note that fields beginning with the at
+	// sign (@) are read-only and set by the web service. When you name fields, you
+	// should choose names containing only alpha-numeric values, as symbols may be
+	// reserved by AWS Data Pipeline. User-defined fields that you add to a pipeline
+	// should prefix their name with the string "my".
 	Type OperatorType
 
 	// The value that the actual field value will be compared with.
@@ -252,8 +260,8 @@ type TaskObject struct {
 	// The ID of the pipeline that provided the task.
 	PipelineId *string
 
-	// An internal identifier for the task. This ID is passed to the SetTaskStatus ()
-	// and ReportTaskProgress () actions.
+	// An internal identifier for the task. This ID is passed to the SetTaskStatus and
+	// ReportTaskProgress actions.
 	TaskId *string
 }
 

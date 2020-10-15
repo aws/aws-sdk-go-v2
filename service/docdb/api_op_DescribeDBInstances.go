@@ -28,7 +28,7 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 	return out, nil
 }
 
-// Represents the input to DescribeDBInstances ().
+// Represents the input to DescribeDBInstances.
 type DescribeDBInstancesInput struct {
 
 	// The user-provided instance identifier. If this parameter is specified,
@@ -64,7 +64,7 @@ type DescribeDBInstancesInput struct {
 	MaxRecords *int32
 }
 
-// Represents the output of DescribeDBInstances ().
+// Represents the output of DescribeDBInstances.
 type DescribeDBInstancesOutput struct {
 
 	// Detailed information about one or more instances.

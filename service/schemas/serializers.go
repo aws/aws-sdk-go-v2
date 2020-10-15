@@ -160,7 +160,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateRegistryInput(v *CreateRegistryIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -250,13 +256,25 @@ func awsRestjson1_serializeOpHttpBindingsCreateSchemaInput(v *CreateSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -345,7 +363,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDiscovererInput(v *DeleteDiscover
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DiscovererId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+	}
 	if v.DiscovererId != nil {
+		if len(*v.DiscovererId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+		}
 		if err := encoder.SetURI("DiscovererId").String(*v.DiscovererId); err != nil {
 			return err
 		}
@@ -405,7 +429,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRegistryInput(v *DeleteRegistryIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -523,13 +553,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSchemaInput(v *DeleteSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -589,19 +631,37 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSchemaVersionInput(v *DeleteSchem
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaVersion == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaVersion must not be empty")}
+	}
 	if v.SchemaVersion != nil {
+		if len(*v.SchemaVersion) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaVersion must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaVersion").String(*v.SchemaVersion); err != nil {
 			return err
 		}
@@ -661,19 +721,37 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCodeBindingInput(v *DescribeCod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Language == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+	}
 	if v.Language != nil {
+		if len(*v.Language) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+		}
 		if err := encoder.SetURI("Language").String(*v.Language); err != nil {
 			return err
 		}
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -737,7 +815,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDiscovererInput(v *DescribeDisc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DiscovererId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+	}
 	if v.DiscovererId != nil {
+		if len(*v.DiscovererId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+		}
 		if err := encoder.SetURI("DiscovererId").String(*v.DiscovererId); err != nil {
 			return err
 		}
@@ -797,7 +881,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRegistryInput(v *DescribeRegist
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -857,13 +947,25 @@ func awsRestjson1_serializeOpHttpBindingsDescribeSchemaInput(v *DescribeSchemaIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -927,19 +1029,37 @@ func awsRestjson1_serializeOpHttpBindingsGetCodeBindingSourceInput(v *GetCodeBin
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Language == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+	}
 	if v.Language != nil {
+		if len(*v.Language) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+		}
 		if err := encoder.SetURI("Language").String(*v.Language); err != nil {
 			return err
 		}
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -1289,7 +1409,13 @@ func awsRestjson1_serializeOpHttpBindingsListSchemasInput(v *ListSchemasInput, e
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -1361,13 +1487,25 @@ func awsRestjson1_serializeOpHttpBindingsListSchemaVersionsInput(v *ListSchemaVe
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -1427,7 +1565,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1487,19 +1631,37 @@ func awsRestjson1_serializeOpHttpBindingsPutCodeBindingInput(v *PutCodeBindingIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Language == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+	}
 	if v.Language != nil {
+		if len(*v.Language) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Language must not be empty")}
+		}
 		if err := encoder.SetURI("Language").String(*v.Language); err != nil {
 			return err
 		}
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}
@@ -1661,7 +1823,13 @@ func awsRestjson1_serializeOpHttpBindingsSearchSchemasInput(v *SearchSchemasInpu
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -1721,7 +1889,13 @@ func awsRestjson1_serializeOpHttpBindingsStartDiscovererInput(v *StartDiscoverer
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DiscovererId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+	}
 	if v.DiscovererId != nil {
+		if len(*v.DiscovererId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+		}
 		if err := encoder.SetURI("DiscovererId").String(*v.DiscovererId); err != nil {
 			return err
 		}
@@ -1781,7 +1955,13 @@ func awsRestjson1_serializeOpHttpBindingsStopDiscovererInput(v *StopDiscovererIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DiscovererId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+	}
 	if v.DiscovererId != nil {
+		if len(*v.DiscovererId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+		}
 		if err := encoder.SetURI("DiscovererId").String(*v.DiscovererId); err != nil {
 			return err
 		}
@@ -1852,7 +2032,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1926,7 +2112,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -2006,7 +2198,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDiscovererInput(v *UpdateDiscover
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DiscovererId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+	}
 	if v.DiscovererId != nil {
+		if len(*v.DiscovererId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DiscovererId must not be empty")}
+		}
 		if err := encoder.SetURI("DiscovererId").String(*v.DiscovererId); err != nil {
 			return err
 		}
@@ -2089,7 +2287,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRegistryInput(v *UpdateRegistryIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
@@ -2172,13 +2376,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSchemaInput(v *UpdateSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
 	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
 		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
 			return err
 		}
 	}
 
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
 	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
 		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
 			return err
 		}

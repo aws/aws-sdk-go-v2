@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Clears any customization of a GatewayResponse () of a specified response type on
-// the given RestApi () and resets it with the default settings.
+// Clears any customization of a GatewayResponse of a specified response type on
+// the given RestApi and resets it with the default settings.
 func (c *Client) DeleteGatewayResponse(ctx context.Context, params *DeleteGatewayResponseInput, optFns ...func(*Options)) (*DeleteGatewayResponseOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayResponseInput{}
@@ -28,11 +28,11 @@ func (c *Client) DeleteGatewayResponse(ctx context.Context, params *DeleteGatewa
 	return out, nil
 }
 
-// Clears any customization of a GatewayResponse () of a specified response type on
-// the given RestApi () and resets it with the default settings.
+// Clears any customization of a GatewayResponse of a specified response type on
+// the given RestApi and resets it with the default settings.
 type DeleteGatewayResponseInput struct {
 
-	// [Required] The response type of the associated GatewayResponse (). Valid values
+	// [Required] The response type of the associated GatewayResponse. Valid values
 	// are
 	//
 	//     * ACCESS_DENIED
@@ -85,7 +85,7 @@ type DeleteGatewayResponseInput struct {
 	// This member is required.
 	ResponseType types.GatewayResponseType
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

@@ -32,7 +32,7 @@ func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Container for the parameters to the DescribeAvailabilityOptions () operation.
+// Container for the parameters to the DescribeAvailabilityOptions operation.
 // Specifies the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeAvailabilityOptionsInput struct {

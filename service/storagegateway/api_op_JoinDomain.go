@@ -74,19 +74,30 @@ type JoinDomainInput struct {
 // JoinDomainOutput
 type JoinDomainOutput struct {
 
-	// Indicates the status of the gateway as a member of the Active Directory domain.
-	// <ul> <li> <p> <code>ACCESS_DENIED</code>: Indicates that the
-	// <code>JoinDomain</code> operation failed due to an authentication error.</p>
-	// </li> <li> <p> <code>DETACHED</code>: Indicates that gateway is not joined to a
-	// domain.</p> </li> <li> <p> <code>JOINED</code>: Indicates that the gateway has
-	// successfully joined a domain.</p> </li> <li> <p> <code>JOINING</code>: Indicates
-	// that a <code>JoinDomain</code> operation is in progress.</p> </li> <li> <p>
-	// <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation
-	// failed due to a network or connectivity error.</p> </li> <li> <p>
-	// <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation
-	// failed because the operation didn't complete within the allotted time.</p> </li>
-	// <li> <p> <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code>
-	// operation failed due to another type of error.</p> </li> </ul>
+	// Indicates the status of the gateway as a member of the Active Directory
+	// domain.
+	//
+	//     * ACCESS_DENIED: Indicates that the JoinDomain operation failed due
+	// to an authentication error.
+	//
+	//     * DETACHED: Indicates that gateway is not
+	// joined to a domain.
+	//
+	//     * JOINED: Indicates that the gateway has successfully
+	// joined a domain.
+	//
+	//     * JOINING: Indicates that a JoinDomain operation is in
+	// progress.
+	//
+	//     * NETWORK_ERROR: Indicates that JoinDomain operation failed due
+	// to a network or connectivity error.
+	//
+	//     * TIMEOUT: Indicates that the
+	// JoinDomain operation failed because the operation didn't complete within the
+	// allotted time.
+	//
+	//     * UNKNOWN_ERROR: Indicates that the JoinDomain operation
+	// failed due to another type of error.
 	ActiveDirectoryStatus types.ActiveDirectoryStatus
 
 	// The unique Amazon Resource Name (ARN) of the gateway that joined the domain.

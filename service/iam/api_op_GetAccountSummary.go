@@ -33,7 +33,7 @@ func (c *Client) GetAccountSummary(ctx context.Context, params *GetAccountSummar
 type GetAccountSummaryInput struct {
 }
 
-// Contains the response to a successful GetAccountSummary () request.
+// Contains the response to a successful GetAccountSummary request.
 type GetAccountSummaryOutput struct {
 
 	// A set of key–value pairs containing information about IAM entity usage and IAM

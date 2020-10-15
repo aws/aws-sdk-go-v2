@@ -41,9 +41,8 @@ type DescribeTaskInput struct {
 type DescribeTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used
-	// to monitor and log events in the task.  <p>For more information on these groups,
-	// see Working with Log Groups and Log Streams in the <i>Amazon CloudWatch User
-	// Guide</i>.</p>
+	// to monitor and log events in the task. For more information on these groups, see
+	// Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
 	CloudWatchLogGroupArn *string
 
 	// The time that the task was created.
@@ -95,9 +94,9 @@ type DescribeTaskOutput struct {
 	// that was created for your subnet.
 	SourceNetworkInterfaceArns []*string
 
-	// The status of the task that was described.  <p>For detailed information about
-	// task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync
-	// User Guide.</i> </p>
+	// The status of the task that was described. For detailed information about task
+	// execution statuses, see Understanding Task Statuses in the AWS DataSync User
+	// Guide.
 	Status types.TaskStatus
 
 	// The Amazon Resource Name (ARN) of the task that was described.

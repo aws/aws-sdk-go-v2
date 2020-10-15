@@ -20,12 +20,12 @@ import (
 // EnvironmentName response element is always null. Related Topics
 //
 //     *
-// DescribeConfigurationOptions ()
+// DescribeConfigurationOptions
 //
-//     * DescribeConfigurationSettings ()
+//     * DescribeConfigurationSettings
 //
 //     *
-// ListAvailableSolutionStacks ()
+// ListAvailableSolutionStacks
 func (c *Client) CreateConfigurationTemplate(ctx context.Context, params *CreateConfigurationTemplateInput, optFns ...func(*Options)) (*CreateConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationTemplateInput{}
@@ -75,9 +75,8 @@ type CreateConfigurationTemplateInput struct {
 	// The Amazon Resource Name (ARN) of the custom platform. For more information, see
 	// Custom Platforms
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
-	// in the AWS Elastic Beanstalk Developer Guide.  <p>If you specify
-	// <code>PlatformArn</code>, then don't specify <code>SolutionStackName</code>.</p>
-	// </note>
+	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn, then
+	// don't specify SolutionStackName.
 	PlatformArn *string
 
 	// The name of an Elastic Beanstalk solution stack (platform version) that this

@@ -189,7 +189,7 @@ func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return 
 // Amazon Polly can't find the specified lexicon. This could be caused by a lexicon
 // that is missing, its name is misspelled or specifying a lexicon that is in a
 // different region. Verify that the lexicon exists, is in the region (see
-// ListLexicons ()) and that you spelled its name is spelled correctly. Then try
+// ListLexicons) and that you spelled its name is spelled correctly. Then try
 // again.
 type LexiconNotFoundException struct {
 	Message *string

@@ -14,7 +14,7 @@ import (
 // Lists the policies attached to the specified principal. If you use an Cognito
 // identity, the ID must be in AmazonCognito Identity format
 // (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax).
-// Note: This API is deprecated. Please use ListAttachedPolicies () instead.
+// Note: This API is deprecated. Please use ListAttachedPolicies instead.
 func (c *Client) ListPrincipalPolicies(ctx context.Context, params *ListPrincipalPoliciesInput, optFns ...func(*Options)) (*ListPrincipalPoliciesOutput, error) {
 	if params == nil {
 		params = &ListPrincipalPoliciesInput{}

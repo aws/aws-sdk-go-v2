@@ -82,7 +82,13 @@ func awsRestxml_serializeOpHttpBindingsAssociateVPCWithHostedZoneInput(v *Associ
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -188,7 +194,13 @@ func awsRestxml_serializeOpHttpBindingsChangeResourceRecordSetsInput(v *ChangeRe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -283,13 +295,25 @@ func awsRestxml_serializeOpHttpBindingsChangeTagsForResourceInput(v *ChangeTagsF
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.ResourceType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+	}
 	if len(v.ResourceType) > 0 {
+		if len(string(v.ResourceType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceType").String(string(v.ResourceType)); err != nil {
 			return err
 		}
@@ -1044,7 +1068,13 @@ func awsRestxml_serializeOpHttpBindingsCreateTrafficPolicyVersionInput(v *Create
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1148,7 +1178,13 @@ func awsRestxml_serializeOpHttpBindingsCreateVPCAssociationAuthorizationInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -1226,7 +1262,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteHealthCheckInput(v *DeleteHealthChe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HealthCheckId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+	}
 	if v.HealthCheckId != nil {
+		if len(*v.HealthCheckId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+		}
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
 			return err
 		}
@@ -1286,7 +1328,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteHostedZoneInput(v *DeleteHostedZone
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1346,7 +1394,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteQueryLoggingConfigInput(v *DeleteQu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1406,7 +1460,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteReusableDelegationSetInput(v *Delet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1466,12 +1526,21 @@ func awsRestxml_serializeOpHttpBindingsDeleteTrafficPolicyInput(v *DeleteTraffic
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
 	}
 
+	if v.Version == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Version must not be empty")}
+	}
 	if v.Version != nil {
 		if err := encoder.SetURI("Version").Integer(*v.Version); err != nil {
 			return err
@@ -1532,7 +1601,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteTrafficPolicyInstanceInput(v *Delet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1609,7 +1684,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteVPCAssociationAuthorizationInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -1704,7 +1785,13 @@ func awsRestxml_serializeOpHttpBindingsDisassociateVPCFromHostedZoneInput(v *Dis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -1793,7 +1880,13 @@ func awsRestxml_serializeOpHttpBindingsGetAccountLimitInput(v *GetAccountLimitIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.Type) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+	}
 	if len(v.Type) > 0 {
+		if len(string(v.Type)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+		}
 		if err := encoder.SetURI("Type").String(string(v.Type)); err != nil {
 			return err
 		}
@@ -1853,7 +1946,13 @@ func awsRestxml_serializeOpHttpBindingsGetChangeInput(v *GetChangeInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2029,7 +2128,13 @@ func awsRestxml_serializeOpHttpBindingsGetHealthCheckInput(v *GetHealthCheckInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HealthCheckId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+	}
 	if v.HealthCheckId != nil {
+		if len(*v.HealthCheckId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+		}
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
 			return err
 		}
@@ -2139,7 +2244,13 @@ func awsRestxml_serializeOpHttpBindingsGetHealthCheckLastFailureReasonInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HealthCheckId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+	}
 	if v.HealthCheckId != nil {
+		if len(*v.HealthCheckId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+		}
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
 			return err
 		}
@@ -2199,7 +2310,13 @@ func awsRestxml_serializeOpHttpBindingsGetHealthCheckStatusInput(v *GetHealthChe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HealthCheckId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+	}
 	if v.HealthCheckId != nil {
+		if len(*v.HealthCheckId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+		}
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
 			return err
 		}
@@ -2259,7 +2376,13 @@ func awsRestxml_serializeOpHttpBindingsGetHostedZoneInput(v *GetHostedZoneInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2369,13 +2492,25 @@ func awsRestxml_serializeOpHttpBindingsGetHostedZoneLimitInput(v *GetHostedZoneL
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.Type) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+	}
 	if len(v.Type) > 0 {
+		if len(string(v.Type)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+		}
 		if err := encoder.SetURI("Type").String(string(v.Type)); err != nil {
 			return err
 		}
@@ -2435,7 +2570,13 @@ func awsRestxml_serializeOpHttpBindingsGetQueryLoggingConfigInput(v *GetQueryLog
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2495,7 +2636,13 @@ func awsRestxml_serializeOpHttpBindingsGetReusableDelegationSetInput(v *GetReusa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -2555,13 +2702,25 @@ func awsRestxml_serializeOpHttpBindingsGetReusableDelegationSetLimitInput(v *Get
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DelegationSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DelegationSetId must not be empty")}
+	}
 	if v.DelegationSetId != nil {
+		if len(*v.DelegationSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DelegationSetId must not be empty")}
+		}
 		if err := encoder.SetURI("DelegationSetId").String(*v.DelegationSetId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.Type) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+	}
 	if len(v.Type) > 0 {
+		if len(string(v.Type)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Type must not be empty")}
+		}
 		if err := encoder.SetURI("Type").String(string(v.Type)); err != nil {
 			return err
 		}
@@ -2621,12 +2780,21 @@ func awsRestxml_serializeOpHttpBindingsGetTrafficPolicyInput(v *GetTrafficPolicy
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
 	}
 
+	if v.Version == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Version must not be empty")}
+	}
 	if v.Version != nil {
 		if err := encoder.SetURI("Version").Integer(*v.Version); err != nil {
 			return err
@@ -2687,7 +2855,13 @@ func awsRestxml_serializeOpHttpBindingsGetTrafficPolicyInstanceInput(v *GetTraff
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -3197,7 +3371,13 @@ func awsRestxml_serializeOpHttpBindingsListResourceRecordSetsInput(v *ListResour
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -3335,13 +3515,25 @@ func awsRestxml_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsForRe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.ResourceType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+	}
 	if len(v.ResourceType) > 0 {
+		if len(string(v.ResourceType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceType").String(string(v.ResourceType)); err != nil {
 			return err
 		}
@@ -3418,7 +3610,13 @@ func awsRestxml_serializeOpHttpBindingsListTagsForResourcesInput(v *ListTagsForR
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ResourceType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+	}
 	if len(v.ResourceType) > 0 {
+		if len(string(v.ResourceType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceType must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceType").String(string(v.ResourceType)); err != nil {
 			return err
 		}
@@ -3776,7 +3974,13 @@ func awsRestxml_serializeOpHttpBindingsListTrafficPolicyVersionsInput(v *ListTra
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -3844,7 +4048,13 @@ func awsRestxml_serializeOpHttpBindingsListVPCAssociationAuthorizationsInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HostedZoneId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
 	if v.HostedZoneId != nil {
+		if len(*v.HostedZoneId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+		}
 		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
@@ -4007,7 +4217,13 @@ func awsRestxml_serializeOpHttpBindingsUpdateHealthCheckInput(v *UpdateHealthChe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.HealthCheckId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+	}
 	if v.HealthCheckId != nil {
+		if len(*v.HealthCheckId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckId must not be empty")}
+		}
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
 			return err
 		}
@@ -4273,7 +4489,13 @@ func awsRestxml_serializeOpHttpBindingsUpdateHostedZoneCommentInput(v *UpdateHos
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -4366,12 +4588,21 @@ func awsRestxml_serializeOpHttpBindingsUpdateTrafficPolicyCommentInput(v *Update
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
 	}
 
+	if v.Version == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Version must not be empty")}
+	}
 	if v.Version != nil {
 		if err := encoder.SetURI("Version").Integer(*v.Version); err != nil {
 			return err
@@ -4465,7 +4696,13 @@ func awsRestxml_serializeOpHttpBindingsUpdateTrafficPolicyInstanceInput(v *Updat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Id == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
 	if v.Id != nil {
+		if len(*v.Id) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}

@@ -17,21 +17,21 @@ import (
 //
 //     *
 // Detach the policy from all users, groups, and roles that the policy is attached
-// to, using the DetachUserPolicy (), DetachGroupPolicy (), or DetachRolePolicy ()
-// API operations. To list all the users, groups, and roles that a policy is
-// attached to, use ListEntitiesForPolicy ().
+// to, using the DetachUserPolicy, DetachGroupPolicy, or DetachRolePolicy API
+// operations. To list all the users, groups, and roles that a policy is attached
+// to, use ListEntitiesForPolicy.
 //
-//     * Delete all versions of the
-// policy using DeletePolicyVersion (). To list the policy's versions, use
-// ListPolicyVersions (). You cannot use DeletePolicyVersion () to delete the
-// version that is marked as the default version. You delete the policy's default
-// version in the next step of the process.
+//     * Delete all versions of the policy using
+// DeletePolicyVersion. To list the policy's versions, use ListPolicyVersions. You
+// cannot use DeletePolicyVersion to delete the version that is marked as the
+// default version. You delete the policy's default version in the next step of the
+// process.
 //
-//     * Delete the policy (this
-// automatically deletes the policy's default version) using this API.
+//     * Delete the policy (this automatically deletes the policy's
+// default version) using this API.
 //
-// For
-// information about managed policies, see Managed Policies and Inline Policies
+// For information about managed policies, see
+// Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {

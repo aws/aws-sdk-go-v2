@@ -28,7 +28,7 @@ func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistor
 	return out, nil
 }
 
-// Container for request parameters to GetUpgradeHistory () operation.
+// Container for request parameters to GetUpgradeHistory operation.
 type GetUpgradeHistoryInput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
@@ -48,16 +48,16 @@ type GetUpgradeHistoryInput struct {
 	NextToken *string
 }
 
-// Container for response returned by GetUpgradeHistory () operation.
+// Container for response returned by GetUpgradeHistory operation.
 type GetUpgradeHistoryOutput struct {
 
 	// Pagination token that needs to be supplied to the next call to get the next page
 	// of results
 	NextToken *string
 
-	// A list of UpgradeHistory () objects corresponding to each Upgrade or Upgrade
+	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
 	// Eligibility Check performed on a domain returned as part of
-	// GetUpgradeHistoryResponse () object.
+	// GetUpgradeHistoryResponse object.
 	UpgradeHistories []*types.UpgradeHistory
 
 	// Metadata pertaining to the operation's result.

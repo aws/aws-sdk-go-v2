@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes a solution. For more information on solutions, see CreateSolution ().
+// Describes a solution. For more information on solutions, see CreateSolution.
 func (c *Client) DescribeSolution(ctx context.Context, params *DescribeSolutionInput, optFns ...func(*Options)) (*DescribeSolutionOutput, error) {
 	if params == nil {
 		params = &DescribeSolutionInput{}

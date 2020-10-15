@@ -66,7 +66,7 @@ type ListHandshakesForAccountInput struct {
 
 type ListHandshakesForAccountOutput struct {
 
-	// A list of Handshake () objects with details about each of the handshakes that is
+	// A list of Handshake objects with details about each of the handshakes that is
 	// associated with the specified account.
 	Handshakes []*types.Handshake
 

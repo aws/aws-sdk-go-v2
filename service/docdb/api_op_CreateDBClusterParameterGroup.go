@@ -41,7 +41,7 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 	return out, nil
 }
 
-// Represents the input of CreateDBClusterParameterGroup ().
+// Represents the input of CreateDBClusterParameterGroup.
 type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the cluster parameter group. Constraints:

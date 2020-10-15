@@ -112,10 +112,10 @@ type ReceiveMessageInput struct {
 	//
 	//     *
 	// MessageDeduplicationId – Returns the value provided by the producer that calls
-	// the SendMessage () action.
+	// the SendMessage action.
 	//
 	//     * MessageGroupId – Returns the value provided by
-	// the producer that calls the SendMessage () action. Messages with the same
+	// the producer that calls the SendMessage action. Messages with the same
 	// MessageGroupId are returned in sequence.
 	//
 	//     * SequenceNumber – Returns the
@@ -145,11 +145,10 @@ type ReceiveMessageInput struct {
 	//
 	// * The name can be up to 256 characters long.
 	//
-	//     <p>When using
-	// <code>ReceiveMessage</code>, you can send a list of attribute names to receive,
-	// or you can return all of the attributes by specifying <code>All</code> or
-	// <code>.*</code> in your request. You can also use all message attributes
-	// starting with a prefix, for example <code>bar.*</code>.</p>
+	// When using ReceiveMessage, you can
+	// send a list of attribute names to receive, or you can return all of the
+	// attributes by specifying All or . in your request. You can also use all message
+	// attributes starting with a prefix, for example bar..
 	MessageAttributeNames []*string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used

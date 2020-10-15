@@ -44,10 +44,10 @@ import (
 // group, this sets the group's DesiredCapacity to the new MaxSize value.
 //
 // To see
-// which parameters have been set, call the DescribeAutoScalingGroups () API. To
-// view the scaling policies for an Auto Scaling group, call the DescribePolicies
-// () API. If the group has scaling policies, you can update them by calling the
-// PutScalingPolicy () API.
+// which parameters have been set, call the DescribeAutoScalingGroups API. To view
+// the scaling policies for an Auto Scaling group, call the DescribePolicies API.
+// If the group has scaling policies, you can update them by calling the
+// PutScalingPolicy API.
 func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoScalingGroupInput, optFns ...func(*Options)) (*UpdateAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateAutoScalingGroupInput{}
@@ -135,13 +135,13 @@ type UpdateAutoScalingGroupInput struct {
 
 	// An embedded object that specifies a mixed instances policy. In your call to
 	// UpdateAutoScalingGroup, you can make changes to the policy that is specified.
-	// All optional parameters are left unchanged if not specified.  <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html">MixedInstancesPolicy</a>
-	// in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
-	// href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto
-	// Scaling Groups with Multiple Instance Types and Purchase Options</a> in the
-	// <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+	// All optional parameters are left unchanged if not specified. For more
+	// information, see MixedInstancesPolicy
+	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html)
+	// in the Amazon EC2 Auto Scaling API Reference and Auto Scaling Groups with
+	// Multiple Instance Types and Purchase Options
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by

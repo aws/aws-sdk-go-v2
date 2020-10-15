@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Amazon Lightsail content delivery network (CDN) distribution.  <p>A
+// Creates an Amazon Lightsail content delivery network (CDN) distribution. A
 // distribution is a globally distributed network of caching servers that improve
 // the performance of your website or web application hosted on a Lightsail
-// instance. For more information, see <a
-// href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks">Content
-// delivery networks in Amazon Lightsail</a>.</p>
+// instance. For more information, see Content delivery networks in Amazon
+// Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks).
 func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionInput, optFns ...func(*Options)) (*CreateDistributionOutput, error) {
 	if params == nil {
 		params = &CreateDistributionInput{}
@@ -34,10 +34,10 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 
 type CreateDistributionInput struct {
 
-	// The bundle ID to use for the distribution.  <p>A distribution bundle describes
-	// the specifications of your distribution, such as the monthly cost and monthly
-	// network transfer quota.</p> <p>Use the <code>GetDistributionBundles</code>
-	// action to get a list of distribution bundle IDs that you can specify.</p>
+	// The bundle ID to use for the distribution. A distribution bundle describes the
+	// specifications of your distribution, such as the monthly cost and monthly
+	// network transfer quota. Use the GetDistributionBundles action to get a list of
+	// distribution bundle IDs that you can specify.
 	//
 	// This member is required.
 	BundleId *string
@@ -53,8 +53,8 @@ type CreateDistributionInput struct {
 	DistributionName *string
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
-	// serves content from the origin.</p>
+	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
+	// content from the origin.
 	//
 	// This member is required.
 	Origin *types.InputOrigin
@@ -66,9 +66,8 @@ type CreateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []*types.CacheBehaviorPerPath
 
-	// The tag keys and optional values to add to the distribution during create.
-	// <p>Use the <code>TagResource</code> action to tag a resource after it's
-	// created.</p>
+	// The tag keys and optional values to add to the distribution during create. Use
+	// the TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
 }
 

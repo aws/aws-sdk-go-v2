@@ -15,11 +15,20 @@ import (
 // resources, which you can use to categorize these resources. For example, you can
 // categorize resources by purpose, owner, environment, or team. Each tag consists
 // of a key and a value, which you define. You can add tags to the following AWS
-// Storage Gateway resources:  <ul> <li> <p>Storage gateways of all types</p> </li>
-// <li> <p>Storage volumes</p> </li> <li> <p>Virtual tapes</p> </li> <li> <p>NFS
-// and SMB file shares</p> </li> </ul> <p>You can create a maximum of 50 tags for
-// each resource. Virtual tapes and storage volumes that are recovered to a new
-// gateway maintain their tags.</p>
+// Storage Gateway resources:
+//
+//     * Storage gateways of all types
+//
+//     * Storage
+// volumes
+//
+//     * Virtual tapes
+//
+//     * NFS and SMB file shares
+//
+// You can create a
+// maximum of 50 tags for each resource. Virtual tapes and storage volumes that are
+// recovered to a new gateway maintain their tags.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}
@@ -44,10 +53,10 @@ type AddTagsToResourceInput struct {
 	ResourceARN *string
 
 	// The key-value pair that represents the tag you want to add to the resource. The
-	// value can be an empty string.  <note> <p>Valid characters for key and value are
-	// letters, spaces, and numbers representable in UTF-8 format, and the following
-	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.</p> </note>
+	// value can be an empty string. Valid characters for key and value are letters,
+	// spaces, and numbers representable in UTF-8 format, and the following special
+	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
+	// characters, and the maximum length for a tag's value is 256.
 	//
 	// This member is required.
 	Tags []*types.Tag

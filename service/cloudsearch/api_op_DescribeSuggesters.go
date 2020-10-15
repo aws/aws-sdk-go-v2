@@ -34,11 +34,11 @@ func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggest
 	return out, nil
 }
 
-// Container for the parameters to the DescribeSuggester () operation. Specifies
-// the name of the domain you want to describe. To restrict the response to
-// particular suggesters, specify the names of the suggesters you want to describe.
-// To show the active configuration and exclude any pending changes, set the
-// Deployed option to true.
+// Container for the parameters to the DescribeSuggester operation. Specifies the
+// name of the domain you want to describe. To restrict the response to particular
+// suggesters, specify the names of the suggesters you want to describe. To show
+// the active configuration and exclude any pending changes, set the Deployed
+// option to true.
 type DescribeSuggestersInput struct {
 
 	// The name of the domain you want to describe.

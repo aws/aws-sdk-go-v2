@@ -118,7 +118,7 @@ type FileSystemDescription struct {
 	LifeCycleState LifeCycleState
 
 	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget ().
+	// information, see CreateMountTarget.
 	//
 	// This member is required.
 	NumberOfMountTargets *int32
@@ -166,8 +166,8 @@ type FileSystemDescription struct {
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem (). If the file system has a Name tag, Amazon EFS returns
-	// the value in this field.
+	// see CreateFileSystem. If the file system has a Name tag, Amazon EFS returns the
+	// value in this field.
 	Name *string
 
 	// The throughput, measured in MiB/s, that you want to provision for a file system.

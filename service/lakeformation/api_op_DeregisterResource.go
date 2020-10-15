@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deregisters the resource as managed by the Data Catalog.  <p>When you deregister
-// a path, Lake Formation removes the path from the inline policy attached to your
-// service-linked role.</p>
+// Deregisters the resource as managed by the Data Catalog. When you deregister a
+// path, Lake Formation removes the path from the inline policy attached to your
+// service-linked role.
 func (c *Client) DeregisterResource(ctx context.Context, params *DeregisterResourceInput, optFns ...func(*Options)) (*DeregisterResourceOutput, error) {
 	if params == nil {
 		params = &DeregisterResourceInput{}

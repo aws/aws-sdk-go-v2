@@ -12,13 +12,13 @@ import (
 )
 
 // Lists gateways owned by an AWS account in an AWS Region specified in the
-// request. The returned list is ordered by gateway Amazon Resource Name (ARN).
-// <p>By default, the operation returns a maximum of 100 gateways. This operation
+// request. The returned list is ordered by gateway Amazon Resource Name (ARN). By
+// default, the operation returns a maximum of 100 gateways. This operation
 // supports pagination that allows you to optionally reduce the number of gateways
-// returned in a response.</p> <p>If you have more gateways than are returned in a
+// returned in a response. If you have more gateways than are returned in a
 // response (that is, the response returns only a truncated list of your gateways),
 // the response contains a marker that you can specify in your next request to
-// fetch the next page of gateways.</p>
+// fetch the next page of gateways.
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}
@@ -34,9 +34,12 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 	return out, nil
 }
 
-// A JSON object containing zero or more of the following fields:  <ul> <li> <p>
-// <a>ListGatewaysInput$Limit</a> </p> </li> <li> <p>
-// <a>ListGatewaysInput$Marker</a> </p> </li> </ul>
+// A JSON object containing zero or more of the following fields:
+//
+//     *
+// ListGatewaysInput$Limit
+//
+//     * ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
 	// Specifies that the list of gateways returned be limited to the specified number
@@ -50,7 +53,7 @@ type ListGatewaysInput struct {
 
 type ListGatewaysOutput struct {
 
-	// An array of GatewayInfo () objects.
+	// An array of GatewayInfo objects.
 	Gateways []*types.GatewayInfo
 
 	// Use the marker in your next request to fetch the next set of gateways in the

@@ -88,7 +88,7 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 // that can’t be nested.
 //
 //     * You tried to update a WebACL with a DefaultAction
-// that isn't among the types available at DefaultAction ().
+// that isn't among the types available at DefaultAction.
 //
 //     * Your request
 // references an ARN that is malformed, or corresponds to a resource with which a
@@ -114,19 +114,26 @@ func (e *WAFInvalidParameterException) ErrorCode() string             { return "
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because the specified policy isn't in the proper format.
-// <p>The policy specifications must conform to the following:</p> <ul> <li> <p>The
-// policy must be composed using IAM Policy version 2012-10-17 or version
-// 2015-01-01.</p> </li> <li> <p>The policy must include specifications for
-// <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p> </li>
-// <li> <p> <code>Effect</code> must specify <code>Allow</code>.</p> </li> <li> <p>
-// <code>Action</code> must specify <code>wafv2:CreateWebACL</code>,
-// <code>wafv2:UpdateWebACL</code>, and
-// <code>wafv2:PutFirewallManagerRuleGroups</code>. AWS WAF rejects any extra
-// actions or wildcard actions in the policy.</p> </li> <li> <p>The policy must not
-// include a <code>Resource</code> parameter.</p> </li> </ul> <p>For more
-// information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">IAM
-// Policies</a>. </p>
+// The policy specifications must conform to the following:
+//
+//     * The policy must
+// be composed using IAM Policy version 2012-10-17 or version 2015-01-01.
+//
+//     *
+// The policy must include specifications for Effect, Action, and Principal.
+//
+//     *
+// Effect must specify Allow.
+//
+//     * Action must specify wafv2:CreateWebACL,
+// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any
+// extra actions or wildcard actions in the policy.
+//
+//     * The policy must not
+// include a Resource parameter.
+//
+// For more information, see IAM Policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
 }

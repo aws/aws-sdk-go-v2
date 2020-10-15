@@ -21,9 +21,9 @@ import (
 // load-balancing algorithm. A cookie is inserted into the response for binding
 // subsequent requests from the same user to that server. The validity of the
 // cookie is based on the cookie expiration time, which is specified in the policy
-// configuration.  <p>For more information, see <a
-// href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based
-// Session Stickiness</a> in the <i>Classic Load Balancers Guide</i>.</p>
+// configuration. For more information, see Duration-Based Session Stickiness
+// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration)
+// in the Classic Load Balancers Guide.
 func (c *Client) CreateLBCookieStickinessPolicy(ctx context.Context, params *CreateLBCookieStickinessPolicyInput, optFns ...func(*Options)) (*CreateLBCookieStickinessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateLBCookieStickinessPolicyInput{}

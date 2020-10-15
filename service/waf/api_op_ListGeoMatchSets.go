@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of GeoMatchSetSummary () objects in the response.
+// global use. Returns an array of GeoMatchSetSummary objects in the response.
 func (c *Client) ListGeoMatchSets(ctx context.Context, params *ListGeoMatchSetsInput, optFns ...func(*Options)) (*ListGeoMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListGeoMatchSetsInput{}
@@ -51,7 +51,7 @@ type ListGeoMatchSetsInput struct {
 
 type ListGeoMatchSetsOutput struct {
 
-	// An array of GeoMatchSetSummary () objects.
+	// An array of GeoMatchSetSummary objects.
 	GeoMatchSets []*types.GeoMatchSetSummary
 
 	// If you have more GeoMatchSet objects than the number that you specified for

@@ -54,18 +54,18 @@ type CreateTaskSetInput struct {
 	// strategy consists of one or more capacity providers along with the base and
 	// weight to assign to them. A capacity provider must be associated with the
 	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders () API is used to associate a capacity provider with
-	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
-	// used. If a capacityProviderStrategy is specified, the launchType parameter must
-	// be omitted. If no capacityProviderStrategy or launchType is specified, the
+	// PutClusterCapacityProviders API is used to associate a capacity provider with a
+	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// If a capacityProviderStrategy is specified, the launchType parameter must be
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
 	// capacity provider that uses an Auto Scaling group, the capacity provider must
 	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider () API operation. To use a AWS Fargate capacity provider,
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
 	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
 	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders () API operation is
-	// used to update the list of available capacity providers for a cluster after the
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
+	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
 

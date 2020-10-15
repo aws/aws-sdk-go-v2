@@ -31,7 +31,7 @@ func (c *Client) ListStacks(ctx context.Context, params *ListStacksInput, optFns
 	return out, nil
 }
 
-// The input for ListStacks () action.
+// The input for ListStacks action.
 type ListStacksInput struct {
 
 	// A string that identifies the next page of stacks that you want to retrieve.
@@ -39,11 +39,11 @@ type ListStacksInput struct {
 
 	// Stack status to use as a filter. Specify one or more stack status codes to list
 	// only stacks with the specified status codes. For a complete list of stack status
-	// codes, see the StackStatus parameter of the Stack () data type.
+	// codes, see the StackStatus parameter of the Stack data type.
 	StackStatusFilter []types.StackStatus
 }
 
-// The output for ListStacks () action.
+// The output for ListStacks action.
 type ListStacksOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of

@@ -13,8 +13,8 @@ import (
 
 // Returns the refresh status of the AWS Trusted Advisor checks that have the
 // specified check IDs. You can get the check IDs by calling the
-// DescribeTrustedAdvisorChecks () operation. Some checks are refreshed
-// automatically, and you can't return their refresh statuses by using the
+// DescribeTrustedAdvisorChecks operation. Some checks are refreshed automatically,
+// and you can't return their refresh statuses by using the
 // DescribeTrustedAdvisorCheckRefreshStatuses operation. If you call this operation
 // for these checks, you might see an InvalidParameterValue error.
 //
@@ -52,7 +52,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 }
 
 // The statuses of the Trusted Advisor checks returned by the
-// DescribeTrustedAdvisorCheckRefreshStatuses () operation.
+// DescribeTrustedAdvisorCheckRefreshStatuses operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 
 	// The refresh status of the specified Trusted Advisor checks.

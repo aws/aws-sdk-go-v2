@@ -28,7 +28,7 @@ func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, par
 	return out, nil
 }
 
-// Represents the input to DescribeEngineDefaultClusterParameters ().
+// Represents the input to DescribeEngineDefaultClusterParameters.
 type DescribeEngineDefaultClusterParametersInput struct {
 
 	// The name of the cluster parameter group family to return the engine parameter

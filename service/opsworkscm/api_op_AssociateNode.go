@@ -12,10 +12,10 @@ import (
 )
 
 // Associates a new node with the server. For more information about how to
-// disassociate a node, see DisassociateNode (). On a Chef server: This command is
-// an alternative to knife bootstrap. Example (Chef): aws opsworks-cm
-// associate-node --server-name MyServer --node-name MyManagedNode
-// --engine-attributes "Name=CHEF_ORGANIZATION,Value=default"
+// disassociate a node, see DisassociateNode. On a Chef server: This command is an
+// alternative to knife bootstrap. Example (Chef): aws opsworks-cm associate-node
+// --server-name MyServer --node-name MyManagedNode --engine-attributes
+// "Name=CHEF_ORGANIZATION,Value=default"
 // "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem" On a Puppet server, this
 // command is an alternative to the puppet cert sign command that signs a Puppet
 // node CSR. Example (Puppet): aws opsworks-cm associate-node --server-name

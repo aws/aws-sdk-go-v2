@@ -10,15 +10,15 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Starts a gateway that you previously shut down (see ShutdownGateway ()). After
-// the gateway starts, you can then make other API calls, your applications can
-// read from or write to the gateway's storage volumes and you will be able to take
-// snapshot backups.  <note> <p>When you make a request, you will get a 200 OK
-// success response immediately. However, it might take some time for the gateway
-// to be ready. You should call <a>DescribeGatewayInformation</a> and check the
-// status before making any additional API calls. For more information, see
-// <a>ActivateGateway</a>.</p> </note> <p>To specify which gateway to start, use
-// the Amazon Resource Name (ARN) of the gateway in your request.</p>
+// Starts a gateway that you previously shut down (see ShutdownGateway). After the
+// gateway starts, you can then make other API calls, your applications can read
+// from or write to the gateway's storage volumes and you will be able to take
+// snapshot backups. When you make a request, you will get a 200 OK success
+// response immediately. However, it might take some time for the gateway to be
+// ready. You should call DescribeGatewayInformation and check the status before
+// making any additional API calls. For more information, see ActivateGateway. To
+// specify which gateway to start, use the Amazon Resource Name (ARN) of the
+// gateway in your request.
 func (c *Client) StartGateway(ctx context.Context, params *StartGatewayInput, optFns ...func(*Options)) (*StartGatewayOutput, error) {
 	if params == nil {
 		params = &StartGatewayInput{}
@@ -37,8 +37,8 @@ func (c *Client) StartGateway(ctx context.Context, params *StartGatewayInput, op
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.
 type StartGatewayInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -48,8 +48,8 @@ type StartGatewayInput struct {
 // restarted.
 type StartGatewayOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

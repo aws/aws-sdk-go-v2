@@ -198,7 +198,7 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 
 // Amazon Translate does not support translation from the language of the source
 // text into the requested target language. For more information, see
-// how-to-error-msg ().
+// how-to-error-msg.
 type UnsupportedLanguagePairException struct {
 	Message *string
 

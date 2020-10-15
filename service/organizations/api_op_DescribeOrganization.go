@@ -14,8 +14,8 @@ import (
 // Retrieves information about the organization that the user's account belongs to.
 // This operation can be called from any account in the organization. Even if a
 // policy type is shown as available in the organization, you can disable it
-// separately at the root level with DisablePolicyType (). Use ListRoots () to see
-// the status of policy types for a specified root.
+// separately at the root level with DisablePolicyType. Use ListRoots to see the
+// status of policy types for a specified root.
 func (c *Client) DescribeOrganization(ctx context.Context, params *DescribeOrganizationInput, optFns ...func(*Options)) (*DescribeOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationInput{}
@@ -40,7 +40,7 @@ type DescribeOrganizationOutput struct {
 	// AvailablePolicyTypes part of the response is deprecated, and you shouldn't use
 	// it in your apps. It doesn't include any policy type supported by Organizations
 	// other than SCPs. To determine which policy types are enabled in your
-	// organization, use the ListRoots () operation.
+	// organization, use the ListRoots operation.
 	Organization *types.Organization
 
 	// Metadata pertaining to the operation's result.

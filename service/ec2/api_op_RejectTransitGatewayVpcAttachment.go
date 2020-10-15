@@ -12,9 +12,9 @@ import (
 )
 
 // Rejects a request to attach a VPC to a transit gateway. The VPC attachment must
-// be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments ()
-// to view your pending VPC attachment requests. Use
-// AcceptTransitGatewayVpcAttachment () to accept a VPC attachment request.
+// be in the pendingAcceptance state. Use DescribeTransitGatewayVpcAttachments to
+// view your pending VPC attachment requests. Use AcceptTransitGatewayVpcAttachment
+// to accept a VPC attachment request.
 func (c *Client) RejectTransitGatewayVpcAttachment(ctx context.Context, params *RejectTransitGatewayVpcAttachmentInput, optFns ...func(*Options)) (*RejectTransitGatewayVpcAttachmentOutput, error) {
 	if params == nil {
 		params = &RejectTransitGatewayVpcAttachmentInput{}

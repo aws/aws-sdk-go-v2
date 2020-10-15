@@ -14,7 +14,7 @@ import (
 // Returns a list of accounts in the organization from AWS Organizations that are
 // affected by the provided event. Before you can call this operation, you must
 // first enable AWS Health to work with AWS Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization () operation from your organization's
+// EnableHealthServiceAccessForOrganization operation from your organization's
 // master account.
 func (c *Client) DescribeAffectedAccountsForOrganization(ctx context.Context, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error) {
 	if params == nil {

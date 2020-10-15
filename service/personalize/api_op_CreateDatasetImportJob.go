@@ -22,14 +22,17 @@ import (
 // -or- CREATE FAILED
 //
 // To get the status of the import job, call
-// DescribeDatasetImportJob (), providing the Amazon Resource Name (ARN) of the
+// DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the
 // dataset import job. The dataset import is complete when the status shows as
 // ACTIVE. If the status shows as CREATE FAILED, the response includes a
 // failureReason key, which describes why the job failed. Importing takes time. You
 // must wait until the status shows as ACTIVE before training a model using the
-// dataset.  <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p>
-// <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a>
-// </p> </li> </ul>
+// dataset. Related APIs
+//
+//     * ListDatasetImportJobs
+//
+//     *
+// DescribeDatasetImportJob
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetImportJobInput{}

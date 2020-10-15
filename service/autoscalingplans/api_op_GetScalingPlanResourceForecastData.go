@@ -15,7 +15,7 @@ import (
 // Retrieves the forecast data for a scalable resource. Capacity forecasts are
 // represented as predicted values, or data points, that are calculated using
 // historical data points from a specified CloudWatch load metric. Data points are
-// available for up to 56 days.  </p>
+// available for up to 56 days.
 func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params *GetScalingPlanResourceForecastDataInput, optFns ...func(*Options)) (*GetScalingPlanResourceForecastDataOutput, error) {
 	if params == nil {
 		params = &GetScalingPlanResourceForecastDataInput{}

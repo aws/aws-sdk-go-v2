@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a Deployment () resource. Deleting a deployment will only succeed if
-// there are no Stage () resources associated with it.
+// Deletes a Deployment resource. Deleting a deployment will only succeed if there
+// are no Stage resources associated with it.
 func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentInput, optFns ...func(*Options)) (*DeleteDeploymentOutput, error) {
 	if params == nil {
 		params = &DeleteDeploymentInput{}
@@ -27,15 +27,15 @@ func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentI
 	return out, nil
 }
 
-// Requests API Gateway to delete a Deployment () resource.
+// Requests API Gateway to delete a Deployment resource.
 type DeleteDeploymentInput struct {
 
-	// [Required] The identifier of the Deployment () resource to delete.
+	// [Required] The identifier of the Deployment resource to delete.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

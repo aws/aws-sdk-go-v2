@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about the schema for the specified endpoint.  <p></p>
+// Returns information about the schema for the specified endpoint.
 func (c *Client) DescribeSchemas(ctx context.Context, params *DescribeSchemasInput, optFns ...func(*Options)) (*DescribeSchemasOutput, error) {
 	if params == nil {
 		params = &DescribeSchemasInput{}

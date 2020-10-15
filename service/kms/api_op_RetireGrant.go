@@ -27,7 +27,7 @@ import (
 // to retire by its grant token or by a combination of the grant ID and the Amazon
 // Resource Name (ARN) of the customer master key (CMK). A grant token is a unique
 // variable-length base64-encoded string. A grant ID is a 64 character unique
-// identifier of a grant. The CreateGrant () operation returns both.
+// identifier of a grant. The CreateGrant operation returns both.
 func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optFns ...func(*Options)) (*RetireGrantOutput, error) {
 	if params == nil {
 		params = &RetireGrantInput{}

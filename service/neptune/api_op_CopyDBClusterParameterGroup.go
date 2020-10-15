@@ -81,7 +81,7 @@ type CopyDBClusterParameterGroupInput struct {
 type CopyDBClusterParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster parameter group. This data
-	// type is used as a response element in the DescribeDBClusterParameterGroups ()
+	// type is used as a response element in the DescribeDBClusterParameterGroups
 	// action.
 	DBClusterParameterGroup *types.DBClusterParameterGroup
 

@@ -56,7 +56,7 @@ type GetIntentsInput struct {
 
 type GetIntentsOutput struct {
 
-	// An array of Intent objects. For more information, see PutBot ().
+	// An array of Intent objects. For more information, see PutBot.
 	Intents []*types.IntentMetadata
 
 	// If the response is truncated, the response includes a pagination token that you

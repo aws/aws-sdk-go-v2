@@ -57,20 +57,20 @@ type ClipTimestampRange struct {
 type DASHFragmentSelector struct {
 
 	// The source of the timestamps for the requested media. When FragmentSelectorType
-	// is set to PRODUCER_TIMESTAMP and GetDASHStreamingSessionURLInput$PlaybackMode ()
-	// is ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer
-	// timestamp within the specified FragmentSelector$TimestampRange () is included in
-	// the media playlist. In addition, the fragments with producer timestamps within
-	// the TimestampRange ingested immediately following the first fragment (up to the
-	// GetDASHStreamingSessionURLInput$MaxManifestFragmentResults () value) are
-	// included. Fragments that have duplicate producer timestamps are deduplicated.
-	// This means that if producers are producing a stream of fragments with producer
-	// timestamps that are approximately equal to the true clock time, the MPEG-DASH
-	// manifest will contain all of the fragments within the requested timestamp range.
-	// If some fragments are ingested within the same time range and very different
-	// points in time, only the oldest ingested collection of fragments are returned.
-	// When FragmentSelectorType is set to PRODUCER_TIMESTAMP and
-	// GetDASHStreamingSessionURLInput$PlaybackMode () is LIVE, the producer timestamps
+	// is set to PRODUCER_TIMESTAMP and GetDASHStreamingSessionURLInput$PlaybackMode is
+	// ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer timestamp
+	// within the specified FragmentSelector$TimestampRange is included in the media
+	// playlist. In addition, the fragments with producer timestamps within the
+	// TimestampRange ingested immediately following the first fragment (up to the
+	// GetDASHStreamingSessionURLInput$MaxManifestFragmentResults value) are included.
+	// Fragments that have duplicate producer timestamps are deduplicated. This means
+	// that if producers are producing a stream of fragments with producer timestamps
+	// that are approximately equal to the true clock time, the MPEG-DASH manifest will
+	// contain all of the fragments within the requested timestamp range. If some
+	// fragments are ingested within the same time range and very different points in
+	// time, only the oldest ingested collection of fragments are returned. When
+	// FragmentSelectorType is set to PRODUCER_TIMESTAMP and
+	// GetDASHStreamingSessionURLInput$PlaybackMode is LIVE, the producer timestamps
 	// are used in the MP4 fragments and for deduplication. But the most recently
 	// ingested fragments based on server timestamps are included in the MPEG-DASH
 	// manifest. This means that even if fragments ingested in the past have producer
@@ -93,15 +93,13 @@ type DASHTimestampRange struct {
 	// The end of the timestamp range for the requested media. This value must be
 	// within 3 hours of the specified StartTimestamp, and it must be later than the
 	// StartTimestamp value. If FragmentSelectorType for the request is
-	// SERVER_TIMESTAMP, this value must be in the past.  <p>The
-	// <code>EndTimestamp</code> value is required for <code>ON_DEMAND</code> mode, but
-	// optional for <code>LIVE_REPLAY</code> mode. If the <code>EndTimestamp</code> is
-	// not set for <code>LIVE_REPLAY</code> mode then the session will continue to
-	// include newly ingested fragments until the session expires.</p> <note> <p>This
-	// value is inclusive. The <code>EndTimestamp</code> is compared to the (starting)
-	// timestamp of the fragment. Fragments that start before the
-	// <code>EndTimestamp</code> value and continue past it are included in the
-	// session.</p> </note>
+	// SERVER_TIMESTAMP, this value must be in the past. The EndTimestamp value is
+	// required for ON_DEMAND mode, but optional for LIVE_REPLAY mode. If the
+	// EndTimestamp is not set for LIVE_REPLAY mode then the session will continue to
+	// include newly ingested fragments until the session expires. This value is
+	// inclusive. The EndTimestamp is compared to the (starting) timestamp of the
+	// fragment. Fragments that start before the EndTimestamp value and continue past
+	// it are included in the session.
 	EndTimestamp *time.Time
 
 	// The start of the timestamp range for the requested media. If the
@@ -168,12 +166,12 @@ type FragmentSelector struct {
 type HLSFragmentSelector struct {
 
 	// The source of the timestamps for the requested media. When FragmentSelectorType
-	// is set to PRODUCER_TIMESTAMP and GetHLSStreamingSessionURLInput$PlaybackMode ()
-	// is ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer
-	// timestamp within the specified FragmentSelector$TimestampRange () is included in
-	// the media playlist. In addition, the fragments with producer timestamps within
-	// the TimestampRange ingested immediately following the first fragment (up to the
-	// GetHLSStreamingSessionURLInput$MaxMediaPlaylistFragmentResults () value) are
+	// is set to PRODUCER_TIMESTAMP and GetHLSStreamingSessionURLInput$PlaybackMode is
+	// ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer timestamp
+	// within the specified FragmentSelector$TimestampRange is included in the media
+	// playlist. In addition, the fragments with producer timestamps within the
+	// TimestampRange ingested immediately following the first fragment (up to the
+	// GetHLSStreamingSessionURLInput$MaxMediaPlaylistFragmentResults value) are
 	// included. Fragments that have duplicate producer timestamps are deduplicated.
 	// This means that if producers are producing a stream of fragments with producer
 	// timestamps that are approximately equal to the true clock time, the HLS media
@@ -181,12 +179,12 @@ type HLSFragmentSelector struct {
 	// range. If some fragments are ingested within the same time range and very
 	// different points in time, only the oldest ingested collection of fragments are
 	// returned. When FragmentSelectorType is set to PRODUCER_TIMESTAMP and
-	// GetHLSStreamingSessionURLInput$PlaybackMode () is LIVE, the producer timestamps
-	// are used in the MP4 fragments and for deduplication. But the most recently
-	// ingested fragments based on server timestamps are included in the HLS media
-	// playlist. This means that even if fragments ingested in the past have producer
-	// timestamps with values now, they are not included in the HLS media playlist. The
-	// default is SERVER_TIMESTAMP.
+	// GetHLSStreamingSessionURLInput$PlaybackMode is LIVE, the producer timestamps are
+	// used in the MP4 fragments and for deduplication. But the most recently ingested
+	// fragments based on server timestamps are included in the HLS media playlist.
+	// This means that even if fragments ingested in the past have producer timestamps
+	// with values now, they are not included in the HLS media playlist. The default is
+	// SERVER_TIMESTAMP.
 	FragmentSelectorType HLSFragmentSelectorType
 
 	// The start and end of the timestamp range for the requested media. This value

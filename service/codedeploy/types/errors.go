@@ -899,7 +899,7 @@ func (e *InvalidAutoScalingGroupException) ErrorFault() smithy.ErrorFault { retu
 
 // The configuration for the blue/green deployment group was provided in an invalid
 // format. For information about deployment configuration format, see
-// CreateDeploymentConfig ().
+// CreateDeploymentConfig.
 type InvalidBlueGreenDeploymentConfigurationException struct {
 	Message *string
 }

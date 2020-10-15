@@ -19,11 +19,7 @@ import (
 const ServiceID = "GroundStation"
 const ServiceAPIVersion = "2019-05-23"
 
-// Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully
-// managed service that enables you to control satellite communications, downlink
-// and process satellite data, and scale your satellite operations efficiently and
-// cost-effectively without having to build or manage your own ground station
-// infrastructure.
+// Client provides the API client to make operations call for AWS Ground Station.
 type Client struct {
 	options Options
 }

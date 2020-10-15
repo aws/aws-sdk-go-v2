@@ -69,15 +69,17 @@ type GetTopicAttributesOutput struct {
 	//     * EffectiveDeliveryPolicy – The JSON serialization of the effective
 	// delivery policy, taking system defaults into account.
 	//
-	//     <p>The following
-	// attribute applies only to <a
-	// href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p>
-	// <ul> <li> <p> <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer
-	// master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a
-	// href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key
-	// Terms</a>. For more examples, see <a
-	// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a>
-	// in the <i>AWS Key Management Service API Reference</i>.</p> </li> </ul>
+	// The following attribute
+	// applies only to server-side-encryption
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
+	//
+	//
+	// * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK) for Amazon
+	// SNS or a custom CMK. For more information, see Key Terms
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
+	// For more examples, see KeyId
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	// in the AWS Key Management Service API Reference.
 	Attributes map[string]*string
 
 	// Metadata pertaining to the operation's result.

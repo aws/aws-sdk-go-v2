@@ -38,7 +38,7 @@ type UpdateSecurityProfileInput struct {
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here. Note: This API field is deprecated. Please use
-	// UpdateSecurityProfileRequest$additionalMetricsToRetainV2 () instead.
+	// UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
 	AdditionalMetricsToRetain []*string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
@@ -79,7 +79,7 @@ type UpdateSecurityProfileOutput struct {
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the security profile's behaviors, but it is also retained
 	// for any metric specified here. Note: This API field is deprecated. Please use
-	// UpdateSecurityProfileResponse$additionalMetricsToRetainV2 () instead.
+	// UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
 	AdditionalMetricsToRetain []*string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained

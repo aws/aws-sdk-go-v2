@@ -14,7 +14,7 @@ import (
 // Removes the specified ingress rules from a security group. To remove a rule, the
 // values that you specify (for example, ports) must match the existing rule's
 // values exactly. [EC2-Classic only] If the values you specify do not match the
-// existing rule's values, no error is returned. Use DescribeSecurityGroups () to
+// existing rule's values, no error is returned. Use DescribeSecurityGroups to
 // verify that the rule has been removed. Each rule consists of the protocol and
 // the CIDR range or source security group. For the TCP and UDP protocols, you must
 // also specify the destination port or range of ports. For the ICMP protocol, you

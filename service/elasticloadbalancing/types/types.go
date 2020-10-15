@@ -374,10 +374,10 @@ type LoadBalancerDescription struct {
 // The policies for a load balancer.
 type Policies struct {
 
-	// The stickiness policies created using CreateAppCookieStickinessPolicy ().
+	// The stickiness policies created using CreateAppCookieStickinessPolicy.
 	AppCookieStickinessPolicies []*AppCookieStickinessPolicy
 
-	// The stickiness policies created using CreateLBCookieStickinessPolicy ().
+	// The stickiness policies created using CreateLBCookieStickinessPolicy.
 	LBCookieStickinessPolicies []*LBCookieStickinessPolicy
 
 	// The policies other than the stickiness policies.

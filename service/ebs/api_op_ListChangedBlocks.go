@@ -49,9 +49,8 @@ type ListChangedBlocksInput struct {
 	// The token to request the next page of results.
 	NextToken *string
 
-	// The block index from which the comparison should start.  <p>The list in the
-	// response will start from this block index or the next valid block index in the
-	// snapshots.</p>
+	// The block index from which the comparison should start. The list in the response
+	// will start from this block index or the next valid block index in the snapshots.
 	StartingBlockIndex *int32
 }
 

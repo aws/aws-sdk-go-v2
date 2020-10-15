@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a Stage () resource.
+// Deletes a Stage resource.
 func (c *Client) DeleteStage(ctx context.Context, params *DeleteStageInput, optFns ...func(*Options)) (*DeleteStageOutput, error) {
 	if params == nil {
 		params = &DeleteStageInput{}
@@ -26,15 +26,15 @@ func (c *Client) DeleteStage(ctx context.Context, params *DeleteStageInput, optF
 	return out, nil
 }
 
-// Requests API Gateway to delete a Stage () resource.
+// Requests API Gateway to delete a Stage resource.
 type DeleteStageInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage () resource to delete.
+	// [Required] The name of the Stage resource to delete.
 	//
 	// This member is required.
 	StageName *string

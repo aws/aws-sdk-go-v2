@@ -46,9 +46,10 @@ type SetInstanceHealthInput struct {
 	// If the Auto Scaling group of the specified instance has a HealthCheckGracePeriod
 	// specified for the group, by default, this call respects the grace period. Set
 	// this to False, to have the call not respect the grace period associated with the
-	// group.  <p>For more information about the health check grace period, see <a
-	// href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html">CreateAutoScalingGroup</a>
-	// in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p>
+	// group. For more information about the health check grace period, see
+	// CreateAutoScalingGroup
+	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
+	// in the Amazon EC2 Auto Scaling API Reference.
 	ShouldRespectGracePeriod *bool
 }
 

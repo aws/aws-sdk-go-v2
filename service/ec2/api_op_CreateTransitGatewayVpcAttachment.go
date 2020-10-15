@@ -15,7 +15,7 @@ import (
 // with a CIDR range that overlaps the CIDR range of a VPC that is already
 // attached, the new VPC CIDR range is not propagated to the default propagation
 // route table. To send VPC traffic to an attached transit gateway, add a route to
-// the VPC route table using CreateRoute ().
+// the VPC route table using CreateRoute.
 func (c *Client) CreateTransitGatewayVpcAttachment(ctx context.Context, params *CreateTransitGatewayVpcAttachmentInput, optFns ...func(*Options)) (*CreateTransitGatewayVpcAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateTransitGatewayVpcAttachmentInput{}

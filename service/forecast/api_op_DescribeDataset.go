@@ -12,14 +12,14 @@ import (
 	"time"
 )
 
-// Describes an Amazon Forecast dataset created using the CreateDataset ()
-// operation. In addition to listing the parameters specified in the CreateDataset
-// request, this operation includes the following dataset properties:
+// Describes an Amazon Forecast dataset created using the CreateDataset operation.
+// In addition to listing the parameters specified in the CreateDataset request,
+// this operation includes the following dataset properties:
 //
-//     *
-// CreationTime
+//     * CreationTime
 //
-//     * LastModificationTime
+//
+// * LastModificationTime
 //
 //     * Status
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
@@ -74,8 +74,8 @@ type DescribeDatasetOutput struct {
 
 	// When you create a dataset, LastModificationTime is the same as CreationTime.
 	// While data is being imported to the dataset, LastModificationTime is the current
-	// time of the DescribeDataset call. After a CreateDatasetImportJob () operation
-	// has finished, LastModificationTime is when the import job completed or failed.
+	// time of the DescribeDataset call. After a CreateDatasetImportJob operation has
+	// finished, LastModificationTime is when the import job completed or failed.
 	LastModificationTime *time.Time
 
 	// An array of SchemaAttribute objects that specify the dataset fields. Each
@@ -96,7 +96,7 @@ type DescribeDatasetOutput struct {
 	//
 	// The
 	// UPDATE states apply while data is imported to the dataset from a call to the
-	// CreateDatasetImportJob () operation and reflect the status of the dataset import
+	// CreateDatasetImportJob operation and reflect the status of the dataset import
 	// job. For example, when the import job status is CREATE_IN_PROGRESS, the status
 	// of the dataset is UPDATE_IN_PROGRESS. The Status of the dataset must be ACTIVE
 	// before you can import training data.

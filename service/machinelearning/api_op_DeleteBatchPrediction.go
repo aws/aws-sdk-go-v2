@@ -11,10 +11,9 @@ import (
 )
 
 // Assigns the DELETED status to a BatchPrediction, rendering it unusable. After
-// using the DeleteBatchPrediction operation, you can use the GetBatchPrediction ()
+// using the DeleteBatchPrediction operation, you can use the GetBatchPrediction
 // operation to verify that the status of the BatchPrediction changed to DELETED.
-// <p> <b>Caution:</b> The result of the <code>DeleteBatchPrediction</code>
-// operation is irreversible.</p>
+// Caution: The result of the DeleteBatchPrediction operation is irreversible.
 func (c *Client) DeleteBatchPrediction(ctx context.Context, params *DeleteBatchPredictionInput, optFns ...func(*Options)) (*DeleteBatchPredictionOutput, error) {
 	if params == nil {
 		params = &DeleteBatchPredictionInput{}

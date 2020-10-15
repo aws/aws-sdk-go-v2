@@ -19,9 +19,8 @@ import (
 const ServiceID = "IoT 1Click Devices Service"
 const ServiceAPIVersion = "2018-05-14"
 
-// Describes all of the AWS IoT 1-Click device-related API operations for the
-// service. Also provides sample requests, responses, and errors for the supported
-// web services protocols.
+// Client provides the API client to make operations call for AWS IoT 1-Click
+// Devices Service.
 type Client struct {
 	options Options
 }

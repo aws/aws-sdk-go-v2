@@ -11,23 +11,22 @@ import (
 )
 
 // Cancels a pending VPC peering authorization for the specified VPC. If you need
-// to delete an existing VPC peering connection, call DeleteVpcPeeringConnection
-// ().
-//
-//     * CreateVpcPeeringAuthorization ()
-//
-//     *
-// DescribeVpcPeeringAuthorizations ()
-//
-//     * DeleteVpcPeeringAuthorization ()
+// to delete an existing VPC peering connection, call DeleteVpcPeeringConnection.
 //
 //
-// * CreateVpcPeeringConnection ()
+// * CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringConnections ()
+//     * DescribeVpcPeeringAuthorizations
 //
 //     *
-// DeleteVpcPeeringConnection ()
+// DeleteVpcPeeringAuthorization
+//
+//     * CreateVpcPeeringConnection
+//
+//     *
+// DescribeVpcPeeringConnections
+//
+//     * DeleteVpcPeeringConnection
 func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *DeleteVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*DeleteVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
 		params = &DeleteVpcPeeringAuthorizationInput{}

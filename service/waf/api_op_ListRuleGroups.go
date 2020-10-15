@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of RuleGroup () objects.
+// global use. Returns an array of RuleGroup objects.
 func (c *Client) ListRuleGroups(ctx context.Context, params *ListRuleGroupsInput, optFns ...func(*Options)) (*ListRuleGroupsOutput, error) {
 	if params == nil {
 		params = &ListRuleGroupsInput{}
@@ -57,7 +57,7 @@ type ListRuleGroupsOutput struct {
 	// response in the NextMarker value in the next request.
 	NextMarker *string
 
-	// An array of RuleGroup () objects.
+	// An array of RuleGroup objects.
 	RuleGroups []*types.RuleGroupSummary
 
 	// Metadata pertaining to the operation's result.

@@ -37,7 +37,7 @@ func (c *Client) GetCallerIdentity(ctx context.Context, params *GetCallerIdentit
 type GetCallerIdentityInput struct {
 }
 
-// Contains the response to a successful GetCallerIdentity () request, including
+// Contains the response to a successful GetCallerIdentity request, including
 // information about the entity making the request.
 type GetCallerIdentityOutput struct {
 

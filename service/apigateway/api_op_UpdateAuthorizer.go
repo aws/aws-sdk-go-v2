@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing Authorizer () resource. AWS CLI
+// Updates an existing Authorizer resource. AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html)
 func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerInput, optFns ...func(*Options)) (*UpdateAuthorizerOutput, error) {
 	if params == nil {
@@ -28,15 +28,15 @@ func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerI
 	return out, nil
 }
 
-// Request to update an existing Authorizer () resource.
+// Request to update an existing Authorizer resource.
 type UpdateAuthorizerInput struct {
 
-	// [Required] The identifier of the Authorizer () resource.
+	// [Required] The identifier of the Authorizer resource.
 	//
 	// This member is required.
 	AuthorizerId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

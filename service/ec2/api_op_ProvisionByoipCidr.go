@@ -14,7 +14,7 @@ import (
 // Provisions an IPv4 or IPv6 address range for use with your AWS resources through
 // bring your own IP addresses (BYOIP) and creates a corresponding address pool.
 // After the address range is provisioned, it is ready to be advertised using
-// AdvertiseByoipCidr (). AWS verifies that you own the address range and are
+// AdvertiseByoipCidr. AWS verifies that you own the address range and are
 // authorized to advertise it. You must ensure that the address range is registered
 // to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618
 // to advertise the address range. For more information, see Bring Your Own IP
@@ -23,10 +23,10 @@ import (
 // Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an
 // asynchronous operation, so the call returns immediately, but the address range
 // is not ready to use until its status changes from pending-provision to
-// provisioned. To monitor the status of an address range, use DescribeByoipCidrs
-// (). To allocate an Elastic IP address from your IPv4 address pool, use
-// AllocateAddress () with either the specific address from the address pool or the
-// ID of the address pool.
+// provisioned. To monitor the status of an address range, use DescribeByoipCidrs.
+// To allocate an Elastic IP address from your IPv4 address pool, use
+// AllocateAddress with either the specific address from the address pool or the ID
+// of the address pool.
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionByoipCidrInput{}

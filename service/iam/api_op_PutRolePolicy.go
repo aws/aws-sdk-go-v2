@@ -13,13 +13,13 @@ import (
 // Adds or updates an inline policy document that is embedded in the specified IAM
 // role. When you embed an inline policy in a role, the inline policy is used as
 // part of the role's access (permissions) policy. The role's trust policy is
-// created at the same time as the role, using CreateRole (). You can update a
-// role's trust policy using UpdateAssumeRolePolicy (). For more information about
-// IAM roles, go to Using Roles to Delegate Permissions and Federate Identities
+// created at the same time as the role, using CreateRole. You can update a role's
+// trust policy using UpdateAssumeRolePolicy. For more information about IAM roles,
+// go to Using Roles to Delegate Permissions and Federate Identities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html). A role
 // can also have a managed policy attached to it. To attach a managed policy to a
-// role, use AttachRolePolicy (). To create a new managed policy, use CreatePolicy
-// (). For information about policies, see Managed Policies and Inline Policies
+// role, use AttachRolePolicy. To create a new managed policy, use CreatePolicy.
+// For information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For information about limits on the number of inline
 // policies that you can embed with a role, see Limitations on IAM Entities

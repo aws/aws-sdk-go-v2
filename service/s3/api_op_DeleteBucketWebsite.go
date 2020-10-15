@@ -14,17 +14,20 @@ import (
 // a 200 OK response upon successfully deleting a website configuration on the
 // specified bucket. You will get a 200 OK response if the website configuration
 // you are trying to delete does not exist on the bucket. Amazon S3 returns a 404
-// response if the bucket specified in the request does not exist.  <p>This DELETE
-// operation requires the <code>S3:DeleteBucketWebsite</code> permission. By
-// default, only the bucket owner can delete the website configuration attached to
-// a bucket. However, bucket owners can grant other users permission to delete the
-// website configuration by writing a bucket policy granting them the
-// <code>S3:DeleteBucketWebsite</code> permission. </p> <p>For more information
-// about hosting websites, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting
-// Websites on Amazon S3</a>. </p> <p>The following operations are related to
-// <code>DeleteBucketWebsite</code>:</p> <ul> <li> <p> <a>GetBucketWebsite</a> </p>
-// </li> <li> <p> <a>PutBucketWebsite</a> </p> </li> </ul>
+// response if the bucket specified in the request does not exist. This DELETE
+// operation requires the S3:DeleteBucketWebsite permission. By default, only the
+// bucket owner can delete the website configuration attached to a bucket. However,
+// bucket owners can grant other users permission to delete the website
+// configuration by writing a bucket policy granting them the
+// S3:DeleteBucketWebsite permission. For more information about hosting websites,
+// see Hosting Websites on Amazon S3
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html). The
+// following operations are related to DeleteBucketWebsite:
+//
+//     *
+// GetBucketWebsite
+//
+//     * PutBucketWebsite
 func (c *Client) DeleteBucketWebsite(ctx context.Context, params *DeleteBucketWebsiteInput, optFns ...func(*Options)) (*DeleteBucketWebsiteOutput, error) {
 	if params == nil {
 		params = &DeleteBucketWebsiteInput{}

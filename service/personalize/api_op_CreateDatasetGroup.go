@@ -22,7 +22,7 @@ import (
 // Users
 //
 // To train a model (create a solution), a dataset group that contains an
-// Interactions dataset is required. Call CreateDataset () to add a dataset to the
+// Interactions dataset is required. Call CreateDataset to add a dataset to the
 // group. A dataset group can be in one of the following states:
 //
 //     * CREATE
@@ -31,8 +31,8 @@ import (
 //     * DELETE
 // PENDING
 //
-// To get the status of the dataset group, call DescribeDatasetGroup ().
-// If the status shows as CREATE FAILED, the response includes a failureReason key,
+// To get the status of the dataset group, call DescribeDatasetGroup. If
+// the status shows as CREATE FAILED, the response includes a failureReason key,
 // which describes why the creation failed. You must wait until the status of the
 // dataset group is ACTIVE before adding a dataset to the group. You can specify an
 // AWS Key Management Service (KMS) key to encrypt the datasets in the group. If
@@ -40,21 +40,21 @@ import (
 // Management (IAM) role that has permission to access the key. APIs that require a
 // dataset group ARN in the request
 //
-//     * CreateDataset ()
+//     * CreateDataset
 //
 //     *
-// CreateEventTracker ()
+// CreateEventTracker
 //
-//     * CreateSolution ()
+//     * CreateSolution
 //
 // Related APIs
 //
 //     *
-// ListDatasetGroups ()
+// ListDatasetGroups
 //
-//     * DescribeDatasetGroup ()
+//     * DescribeDatasetGroup
 //
-//     * DeleteDatasetGroup ()
+//     * DeleteDatasetGroup
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}

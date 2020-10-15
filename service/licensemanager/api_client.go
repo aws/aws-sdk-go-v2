@@ -19,8 +19,7 @@ import (
 const ServiceID = "License Manager"
 const ServiceAPIVersion = "2018-08-01"
 
-// AWS License Manager AWS License Manager makes it easier to manage licenses from
-// software vendors across multiple AWS accounts and on-premises servers.
+// Client provides the API client to make operations call for AWS License Manager.
 type Client struct {
 	options Options
 }

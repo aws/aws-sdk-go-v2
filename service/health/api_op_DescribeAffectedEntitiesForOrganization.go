@@ -18,7 +18,7 @@ import (
 // least one event ARN and account ID are required. Results are sorted by the
 // lastUpdatedTime of the entity, starting with the most recent. Before you can
 // call this operation, you must first enable AWS Health to work with AWS
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization ()
+// Organizations. To do this, call the EnableHealthServiceAccessForOrganization
 // operation from your organization's master account.
 func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, params *DescribeAffectedEntitiesForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error) {
 	if params == nil {

@@ -54,8 +54,7 @@ type CreateClusterInput struct {
 	//     * Must be
 	// unique for all clusters within an AWS account.
 	//
-	//     <p>Example:
-	// <code>myexamplecluster</code> </p>
+	// Example: myexamplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -89,9 +88,9 @@ type CreateClusterInput struct {
 	//     * First character must be a letter.
 	//
 	//     *
-	// <p>Cannot be a reserved word. A list of reserved words can be found in <a
-	// href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved
-	// Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>
+	// Cannot be a reserved word. A list of reserved words can be found in Reserved
+	// Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
+	// Amazon Redshift Database Developer Guide.
 	//
 	// This member is required.
 	MasterUsername *string
@@ -118,7 +117,7 @@ type CreateClusterInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot ().
+	// can still create manual snapshots when you want with CreateClusterSnapshot.
 	// Default: 1 Constraints: Must be a value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32
 

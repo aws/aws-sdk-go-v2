@@ -16,18 +16,18 @@ import (
 // properties, specify the alias ID. If successful, the requested alias record is
 // returned.
 //
-//     * CreateAlias ()
+//     * CreateAlias
 //
-//     * ListAliases ()
+//     * ListAliases
 //
-//     * DescribeAlias ()
+//     * DescribeAlias
 //
+//     *
+// UpdateAlias
 //
-// * UpdateAlias ()
+//     * DeleteAlias
 //
-//     * DeleteAlias ()
-//
-//     * ResolveAlias ()
+//     * ResolveAlias
 func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, optFns ...func(*Options)) (*DescribeAliasOutput, error) {
 	if params == nil {
 		params = &DescribeAliasInput{}

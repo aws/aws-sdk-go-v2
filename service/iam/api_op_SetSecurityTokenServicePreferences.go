@@ -28,7 +28,7 @@ import (
 // STS in an AWS Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the IAM User Guide. To view the current session token version, see the
-// GlobalEndpointTokenVersion entry in the response of the GetAccountSummary ()
+// GlobalEndpointTokenVersion entry in the response of the GetAccountSummary
 // operation.
 func (c *Client) SetSecurityTokenServicePreferences(ctx context.Context, params *SetSecurityTokenServicePreferencesInput, optFns ...func(*Options)) (*SetSecurityTokenServicePreferencesOutput, error) {
 	if params == nil {

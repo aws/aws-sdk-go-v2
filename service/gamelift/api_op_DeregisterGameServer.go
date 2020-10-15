@@ -20,19 +20,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer ()
+//     * RegisterGameServer
 //
-//     * ListGameServers ()
+//     * ListGameServers
 //
 //     *
-// ClaimGameServer ()
+// ClaimGameServer
 //
-//     * DescribeGameServer ()
+//     * DescribeGameServer
 //
-//     * UpdateGameServer ()
+//     * UpdateGameServer
 //
-//
-// * DeregisterGameServer ()
+//     *
+// DeregisterGameServer
 func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGameServerInput, optFns ...func(*Options)) (*DeregisterGameServerOutput, error) {
 	if params == nil {
 		params = &DeregisterGameServerInput{}
@@ -51,7 +51,7 @@ func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGam
 type DeregisterGameServerInput struct {
 
 	// An identifier for the game server group where the game server to be
-	// de-registered is running. Use either the GameServerGroup () name or ARN value.
+	// de-registered is running. Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

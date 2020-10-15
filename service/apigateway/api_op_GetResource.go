@@ -30,20 +30,20 @@ func (c *Client) GetResource(ctx context.Context, params *GetResourceInput, optF
 // Request to list information about a resource.
 type GetResourceInput struct {
 
-	// [Required] The identifier for the Resource () resource.
+	// [Required] The identifier for the Resource resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
 	// A query parameter to retrieve the specified resources embedded in the returned
-	// Resource () representation in the response. This embed parameter value is a list
-	// of comma-separated strings. Currently, the request supports only retrieval of
-	// the embedded Method () resources this way. The query parameter value must be a
+	// Resource representation in the response. This embed parameter value is a list of
+	// comma-separated strings. Currently, the request supports only retrieval of the
+	// embedded Method resources this way. The query parameter value must be a
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
 	Embed []*string

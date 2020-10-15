@@ -33,14 +33,22 @@ import (
 // uploaded to an Amazon GameLift-owned S3 bucket and the script record's storage
 // location reflects this location. If the script file is provided as an S3 bucket,
 // Amazon GameLift accesses the file at this storage location as needed for
-// deployment. Learn more  <p> <a
-// href="https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html">Amazon
-// GameLift Realtime Servers</a> </p> <p> <a
-// href="https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html">Set
-// Up a Role for Amazon GameLift Access</a> </p> <p> <b>Related operations</b> </p>
-// <ul> <li> <p> <a>CreateScript</a> </p> </li> <li> <p> <a>ListScripts</a> </p>
-// </li> <li> <p> <a>DescribeScript</a> </p> </li> <li> <p> <a>UpdateScript</a>
-// </p> </li> <li> <p> <a>DeleteScript</a> </p> </li> </ul>
+// deployment. Learn more Amazon GameLift Realtime Servers
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)Set
+// Up a Role for Amazon GameLift Access
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
+// Related operations
+//
+//     * CreateScript
+//
+//     * ListScripts
+//
+//     *
+// DescribeScript
+//
+//     * UpdateScript
+//
+//     * DeleteScript
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {
 		params = &CreateScriptInput{}
@@ -59,7 +67,7 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 type CreateScriptInput struct {
 
 	// A descriptive label that is associated with a script. Script names do not need
-	// to be unique. You can use UpdateScript () to change this value later.
+	// to be unique. You can use UpdateScript to change this value later.
 	Name *string
 
 	// The location of the Amazon S3 bucket where a zipped file containing your
@@ -77,14 +85,14 @@ type CreateScriptInput struct {
 	// management, access management and cost allocation. For more information, see
 	// Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource (),
-	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
+	// General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag
 
 	// The version that is associated with a build or script. Version strings do not
-	// need to be unique. You can use UpdateScript () to change this value later.
+	// need to be unique. You can use UpdateScript to change this value later.
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.

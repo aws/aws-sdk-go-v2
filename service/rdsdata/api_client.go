@@ -19,14 +19,7 @@ import (
 const ServiceID = "RDS Data"
 const ServiceAPIVersion = "2018-08-01"
 
-// Amazon RDS Data Service Amazon RDS provides an HTTP endpoint to run SQL
-// statements on an Amazon Aurora Serverless DB cluster. To run these statements,
-// you work with the Data Service API. For more information about the Data Service
-// API, see Using the Data API for Aurora Serverless
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
-// the Amazon Aurora User Guide. If you have questions or comments related to the
-// Data API, send email to Rds-data-api-feedback@amazon.com
-// (mailto:Rds-data-api-feedback@amazon.com).
+// Client provides the API client to make operations call for AWS RDS DataService.
 type Client struct {
 	options Options
 }

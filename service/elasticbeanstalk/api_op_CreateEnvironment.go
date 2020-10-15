@@ -85,9 +85,8 @@ type CreateEnvironmentInput struct {
 	// The Amazon Resource Name (ARN) of the custom platform to use with the
 	// environment. For more information, see Custom Platforms
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
-	// in the AWS Elastic Beanstalk Developer Guide.  <p>If you specify
-	// <code>PlatformArn</code>, don't specify <code>SolutionStackName</code>.</p>
-	// </note>
+	// in the AWS Elastic Beanstalk Developer Guide. If you specify PlatformArn, don't
+	// specify SolutionStackName.
 	PlatformArn *string
 
 	// The name of an Elastic Beanstalk solution stack (platform version) to use with
@@ -198,14 +197,22 @@ type CreateEnvironmentOutput struct {
 	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
 
-	// The current operational status of the environment:  <ul> <li> <p>
-	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
-	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
-	// its configuration settings or application version.</p> </li> <li> <p>
-	// <code>Ready</code>: Environment is available to have an action performed on it,
-	// such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>:
-	// Environment is in the shut-down process.</p> </li> <li> <p>
-	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
+	// The current operational status of the environment:
+	//
+	//     * Launching: Environment
+	// is in the process of initial deployment.
+	//
+	//     * Updating: Environment is in the
+	// process of updating its configuration settings or application version.
+	//
+	//     *
+	// Ready: Environment is available to have an action performed on it, such as
+	// update or terminate.
+	//
+	//     * Terminating: Environment is in the shut-down
+	// process.
+	//
+	//     * Terminated: Environment is not running.
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

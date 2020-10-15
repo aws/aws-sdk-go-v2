@@ -33,7 +33,7 @@ type DeleteDocumentationPartInput struct {
 	// This member is required.
 	DocumentationPartId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

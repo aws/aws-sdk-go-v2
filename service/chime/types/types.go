@@ -75,7 +75,7 @@ type AlexaForBusinessMetadata struct {
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and
 // JoinToken. The JoinToken allows a client to authenticate and join as the
 // specified attendee. The JoinToken expires when the meeting ends or when
-// DeleteAttendee () is called. After that, the attendee is unable to join the
+// DeleteAttendee is called. After that, the attendee is unable to join the
 // meeting. We recommend securely transferring each JoinToken from your server
 // application to the client so that no other client has access to the token except
 // for the one authorized to represent the attendee.
@@ -766,7 +766,7 @@ type TerminationHealth struct {
 }
 
 // The phone number ID, product type, or calling name fields to update, used with
-// the BatchUpdatePhoneNumber () and UpdatePhoneNumber () actions.
+// the BatchUpdatePhoneNumber and UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
 
 	// The phone number ID to update.
@@ -781,7 +781,7 @@ type UpdatePhoneNumberRequestItem struct {
 	ProductType PhoneNumberProductType
 }
 
-// The user ID and user fields to update, used with the BatchUpdateUser () action.
+// The user ID and user fields to update, used with the BatchUpdateUser action.
 type UpdateUserRequestItem struct {
 
 	// The user ID.
@@ -846,8 +846,8 @@ type User struct {
 }
 
 // The list of errors returned when errors are encountered during the
-// BatchSuspendUser (), BatchUnsuspendUser (), or BatchUpdateUser () actions. This
-// includes user IDs, error codes, and error messages.
+// BatchSuspendUser, BatchUnsuspendUser, or BatchUpdateUser actions. This includes
+// user IDs, error codes, and error messages.
 type UserError struct {
 
 	// The error code.

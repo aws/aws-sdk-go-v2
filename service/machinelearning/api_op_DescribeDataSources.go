@@ -84,8 +84,14 @@ type DescribeDataSourcesInput struct {
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, a DataSource could have the Name2014-09-09-HolidayGiftMailer. To search
 	// for this DataSource, select Name for the FilterVariable and any of the following
-	// strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li> <p>2014-09-09</p>
-	// </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
+	// strings for the Prefix:
+	//
+	//     * 2014-09
+	//
+	//     * 2014-09-09
+	//
+	//     *
+	// 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
@@ -101,8 +107,8 @@ type DescribeDataSourcesInput struct {
 	SortOrder types.SortOrder
 }
 
-// Represents the query results from a DescribeDataSources () operation. The
-// content is essentially a list of DataSource.
+// Represents the query results from a DescribeDataSources operation. The content
+// is essentially a list of DataSource.
 type DescribeDataSourcesOutput struct {
 
 	// An ID of the next page in the paginated results that indicates at least one more

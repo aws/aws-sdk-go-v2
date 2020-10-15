@@ -14,13 +14,13 @@ import (
 // Retrieves information about the specified managed policy, including the policy's
 // default version and the total number of IAM users, groups, and roles to which
 // the policy is attached. To retrieve the list of the specific users, groups, and
-// roles that the policy is attached to, use the ListEntitiesForPolicy () API. This
+// roles that the policy is attached to, use the ListEntitiesForPolicy API. This
 // API returns metadata about the policy. To retrieve the actual policy document
-// for a specific version of the policy, use GetPolicyVersion (). This API
-// retrieves information about managed policies. To retrieve information about an
-// inline policy that is embedded with an IAM user, group, or role, use the
-// GetUserPolicy (), GetGroupPolicy (), or GetRolePolicy () API. For more
-// information about policies, see Managed Policies and Inline Policies
+// for a specific version of the policy, use GetPolicyVersion. This API retrieves
+// information about managed policies. To retrieve information about an inline
+// policy that is embedded with an IAM user, group, or role, use the GetUserPolicy,
+// GetGroupPolicy, or GetRolePolicy API. For more information about policies, see
+// Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
@@ -50,7 +50,7 @@ type GetPolicyInput struct {
 	PolicyArn *string
 }
 
-// Contains the response to a successful GetPolicy () request.
+// Contains the response to a successful GetPolicy request.
 type GetPolicyOutput struct {
 
 	// A structure containing details about the policy.

@@ -343,95 +343,108 @@ type Bundle struct {
 // network (CDN) distribution.
 type CacheBehavior struct {
 
-	// The cache behavior of the distribution.  <p>The following cache behaviors can be
-	// specified:</p> <ul> <li> <p> <b> <code>cache</code> </b> - This option is best
-	// for static sites. When specified, your distribution caches and serves your
-	// entire website as static content. This behavior is ideal for websites with
-	// static content that doesn't change depending on who views it, or for websites
-	// that don't use cookies, headers, or query strings to personalize content.</p>
-	// </li> <li> <p> <b> <code>dont-cache</code> </b> - This option is best for sites
-	// that serve a mix of static and dynamic content. When specified, your
+	// The cache behavior of the distribution. The following cache behaviors can be
+	// specified:
+	//
+	//     * cache - This option is best for static sites. When specified,
+	// your distribution caches and serves your entire website as static content. This
+	// behavior is ideal for websites with static content that doesn't change depending
+	// on who views it, or for websites that don't use cookies, headers, or query
+	// strings to personalize content.
+	//
+	//     * dont-cache - This option is best for
+	// sites that serve a mix of static and dynamic content. When specified, your
 	// distribution caches and serve only the content that is specified in the
-	// distribution's <code>CacheBehaviorPerPath</code> parameter. This behavior is
-	// ideal for websites or web applications that use cookies, headers, and query
-	// strings to personalize content for individual users.</p> </li> </ul>
+	// distribution's CacheBehaviorPerPath parameter. This behavior is ideal for
+	// websites or web applications that use cookies, headers, and query strings to
+	// personalize content for individual users.
 	Behavior BehaviorEnum
 }
 
 // Describes the per-path cache behavior of an Amazon Lightsail content delivery
-// network (CDN) distribution.  <p>A per-path cache behavior is used to override,
-// or add an exception to, the default cache behavior of a distribution. For
-// example, if the <code>cacheBehavior</code> is set to <code>cache</code>, then a
-// per-path cache behavior can be used to specify a directory, file, or file type
-// that your distribution will cache. Alternately, if the distribution's
-// <code>cacheBehavior</code> is <code>dont-cache</code>, then a per-path cache
-// behavior can be used to specify a directory, file, or file type that your
-// distribution will not cache.</p> <p>if the cacheBehavior's behavior is set to
-// 'cache', then</p>
+// network (CDN) distribution. A per-path cache behavior is used to override, or
+// add an exception to, the default cache behavior of a distribution. For example,
+// if the cacheBehavior is set to cache, then a per-path cache behavior can be used
+// to specify a directory, file, or file type that your distribution will cache.
+// Alternately, if the distribution's cacheBehavior is dont-cache, then a per-path
+// cache behavior can be used to specify a directory, file, or file type that your
+// distribution will not cache. if the cacheBehavior's behavior is set to 'cache',
+// then
 type CacheBehaviorPerPath struct {
 
-	// The cache behavior for the specified path.  <p>You can specify one of the
-	// following per-path cache behaviors:</p> <ul> <li> <p> <b> <code>cache</code>
-	// </b> - This behavior caches the specified path. </p> </li> <li> <p> <b>
-	// <code>dont-cache</code> </b> - This behavior doesn't cache the specified path.
-	// </p> </li> </ul>
+	// The cache behavior for the specified path. You can specify one of the following
+	// per-path cache behaviors:
+	//
+	//     * cache - This behavior caches the specified
+	// path.
+	//
+	//     * dont-cache - This behavior doesn't cache the specified path.
 	Behavior BehaviorEnum
 
 	// The path to a directory or file to cached, or not cache. Use an asterisk symbol
 	// to specify wildcard directories (path/to/assets/*), and file types (*.html,
-	// *jpg, *js). Directories and file paths are case-sensitive.  <p>Examples:</p>
-	// <ul> <li> <p>Specify the following to cache all files in the document root of an
-	// Apache web server running on a Lightsail instance.</p> <p>
-	// <code>var/www/html/</code> </p> </li> <li> <p>Specify the following file to
-	// cache only the index page in the document root of an Apache web server.</p> <p>
-	// <code>var/www/html/index.html</code> </p> </li> <li> <p>Specify the following to
-	// cache only the .html files in the document root of an Apache web server.</p> <p>
-	// <code>var/www/html/*.html</code> </p> </li> <li> <p>Specify the following to
-	// cache only the .jpg, .png, and .gif files in the images sub-directory of the
-	// document root of an Apache web server.</p> <p>
-	// <code>var/www/html/images/*.jpg</code> </p> <p>
-	// <code>var/www/html/images/*.png</code> </p> <p>
-	// <code>var/www/html/images/*.gif</code> </p> <p>Specify the following to cache
-	// all files in the images sub-directory of the document root of an Apache web
-	// server.</p> <p> <code>var/www/html/images/</code> </p> </li> </ul>
+	// *jpg, *js). Directories and file paths are case-sensitive. Examples:
+	//
+	//     *
+	// Specify the following to cache all files in the document root of an Apache web
+	// server running on a Lightsail instance. var/www/html/
+	//
+	//     * Specify the
+	// following file to cache only the index page in the document root of an Apache
+	// web server. var/www/html/index.html
+	//
+	//     * Specify the following to cache only
+	// the .html files in the document root of an Apache web server.
+	// var/www/html/.html
+	//
+	//     * Specify the following to cache only the .jpg, .png,
+	// and .gif files in the images sub-directory of the document root of an Apache web
+	// server. var/www/html/images/.jpgvar/www/html/images/.pngvar/www/html/images/.gif
+	// Specify the following to cache all files in the images sub-directory of the
+	// document root of an Apache web server. var/www/html/images/
 	Path *string
 }
 
 // Describes the cache settings of an Amazon Lightsail content delivery network
-// (CDN) distribution.  <p>These settings apply only to your distribution's
-// <code>cacheBehaviors</code> (including the <code>defaultCacheBehavior</code>)
-// that have a <code>behavior</code> of <code>cache</code>.</p>
+// (CDN) distribution. These settings apply only to your distribution's
+// cacheBehaviors (including the defaultCacheBehavior) that have a behavior of
+// cache.
 type CacheSettings struct {
 
 	// The HTTP methods that are processed and forwarded to the distribution's origin.
-	// <p>You can specify the following options:</p> <ul> <li> <p>
-	// <code>GET,HEAD</code> - The distribution forwards the <code>GET</code> and
-	// <code>HEAD</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> -
-	// The distribution forwards the <code>GET</code>, <code>HEAD</code>, and
-	// <code>OPTIONS</code> methods.</p> </li> <li> <p>
-	// <code>GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE</code> - The distribution forwards
-	// the <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PUT</code>,
-	// <code>PATCH</code>, <code>POST</code>, and <code>DELETE</code> methods.</p>
-	// </li> </ul> <p>If you specify the third option, you might need to restrict
-	// access to your distribution's origin so users can't perform operations that you
-	// don't want them to. For example, you might not want users to have permission to
-	// delete objects from your origin.</p>
+	// You can specify the following options:
+	//
+	//     * GET,HEAD - The distribution
+	// forwards the GET and HEAD methods.
+	//
+	//     * GET,HEAD,OPTIONS - The distribution
+	// forwards the GET, HEAD, and OPTIONS methods.
+	//
+	//     *
+	// GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE - The distribution forwards the GET,
+	// HEAD, OPTIONS, PUT, PATCH, POST, and DELETE methods.
+	//
+	// If you specify the third
+	// option, you might need to restrict access to your distribution's origin so users
+	// can't perform operations that you don't want them to. For example, you might not
+	// want users to have permission to delete objects from your origin.
 	AllowedHTTPMethods *string
 
-	// The HTTP method responses that are cached by your distribution.  <p>You can
-	// specify the following options:</p> <ul> <li> <p> <code>GET,HEAD</code> - The
-	// distribution caches responses to the <code>GET</code> and <code>HEAD</code>
-	// methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> - The distribution
-	// caches responses to the <code>GET</code>, <code>HEAD</code>, and
-	// <code>OPTIONS</code> methods.</p> </li> </ul>
+	// The HTTP method responses that are cached by your distribution. You can specify
+	// the following options:
+	//
+	//     * GET,HEAD - The distribution caches responses to
+	// the GET and HEAD methods.
+	//
+	//     * GET,HEAD,OPTIONS - The distribution caches
+	// responses to the GET, HEAD, and OPTIONS methods.
 	CachedHTTPMethods *string
 
 	// The default amount of time that objects stay in the distribution's cache before
 	// the distribution forwards another request to the origin to determine whether the
-	// content has been updated.  <note> <p>The value specified applies only when the
-	// origin does not add HTTP headers such as <code>Cache-Control max-age</code>,
-	// <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>
-	// </note>
+	// content has been updated. The value specified applies only when the origin does
+	// not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and
+	// Expires to objects.
 	DefaultTTL *int64
 
 	// An object that describes the cookies that are forwarded to the origin. Your
@@ -448,24 +461,22 @@ type CacheSettings struct {
 
 	// The maximum amount of time that objects stay in the distribution's cache before
 	// the distribution forwards another request to the origin to determine whether the
-	// object has been updated.  <p>The value specified applies only when the origin
-	// adds HTTP headers such as <code>Cache-Control max-age</code>,
-	// <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>
+	// object has been updated. The value specified applies only when the origin adds
+	// HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires
+	// to objects.
 	MaximumTTL *int64
 
 	// The minimum amount of time that objects stay in the distribution's cache before
 	// the distribution forwards another request to the origin to determine whether the
-	// object has been updated.  <p>A value of <code>0</code> must be specified for
-	// <code>minimumTTL</code> if the distribution is configured to forward all headers
-	// to the origin.</p>
+	// object has been updated. A value of 0 must be specified for minimumTTL if the
+	// distribution is configured to forward all headers to the origin.
 	MinimumTTL *int64
 }
 
-// Describes the full details of an Amazon Lightsail SSL/TLS certificate.  <note>
-// <p>To get a summary of a certificate, use the <code>GetCertificates</code>
-// action and ommit <code>includeCertificateDetails</code> from your request. The
-// response will include only the certificate Amazon Resource Name (ARN),
-// certificate name, domain name, and tags.</p> </note>
+// Describes the full details of an Amazon Lightsail SSL/TLS certificate. To get a
+// summary of a certificate, use the GetCertificates action and ommit
+// includeCertificateDetails from your request. The response will include only the
+// certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) of the certificate.
@@ -510,44 +521,49 @@ type Certificate struct {
 	// Lightsail.
 	RenewalSummary *RenewalSummary
 
-	// The validation failure reason, if any, of the certificate.  <p>The following
-	// failure reasons are possible:</p> <ul> <li> <p> <b>
-	// <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email
-	// validation, which is not available for Lightsail certificates.</p> </li> <li>
-	// <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires
-	// additional information to process this certificate request. This can happen as a
-	// fraud-protection measure, such as when the domain ranks within the Alexa top
-	// 1000 websites. To provide the required information, use the <a
-	// href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to
-	// contact AWS Support.</p> <note> <p>You cannot request a certificate for
-	// Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net,
-	// or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b>
-	// <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the
-	// certificate request was reported as an unsafe domain by <a
-	// href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the
-	// problem, search for your domain name on the <a
-	// href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your
-	// domain is reported as suspicious, see <a
-	// href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked
-	// Websites</a> to learn what you can do.</p> <p>If you believe that the result is
-	// a false positive, notify the organization that is reporting the domain.
-	// VirusTotal is an aggregate of several antivirus and URL scanners and cannot
-	// remove your domain from a block list itself. After you correct the problem and
-	// the VirusTotal registry has been updated, request a new certificate.</p> <p>If
-	// you see this error and your domain is not included in the VirusTotal list, visit
-	// the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a>
-	// and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code>
-	// </b> - One or more of the domain names in the certificate request is not valid.
-	// Typically, this is because a domain name in the request is not a valid top-level
-	// domain. Try to request a certificate again, correcting any spelling errors or
-	// typos that were in the failed request, and ensure that all domain names in the
-	// request are for valid top-level domains. For example, you cannot request a
-	// certificate for <code>example.invalidpublicdomain</code> because
-	// <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li>
-	// <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a
-	// typographical error in one or more of the domain names in the certificate
-	// request. Try to request a certificate again, correcting any spelling errors or
-	// typos that were in the failed request. </p> </li> </ul>
+	// The validation failure reason, if any, of the certificate. The following failure
+	// reasons are possible:
+	//
+	//     * NO_AVAILABLE_CONTACTS - This failure applies to
+	// email validation, which is not available for Lightsail certificates.
+	//
+	//     *
+	// ADDITIONAL_VERIFICATION_REQUIRED - Lightsail requires additional information to
+	// process this certificate request. This can happen as a fraud-protection measure,
+	// such as when the domain ranks within the Alexa top 1000 websites. To provide the
+	// required information, use the AWS Support Center
+	// (https://console.aws.amazon.com/support/home) to contact AWS Support. You cannot
+	// request a certificate for Amazon-owned domain names such as those ending in
+	// amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
+	//
+	//     *
+	// DOMAIN_NOT_ALLOWED - One or more of the domain names in the certificate request
+	// was reported as an unsafe domain by VirusTotal
+	// (https://www.virustotal.com/gui/home/url). To correct the problem, search for
+	// your domain name on the VirusTotal (https://www.virustotal.com/gui/home/url)
+	// website. If your domain is reported as suspicious, see Google Help for Hacked
+	// Websites (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can
+	// do. If you believe that the result is a false positive, notify the organization
+	// that is reporting the domain. VirusTotal is an aggregate of several antivirus
+	// and URL scanners and cannot remove your domain from a block list itself. After
+	// you correct the problem and the VirusTotal registry has been updated, request a
+	// new certificate. If you see this error and your domain is not included in the
+	// VirusTotal list, visit the AWS Support Center
+	// (https://console.aws.amazon.com/support/home) and create a case.
+	//
+	//     *
+	// INVALID_PUBLIC_DOMAIN - One or more of the domain names in the certificate
+	// request is not valid. Typically, this is because a domain name in the request is
+	// not a valid top-level domain. Try to request a certificate again, correcting any
+	// spelling errors or typos that were in the failed request, and ensure that all
+	// domain names in the request are for valid top-level domains. For example, you
+	// cannot request a certificate for example.invalidpublicdomain because
+	// invalidpublicdomain is not a valid top-level domain.
+	//
+	//     * OTHER - Typically,
+	// this failure occurs when there is a typographical error in one or more of the
+	// domain names in the certificate request. Try to request a certificate again,
+	// correcting any spelling errors or typos that were in the failed request.
 	RequestFailureReason *string
 
 	// The reason the certificate was revoked. This value is present only when the
@@ -696,9 +712,9 @@ type ContactMethod struct {
 }
 
 // Describes whether an Amazon Lightsail content delivery network (CDN)
-// distribution forwards cookies to the origin and, if so, which ones.  <p>For the
+// distribution forwards cookies to the origin and, if so, which ones. For the
 // cookies that you specify, your distribution caches separate versions of the
-// specified content based on the cookie values in viewer requests.</p>
+// specified content based on the cookie values in viewer requests.
 type CookieObject struct {
 
 	// The specific cookies to forward to your distribution's origin.
@@ -1044,26 +1060,29 @@ type ExportSnapshotRecordSourceInfo struct {
 }
 
 // Describes the request headers that a Lightsail distribution bases caching on.
-// <p>For the headers that you specify, your distribution caches separate versions
-// of the specified content based on the header values in viewer requests. For
-// example, suppose viewer requests for <code>logo.jpg</code> contain a custom
-// <code>product</code> header that has a value of either <code>acme</code> or
-// <code>apex</code>, and you configure your distribution to cache your content
-// based on values in the <code>product</code> header. Your distribution forwards
-// the <code>product</code> header to the origin and caches the response from the
-// origin once for each header value. </p>
+// For the headers that you specify, your distribution caches separate versions of
+// the specified content based on the header values in viewer requests. For
+// example, suppose viewer requests for logo.jpg contain a custom product header
+// that has a value of either acme or apex, and you configure your distribution to
+// cache your content based on values in the product header. Your distribution
+// forwards the product header to the origin and caches the response from the
+// origin once for each header value.
 type HeaderObject struct {
 
 	// The specific headers to forward to your distribution's origin.
 	HeadersAllowList []HeaderEnum
 
 	// The headers that you want your distribution to forward to your origin and base
-	// caching on.  <p>You can configure your distribution to do one of the
-	// following:</p> <ul> <li> <p> <b> <code>all</code> </b> - Forward all headers to
-	// your origin.</p> </li> <li> <p> <b> <code>none</code> </b> - Forward only the
-	// default headers.</p> </li> <li> <p> <b> <code>allow-list</code> </b> - Forward
-	// only the headers you specify using the <code>headersAllowList</code>
-	// parameter.</p> </li> </ul>
+	// caching on. You can configure your distribution to do one of the following:
+	//
+	//
+	// * all - Forward all headers to your origin.
+	//
+	//     * none - Forward only the
+	// default headers.
+	//
+	//     * allow-list - Forward only the headers you specify using
+	// the headersAllowList parameter.
 	Option ForwardValues
 }
 
@@ -1112,9 +1131,9 @@ type HostKeyAttributes struct {
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
-// (CDN) distribution.  <p>An origin can be a Lightsail instance or load balancer.
-// A distribution pulls content from an origin, caches it, and serves it to viewers
-// via a worldwide network of edge servers.</p>
+// (CDN) distribution. An origin can be a Lightsail instance or load balancer. A
+// distribution pulls content from an origin, caches it, and serves it to viewers
+// via a worldwide network of edge servers.
 type InputOrigin struct {
 
 	// The name of the origin resource.
@@ -1675,8 +1694,8 @@ type LightsailDistribution struct {
 
 	// Indicates whether the bundle that is currently applied to your distribution,
 	// specified using the distributionName parameter, can be changed to another
-	// bundle.  <p>Use the <code>UpdateDistributionBundle</code> action to change your
-	// distribution's bundle.</p>
+	// bundle. Use the UpdateDistributionBundle action to change your distribution's
+	// bundle.
 	AbleToUpdateBundle *bool
 
 	// The alternate domain names of the distribution.
@@ -1720,8 +1739,8 @@ type LightsailDistribution struct {
 	Name *string
 
 	// An object that describes the origin resource of the distribution, such as a
-	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
-	// serves content from the origin.</p>
+	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
+	// content from the origin.
 	Origin *Origin
 
 	// The public DNS of the origin.
@@ -1826,44 +1845,49 @@ type LoadBalancerTlsCertificate struct {
 	// the records.
 	DomainValidationRecords []*LoadBalancerTlsCertificateDomainValidationRecord
 
-	// The validation failure reason, if any, of the certificate.  <p>The following
-	// failure reasons are possible:</p> <ul> <li> <p> <b>
-	// <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email
-	// validation, which is not available for Lightsail certificates.</p> </li> <li>
-	// <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires
-	// additional information to process this certificate request. This can happen as a
-	// fraud-protection measure, such as when the domain ranks within the Alexa top
-	// 1000 websites. To provide the required information, use the <a
-	// href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to
-	// contact AWS Support.</p> <note> <p>You cannot request a certificate for
-	// Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net,
-	// or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b>
-	// <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the
-	// certificate request was reported as an unsafe domain by <a
-	// href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the
-	// problem, search for your domain name on the <a
-	// href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your
-	// domain is reported as suspicious, see <a
-	// href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked
-	// Websites</a> to learn what you can do.</p> <p>If you believe that the result is
-	// a false positive, notify the organization that is reporting the domain.
-	// VirusTotal is an aggregate of several antivirus and URL scanners and cannot
-	// remove your domain from a block list itself. After you correct the problem and
-	// the VirusTotal registry has been updated, request a new certificate.</p> <p>If
-	// you see this error and your domain is not included in the VirusTotal list, visit
-	// the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a>
-	// and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code>
-	// </b> - One or more of the domain names in the certificate request is not valid.
-	// Typically, this is because a domain name in the request is not a valid top-level
-	// domain. Try to request a certificate again, correcting any spelling errors or
-	// typos that were in the failed request, and ensure that all domain names in the
-	// request are for valid top-level domains. For example, you cannot request a
-	// certificate for <code>example.invalidpublicdomain</code> because
-	// <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li>
-	// <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a
-	// typographical error in one or more of the domain names in the certificate
-	// request. Try to request a certificate again, correcting any spelling errors or
-	// typos that were in the failed request. </p> </li> </ul>
+	// The validation failure reason, if any, of the certificate. The following failure
+	// reasons are possible:
+	//
+	//     * NO_AVAILABLE_CONTACTS - This failure applies to
+	// email validation, which is not available for Lightsail certificates.
+	//
+	//     *
+	// ADDITIONAL_VERIFICATION_REQUIRED - Lightsail requires additional information to
+	// process this certificate request. This can happen as a fraud-protection measure,
+	// such as when the domain ranks within the Alexa top 1000 websites. To provide the
+	// required information, use the AWS Support Center
+	// (https://console.aws.amazon.com/support/home) to contact AWS Support. You cannot
+	// request a certificate for Amazon-owned domain names such as those ending in
+	// amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
+	//
+	//     *
+	// DOMAIN_NOT_ALLOWED - One or more of the domain names in the certificate request
+	// was reported as an unsafe domain by VirusTotal
+	// (https://www.virustotal.com/gui/home/url). To correct the problem, search for
+	// your domain name on the VirusTotal (https://www.virustotal.com/gui/home/url)
+	// website. If your domain is reported as suspicious, see Google Help for Hacked
+	// Websites (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can
+	// do. If you believe that the result is a false positive, notify the organization
+	// that is reporting the domain. VirusTotal is an aggregate of several antivirus
+	// and URL scanners and cannot remove your domain from a block list itself. After
+	// you correct the problem and the VirusTotal registry has been updated, request a
+	// new certificate. If you see this error and your domain is not included in the
+	// VirusTotal list, visit the AWS Support Center
+	// (https://console.aws.amazon.com/support/home) and create a case.
+	//
+	//     *
+	// INVALID_PUBLIC_DOMAIN - One or more of the domain names in the certificate
+	// request is not valid. Typically, this is because a domain name in the request is
+	// not a valid top-level domain. Try to request a certificate again, correcting any
+	// spelling errors or typos that were in the failed request, and ensure that all
+	// domain names in the request are for valid top-level domains. For example, you
+	// cannot request a certificate for example.invalidpublicdomain because
+	// invalidpublicdomain is not a valid top-level domain.
+	//
+	//     * OTHER - Typically,
+	// this failure occurs when there is a typographical error in one or more of the
+	// domain names in the certificate request. Try to request a certificate again,
+	// correcting any spelling errors or typos that were in the failed request.
 	FailureReason LoadBalancerTlsCertificateFailureReason
 
 	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
@@ -1994,21 +2018,27 @@ type LoadBalancerTlsCertificateDomainValidationRecord struct {
 }
 
 // Contains information about the status of Lightsail's managed renewal for the
-// certificate.  <p>The renewal status of the certificate.</p> <p>The following
-// renewal status are possible:</p> <ul> <li> <p> <b>
-// <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically
-// validate the domain names in the certificate. No further action is required.
-// </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn't
-// automatically validate one or more domain names in the certificate. You must
-// take action to validate these domain names or the certificate won't be renewed.
-// If you used DNS validation, check to make sure your certificate's domain
-// validation records exist in your domain's DNS, and that your certificate remains
-// in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in
-// the certificate are validated, and Lightsail renewed the certificate. No further
-// action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or
+// certificate. The renewal status of the certificate. The following renewal status
+// are possible:
+//
+//     * PendingAutoRenewal - Lightsail is attempting to
+// automatically validate the domain names in the certificate. No further action is
+// required.
+//
+//     * PendingValidation - Lightsail couldn't automatically validate
+// one or more domain names in the certificate. You must take action to validate
+// these domain names or the certificate won't be renewed. If you used DNS
+// validation, check to make sure your certificate's domain validation records
+// exist in your domain's DNS, and that your certificate remains in use.
+//
+//     *
+// Success - All domain names in the certificate are validated, and Lightsail
+// renewed the certificate. No further action is required.
+//
+//     * Failed - One or
 // more domain names were not validated before the certificate expired, and
 // Lightsail did not renew the certificate. You can request a new certificate using
-// the <code>CreateCertificate</code> action.</p> </li> </ul>
+// the CreateCertificate action.
 type LoadBalancerTlsCertificateRenewalSummary struct {
 
 	// Contains information about the validation of each domain name in the
@@ -2152,9 +2182,9 @@ type Operation struct {
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
-// (CDN) distribution.  <p>An origin can be a Lightsail instance or load balancer.
-// A distribution pulls content from an origin, caches it, and serves it to viewers
-// via a worldwide network of edge servers.</p>
+// (CDN) distribution. An origin can be a Lightsail instance or load balancer. A
+// distribution pulls content from an origin, caches it, and serves it to viewers
+// via a worldwide network of edge servers.
 type Origin struct {
 
 	// The name of the origin resource.
@@ -2301,19 +2331,18 @@ type PortInfo struct {
 }
 
 // Describes the query string parameters that an Amazon Lightsail content delivery
-// network (CDN) distribution to bases caching on.  <p>For the query strings that
-// you specify, your distribution caches separate versions of the specified content
-// based on the query string values in viewer requests.</p>
+// network (CDN) distribution to bases caching on. For the query strings that you
+// specify, your distribution caches separate versions of the specified content
+// based on the query string values in viewer requests.
 type QueryStringObject struct {
 
 	// Indicates whether the distribution forwards and caches based on query strings.
 	Option *bool
 
-	// The specific query strings that the distribution forwards to the origin.
-	// <p>Your distribution will cache content based on the specified query
-	// strings.</p> <p>If the <code>option</code> parameter is true, then your
-	// distribution forwards all query strings, regardless of what you specify using
-	// the <code>queryStringsAllowList</code> parameter.</p>
+	// The specific query strings that the distribution forwards to the origin. Your
+	// distribution will cache content based on the specified query strings. If the
+	// option parameter is true, then your distribution forwards all query strings,
+	// regardless of what you specify using the queryStringsAllowList parameter.
 	QueryStringsAllowList []*string
 }
 
@@ -2622,21 +2651,26 @@ type RenewalSummary struct {
 	// certificate.
 	DomainValidationRecords []*DomainValidationRecord
 
-	// The renewal status of the certificate.  <p>The following renewal status are
-	// possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail
-	// is attempting to automatically validate the domain names of the certificate. No
-	// further action is required. </p> </li> <li> <p> <b>
-	// <code>PendingValidation</code> </b> - Lightsail couldn't automatically validate
-	// one or more domain names of the certificate. You must take action to validate
-	// these domain names or the certificate won't be renewed. Check to make sure your
-	// certificate's domain validation records exist in your domain's DNS, and that
-	// your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code>
-	// </b> - All domain names in the certificate are validated, and Lightsail renewed
-	// the certificate. No further action is required. </p> </li> <li> <p> <b>
-	// <code>Failed</code> </b> - One or more domain names were not validated before
-	// the certificate expired, and Lightsail did not renew the certificate. You can
-	// request a new certificate using the <code>CreateCertificate</code> action.</p>
-	// </li> </ul>
+	// The renewal status of the certificate. The following renewal status are
+	// possible:
+	//
+	//     * PendingAutoRenewal - Lightsail is attempting to automatically
+	// validate the domain names of the certificate. No further action is required.
+	//
+	//
+	// * PendingValidation - Lightsail couldn't automatically validate one or more
+	// domain names of the certificate. You must take action to validate these domain
+	// names or the certificate won't be renewed. Check to make sure your certificate's
+	// domain validation records exist in your domain's DNS, and that your certificate
+	// remains in use.
+	//
+	//     * Success - All domain names in the certificate are
+	// validated, and Lightsail renewed the certificate. No further action is
+	// required.
+	//
+	//     * Failed - One or more domain names were not validated before the
+	// certificate expired, and Lightsail did not renew the certificate. You can
+	// request a new certificate using the CreateCertificate action.
 	RenewalStatus RenewalStatus
 
 	// The reason for the renewal status of the certificate.

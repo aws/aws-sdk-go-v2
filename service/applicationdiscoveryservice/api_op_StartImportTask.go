@@ -17,23 +17,33 @@ import (
 // Application Discovery Service (ADS) tools such as the Discovery Connector or
 // Discovery Agent. This gives you the option to perform migration assessment and
 // planning directly from your imported data, including the ability to group your
-// devices as applications and track their migration status.  <p>To start an import
-// request, do this:</p> <ol> <li> <p>Download the specially formatted comma
-// separated value (CSV) import template, which you can find here: <a
-// href="https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv">https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv</a>.</p>
-// </li> <li> <p>Fill out the template with your server and application data.</p>
-// </li> <li> <p>Upload your import file to an Amazon S3 bucket, and make a note of
-// it's Object URL. Your import file must be in the CSV format.</p> </li> <li>
-// <p>Use the console or the <code>StartImportTask</code> command with the AWS CLI
-// or one of the AWS SDKs to import the records from your file.</p> </li> </ol>
-// <p>For more information, including step-by-step procedures, see <a
-// href="https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html">Migration
-// Hub Import</a> in the <i>AWS Application Discovery Service User Guide</i>.</p>
-// <note> <p>There are limits to the number of import tasks you can create (and
-// delete) in an AWS account. For more information, see <a
-// href="https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html">AWS
-// Application Discovery Service Limits</a> in the <i>AWS Application Discovery
-// Service User Guide</i>.</p> </note>
+// devices as applications and track their migration status. To start an import
+// request, do this:
+//
+//     * Download the specially formatted comma separated value
+// (CSV) import template, which you can find here:
+// https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+// (https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv).
+//
+//
+// * Fill out the template with your server and application data.
+//
+//     * Upload
+// your import file to an Amazon S3 bucket, and make a note of it's Object URL.
+// Your import file must be in the CSV format.
+//
+//     * Use the console or the
+// StartImportTask command with the AWS CLI or one of the AWS SDKs to import the
+// records from your file.
+//
+// For more information, including step-by-step
+// procedures, see Migration Hub Import
+// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html)
+// in the AWS Application Discovery Service User Guide. There are limits to the
+// number of import tasks you can create (and delete) in an AWS account. For more
+// information, see AWS Application Discovery Service Limits
+// (https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html)
+// in the AWS Application Discovery Service User Guide.
 func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInput, optFns ...func(*Options)) (*StartImportTaskOutput, error) {
 	if params == nil {
 		params = &StartImportTaskInput{}
@@ -51,9 +61,9 @@ func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInp
 
 type StartImportTaskInput struct {
 
-	// The URL for your import file that you've uploaded to Amazon S3.  <note> <p>If
-	// you're using the AWS CLI, this URL is structured as follows:
-	// <code>s3://BucketName/ImportFileName.CSV</code> </p> </note>
+	// The URL for your import file that you've uploaded to Amazon S3. If you're using
+	// the AWS CLI, this URL is structured as follows:
+	// s3://BucketName/ImportFileName.CSV
 	//
 	// This member is required.
 	ImportUrl *string
@@ -68,9 +78,9 @@ type StartImportTaskInput struct {
 
 	// Optional. A unique token that you can provide to prevent the same import request
 	// from occurring more than once. If you don't provide a token, a token is
-	// automatically generated.  <p>Sending more than one <code>StartImportTask</code>
-	// request with the same client request token will return information about the
-	// original import task with that client request token.</p>
+	// automatically generated. Sending more than one StartImportTask request with the
+	// same client request token will return information about the original import task
+	// with that client request token.
 	ClientRequestToken *string
 }
 

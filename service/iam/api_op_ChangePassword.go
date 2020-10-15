@@ -12,7 +12,7 @@ import (
 
 // Changes the password of the IAM user who is calling this operation. The AWS
 // account root user password is not affected by this operation. To change the
-// password for a different user, see UpdateLoginProfile (). For more information
+// password for a different user, see UpdateLoginProfile. For more information
 // about modifying passwords, see Managing Passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.

@@ -47,7 +47,7 @@ type DescribeClusterSecurityGroupsInput struct {
 	ClusterSecurityGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSecurityGroups () request
+	// response records. When the results of a DescribeClusterSecurityGroups request
 	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
 	// field of the response. You can retrieve the next set of response records by
 	// providing the returned marker value in the Marker parameter and retrying the
@@ -82,7 +82,7 @@ type DescribeClusterSecurityGroupsInput struct {
 //
 type DescribeClusterSecurityGroupsOutput struct {
 
-	// A list of ClusterSecurityGroup () instances.
+	// A list of ClusterSecurityGroup instances.
 	ClusterSecurityGroups []*types.ClusterSecurityGroup
 
 	// A value that indicates the starting point for the next set of response records

@@ -13,9 +13,9 @@ import (
 // Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a
 // specified iSCSI target. By default, a gateway does not have CHAP enabled;
 // however, for added security, you might use it. This operation is supported in
-// the volume and tape gateway types.  <important> <p>When you update CHAP
-// credentials, all existing connections on the target are closed and initiators
-// must reconnect with the new credentials.</p> </important>
+// the volume and tape gateway types. When you update CHAP credentials, all
+// existing connections on the target are closed and initiators must reconnect with
+// the new credentials.
 func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCredentialsInput, optFns ...func(*Options)) (*UpdateChapCredentialsOutput, error) {
 	if params == nil {
 		params = &UpdateChapCredentialsInput{}
@@ -31,11 +31,19 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 	return out, nil
 }
 
-// A JSON object containing one or more of the following fields:  <ul> <li> <p>
-// <a>UpdateChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p>
-// <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </p> </li> <li>
-// <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li>
-// <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>
+// A JSON object containing one or more of the following fields:
+//
+//     *
+// UpdateChapCredentialsInput$InitiatorName
+//
+//     *
+// UpdateChapCredentialsInput$SecretToAuthenticateInitiator
+//
+//     *
+// UpdateChapCredentialsInput$SecretToAuthenticateTarget
+//
+//     *
+// UpdateChapCredentialsInput$TargetARN
 type UpdateChapCredentialsInput struct {
 
 	// The iSCSI initiator that connects to the target.
@@ -44,23 +52,23 @@ type UpdateChapCredentialsInput struct {
 	InitiatorName *string
 
 	// The secret key that the initiator (for example, the Windows client) must provide
-	// to participate in mutual CHAP with the target.  <note> <p>The secret key must be
-	// between 12 and 16 bytes when encoded in UTF-8.</p> </note>
+	// to participate in mutual CHAP with the target. The secret key must be between 12
+	// and 16 bytes when encoded in UTF-8.
 	//
 	// This member is required.
 	SecretToAuthenticateInitiator *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes () operation to return the TargetARN for specified
+	// DescribeStorediSCSIVolumes operation to return the TargetARN for specified
 	// VolumeARN.
 	//
 	// This member is required.
 	TargetARN *string
 
 	// The secret key that the target must provide to participate in mutual CHAP with
-	// the initiator (e.g. Windows client).  <p>Byte constraints: Minimum bytes of 12.
-	// Maximum bytes of 16.</p> <note> <p>The secret key must be between 12 and 16
-	// bytes when encoded in UTF-8.</p> </note>
+	// the initiator (e.g. Windows client). Byte constraints: Minimum bytes of 12.
+	// Maximum bytes of 16. The secret key must be between 12 and 16 bytes when encoded
+	// in UTF-8.
 	SecretToAuthenticateTarget *string
 }
 

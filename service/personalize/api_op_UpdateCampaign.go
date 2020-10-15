@@ -13,9 +13,9 @@ import (
 // Updates a campaign by either deploying a new solution or changing the value of
 // the campaign's minProvisionedTPS parameter. To update a campaign, the campaign
 // status must be ACTIVE or CREATE FAILED. Check the campaign status using the
-// DescribeCampaign () API. You must wait until the status of the updated campaign
-// is ACTIVE before asking the campaign for recommendations. For more information
-// on campaigns, see CreateCampaign ().
+// DescribeCampaign API. You must wait until the status of the updated campaign is
+// ACTIVE before asking the campaign for recommendations. For more information on
+// campaigns, see CreateCampaign.
 func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput, optFns ...func(*Options)) (*UpdateCampaignOutput, error) {
 	if params == nil {
 		params = &UpdateCampaignInput{}

@@ -12,16 +12,15 @@ import (
 
 // The AssociateQualificationWithWorker operation gives a Worker a Qualification.
 // AssociateQualificationWithWorker does not require that the Worker submit a
-// Qualification request. It gives the Qualification directly to the Worker.  <p>
-// You can only assign a Qualification of a Qualification type that you created
-// (using the <code>CreateQualificationType</code> operation). </p> <note> <p>
-// Note: <code>AssociateQualificationWithWorker</code> does not affect any pending
-// Qualification requests for the Qualification by the Worker. If you assign a
-// Qualification to a Worker, then later grant a Qualification request made by the
-// Worker, the granting of the request may modify the Qualification score. To
-// resolve a pending Qualification request without affecting the Qualification the
-// Worker already has, reject the request with the
-// <code>RejectQualificationRequest</code> operation. </p> </note>
+// Qualification request. It gives the Qualification directly to the Worker. You
+// can only assign a Qualification of a Qualification type that you created (using
+// the CreateQualificationType operation). Note: AssociateQualificationWithWorker
+// does not affect any pending Qualification requests for the Qualification by the
+// Worker. If you assign a Qualification to a Worker, then later grant a
+// Qualification request made by the Worker, the granting of the request may modify
+// the Qualification score. To resolve a pending Qualification request without
+// affecting the Qualification the Worker already has, reject the request with the
+// RejectQualificationRequest operation.
 func (c *Client) AssociateQualificationWithWorker(ctx context.Context, params *AssociateQualificationWithWorkerInput, optFns ...func(*Options)) (*AssociateQualificationWithWorkerOutput, error) {
 	if params == nil {
 		params = &AssociateQualificationWithWorkerInput{}

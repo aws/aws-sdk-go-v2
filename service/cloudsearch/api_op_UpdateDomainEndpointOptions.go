@@ -31,7 +31,7 @@ func (c *Client) UpdateDomainEndpointOptions(ctx context.Context, params *Update
 	return out, nil
 }
 
-// Container for the parameters to the UpdateDomainEndpointOptions () operation.
+// Container for the parameters to the UpdateDomainEndpointOptions operation.
 // Specifies the name of the domain you want to update and the domain endpoint
 // options.
 type UpdateDomainEndpointOptionsInput struct {

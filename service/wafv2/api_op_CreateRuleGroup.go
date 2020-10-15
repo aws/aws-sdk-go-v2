@@ -15,11 +15,11 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Creates a RuleGroup () per the specifications provided. A rule group defines a
+// Creates a RuleGroup per the specifications provided. A rule group defines a
 // collection of rules to inspect and control web requests that you can use in a
-// WebACL (). When you create a rule group, you define an immutable capacity limit.
-// If you update a rule group, you must stay within the capacity. This allows
-// others to reuse the rule group with confidence in its capacity requirements.
+// WebACL. When you create a rule group, you define an immutable capacity limit. If
+// you update a rule group, you must stay within the capacity. This allows others
+// to reuse the rule group with confidence in its capacity requirements.
 func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInput, optFns ...func(*Options)) (*CreateRuleGroupOutput, error) {
 	if params == nil {
 		params = &CreateRuleGroupInput{}
@@ -40,10 +40,10 @@ type CreateRuleGroupInput struct {
 	// The web ACL capacity units (WCUs) required for this rule group. When you create
 	// your own rule group, you define this, and you cannot change it after creation.
 	// When you add or modify the rules in a rule group, AWS WAF enforces this limit.
-	// You can check the capacity for a set of rules using CheckCapacity (). AWS WAF
-	// uses WCUs to calculate and control the operating resources that are used to run
-	// your rules, rule groups, and web ACLs. AWS WAF calculates capacity differently
-	// for each rule type, to reflect the relative cost of each rule. Simple rules that
+	// You can check the capacity for a set of rules using CheckCapacity. AWS WAF uses
+	// WCUs to calculate and control the operating resources that are used to run your
+	// rules, rule groups, and web ACLs. AWS WAF calculates capacity differently for
+	// each rule type, to reflect the relative cost of each rule. Simple rules that
 	// cost little to run use fewer WCUs than more complex rules that use more
 	// processing power. Rule group capacity is fixed at creation, which helps users
 	// plan their web ACL WCU usage when they use a rule group. The WCU limit for web
@@ -81,7 +81,7 @@ type CreateRuleGroupInput struct {
 	// change the description of a rule group after you create it.
 	Description *string
 
-	// The Rule () statements used to identify the web requests that you want to allow,
+	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
@@ -93,10 +93,10 @@ type CreateRuleGroupInput struct {
 
 type CreateRuleGroupOutput struct {
 
-	// High-level information about a RuleGroup (), returned by operations like create
-	// and list. This provides information like the ID, that you can use to retrieve
-	// and manage a RuleGroup, and the ARN, that you provide to the
-	// RuleGroupReferenceStatement () to use the rule group in a Rule ().
+	// High-level information about a RuleGroup, returned by operations like create and
+	// list. This provides information like the ID, that you can use to retrieve and
+	// manage a RuleGroup, and the ARN, that you provide to the
+	// RuleGroupReferenceStatement to use the rule group in a Rule.
 	Summary *types.RuleGroupSummary
 
 	// Metadata pertaining to the operation's result.

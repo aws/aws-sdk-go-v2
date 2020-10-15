@@ -29,7 +29,7 @@ import (
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html)
 // in the Amazon Elastic Container Service Developer Guide. After you have created
 // your unmanaged compute environment, you can use the DescribeComputeEnvironments
-// () operation to find the Amazon ECS cluster that is associated with it. Then,
+// operation to find the Amazon ECS cluster that is associated with it. Then,
 // manually launch your container instances into that Amazon ECS cluster. For more
 // information, see Launching an Amazon ECS Container Instance
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)

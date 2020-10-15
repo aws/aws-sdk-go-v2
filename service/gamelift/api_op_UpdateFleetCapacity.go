@@ -12,44 +12,44 @@ import (
 
 // Updates capacity settings for a fleet. Use this action to specify the number of
 // EC2 instances (hosts) that you want this fleet to contain. Before calling this
-// action, you may want to call DescribeEC2InstanceLimits () to get the maximum
+// action, you may want to call DescribeEC2InstanceLimits to get the maximum
 // capacity based on the fleet's EC2 instance type. Specify minimum and maximum
 // number of instances. Amazon GameLift will not change fleet capacity to values
 // fall outside of this range. This is particularly important when using
-// auto-scaling (see PutScalingPolicy ()) to allow capacity to adjust based on
-// player demand while imposing limits on automatic adjustments. To update fleet
-// capacity, specify the fleet ID and the number of instances you want the fleet to
-// host. If successful, Amazon GameLift starts or terminates instances so that the
-// fleet's active instance count matches the desired instance count. You can view a
-// fleet's current capacity information by calling DescribeFleetCapacity (). If the
-// desired instance count is higher than the instance type's limit, the "Limit
-// Exceeded" exception occurs. Learn more Setting up GameLift Fleets
+// auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player
+// demand while imposing limits on automatic adjustments. To update fleet capacity,
+// specify the fleet ID and the number of instances you want the fleet to host. If
+// successful, Amazon GameLift starts or terminates instances so that the fleet's
+// active instance count matches the desired instance count. You can view a fleet's
+// current capacity information by calling DescribeFleetCapacity. If the desired
+// instance count is higher than the instance type's limit, the "Limit Exceeded"
+// exception occurs. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
+//
+// * DescribeFleetAttributes
 //
 //     * Update fleets:
 //
 //         *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//         * UpdateFleetCapacity ()
+//         * UpdateFleetCapacity
 //
 //         *
-// UpdateFleetPortSettings ()
+// UpdateFleetPortSettings
 //
-//         * UpdateRuntimeConfiguration ()
+//         * UpdateRuntimeConfiguration
 //
 //     *
-// StartFleetActions () or StopFleetActions ()
+// StartFleetActions or StopFleetActions
 func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCapacityInput, optFns ...func(*Options)) (*UpdateFleetCapacityOutput, error) {
 	if params == nil {
 		params = &UpdateFleetCapacityInput{}

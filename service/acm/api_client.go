@@ -19,11 +19,8 @@ import (
 const ServiceID = "ACM"
 const ServiceAPIVersion = "2015-12-08"
 
-// AWS Certificate Manager Welcome to the AWS Certificate Manager (ACM) API
-// documentation. You can use ACM to manage SSL/TLS certificates for your AWS-based
-// websites and applications. For general information about using ACM, see the  AWS
-// Certificate Manager User Guide
-// (https://docs.aws.amazon.com/acm/latest/userguide/).
+// Client provides the API client to make operations call for AWS Certificate
+// Manager.
 type Client struct {
 	options Options
 }

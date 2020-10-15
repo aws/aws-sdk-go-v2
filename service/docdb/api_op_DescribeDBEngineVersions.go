@@ -27,7 +27,7 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
-// Represents the input to DescribeDBEngineVersions ().
+// Represents the input to DescribeDBEngineVersions.
 type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific parameter group family to return details for.
@@ -71,7 +71,7 @@ type DescribeDBEngineVersionsInput struct {
 	MaxRecords *int32
 }
 
-// Represents the output of DescribeDBEngineVersions ().
+// Represents the output of DescribeDBEngineVersions.
 type DescribeDBEngineVersionsOutput struct {
 
 	// Detailed information about one or more engine versions.

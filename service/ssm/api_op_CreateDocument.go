@@ -91,10 +91,15 @@ type CreateDocumentInput struct {
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag an SSM document to identify the types of targets
 	// or the environment where it will run. In this case, you could specify the
-	// following key name/value pairs:  <ul> <li> <p> <code>Key=OS,Value=Windows</code>
-	// </p> </li> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li>
-	// </ul> <note> <p>To add tags to an existing SSM document, use the
-	// <a>AddTagsToResource</a> action.</p> </note>
+	// following key name/value pairs:
+	//
+	//     * Key=OS,Value=Windows
+	//
+	//     *
+	// Key=Environment,Value=Production
+	//
+	// To add tags to an existing SSM document, use
+	// the AddTagsToResource action.
 	Tags []*types.Tag
 
 	// Specify a target type to define the kinds of resources the document can run on.

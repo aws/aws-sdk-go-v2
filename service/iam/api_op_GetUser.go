@@ -40,7 +40,7 @@ type GetUserInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful GetUser () request.
+// Contains the response to a successful GetUser request.
 type GetUserOutput struct {
 
 	// A structure containing details about the IAM user. Due to a service issue,

@@ -15,11 +15,10 @@ import (
 // all previously launched instances in the Auto Scaling group with a new group of
 // instances. If successful, this call creates a new instance refresh request with
 // a unique ID that you can use to track its progress. To query its status, call
-// the DescribeInstanceRefreshes () API. To describe the instance refreshes that
-// have already run, call the DescribeInstanceRefreshes () API. To cancel an
-// instance refresh operation in progress, use the CancelInstanceRefresh () API.
-// For more information, see Replacing Auto Scaling Instances Based on an Instance
-// Refresh
+// the DescribeInstanceRefreshes API. To describe the instance refreshes that have
+// already run, call the DescribeInstanceRefreshes API. To cancel an instance
+// refresh operation in progress, use the CancelInstanceRefresh API. For more
+// information, see Replacing Auto Scaling Instances Based on an Instance Refresh
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html).
 func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstanceRefreshInput, optFns ...func(*Options)) (*StartInstanceRefreshOutput, error) {
 	if params == nil {

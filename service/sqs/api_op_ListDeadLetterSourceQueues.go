@@ -11,11 +11,10 @@ import (
 )
 
 // Returns a list of your queues that have the RedrivePolicy queue attribute
-// configured with a dead-letter queue.  <p>For more information about using
-// dead-letter queues, see <a
-// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">Using
-// Amazon SQS Dead-Letter Queues</a> in the <i>Amazon Simple Queue Service
-// Developer Guide</i>.</p>
+// configured with a dead-letter queue. For more information about using
+// dead-letter queues, see Using Amazon SQS Dead-Letter Queues
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+// in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) ListDeadLetterSourceQueues(ctx context.Context, params *ListDeadLetterSourceQueuesInput, optFns ...func(*Options)) (*ListDeadLetterSourceQueuesOutput, error) {
 	if params == nil {
 		params = &ListDeadLetterSourceQueuesInput{}

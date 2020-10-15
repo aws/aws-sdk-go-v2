@@ -14,15 +14,15 @@ import (
 // Creates a Network File System (NFS) file share on an existing file gateway. In
 // Storage Gateway, a file share is a file system mount point backed by Amazon S3
 // cloud storage. Storage Gateway exposes file shares using an NFS interface. This
-// operation is only supported for file gateways.  <important> <p>File gateway
-// requires AWS Security Token Service (AWS STS) to be activated to enable you to
-// create a file share. Make sure AWS STS is activated in the AWS Region you are
-// creating your file gateway in. If AWS STS is not activated in the AWS Region,
-// activate it. For information about how to activate AWS STS, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
-// and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access
-// Management User Guide</i>.</p> <p>File gateway does not support creating hard or
-// symbolic links on a file share.</p> </important>
+// operation is only supported for file gateways. File gateway requires AWS
+// Security Token Service (AWS STS) to be activated to enable you to create a file
+// share. Make sure AWS STS is activated in the AWS Region you are creating your
+// file gateway in. If AWS STS is not activated in the AWS Region, activate it. For
+// information about how to activate AWS STS, see Activating and deactivating AWS
+// STS in an AWS Region
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide. File gateway does not
+// support creating hard or symbolic links on a file share.
 func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileShareInput, optFns ...func(*Options)) (*CreateNFSFileShareOutput, error) {
 	if params == nil {
 		params = &CreateNFSFileShareInput{}
@@ -73,24 +73,21 @@ type CreateNFSFileShareInput struct {
 	ClientList []*string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
-	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
-	// <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>
+	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
-	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
+	// name is set in LocationARN.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -106,32 +103,36 @@ type CreateNFSFileShareInput struct {
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// set the write status to read-only, otherwise set to false. Valid Values: true |
+	// false
 	ReadOnly *bool
 
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data.  <note> <p>
-	// <code>RequesterPays</code> is a configuration for the S3 bucket that backs the
-	// file share, so make sure that the configuration on the file share is the same as
-	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// owner always pays the cost of storing data. RequesterPays is a configuration for
+	// the S3 bucket that backs the file share, so make sure that the configuration on
+	// the file share is the same as the S3 bucket configuration. Valid Values: true |
+	// false
 	RequesterPays *bool
 
-	// A value that maps a user to anonymous user.  <p>Valid values are the
-	// following:</p> <ul> <li> <p> <code>RootSquash</code>: Only root is mapped to
-	// anonymous user.</p> </li> <li> <p> <code>NoSquash</code>: No one is mapped to
-	// anonymous user.</p> </li> <li> <p> <code>AllSquash</code>: Everyone is mapped to
-	// anonymous user.</p> </li> </ul>
+	// A value that maps a user to anonymous user. Valid values are the following:
+	//
+	//
+	// * RootSquash: Only root is mapped to anonymous user.
+	//
+	//     * NoSquash: No one is
+	// mapped to anonymous user.
+	//
+	//     * AllSquash: Everyone is mapped to anonymous
+	// user.
 	Squash *string
 
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is
-	// a key-value pair.  <note> <p>Valid characters for key and value are letters,
-	// spaces, and numbers representable in UTF-8 format, and the following special
-	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.</p> </note>
+	// a key-value pair. Valid characters for key and value are letters, spaces, and
+	// numbers representable in UTF-8 format, and the following special characters: + -
+	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
+	// maximum length for a tag's value is 256.
 	Tags []*types.Tag
 }
 

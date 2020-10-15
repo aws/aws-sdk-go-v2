@@ -12,7 +12,7 @@ import (
 
 // Attaches the specified managed policy to the specified IAM group. You use this
 // API to attach a managed policy to a group. To embed an inline policy in a group,
-// use PutGroupPolicy (). For more information about policies, see Managed Policies
+// use PutGroupPolicy. For more information about policies, see Managed Policies
 // and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.

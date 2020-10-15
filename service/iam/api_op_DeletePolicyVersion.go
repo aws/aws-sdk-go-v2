@@ -12,10 +12,9 @@ import (
 
 // Deletes the specified version from the specified managed policy. You cannot
 // delete the default version from a policy using this API. To delete the default
-// version from a policy, use DeletePolicy (). To find out which version of a
-// policy is marked as the default version, use ListPolicyVersions (). For
-// information about versions for managed policies, see Versioning for Managed
-// Policies
+// version from a policy, use DeletePolicy. To find out which version of a policy
+// is marked as the default version, use ListPolicyVersions. For information about
+// versions for managed policies, see Versioning for Managed Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVersionInput, optFns ...func(*Options)) (*DeletePolicyVersionOutput, error) {

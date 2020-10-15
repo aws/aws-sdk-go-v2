@@ -21,10 +21,7 @@ import (
 const ServiceID = "Comprehend"
 const ServiceAPIVersion = "2017-11-27"
 
-// Amazon Comprehend is an AWS service for gaining insight into the content of
-// documents. Use these actions to determine the topics contained in your
-// documents, the topics they discuss, the predominant sentiment expressed in them,
-// the predominant language used, and more.
+// Client provides the API client to make operations call for Amazon Comprehend.
 type Client struct {
 	options Options
 }

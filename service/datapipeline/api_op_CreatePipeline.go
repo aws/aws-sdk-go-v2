@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a new, empty pipeline. Use PutPipelineDefinition () to populate the
+// Creates a new, empty pipeline. Use PutPipelineDefinition to populate the
 // pipeline.
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {

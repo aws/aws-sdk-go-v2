@@ -29,8 +29,7 @@ import (
 // FINISHED state.
 //
 // Pipeline object definitions are passed to the
-// PutPipelineDefinition action and returned by the GetPipelineDefinition ()
-// action.
+// PutPipelineDefinition action and returned by the GetPipelineDefinition action.
 func (c *Client) PutPipelineDefinition(ctx context.Context, params *PutPipelineDefinitionInput, optFns ...func(*Options)) (*PutPipelineDefinitionOutput, error) {
 	if params == nil {
 		params = &PutPipelineDefinitionInput{}

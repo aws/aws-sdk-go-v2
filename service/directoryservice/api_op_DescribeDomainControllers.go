@@ -43,17 +43,17 @@ type DescribeDomainControllersInput struct {
 	Limit *int32
 
 	// The DescribeDomainControllers.NextToken value from a previous call to
-	// DescribeDomainControllers (). Pass null if this is the first call.
+	// DescribeDomainControllers. Pass null if this is the first call.
 	NextToken *string
 }
 
 type DescribeDomainControllersOutput struct {
 
-	// List of the DomainController () objects that were retrieved.
+	// List of the DomainController objects that were retrieved.
 	DomainControllers []*types.DomainController
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeDomainControllers () retrieve the next
+	// parameter in a subsequent call to DescribeDomainControllers retrieve the next
 	// set of items.
 	NextToken *string
 

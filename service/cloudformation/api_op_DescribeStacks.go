@@ -29,7 +29,7 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 	return out, nil
 }
 
-// The input for DescribeStacks () action.
+// The input for DescribeStacks action.
 type DescribeStacksInput struct {
 
 	// A string that identifies the next page of stacks that you want to retrieve.
@@ -48,7 +48,7 @@ type DescribeStacksInput struct {
 	StackName *string
 }
 
-// The output for a DescribeStacks () action.
+// The output for a DescribeStacks action.
 type DescribeStacksOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of

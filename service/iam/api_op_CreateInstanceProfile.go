@@ -56,7 +56,7 @@ type CreateInstanceProfileInput struct {
 	Path *string
 }
 
-// Contains the response to a successful CreateInstanceProfile () request.
+// Contains the response to a successful CreateInstanceProfile request.
 type CreateInstanceProfileOutput struct {
 
 	// A structure containing details about the new instance profile.

@@ -28,7 +28,7 @@ func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterSnapshots ().
+// Represents the input to DescribeDBClusterSnapshots.
 type DescribeDBClusterSnapshotsInput struct {
 
 	// The ID of the cluster to retrieve the list of cluster snapshots for. This
@@ -101,7 +101,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	SnapshotType *string
 }
 
-// Represents the output of DescribeDBClusterSnapshots ().
+// Represents the output of DescribeDBClusterSnapshots.
 type DescribeDBClusterSnapshotsOutput struct {
 
 	// Provides a list of cluster snapshots.

@@ -28,7 +28,7 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 	return out, nil
 }
 
-// Represents the input to ApplyPendingMaintenanceAction ().
+// Represents the input to ApplyPendingMaintenanceAction.
 type ApplyPendingMaintenanceActionInput struct {
 
 	// The pending maintenance action to apply to this resource. Valid values:
@@ -62,7 +62,7 @@ type ApplyPendingMaintenanceActionInput struct {
 
 type ApplyPendingMaintenanceActionOutput struct {
 
-	// Represents the output of ApplyPendingMaintenanceAction ().
+	// Represents the output of ApplyPendingMaintenanceAction.
 	ResourcePendingMaintenanceActions *types.ResourcePendingMaintenanceActions
 
 	// Metadata pertaining to the operation's result.

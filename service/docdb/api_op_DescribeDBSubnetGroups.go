@@ -29,7 +29,7 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 	return out, nil
 }
 
-// Represents the input to DescribeDBSubnetGroups ().
+// Represents the input to DescribeDBSubnetGroups.
 type DescribeDBSubnetGroupsInput struct {
 
 	// The name of the subnet group to return details for.
@@ -50,7 +50,7 @@ type DescribeDBSubnetGroupsInput struct {
 	MaxRecords *int32
 }
 
-// Represents the output of DescribeDBSubnetGroups ().
+// Represents the output of DescribeDBSubnetGroups.
 type DescribeDBSubnetGroupsOutput struct {
 
 	// Detailed information about one or more subnet groups.

@@ -17,12 +17,12 @@ import (
 // not perform the API operations; it only checks the authorization to determine if
 // the simulated policies allow or deny the operations. If you want to simulate
 // existing policies that are attached to an IAM user, group, or role, use
-// SimulatePrincipalPolicy () instead. Context keys are variables that are
-// maintained by AWS and its services and which provide details about the context
-// of an API query request. You can use the Condition element of an IAM policy to
-// evaluate context keys. To get the list of context keys that the policies require
-// for correct simulation, use GetContextKeysForCustomPolicy (). If the output is
-// long, you can use MaxItems and Marker parameters to paginate the results.
+// SimulatePrincipalPolicy instead. Context keys are variables that are maintained
+// by AWS and its services and which provide details about the context of an API
+// query request. You can use the Condition element of an IAM policy to evaluate
+// context keys. To get the list of context keys that the policies require for
+// correct simulation, use GetContextKeysForCustomPolicy. If the output is long,
+// you can use MaxItems and Marker parameters to paginate the results.
 func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCustomPolicyInput, optFns ...func(*Options)) (*SimulateCustomPolicyOutput, error) {
 	if params == nil {
 		params = &SimulateCustomPolicyInput{}
@@ -206,8 +206,8 @@ type SimulateCustomPolicyInput struct {
 	ResourcePolicy *string
 }
 
-// Contains the response to a successful SimulatePrincipalPolicy () or
-// SimulateCustomPolicy () request.
+// Contains the response to a successful SimulatePrincipalPolicy or
+// SimulateCustomPolicy request.
 type SimulateCustomPolicyOutput struct {
 
 	// The results of the simulation.

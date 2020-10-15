@@ -292,7 +292,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteClusterInput(v *DeleteClusterInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -356,7 +362,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeClusterInput(v *DescribeCluster
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -416,7 +428,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeClusterOperationInput(v *Descri
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterOperationArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterOperationArn must not be empty")}
+	}
 	if v.ClusterOperationArn != nil {
+		if len(*v.ClusterOperationArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterOperationArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterOperationArn").String(*v.ClusterOperationArn); err != nil {
 			return err
 		}
@@ -476,7 +494,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationInput(v *DescribeC
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}
@@ -536,12 +560,21 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationRevisionInput(v *D
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}
 	}
 
+	if v.Revision == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Revision must not be empty")}
+	}
 	if v.Revision != nil {
 		if err := encoder.SetURI("Revision").Long(*v.Revision); err != nil {
 			return err
@@ -602,7 +635,13 @@ func awsRestjson1_serializeOpHttpBindingsGetBootstrapBrokersInput(v *GetBootstra
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -720,7 +759,13 @@ func awsRestjson1_serializeOpHttpBindingsListClusterOperationsInput(v *ListClust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -854,7 +899,13 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationRevisionsInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}
@@ -1046,7 +1097,13 @@ func awsRestjson1_serializeOpHttpBindingsListNodesInput(v *ListNodesInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1114,7 +1171,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1185,7 +1248,13 @@ func awsRestjson1_serializeOpHttpBindingsRebootBrokerInput(v *RebootBrokerInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1270,7 +1339,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1344,7 +1419,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1424,7 +1505,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateBrokerCountInput(v *UpdateBrokerC
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1512,7 +1599,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateBrokerStorageInput(v *UpdateBroke
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1602,7 +1695,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateClusterConfigurationInput(v *Upda
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1692,7 +1791,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateClusterKafkaVersionInput(v *Updat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
@@ -1787,7 +1892,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMonitoringInput(v *UpdateMonitori
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
 	if v.ClusterArn != nil {
+		if len(*v.ClusterArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+		}
 		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}

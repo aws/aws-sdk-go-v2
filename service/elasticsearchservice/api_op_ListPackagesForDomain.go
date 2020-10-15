@@ -27,7 +27,7 @@ func (c *Client) ListPackagesForDomain(ctx context.Context, params *ListPackages
 	return out, nil
 }
 
-// Container for request parameters to ListPackagesForDomain () operation.
+// Container for request parameters to ListPackagesForDomain operation.
 type ListPackagesForDomainInput struct {
 
 	// The name of the domain for which you want to list associated packages.
@@ -43,7 +43,7 @@ type ListPackagesForDomainInput struct {
 	NextToken *string
 }
 
-// Container for response parameters to ListPackagesForDomain () operation.
+// Container for response parameters to ListPackagesForDomain operation.
 type ListPackagesForDomainOutput struct {
 
 	// List of DomainPackageDetails objects.

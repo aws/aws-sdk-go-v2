@@ -22,12 +22,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
 // or GetMetricStatistics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
-// <p> <code>ListMetrics</code> doesn't return information about metrics if those
-// metrics haven't reported data in the past two weeks. To retrieve those metrics,
-// use <a
-// href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html">GetMetricData</a>
-// or <a
-// href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html">GetMetricStatistics</a>.</p>
+// ListMetrics doesn't return information about metrics if those metrics haven't
+// reported data in the past two weeks. To retrieve those metrics, use
+// GetMetricData
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
+// or GetMetricStatistics
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
 func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optFns ...func(*Options)) (*ListMetricsOutput, error) {
 	if params == nil {
 		params = &ListMetricsInput{}

@@ -73,7 +73,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
 
-	// An OrderableDBInstanceOption () structure containing information about orderable
+	// An OrderableDBInstanceOption structure containing information about orderable
 	// options for the DB instance.
 	OrderableDBInstanceOptions []*types.OrderableDBInstanceOption
 

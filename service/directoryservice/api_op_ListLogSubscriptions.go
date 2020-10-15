@@ -44,7 +44,7 @@ type ListLogSubscriptionsInput struct {
 
 type ListLogSubscriptionsOutput struct {
 
-	// A list of active LogSubscription () objects for calling the AWS account.
+	// A list of active LogSubscription objects for calling the AWS account.
 	LogSubscriptions []*types.LogSubscription
 
 	// The token for the next set of items to return.

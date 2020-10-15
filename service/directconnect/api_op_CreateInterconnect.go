@@ -25,7 +25,7 @@ import (
 // Direct Connect endpoint that hosts the specified LAG. If there are no available
 // ports on the endpoint, the request fails and no interconnect is created. For
 // each end customer, the AWS Direct Connect Partner provisions a connection on
-// their interconnect by calling AllocateHostedConnection (). The end customer can
+// their interconnect by calling AllocateHostedConnection. The end customer can
 // then connect to AWS resources by creating a virtual interface on their
 // connection, using the VLAN assigned to them by the AWS Direct Connect Partner.
 // Intended for use by AWS Direct Connect Partners only.
@@ -123,7 +123,7 @@ type CreateInterconnectOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

@@ -26,9 +26,9 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchVersions () operation. Use
-// MaxResults () to control the maximum number of results to retrieve in a single
-// call. Use NextToken () in response to retrieve more results. If the received
+// Container for the parameters to the ListElasticsearchVersions operation. Use
+// MaxResults to control the maximum number of results to retrieve in a single
+// call. Use NextToken in response to retrieve more results. If the received
 // response does not contain a NextToken, then there are no more results to
 // retrieve.
 type ListElasticsearchVersionsInput struct {
@@ -44,7 +44,7 @@ type ListElasticsearchVersionsInput struct {
 }
 
 // Container for the parameters for response received from
-// ListElasticsearchVersions () operation.
+// ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {
 
 	// List of supported elastic search versions.

@@ -12,8 +12,8 @@ import (
 
 // An SaaS partner can use this operation to list details about a partner event
 // source that they have created. AWS customers do not use this operation. Instead,
-// AWS customers can use DescribeEventSource () to see details about a partner
-// event source that is shared with them.
+// AWS customers can use DescribeEventSource to see details about a partner event
+// source that is shared with them.
 func (c *Client) DescribePartnerEventSource(ctx context.Context, params *DescribePartnerEventSourceInput, optFns ...func(*Options)) (*DescribePartnerEventSourceOutput, error) {
 	if params == nil {
 		params = &DescribePartnerEventSourceInput{}

@@ -136,9 +136,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
+	// For more information, see  IAM Database Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless,

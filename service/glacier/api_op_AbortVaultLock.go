@@ -15,9 +15,9 @@ import (
 // Locked state. If the vault lock is in the Locked state when this operation is
 // requested, the operation returns an AccessDeniedException error. Aborting the
 // vault locking process removes the vault lock policy from the specified vault. A
-// vault lock is put into the InProgress state by calling InitiateVaultLock (). A
-// vault lock is put into the Locked state by calling CompleteVaultLock (). You can
-// get the state of a vault lock by calling GetVaultLock (). For more information
+// vault lock is put into the InProgress state by calling InitiateVaultLock. A
+// vault lock is put into the Locked state by calling CompleteVaultLock. You can
+// get the state of a vault lock by calling GetVaultLock. For more information
 // about the vault locking process, see Amazon Glacier Vault Lock
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html). For more
 // information about vault lock policies, see Amazon Glacier Access Control with

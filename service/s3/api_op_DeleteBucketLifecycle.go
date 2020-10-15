@@ -17,13 +17,16 @@ import (
 // lifecycle configuration. To use this operation, you must have permission to
 // perform the s3:PutLifecycleConfiguration action. By default, the bucket owner
 // has this permission and the bucket owner can grant this permission to others.
-// <p>There is usually some time lag before lifecycle configuration deletion is
-// fully propagated to all the Amazon S3 systems.</p> <p>For more information about
-// the object expiration, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions">Elements
-// to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li>
-// <p> <a>PutBucketLifecycleConfiguration</a> </p> </li> <li> <p>
-// <a>GetBucketLifecycleConfiguration</a> </p> </li> </ul>
+// There is usually some time lag before lifecycle configuration deletion is fully
+// propagated to all the Amazon S3 systems. For more information about the object
+// expiration, see Elements to Describe Lifecycle Actions
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions).
+// Related actions include:
+//
+//     * PutBucketLifecycleConfiguration
+//
+//     *
+// GetBucketLifecycleConfiguration
 func (c *Client) DeleteBucketLifecycle(ctx context.Context, params *DeleteBucketLifecycleInput, optFns ...func(*Options)) (*DeleteBucketLifecycleOutput, error) {
 	if params == nil {
 		params = &DeleteBucketLifecycleInput{}

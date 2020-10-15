@@ -15,14 +15,14 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Updates the specified WebACL (). A Web ACL defines a collection of rules to use
-// to inspect and control web requests. Each rule has an action defined (allow,
-// block, or count) for requests that match the statement of the rule. In the Web
-// ACL, you assign a default action to take (allow, block) for any request that
-// does not match any of the rules. The rules in a Web ACL can be a combination of
-// the types Rule (), RuleGroup (), and managed rule group. You can associate a Web
-// ACL with one or more AWS resources to protect. The resources can be Amazon
-// CloudFront, an Amazon API Gateway API, or an Application Load Balancer.
+// Updates the specified WebACL. A Web ACL defines a collection of rules to use to
+// inspect and control web requests. Each rule has an action defined (allow, block,
+// or count) for requests that match the statement of the rule. In the Web ACL, you
+// assign a default action to take (allow, block) for any request that does not
+// match any of the rules. The rules in a Web ACL can be a combination of the types
+// Rule, RuleGroup, and managed rule group. You can associate a Web ACL with one or
+// more AWS resources to protect. The resources can be Amazon CloudFront, an Amazon
+// API Gateway API, or an Application Load Balancer.
 func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, optFns ...func(*Options)) (*UpdateWebACLOutput, error) {
 	if params == nil {
 		params = &UpdateWebACLInput{}
@@ -91,7 +91,7 @@ type UpdateWebACLInput struct {
 	// the description of a Web ACL after you create it.
 	Description *string
 
-	// The Rule () statements used to identify the web requests that you want to allow,
+	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.

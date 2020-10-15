@@ -55,7 +55,7 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	// request.
 	Marker *string
 
-	// Returns an array of ReservedNodeOffering () objects.
+	// Returns an array of ReservedNodeOffering objects.
 	ReservedNodeOfferings []*types.ReservedNodeOffering
 
 	// Metadata pertaining to the operation's result.

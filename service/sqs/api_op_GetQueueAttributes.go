@@ -115,34 +115,40 @@ type GetQueueAttributesInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
-	//     <p>The following
-	// attributes apply only to <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html">server-side-encryption</a>:</p>
-	// <ul> <li> <p> <code>KmsMasterKeyId</code> – Returns the ID of an AWS-managed
-	// customer master key (CMK) for Amazon SQS or a custom CMK. For more information,
-	// see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms">Key
-	// Terms</a>. </p> </li> <li> <p> <code>KmsDataKeyReusePeriodSeconds</code> –
-	// Returns the length of time, in seconds, for which Amazon SQS can reuse a data
-	// key to encrypt or decrypt messages before calling AWS KMS again. For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work">How
-	// Does the Data Key Reuse Period Work?</a>. </p> </li> </ul> <p>The following
-	// attributes apply only to <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html">FIFO
-	// (first-in-first-out) queues</a>:</p> <ul> <li> <p> <code>FifoQueue</code> –
-	// Returns whether the queue is FIFO. For more information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic">FIFO
-	// Queue Logic</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>
-	// <note> <p>To determine whether a queue is <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html">FIFO</a>,
-	// you can check whether <code>QueueName</code> ends with the <code>.fifo</code>
-	// suffix.</p> </note> </li> <li> <p> <code>ContentBasedDeduplication</code> –
-	// Returns whether content-based deduplication is enabled for the queue. For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing">Exactly-Once
-	// Processing</a> in the <i>Amazon Simple Queue Service Developer Guide</i>. </p>
-	// </li> </ul>
+	// The following attributes
+	// apply only to server-side-encryption
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
+	//
+	//
+	// * KmsMasterKeyId – Returns the ID of an AWS-managed customer master key (CMK)
+	// for Amazon SQS or a custom CMK. For more information, see Key Terms
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
+	//
+	//
+	// * KmsDataKeyReusePeriodSeconds – Returns the length of time, in seconds, for
+	// which Amazon SQS can reuse a data key to encrypt or decrypt messages before
+	// calling AWS KMS again. For more information, see How Does the Data Key Reuse
+	// Period Work?
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
+	//
+	// The
+	// following attributes apply only to FIFO (first-in-first-out) queues
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
+	//
+	//
+	// * FifoQueue – Returns whether the queue is FIFO. For more information, see FIFO
+	// Queue Logic
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
+	// in the Amazon Simple Queue Service Developer Guide. To determine whether a queue
+	// is FIFO
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html),
+	// you can check whether QueueName ends with the .fifo suffix.
+	//
+	//     *
+	// ContentBasedDeduplication – Returns whether content-based deduplication is
+	// enabled for the queue. For more information, see Exactly-Once Processing
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// in the Amazon Simple Queue Service Developer Guide.
 	AttributeNames []types.QueueAttributeName
 }
 

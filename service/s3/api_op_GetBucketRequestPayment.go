@@ -14,10 +14,10 @@ import (
 // Returns the request payment configuration of a bucket. To use this version of
 // the operation, you must be the bucket owner. For more information, see Requester
 // Pays Buckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
-// <p>The following operations are related to
-// <code>GetBucketRequestPayment</code>:</p> <ul> <li> <p> <a>ListObjects</a> </p>
-// </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html). The
+// following operations are related to GetBucketRequestPayment:
+//
+//     * ListObjects
 func (c *Client) GetBucketRequestPayment(ctx context.Context, params *GetBucketRequestPaymentInput, optFns ...func(*Options)) (*GetBucketRequestPaymentOutput, error) {
 	if params == nil {
 		params = &GetBucketRequestPaymentInput{}

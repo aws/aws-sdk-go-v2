@@ -17,8 +17,7 @@ import (
 // retrieve metadata about pipelines that you or your IAM users have created. If
 // you are using an IAM user account, you can retrieve metadata about only those
 // pipelines for which you have read permissions. To retrieve the full pipeline
-// definition instead of metadata about the pipeline, call GetPipelineDefinition
-// ().
+// definition instead of metadata about the pipeline, call GetPipelineDefinition.
 func (c *Client) DescribePipelines(ctx context.Context, params *DescribePipelinesInput, optFns ...func(*Options)) (*DescribePipelinesOutput, error) {
 	if params == nil {
 		params = &DescribePipelinesInput{}
@@ -38,7 +37,7 @@ func (c *Client) DescribePipelines(ctx context.Context, params *DescribePipeline
 type DescribePipelinesInput struct {
 
 	// The IDs of the pipelines to describe. You can pass as many as 25 identifiers in
-	// a single call. To obtain pipeline IDs, call ListPipelines ().
+	// a single call. To obtain pipeline IDs, call ListPipelines.
 	//
 	// This member is required.
 	PipelineIds []*string

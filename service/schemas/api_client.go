@@ -21,7 +21,7 @@ import (
 const ServiceID = "schemas"
 const ServiceAPIVersion = "2019-12-02"
 
-// Amazon EventBridge Schema Registry
+// Client provides the API client to make operations call for Schemas.
 type Client struct {
 	options Options
 }

@@ -19,7 +19,7 @@ import (
 const ServiceID = "Glue"
 const ServiceAPIVersion = "2017-03-31"
 
-// AWS Glue Defines the public endpoint for the AWS Glue service.
+// Client provides the API client to make operations call for AWS Glue.
 type Client struct {
 	options Options
 }

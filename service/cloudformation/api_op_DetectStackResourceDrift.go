@@ -20,10 +20,10 @@ import (
 // Detecting Unregulated Configuration Changes to Stacks and Resources
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 // Use DetectStackResourceDrift to detect drift on individual resources, or
-// DetectStackDrift () to detect drift on all resources in a given stack that
-// support drift detection. Resources that do not currently support drift detection
-// cannot be checked. For a list of resources that support drift detection, see
-// Resources that Support Drift Detection
+// DetectStackDrift to detect drift on all resources in a given stack that support
+// drift detection. Resources that do not currently support drift detection cannot
+// be checked. For a list of resources that support drift detection, see Resources
+// that Support Drift Detection
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 func (c *Client) DetectStackResourceDrift(ctx context.Context, params *DetectStackResourceDriftInput, optFns ...func(*Options)) (*DetectStackResourceDriftOutput, error) {
 	if params == nil {

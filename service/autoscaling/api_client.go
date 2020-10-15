@@ -19,14 +19,7 @@ import (
 const ServiceID = "Auto Scaling"
 const ServiceAPIVersion = "2011-01-01"
 
-// Amazon EC2 Auto Scaling  <p>Amazon EC2 Auto Scaling is designed to automatically
-// launch or terminate EC2 instances based on user-defined scaling policies,
-// scheduled actions, and health checks. Use this service with AWS Auto Scaling,
-// Amazon CloudWatch, and Elastic Load Balancing.</p> <p>For more information,
-// including information about granting IAM users required permissions for Amazon
-// EC2 Auto Scaling actions, see the <a
-// href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">Amazon
-// EC2 Auto Scaling User Guide</a>.</p>
+// Client provides the API client to make operations call for Auto Scaling.
 type Client struct {
 	options Options
 }

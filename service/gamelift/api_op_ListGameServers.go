@@ -20,19 +20,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer ()
+//     * RegisterGameServer
 //
-//     * ListGameServers ()
+//     * ListGameServers
 //
 //     *
-// ClaimGameServer ()
+// ClaimGameServer
 //
-//     * DescribeGameServer ()
+//     * DescribeGameServer
 //
-//     * UpdateGameServer ()
+//     * UpdateGameServer
 //
-//
-// * DeregisterGameServer ()
+//     *
+// DeregisterGameServer
 func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInput, optFns ...func(*Options)) (*ListGameServersOutput, error) {
 	if params == nil {
 		params = &ListGameServersInput{}
@@ -51,7 +51,7 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 type ListGameServersInput struct {
 
 	// An identifier for the game server group for the game server you want to list.
-	// Use either the GameServerGroup () name or ARN value.
+	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

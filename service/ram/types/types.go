@@ -75,7 +75,7 @@ type ResourceShare struct {
 	//
 	//     * PROMOTING_TO_STANDARD - The resource share is in
 	// the process of being promoted. For more information, see
-	// PromoteResourceShareCreatedFromPolicy ().
+	// PromoteResourceShareCreatedFromPolicy.
 	//
 	//     * STANDARD - Indicates that the
 	// resource share was created in AWS RAM using the console or APIs. These resource

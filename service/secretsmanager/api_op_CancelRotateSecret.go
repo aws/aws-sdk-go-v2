@@ -11,10 +11,10 @@ import (
 )
 
 // Disables automatic scheduled rotation and cancels the rotation of a secret if
-// currently in progress. To re-enable scheduled rotation, call RotateSecret ()
-// with AutomaticallyRotateAfterDays set to a value greater than 0. This
-// immediately rotates your secret and then enables the automatic schedule. If you
-// cancel a rotation while in progress, it can leave the VersionStage labels in an
+// currently in progress. To re-enable scheduled rotation, call RotateSecret with
+// AutomaticallyRotateAfterDays set to a value greater than 0. This immediately
+// rotates your secret and then enables the automatic schedule. If you cancel a
+// rotation while in progress, it can leave the VersionStage labels in an
 // unexpected state. Depending on the step of the rotation in progress, you might
 // need to remove the staging label AWSPENDING from the partially created version,
 // specified by the VersionId response value. You should also evaluate the
@@ -30,15 +30,26 @@ import (
 //
 // If the staging label
 // AWSPENDING attached to a different version than the version with AWSCURRENT then
-// the attempt to rotate fails.  <p> <b>Minimum permissions</b> </p> <p>To run this
-// command, you must have the following permissions:</p> <ul> <li>
-// <p>secretsmanager:CancelRotateSecret</p> </li> </ul> <p> <b>Related
-// operations</b> </p> <ul> <li> <p>To configure rotation for a secret or to
-// manually trigger a rotation, use <a>RotateSecret</a>.</p> </li> <li> <p>To get
-// the rotation configuration details for a secret, use <a>DescribeSecret</a>.</p>
-// </li> <li> <p>To list all of the currently available secrets, use
-// <a>ListSecrets</a>.</p> </li> <li> <p>To list all of the versions currently
-// associated with a secret, use <a>ListSecretVersionIds</a>.</p> </li> </ul>
+// the attempt to rotate fails. Minimum permissions To run this command, you must
+// have the following permissions:
+//
+//     *
+// secretsmanager:CancelRotateSecret
+//
+// Related operations
+//
+//     * To configure
+// rotation for a secret or to manually trigger a rotation, use RotateSecret.
+//
+//
+// * To get the rotation configuration details for a secret, use DescribeSecret.
+//
+//
+// * To list all of the currently available secrets, use ListSecrets.
+//
+//     * To
+// list all of the versions currently associated with a secret, use
+// ListSecretVersionIds.
 func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSecretInput, optFns ...func(*Options)) (*CancelRotateSecretOutput, error) {
 	if params == nil {
 		params = &CancelRotateSecretInput{}

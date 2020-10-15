@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the specified rule. DescribeRule does not list the targets of a rule.
-// To see the targets associated with a rule, use ListTargetsByRule ().
+// To see the targets associated with a rule, use ListTargetsByRule.
 func (c *Client) DescribeRule(ctx context.Context, params *DescribeRuleInput, optFns ...func(*Options)) (*DescribeRuleOutput, error) {
 	if params == nil {
 		params = &DescribeRuleInput{}

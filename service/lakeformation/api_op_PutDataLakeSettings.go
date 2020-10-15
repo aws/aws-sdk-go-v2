@@ -15,9 +15,9 @@ import (
 // resources managed by Lake Formation. For more information on admin privileges,
 // see Granting Lake Formation Permissions
 // (https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html).
-// <p>This API replaces the current list of data lake admins with the new list
-// being passed. To add an admin, fetch the current list and add the new admin to
-// that list and pass that list in this API.</p>
+// This API replaces the current list of data lake admins with the new list being
+// passed. To add an admin, fetch the current list and add the new admin to that
+// list and pass that list in this API.
 func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSettingsInput, optFns ...func(*Options)) (*PutDataLakeSettingsOutput, error) {
 	if params == nil {
 		params = &PutDataLakeSettingsInput{}

@@ -13,23 +13,16 @@ import (
 
 // Describes the longer ID format settings for all resource types in a specific
 // Region. This request is useful for performing a quick audit to determine whether
-// a specific Region is fully opted in for longer IDs (17-character IDs).  <p>This
-// request only returns information about resource types that support longer
-// IDs.</p> <p>The following resource types support longer IDs: <code>bundle</code>
-// | <code>conversion-task</code> | <code>customer-gateway</code> |
-// <code>dhcp-options</code> | <code>elastic-ip-allocation</code> |
-// <code>elastic-ip-association</code> | <code>export-task</code> |
-// <code>flow-log</code> | <code>image</code> | <code>import-task</code> |
-// <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code>
-// | <code>network-acl-association</code> | <code>network-interface</code> |
-// <code>network-interface-attachment</code> | <code>prefix-list</code> |
-// <code>reservation</code> | <code>route-table</code> |
-// <code>route-table-association</code> | <code>security-group</code> |
-// <code>snapshot</code> | <code>subnet</code> |
-// <code>subnet-cidr-block-association</code> | <code>volume</code> |
-// <code>vpc</code> | <code>vpc-cidr-block-association</code> |
-// <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> |
-// <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>
+// a specific Region is fully opted in for longer IDs (17-character IDs). This
+// request only returns information about resource types that support longer IDs.
+// The following resource types support longer IDs: bundle | conversion-task |
+// customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association
+// | export-task | flow-log | image | import-task | instance | internet-gateway |
+// network-acl | network-acl-association | network-interface |
+// network-interface-attachment | prefix-list | reservation | route-table |
+// route-table-association | security-group | snapshot | subnet |
+// subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association |
+// vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.
 func (c *Client) DescribeAggregateIdFormat(ctx context.Context, params *DescribeAggregateIdFormatInput, optFns ...func(*Options)) (*DescribeAggregateIdFormatOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateIdFormatInput{}

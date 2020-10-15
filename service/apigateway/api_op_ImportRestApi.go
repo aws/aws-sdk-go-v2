@@ -42,16 +42,16 @@ type ImportRestApiInput struct {
 	// A key-value map of context-specific query string parameters specifying the
 	// behavior of different API importing operations. The following shows
 	// operation-specific parameters and their supported values. To exclude
-	// DocumentationParts () from the import, set parameters as ignore=documentation.
-	// To configure the endpoint type, set parameters as
-	// endpointConfigurationTypes=EDGE, endpointConfigurationTypes=REGIONAL, or
-	// endpointConfigurationTypes=PRIVATE. The default endpoint type is EDGE. To handle
-	// imported basepath, set parameters as basepath=ignore, basepath=prepend or
-	// basepath=split. For example, the AWS CLI command to exclude documentation from
-	// the imported API is: aws apigateway import-rest-api --parameters
-	// ignore=documentation --body 'file:///path/to/imported-api-body.json' The AWS CLI
-	// command to set the regional endpoint on the imported API is: aws apigateway
-	// import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body
+	// DocumentationParts from the import, set parameters as ignore=documentation. To
+	// configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE,
+	// endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The
+	// default endpoint type is EDGE. To handle imported basepath, set parameters as
+	// basepath=ignore, basepath=prepend or basepath=split. For example, the AWS CLI
+	// command to exclude documentation from the imported API is: aws apigateway
+	// import-rest-api --parameters ignore=documentation --body
+	// 'file:///path/to/imported-api-body.json' The AWS CLI command to set the regional
+	// endpoint on the imported API is: aws apigateway import-rest-api --parameters
+	// endpointConfigurationTypes=REGIONAL --body
 	// 'file:///path/to/imported-api-body.json'
 	Parameters map[string]*string
 
@@ -76,8 +76,8 @@ type ImportRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
@@ -86,7 +86,7 @@ type ImportRestApiOutput struct {
 	// The API's description.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -105,7 +105,7 @@ type ImportRestApiOutput struct {
 	Name *string
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.

@@ -36,19 +36,25 @@ func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns
 type CreateRoleInput struct {
 
 	// The trust relationship policy document that grants an entity permission to
-	// assume the role.  <p>In IAM, you must provide a JSON policy that has been
-	// converted to a string. However, for AWS CloudFormation templates formatted in
-	// YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation
-	// always converts a YAML policy to JSON format before submitting it to IAM.</p>
-	// <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to
-	// validate this parameter is a string of characters consisting of the
-	// following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space
-	// character (<code>\u0020</code>) through the end of the ASCII character range</p>
-	// </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through <code>\u00FF</code>)</p> </li> <li> <p>The special
-	// characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
-	// carriage return (<code>\u000D</code>)</p> </li> </ul> <p> Upon success, the
-	// response includes the same trust policy in JSON format.</p>
+	// assume the role. In IAM, you must provide a JSON policy that has been converted
+	// to a string. However, for AWS CloudFormation templates formatted in YAML, you
+	// can provide the policy in JSON or YAML format. AWS CloudFormation always
+	// converts a YAML policy to JSON format before submitting it to IAM. The regex
+	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
+	// string of characters consisting of the following:
+	//
+	//     * Any printable ASCII
+	// character ranging from the space character (\u0020) through the end of the ASCII
+	// character range
+	//
+	//     * The printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF)
+	//
+	//     * The special characters tab
+	// (\u0009), line feed (\u000A), and carriage return (\u000D)
+	//
+	// Upon success, the
+	// response includes the same trust policy in JSON format.
 	//
 	// This member is required.
 	AssumeRolePolicyDocument *string
@@ -101,7 +107,7 @@ type CreateRoleInput struct {
 	Tags []*types.Tag
 }
 
-// Contains the response to a successful CreateRole () request.
+// Contains the response to a successful CreateRole request.
 type CreateRoleOutput struct {
 
 	// A structure containing details about the new role.

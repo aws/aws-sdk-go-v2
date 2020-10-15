@@ -210,8 +210,7 @@ type SqlParameter struct {
 	Value Field
 }
 
-// The result of a SQL statement.  <important> <p>This data type is deprecated.</p>
-// </important>
+// The result of a SQL statement. This data type is deprecated.
 type SqlStatementResult struct {
 
 	// The number of records updated by a SQL statement.
@@ -235,8 +234,7 @@ type UpdateResult struct {
 	GeneratedFields []Field
 }
 
-// Contains the value of a column.  <important> <p>This data type is
-// deprecated.</p> </important>
+// Contains the value of a column. This data type is deprecated.
 type Value interface {
 	isValue()
 }

@@ -81,7 +81,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
 	// the Parameters option in the TaskInvocationParameters structure. For information
 	// about how Systems Manager handles these options for the supported maintenance
-	// window task types, see MaintenanceWindowTaskInvocationParameters (). The map has
+	// window task types, see MaintenanceWindowTaskInvocationParameters. The map has
 	// the following format: Key: string, between 1 and 255 characters Value: an array
 	// of strings, each string is between 1 and 255 characters
 	TaskParameters []map[string]*types.MaintenanceWindowTaskParameterValueExpression

@@ -11,8 +11,8 @@ import (
 )
 
 // Revokes permissions that a private CA assigned to a designated AWS service.
-// Permissions can be created with the CreatePermission () action and listed with
-// the ListPermissions () action.
+// Permissions can be created with the CreatePermission action and listed with the
+// ListPermissions action.
 func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionInput, optFns ...func(*Options)) (*DeletePermissionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionInput{}
@@ -31,8 +31,8 @@ func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionI
 type DeletePermissionInput struct {
 
 	// The Amazon Resource Number (ARN) of the private CA that issued the permissions.
-	// You can find the CA's ARN by calling the ListCertificateAuthorities () action.
-	// This must have the following form:
+	// You can find the CA's ARN by calling the ListCertificateAuthorities action. This
+	// must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
 	//

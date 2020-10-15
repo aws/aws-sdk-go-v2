@@ -32,7 +32,7 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
-// Represents the input to DescribeEvents ().
+// Represents the input to DescribeEvents.
 type DescribeEventsInput struct {
 
 	// The number of minutes to retrieve events for. Default: 60
@@ -91,7 +91,7 @@ type DescribeEventsInput struct {
 	StartTime *time.Time
 }
 
-// Represents the output of DescribeEvents ().
+// Represents the output of DescribeEvents.
 type DescribeEventsOutput struct {
 
 	// Detailed information about one or more events.

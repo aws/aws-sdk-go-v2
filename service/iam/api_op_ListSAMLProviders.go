@@ -32,7 +32,7 @@ func (c *Client) ListSAMLProviders(ctx context.Context, params *ListSAMLProvider
 type ListSAMLProvidersInput struct {
 }
 
-// Contains the response to a successful ListSAMLProviders () request.
+// Contains the response to a successful ListSAMLProviders request.
 type ListSAMLProvidersOutput struct {
 
 	// The list of SAML provider resource objects defined in IAM for this AWS account.

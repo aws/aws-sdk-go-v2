@@ -12,39 +12,39 @@ import (
 )
 
 // Retrieves a set of one or more game sessions. Request a specific game session or
-// request all game sessions on a fleet. Alternatively, use SearchGameSessions ()
-// to request a set of active game sessions that are filtered by certain criteria.
-// To retrieve protection policy settings for game sessions, use
-// DescribeGameSessionDetails (). To get game sessions, specify one of the
-// following: game session ID, fleet ID, or alias ID. You can filter this request
-// by game session status. Use the pagination parameters to retrieve results as a
-// set of sequential pages. If successful, a GameSession () object is returned for
-// each game session matching the request. Available in Amazon GameLift Local.
-//
-//
-// * CreateGameSession ()
-//
-//     * DescribeGameSessions ()
+// request all game sessions on a fleet. Alternatively, use SearchGameSessions to
+// request a set of active game sessions that are filtered by certain criteria. To
+// retrieve protection policy settings for game sessions, use
+// DescribeGameSessionDetails. To get game sessions, specify one of the following:
+// game session ID, fleet ID, or alias ID. You can filter this request by game
+// session status. Use the pagination parameters to retrieve results as a set of
+// sequential pages. If successful, a GameSession object is returned for each game
+// session matching the request. Available in Amazon GameLift Local.
 //
 //     *
-// DescribeGameSessionDetails ()
+// CreateGameSession
 //
-//     * SearchGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// UpdateGameSession ()
+// DescribeGameSessionDetails
 //
-//     * GetGameSessionLogUrl ()
+//     * SearchGameSessions
 //
-//     * Game session
-// placements
+//     * UpdateGameSession
 //
-//         * StartGameSessionPlacement ()
+//
+// * GetGameSessionLogUrl
+//
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) DescribeGameSessions(ctx context.Context, params *DescribeGameSessionsInput, optFns ...func(*Options)) (*DescribeGameSessionsOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionsInput{}

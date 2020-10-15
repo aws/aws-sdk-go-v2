@@ -73,11 +73,11 @@ type ASN1Subject struct {
 // CA can issue and revoke X.509 digital certificates. Digital certificates verify
 // that the entity named in the certificate Subject field owns or controls the
 // public key contained in the Subject Public Key Info field. Call the
-// CreateCertificateAuthority () action to create your private CA. You must then
-// call the GetCertificateAuthorityCertificate () action to retrieve a private CA
+// CreateCertificateAuthority action to create your private CA. You must then call
+// the GetCertificateAuthorityCertificate action to retrieve a private CA
 // certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted
 // or on-premises root or subordinate CA certificate. Call the
-// ImportCertificateAuthorityCertificate () action to import the signed certificate
+// ImportCertificateAuthorityCertificate action to import the signed certificate
 // into AWS Certificate Manager (ACM).
 type CertificateAuthority struct {
 
@@ -105,7 +105,7 @@ type CertificateAuthority struct {
 
 	// The period during which a deleted CA can be restored. For more information, see
 	// the PermanentDeletionTimeInDays parameter of the
-	// DeleteCertificateAuthorityRequest () action.
+	// DeleteCertificateAuthorityRequest action.
 	RestorableUntil *time.Time
 
 	// Information about the certificate revocation list (CRL) created and maintained
@@ -127,7 +127,7 @@ type CertificateAuthority struct {
 // pair that your private CA creates when it issues a certificate. It also includes
 // the signature algorithm that it uses when issuing certificates, and its X.500
 // distinguished name. You must specify this information when you call the
-// CreateCertificateAuthority () action.
+// CreateCertificateAuthority action.
 type CertificateAuthorityConfiguration struct {
 
 	// Type of the public key algorithm and size, in bits, of the key pair that your CA
@@ -217,8 +217,8 @@ type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
 	// enabled. You can use this value to enable certificate revocation for a new CA
-	// when you call the CreateCertificateAuthority () action or for an existing CA
-	// when you call the UpdateCertificateAuthority () action.
+	// when you call the CreateCertificateAuthority action or for an existing CA when
+	// you call the UpdateCertificateAuthority action.
 	//
 	// This member is required.
 	Enabled *bool
@@ -234,7 +234,7 @@ type CrlConfiguration struct {
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for
 	// the CustomCname argument, the name of your S3 bucket is placed into the CRL
 	// Distribution Points extension of the issued certificate. You can change the name
-	// of your bucket by calling the UpdateCertificateAuthority () action. You must
+	// of your bucket by calling the UpdateCertificateAuthority action. You must
 	// specify a bucket policy that allows ACM Private CA to write the CRL to your
 	// bucket.
 	S3BucketName *string
@@ -244,8 +244,8 @@ type CrlConfiguration struct {
 // service or entity. In order for ACM to automatically renew private certificates,
 // you must give the ACM service principal all available permissions
 // (IssueCertificate, GetCertificate, and ListPermissions). Permissions can be
-// assigned with the CreatePermission () action, removed with the DeletePermission
-// () action, and listed with the ListPermissions () action.
+// assigned with the CreatePermission action, removed with the DeletePermission
+// action, and listed with the ListPermissions action.
 type Permission struct {
 
 	// The private CA actions that can be performed by the designated AWS service.
@@ -269,11 +269,11 @@ type Permission struct {
 	SourceAccount *string
 }
 
-// Certificate revocation information used by the CreateCertificateAuthority () and
-// UpdateCertificateAuthority () actions. Your private certificate authority (CA)
-// can create and maintain a certificate revocation list (CRL). A CRL contains
+// Certificate revocation information used by the CreateCertificateAuthority and
+// UpdateCertificateAuthority actions. Your private certificate authority (CA) can
+// create and maintain a certificate revocation list (CRL). A CRL contains
 // information about certificates revoked by your CA. For more information, see
-// RevokeCertificate ().
+// RevokeCertificate.
 type RevocationConfiguration struct {
 
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
@@ -284,8 +284,8 @@ type RevocationConfiguration struct {
 // Tags are labels that you can use to identify and organize your private CAs. Each
 // tag consists of a key and an optional value. You can associate up to 50 tags
 // with a private CA. To add one or more tags to a private CA, call the
-// TagCertificateAuthority () action. To remove a tag, call the
-// UntagCertificateAuthority () action.
+// TagCertificateAuthority action. To remove a tag, call the
+// UntagCertificateAuthority action.
 type Tag struct {
 
 	// Key (name) of the tag.
@@ -299,7 +299,7 @@ type Tag struct {
 
 // Length of time for which the certificate issued by your private certificate
 // authority (CA), or by the private CA itself, is valid in days, months, or years.
-// You can issue a certificate by calling the IssueCertificate () action.
+// You can issue a certificate by calling the IssueCertificate action.
 type Validity struct {
 
 	// Specifies whether the Value parameter represents days, months, or years.

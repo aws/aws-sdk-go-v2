@@ -91,8 +91,14 @@ type DescribeEvaluationsInput struct {
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer. To
 	// search for this Evaluation, select Name for the FilterVariable and any of the
-	// following strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li>
-	// <p>2014-09-09</p> </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
+	// following strings for the Prefix:
+	//
+	//     * 2014-09
+	//
+	//     * 2014-09-09
+	//
+	//     *
+	// 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of

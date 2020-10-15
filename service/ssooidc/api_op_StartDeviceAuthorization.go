@@ -29,14 +29,14 @@ func (c *Client) StartDeviceAuthorization(ctx context.Context, params *StartDevi
 type StartDeviceAuthorizationInput struct {
 
 	// The unique identifier string for the client that is registered with AWS SSO.
-	// This value should come from the persisted result of the RegisterClient () API
+	// This value should come from the persisted result of the RegisterClient API
 	// operation.
 	//
 	// This member is required.
 	ClientId *string
 
 	// A secret string that is generated for the client. This value should come from
-	// the persisted result of the RegisterClient () API operation.
+	// the persisted result of the RegisterClient API operation.
 	//
 	// This member is required.
 	ClientSecret *string

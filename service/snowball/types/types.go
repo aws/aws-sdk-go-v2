@@ -66,7 +66,7 @@ type ClusterListEntry struct {
 	ClusterId *string
 
 	// The current state of this cluster. For information about the state of a specific
-	// node, see JobListEntry$JobState ().
+	// node, see JobListEntry$JobState.
 	ClusterState ClusterState
 
 	// The creation date for this cluster.
@@ -113,8 +113,8 @@ type ClusterMetadata struct {
 	// this cluster.
 	Notification *Notification
 
-	// The arrays of JobResource () objects that can include updated S3Resource ()
-	// objects or LambdaResource () objects.
+	// The arrays of JobResource objects that can include updated S3Resource objects or
+	// LambdaResource objects.
 	Resources *JobResource
 
 	// The role ARN associated with this cluster. This ARN was created using the
@@ -126,14 +126,21 @@ type ClusterMetadata struct {
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
 	// soon you'll get each Snowball Edge device, rather it represents how quickly each
 	// device moves to its destination while in transit. Regional shipping speeds are
-	// as follows:  <ul> <li> <p>In Australia, you have access to express shipping.
-	// Typically, devices shipped express are delivered in about a day.</p> </li> <li>
-	// <p>In the European Union (EU), you have access to express shipping. Typically,
-	// Snowball Edges shipped express are delivered in about a day. In addition, most
-	// countries in the EU have access to standard shipping, which typically takes less
-	// than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered
-	// in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day
-	// shipping and two-day shipping.</p> </li> </ul>
+	// as follows:
+	//
+	//     * In Australia, you have access to express shipping. Typically,
+	// devices shipped express are delivered in about a day.
+	//
+	//     * In the European
+	// Union (EU), you have access to express shipping. Typically, Snowball Edges
+	// shipped express are delivered in about a day. In addition, most countries in the
+	// EU have access to standard shipping, which typically takes less than a week, one
+	// way.
+	//
+	//     * In India, Snowball Edges are delivered in one to seven days.
+	//
+	//     *
+	// In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
 	// The type of AWS Snowball device to use for this cluster. For cluster jobs, AWS
@@ -200,7 +207,7 @@ type Ec2AmiResource struct {
 	SnowballAmiId *string
 }
 
-// The container for the EventTriggerDefinition$EventResourceARN ().
+// The container for the EventTriggerDefinition$EventResourceARN.
 type EventTriggerDefinition struct {
 
 	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS
@@ -253,16 +260,16 @@ type JobListEntry struct {
 // logs are returned as a part of the response syntax of the DescribeJob action in
 // the JobMetadata data type. The job logs can be accessed for up to 60 minutes
 // after this request has been made. To access any of the job logs after 60 minutes
-// have passed, you'll have to make another call to the DescribeJob action.  <p>For
+// have passed, you'll have to make another call to the DescribeJob action. For
 // import jobs, the PDF job report becomes available at the end of the import
 // process. For export jobs, your job report typically becomes available while the
-// Snowball for your job part is being delivered to you.</p> <p>The job report
-// provides you insight into the state of your Amazon S3 data transfer. The report
-// includes details about your job or job part for your records.</p> <p>For deeper
-// visibility into the status of your transferred objects, you can look at the two
-// associated logs: a success log and a failure log. The logs are saved in
-// comma-separated value (CSV) format, and the name of each log includes the ID of
-// the job or job part that the log describes.</p>
+// Snowball for your job part is being delivered to you. The job report provides
+// you insight into the state of your Amazon S3 data transfer. The report includes
+// details about your job or job part for your records. For deeper visibility into
+// the status of your transferred objects, you can look at the two associated logs:
+// a success log and a failure log. The logs are saved in comma-separated value
+// (CSV) format, and the name of each log includes the ID of the job or job part
+// that the log describes.
 type JobLogs struct {
 
 	// A link to an Amazon S3 presigned URL where the job completion report is located.
@@ -390,8 +397,8 @@ type KeyRange struct {
 // Identifies
 type LambdaResource struct {
 
-	// The array of ARNs for S3Resource () objects to trigger the LambdaResource ()
-	// objects associated with this job.
+	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
+	// associated with this job.
 	EventTriggers []*EventTriggerDefinition
 
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
@@ -401,12 +408,11 @@ type LambdaResource struct {
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
 // associated with a specific job. The Notification object is returned as a part of
-// the response syntax of the DescribeJob action in the JobMetadata data type.
-// <p>When the notification settings are defined during job creation, you can
-// choose to notify based on a specific set of job states using the
-// <code>JobStatesToNotify</code> array of strings, or you can specify that you
-// want to have Amazon SNS notifications sent out for all job states with
-// <code>NotifyAll</code> set to true.</p>
+// the response syntax of the DescribeJob action in the JobMetadata data type. When
+// the notification settings are defined during job creation, you can choose to
+// notify based on a specific set of job states using the JobStatesToNotify array
+// of strings, or you can specify that you want to have Amazon SNS notifications
+// sent out for all job states with NotifyAll set to true.
 type Notification struct {
 
 	// The list of job states that will trigger a notification for this job.
@@ -418,10 +424,10 @@ type Notification struct {
 	// The new SNS TopicArn that you want to associate with this job. You can create
 	// Amazon Resource Names (ARNs) for topics by using the CreateTopic
 	// (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) Amazon SNS API
-	// action.  <p>You can subscribe email addresses to an Amazon SNS topic through the
-	// AWS Management Console, or by using the <a
-	// href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a>
-	// AWS Simple Notification Service (SNS) API action.</p>
+	// action. You can subscribe email addresses to an Amazon SNS topic through the AWS
+	// Management Console, or by using the Subscribe
+	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) AWS Simple
+	// Notification Service (SNS) API action.
 	SnsTopicARN *string
 }
 
@@ -470,14 +476,22 @@ type ShippingDetails struct {
 	// The shipping speed for a particular job. This speed doesn't dictate how soon
 	// you'll get the Snowball from the job's creation date. This speed represents how
 	// quickly it moves to its destination while in transit. Regional shipping speeds
-	// are as follows:  <ul> <li> <p>In Australia, you have access to express shipping.
-	// Typically, Snowballs shipped express are delivered in about a day.</p> </li>
-	// <li> <p>In the European Union (EU), you have access to express shipping.
-	// Typically, Snowballs shipped express are delivered in about a day. In addition,
-	// most countries in the EU have access to standard shipping, which typically takes
-	// less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered
-	// in one to seven days.</p> </li> <li> <p>In the United States of America (US),
-	// you have access to one-day shipping and two-day shipping.</p> </li> </ul>
+	// are as follows:
+	//
+	//     * In Australia, you have access to express shipping.
+	// Typically, Snowballs shipped express are delivered in about a day.
+	//
+	//     * In the
+	// European Union (EU), you have access to express shipping. Typically, Snowballs
+	// shipped express are delivered in about a day. In addition, most countries in the
+	// EU have access to standard shipping, which typically takes less than a week, one
+	// way.
+	//
+	//     * In India, Snowballs are delivered in one to seven days.
+	//
+	//     * In
+	// the United States of America (US), you have access to one-day shipping and
+	// two-day shipping.
 	ShippingOption ShippingOption
 }
 

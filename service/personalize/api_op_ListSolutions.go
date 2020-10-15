@@ -15,7 +15,7 @@ import (
 // group is not specified, all the solutions associated with the account are
 // listed. The response provides the properties for each solution, including the
 // Amazon Resource Name (ARN). For more information on solutions, see
-// CreateSolution ().
+// CreateSolution.
 func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, optFns ...func(*Options)) (*ListSolutionsOutput, error) {
 	if params == nil {
 		params = &ListSolutionsInput{}

@@ -15,7 +15,7 @@ import (
 // user's password does not prevent a user from accessing AWS through the command
 // line interface or the API. To prevent all user access, you must also either make
 // any access keys inactive or delete them. For more information about making keys
-// inactive or deleting them, see UpdateAccessKey () and DeleteAccessKey ().
+// inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
 func (c *Client) DeleteLoginProfile(ctx context.Context, params *DeleteLoginProfileInput, optFns ...func(*Options)) (*DeleteLoginProfileOutput, error) {
 	if params == nil {
 		params = &DeleteLoginProfileInput{}

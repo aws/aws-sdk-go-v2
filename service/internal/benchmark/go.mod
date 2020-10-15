@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.1.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v0.26.0
-	github.com/awslabs/smithy-go v0.1.1
+	github.com/awslabs/smithy-go v0.1.2-0.20201012175301-b4d8737f29d1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../

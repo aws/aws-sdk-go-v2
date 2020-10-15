@@ -12,7 +12,7 @@ import (
 
 // Deletes the Systems Manager document and all instance associations to the
 // document. Before you delete the document, we recommend that you use
-// DeleteAssociation () to disassociate all instances that are associated with the
+// DeleteAssociation to disassociate all instances that are associated with the
 // document.
 func (c *Client) DeleteDocument(ctx context.Context, params *DeleteDocumentInput, optFns ...func(*Options)) (*DeleteDocumentOutput, error) {
 	if params == nil {

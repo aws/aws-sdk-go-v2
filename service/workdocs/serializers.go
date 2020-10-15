@@ -73,13 +73,25 @@ func awsRestjson1_serializeOpHttpBindingsAbortDocumentVersionUploadInput(v *Abor
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -146,7 +158,13 @@ func awsRestjson1_serializeOpHttpBindingsActivateUserInput(v *ActivateUserInput,
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+		}
 		if err := encoder.SetURI("UserId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -224,7 +242,13 @@ func awsRestjson1_serializeOpHttpBindingsAddResourcePermissionsInput(v *AddResou
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -323,13 +347,25 @@ func awsRestjson1_serializeOpHttpBindingsCreateCommentInput(v *CreateCommentInpu
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -439,7 +475,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateCustomMetadataInput(v *CreateCust
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -624,7 +666,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateLabelsInput(v *CreateLabelsInput,
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -709,7 +757,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateNotificationSubscriptionInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.OrganizationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+	}
 	if v.OrganizationId != nil {
+		if len(*v.OrganizationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+		}
 		if err := encoder.SetURI("OrganizationId").String(*v.OrganizationId); err != nil {
 			return err
 		}
@@ -919,7 +973,13 @@ func awsRestjson1_serializeOpHttpBindingsDeactivateUserInput(v *DeactivateUserIn
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+		}
 		if err := encoder.SetURI("UserId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -986,19 +1046,37 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCommentInput(v *DeleteCommentInpu
 		}
 	}
 
+	if v.CommentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CommentId must not be empty")}
+	}
 	if v.CommentId != nil {
+		if len(*v.CommentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CommentId must not be empty")}
+		}
 		if err := encoder.SetURI("CommentId").String(*v.CommentId); err != nil {
 			return err
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -1078,7 +1156,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCustomMetadataInput(v *DeleteCust
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -1149,7 +1233,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDocumentInput(v *DeleteDocumentIn
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -1216,7 +1306,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFolderInput(v *DeleteFolderInput,
 		}
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -1283,7 +1379,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFolderContentsInput(v *DeleteFold
 		}
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -1363,7 +1465,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLabelsInput(v *DeleteLabelsInput,
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -1423,13 +1531,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteNotificationSubscriptionInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.OrganizationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+	}
 	if v.OrganizationId != nil {
+		if len(*v.OrganizationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+		}
 		if err := encoder.SetURI("OrganizationId").String(*v.OrganizationId); err != nil {
 			return err
 		}
 	}
 
+	if v.SubscriptionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SubscriptionId must not be empty")}
+	}
 	if v.SubscriptionId != nil {
+		if len(*v.SubscriptionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SubscriptionId must not be empty")}
+		}
 		if err := encoder.SetURI("SubscriptionId").String(*v.SubscriptionId); err != nil {
 			return err
 		}
@@ -1496,7 +1616,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteUserInput(v *DeleteUserInput, enc
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+		}
 		if err := encoder.SetURI("UserId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -1660,7 +1786,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCommentsInput(v *DescribeCommen
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -1674,7 +1806,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCommentsInput(v *DescribeCommen
 		encoder.SetQuery("marker").String(*v.Marker)
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -1741,7 +1879,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDocumentVersionsInput(v *Descri
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -1824,7 +1968,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFolderContentsInput(v *Describe
 		}
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -1993,7 +2143,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeNotificationSubscriptionsInput(
 		encoder.SetQuery("marker").String(*v.Marker)
 	}
 
+	if v.OrganizationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+	}
 	if v.OrganizationId != nil {
+		if len(*v.OrganizationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member OrganizationId must not be empty")}
+		}
 		if err := encoder.SetURI("OrganizationId").String(*v.OrganizationId); err != nil {
 			return err
 		}
@@ -2072,7 +2228,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeResourcePermissionsInput(v *Des
 		encoder.SetQuery("principalId").String(*v.PrincipalId)
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -2366,7 +2528,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentInput(v *GetDocumentInput, e
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -2437,7 +2605,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentPathInput(v *GetDocumentPath
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -2516,7 +2690,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentVersionInput(v *GetDocumentV
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -2530,7 +2710,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentVersionInput(v *GetDocumentV
 		encoder.SetQuery("includeCustomMetadata").Boolean(*v.IncludeCustomMetadata)
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -2597,7 +2783,13 @@ func awsRestjson1_serializeOpHttpBindingsGetFolderInput(v *GetFolderInput, encod
 		}
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -2672,7 +2864,13 @@ func awsRestjson1_serializeOpHttpBindingsGetFolderPathInput(v *GetFolderPathInpu
 		encoder.SetQuery("fields").String(*v.Fields)
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -2938,7 +3136,13 @@ func awsRestjson1_serializeOpHttpBindingsRemoveAllResourcePermissionsInput(v *Re
 		}
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -3005,7 +3209,13 @@ func awsRestjson1_serializeOpHttpBindingsRemoveResourcePermissionInput(v *Remove
 		}
 	}
 
+	if v.PrincipalId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PrincipalId must not be empty")}
+	}
 	if v.PrincipalId != nil {
+		if len(*v.PrincipalId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PrincipalId must not be empty")}
+		}
 		if err := encoder.SetURI("PrincipalId").String(*v.PrincipalId); err != nil {
 			return err
 		}
@@ -3015,7 +3225,13 @@ func awsRestjson1_serializeOpHttpBindingsRemoveResourcePermissionInput(v *Remove
 		encoder.SetQuery("type").String(string(v.PrincipalType))
 	}
 
+	if v.ResourceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+	}
 	if v.ResourceId != nil {
+		if len(*v.ResourceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -3093,7 +3309,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDocumentInput(v *UpdateDocumentIn
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
@@ -3193,13 +3415,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDocumentVersionInput(v *UpdateDoc
 		}
 	}
 
+	if v.DocumentId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+	}
 	if v.DocumentId != nil {
+		if len(*v.DocumentId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DocumentId must not be empty")}
+		}
 		if err := encoder.SetURI("DocumentId").String(*v.DocumentId); err != nil {
 			return err
 		}
 	}
 
+	if v.VersionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+	}
 	if v.VersionId != nil {
+		if len(*v.VersionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member VersionId must not be empty")}
+		}
 		if err := encoder.SetURI("VersionId").String(*v.VersionId); err != nil {
 			return err
 		}
@@ -3289,7 +3523,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFolderInput(v *UpdateFolderInput,
 		}
 	}
 
+	if v.FolderId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+	}
 	if v.FolderId != nil {
+		if len(*v.FolderId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FolderId must not be empty")}
+		}
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
@@ -3389,7 +3629,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateUserInput(v *UpdateUserInput, enc
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member UserId must not be empty")}
+		}
 		if err := encoder.SetURI("UserId").String(*v.UserId); err != nil {
 			return err
 		}

@@ -29,7 +29,7 @@ func (c *Client) DeleteServiceSpecificCredential(ctx context.Context, params *De
 type DeleteServiceSpecificCredentialInput struct {
 
 	// The unique identifier of the service-specific credential. You can get this value
-	// by calling ListServiceSpecificCredentials (). This parameter allows (through its
+	// by calling ListServiceSpecificCredentials. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
 	// consist of any upper or lowercased letter or digit.
 	//

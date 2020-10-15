@@ -12,10 +12,9 @@ import (
 )
 
 // Lists log events from the specified log stream. You can list all the log events
-// or filter using a time range.  <p>By default, this operation returns as many log
+// or filter using a time range. By default, this operation returns as many log
 // events as can fit in a response size of 1MB (up to 10,000 log events). You can
-// get additional log events by specifying one of the tokens in a subsequent
-// call.</p>
+// get additional log events by specifying one of the tokens in a subsequent call.
 func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, optFns ...func(*Options)) (*GetLogEventsOutput, error) {
 	if params == nil {
 		params = &GetLogEventsInput{}

@@ -19,23 +19,31 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
 // Amazon Simple Storage Service Developer Guide. To use this operation, you must
 // have permission to perform the GetBucketTagging action. By default, the bucket
-// owner has this permission and can grant this permission to others.  <p>
-// <code>GetBucketTagging</code> has the following special error:</p> <ul> <li>
-// <p>Error code: <code>NoSuchTagSetError</code> </p> <ul> <li> <p>Description:
-// There is no tag set associated with the bucket.</p> </li> </ul> </li> </ul>
-// <p>All Amazon S3 on Outposts REST API requests for this action require an
-// additional parameter of outpost-id to be passed with the request and an S3 on
+// owner has this permission and can grant this permission to others.
+// GetBucketTagging has the following special error:
+//
+//     * Error code:
+// NoSuchTagSetError
+//
+//         * Description: There is no tag set associated with
+// the bucket.
+//
+// All Amazon S3 on Outposts REST API requests for this action require
+// an additional parameter of outpost-id to be passed with the request and an S3 on
 // Outposts endpoint hostname prefix instead of s3-control. For an example of the
 // request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
 // hostname prefix and the outpost-id derived using the access point ARN, see the
-// <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketTagging.html#API_control_GetBucketTagging_Examples">
-// Example</a> section below.</p> <p>The following actions are related to
-// <code>GetBucketTagging</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html">PutBucketTagging</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html">DeleteBucketTagging</a>
-// </p> </li> </ul>
+// Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketTagging.html#API_control_GetBucketTagging_Examples)
+// section below. The following actions are related to GetBucketTagging:
+//
+//     *
+// PutBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
+//
+//
+// * DeleteBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {
 	if params == nil {
 		params = &GetBucketTaggingInput{}

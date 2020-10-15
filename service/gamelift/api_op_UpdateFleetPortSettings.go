@@ -20,29 +20,29 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
+//
+// * DescribeFleetAttributes
 //
 //     * Update fleets:
 //
 //         *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//         * UpdateFleetCapacity ()
+//         * UpdateFleetCapacity
 //
 //         *
-// UpdateFleetPortSettings ()
+// UpdateFleetPortSettings
 //
-//         * UpdateRuntimeConfiguration ()
+//         * UpdateRuntimeConfiguration
 //
 //     *
-// StartFleetActions () or StopFleetActions ()
+// StartFleetActions or StopFleetActions
 func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFleetPortSettingsInput, optFns ...func(*Options)) (*UpdateFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateFleetPortSettingsInput{}

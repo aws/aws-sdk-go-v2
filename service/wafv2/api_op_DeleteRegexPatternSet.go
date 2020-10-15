@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Deletes the specified RegexPatternSet ().
+// Deletes the specified RegexPatternSet.
 func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexPatternSetInput, optFns ...func(*Options)) (*DeleteRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &DeleteRegexPatternSetInput{}

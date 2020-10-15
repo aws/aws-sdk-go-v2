@@ -38,7 +38,7 @@ type DescribePatchGroupsInput struct {
 	//     *
 	// OPERATING_SYSTEM: The supported operating system type to return results for. For
 	// valid operating system values, see
-	// GetDefaultPatchBaselineRequest$OperatingSystem () in CreatePatchBaseline ().
+	// GetDefaultPatchBaselineRequest$OperatingSystem in CreatePatchBaseline.
 	// Examples:
 	//
 	//         * --filters Key=NAME_PREFIX,Values=MyPatchGroup*

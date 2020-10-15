@@ -64,7 +64,7 @@ type CreateDBClusterSnapshotInput struct {
 type CreateDBClusterSnapshotOutput struct {
 
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type is
-	// used as a response element in the DescribeDBClusterSnapshots () action.
+	// used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

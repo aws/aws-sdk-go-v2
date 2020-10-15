@@ -30,19 +30,18 @@ func (c *Client) CreateUsagePlanKey(ctx context.Context, params *CreateUsagePlan
 // usage plan.
 type CreateUsagePlanKeyInput struct {
 
-	// [Required] The identifier of a UsagePlanKey () resource for a plan customer.
+	// [Required] The identifier of a UsagePlanKey resource for a plan customer.
 	//
 	// This member is required.
 	KeyId *string
 
-	// [Required] The type of a UsagePlanKey () resource for a plan customer.
+	// [Required] The type of a UsagePlanKey resource for a plan customer.
 	//
 	// This member is required.
 	KeyType *string
 
-	// [Required] The Id of the UsagePlan () resource representing the usage plan
-	// containing the to-be-created UsagePlanKey () resource representing a plan
-	// customer.
+	// [Required] The Id of the UsagePlan resource representing the usage plan
+	// containing the to-be-created UsagePlanKey resource representing a plan customer.
 	//
 	// This member is required.
 	UsagePlanId *string
@@ -58,7 +57,7 @@ type CreateUsagePlanKeyInput struct {
 
 // Represents a usage plan key to identify a plan customer. To associate an API
 // stage with a selected API key in a usage plan, you must create a UsagePlanKey
-// resource to represent the selected ApiKey (). " Create and Use Usage Plans
+// resource to represent the selected ApiKey. " Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type CreateUsagePlanKeyOutput struct {
 

@@ -21,7 +21,8 @@ import (
 const ServiceID = "kendra"
 const ServiceAPIVersion = "2019-02-03"
 
-// Amazon Kendra is a service for indexing large document sets.
+// Client provides the API client to make operations call for
+// AWSKendraFrontendService.
 type Client struct {
 	options Options
 }

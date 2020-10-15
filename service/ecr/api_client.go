@@ -19,13 +19,8 @@ import (
 const ServiceID = "ECR"
 const ServiceAPIVersion = "2015-09-21"
 
-// Amazon Elastic Container Registry Amazon Elastic Container Registry (Amazon ECR)
-// is a managed container image registry service. Customers can use the familiar
-// Docker CLI, or their preferred client, to push, pull, and manage images. Amazon
-// ECR provides a secure, scalable, and reliable registry for your Docker or Open
-// Container Initiative (OCI) images. Amazon ECR supports private repositories with
-// resource-based permissions using IAM so that specific users or Amazon EC2
-// instances can access repositories and images.
+// Client provides the API client to make operations call for Amazon EC2 Container
+// Registry.
 type Client struct {
 	options Options
 }

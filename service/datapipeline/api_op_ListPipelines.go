@@ -42,8 +42,8 @@ type ListPipelinesInput struct {
 type ListPipelinesOutput struct {
 
 	// The pipeline identifiers. If you require additional information about the
-	// pipelines, you can use these identifiers to call DescribePipelines () and
-	// GetPipelineDefinition ().
+	// pipelines, you can use these identifiers to call DescribePipelines and
+	// GetPipelineDefinition.
 	//
 	// This member is required.
 	PipelineIdList []*types.PipelineIdName

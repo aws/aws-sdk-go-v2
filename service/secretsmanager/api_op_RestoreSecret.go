@@ -20,7 +20,7 @@ import (
 // Related operations
 //
 //     * To delete a secret, use
-// DeleteSecret ().
+// DeleteSecret.
 func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, optFns ...func(*Options)) (*RestoreSecretOutput, error) {
 	if params == nil {
 		params = &RestoreSecretInput{}

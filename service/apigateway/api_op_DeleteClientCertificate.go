@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the ClientCertificate () resource.
+// Deletes the ClientCertificate resource.
 func (c *Client) DeleteClientCertificate(ctx context.Context, params *DeleteClientCertificateInput, optFns ...func(*Options)) (*DeleteClientCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteClientCertificateInput{}
@@ -26,10 +26,10 @@ func (c *Client) DeleteClientCertificate(ctx context.Context, params *DeleteClie
 	return out, nil
 }
 
-// A request to delete the ClientCertificate () resource.
+// A request to delete the ClientCertificate resource.
 type DeleteClientCertificateInput struct {
 
-	// [Required] The identifier of the ClientCertificate () resource to be deleted.
+	// [Required] The identifier of the ClientCertificate resource to be deleted.
 	//
 	// This member is required.
 	ClientCertificateId *string

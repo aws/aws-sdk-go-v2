@@ -49,7 +49,7 @@ type CreateAccessKeyInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful CreateAccessKey () request.
+// Contains the response to a successful CreateAccessKey request.
 type CreateAccessKeyOutput struct {
 
 	// A structure with details about the access key.

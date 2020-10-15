@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Represents a collection of BasePathMapping () resources.
+// Represents a collection of BasePathMapping resources.
 func (c *Client) GetBasePathMappings(ctx context.Context, params *GetBasePathMappingsInput, optFns ...func(*Options)) (*GetBasePathMappingsOutput, error) {
 	if params == nil {
 		params = &GetBasePathMappingsInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetBasePathMappings(ctx context.Context, params *GetBasePathMap
 	return out, nil
 }
 
-// A request to get information about a collection of BasePathMapping () resources.
+// A request to get information about a collection of BasePathMapping resources.
 type GetBasePathMappingsInput struct {
 
-	// [Required] The domain name of a BasePathMapping () resource.
+	// [Required] The domain name of a BasePathMapping resource.
 	//
 	// This member is required.
 	DomainName *string
@@ -51,7 +51,7 @@ type GetBasePathMappingsInput struct {
 	Title *string
 }
 
-// Represents a collection of BasePathMapping () resources. Use Custom Domain Names
+// Represents a collection of BasePathMapping resources. Use Custom Domain Names
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type GetBasePathMappingsOutput struct {
 

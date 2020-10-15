@@ -62,7 +62,7 @@ type ListServerCertificatesInput struct {
 	PathPrefix *string
 }
 
-// Contains the response to a successful ListServerCertificates () request.
+// Contains the response to a successful ListServerCertificates request.
 type ListServerCertificatesOutput struct {
 
 	// A list of server certificates.

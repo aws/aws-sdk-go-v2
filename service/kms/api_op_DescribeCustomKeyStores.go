@@ -25,9 +25,9 @@ import (
 // use the ConnectionState element in the response. If an attempt to connect the
 // custom key store failed, the ConnectionState value is FAILED and the
 // ConnectionErrorCode element in the response indicates the cause of the failure.
-// For help interpreting the ConnectionErrorCode, see CustomKeyStoresListEntry ().
+// For help interpreting the ConnectionErrorCode, see CustomKeyStoresListEntry.
 // Custom key stores have a DISCONNECTED connection state if the key store has
-// never been connected or you use the DisconnectCustomKeyStore () operation to
+// never been connected or you use the DisconnectCustomKeyStore operation to
 // disconnect it. If your custom key store state is CONNECTED but you are having
 // trouble using it, make sure that its associated AWS CloudHSM cluster is active
 // and contains the minimum number of HSMs required for the operation, if any. For

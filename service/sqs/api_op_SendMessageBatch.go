@@ -12,7 +12,7 @@ import (
 )
 
 // Delivers up to ten messages to the specified queue. This is a batch version of
-// SendMessage (). For a FIFO queue, multiple messages within a single batch are
+// SendMessage. For a FIFO queue, multiple messages within a single batch are
 // enqueued in the order they are sent. The result of sending each message is
 // reported individually in the response. Because the batch request can result in a
 // combination of successful and unsuccessful actions, you should check for batch
@@ -48,7 +48,7 @@ func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchI
 //
 type SendMessageBatchInput struct {
 
-	// A list of SendMessageBatchRequestEntry () items.
+	// A list of SendMessageBatchRequestEntry items.
 	//
 	// This member is required.
 	Entries []*types.SendMessageBatchRequestEntry
@@ -61,17 +61,17 @@ type SendMessageBatchInput struct {
 }
 
 // For each message in the batch, the response contains a
-// SendMessageBatchResultEntry () tag if the message succeeds or a
-// BatchResultErrorEntry () tag if the message fails.
+// SendMessageBatchResultEntry tag if the message succeeds or a
+// BatchResultErrorEntry tag if the message fails.
 type SendMessageBatchOutput struct {
 
-	// A list of BatchResultErrorEntry () items with error details about each message
-	// that can't be enqueued.
+	// A list of BatchResultErrorEntry items with error details about each message that
+	// can't be enqueued.
 	//
 	// This member is required.
 	Failed []*types.BatchResultErrorEntry
 
-	// A list of SendMessageBatchResultEntry () items.
+	// A list of SendMessageBatchResultEntry items.
 	//
 	// This member is required.
 	Successful []*types.SendMessageBatchResultEntry

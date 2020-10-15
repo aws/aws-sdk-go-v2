@@ -54,7 +54,7 @@ type BatchPutDocumentInput struct {
 	Documents []*types.Document
 
 	// The identifier of the index to add the documents to. You need to create the
-	// index first using the CreateIndex () operation.
+	// index first using the CreateIndex operation.
 	//
 	// This member is required.
 	IndexId *string

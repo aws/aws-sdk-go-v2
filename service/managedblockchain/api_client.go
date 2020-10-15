@@ -21,12 +21,8 @@ import (
 const ServiceID = "ManagedBlockchain"
 const ServiceAPIVersion = "2018-09-24"
 
-// Amazon Managed Blockchain is a fully managed service for creating and managing
-// blockchain networks using open source frameworks. Blockchain allows you to build
-// applications where multiple parties can securely and transparently run
-// transactions and share data without the need for a trusted, central authority.
-// Currently, Managed Blockchain supports the Hyperledger Fabric open source
-// framework.
+// Client provides the API client to make operations call for Amazon Managed
+// Blockchain.
 type Client struct {
 	options Options
 }

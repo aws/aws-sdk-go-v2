@@ -30,7 +30,7 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 
 type ListGroupResourcesInput struct {
 
-	// Filters, formatted as ResourceFilter () objects, that you want to apply to a
+	// Filters, formatted as ResourceFilter objects, that you want to apply to a
 	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
 	//

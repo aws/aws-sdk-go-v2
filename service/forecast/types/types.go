@@ -7,7 +7,7 @@ import (
 )
 
 // Specifies a categorical hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges () object.
+// object is part of the ParameterRanges object.
 type CategoricalParameterRange struct {
 
 	// The name of the categorical hyperparameter to tune.
@@ -22,7 +22,7 @@ type CategoricalParameterRange struct {
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges () object.
+// object is part of the ParameterRanges object.
 type ContinuousParameterRange struct {
 
 	// The maximum tunable value of the hyperparameter.
@@ -59,7 +59,7 @@ type ContinuousParameterRange struct {
 // The destination for an exported forecast, an AWS Identity and Access Management
 // (IAM) role that allows Amazon Forecast to access the location and, optionally,
 // an AWS Key Management Service (KMS) key. This object is submitted in the
-// CreateForecastExportJob () request.
+// CreateForecastExportJob request.
 type DataDestination struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the
@@ -70,8 +70,8 @@ type DataDestination struct {
 }
 
 // Provides a summary of the dataset group properties used in the ListDatasetGroups
-// () operation. To get the complete set of properties, call the
-// DescribeDatasetGroup () operation, and provide the DatasetGroupArn.
+// operation. To get the complete set of properties, call the DescribeDatasetGroup
+// operation, and provide the DatasetGroupArn.
 type DatasetGroupSummary struct {
 
 	// When the dataset group was created.
@@ -84,14 +84,14 @@ type DatasetGroupSummary struct {
 	DatasetGroupName *string
 
 	// When the dataset group was created or last updated from a call to the
-	// UpdateDatasetGroup () operation. While the dataset group is being updated,
+	// UpdateDatasetGroup operation. While the dataset group is being updated,
 	// LastModificationTime is the current time of the ListDatasetGroups call.
 	LastModificationTime *time.Time
 }
 
 // Provides a summary of the dataset import job properties used in the
-// ListDatasetImportJobs () operation. To get the complete set of properties, call
-// the DescribeDatasetImportJob () operation, and provide the DatasetImportJobArn.
+// ListDatasetImportJobs operation. To get the complete set of properties, call the
+// DescribeDatasetImportJob operation, and provide the DatasetImportJobArn.
 type DatasetImportJobSummary struct {
 
 	// When the dataset import job was created.
@@ -138,9 +138,9 @@ type DatasetImportJobSummary struct {
 	Status *string
 }
 
-// Provides a summary of the dataset properties used in the ListDatasets ()
-// operation. To get the complete set of properties, call the DescribeDataset ()
-// operation, and provide the DatasetArn.
+// Provides a summary of the dataset properties used in the ListDatasets operation.
+// To get the complete set of properties, call the DescribeDataset operation, and
+// provide the DatasetArn.
 type DatasetSummary struct {
 
 	// When the dataset was created.
@@ -160,7 +160,7 @@ type DatasetSummary struct {
 
 	// When you create a dataset, LastModificationTime is the same as CreationTime.
 	// While data is being imported to the dataset, LastModificationTime is the current
-	// time of the ListDatasets call. After a CreateDatasetImportJob () operation has
+	// time of the ListDatasets call. After a CreateDatasetImportJob operation has
 	// finished, LastModificationTime is when the import job completed or failed.
 	LastModificationTime *time.Time
 }
@@ -168,7 +168,7 @@ type DatasetSummary struct {
 // The source of your training data, an AWS Identity and Access Management (IAM)
 // role that allows Amazon Forecast to access the data and, optionally, an AWS Key
 // Management Service (KMS) key. This object is submitted in the
-// CreateDatasetImportJob () request.
+// CreateDatasetImportJob request.
 type DataSource struct {
 
 	// The path to the training data stored in an Amazon Simple Storage Service (Amazon
@@ -180,8 +180,7 @@ type DataSource struct {
 
 // An AWS Key Management Service (KMS) key and an AWS Identity and Access
 // Management (IAM) role that Amazon Forecast can assume to access the key. You can
-// specify this optional object in the CreateDataset () and CreatePredictor ()
-// requests.
+// specify this optional object in the CreateDataset and CreatePredictor requests.
 type EncryptionConfig struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key.
@@ -199,7 +198,7 @@ type EncryptionConfig struct {
 
 // Parameters that define how to split a dataset into training data and testing
 // data, and the number of iterations to perform. These parameters are specified in
-// the predefined algorithms but you can override them in the CreatePredictor ()
+// the predefined algorithms but you can override them in the CreatePredictor
 // request.
 type EvaluationParameters struct {
 
@@ -218,36 +217,41 @@ type EvaluationParameters struct {
 }
 
 // The results of evaluating an algorithm. Returned as part of the
-// GetAccuracyMetrics () response.
+// GetAccuracyMetrics response.
 type EvaluationResult struct {
 
 	// The Amazon Resource Name (ARN) of the algorithm that was evaluated.
 	AlgorithmArn *string
 
 	// The array of test windows used for evaluating the algorithm. The
-	// NumberOfBacktestWindows from the EvaluationParameters () object determines the
+	// NumberOfBacktestWindows from the EvaluationParameters object determines the
 	// number of windows in the array.
 	TestWindows []*WindowSummary
 }
 
 // Provides featurization (transformation) information for a dataset field. This
-// object is part of the FeaturizationConfig () object. For example: {
+// object is part of the FeaturizationConfig object. For example: {
 //
 // "AttributeName": "demand",
 //
 //     FeaturizationPipeline [ {
 //
-//     <p>
-// <code>"FeaturizationMethodName": "filling",</code> </p> <p>
-// <code>"FeaturizationMethodParameters": {"aggregation": "avg", "backfill":
-// "nan"}</code> </p> <p> <code>} ]</code> </p> <p> <code>}</code> </p>
+//
+// "FeaturizationMethodName": "filling",
+//
+//     "FeaturizationMethodParameters":
+// {"aggregation": "avg", "backfill": "nan"}
+//
+//     } ]
+//
+//     }
 type Featurization struct {
 
 	// The name of the schema attribute that specifies the data field to be featurized.
 	// Amazon Forecast supports the target field of the TARGET_TIME_SERIES and the
 	// RELATED_TIME_SERIES datasets. For example, for the RETAIL domain, the target is
 	// demand, and for the CUSTOM domain, the target is target_value. For more
-	// information, see howitworks-missing-values ().
+	// information, see howitworks-missing-values.
 	//
 	// This member is required.
 	AttributeName *string
@@ -257,9 +261,9 @@ type Featurization struct {
 	FeaturizationPipeline []*FeaturizationMethod
 }
 
-// In a CreatePredictor () operation, the specified algorithm trains a model using
-// the specified dataset group. You can optionally tell the operation to modify
-// data fields prior to training a model. These modifications are referred to as
+// In a CreatePredictor operation, the specified algorithm trains a model using the
+// specified dataset group. You can optionally tell the operation to modify data
+// fields prior to training a model. These modifications are referred to as
 // featurization. You define featurization using the FeaturizationConfig object.
 // You specify an array of transformations, one for each field that you want to
 // featurize. You then include the FeaturizationConfig object in your
@@ -297,7 +301,7 @@ type FeaturizationConfig struct {
 }
 
 // Provides information about the method that featurizes (transforms) a dataset
-// field. The method is part of the FeaturizationPipeline of the Featurization ()
+// field. The method is part of the FeaturizationPipeline of the Featurization
 // object. The following is an example of how you specify a FeaturizationMethod
 // object. {
 //     "FeaturizationMethodName": "filling",
@@ -331,15 +335,17 @@ type FeaturizationMethod struct {
 	//     * backfill: zero,
 	// nan, value, median, mean, min, max
 	//
-	//     <p>The following list shows the
-	// parameters and their valid values for a <b>Related Time Series</b> featurization
-	// method (there are no defaults):</p> <ul> <li> <p> <code>middlefill</code>:
-	// <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>,
-	// <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>:
-	// <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>,
-	// <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>futurefill</code>:
-	// <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>,
-	// <code>min</code>, <code>max</code> </p> </li> </ul>
+	// The following list shows the parameters and
+	// their valid values for a Related Time Series featurization method (there are no
+	// defaults):
+	//
+	//     * middlefill: zero, value, median, mean, min, max
+	//
+	//     *
+	// backfill: zero, value, median, mean, min, max
+	//
+	//     * futurefill: zero, value,
+	// median, mean, min, max
 	FeaturizationMethodParameters map[string]*string
 }
 
@@ -367,8 +373,8 @@ type Filter struct {
 }
 
 // Provides a summary of the forecast export job properties used in the
-// ListForecastExportJobs () operation. To get the complete set of properties, call
-// the DescribeForecastExportJob () operation, and provide the listed
+// ListForecastExportJobs operation. To get the complete set of properties, call
+// the DescribeForecastExportJob operation, and provide the listed
 // ForecastExportJobArn.
 type ForecastExportJobSummary struct {
 
@@ -406,8 +412,8 @@ type ForecastExportJobSummary struct {
 	Status *string
 }
 
-// Provides a summary of the forecast properties used in the ListForecasts ()
-// operation. To get the complete set of properties, call the DescribeForecast ()
+// Provides a summary of the forecast properties used in the ListForecasts
+// operation. To get the complete set of properties, call the DescribeForecast
 // operation, and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
 
@@ -452,7 +458,7 @@ type ForecastSummary struct {
 }
 
 // Configuration information for a hyperparameter tuning job. You specify this
-// object in the CreatePredictor () request. A hyperparameter is a parameter that
+// object in the CreatePredictor request. A hyperparameter is a parameter that
 // governs the model training process. You set hyperparameters before training
 // starts, unlike model parameters, which are determined during training. The
 // values of the hyperparameters effect which values are chosen for the model
@@ -468,8 +474,7 @@ type HyperParameterTuningJobConfig struct {
 }
 
 // The data used to train a predictor. The data includes a dataset group and any
-// supplementary features. You specify this object in the CreatePredictor ()
-// request.
+// supplementary features. You specify this object in the CreatePredictor request.
 type InputDataConfig struct {
 
 	// The Amazon Resource Name (ARN) of the dataset group.
@@ -483,7 +488,7 @@ type InputDataConfig struct {
 }
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
-// object is part of the ParameterRanges () object.
+// object is part of the ParameterRanges object.
 type IntegerParameterRange struct {
 
 	// The maximum tunable value of the hyperparameter.
@@ -517,7 +522,7 @@ type IntegerParameterRange struct {
 }
 
 // Provides metrics that are used to evaluate the performance of a predictor. This
-// object is part of the WindowSummary () object.
+// object is part of the WindowSummary object.
 type Metrics struct {
 
 	// The root mean square error (RMSE).
@@ -532,7 +537,7 @@ type Metrics struct {
 // Specifies the categorical, continuous, and integer hyperparameters, and their
 // ranges of tunable values. The range of tunable values determines which values
 // that a hyperparameter tuning job can choose for the specified hyperparameter.
-// This object is part of the HyperParameterTuningJobConfig () object.
+// This object is part of the HyperParameterTuningJobConfig object.
 type ParameterRanges struct {
 
 	// Specifies the tunable range for each categorical hyperparameter.
@@ -570,8 +575,8 @@ type PredictorExecutionDetails struct {
 }
 
 // Provides a summary of the predictor properties that are used in the
-// ListPredictors () operation. To get the complete set of properties, call the
-// DescribePredictor () operation, and provide the listed PredictorArn.
+// ListPredictors operation. To get the complete set of properties, call the
+// DescribePredictor operation, and provide the listed PredictorArn.
 type PredictorSummary struct {
 
 	// When the model training task was created.
@@ -616,9 +621,9 @@ type PredictorSummary struct {
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
 // and an AWS Identity and Access Management (IAM) role that Amazon Forecast can
 // assume to access the file(s). Optionally, includes an AWS Key Management Service
-// (KMS) key. This object is part of the DataSource () object that is submitted in
-// the CreateDatasetImportJob () request, and part of the DataDestination () object
-// that is submitted in the CreateForecastExportJob () request.
+// (KMS) key. This object is part of the DataSource object that is submitted in the
+// CreateDatasetImportJob request, and part of the DataDestination object that is
+// submitted in the CreateForecastExportJob request.
 type S3Config struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an
@@ -640,7 +645,7 @@ type S3Config struct {
 	KMSKeyArn *string
 }
 
-// Defines the fields of a dataset. You specify this object in the CreateDataset ()
+// Defines the fields of a dataset. You specify this object in the CreateDataset
 // request.
 type Schema struct {
 
@@ -649,7 +654,7 @@ type Schema struct {
 }
 
 // An attribute of a schema, which defines a dataset field. A schema attribute is
-// required for every field in a dataset. The Schema () object contains an array of
+// required for every field in a dataset. The Schema object contains an array of
 // SchemaAttribute objects.
 type SchemaAttribute struct {
 
@@ -661,7 +666,7 @@ type SchemaAttribute struct {
 }
 
 // Provides statistics for each data field imported into to an Amazon Forecast
-// dataset with the CreateDatasetImportJob () operation.
+// dataset with the CreateDatasetImportJob operation.
 type Statistics struct {
 
 	// For a numeric field, the average value in the field.
@@ -690,9 +695,9 @@ type Statistics struct {
 }
 
 // Describes a supplementary feature of a dataset group. This object is part of the
-// InputDataConfig () object. The only supported feature is a holiday calendar. If
-// you use the calendar, all data in the datasets should belong to the same country
-// as the calendar. For the holiday calendar data, see the Jollyday
+// InputDataConfig object. The only supported feature is a holiday calendar. If you
+// use the calendar, all data in the datasets should belong to the same country as
+// the calendar. For the holiday calendar data, see the Jollyday
 // (http://jollyday.sourceforge.net/data.html) web site. India and Korea's holidays
 // are not included in the Jollyday library, but both are supported by Amazon
 // Forecast. Their holidays are: "IN" - INDIA
@@ -881,7 +886,7 @@ type TestWindowSummary struct {
 	TestWindowStart *time.Time
 }
 
-// The weighted loss value for a quantile. This object is part of the Metrics ()
+// The weighted loss value for a quantile. This object is part of the Metrics
 // object.
 type WeightedQuantileLoss struct {
 
@@ -896,9 +901,9 @@ type WeightedQuantileLoss struct {
 }
 
 // The metrics for a time range within the evaluation portion of a dataset. This
-// object is part of the EvaluationResult () object. The TestWindowStart and
+// object is part of the EvaluationResult object. The TestWindowStart and
 // TestWindowEnd parameters are determined by the BackTestWindowOffset parameter of
-// the EvaluationParameters () object.
+// the EvaluationParameters object.
 type WindowSummary struct {
 
 	// The type of evaluation.

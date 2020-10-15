@@ -16,12 +16,20 @@ import (
 // bucket. A 200 OK response can contain valid or invalid XML. Be sure to design
 // your application to parse the contents of the response and handle it
 // appropriately. This API has been revised. We recommend that you use the newer
-// version, ListObjectsV2 (), when developing applications. For backward
-// compatibility, Amazon S3 continues to support ListObjects.  <p>The following
-// operations are related to <code>ListObjects</code>:</p> <ul> <li> <p>
-// <a>ListObjectsV2</a> </p> </li> <li> <p> <a>GetObject</a> </p> </li> <li> <p>
-// <a>PutObject</a> </p> </li> <li> <p> <a>CreateBucket</a> </p> </li> <li> <p>
-// <a>ListBuckets</a> </p> </li> </ul>
+// version, ListObjectsV2, when developing applications. For backward
+// compatibility, Amazon S3 continues to support ListObjects. The following
+// operations are related to ListObjects:
+//
+//     * ListObjectsV2
+//
+//     * GetObject
+//
+//
+// * PutObject
+//
+//     * CreateBucket
+//
+//     * ListBuckets
 func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optFns ...func(*Options)) (*ListObjectsOutput, error) {
 	if params == nil {
 		params = &ListObjectsInput{}
@@ -75,14 +83,14 @@ type ListObjectsInput struct {
 type ListObjectsOutput struct {
 
 	// All of the keys rolled up in a common prefix count as a single return when
-	// calculating the number of returns.  <p>A response can contain CommonPrefixes
-	// only if you specify a delimiter.</p> <p>CommonPrefixes contains all (if there
-	// are any) keys between Prefix and the next occurrence of the string specified by
-	// the delimiter.</p> <p> CommonPrefixes lists keys that act like subdirectories in
-	// the directory specified by Prefix.</p> <p>For example, if the prefix is notes/
-	// and the delimiter is a slash (/) as in notes/summer/july, the common prefix is
-	// notes/summer/. All of the keys that roll up into a common prefix count as a
-	// single return when calculating the number of returns.</p>
+	// calculating the number of returns. A response can contain CommonPrefixes only if
+	// you specify a delimiter. CommonPrefixes contains all (if there are any) keys
+	// between Prefix and the next occurrence of the string specified by the delimiter.
+	// CommonPrefixes lists keys that act like subdirectories in the directory
+	// specified by Prefix. For example, if the prefix is notes/ and the delimiter is a
+	// slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of
+	// the keys that roll up into a common prefix count as a single return when
+	// calculating the number of returns.
 	CommonPrefixes []*types.CommonPrefix
 
 	// Metadata about each object returned.

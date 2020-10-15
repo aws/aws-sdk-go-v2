@@ -14,55 +14,56 @@ import (
 )
 
 // Adds an object to a bucket. You must have WRITE permissions on a bucket to add
-// an object to it.  <p>Amazon S3 never adds partial objects; if you receive a
-// success response, Amazon S3 added the entire object to the bucket.</p> <p>Amazon
-// S3 is a distributed system. If it receives multiple write requests for the same
-// object simultaneously, it overwrites all but the last object written. Amazon S3
-// does not provide object locking; if you need this, make sure to build it into
-// your application layer or use versioning instead.</p> <p>To ensure that data is
-// not corrupted traversing the network, use the <code>Content-MD5</code> header.
-// When you use this header, Amazon S3 checks the object against the provided MD5
-// value and, if they do not match, returns an error. Additionally, you can
-// calculate the MD5 while putting an object to Amazon S3 and compare the returned
-// ETag to the calculated MD5 value.</p> <note> <p> The <code>Content-MD5</code>
-// header is required for any request to upload an object with a retention period
-// configured using Amazon S3 Object Lock. For more information about Amazon S3
-// Object Lock, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html">Amazon
-// S3 Object Lock Overview</a> in the <i>Amazon Simple Storage Service Developer
-// Guide</i>. </p> </note> <p> <b>Server-side Encryption</b> </p> <p>You can
-// optionally request server-side encryption. With server-side encryption, Amazon
-// S3 encrypts your data as it writes it to disks in its data centers and decrypts
-// the data when you access it. You have the option to provide your own encryption
-// key or use AWS managed encryption keys. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Using
-// Server-Side Encryption</a>.</p> <p> <b>Access Control List (ACL)-Specific
-// Request Headers</b> </p> <p>You can use headers to grant ACL- based permissions.
-// By default, all objects are private. Only the owner has full access control.
-// When adding a new object, you can grant permissions to individual AWS accounts
-// or to predefined groups defined by Amazon S3. These permissions are then added
-// to the ACL on the object. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access
-// Control List (ACL) Overview</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html">Managing
-// ACLs Using the REST API</a>. </p> <p> <b>Storage Class Options</b> </p> <p>By
-// default, Amazon S3 uses the STANDARD storage class to store newly created
-// objects. The STANDARD storage class provides high durability and high
-// availability. Depending on performance needs, you can specify a different
-// storage class. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
-// Classes</a> in the <i>Amazon S3 Service Developer Guide</i>.</p> <p>
-// <b>Versioning</b> </p> <p>If you enable versioning for a bucket, Amazon S3
-// automatically generates a unique version ID for the object being stored. Amazon
-// S3 returns this ID in the response. When you enable versioning for a bucket, if
-// Amazon S3 receives multiple write requests for the same object simultaneously,
-// it stores all of the objects.</p> <p>For more information about versioning, see
-// <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html">Adding
-// Objects to Versioning Enabled Buckets</a>. For information about returning the
-// versioning state of a bucket, see <a>GetBucketVersioning</a>. </p> <p
-// class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a>CopyObject</a>
-// </p> </li> <li> <p> <a>DeleteObject</a> </p> </li> </ul>
+// an object to it. Amazon S3 never adds partial objects; if you receive a success
+// response, Amazon S3 added the entire object to the bucket. Amazon S3 is a
+// distributed system. If it receives multiple write requests for the same object
+// simultaneously, it overwrites all but the last object written. Amazon S3 does
+// not provide object locking; if you need this, make sure to build it into your
+// application layer or use versioning instead. To ensure that data is not
+// corrupted traversing the network, use the Content-MD5 header. When you use this
+// header, Amazon S3 checks the object against the provided MD5 value and, if they
+// do not match, returns an error. Additionally, you can calculate the MD5 while
+// putting an object to Amazon S3 and compare the returned ETag to the calculated
+// MD5 value. The Content-MD5 header is required for any request to upload an
+// object with a retention period configured using Amazon S3 Object Lock. For more
+// information about Amazon S3 Object Lock, see Amazon S3 Object Lock Overview
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html) in
+// the Amazon Simple Storage Service Developer Guide. Server-side Encryption You
+// can optionally request server-side encryption. With server-side encryption,
+// Amazon S3 encrypts your data as it writes it to disks in its data centers and
+// decrypts the data when you access it. You have the option to provide your own
+// encryption key or use AWS managed encryption keys. For more information, see
+// Using Server-Side Encryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
+// Access Control List (ACL)-Specific Request Headers
+//
+// You can use headers to grant
+// ACL- based permissions. By default, all objects are private. Only the owner has
+// full access control. When adding a new object, you can grant permissions to
+// individual AWS accounts or to predefined groups defined by Amazon S3. These
+// permissions are then added to the ACL on the object. For more information, see
+// Access Control List (ACL) Overview
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
+// ACLs Using the REST API
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
+// Storage Class Options By default, Amazon S3 uses the STANDARD storage class to
+// store newly created objects. The STANDARD storage class provides high durability
+// and high availability. Depending on performance needs, you can specify a
+// different storage class. For more information, see Storage Classes
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
+// the Amazon S3 Service Developer Guide. Versioning If you enable versioning for a
+// bucket, Amazon S3 automatically generates a unique version ID for the object
+// being stored. Amazon S3 returns this ID in the response. When you enable
+// versioning for a bucket, if Amazon S3 receives multiple write requests for the
+// same object simultaneously, it stores all of the objects. For more information
+// about versioning, see Adding Objects to Versioning Enabled Buckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html).
+// For information about returning the versioning state of a bucket, see
+// GetBucketVersioning. Related Resources
+//
+//     * CopyObject
+//
+//     * DeleteObject
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {
 	if params == nil {
 		params = &PutObjectInput{}
@@ -231,18 +232,16 @@ type PutObjectInput struct {
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata. For information about object
 	// metadata, see Object Key and Metadata
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html).  <p>In the
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html). In the
 	// following example, the request header sets the redirect to an object
-	// (anotherPage.html) in the same bucket:</p> <p>
-	// <code>x-amz-website-redirect-location: /anotherPage.html</code> </p> <p>In the
-	// following example, the request header sets the object redirect to another
-	// website:</p> <p> <code>x-amz-website-redirect-location:
-	// http://www.example.com/</code> </p> <p>For more information about website
-	// hosting in Amazon S3, see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting
-	// Websites on Amazon S3</a> and <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html">How
-	// to Configure Website Page Redirects</a>. </p>
+	// (anotherPage.html) in the same bucket: x-amz-website-redirect-location:
+	// /anotherPage.html In the following example, the request header sets the object
+	// redirect to another website: x-amz-website-redirect-location:
+	// http://www.example.com/ For more information about website hosting in Amazon S3,
+	// see Hosting Websites on Amazon S3
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) and How to
+	// Configure Website Page Redirects
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html).
 	WebsiteRedirectLocation *string
 }
 
@@ -252,9 +251,9 @@ type PutObjectOutput struct {
 	ETag *string
 
 	// If the expiration is configured for the object (see
-	// PutBucketLifecycleConfiguration ()), the response includes this header. It
-	// includes the expiry-date and rule-id key-value pairs that provide information
-	// about object expiration. The value of the rule-id is URL encoded.
+	// PutBucketLifecycleConfiguration), the response includes this header. It includes
+	// the expiry-date and rule-id key-value pairs that provide information about
+	// object expiration. The value of the rule-id is URL encoded.
 	Expiration *string
 
 	// If present, indicates that the requester was successfully charged for the

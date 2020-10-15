@@ -57,8 +57,8 @@ type CertificateInfo struct {
 // Contains information about a computer account in a directory.
 type Computer struct {
 
-	// An array of Attribute () objects containing the LDAP attributes that belong to
-	// the computer account.
+	// An array of Attribute objects containing the LDAP attributes that belong to the
+	// computer account.
 	ComputerAttributes []*Attribute
 
 	// The identifier of the computer.
@@ -87,7 +87,7 @@ type ConditionalForwarder struct {
 	ReplicationScope ReplicationScope
 }
 
-// Contains information for the ConnectDirectory () operation when an AD Connector
+// Contains information for the ConnectDirectory operation when an AD Connector
 // directory is being created.
 type DirectoryConnectSettings struct {
 
@@ -156,7 +156,7 @@ type DirectoryDescription struct {
 	// alias is the directory identifier, such as d-XXXXXXXXXX.
 	Alias *string
 
-	// A DirectoryConnectSettingsDescription () object that contains additional
+	// A DirectoryConnectSettingsDescription object that contains additional
 	// information about an AD Connector directory. This member is only present if the
 	// directory is an AD Connector directory.
 	ConnectSettings *DirectoryConnectSettingsDescription
@@ -190,7 +190,7 @@ type DirectoryDescription struct {
 	// Describes the AWS Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription
 
-	// A RadiusSettings () object that contains information about the RADIUS server
+	// A RadiusSettings object that contains information about the RADIUS server
 	// configured for this directory.
 	RadiusSettings *RadiusSettings
 
@@ -217,7 +217,7 @@ type DirectoryDescription struct {
 	Size DirectorySize
 
 	// Indicates if single sign-on is enabled for the directory. For more information,
-	// see EnableSso () and DisableSso ().
+	// see EnableSso and DisableSso.
 	SsoEnabled *bool
 
 	// The current stage of the directory.
@@ -232,7 +232,7 @@ type DirectoryDescription struct {
 	// The directory size.
 	Type DirectoryType
 
-	// A DirectoryVpcSettingsDescription () object that contains additional information
+	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple AD
 	// or Managed AD directory.
 	VpcSettings *DirectoryVpcSettingsDescription
@@ -270,8 +270,7 @@ type DirectoryLimits struct {
 	ConnectedDirectoriesLimitReached *bool
 }
 
-// Contains VPC information for the CreateDirectory () or CreateMicrosoftAD ()
-// operation.
+// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 type DirectoryVpcSettings struct {
 
 	// The identifiers of the subnets for the directory servers. The two subnets must
@@ -376,10 +375,10 @@ type IpRouteInfo struct {
 	// The date and time the address block was added to the directory.
 	AddedDateTime *time.Time
 
-	// IP address block in the IpRoute ().
+	// IP address block in the IpRoute.
 	CidrIp *string
 
-	// Description of the IpRouteInfo ().
+	// Description of the IpRouteInfo.
 	Description *string
 
 	// Identifier (ID) of the directory associated with the IP addresses.
@@ -434,7 +433,7 @@ type OwnerDirectoryDescription struct {
 	// IP address of the directory’s domain controllers.
 	DnsIpAddrs []*string
 
-	// A RadiusSettings () object that contains information about the RADIUS server.
+	// A RadiusSettings object that contains information about the RADIUS server.
 	RadiusSettings *RadiusSettings
 
 	// Information about the status of the RADIUS server.

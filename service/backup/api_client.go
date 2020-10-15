@@ -19,10 +19,7 @@ import (
 const ServiceID = "Backup"
 const ServiceAPIVersion = "2018-11-15"
 
-// AWS Backup AWS Backup is a unified backup service designed to protect AWS
-// services and their associated data. AWS Backup simplifies the creation,
-// migration, restoration, and deletion of backups, while also providing reporting
-// and auditing.
+// Client provides the API client to make operations call for AWS Backup.
 type Client struct {
 	options Options
 }

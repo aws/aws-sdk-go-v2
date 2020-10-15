@@ -51,11 +51,10 @@ type DescribeClusterVersionsInput struct {
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterVersions () request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterVersions request exceed
+	// the value specified in MaxRecords, AWS returns a value in the Marker field of
+	// the response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -66,7 +65,7 @@ type DescribeClusterVersionsInput struct {
 	MaxRecords *int32
 }
 
-// Contains the output from the DescribeClusterVersions () action.
+// Contains the output from the DescribeClusterVersions action.
 type DescribeClusterVersionsOutput struct {
 
 	// A list of Version elements.

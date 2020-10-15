@@ -15,8 +15,8 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Retrieves an array of RegexPatternSetSummary () objects for the regex pattern
-// sets that you manage.
+// Retrieves an array of RegexPatternSetSummary objects for the regex pattern sets
+// that you manage.
 func (c *Client) ListRegexPatternSets(ctx context.Context, params *ListRegexPatternSetsInput, optFns ...func(*Options)) (*ListRegexPatternSetsOutput, error) {
 	if params == nil {
 		params = &ListRegexPatternSetsInput{}

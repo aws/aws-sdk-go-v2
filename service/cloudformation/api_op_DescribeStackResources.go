@@ -40,7 +40,7 @@ func (c *Client) DescribeStackResources(ctx context.Context, params *DescribeSta
 	return out, nil
 }
 
-// The input for DescribeStackResources () action.
+// The input for DescribeStackResources action.
 type DescribeStackResourcesInput struct {
 
 	// The logical name of the resource as specified in the template. Default: There is
@@ -70,7 +70,7 @@ type DescribeStackResourcesInput struct {
 	StackName *string
 }
 
-// The output for a DescribeStackResources () action.
+// The output for a DescribeStackResources action.
 type DescribeStackResourcesOutput struct {
 
 	// A list of StackResource structures.

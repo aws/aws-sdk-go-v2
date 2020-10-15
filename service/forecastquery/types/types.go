@@ -2,7 +2,7 @@
 
 package types
 
-// The forecast value for a specific date. Part of the Forecast () object.
+// The forecast value for a specific date. Part of the Forecast object.
 type DataPoint struct {
 
 	// The timestamp of the specific forecast.
@@ -12,7 +12,7 @@ type DataPoint struct {
 	Value *float64
 }
 
-// Provides information about a forecast. Returned as part of the QueryForecast ()
+// Provides information about a forecast. Returned as part of the QueryForecast
 // response.
 type Forecast struct {
 

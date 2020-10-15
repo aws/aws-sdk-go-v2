@@ -24,10 +24,10 @@ import (
 // Creates an uninitialized HSM instance. There is an upfront fee charged for each
 // HSM instance that you create with the CreateHsm operation. If you accidentally
 // provision an HSM and want to request a refund, delete the instance using the
-// DeleteHsm () operation, go to the AWS Support Center
+// DeleteHsm operation, go to the AWS Support Center
 // (https://console.aws.amazon.com/support/home), create a new case, and select
 // Account and Billing Support. It can take up to 20 minutes to create and
-// provision an HSM. You can monitor the status of the HSM with the DescribeHsm ()
+// provision an HSM. You can monitor the status of the HSM with the DescribeHsm
 // operation. The HSM is ready to be initialized when the status changes to
 // RUNNING.
 func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns ...func(*Options)) (*CreateHsmOutput, error) {

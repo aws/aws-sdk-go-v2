@@ -28,7 +28,7 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the most recent credential report has expired.
-// To generate a new credential report, use GenerateCredentialReport (). For more
+// To generate a new credential report, use GenerateCredentialReport. For more
 // information about credential report expiration, see Getting Credential Reports
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
 // the IAM User Guide.
@@ -51,7 +51,7 @@ func (e *CredentialReportExpiredException) ErrorCode() string {
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the credential report does not exist. To
-// generate a credential report, use GenerateCredentialReport ().
+// generate a credential report, use GenerateCredentialReport.
 type CredentialReportNotPresentException struct {
 	Message *string
 }

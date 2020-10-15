@@ -26,20 +26,20 @@ import (
 // operation.
 //
 // A successful CreateCase request returns an AWS Support case number.
-// You can use the DescribeCases () operation and specify the case number to get
+// You can use the DescribeCases operation and specify the case number to get
 // existing AWS Support cases. After you create a case, use the
-// AddCommunicationToCase () operation to add additional communication or
-// attachments to an existing case. The caseId is separate from the displayId that
-// appears in the AWS Support Center (https://console.aws.amazon.com/support). Use
-// the DescribeCases () operation to get the displayId.
+// AddCommunicationToCase operation to add additional communication or attachments
+// to an existing case. The caseId is separate from the displayId that appears in
+// the AWS Support Center (https://console.aws.amazon.com/support). Use the
+// DescribeCases operation to get the displayId.
 //
-//     * You must have a
-// Business or Enterprise support plan to use the AWS Support API.
+//     * You must have a Business or
+// Enterprise support plan to use the AWS Support API.
 //
-//     * If you
-// call the AWS Support API from an account that does not have a Business or
-// Enterprise support plan, the SubscriptionRequiredException error message
-// appears. For information about changing your support plan, see AWS Support
+//     * If you call the AWS
+// Support API from an account that does not have a Business or Enterprise support
+// plan, the SubscriptionRequiredException error message appears. For information
+// about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
 	if params == nil {
@@ -73,11 +73,11 @@ type CreateCaseInput struct {
 	Subject *string
 
 	// The ID of a set of one or more attachments for the case. Create the set by using
-	// the AddAttachmentsToSet () operation.
+	// the AddAttachmentsToSet operation.
 	AttachmentSetId *string
 
 	// The category of problem for the AWS Support case. You also use the
-	// DescribeServices () operation to get the category code for a service. Each AWS
+	// DescribeServices operation to get the category code for a service. Each AWS
 	// service defines its own set of category codes.
 	CategoryCode *string
 
@@ -96,21 +96,21 @@ type CreateCaseInput struct {
 	// Currently, English ("en") and Japanese ("ja") are supported.
 	Language *string
 
-	// The code for the AWS service. You can use the DescribeServices () operation to
-	// get the possible serviceCode values.
+	// The code for the AWS service. You can use the DescribeServices operation to get
+	// the possible serviceCode values.
 	ServiceCode *string
 
 	// A value that indicates the urgency of the case. This value determines the
 	// response time according to your service level agreement with AWS Support. You
-	// can use the DescribeSeverityLevels () operation to get the possible values for
-	// severityCode. For more information, see SeverityLevel () and Choosing a Severity
+	// can use the DescribeSeverityLevels operation to get the possible values for
+	// severityCode. For more information, see SeverityLevel and Choosing a Severity
 	// (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity)
 	// in the AWS Support User Guide. The availability of severity levels depends on
 	// the support plan for the AWS account.
 	SeverityCode *string
 }
 
-// The AWS Support case ID returned by a successful completion of the CreateCase ()
+// The AWS Support case ID returned by a successful completion of the CreateCase
 // operation.
 type CreateCaseOutput struct {
 

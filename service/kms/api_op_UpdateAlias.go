@@ -17,16 +17,16 @@ import (
 // account. The current and new CMK must be the same type (both symmetric or both
 // asymmetric), and they must have the same key usage (ENCRYPT_DECRYPT or
 // SIGN_VERIFY). This restriction prevents errors in code that uses aliases. If you
-// must assign an alias to a different type of CMK, use DeleteAlias () to delete
-// the old alias and CreateAlias () to create a new alias. You cannot use
-// UpdateAlias to change an alias name. To change an alias name, use DeleteAlias ()
-// to delete the old alias and CreateAlias () to create a new alias. Because an
-// alias is not a property of a CMK, you can create, update, and delete the aliases
-// of a CMK without affecting the CMK. Also, aliases do not appear in the response
-// from the DescribeKey () operation. To get the aliases of all CMKs in the
-// account, use the ListAliases () operation. The CMK that you use for this
-// operation must be in a compatible key state. For details, see How Key State
-// Affects Use of a Customer Master Key
+// must assign an alias to a different type of CMK, use DeleteAlias to delete the
+// old alias and CreateAlias to create a new alias. You cannot use UpdateAlias to
+// change an alias name. To change an alias name, use DeleteAlias to delete the old
+// alias and CreateAlias to create a new alias. Because an alias is not a property
+// of a CMK, you can create, update, and delete the aliases of a CMK without
+// affecting the CMK. Also, aliases do not appear in the response from the
+// DescribeKey operation. To get the aliases of all CMKs in the account, use the
+// ListAliases operation. The CMK that you use for this operation must be in a
+// compatible key state. For details, see How Key State Affects Use of a Customer
+// Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
@@ -67,8 +67,8 @@ type UpdateAliasInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey (). To
-	// verify that the alias is mapped to the correct CMK, use ListAliases ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To verify
+	// that the alias is mapped to the correct CMK, use ListAliases.
 	//
 	// This member is required.
 	TargetKeyId *string

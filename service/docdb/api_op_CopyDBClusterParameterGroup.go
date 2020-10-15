@@ -27,7 +27,7 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 	return out, nil
 }
 
-// Represents the input to CopyDBClusterParameterGroup ().
+// Represents the input to CopyDBClusterParameterGroup.
 type CopyDBClusterParameterGroupInput struct {
 
 	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter

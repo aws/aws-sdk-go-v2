@@ -60,8 +60,8 @@ type Child struct {
 	Type ChildType
 }
 
-// Contains the status about a CreateAccount () or CreateGovCloudAccount () request
-// to create an AWS account or an AWS GovCloud (US) account in an organization.
+// Contains the status about a CreateAccount or CreateGovCloudAccount request to
+// create an AWS account or an AWS GovCloud (US) account in an organization.
 type CreateAccountStatus struct {
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -106,7 +106,7 @@ type CreateAccountStatus struct {
 	GovCloudAccountId *string
 
 	// The unique identifier (ID) that references this request. You get this value from
-	// the response of the initial CreateAccount () request to create the account. The
+	// the response of the initial CreateAccount request to create the account. The
 	// regex pattern (http://wikipedia.org/wiki/regex) for a create account request ID
 	// string requires "car-" followed by from 8 to 32 lower-case letters or digits.
 	Id *string
@@ -354,8 +354,8 @@ type Organization struct {
 
 	// Do not use. This field is deprecated and doesn't provide complete information
 	// about the policies in your organization. To determine the policies that are
-	// enabled and available for use in your organization, use the ListRoots ()
-	// operation instead.
+	// enabled and available for use in your organization, use the ListRoots operation
+	// instead.
 	AvailablePolicyTypes []*PolicyTypeSummary
 
 	// Specifies the functionality that currently is available to the organization. If
@@ -447,7 +447,7 @@ type Policy struct {
 }
 
 // Contains information about a policy, but does not include the content. To see
-// the content of a policy, see DescribePolicy ().
+// the content of a policy, see DescribePolicy.
 type PolicySummary struct {
 
 	// The Amazon Resource Name (ARN) of the policy. For more information about ARNs in
@@ -550,8 +550,8 @@ type Root struct {
 	// The types of policies that are currently enabled for the root and therefore can
 	// be attached to the root or to its OUs or accounts. Even if a policy type is
 	// shown as available in the organization, you can separately enable and disable
-	// them at the root level by using EnablePolicyType () and DisablePolicyType ().
-	// Use DescribeOrganization () to see the availability of the policy types in that
+	// them at the root level by using EnablePolicyType and DisablePolicyType. Use
+	// DescribeOrganization to see the availability of the policy types in that
 	// organization.
 	PolicyTypes []*PolicyTypeSummary
 }

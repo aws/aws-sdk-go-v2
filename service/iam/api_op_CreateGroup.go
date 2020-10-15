@@ -52,7 +52,7 @@ type CreateGroupInput struct {
 	Path *string
 }
 
-// Contains the response to a successful CreateGroup () request.
+// Contains the response to a successful CreateGroup request.
 type CreateGroupOutput struct {
 
 	// A structure containing details about the new group.

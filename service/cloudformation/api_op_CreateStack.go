@@ -13,7 +13,7 @@ import (
 
 // Creates a stack as specified in the template. After the call completes
 // successfully, the stack creation starts. You can check the status of the stack
-// via the DescribeStacks () API.
+// via the DescribeStacks API.
 func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optFns ...func(*Options)) (*CreateStackOutput, error) {
 	if params == nil {
 		params = &CreateStackInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optF
 	return out, nil
 }
 
-// The input for CreateStack () action.
+// The input for CreateStack action.
 type CreateStackInput struct {
 
 	// The name that is associated with the stack. The name must be unique in the
@@ -239,7 +239,7 @@ type CreateStackInput struct {
 	TimeoutInMinutes *int32
 }
 
-// The output for a CreateStack () action.
+// The output for a CreateStack action.
 type CreateStackOutput struct {
 
 	// Unique identifier of the stack.

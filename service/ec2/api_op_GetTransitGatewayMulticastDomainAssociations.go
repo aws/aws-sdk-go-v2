@@ -44,12 +44,14 @@ type GetTransitGatewayMulticastDomainAssociationsInput struct {
 	//     * resource-type - The type of resource. The valid value is:
 	// vpc.
 	//
-	//     * <p> <code>state</code> - The state of the subnet association. Valid
-	// values are <code>associated</code> | <code>associating</code> |
-	// <code>disassociated</code> | <code>disassociating</code>.</p> </li> <li> <p>
-	// <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p>
-	// <code>transit-gateway-attachment-id</code> - The id of the transit gateway
-	// attachment.</p> </li> </ul>
+	//     * state - The state of the subnet association. Valid values are
+	// associated | associating | disassociated | disassociating.
+	//
+	//     * subnet-id -
+	// The ID of the subnet.
+	//
+	//     * transit-gateway-attachment-id - The id of the
+	// transit gateway attachment.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Configures an IndexField () for the search domain. Used to create new fields and
+// Configures an IndexField for the search domain. Used to create new fields and
 // modify existing ones. You must specify the name of the domain you are
 // configuring and an index field configuration. The index field configuration
 // specifies a unique name, the index field type, and the options you want to
 // configure for the field. The options you can specify depend on the
-// IndexFieldType (). If the field exists, the new configuration replaces the old
-// one. For more information, see Configuring Index Fields
+// IndexFieldType. If the field exists, the new configuration replaces the old one.
+// For more information, see Configuring Index Fields
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
 func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldInput, optFns ...func(*Options)) (*DefineIndexFieldOutput, error) {
@@ -35,7 +35,7 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 	return out, nil
 }
 
-// Container for the parameters to the DefineIndexField () operation. Specifies the
+// Container for the parameters to the DefineIndexField operation. Specifies the
 // name of the domain you want to update and the index field configuration.
 type DefineIndexFieldInput struct {
 
@@ -53,7 +53,7 @@ type DefineIndexFieldInput struct {
 	IndexField *types.IndexField
 }
 
-// The result of a DefineIndexField () request. Contains the status of the
+// The result of a DefineIndexField request. Contains the status of the
 // newly-configured index field.
 type DefineIndexFieldOutput struct {
 

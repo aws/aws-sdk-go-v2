@@ -67,7 +67,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteThingShadowInput(v *DeleteThingSh
 		encoder.SetQuery("name").String(*v.ShadowName)
 	}
 
+	if v.ThingName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+	}
 	if v.ThingName != nil {
+		if len(*v.ThingName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -131,7 +137,13 @@ func awsRestjson1_serializeOpHttpBindingsGetThingShadowInput(v *GetThingShadowIn
 		encoder.SetQuery("name").String(*v.ShadowName)
 	}
 
+	if v.ThingName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+	}
 	if v.ThingName != nil {
+		if len(*v.ThingName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -199,7 +211,13 @@ func awsRestjson1_serializeOpHttpBindingsListNamedShadowsForThingInput(v *ListNa
 		encoder.SetQuery("pageSize").Integer(*v.PageSize)
 	}
 
+	if v.ThingName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+	}
 	if v.ThingName != nil {
+		if len(*v.ThingName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
@@ -274,7 +292,13 @@ func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *
 		encoder.SetQuery("qos").Integer(*v.Qos)
 	}
 
+	if v.Topic == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member topic must not be empty")}
+	}
 	if v.Topic != nil {
+		if len(*v.Topic) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member topic must not be empty")}
+		}
 		if err := encoder.SetURI("topic").String(*v.Topic); err != nil {
 			return err
 		}
@@ -349,7 +373,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateThingShadowInput(v *UpdateThingSh
 		encoder.SetQuery("name").String(*v.ShadowName)
 	}
 
+	if v.ThingName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+	}
 	if v.ThingName != nil {
+		if len(*v.ThingName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member thingName must not be empty")}
+		}
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}

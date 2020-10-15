@@ -32,8 +32,8 @@ func (c *Client) GetUsagePlanKeys(ctx context.Context, params *GetUsagePlanKeysI
 // to a specified usage plan.
 type GetUsagePlanKeysInput struct {
 
-	// [Required] The Id of the UsagePlan () resource representing the usage plan
-	// containing the to-be-retrieved UsagePlanKey () resource representing a plan
+	// [Required] The Id of the UsagePlan resource representing the usage plan
+	// containing the to-be-retrieved UsagePlanKey resource representing a plan
 	// customer.
 	//
 	// This member is required.

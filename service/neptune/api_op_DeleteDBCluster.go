@@ -14,9 +14,9 @@ import (
 // The DeleteDBCluster action deletes a previously provisioned DB cluster. When you
 // delete a DB cluster, all automated backups for that DB cluster are deleted and
 // can't be recovered. Manual DB cluster snapshots of the specified DB cluster are
-// not deleted.  <p>Note that the DB Cluster cannot be deleted if deletion
-// protection is enabled. To delete it, you must first set its
-// <code>DeletionProtection</code> field to <code>False</code>.</p>
+// not deleted. Note that the DB Cluster cannot be deleted if deletion protection
+// is enabled. To delete it, you must first set its DeletionProtection field to
+// False.
 func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInput, optFns ...func(*Options)) (*DeleteDBClusterOutput, error) {
 	if params == nil {
 		params = &DeleteDBClusterInput{}
@@ -66,7 +66,7 @@ type DeleteDBClusterInput struct {
 type DeleteDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters () action.
+	// a response element in the DescribeDBClusters action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

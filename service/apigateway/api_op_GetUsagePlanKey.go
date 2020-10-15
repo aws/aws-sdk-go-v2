@@ -29,14 +29,14 @@ func (c *Client) GetUsagePlanKey(ctx context.Context, params *GetUsagePlanKeyInp
 // The GET request to get a usage plan key of a given key identifier.
 type GetUsagePlanKeyInput struct {
 
-	// [Required] The key Id of the to-be-retrieved UsagePlanKey () resource
-	// representing a plan customer.
+	// [Required] The key Id of the to-be-retrieved UsagePlanKey resource representing
+	// a plan customer.
 	//
 	// This member is required.
 	KeyId *string
 
-	// [Required] The Id of the UsagePlan () resource representing the usage plan
-	// containing the to-be-retrieved UsagePlanKey () resource representing a plan
+	// [Required] The Id of the UsagePlan resource representing the usage plan
+	// containing the to-be-retrieved UsagePlanKey resource representing a plan
 	// customer.
 	//
 	// This member is required.
@@ -53,7 +53,7 @@ type GetUsagePlanKeyInput struct {
 
 // Represents a usage plan key to identify a plan customer. To associate an API
 // stage with a selected API key in a usage plan, you must create a UsagePlanKey
-// resource to represent the selected ApiKey (). " Create and Use Usage Plans
+// resource to represent the selected ApiKey. " Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type GetUsagePlanKeyOutput struct {
 

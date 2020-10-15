@@ -20,13 +20,12 @@ import (
 // a match. For more information about configuring suggesters and retrieving
 // suggestions, see Getting Suggestions
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide.  <p>The endpoint for submitting
-// <code>Suggest</code> requests is domain-specific and requires the
-// <code>--endpoint-url</code> option. You submit suggest requests to a domain's
-// search endpoint. To get the search endpoint for your domain, use the Amazon
-// CloudSearch configuration service <code>DescribeDomains</code> action. The
-// endpoints are also available on the domain dashboard in the Amazon CloudSearch
-// console.</p>
+// in the Amazon CloudSearch Developer Guide. The endpoint for submitting Suggest
+// requests is domain-specific and requires the --endpoint-url option. You submit
+// suggest requests to a domain's search endpoint. To get the search endpoint for
+// your domain, use the Amazon CloudSearch configuration service DescribeDomains
+// action. The endpoints are also available on the domain dashboard in the Amazon
+// CloudSearch console.
 func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...func(*Options)) (*SuggestOutput, error) {
 	if params == nil {
 		params = &SuggestInput{}

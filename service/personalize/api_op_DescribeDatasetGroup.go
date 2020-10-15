@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the given dataset group. For more information on dataset groups, see
-// CreateDatasetGroup ().
+// CreateDatasetGroup.
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}

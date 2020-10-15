@@ -28,7 +28,7 @@ func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnet
 	return out, nil
 }
 
-// Represents the input to ModifyDBSubnetGroup ().
+// Represents the input to ModifyDBSubnetGroup.
 type ModifyDBSubnetGroupInput struct {
 
 	// The name for the subnet group. This value is stored as a lowercase string. You

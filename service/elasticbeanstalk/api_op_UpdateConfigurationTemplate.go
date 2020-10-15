@@ -17,7 +17,7 @@ import (
 // provided, its value remains unchanged. To clear such properties, specify an
 // empty string. Related Topics
 //
-//     * DescribeConfigurationOptions ()
+//     * DescribeConfigurationOptions
 func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *UpdateConfigurationTemplateInput, optFns ...func(*Options)) (*UpdateConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationTemplateInput{}

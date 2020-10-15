@@ -19,7 +19,7 @@ import (
 // the changed values for the S3 bucket and the SNS topic. If you specify a
 // different value for either the S3 bucket or the SNS topic, this action will keep
 // the existing value for the parameter that is not changed. You can have only one
-// delivery channel per region in your account.  </note>
+// delivery channel per region in your account.
 func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChannelInput, optFns ...func(*Options)) (*PutDeliveryChannelOutput, error) {
 	if params == nil {
 		params = &PutDeliveryChannelInput{}
@@ -35,7 +35,7 @@ func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChan
 	return out, nil
 }
 
-// The input for the PutDeliveryChannel () action.
+// The input for the PutDeliveryChannel action.
 type PutDeliveryChannelInput struct {
 
 	// The configuration delivery channel object that delivers the configuration

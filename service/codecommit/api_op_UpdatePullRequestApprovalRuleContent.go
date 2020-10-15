@@ -67,7 +67,7 @@ type UpdatePullRequestApprovalRuleContentInput struct {
 	// For more information about IAM ARNs, wildcards, and formats, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
-	// the IAM User Guide.  </note>
+	// the IAM User Guide.
 	//
 	// This member is required.
 	NewRuleContent *string
@@ -78,7 +78,7 @@ type UpdatePullRequestApprovalRuleContentInput struct {
 	PullRequestId *string
 
 	// The SHA-256 hash signature for the content of the approval rule. You can
-	// retrieve this information by using GetPullRequest ().
+	// retrieve this information by using GetPullRequest.
 	ExistingRuleContentSha256 *string
 }
 

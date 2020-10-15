@@ -22,13 +22,13 @@ import (
 // Related operations
 //
 //     * To attach a resource
-// policy to a secret, use PutResourcePolicy ().
+// policy to a secret, use PutResourcePolicy.
 //
-//     * To delete the
-// resource-based policy attached to a secret, use DeleteResourcePolicy ().
+//     * To delete the resource-based
+// policy attached to a secret, use DeleteResourcePolicy.
 //
-//     *
-// To list all of the currently available secrets, use ListSecrets ().
+//     * To list all of the
+// currently available secrets, use ListSecrets.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}

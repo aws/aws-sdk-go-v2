@@ -55,7 +55,7 @@ type CreateUsageLimitInput struct {
 	LimitType types.UsageLimitLimitType
 
 	// The action that Amazon Redshift takes when the limit is reached. The default is
-	// log. For more information about this parameter, see UsageLimit ().
+	// log. For more information about this parameter, see UsageLimit.
 	BreachAction types.UsageLimitBreachAction
 
 	// The time period that the amount applies to. A weekly period begins on Sunday.

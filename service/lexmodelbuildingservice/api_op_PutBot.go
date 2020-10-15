@@ -18,15 +18,14 @@ import (
 // add intents later, or to remove intents from an existing bot. When you create a
 // bot with the minimum information, the bot is created or updated but Amazon Lex
 // returns the  response FAILED. You can build the bot after you add one or more
-// intents. For more information about Amazon Lex bots, see how-it-works (). If you
+// intents. For more information about Amazon Lex bots, see how-it-works. If you
 // specify the name of an existing bot, the fields in the request replace the
 // existing values in the $LATEST version of the bot. Amazon Lex removes any fields
 // that you don't provide values for in the request, except for the
 // idleTTLInSeconds and privacySettings fields, which are set to their default
 // values. If you don't specify values for required fields, Amazon Lex throws an
-// exception.  <p>This operation requires permissions for the
-// <code>lex:PutBot</code> action. For more information, see
-// <a>security-iam</a>.</p>
+// exception. This operation requires permissions for the lex:PutBot action. For
+// more information, see security-iam.
 func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func(*Options)) (*PutBotOutput, error) {
 	if params == nil {
 		params = &PutBotInput{}
@@ -70,8 +69,7 @@ type PutBotInput struct {
 	ChildDirected *bool
 
 	// Specifies the target locale for the bot. Any intent used in the bot must be
-	// compatible with the locale of the bot.  <p>The default is
-	// <code>en-US</code>.</p>
+	// compatible with the locale of the bot. The default is en-US.
 	//
 	// This member is required.
 	Locale types.Locale
@@ -162,7 +160,7 @@ type PutBotInput struct {
 
 	// An array of Intent objects. Each intent represents a command that a user can
 	// express. For example, a pizza ordering bot might support an OrderPizza intent.
-	// For more information, see how-it-works ().
+	// For more information, see how-it-works.
 	Intents []*types.Intent
 
 	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
@@ -186,7 +184,7 @@ type PutBotInput struct {
 type PutBotOutput struct {
 
 	// The message that Amazon Lex uses to abort a conversation. For more information,
-	// see PutBot ().
+	// see PutBot.
 	AbortStatement *types.Statement
 
 	// Checksum of the bot that you created.
@@ -216,7 +214,7 @@ type PutBotOutput struct {
 	ChildDirected *bool
 
 	// The prompts that Amazon Lex uses when it doesn't understand the user's intent.
-	// For more information, see PutBot ().
+	// For more information, see PutBot.
 	ClarificationPrompt *types.Prompt
 
 	// True if a new version of the bot was created. If the createVersion field was not
@@ -240,10 +238,10 @@ type PutBotOutput struct {
 	FailureReason *string
 
 	// The maximum length of time that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot ().
+	// conversation. For more information, see PutBot.
 	IdleSessionTTLInSeconds *int32
 
-	// An array of Intent objects. For more information, see PutBot ().
+	// An array of Intent objects. For more information, see PutBot.
 	Intents []*types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation date
@@ -274,7 +272,7 @@ type PutBotOutput struct {
 	Version *string
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
-	// user. For more information, see PutBot ().
+	// user. For more information, see PutBot.
 	VoiceId *string
 
 	// Metadata pertaining to the operation's result.

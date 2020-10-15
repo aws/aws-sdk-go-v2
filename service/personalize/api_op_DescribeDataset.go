@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes the given dataset. For more information on datasets, see CreateDataset
-// ().
+// Describes the given dataset. For more information on datasets, see
+// CreateDataset.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}

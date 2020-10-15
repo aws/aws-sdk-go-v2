@@ -19,9 +19,7 @@ import (
 const ServiceID = "Textract"
 const ServiceAPIVersion = "2018-06-27"
 
-// Amazon Textract detects and analyzes text in documents and converts it into
-// machine-readable text. This is the API reference documentation for Amazon
-// Textract.
+// Client provides the API client to make operations call for Amazon Textract.
 type Client struct {
 	options Options
 }

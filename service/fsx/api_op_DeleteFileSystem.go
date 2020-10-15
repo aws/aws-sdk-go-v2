@@ -16,17 +16,15 @@ import (
 // longer exists, and its data is gone. Any existing automatic backups will also be
 // deleted. By default, when you delete an Amazon FSx for Windows File Server file
 // system, a final backup is created upon deletion. This final backup is not
-// subject to the file system's retention policy, and must be manually deleted.
-// <p>The <code>DeleteFileSystem</code> action returns while the file system has
-// the <code>DELETING</code> status. You can check the file system deletion status
-// by calling the <a>DescribeFileSystems</a> action, which returns a list of file
-// systems in your account. If you pass the file system ID for a deleted file
-// system, the <a>DescribeFileSystems</a> returns a <code>FileSystemNotFound</code>
-// error.</p> <note> <p>Deleting an Amazon FSx for Lustre file system will fail
-// with a 400 BadRequest if a data repository task is in a <code>PENDING</code> or
-// <code>EXECUTING</code> state.</p> </note> <important> <p>The data in a deleted
-// file system is also deleted and can't be recovered by any means.</p>
-// </important>
+// subject to the file system's retention policy, and must be manually deleted. The
+// DeleteFileSystem action returns while the file system has the DELETING status.
+// You can check the file system deletion status by calling the DescribeFileSystems
+// action, which returns a list of file systems in your account. If you pass the
+// file system ID for a deleted file system, the DescribeFileSystems returns a
+// FileSystemNotFound error. Deleting an Amazon FSx for Lustre file system will
+// fail with a 400 BadRequest if a data repository task is in a PENDING or
+// EXECUTING state. The data in a deleted file system is also deleted and can't be
+// recovered by any means.
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}

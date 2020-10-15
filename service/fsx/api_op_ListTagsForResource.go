@@ -12,23 +12,23 @@ import (
 )
 
 // Lists tags for an Amazon FSx file systems and backups in the case of Amazon FSx
-// for Windows File Server.  <p>When retrieving all tags, you can optionally
-// specify the <code>MaxResults</code> parameter to limit the number of tags in a
-// response. If more tags remain, Amazon FSx returns a <code>NextToken</code> value
-// in the response. In this case, send a later request with the
-// <code>NextToken</code> request parameter set to the value of
-// <code>NextToken</code> from the last response.</p> <p>This action is used in an
-// iterative process to retrieve a list of your tags.
-// <code>ListTagsForResource</code> is called first without a
-// <code>NextToken</code>value. Then the action continues to be called with the
-// <code>NextToken</code> parameter set to the value of the last
-// <code>NextToken</code> value until a response has no <code>NextToken</code>.</p>
-// <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The
-// implementation might return fewer than <code>MaxResults</code> file system
-// descriptions while still including a <code>NextToken</code> value.</p> </li>
-// <li> <p>The order of tags returned in the response of one
-// <code>ListTagsForResource</code> call and the order of tags returned across the
-// responses of a multi-call iteration is unspecified.</p> </li> </ul>
+// for Windows File Server. When retrieving all tags, you can optionally specify
+// the MaxResults parameter to limit the number of tags in a response. If more tags
+// remain, Amazon FSx returns a NextToken value in the response. In this case, send
+// a later request with the NextToken request parameter set to the value of
+// NextToken from the last response. This action is used in an iterative process to
+// retrieve a list of your tags. ListTagsForResource is called first without a
+// NextTokenvalue. Then the action continues to be called with the NextToken
+// parameter set to the value of the last NextToken value until a response has no
+// NextToken. When using this action, keep the following in mind:
+//
+//     * The
+// implementation might return fewer than MaxResults file system descriptions while
+// still including a NextToken value.
+//
+//     * The order of tags returned in the
+// response of one ListTagsForResource call and the order of tags returned across
+// the responses of a multi-call iteration is unspecified.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

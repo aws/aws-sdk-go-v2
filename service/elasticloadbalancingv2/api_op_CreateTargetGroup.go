@@ -12,14 +12,14 @@ import (
 )
 
 // Creates a target group. To register targets with the target group, use
-// RegisterTargets (). To update the health check settings for the target group,
-// use ModifyTargetGroup (). To monitor the health of targets in the target group,
-// use DescribeTargetHealth (). To route traffic to the targets in a target group,
-// specify the target group in an action using CreateListener () or CreateRule ().
-// To delete a target group, use DeleteTargetGroup (). This operation is
-// idempotent, which means that it completes at most one time. If you attempt to
-// create multiple target groups with the same settings, each call succeeds. For
-// more information, see Target Groups for Your Application Load Balancers
+// RegisterTargets. To update the health check settings for the target group, use
+// ModifyTargetGroup. To monitor the health of targets in the target group, use
+// DescribeTargetHealth. To route traffic to the targets in a target group, specify
+// the target group in an action using CreateListener or CreateRule. To delete a
+// target group, use DeleteTargetGroup. This operation is idempotent, which means
+// that it completes at most one time. If you attempt to create multiple target
+// groups with the same settings, each call succeeds. For more information, see
+// Target Groups for Your Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
 // in the Application Load Balancers Guide or Target Groups for Your Network Load
 // Balancers

@@ -33,7 +33,7 @@ func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInp
 	return out, nil
 }
 
-// Container for the parameters to the DefineSuggester () operation. Specifies the
+// Container for the parameters to the DefineSuggester operation. Specifies the
 // name of the domain you want to update and the suggester configuration.
 type DefineSuggesterInput struct {
 
