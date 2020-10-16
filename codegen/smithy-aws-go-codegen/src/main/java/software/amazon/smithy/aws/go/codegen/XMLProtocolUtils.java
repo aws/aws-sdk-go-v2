@@ -275,10 +275,12 @@ final class XmlProtocolUtils {
 
         if (requiresS3Customization(service)) {
             writer.addUseImports(AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION);
-            String getErrorComponents = String.format("errorComponents, err := "
-                            + "s3shared.GetErrorResponseComponents(errorBody, response.StatusCode, %s)",
-                    isS3Service(service));
-            writer.write(getErrorComponents);
+            if (isS3Service(service)){
+                writer.write("errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)");
+            } else {
+                // s3 control
+                writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+            }
 
             writer.write("if err != nil { return err }");
 
