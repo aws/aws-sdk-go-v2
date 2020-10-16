@@ -1,3 +1,43 @@
+# Pending Release
+
+## New Features
+* `feature/s3/manager`: Add the Amazon S3 Upload and Download transfer manager ([#802](https://github.com/aws/aws-sdk-go-v2/pull/802))
+
+## Service Client Highlights
+* `service/machinelearning`: Add customization for setting client endpoint with PredictEndpoint value if set ([#782](https://github.com/aws/aws-sdk-go-v2/pull/782))
+* `service/s3`: Fix empty response body deserialization in case of error response ([#801](https://github.com/aws/aws-sdk-go-v2/pull/801))
+  * Fixes xml deserialization util to correctly handle empty response body in case of an error response.
+* `service/s3`: Add customization to auto fill Content-Md5 request header for Amazon S3 operations ([#812](https://github.com/aws/aws-sdk-go-v2/pull/812))
+* `service/s3`: Add fallback to using HTTP status code for error code ([#818](https://github.com/aws/aws-sdk-go-v2/pull/818))
+  * Adds falling back to using the HTTP status code to create a API Error code when not error code is received from the service, such as HeadObject.
+* `service/route53`: Add support for deserialzing `InvalidChangeBatch` API error ([#792](https://github.com/aws/aws-sdk-go-v2/pull/792))
+* `codegen`: Remove API client `Options` getter methods ([#788](https://github.com/aws/aws-sdk-go-v2/pull/788))
+* `codegen`: Regenerate API Client modeled endpoints ([#791](https://github.com/aws/aws-sdk-go-v2/pull/791))
+* `codegen`: Sort API Client struct member paramaters by required and alphabetical ([#787](https://github.com/aws/aws-sdk-go-v2/pull/787))
+* `codegen`: Add package docs to API client modules ([#821](https://github.com/aws/aws-sdk-go-v2/pull/821))
+* `codegen`: Rename `smithy-go`'s `smithy.OperationError` to `smithy.OperationInvokeError`.
+
+## Core SDK Highlights
+* `config`: Refactor Config Module, Add Config Package Documentation and Examples, Improve Overall SDK Readme ([#822](https://github.com/aws/aws-sdk-go-v2/pull/822))
+* `credentials`: Strip Monotonic Clock Readings when Comparing Credential Expiry Time ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
+* `ec2imds`: Fix refreshing API token if expired ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
+
+## Migrating from v0.26.0 to v0.27.0
+
+#### Configuration
+
+The `config` module's exported types were trimmed down to add clarity and reduce confusion. Additional changes to the `config` module' helpers. 
+
+* Refactored `WithCredentialsProvider`, `WithHTTPClient`, and `WithEndpointResolver` to functions instead of structs.
+* Removed `MFATokenFuncProvider`, use `AssumeRoleCredentialOptionsProvider` for setting options for `stscreds.AssumeRoleOptions`.
+* Renamed `WithWebIdentityCredentialProviderOptions` to `WithWebIdentityRoleCredentialOptions`
+* Renamed `AssumeRoleCredentialProviderOptions` to `AssumeRoleCredentialOptionsProvider`
+* Renamed `EndpointResolverFuncProvider` to `EndpointResolverProvider`
+
+#### API Client
+* API Client `Options` type getter methods have been removed. Use the struct members instead.
+* The error returned by API Client operations was renamed from `smithy.OperationError` to `smithy.OperationInvokeError`.
+
 # Release 2020-09-30
 
 ## Service Client Highlights
