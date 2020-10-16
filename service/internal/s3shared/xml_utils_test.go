@@ -1,54 +1,56 @@
 package s3shared
 
 import (
-	"bytes"
-	"io"
 	"strings"
 	"testing"
 )
 
 func TestGetResponseErrorCode(t *testing.T) {
+	const xmlErrorResponse = `<Error>
+    <Type>Sender</Type>
+    <Code>InvalidGreeting</Code>
+    <Message>Hi</Message>
+    <HostId>bar-id</HostId>
+    <RequestId>foo-id</RequestId>
+</Error>`
+
 	cases := map[string]struct {
-		isS3Service            bool
-		status                 int
-		errorResponse          io.Reader
+		getErr                 func() (ErrorComponents, error)
 		expectedErrorCode      string
 		expectedErrorMessage   string
 		expectedErrorRequestID string
 		expectedErrorHostID    string
 	}{
 		"standard xml error": {
-			isS3Service: true,
-			status:      400,
-			errorResponse: bytes.NewReader([]byte(`<Error>
-    <Type>Sender</Type>
-    <Code>InvalidGreeting</Code>
-    <Message>Hi</Message>
-    <HostId>bar-id</HostId>
-    <RequestId>foo-id</RequestId>
-</Error>`)),
+			getErr: func() (ErrorComponents, error) {
+				errResp := strings.NewReader(xmlErrorResponse)
+				return GetErrorResponseComponents(errResp)
+			},
 			expectedErrorCode:      "InvalidGreeting",
 			expectedErrorMessage:   "Hi",
 			expectedErrorRequestID: "foo-id",
 			expectedErrorHostID:    "bar-id",
 		},
+
 		"s3 no response body": {
-			isS3Service:          true,
-			status:               400,
-			errorResponse:        bytes.NewReader([]byte(``)),
+			getErr: func() (ErrorComponents, error) {
+				errResp := strings.NewReader("")
+				return GetS3ErrorResponseComponents(errResp, 400)
+			},
 			expectedErrorCode:    "BadRequest",
 			expectedErrorMessage: "Bad Request",
 		},
 		"s3control no response body": {
-			isS3Service:   false,
-			status:        400,
-			errorResponse: bytes.NewReader([]byte(``)),
+			getErr: func() (ErrorComponents, error) {
+				errResp := strings.NewReader("")
+				return GetErrorResponseComponents(errResp)
+			},
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			ec, err := GetErrorResponseComponents(c.errorResponse, c.status, c.isS3Service)
+			ec, err := c.getErr()
 			if err != nil {
 				t.Fatalf("expected no error, got %v", err)
 			}
