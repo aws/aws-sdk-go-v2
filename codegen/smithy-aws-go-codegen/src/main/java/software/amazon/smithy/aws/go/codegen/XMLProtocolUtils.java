@@ -275,8 +275,15 @@ final class XmlProtocolUtils {
 
         if (requiresS3Customization(service)) {
             writer.addUseImports(AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION);
-            writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+            if (isS3Service(service)){
+                writer.write("errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)");
+            } else {
+                // s3 control
+                writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+            }
+
             writer.write("if err != nil { return err }");
+
             writer.insertTrailingNewline();
             writer.openBlock("if hostID := errorComponents.HostID; len(hostID)!=0 {", "}", () -> {
                 writer.write("s3shared.SetHostIDMetadata(metadata, hostID)");
@@ -306,6 +313,11 @@ final class XmlProtocolUtils {
     private static boolean requiresS3Customization(ServiceShape service) {
         String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
         return serviceId.equalsIgnoreCase("S3") || serviceId.equalsIgnoreCase("S3 Control");
+    }
+
+    private static boolean isS3Service(ServiceShape service) {
+        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
+        return serviceId.equalsIgnoreCase("S3");
     }
 }
 
