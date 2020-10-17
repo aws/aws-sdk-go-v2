@@ -1,9 +1,12 @@
-# Pending Release
+# Release 2020-10-16
 
 ## New Features
-* `feature/s3/manager`: Add the Amazon S3 Upload and Download transfer manager ([#802](https://github.com/aws/aws-sdk-go-v2/pull/802))
+* `feature/s3/manager`:
+  * Initial `v0.1.0` release
+  * Add the Amazon S3 Upload and Download transfer manager ([#802](https://github.com/aws/aws-sdk-go-v2/pull/802))
 
 ## Service Client Highlights
+* Clients have been bumped to version `v0.27.0`
 * `service/machinelearning`: Add customization for setting client endpoint with PredictEndpoint value if set ([#782](https://github.com/aws/aws-sdk-go-v2/pull/782))
 * `service/s3`: Fix empty response body deserialization in case of error response ([#801](https://github.com/aws/aws-sdk-go-v2/pull/801))
   * Fixes xml deserialization util to correctly handle empty response body in case of an error response.
@@ -18,9 +21,15 @@
 * `codegen`: Rename `smithy-go`'s `smithy.OperationError` to `smithy.OperationInvokeError`.
 
 ## Core SDK Highlights
-* `config`: Refactor Config Module, Add Config Package Documentation and Examples, Improve Overall SDK Readme ([#822](https://github.com/aws/aws-sdk-go-v2/pull/822))
-* `credentials`: Strip Monotonic Clock Readings when Comparing Credential Expiry Time ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
-* `ec2imds`: Fix refreshing API token if expired ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
+* `config`: 
+  * Bumped to `v0.2.0`
+  * Refactor Config Module, Add Config Package Documentation and Examples, Improve Overall SDK Readme ([#822](https://github.com/aws/aws-sdk-go-v2/pull/822))
+* `credentials`:
+  * Bumped to `v0.1.2`
+  * Strip Monotonic Clock Readings when Comparing Credential Expiry Time ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
+* `ec2imds`:
+  * Bumped to `v0.1.2`
+  * Fix refreshing API token if expired ([#789](https://github.com/aws/aws-sdk-go-v2/pull/789))
 
 ## Migrating from v0.26.0 to v0.27.0
 
