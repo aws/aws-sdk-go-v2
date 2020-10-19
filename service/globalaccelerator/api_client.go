@@ -176,11 +176,16 @@ type HTTPSignerV4 interface {
 	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 }
 
+func configureSignerV4(s *v4.Signer) {
+}
+
 func resolveHTTPSignerV4(o *Options) {
 	if o.HTTPSignerV4 != nil {
 		return
 	}
-	o.HTTPSignerV4 = v4.NewSigner()
+	o.HTTPSignerV4 = v4.NewSigner(
+		configureSignerV4,
+	)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {
