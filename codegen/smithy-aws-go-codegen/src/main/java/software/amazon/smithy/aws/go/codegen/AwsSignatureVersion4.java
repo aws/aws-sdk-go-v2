@@ -18,6 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.List;
 import java.util.Map;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -45,6 +46,9 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static final String SIGNER_CONFIG_FIELD_NAME = SIGNER_INTERFACE_NAME;
     public static final String SIGNER_RESOLVER = "resolve" + SIGNER_CONFIG_FIELD_NAME;
 
+    private static final String CONFIGURE_SIGNER_FUNCTION = "configureSignerV4";
+    private static final List<String> DISABLE_URI_PATH_ESCAPE = ListUtils.of("com.amazonaws.s3#AmazonS3");
+
     @Override
     public byte getOrder() {
         return -48;
@@ -62,6 +66,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
             goDelegator.useShapeWriter(serviceShape, writer -> {
                 writeMiddlewareRegister(model, writer, serviceShape);
                 writerSignerInterface(writer);
+                writeConfigureSigner(writer, serviceShape);
                 writerConfigFieldResolver(writer);
             });
         }
@@ -79,11 +84,26 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     }
 
     private void writerConfigFieldResolver(GoWriter writer) {
+        Symbol signerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner", AwsGoDependency.AWS_SIGNER_V4).build();
+
         writer.openBlock("func $L(o *Options) {", "}", SIGNER_RESOLVER, () -> {
             writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_FIELD_NAME, () -> writer.write("return"));
-            writer.write("o.$L = $T()", SIGNER_CONFIG_FIELD_NAME, SymbolUtils.createValueSymbolBuilder("NewSigner",
-                    AwsGoDependency.AWS_SIGNER_V4).build());
+            writer.openBlock("o.$L = $T(", ")", SIGNER_CONFIG_FIELD_NAME, signerSymbol, () -> {
+                writer.write("$L,", CONFIGURE_SIGNER_FUNCTION);
+            });
         });
+        writer.write("");
+    }
+
+    private void writeConfigureSigner(GoWriter writer, ServiceShape serviceShape) {
+        Symbol signerSymbol = SymbolUtils.createPointableSymbolBuilder("Signer", AwsGoDependency.AWS_SIGNER_V4).build();
+
+        writer.openBlock("func $L(s $P) {", "}", CONFIGURE_SIGNER_FUNCTION, signerSymbol, () -> {
+            if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
+                writer.write("s.DisableURIPathEscaping = true");
+            }
+        });
+        writer.write("");
     }
 
     @Override
@@ -110,9 +130,6 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         writer.write("");
     }
 
-    private void writeServiceSignerConfig(Model model, GoWriter writer, ServiceShape serviceShape) {
-    }
-
     /**
      * Returns if the SigV4Trait is a auth scheme supported by the service.
      *
@@ -122,7 +139,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
      */
     public static boolean isSupportedAuthentication(Model model, ServiceShape serviceShape) {
         return ServiceIndex.of(model).getAuthSchemes(serviceShape).values().stream().anyMatch(trait -> trait.getClass()
-                        .equals(SigV4Trait.class));
+                .equals(SigV4Trait.class));
     }
 
     /**
