@@ -25,6 +25,7 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
     public static final GoDependency DYNAMODB_CUSTOMIZATION = aws(
             "service/dynamodb/internal/customizations", "ddbcust");
     public static final GoDependency S3_CUSTOMIZATION = aws("service/s3/internal/customizations", "s3cust");
+    public static final GoDependency S3CONTROL_CUSTOMIZATION = aws("service/s3control/internal/customizations", "s3controlcust");
     public static final GoDependency APIGATEWAY_CUSTOMIZATION = aws(
             "service/apigateway/internal/customizations", "agcust");
     public static final GoDependency GLACIER_CUSTOMIZATION = aws(

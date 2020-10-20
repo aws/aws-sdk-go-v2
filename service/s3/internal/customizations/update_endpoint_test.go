@@ -8,6 +8,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
+
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
 
@@ -22,8 +24,11 @@ type s3BucketTest struct {
 
 func TestUpdateEndpointBuild(t *testing.T) {
 	cases := map[string]struct {
-		usePathStyle bool
-		tests        []s3BucketTest
+		tests         []s3BucketTest
+		useAccelerate bool
+		useDualstack  bool
+		usePathStyle  bool
+		disableHTTPS  bool
 	}{
 		"PathStyleBucket": {
 			usePathStyle: true,
@@ -42,14 +47,64 @@ func TestUpdateEndpointBuild(t *testing.T) {
 				{"a..bc", "https://s3.mock-region.amazonaws.com/a..bc", ""},
 			},
 		},
+		"Accelerate": {
+			useAccelerate: true,
+			tests: []s3BucketTest{
+				{"abc", "https://abc.s3-accelerate.amazonaws.com/", ""},
+				{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", "not compatible"},
+				{"a$b$c", "https://s3.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+			},
+		},
+		"AccelerateNoSSLTests": {
+			useAccelerate: true,
+			disableHTTPS:  true,
+			tests: []s3BucketTest{
+				{"abc", "http://abc.s3-accelerate.amazonaws.com/", ""},
+				{"a.b.c", "http://a.b.c.s3-accelerate.amazonaws.com/", ""},
+				{"a$b$c", "http://s3.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+			},
+		},
+		"DualStack": {
+			useDualstack: true,
+			tests: []s3BucketTest{
+				{"abc", "https://abc.s3.dualstack.mock-region.amazonaws.com/", ""},
+				{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", "not compatible"},
+				{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+			},
+		},
+		"DualStackWithPathStyle": {
+			useDualstack: true,
+			usePathStyle: true,
+			tests: []s3BucketTest{
+				{"abc", "https://s3.dualstack.mock-region.amazonaws.com/abc", ""},
+				{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", ""},
+				{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", ""},
+			},
+		},
+		"AccelerateWithDualStack": {
+			useAccelerate: true,
+			useDualstack:  true,
+			tests: []s3BucketTest{
+				{"abc", "https://abc.s3-accelerate.dualstack.amazonaws.com/", ""},
+				{"a.b.c", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c", "not compatible"},
+				{"a$b$c", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c", "not compatible"},
+			},
+		},
 	}
 
 	for name, c := range cases {
 		options := s3.Options{
-			Credentials:  unit.StubCredentialsProvider{},
-			Retryer:      aws.NoOpRetryer{},
-			Region:       "mock-region",
-			UsePathStyle: c.usePathStyle,
+			Credentials: unit.StubCredentialsProvider{},
+			Retryer:     aws.NoOpRetryer{},
+			Region:      "mock-region",
+
+			EndpointOptions: endpoints.Options{
+				DisableHTTPS: c.disableHTTPS,
+			},
+
+			UsePathStyle:  c.usePathStyle,
+			UseAccelerate: c.useAccelerate,
+			UseDualstack:  c.useDualstack,
 		}
 
 		svc := s3.New(options)
