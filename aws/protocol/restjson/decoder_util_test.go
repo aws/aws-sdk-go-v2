@@ -49,6 +49,12 @@ func TestGetErrorInfo(t *testing.T) {
 			errorResponse:                []byte(`{"xyz":"abc"`),
 			expectedDeserializationError: io.ErrUnexpectedEOF.Error(),
 		},
+
+		"caseless compare": {
+			errorResponse:     []byte(`{"Code": "errorCode", "Message": "errorMessage", "xyz": "abc"}`),
+			expectedErrorType: "errorCode",
+			expectedErrorMsg:  "errorMessage",
+		},
 	}
 
 	for name, c := range cases {

@@ -14,9 +14,9 @@ import (
 // identify the error code, msg in a REST JSON error response.
 func GetErrorInfo(decoder *json.Decoder) (errorType string, message string, err error) {
 	var errInfo struct {
-		Code    string `json:"code"`
-		Type  string `json:"__type"`
-		Message string `json:"message"`
+		Code    string
+		Type    string `json:"__type"`
+		Message string
 	}
 
 	err = decoder.Decode(&errInfo)
