@@ -97,6 +97,7 @@ func addOperationDeleteBucketMiddlewares(stack *middleware.Stack, options Option
 	addOpDeleteBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucket(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

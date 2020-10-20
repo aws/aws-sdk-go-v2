@@ -135,6 +135,7 @@ func addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options O
 	addOpCreateAccessPointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessPoint(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

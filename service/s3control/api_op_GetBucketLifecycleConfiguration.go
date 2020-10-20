@@ -123,6 +123,7 @@ func addOperationGetBucketLifecycleConfigurationMiddlewares(stack *middleware.St
 	addOpGetBucketLifecycleConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketLifecycleConfiguration(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

@@ -83,6 +83,7 @@ func addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack, options Op
 	addOpDeleteJobTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJobTagging(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

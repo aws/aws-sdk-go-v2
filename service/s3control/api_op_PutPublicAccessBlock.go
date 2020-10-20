@@ -79,6 +79,7 @@ func addOperationPutPublicAccessBlockMiddlewares(stack *middleware.Stack, option
 	addOpPutPublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutPublicAccessBlock(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

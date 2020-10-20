@@ -158,6 +158,7 @@ func addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Option
 	addOpCreateBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBucket(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	smithyhttp.AddChecksumMiddleware(stack)

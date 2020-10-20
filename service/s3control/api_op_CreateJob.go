@@ -137,6 +137,7 @@ func addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) 
 	addOpCreateJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJob(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

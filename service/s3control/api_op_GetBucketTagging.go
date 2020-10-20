@@ -110,6 +110,7 @@ func addOperationGetBucketTaggingMiddlewares(stack *middleware.Stack, options Op
 	addOpGetBucketTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketTagging(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil
