@@ -53,13 +53,14 @@ func main() {
 	if len(objectDelimiter) != 0 {
 		params.Delimiter = &objectDelimiter
 	}
-	if v := int32(maxKeys); v != 0 {
-		params.MaxKeys = &v
-	}
 
 	// TODO replace this with the code generate paginator when available
 	// s3.NewListObjectsV2Paginator()
-	p := NewS3ListObjectsV2Paginator(client, params)
+	p := NewS3ListObjectsV2Paginator(client, params, func(o *S3ListObjectsV2PaginatorOptions) {
+		if v := int32(maxKeys); v != 0 {
+			o.Limit = v
+		}
+	})
 
 	// Iterate through the S3 object pages, printing each object returned.
 	var i int
@@ -87,9 +88,18 @@ type S3ListObjectsV2APIClient interface {
 	ListObjectsV2(context.Context, *s3.ListObjectsV2Input, ...func(*s3.Options)) (*s3.ListObjectsV2Output, error)
 }
 
+// S3ListObjectsV2PaginatorOptions provides the options for configuring the
+// ListObjectsV2Paginator.
+type S3ListObjectsV2PaginatorOptions struct {
+	// The maximum number of keys to return per page.
+	Limit int32
+}
+
 // S3ListObjectsV2Paginator provides the paginator to paginate S3 ListObjectsV2
 // response pages.
 type S3ListObjectsV2Paginator struct {
+	options S3ListObjectsV2PaginatorOptions
+
 	client S3ListObjectsV2APIClient
 	params s3.ListObjectsV2Input
 
@@ -99,8 +109,13 @@ type S3ListObjectsV2Paginator struct {
 
 // NewS3ListObjectsV2Paginator initializes a new S3 ListObjectsV2 Paginator for
 // paginating the ListObjectsV2 respones.
-func NewS3ListObjectsV2Paginator(client S3ListObjectsV2APIClient, params *s3.ListObjectsV2Input) *S3ListObjectsV2Paginator {
+func NewS3ListObjectsV2Paginator(client S3ListObjectsV2APIClient, params *s3.ListObjectsV2Input, optFns ...func(*S3ListObjectsV2PaginatorOptions)) *S3ListObjectsV2Paginator {
+	var options S3ListObjectsV2PaginatorOptions
+	for _, fn := range optFns {
+		fn(&options)
+	}
 	p := &S3ListObjectsV2Paginator{
+		options:   options,
 		client:    client,
 		firstPage: true,
 	}
@@ -125,6 +140,9 @@ func (p *S3ListObjectsV2Paginator) NextPage(ctx context.Context) (
 	}
 
 	params := p.params
+	if v := p.options.Limit; v != 0 {
+		params.MaxKeys = &v
+	}
 	result, err := p.client.ListObjectsV2(ctx, &params)
 	if err != nil {
 		return nil, err
