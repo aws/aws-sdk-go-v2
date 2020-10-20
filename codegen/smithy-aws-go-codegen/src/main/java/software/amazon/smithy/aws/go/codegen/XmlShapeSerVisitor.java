@@ -14,6 +14,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
@@ -30,17 +31,17 @@ import software.amazon.smithy.utils.FunctionalUtils;
 
 final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final TimestampFormatTrait.Format DEFAULT_TIMESTAMP_FORMAT = TimestampFormatTrait.Format.DATE_TIME;
-    private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(XmlShapeSerVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
 
     public XmlShapeSerVisitor(GenerationContext context) {
-        this(context, FunctionalUtils.alwaysTrue());
+        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
     }
 
     public XmlShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
-        this.memberFilter = memberFilter;
+        this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {

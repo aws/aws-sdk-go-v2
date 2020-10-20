@@ -15,6 +15,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
@@ -32,25 +33,25 @@ import software.amazon.smithy.utils.FunctionalUtils;
 /**
  * Visitor to generate serialization functions for shapes in AWS Query protocol
  * document bodies.
- *
+ * <p>
  * This class handles function body generation for all types expected by the
  * {@code DocumentShapeSerVisitor}. No other shape type serialization is overwritten.
- *
+ * <p>
  * Timestamps are serialized to {@link Format}.DATE_TIME by default.
  */
 class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.DATE_TIME;
-    private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(QueryShapeSerVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
 
     public QueryShapeSerVisitor(GenerationContext context) {
-        this(context, FunctionalUtils.alwaysTrue());
+        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
     }
 
     public QueryShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
-        this.memberFilter = memberFilter;
+        this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -170,7 +171,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
      * Retrieves the correct serialization location based on the member's
      * xmlName trait or uses the default value.
      *
-     * @param memberShape The member being serialized.
+     * @param memberShape  The member being serialized.
      * @param defaultValue A default value for the location.
      * @return The location where the member will be serialized.
      */
@@ -184,7 +185,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
      * Tells whether the contents of the member should be flattened
      * when serialized.
      *
-     * @param context The generation context.
+     * @param context     The generation context.
      * @param memberShape The member being serialized.
      * @return If the member's contents should be flattened when serialized.
      */

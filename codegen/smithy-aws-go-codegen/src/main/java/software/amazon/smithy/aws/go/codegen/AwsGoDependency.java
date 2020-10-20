@@ -32,6 +32,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
+    public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
@@ -81,6 +82,6 @@ public class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.27.0";
+        private static final String AWS_SDK = "v0.27.1-0.20201020212433-5fb7a9ec04bb";
     }
 }

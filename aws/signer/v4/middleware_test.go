@@ -106,7 +106,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 			creds: aws.AnonymousCredentials{},
 		},
 		"nil creds": {
-			creds: aws.AnonymousCredentials{},
+			creds: nil,
 		},
 	}
 

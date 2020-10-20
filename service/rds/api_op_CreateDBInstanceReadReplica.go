@@ -4,11 +4,15 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"net/http"
 )
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
@@ -321,6 +325,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// CreateDBInstance.
 	PubliclyAccessible *bool
 
+	// The AWS region the resource is in. The presigned URL will be created with this
+	// region, if the PresignURL member is empty set.
+	SourceRegion *string
+
 	// Specifies the storage type to be associated with the read replica. Valid values:
 	// standard | gp2 | io1 If you specify io1, you must also include a value for the
 	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
@@ -338,6 +346,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// A list of EC2 VPC security groups to associate with the read replica. Default:
 	// The default EC2 VPC security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []*string
+
+	// Used by the SDK's PresignURL autofill customization to specify the region the of
+	// the client's request.
+	destinationRegion *string
 }
 
 type CreateDBInstanceReadReplicaOutput struct {
@@ -369,11 +381,132 @@ func addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack,
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addCreateDBInstanceReadReplicaPresignURLMiddleware(stack, options)
 	addOpCreateDBInstanceReadReplicaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+func copyCreateDBInstanceReadReplicaInputForPresign(params interface{}) (interface{}, error) {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getCreateDBInstanceReadReplicaPreSignedUrl(params interface{}) (string, bool, error) {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	if input.PreSignedUrl == nil || len(*input.PreSignedUrl) == 0 {
+		return ``, false, nil
+	}
+	return *input.PreSignedUrl, true, nil
+}
+func getCreateDBInstanceReadReplicaSourceRegion(params interface{}) (string, bool, error) {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	if input.SourceRegion == nil || len(*input.SourceRegion) == 0 {
+		return ``, false, nil
+	}
+	return *input.SourceRegion, true, nil
+}
+func setCreateDBInstanceReadReplicaPreSignedUrl(params interface{}, value string) error {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	input.PreSignedUrl = &value
+	return nil
+}
+func setCreateDBInstanceReadReplicadestinationRegion(params interface{}, value string) error {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	input.destinationRegion = &value
+	return nil
+}
+
+type createDBInstanceReadReplicaHTTPPresignURLClient struct {
+	client    *Client
+	presigner *v4.Signer
+}
+
+func newCreateDBInstanceReadReplicaHTTPPresignURLClient(options Options, optFns ...func(*Options)) *createDBInstanceReadReplicaHTTPPresignURLClient {
+	return &createDBInstanceReadReplicaHTTPPresignURLClient{
+		client:    New(options, optFns...),
+		presigner: v4.NewSigner(),
+	}
+}
+func (c *createDBInstanceReadReplicaHTTPPresignURLClient) PresignCreateDBInstanceReadReplica(ctx context.Context, params *CreateDBInstanceReadReplicaInput, optFns ...func(*Options)) (string, http.Header, error) {
+	if params == nil {
+		params = &CreateDBInstanceReadReplicaInput{}
+	}
+
+	optFns = append(optFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, optFns,
+		addOperationCreateDBInstanceReadReplicaMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return ``, nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out.URL, out.SignedHeader, nil
+}
+func (c *createDBInstanceReadReplicaHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func addCreateDBInstanceReadReplicaPresignURLMiddleware(stack *middleware.Stack, options Options) error {
+	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
+		Accessor: presignedurlcust.ParameterAccessor{
+			GetPresignedURL:      getCreateDBInstanceReadReplicaPreSignedUrl,
+			GetSourceRegion:      getCreateDBInstanceReadReplicaSourceRegion,
+			CopyInput:            copyCreateDBInstanceReadReplicaInputForPresign,
+			SetDestinationRegion: setCreateDBInstanceReadReplicadestinationRegion,
+			SetPresignedURL:      setCreateDBInstanceReadReplicaPreSignedUrl,
+		},
+		Presigner: &presignAutoFillCreateDBInstanceReadReplicaClient{client: newCreateDBInstanceReadReplicaHTTPPresignURLClient(options)},
+	})
+}
+
+type presignAutoFillCreateDBInstanceReadReplicaClient struct {
+	client *createDBInstanceReadReplicaHTTPPresignURLClient
+}
+
+func (c *presignAutoFillCreateDBInstanceReadReplicaClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
+	input, ok := params.(*CreateDBInstanceReadReplicaInput)
+	if !ok {
+		return ``, nil, fmt.Errorf("expect *CreateDBInstanceReadReplicaInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	return c.client.PresignCreateDBInstanceReadReplica(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) awsmiddleware.RegisterServiceMetadata {
