@@ -30352,9 +30352,9 @@ func awsEc2query_serializeOpDocumentCopySnapshotInput(v *CopySnapshotInput, valu
 		objectKey.String(*v.Description)
 	}
 
-	if v.DestinationRegion != nil {
+	if v.destinationRegion != nil {
 		objectKey := object.Key("DestinationRegion")
-		objectKey.String(*v.DestinationRegion)
+		objectKey.String(*v.destinationRegion)
 	}
 
 	if v.DryRun != nil {

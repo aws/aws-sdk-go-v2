@@ -8038,6 +8038,11 @@ func awsAwsquery_serializeOpDocumentCopyDBClusterSnapshotInput(v *CopyDBClusterS
 		objectKey.Boolean(*v.CopyTags)
 	}
 
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -8104,6 +8109,11 @@ func awsAwsquery_serializeOpDocumentCopyDBSnapshotInput(v *CopyDBSnapshotInput, 
 	if v.CopyTags != nil {
 		objectKey := object.Key("CopyTags")
 		objectKey.Boolean(*v.CopyTags)
+	}
+
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
 	}
 
 	if v.KmsKeyId != nil {
@@ -8294,6 +8304,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
+	}
+
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
 	}
 
 	if v.Domain != nil {
@@ -8764,6 +8779,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
+	}
+
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
 	}
 
 	if v.Domain != nil {

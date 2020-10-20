@@ -4,11 +4,15 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"net/http"
 )
 
 // Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You
@@ -54,14 +58,6 @@ type CopySnapshotInput struct {
 
 	// A description for the EBS snapshot.
 	Description *string
-
-	// The destination Region to use in the PresignedUrl parameter of a snapshot copy
-	// operation. This parameter is only valid for specifying the destination Region in
-	// a PresignedUrl parameter, where it is required. The snapshot copy is sent to the
-	// regional endpoint that you sent the HTTP request to (for example,
-	// ec2.us-east-1.amazonaws.com). With the AWS CLI, this is specified using the
-	// --region parameter or the default Region in your AWS configuration file.
-	DestinationRegion *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -119,6 +115,10 @@ type CopySnapshotInput struct {
 
 	// The tags to apply to the new snapshot.
 	TagSpecifications []*types.TagSpecification
+
+	// Used by the SDK's PresignURL autofill customization to specify the region the of
+	// the client's request.
+	destinationRegion *string
 }
 
 type CopySnapshotOutput struct {
@@ -152,11 +152,132 @@ func addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Option
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addCopySnapshotPresignURLMiddleware(stack, options)
 	addOpCopySnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopySnapshot(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+func copyCopySnapshotInputForPresign(params interface{}) (interface{}, error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getCopySnapshotPresignedUrl(params interface{}) (string, bool, error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	if input.PresignedUrl == nil || len(*input.PresignedUrl) == 0 {
+		return ``, false, nil
+	}
+	return *input.PresignedUrl, true, nil
+}
+func getCopySnapshotSourceRegion(params interface{}) (string, bool, error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	if input.SourceRegion == nil || len(*input.SourceRegion) == 0 {
+		return ``, false, nil
+	}
+	return *input.SourceRegion, true, nil
+}
+func setCopySnapshotPresignedUrl(params interface{}, value string) error {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	input.PresignedUrl = &value
+	return nil
+}
+func setCopySnapshotdestinationRegion(params interface{}, value string) error {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	input.destinationRegion = &value
+	return nil
+}
+
+type copySnapshotHTTPPresignURLClient struct {
+	client    *Client
+	presigner *v4.Signer
+}
+
+func newCopySnapshotHTTPPresignURLClient(options Options, optFns ...func(*Options)) *copySnapshotHTTPPresignURLClient {
+	return &copySnapshotHTTPPresignURLClient{
+		client:    New(options, optFns...),
+		presigner: v4.NewSigner(),
+	}
+}
+func (c *copySnapshotHTTPPresignURLClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*Options)) (string, http.Header, error) {
+	if params == nil {
+		params = &CopySnapshotInput{}
+	}
+
+	optFns = append(optFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, optFns,
+		addOperationCopySnapshotMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return ``, nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out.URL, out.SignedHeader, nil
+}
+func (c *copySnapshotHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func addCopySnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
+	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
+		Accessor: presignedurlcust.ParameterAccessor{
+			GetPresignedURL:      getCopySnapshotPresignedUrl,
+			GetSourceRegion:      getCopySnapshotSourceRegion,
+			CopyInput:            copyCopySnapshotInputForPresign,
+			SetDestinationRegion: setCopySnapshotdestinationRegion,
+			SetPresignedURL:      setCopySnapshotPresignedUrl,
+		},
+		Presigner: &presignAutoFillCopySnapshotClient{client: newCopySnapshotHTTPPresignURLClient(options)},
+	})
+}
+
+type presignAutoFillCopySnapshotClient struct {
+	client *copySnapshotHTTPPresignURLClient
+}
+
+func (c *presignAutoFillCopySnapshotClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return ``, nil, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	return c.client.PresignCopySnapshot(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCopySnapshot(region string) awsmiddleware.RegisterServiceMetadata {

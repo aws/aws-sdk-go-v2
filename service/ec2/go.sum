@@ -1,8 +1,15 @@
+github.com/aws/aws-sdk-go-v2 v0.26.0/go.mod h1:KAhGbTQM7VGrReUuwuRBIp+SSiB01L/jdfvwjtCJtEo=
+github.com/aws/aws-sdk-go-v2 v0.27.1-0.20201020212433-5fb7a9ec04bb h1:0o85dayQPVzN1lPsqRp5z8/sEJdQ8c3ZnESjPErBzio=
+github.com/aws/aws-sdk-go-v2 v0.27.1-0.20201020212433-5fb7a9ec04bb/go.mod h1:F9alGopZD03PJvZJSuXC9d0nQuvbmgcKgeIrEmLZG3s=
+github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v0.0.0-20201020212433-5fb7a9ec04bb h1:KHrrknRFwdVffVc5cPSgGvrHNMELWPDhHqEUBih4GDk=
+github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v0.0.0-20201020212433-5fb7a9ec04bb/go.mod h1:vXL3cTbvZ6JTVcQhsaFNFnuBpYCajfVECC1PUzBaJlQ=
+github.com/awslabs/smithy-go v0.0.0-20200930175536-2cd7f70a8c2f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.2.0 h1:lXzqqSYp5pLdLyjo4OMkyS57RrZIFPwkOayjqnBA02I=
 github.com/awslabs/smithy-go v0.2.0/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=
 github.com/google/go-cmp v0.4.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1/go.mod h1:L3OGu8Wl2/fWfCI6z80xFu9LTZmf1ZRjMHUOPmWr69U=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

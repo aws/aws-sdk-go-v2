@@ -4,11 +4,15 @@ package rds
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"net/http"
 )
 
 // Copies the specified DB snapshot. The source DB snapshot must be in the
@@ -149,10 +153,18 @@ type CopyDBSnapshotInput struct {
 	// for the operation that can be executed in the source AWS Region.
 	PreSignedUrl *string
 
+	// The AWS region the resource is in. The presigned URL will be created with this
+	// region, if the PresignURL member is empty set.
+	SourceRegion *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
+
+	// Used by the SDK's PresignURL autofill customization to specify the region the of
+	// the client's request.
+	destinationRegion *string
 }
 
 type CopyDBSnapshotOutput struct {
@@ -184,11 +196,132 @@ func addOperationCopyDBSnapshotMiddlewares(stack *middleware.Stack, options Opti
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addCopyDBSnapshotPresignURLMiddleware(stack, options)
 	addOpCopyDBSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBSnapshot(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+func copyCopyDBSnapshotInputForPresign(params interface{}) (interface{}, error) {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getCopyDBSnapshotPreSignedUrl(params interface{}) (string, bool, error) {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	if input.PreSignedUrl == nil || len(*input.PreSignedUrl) == 0 {
+		return ``, false, nil
+	}
+	return *input.PreSignedUrl, true, nil
+}
+func getCopyDBSnapshotSourceRegion(params interface{}) (string, bool, error) {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	if input.SourceRegion == nil || len(*input.SourceRegion) == 0 {
+		return ``, false, nil
+	}
+	return *input.SourceRegion, true, nil
+}
+func setCopyDBSnapshotPreSignedUrl(params interface{}, value string) error {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	input.PreSignedUrl = &value
+	return nil
+}
+func setCopyDBSnapshotdestinationRegion(params interface{}, value string) error {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	input.destinationRegion = &value
+	return nil
+}
+
+type copyDBSnapshotHTTPPresignURLClient struct {
+	client    *Client
+	presigner *v4.Signer
+}
+
+func newCopyDBSnapshotHTTPPresignURLClient(options Options, optFns ...func(*Options)) *copyDBSnapshotHTTPPresignURLClient {
+	return &copyDBSnapshotHTTPPresignURLClient{
+		client:    New(options, optFns...),
+		presigner: v4.NewSigner(),
+	}
+}
+func (c *copyDBSnapshotHTTPPresignURLClient) PresignCopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput, optFns ...func(*Options)) (string, http.Header, error) {
+	if params == nil {
+		params = &CopyDBSnapshotInput{}
+	}
+
+	optFns = append(optFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CopyDBSnapshot", params, optFns,
+		addOperationCopyDBSnapshotMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return ``, nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out.URL, out.SignedHeader, nil
+}
+func (c *copyDBSnapshotHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func addCopyDBSnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
+	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
+		Accessor: presignedurlcust.ParameterAccessor{
+			GetPresignedURL:      getCopyDBSnapshotPreSignedUrl,
+			GetSourceRegion:      getCopyDBSnapshotSourceRegion,
+			CopyInput:            copyCopyDBSnapshotInputForPresign,
+			SetDestinationRegion: setCopyDBSnapshotdestinationRegion,
+			SetPresignedURL:      setCopyDBSnapshotPreSignedUrl,
+		},
+		Presigner: &presignAutoFillCopyDBSnapshotClient{client: newCopyDBSnapshotHTTPPresignURLClient(options)},
+	})
+}
+
+type presignAutoFillCopyDBSnapshotClient struct {
+	client *copyDBSnapshotHTTPPresignURLClient
+}
+
+func (c *presignAutoFillCopyDBSnapshotClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
+	input, ok := params.(*CopyDBSnapshotInput)
+	if !ok {
+		return ``, nil, fmt.Errorf("expect *CopyDBSnapshotInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	return c.client.PresignCopyDBSnapshot(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCopyDBSnapshot(region string) awsmiddleware.RegisterServiceMetadata {
