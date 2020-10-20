@@ -19,7 +19,7 @@ var (
 func init() {
 	flag.StringVar(&bucketName, "bucket", "", "The `name` of the S3 bucket to list objects from.")
 	flag.StringVar(&objectPrefix, "prefix", "", "The optional `object prefix` of the S3 Object keys to list.")
-	flag.StringVar(&objectDelimiter, "delimiter", "/",
+	flag.StringVar(&objectDelimiter, "delimiter", "",
 		"The optional `object key delimiter` used by S3 List objects to group object keys.")
 }
 
@@ -64,6 +64,8 @@ func main() {
 	for p.HasMorePages() {
 		i++
 
+		// Next Page takes a new context for each page retrieval. This is where
+		// you could add timeouts or deadlines.
 		page, err := p.NextPage(context.TODO())
 		if err != nil {
 			log.Fatalf("failed to get page %v, %v", i, err)
@@ -123,7 +125,11 @@ func (p *S3ListObjectsV2Paginator) NextPage(ctx context.Context) (
 	}
 
 	p.firstPage = false
-	p.nextToken = result.NextContinuationToken
+	if result.IsTruncated != nil && *result.IsTruncated == true {
+		p.nextToken = nil
+	} else {
+		p.nextToken = result.NextContinuationToken
+	}
 
 	return result, nil
 }

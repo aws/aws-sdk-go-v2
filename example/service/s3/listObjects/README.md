@@ -1,6 +1,6 @@
 # Amazon S3 ListObjectsV2 Example
 
-This is an example using the AWS SDK for Go to list objects' key in a S3 bucket.
+This is an example using the AWS SDK for Go to list objects in a S3 bucket.
 
 ### Usage
 
@@ -32,4 +32,4 @@ Object: resources/0002/item-02
 Object: resources/0002/item-03
 Object: resources/0002/item-04
 Object: resources/0002/item-05
-`
+```
