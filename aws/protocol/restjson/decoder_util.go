@@ -2,12 +2,10 @@ package restjson
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"strings"
 
 	"github.com/awslabs/smithy-go"
-	smithyjson "github.com/awslabs/smithy-go/json"
 )
 
 // GetErrorInfo util looks for code, __type, and message members in the
@@ -15,55 +13,37 @@ import (
 // returns the value of member if it is available. This function is useful to
 // identify the error code, msg in a REST JSON error response.
 func GetErrorInfo(decoder *json.Decoder) (errorType string, message string, err error) {
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return "", "", nil
+	var errInfo struct {
+		Code    string `json:"code"`
+		Type  string `json:"__type"`
+		Message string `json:"message"`
 	}
+
+	err = decoder.Decode(&errInfo)
 	if err != nil {
-		return "", "", err
-	}
-
-	if t, ok := startToken.(json.Delim); !ok || t.String() != "{" {
-		return "", "", fmt.Errorf("expected start token to be {")
-	}
-
-	for decoder.More() {
-		var target *string
-		t, err := decoder.Token()
-		if err != nil {
-			return "", "", err
+		if err == io.EOF {
+			return errorType, message, nil
 		}
-
-		switch st := t.(string); {
-		case strings.EqualFold(st, "code"):
-			fallthrough
-		case strings.EqualFold(st, "__type"):
-			target = &errorType
-		case strings.EqualFold(st, "message"):
-			target = &message
-		default:
-			smithyjson.DiscardUnknownField(decoder)
-			continue
-		}
-
-		v, err := decoder.Token()
-		if err != nil {
-			return errorType, message, err
-		}
-		*target = v.(string)
+		return errorType, message, err
 	}
 
-	endToken, err := decoder.Token()
-	if err != nil {
-		return "", "", err
+	// assign error type
+	if len(errInfo.Code) != 0 {
+		errorType = errInfo.Code
+	} else if len(errInfo.Type) != 0 {
+		errorType = errInfo.Type
 	}
 
-	if t, ok := endToken.(json.Delim); !ok || t.String() != "}" {
-		return "", "", fmt.Errorf("expected end token to be }")
+	// assign error message
+	if len(errInfo.Message) != 0 {
+		message = errInfo.Message
 	}
 
 	// sanitize error
-	errorType = SanitizeErrorCode(errorType)
+	if len(errorType) != 0 {
+		errorType = SanitizeErrorCode(errorType)
+	}
+
 	return errorType, message, nil
 }
 
