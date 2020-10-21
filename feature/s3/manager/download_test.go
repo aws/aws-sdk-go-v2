@@ -464,7 +464,9 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 }
 
 func TestDownloadWithContextCanceled(t *testing.T) {
-	d := manager.NewDownloader(s3.New(s3.Options{}))
+	d := manager.NewDownloader(s3.New(s3.Options{
+		Region: "mock-region",
+	}))
 
 	params := s3.GetObjectInput{
 		Bucket: aws.String("bucket"),

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/transport/http"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // EnableDualstackMiddleware represents middleware struct for enabling dualstack support
@@ -28,7 +28,11 @@ func (u *EnableDualstackMiddleware) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	req, ok := in.Request.(*http.Request)
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown request type %T", req)
 	}
