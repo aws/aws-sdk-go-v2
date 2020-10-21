@@ -26,6 +26,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -148,6 +149,10 @@ public class S3UpdateEndpoint implements GoIntegration {
     }
 
     private void writeS3ControlMiddlewareHelper(GoWriter writer) {
+        // imports
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+        writer.addUseImports(AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION);
+
         writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", UPDATE_ENDPOINT_ADDER, () -> {
             writer.write("$T(stack, $T{UseDualstack: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
@@ -160,6 +165,10 @@ public class S3UpdateEndpoint implements GoIntegration {
     }
 
     private void writeS3MiddlewareHelper(GoWriter writer) {
+        // imports
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+        writer.addUseImports(AwsCustomGoDependency.S3_CUSTOMIZATION);
+
         writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", UPDATE_ENDPOINT_ADDER, () -> {
             writer.write("$T(stack, $T{ \n"
                             + "Region: options.Region,\n GetBucketFromInput: $L,\n UsePathStyle: options.$L,\n "
@@ -219,7 +228,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                             .type(SymbolUtils.createValueSymbolBuilder("bool")
                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                 .build())
-                            .documentation("")
+                            .documentation("Allows you to enable Dualstack endpoint support for the service.")
                             .build()
                         ))
                         .registerMiddleware(MiddlewareRegistrar.builder()

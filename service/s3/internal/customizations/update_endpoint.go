@@ -111,38 +111,39 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 
 func (u updateEndpointMiddleware) updateEndpointFromConfig(req *http.Request, bucket string) error {
 	// do nothing if path style is enforced
-	if !u.usePathStyle {
-		if !hostCompatibleBucketName(req.URL, bucket) {
-			// bucket name must be valid to put into the host
-			return fmt.Errorf("bucket name %s is not compatible with S3", bucket)
-		}
-
-		// accelerate is only supported if use path style is disabled
-		if u.useAccelerate {
-			parts := strings.Split(req.URL.Host, ".")
-			if len(parts) < 3 {
-				return fmt.Errorf("unable to update endpoint host for S3 accelerate, hostname invalid, %s", req.URL.Host)
-			}
-
-			if parts[0] == "s3" || strings.HasPrefix(parts[0], "s3-") {
-				parts[0] = "s3-accelerate"
-			}
-
-			for i := 1; i+1 < len(parts); i++ {
-				if strings.EqualFold(parts[i], u.region) {
-					parts = append(parts[:i], parts[i+1:]...)
-					break
-				}
-			}
-
-			// construct the url host
-			req.URL.Host = strings.Join(parts, ".")
-		}
-
-		// move bucket to follow virtual host style
-		moveBucketNameToHost(req.URL, bucket)
+	if u.usePathStyle {
+		return nil
 	}
 
+	if !hostCompatibleBucketName(req.URL, bucket) {
+		// bucket name must be valid to put into the host
+		return fmt.Errorf("bucket name %s is not compatible with S3", bucket)
+	}
+
+	// accelerate is only supported if use path style is disabled
+	if u.useAccelerate {
+		parts := strings.Split(req.URL.Host, ".")
+		if len(parts) < 3 {
+			return fmt.Errorf("unable to update endpoint host for S3 accelerate, hostname invalid, %s", req.URL.Host)
+		}
+
+		if parts[0] == "s3" || strings.HasPrefix(parts[0], "s3-") {
+			parts[0] = "s3-accelerate"
+		}
+
+		for i := 1; i+1 < len(parts); i++ {
+			if strings.EqualFold(parts[i], u.region) {
+				parts = append(parts[:i], parts[i+1:]...)
+				break
+			}
+		}
+
+		// construct the url host
+		req.URL.Host = strings.Join(parts, ".")
+	}
+
+	// move bucket to follow virtual host style
+	moveBucketNameToHost(req.URL, bucket)
 	return nil
 }
 
