@@ -207,183 +207,183 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 	switch i := input.(type) {
 	case *AssociateVPCWithHostedZoneInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *ChangeResourceRecordSetsInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *CreateHostedZoneInput:
 		if i.DelegationSetId != nil {
-			values := strings.Split(*i.DelegationSetId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.DelegationSetId, `/`)
+			v := (*i.DelegationSetId)[idx+1:]
 			i.DelegationSetId = &v
 		}
 
 	case *CreateQueryLoggingConfigInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *CreateReusableDelegationSetInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *CreateTrafficPolicyInstanceInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *CreateVPCAssociationAuthorizationInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *DeleteHostedZoneInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 
 	case *DeleteReusableDelegationSetInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 
 	case *DeleteVPCAssociationAuthorizationInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *DisassociateVPCFromHostedZoneInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *GetChangeInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 
 	case *GetHostedZoneInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 
 	case *GetHostedZoneLimitInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *GetReusableDelegationSetInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 
 	case *GetReusableDelegationSetLimitInput:
 		if i.DelegationSetId != nil {
-			values := strings.Split(*i.DelegationSetId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.DelegationSetId, `/`)
+			v := (*i.DelegationSetId)[idx+1:]
 			i.DelegationSetId = &v
 		}
 
 	case *ListHostedZonesInput:
 		if i.DelegationSetId != nil {
-			values := strings.Split(*i.DelegationSetId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.DelegationSetId, `/`)
+			v := (*i.DelegationSetId)[idx+1:]
 			i.DelegationSetId = &v
 		}
 
 	case *ListHostedZonesByNameInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *ListQueryLoggingConfigsInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *ListResourceRecordSetsInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *ListTrafficPolicyInstancesInput:
 		if i.HostedZoneIdMarker != nil {
-			values := strings.Split(*i.HostedZoneIdMarker, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneIdMarker, `/`)
+			v := (*i.HostedZoneIdMarker)[idx+1:]
 			i.HostedZoneIdMarker = &v
 		}
 
 	case *ListTrafficPolicyInstancesByHostedZoneInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *ListTrafficPolicyInstancesByPolicyInput:
 		if i.HostedZoneIdMarker != nil {
-			values := strings.Split(*i.HostedZoneIdMarker, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneIdMarker, `/`)
+			v := (*i.HostedZoneIdMarker)[idx+1:]
 			i.HostedZoneIdMarker = &v
 		}
 
 	case *ListVPCAssociationAuthorizationsInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *TestDNSAnswerInput:
 		if i.HostedZoneId != nil {
-			values := strings.Split(*i.HostedZoneId, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
 		}
 
 	case *UpdateHostedZoneCommentInput:
 		if i.Id != nil {
-			values := strings.Split(*i.Id, "/")
-			v := values[len(values)-1]
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
 			i.Id = &v
 		}
 

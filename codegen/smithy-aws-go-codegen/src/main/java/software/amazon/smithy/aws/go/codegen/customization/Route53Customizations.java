@@ -109,10 +109,11 @@ public class Route53Customizations implements GoIntegration {
                         writer.openBlock("case $P :", "", symbolProvider.toSymbol(input), () -> {
                             writer.addUseImports(SmithyGoDependency.STRINGS);
                             for (MemberShape member : hostedZoneIDMembers) {
-                               writer.openBlock("if i.$L != nil {", "}", member.getMemberName(), () -> {
-                                writer.write("values := strings.Split(*i.$L, \"/\")", member.getMemberName());
-                                writer.write("v := values[len(values)-1]");
-                                writer.write("i.$L = &v", member.getMemberName());
+                                String memberName = member.getMemberName();
+                               writer.openBlock("if i.$L != nil {", "}", memberName, () -> {
+                                writer.write("idx := strings.LastIndex(*i.$L, `/`)", memberName);
+                                writer.write("v := (*i.$L)[idx+1:]", memberName);
+                                writer.write("i.$L = &v", memberName);
                                });
                             }
                         });
