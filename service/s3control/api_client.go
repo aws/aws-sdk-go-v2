@@ -83,7 +83,7 @@ type Options struct {
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
 
-	//
+	// Allows you to enable Dualstack endpoint support for the service.
 	UseDualstack bool
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
