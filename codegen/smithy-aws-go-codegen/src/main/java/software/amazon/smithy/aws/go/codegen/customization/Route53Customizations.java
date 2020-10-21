@@ -110,7 +110,7 @@ public class Route53Customizations implements GoIntegration {
                             writer.addUseImports(SmithyGoDependency.STRINGS);
                             for (MemberShape member : hostedZoneIDMembers) {
                                writer.openBlock("if i.$L != nil {", "}", member.getMemberName(), () -> {
-                                writer.write("values := strings.SplitN(*i.$L, \"/\", 2)", member.getMemberName());
+                                writer.write("values := strings.Split(*i.$L, \"/\")", member.getMemberName());
                                 writer.write("v := values[len(values)-1]");
                                 writer.write("i.$L = &v", member.getMemberName());
                                });
