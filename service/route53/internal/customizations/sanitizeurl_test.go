@@ -27,6 +27,10 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 			Given:       "ABCDEFG",
 			ExpectedURL: "https://route53.amazonaws.com/2013-04-01/delegationset/ABCDEFG",
 		},
+		"includes leading / in hostedzone": {
+			Given:       "/hostedzone/ABCDEFG",
+			ExpectedURL: "https://route53.amazonaws.com/2013-04-01/delegationset/ABCDEFG",
+		},
 	}
 
 	for name, c := range cases {
