@@ -102,6 +102,7 @@ func addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware
 	addOpDeleteBucketLifecycleConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketLifecycleConfiguration(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

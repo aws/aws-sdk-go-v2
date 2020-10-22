@@ -96,6 +96,7 @@ func addOperationGetBucketMiddlewares(stack *middleware.Stack, options Options) 
 	addOpGetBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucket(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil

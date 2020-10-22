@@ -3,7 +3,7 @@ Package customizations provides customizations for the Amazon S3 API client.
 
 This package provides support for following S3 customizations
 
-    UpdateEndpoint Middleware: Virtual Host style url addressing
+    UpdateEndpoint Middleware: resolves a custom endpoint as per s3 config options
 
     processResponseWith200Error Middleware: Deserializing response error with 200 status code
 
@@ -12,17 +12,34 @@ Virtual Host style url addressing
 
 Since serializers serialize by default as path style url, we use customization
 to modify the endpoint url when `UsePathStyle` option on S3Client is unset or
-false.
+false. This flag will be ignored if `UseAccelerate` option is set to true.
 
-UpdateEndpoint middleware handler for virtual host url addressing needs to be
+
+Transfer acceleration
+
+By default S3 Transfer acceleration support is disabled. By enabling `UseAccelerate`
+option on S3Client, one can enable s3 transfer acceleration support. Transfer
+acceleration only works with Virtual Host style addressing, and thus `UsePathStyle`
+option if set is ignored. Transfer acceleration is not supported for S3 operations
+DeleteBucket, ListBuckets, and CreateBucket.
+
+Dualstack support
+
+By default dualstack support for s3 client is disabled. By enabling `UseDualstack`
+option on s3 client, you can enable dualstack endpoint support.
+
+
+UpdateEndpoint middleware handler for modifying resolved endpoint needs to be
 executed after request serialization.
 
-    Middleware layering:
+ Middleware layering:
 
-    HTTP Request -> operation serializer -> Update-Endpoint customization -> next middleware
+ HTTP Request -> operation serializer -> Update-Endpoint customization -> next middleware
 
-Customization option:
-    UsePathStyle (Disabled by Default)
+Customization options:
+ UsePathStyle (Disabled by Default)
+ UseAccelerate (Disabled by Default)
+ UseDualstack (Disabled by Default)
 
 Handle Error response with 200 status code
 
@@ -36,9 +53,9 @@ than response deserialization. Since the behavior of Deserialization is in
 reverse order to the other stack steps its easier to consider that "after" means
 "before".
 
-    Middleware layering:
+ Middleware layering:
 
-	HTTP Response -> handle 200 error customization -> deserialize
+ HTTP Response -> handle 200 error customization -> deserialize
 
 */
 package customizations

@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
@@ -81,6 +82,9 @@ type Options struct {
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
+
+	// Allows you to enable Dualstack endpoint support for the service.
+	UseDualstack bool
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
@@ -208,6 +212,10 @@ type IdempotencyTokenProvider interface {
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
 	s3shared.AddMetadataRetrieverMiddleware(stack)
+}
+
+func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
+	s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{UseDualstack: options.UseDualstack})
 }
 
 func addResponseErrorMiddleware(stack *middleware.Stack) {

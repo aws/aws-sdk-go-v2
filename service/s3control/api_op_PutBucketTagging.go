@@ -150,6 +150,7 @@ func addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack, options Op
 	addOpPutBucketTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketTagging(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	smithyhttp.AddChecksumMiddleware(stack)

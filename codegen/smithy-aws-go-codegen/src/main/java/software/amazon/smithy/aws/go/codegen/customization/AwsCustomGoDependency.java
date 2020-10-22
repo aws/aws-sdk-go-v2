@@ -25,6 +25,7 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
     public static final GoDependency DYNAMODB_CUSTOMIZATION = aws(
             "service/dynamodb/internal/customizations", "ddbcust");
     public static final GoDependency S3_CUSTOMIZATION = aws("service/s3/internal/customizations", "s3cust");
+    public static final GoDependency S3CONTROL_CUSTOMIZATION = aws("service/s3control/internal/customizations", "s3controlcust");
     public static final GoDependency APIGATEWAY_CUSTOMIZATION = aws(
             "service/apigateway/internal/customizations", "agcust");
     public static final GoDependency GLACIER_CUSTOMIZATION = aws(
@@ -47,7 +48,7 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String INTERNAL_S3SHARED = "v0.2.1-0.20201019214249-1049b73d5c17";
+        private static final String INTERNAL_S3SHARED = "v0.2.1-0.20201022222834-4451b4af620e";
         private static final String INTERNAL_ACCEPTENCODING = "v0.0.0-20200930084954-897dfb99530c";
         private static final String INTERNAL_PRESIGNURL = "v0.0.0-20201020212433-5fb7a9ec04bb";
     }
