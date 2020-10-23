@@ -6,6 +6,7 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -22,10 +23,10 @@ type AddSanitizeURLMiddlewareOptions struct {
 }
 
 // AddSanitizeURLMiddleware add the middleware necessary to modify Route53 input before op serialization.
-func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) {
-	stack.Serialize.Insert(&sanitizeURLMiddleware{
+func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) error {
+	return stack.Serialize.Insert(&sanitizeURLMiddleware{
 		sanitizeHostedZoneIDInput: options.SanitizeHostedZoneIDInput,
-	}, "OperationSerializer", middleware.Before)
+	}, smithyid.OperationSerializer, middleware.Before)
 }
 
 // sanitizeURLMiddleware cleans up potential formatting issues in the Route53 path.

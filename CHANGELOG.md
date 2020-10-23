@@ -1,3 +1,9 @@
+# Pending Release
+## Migrating from v0.27.0
+* `aws/middleware`:
+  * `RequestInvocationIDMiddleware` has been renamed to `ClientRequestID`. The ID method now returns `ClientRequestID`.
+  * `AddRequestInvocationIDMiddleware` renamed to `AddClientRequestID`.
+
 # Release 2020-10-16
 
 ## New Features

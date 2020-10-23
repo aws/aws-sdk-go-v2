@@ -6,24 +6,26 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
+	smithymwid "github.com/awslabs/smithy-go/middleware/id"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// RequestInvocationIDMiddleware is a Smithy BuildMiddleware that will generate a unique ID for logical API operation
+// ClientRequestID is a Smithy BuildMiddleware that will generate a unique ID for logical API operation
 // invocation.
-type RequestInvocationIDMiddleware struct{}
+type ClientRequestID struct{}
 
-// ID the identifier for the RequestInvocationIDMiddleware
-func (r RequestInvocationIDMiddleware) ID() string {
-	return "RequestInvocationIDMiddleware"
+// ID the identifier for the ClientRequestID
+func (r *ClientRequestID) ID() string {
+	return id.ClientRequestID
 }
 
 // HandleBuild attaches a unique operation invocation id for the operation to the request
-func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+func (r ClientRequestID) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -47,7 +49,7 @@ func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middl
 type AttemptClockSkewMiddleware struct{}
 
 // ID is the middleware identifier
-func (a AttemptClockSkewMiddleware) ID() string {
+func (a *AttemptClockSkewMiddleware) ID() string {
 	return "AttemptClockSkewMiddleware"
 }
 
@@ -103,14 +105,14 @@ func setResponseMetadata(metadata *middleware.Metadata, responseMetadata Respons
 	metadata.Set(responseMetadataKey{}, responseMetadata)
 }
 
-// AddRequestInvocationIDMiddleware adds RequestInvocationIDMiddleware to the middleware stack
-func AddRequestInvocationIDMiddleware(stack *middleware.Stack) {
-	requestInvocationIDMiddleware := RequestInvocationIDMiddleware{}
-	stack.Build.Add(requestInvocationIDMiddleware, middleware.After)
+// AddClientRequestID adds ClientRequestID to the middleware stack
+func AddClientRequestIDMiddleware(stack *middleware.Stack) error {
+	m := &ClientRequestID{}
+	return stack.Build.Add(m, middleware.After)
 }
 
 // AddAttemptClockSkewMiddleware adds AttemptClockSkewMiddleware to the middleware stack
-func AddAttemptClockSkewMiddleware(stack *middleware.Stack) {
-	attemptClockSkeyMiddleware := AttemptClockSkewMiddleware{}
-	stack.Deserialize.Add(attemptClockSkeyMiddleware, middleware.After)
+func AddAttemptClockSkewMiddleware(stack *middleware.Stack) error {
+	attemptClockSkeyMiddleware := &AttemptClockSkewMiddleware{}
+	return stack.Deserialize.Insert(attemptClockSkeyMiddleware, smithymwid.OperationDeserializer, middleware.After)
 }

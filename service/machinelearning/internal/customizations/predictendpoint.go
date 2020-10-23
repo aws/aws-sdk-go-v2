@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -11,21 +12,21 @@ import (
 
 // AddPredictEndpointMiddleware adds the middleware required to set the endpoint
 // based on Predict's PredictEndpoint input member.
-func AddPredictEndpointMiddleware(stack *middleware.Stack, endpoint func(interface{}) (*string, error)) {
-	stack.Serialize.Insert(&predictEndpointMiddleware{}, "ResolveEndpoint", middleware.After)
+func AddPredictEndpointMiddleware(stack *middleware.Stack, endpoint func(interface{}) (*string, error)) error {
+	return stack.Serialize.Insert(&predictEndpoint{}, awsid.ResolveEndpoint, middleware.After)
 }
 
-// predictEndpointMiddleware rewrites the endpoint with whatever is specified in the
+// predictEndpoint rewrites the endpoint with whatever is specified in the
 // operation input if it is non-nil and non-empty.
-type predictEndpointMiddleware struct{
+type predictEndpoint struct {
 	fetchPredictEndpoint func(interface{}) (*string, error)
 }
 
 // ID returns the id for the middleware.
-func (*predictEndpointMiddleware) ID() string { return "MachineLearning:PredictEndpoint" }
+func (*predictEndpoint) ID() string { return "MachineLearning:PredictEndpoint" }
 
 // HandleSerialize implements the SerializeMiddleware interface.
-func (m *predictEndpointMiddleware) HandleSerialize(
+func (m *predictEndpoint) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,

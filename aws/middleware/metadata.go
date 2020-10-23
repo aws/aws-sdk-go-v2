@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/awslabs/smithy-go/middleware"
 )
 
@@ -16,8 +17,8 @@ type RegisterServiceMetadata struct {
 }
 
 // ID returns the middleware identifier.
-func (s RegisterServiceMetadata) ID() string {
-	return "RegisterServiceMetadata"
+func (s *RegisterServiceMetadata) ID() string {
+	return id.RegisterServiceMetadata
 }
 
 // HandleInitialize registers service metadata information into the middleware context, allowing for introspection.

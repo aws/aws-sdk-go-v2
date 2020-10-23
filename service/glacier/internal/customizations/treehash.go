@@ -13,20 +13,20 @@ import (
 
 // AddTreeHashMiddleware adds middleware needed to automatically
 // calculate Glacier's required checksum headers.
-func AddTreeHashMiddleware(stack *middleware.Stack) {
-	stack.Finalize.Add(&TreeHashMiddleware{}, middleware.Before)
+func AddTreeHashMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Add(&TreeHash{}, middleware.Before)
 }
 
-// TreeHashMiddleware provides the middleware that will automatically
+// TreeHash provides the middleware that will automatically
 // set the sha256 and tree hash headers if they have not already been
 // set.
-type TreeHashMiddleware struct{}
+type TreeHash struct{}
 
 // ID returns the middleware ID.
-func (*TreeHashMiddleware) ID() string { return "Glacier:TreeHash" }
+func (*TreeHash) ID() string { return "Glacier:TreeHash" }
 
 // HandleFinalize implements the finalize middleware handler method
-func (*TreeHashMiddleware) HandleFinalize(
+func (*TreeHash) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	output middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -84,7 +84,7 @@ func computeHashes(r io.Reader) Hash {
 	const bufsize = 1024 * 1024
 
 	buf := make([]byte, bufsize)
-	hashes := [][]byte{}
+	var hashes [][]byte
 	hsh := sha256.New()
 
 	for {

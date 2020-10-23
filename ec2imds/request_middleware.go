@@ -8,8 +8,10 @@ import (
 	"time"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -25,14 +27,12 @@ func addAPIRequestMiddleware(stack *middleware.Stack,
 
 	// Token Serializer build and state management.
 	if !options.disableAPIToken {
-		err = stack.Finalize.Insert(options.tokenProvider,
-			retry.AttemptMiddleware{}.ID(), middleware.After)
+		err = stack.Finalize.Insert(options.tokenProvider, id.Retry, middleware.After)
 		if err != nil {
 			return err
 		}
 
-		err = stack.Deserialize.Insert(options.tokenProvider,
-			"OperationDeserializer", middleware.Before)
+		err = stack.Deserialize.Insert(options.tokenProvider, smithyid.OperationDeserializer, middleware.Before)
 		if err != nil {
 			return err
 		}
@@ -72,7 +72,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	// Operation endpoint resolver
 	err = stack.Serialize.Insert(&resolveEndpoint{
 		Endpoint: options.Endpoint,
-	}, "OperationSerializer", middleware.Before)
+	}, smithyid.OperationSerializer, middleware.Before)
 	if err != nil {
 		return err
 	}
@@ -97,7 +97,7 @@ type serializeRequest struct {
 }
 
 func (*serializeRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *serializeRequest) HandleSerialize(

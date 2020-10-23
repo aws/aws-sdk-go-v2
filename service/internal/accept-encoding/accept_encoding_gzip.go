@@ -8,6 +8,7 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -23,28 +24,32 @@ type AddAcceptEncodingGzipOptions struct {
 // AddAcceptEncodingGzip explicitly adds handling for accept-encoding GZIP
 // middleware to the operation stack. This allows checksums to be correctly
 // computed without disabling GZIP support.
-func AddAcceptEncodingGzip(stack *middleware.Stack, options AddAcceptEncodingGzipOptions) {
+func AddAcceptEncodingGzip(stack *middleware.Stack, options AddAcceptEncodingGzipOptions) error {
 	if options.Enable {
-		stack.Finalize.Add(&EnableGzipMiddleware{}, middleware.Before)
-		stack.Deserialize.Insert(&DecompressGzipMiddleware{}, "OperationDeserializer", middleware.After)
-		return
+		if err := stack.Finalize.Add(&EnableGzip{}, middleware.Before); err != nil {
+			return err
+		}
+		if err := stack.Deserialize.Insert(&DecompressGzip{}, smithyid.OperationDeserializer, middleware.After); err != nil {
+			return err
+		}
+		return nil
 	}
 
-	stack.Finalize.Add(&DisableGzipMiddleware{}, middleware.Before)
+	return stack.Finalize.Add(&DisableGzip{}, middleware.Before)
 }
 
-// DisableGzipMiddleware provides the middleware that will
+// DisableGzip provides the middleware that will
 // disable the underlying http client automatically enabling for gzip
 // decompress content-encoding support.
-type DisableGzipMiddleware struct{}
+type DisableGzip struct{}
 
 // ID returns the id for the middleware.
-func (*DisableGzipMiddleware) ID() string {
-	return "DisableAcceptEncodingGzipMiddleware"
+func (*DisableGzip) ID() string {
+	return "DisableAcceptEncodingGzip"
 }
 
 // HandleFinalize implements the FinalizeMiddleware interface.
-func (*DisableGzipMiddleware) HandleFinalize(
+func (*DisableGzip) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	output middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -63,16 +68,16 @@ func (*DisableGzipMiddleware) HandleFinalize(
 	return next.HandleFinalize(ctx, input)
 }
 
-// EnableGzipMiddleware provides a middleware to enable support for
+// EnableGzip provides a middleware to enable support for
 // gzip responses, with manual decompression. This prevents the underlying HTTP
 // client from performing the gzip decompression automatically.
-type EnableGzipMiddleware struct{}
+type EnableGzip struct{}
 
 // ID returns the id for the middleware.
-func (*EnableGzipMiddleware) ID() string { return "AcceptEncodingGzipMiddleware" }
+func (*EnableGzip) ID() string { return "AcceptEncodingGzip" }
 
-// HandleFinalize implements the FinalizeMiddlware interface.
-func (*EnableGzipMiddleware) HandleFinalize(
+// HandleFinalize implements the FinalizeMiddleware interface.
+func (*EnableGzip) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	output middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -91,15 +96,15 @@ func (*EnableGzipMiddleware) HandleFinalize(
 	return next.HandleFinalize(ctx, input)
 }
 
-// DecompressGzipMiddleware provides the middleware for decompressing a gzip
+// DecompressGzip provides the middleware for decompressing a gzip
 // response from the service.
-type DecompressGzipMiddleware struct{}
+type DecompressGzip struct{}
 
 // ID returns the id for the middleware.
-func (*DecompressGzipMiddleware) ID() string { return "DecompressGzipMiddleware" }
+func (*DecompressGzip) ID() string { return "DecompressGzip" }
 
 // HandleDeserialize implements the DeserializeMiddlware interface.
-func (*DecompressGzipMiddleware) HandleDeserialize(
+func (*DecompressGzip) HandleDeserialize(
 	ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler,
 ) (
 	output middleware.DeserializeOutput, metadata middleware.Metadata, err error,

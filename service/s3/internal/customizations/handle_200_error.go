@@ -11,6 +11,7 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
 )
@@ -18,8 +19,8 @@ import (
 // HandleResponseErrorWith200Status check for S3 200 error response.
 // If an s3 200 error is found, status code for the response is modified temporarily to
 // 5xx response status code.
-func HandleResponseErrorWith200Status(stack *middleware.Stack) {
-	stack.Deserialize.Insert(&processResponseFor200ErrorMiddleware{}, "OperationDeserializer", middleware.After)
+func HandleResponseErrorWith200Status(stack *middleware.Stack) error {
+	return stack.Deserialize.Insert(&processResponseFor200ErrorMiddleware{}, smithyid.OperationDeserializer, middleware.After)
 }
 
 // middleware to process raw response and look for error response with 200 status code

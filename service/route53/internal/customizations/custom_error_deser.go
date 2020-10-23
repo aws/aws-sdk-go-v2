@@ -11,6 +11,7 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
@@ -22,8 +23,8 @@ import (
 // HandleCustomErrorDeserialization check if Route53 response is an error and needs
 // custom error deserialization.
 //
-func HandleCustomErrorDeserialization(stack *middleware.Stack) {
-	stack.Deserialize.Insert(&processResponseMiddleware{}, "OperationDeserializer", middleware.After)
+func HandleCustomErrorDeserialization(stack *middleware.Stack) error {
+	return stack.Deserialize.Insert(&processResponseMiddleware{}, smithyid.OperationDeserializer, middleware.After)
 }
 
 // middleware to process raw response and look for error response with InvalidChangeBatch error tag

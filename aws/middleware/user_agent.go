@@ -7,6 +7,7 @@ import (
 	"runtime"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -90,7 +91,7 @@ func (u *requestUserAgent) AddKeyValue(key, value string) {
 
 // ID the name of the middleware.
 func (u *requestUserAgent) ID() string {
-	return "requestUserAgent"
+	return id.UserAgent
 }
 
 // HandleBuild adds or appends the constructed user agent to the request.

@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
@@ -40,16 +41,17 @@ type UpdateEndpointOptions struct {
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
-func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
-
+func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) error {
 	// enable dual stack support
-	stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
+	if err := stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
 		UseDualstack: options.UseDualstack,
 		ServiceID:    "s3",
-	}, "OperationSerializer", middleware.After)
+	}, smithyid.OperationSerializer, middleware.After); err != nil {
+		return err
+	}
 
 	// update endpoint to use options for path style and accelerate
-	stack.Serialize.Insert(&updateEndpointMiddleware{
+	return stack.Serialize.Insert(&updateEndpointMiddleware{
 		region:             options.Region,
 		usePathStyle:       options.UsePathStyle,
 		getBucketFromInput: options.GetBucketFromInput,
@@ -58,7 +60,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
 	}, (&s3shared.EnableDualstackMiddleware{}).ID(), middleware.After)
 }
 
-type updateEndpointMiddleware struct {
+type updateEndpoint struct {
 	region string
 
 	// path style options
@@ -71,9 +73,9 @@ type updateEndpointMiddleware struct {
 }
 
 // ID returns the middleware ID.
-func (*updateEndpointMiddleware) ID() string { return "S3:UpdateEndpointMiddleware" }
+func (*updateEndpoint) ID() string { return "S3:UpdateEndpoint" }
 
-func (u *updateEndpointMiddleware) HandleSerialize(
+func (u *updateEndpoint) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
@@ -109,7 +111,7 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func (u updateEndpointMiddleware) updateEndpointFromConfig(req *http.Request, bucket string) error {
+func (u updateEndpoint) updateEndpointFromConfig(req *http.Request, bucket string) error {
 	// do nothing if path style is enforced
 	if u.usePathStyle {
 		return nil

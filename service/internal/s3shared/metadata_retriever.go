@@ -9,21 +9,21 @@ import (
 )
 
 // AddMetadataRetrieverMiddleware adds request id, host id retriever middleware
-func AddMetadataRetrieverMiddleware(stack *middleware.Stack) {
+func AddMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	// add metadata retriever middleware before operation deserializers so that it can retrieve metadata such as
 	// host id, request id from response header returned by operation deserializers
-	stack.Deserialize.Insert(&metadataRetrieverMiddleware{}, "OperationDeserializer", middleware.Before)
+	return stack.Deserialize.Add(&metadataRetriever{}, middleware.After)
 }
 
-type metadataRetrieverMiddleware struct {
+type metadataRetriever struct {
 }
 
 // ID returns the middleware identifier
-func (m *metadataRetrieverMiddleware) ID() string {
-	return "S3MetadataRetrieverMiddleware"
+func (m *metadataRetriever) ID() string {
+	return "S3MetadataRetriever"
 }
 
-func (m *metadataRetrieverMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *metadataRetriever) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)

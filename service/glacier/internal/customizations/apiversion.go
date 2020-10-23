@@ -12,20 +12,20 @@ const glacierAPIVersionHeaderKey = "X-Amz-Glacier-Version"
 
 // AddGlacierAPIVersionMiddleware explicitly add handling for the Glacier api version
 // middleware to the operation stack.
-func AddGlacierAPIVersionMiddleware(stack *middleware.Stack, apiVersion string) {
-	stack.Serialize.Add(&GlacierAPIVersionMiddleware{apiVersion: apiVersion}, middleware.Before)
+func AddGlacierAPIVersionMiddleware(stack *middleware.Stack, apiVersion string) error {
+	return stack.Serialize.Add(&GlacierAPIVersion{apiVersion: apiVersion}, middleware.Before)
 }
 
-// GlacierAPIVersionMiddleware handles automatically setting Glacier's API version header.
-type GlacierAPIVersionMiddleware struct{
+// GlacierAPIVersion handles automatically setting Glacier's API version header.
+type GlacierAPIVersion struct {
 	apiVersion string
 }
 
 // ID returns the id for the middleware.
-func (*GlacierAPIVersionMiddleware) ID() string { return "Glacier:APIVersion" }
+func (*GlacierAPIVersion) ID() string { return "Glacier:APIVersion" }
 
 // HandleSerialize implements the SerializeMiddleware interface
-func (m *GlacierAPIVersionMiddleware) HandleSerialize(
+func (m *GlacierAPIVersion) HandleSerialize(
 	ctx context.Context, input middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	output middleware.SerializeOutput, metadata middleware.Metadata, err error,
