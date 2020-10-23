@@ -94,6 +94,7 @@ func addOperationCreateVPCAssociationAuthorizationMiddlewares(stack *middleware.
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVPCAssociationAuthorization(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

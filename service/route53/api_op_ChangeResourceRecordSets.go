@@ -142,6 +142,7 @@ func addOperationChangeResourceRecordSetsMiddlewares(stack *middleware.Stack, op
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	route53cust.HandleCustomErrorDeserialization(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

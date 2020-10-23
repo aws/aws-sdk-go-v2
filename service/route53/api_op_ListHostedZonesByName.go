@@ -165,6 +165,7 @@ func addOperationListHostedZonesByNameMiddlewares(stack *middleware.Stack, optio
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZonesByName(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

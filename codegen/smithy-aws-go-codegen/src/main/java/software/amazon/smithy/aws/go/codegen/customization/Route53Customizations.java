@@ -3,7 +3,9 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -143,12 +145,17 @@ public class Route53Customizations implements GoIntegration {
         }
 
         StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-        Optional<MemberShape> targetMember = input.getAllMembers().values().stream().findFirst().filter(
+        List<MemberShape> targetMembers = input.getAllMembers().values().stream().filter(
                 memberShape -> memberShape.getTarget().getName().equalsIgnoreCase("ResourceId") ||
                         memberShape.getTarget().getName().equalsIgnoreCase("DelegationSetId")
-        );
+        ).collect(Collectors.toList());
 
-        return targetMember.isPresent();
+        if (targetMembers.size() >1 ){
+            throw new CodegenException(String.format("Route53 service has ResourceId, DelegationSetId members " +
+                            "modeled on %s shape", input.getId().getName()));
+        }
+
+        return targetMembers.size() != 0;
     }
 
     // returns true if service is route53

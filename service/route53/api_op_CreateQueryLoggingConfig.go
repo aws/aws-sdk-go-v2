@@ -178,6 +178,7 @@ func addOperationCreateQueryLoggingConfigMiddlewares(stack *middleware.Stack, op
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQueryLoggingConfig(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 
