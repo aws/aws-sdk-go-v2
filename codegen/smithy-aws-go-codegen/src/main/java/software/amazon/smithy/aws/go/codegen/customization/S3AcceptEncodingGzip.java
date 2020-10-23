@@ -59,8 +59,8 @@ public class S3AcceptEncodingGzip implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", GZIP_DISABLE, () -> {
-            writer.write("$T(stack, $T{})",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", GZIP_DISABLE, () -> {
+            writer.write("return $T(stack, $T{})",
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER,
                             AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER + "Options",

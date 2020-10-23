@@ -186,7 +186,7 @@ final class EndpointGenerator implements Runnable {
     private void generateMiddleware(GoWriter writer) {
         // Generate middleware definition
         GoStackStepMiddlewareGenerator middleware = GoStackStepMiddlewareGenerator.createSerializeStepMiddleware(
-                MIDDLEWARE_NAME, MIDDLEWARE_NAME);
+                MIDDLEWARE_NAME, AwsSlotUtils.awsSymbolId("ResolveEndpoint"));
         middleware.writeMiddleware(writer, this::generateMiddlewareResolverBody,
                 this::generateMiddlewareStructureMembers);
 

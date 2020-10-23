@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
+import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;

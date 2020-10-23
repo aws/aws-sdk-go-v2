@@ -120,9 +120,9 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     }
 
     private void writeMiddlewareRegister(Model model, GoWriter writer, ServiceShape serviceShape) {
-        writer.openBlock("func $L(stack $P, o Options) {", "}", REGISTER_MIDDLEWARE_FUNCTION,
+        writer.openBlock("func $L(stack $P, o Options) error {", "}", REGISTER_MIDDLEWARE_FUNCTION,
                 SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                    writer.write("stack.Finalize.Add($T(o.$L, o.$L), middleware.After)",
+                    writer.write("return stack.Finalize.Add($T(o.$L, o.$L), middleware.After)",
                             SymbolUtils.createValueSymbolBuilder("NewSignHTTPRequestMiddleware",
                                     AwsGoDependency.AWS_SIGNER_V4).build(),
                             AddAwsConfigFields.CREDENTIALS_CONFIG_NAME, SIGNER_CONFIG_FIELD_NAME);

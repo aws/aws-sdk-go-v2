@@ -48,8 +48,8 @@ public class AWSResponseErrorWrapper implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", ADD_ERROR_MIDDLEWARE, () -> {
-            writer.write("$T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_ERROR_MIDDLEWARE, () -> {
+            writer.write("return $T(stack)",
                     SymbolUtils.createValueSymbolBuilder(ADD_ERROR_MIDDLEWARE_INTERNAL,
                             AwsGoDependency.AWS_HTTP_TRANSPORT).build()
             );

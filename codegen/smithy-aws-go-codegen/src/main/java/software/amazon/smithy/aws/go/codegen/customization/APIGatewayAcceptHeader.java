@@ -66,8 +66,8 @@ public class APIGatewayAcceptHeader implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", ADD_ACCEPT_HEADER, () -> {
-            writer.write("$T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_ACCEPT_HEADER, () -> {
+            writer.write("return $T(stack)",
                     SymbolUtils.createValueSymbolBuilder(ACCEPT_HEADER_INTERNAL_ADDER,
                             AwsCustomGoDependency.APIGATEWAY_CUSTOMIZATION).build()
             );

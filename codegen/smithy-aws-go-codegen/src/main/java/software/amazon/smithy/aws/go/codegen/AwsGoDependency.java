@@ -27,6 +27,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_EC2QUERY_PROTOCOL = aws("aws/protocol/ec2query");
     public static final GoDependency AWS_CORE = aws("aws");
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
+    public static final GoDependency AWS_MIDDLEWARE_ID = aws("aws/middleware/id", "awsid");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
     public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
