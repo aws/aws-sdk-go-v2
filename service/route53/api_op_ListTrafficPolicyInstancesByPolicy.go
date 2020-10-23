@@ -154,6 +154,7 @@ func addOperationListTrafficPolicyInstancesByPolicyMiddlewares(stack *middleware
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficPolicyInstancesByPolicy(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

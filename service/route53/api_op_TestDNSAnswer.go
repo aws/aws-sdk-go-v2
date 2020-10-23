@@ -142,6 +142,7 @@ func addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, options Optio
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestDNSAnswer(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

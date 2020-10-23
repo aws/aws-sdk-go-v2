@@ -105,6 +105,7 @@ func addOperationDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stac
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateVPCFromHostedZone(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 

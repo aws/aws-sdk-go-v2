@@ -169,6 +169,7 @@ func addOperationCreateHostedZoneMiddlewares(stack *middleware.Stack, options Op
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHostedZone(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 	return nil
 }
 
