@@ -10,6 +10,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
@@ -20,7 +21,7 @@ type awsRestxml_serializeOpCreateAccessPoint struct {
 }
 
 func (*awsRestxml_serializeOpCreateAccessPoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateAccessPoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -162,7 +163,7 @@ type awsRestxml_serializeOpCreateBucket struct {
 }
 
 func (*awsRestxml_serializeOpCreateBucket) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -302,7 +303,7 @@ type awsRestxml_serializeOpCreateJob struct {
 }
 
 func (*awsRestxml_serializeOpCreateJob) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -502,7 +503,7 @@ type awsRestxml_serializeOpDeleteAccessPoint struct {
 }
 
 func (*awsRestxml_serializeOpDeleteAccessPoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteAccessPoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -585,7 +586,7 @@ type awsRestxml_serializeOpDeleteAccessPointPolicy struct {
 }
 
 func (*awsRestxml_serializeOpDeleteAccessPointPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteAccessPointPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -668,7 +669,7 @@ type awsRestxml_serializeOpDeleteBucket struct {
 }
 
 func (*awsRestxml_serializeOpDeleteBucket) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteBucket) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -751,7 +752,7 @@ type awsRestxml_serializeOpDeleteBucketLifecycleConfiguration struct {
 }
 
 func (*awsRestxml_serializeOpDeleteBucketLifecycleConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteBucketLifecycleConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -834,7 +835,7 @@ type awsRestxml_serializeOpDeleteBucketPolicy struct {
 }
 
 func (*awsRestxml_serializeOpDeleteBucketPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteBucketPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -917,7 +918,7 @@ type awsRestxml_serializeOpDeleteBucketTagging struct {
 }
 
 func (*awsRestxml_serializeOpDeleteBucketTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteBucketTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1000,7 +1001,7 @@ type awsRestxml_serializeOpDeleteJobTagging struct {
 }
 
 func (*awsRestxml_serializeOpDeleteJobTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteJobTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1083,7 +1084,7 @@ type awsRestxml_serializeOpDeletePublicAccessBlock struct {
 }
 
 func (*awsRestxml_serializeOpDeletePublicAccessBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1154,7 +1155,7 @@ type awsRestxml_serializeOpDescribeJob struct {
 }
 
 func (*awsRestxml_serializeOpDescribeJob) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDescribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1237,7 +1238,7 @@ type awsRestxml_serializeOpGetAccessPoint struct {
 }
 
 func (*awsRestxml_serializeOpGetAccessPoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetAccessPoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1320,7 +1321,7 @@ type awsRestxml_serializeOpGetAccessPointPolicy struct {
 }
 
 func (*awsRestxml_serializeOpGetAccessPointPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetAccessPointPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1403,7 +1404,7 @@ type awsRestxml_serializeOpGetAccessPointPolicyStatus struct {
 }
 
 func (*awsRestxml_serializeOpGetAccessPointPolicyStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetAccessPointPolicyStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1486,7 +1487,7 @@ type awsRestxml_serializeOpGetBucket struct {
 }
 
 func (*awsRestxml_serializeOpGetBucket) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetBucket) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1569,7 +1570,7 @@ type awsRestxml_serializeOpGetBucketLifecycleConfiguration struct {
 }
 
 func (*awsRestxml_serializeOpGetBucketLifecycleConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetBucketLifecycleConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1652,7 +1653,7 @@ type awsRestxml_serializeOpGetBucketPolicy struct {
 }
 
 func (*awsRestxml_serializeOpGetBucketPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetBucketPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1735,7 +1736,7 @@ type awsRestxml_serializeOpGetBucketTagging struct {
 }
 
 func (*awsRestxml_serializeOpGetBucketTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetBucketTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1818,7 +1819,7 @@ type awsRestxml_serializeOpGetJobTagging struct {
 }
 
 func (*awsRestxml_serializeOpGetJobTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetJobTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1901,7 +1902,7 @@ type awsRestxml_serializeOpGetPublicAccessBlock struct {
 }
 
 func (*awsRestxml_serializeOpGetPublicAccessBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1972,7 +1973,7 @@ type awsRestxml_serializeOpListAccessPoints struct {
 }
 
 func (*awsRestxml_serializeOpListAccessPoints) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListAccessPoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2055,7 +2056,7 @@ type awsRestxml_serializeOpListJobs struct {
 }
 
 func (*awsRestxml_serializeOpListJobs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2140,7 +2141,7 @@ type awsRestxml_serializeOpListRegionalBuckets struct {
 }
 
 func (*awsRestxml_serializeOpListRegionalBuckets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListRegionalBuckets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2226,7 +2227,7 @@ type awsRestxml_serializeOpPutAccessPointPolicy struct {
 }
 
 func (*awsRestxml_serializeOpPutAccessPointPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutAccessPointPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2342,7 +2343,7 @@ type awsRestxml_serializeOpPutBucketLifecycleConfiguration struct {
 }
 
 func (*awsRestxml_serializeOpPutBucketLifecycleConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2447,7 +2448,7 @@ type awsRestxml_serializeOpPutBucketPolicy struct {
 }
 
 func (*awsRestxml_serializeOpPutBucketPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2568,7 +2569,7 @@ type awsRestxml_serializeOpPutBucketTagging struct {
 }
 
 func (*awsRestxml_serializeOpPutBucketTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2673,7 +2674,7 @@ type awsRestxml_serializeOpPutJobTagging struct {
 }
 
 func (*awsRestxml_serializeOpPutJobTagging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutJobTagging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2791,7 +2792,7 @@ type awsRestxml_serializeOpPutPublicAccessBlock struct {
 }
 
 func (*awsRestxml_serializeOpPutPublicAccessBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2884,7 +2885,7 @@ type awsRestxml_serializeOpUpdateJobPriority struct {
 }
 
 func (*awsRestxml_serializeOpUpdateJobPriority) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateJobPriority) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2971,7 +2972,7 @@ type awsRestxml_serializeOpUpdateJobStatus struct {
 }
 
 func (*awsRestxml_serializeOpUpdateJobStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateJobStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

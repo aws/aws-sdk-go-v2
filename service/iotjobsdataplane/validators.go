@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDescribeJobExecution struct {
 }
 
 func (*validateOpDescribeJobExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeJobExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpGetPendingJobExecutions struct {
 }
 
 func (*validateOpGetPendingJobExecutions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetPendingJobExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpStartNextPendingJobExecution struct {
 }
 
 func (*validateOpStartNextPendingJobExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartNextPendingJobExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpUpdateJobExecution struct {
 }
 
 func (*validateOpUpdateJobExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateJobExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

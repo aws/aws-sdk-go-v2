@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAcceptSharedDirectory struct {
 }
 
 func (*validateOpAcceptSharedDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAcceptSharedDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpAddIpRoutes struct {
 }
 
 func (*validateOpAddIpRoutes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddIpRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpAddTagsToResource struct {
 }
 
 func (*validateOpAddTagsToResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddTagsToResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpCancelSchemaExtension struct {
 }
 
 func (*validateOpCancelSchemaExtension) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCancelSchemaExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpConnectDirectory struct {
 }
 
 func (*validateOpConnectDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpConnectDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpCreateAlias struct {
 }
 
 func (*validateOpCreateAlias) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpCreateComputer struct {
 }
 
 func (*validateOpCreateComputer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateComputer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -154,7 +155,7 @@ type validateOpCreateConditionalForwarder struct {
 }
 
 func (*validateOpCreateConditionalForwarder) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateConditionalForwarder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -174,7 +175,7 @@ type validateOpCreateDirectory struct {
 }
 
 func (*validateOpCreateDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -194,7 +195,7 @@ type validateOpCreateLogSubscription struct {
 }
 
 func (*validateOpCreateLogSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateLogSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -214,7 +215,7 @@ type validateOpCreateMicrosoftAD struct {
 }
 
 func (*validateOpCreateMicrosoftAD) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateMicrosoftAD) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -234,7 +235,7 @@ type validateOpCreateSnapshot struct {
 }
 
 func (*validateOpCreateSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -254,7 +255,7 @@ type validateOpCreateTrust struct {
 }
 
 func (*validateOpCreateTrust) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateTrust) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -274,7 +275,7 @@ type validateOpDeleteConditionalForwarder struct {
 }
 
 func (*validateOpDeleteConditionalForwarder) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteConditionalForwarder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -294,7 +295,7 @@ type validateOpDeleteDirectory struct {
 }
 
 func (*validateOpDeleteDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -314,7 +315,7 @@ type validateOpDeleteLogSubscription struct {
 }
 
 func (*validateOpDeleteLogSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteLogSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -334,7 +335,7 @@ type validateOpDeleteSnapshot struct {
 }
 
 func (*validateOpDeleteSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -354,7 +355,7 @@ type validateOpDeleteTrust struct {
 }
 
 func (*validateOpDeleteTrust) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteTrust) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -374,7 +375,7 @@ type validateOpDeregisterCertificate struct {
 }
 
 func (*validateOpDeregisterCertificate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeregisterCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -394,7 +395,7 @@ type validateOpDeregisterEventTopic struct {
 }
 
 func (*validateOpDeregisterEventTopic) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeregisterEventTopic) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -414,7 +415,7 @@ type validateOpDescribeCertificate struct {
 }
 
 func (*validateOpDescribeCertificate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -434,7 +435,7 @@ type validateOpDescribeConditionalForwarders struct {
 }
 
 func (*validateOpDescribeConditionalForwarders) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeConditionalForwarders) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -454,7 +455,7 @@ type validateOpDescribeDomainControllers struct {
 }
 
 func (*validateOpDescribeDomainControllers) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDomainControllers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -474,7 +475,7 @@ type validateOpDescribeLDAPSSettings struct {
 }
 
 func (*validateOpDescribeLDAPSSettings) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeLDAPSSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -494,7 +495,7 @@ type validateOpDescribeSharedDirectories struct {
 }
 
 func (*validateOpDescribeSharedDirectories) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeSharedDirectories) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -514,7 +515,7 @@ type validateOpDisableLDAPS struct {
 }
 
 func (*validateOpDisableLDAPS) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisableLDAPS) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -534,7 +535,7 @@ type validateOpDisableRadius struct {
 }
 
 func (*validateOpDisableRadius) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisableRadius) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -554,7 +555,7 @@ type validateOpDisableSso struct {
 }
 
 func (*validateOpDisableSso) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisableSso) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -574,7 +575,7 @@ type validateOpEnableLDAPS struct {
 }
 
 func (*validateOpEnableLDAPS) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpEnableLDAPS) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -594,7 +595,7 @@ type validateOpEnableRadius struct {
 }
 
 func (*validateOpEnableRadius) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpEnableRadius) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -614,7 +615,7 @@ type validateOpEnableSso struct {
 }
 
 func (*validateOpEnableSso) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpEnableSso) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -634,7 +635,7 @@ type validateOpGetSnapshotLimits struct {
 }
 
 func (*validateOpGetSnapshotLimits) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetSnapshotLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -654,7 +655,7 @@ type validateOpListCertificates struct {
 }
 
 func (*validateOpListCertificates) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListCertificates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -674,7 +675,7 @@ type validateOpListIpRoutes struct {
 }
 
 func (*validateOpListIpRoutes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListIpRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -694,7 +695,7 @@ type validateOpListSchemaExtensions struct {
 }
 
 func (*validateOpListSchemaExtensions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListSchemaExtensions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -714,7 +715,7 @@ type validateOpListTagsForResource struct {
 }
 
 func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -734,7 +735,7 @@ type validateOpRegisterCertificate struct {
 }
 
 func (*validateOpRegisterCertificate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRegisterCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -754,7 +755,7 @@ type validateOpRegisterEventTopic struct {
 }
 
 func (*validateOpRegisterEventTopic) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRegisterEventTopic) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -774,7 +775,7 @@ type validateOpRejectSharedDirectory struct {
 }
 
 func (*validateOpRejectSharedDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRejectSharedDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -794,7 +795,7 @@ type validateOpRemoveIpRoutes struct {
 }
 
 func (*validateOpRemoveIpRoutes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveIpRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -814,7 +815,7 @@ type validateOpRemoveTagsFromResource struct {
 }
 
 func (*validateOpRemoveTagsFromResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveTagsFromResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -834,7 +835,7 @@ type validateOpResetUserPassword struct {
 }
 
 func (*validateOpResetUserPassword) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpResetUserPassword) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -854,7 +855,7 @@ type validateOpRestoreFromSnapshot struct {
 }
 
 func (*validateOpRestoreFromSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreFromSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -874,7 +875,7 @@ type validateOpShareDirectory struct {
 }
 
 func (*validateOpShareDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpShareDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -894,7 +895,7 @@ type validateOpStartSchemaExtension struct {
 }
 
 func (*validateOpStartSchemaExtension) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartSchemaExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -914,7 +915,7 @@ type validateOpUnshareDirectory struct {
 }
 
 func (*validateOpUnshareDirectory) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUnshareDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -934,7 +935,7 @@ type validateOpUpdateConditionalForwarder struct {
 }
 
 func (*validateOpUpdateConditionalForwarder) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateConditionalForwarder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -954,7 +955,7 @@ type validateOpUpdateNumberOfDomainControllers struct {
 }
 
 func (*validateOpUpdateNumberOfDomainControllers) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateNumberOfDomainControllers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -974,7 +975,7 @@ type validateOpUpdateRadius struct {
 }
 
 func (*validateOpUpdateRadius) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateRadius) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -994,7 +995,7 @@ type validateOpUpdateTrust struct {
 }
 
 func (*validateOpUpdateTrust) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateTrust) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1014,7 +1015,7 @@ type validateOpVerifyTrust struct {
 }
 
 func (*validateOpVerifyTrust) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpVerifyTrust) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

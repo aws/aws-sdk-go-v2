@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDeleteTerminology struct {
 }
 
 func (*validateOpDeleteTerminology) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteTerminology) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpDescribeTextTranslationJob struct {
 }
 
 func (*validateOpDescribeTextTranslationJob) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTextTranslationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpGetTerminology struct {
 }
 
 func (*validateOpGetTerminology) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetTerminology) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpImportTerminology struct {
 }
 
 func (*validateOpImportTerminology) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpImportTerminology) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpStartTextTranslationJob struct {
 }
 
 func (*validateOpStartTextTranslationJob) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartTextTranslationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpStopTextTranslationJob struct {
 }
 
 func (*validateOpStopTextTranslationJob) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopTextTranslationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpTranslateText struct {
 }
 
 func (*validateOpTranslateText) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpTranslateText) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

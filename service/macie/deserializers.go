@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -21,7 +22,7 @@ type awsAwsjson11_deserializeOpAssociateMemberAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateMemberAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateMemberAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -138,7 +139,7 @@ type awsAwsjson11_deserializeOpAssociateS3Resources struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateS3Resources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateS3Resources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -258,7 +259,7 @@ type awsAwsjson11_deserializeOpDisassociateMemberAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisassociateMemberAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisassociateMemberAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -372,7 +373,7 @@ type awsAwsjson11_deserializeOpDisassociateS3Resources struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisassociateS3Resources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisassociateS3Resources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -489,7 +490,7 @@ type awsAwsjson11_deserializeOpListMemberAccounts struct {
 }
 
 func (*awsAwsjson11_deserializeOpListMemberAccounts) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListMemberAccounts) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -603,7 +604,7 @@ type awsAwsjson11_deserializeOpListS3Resources struct {
 }
 
 func (*awsAwsjson11_deserializeOpListS3Resources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListS3Resources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -720,7 +721,7 @@ type awsAwsjson11_deserializeOpUpdateS3Resources struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateS3Resources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateS3Resources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

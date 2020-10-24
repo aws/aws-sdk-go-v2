@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -22,7 +23,7 @@ type awsRestjson1_deserializeOpDeleteConnection struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -111,7 +112,7 @@ type awsRestjson1_deserializeOpGetConnection struct {
 }
 
 func (*awsRestjson1_deserializeOpGetConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -290,7 +291,7 @@ type awsRestjson1_deserializeOpPostToConnection struct {
 }
 
 func (*awsRestjson1_deserializeOpPostToConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpPostToConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

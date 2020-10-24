@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpConstantQueryString struct {
 }
 
 func (*validateOpConstantQueryString) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpConstantQueryString) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpHttpRequestWithGreedyLabelInPath struct {
 }
 
 func (*validateOpHttpRequestWithGreedyLabelInPath) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpHttpRequestWithGreedyLabelInPath) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpHttpRequestWithLabelsAndTimestampFormat struct {
 }
 
 func (*validateOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpHttpRequestWithLabelsAndTimestampFormat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpHttpRequestWithLabels struct {
 }
 
 func (*validateOpHttpRequestWithLabels) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpHttpRequestWithLabels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

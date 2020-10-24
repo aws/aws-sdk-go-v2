@@ -39,6 +39,45 @@ const (
 	LanguageCodeAr_ae LanguageCode = "ar-AE"
 )
 
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en-US",
+		"es-US",
+		"en-AU",
+		"fr-CA",
+		"en-GB",
+		"de-DE",
+		"pt-BR",
+		"fr-FR",
+		"it-IT",
+		"ko-KR",
+		"es-ES",
+		"en-IN",
+		"hi-IN",
+		"ar-SA",
+		"ru-RU",
+		"zh-CN",
+		"nl-NL",
+		"id-ID",
+		"ta-IN",
+		"fa-IR",
+		"en-IE",
+		"en-AB",
+		"en-WL",
+		"pt-PT",
+		"te-IN",
+		"tr-TR",
+		"de-CH",
+		"he-IL",
+		"ms-MY",
+		"ja-JP",
+		"ar-AE",
+	}
+}
+
 type MediaFormat string
 
 // Enum values for MediaFormat
@@ -49,6 +88,18 @@ const (
 	MediaFormatFlac MediaFormat = "flac"
 )
 
+// Values returns all known values for MediaFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MediaFormat) Values() []MediaFormat {
+	return []MediaFormat{
+		"mp3",
+		"mp4",
+		"wav",
+		"flac",
+	}
+}
+
 type OutputLocationType string
 
 // Enum values for OutputLocationType
@@ -56,6 +107,16 @@ const (
 	OutputLocationTypeCustomer_bucket OutputLocationType = "CUSTOMER_BUCKET"
 	OutputLocationTypeService_bucket  OutputLocationType = "SERVICE_BUCKET"
 )
+
+// Values returns all known values for OutputLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutputLocationType) Values() []OutputLocationType {
+	return []OutputLocationType{
+		"CUSTOMER_BUCKET",
+		"SERVICE_BUCKET",
+	}
+}
 
 type RedactionOutput string
 
@@ -65,6 +126,16 @@ const (
 	RedactionOutputRedacted_and_unredacted RedactionOutput = "redacted_and_unredacted"
 )
 
+// Values returns all known values for RedactionOutput. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RedactionOutput) Values() []RedactionOutput {
+	return []RedactionOutput{
+		"redacted",
+		"redacted_and_unredacted",
+	}
+}
+
 type RedactionType string
 
 // Enum values for RedactionType
@@ -72,12 +143,30 @@ const (
 	RedactionTypePii RedactionType = "PII"
 )
 
+// Values returns all known values for RedactionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RedactionType) Values() []RedactionType {
+	return []RedactionType{
+		"PII",
+	}
+}
+
 type Specialty string
 
 // Enum values for Specialty
 const (
 	SpecialtyPrimarycare Specialty = "PRIMARYCARE"
 )
+
+// Values returns all known values for Specialty. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Specialty) Values() []Specialty {
+	return []Specialty{
+		"PRIMARYCARE",
+	}
+}
 
 type TranscriptionJobStatus string
 
@@ -89,6 +178,18 @@ const (
 	TranscriptionJobStatusCompleted   TranscriptionJobStatus = "COMPLETED"
 )
 
+// Values returns all known values for TranscriptionJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TranscriptionJobStatus) Values() []TranscriptionJobStatus {
+	return []TranscriptionJobStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type Type string
 
 // Enum values for Type
@@ -96,6 +197,16 @@ const (
 	TypeConversation Type = "CONVERSATION"
 	TypeDictation    Type = "DICTATION"
 )
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"CONVERSATION",
+		"DICTATION",
+	}
+}
 
 type VocabularyFilterMethod string
 
@@ -105,6 +216,16 @@ const (
 	VocabularyFilterMethodMask   VocabularyFilterMethod = "mask"
 )
 
+// Values returns all known values for VocabularyFilterMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VocabularyFilterMethod) Values() []VocabularyFilterMethod {
+	return []VocabularyFilterMethod{
+		"remove",
+		"mask",
+	}
+}
+
 type VocabularyState string
 
 // Enum values for VocabularyState
@@ -113,3 +234,14 @@ const (
 	VocabularyStateReady   VocabularyState = "READY"
 	VocabularyStateFailed  VocabularyState = "FAILED"
 )
+
+// Values returns all known values for VocabularyState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VocabularyState) Values() []VocabularyState {
+	return []VocabularyState{
+		"PENDING",
+		"READY",
+		"FAILED",
+	}
+}

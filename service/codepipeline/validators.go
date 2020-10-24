@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAcknowledgeJob struct {
 }
 
 func (*validateOpAcknowledgeJob) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAcknowledgeJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpAcknowledgeThirdPartyJob struct {
 }
 
 func (*validateOpAcknowledgeThirdPartyJob) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAcknowledgeThirdPartyJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpCreateCustomActionType struct {
 }
 
 func (*validateOpCreateCustomActionType) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateCustomActionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpCreatePipeline struct {
 }
 
 func (*validateOpCreatePipeline) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreatePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpDeleteCustomActionType struct {
 }
 
 func (*validateOpDeleteCustomActionType) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteCustomActionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpDeletePipeline struct {
 }
 
 func (*validateOpDeletePipeline) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeletePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpDeleteWebhook struct {
 }
 
 func (*validateOpDeleteWebhook) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteWebhook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -154,7 +155,7 @@ type validateOpDisableStageTransition struct {
 }
 
 func (*validateOpDisableStageTransition) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisableStageTransition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -174,7 +175,7 @@ type validateOpEnableStageTransition struct {
 }
 
 func (*validateOpEnableStageTransition) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpEnableStageTransition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -194,7 +195,7 @@ type validateOpGetJobDetails struct {
 }
 
 func (*validateOpGetJobDetails) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetJobDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -214,7 +215,7 @@ type validateOpGetPipelineExecution struct {
 }
 
 func (*validateOpGetPipelineExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -234,7 +235,7 @@ type validateOpGetPipeline struct {
 }
 
 func (*validateOpGetPipeline) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetPipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -254,7 +255,7 @@ type validateOpGetPipelineState struct {
 }
 
 func (*validateOpGetPipelineState) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetPipelineState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -274,7 +275,7 @@ type validateOpGetThirdPartyJobDetails struct {
 }
 
 func (*validateOpGetThirdPartyJobDetails) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetThirdPartyJobDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -294,7 +295,7 @@ type validateOpListActionExecutions struct {
 }
 
 func (*validateOpListActionExecutions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListActionExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -314,7 +315,7 @@ type validateOpListPipelineExecutions struct {
 }
 
 func (*validateOpListPipelineExecutions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListPipelineExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -334,7 +335,7 @@ type validateOpListTagsForResource struct {
 }
 
 func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -354,7 +355,7 @@ type validateOpPollForJobs struct {
 }
 
 func (*validateOpPollForJobs) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPollForJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -374,7 +375,7 @@ type validateOpPollForThirdPartyJobs struct {
 }
 
 func (*validateOpPollForThirdPartyJobs) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPollForThirdPartyJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -394,7 +395,7 @@ type validateOpPutActionRevision struct {
 }
 
 func (*validateOpPutActionRevision) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutActionRevision) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -414,7 +415,7 @@ type validateOpPutApprovalResult struct {
 }
 
 func (*validateOpPutApprovalResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutApprovalResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -434,7 +435,7 @@ type validateOpPutJobFailureResult struct {
 }
 
 func (*validateOpPutJobFailureResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutJobFailureResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -454,7 +455,7 @@ type validateOpPutJobSuccessResult struct {
 }
 
 func (*validateOpPutJobSuccessResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutJobSuccessResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -474,7 +475,7 @@ type validateOpPutThirdPartyJobFailureResult struct {
 }
 
 func (*validateOpPutThirdPartyJobFailureResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutThirdPartyJobFailureResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -494,7 +495,7 @@ type validateOpPutThirdPartyJobSuccessResult struct {
 }
 
 func (*validateOpPutThirdPartyJobSuccessResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutThirdPartyJobSuccessResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -514,7 +515,7 @@ type validateOpPutWebhook struct {
 }
 
 func (*validateOpPutWebhook) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutWebhook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -534,7 +535,7 @@ type validateOpRetryStageExecution struct {
 }
 
 func (*validateOpRetryStageExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRetryStageExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -554,7 +555,7 @@ type validateOpStartPipelineExecution struct {
 }
 
 func (*validateOpStartPipelineExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -574,7 +575,7 @@ type validateOpStopPipelineExecution struct {
 }
 
 func (*validateOpStopPipelineExecution) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -594,7 +595,7 @@ type validateOpTagResource struct {
 }
 
 func (*validateOpTagResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -614,7 +615,7 @@ type validateOpUntagResource struct {
 }
 
 func (*validateOpUntagResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -634,7 +635,7 @@ type validateOpUpdatePipeline struct {
 }
 
 func (*validateOpUpdatePipeline) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdatePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

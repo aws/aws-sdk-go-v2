@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpAbortMultipartUpload struct {
 }
 
 func (*awsRestjson1_serializeOpAbortMultipartUpload) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAbortMultipartUpload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -108,7 +109,7 @@ type awsRestjson1_serializeOpAbortVaultLock struct {
 }
 
 func (*awsRestjson1_serializeOpAbortVaultLock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAbortVaultLock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -186,7 +187,7 @@ type awsRestjson1_serializeOpAddTagsToVault struct {
 }
 
 func (*awsRestjson1_serializeOpAddTagsToVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAddTagsToVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -289,7 +290,7 @@ type awsRestjson1_serializeOpCompleteMultipartUpload struct {
 }
 
 func (*awsRestjson1_serializeOpCompleteMultipartUpload) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCompleteMultipartUpload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -393,7 +394,7 @@ type awsRestjson1_serializeOpCompleteVaultLock struct {
 }
 
 func (*awsRestjson1_serializeOpCompleteVaultLock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCompleteVaultLock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -483,7 +484,7 @@ type awsRestjson1_serializeOpCreateVault struct {
 }
 
 func (*awsRestjson1_serializeOpCreateVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -561,7 +562,7 @@ type awsRestjson1_serializeOpDeleteArchive struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteArchive) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteArchive) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -651,7 +652,7 @@ type awsRestjson1_serializeOpDeleteVault struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -729,7 +730,7 @@ type awsRestjson1_serializeOpDeleteVaultAccessPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteVaultAccessPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteVaultAccessPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -807,7 +808,7 @@ type awsRestjson1_serializeOpDeleteVaultNotifications struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteVaultNotifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteVaultNotifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -885,7 +886,7 @@ type awsRestjson1_serializeOpDescribeJob struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeJob) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -975,7 +976,7 @@ type awsRestjson1_serializeOpDescribeVault struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1053,7 +1054,7 @@ type awsRestjson1_serializeOpGetDataRetrievalPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpGetDataRetrievalPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDataRetrievalPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1119,7 +1120,7 @@ type awsRestjson1_serializeOpGetJobOutput struct {
 }
 
 func (*awsRestjson1_serializeOpGetJobOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetJobOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1216,7 +1217,7 @@ type awsRestjson1_serializeOpGetVaultAccessPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpGetVaultAccessPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetVaultAccessPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1294,7 +1295,7 @@ type awsRestjson1_serializeOpGetVaultLock struct {
 }
 
 func (*awsRestjson1_serializeOpGetVaultLock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetVaultLock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1372,7 +1373,7 @@ type awsRestjson1_serializeOpGetVaultNotifications struct {
 }
 
 func (*awsRestjson1_serializeOpGetVaultNotifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetVaultNotifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1450,7 +1451,7 @@ type awsRestjson1_serializeOpInitiateJob struct {
 }
 
 func (*awsRestjson1_serializeOpInitiateJob) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpInitiateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1543,7 +1544,7 @@ type awsRestjson1_serializeOpInitiateMultipartUpload struct {
 }
 
 func (*awsRestjson1_serializeOpInitiateMultipartUpload) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpInitiateMultipartUpload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1635,7 +1636,7 @@ type awsRestjson1_serializeOpInitiateVaultLock struct {
 }
 
 func (*awsRestjson1_serializeOpInitiateVaultLock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpInitiateVaultLock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1728,7 +1729,7 @@ type awsRestjson1_serializeOpListJobs struct {
 }
 
 func (*awsRestjson1_serializeOpListJobs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1822,7 +1823,7 @@ type awsRestjson1_serializeOpListMultipartUploads struct {
 }
 
 func (*awsRestjson1_serializeOpListMultipartUploads) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListMultipartUploads) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1908,7 +1909,7 @@ type awsRestjson1_serializeOpListParts struct {
 }
 
 func (*awsRestjson1_serializeOpListParts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListParts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2006,7 +2007,7 @@ type awsRestjson1_serializeOpListProvisionedCapacity struct {
 }
 
 func (*awsRestjson1_serializeOpListProvisionedCapacity) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListProvisionedCapacity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2072,7 +2073,7 @@ type awsRestjson1_serializeOpListTagsForVault struct {
 }
 
 func (*awsRestjson1_serializeOpListTagsForVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTagsForVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2150,7 +2151,7 @@ type awsRestjson1_serializeOpListVaults struct {
 }
 
 func (*awsRestjson1_serializeOpListVaults) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListVaults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2224,7 +2225,7 @@ type awsRestjson1_serializeOpPurchaseProvisionedCapacity struct {
 }
 
 func (*awsRestjson1_serializeOpPurchaseProvisionedCapacity) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPurchaseProvisionedCapacity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2290,7 +2291,7 @@ type awsRestjson1_serializeOpRemoveTagsFromVault struct {
 }
 
 func (*awsRestjson1_serializeOpRemoveTagsFromVault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpRemoveTagsFromVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2393,7 +2394,7 @@ type awsRestjson1_serializeOpSetDataRetrievalPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpSetDataRetrievalPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSetDataRetrievalPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2484,7 +2485,7 @@ type awsRestjson1_serializeOpSetVaultAccessPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpSetVaultAccessPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSetVaultAccessPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2577,7 +2578,7 @@ type awsRestjson1_serializeOpSetVaultNotifications struct {
 }
 
 func (*awsRestjson1_serializeOpSetVaultNotifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSetVaultNotifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2670,7 +2671,7 @@ type awsRestjson1_serializeOpUploadArchive struct {
 }
 
 func (*awsRestjson1_serializeOpUploadArchive) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUploadArchive) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2773,7 +2774,7 @@ type awsRestjson1_serializeOpUploadMultipartPart struct {
 }
 
 func (*awsRestjson1_serializeOpUploadMultipartPart) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUploadMultipartPart) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

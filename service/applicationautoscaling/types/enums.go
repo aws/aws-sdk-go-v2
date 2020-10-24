@@ -11,6 +11,17 @@ const (
 	AdjustmentTypeExactcapacity           AdjustmentType = "ExactCapacity"
 )
 
+// Values returns all known values for AdjustmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdjustmentType) Values() []AdjustmentType {
+	return []AdjustmentType{
+		"ChangeInCapacity",
+		"PercentChangeInCapacity",
+		"ExactCapacity",
+	}
+}
+
 type MetricAggregationType string
 
 // Enum values for MetricAggregationType
@@ -19,6 +30,17 @@ const (
 	MetricAggregationTypeMinimum MetricAggregationType = "Minimum"
 	MetricAggregationTypeMaximum MetricAggregationType = "Maximum"
 )
+
+// Values returns all known values for MetricAggregationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricAggregationType) Values() []MetricAggregationType {
+	return []MetricAggregationType{
+		"Average",
+		"Minimum",
+		"Maximum",
+	}
+}
 
 type MetricStatistic string
 
@@ -30,6 +52,19 @@ const (
 	MetricStatisticSamplecount MetricStatistic = "SampleCount"
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
+
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Average",
+		"Minimum",
+		"Maximum",
+		"SampleCount",
+		"Sum",
+	}
+}
 
 type MetricType string
 
@@ -53,6 +88,30 @@ const (
 	MetricTypeCassandrawritecapacityutilization        MetricType = "CassandraWriteCapacityUtilization"
 )
 
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"DynamoDBReadCapacityUtilization",
+		"DynamoDBWriteCapacityUtilization",
+		"ALBRequestCountPerTarget",
+		"RDSReaderAverageCPUUtilization",
+		"RDSReaderAverageDatabaseConnections",
+		"EC2SpotFleetRequestAverageCPUUtilization",
+		"EC2SpotFleetRequestAverageNetworkIn",
+		"EC2SpotFleetRequestAverageNetworkOut",
+		"SageMakerVariantInvocationsPerInstance",
+		"ECSServiceAverageCPUUtilization",
+		"ECSServiceAverageMemoryUtilization",
+		"AppStreamAverageCapacityUtilization",
+		"ComprehendInferenceUtilization",
+		"LambdaProvisionedConcurrencyUtilization",
+		"CassandraReadCapacityUtilization",
+		"CassandraWriteCapacityUtilization",
+	}
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
@@ -60,6 +119,16 @@ const (
 	PolicyTypeStepscaling           PolicyType = "StepScaling"
 	PolicyTypeTargettrackingscaling PolicyType = "TargetTrackingScaling"
 )
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"StepScaling",
+		"TargetTrackingScaling",
+	}
+}
 
 type ScalableDimension string
 
@@ -82,6 +151,29 @@ const (
 	ScalableDimensionCassandratablewritecapacityunits              ScalableDimension = "cassandra:table:WriteCapacityUnits"
 )
 
+// Values returns all known values for ScalableDimension. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalableDimension) Values() []ScalableDimension {
+	return []ScalableDimension{
+		"ecs:service:DesiredCount",
+		"ec2:spot-fleet-request:TargetCapacity",
+		"elasticmapreduce:instancegroup:InstanceCount",
+		"appstream:fleet:DesiredCapacity",
+		"dynamodb:table:ReadCapacityUnits",
+		"dynamodb:table:WriteCapacityUnits",
+		"dynamodb:index:ReadCapacityUnits",
+		"dynamodb:index:WriteCapacityUnits",
+		"rds:cluster:ReadReplicaCount",
+		"sagemaker:variant:DesiredInstanceCount",
+		"custom-resource:ResourceType:Property",
+		"comprehend:document-classifier-endpoint:DesiredInferenceUnits",
+		"lambda:function:ProvisionedConcurrency",
+		"cassandra:table:ReadCapacityUnits",
+		"cassandra:table:WriteCapacityUnits",
+	}
+}
+
 type ScalingActivityStatusCode string
 
 // Enum values for ScalingActivityStatusCode
@@ -93,6 +185,20 @@ const (
 	ScalingActivityStatusCodeUnfulfilled ScalingActivityStatusCode = "Unfulfilled"
 	ScalingActivityStatusCodeFailed      ScalingActivityStatusCode = "Failed"
 )
+
+// Values returns all known values for ScalingActivityStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
+	return []ScalingActivityStatusCode{
+		"Pending",
+		"InProgress",
+		"Successful",
+		"Overridden",
+		"Unfulfilled",
+		"Failed",
+	}
+}
 
 type ServiceNamespace string
 
@@ -110,3 +216,22 @@ const (
 	ServiceNamespaceLambda          ServiceNamespace = "lambda"
 	ServiceNamespaceCassandra       ServiceNamespace = "cassandra"
 )
+
+// Values returns all known values for ServiceNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNamespace) Values() []ServiceNamespace {
+	return []ServiceNamespace{
+		"ecs",
+		"elasticmapreduce",
+		"ec2",
+		"appstream",
+		"dynamodb",
+		"rds",
+		"sagemaker",
+		"custom-resource",
+		"comprehend",
+		"lambda",
+		"cassandra",
+	}
+}

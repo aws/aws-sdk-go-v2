@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAddTags struct {
 }
 
 func (*validateOpAddTags) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpApplySecurityGroupsToLoadBalancer struct {
 }
 
 func (*validateOpApplySecurityGroupsToLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpApplySecurityGroupsToLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpAttachLoadBalancerToSubnets struct {
 }
 
 func (*validateOpAttachLoadBalancerToSubnets) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAttachLoadBalancerToSubnets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpConfigureHealthCheck struct {
 }
 
 func (*validateOpConfigureHealthCheck) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpConfigureHealthCheck) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpCreateAppCookieStickinessPolicy struct {
 }
 
 func (*validateOpCreateAppCookieStickinessPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateAppCookieStickinessPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpCreateLBCookieStickinessPolicy struct {
 }
 
 func (*validateOpCreateLBCookieStickinessPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateLBCookieStickinessPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpCreateLoadBalancer struct {
 }
 
 func (*validateOpCreateLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -154,7 +155,7 @@ type validateOpCreateLoadBalancerListeners struct {
 }
 
 func (*validateOpCreateLoadBalancerListeners) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateLoadBalancerListeners) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -174,7 +175,7 @@ type validateOpCreateLoadBalancerPolicy struct {
 }
 
 func (*validateOpCreateLoadBalancerPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateLoadBalancerPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -194,7 +195,7 @@ type validateOpDeleteLoadBalancer struct {
 }
 
 func (*validateOpDeleteLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -214,7 +215,7 @@ type validateOpDeleteLoadBalancerListeners struct {
 }
 
 func (*validateOpDeleteLoadBalancerListeners) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteLoadBalancerListeners) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -234,7 +235,7 @@ type validateOpDeleteLoadBalancerPolicy struct {
 }
 
 func (*validateOpDeleteLoadBalancerPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteLoadBalancerPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -254,7 +255,7 @@ type validateOpDeregisterInstancesFromLoadBalancer struct {
 }
 
 func (*validateOpDeregisterInstancesFromLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeregisterInstancesFromLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -274,7 +275,7 @@ type validateOpDescribeInstanceHealth struct {
 }
 
 func (*validateOpDescribeInstanceHealth) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeInstanceHealth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -294,7 +295,7 @@ type validateOpDescribeLoadBalancerAttributes struct {
 }
 
 func (*validateOpDescribeLoadBalancerAttributes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeLoadBalancerAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -314,7 +315,7 @@ type validateOpDescribeTags struct {
 }
 
 func (*validateOpDescribeTags) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -334,7 +335,7 @@ type validateOpDetachLoadBalancerFromSubnets struct {
 }
 
 func (*validateOpDetachLoadBalancerFromSubnets) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDetachLoadBalancerFromSubnets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -354,7 +355,7 @@ type validateOpDisableAvailabilityZonesForLoadBalancer struct {
 }
 
 func (*validateOpDisableAvailabilityZonesForLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisableAvailabilityZonesForLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -374,7 +375,7 @@ type validateOpEnableAvailabilityZonesForLoadBalancer struct {
 }
 
 func (*validateOpEnableAvailabilityZonesForLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpEnableAvailabilityZonesForLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -394,7 +395,7 @@ type validateOpModifyLoadBalancerAttributes struct {
 }
 
 func (*validateOpModifyLoadBalancerAttributes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyLoadBalancerAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -414,7 +415,7 @@ type validateOpRegisterInstancesWithLoadBalancer struct {
 }
 
 func (*validateOpRegisterInstancesWithLoadBalancer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRegisterInstancesWithLoadBalancer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -434,7 +435,7 @@ type validateOpRemoveTags struct {
 }
 
 func (*validateOpRemoveTags) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -454,7 +455,7 @@ type validateOpSetLoadBalancerListenerSSLCertificate struct {
 }
 
 func (*validateOpSetLoadBalancerListenerSSLCertificate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSetLoadBalancerListenerSSLCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -474,7 +475,7 @@ type validateOpSetLoadBalancerPoliciesForBackendServer struct {
 }
 
 func (*validateOpSetLoadBalancerPoliciesForBackendServer) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSetLoadBalancerPoliciesForBackendServer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -494,7 +495,7 @@ type validateOpSetLoadBalancerPoliciesOfListener struct {
 }
 
 func (*validateOpSetLoadBalancerPoliciesOfListener) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSetLoadBalancerPoliciesOfListener) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

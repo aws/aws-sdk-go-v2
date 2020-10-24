@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -17,7 +18,7 @@ type awsRestjson1_serializeOpCreateToken struct {
 }
 
 func (*awsRestjson1_serializeOpCreateToken) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -127,7 +128,7 @@ type awsRestjson1_serializeOpRegisterClient struct {
 }
 
 func (*awsRestjson1_serializeOpRegisterClient) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpRegisterClient) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -212,7 +213,7 @@ type awsRestjson1_serializeOpStartDeviceAuthorization struct {
 }
 
 func (*awsRestjson1_serializeOpStartDeviceAuthorization) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartDeviceAuthorization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

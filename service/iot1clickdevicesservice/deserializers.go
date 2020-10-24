@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -22,7 +23,7 @@ type awsRestjson1_deserializeOpClaimDevicesByClaimCode struct {
 }
 
 func (*awsRestjson1_deserializeOpClaimDevicesByClaimCode) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpClaimDevicesByClaimCode) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -192,7 +193,7 @@ type awsRestjson1_deserializeOpDescribeDevice struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeDevice) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -345,7 +346,7 @@ type awsRestjson1_deserializeOpFinalizeDeviceClaim struct {
 }
 
 func (*awsRestjson1_deserializeOpFinalizeDeviceClaim) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpFinalizeDeviceClaim) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -508,7 +509,7 @@ type awsRestjson1_deserializeOpGetDeviceMethods struct {
 }
 
 func (*awsRestjson1_deserializeOpGetDeviceMethods) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetDeviceMethods) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -661,7 +662,7 @@ type awsRestjson1_deserializeOpInitiateDeviceClaim struct {
 }
 
 func (*awsRestjson1_deserializeOpInitiateDeviceClaim) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpInitiateDeviceClaim) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -821,7 +822,7 @@ type awsRestjson1_deserializeOpInvokeDeviceMethod struct {
 }
 
 func (*awsRestjson1_deserializeOpInvokeDeviceMethod) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpInvokeDeviceMethod) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -987,7 +988,7 @@ type awsRestjson1_deserializeOpListDeviceEvents struct {
 }
 
 func (*awsRestjson1_deserializeOpListDeviceEvents) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListDeviceEvents) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1152,7 +1153,7 @@ type awsRestjson1_deserializeOpListDevices struct {
 }
 
 func (*awsRestjson1_deserializeOpListDevices) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListDevices) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1314,7 +1315,7 @@ type awsRestjson1_deserializeOpListTagsForResource struct {
 }
 
 func (*awsRestjson1_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1464,7 +1465,7 @@ type awsRestjson1_deserializeOpTagResource struct {
 }
 
 func (*awsRestjson1_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1553,7 +1554,7 @@ type awsRestjson1_deserializeOpUnclaimDevice struct {
 }
 
 func (*awsRestjson1_deserializeOpUnclaimDevice) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUnclaimDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1710,7 +1711,7 @@ type awsRestjson1_deserializeOpUntagResource struct {
 }
 
 func (*awsRestjson1_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1799,7 +1800,7 @@ type awsRestjson1_deserializeOpUpdateDeviceState struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateDeviceState) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateDeviceState) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

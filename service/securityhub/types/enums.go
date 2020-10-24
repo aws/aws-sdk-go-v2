@@ -10,6 +10,16 @@ const (
 	AwsIamAccessKeyStatusInactive AwsIamAccessKeyStatus = "Inactive"
 )
 
+// Values returns all known values for AwsIamAccessKeyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AwsIamAccessKeyStatus) Values() []AwsIamAccessKeyStatus {
+	return []AwsIamAccessKeyStatus{
+		"Active",
+		"Inactive",
+	}
+}
+
 type ComplianceStatus string
 
 // Enum values for ComplianceStatus
@@ -20,6 +30,18 @@ const (
 	ComplianceStatusNot_available ComplianceStatus = "NOT_AVAILABLE"
 )
 
+// Values returns all known values for ComplianceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceStatus) Values() []ComplianceStatus {
+	return []ComplianceStatus{
+		"PASSED",
+		"WARNING",
+		"FAILED",
+		"NOT_AVAILABLE",
+	}
+}
+
 type ControlStatus string
 
 // Enum values for ControlStatus
@@ -28,12 +50,31 @@ const (
 	ControlStatusDisabled ControlStatus = "DISABLED"
 )
 
+// Values returns all known values for ControlStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ControlStatus) Values() []ControlStatus {
+	return []ControlStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type DateRangeUnit string
 
 // Enum values for DateRangeUnit
 const (
 	DateRangeUnitDays DateRangeUnit = "DAYS"
 )
+
+// Values returns all known values for DateRangeUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DateRangeUnit) Values() []DateRangeUnit {
+	return []DateRangeUnit{
+		"DAYS",
+	}
+}
 
 type IntegrationType string
 
@@ -43,6 +84,16 @@ const (
 	IntegrationTypeReceive_findings_from_security_hub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
 )
 
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"SEND_FINDINGS_TO_SECURITY_HUB",
+		"RECEIVE_FINDINGS_FROM_SECURITY_HUB",
+	}
+}
+
 type MalwareState string
 
 // Enum values for MalwareState
@@ -51,6 +102,17 @@ const (
 	MalwareStateRemoval_failed MalwareState = "REMOVAL_FAILED"
 	MalwareStateRemoved        MalwareState = "REMOVED"
 )
+
+// Values returns all known values for MalwareState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MalwareState) Values() []MalwareState {
+	return []MalwareState{
+		"OBSERVED",
+		"REMOVAL_FAILED",
+		"REMOVED",
+	}
+}
 
 type MalwareType string
 
@@ -73,12 +135,44 @@ const (
 	MalwareTypeWorm                 MalwareType = "WORM"
 )
 
+// Values returns all known values for MalwareType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MalwareType) Values() []MalwareType {
+	return []MalwareType{
+		"ADWARE",
+		"BLENDED_THREAT",
+		"BOTNET_AGENT",
+		"COIN_MINER",
+		"EXPLOIT_KIT",
+		"KEYLOGGER",
+		"MACRO",
+		"POTENTIALLY_UNWANTED",
+		"SPYWARE",
+		"RANSOMWARE",
+		"REMOTE_ACCESS",
+		"ROOTKIT",
+		"TROJAN",
+		"VIRUS",
+		"WORM",
+	}
+}
+
 type MapFilterComparison string
 
 // Enum values for MapFilterComparison
 const (
 	MapFilterComparisonEquals MapFilterComparison = "EQUALS"
 )
+
+// Values returns all known values for MapFilterComparison. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MapFilterComparison) Values() []MapFilterComparison {
+	return []MapFilterComparison{
+		"EQUALS",
+	}
+}
 
 type NetworkDirection string
 
@@ -87,6 +181,16 @@ const (
 	NetworkDirectionIn  NetworkDirection = "IN"
 	NetworkDirectionOut NetworkDirection = "OUT"
 )
+
+// Values returns all known values for NetworkDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkDirection) Values() []NetworkDirection {
+	return []NetworkDirection{
+		"IN",
+		"OUT",
+	}
+}
 
 type Partition string
 
@@ -97,6 +201,17 @@ const (
 	PartitionAws_us_gov Partition = "aws-us-gov"
 )
 
+// Values returns all known values for Partition. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Partition) Values() []Partition {
+	return []Partition{
+		"aws",
+		"aws-cn",
+		"aws-us-gov",
+	}
+}
+
 type RecordState string
 
 // Enum values for RecordState
@@ -104,6 +219,16 @@ const (
 	RecordStateActive   RecordState = "ACTIVE"
 	RecordStateArchived RecordState = "ARCHIVED"
 )
+
+// Values returns all known values for RecordState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RecordState) Values() []RecordState {
+	return []RecordState{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
 
 type SeverityLabel string
 
@@ -116,6 +241,19 @@ const (
 	SeverityLabelCritical      SeverityLabel = "CRITICAL"
 )
 
+// Values returns all known values for SeverityLabel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SeverityLabel) Values() []SeverityLabel {
+	return []SeverityLabel{
+		"INFORMATIONAL",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"CRITICAL",
+	}
+}
+
 type SeverityRating string
 
 // Enum values for SeverityRating
@@ -126,6 +264,18 @@ const (
 	SeverityRatingCritical SeverityRating = "CRITICAL"
 )
 
+// Values returns all known values for SeverityRating. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SeverityRating) Values() []SeverityRating {
+	return []SeverityRating{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"CRITICAL",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -133,6 +283,16 @@ const (
 	SortOrderAscending  SortOrder = "asc"
 	SortOrderDescending SortOrder = "desc"
 )
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"asc",
+		"desc",
+	}
+}
 
 type StandardsStatus string
 
@@ -145,6 +305,19 @@ const (
 	StandardsStatusIncomplete StandardsStatus = "INCOMPLETE"
 )
 
+// Values returns all known values for StandardsStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StandardsStatus) Values() []StandardsStatus {
+	return []StandardsStatus{
+		"PENDING",
+		"READY",
+		"FAILED",
+		"DELETING",
+		"INCOMPLETE",
+	}
+}
+
 type StringFilterComparison string
 
 // Enum values for StringFilterComparison
@@ -152,6 +325,16 @@ const (
 	StringFilterComparisonEquals StringFilterComparison = "EQUALS"
 	StringFilterComparisonPrefix StringFilterComparison = "PREFIX"
 )
+
+// Values returns all known values for StringFilterComparison. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StringFilterComparison) Values() []StringFilterComparison {
+	return []StringFilterComparison{
+		"EQUALS",
+		"PREFIX",
+	}
+}
 
 type ThreatIntelIndicatorCategory string
 
@@ -164,6 +347,20 @@ const (
 	ThreatIntelIndicatorCategoryExploit_site        ThreatIntelIndicatorCategory = "EXPLOIT_SITE"
 	ThreatIntelIndicatorCategoryKeylogger           ThreatIntelIndicatorCategory = "KEYLOGGER"
 )
+
+// Values returns all known values for ThreatIntelIndicatorCategory. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatIntelIndicatorCategory) Values() []ThreatIntelIndicatorCategory {
+	return []ThreatIntelIndicatorCategory{
+		"BACKDOOR",
+		"CARD_STEALER",
+		"COMMAND_AND_CONTROL",
+		"DROP_SITE",
+		"EXPLOIT_SITE",
+		"KEYLOGGER",
+	}
+}
 
 type ThreatIntelIndicatorType string
 
@@ -182,6 +379,25 @@ const (
 	ThreatIntelIndicatorTypeUrl           ThreatIntelIndicatorType = "URL"
 )
 
+// Values returns all known values for ThreatIntelIndicatorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatIntelIndicatorType) Values() []ThreatIntelIndicatorType {
+	return []ThreatIntelIndicatorType{
+		"DOMAIN",
+		"EMAIL_ADDRESS",
+		"HASH_MD5",
+		"HASH_SHA1",
+		"HASH_SHA256",
+		"HASH_SHA512",
+		"IPV4_ADDRESS",
+		"IPV6_ADDRESS",
+		"MUTEX",
+		"PROCESS",
+		"URL",
+	}
+}
+
 type VerificationState string
 
 // Enum values for VerificationState
@@ -191,6 +407,18 @@ const (
 	VerificationStateFalse_positive  VerificationState = "FALSE_POSITIVE"
 	VerificationStateBenign_positive VerificationState = "BENIGN_POSITIVE"
 )
+
+// Values returns all known values for VerificationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationState) Values() []VerificationState {
+	return []VerificationState{
+		"UNKNOWN",
+		"TRUE_POSITIVE",
+		"FALSE_POSITIVE",
+		"BENIGN_POSITIVE",
+	}
+}
 
 type WorkflowState string
 
@@ -203,6 +431,19 @@ const (
 	WorkflowStateResolved    WorkflowState = "RESOLVED"
 )
 
+// Values returns all known values for WorkflowState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowState) Values() []WorkflowState {
+	return []WorkflowState{
+		"NEW",
+		"ASSIGNED",
+		"IN_PROGRESS",
+		"DEFERRED",
+		"RESOLVED",
+	}
+}
+
 type WorkflowStatus string
 
 // Enum values for WorkflowStatus
@@ -212,3 +453,15 @@ const (
 	WorkflowStatusResolved   WorkflowStatus = "RESOLVED"
 	WorkflowStatusSuppressed WorkflowStatus = "SUPPRESSED"
 )
+
+// Values returns all known values for WorkflowStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStatus) Values() []WorkflowStatus {
+	return []WorkflowStatus{
+		"NEW",
+		"NOTIFIED",
+		"RESOLVED",
+		"SUPPRESSED",
+	}
+}

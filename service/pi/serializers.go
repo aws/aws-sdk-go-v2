@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson11_serializeOpDescribeDimensionKeys struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeDimensionKeys) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeDimensionKeys) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -65,7 +66,7 @@ type awsAwsjson11_serializeOpGetResourceMetrics struct {
 }
 
 func (*awsAwsjson11_serializeOpGetResourceMetrics) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetResourceMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

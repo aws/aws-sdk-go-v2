@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsRestjson1_serializeOpCreateConfigurationSet struct {
 }
 
 func (*awsRestjson1_serializeOpCreateConfigurationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateConfigurationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -134,7 +135,7 @@ type awsRestjson1_serializeOpCreateConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_serializeOpCreateConfigurationSetEventDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateConfigurationSetEventDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -230,7 +231,7 @@ type awsRestjson1_serializeOpCreateCustomVerificationEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpCreateCustomVerificationEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateCustomVerificationEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -328,7 +329,7 @@ type awsRestjson1_serializeOpCreateDedicatedIpPool struct {
 }
 
 func (*awsRestjson1_serializeOpCreateDedicatedIpPool) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateDedicatedIpPool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -408,7 +409,7 @@ type awsRestjson1_serializeOpCreateDeliverabilityTestReport struct {
 }
 
 func (*awsRestjson1_serializeOpCreateDeliverabilityTestReport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateDeliverabilityTestReport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -500,7 +501,7 @@ type awsRestjson1_serializeOpCreateEmailIdentity struct {
 }
 
 func (*awsRestjson1_serializeOpCreateEmailIdentity) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateEmailIdentity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -587,7 +588,7 @@ type awsRestjson1_serializeOpCreateEmailIdentityPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpCreateEmailIdentityPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateEmailIdentityPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -688,7 +689,7 @@ type awsRestjson1_serializeOpCreateEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpCreateEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -768,7 +769,7 @@ type awsRestjson1_serializeOpDeleteConfigurationSet struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteConfigurationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteConfigurationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -834,7 +835,7 @@ type awsRestjson1_serializeOpDeleteConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteConfigurationSetEventDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteConfigurationSetEventDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -912,7 +913,7 @@ type awsRestjson1_serializeOpDeleteCustomVerificationEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteCustomVerificationEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteCustomVerificationEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -978,7 +979,7 @@ type awsRestjson1_serializeOpDeleteDedicatedIpPool struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteDedicatedIpPool) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteDedicatedIpPool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1044,7 +1045,7 @@ type awsRestjson1_serializeOpDeleteEmailIdentity struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteEmailIdentity) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteEmailIdentity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1110,7 +1111,7 @@ type awsRestjson1_serializeOpDeleteEmailIdentityPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteEmailIdentityPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteEmailIdentityPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1188,7 +1189,7 @@ type awsRestjson1_serializeOpDeleteEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1254,7 +1255,7 @@ type awsRestjson1_serializeOpDeleteSuppressedDestination struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteSuppressedDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteSuppressedDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1320,7 +1321,7 @@ type awsRestjson1_serializeOpGetAccount struct {
 }
 
 func (*awsRestjson1_serializeOpGetAccount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1370,7 +1371,7 @@ type awsRestjson1_serializeOpGetBlacklistReports struct {
 }
 
 func (*awsRestjson1_serializeOpGetBlacklistReports) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetBlacklistReports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1433,7 +1434,7 @@ type awsRestjson1_serializeOpGetConfigurationSet struct {
 }
 
 func (*awsRestjson1_serializeOpGetConfigurationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetConfigurationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1499,7 +1500,7 @@ type awsRestjson1_serializeOpGetConfigurationSetEventDestinations struct {
 }
 
 func (*awsRestjson1_serializeOpGetConfigurationSetEventDestinations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetConfigurationSetEventDestinations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1565,7 +1566,7 @@ type awsRestjson1_serializeOpGetCustomVerificationEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpGetCustomVerificationEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetCustomVerificationEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1631,7 +1632,7 @@ type awsRestjson1_serializeOpGetDedicatedIp struct {
 }
 
 func (*awsRestjson1_serializeOpGetDedicatedIp) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDedicatedIp) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1697,7 +1698,7 @@ type awsRestjson1_serializeOpGetDedicatedIps struct {
 }
 
 func (*awsRestjson1_serializeOpGetDedicatedIps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDedicatedIps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1763,7 +1764,7 @@ type awsRestjson1_serializeOpGetDeliverabilityDashboardOptions struct {
 }
 
 func (*awsRestjson1_serializeOpGetDeliverabilityDashboardOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDeliverabilityDashboardOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1813,7 +1814,7 @@ type awsRestjson1_serializeOpGetDeliverabilityTestReport struct {
 }
 
 func (*awsRestjson1_serializeOpGetDeliverabilityTestReport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDeliverabilityTestReport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1879,7 +1880,7 @@ type awsRestjson1_serializeOpGetDomainDeliverabilityCampaign struct {
 }
 
 func (*awsRestjson1_serializeOpGetDomainDeliverabilityCampaign) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDomainDeliverabilityCampaign) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1945,7 +1946,7 @@ type awsRestjson1_serializeOpGetDomainStatisticsReport struct {
 }
 
 func (*awsRestjson1_serializeOpGetDomainStatisticsReport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDomainStatisticsReport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2019,7 +2020,7 @@ type awsRestjson1_serializeOpGetEmailIdentity struct {
 }
 
 func (*awsRestjson1_serializeOpGetEmailIdentity) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetEmailIdentity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2085,7 +2086,7 @@ type awsRestjson1_serializeOpGetEmailIdentityPolicies struct {
 }
 
 func (*awsRestjson1_serializeOpGetEmailIdentityPolicies) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetEmailIdentityPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2151,7 +2152,7 @@ type awsRestjson1_serializeOpGetEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpGetEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2217,7 +2218,7 @@ type awsRestjson1_serializeOpGetSuppressedDestination struct {
 }
 
 func (*awsRestjson1_serializeOpGetSuppressedDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetSuppressedDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2283,7 +2284,7 @@ type awsRestjson1_serializeOpListConfigurationSets struct {
 }
 
 func (*awsRestjson1_serializeOpListConfigurationSets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListConfigurationSets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2345,7 +2346,7 @@ type awsRestjson1_serializeOpListCustomVerificationEmailTemplates struct {
 }
 
 func (*awsRestjson1_serializeOpListCustomVerificationEmailTemplates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListCustomVerificationEmailTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2407,7 +2408,7 @@ type awsRestjson1_serializeOpListDedicatedIpPools struct {
 }
 
 func (*awsRestjson1_serializeOpListDedicatedIpPools) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListDedicatedIpPools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2469,7 +2470,7 @@ type awsRestjson1_serializeOpListDeliverabilityTestReports struct {
 }
 
 func (*awsRestjson1_serializeOpListDeliverabilityTestReports) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListDeliverabilityTestReports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2531,7 +2532,7 @@ type awsRestjson1_serializeOpListDomainDeliverabilityCampaigns struct {
 }
 
 func (*awsRestjson1_serializeOpListDomainDeliverabilityCampaigns) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListDomainDeliverabilityCampaigns) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2613,7 +2614,7 @@ type awsRestjson1_serializeOpListEmailIdentities struct {
 }
 
 func (*awsRestjson1_serializeOpListEmailIdentities) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListEmailIdentities) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2675,7 +2676,7 @@ type awsRestjson1_serializeOpListEmailTemplates struct {
 }
 
 func (*awsRestjson1_serializeOpListEmailTemplates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListEmailTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2737,7 +2738,7 @@ type awsRestjson1_serializeOpListSuppressedDestinations struct {
 }
 
 func (*awsRestjson1_serializeOpListSuppressedDestinations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListSuppressedDestinations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2813,7 +2814,7 @@ type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
 func (*awsRestjson1_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2871,7 +2872,7 @@ type awsRestjson1_serializeOpPutAccountDedicatedIpWarmupAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutAccountDedicatedIpWarmupAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutAccountDedicatedIpWarmupAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2944,7 +2945,7 @@ type awsRestjson1_serializeOpPutAccountDetails struct {
 }
 
 func (*awsRestjson1_serializeOpPutAccountDetails) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutAccountDetails) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3044,7 +3045,7 @@ type awsRestjson1_serializeOpPutAccountSendingAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutAccountSendingAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutAccountSendingAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3117,7 +3118,7 @@ type awsRestjson1_serializeOpPutAccountSuppressionAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutAccountSuppressionAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutAccountSuppressionAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3192,7 +3193,7 @@ type awsRestjson1_serializeOpPutConfigurationSetDeliveryOptions struct {
 }
 
 func (*awsRestjson1_serializeOpPutConfigurationSetDeliveryOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutConfigurationSetDeliveryOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3286,7 +3287,7 @@ type awsRestjson1_serializeOpPutConfigurationSetReputationOptions struct {
 }
 
 func (*awsRestjson1_serializeOpPutConfigurationSetReputationOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutConfigurationSetReputationOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3375,7 +3376,7 @@ type awsRestjson1_serializeOpPutConfigurationSetSendingOptions struct {
 }
 
 func (*awsRestjson1_serializeOpPutConfigurationSetSendingOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutConfigurationSetSendingOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3464,7 +3465,7 @@ type awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions struct {
 }
 
 func (*awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3555,7 +3556,7 @@ type awsRestjson1_serializeOpPutConfigurationSetTrackingOptions struct {
 }
 
 func (*awsRestjson1_serializeOpPutConfigurationSetTrackingOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutConfigurationSetTrackingOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3644,7 +3645,7 @@ type awsRestjson1_serializeOpPutDedicatedIpInPool struct {
 }
 
 func (*awsRestjson1_serializeOpPutDedicatedIpInPool) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutDedicatedIpInPool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3733,7 +3734,7 @@ type awsRestjson1_serializeOpPutDedicatedIpWarmupAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutDedicatedIpWarmupAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutDedicatedIpWarmupAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3822,7 +3823,7 @@ type awsRestjson1_serializeOpPutDeliverabilityDashboardOption struct {
 }
 
 func (*awsRestjson1_serializeOpPutDeliverabilityDashboardOption) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutDeliverabilityDashboardOption) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3902,7 +3903,7 @@ type awsRestjson1_serializeOpPutEmailIdentityDkimAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutEmailIdentityDkimAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutEmailIdentityDkimAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3991,7 +3992,7 @@ type awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4087,7 +4088,7 @@ type awsRestjson1_serializeOpPutEmailIdentityFeedbackAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutEmailIdentityFeedbackAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutEmailIdentityFeedbackAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4176,7 +4177,7 @@ type awsRestjson1_serializeOpPutEmailIdentityMailFromAttributes struct {
 }
 
 func (*awsRestjson1_serializeOpPutEmailIdentityMailFromAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutEmailIdentityMailFromAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4270,7 +4271,7 @@ type awsRestjson1_serializeOpPutSuppressedDestination struct {
 }
 
 func (*awsRestjson1_serializeOpPutSuppressedDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutSuppressedDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4348,7 +4349,7 @@ type awsRestjson1_serializeOpSendBulkEmail struct {
 }
 
 func (*awsRestjson1_serializeOpSendBulkEmail) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSendBulkEmail) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4469,7 +4470,7 @@ type awsRestjson1_serializeOpSendCustomVerificationEmail struct {
 }
 
 func (*awsRestjson1_serializeOpSendCustomVerificationEmail) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSendCustomVerificationEmail) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4552,7 +4553,7 @@ type awsRestjson1_serializeOpSendEmail struct {
 }
 
 func (*awsRestjson1_serializeOpSendEmail) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSendEmail) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4673,7 +4674,7 @@ type awsRestjson1_serializeOpTagResource struct {
 }
 
 func (*awsRestjson1_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4753,7 +4754,7 @@ type awsRestjson1_serializeOpTestRenderEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpTestRenderEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpTestRenderEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4842,7 +4843,7 @@ type awsRestjson1_serializeOpUntagResource struct {
 }
 
 func (*awsRestjson1_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4909,7 +4910,7 @@ type awsRestjson1_serializeOpUpdateConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateConfigurationSetEventDestination) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateConfigurationSetEventDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5012,7 +5013,7 @@ type awsRestjson1_serializeOpUpdateCustomVerificationEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateCustomVerificationEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateCustomVerificationEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5121,7 +5122,7 @@ type awsRestjson1_serializeOpUpdateEmailIdentityPolicy struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateEmailIdentityPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateEmailIdentityPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5222,7 +5223,7 @@ type awsRestjson1_serializeOpUpdateEmailTemplate struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateEmailTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateEmailTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

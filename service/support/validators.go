@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAddAttachmentsToSet struct {
 }
 
 func (*validateOpAddAttachmentsToSet) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddAttachmentsToSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpAddCommunicationToCase struct {
 }
 
 func (*validateOpAddCommunicationToCase) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddCommunicationToCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpCreateCase struct {
 }
 
 func (*validateOpCreateCase) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpDescribeAttachment struct {
 }
 
 func (*validateOpDescribeAttachment) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -93,7 +94,7 @@ type validateOpDescribeCommunications struct {
 }
 
 func (*validateOpDescribeCommunications) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeCommunications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -113,7 +114,7 @@ type validateOpDescribeTrustedAdvisorCheckRefreshStatuses struct {
 }
 
 func (*validateOpDescribeTrustedAdvisorCheckRefreshStatuses) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTrustedAdvisorCheckRefreshStatuses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -133,7 +134,7 @@ type validateOpDescribeTrustedAdvisorCheckResult struct {
 }
 
 func (*validateOpDescribeTrustedAdvisorCheckResult) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTrustedAdvisorCheckResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -153,7 +154,7 @@ type validateOpDescribeTrustedAdvisorChecks struct {
 }
 
 func (*validateOpDescribeTrustedAdvisorChecks) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTrustedAdvisorChecks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -173,7 +174,7 @@ type validateOpDescribeTrustedAdvisorCheckSummaries struct {
 }
 
 func (*validateOpDescribeTrustedAdvisorCheckSummaries) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeTrustedAdvisorCheckSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -193,7 +194,7 @@ type validateOpRefreshTrustedAdvisorCheck struct {
 }
 
 func (*validateOpRefreshTrustedAdvisorCheck) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRefreshTrustedAdvisorCheck) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

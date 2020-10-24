@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -24,7 +25,7 @@ type awsAwsjson10_deserializeOpDescribeRecommendationExportJobs struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -156,7 +157,7 @@ type awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations struct {
 }
 
 func (*awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -288,7 +289,7 @@ type awsAwsjson10_deserializeOpExportEC2InstanceRecommendations struct {
 }
 
 func (*awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -420,7 +421,7 @@ type awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -552,7 +553,7 @@ type awsAwsjson10_deserializeOpGetEC2InstanceRecommendations struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -684,7 +685,7 @@ type awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -816,7 +817,7 @@ type awsAwsjson10_deserializeOpGetEnrollmentStatus struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetEnrollmentStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetEnrollmentStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -942,7 +943,7 @@ type awsAwsjson10_deserializeOpGetRecommendationSummaries struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetRecommendationSummaries) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetRecommendationSummaries) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1071,7 +1072,7 @@ type awsAwsjson10_deserializeOpUpdateEnrollmentStatus struct {
 }
 
 func (*awsAwsjson10_deserializeOpUpdateEnrollmentStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpUpdateEnrollmentStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

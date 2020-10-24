@@ -9,6 +9,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -16,7 +17,7 @@ type awsRestjson1_serializeOpDeleteThingShadow struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteThingShadow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteThingShadow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -86,7 +87,7 @@ type awsRestjson1_serializeOpGetThingShadow struct {
 }
 
 func (*awsRestjson1_serializeOpGetThingShadow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetThingShadow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -156,7 +157,7 @@ type awsRestjson1_serializeOpListNamedShadowsForThing struct {
 }
 
 func (*awsRestjson1_serializeOpListNamedShadowsForThing) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListNamedShadowsForThing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -230,7 +231,7 @@ type awsRestjson1_serializeOpPublish struct {
 }
 
 func (*awsRestjson1_serializeOpPublish) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPublish) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -311,7 +312,7 @@ type awsRestjson1_serializeOpUpdateThingShadow struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateThingShadow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateThingShadow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

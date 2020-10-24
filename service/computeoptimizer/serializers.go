@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson10_serializeOpDescribeRecommendationExportJobs struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeRecommendationExportJobs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeRecommendationExportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -65,7 +66,7 @@ type awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations struct {
 }
 
 func (*awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -111,7 +112,7 @@ type awsAwsjson10_serializeOpExportEC2InstanceRecommendations struct {
 }
 
 func (*awsAwsjson10_serializeOpExportEC2InstanceRecommendations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpExportEC2InstanceRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -157,7 +158,7 @@ type awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations struct {
 }
 
 func (*awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -203,7 +204,7 @@ type awsAwsjson10_serializeOpGetEC2InstanceRecommendations struct {
 }
 
 func (*awsAwsjson10_serializeOpGetEC2InstanceRecommendations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetEC2InstanceRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -249,7 +250,7 @@ type awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics struct {
 }
 
 func (*awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -295,7 +296,7 @@ type awsAwsjson10_serializeOpGetEnrollmentStatus struct {
 }
 
 func (*awsAwsjson10_serializeOpGetEnrollmentStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetEnrollmentStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -334,7 +335,7 @@ type awsAwsjson10_serializeOpGetRecommendationSummaries struct {
 }
 
 func (*awsAwsjson10_serializeOpGetRecommendationSummaries) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetRecommendationSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -380,7 +381,7 @@ type awsAwsjson10_serializeOpUpdateEnrollmentStatus struct {
 }
 
 func (*awsAwsjson10_serializeOpUpdateEnrollmentStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpUpdateEnrollmentStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

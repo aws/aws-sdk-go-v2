@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpGetIceServerConfig struct {
 }
 
 func (*validateOpGetIceServerConfig) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetIceServerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpSendAlexaOfferToMaster struct {
 }
 
 func (*validateOpSendAlexaOfferToMaster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSendAlexaOfferToMaster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpBatchCheckLayerAvailability struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchCheckLayerAvailability) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchCheckLayerAvailability) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -140,7 +141,7 @@ type awsAwsjson11_deserializeOpBatchDeleteImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDeleteImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDeleteImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -257,7 +258,7 @@ type awsAwsjson11_deserializeOpBatchGetImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchGetImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchGetImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -374,7 +375,7 @@ type awsAwsjson11_deserializeOpCompleteLayerUpload struct {
 }
 
 func (*awsAwsjson11_deserializeOpCompleteLayerUpload) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCompleteLayerUpload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -509,7 +510,7 @@ type awsAwsjson11_deserializeOpCreateRepository struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateRepository) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateRepository) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -638,7 +639,7 @@ type awsAwsjson11_deserializeOpDeleteLifecyclePolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteLifecyclePolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteLifecyclePolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -758,7 +759,7 @@ type awsAwsjson11_deserializeOpDeleteRepository struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteRepository) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteRepository) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -881,7 +882,7 @@ type awsAwsjson11_deserializeOpDeleteRepositoryPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteRepositoryPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteRepositoryPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1001,7 +1002,7 @@ type awsAwsjson11_deserializeOpDescribeImages struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeImages) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeImages) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1121,7 +1122,7 @@ type awsAwsjson11_deserializeOpDescribeImageScanFindings struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeImageScanFindings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeImageScanFindings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1244,7 +1245,7 @@ type awsAwsjson11_deserializeOpDescribeRepositories struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeRepositories) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeRepositories) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1361,7 +1362,7 @@ type awsAwsjson11_deserializeOpGetAuthorizationToken struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetAuthorizationToken) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetAuthorizationToken) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1475,7 +1476,7 @@ type awsAwsjson11_deserializeOpGetDownloadUrlForLayer struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDownloadUrlForLayer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDownloadUrlForLayer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1598,7 +1599,7 @@ type awsAwsjson11_deserializeOpGetLifecyclePolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetLifecyclePolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetLifecyclePolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1718,7 +1719,7 @@ type awsAwsjson11_deserializeOpGetLifecyclePolicyPreview struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetLifecyclePolicyPreview) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetLifecyclePolicyPreview) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1838,7 +1839,7 @@ type awsAwsjson11_deserializeOpGetRepositoryPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetRepositoryPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetRepositoryPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1958,7 +1959,7 @@ type awsAwsjson11_deserializeOpInitiateLayerUpload struct {
 }
 
 func (*awsAwsjson11_deserializeOpInitiateLayerUpload) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpInitiateLayerUpload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2078,7 +2079,7 @@ type awsAwsjson11_deserializeOpListImages struct {
 }
 
 func (*awsAwsjson11_deserializeOpListImages) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListImages) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2195,7 +2196,7 @@ type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2312,7 +2313,7 @@ type awsAwsjson11_deserializeOpPutImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2450,7 +2451,7 @@ type awsAwsjson11_deserializeOpPutImageScanningConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutImageScanningConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutImageScanningConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2567,7 +2568,7 @@ type awsAwsjson11_deserializeOpPutImageTagMutability struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutImageTagMutability) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutImageTagMutability) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2684,7 +2685,7 @@ type awsAwsjson11_deserializeOpPutLifecyclePolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutLifecyclePolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutLifecyclePolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2801,7 +2802,7 @@ type awsAwsjson11_deserializeOpSetRepositoryPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpSetRepositoryPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpSetRepositoryPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2918,7 +2919,7 @@ type awsAwsjson11_deserializeOpStartImageScan struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartImageScan) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartImageScan) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3044,7 +3045,7 @@ type awsAwsjson11_deserializeOpStartLifecyclePolicyPreview struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartLifecyclePolicyPreview) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartLifecyclePolicyPreview) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3167,7 +3168,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3290,7 +3291,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3413,7 +3414,7 @@ type awsAwsjson11_deserializeOpUploadLayerPart struct {
 }
 
 func (*awsAwsjson11_deserializeOpUploadLayerPart) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUploadLayerPart) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

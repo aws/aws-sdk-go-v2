@@ -11,6 +11,17 @@ const (
 	CodeGenerationStatusCreate_failed      CodeGenerationStatus = "CREATE_FAILED"
 )
 
+// Values returns all known values for CodeGenerationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodeGenerationStatus) Values() []CodeGenerationStatus {
+	return []CodeGenerationStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+	}
+}
+
 type DiscovererState string
 
 // Enum values for DiscovererState
@@ -19,9 +30,28 @@ const (
 	DiscovererStateStopped DiscovererState = "STOPPED"
 )
 
+// Values returns all known values for DiscovererState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DiscovererState) Values() []DiscovererState {
+	return []DiscovererState{
+		"STARTED",
+		"STOPPED",
+	}
+}
+
 type Type string
 
 // Enum values for Type
 const (
 	TypeOpenapi3 Type = "OpenApi3"
 )
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"OpenApi3",
+	}
+}

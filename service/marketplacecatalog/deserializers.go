@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -21,7 +22,7 @@ type awsRestjson1_deserializeOpCancelChangeSet struct {
 }
 
 func (*awsRestjson1_deserializeOpCancelChangeSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCancelChangeSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -196,7 +197,7 @@ type awsRestjson1_deserializeOpDescribeChangeSet struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeChangeSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeChangeSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -418,7 +419,7 @@ type awsRestjson1_deserializeOpDescribeEntity struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeEntity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeEntity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -620,7 +621,7 @@ type awsRestjson1_deserializeOpListChangeSets struct {
 }
 
 func (*awsRestjson1_deserializeOpListChangeSets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListChangeSets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -785,7 +786,7 @@ type awsRestjson1_deserializeOpListEntities struct {
 }
 
 func (*awsRestjson1_deserializeOpListEntities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListEntities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -953,7 +954,7 @@ type awsRestjson1_deserializeOpStartChangeSet struct {
 }
 
 func (*awsRestjson1_deserializeOpStartChangeSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpStartChangeSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

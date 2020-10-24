@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpGetMedia struct {
 }
 
 func (*validateOpGetMedia) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

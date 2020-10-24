@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson11_serializeOpCreateCluster struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -65,7 +66,7 @@ type awsAwsjson11_serializeOpCreateParameterGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -111,7 +112,7 @@ type awsAwsjson11_serializeOpCreateSubnetGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -157,7 +158,7 @@ type awsAwsjson11_serializeOpDecreaseReplicationFactor struct {
 }
 
 func (*awsAwsjson11_serializeOpDecreaseReplicationFactor) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDecreaseReplicationFactor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -203,7 +204,7 @@ type awsAwsjson11_serializeOpDeleteCluster struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -249,7 +250,7 @@ type awsAwsjson11_serializeOpDeleteParameterGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -295,7 +296,7 @@ type awsAwsjson11_serializeOpDeleteSubnetGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -341,7 +342,7 @@ type awsAwsjson11_serializeOpDescribeClusters struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeClusters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -387,7 +388,7 @@ type awsAwsjson11_serializeOpDescribeDefaultParameters struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeDefaultParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeDefaultParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -433,7 +434,7 @@ type awsAwsjson11_serializeOpDescribeEvents struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeEvents) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -479,7 +480,7 @@ type awsAwsjson11_serializeOpDescribeParameterGroups struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeParameterGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeParameterGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -525,7 +526,7 @@ type awsAwsjson11_serializeOpDescribeParameters struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -571,7 +572,7 @@ type awsAwsjson11_serializeOpDescribeSubnetGroups struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeSubnetGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeSubnetGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -617,7 +618,7 @@ type awsAwsjson11_serializeOpIncreaseReplicationFactor struct {
 }
 
 func (*awsAwsjson11_serializeOpIncreaseReplicationFactor) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpIncreaseReplicationFactor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -663,7 +664,7 @@ type awsAwsjson11_serializeOpListTags struct {
 }
 
 func (*awsAwsjson11_serializeOpListTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -709,7 +710,7 @@ type awsAwsjson11_serializeOpRebootNode struct {
 }
 
 func (*awsAwsjson11_serializeOpRebootNode) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRebootNode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -755,7 +756,7 @@ type awsAwsjson11_serializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -801,7 +802,7 @@ type awsAwsjson11_serializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -847,7 +848,7 @@ type awsAwsjson11_serializeOpUpdateCluster struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -893,7 +894,7 @@ type awsAwsjson11_serializeOpUpdateParameterGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -939,7 +940,7 @@ type awsAwsjson11_serializeOpUpdateSubnetGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

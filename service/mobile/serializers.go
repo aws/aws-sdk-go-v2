@@ -9,6 +9,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -16,7 +17,7 @@ type awsRestjson1_serializeOpCreateProject struct {
 }
 
 func (*awsRestjson1_serializeOpCreateProject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -93,7 +94,7 @@ type awsRestjson1_serializeOpDeleteProject struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteProject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -159,7 +160,7 @@ type awsRestjson1_serializeOpDescribeBundle struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeBundle) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -225,7 +226,7 @@ type awsRestjson1_serializeOpDescribeProject struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeProject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -287,7 +288,7 @@ type awsRestjson1_serializeOpExportBundle struct {
 }
 
 func (*awsRestjson1_serializeOpExportBundle) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpExportBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -361,7 +362,7 @@ type awsRestjson1_serializeOpExportProject struct {
 }
 
 func (*awsRestjson1_serializeOpExportProject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpExportProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -427,7 +428,7 @@ type awsRestjson1_serializeOpListBundles struct {
 }
 
 func (*awsRestjson1_serializeOpListBundles) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListBundles) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -489,7 +490,7 @@ type awsRestjson1_serializeOpListProjects struct {
 }
 
 func (*awsRestjson1_serializeOpListProjects) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListProjects) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -551,7 +552,7 @@ type awsRestjson1_serializeOpUpdateProject struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateProject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

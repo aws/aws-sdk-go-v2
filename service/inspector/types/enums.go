@@ -16,6 +16,22 @@ const (
 	AccessDeniedErrorCodeAccess_denied_to_iam_role            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
+// Values returns all known values for AccessDeniedErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDeniedErrorCode) Values() []AccessDeniedErrorCode {
+	return []AccessDeniedErrorCode{
+		"ACCESS_DENIED_TO_ASSESSMENT_TARGET",
+		"ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE",
+		"ACCESS_DENIED_TO_ASSESSMENT_RUN",
+		"ACCESS_DENIED_TO_FINDING",
+		"ACCESS_DENIED_TO_RESOURCE_GROUP",
+		"ACCESS_DENIED_TO_RULES_PACKAGE",
+		"ACCESS_DENIED_TO_SNS_TOPIC",
+		"ACCESS_DENIED_TO_IAM_ROLE",
+	}
+}
+
 type AgentHealth string
 
 // Enum values for AgentHealth
@@ -24,6 +40,17 @@ const (
 	AgentHealthUnhealthy AgentHealth = "UNHEALTHY"
 	AgentHealthUnknown   AgentHealth = "UNKNOWN"
 )
+
+// Values returns all known values for AgentHealth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AgentHealth) Values() []AgentHealth {
+	return []AgentHealth{
+		"HEALTHY",
+		"UNHEALTHY",
+		"UNKNOWN",
+	}
+}
 
 type AgentHealthCode string
 
@@ -37,6 +64,20 @@ const (
 	AgentHealthCodeUnknown   AgentHealthCode = "UNKNOWN"
 )
 
+// Values returns all known values for AgentHealthCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgentHealthCode) Values() []AgentHealthCode {
+	return []AgentHealthCode{
+		"IDLE",
+		"RUNNING",
+		"SHUTDOWN",
+		"UNHEALTHY",
+		"THROTTLED",
+		"UNKNOWN",
+	}
+}
+
 type AssessmentRunNotificationSnsStatusCode string
 
 // Enum values for AssessmentRunNotificationSnsStatusCode
@@ -46,6 +87,19 @@ const (
 	AssessmentRunNotificationSnsStatusCodeAccess_denied        AssessmentRunNotificationSnsStatusCode = "ACCESS_DENIED"
 	AssessmentRunNotificationSnsStatusCodeInternal_error       AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
 )
+
+// Values returns all known values for AssessmentRunNotificationSnsStatusCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssessmentRunNotificationSnsStatusCode) Values() []AssessmentRunNotificationSnsStatusCode {
+	return []AssessmentRunNotificationSnsStatusCode{
+		"SUCCESS",
+		"TOPIC_DOES_NOT_EXIST",
+		"ACCESS_DENIED",
+		"INTERNAL_ERROR",
+	}
+}
 
 type AssessmentRunState string
 
@@ -66,12 +120,42 @@ const (
 	AssessmentRunStateCanceled                          AssessmentRunState = "CANCELED"
 )
 
+// Values returns all known values for AssessmentRunState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentRunState) Values() []AssessmentRunState {
+	return []AssessmentRunState{
+		"CREATED",
+		"START_DATA_COLLECTION_PENDING",
+		"START_DATA_COLLECTION_IN_PROGRESS",
+		"COLLECTING_DATA",
+		"STOP_DATA_COLLECTION_PENDING",
+		"DATA_COLLECTED",
+		"START_EVALUATING_RULES_PENDING",
+		"EVALUATING_RULES",
+		"FAILED",
+		"ERROR",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"CANCELED",
+	}
+}
+
 type AssetType string
 
 // Enum values for AssetType
 const (
 	AssetTypeEc2_instance AssetType = "ec2-instance"
 )
+
+// Values returns all known values for AssetType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AssetType) Values() []AssetType {
+	return []AssetType{
+		"ec2-instance",
+	}
+}
 
 type FailedItemErrorCode string
 
@@ -85,6 +169,20 @@ const (
 	FailedItemErrorCodeInternal_error      FailedItemErrorCode = "INTERNAL_ERROR"
 )
 
+// Values returns all known values for FailedItemErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailedItemErrorCode) Values() []FailedItemErrorCode {
+	return []FailedItemErrorCode{
+		"INVALID_ARN",
+		"DUPLICATE_ARN",
+		"ITEM_DOES_NOT_EXIST",
+		"ACCESS_DENIED",
+		"LIMIT_EXCEEDED",
+		"INTERNAL_ERROR",
+	}
+}
+
 type InspectorEvent string
 
 // Enum values for InspectorEvent
@@ -96,6 +194,19 @@ const (
 	InspectorEventOther                        InspectorEvent = "OTHER"
 )
 
+// Values returns all known values for InspectorEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InspectorEvent) Values() []InspectorEvent {
+	return []InspectorEvent{
+		"ASSESSMENT_RUN_STARTED",
+		"ASSESSMENT_RUN_COMPLETED",
+		"ASSESSMENT_RUN_STATE_CHANGED",
+		"FINDING_REPORTED",
+		"OTHER",
+	}
+}
+
 type InvalidCrossAccountRoleErrorCode string
 
 // Enum values for InvalidCrossAccountRoleErrorCode
@@ -103,6 +214,17 @@ const (
 	InvalidCrossAccountRoleErrorCodeRole_does_not_exist_or_invalid_trust_relationship InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
 	InvalidCrossAccountRoleErrorCodeRole_does_not_have_correct_policy                 InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
+
+// Values returns all known values for InvalidCrossAccountRoleErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InvalidCrossAccountRoleErrorCode) Values() []InvalidCrossAccountRoleErrorCode {
+	return []InvalidCrossAccountRoleErrorCode{
+		"ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP",
+		"ROLE_DOES_NOT_HAVE_CORRECT_POLICY",
+	}
+}
 
 type InvalidInputErrorCode string
 
@@ -164,6 +286,68 @@ const (
 	InvalidInputErrorCodeInvalid_number_of_severities                   InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
+// Values returns all known values for InvalidInputErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvalidInputErrorCode) Values() []InvalidInputErrorCode {
+	return []InvalidInputErrorCode{
+		"INVALID_ASSESSMENT_TARGET_ARN",
+		"INVALID_ASSESSMENT_TEMPLATE_ARN",
+		"INVALID_ASSESSMENT_RUN_ARN",
+		"INVALID_FINDING_ARN",
+		"INVALID_RESOURCE_GROUP_ARN",
+		"INVALID_RULES_PACKAGE_ARN",
+		"INVALID_RESOURCE_ARN",
+		"INVALID_SNS_TOPIC_ARN",
+		"INVALID_IAM_ROLE_ARN",
+		"INVALID_ASSESSMENT_TARGET_NAME",
+		"INVALID_ASSESSMENT_TARGET_NAME_PATTERN",
+		"INVALID_ASSESSMENT_TEMPLATE_NAME",
+		"INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN",
+		"INVALID_ASSESSMENT_TEMPLATE_DURATION",
+		"INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE",
+		"INVALID_ASSESSMENT_RUN_DURATION_RANGE",
+		"INVALID_ASSESSMENT_RUN_START_TIME_RANGE",
+		"INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE",
+		"INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE",
+		"INVALID_ASSESSMENT_RUN_STATE",
+		"INVALID_TAG",
+		"INVALID_TAG_KEY",
+		"INVALID_TAG_VALUE",
+		"INVALID_RESOURCE_GROUP_TAG_KEY",
+		"INVALID_RESOURCE_GROUP_TAG_VALUE",
+		"INVALID_ATTRIBUTE",
+		"INVALID_USER_ATTRIBUTE",
+		"INVALID_USER_ATTRIBUTE_KEY",
+		"INVALID_USER_ATTRIBUTE_VALUE",
+		"INVALID_PAGINATION_TOKEN",
+		"INVALID_MAX_RESULTS",
+		"INVALID_AGENT_ID",
+		"INVALID_AUTO_SCALING_GROUP",
+		"INVALID_RULE_NAME",
+		"INVALID_SEVERITY",
+		"INVALID_LOCALE",
+		"INVALID_EVENT",
+		"ASSESSMENT_TARGET_NAME_ALREADY_TAKEN",
+		"ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN",
+		"INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS",
+		"INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS",
+		"INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS",
+		"INVALID_NUMBER_OF_FINDING_ARNS",
+		"INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS",
+		"INVALID_NUMBER_OF_RULES_PACKAGE_ARNS",
+		"INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES",
+		"INVALID_NUMBER_OF_TAGS",
+		"INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS",
+		"INVALID_NUMBER_OF_ATTRIBUTES",
+		"INVALID_NUMBER_OF_USER_ATTRIBUTES",
+		"INVALID_NUMBER_OF_AGENT_IDS",
+		"INVALID_NUMBER_OF_AUTO_SCALING_GROUPS",
+		"INVALID_NUMBER_OF_RULE_NAMES",
+		"INVALID_NUMBER_OF_SEVERITIES",
+	}
+}
+
 type LimitExceededErrorCode string
 
 // Enum values for LimitExceededErrorCode
@@ -175,12 +359,34 @@ const (
 	LimitExceededErrorCodeEvent_subscription_limit_exceeded  LimitExceededErrorCode = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
 )
 
+// Values returns all known values for LimitExceededErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LimitExceededErrorCode) Values() []LimitExceededErrorCode {
+	return []LimitExceededErrorCode{
+		"ASSESSMENT_TARGET_LIMIT_EXCEEDED",
+		"ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED",
+		"ASSESSMENT_RUN_LIMIT_EXCEEDED",
+		"RESOURCE_GROUP_LIMIT_EXCEEDED",
+		"EVENT_SUBSCRIPTION_LIMIT_EXCEEDED",
+	}
+}
+
 type Locale string
 
 // Enum values for Locale
 const (
 	LocaleEn_us Locale = "EN_US"
 )
+
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"EN_US",
+	}
+}
 
 type NoSuchEntityErrorCode string
 
@@ -196,6 +402,22 @@ const (
 	NoSuchEntityErrorCodeIam_role_does_not_exist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
+// Values returns all known values for NoSuchEntityErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NoSuchEntityErrorCode) Values() []NoSuchEntityErrorCode {
+	return []NoSuchEntityErrorCode{
+		"ASSESSMENT_TARGET_DOES_NOT_EXIST",
+		"ASSESSMENT_TEMPLATE_DOES_NOT_EXIST",
+		"ASSESSMENT_RUN_DOES_NOT_EXIST",
+		"FINDING_DOES_NOT_EXIST",
+		"RESOURCE_GROUP_DOES_NOT_EXIST",
+		"RULES_PACKAGE_DOES_NOT_EXIST",
+		"SNS_TOPIC_DOES_NOT_EXIST",
+		"IAM_ROLE_DOES_NOT_EXIST",
+	}
+}
+
 type PreviewStatus string
 
 // Enum values for PreviewStatus
@@ -204,6 +426,16 @@ const (
 	PreviewStatusCompleted        PreviewStatus = "COMPLETED"
 )
 
+// Values returns all known values for PreviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PreviewStatus) Values() []PreviewStatus {
+	return []PreviewStatus{
+		"WORK_IN_PROGRESS",
+		"COMPLETED",
+	}
+}
+
 type ReportFileFormat string
 
 // Enum values for ReportFileFormat
@@ -211,6 +443,16 @@ const (
 	ReportFileFormatHtml ReportFileFormat = "HTML"
 	ReportFileFormatPdf  ReportFileFormat = "PDF"
 )
+
+// Values returns all known values for ReportFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportFileFormat) Values() []ReportFileFormat {
+	return []ReportFileFormat{
+		"HTML",
+		"PDF",
+	}
+}
 
 type ReportStatus string
 
@@ -221,6 +463,17 @@ const (
 	ReportStatusCompleted        ReportStatus = "COMPLETED"
 )
 
+// Values returns all known values for ReportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportStatus) Values() []ReportStatus {
+	return []ReportStatus{
+		"WORK_IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type ReportType string
 
 // Enum values for ReportType
@@ -229,6 +482,16 @@ const (
 	ReportTypeFull    ReportType = "FULL"
 )
 
+// Values returns all known values for ReportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportType) Values() []ReportType {
+	return []ReportType{
+		"FINDING",
+		"FULL",
+	}
+}
+
 type ScopeType string
 
 // Enum values for ScopeType
@@ -236,6 +499,16 @@ const (
 	ScopeTypeInstance_id       ScopeType = "INSTANCE_ID"
 	ScopeTypeRules_package_arn ScopeType = "RULES_PACKAGE_ARN"
 )
+
+// Values returns all known values for ScopeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ScopeType) Values() []ScopeType {
+	return []ScopeType{
+		"INSTANCE_ID",
+		"RULES_PACKAGE_ARN",
+	}
+}
 
 type Severity string
 
@@ -248,6 +521,19 @@ const (
 	SeverityUndefined     Severity = "Undefined"
 )
 
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Severity) Values() []Severity {
+	return []Severity{
+		"Low",
+		"Medium",
+		"High",
+		"Informational",
+		"Undefined",
+	}
+}
+
 type StopAction string
 
 // Enum values for StopAction
@@ -255,3 +541,13 @@ const (
 	StopActionStart_evaluation StopAction = "START_EVALUATION"
 	StopActionSkip_evaluation  StopAction = "SKIP_EVALUATION"
 )
+
+// Values returns all known values for StopAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StopAction) Values() []StopAction {
+	return []StopAction{
+		"START_EVALUATION",
+		"SKIP_EVALUATION",
+	}
+}

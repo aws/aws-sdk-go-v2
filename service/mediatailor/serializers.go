@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpDeletePlaybackConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpDeletePlaybackConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeletePlaybackConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -84,7 +85,7 @@ type awsRestjson1_serializeOpGetPlaybackConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpGetPlaybackConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetPlaybackConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -150,7 +151,7 @@ type awsRestjson1_serializeOpListPlaybackConfigurations struct {
 }
 
 func (*awsRestjson1_serializeOpListPlaybackConfigurations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListPlaybackConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -212,7 +213,7 @@ type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
 func (*awsRestjson1_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -278,7 +279,7 @@ type awsRestjson1_serializeOpPutPlaybackConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpPutPlaybackConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutPlaybackConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -418,7 +419,7 @@ type awsRestjson1_serializeOpTagResource struct {
 }
 
 func (*awsRestjson1_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -509,7 +510,7 @@ type awsRestjson1_serializeOpUntagResource struct {
 }
 
 func (*awsRestjson1_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

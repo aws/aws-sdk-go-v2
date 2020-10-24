@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpAcceptMatch struct {
 }
 
 func (*awsAwsjson11_deserializeOpAcceptMatch) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAcceptMatch) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_deserializeOpClaimGameServer struct {
 }
 
 func (*awsAwsjson11_deserializeOpClaimGameServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpClaimGameServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -269,7 +270,7 @@ type awsAwsjson11_deserializeOpCreateAlias struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateAlias) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateAlias) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -395,7 +396,7 @@ type awsAwsjson11_deserializeOpCreateBuild struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateBuild) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateBuild) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -518,7 +519,7 @@ type awsAwsjson11_deserializeOpCreateFleet struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateFleet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateFleet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -647,7 +648,7 @@ type awsAwsjson11_deserializeOpCreateGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -770,7 +771,7 @@ type awsAwsjson11_deserializeOpCreateGameSession struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateGameSession) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateGameSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -908,7 +909,7 @@ type awsAwsjson11_deserializeOpCreateGameSessionQueue struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateGameSessionQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateGameSessionQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1031,7 +1032,7 @@ type awsAwsjson11_deserializeOpCreateMatchmakingConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateMatchmakingConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateMatchmakingConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1157,7 +1158,7 @@ type awsAwsjson11_deserializeOpCreateMatchmakingRuleSet struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateMatchmakingRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateMatchmakingRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1277,7 +1278,7 @@ type awsAwsjson11_deserializeOpCreatePlayerSession struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePlayerSession) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePlayerSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1406,7 +1407,7 @@ type awsAwsjson11_deserializeOpCreatePlayerSessions struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePlayerSessions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePlayerSessions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1535,7 +1536,7 @@ type awsAwsjson11_deserializeOpCreateScript struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateScript) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateScript) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1658,7 +1659,7 @@ type awsAwsjson11_deserializeOpCreateVpcPeeringAuthorization struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateVpcPeeringAuthorization) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateVpcPeeringAuthorization) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1778,7 +1779,7 @@ type awsAwsjson11_deserializeOpCreateVpcPeeringConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateVpcPeeringConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateVpcPeeringConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1898,7 +1899,7 @@ type awsAwsjson11_deserializeOpDeleteAlias struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteAlias) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteAlias) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2021,7 +2022,7 @@ type awsAwsjson11_deserializeOpDeleteBuild struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteBuild) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteBuild) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2144,7 +2145,7 @@ type awsAwsjson11_deserializeOpDeleteFleet struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteFleet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteFleet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2270,7 +2271,7 @@ type awsAwsjson11_deserializeOpDeleteGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2390,7 +2391,7 @@ type awsAwsjson11_deserializeOpDeleteGameSessionQueue struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteGameSessionQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteGameSessionQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2513,7 +2514,7 @@ type awsAwsjson11_deserializeOpDeleteMatchmakingConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteMatchmakingConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteMatchmakingConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2636,7 +2637,7 @@ type awsAwsjson11_deserializeOpDeleteMatchmakingRuleSet struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteMatchmakingRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteMatchmakingRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2759,7 +2760,7 @@ type awsAwsjson11_deserializeOpDeleteScalingPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteScalingPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteScalingPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2879,7 +2880,7 @@ type awsAwsjson11_deserializeOpDeleteScript struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteScript) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteScript) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3002,7 +3003,7 @@ type awsAwsjson11_deserializeOpDeleteVpcPeeringAuthorization struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteVpcPeeringAuthorization) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteVpcPeeringAuthorization) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3122,7 +3123,7 @@ type awsAwsjson11_deserializeOpDeleteVpcPeeringConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteVpcPeeringConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteVpcPeeringConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3242,7 +3243,7 @@ type awsAwsjson11_deserializeOpDeregisterGameServer struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeregisterGameServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeregisterGameServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3362,7 +3363,7 @@ type awsAwsjson11_deserializeOpDescribeAlias struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeAlias) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeAlias) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3482,7 +3483,7 @@ type awsAwsjson11_deserializeOpDescribeBuild struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeBuild) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeBuild) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3602,7 +3603,7 @@ type awsAwsjson11_deserializeOpDescribeEC2InstanceLimits struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeEC2InstanceLimits) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeEC2InstanceLimits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3719,7 +3720,7 @@ type awsAwsjson11_deserializeOpDescribeFleetAttributes struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeFleetAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeFleetAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3839,7 +3840,7 @@ type awsAwsjson11_deserializeOpDescribeFleetCapacity struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeFleetCapacity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeFleetCapacity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3959,7 +3960,7 @@ type awsAwsjson11_deserializeOpDescribeFleetEvents struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeFleetEvents) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeFleetEvents) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4079,7 +4080,7 @@ type awsAwsjson11_deserializeOpDescribeFleetPortSettings struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeFleetPortSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeFleetPortSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4199,7 +4200,7 @@ type awsAwsjson11_deserializeOpDescribeFleetUtilization struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeFleetUtilization) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeFleetUtilization) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4319,7 +4320,7 @@ type awsAwsjson11_deserializeOpDescribeGameServer struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4439,7 +4440,7 @@ type awsAwsjson11_deserializeOpDescribeGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4559,7 +4560,7 @@ type awsAwsjson11_deserializeOpDescribeGameSessionDetails struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameSessionDetails) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameSessionDetails) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4682,7 +4683,7 @@ type awsAwsjson11_deserializeOpDescribeGameSessionPlacement struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameSessionPlacement) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameSessionPlacement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4802,7 +4803,7 @@ type awsAwsjson11_deserializeOpDescribeGameSessionQueues struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameSessionQueues) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameSessionQueues) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4922,7 +4923,7 @@ type awsAwsjson11_deserializeOpDescribeGameSessions struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeGameSessions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeGameSessions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5045,7 +5046,7 @@ type awsAwsjson11_deserializeOpDescribeInstances struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeInstances) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeInstances) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5165,7 +5166,7 @@ type awsAwsjson11_deserializeOpDescribeMatchmaking struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeMatchmaking) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeMatchmaking) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5282,7 +5283,7 @@ type awsAwsjson11_deserializeOpDescribeMatchmakingConfigurations struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeMatchmakingConfigurations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeMatchmakingConfigurations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5399,7 +5400,7 @@ type awsAwsjson11_deserializeOpDescribeMatchmakingRuleSets struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeMatchmakingRuleSets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeMatchmakingRuleSets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5519,7 +5520,7 @@ type awsAwsjson11_deserializeOpDescribePlayerSessions struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribePlayerSessions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribePlayerSessions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5639,7 +5640,7 @@ type awsAwsjson11_deserializeOpDescribeRuntimeConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeRuntimeConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeRuntimeConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5759,7 +5760,7 @@ type awsAwsjson11_deserializeOpDescribeScalingPolicies struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalingPolicies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalingPolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5879,7 +5880,7 @@ type awsAwsjson11_deserializeOpDescribeScript struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScript) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScript) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5999,7 +6000,7 @@ type awsAwsjson11_deserializeOpDescribeVpcPeeringAuthorizations struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeVpcPeeringAuthorizations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeVpcPeeringAuthorizations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6116,7 +6117,7 @@ type awsAwsjson11_deserializeOpDescribeVpcPeeringConnections struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeVpcPeeringConnections) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeVpcPeeringConnections) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6236,7 +6237,7 @@ type awsAwsjson11_deserializeOpGetGameSessionLogUrl struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetGameSessionLogUrl) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetGameSessionLogUrl) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6356,7 +6357,7 @@ type awsAwsjson11_deserializeOpGetInstanceAccess struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetInstanceAccess) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetInstanceAccess) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6476,7 +6477,7 @@ type awsAwsjson11_deserializeOpListAliases struct {
 }
 
 func (*awsAwsjson11_deserializeOpListAliases) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListAliases) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6593,7 +6594,7 @@ type awsAwsjson11_deserializeOpListBuilds struct {
 }
 
 func (*awsAwsjson11_deserializeOpListBuilds) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListBuilds) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6710,7 +6711,7 @@ type awsAwsjson11_deserializeOpListFleets struct {
 }
 
 func (*awsAwsjson11_deserializeOpListFleets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListFleets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6830,7 +6831,7 @@ type awsAwsjson11_deserializeOpListGameServerGroups struct {
 }
 
 func (*awsAwsjson11_deserializeOpListGameServerGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListGameServerGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6947,7 +6948,7 @@ type awsAwsjson11_deserializeOpListGameServers struct {
 }
 
 func (*awsAwsjson11_deserializeOpListGameServers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListGameServers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7064,7 +7065,7 @@ type awsAwsjson11_deserializeOpListScripts struct {
 }
 
 func (*awsAwsjson11_deserializeOpListScripts) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListScripts) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7181,7 +7182,7 @@ type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7301,7 +7302,7 @@ type awsAwsjson11_deserializeOpPutScalingPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutScalingPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutScalingPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7421,7 +7422,7 @@ type awsAwsjson11_deserializeOpRegisterGameServer struct {
 }
 
 func (*awsAwsjson11_deserializeOpRegisterGameServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRegisterGameServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7544,7 +7545,7 @@ type awsAwsjson11_deserializeOpRequestUploadCredentials struct {
 }
 
 func (*awsAwsjson11_deserializeOpRequestUploadCredentials) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRequestUploadCredentials) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7664,7 +7665,7 @@ type awsAwsjson11_deserializeOpResolveAlias struct {
 }
 
 func (*awsAwsjson11_deserializeOpResolveAlias) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpResolveAlias) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7787,7 +7788,7 @@ type awsAwsjson11_deserializeOpResumeGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpResumeGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpResumeGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -7907,7 +7908,7 @@ type awsAwsjson11_deserializeOpSearchGameSessions struct {
 }
 
 func (*awsAwsjson11_deserializeOpSearchGameSessions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpSearchGameSessions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8030,7 +8031,7 @@ type awsAwsjson11_deserializeOpStartFleetActions struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartFleetActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartFleetActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8150,7 +8151,7 @@ type awsAwsjson11_deserializeOpStartGameSessionPlacement struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartGameSessionPlacement) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartGameSessionPlacement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8270,7 +8271,7 @@ type awsAwsjson11_deserializeOpStartMatchBackfill struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartMatchBackfill) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartMatchBackfill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8390,7 +8391,7 @@ type awsAwsjson11_deserializeOpStartMatchmaking struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartMatchmaking) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartMatchmaking) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8510,7 +8511,7 @@ type awsAwsjson11_deserializeOpStopFleetActions struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopFleetActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopFleetActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8630,7 +8631,7 @@ type awsAwsjson11_deserializeOpStopGameSessionPlacement struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopGameSessionPlacement) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopGameSessionPlacement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8750,7 +8751,7 @@ type awsAwsjson11_deserializeOpStopMatchmaking struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopMatchmaking) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopMatchmaking) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8870,7 +8871,7 @@ type awsAwsjson11_deserializeOpSuspendGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpSuspendGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpSuspendGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -8990,7 +8991,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9110,7 +9111,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9230,7 +9231,7 @@ type awsAwsjson11_deserializeOpUpdateAlias struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateAlias) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateAlias) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9350,7 +9351,7 @@ type awsAwsjson11_deserializeOpUpdateBuild struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateBuild) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateBuild) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9470,7 +9471,7 @@ type awsAwsjson11_deserializeOpUpdateFleetAttributes struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateFleetAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateFleetAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9599,7 +9600,7 @@ type awsAwsjson11_deserializeOpUpdateFleetCapacity struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateFleetCapacity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateFleetCapacity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9728,7 +9729,7 @@ type awsAwsjson11_deserializeOpUpdateFleetPortSettings struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateFleetPortSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateFleetPortSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9857,7 +9858,7 @@ type awsAwsjson11_deserializeOpUpdateGameServer struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateGameServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateGameServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -9977,7 +9978,7 @@ type awsAwsjson11_deserializeOpUpdateGameServerGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateGameServerGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateGameServerGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10097,7 +10098,7 @@ type awsAwsjson11_deserializeOpUpdateGameSession struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateGameSession) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateGameSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10223,7 +10224,7 @@ type awsAwsjson11_deserializeOpUpdateGameSessionQueue struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateGameSessionQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateGameSessionQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10343,7 +10344,7 @@ type awsAwsjson11_deserializeOpUpdateMatchmakingConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateMatchmakingConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateMatchmakingConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10463,7 +10464,7 @@ type awsAwsjson11_deserializeOpUpdateRuntimeConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateRuntimeConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateRuntimeConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10586,7 +10587,7 @@ type awsAwsjson11_deserializeOpUpdateScript struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateScript) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateScript) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -10706,7 +10707,7 @@ type awsAwsjson11_deserializeOpValidateMatchmakingRuleSet struct {
 }
 
 func (*awsAwsjson11_deserializeOpValidateMatchmakingRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpValidateMatchmakingRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDeleteThingShadow struct {
 }
 
 func (*validateOpDeleteThingShadow) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteThingShadow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpGetThingShadow struct {
 }
 
 func (*validateOpGetThingShadow) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetThingShadow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpListNamedShadowsForThing struct {
 }
 
 func (*validateOpListNamedShadowsForThing) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListNamedShadowsForThing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpPublish struct {
 }
 
 func (*validateOpPublish) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPublish) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -93,7 +94,7 @@ type validateOpUpdateThingShadow struct {
 }
 
 func (*validateOpUpdateThingShadow) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateThingShadow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

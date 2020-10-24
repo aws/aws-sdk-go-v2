@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -22,7 +23,7 @@ type awsRestjson1_deserializeOpDescribeJobExecution struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeJobExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeJobExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -184,7 +185,7 @@ type awsRestjson1_deserializeOpGetPendingJobExecutions struct {
 }
 
 func (*awsRestjson1_deserializeOpGetPendingJobExecutions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetPendingJobExecutions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -348,7 +349,7 @@ type awsRestjson1_deserializeOpStartNextPendingJobExecution struct {
 }
 
 func (*awsRestjson1_deserializeOpStartNextPendingJobExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpStartNextPendingJobExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -507,7 +508,7 @@ type awsRestjson1_deserializeOpUpdateJobExecution struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateJobExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateJobExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

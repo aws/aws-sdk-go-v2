@@ -11,6 +11,17 @@ const (
 	DataSourceExternal_model_score DataSource = "EXTERNAL_MODEL_SCORE"
 )
 
+// Values returns all known values for DataSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataSource) Values() []DataSource {
+	return []DataSource{
+		"EVENT",
+		"MODEL_SCORE",
+		"EXTERNAL_MODEL_SCORE",
+	}
+}
+
 type DataType string
 
 // Enum values for DataType
@@ -21,6 +32,18 @@ const (
 	DataTypeBoolean DataType = "BOOLEAN"
 )
 
+// Values returns all known values for DataType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DataType) Values() []DataType {
+	return []DataType{
+		"STRING",
+		"INTEGER",
+		"FLOAT",
+		"BOOLEAN",
+	}
+}
+
 type DetectorVersionStatus string
 
 // Enum values for DetectorVersionStatus
@@ -30,12 +53,32 @@ const (
 	DetectorVersionStatusInactive DetectorVersionStatus = "INACTIVE"
 )
 
+// Values returns all known values for DetectorVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetectorVersionStatus) Values() []DetectorVersionStatus {
+	return []DetectorVersionStatus{
+		"DRAFT",
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type Language string
 
 // Enum values for Language
 const (
 	LanguageDetectorpl Language = "DETECTORPL"
 )
+
+// Values returns all known values for Language. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Language) Values() []Language {
+	return []Language{
+		"DETECTORPL",
+	}
+}
 
 type ModelEndpointStatus string
 
@@ -45,6 +88,16 @@ const (
 	ModelEndpointStatusDissociated ModelEndpointStatus = "DISSOCIATED"
 )
 
+// Values returns all known values for ModelEndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelEndpointStatus) Values() []ModelEndpointStatus {
+	return []ModelEndpointStatus{
+		"ASSOCIATED",
+		"DISSOCIATED",
+	}
+}
+
 type ModelInputDataFormat string
 
 // Enum values for ModelInputDataFormat
@@ -52,6 +105,16 @@ const (
 	ModelInputDataFormatCsv  ModelInputDataFormat = "TEXT_CSV"
 	ModelInputDataFormatJson ModelInputDataFormat = "APPLICATION_JSON"
 )
+
+// Values returns all known values for ModelInputDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelInputDataFormat) Values() []ModelInputDataFormat {
+	return []ModelInputDataFormat{
+		"TEXT_CSV",
+		"APPLICATION_JSON",
+	}
+}
 
 type ModelOutputDataFormat string
 
@@ -61,6 +124,16 @@ const (
 	ModelOutputDataFormatJsonlines ModelOutputDataFormat = "APPLICATION_JSONLINES"
 )
 
+// Values returns all known values for ModelOutputDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelOutputDataFormat) Values() []ModelOutputDataFormat {
+	return []ModelOutputDataFormat{
+		"TEXT_CSV",
+		"APPLICATION_JSONLINES",
+	}
+}
+
 type ModelSource string
 
 // Enum values for ModelSource
@@ -68,12 +141,30 @@ const (
 	ModelSourceSagemaker ModelSource = "SAGEMAKER"
 )
 
+// Values returns all known values for ModelSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ModelSource) Values() []ModelSource {
+	return []ModelSource{
+		"SAGEMAKER",
+	}
+}
+
 type ModelTypeEnum string
 
 // Enum values for ModelTypeEnum
 const (
 	ModelTypeEnumOnline_fraud_insights ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
 )
+
+// Values returns all known values for ModelTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelTypeEnum) Values() []ModelTypeEnum {
+	return []ModelTypeEnum{
+		"ONLINE_FRAUD_INSIGHTS",
+	}
+}
 
 type ModelVersionStatus string
 
@@ -83,6 +174,16 @@ const (
 	ModelVersionStatusInactive ModelVersionStatus = "INACTIVE"
 )
 
+// Values returns all known values for ModelVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelVersionStatus) Values() []ModelVersionStatus {
+	return []ModelVersionStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type RuleExecutionMode string
 
 // Enum values for RuleExecutionMode
@@ -91,9 +192,28 @@ const (
 	RuleExecutionModeFirst_matched RuleExecutionMode = "FIRST_MATCHED"
 )
 
+// Values returns all known values for RuleExecutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RuleExecutionMode) Values() []RuleExecutionMode {
+	return []RuleExecutionMode{
+		"ALL_MATCHED",
+		"FIRST_MATCHED",
+	}
+}
+
 type TrainingDataSourceEnum string
 
 // Enum values for TrainingDataSourceEnum
 const (
 	TrainingDataSourceEnumExternal_events TrainingDataSourceEnum = "EXTERNAL_EVENTS"
 )
+
+// Values returns all known values for TrainingDataSourceEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingDataSourceEnum) Values() []TrainingDataSourceEnum {
+	return []TrainingDataSourceEnum{
+		"EXTERNAL_EVENTS",
+	}
+}

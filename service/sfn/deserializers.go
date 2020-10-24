@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson10_deserializeOpCreateActivity struct {
 }
 
 func (*awsAwsjson10_deserializeOpCreateActivity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpCreateActivity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -140,7 +141,7 @@ type awsAwsjson10_deserializeOpCreateStateMachine struct {
 }
 
 func (*awsAwsjson10_deserializeOpCreateStateMachine) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpCreateStateMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -275,7 +276,7 @@ type awsAwsjson10_deserializeOpDeleteActivity struct {
 }
 
 func (*awsAwsjson10_deserializeOpDeleteActivity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDeleteActivity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -386,7 +387,7 @@ type awsAwsjson10_deserializeOpDeleteStateMachine struct {
 }
 
 func (*awsAwsjson10_deserializeOpDeleteStateMachine) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDeleteStateMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -497,7 +498,7 @@ type awsAwsjson10_deserializeOpDescribeActivity struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeActivity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeActivity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -611,7 +612,7 @@ type awsAwsjson10_deserializeOpDescribeExecution struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -725,7 +726,7 @@ type awsAwsjson10_deserializeOpDescribeStateMachine struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeStateMachine) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeStateMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -839,7 +840,7 @@ type awsAwsjson10_deserializeOpDescribeStateMachineForExecution struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeStateMachineForExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeStateMachineForExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -953,7 +954,7 @@ type awsAwsjson10_deserializeOpGetActivityTask struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetActivityTask) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetActivityTask) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1070,7 +1071,7 @@ type awsAwsjson10_deserializeOpGetExecutionHistory struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetExecutionHistory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetExecutionHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1187,7 +1188,7 @@ type awsAwsjson10_deserializeOpListActivities struct {
 }
 
 func (*awsAwsjson10_deserializeOpListActivities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpListActivities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1298,7 +1299,7 @@ type awsAwsjson10_deserializeOpListExecutions struct {
 }
 
 func (*awsAwsjson10_deserializeOpListExecutions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpListExecutions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1418,7 +1419,7 @@ type awsAwsjson10_deserializeOpListStateMachines struct {
 }
 
 func (*awsAwsjson10_deserializeOpListStateMachines) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpListStateMachines) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1529,7 +1530,7 @@ type awsAwsjson10_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson10_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1643,7 +1644,7 @@ type awsAwsjson10_deserializeOpSendTaskFailure struct {
 }
 
 func (*awsAwsjson10_deserializeOpSendTaskFailure) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpSendTaskFailure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1760,7 +1761,7 @@ type awsAwsjson10_deserializeOpSendTaskHeartbeat struct {
 }
 
 func (*awsAwsjson10_deserializeOpSendTaskHeartbeat) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpSendTaskHeartbeat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1877,7 +1878,7 @@ type awsAwsjson10_deserializeOpSendTaskSuccess struct {
 }
 
 func (*awsAwsjson10_deserializeOpSendTaskSuccess) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpSendTaskSuccess) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1997,7 +1998,7 @@ type awsAwsjson10_deserializeOpStartExecution struct {
 }
 
 func (*awsAwsjson10_deserializeOpStartExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpStartExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2126,7 +2127,7 @@ type awsAwsjson10_deserializeOpStopExecution struct {
 }
 
 func (*awsAwsjson10_deserializeOpStopExecution) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpStopExecution) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2240,7 +2241,7 @@ type awsAwsjson10_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson10_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2357,7 +2358,7 @@ type awsAwsjson10_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson10_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2471,7 +2472,7 @@ type awsAwsjson10_deserializeOpUpdateStateMachine struct {
 }
 
 func (*awsAwsjson10_deserializeOpUpdateStateMachine) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpUpdateStateMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

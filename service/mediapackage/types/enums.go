@@ -16,12 +16,37 @@ const (
 	AdTriggersElementDistributor_overlay_placement_opportunity AdTriggersElement = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
 )
 
+// Values returns all known values for AdTriggersElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdTriggersElement) Values() []AdTriggersElement {
+	return []AdTriggersElement{
+		"SPLICE_INSERT",
+		"BREAK",
+		"PROVIDER_ADVERTISEMENT",
+		"DISTRIBUTOR_ADVERTISEMENT",
+		"PROVIDER_PLACEMENT_OPPORTUNITY",
+		"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+		"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+		"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
+	}
+}
+
 type PeriodTriggersElement string
 
 // Enum values for PeriodTriggersElement
 const (
 	PeriodTriggersElementAds PeriodTriggersElement = "ADS"
 )
+
+// Values returns all known values for PeriodTriggersElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PeriodTriggersElement) Values() []PeriodTriggersElement {
+	return []PeriodTriggersElement{
+		"ADS",
+	}
+}
 
 type AdMarkers string
 
@@ -33,6 +58,18 @@ const (
 	AdMarkersDaterange       AdMarkers = "DATERANGE"
 )
 
+// Values returns all known values for AdMarkers. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AdMarkers) Values() []AdMarkers {
+	return []AdMarkers{
+		"NONE",
+		"SCTE35_ENHANCED",
+		"PASSTHROUGH",
+		"DATERANGE",
+	}
+}
+
 type AdsOnDeliveryRestrictions string
 
 // Enum values for AdsOnDeliveryRestrictions
@@ -43,6 +80,18 @@ const (
 	AdsOnDeliveryRestrictionsBoth         AdsOnDeliveryRestrictions = "BOTH"
 )
 
+// Values returns all known values for AdsOnDeliveryRestrictions. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdsOnDeliveryRestrictions) Values() []AdsOnDeliveryRestrictions {
+	return []AdsOnDeliveryRestrictions{
+		"NONE",
+		"RESTRICTED",
+		"UNRESTRICTED",
+		"BOTH",
+	}
+}
+
 type EncryptionMethod string
 
 // Enum values for EncryptionMethod
@@ -50,6 +99,16 @@ const (
 	EncryptionMethodAes_128    EncryptionMethod = "AES_128"
 	EncryptionMethodSample_aes EncryptionMethod = "SAMPLE_AES"
 )
+
+// Values returns all known values for EncryptionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionMethod) Values() []EncryptionMethod {
+	return []EncryptionMethod{
+		"AES_128",
+		"SAMPLE_AES",
+	}
+}
 
 type ManifestLayout string
 
@@ -59,6 +118,16 @@ const (
 	ManifestLayoutCompact ManifestLayout = "COMPACT"
 )
 
+// Values returns all known values for ManifestLayout. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManifestLayout) Values() []ManifestLayout {
+	return []ManifestLayout{
+		"FULL",
+		"COMPACT",
+	}
+}
+
 type Origination string
 
 // Enum values for Origination
@@ -66,6 +135,16 @@ const (
 	OriginationAllow Origination = "ALLOW"
 	OriginationDeny  Origination = "DENY"
 )
+
+// Values returns all known values for Origination. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Origination) Values() []Origination {
+	return []Origination{
+		"ALLOW",
+		"DENY",
+	}
+}
 
 type PlaylistType string
 
@@ -76,6 +155,17 @@ const (
 	PlaylistTypeVod   PlaylistType = "VOD"
 )
 
+// Values returns all known values for PlaylistType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PlaylistType) Values() []PlaylistType {
+	return []PlaylistType{
+		"NONE",
+		"EVENT",
+		"VOD",
+	}
+}
+
 type Profile string
 
 // Enum values for Profile
@@ -83,6 +173,16 @@ const (
 	ProfileNone      Profile = "NONE"
 	ProfileHbbtv_1_5 Profile = "HBBTV_1_5"
 )
+
+// Values returns all known values for Profile. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Profile) Values() []Profile {
+	return []Profile{
+		"NONE",
+		"HBBTV_1_5",
+	}
+}
 
 type SegmentTemplateFormat string
 
@@ -93,6 +193,17 @@ const (
 	SegmentTemplateFormatNumber_with_duration SegmentTemplateFormat = "NUMBER_WITH_DURATION"
 )
 
+// Values returns all known values for SegmentTemplateFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentTemplateFormat) Values() []SegmentTemplateFormat {
+	return []SegmentTemplateFormat{
+		"NUMBER_WITH_TIMELINE",
+		"TIME_WITH_TIMELINE",
+		"NUMBER_WITH_DURATION",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -102,6 +213,17 @@ const (
 	StatusFailed      Status = "FAILED"
 )
 
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type StreamOrder string
 
 // Enum values for StreamOrder
@@ -110,3 +232,14 @@ const (
 	StreamOrderVideo_bitrate_ascending  StreamOrder = "VIDEO_BITRATE_ASCENDING"
 	StreamOrderVideo_bitrate_descending StreamOrder = "VIDEO_BITRATE_DESCENDING"
 )
+
+// Values returns all known values for StreamOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StreamOrder) Values() []StreamOrder {
+	return []StreamOrder{
+		"ORIGINAL",
+		"VIDEO_BITRATE_ASCENDING",
+		"VIDEO_BITRATE_DESCENDING",
+	}
+}

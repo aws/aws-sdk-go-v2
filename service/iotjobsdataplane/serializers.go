@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -17,7 +18,7 @@ type awsRestjson1_serializeOpDescribeJobExecution struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeJobExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeJobExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -103,7 +104,7 @@ type awsRestjson1_serializeOpGetPendingJobExecutions struct {
 }
 
 func (*awsRestjson1_serializeOpGetPendingJobExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetPendingJobExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -169,7 +170,7 @@ type awsRestjson1_serializeOpStartNextPendingJobExecution struct {
 }
 
 func (*awsRestjson1_serializeOpStartNextPendingJobExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartNextPendingJobExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -265,7 +266,7 @@ type awsRestjson1_serializeOpUpdateJobExecution struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateJobExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateJobExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

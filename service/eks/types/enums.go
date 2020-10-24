@@ -10,6 +10,16 @@ const (
 	AMITypesAl2_x86_64_gpu AMITypes = "AL2_x86_64_GPU"
 )
 
+// Values returns all known values for AMITypes. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AMITypes) Values() []AMITypes {
+	return []AMITypes{
+		"AL2_x86_64",
+		"AL2_x86_64_GPU",
+	}
+}
+
 type ClusterStatus string
 
 // Enum values for ClusterStatus
@@ -20,6 +30,19 @@ const (
 	ClusterStatusFailed   ClusterStatus = "FAILED"
 	ClusterStatusUpdating ClusterStatus = "UPDATING"
 )
+
+// Values returns all known values for ClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStatus) Values() []ClusterStatus {
+	return []ClusterStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+		"UPDATING",
+	}
+}
 
 type ErrorCode string
 
@@ -38,6 +61,25 @@ const (
 	ErrorCodeInsufficient_free_addresses ErrorCode = "InsufficientFreeAddresses"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"SubnetNotFound",
+		"SecurityGroupNotFound",
+		"EniLimitReached",
+		"IpNotAvailable",
+		"AccessDenied",
+		"OperationNotPermitted",
+		"VpcIdNotFound",
+		"Unknown",
+		"NodeCreationFailure",
+		"PodEvictionFailure",
+		"InsufficientFreeAddresses",
+	}
+}
+
 type FargateProfileStatus string
 
 // Enum values for FargateProfileStatus
@@ -49,6 +91,19 @@ const (
 	FargateProfileStatusDelete_failed FargateProfileStatus = "DELETE_FAILED"
 )
 
+// Values returns all known values for FargateProfileStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FargateProfileStatus) Values() []FargateProfileStatus {
+	return []FargateProfileStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -59,6 +114,19 @@ const (
 	LogTypeController_manager LogType = "controllerManager"
 	LogTypeScheduler          LogType = "scheduler"
 )
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"api",
+		"audit",
+		"authenticator",
+		"controllerManager",
+		"scheduler",
+	}
+}
 
 type NodegroupIssueCode string
 
@@ -83,6 +151,31 @@ const (
 	NodegroupIssueCodeInternal_failure                         NodegroupIssueCode = "InternalFailure"
 )
 
+// Values returns all known values for NodegroupIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NodegroupIssueCode) Values() []NodegroupIssueCode {
+	return []NodegroupIssueCode{
+		"AutoScalingGroupNotFound",
+		"AutoScalingGroupInvalidConfiguration",
+		"Ec2SecurityGroupNotFound",
+		"Ec2SecurityGroupDeletionFailure",
+		"Ec2LaunchTemplateNotFound",
+		"Ec2LaunchTemplateVersionMismatch",
+		"Ec2SubnetNotFound",
+		"Ec2SubnetInvalidConfiguration",
+		"IamInstanceProfileNotFound",
+		"IamLimitExceeded",
+		"IamNodeRoleNotFound",
+		"NodeCreationFailure",
+		"AsgInstanceLaunchFailures",
+		"InstanceLimitExceeded",
+		"InsufficientFreeAddresses",
+		"AccessDenied",
+		"InternalFailure",
+	}
+}
+
 type NodegroupStatus string
 
 // Enum values for NodegroupStatus
@@ -95,6 +188,21 @@ const (
 	NodegroupStatusDelete_failed NodegroupStatus = "DELETE_FAILED"
 	NodegroupStatusDegraded      NodegroupStatus = "DEGRADED"
 )
+
+// Values returns all known values for NodegroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NodegroupStatus) Values() []NodegroupStatus {
+	return []NodegroupStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+		"DEGRADED",
+	}
+}
 
 type UpdateParamType string
 
@@ -114,6 +222,26 @@ const (
 	UpdateParamTypePublic_access_cidrs     UpdateParamType = "PublicAccessCidrs"
 )
 
+// Values returns all known values for UpdateParamType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateParamType) Values() []UpdateParamType {
+	return []UpdateParamType{
+		"Version",
+		"PlatformVersion",
+		"EndpointPrivateAccess",
+		"EndpointPublicAccess",
+		"ClusterLogging",
+		"DesiredSize",
+		"LabelsToAdd",
+		"LabelsToRemove",
+		"MaxSize",
+		"MinSize",
+		"ReleaseVersion",
+		"PublicAccessCidrs",
+	}
+}
+
 type UpdateStatus string
 
 // Enum values for UpdateStatus
@@ -124,6 +252,18 @@ const (
 	UpdateStatusSuccessful  UpdateStatus = "Successful"
 )
 
+// Values returns all known values for UpdateStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"InProgress",
+		"Failed",
+		"Cancelled",
+		"Successful",
+	}
+}
+
 type UpdateType string
 
 // Enum values for UpdateType
@@ -133,3 +273,15 @@ const (
 	UpdateTypeLogging_update         UpdateType = "LoggingUpdate"
 	UpdateTypeConfig_update          UpdateType = "ConfigUpdate"
 )
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"VersionUpdate",
+		"EndpointAccessUpdate",
+		"LoggingUpdate",
+		"ConfigUpdate",
+	}
+}

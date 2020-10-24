@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDescribeAffectedAccountsForOrganization struct {
 }
 
 func (*validateOpDescribeAffectedAccountsForOrganization) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeAffectedAccountsForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpDescribeAffectedEntitiesForOrganization struct {
 }
 
 func (*validateOpDescribeAffectedEntitiesForOrganization) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeAffectedEntitiesForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpDescribeAffectedEntities struct {
 }
 
 func (*validateOpDescribeAffectedEntities) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeAffectedEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpDescribeEventAggregates struct {
 }
 
 func (*validateOpDescribeEventAggregates) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEventAggregates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpDescribeEventDetailsForOrganization struct {
 }
 
 func (*validateOpDescribeEventDetailsForOrganization) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEventDetailsForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpDescribeEventDetails struct {
 }
 
 func (*validateOpDescribeEventDetails) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEventDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

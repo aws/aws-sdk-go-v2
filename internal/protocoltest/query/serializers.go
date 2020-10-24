@@ -11,6 +11,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"sort"
@@ -20,7 +21,7 @@ type awsAwsquery_serializeOpEmptyInputAndEmptyOutput struct {
 }
 
 func (*awsAwsquery_serializeOpEmptyInputAndEmptyOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -73,7 +74,7 @@ type awsAwsquery_serializeOpFlattenedXmlMap struct {
 }
 
 func (*awsAwsquery_serializeOpFlattenedXmlMap) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -126,7 +127,7 @@ type awsAwsquery_serializeOpFlattenedXmlMapWithXmlName struct {
 }
 
 func (*awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -179,7 +180,7 @@ type awsAwsquery_serializeOpGreetingWithErrors struct {
 }
 
 func (*awsAwsquery_serializeOpGreetingWithErrors) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGreetingWithErrors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -232,7 +233,7 @@ type awsAwsquery_serializeOpIgnoresWrappingXmlName struct {
 }
 
 func (*awsAwsquery_serializeOpIgnoresWrappingXmlName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -285,7 +286,7 @@ type awsAwsquery_serializeOpNestedStructures struct {
 }
 
 func (*awsAwsquery_serializeOpNestedStructures) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpNestedStructures) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -340,7 +341,7 @@ type awsAwsquery_serializeOpNoInputAndNoOutput struct {
 }
 
 func (*awsAwsquery_serializeOpNoInputAndNoOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -393,7 +394,7 @@ type awsAwsquery_serializeOpNoInputAndOutput struct {
 }
 
 func (*awsAwsquery_serializeOpNoInputAndOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -446,7 +447,7 @@ type awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill struct {
 }
 
 func (*awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -501,7 +502,7 @@ type awsAwsquery_serializeOpQueryLists struct {
 }
 
 func (*awsAwsquery_serializeOpQueryLists) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpQueryLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -556,7 +557,7 @@ type awsAwsquery_serializeOpQueryMaps struct {
 }
 
 func (*awsAwsquery_serializeOpQueryMaps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpQueryMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -611,7 +612,7 @@ type awsAwsquery_serializeOpQueryTimestamps struct {
 }
 
 func (*awsAwsquery_serializeOpQueryTimestamps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpQueryTimestamps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -666,7 +667,7 @@ type awsAwsquery_serializeOpRecursiveXmlShapes struct {
 }
 
 func (*awsAwsquery_serializeOpRecursiveXmlShapes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -719,7 +720,7 @@ type awsAwsquery_serializeOpSimpleInputParams struct {
 }
 
 func (*awsAwsquery_serializeOpSimpleInputParams) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSimpleInputParams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -774,7 +775,7 @@ type awsAwsquery_serializeOpSimpleScalarXmlProperties struct {
 }
 
 func (*awsAwsquery_serializeOpSimpleScalarXmlProperties) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -827,7 +828,7 @@ type awsAwsquery_serializeOpXmlBlobs struct {
 }
 
 func (*awsAwsquery_serializeOpXmlBlobs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -880,7 +881,7 @@ type awsAwsquery_serializeOpXmlEmptyBlobs struct {
 }
 
 func (*awsAwsquery_serializeOpXmlEmptyBlobs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlEmptyBlobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -933,7 +934,7 @@ type awsAwsquery_serializeOpXmlEmptyLists struct {
 }
 
 func (*awsAwsquery_serializeOpXmlEmptyLists) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlEmptyLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -986,7 +987,7 @@ type awsAwsquery_serializeOpXmlEmptyMaps struct {
 }
 
 func (*awsAwsquery_serializeOpXmlEmptyMaps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlEmptyMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1039,7 +1040,7 @@ type awsAwsquery_serializeOpXmlEnums struct {
 }
 
 func (*awsAwsquery_serializeOpXmlEnums) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlEnums) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1092,7 +1093,7 @@ type awsAwsquery_serializeOpXmlLists struct {
 }
 
 func (*awsAwsquery_serializeOpXmlLists) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1145,7 +1146,7 @@ type awsAwsquery_serializeOpXmlMaps struct {
 }
 
 func (*awsAwsquery_serializeOpXmlMaps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1198,7 +1199,7 @@ type awsAwsquery_serializeOpXmlMapsXmlName struct {
 }
 
 func (*awsAwsquery_serializeOpXmlMapsXmlName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1251,7 +1252,7 @@ type awsAwsquery_serializeOpXmlNamespaces struct {
 }
 
 func (*awsAwsquery_serializeOpXmlNamespaces) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlNamespaces) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1304,7 +1305,7 @@ type awsAwsquery_serializeOpXmlTimestamps struct {
 }
 
 func (*awsAwsquery_serializeOpXmlTimestamps) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpXmlTimestamps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

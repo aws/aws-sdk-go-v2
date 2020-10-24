@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsAwsjson11_serializeOpAssociateMemberAccount struct {
 }
 
 func (*awsAwsjson11_serializeOpAssociateMemberAccount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpAssociateMemberAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -64,7 +65,7 @@ type awsAwsjson11_serializeOpAssociateS3Resources struct {
 }
 
 func (*awsAwsjson11_serializeOpAssociateS3Resources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpAssociateS3Resources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -110,7 +111,7 @@ type awsAwsjson11_serializeOpDisassociateMemberAccount struct {
 }
 
 func (*awsAwsjson11_serializeOpDisassociateMemberAccount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDisassociateMemberAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -156,7 +157,7 @@ type awsAwsjson11_serializeOpDisassociateS3Resources struct {
 }
 
 func (*awsAwsjson11_serializeOpDisassociateS3Resources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDisassociateS3Resources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -202,7 +203,7 @@ type awsAwsjson11_serializeOpListMemberAccounts struct {
 }
 
 func (*awsAwsjson11_serializeOpListMemberAccounts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListMemberAccounts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -248,7 +249,7 @@ type awsAwsjson11_serializeOpListS3Resources struct {
 }
 
 func (*awsAwsjson11_serializeOpListS3Resources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListS3Resources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsAwsjson11_serializeOpUpdateS3Resources struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateS3Resources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateS3Resources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

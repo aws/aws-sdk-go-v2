@@ -13,6 +13,19 @@ const (
 	ActionTypeEnumFixed_response       ActionTypeEnum = "fixed-response"
 )
 
+// Values returns all known values for ActionTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionTypeEnum) Values() []ActionTypeEnum {
+	return []ActionTypeEnum{
+		"forward",
+		"authenticate-oidc",
+		"authenticate-cognito",
+		"redirect",
+		"fixed-response",
+	}
+}
+
 type AuthenticateCognitoActionConditionalBehaviorEnum string
 
 // Enum values for AuthenticateCognitoActionConditionalBehaviorEnum
@@ -21,6 +34,18 @@ const (
 	AuthenticateCognitoActionConditionalBehaviorEnumAllow        AuthenticateCognitoActionConditionalBehaviorEnum = "allow"
 	AuthenticateCognitoActionConditionalBehaviorEnumAuthenticate AuthenticateCognitoActionConditionalBehaviorEnum = "authenticate"
 )
+
+// Values returns all known values for
+// AuthenticateCognitoActionConditionalBehaviorEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AuthenticateCognitoActionConditionalBehaviorEnum) Values() []AuthenticateCognitoActionConditionalBehaviorEnum {
+	return []AuthenticateCognitoActionConditionalBehaviorEnum{
+		"deny",
+		"allow",
+		"authenticate",
+	}
+}
 
 type AuthenticateOidcActionConditionalBehaviorEnum string
 
@@ -31,6 +56,18 @@ const (
 	AuthenticateOidcActionConditionalBehaviorEnumAuthenticate AuthenticateOidcActionConditionalBehaviorEnum = "authenticate"
 )
 
+// Values returns all known values for
+// AuthenticateOidcActionConditionalBehaviorEnum. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AuthenticateOidcActionConditionalBehaviorEnum) Values() []AuthenticateOidcActionConditionalBehaviorEnum {
+	return []AuthenticateOidcActionConditionalBehaviorEnum{
+		"deny",
+		"allow",
+		"authenticate",
+	}
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType
@@ -39,6 +76,16 @@ const (
 	IpAddressTypeDualstack IpAddressType = "dualstack"
 )
 
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"ipv4",
+		"dualstack",
+	}
+}
+
 type LoadBalancerSchemeEnum string
 
 // Enum values for LoadBalancerSchemeEnum
@@ -46,6 +93,16 @@ const (
 	LoadBalancerSchemeEnumInternet_facing LoadBalancerSchemeEnum = "internet-facing"
 	LoadBalancerSchemeEnumInternal        LoadBalancerSchemeEnum = "internal"
 )
+
+// Values returns all known values for LoadBalancerSchemeEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerSchemeEnum) Values() []LoadBalancerSchemeEnum {
+	return []LoadBalancerSchemeEnum{
+		"internet-facing",
+		"internal",
+	}
+}
 
 type LoadBalancerStateEnum string
 
@@ -57,6 +114,18 @@ const (
 	LoadBalancerStateEnumFailed          LoadBalancerStateEnum = "failed"
 )
 
+// Values returns all known values for LoadBalancerStateEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerStateEnum) Values() []LoadBalancerStateEnum {
+	return []LoadBalancerStateEnum{
+		"active",
+		"provisioning",
+		"active_impaired",
+		"failed",
+	}
+}
+
 type LoadBalancerTypeEnum string
 
 // Enum values for LoadBalancerTypeEnum
@@ -64,6 +133,16 @@ const (
 	LoadBalancerTypeEnumApplication LoadBalancerTypeEnum = "application"
 	LoadBalancerTypeEnumNetwork     LoadBalancerTypeEnum = "network"
 )
+
+// Values returns all known values for LoadBalancerTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerTypeEnum) Values() []LoadBalancerTypeEnum {
+	return []LoadBalancerTypeEnum{
+		"application",
+		"network",
+	}
+}
 
 type ProtocolEnum string
 
@@ -77,6 +156,20 @@ const (
 	ProtocolEnumTcp_udp ProtocolEnum = "TCP_UDP"
 )
 
+// Values returns all known values for ProtocolEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProtocolEnum) Values() []ProtocolEnum {
+	return []ProtocolEnum{
+		"HTTP",
+		"HTTPS",
+		"TCP",
+		"TLS",
+		"UDP",
+		"TCP_UDP",
+	}
+}
+
 type RedirectActionStatusCodeEnum string
 
 // Enum values for RedirectActionStatusCodeEnum
@@ -84,6 +177,16 @@ const (
 	RedirectActionStatusCodeEnumHttp_301 RedirectActionStatusCodeEnum = "HTTP_301"
 	RedirectActionStatusCodeEnumHttp_302 RedirectActionStatusCodeEnum = "HTTP_302"
 )
+
+// Values returns all known values for RedirectActionStatusCodeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedirectActionStatusCodeEnum) Values() []RedirectActionStatusCodeEnum {
+	return []RedirectActionStatusCodeEnum{
+		"HTTP_301",
+		"HTTP_302",
+	}
+}
 
 type TargetHealthReasonEnum string
 
@@ -103,6 +206,26 @@ const (
 	TargetHealthReasonEnumInternal_error             TargetHealthReasonEnum = "Elb.InternalError"
 )
 
+// Values returns all known values for TargetHealthReasonEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetHealthReasonEnum) Values() []TargetHealthReasonEnum {
+	return []TargetHealthReasonEnum{
+		"Elb.RegistrationInProgress",
+		"Elb.InitialHealthChecking",
+		"Target.ResponseCodeMismatch",
+		"Target.Timeout",
+		"Target.FailedHealthChecks",
+		"Target.NotRegistered",
+		"Target.NotInUse",
+		"Target.DeregistrationInProgress",
+		"Target.InvalidState",
+		"Target.IpUnusable",
+		"Target.HealthCheckDisabled",
+		"Elb.InternalError",
+	}
+}
+
 type TargetHealthStateEnum string
 
 // Enum values for TargetHealthStateEnum
@@ -115,6 +238,20 @@ const (
 	TargetHealthStateEnumUnavailable TargetHealthStateEnum = "unavailable"
 )
 
+// Values returns all known values for TargetHealthStateEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetHealthStateEnum) Values() []TargetHealthStateEnum {
+	return []TargetHealthStateEnum{
+		"initial",
+		"healthy",
+		"unhealthy",
+		"unused",
+		"draining",
+		"unavailable",
+	}
+}
+
 type TargetTypeEnum string
 
 // Enum values for TargetTypeEnum
@@ -123,3 +260,14 @@ const (
 	TargetTypeEnumIp       TargetTypeEnum = "ip"
 	TargetTypeEnumLambda   TargetTypeEnum = "lambda"
 )
+
+// Values returns all known values for TargetTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetTypeEnum) Values() []TargetTypeEnum {
+	return []TargetTypeEnum{
+		"instance",
+		"ip",
+		"lambda",
+	}
+}

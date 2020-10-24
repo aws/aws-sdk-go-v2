@@ -10,12 +10,31 @@ const (
 	EditionStandard Edition = "STANDARD"
 )
 
+// Values returns all known values for Edition. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Edition) Values() []Edition {
+	return []Edition{
+		"STARTER",
+		"STANDARD",
+	}
+}
+
 type Framework string
 
 // Enum values for Framework
 const (
 	FrameworkHyperledger_fabric Framework = "HYPERLEDGER_FABRIC"
 )
+
+// Values returns all known values for Framework. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Framework) Values() []Framework {
+	return []Framework{
+		"HYPERLEDGER_FABRIC",
+	}
+}
 
 type InvitationStatus string
 
@@ -27,6 +46,19 @@ const (
 	InvitationStatusRejected  InvitationStatus = "REJECTED"
 	InvitationStatusExpired   InvitationStatus = "EXPIRED"
 )
+
+// Values returns all known values for InvitationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvitationStatus) Values() []InvitationStatus {
+	return []InvitationStatus{
+		"PENDING",
+		"ACCEPTED",
+		"ACCEPTING",
+		"REJECTED",
+		"EXPIRED",
+	}
+}
 
 type MemberStatus string
 
@@ -40,6 +72,20 @@ const (
 	MemberStatusDeleted       MemberStatus = "DELETED"
 )
 
+// Values returns all known values for MemberStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MemberStatus) Values() []MemberStatus {
+	return []MemberStatus{
+		"CREATING",
+		"AVAILABLE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type NetworkStatus string
 
 // Enum values for NetworkStatus
@@ -50,6 +96,19 @@ const (
 	NetworkStatusDeleting      NetworkStatus = "DELETING"
 	NetworkStatusDeleted       NetworkStatus = "DELETED"
 )
+
+// Values returns all known values for NetworkStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkStatus) Values() []NetworkStatus {
+	return []NetworkStatus{
+		"CREATING",
+		"AVAILABLE",
+		"CREATE_FAILED",
+		"DELETING",
+		"DELETED",
+	}
+}
 
 type NodeStatus string
 
@@ -64,6 +123,21 @@ const (
 	NodeStatusFailed        NodeStatus = "FAILED"
 )
 
+// Values returns all known values for NodeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NodeStatus) Values() []NodeStatus {
+	return []NodeStatus{
+		"CREATING",
+		"AVAILABLE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+	}
+}
+
 type ProposalStatus string
 
 // Enum values for ProposalStatus
@@ -75,6 +149,19 @@ const (
 	ProposalStatusAction_failed ProposalStatus = "ACTION_FAILED"
 )
 
+// Values returns all known values for ProposalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProposalStatus) Values() []ProposalStatus {
+	return []ProposalStatus{
+		"IN_PROGRESS",
+		"APPROVED",
+		"REJECTED",
+		"EXPIRED",
+		"ACTION_FAILED",
+	}
+}
+
 type ThresholdComparator string
 
 // Enum values for ThresholdComparator
@@ -83,6 +170,16 @@ const (
 	ThresholdComparatorGreater_than_or_equal_to ThresholdComparator = "GREATER_THAN_OR_EQUAL_TO"
 )
 
+// Values returns all known values for ThresholdComparator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdComparator) Values() []ThresholdComparator {
+	return []ThresholdComparator{
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUAL_TO",
+	}
+}
+
 type VoteValue string
 
 // Enum values for VoteValue
@@ -90,3 +187,13 @@ const (
 	VoteValueYes VoteValue = "YES"
 	VoteValueNo  VoteValue = "NO"
 )
+
+// Values returns all known values for VoteValue. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (VoteValue) Values() []VoteValue {
+	return []VoteValue{
+		"YES",
+		"NO",
+	}
+}

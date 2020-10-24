@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpAssociateRepository struct {
 }
 
 func (*awsRestjson1_deserializeOpAssociateRepository) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpAssociateRepository) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -182,7 +183,7 @@ type awsRestjson1_deserializeOpDescribeCodeReview struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeCodeReview) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeCodeReview) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -341,7 +342,7 @@ type awsRestjson1_deserializeOpDescribeRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeRecommendationFeedback) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeRecommendationFeedback) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -500,7 +501,7 @@ type awsRestjson1_deserializeOpDescribeRepositoryAssociation struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeRepositoryAssociation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeRepositoryAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -659,7 +660,7 @@ type awsRestjson1_deserializeOpDisassociateRepository struct {
 }
 
 func (*awsRestjson1_deserializeOpDisassociateRepository) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDisassociateRepository) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -821,7 +822,7 @@ type awsRestjson1_deserializeOpListCodeReviews struct {
 }
 
 func (*awsRestjson1_deserializeOpListCodeReviews) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListCodeReviews) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -986,7 +987,7 @@ type awsRestjson1_deserializeOpListRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_deserializeOpListRecommendationFeedback) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListRecommendationFeedback) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1154,7 +1155,7 @@ type awsRestjson1_deserializeOpListRecommendations struct {
 }
 
 func (*awsRestjson1_deserializeOpListRecommendations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1322,7 +1323,7 @@ type awsRestjson1_deserializeOpListRepositoryAssociations struct {
 }
 
 func (*awsRestjson1_deserializeOpListRepositoryAssociations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListRepositoryAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1484,7 +1485,7 @@ type awsRestjson1_deserializeOpPutRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_deserializeOpPutRecommendationFeedback) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpPutRecommendationFeedback) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

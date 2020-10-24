@@ -10,6 +10,16 @@ const (
 	DurationUnitMs DurationUnit = "ms"
 )
 
+// Values returns all known values for DurationUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DurationUnit) Values() []DurationUnit {
+	return []DurationUnit{
+		"s",
+		"ms",
+	}
+}
+
 type EgressFilterType string
 
 // Enum values for EgressFilterType
@@ -17,6 +27,16 @@ const (
 	EgressFilterTypeAllow_all EgressFilterType = "ALLOW_ALL"
 	EgressFilterTypeDrop_all  EgressFilterType = "DROP_ALL"
 )
+
+// Values returns all known values for EgressFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EgressFilterType) Values() []EgressFilterType {
+	return []EgressFilterType{
+		"ALLOW_ALL",
+		"DROP_ALL",
+	}
+}
 
 type GatewayRouteStatusCode string
 
@@ -26,6 +46,17 @@ const (
 	GatewayRouteStatusCodeInactive GatewayRouteStatusCode = "INACTIVE"
 	GatewayRouteStatusCodeDeleted  GatewayRouteStatusCode = "DELETED"
 )
+
+// Values returns all known values for GatewayRouteStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRouteStatusCode) Values() []GatewayRouteStatusCode {
+	return []GatewayRouteStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
 
 type GrpcRetryPolicyEvent string
 
@@ -37,6 +68,19 @@ const (
 	GrpcRetryPolicyEventResource_exhausted GrpcRetryPolicyEvent = "resource-exhausted"
 	GrpcRetryPolicyEventUnavailable        GrpcRetryPolicyEvent = "unavailable"
 )
+
+// Values returns all known values for GrpcRetryPolicyEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GrpcRetryPolicyEvent) Values() []GrpcRetryPolicyEvent {
+	return []GrpcRetryPolicyEvent{
+		"cancelled",
+		"deadline-exceeded",
+		"internal",
+		"resource-exhausted",
+		"unavailable",
+	}
+}
 
 type HttpMethod string
 
@@ -53,6 +97,23 @@ const (
 	HttpMethodPatch   HttpMethod = "PATCH"
 )
 
+// Values returns all known values for HttpMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpMethod) Values() []HttpMethod {
+	return []HttpMethod{
+		"GET",
+		"HEAD",
+		"POST",
+		"PUT",
+		"DELETE",
+		"CONNECT",
+		"OPTIONS",
+		"TRACE",
+		"PATCH",
+	}
+}
+
 type HttpScheme string
 
 // Enum values for HttpScheme
@@ -60,6 +121,16 @@ const (
 	HttpSchemeHttp  HttpScheme = "http"
 	HttpSchemeHttps HttpScheme = "https"
 )
+
+// Values returns all known values for HttpScheme. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpScheme) Values() []HttpScheme {
+	return []HttpScheme{
+		"http",
+		"https",
+	}
+}
 
 type ListenerTlsMode string
 
@@ -70,6 +141,17 @@ const (
 	ListenerTlsModeDisabled   ListenerTlsMode = "DISABLED"
 )
 
+// Values returns all known values for ListenerTlsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListenerTlsMode) Values() []ListenerTlsMode {
+	return []ListenerTlsMode{
+		"STRICT",
+		"PERMISSIVE",
+		"DISABLED",
+	}
+}
+
 type MeshStatusCode string
 
 // Enum values for MeshStatusCode
@@ -78,6 +160,17 @@ const (
 	MeshStatusCodeInactive MeshStatusCode = "INACTIVE"
 	MeshStatusCodeDeleted  MeshStatusCode = "DELETED"
 )
+
+// Values returns all known values for MeshStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MeshStatusCode) Values() []MeshStatusCode {
+	return []MeshStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
 
 type PortProtocol string
 
@@ -89,6 +182,18 @@ const (
 	PortProtocolGrpc  PortProtocol = "grpc"
 )
 
+// Values returns all known values for PortProtocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PortProtocol) Values() []PortProtocol {
+	return []PortProtocol{
+		"http",
+		"tcp",
+		"http2",
+		"grpc",
+	}
+}
+
 type RouteStatusCode string
 
 // Enum values for RouteStatusCode
@@ -98,12 +203,32 @@ const (
 	RouteStatusCodeDeleted  RouteStatusCode = "DELETED"
 )
 
+// Values returns all known values for RouteStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RouteStatusCode) Values() []RouteStatusCode {
+	return []RouteStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
+
 type TcpRetryPolicyEvent string
 
 // Enum values for TcpRetryPolicyEvent
 const (
 	TcpRetryPolicyEventConnection_error TcpRetryPolicyEvent = "connection-error"
 )
+
+// Values returns all known values for TcpRetryPolicyEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TcpRetryPolicyEvent) Values() []TcpRetryPolicyEvent {
+	return []TcpRetryPolicyEvent{
+		"connection-error",
+	}
+}
 
 type VirtualGatewayListenerTlsMode string
 
@@ -114,6 +239,18 @@ const (
 	VirtualGatewayListenerTlsModeDisabled   VirtualGatewayListenerTlsMode = "DISABLED"
 )
 
+// Values returns all known values for VirtualGatewayListenerTlsMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VirtualGatewayListenerTlsMode) Values() []VirtualGatewayListenerTlsMode {
+	return []VirtualGatewayListenerTlsMode{
+		"STRICT",
+		"PERMISSIVE",
+		"DISABLED",
+	}
+}
+
 type VirtualGatewayPortProtocol string
 
 // Enum values for VirtualGatewayPortProtocol
@@ -122,6 +259,17 @@ const (
 	VirtualGatewayPortProtocolHttp2 VirtualGatewayPortProtocol = "http2"
 	VirtualGatewayPortProtocolGrpc  VirtualGatewayPortProtocol = "grpc"
 )
+
+// Values returns all known values for VirtualGatewayPortProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualGatewayPortProtocol) Values() []VirtualGatewayPortProtocol {
+	return []VirtualGatewayPortProtocol{
+		"http",
+		"http2",
+		"grpc",
+	}
+}
 
 type VirtualGatewayStatusCode string
 
@@ -132,6 +280,17 @@ const (
 	VirtualGatewayStatusCodeDeleted  VirtualGatewayStatusCode = "DELETED"
 )
 
+// Values returns all known values for VirtualGatewayStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualGatewayStatusCode) Values() []VirtualGatewayStatusCode {
+	return []VirtualGatewayStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
+
 type VirtualNodeStatusCode string
 
 // Enum values for VirtualNodeStatusCode
@@ -140,6 +299,17 @@ const (
 	VirtualNodeStatusCodeInactive VirtualNodeStatusCode = "INACTIVE"
 	VirtualNodeStatusCodeDeleted  VirtualNodeStatusCode = "DELETED"
 )
+
+// Values returns all known values for VirtualNodeStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualNodeStatusCode) Values() []VirtualNodeStatusCode {
+	return []VirtualNodeStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
 
 type VirtualRouterStatusCode string
 
@@ -150,6 +320,17 @@ const (
 	VirtualRouterStatusCodeDeleted  VirtualRouterStatusCode = "DELETED"
 )
 
+// Values returns all known values for VirtualRouterStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualRouterStatusCode) Values() []VirtualRouterStatusCode {
+	return []VirtualRouterStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}
+
 type VirtualServiceStatusCode string
 
 // Enum values for VirtualServiceStatusCode
@@ -158,3 +339,14 @@ const (
 	VirtualServiceStatusCodeInactive VirtualServiceStatusCode = "INACTIVE"
 	VirtualServiceStatusCodeDeleted  VirtualServiceStatusCode = "DELETED"
 )
+
+// Values returns all known values for VirtualServiceStatusCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualServiceStatusCode) Values() []VirtualServiceStatusCode {
+	return []VirtualServiceStatusCode{
+		"ACTIVE",
+		"INACTIVE",
+		"DELETED",
+	}
+}

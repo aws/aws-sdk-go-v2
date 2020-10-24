@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpExportAutoScalingGroupRecommendations struct {
 }
 
 func (*validateOpExportAutoScalingGroupRecommendations) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpExportAutoScalingGroupRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpExportEC2InstanceRecommendations struct {
 }
 
 func (*validateOpExportEC2InstanceRecommendations) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpExportEC2InstanceRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpGetEC2RecommendationProjectedMetrics struct {
 }
 
 func (*validateOpGetEC2RecommendationProjectedMetrics) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetEC2RecommendationProjectedMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpUpdateEnrollmentStatus struct {
 }
 
 func (*validateOpUpdateEnrollmentStatus) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateEnrollmentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

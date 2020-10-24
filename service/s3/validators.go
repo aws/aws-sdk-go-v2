@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAbortMultipartUpload struct {
 }
 
 func (*validateOpAbortMultipartUpload) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAbortMultipartUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpCompleteMultipartUpload struct {
 }
 
 func (*validateOpCompleteMultipartUpload) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCompleteMultipartUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpCopyObject struct {
 }
 
 func (*validateOpCopyObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpCreateBucket struct {
 }
 
 func (*validateOpCreateBucket) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpCreateMultipartUpload struct {
 }
 
 func (*validateOpCreateMultipartUpload) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateMultipartUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpDeleteBucketAnalyticsConfiguration struct {
 }
 
 func (*validateOpDeleteBucketAnalyticsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketAnalyticsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpDeleteBucketCors struct {
 }
 
 func (*validateOpDeleteBucketCors) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketCors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -154,7 +155,7 @@ type validateOpDeleteBucketEncryption struct {
 }
 
 func (*validateOpDeleteBucketEncryption) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -174,7 +175,7 @@ type validateOpDeleteBucket struct {
 }
 
 func (*validateOpDeleteBucket) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -194,7 +195,7 @@ type validateOpDeleteBucketInventoryConfiguration struct {
 }
 
 func (*validateOpDeleteBucketInventoryConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketInventoryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -214,7 +215,7 @@ type validateOpDeleteBucketLifecycle struct {
 }
 
 func (*validateOpDeleteBucketLifecycle) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketLifecycle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -234,7 +235,7 @@ type validateOpDeleteBucketMetricsConfiguration struct {
 }
 
 func (*validateOpDeleteBucketMetricsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -254,7 +255,7 @@ type validateOpDeleteBucketPolicy struct {
 }
 
 func (*validateOpDeleteBucketPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -274,7 +275,7 @@ type validateOpDeleteBucketReplication struct {
 }
 
 func (*validateOpDeleteBucketReplication) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -294,7 +295,7 @@ type validateOpDeleteBucketTagging struct {
 }
 
 func (*validateOpDeleteBucketTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -314,7 +315,7 @@ type validateOpDeleteBucketWebsite struct {
 }
 
 func (*validateOpDeleteBucketWebsite) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteBucketWebsite) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -334,7 +335,7 @@ type validateOpDeleteObject struct {
 }
 
 func (*validateOpDeleteObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -354,7 +355,7 @@ type validateOpDeleteObjects struct {
 }
 
 func (*validateOpDeleteObjects) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteObjects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -374,7 +375,7 @@ type validateOpDeleteObjectTagging struct {
 }
 
 func (*validateOpDeleteObjectTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteObjectTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -394,7 +395,7 @@ type validateOpDeletePublicAccessBlock struct {
 }
 
 func (*validateOpDeletePublicAccessBlock) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeletePublicAccessBlock) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -414,7 +415,7 @@ type validateOpGetBucketAccelerateConfiguration struct {
 }
 
 func (*validateOpGetBucketAccelerateConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketAccelerateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -434,7 +435,7 @@ type validateOpGetBucketAcl struct {
 }
 
 func (*validateOpGetBucketAcl) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -454,7 +455,7 @@ type validateOpGetBucketAnalyticsConfiguration struct {
 }
 
 func (*validateOpGetBucketAnalyticsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketAnalyticsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -474,7 +475,7 @@ type validateOpGetBucketCors struct {
 }
 
 func (*validateOpGetBucketCors) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketCors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -494,7 +495,7 @@ type validateOpGetBucketEncryption struct {
 }
 
 func (*validateOpGetBucketEncryption) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -514,7 +515,7 @@ type validateOpGetBucketInventoryConfiguration struct {
 }
 
 func (*validateOpGetBucketInventoryConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketInventoryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -534,7 +535,7 @@ type validateOpGetBucketLifecycleConfiguration struct {
 }
 
 func (*validateOpGetBucketLifecycleConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketLifecycleConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -554,7 +555,7 @@ type validateOpGetBucketLocation struct {
 }
 
 func (*validateOpGetBucketLocation) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -574,7 +575,7 @@ type validateOpGetBucketLogging struct {
 }
 
 func (*validateOpGetBucketLogging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketLogging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -594,7 +595,7 @@ type validateOpGetBucketMetricsConfiguration struct {
 }
 
 func (*validateOpGetBucketMetricsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -614,7 +615,7 @@ type validateOpGetBucketNotificationConfiguration struct {
 }
 
 func (*validateOpGetBucketNotificationConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -634,7 +635,7 @@ type validateOpGetBucketPolicy struct {
 }
 
 func (*validateOpGetBucketPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -654,7 +655,7 @@ type validateOpGetBucketPolicyStatus struct {
 }
 
 func (*validateOpGetBucketPolicyStatus) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketPolicyStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -674,7 +675,7 @@ type validateOpGetBucketReplication struct {
 }
 
 func (*validateOpGetBucketReplication) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -694,7 +695,7 @@ type validateOpGetBucketRequestPayment struct {
 }
 
 func (*validateOpGetBucketRequestPayment) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketRequestPayment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -714,7 +715,7 @@ type validateOpGetBucketTagging struct {
 }
 
 func (*validateOpGetBucketTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -734,7 +735,7 @@ type validateOpGetBucketVersioning struct {
 }
 
 func (*validateOpGetBucketVersioning) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketVersioning) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -754,7 +755,7 @@ type validateOpGetBucketWebsite struct {
 }
 
 func (*validateOpGetBucketWebsite) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetBucketWebsite) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -774,7 +775,7 @@ type validateOpGetObjectAcl struct {
 }
 
 func (*validateOpGetObjectAcl) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -794,7 +795,7 @@ type validateOpGetObject struct {
 }
 
 func (*validateOpGetObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -814,7 +815,7 @@ type validateOpGetObjectLegalHold struct {
 }
 
 func (*validateOpGetObjectLegalHold) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -834,7 +835,7 @@ type validateOpGetObjectLockConfiguration struct {
 }
 
 func (*validateOpGetObjectLockConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectLockConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -854,7 +855,7 @@ type validateOpGetObjectRetention struct {
 }
 
 func (*validateOpGetObjectRetention) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectRetention) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -874,7 +875,7 @@ type validateOpGetObjectTagging struct {
 }
 
 func (*validateOpGetObjectTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -894,7 +895,7 @@ type validateOpGetObjectTorrent struct {
 }
 
 func (*validateOpGetObjectTorrent) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetObjectTorrent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -914,7 +915,7 @@ type validateOpGetPublicAccessBlock struct {
 }
 
 func (*validateOpGetPublicAccessBlock) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetPublicAccessBlock) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -934,7 +935,7 @@ type validateOpHeadBucket struct {
 }
 
 func (*validateOpHeadBucket) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpHeadBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -954,7 +955,7 @@ type validateOpHeadObject struct {
 }
 
 func (*validateOpHeadObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpHeadObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -974,7 +975,7 @@ type validateOpListBucketAnalyticsConfigurations struct {
 }
 
 func (*validateOpListBucketAnalyticsConfigurations) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListBucketAnalyticsConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -994,7 +995,7 @@ type validateOpListBucketInventoryConfigurations struct {
 }
 
 func (*validateOpListBucketInventoryConfigurations) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListBucketInventoryConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1014,7 +1015,7 @@ type validateOpListBucketMetricsConfigurations struct {
 }
 
 func (*validateOpListBucketMetricsConfigurations) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListBucketMetricsConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1034,7 +1035,7 @@ type validateOpListMultipartUploads struct {
 }
 
 func (*validateOpListMultipartUploads) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListMultipartUploads) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1054,7 +1055,7 @@ type validateOpListObjects struct {
 }
 
 func (*validateOpListObjects) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListObjects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1074,7 +1075,7 @@ type validateOpListObjectsV2 struct {
 }
 
 func (*validateOpListObjectsV2) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListObjectsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1094,7 +1095,7 @@ type validateOpListObjectVersions struct {
 }
 
 func (*validateOpListObjectVersions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListObjectVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1114,7 +1115,7 @@ type validateOpListParts struct {
 }
 
 func (*validateOpListParts) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListParts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1134,7 +1135,7 @@ type validateOpPutBucketAccelerateConfiguration struct {
 }
 
 func (*validateOpPutBucketAccelerateConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketAccelerateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1154,7 +1155,7 @@ type validateOpPutBucketAcl struct {
 }
 
 func (*validateOpPutBucketAcl) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1174,7 +1175,7 @@ type validateOpPutBucketAnalyticsConfiguration struct {
 }
 
 func (*validateOpPutBucketAnalyticsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketAnalyticsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1194,7 +1195,7 @@ type validateOpPutBucketCors struct {
 }
 
 func (*validateOpPutBucketCors) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketCors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1214,7 +1215,7 @@ type validateOpPutBucketEncryption struct {
 }
 
 func (*validateOpPutBucketEncryption) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketEncryption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1234,7 +1235,7 @@ type validateOpPutBucketInventoryConfiguration struct {
 }
 
 func (*validateOpPutBucketInventoryConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketInventoryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1254,7 +1255,7 @@ type validateOpPutBucketLifecycleConfiguration struct {
 }
 
 func (*validateOpPutBucketLifecycleConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketLifecycleConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1274,7 +1275,7 @@ type validateOpPutBucketLogging struct {
 }
 
 func (*validateOpPutBucketLogging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketLogging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1294,7 +1295,7 @@ type validateOpPutBucketMetricsConfiguration struct {
 }
 
 func (*validateOpPutBucketMetricsConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1314,7 +1315,7 @@ type validateOpPutBucketNotificationConfiguration struct {
 }
 
 func (*validateOpPutBucketNotificationConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1334,7 +1335,7 @@ type validateOpPutBucketPolicy struct {
 }
 
 func (*validateOpPutBucketPolicy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1354,7 +1355,7 @@ type validateOpPutBucketReplication struct {
 }
 
 func (*validateOpPutBucketReplication) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1374,7 +1375,7 @@ type validateOpPutBucketRequestPayment struct {
 }
 
 func (*validateOpPutBucketRequestPayment) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketRequestPayment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1394,7 +1395,7 @@ type validateOpPutBucketTagging struct {
 }
 
 func (*validateOpPutBucketTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1414,7 +1415,7 @@ type validateOpPutBucketVersioning struct {
 }
 
 func (*validateOpPutBucketVersioning) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketVersioning) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1434,7 +1435,7 @@ type validateOpPutBucketWebsite struct {
 }
 
 func (*validateOpPutBucketWebsite) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutBucketWebsite) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1454,7 +1455,7 @@ type validateOpPutObjectAcl struct {
 }
 
 func (*validateOpPutObjectAcl) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObjectAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1474,7 +1475,7 @@ type validateOpPutObject struct {
 }
 
 func (*validateOpPutObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1494,7 +1495,7 @@ type validateOpPutObjectLegalHold struct {
 }
 
 func (*validateOpPutObjectLegalHold) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObjectLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1514,7 +1515,7 @@ type validateOpPutObjectLockConfiguration struct {
 }
 
 func (*validateOpPutObjectLockConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObjectLockConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1534,7 +1535,7 @@ type validateOpPutObjectRetention struct {
 }
 
 func (*validateOpPutObjectRetention) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObjectRetention) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1554,7 +1555,7 @@ type validateOpPutObjectTagging struct {
 }
 
 func (*validateOpPutObjectTagging) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutObjectTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1574,7 +1575,7 @@ type validateOpPutPublicAccessBlock struct {
 }
 
 func (*validateOpPutPublicAccessBlock) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutPublicAccessBlock) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1594,7 +1595,7 @@ type validateOpRestoreObject struct {
 }
 
 func (*validateOpRestoreObject) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1614,7 +1615,7 @@ type validateOpUploadPartCopy struct {
 }
 
 func (*validateOpUploadPartCopy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUploadPartCopy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1634,7 +1635,7 @@ type validateOpUploadPart struct {
 }
 
 func (*validateOpUploadPart) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUploadPart) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

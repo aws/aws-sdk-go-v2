@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -26,7 +27,7 @@ type awsAwsquery_deserializeOpCloneReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpCloneReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCloneReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -128,7 +129,7 @@ type awsAwsquery_deserializeOpCreateConfigurationSet struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateConfigurationSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -230,7 +231,7 @@ type awsAwsquery_deserializeOpCreateConfigurationSetEventDestination struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -341,7 +342,7 @@ type awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -443,7 +444,7 @@ type awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -548,7 +549,7 @@ type awsAwsquery_deserializeOpCreateReceiptFilter struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateReceiptFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateReceiptFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -647,7 +648,7 @@ type awsAwsquery_deserializeOpCreateReceiptRule struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateReceiptRule) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateReceiptRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -761,7 +762,7 @@ type awsAwsquery_deserializeOpCreateReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -860,7 +861,7 @@ type awsAwsquery_deserializeOpCreateTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -962,7 +963,7 @@ type awsAwsquery_deserializeOpDeleteConfigurationSet struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteConfigurationSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1058,7 +1059,7 @@ type awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1157,7 +1158,7 @@ type awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1256,7 +1257,7 @@ type awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1349,7 +1350,7 @@ type awsAwsquery_deserializeOpDeleteIdentity struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteIdentity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteIdentity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1442,7 +1443,7 @@ type awsAwsquery_deserializeOpDeleteIdentityPolicy struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteIdentityPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteIdentityPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1535,7 +1536,7 @@ type awsAwsquery_deserializeOpDeleteReceiptFilter struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteReceiptFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteReceiptFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1628,7 +1629,7 @@ type awsAwsquery_deserializeOpDeleteReceiptRule struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteReceiptRule) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteReceiptRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1724,7 +1725,7 @@ type awsAwsquery_deserializeOpDeleteReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1820,7 +1821,7 @@ type awsAwsquery_deserializeOpDeleteTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1913,7 +1914,7 @@ type awsAwsquery_deserializeOpDeleteVerifiedEmailAddress struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteVerifiedEmailAddress) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteVerifiedEmailAddress) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2006,7 +2007,7 @@ type awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2099,7 +2100,7 @@ type awsAwsquery_deserializeOpDescribeConfigurationSet struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeConfigurationSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeConfigurationSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2195,7 +2196,7 @@ type awsAwsquery_deserializeOpDescribeReceiptRule struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeReceiptRule) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeReceiptRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2294,7 +2295,7 @@ type awsAwsquery_deserializeOpDescribeReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2390,7 +2391,7 @@ type awsAwsquery_deserializeOpGetAccountSendingEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpGetAccountSendingEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetAccountSendingEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2483,7 +2484,7 @@ type awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2579,7 +2580,7 @@ type awsAwsquery_deserializeOpGetIdentityDkimAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpGetIdentityDkimAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetIdentityDkimAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2672,7 +2673,7 @@ type awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2765,7 +2766,7 @@ type awsAwsquery_deserializeOpGetIdentityNotificationAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpGetIdentityNotificationAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetIdentityNotificationAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2858,7 +2859,7 @@ type awsAwsquery_deserializeOpGetIdentityPolicies struct {
 }
 
 func (*awsAwsquery_deserializeOpGetIdentityPolicies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetIdentityPolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2951,7 +2952,7 @@ type awsAwsquery_deserializeOpGetIdentityVerificationAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpGetIdentityVerificationAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetIdentityVerificationAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3044,7 +3045,7 @@ type awsAwsquery_deserializeOpGetSendQuota struct {
 }
 
 func (*awsAwsquery_deserializeOpGetSendQuota) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetSendQuota) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3137,7 +3138,7 @@ type awsAwsquery_deserializeOpGetSendStatistics struct {
 }
 
 func (*awsAwsquery_deserializeOpGetSendStatistics) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetSendStatistics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3230,7 +3231,7 @@ type awsAwsquery_deserializeOpGetTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpGetTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3326,7 +3327,7 @@ type awsAwsquery_deserializeOpListConfigurationSets struct {
 }
 
 func (*awsAwsquery_deserializeOpListConfigurationSets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListConfigurationSets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3419,7 +3420,7 @@ type awsAwsquery_deserializeOpListCustomVerificationEmailTemplates struct {
 }
 
 func (*awsAwsquery_deserializeOpListCustomVerificationEmailTemplates) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListCustomVerificationEmailTemplates) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3512,7 +3513,7 @@ type awsAwsquery_deserializeOpListIdentities struct {
 }
 
 func (*awsAwsquery_deserializeOpListIdentities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListIdentities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3605,7 +3606,7 @@ type awsAwsquery_deserializeOpListIdentityPolicies struct {
 }
 
 func (*awsAwsquery_deserializeOpListIdentityPolicies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListIdentityPolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3698,7 +3699,7 @@ type awsAwsquery_deserializeOpListReceiptFilters struct {
 }
 
 func (*awsAwsquery_deserializeOpListReceiptFilters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListReceiptFilters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3791,7 +3792,7 @@ type awsAwsquery_deserializeOpListReceiptRuleSets struct {
 }
 
 func (*awsAwsquery_deserializeOpListReceiptRuleSets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListReceiptRuleSets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3884,7 +3885,7 @@ type awsAwsquery_deserializeOpListTemplates struct {
 }
 
 func (*awsAwsquery_deserializeOpListTemplates) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListTemplates) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3977,7 +3978,7 @@ type awsAwsquery_deserializeOpListVerifiedEmailAddresses struct {
 }
 
 func (*awsAwsquery_deserializeOpListVerifiedEmailAddresses) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListVerifiedEmailAddresses) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4070,7 +4071,7 @@ type awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4169,7 +4170,7 @@ type awsAwsquery_deserializeOpPutIdentityPolicy struct {
 }
 
 func (*awsAwsquery_deserializeOpPutIdentityPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutIdentityPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4265,7 +4266,7 @@ type awsAwsquery_deserializeOpReorderReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpReorderReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpReorderReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4364,7 +4365,7 @@ type awsAwsquery_deserializeOpSendBounce struct {
 }
 
 func (*awsAwsquery_deserializeOpSendBounce) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendBounce) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4460,7 +4461,7 @@ type awsAwsquery_deserializeOpSendBulkTemplatedEmail struct {
 }
 
 func (*awsAwsquery_deserializeOpSendBulkTemplatedEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendBulkTemplatedEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4571,7 +4572,7 @@ type awsAwsquery_deserializeOpSendCustomVerificationEmail struct {
 }
 
 func (*awsAwsquery_deserializeOpSendCustomVerificationEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendCustomVerificationEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4679,7 +4680,7 @@ type awsAwsquery_deserializeOpSendEmail struct {
 }
 
 func (*awsAwsquery_deserializeOpSendEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4787,7 +4788,7 @@ type awsAwsquery_deserializeOpSendRawEmail struct {
 }
 
 func (*awsAwsquery_deserializeOpSendRawEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendRawEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4895,7 +4896,7 @@ type awsAwsquery_deserializeOpSendTemplatedEmail struct {
 }
 
 func (*awsAwsquery_deserializeOpSendTemplatedEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendTemplatedEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5006,7 +5007,7 @@ type awsAwsquery_deserializeOpSetActiveReceiptRuleSet struct {
 }
 
 func (*awsAwsquery_deserializeOpSetActiveReceiptRuleSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetActiveReceiptRuleSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5102,7 +5103,7 @@ type awsAwsquery_deserializeOpSetIdentityDkimEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpSetIdentityDkimEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetIdentityDkimEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5195,7 +5196,7 @@ type awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5288,7 +5289,7 @@ type awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5381,7 +5382,7 @@ type awsAwsquery_deserializeOpSetIdentityMailFromDomain struct {
 }
 
 func (*awsAwsquery_deserializeOpSetIdentityMailFromDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetIdentityMailFromDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5474,7 +5475,7 @@ type awsAwsquery_deserializeOpSetIdentityNotificationTopic struct {
 }
 
 func (*awsAwsquery_deserializeOpSetIdentityNotificationTopic) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetIdentityNotificationTopic) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5567,7 +5568,7 @@ type awsAwsquery_deserializeOpSetReceiptRulePosition struct {
 }
 
 func (*awsAwsquery_deserializeOpSetReceiptRulePosition) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetReceiptRulePosition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5666,7 +5667,7 @@ type awsAwsquery_deserializeOpTestRenderTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpTestRenderTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpTestRenderTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5768,7 +5769,7 @@ type awsAwsquery_deserializeOpUpdateAccountSendingEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateAccountSendingEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateAccountSendingEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5861,7 +5862,7 @@ type awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5969,7 +5970,7 @@ type awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled str
 }
 
 func (*awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6065,7 +6066,7 @@ type awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6161,7 +6162,7 @@ type awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6263,7 +6264,7 @@ type awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6365,7 +6366,7 @@ type awsAwsquery_deserializeOpUpdateReceiptRule struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateReceiptRule) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateReceiptRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6476,7 +6477,7 @@ type awsAwsquery_deserializeOpUpdateTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6575,7 +6576,7 @@ type awsAwsquery_deserializeOpVerifyDomainDkim struct {
 }
 
 func (*awsAwsquery_deserializeOpVerifyDomainDkim) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpVerifyDomainDkim) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6668,7 +6669,7 @@ type awsAwsquery_deserializeOpVerifyDomainIdentity struct {
 }
 
 func (*awsAwsquery_deserializeOpVerifyDomainIdentity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpVerifyDomainIdentity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6761,7 +6762,7 @@ type awsAwsquery_deserializeOpVerifyEmailAddress struct {
 }
 
 func (*awsAwsquery_deserializeOpVerifyEmailAddress) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpVerifyEmailAddress) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6854,7 +6855,7 @@ type awsAwsquery_deserializeOpVerifyEmailIdentity struct {
 }
 
 func (*awsAwsquery_deserializeOpVerifyEmailIdentity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpVerifyEmailIdentity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -26,7 +27,7 @@ type awsAwsquery_deserializeOpAssumeRole struct {
 }
 
 func (*awsAwsquery_deserializeOpAssumeRole) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAssumeRole) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -128,7 +129,7 @@ type awsAwsquery_deserializeOpAssumeRoleWithSAML struct {
 }
 
 func (*awsAwsquery_deserializeOpAssumeRoleWithSAML) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAssumeRoleWithSAML) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -239,7 +240,7 @@ type awsAwsquery_deserializeOpAssumeRoleWithWebIdentity struct {
 }
 
 func (*awsAwsquery_deserializeOpAssumeRoleWithWebIdentity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAssumeRoleWithWebIdentity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -353,7 +354,7 @@ type awsAwsquery_deserializeOpDecodeAuthorizationMessage struct {
 }
 
 func (*awsAwsquery_deserializeOpDecodeAuthorizationMessage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDecodeAuthorizationMessage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -449,7 +450,7 @@ type awsAwsquery_deserializeOpGetAccessKeyInfo struct {
 }
 
 func (*awsAwsquery_deserializeOpGetAccessKeyInfo) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetAccessKeyInfo) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -542,7 +543,7 @@ type awsAwsquery_deserializeOpGetCallerIdentity struct {
 }
 
 func (*awsAwsquery_deserializeOpGetCallerIdentity) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetCallerIdentity) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -635,7 +636,7 @@ type awsAwsquery_deserializeOpGetFederationToken struct {
 }
 
 func (*awsAwsquery_deserializeOpGetFederationToken) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetFederationToken) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -737,7 +738,7 @@ type awsAwsquery_deserializeOpGetSessionToken struct {
 }
 
 func (*awsAwsquery_deserializeOpGetSessionToken) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetSessionToken) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -8,6 +8,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -15,7 +16,7 @@ type awsRestjson1_serializeOpDeleteObject struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteObject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteObject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -81,7 +82,7 @@ type awsRestjson1_serializeOpDescribeObject struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeObject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeObject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -147,7 +148,7 @@ type awsRestjson1_serializeOpGetObject struct {
 }
 
 func (*awsRestjson1_serializeOpGetObject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetObject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -220,7 +221,7 @@ type awsRestjson1_serializeOpListItems struct {
 }
 
 func (*awsRestjson1_serializeOpListItems) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -286,7 +287,7 @@ type awsRestjson1_serializeOpPutObject struct {
 }
 
 func (*awsRestjson1_serializeOpPutObject) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutObject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -9,6 +9,15 @@ const (
 	EncryptionKeyTypeKms EncryptionKeyType = "KMS"
 )
 
+// Values returns all known values for EncryptionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyType) Values() []EncryptionKeyType {
+	return []EncryptionKeyType{
+		"KMS",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -22,12 +31,36 @@ const (
 	JobStatusStopped              JobStatus = "STOPPED"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERROR",
+		"FAILED",
+		"STOP_REQUESTED",
+		"STOPPED",
+	}
+}
+
 type MergeStrategy string
 
 // Enum values for MergeStrategy
 const (
 	MergeStrategyOverwrite MergeStrategy = "OVERWRITE"
 )
+
+// Values returns all known values for MergeStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MergeStrategy) Values() []MergeStrategy {
+	return []MergeStrategy{
+		"OVERWRITE",
+	}
+}
 
 type TerminologyDataFormat string
 
@@ -36,3 +69,13 @@ const (
 	TerminologyDataFormatCsv TerminologyDataFormat = "CSV"
 	TerminologyDataFormatTmx TerminologyDataFormat = "TMX"
 )
+
+// Values returns all known values for TerminologyDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TerminologyDataFormat) Values() []TerminologyDataFormat {
+	return []TerminologyDataFormat{
+		"CSV",
+		"TMX",
+	}
+}

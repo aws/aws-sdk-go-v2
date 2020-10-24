@@ -10,6 +10,16 @@ const (
 	ClientVersionFive_three ClientVersion = "5.3"
 )
 
+// Values returns all known values for ClientVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClientVersion) Values() []ClientVersion {
+	return []ClientVersion{
+		"5.1",
+		"5.3",
+	}
+}
+
 type CloudHsmObjectState string
 
 // Enum values for CloudHsmObjectState
@@ -18,6 +28,17 @@ const (
 	CloudHsmObjectStateUpdating CloudHsmObjectState = "UPDATING"
 	CloudHsmObjectStateDegraded CloudHsmObjectState = "DEGRADED"
 )
+
+// Values returns all known values for CloudHsmObjectState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CloudHsmObjectState) Values() []CloudHsmObjectState {
+	return []CloudHsmObjectState{
+		"READY",
+		"UPDATING",
+		"DEGRADED",
+	}
+}
 
 type HsmStatus string
 
@@ -32,9 +53,33 @@ const (
 	HsmStatusDegraded    HsmStatus = "DEGRADED"
 )
 
+// Values returns all known values for HsmStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (HsmStatus) Values() []HsmStatus {
+	return []HsmStatus{
+		"PENDING",
+		"RUNNING",
+		"UPDATING",
+		"SUSPENDED",
+		"TERMINATING",
+		"TERMINATED",
+		"DEGRADED",
+	}
+}
+
 type SubscriptionType string
 
 // Enum values for SubscriptionType
 const (
 	SubscriptionTypeProduction SubscriptionType = "PRODUCTION"
 )
+
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"PRODUCTION",
+	}
+}

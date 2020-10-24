@@ -9,6 +9,15 @@ const (
 	AlgorithmSgd Algorithm = "sgd"
 )
 
+// Values returns all known values for Algorithm. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Algorithm) Values() []Algorithm {
+	return []Algorithm{
+		"sgd",
+	}
+}
+
 type BatchPredictionFilterVariable string
 
 // Enum values for BatchPredictionFilterVariable
@@ -23,6 +32,23 @@ const (
 	BatchPredictionFilterVariableData_uri        BatchPredictionFilterVariable = "DataURI"
 )
 
+// Values returns all known values for BatchPredictionFilterVariable. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchPredictionFilterVariable) Values() []BatchPredictionFilterVariable {
+	return []BatchPredictionFilterVariable{
+		"CreatedAt",
+		"LastUpdatedAt",
+		"Status",
+		"Name",
+		"IAMUser",
+		"MLModelId",
+		"DataSourceId",
+		"DataURI",
+	}
+}
+
 type DataSourceFilterVariable string
 
 // Enum values for DataSourceFilterVariable
@@ -35,6 +61,20 @@ const (
 	DataSourceFilterVariableIam_user        DataSourceFilterVariable = "IAMUser"
 )
 
+// Values returns all known values for DataSourceFilterVariable. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceFilterVariable) Values() []DataSourceFilterVariable {
+	return []DataSourceFilterVariable{
+		"CreatedAt",
+		"LastUpdatedAt",
+		"Status",
+		"Name",
+		"DataLocationS3",
+		"IAMUser",
+	}
+}
+
 type DetailsAttributes string
 
 // Enum values for DetailsAttributes
@@ -42,6 +82,16 @@ const (
 	DetailsAttributesPredictive_model_type DetailsAttributes = "PredictiveModelType"
 	DetailsAttributesAlgorithm             DetailsAttributes = "Algorithm"
 )
+
+// Values returns all known values for DetailsAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetailsAttributes) Values() []DetailsAttributes {
+	return []DetailsAttributes{
+		"PredictiveModelType",
+		"Algorithm",
+	}
+}
 
 type EntityStatus string
 
@@ -53,6 +103,19 @@ const (
 	EntityStatusCompleted  EntityStatus = "COMPLETED"
 	EntityStatusDeleted    EntityStatus = "DELETED"
 )
+
+// Values returns all known values for EntityStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityStatus) Values() []EntityStatus {
+	return []EntityStatus{
+		"PENDING",
+		"INPROGRESS",
+		"FAILED",
+		"COMPLETED",
+		"DELETED",
+	}
+}
 
 type EvaluationFilterVariable string
 
@@ -67,6 +130,22 @@ const (
 	EvaluationFilterVariableDatasource_id   EvaluationFilterVariable = "DataSourceId"
 	EvaluationFilterVariableData_uri        EvaluationFilterVariable = "DataURI"
 )
+
+// Values returns all known values for EvaluationFilterVariable. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFilterVariable) Values() []EvaluationFilterVariable {
+	return []EvaluationFilterVariable{
+		"CreatedAt",
+		"LastUpdatedAt",
+		"Status",
+		"Name",
+		"IAMUser",
+		"MLModelId",
+		"DataSourceId",
+		"DataURI",
+	}
+}
 
 type MLModelFilterVariable string
 
@@ -84,6 +163,24 @@ const (
 	MLModelFilterVariableTraining_data_uri         MLModelFilterVariable = "TrainingDataURI"
 )
 
+// Values returns all known values for MLModelFilterVariable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MLModelFilterVariable) Values() []MLModelFilterVariable {
+	return []MLModelFilterVariable{
+		"CreatedAt",
+		"LastUpdatedAt",
+		"Status",
+		"Name",
+		"IAMUser",
+		"TrainingDataSourceId",
+		"RealtimeEndpointStatus",
+		"MLModelType",
+		"Algorithm",
+		"TrainingDataURI",
+	}
+}
+
 type MLModelType string
 
 // Enum values for MLModelType
@@ -92,6 +189,17 @@ const (
 	MLModelTypeBinary     MLModelType = "BINARY"
 	MLModelTypeMulticlass MLModelType = "MULTICLASS"
 )
+
+// Values returns all known values for MLModelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MLModelType) Values() []MLModelType {
+	return []MLModelType{
+		"REGRESSION",
+		"BINARY",
+		"MULTICLASS",
+	}
+}
 
 type RealtimeEndpointStatus string
 
@@ -103,6 +211,18 @@ const (
 	RealtimeEndpointStatusFailed   RealtimeEndpointStatus = "FAILED"
 )
 
+// Values returns all known values for RealtimeEndpointStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RealtimeEndpointStatus) Values() []RealtimeEndpointStatus {
+	return []RealtimeEndpointStatus{
+		"NONE",
+		"READY",
+		"UPDATING",
+		"FAILED",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -110,6 +230,16 @@ const (
 	SortOrderAsc SortOrder = "asc"
 	SortOrderDsc SortOrder = "dsc"
 )
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"asc",
+		"dsc",
+	}
+}
 
 type TaggableResourceType string
 
@@ -120,3 +250,15 @@ const (
 	TaggableResourceTypeEvaluation       TaggableResourceType = "Evaluation"
 	TaggableResourceTypeMl_model         TaggableResourceType = "MLModel"
 )
+
+// Values returns all known values for TaggableResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TaggableResourceType) Values() []TaggableResourceType {
+	return []TaggableResourceType{
+		"BatchPrediction",
+		"DataSource",
+		"Evaluation",
+		"MLModel",
+	}
+}

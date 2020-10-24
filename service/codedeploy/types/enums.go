@@ -11,6 +11,17 @@ const (
 	ApplicationRevisionSortByLastusedtime  ApplicationRevisionSortBy = "lastUsedTime"
 )
 
+// Values returns all known values for ApplicationRevisionSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationRevisionSortBy) Values() []ApplicationRevisionSortBy {
+	return []ApplicationRevisionSortBy{
+		"registerTime",
+		"firstUsedTime",
+		"lastUsedTime",
+	}
+}
+
 type AutoRollbackEvent string
 
 // Enum values for AutoRollbackEvent
@@ -19,6 +30,17 @@ const (
 	AutoRollbackEventDeployment_stop_on_alarm   AutoRollbackEvent = "DEPLOYMENT_STOP_ON_ALARM"
 	AutoRollbackEventDeployment_stop_on_request AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
 )
+
+// Values returns all known values for AutoRollbackEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoRollbackEvent) Values() []AutoRollbackEvent {
+	return []AutoRollbackEvent{
+		"DEPLOYMENT_FAILURE",
+		"DEPLOYMENT_STOP_ON_ALARM",
+		"DEPLOYMENT_STOP_ON_REQUEST",
+	}
+}
 
 type BundleType string
 
@@ -31,6 +53,19 @@ const (
 	BundleTypeJson    BundleType = "JSON"
 )
 
+// Values returns all known values for BundleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BundleType) Values() []BundleType {
+	return []BundleType{
+		"tar",
+		"tgz",
+		"zip",
+		"YAML",
+		"JSON",
+	}
+}
+
 type ComputePlatform string
 
 // Enum values for ComputePlatform
@@ -39,6 +74,17 @@ const (
 	ComputePlatformLambda ComputePlatform = "Lambda"
 	ComputePlatformEcs    ComputePlatform = "ECS"
 )
+
+// Values returns all known values for ComputePlatform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputePlatform) Values() []ComputePlatform {
+	return []ComputePlatform{
+		"Server",
+		"Lambda",
+		"ECS",
+	}
+}
 
 type DeploymentCreator string
 
@@ -52,6 +98,20 @@ const (
 	DeploymentCreatorCloudformationrollback DeploymentCreator = "CloudFormationRollback"
 )
 
+// Values returns all known values for DeploymentCreator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentCreator) Values() []DeploymentCreator {
+	return []DeploymentCreator{
+		"user",
+		"autoscaling",
+		"codeDeployRollback",
+		"CodeDeploy",
+		"CloudFormation",
+		"CloudFormationRollback",
+	}
+}
+
 type DeploymentOption string
 
 // Enum values for DeploymentOption
@@ -60,6 +120,16 @@ const (
 	DeploymentOptionWithout_traffic_control DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
 )
 
+// Values returns all known values for DeploymentOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentOption) Values() []DeploymentOption {
+	return []DeploymentOption{
+		"WITH_TRAFFIC_CONTROL",
+		"WITHOUT_TRAFFIC_CONTROL",
+	}
+}
+
 type DeploymentReadyAction string
 
 // Enum values for DeploymentReadyAction
@@ -67,6 +137,16 @@ const (
 	DeploymentReadyActionContinue_deployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
 	DeploymentReadyActionStop_deployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
 )
+
+// Values returns all known values for DeploymentReadyAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentReadyAction) Values() []DeploymentReadyAction {
+	return []DeploymentReadyAction{
+		"CONTINUE_DEPLOYMENT",
+		"STOP_DEPLOYMENT",
+	}
+}
 
 type DeploymentStatus string
 
@@ -82,6 +162,22 @@ const (
 	DeploymentStatusReady       DeploymentStatus = "Ready"
 )
 
+// Values returns all known values for DeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStatus) Values() []DeploymentStatus {
+	return []DeploymentStatus{
+		"Created",
+		"Queued",
+		"InProgress",
+		"Baking",
+		"Succeeded",
+		"Failed",
+		"Stopped",
+		"Ready",
+	}
+}
+
 type DeploymentTargetType string
 
 // Enum values for DeploymentTargetType
@@ -92,6 +188,18 @@ const (
 	DeploymentTargetTypeCloudformation_target DeploymentTargetType = "CloudFormationTarget"
 )
 
+// Values returns all known values for DeploymentTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentTargetType) Values() []DeploymentTargetType {
+	return []DeploymentTargetType{
+		"InstanceTarget",
+		"LambdaTarget",
+		"ECSTarget",
+		"CloudFormationTarget",
+	}
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -99,6 +207,16 @@ const (
 	DeploymentTypeIn_place   DeploymentType = "IN_PLACE"
 	DeploymentTypeBlue_green DeploymentType = "BLUE_GREEN"
 )
+
+// Values returns all known values for DeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentType) Values() []DeploymentType {
+	return []DeploymentType{
+		"IN_PLACE",
+		"BLUE_GREEN",
+	}
+}
 
 type DeploymentWaitType string
 
@@ -108,6 +226,16 @@ const (
 	DeploymentWaitTypeTermination_wait DeploymentWaitType = "TERMINATION_WAIT"
 )
 
+// Values returns all known values for DeploymentWaitType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentWaitType) Values() []DeploymentWaitType {
+	return []DeploymentWaitType{
+		"READY_WAIT",
+		"TERMINATION_WAIT",
+	}
+}
+
 type EC2TagFilterType string
 
 // Enum values for EC2TagFilterType
@@ -116,6 +244,17 @@ const (
 	EC2TagFilterTypeValue_only    EC2TagFilterType = "VALUE_ONLY"
 	EC2TagFilterTypeKey_and_value EC2TagFilterType = "KEY_AND_VALUE"
 )
+
+// Values returns all known values for EC2TagFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EC2TagFilterType) Values() []EC2TagFilterType {
+	return []EC2TagFilterType{
+		"KEY_ONLY",
+		"VALUE_ONLY",
+		"KEY_AND_VALUE",
+	}
+}
 
 type ErrorCode string
 
@@ -157,6 +296,48 @@ const (
 	ErrorCodeCloudformation_stack_failure                ErrorCode = "CLOUDFORMATION_STACK_FAILURE"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"AGENT_ISSUE",
+		"ALARM_ACTIVE",
+		"APPLICATION_MISSING",
+		"AUTOSCALING_VALIDATION_ERROR",
+		"AUTO_SCALING_CONFIGURATION",
+		"AUTO_SCALING_IAM_ROLE_PERMISSIONS",
+		"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND",
+		"CUSTOMER_APPLICATION_UNHEALTHY",
+		"DEPLOYMENT_GROUP_MISSING",
+		"ECS_UPDATE_ERROR",
+		"ELASTIC_LOAD_BALANCING_INVALID",
+		"ELB_INVALID_INSTANCE",
+		"HEALTH_CONSTRAINTS",
+		"HEALTH_CONSTRAINTS_INVALID",
+		"HOOK_EXECUTION_FAILURE",
+		"IAM_ROLE_MISSING",
+		"IAM_ROLE_PERMISSIONS",
+		"INTERNAL_ERROR",
+		"INVALID_ECS_SERVICE",
+		"INVALID_LAMBDA_CONFIGURATION",
+		"INVALID_LAMBDA_FUNCTION",
+		"INVALID_REVISION",
+		"MANUAL_STOP",
+		"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION",
+		"MISSING_ELB_INFORMATION",
+		"MISSING_GITHUB_TOKEN",
+		"NO_EC2_SUBSCRIPTION",
+		"NO_INSTANCES",
+		"OVER_MAX_INSTANCES",
+		"RESOURCE_LIMIT_EXCEEDED",
+		"REVISION_MISSING",
+		"THROTTLED",
+		"TIMEOUT",
+		"CLOUDFORMATION_STACK_FAILURE",
+	}
+}
+
 type FileExistsBehavior string
 
 // Enum values for FileExistsBehavior
@@ -166,6 +347,17 @@ const (
 	FileExistsBehaviorRetain    FileExistsBehavior = "RETAIN"
 )
 
+// Values returns all known values for FileExistsBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileExistsBehavior) Values() []FileExistsBehavior {
+	return []FileExistsBehavior{
+		"DISALLOW",
+		"OVERWRITE",
+		"RETAIN",
+	}
+}
+
 type GreenFleetProvisioningAction string
 
 // Enum values for GreenFleetProvisioningAction
@@ -174,6 +366,16 @@ const (
 	GreenFleetProvisioningActionCopy_auto_scaling_group GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
 )
 
+// Values returns all known values for GreenFleetProvisioningAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GreenFleetProvisioningAction) Values() []GreenFleetProvisioningAction {
+	return []GreenFleetProvisioningAction{
+		"DISCOVER_EXISTING",
+		"COPY_AUTO_SCALING_GROUP",
+	}
+}
+
 type InstanceAction string
 
 // Enum values for InstanceAction
@@ -181,6 +383,16 @@ const (
 	InstanceActionTerminate  InstanceAction = "TERMINATE"
 	InstanceActionKeep_alive InstanceAction = "KEEP_ALIVE"
 )
+
+// Values returns all known values for InstanceAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceAction) Values() []InstanceAction {
+	return []InstanceAction{
+		"TERMINATE",
+		"KEEP_ALIVE",
+	}
+}
 
 type InstanceStatus string
 
@@ -195,6 +407,21 @@ const (
 	InstanceStatusReady       InstanceStatus = "Ready"
 )
 
+// Values returns all known values for InstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStatus) Values() []InstanceStatus {
+	return []InstanceStatus{
+		"Pending",
+		"InProgress",
+		"Succeeded",
+		"Failed",
+		"Skipped",
+		"Unknown",
+		"Ready",
+	}
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -202,6 +429,16 @@ const (
 	InstanceTypeBlue  InstanceType = "Blue"
 	InstanceTypeGreen InstanceType = "Green"
 )
+
+// Values returns all known values for InstanceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InstanceType) Values() []InstanceType {
+	return []InstanceType{
+		"Blue",
+		"Green",
+	}
+}
 
 type LifecycleErrorCode string
 
@@ -215,6 +452,20 @@ const (
 	LifecycleErrorCodeUnknown_error         LifecycleErrorCode = "UnknownError"
 )
 
+// Values returns all known values for LifecycleErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LifecycleErrorCode) Values() []LifecycleErrorCode {
+	return []LifecycleErrorCode{
+		"Success",
+		"ScriptMissing",
+		"ScriptNotExecutable",
+		"ScriptTimedOut",
+		"ScriptFailed",
+		"UnknownError",
+	}
+}
+
 type LifecycleEventStatus string
 
 // Enum values for LifecycleEventStatus
@@ -227,6 +478,20 @@ const (
 	LifecycleEventStatusUnknown     LifecycleEventStatus = "Unknown"
 )
 
+// Values returns all known values for LifecycleEventStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LifecycleEventStatus) Values() []LifecycleEventStatus {
+	return []LifecycleEventStatus{
+		"Pending",
+		"InProgress",
+		"Succeeded",
+		"Failed",
+		"Skipped",
+		"Unknown",
+	}
+}
+
 type ListStateFilterAction string
 
 // Enum values for ListStateFilterAction
@@ -236,6 +501,17 @@ const (
 	ListStateFilterActionIgnore  ListStateFilterAction = "ignore"
 )
 
+// Values returns all known values for ListStateFilterAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListStateFilterAction) Values() []ListStateFilterAction {
+	return []ListStateFilterAction{
+		"include",
+		"exclude",
+		"ignore",
+	}
+}
+
 type MinimumHealthyHostsType string
 
 // Enum values for MinimumHealthyHostsType
@@ -244,6 +520,16 @@ const (
 	MinimumHealthyHostsTypeFleet_percent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
 
+// Values returns all known values for MinimumHealthyHostsType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MinimumHealthyHostsType) Values() []MinimumHealthyHostsType {
+	return []MinimumHealthyHostsType{
+		"HOST_COUNT",
+		"FLEET_PERCENT",
+	}
+}
+
 type RegistrationStatus string
 
 // Enum values for RegistrationStatus
@@ -251,6 +537,16 @@ const (
 	RegistrationStatusRegistered   RegistrationStatus = "Registered"
 	RegistrationStatusDeregistered RegistrationStatus = "Deregistered"
 )
+
+// Values returns all known values for RegistrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RegistrationStatus) Values() []RegistrationStatus {
+	return []RegistrationStatus{
+		"Registered",
+		"Deregistered",
+	}
+}
 
 type RevisionLocationType string
 
@@ -262,6 +558,18 @@ const (
 	RevisionLocationTypeAppspeccontent RevisionLocationType = "AppSpecContent"
 )
 
+// Values returns all known values for RevisionLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RevisionLocationType) Values() []RevisionLocationType {
+	return []RevisionLocationType{
+		"S3",
+		"GitHub",
+		"String",
+		"AppSpecContent",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -270,6 +578,16 @@ const (
 	SortOrderDescending SortOrder = "descending"
 )
 
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ascending",
+		"descending",
+	}
+}
+
 type StopStatus string
 
 // Enum values for StopStatus
@@ -277,6 +595,16 @@ const (
 	StopStatusPending   StopStatus = "Pending"
 	StopStatusSucceeded StopStatus = "Succeeded"
 )
+
+// Values returns all known values for StopStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StopStatus) Values() []StopStatus {
+	return []StopStatus{
+		"Pending",
+		"Succeeded",
+	}
+}
 
 type TagFilterType string
 
@@ -287,6 +615,17 @@ const (
 	TagFilterTypeKey_and_value TagFilterType = "KEY_AND_VALUE"
 )
 
+// Values returns all known values for TagFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TagFilterType) Values() []TagFilterType {
+	return []TagFilterType{
+		"KEY_ONLY",
+		"VALUE_ONLY",
+		"KEY_AND_VALUE",
+	}
+}
+
 type TargetFilterName string
 
 // Enum values for TargetFilterName
@@ -295,6 +634,16 @@ const (
 	TargetFilterNameServer_instance_label TargetFilterName = "ServerInstanceLabel"
 )
 
+// Values returns all known values for TargetFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetFilterName) Values() []TargetFilterName {
+	return []TargetFilterName{
+		"TargetStatus",
+		"ServerInstanceLabel",
+	}
+}
+
 type TargetLabel string
 
 // Enum values for TargetLabel
@@ -302,6 +651,16 @@ const (
 	TargetLabelBlue  TargetLabel = "Blue"
 	TargetLabelGreen TargetLabel = "Green"
 )
+
+// Values returns all known values for TargetLabel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetLabel) Values() []TargetLabel {
+	return []TargetLabel{
+		"Blue",
+		"Green",
+	}
+}
 
 type TargetStatus string
 
@@ -316,6 +675,21 @@ const (
 	TargetStatusReady       TargetStatus = "Ready"
 )
 
+// Values returns all known values for TargetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetStatus) Values() []TargetStatus {
+	return []TargetStatus{
+		"Pending",
+		"InProgress",
+		"Succeeded",
+		"Failed",
+		"Skipped",
+		"Unknown",
+		"Ready",
+	}
+}
+
 type TrafficRoutingType string
 
 // Enum values for TrafficRoutingType
@@ -324,6 +698,17 @@ const (
 	TrafficRoutingTypeTimebasedlinear TrafficRoutingType = "TimeBasedLinear"
 	TrafficRoutingTypeAllatonce       TrafficRoutingType = "AllAtOnce"
 )
+
+// Values returns all known values for TrafficRoutingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficRoutingType) Values() []TrafficRoutingType {
+	return []TrafficRoutingType{
+		"TimeBasedCanary",
+		"TimeBasedLinear",
+		"AllAtOnce",
+	}
+}
 
 type TriggerEventType string
 
@@ -340,3 +725,21 @@ const (
 	TriggerEventTypeInstance_failure    TriggerEventType = "InstanceFailure"
 	TriggerEventTypeInstance_ready      TriggerEventType = "InstanceReady"
 )
+
+// Values returns all known values for TriggerEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEventType) Values() []TriggerEventType {
+	return []TriggerEventType{
+		"DeploymentStart",
+		"DeploymentSuccess",
+		"DeploymentFailure",
+		"DeploymentStop",
+		"DeploymentRollback",
+		"DeploymentReady",
+		"InstanceStart",
+		"InstanceSuccess",
+		"InstanceFailure",
+		"InstanceReady",
+	}
+}

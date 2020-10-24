@@ -11,6 +11,17 @@ const (
 	EntityStateDeleted  EntityState = "DELETED"
 )
 
+// Values returns all known values for EntityState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityState) Values() []EntityState {
+	return []EntityState{
+		"ENABLED",
+		"DISABLED",
+		"DELETED",
+	}
+}
+
 type MemberType string
 
 // Enum values for MemberType
@@ -18,6 +29,16 @@ const (
 	MemberTypeGroup MemberType = "GROUP"
 	MemberTypeUser  MemberType = "USER"
 )
+
+// Values returns all known values for MemberType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MemberType) Values() []MemberType {
+	return []MemberType{
+		"GROUP",
+		"USER",
+	}
+}
 
 type PermissionType string
 
@@ -28,6 +49,17 @@ const (
 	PermissionTypeSend_on_behalf PermissionType = "SEND_ON_BEHALF"
 )
 
+// Values returns all known values for PermissionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionType) Values() []PermissionType {
+	return []PermissionType{
+		"FULL_ACCESS",
+		"SEND_AS",
+		"SEND_ON_BEHALF",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -35,6 +67,16 @@ const (
 	ResourceTypeRoom      ResourceType = "ROOM"
 	ResourceTypeEquipment ResourceType = "EQUIPMENT"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"ROOM",
+		"EQUIPMENT",
+	}
+}
 
 type UserRole string
 
@@ -44,3 +86,14 @@ const (
 	UserRoleResource    UserRole = "RESOURCE"
 	UserRoleSystem_user UserRole = "SYSTEM_USER"
 )
+
+// Values returns all known values for UserRole. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UserRole) Values() []UserRole {
+	return []UserRole{
+		"USER",
+		"RESOURCE",
+		"SYSTEM_USER",
+	}
+}

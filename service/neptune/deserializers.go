@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -26,7 +27,7 @@ type awsAwsquery_deserializeOpAddRoleToDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpAddRoleToDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAddRoleToDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -131,7 +132,7 @@ type awsAwsquery_deserializeOpAddSourceIdentifierToSubscription struct {
 }
 
 func (*awsAwsquery_deserializeOpAddSourceIdentifierToSubscription) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAddSourceIdentifierToSubscription) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -230,7 +231,7 @@ type awsAwsquery_deserializeOpAddTagsToResource struct {
 }
 
 func (*awsAwsquery_deserializeOpAddTagsToResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAddTagsToResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -332,7 +333,7 @@ type awsAwsquery_deserializeOpApplyPendingMaintenanceAction struct {
 }
 
 func (*awsAwsquery_deserializeOpApplyPendingMaintenanceAction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpApplyPendingMaintenanceAction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -428,7 +429,7 @@ type awsAwsquery_deserializeOpCopyDBClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpCopyDBClusterParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCopyDBClusterParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -530,7 +531,7 @@ type awsAwsquery_deserializeOpCopyDBClusterSnapshot struct {
 }
 
 func (*awsAwsquery_deserializeOpCopyDBClusterSnapshot) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCopyDBClusterSnapshot) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -641,7 +642,7 @@ type awsAwsquery_deserializeOpCopyDBParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpCopyDBParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCopyDBParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -743,7 +744,7 @@ type awsAwsquery_deserializeOpCreateDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -881,7 +882,7 @@ type awsAwsquery_deserializeOpCreateDBClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBClusterParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBClusterParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -980,7 +981,7 @@ type awsAwsquery_deserializeOpCreateDBClusterSnapshot struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBClusterSnapshot) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBClusterSnapshot) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1088,7 +1089,7 @@ type awsAwsquery_deserializeOpCreateDBInstance struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1235,7 +1236,7 @@ type awsAwsquery_deserializeOpCreateDBParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1334,7 +1335,7 @@ type awsAwsquery_deserializeOpCreateDBSubnetGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateDBSubnetGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateDBSubnetGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1442,7 +1443,7 @@ type awsAwsquery_deserializeOpCreateEventSubscription struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateEventSubscription) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateEventSubscription) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1556,7 +1557,7 @@ type awsAwsquery_deserializeOpDeleteDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1664,7 +1665,7 @@ type awsAwsquery_deserializeOpDeleteDBClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBClusterParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBClusterParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1763,7 +1764,7 @@ type awsAwsquery_deserializeOpDeleteDBClusterSnapshot struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBClusterSnapshot) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBClusterSnapshot) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1862,7 +1863,7 @@ type awsAwsquery_deserializeOpDeleteDBInstance struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1970,7 +1971,7 @@ type awsAwsquery_deserializeOpDeleteDBParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2069,7 +2070,7 @@ type awsAwsquery_deserializeOpDeleteDBSubnetGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDBSubnetGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDBSubnetGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2171,7 +2172,7 @@ type awsAwsquery_deserializeOpDeleteEventSubscription struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteEventSubscription) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteEventSubscription) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2270,7 +2271,7 @@ type awsAwsquery_deserializeOpDescribeDBClusterParameterGroups struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBClusterParameterGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBClusterParameterGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2366,7 +2367,7 @@ type awsAwsquery_deserializeOpDescribeDBClusterParameters struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBClusterParameters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBClusterParameters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2462,7 +2463,7 @@ type awsAwsquery_deserializeOpDescribeDBClusters struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBClusters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBClusters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2558,7 +2559,7 @@ type awsAwsquery_deserializeOpDescribeDBClusterSnapshotAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBClusterSnapshotAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBClusterSnapshotAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2654,7 +2655,7 @@ type awsAwsquery_deserializeOpDescribeDBClusterSnapshots struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBClusterSnapshots) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBClusterSnapshots) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2750,7 +2751,7 @@ type awsAwsquery_deserializeOpDescribeDBEngineVersions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBEngineVersions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBEngineVersions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2843,7 +2844,7 @@ type awsAwsquery_deserializeOpDescribeDBInstances struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBInstances) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBInstances) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2939,7 +2940,7 @@ type awsAwsquery_deserializeOpDescribeDBParameterGroups struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBParameterGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBParameterGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3035,7 +3036,7 @@ type awsAwsquery_deserializeOpDescribeDBParameters struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBParameters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBParameters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3131,7 +3132,7 @@ type awsAwsquery_deserializeOpDescribeDBSubnetGroups struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeDBSubnetGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeDBSubnetGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3227,7 +3228,7 @@ type awsAwsquery_deserializeOpDescribeEngineDefaultClusterParameters struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEngineDefaultClusterParameters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEngineDefaultClusterParameters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3320,7 +3321,7 @@ type awsAwsquery_deserializeOpDescribeEngineDefaultParameters struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEngineDefaultParameters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEngineDefaultParameters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3413,7 +3414,7 @@ type awsAwsquery_deserializeOpDescribeEventCategories struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEventCategories) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEventCategories) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3506,7 +3507,7 @@ type awsAwsquery_deserializeOpDescribeEvents struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEvents) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEvents) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3599,7 +3600,7 @@ type awsAwsquery_deserializeOpDescribeEventSubscriptions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEventSubscriptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEventSubscriptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3695,7 +3696,7 @@ type awsAwsquery_deserializeOpDescribeOrderableDBInstanceOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeOrderableDBInstanceOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeOrderableDBInstanceOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3788,7 +3789,7 @@ type awsAwsquery_deserializeOpDescribePendingMaintenanceActions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribePendingMaintenanceActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribePendingMaintenanceActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3884,7 +3885,7 @@ type awsAwsquery_deserializeOpDescribeValidDBInstanceModifications struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeValidDBInstanceModifications) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeValidDBInstanceModifications) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3983,7 +3984,7 @@ type awsAwsquery_deserializeOpFailoverDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpFailoverDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpFailoverDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4085,7 +4086,7 @@ type awsAwsquery_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsquery_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4187,7 +4188,7 @@ type awsAwsquery_deserializeOpModifyDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4313,7 +4314,7 @@ type awsAwsquery_deserializeOpModifyDBClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBClusterParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBClusterParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4412,7 +4413,7 @@ type awsAwsquery_deserializeOpModifyDBClusterSnapshotAttribute struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBClusterSnapshotAttribute) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBClusterSnapshotAttribute) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4514,7 +4515,7 @@ type awsAwsquery_deserializeOpModifyDBInstance struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4655,7 +4656,7 @@ type awsAwsquery_deserializeOpModifyDBParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4754,7 +4755,7 @@ type awsAwsquery_deserializeOpModifyDBSubnetGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyDBSubnetGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyDBSubnetGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4862,7 +4863,7 @@ type awsAwsquery_deserializeOpModifyEventSubscription struct {
 }
 
 func (*awsAwsquery_deserializeOpModifyEventSubscription) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpModifyEventSubscription) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4973,7 +4974,7 @@ type awsAwsquery_deserializeOpPromoteReadReplicaDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpPromoteReadReplicaDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPromoteReadReplicaDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5072,7 +5073,7 @@ type awsAwsquery_deserializeOpRebootDBInstance struct {
 }
 
 func (*awsAwsquery_deserializeOpRebootDBInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRebootDBInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5171,7 +5172,7 @@ type awsAwsquery_deserializeOpRemoveRoleFromDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpRemoveRoleFromDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRemoveRoleFromDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5273,7 +5274,7 @@ type awsAwsquery_deserializeOpRemoveSourceIdentifierFromSubscription struct {
 }
 
 func (*awsAwsquery_deserializeOpRemoveSourceIdentifierFromSubscription) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRemoveSourceIdentifierFromSubscription) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5372,7 +5373,7 @@ type awsAwsquery_deserializeOpRemoveTagsFromResource struct {
 }
 
 func (*awsAwsquery_deserializeOpRemoveTagsFromResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRemoveTagsFromResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5474,7 +5475,7 @@ type awsAwsquery_deserializeOpResetDBClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpResetDBClusterParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpResetDBClusterParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5573,7 +5574,7 @@ type awsAwsquery_deserializeOpResetDBParameterGroup struct {
 }
 
 func (*awsAwsquery_deserializeOpResetDBParameterGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpResetDBParameterGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5672,7 +5673,7 @@ type awsAwsquery_deserializeOpRestoreDBClusterFromSnapshot struct {
 }
 
 func (*awsAwsquery_deserializeOpRestoreDBClusterFromSnapshot) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRestoreDBClusterFromSnapshot) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5813,7 +5814,7 @@ type awsAwsquery_deserializeOpRestoreDBClusterToPointInTime struct {
 }
 
 func (*awsAwsquery_deserializeOpRestoreDBClusterToPointInTime) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRestoreDBClusterToPointInTime) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5957,7 +5958,7 @@ type awsAwsquery_deserializeOpStartDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpStartDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpStartDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6059,7 +6060,7 @@ type awsAwsquery_deserializeOpStopDBCluster struct {
 }
 
 func (*awsAwsquery_deserializeOpStopDBCluster) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpStopDBCluster) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

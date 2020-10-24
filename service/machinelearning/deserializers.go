@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpAddTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpAddTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAddTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -146,7 +147,7 @@ type awsAwsjson11_deserializeOpCreateBatchPrediction struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateBatchPrediction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateBatchPrediction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -263,7 +264,7 @@ type awsAwsjson11_deserializeOpCreateDataSourceFromRDS struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDataSourceFromRDS) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDataSourceFromRDS) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -380,7 +381,7 @@ type awsAwsjson11_deserializeOpCreateDataSourceFromRedshift struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDataSourceFromRedshift) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDataSourceFromRedshift) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -497,7 +498,7 @@ type awsAwsjson11_deserializeOpCreateDataSourceFromS3 struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDataSourceFromS3) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDataSourceFromS3) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -614,7 +615,7 @@ type awsAwsjson11_deserializeOpCreateEvaluation struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateEvaluation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateEvaluation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -731,7 +732,7 @@ type awsAwsjson11_deserializeOpCreateMLModel struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateMLModel) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateMLModel) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -848,7 +849,7 @@ type awsAwsjson11_deserializeOpCreateRealtimeEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateRealtimeEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateRealtimeEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -965,7 +966,7 @@ type awsAwsjson11_deserializeOpDeleteBatchPrediction struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteBatchPrediction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteBatchPrediction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1082,7 +1083,7 @@ type awsAwsjson11_deserializeOpDeleteDataSource struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteDataSource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteDataSource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1199,7 +1200,7 @@ type awsAwsjson11_deserializeOpDeleteEvaluation struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteEvaluation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteEvaluation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1316,7 +1317,7 @@ type awsAwsjson11_deserializeOpDeleteMLModel struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteMLModel) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteMLModel) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1433,7 +1434,7 @@ type awsAwsjson11_deserializeOpDeleteRealtimeEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteRealtimeEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteRealtimeEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1550,7 +1551,7 @@ type awsAwsjson11_deserializeOpDeleteTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1670,7 +1671,7 @@ type awsAwsjson11_deserializeOpDescribeBatchPredictions struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeBatchPredictions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeBatchPredictions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1784,7 +1785,7 @@ type awsAwsjson11_deserializeOpDescribeDataSources struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDataSources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDataSources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1898,7 +1899,7 @@ type awsAwsjson11_deserializeOpDescribeEvaluations struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeEvaluations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeEvaluations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2012,7 +2013,7 @@ type awsAwsjson11_deserializeOpDescribeMLModels struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeMLModels) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeMLModels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2126,7 +2127,7 @@ type awsAwsjson11_deserializeOpDescribeTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2243,7 +2244,7 @@ type awsAwsjson11_deserializeOpGetBatchPrediction struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetBatchPrediction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetBatchPrediction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2360,7 +2361,7 @@ type awsAwsjson11_deserializeOpGetDataSource struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDataSource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDataSource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2477,7 +2478,7 @@ type awsAwsjson11_deserializeOpGetEvaluation struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetEvaluation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetEvaluation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2594,7 +2595,7 @@ type awsAwsjson11_deserializeOpGetMLModel struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetMLModel) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetMLModel) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2711,7 +2712,7 @@ type awsAwsjson11_deserializeOpPredict struct {
 }
 
 func (*awsAwsjson11_deserializeOpPredict) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPredict) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2834,7 +2835,7 @@ type awsAwsjson11_deserializeOpUpdateBatchPrediction struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateBatchPrediction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateBatchPrediction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2951,7 +2952,7 @@ type awsAwsjson11_deserializeOpUpdateDataSource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateDataSource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateDataSource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3068,7 +3069,7 @@ type awsAwsjson11_deserializeOpUpdateEvaluation struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateEvaluation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateEvaluation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3185,7 +3186,7 @@ type awsAwsjson11_deserializeOpUpdateMLModel struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateMLModel) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateMLModel) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

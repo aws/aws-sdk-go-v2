@@ -8,6 +8,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -15,7 +16,7 @@ type awsRestjson1_serializeOpGetRoleCredentials struct {
 }
 
 func (*awsRestjson1_serializeOpGetRoleCredentials) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetRoleCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -84,7 +85,7 @@ type awsRestjson1_serializeOpListAccountRoles struct {
 }
 
 func (*awsRestjson1_serializeOpListAccountRoles) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListAccountRoles) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -157,7 +158,7 @@ type awsRestjson1_serializeOpListAccounts struct {
 }
 
 func (*awsRestjson1_serializeOpListAccounts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListAccounts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -226,7 +227,7 @@ type awsRestjson1_serializeOpLogout struct {
 }
 
 func (*awsRestjson1_serializeOpLogout) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpLogout) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

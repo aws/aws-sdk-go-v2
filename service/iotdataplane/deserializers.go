@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
@@ -22,7 +23,7 @@ type awsRestjson1_deserializeOpDeleteThingShadow struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteThingShadow) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteThingShadow) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -146,7 +147,7 @@ type awsRestjson1_deserializeOpGetThingShadow struct {
 }
 
 func (*awsRestjson1_deserializeOpGetThingShadow) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetThingShadow) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -270,7 +271,7 @@ type awsRestjson1_deserializeOpListNamedShadowsForThing struct {
 }
 
 func (*awsRestjson1_deserializeOpListNamedShadowsForThing) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListNamedShadowsForThing) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -457,7 +458,7 @@ type awsRestjson1_deserializeOpPublish struct {
 }
 
 func (*awsRestjson1_deserializeOpPublish) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpPublish) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -549,7 +550,7 @@ type awsRestjson1_deserializeOpUpdateThingShadow struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateThingShadow) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateThingShadow) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

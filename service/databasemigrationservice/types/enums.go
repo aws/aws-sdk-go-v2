@@ -11,6 +11,17 @@ const (
 	AuthMechanismValueScram_sha_1 AuthMechanismValue = "scram_sha_1"
 )
 
+// Values returns all known values for AuthMechanismValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthMechanismValue) Values() []AuthMechanismValue {
+	return []AuthMechanismValue{
+		"default",
+		"mongodb_cr",
+		"scram_sha_1",
+	}
+}
+
 type AuthTypeValue string
 
 // Enum values for AuthTypeValue
@@ -18,6 +29,16 @@ const (
 	AuthTypeValueNo       AuthTypeValue = "no"
 	AuthTypeValuePassword AuthTypeValue = "password"
 )
+
+// Values returns all known values for AuthTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthTypeValue) Values() []AuthTypeValue {
+	return []AuthTypeValue{
+		"no",
+		"password",
+	}
+}
 
 type CompressionTypeValue string
 
@@ -27,6 +48,16 @@ const (
 	CompressionTypeValueGzip CompressionTypeValue = "gzip"
 )
 
+// Values returns all known values for CompressionTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionTypeValue) Values() []CompressionTypeValue {
+	return []CompressionTypeValue{
+		"none",
+		"gzip",
+	}
+}
+
 type DataFormatValue string
 
 // Enum values for DataFormatValue
@@ -34,6 +65,16 @@ const (
 	DataFormatValueCsv     DataFormatValue = "csv"
 	DataFormatValueParquet DataFormatValue = "parquet"
 )
+
+// Values returns all known values for DataFormatValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataFormatValue) Values() []DataFormatValue {
+	return []DataFormatValue{
+		"csv",
+		"parquet",
+	}
+}
 
 type DmsSslModeValue string
 
@@ -45,6 +86,18 @@ const (
 	DmsSslModeValueVerify_full DmsSslModeValue = "verify-full"
 )
 
+// Values returns all known values for DmsSslModeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DmsSslModeValue) Values() []DmsSslModeValue {
+	return []DmsSslModeValue{
+		"none",
+		"require",
+		"verify-ca",
+		"verify-full",
+	}
+}
+
 type EncodingTypeValue string
 
 // Enum values for EncodingTypeValue
@@ -54,6 +107,17 @@ const (
 	EncodingTypeValueRle_dictionary   EncodingTypeValue = "rle-dictionary"
 )
 
+// Values returns all known values for EncodingTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncodingTypeValue) Values() []EncodingTypeValue {
+	return []EncodingTypeValue{
+		"plain",
+		"plain-dictionary",
+		"rle-dictionary",
+	}
+}
+
 type EncryptionModeValue string
 
 // Enum values for EncryptionModeValue
@@ -62,6 +126,16 @@ const (
 	EncryptionModeValueSse_kms EncryptionModeValue = "sse-kms"
 )
 
+// Values returns all known values for EncryptionModeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionModeValue) Values() []EncryptionModeValue {
+	return []EncryptionModeValue{
+		"sse-s3",
+		"sse-kms",
+	}
+}
+
 type MessageFormatValue string
 
 // Enum values for MessageFormatValue
@@ -69,6 +143,16 @@ const (
 	MessageFormatValueJson             MessageFormatValue = "json"
 	MessageFormatValueJson_unformatted MessageFormatValue = "json-unformatted"
 )
+
+// Values returns all known values for MessageFormatValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessageFormatValue) Values() []MessageFormatValue {
+	return []MessageFormatValue{
+		"json",
+		"json-unformatted",
+	}
+}
 
 type MigrationTypeValue string
 
@@ -79,6 +163,17 @@ const (
 	MigrationTypeValueFull_load_and_cdc MigrationTypeValue = "full-load-and-cdc"
 )
 
+// Values returns all known values for MigrationTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationTypeValue) Values() []MigrationTypeValue {
+	return []MigrationTypeValue{
+		"full-load",
+		"cdc",
+		"full-load-and-cdc",
+	}
+}
+
 type NestingLevelValue string
 
 // Enum values for NestingLevelValue
@@ -87,6 +182,16 @@ const (
 	NestingLevelValueOne  NestingLevelValue = "one"
 )
 
+// Values returns all known values for NestingLevelValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NestingLevelValue) Values() []NestingLevelValue {
+	return []NestingLevelValue{
+		"none",
+		"one",
+	}
+}
+
 type ParquetVersionValue string
 
 // Enum values for ParquetVersionValue
@@ -94,6 +199,16 @@ const (
 	ParquetVersionValueParquet_1_0 ParquetVersionValue = "parquet-1-0"
 	ParquetVersionValueParquet_2_0 ParquetVersionValue = "parquet-2-0"
 )
+
+// Values returns all known values for ParquetVersionValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParquetVersionValue) Values() []ParquetVersionValue {
+	return []ParquetVersionValue{
+		"parquet-1-0",
+		"parquet-2-0",
+	}
+}
 
 type RefreshSchemasStatusTypeValue string
 
@@ -104,12 +219,33 @@ const (
 	RefreshSchemasStatusTypeValueRefreshing RefreshSchemasStatusTypeValue = "refreshing"
 )
 
+// Values returns all known values for RefreshSchemasStatusTypeValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RefreshSchemasStatusTypeValue) Values() []RefreshSchemasStatusTypeValue {
+	return []RefreshSchemasStatusTypeValue{
+		"successful",
+		"failed",
+		"refreshing",
+	}
+}
+
 type ReleaseStatusValues string
 
 // Enum values for ReleaseStatusValues
 const (
 	ReleaseStatusValuesBeta ReleaseStatusValues = "beta"
 )
+
+// Values returns all known values for ReleaseStatusValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReleaseStatusValues) Values() []ReleaseStatusValues {
+	return []ReleaseStatusValues{
+		"beta",
+	}
+}
 
 type ReloadOptionValue string
 
@@ -119,6 +255,16 @@ const (
 	ReloadOptionValueValidate_only ReloadOptionValue = "validate-only"
 )
 
+// Values returns all known values for ReloadOptionValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReloadOptionValue) Values() []ReloadOptionValue {
+	return []ReloadOptionValue{
+		"data-reload",
+		"validate-only",
+	}
+}
+
 type ReplicationEndpointTypeValue string
 
 // Enum values for ReplicationEndpointTypeValue
@@ -127,12 +273,31 @@ const (
 	ReplicationEndpointTypeValueTarget ReplicationEndpointTypeValue = "target"
 )
 
+// Values returns all known values for ReplicationEndpointTypeValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationEndpointTypeValue) Values() []ReplicationEndpointTypeValue {
+	return []ReplicationEndpointTypeValue{
+		"source",
+		"target",
+	}
+}
+
 type SourceType string
 
 // Enum values for SourceType
 const (
 	SourceTypeReplicationInstance SourceType = "replication-instance"
 )
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"replication-instance",
+	}
+}
 
 type StartReplicationTaskTypeValue string
 
@@ -142,3 +307,15 @@ const (
 	StartReplicationTaskTypeValueResume_processing StartReplicationTaskTypeValue = "resume-processing"
 	StartReplicationTaskTypeValueReload_target     StartReplicationTaskTypeValue = "reload-target"
 )
+
+// Values returns all known values for StartReplicationTaskTypeValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StartReplicationTaskTypeValue) Values() []StartReplicationTaskTypeValue {
+	return []StartReplicationTaskTypeValue{
+		"start-replication",
+		"resume-processing",
+		"reload-target",
+	}
+}

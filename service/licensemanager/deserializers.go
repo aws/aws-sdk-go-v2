@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpCreateLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -149,7 +150,7 @@ type awsAwsjson11_deserializeOpDeleteLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -272,7 +273,7 @@ type awsAwsjson11_deserializeOpGetLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -395,7 +396,7 @@ type awsAwsjson11_deserializeOpGetServiceSettings struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetServiceSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetServiceSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -515,7 +516,7 @@ type awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -641,7 +642,7 @@ type awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations str
 }
 
 func (*awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -764,7 +765,7 @@ type awsAwsjson11_deserializeOpListLicenseConfigurations struct {
 }
 
 func (*awsAwsjson11_deserializeOpListLicenseConfigurations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListLicenseConfigurations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -890,7 +891,7 @@ type awsAwsjson11_deserializeOpListLicenseSpecificationsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListLicenseSpecificationsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListLicenseSpecificationsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1013,7 +1014,7 @@ type awsAwsjson11_deserializeOpListResourceInventory struct {
 }
 
 func (*awsAwsjson11_deserializeOpListResourceInventory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListResourceInventory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1142,7 +1143,7 @@ type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1265,7 +1266,7 @@ type awsAwsjson11_deserializeOpListUsageForLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpListUsageForLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListUsageForLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1391,7 +1392,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1514,7 +1515,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1637,7 +1638,7 @@ type awsAwsjson11_deserializeOpUpdateLicenseConfiguration struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateLicenseConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateLicenseConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1760,7 +1761,7 @@ type awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1889,7 +1890,7 @@ type awsAwsjson11_deserializeOpUpdateServiceSettings struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateServiceSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateServiceSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

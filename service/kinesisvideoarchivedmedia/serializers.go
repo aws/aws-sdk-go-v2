@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsRestjson1_serializeOpGetClip struct {
 }
 
 func (*awsRestjson1_serializeOpGetClip) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetClip) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -104,7 +105,7 @@ type awsRestjson1_serializeOpGetDASHStreamingSessionURL struct {
 }
 
 func (*awsRestjson1_serializeOpGetDASHStreamingSessionURL) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDASHStreamingSessionURL) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -214,7 +215,7 @@ type awsRestjson1_serializeOpGetHLSStreamingSessionURL struct {
 }
 
 func (*awsRestjson1_serializeOpGetHLSStreamingSessionURL) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetHLSStreamingSessionURL) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -329,7 +330,7 @@ type awsRestjson1_serializeOpGetMediaForFragmentList struct {
 }
 
 func (*awsRestjson1_serializeOpGetMediaForFragmentList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetMediaForFragmentList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -409,7 +410,7 @@ type awsRestjson1_serializeOpListFragments struct {
 }
 
 func (*awsRestjson1_serializeOpListFragments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListFragments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

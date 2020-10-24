@@ -10,6 +10,16 @@ const (
 	DistributionBylogstream Distribution = "ByLogStream"
 )
 
+// Values returns all known values for Distribution. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Distribution) Values() []Distribution {
+	return []Distribution{
+		"Random",
+		"ByLogStream",
+	}
+}
+
 type ExportTaskStatusCode string
 
 // Enum values for ExportTaskStatusCode
@@ -22,6 +32,20 @@ const (
 	ExportTaskStatusCodeRunning        ExportTaskStatusCode = "RUNNING"
 )
 
+// Values returns all known values for ExportTaskStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportTaskStatusCode) Values() []ExportTaskStatusCode {
+	return []ExportTaskStatusCode{
+		"CANCELLED",
+		"COMPLETED",
+		"FAILED",
+		"PENDING",
+		"PENDING_CANCEL",
+		"RUNNING",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -29,6 +53,16 @@ const (
 	OrderByLogstreamname OrderBy = "LogStreamName"
 	OrderByLasteventtime OrderBy = "LastEventTime"
 )
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"LogStreamName",
+		"LastEventTime",
+	}
+}
 
 type QueryStatus string
 
@@ -40,3 +74,16 @@ const (
 	QueryStatusFailed    QueryStatus = "Failed"
 	QueryStatusCancelled QueryStatus = "Cancelled"
 )
+
+// Values returns all known values for QueryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueryStatus) Values() []QueryStatus {
+	return []QueryStatus{
+		"Scheduled",
+		"Running",
+		"Complete",
+		"Failed",
+		"Cancelled",
+	}
+}

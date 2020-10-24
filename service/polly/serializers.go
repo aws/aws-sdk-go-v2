@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpDeleteLexicon struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteLexicon) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteLexicon) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -84,7 +85,7 @@ type awsRestjson1_serializeOpDescribeVoices struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeVoices) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeVoices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -154,7 +155,7 @@ type awsRestjson1_serializeOpGetLexicon struct {
 }
 
 func (*awsRestjson1_serializeOpGetLexicon) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetLexicon) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -220,7 +221,7 @@ type awsRestjson1_serializeOpGetSpeechSynthesisTask struct {
 }
 
 func (*awsRestjson1_serializeOpGetSpeechSynthesisTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetSpeechSynthesisTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -286,7 +287,7 @@ type awsRestjson1_serializeOpListLexicons struct {
 }
 
 func (*awsRestjson1_serializeOpListLexicons) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListLexicons) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -344,7 +345,7 @@ type awsRestjson1_serializeOpListSpeechSynthesisTasks struct {
 }
 
 func (*awsRestjson1_serializeOpListSpeechSynthesisTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListSpeechSynthesisTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -410,7 +411,7 @@ type awsRestjson1_serializeOpPutLexicon struct {
 }
 
 func (*awsRestjson1_serializeOpPutLexicon) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutLexicon) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -499,7 +500,7 @@ type awsRestjson1_serializeOpStartSpeechSynthesisTask struct {
 }
 
 func (*awsRestjson1_serializeOpStartSpeechSynthesisTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartSpeechSynthesisTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -631,7 +632,7 @@ type awsRestjson1_serializeOpSynthesizeSpeech struct {
 }
 
 func (*awsRestjson1_serializeOpSynthesizeSpeech) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSynthesizeSpeech) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

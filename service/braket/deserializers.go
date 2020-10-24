@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -22,7 +23,7 @@ type awsRestjson1_deserializeOpCancelQuantumTask struct {
 }
 
 func (*awsRestjson1_deserializeOpCancelQuantumTask) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCancelQuantumTask) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -197,7 +198,7 @@ type awsRestjson1_deserializeOpCreateQuantumTask struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateQuantumTask) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateQuantumTask) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -363,7 +364,7 @@ type awsRestjson1_deserializeOpGetDevice struct {
 }
 
 func (*awsRestjson1_deserializeOpGetDevice) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -571,7 +572,7 @@ type awsRestjson1_deserializeOpGetQuantumTask struct {
 }
 
 func (*awsRestjson1_deserializeOpGetQuantumTask) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetQuantumTask) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -827,7 +828,7 @@ type awsRestjson1_deserializeOpSearchDevices struct {
 }
 
 func (*awsRestjson1_deserializeOpSearchDevices) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpSearchDevices) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -992,7 +993,7 @@ type awsRestjson1_deserializeOpSearchQuantumTasks struct {
 }
 
 func (*awsRestjson1_deserializeOpSearchQuantumTasks) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpSearchQuantumTasks) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -11,6 +11,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsquery_serializeOpDeleteAlarms struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteAlarms) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteAlarms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -74,7 +75,7 @@ type awsAwsquery_serializeOpDeleteAnomalyDetector struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteAnomalyDetector) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteAnomalyDetector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -129,7 +130,7 @@ type awsAwsquery_serializeOpDeleteDashboards struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteDashboards) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteDashboards) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -184,7 +185,7 @@ type awsAwsquery_serializeOpDeleteInsightRules struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteInsightRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteInsightRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -239,7 +240,7 @@ type awsAwsquery_serializeOpDescribeAlarmHistory struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAlarmHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAlarmHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsAwsquery_serializeOpDescribeAlarms struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAlarms) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAlarms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -349,7 +350,7 @@ type awsAwsquery_serializeOpDescribeAlarmsForMetric struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAlarmsForMetric) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAlarmsForMetric) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -404,7 +405,7 @@ type awsAwsquery_serializeOpDescribeAnomalyDetectors struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAnomalyDetectors) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAnomalyDetectors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -459,7 +460,7 @@ type awsAwsquery_serializeOpDescribeInsightRules struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeInsightRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeInsightRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -514,7 +515,7 @@ type awsAwsquery_serializeOpDisableAlarmActions struct {
 }
 
 func (*awsAwsquery_serializeOpDisableAlarmActions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDisableAlarmActions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -569,7 +570,7 @@ type awsAwsquery_serializeOpDisableInsightRules struct {
 }
 
 func (*awsAwsquery_serializeOpDisableInsightRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDisableInsightRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -624,7 +625,7 @@ type awsAwsquery_serializeOpEnableAlarmActions struct {
 }
 
 func (*awsAwsquery_serializeOpEnableAlarmActions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEnableAlarmActions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -679,7 +680,7 @@ type awsAwsquery_serializeOpEnableInsightRules struct {
 }
 
 func (*awsAwsquery_serializeOpEnableInsightRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEnableInsightRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -734,7 +735,7 @@ type awsAwsquery_serializeOpGetDashboard struct {
 }
 
 func (*awsAwsquery_serializeOpGetDashboard) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetDashboard) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -789,7 +790,7 @@ type awsAwsquery_serializeOpGetInsightRuleReport struct {
 }
 
 func (*awsAwsquery_serializeOpGetInsightRuleReport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetInsightRuleReport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -844,7 +845,7 @@ type awsAwsquery_serializeOpGetMetricData struct {
 }
 
 func (*awsAwsquery_serializeOpGetMetricData) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetMetricData) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -899,7 +900,7 @@ type awsAwsquery_serializeOpGetMetricStatistics struct {
 }
 
 func (*awsAwsquery_serializeOpGetMetricStatistics) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetMetricStatistics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -954,7 +955,7 @@ type awsAwsquery_serializeOpGetMetricWidgetImage struct {
 }
 
 func (*awsAwsquery_serializeOpGetMetricWidgetImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetMetricWidgetImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1009,7 +1010,7 @@ type awsAwsquery_serializeOpListDashboards struct {
 }
 
 func (*awsAwsquery_serializeOpListDashboards) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpListDashboards) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1064,7 +1065,7 @@ type awsAwsquery_serializeOpListMetrics struct {
 }
 
 func (*awsAwsquery_serializeOpListMetrics) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpListMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1119,7 +1120,7 @@ type awsAwsquery_serializeOpListTagsForResource struct {
 }
 
 func (*awsAwsquery_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1174,7 +1175,7 @@ type awsAwsquery_serializeOpPutAnomalyDetector struct {
 }
 
 func (*awsAwsquery_serializeOpPutAnomalyDetector) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutAnomalyDetector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1229,7 +1230,7 @@ type awsAwsquery_serializeOpPutCompositeAlarm struct {
 }
 
 func (*awsAwsquery_serializeOpPutCompositeAlarm) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutCompositeAlarm) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1284,7 +1285,7 @@ type awsAwsquery_serializeOpPutDashboard struct {
 }
 
 func (*awsAwsquery_serializeOpPutDashboard) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutDashboard) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1339,7 +1340,7 @@ type awsAwsquery_serializeOpPutInsightRule struct {
 }
 
 func (*awsAwsquery_serializeOpPutInsightRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutInsightRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1394,7 +1395,7 @@ type awsAwsquery_serializeOpPutMetricAlarm struct {
 }
 
 func (*awsAwsquery_serializeOpPutMetricAlarm) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutMetricAlarm) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1449,7 +1450,7 @@ type awsAwsquery_serializeOpPutMetricData struct {
 }
 
 func (*awsAwsquery_serializeOpPutMetricData) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPutMetricData) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1504,7 +1505,7 @@ type awsAwsquery_serializeOpSetAlarmState struct {
 }
 
 func (*awsAwsquery_serializeOpSetAlarmState) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSetAlarmState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1559,7 +1560,7 @@ type awsAwsquery_serializeOpTagResource struct {
 }
 
 func (*awsAwsquery_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1614,7 +1615,7 @@ type awsAwsquery_serializeOpUntagResource struct {
 }
 
 func (*awsAwsquery_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

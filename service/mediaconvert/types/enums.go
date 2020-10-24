@@ -10,6 +10,17 @@ const (
 	AacAudioDescriptionBroadcasterMixNormal               AacAudioDescriptionBroadcasterMix = "NORMAL"
 )
 
+// Values returns all known values for AacAudioDescriptionBroadcasterMix. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AacAudioDescriptionBroadcasterMix) Values() []AacAudioDescriptionBroadcasterMix {
+	return []AacAudioDescriptionBroadcasterMix{
+		"BROADCASTER_MIXED_AD",
+		"NORMAL",
+	}
+}
+
 type AacCodecProfile string
 
 // Enum values for AacCodecProfile
@@ -18,6 +29,17 @@ const (
 	AacCodecProfileHev1 AacCodecProfile = "HEV1"
 	AacCodecProfileHev2 AacCodecProfile = "HEV2"
 )
+
+// Values returns all known values for AacCodecProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AacCodecProfile) Values() []AacCodecProfile {
+	return []AacCodecProfile{
+		"LC",
+		"HEV1",
+		"HEV2",
+	}
+}
 
 type AacCodingMode string
 
@@ -30,6 +52,19 @@ const (
 	AacCodingModeCoding_mode_5_1 AacCodingMode = "CODING_MODE_5_1"
 )
 
+// Values returns all known values for AacCodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AacCodingMode) Values() []AacCodingMode {
+	return []AacCodingMode{
+		"AD_RECEIVER_MIX",
+		"CODING_MODE_1_0",
+		"CODING_MODE_1_1",
+		"CODING_MODE_2_0",
+		"CODING_MODE_5_1",
+	}
+}
+
 type AacRateControlMode string
 
 // Enum values for AacRateControlMode
@@ -37,6 +72,16 @@ const (
 	AacRateControlModeCbr AacRateControlMode = "CBR"
 	AacRateControlModeVbr AacRateControlMode = "VBR"
 )
+
+// Values returns all known values for AacRateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AacRateControlMode) Values() []AacRateControlMode {
+	return []AacRateControlMode{
+		"CBR",
+		"VBR",
+	}
+}
 
 type AacRawFormat string
 
@@ -46,6 +91,16 @@ const (
 	AacRawFormatNone      AacRawFormat = "NONE"
 )
 
+// Values returns all known values for AacRawFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AacRawFormat) Values() []AacRawFormat {
+	return []AacRawFormat{
+		"LATM_LOAS",
+		"NONE",
+	}
+}
+
 type AacSpecification string
 
 // Enum values for AacSpecification
@@ -53,6 +108,16 @@ const (
 	AacSpecificationMpeg2 AacSpecification = "MPEG2"
 	AacSpecificationMpeg4 AacSpecification = "MPEG4"
 )
+
+// Values returns all known values for AacSpecification. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AacSpecification) Values() []AacSpecification {
+	return []AacSpecification{
+		"MPEG2",
+		"MPEG4",
+	}
+}
 
 type AacVbrQuality string
 
@@ -63,6 +128,18 @@ const (
 	AacVbrQualityMedium_high AacVbrQuality = "MEDIUM_HIGH"
 	AacVbrQualityHigh        AacVbrQuality = "HIGH"
 )
+
+// Values returns all known values for AacVbrQuality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AacVbrQuality) Values() []AacVbrQuality {
+	return []AacVbrQuality{
+		"LOW",
+		"MEDIUM_LOW",
+		"MEDIUM_HIGH",
+		"HIGH",
+	}
+}
 
 type Ac3BitstreamMode string
 
@@ -78,6 +155,22 @@ const (
 	Ac3BitstreamModeVoice_over        Ac3BitstreamMode = "VOICE_OVER"
 )
 
+// Values returns all known values for Ac3BitstreamMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ac3BitstreamMode) Values() []Ac3BitstreamMode {
+	return []Ac3BitstreamMode{
+		"COMPLETE_MAIN",
+		"COMMENTARY",
+		"DIALOGUE",
+		"EMERGENCY",
+		"HEARING_IMPAIRED",
+		"MUSIC_AND_EFFECTS",
+		"VISUALLY_IMPAIRED",
+		"VOICE_OVER",
+	}
+}
+
 type Ac3CodingMode string
 
 // Enum values for Ac3CodingMode
@@ -88,6 +181,18 @@ const (
 	Ac3CodingModeCoding_mode_3_2_lfe Ac3CodingMode = "CODING_MODE_3_2_LFE"
 )
 
+// Values returns all known values for Ac3CodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ac3CodingMode) Values() []Ac3CodingMode {
+	return []Ac3CodingMode{
+		"CODING_MODE_1_0",
+		"CODING_MODE_1_1",
+		"CODING_MODE_2_0",
+		"CODING_MODE_3_2_LFE",
+	}
+}
+
 type Ac3DynamicRangeCompressionProfile string
 
 // Enum values for Ac3DynamicRangeCompressionProfile
@@ -95,6 +200,17 @@ const (
 	Ac3DynamicRangeCompressionProfileFilm_standard Ac3DynamicRangeCompressionProfile = "FILM_STANDARD"
 	Ac3DynamicRangeCompressionProfileNone          Ac3DynamicRangeCompressionProfile = "NONE"
 )
+
+// Values returns all known values for Ac3DynamicRangeCompressionProfile. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Ac3DynamicRangeCompressionProfile) Values() []Ac3DynamicRangeCompressionProfile {
+	return []Ac3DynamicRangeCompressionProfile{
+		"FILM_STANDARD",
+		"NONE",
+	}
+}
 
 type Ac3LfeFilter string
 
@@ -104,6 +220,16 @@ const (
 	Ac3LfeFilterDisabled Ac3LfeFilter = "DISABLED"
 )
 
+// Values returns all known values for Ac3LfeFilter. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Ac3LfeFilter) Values() []Ac3LfeFilter {
+	return []Ac3LfeFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Ac3MetadataControl string
 
 // Enum values for Ac3MetadataControl
@@ -111,6 +237,16 @@ const (
 	Ac3MetadataControlFollow_input   Ac3MetadataControl = "FOLLOW_INPUT"
 	Ac3MetadataControlUse_configured Ac3MetadataControl = "USE_CONFIGURED"
 )
+
+// Values returns all known values for Ac3MetadataControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ac3MetadataControl) Values() []Ac3MetadataControl {
+	return []Ac3MetadataControl{
+		"FOLLOW_INPUT",
+		"USE_CONFIGURED",
+	}
+}
 
 type AccelerationMode string
 
@@ -120,6 +256,17 @@ const (
 	AccelerationModeEnabled   AccelerationMode = "ENABLED"
 	AccelerationModePreferred AccelerationMode = "PREFERRED"
 )
+
+// Values returns all known values for AccelerationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccelerationMode) Values() []AccelerationMode {
+	return []AccelerationMode{
+		"DISABLED",
+		"ENABLED",
+		"PREFERRED",
+	}
+}
 
 type AccelerationStatus string
 
@@ -131,6 +278,18 @@ const (
 	AccelerationStatusNot_accelerated AccelerationStatus = "NOT_ACCELERATED"
 )
 
+// Values returns all known values for AccelerationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccelerationStatus) Values() []AccelerationStatus {
+	return []AccelerationStatus{
+		"NOT_APPLICABLE",
+		"IN_PROGRESS",
+		"ACCELERATED",
+		"NOT_ACCELERATED",
+	}
+}
+
 type AfdSignaling string
 
 // Enum values for AfdSignaling
@@ -140,6 +299,17 @@ const (
 	AfdSignalingFixed AfdSignaling = "FIXED"
 )
 
+// Values returns all known values for AfdSignaling. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AfdSignaling) Values() []AfdSignaling {
+	return []AfdSignaling{
+		"NONE",
+		"AUTO",
+		"FIXED",
+	}
+}
+
 type AlphaBehavior string
 
 // Enum values for AlphaBehavior
@@ -147,6 +317,16 @@ const (
 	AlphaBehaviorDiscard       AlphaBehavior = "DISCARD"
 	AlphaBehaviorRemap_to_luma AlphaBehavior = "REMAP_TO_LUMA"
 )
+
+// Values returns all known values for AlphaBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlphaBehavior) Values() []AlphaBehavior {
+	return []AlphaBehavior{
+		"DISCARD",
+		"REMAP_TO_LUMA",
+	}
+}
 
 type AncillaryConvert608To708 string
 
@@ -156,6 +336,16 @@ const (
 	AncillaryConvert608To708Disabled  AncillaryConvert608To708 = "DISABLED"
 )
 
+// Values returns all known values for AncillaryConvert608To708. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AncillaryConvert608To708) Values() []AncillaryConvert608To708 {
+	return []AncillaryConvert608To708{
+		"UPCONVERT",
+		"DISABLED",
+	}
+}
+
 type AncillaryTerminateCaptions string
 
 // Enum values for AncillaryTerminateCaptions
@@ -164,6 +354,16 @@ const (
 	AncillaryTerminateCaptionsDisabled     AncillaryTerminateCaptions = "DISABLED"
 )
 
+// Values returns all known values for AncillaryTerminateCaptions. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AncillaryTerminateCaptions) Values() []AncillaryTerminateCaptions {
+	return []AncillaryTerminateCaptions{
+		"END_OF_INPUT",
+		"DISABLED",
+	}
+}
+
 type AntiAlias string
 
 // Enum values for AntiAlias
@@ -171,6 +371,16 @@ const (
 	AntiAliasDisabled AntiAlias = "DISABLED"
 	AntiAliasEnabled  AntiAlias = "ENABLED"
 )
+
+// Values returns all known values for AntiAlias. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AntiAlias) Values() []AntiAlias {
+	return []AntiAlias{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type AudioCodec string
 
@@ -189,6 +399,25 @@ const (
 	AudioCodecPassthrough AudioCodec = "PASSTHROUGH"
 )
 
+// Values returns all known values for AudioCodec. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AudioCodec) Values() []AudioCodec {
+	return []AudioCodec{
+		"AAC",
+		"MP2",
+		"MP3",
+		"WAV",
+		"AIFF",
+		"AC3",
+		"EAC3",
+		"EAC3_ATMOS",
+		"VORBIS",
+		"OPUS",
+		"PASSTHROUGH",
+	}
+}
+
 type AudioDefaultSelection string
 
 // Enum values for AudioDefaultSelection
@@ -197,6 +426,16 @@ const (
 	AudioDefaultSelectionNot_default AudioDefaultSelection = "NOT_DEFAULT"
 )
 
+// Values returns all known values for AudioDefaultSelection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioDefaultSelection) Values() []AudioDefaultSelection {
+	return []AudioDefaultSelection{
+		"DEFAULT",
+		"NOT_DEFAULT",
+	}
+}
+
 type AudioLanguageCodeControl string
 
 // Enum values for AudioLanguageCodeControl
@@ -204,6 +443,16 @@ const (
 	AudioLanguageCodeControlFollow_input   AudioLanguageCodeControl = "FOLLOW_INPUT"
 	AudioLanguageCodeControlUse_configured AudioLanguageCodeControl = "USE_CONFIGURED"
 )
+
+// Values returns all known values for AudioLanguageCodeControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioLanguageCodeControl) Values() []AudioLanguageCodeControl {
+	return []AudioLanguageCodeControl{
+		"FOLLOW_INPUT",
+		"USE_CONFIGURED",
+	}
+}
 
 type AudioNormalizationAlgorithm string
 
@@ -215,6 +464,18 @@ const (
 	AudioNormalizationAlgorithmItu_bs_1770_4 AudioNormalizationAlgorithm = "ITU_BS_1770_4"
 )
 
+// Values returns all known values for AudioNormalizationAlgorithm. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioNormalizationAlgorithm) Values() []AudioNormalizationAlgorithm {
+	return []AudioNormalizationAlgorithm{
+		"ITU_BS_1770_1",
+		"ITU_BS_1770_2",
+		"ITU_BS_1770_3",
+		"ITU_BS_1770_4",
+	}
+}
+
 type AudioNormalizationAlgorithmControl string
 
 // Enum values for AudioNormalizationAlgorithmControl
@@ -222,6 +483,17 @@ const (
 	AudioNormalizationAlgorithmControlCorrect_audio AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"
 	AudioNormalizationAlgorithmControlMeasure_only  AudioNormalizationAlgorithmControl = "MEASURE_ONLY"
 )
+
+// Values returns all known values for AudioNormalizationAlgorithmControl. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AudioNormalizationAlgorithmControl) Values() []AudioNormalizationAlgorithmControl {
+	return []AudioNormalizationAlgorithmControl{
+		"CORRECT_AUDIO",
+		"MEASURE_ONLY",
+	}
+}
 
 type AudioNormalizationLoudnessLogging string
 
@@ -231,6 +503,17 @@ const (
 	AudioNormalizationLoudnessLoggingDont_log AudioNormalizationLoudnessLogging = "DONT_LOG"
 )
 
+// Values returns all known values for AudioNormalizationLoudnessLogging. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AudioNormalizationLoudnessLogging) Values() []AudioNormalizationLoudnessLogging {
+	return []AudioNormalizationLoudnessLogging{
+		"LOG",
+		"DONT_LOG",
+	}
+}
+
 type AudioNormalizationPeakCalculation string
 
 // Enum values for AudioNormalizationPeakCalculation
@@ -238,6 +521,17 @@ const (
 	AudioNormalizationPeakCalculationTrue_peak AudioNormalizationPeakCalculation = "TRUE_PEAK"
 	AudioNormalizationPeakCalculationNone      AudioNormalizationPeakCalculation = "NONE"
 )
+
+// Values returns all known values for AudioNormalizationPeakCalculation. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AudioNormalizationPeakCalculation) Values() []AudioNormalizationPeakCalculation {
+	return []AudioNormalizationPeakCalculation{
+		"TRUE_PEAK",
+		"NONE",
+	}
+}
 
 type AudioSelectorType string
 
@@ -248,6 +542,17 @@ const (
 	AudioSelectorTypeLanguage_code AudioSelectorType = "LANGUAGE_CODE"
 )
 
+// Values returns all known values for AudioSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioSelectorType) Values() []AudioSelectorType {
+	return []AudioSelectorType{
+		"PID",
+		"TRACK",
+		"LANGUAGE_CODE",
+	}
+}
+
 type AudioTypeControl string
 
 // Enum values for AudioTypeControl
@@ -255,6 +560,16 @@ const (
 	AudioTypeControlFollow_input   AudioTypeControl = "FOLLOW_INPUT"
 	AudioTypeControlUse_configured AudioTypeControl = "USE_CONFIGURED"
 )
+
+// Values returns all known values for AudioTypeControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioTypeControl) Values() []AudioTypeControl {
+	return []AudioTypeControl{
+		"FOLLOW_INPUT",
+		"USE_CONFIGURED",
+	}
+}
 
 type Av1AdaptiveQuantization string
 
@@ -268,6 +583,20 @@ const (
 	Av1AdaptiveQuantizationMax    Av1AdaptiveQuantization = "MAX"
 )
 
+// Values returns all known values for Av1AdaptiveQuantization. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Av1AdaptiveQuantization) Values() []Av1AdaptiveQuantization {
+	return []Av1AdaptiveQuantization{
+		"OFF",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"HIGHER",
+		"MAX",
+	}
+}
+
 type Av1FramerateControl string
 
 // Enum values for Av1FramerateControl
@@ -275,6 +604,16 @@ const (
 	Av1FramerateControlInitialize_from_source Av1FramerateControl = "INITIALIZE_FROM_SOURCE"
 	Av1FramerateControlSpecified              Av1FramerateControl = "SPECIFIED"
 )
+
+// Values returns all known values for Av1FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Av1FramerateControl) Values() []Av1FramerateControl {
+	return []Av1FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type Av1FramerateConversionAlgorithm string
 
@@ -284,12 +623,32 @@ const (
 	Av1FramerateConversionAlgorithmInterpolate    Av1FramerateConversionAlgorithm = "INTERPOLATE"
 )
 
+// Values returns all known values for Av1FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Av1FramerateConversionAlgorithm) Values() []Av1FramerateConversionAlgorithm {
+	return []Av1FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
+
 type Av1RateControlMode string
 
 // Enum values for Av1RateControlMode
 const (
 	Av1RateControlModeQvbr Av1RateControlMode = "QVBR"
 )
+
+// Values returns all known values for Av1RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Av1RateControlMode) Values() []Av1RateControlMode {
+	return []Av1RateControlMode{
+		"QVBR",
+	}
+}
 
 type Av1SpatialAdaptiveQuantization string
 
@@ -298,6 +657,17 @@ const (
 	Av1SpatialAdaptiveQuantizationDisabled Av1SpatialAdaptiveQuantization = "DISABLED"
 	Av1SpatialAdaptiveQuantizationEnabled  Av1SpatialAdaptiveQuantization = "ENABLED"
 )
+
+// Values returns all known values for Av1SpatialAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Av1SpatialAdaptiveQuantization) Values() []Av1SpatialAdaptiveQuantization {
+	return []Av1SpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type BillingTagsSource string
 
@@ -309,6 +679,18 @@ const (
 	BillingTagsSourceJob          BillingTagsSource = "JOB"
 )
 
+// Values returns all known values for BillingTagsSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BillingTagsSource) Values() []BillingTagsSource {
+	return []BillingTagsSource{
+		"QUEUE",
+		"PRESET",
+		"JOB_TEMPLATE",
+		"JOB",
+	}
+}
+
 type BurninSubtitleAlignment string
 
 // Enum values for BurninSubtitleAlignment
@@ -316,6 +698,16 @@ const (
 	BurninSubtitleAlignmentCentered BurninSubtitleAlignment = "CENTERED"
 	BurninSubtitleAlignmentLeft     BurninSubtitleAlignment = "LEFT"
 )
+
+// Values returns all known values for BurninSubtitleAlignment. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleAlignment) Values() []BurninSubtitleAlignment {
+	return []BurninSubtitleAlignment{
+		"CENTERED",
+		"LEFT",
+	}
+}
 
 type BurninSubtitleBackgroundColor string
 
@@ -325,6 +717,18 @@ const (
 	BurninSubtitleBackgroundColorBlack BurninSubtitleBackgroundColor = "BLACK"
 	BurninSubtitleBackgroundColorWhite BurninSubtitleBackgroundColor = "WHITE"
 )
+
+// Values returns all known values for BurninSubtitleBackgroundColor. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BurninSubtitleBackgroundColor) Values() []BurninSubtitleBackgroundColor {
+	return []BurninSubtitleBackgroundColor{
+		"NONE",
+		"BLACK",
+		"WHITE",
+	}
+}
 
 type BurninSubtitleFontColor string
 
@@ -338,6 +742,20 @@ const (
 	BurninSubtitleFontColorBlue   BurninSubtitleFontColor = "BLUE"
 )
 
+// Values returns all known values for BurninSubtitleFontColor. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleFontColor) Values() []BurninSubtitleFontColor {
+	return []BurninSubtitleFontColor{
+		"WHITE",
+		"BLACK",
+		"YELLOW",
+		"RED",
+		"GREEN",
+		"BLUE",
+	}
+}
+
 type BurninSubtitleOutlineColor string
 
 // Enum values for BurninSubtitleOutlineColor
@@ -350,6 +768,20 @@ const (
 	BurninSubtitleOutlineColorBlue   BurninSubtitleOutlineColor = "BLUE"
 )
 
+// Values returns all known values for BurninSubtitleOutlineColor. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleOutlineColor) Values() []BurninSubtitleOutlineColor {
+	return []BurninSubtitleOutlineColor{
+		"BLACK",
+		"WHITE",
+		"YELLOW",
+		"RED",
+		"GREEN",
+		"BLUE",
+	}
+}
+
 type BurninSubtitleShadowColor string
 
 // Enum values for BurninSubtitleShadowColor
@@ -359,6 +791,17 @@ const (
 	BurninSubtitleShadowColorWhite BurninSubtitleShadowColor = "WHITE"
 )
 
+// Values returns all known values for BurninSubtitleShadowColor. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleShadowColor) Values() []BurninSubtitleShadowColor {
+	return []BurninSubtitleShadowColor{
+		"NONE",
+		"BLACK",
+		"WHITE",
+	}
+}
+
 type BurninSubtitleTeletextSpacing string
 
 // Enum values for BurninSubtitleTeletextSpacing
@@ -366,6 +809,17 @@ const (
 	BurninSubtitleTeletextSpacingFixed_grid   BurninSubtitleTeletextSpacing = "FIXED_GRID"
 	BurninSubtitleTeletextSpacingProportional BurninSubtitleTeletextSpacing = "PROPORTIONAL"
 )
+
+// Values returns all known values for BurninSubtitleTeletextSpacing. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BurninSubtitleTeletextSpacing) Values() []BurninSubtitleTeletextSpacing {
+	return []BurninSubtitleTeletextSpacing{
+		"FIXED_GRID",
+		"PROPORTIONAL",
+	}
+}
 
 type CaptionDestinationType string
 
@@ -385,6 +839,26 @@ const (
 	CaptionDestinationTypeWebvtt               CaptionDestinationType = "WEBVTT"
 )
 
+// Values returns all known values for CaptionDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionDestinationType) Values() []CaptionDestinationType {
+	return []CaptionDestinationType{
+		"BURN_IN",
+		"DVB_SUB",
+		"EMBEDDED",
+		"EMBEDDED_PLUS_SCTE20",
+		"IMSC",
+		"SCTE20_PLUS_EMBEDDED",
+		"SCC",
+		"SRT",
+		"SMI",
+		"TELETEXT",
+		"TTML",
+		"WEBVTT",
+	}
+}
+
 type CaptionSourceType string
 
 // Enum values for CaptionSourceType
@@ -403,6 +877,26 @@ const (
 	CaptionSourceTypeImsc        CaptionSourceType = "IMSC"
 )
 
+// Values returns all known values for CaptionSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionSourceType) Values() []CaptionSourceType {
+	return []CaptionSourceType{
+		"ANCILLARY",
+		"DVB_SUB",
+		"EMBEDDED",
+		"SCTE20",
+		"SCC",
+		"TTML",
+		"STL",
+		"SRT",
+		"SMI",
+		"TELETEXT",
+		"NULL_SOURCE",
+		"IMSC",
+	}
+}
+
 type CmafClientCache string
 
 // Enum values for CmafClientCache
@@ -410,6 +904,16 @@ const (
 	CmafClientCacheDisabled CmafClientCache = "DISABLED"
 	CmafClientCacheEnabled  CmafClientCache = "ENABLED"
 )
+
+// Values returns all known values for CmafClientCache. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafClientCache) Values() []CmafClientCache {
+	return []CmafClientCache{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type CmafCodecSpecification string
 
@@ -419,6 +923,16 @@ const (
 	CmafCodecSpecificationRfc_4281 CmafCodecSpecification = "RFC_4281"
 )
 
+// Values returns all known values for CmafCodecSpecification. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafCodecSpecification) Values() []CmafCodecSpecification {
+	return []CmafCodecSpecification{
+		"RFC_6381",
+		"RFC_4281",
+	}
+}
+
 type CmafEncryptionType string
 
 // Enum values for CmafEncryptionType
@@ -426,6 +940,16 @@ const (
 	CmafEncryptionTypeSample_aes CmafEncryptionType = "SAMPLE_AES"
 	CmafEncryptionTypeAes_ctr    CmafEncryptionType = "AES_CTR"
 )
+
+// Values returns all known values for CmafEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafEncryptionType) Values() []CmafEncryptionType {
+	return []CmafEncryptionType{
+		"SAMPLE_AES",
+		"AES_CTR",
+	}
+}
 
 type CmafInitializationVectorInManifest string
 
@@ -435,6 +959,17 @@ const (
 	CmafInitializationVectorInManifestExclude CmafInitializationVectorInManifest = "EXCLUDE"
 )
 
+// Values returns all known values for CmafInitializationVectorInManifest. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmafInitializationVectorInManifest) Values() []CmafInitializationVectorInManifest {
+	return []CmafInitializationVectorInManifest{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type CmafKeyProviderType string
 
 // Enum values for CmafKeyProviderType
@@ -442,6 +977,16 @@ const (
 	CmafKeyProviderTypeSpeke      CmafKeyProviderType = "SPEKE"
 	CmafKeyProviderTypeStatic_key CmafKeyProviderType = "STATIC_KEY"
 )
+
+// Values returns all known values for CmafKeyProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafKeyProviderType) Values() []CmafKeyProviderType {
+	return []CmafKeyProviderType{
+		"SPEKE",
+		"STATIC_KEY",
+	}
+}
 
 type CmafManifestCompression string
 
@@ -451,6 +996,16 @@ const (
 	CmafManifestCompressionNone CmafManifestCompression = "NONE"
 )
 
+// Values returns all known values for CmafManifestCompression. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafManifestCompression) Values() []CmafManifestCompression {
+	return []CmafManifestCompression{
+		"GZIP",
+		"NONE",
+	}
+}
+
 type CmafManifestDurationFormat string
 
 // Enum values for CmafManifestDurationFormat
@@ -458,6 +1013,16 @@ const (
 	CmafManifestDurationFormatFloating_point CmafManifestDurationFormat = "FLOATING_POINT"
 	CmafManifestDurationFormatInteger        CmafManifestDurationFormat = "INTEGER"
 )
+
+// Values returns all known values for CmafManifestDurationFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafManifestDurationFormat) Values() []CmafManifestDurationFormat {
+	return []CmafManifestDurationFormat{
+		"FLOATING_POINT",
+		"INTEGER",
+	}
+}
 
 type CmafMpdProfile string
 
@@ -467,6 +1032,16 @@ const (
 	CmafMpdProfileOn_demand_profile CmafMpdProfile = "ON_DEMAND_PROFILE"
 )
 
+// Values returns all known values for CmafMpdProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafMpdProfile) Values() []CmafMpdProfile {
+	return []CmafMpdProfile{
+		"MAIN_PROFILE",
+		"ON_DEMAND_PROFILE",
+	}
+}
+
 type CmafSegmentControl string
 
 // Enum values for CmafSegmentControl
@@ -474,6 +1049,16 @@ const (
 	CmafSegmentControlSingle_file     CmafSegmentControl = "SINGLE_FILE"
 	CmafSegmentControlSegmented_files CmafSegmentControl = "SEGMENTED_FILES"
 )
+
+// Values returns all known values for CmafSegmentControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafSegmentControl) Values() []CmafSegmentControl {
+	return []CmafSegmentControl{
+		"SINGLE_FILE",
+		"SEGMENTED_FILES",
+	}
+}
 
 type CmafStreamInfResolution string
 
@@ -483,6 +1068,16 @@ const (
 	CmafStreamInfResolutionExclude CmafStreamInfResolution = "EXCLUDE"
 )
 
+// Values returns all known values for CmafStreamInfResolution. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafStreamInfResolution) Values() []CmafStreamInfResolution {
+	return []CmafStreamInfResolution{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type CmafWriteDASHManifest string
 
 // Enum values for CmafWriteDASHManifest
@@ -490,6 +1085,16 @@ const (
 	CmafWriteDASHManifestDisabled CmafWriteDASHManifest = "DISABLED"
 	CmafWriteDASHManifestEnabled  CmafWriteDASHManifest = "ENABLED"
 )
+
+// Values returns all known values for CmafWriteDASHManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafWriteDASHManifest) Values() []CmafWriteDASHManifest {
+	return []CmafWriteDASHManifest{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type CmafWriteHLSManifest string
 
@@ -499,6 +1104,16 @@ const (
 	CmafWriteHLSManifestEnabled  CmafWriteHLSManifest = "ENABLED"
 )
 
+// Values returns all known values for CmafWriteHLSManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafWriteHLSManifest) Values() []CmafWriteHLSManifest {
+	return []CmafWriteHLSManifest{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type CmafWriteSegmentTimelineInRepresentation string
 
 // Enum values for CmafWriteSegmentTimelineInRepresentation
@@ -506,6 +1121,17 @@ const (
 	CmafWriteSegmentTimelineInRepresentationEnabled  CmafWriteSegmentTimelineInRepresentation = "ENABLED"
 	CmafWriteSegmentTimelineInRepresentationDisabled CmafWriteSegmentTimelineInRepresentation = "DISABLED"
 )
+
+// Values returns all known values for CmafWriteSegmentTimelineInRepresentation.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmafWriteSegmentTimelineInRepresentation) Values() []CmafWriteSegmentTimelineInRepresentation {
+	return []CmafWriteSegmentTimelineInRepresentation{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type CmfcScte35Esam string
 
@@ -515,6 +1141,16 @@ const (
 	CmfcScte35EsamNone   CmfcScte35Esam = "NONE"
 )
 
+// Values returns all known values for CmfcScte35Esam. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcScte35Esam) Values() []CmfcScte35Esam {
+	return []CmfcScte35Esam{
+		"INSERT",
+		"NONE",
+	}
+}
+
 type CmfcScte35Source string
 
 // Enum values for CmfcScte35Source
@@ -523,6 +1159,16 @@ const (
 	CmfcScte35SourceNone        CmfcScte35Source = "NONE"
 )
 
+// Values returns all known values for CmfcScte35Source. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcScte35Source) Values() []CmfcScte35Source {
+	return []CmfcScte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
 type ColorMetadata string
 
 // Enum values for ColorMetadata
@@ -530,6 +1176,16 @@ const (
 	ColorMetadataIgnore ColorMetadata = "IGNORE"
 	ColorMetadataInsert ColorMetadata = "INSERT"
 )
+
+// Values returns all known values for ColorMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColorMetadata) Values() []ColorMetadata {
+	return []ColorMetadata{
+		"IGNORE",
+		"INSERT",
+	}
+}
 
 type ColorSpace string
 
@@ -542,6 +1198,19 @@ const (
 	ColorSpaceHlg_2020 ColorSpace = "HLG_2020"
 )
 
+// Values returns all known values for ColorSpace. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ColorSpace) Values() []ColorSpace {
+	return []ColorSpace{
+		"FOLLOW",
+		"REC_601",
+		"REC_709",
+		"HDR10",
+		"HLG_2020",
+	}
+}
+
 type ColorSpaceConversion string
 
 // Enum values for ColorSpaceConversion
@@ -553,6 +1222,19 @@ const (
 	ColorSpaceConversionForce_hlg_2020 ColorSpaceConversion = "FORCE_HLG_2020"
 )
 
+// Values returns all known values for ColorSpaceConversion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColorSpaceConversion) Values() []ColorSpaceConversion {
+	return []ColorSpaceConversion{
+		"NONE",
+		"FORCE_601",
+		"FORCE_709",
+		"FORCE_HDR10",
+		"FORCE_HLG_2020",
+	}
+}
+
 type ColorSpaceUsage string
 
 // Enum values for ColorSpaceUsage
@@ -561,12 +1243,31 @@ const (
 	ColorSpaceUsageFallback ColorSpaceUsage = "FALLBACK"
 )
 
+// Values returns all known values for ColorSpaceUsage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColorSpaceUsage) Values() []ColorSpaceUsage {
+	return []ColorSpaceUsage{
+		"FORCE",
+		"FALLBACK",
+	}
+}
+
 type Commitment string
 
 // Enum values for Commitment
 const (
 	CommitmentOne_year Commitment = "ONE_YEAR"
 )
+
+// Values returns all known values for Commitment. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Commitment) Values() []Commitment {
+	return []Commitment{
+		"ONE_YEAR",
+	}
+}
 
 type ContainerType string
 
@@ -585,6 +1286,25 @@ const (
 	ContainerTypeRaw  ContainerType = "RAW"
 )
 
+// Values returns all known values for ContainerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerType) Values() []ContainerType {
+	return []ContainerType{
+		"F4V",
+		"ISMV",
+		"M2TS",
+		"M3U8",
+		"CMFC",
+		"MOV",
+		"MP4",
+		"MPD",
+		"MXF",
+		"WEBM",
+		"RAW",
+	}
+}
+
 type DashIsoHbbtvCompliance string
 
 // Enum values for DashIsoHbbtvCompliance
@@ -592,6 +1312,16 @@ const (
 	DashIsoHbbtvComplianceHbbtv_1_5 DashIsoHbbtvCompliance = "HBBTV_1_5"
 	DashIsoHbbtvComplianceNone      DashIsoHbbtvCompliance = "NONE"
 )
+
+// Values returns all known values for DashIsoHbbtvCompliance. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoHbbtvCompliance) Values() []DashIsoHbbtvCompliance {
+	return []DashIsoHbbtvCompliance{
+		"HBBTV_1_5",
+		"NONE",
+	}
+}
 
 type DashIsoMpdProfile string
 
@@ -601,6 +1331,16 @@ const (
 	DashIsoMpdProfileOn_demand_profile DashIsoMpdProfile = "ON_DEMAND_PROFILE"
 )
 
+// Values returns all known values for DashIsoMpdProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoMpdProfile) Values() []DashIsoMpdProfile {
+	return []DashIsoMpdProfile{
+		"MAIN_PROFILE",
+		"ON_DEMAND_PROFILE",
+	}
+}
+
 type DashIsoPlaybackDeviceCompatibility string
 
 // Enum values for DashIsoPlaybackDeviceCompatibility
@@ -608,6 +1348,17 @@ const (
 	DashIsoPlaybackDeviceCompatibilityCenc_v1         DashIsoPlaybackDeviceCompatibility = "CENC_V1"
 	DashIsoPlaybackDeviceCompatibilityUnencrypted_sei DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
 )
+
+// Values returns all known values for DashIsoPlaybackDeviceCompatibility. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoPlaybackDeviceCompatibility) Values() []DashIsoPlaybackDeviceCompatibility {
+	return []DashIsoPlaybackDeviceCompatibility{
+		"CENC_V1",
+		"UNENCRYPTED_SEI",
+	}
+}
 
 type DashIsoSegmentControl string
 
@@ -617,6 +1368,16 @@ const (
 	DashIsoSegmentControlSegmented_files DashIsoSegmentControl = "SEGMENTED_FILES"
 )
 
+// Values returns all known values for DashIsoSegmentControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoSegmentControl) Values() []DashIsoSegmentControl {
+	return []DashIsoSegmentControl{
+		"SINGLE_FILE",
+		"SEGMENTED_FILES",
+	}
+}
+
 type DashIsoWriteSegmentTimelineInRepresentation string
 
 // Enum values for DashIsoWriteSegmentTimelineInRepresentation
@@ -624,6 +1385,17 @@ const (
 	DashIsoWriteSegmentTimelineInRepresentationEnabled  DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"
 	DashIsoWriteSegmentTimelineInRepresentationDisabled DashIsoWriteSegmentTimelineInRepresentation = "DISABLED"
 )
+
+// Values returns all known values for DashIsoWriteSegmentTimelineInRepresentation.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoWriteSegmentTimelineInRepresentation) Values() []DashIsoWriteSegmentTimelineInRepresentation {
+	return []DashIsoWriteSegmentTimelineInRepresentation{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type DecryptionMode string
 
@@ -633,6 +1405,17 @@ const (
 	DecryptionModeAes_cbc DecryptionMode = "AES_CBC"
 	DecryptionModeAes_gcm DecryptionMode = "AES_GCM"
 )
+
+// Values returns all known values for DecryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DecryptionMode) Values() []DecryptionMode {
+	return []DecryptionMode{
+		"AES_CTR",
+		"AES_CBC",
+		"AES_GCM",
+	}
+}
 
 type DeinterlaceAlgorithm string
 
@@ -644,6 +1427,18 @@ const (
 	DeinterlaceAlgorithmBlend_ticker       DeinterlaceAlgorithm = "BLEND_TICKER"
 )
 
+// Values returns all known values for DeinterlaceAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeinterlaceAlgorithm) Values() []DeinterlaceAlgorithm {
+	return []DeinterlaceAlgorithm{
+		"INTERPOLATE",
+		"INTERPOLATE_TICKER",
+		"BLEND",
+		"BLEND_TICKER",
+	}
+}
+
 type DeinterlacerControl string
 
 // Enum values for DeinterlacerControl
@@ -651,6 +1446,16 @@ const (
 	DeinterlacerControlForce_all_frames DeinterlacerControl = "FORCE_ALL_FRAMES"
 	DeinterlacerControlNormal           DeinterlacerControl = "NORMAL"
 )
+
+// Values returns all known values for DeinterlacerControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeinterlacerControl) Values() []DeinterlacerControl {
+	return []DeinterlacerControl{
+		"FORCE_ALL_FRAMES",
+		"NORMAL",
+	}
+}
 
 type DeinterlacerMode string
 
@@ -661,6 +1466,17 @@ const (
 	DeinterlacerModeAdaptive         DeinterlacerMode = "ADAPTIVE"
 )
 
+// Values returns all known values for DeinterlacerMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeinterlacerMode) Values() []DeinterlacerMode {
+	return []DeinterlacerMode{
+		"DEINTERLACE",
+		"INVERSE_TELECINE",
+		"ADAPTIVE",
+	}
+}
+
 type DescribeEndpointsMode string
 
 // Enum values for DescribeEndpointsMode
@@ -668,6 +1484,16 @@ const (
 	DescribeEndpointsModeDefault  DescribeEndpointsMode = "DEFAULT"
 	DescribeEndpointsModeGet_only DescribeEndpointsMode = "GET_ONLY"
 )
+
+// Values returns all known values for DescribeEndpointsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DescribeEndpointsMode) Values() []DescribeEndpointsMode {
+	return []DescribeEndpointsMode{
+		"DEFAULT",
+		"GET_ONLY",
+	}
+}
 
 type DolbyVisionLevel6Mode string
 
@@ -678,12 +1504,32 @@ const (
 	DolbyVisionLevel6ModeSpecify     DolbyVisionLevel6Mode = "SPECIFY"
 )
 
+// Values returns all known values for DolbyVisionLevel6Mode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionLevel6Mode) Values() []DolbyVisionLevel6Mode {
+	return []DolbyVisionLevel6Mode{
+		"PASSTHROUGH",
+		"RECALCULATE",
+		"SPECIFY",
+	}
+}
+
 type DolbyVisionProfile string
 
 // Enum values for DolbyVisionProfile
 const (
 	DolbyVisionProfileProfile_5 DolbyVisionProfile = "PROFILE_5"
 )
+
+// Values returns all known values for DolbyVisionProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionProfile) Values() []DolbyVisionProfile {
+	return []DolbyVisionProfile{
+		"PROFILE_5",
+	}
+}
 
 type DropFrameTimecode string
 
@@ -693,6 +1539,16 @@ const (
 	DropFrameTimecodeEnabled  DropFrameTimecode = "ENABLED"
 )
 
+// Values returns all known values for DropFrameTimecode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DropFrameTimecode) Values() []DropFrameTimecode {
+	return []DropFrameTimecode{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type DvbSubtitleAlignment string
 
 // Enum values for DvbSubtitleAlignment
@@ -700,6 +1556,16 @@ const (
 	DvbSubtitleAlignmentCentered DvbSubtitleAlignment = "CENTERED"
 	DvbSubtitleAlignmentLeft     DvbSubtitleAlignment = "LEFT"
 )
+
+// Values returns all known values for DvbSubtitleAlignment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleAlignment) Values() []DvbSubtitleAlignment {
+	return []DvbSubtitleAlignment{
+		"CENTERED",
+		"LEFT",
+	}
+}
 
 type DvbSubtitleBackgroundColor string
 
@@ -709,6 +1575,17 @@ const (
 	DvbSubtitleBackgroundColorBlack DvbSubtitleBackgroundColor = "BLACK"
 	DvbSubtitleBackgroundColorWhite DvbSubtitleBackgroundColor = "WHITE"
 )
+
+// Values returns all known values for DvbSubtitleBackgroundColor. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleBackgroundColor) Values() []DvbSubtitleBackgroundColor {
+	return []DvbSubtitleBackgroundColor{
+		"NONE",
+		"BLACK",
+		"WHITE",
+	}
+}
 
 type DvbSubtitleFontColor string
 
@@ -722,6 +1599,20 @@ const (
 	DvbSubtitleFontColorBlue   DvbSubtitleFontColor = "BLUE"
 )
 
+// Values returns all known values for DvbSubtitleFontColor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleFontColor) Values() []DvbSubtitleFontColor {
+	return []DvbSubtitleFontColor{
+		"WHITE",
+		"BLACK",
+		"YELLOW",
+		"RED",
+		"GREEN",
+		"BLUE",
+	}
+}
+
 type DvbSubtitleOutlineColor string
 
 // Enum values for DvbSubtitleOutlineColor
@@ -734,6 +1625,20 @@ const (
 	DvbSubtitleOutlineColorBlue   DvbSubtitleOutlineColor = "BLUE"
 )
 
+// Values returns all known values for DvbSubtitleOutlineColor. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleOutlineColor) Values() []DvbSubtitleOutlineColor {
+	return []DvbSubtitleOutlineColor{
+		"BLACK",
+		"WHITE",
+		"YELLOW",
+		"RED",
+		"GREEN",
+		"BLUE",
+	}
+}
+
 type DvbSubtitleShadowColor string
 
 // Enum values for DvbSubtitleShadowColor
@@ -743,6 +1648,17 @@ const (
 	DvbSubtitleShadowColorWhite DvbSubtitleShadowColor = "WHITE"
 )
 
+// Values returns all known values for DvbSubtitleShadowColor. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleShadowColor) Values() []DvbSubtitleShadowColor {
+	return []DvbSubtitleShadowColor{
+		"NONE",
+		"BLACK",
+		"WHITE",
+	}
+}
+
 type DvbSubtitleTeletextSpacing string
 
 // Enum values for DvbSubtitleTeletextSpacing
@@ -750,6 +1666,16 @@ const (
 	DvbSubtitleTeletextSpacingFixed_grid   DvbSubtitleTeletextSpacing = "FIXED_GRID"
 	DvbSubtitleTeletextSpacingProportional DvbSubtitleTeletextSpacing = "PROPORTIONAL"
 )
+
+// Values returns all known values for DvbSubtitleTeletextSpacing. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleTeletextSpacing) Values() []DvbSubtitleTeletextSpacing {
+	return []DvbSubtitleTeletextSpacing{
+		"FIXED_GRID",
+		"PROPORTIONAL",
+	}
+}
 
 type DvbSubtitlingType string
 
@@ -759,12 +1685,31 @@ const (
 	DvbSubtitlingTypeStandard         DvbSubtitlingType = "STANDARD"
 )
 
+// Values returns all known values for DvbSubtitlingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitlingType) Values() []DvbSubtitlingType {
+	return []DvbSubtitlingType{
+		"HEARING_IMPAIRED",
+		"STANDARD",
+	}
+}
+
 type Eac3AtmosBitstreamMode string
 
 // Enum values for Eac3AtmosBitstreamMode
 const (
 	Eac3AtmosBitstreamModeComplete_main Eac3AtmosBitstreamMode = "COMPLETE_MAIN"
 )
+
+// Values returns all known values for Eac3AtmosBitstreamMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosBitstreamMode) Values() []Eac3AtmosBitstreamMode {
+	return []Eac3AtmosBitstreamMode{
+		"COMPLETE_MAIN",
+	}
+}
 
 type Eac3AtmosCodingMode string
 
@@ -773,6 +1718,15 @@ const (
 	Eac3AtmosCodingModeCoding_mode_9_1_6 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
 )
 
+// Values returns all known values for Eac3AtmosCodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosCodingMode) Values() []Eac3AtmosCodingMode {
+	return []Eac3AtmosCodingMode{
+		"CODING_MODE_9_1_6",
+	}
+}
+
 type Eac3AtmosDialogueIntelligence string
 
 // Enum values for Eac3AtmosDialogueIntelligence
@@ -780,6 +1734,17 @@ const (
 	Eac3AtmosDialogueIntelligenceEnabled  Eac3AtmosDialogueIntelligence = "ENABLED"
 	Eac3AtmosDialogueIntelligenceDisabled Eac3AtmosDialogueIntelligence = "DISABLED"
 )
+
+// Values returns all known values for Eac3AtmosDialogueIntelligence. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Eac3AtmosDialogueIntelligence) Values() []Eac3AtmosDialogueIntelligence {
+	return []Eac3AtmosDialogueIntelligence{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Eac3AtmosDynamicRangeCompressionLine string
 
@@ -793,6 +1758,21 @@ const (
 	Eac3AtmosDynamicRangeCompressionLineSpeech         Eac3AtmosDynamicRangeCompressionLine = "SPEECH"
 )
 
+// Values returns all known values for Eac3AtmosDynamicRangeCompressionLine. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Eac3AtmosDynamicRangeCompressionLine) Values() []Eac3AtmosDynamicRangeCompressionLine {
+	return []Eac3AtmosDynamicRangeCompressionLine{
+		"NONE",
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+	}
+}
+
 type Eac3AtmosDynamicRangeCompressionRf string
 
 // Enum values for Eac3AtmosDynamicRangeCompressionRf
@@ -805,6 +1785,21 @@ const (
 	Eac3AtmosDynamicRangeCompressionRfSpeech         Eac3AtmosDynamicRangeCompressionRf = "SPEECH"
 )
 
+// Values returns all known values for Eac3AtmosDynamicRangeCompressionRf. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Eac3AtmosDynamicRangeCompressionRf) Values() []Eac3AtmosDynamicRangeCompressionRf {
+	return []Eac3AtmosDynamicRangeCompressionRf{
+		"NONE",
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+	}
+}
+
 type Eac3AtmosMeteringMode string
 
 // Enum values for Eac3AtmosMeteringMode
@@ -816,6 +1811,19 @@ const (
 	Eac3AtmosMeteringModeItu_bs_1770_4 Eac3AtmosMeteringMode = "ITU_BS_1770_4"
 )
 
+// Values returns all known values for Eac3AtmosMeteringMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosMeteringMode) Values() []Eac3AtmosMeteringMode {
+	return []Eac3AtmosMeteringMode{
+		"LEQ_A",
+		"ITU_BS_1770_1",
+		"ITU_BS_1770_2",
+		"ITU_BS_1770_3",
+		"ITU_BS_1770_4",
+	}
+}
+
 type Eac3AtmosStereoDownmix string
 
 // Enum values for Eac3AtmosStereoDownmix
@@ -826,6 +1834,18 @@ const (
 	Eac3AtmosStereoDownmixDpl2          Eac3AtmosStereoDownmix = "DPL2"
 )
 
+// Values returns all known values for Eac3AtmosStereoDownmix. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosStereoDownmix) Values() []Eac3AtmosStereoDownmix {
+	return []Eac3AtmosStereoDownmix{
+		"NOT_INDICATED",
+		"STEREO",
+		"SURROUND",
+		"DPL2",
+	}
+}
+
 type Eac3AtmosSurroundExMode string
 
 // Enum values for Eac3AtmosSurroundExMode
@@ -835,6 +1855,17 @@ const (
 	Eac3AtmosSurroundExModeDisabled      Eac3AtmosSurroundExMode = "DISABLED"
 )
 
+// Values returns all known values for Eac3AtmosSurroundExMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosSurroundExMode) Values() []Eac3AtmosSurroundExMode {
+	return []Eac3AtmosSurroundExMode{
+		"NOT_INDICATED",
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Eac3AttenuationControl string
 
 // Enum values for Eac3AttenuationControl
@@ -842,6 +1873,16 @@ const (
 	Eac3AttenuationControlAttenuate_3_db Eac3AttenuationControl = "ATTENUATE_3_DB"
 	Eac3AttenuationControlNone           Eac3AttenuationControl = "NONE"
 )
+
+// Values returns all known values for Eac3AttenuationControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AttenuationControl) Values() []Eac3AttenuationControl {
+	return []Eac3AttenuationControl{
+		"ATTENUATE_3_DB",
+		"NONE",
+	}
+}
 
 type Eac3BitstreamMode string
 
@@ -854,6 +1895,19 @@ const (
 	Eac3BitstreamModeVisually_impaired Eac3BitstreamMode = "VISUALLY_IMPAIRED"
 )
 
+// Values returns all known values for Eac3BitstreamMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3BitstreamMode) Values() []Eac3BitstreamMode {
+	return []Eac3BitstreamMode{
+		"COMPLETE_MAIN",
+		"COMMENTARY",
+		"EMERGENCY",
+		"HEARING_IMPAIRED",
+		"VISUALLY_IMPAIRED",
+	}
+}
+
 type Eac3CodingMode string
 
 // Enum values for Eac3CodingMode
@@ -863,6 +1917,17 @@ const (
 	Eac3CodingModeCoding_mode_3_2 Eac3CodingMode = "CODING_MODE_3_2"
 )
 
+// Values returns all known values for Eac3CodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3CodingMode) Values() []Eac3CodingMode {
+	return []Eac3CodingMode{
+		"CODING_MODE_1_0",
+		"CODING_MODE_2_0",
+		"CODING_MODE_3_2",
+	}
+}
+
 type Eac3DcFilter string
 
 // Enum values for Eac3DcFilter
@@ -870,6 +1935,16 @@ const (
 	Eac3DcFilterEnabled  Eac3DcFilter = "ENABLED"
 	Eac3DcFilterDisabled Eac3DcFilter = "DISABLED"
 )
+
+// Values returns all known values for Eac3DcFilter. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Eac3DcFilter) Values() []Eac3DcFilter {
+	return []Eac3DcFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Eac3DynamicRangeCompressionLine string
 
@@ -883,6 +1958,21 @@ const (
 	Eac3DynamicRangeCompressionLineSpeech         Eac3DynamicRangeCompressionLine = "SPEECH"
 )
 
+// Values returns all known values for Eac3DynamicRangeCompressionLine. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Eac3DynamicRangeCompressionLine) Values() []Eac3DynamicRangeCompressionLine {
+	return []Eac3DynamicRangeCompressionLine{
+		"NONE",
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+	}
+}
+
 type Eac3DynamicRangeCompressionRf string
 
 // Enum values for Eac3DynamicRangeCompressionRf
@@ -895,6 +1985,21 @@ const (
 	Eac3DynamicRangeCompressionRfSpeech         Eac3DynamicRangeCompressionRf = "SPEECH"
 )
 
+// Values returns all known values for Eac3DynamicRangeCompressionRf. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Eac3DynamicRangeCompressionRf) Values() []Eac3DynamicRangeCompressionRf {
+	return []Eac3DynamicRangeCompressionRf{
+		"NONE",
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+	}
+}
+
 type Eac3LfeControl string
 
 // Enum values for Eac3LfeControl
@@ -902,6 +2007,16 @@ const (
 	Eac3LfeControlLfe    Eac3LfeControl = "LFE"
 	Eac3LfeControlNo_lfe Eac3LfeControl = "NO_LFE"
 )
+
+// Values returns all known values for Eac3LfeControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3LfeControl) Values() []Eac3LfeControl {
+	return []Eac3LfeControl{
+		"LFE",
+		"NO_LFE",
+	}
+}
 
 type Eac3LfeFilter string
 
@@ -911,6 +2026,16 @@ const (
 	Eac3LfeFilterDisabled Eac3LfeFilter = "DISABLED"
 )
 
+// Values returns all known values for Eac3LfeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3LfeFilter) Values() []Eac3LfeFilter {
+	return []Eac3LfeFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Eac3MetadataControl string
 
 // Enum values for Eac3MetadataControl
@@ -918,6 +2043,16 @@ const (
 	Eac3MetadataControlFollow_input   Eac3MetadataControl = "FOLLOW_INPUT"
 	Eac3MetadataControlUse_configured Eac3MetadataControl = "USE_CONFIGURED"
 )
+
+// Values returns all known values for Eac3MetadataControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3MetadataControl) Values() []Eac3MetadataControl {
+	return []Eac3MetadataControl{
+		"FOLLOW_INPUT",
+		"USE_CONFIGURED",
+	}
+}
 
 type Eac3PassthroughControl string
 
@@ -927,6 +2062,16 @@ const (
 	Eac3PassthroughControlNo_passthrough Eac3PassthroughControl = "NO_PASSTHROUGH"
 )
 
+// Values returns all known values for Eac3PassthroughControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3PassthroughControl) Values() []Eac3PassthroughControl {
+	return []Eac3PassthroughControl{
+		"WHEN_POSSIBLE",
+		"NO_PASSTHROUGH",
+	}
+}
+
 type Eac3PhaseControl string
 
 // Enum values for Eac3PhaseControl
@@ -934,6 +2079,16 @@ const (
 	Eac3PhaseControlShift_90_degrees Eac3PhaseControl = "SHIFT_90_DEGREES"
 	Eac3PhaseControlNo_shift         Eac3PhaseControl = "NO_SHIFT"
 )
+
+// Values returns all known values for Eac3PhaseControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3PhaseControl) Values() []Eac3PhaseControl {
+	return []Eac3PhaseControl{
+		"SHIFT_90_DEGREES",
+		"NO_SHIFT",
+	}
+}
 
 type Eac3StereoDownmix string
 
@@ -945,6 +2100,18 @@ const (
 	Eac3StereoDownmixDpl2          Eac3StereoDownmix = "DPL2"
 )
 
+// Values returns all known values for Eac3StereoDownmix. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3StereoDownmix) Values() []Eac3StereoDownmix {
+	return []Eac3StereoDownmix{
+		"NOT_INDICATED",
+		"LO_RO",
+		"LT_RT",
+		"DPL2",
+	}
+}
+
 type Eac3SurroundExMode string
 
 // Enum values for Eac3SurroundExMode
@@ -953,6 +2120,17 @@ const (
 	Eac3SurroundExModeEnabled       Eac3SurroundExMode = "ENABLED"
 	Eac3SurroundExModeDisabled      Eac3SurroundExMode = "DISABLED"
 )
+
+// Values returns all known values for Eac3SurroundExMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3SurroundExMode) Values() []Eac3SurroundExMode {
+	return []Eac3SurroundExMode{
+		"NOT_INDICATED",
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Eac3SurroundMode string
 
@@ -963,6 +2141,17 @@ const (
 	Eac3SurroundModeDisabled      Eac3SurroundMode = "DISABLED"
 )
 
+// Values returns all known values for Eac3SurroundMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3SurroundMode) Values() []Eac3SurroundMode {
+	return []Eac3SurroundMode{
+		"NOT_INDICATED",
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type EmbeddedConvert608To708 string
 
 // Enum values for EmbeddedConvert608To708
@@ -970,6 +2159,16 @@ const (
 	EmbeddedConvert608To708Upconvert EmbeddedConvert608To708 = "UPCONVERT"
 	EmbeddedConvert608To708Disabled  EmbeddedConvert608To708 = "DISABLED"
 )
+
+// Values returns all known values for EmbeddedConvert608To708. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedConvert608To708) Values() []EmbeddedConvert608To708 {
+	return []EmbeddedConvert608To708{
+		"UPCONVERT",
+		"DISABLED",
+	}
+}
 
 type EmbeddedTerminateCaptions string
 
@@ -979,6 +2178,16 @@ const (
 	EmbeddedTerminateCaptionsDisabled     EmbeddedTerminateCaptions = "DISABLED"
 )
 
+// Values returns all known values for EmbeddedTerminateCaptions. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedTerminateCaptions) Values() []EmbeddedTerminateCaptions {
+	return []EmbeddedTerminateCaptions{
+		"END_OF_INPUT",
+		"DISABLED",
+	}
+}
+
 type F4vMoovPlacement string
 
 // Enum values for F4vMoovPlacement
@@ -986,6 +2195,16 @@ const (
 	F4vMoovPlacementProgressive_download F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"
 	F4vMoovPlacementNormal               F4vMoovPlacement = "NORMAL"
 )
+
+// Values returns all known values for F4vMoovPlacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (F4vMoovPlacement) Values() []F4vMoovPlacement {
+	return []F4vMoovPlacement{
+		"PROGRESSIVE_DOWNLOAD",
+		"NORMAL",
+	}
+}
 
 type FileSourceConvert608To708 string
 
@@ -995,6 +2214,16 @@ const (
 	FileSourceConvert608To708Disabled  FileSourceConvert608To708 = "DISABLED"
 )
 
+// Values returns all known values for FileSourceConvert608To708. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileSourceConvert608To708) Values() []FileSourceConvert608To708 {
+	return []FileSourceConvert608To708{
+		"UPCONVERT",
+		"DISABLED",
+	}
+}
+
 type FontScript string
 
 // Enum values for FontScript
@@ -1003,6 +2232,17 @@ const (
 	FontScriptHans      FontScript = "HANS"
 	FontScriptHant      FontScript = "HANT"
 )
+
+// Values returns all known values for FontScript. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FontScript) Values() []FontScript {
+	return []FontScript{
+		"AUTOMATIC",
+		"HANS",
+		"HANT",
+	}
+}
 
 type H264AdaptiveQuantization string
 
@@ -1015,6 +2255,20 @@ const (
 	H264AdaptiveQuantizationHigher H264AdaptiveQuantization = "HIGHER"
 	H264AdaptiveQuantizationMax    H264AdaptiveQuantization = "MAX"
 )
+
+// Values returns all known values for H264AdaptiveQuantization. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264AdaptiveQuantization) Values() []H264AdaptiveQuantization {
+	return []H264AdaptiveQuantization{
+		"OFF",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"HIGHER",
+		"MAX",
+	}
+}
 
 type H264CodecLevel string
 
@@ -1039,6 +2293,31 @@ const (
 	H264CodecLevelLevel_5_2 H264CodecLevel = "LEVEL_5_2"
 )
 
+// Values returns all known values for H264CodecLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264CodecLevel) Values() []H264CodecLevel {
+	return []H264CodecLevel{
+		"AUTO",
+		"LEVEL_1",
+		"LEVEL_1_1",
+		"LEVEL_1_2",
+		"LEVEL_1_3",
+		"LEVEL_2",
+		"LEVEL_2_1",
+		"LEVEL_2_2",
+		"LEVEL_3",
+		"LEVEL_3_1",
+		"LEVEL_3_2",
+		"LEVEL_4",
+		"LEVEL_4_1",
+		"LEVEL_4_2",
+		"LEVEL_5",
+		"LEVEL_5_1",
+		"LEVEL_5_2",
+	}
+}
+
 type H264CodecProfile string
 
 // Enum values for H264CodecProfile
@@ -1051,6 +2330,20 @@ const (
 	H264CodecProfileMain           H264CodecProfile = "MAIN"
 )
 
+// Values returns all known values for H264CodecProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264CodecProfile) Values() []H264CodecProfile {
+	return []H264CodecProfile{
+		"BASELINE",
+		"HIGH",
+		"HIGH_10BIT",
+		"HIGH_422",
+		"HIGH_422_10BIT",
+		"MAIN",
+	}
+}
+
 type H264DynamicSubGop string
 
 // Enum values for H264DynamicSubGop
@@ -1058,6 +2351,16 @@ const (
 	H264DynamicSubGopAdaptive H264DynamicSubGop = "ADAPTIVE"
 	H264DynamicSubGopStatic   H264DynamicSubGop = "STATIC"
 )
+
+// Values returns all known values for H264DynamicSubGop. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264DynamicSubGop) Values() []H264DynamicSubGop {
+	return []H264DynamicSubGop{
+		"ADAPTIVE",
+		"STATIC",
+	}
+}
 
 type H264EntropyEncoding string
 
@@ -1067,6 +2370,16 @@ const (
 	H264EntropyEncodingCavlc H264EntropyEncoding = "CAVLC"
 )
 
+// Values returns all known values for H264EntropyEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264EntropyEncoding) Values() []H264EntropyEncoding {
+	return []H264EntropyEncoding{
+		"CABAC",
+		"CAVLC",
+	}
+}
+
 type H264FieldEncoding string
 
 // Enum values for H264FieldEncoding
@@ -1074,6 +2387,16 @@ const (
 	H264FieldEncodingPaff        H264FieldEncoding = "PAFF"
 	H264FieldEncodingForce_field H264FieldEncoding = "FORCE_FIELD"
 )
+
+// Values returns all known values for H264FieldEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264FieldEncoding) Values() []H264FieldEncoding {
+	return []H264FieldEncoding{
+		"PAFF",
+		"FORCE_FIELD",
+	}
+}
 
 type H264FlickerAdaptiveQuantization string
 
@@ -1083,6 +2406,17 @@ const (
 	H264FlickerAdaptiveQuantizationEnabled  H264FlickerAdaptiveQuantization = "ENABLED"
 )
 
+// Values returns all known values for H264FlickerAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H264FlickerAdaptiveQuantization) Values() []H264FlickerAdaptiveQuantization {
+	return []H264FlickerAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H264FramerateControl string
 
 // Enum values for H264FramerateControl
@@ -1090,6 +2424,16 @@ const (
 	H264FramerateControlInitialize_from_source H264FramerateControl = "INITIALIZE_FROM_SOURCE"
 	H264FramerateControlSpecified              H264FramerateControl = "SPECIFIED"
 )
+
+// Values returns all known values for H264FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264FramerateControl) Values() []H264FramerateControl {
+	return []H264FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type H264FramerateConversionAlgorithm string
 
@@ -1099,6 +2443,17 @@ const (
 	H264FramerateConversionAlgorithmInterpolate    H264FramerateConversionAlgorithm = "INTERPOLATE"
 )
 
+// Values returns all known values for H264FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H264FramerateConversionAlgorithm) Values() []H264FramerateConversionAlgorithm {
+	return []H264FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
+
 type H264GopBReference string
 
 // Enum values for H264GopBReference
@@ -1107,6 +2462,16 @@ const (
 	H264GopBReferenceEnabled  H264GopBReference = "ENABLED"
 )
 
+// Values returns all known values for H264GopBReference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264GopBReference) Values() []H264GopBReference {
+	return []H264GopBReference{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H264GopSizeUnits string
 
 // Enum values for H264GopSizeUnits
@@ -1114,6 +2479,16 @@ const (
 	H264GopSizeUnitsFrames  H264GopSizeUnits = "FRAMES"
 	H264GopSizeUnitsSeconds H264GopSizeUnits = "SECONDS"
 )
+
+// Values returns all known values for H264GopSizeUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264GopSizeUnits) Values() []H264GopSizeUnits {
+	return []H264GopSizeUnits{
+		"FRAMES",
+		"SECONDS",
+	}
+}
 
 type H264InterlaceMode string
 
@@ -1126,6 +2501,19 @@ const (
 	H264InterlaceModeFollow_bottom_field H264InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
+// Values returns all known values for H264InterlaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264InterlaceMode) Values() []H264InterlaceMode {
+	return []H264InterlaceMode{
+		"PROGRESSIVE",
+		"TOP_FIELD",
+		"BOTTOM_FIELD",
+		"FOLLOW_TOP_FIELD",
+		"FOLLOW_BOTTOM_FIELD",
+	}
+}
+
 type H264ParControl string
 
 // Enum values for H264ParControl
@@ -1133,6 +2521,16 @@ const (
 	H264ParControlInitialize_from_source H264ParControl = "INITIALIZE_FROM_SOURCE"
 	H264ParControlSpecified              H264ParControl = "SPECIFIED"
 )
+
+// Values returns all known values for H264ParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264ParControl) Values() []H264ParControl {
+	return []H264ParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type H264QualityTuningLevel string
 
@@ -1143,6 +2541,17 @@ const (
 	H264QualityTuningLevelMulti_pass_hq  H264QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
+// Values returns all known values for H264QualityTuningLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264QualityTuningLevel) Values() []H264QualityTuningLevel {
+	return []H264QualityTuningLevel{
+		"SINGLE_PASS",
+		"SINGLE_PASS_HQ",
+		"MULTI_PASS_HQ",
+	}
+}
+
 type H264RateControlMode string
 
 // Enum values for H264RateControlMode
@@ -1152,6 +2561,17 @@ const (
 	H264RateControlModeQvbr H264RateControlMode = "QVBR"
 )
 
+// Values returns all known values for H264RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264RateControlMode) Values() []H264RateControlMode {
+	return []H264RateControlMode{
+		"VBR",
+		"CBR",
+		"QVBR",
+	}
+}
+
 type H264RepeatPps string
 
 // Enum values for H264RepeatPps
@@ -1159,6 +2579,16 @@ const (
 	H264RepeatPpsDisabled H264RepeatPps = "DISABLED"
 	H264RepeatPpsEnabled  H264RepeatPps = "ENABLED"
 )
+
+// Values returns all known values for H264RepeatPps. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264RepeatPps) Values() []H264RepeatPps {
+	return []H264RepeatPps{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H264SceneChangeDetect string
 
@@ -1169,6 +2599,17 @@ const (
 	H264SceneChangeDetectTransition_detection H264SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
+// Values returns all known values for H264SceneChangeDetect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H264SceneChangeDetect) Values() []H264SceneChangeDetect {
+	return []H264SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+		"TRANSITION_DETECTION",
+	}
+}
+
 type H264SlowPal string
 
 // Enum values for H264SlowPal
@@ -1176,6 +2617,16 @@ const (
 	H264SlowPalDisabled H264SlowPal = "DISABLED"
 	H264SlowPalEnabled  H264SlowPal = "ENABLED"
 )
+
+// Values returns all known values for H264SlowPal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (H264SlowPal) Values() []H264SlowPal {
+	return []H264SlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H264SpatialAdaptiveQuantization string
 
@@ -1185,6 +2636,17 @@ const (
 	H264SpatialAdaptiveQuantizationEnabled  H264SpatialAdaptiveQuantization = "ENABLED"
 )
 
+// Values returns all known values for H264SpatialAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H264SpatialAdaptiveQuantization) Values() []H264SpatialAdaptiveQuantization {
+	return []H264SpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H264Syntax string
 
 // Enum values for H264Syntax
@@ -1192,6 +2654,16 @@ const (
 	H264SyntaxDefault H264Syntax = "DEFAULT"
 	H264SyntaxRp2027  H264Syntax = "RP2027"
 )
+
+// Values returns all known values for H264Syntax. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (H264Syntax) Values() []H264Syntax {
+	return []H264Syntax{
+		"DEFAULT",
+		"RP2027",
+	}
+}
 
 type H264Telecine string
 
@@ -1202,6 +2674,17 @@ const (
 	H264TelecineHard H264Telecine = "HARD"
 )
 
+// Values returns all known values for H264Telecine. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (H264Telecine) Values() []H264Telecine {
+	return []H264Telecine{
+		"NONE",
+		"SOFT",
+		"HARD",
+	}
+}
+
 type H264TemporalAdaptiveQuantization string
 
 // Enum values for H264TemporalAdaptiveQuantization
@@ -1210,6 +2693,17 @@ const (
 	H264TemporalAdaptiveQuantizationEnabled  H264TemporalAdaptiveQuantization = "ENABLED"
 )
 
+// Values returns all known values for H264TemporalAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H264TemporalAdaptiveQuantization) Values() []H264TemporalAdaptiveQuantization {
+	return []H264TemporalAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H264UnregisteredSeiTimecode string
 
 // Enum values for H264UnregisteredSeiTimecode
@@ -1217,6 +2711,16 @@ const (
 	H264UnregisteredSeiTimecodeDisabled H264UnregisteredSeiTimecode = "DISABLED"
 	H264UnregisteredSeiTimecodeEnabled  H264UnregisteredSeiTimecode = "ENABLED"
 )
+
+// Values returns all known values for H264UnregisteredSeiTimecode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264UnregisteredSeiTimecode) Values() []H264UnregisteredSeiTimecode {
+	return []H264UnregisteredSeiTimecode{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H265AdaptiveQuantization string
 
@@ -1230,6 +2734,20 @@ const (
 	H265AdaptiveQuantizationMax    H265AdaptiveQuantization = "MAX"
 )
 
+// Values returns all known values for H265AdaptiveQuantization. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265AdaptiveQuantization) Values() []H265AdaptiveQuantization {
+	return []H265AdaptiveQuantization{
+		"OFF",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"HIGHER",
+		"MAX",
+	}
+}
+
 type H265AlternateTransferFunctionSei string
 
 // Enum values for H265AlternateTransferFunctionSei
@@ -1237,6 +2755,17 @@ const (
 	H265AlternateTransferFunctionSeiDisabled H265AlternateTransferFunctionSei = "DISABLED"
 	H265AlternateTransferFunctionSeiEnabled  H265AlternateTransferFunctionSei = "ENABLED"
 )
+
+// Values returns all known values for H265AlternateTransferFunctionSei. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265AlternateTransferFunctionSei) Values() []H265AlternateTransferFunctionSei {
+	return []H265AlternateTransferFunctionSei{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H265CodecLevel string
 
@@ -1258,6 +2787,28 @@ const (
 	H265CodecLevelLevel_6_2 H265CodecLevel = "LEVEL_6_2"
 )
 
+// Values returns all known values for H265CodecLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265CodecLevel) Values() []H265CodecLevel {
+	return []H265CodecLevel{
+		"AUTO",
+		"LEVEL_1",
+		"LEVEL_2",
+		"LEVEL_2_1",
+		"LEVEL_3",
+		"LEVEL_3_1",
+		"LEVEL_4",
+		"LEVEL_4_1",
+		"LEVEL_5",
+		"LEVEL_5_1",
+		"LEVEL_5_2",
+		"LEVEL_6",
+		"LEVEL_6_1",
+		"LEVEL_6_2",
+	}
+}
+
 type H265CodecProfile string
 
 // Enum values for H265CodecProfile
@@ -1272,6 +2823,22 @@ const (
 	H265CodecProfileMain_422_10bit_high H265CodecProfile = "MAIN_422_10BIT_HIGH"
 )
 
+// Values returns all known values for H265CodecProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265CodecProfile) Values() []H265CodecProfile {
+	return []H265CodecProfile{
+		"MAIN_MAIN",
+		"MAIN_HIGH",
+		"MAIN10_MAIN",
+		"MAIN10_HIGH",
+		"MAIN_422_8BIT_MAIN",
+		"MAIN_422_8BIT_HIGH",
+		"MAIN_422_10BIT_MAIN",
+		"MAIN_422_10BIT_HIGH",
+	}
+}
+
 type H265DynamicSubGop string
 
 // Enum values for H265DynamicSubGop
@@ -1279,6 +2846,16 @@ const (
 	H265DynamicSubGopAdaptive H265DynamicSubGop = "ADAPTIVE"
 	H265DynamicSubGopStatic   H265DynamicSubGop = "STATIC"
 )
+
+// Values returns all known values for H265DynamicSubGop. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265DynamicSubGop) Values() []H265DynamicSubGop {
+	return []H265DynamicSubGop{
+		"ADAPTIVE",
+		"STATIC",
+	}
+}
 
 type H265FlickerAdaptiveQuantization string
 
@@ -1288,6 +2865,17 @@ const (
 	H265FlickerAdaptiveQuantizationEnabled  H265FlickerAdaptiveQuantization = "ENABLED"
 )
 
+// Values returns all known values for H265FlickerAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265FlickerAdaptiveQuantization) Values() []H265FlickerAdaptiveQuantization {
+	return []H265FlickerAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265FramerateControl string
 
 // Enum values for H265FramerateControl
@@ -1295,6 +2883,16 @@ const (
 	H265FramerateControlInitialize_from_source H265FramerateControl = "INITIALIZE_FROM_SOURCE"
 	H265FramerateControlSpecified              H265FramerateControl = "SPECIFIED"
 )
+
+// Values returns all known values for H265FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265FramerateControl) Values() []H265FramerateControl {
+	return []H265FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type H265FramerateConversionAlgorithm string
 
@@ -1304,6 +2902,17 @@ const (
 	H265FramerateConversionAlgorithmInterpolate    H265FramerateConversionAlgorithm = "INTERPOLATE"
 )
 
+// Values returns all known values for H265FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265FramerateConversionAlgorithm) Values() []H265FramerateConversionAlgorithm {
+	return []H265FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
+
 type H265GopBReference string
 
 // Enum values for H265GopBReference
@@ -1312,6 +2921,16 @@ const (
 	H265GopBReferenceEnabled  H265GopBReference = "ENABLED"
 )
 
+// Values returns all known values for H265GopBReference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265GopBReference) Values() []H265GopBReference {
+	return []H265GopBReference{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265GopSizeUnits string
 
 // Enum values for H265GopSizeUnits
@@ -1319,6 +2938,16 @@ const (
 	H265GopSizeUnitsFrames  H265GopSizeUnits = "FRAMES"
 	H265GopSizeUnitsSeconds H265GopSizeUnits = "SECONDS"
 )
+
+// Values returns all known values for H265GopSizeUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265GopSizeUnits) Values() []H265GopSizeUnits {
+	return []H265GopSizeUnits{
+		"FRAMES",
+		"SECONDS",
+	}
+}
 
 type H265InterlaceMode string
 
@@ -1331,6 +2960,19 @@ const (
 	H265InterlaceModeFollow_bottom_field H265InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
+// Values returns all known values for H265InterlaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265InterlaceMode) Values() []H265InterlaceMode {
+	return []H265InterlaceMode{
+		"PROGRESSIVE",
+		"TOP_FIELD",
+		"BOTTOM_FIELD",
+		"FOLLOW_TOP_FIELD",
+		"FOLLOW_BOTTOM_FIELD",
+	}
+}
+
 type H265ParControl string
 
 // Enum values for H265ParControl
@@ -1338,6 +2980,16 @@ const (
 	H265ParControlInitialize_from_source H265ParControl = "INITIALIZE_FROM_SOURCE"
 	H265ParControlSpecified              H265ParControl = "SPECIFIED"
 )
+
+// Values returns all known values for H265ParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265ParControl) Values() []H265ParControl {
+	return []H265ParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type H265QualityTuningLevel string
 
@@ -1348,6 +3000,17 @@ const (
 	H265QualityTuningLevelMulti_pass_hq  H265QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
+// Values returns all known values for H265QualityTuningLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265QualityTuningLevel) Values() []H265QualityTuningLevel {
+	return []H265QualityTuningLevel{
+		"SINGLE_PASS",
+		"SINGLE_PASS_HQ",
+		"MULTI_PASS_HQ",
+	}
+}
+
 type H265RateControlMode string
 
 // Enum values for H265RateControlMode
@@ -1356,6 +3019,17 @@ const (
 	H265RateControlModeCbr  H265RateControlMode = "CBR"
 	H265RateControlModeQvbr H265RateControlMode = "QVBR"
 )
+
+// Values returns all known values for H265RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265RateControlMode) Values() []H265RateControlMode {
+	return []H265RateControlMode{
+		"VBR",
+		"CBR",
+		"QVBR",
+	}
+}
 
 type H265SampleAdaptiveOffsetFilterMode string
 
@@ -1366,6 +3040,18 @@ const (
 	H265SampleAdaptiveOffsetFilterModeOff      H265SampleAdaptiveOffsetFilterMode = "OFF"
 )
 
+// Values returns all known values for H265SampleAdaptiveOffsetFilterMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265SampleAdaptiveOffsetFilterMode) Values() []H265SampleAdaptiveOffsetFilterMode {
+	return []H265SampleAdaptiveOffsetFilterMode{
+		"DEFAULT",
+		"ADAPTIVE",
+		"OFF",
+	}
+}
+
 type H265SceneChangeDetect string
 
 // Enum values for H265SceneChangeDetect
@@ -1375,6 +3061,17 @@ const (
 	H265SceneChangeDetectTransition_detection H265SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
+// Values returns all known values for H265SceneChangeDetect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265SceneChangeDetect) Values() []H265SceneChangeDetect {
+	return []H265SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+		"TRANSITION_DETECTION",
+	}
+}
+
 type H265SlowPal string
 
 // Enum values for H265SlowPal
@@ -1383,6 +3080,16 @@ const (
 	H265SlowPalEnabled  H265SlowPal = "ENABLED"
 )
 
+// Values returns all known values for H265SlowPal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (H265SlowPal) Values() []H265SlowPal {
+	return []H265SlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265SpatialAdaptiveQuantization string
 
 // Enum values for H265SpatialAdaptiveQuantization
@@ -1390,6 +3097,17 @@ const (
 	H265SpatialAdaptiveQuantizationDisabled H265SpatialAdaptiveQuantization = "DISABLED"
 	H265SpatialAdaptiveQuantizationEnabled  H265SpatialAdaptiveQuantization = "ENABLED"
 )
+
+// Values returns all known values for H265SpatialAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265SpatialAdaptiveQuantization) Values() []H265SpatialAdaptiveQuantization {
+	return []H265SpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H265Telecine string
 
@@ -1400,6 +3118,17 @@ const (
 	H265TelecineHard H265Telecine = "HARD"
 )
 
+// Values returns all known values for H265Telecine. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (H265Telecine) Values() []H265Telecine {
+	return []H265Telecine{
+		"NONE",
+		"SOFT",
+		"HARD",
+	}
+}
+
 type H265TemporalAdaptiveQuantization string
 
 // Enum values for H265TemporalAdaptiveQuantization
@@ -1407,6 +3136,17 @@ const (
 	H265TemporalAdaptiveQuantizationDisabled H265TemporalAdaptiveQuantization = "DISABLED"
 	H265TemporalAdaptiveQuantizationEnabled  H265TemporalAdaptiveQuantization = "ENABLED"
 )
+
+// Values returns all known values for H265TemporalAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (H265TemporalAdaptiveQuantization) Values() []H265TemporalAdaptiveQuantization {
+	return []H265TemporalAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H265TemporalIds string
 
@@ -1416,6 +3156,16 @@ const (
 	H265TemporalIdsEnabled  H265TemporalIds = "ENABLED"
 )
 
+// Values returns all known values for H265TemporalIds. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265TemporalIds) Values() []H265TemporalIds {
+	return []H265TemporalIds{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265Tiles string
 
 // Enum values for H265Tiles
@@ -1423,6 +3173,16 @@ const (
 	H265TilesDisabled H265Tiles = "DISABLED"
 	H265TilesEnabled  H265Tiles = "ENABLED"
 )
+
+// Values returns all known values for H265Tiles. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (H265Tiles) Values() []H265Tiles {
+	return []H265Tiles{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type H265UnregisteredSeiTimecode string
 
@@ -1432,6 +3192,16 @@ const (
 	H265UnregisteredSeiTimecodeEnabled  H265UnregisteredSeiTimecode = "ENABLED"
 )
 
+// Values returns all known values for H265UnregisteredSeiTimecode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265UnregisteredSeiTimecode) Values() []H265UnregisteredSeiTimecode {
+	return []H265UnregisteredSeiTimecode{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265WriteMp4PackagingType string
 
 // Enum values for H265WriteMp4PackagingType
@@ -1439,6 +3209,16 @@ const (
 	H265WriteMp4PackagingTypeHvc1 H265WriteMp4PackagingType = "HVC1"
 	H265WriteMp4PackagingTypeHev1 H265WriteMp4PackagingType = "HEV1"
 )
+
+// Values returns all known values for H265WriteMp4PackagingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265WriteMp4PackagingType) Values() []H265WriteMp4PackagingType {
+	return []H265WriteMp4PackagingType{
+		"HVC1",
+		"HEV1",
+	}
+}
 
 type HlsAdMarkers string
 
@@ -1448,6 +3228,16 @@ const (
 	HlsAdMarkersElemental_scte35 HlsAdMarkers = "ELEMENTAL_SCTE35"
 )
 
+// Values returns all known values for HlsAdMarkers. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HlsAdMarkers) Values() []HlsAdMarkers {
+	return []HlsAdMarkers{
+		"ELEMENTAL",
+		"ELEMENTAL_SCTE35",
+	}
+}
+
 type HlsAudioOnlyContainer string
 
 // Enum values for HlsAudioOnlyContainer
@@ -1455,6 +3245,16 @@ const (
 	HlsAudioOnlyContainerAutomatic HlsAudioOnlyContainer = "AUTOMATIC"
 	HlsAudioOnlyContainerM2ts      HlsAudioOnlyContainer = "M2TS"
 )
+
+// Values returns all known values for HlsAudioOnlyContainer. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsAudioOnlyContainer) Values() []HlsAudioOnlyContainer {
+	return []HlsAudioOnlyContainer{
+		"AUTOMATIC",
+		"M2TS",
+	}
+}
 
 type HlsAudioTrackType string
 
@@ -1466,6 +3266,18 @@ const (
 	HlsAudioTrackTypeAudio_only_variant_stream           HlsAudioTrackType = "AUDIO_ONLY_VARIANT_STREAM"
 )
 
+// Values returns all known values for HlsAudioTrackType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsAudioTrackType) Values() []HlsAudioTrackType {
+	return []HlsAudioTrackType{
+		"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
+		"ALTERNATE_AUDIO_AUTO_SELECT",
+		"ALTERNATE_AUDIO_NOT_AUTO_SELECT",
+		"AUDIO_ONLY_VARIANT_STREAM",
+	}
+}
+
 type HlsCaptionLanguageSetting string
 
 // Enum values for HlsCaptionLanguageSetting
@@ -1475,6 +3287,17 @@ const (
 	HlsCaptionLanguageSettingNone   HlsCaptionLanguageSetting = "NONE"
 )
 
+// Values returns all known values for HlsCaptionLanguageSetting. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsCaptionLanguageSetting) Values() []HlsCaptionLanguageSetting {
+	return []HlsCaptionLanguageSetting{
+		"INSERT",
+		"OMIT",
+		"NONE",
+	}
+}
+
 type HlsClientCache string
 
 // Enum values for HlsClientCache
@@ -1482,6 +3305,16 @@ const (
 	HlsClientCacheDisabled HlsClientCache = "DISABLED"
 	HlsClientCacheEnabled  HlsClientCache = "ENABLED"
 )
+
+// Values returns all known values for HlsClientCache. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsClientCache) Values() []HlsClientCache {
+	return []HlsClientCache{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type HlsCodecSpecification string
 
@@ -1491,6 +3324,16 @@ const (
 	HlsCodecSpecificationRfc_4281 HlsCodecSpecification = "RFC_4281"
 )
 
+// Values returns all known values for HlsCodecSpecification. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsCodecSpecification) Values() []HlsCodecSpecification {
+	return []HlsCodecSpecification{
+		"RFC_6381",
+		"RFC_4281",
+	}
+}
+
 type HlsDirectoryStructure string
 
 // Enum values for HlsDirectoryStructure
@@ -1498,6 +3341,16 @@ const (
 	HlsDirectoryStructureSingle_directory        HlsDirectoryStructure = "SINGLE_DIRECTORY"
 	HlsDirectoryStructureSubdirectory_per_stream HlsDirectoryStructure = "SUBDIRECTORY_PER_STREAM"
 )
+
+// Values returns all known values for HlsDirectoryStructure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsDirectoryStructure) Values() []HlsDirectoryStructure {
+	return []HlsDirectoryStructure{
+		"SINGLE_DIRECTORY",
+		"SUBDIRECTORY_PER_STREAM",
+	}
+}
 
 type HlsEncryptionType string
 
@@ -1507,6 +3360,16 @@ const (
 	HlsEncryptionTypeSample_aes HlsEncryptionType = "SAMPLE_AES"
 )
 
+// Values returns all known values for HlsEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsEncryptionType) Values() []HlsEncryptionType {
+	return []HlsEncryptionType{
+		"AES128",
+		"SAMPLE_AES",
+	}
+}
+
 type HlsIFrameOnlyManifest string
 
 // Enum values for HlsIFrameOnlyManifest
@@ -1514,6 +3377,16 @@ const (
 	HlsIFrameOnlyManifestInclude HlsIFrameOnlyManifest = "INCLUDE"
 	HlsIFrameOnlyManifestExclude HlsIFrameOnlyManifest = "EXCLUDE"
 )
+
+// Values returns all known values for HlsIFrameOnlyManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsIFrameOnlyManifest) Values() []HlsIFrameOnlyManifest {
+	return []HlsIFrameOnlyManifest{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
 
 type HlsInitializationVectorInManifest string
 
@@ -1523,6 +3396,17 @@ const (
 	HlsInitializationVectorInManifestExclude HlsInitializationVectorInManifest = "EXCLUDE"
 )
 
+// Values returns all known values for HlsInitializationVectorInManifest. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HlsInitializationVectorInManifest) Values() []HlsInitializationVectorInManifest {
+	return []HlsInitializationVectorInManifest{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type HlsKeyProviderType string
 
 // Enum values for HlsKeyProviderType
@@ -1530,6 +3414,16 @@ const (
 	HlsKeyProviderTypeSpeke      HlsKeyProviderType = "SPEKE"
 	HlsKeyProviderTypeStatic_key HlsKeyProviderType = "STATIC_KEY"
 )
+
+// Values returns all known values for HlsKeyProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsKeyProviderType) Values() []HlsKeyProviderType {
+	return []HlsKeyProviderType{
+		"SPEKE",
+		"STATIC_KEY",
+	}
+}
 
 type HlsManifestCompression string
 
@@ -1539,6 +3433,16 @@ const (
 	HlsManifestCompressionNone HlsManifestCompression = "NONE"
 )
 
+// Values returns all known values for HlsManifestCompression. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsManifestCompression) Values() []HlsManifestCompression {
+	return []HlsManifestCompression{
+		"GZIP",
+		"NONE",
+	}
+}
+
 type HlsManifestDurationFormat string
 
 // Enum values for HlsManifestDurationFormat
@@ -1546,6 +3450,16 @@ const (
 	HlsManifestDurationFormatFloating_point HlsManifestDurationFormat = "FLOATING_POINT"
 	HlsManifestDurationFormatInteger        HlsManifestDurationFormat = "INTEGER"
 )
+
+// Values returns all known values for HlsManifestDurationFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsManifestDurationFormat) Values() []HlsManifestDurationFormat {
+	return []HlsManifestDurationFormat{
+		"FLOATING_POINT",
+		"INTEGER",
+	}
+}
 
 type HlsOfflineEncrypted string
 
@@ -1555,6 +3469,16 @@ const (
 	HlsOfflineEncryptedDisabled HlsOfflineEncrypted = "DISABLED"
 )
 
+// Values returns all known values for HlsOfflineEncrypted. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsOfflineEncrypted) Values() []HlsOfflineEncrypted {
+	return []HlsOfflineEncrypted{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type HlsOutputSelection string
 
 // Enum values for HlsOutputSelection
@@ -1562,6 +3486,16 @@ const (
 	HlsOutputSelectionManifests_and_segments HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"
 	HlsOutputSelectionSegments_only          HlsOutputSelection = "SEGMENTS_ONLY"
 )
+
+// Values returns all known values for HlsOutputSelection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsOutputSelection) Values() []HlsOutputSelection {
+	return []HlsOutputSelection{
+		"MANIFESTS_AND_SEGMENTS",
+		"SEGMENTS_ONLY",
+	}
+}
 
 type HlsProgramDateTime string
 
@@ -1571,6 +3505,16 @@ const (
 	HlsProgramDateTimeExclude HlsProgramDateTime = "EXCLUDE"
 )
 
+// Values returns all known values for HlsProgramDateTime. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsProgramDateTime) Values() []HlsProgramDateTime {
+	return []HlsProgramDateTime{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type HlsSegmentControl string
 
 // Enum values for HlsSegmentControl
@@ -1579,6 +3523,16 @@ const (
 	HlsSegmentControlSegmented_files HlsSegmentControl = "SEGMENTED_FILES"
 )
 
+// Values returns all known values for HlsSegmentControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsSegmentControl) Values() []HlsSegmentControl {
+	return []HlsSegmentControl{
+		"SINGLE_FILE",
+		"SEGMENTED_FILES",
+	}
+}
+
 type HlsStreamInfResolution string
 
 // Enum values for HlsStreamInfResolution
@@ -1586,6 +3540,16 @@ const (
 	HlsStreamInfResolutionInclude HlsStreamInfResolution = "INCLUDE"
 	HlsStreamInfResolutionExclude HlsStreamInfResolution = "EXCLUDE"
 )
+
+// Values returns all known values for HlsStreamInfResolution. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsStreamInfResolution) Values() []HlsStreamInfResolution {
+	return []HlsStreamInfResolution{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
 
 type HlsTimedMetadataId3Frame string
 
@@ -1596,6 +3560,17 @@ const (
 	HlsTimedMetadataId3FrameTdrl HlsTimedMetadataId3Frame = "TDRL"
 )
 
+// Values returns all known values for HlsTimedMetadataId3Frame. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsTimedMetadataId3Frame) Values() []HlsTimedMetadataId3Frame {
+	return []HlsTimedMetadataId3Frame{
+		"NONE",
+		"PRIV",
+		"TDRL",
+	}
+}
+
 type ImscStylePassthrough string
 
 // Enum values for ImscStylePassthrough
@@ -1603,6 +3578,16 @@ const (
 	ImscStylePassthroughEnabled  ImscStylePassthrough = "ENABLED"
 	ImscStylePassthroughDisabled ImscStylePassthrough = "DISABLED"
 )
+
+// Values returns all known values for ImscStylePassthrough. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImscStylePassthrough) Values() []ImscStylePassthrough {
+	return []ImscStylePassthrough{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type InputDeblockFilter string
 
@@ -1612,6 +3597,16 @@ const (
 	InputDeblockFilterDisabled InputDeblockFilter = "DISABLED"
 )
 
+// Values returns all known values for InputDeblockFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputDeblockFilter) Values() []InputDeblockFilter {
+	return []InputDeblockFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type InputDenoiseFilter string
 
 // Enum values for InputDenoiseFilter
@@ -1619,6 +3614,16 @@ const (
 	InputDenoiseFilterEnabled  InputDenoiseFilter = "ENABLED"
 	InputDenoiseFilterDisabled InputDenoiseFilter = "DISABLED"
 )
+
+// Values returns all known values for InputDenoiseFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputDenoiseFilter) Values() []InputDenoiseFilter {
+	return []InputDenoiseFilter{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type InputFilterEnable string
 
@@ -1629,6 +3634,17 @@ const (
 	InputFilterEnableForce   InputFilterEnable = "FORCE"
 )
 
+// Values returns all known values for InputFilterEnable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputFilterEnable) Values() []InputFilterEnable {
+	return []InputFilterEnable{
+		"AUTO",
+		"DISABLE",
+		"FORCE",
+	}
+}
+
 type InputPsiControl string
 
 // Enum values for InputPsiControl
@@ -1636,6 +3652,16 @@ const (
 	InputPsiControlIgnore_psi InputPsiControl = "IGNORE_PSI"
 	InputPsiControlUse_psi    InputPsiControl = "USE_PSI"
 )
+
+// Values returns all known values for InputPsiControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputPsiControl) Values() []InputPsiControl {
+	return []InputPsiControl{
+		"IGNORE_PSI",
+		"USE_PSI",
+	}
+}
 
 type InputRotate string
 
@@ -1648,6 +3674,19 @@ const (
 	InputRotateAuto        InputRotate = "AUTO"
 )
 
+// Values returns all known values for InputRotate. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputRotate) Values() []InputRotate {
+	return []InputRotate{
+		"DEGREE_0",
+		"DEGREES_90",
+		"DEGREES_180",
+		"DEGREES_270",
+		"AUTO",
+	}
+}
+
 type InputTimecodeSource string
 
 // Enum values for InputTimecodeSource
@@ -1657,6 +3696,17 @@ const (
 	InputTimecodeSourceSpecifiedstart InputTimecodeSource = "SPECIFIEDSTART"
 )
 
+// Values returns all known values for InputTimecodeSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputTimecodeSource) Values() []InputTimecodeSource {
+	return []InputTimecodeSource{
+		"EMBEDDED",
+		"ZEROBASED",
+		"SPECIFIEDSTART",
+	}
+}
+
 type JobPhase string
 
 // Enum values for JobPhase
@@ -1665,6 +3715,17 @@ const (
 	JobPhaseTranscoding JobPhase = "TRANSCODING"
 	JobPhaseUploading   JobPhase = "UPLOADING"
 )
+
+// Values returns all known values for JobPhase. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobPhase) Values() []JobPhase {
+	return []JobPhase{
+		"PROBING",
+		"TRANSCODING",
+		"UPLOADING",
+	}
+}
 
 type JobStatus string
 
@@ -1677,6 +3738,19 @@ const (
 	JobStatusError       JobStatus = "ERROR"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"PROGRESSING",
+		"COMPLETE",
+		"CANCELED",
+		"ERROR",
+	}
+}
+
 type JobTemplateListBy string
 
 // Enum values for JobTemplateListBy
@@ -1685,6 +3759,17 @@ const (
 	JobTemplateListByCreation_date JobTemplateListBy = "CREATION_DATE"
 	JobTemplateListBySystem        JobTemplateListBy = "SYSTEM"
 )
+
+// Values returns all known values for JobTemplateListBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobTemplateListBy) Values() []JobTemplateListBy {
+	return []JobTemplateListBy{
+		"NAME",
+		"CREATION_DATE",
+		"SYSTEM",
+	}
+}
 
 type LanguageCode string
 
@@ -1883,6 +3968,205 @@ const (
 	LanguageCodeTng LanguageCode = "TNG"
 )
 
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"ENG",
+		"SPA",
+		"FRA",
+		"DEU",
+		"GER",
+		"ZHO",
+		"ARA",
+		"HIN",
+		"JPN",
+		"RUS",
+		"POR",
+		"ITA",
+		"URD",
+		"VIE",
+		"KOR",
+		"PAN",
+		"ABK",
+		"AAR",
+		"AFR",
+		"AKA",
+		"SQI",
+		"AMH",
+		"ARG",
+		"HYE",
+		"ASM",
+		"AVA",
+		"AVE",
+		"AYM",
+		"AZE",
+		"BAM",
+		"BAK",
+		"EUS",
+		"BEL",
+		"BEN",
+		"BIH",
+		"BIS",
+		"BOS",
+		"BRE",
+		"BUL",
+		"MYA",
+		"CAT",
+		"KHM",
+		"CHA",
+		"CHE",
+		"NYA",
+		"CHU",
+		"CHV",
+		"COR",
+		"COS",
+		"CRE",
+		"HRV",
+		"CES",
+		"DAN",
+		"DIV",
+		"NLD",
+		"DZO",
+		"ENM",
+		"EPO",
+		"EST",
+		"EWE",
+		"FAO",
+		"FIJ",
+		"FIN",
+		"FRM",
+		"FUL",
+		"GLA",
+		"GLG",
+		"LUG",
+		"KAT",
+		"ELL",
+		"GRN",
+		"GUJ",
+		"HAT",
+		"HAU",
+		"HEB",
+		"HER",
+		"HMO",
+		"HUN",
+		"ISL",
+		"IDO",
+		"IBO",
+		"IND",
+		"INA",
+		"ILE",
+		"IKU",
+		"IPK",
+		"GLE",
+		"JAV",
+		"KAL",
+		"KAN",
+		"KAU",
+		"KAS",
+		"KAZ",
+		"KIK",
+		"KIN",
+		"KIR",
+		"KOM",
+		"KON",
+		"KUA",
+		"KUR",
+		"LAO",
+		"LAT",
+		"LAV",
+		"LIM",
+		"LIN",
+		"LIT",
+		"LUB",
+		"LTZ",
+		"MKD",
+		"MLG",
+		"MSA",
+		"MAL",
+		"MLT",
+		"GLV",
+		"MRI",
+		"MAR",
+		"MAH",
+		"MON",
+		"NAU",
+		"NAV",
+		"NDE",
+		"NBL",
+		"NDO",
+		"NEP",
+		"SME",
+		"NOR",
+		"NOB",
+		"NNO",
+		"OCI",
+		"OJI",
+		"ORI",
+		"ORM",
+		"OSS",
+		"PLI",
+		"FAS",
+		"POL",
+		"PUS",
+		"QUE",
+		"QAA",
+		"RON",
+		"ROH",
+		"RUN",
+		"SMO",
+		"SAG",
+		"SAN",
+		"SRD",
+		"SRB",
+		"SNA",
+		"III",
+		"SND",
+		"SIN",
+		"SLK",
+		"SLV",
+		"SOM",
+		"SOT",
+		"SUN",
+		"SWA",
+		"SSW",
+		"SWE",
+		"TGL",
+		"TAH",
+		"TGK",
+		"TAM",
+		"TAT",
+		"TEL",
+		"THA",
+		"BOD",
+		"TIR",
+		"TON",
+		"TSO",
+		"TSN",
+		"TUR",
+		"TUK",
+		"TWI",
+		"UIG",
+		"UKR",
+		"UZB",
+		"VEN",
+		"VOL",
+		"WLN",
+		"CYM",
+		"FRY",
+		"WOL",
+		"XHO",
+		"YID",
+		"YOR",
+		"ZHA",
+		"ZUL",
+		"ORJ",
+		"QPC",
+		"TNG",
+	}
+}
+
 type M2tsAudioBufferModel string
 
 // Enum values for M2tsAudioBufferModel
@@ -1890,6 +4174,16 @@ const (
 	M2tsAudioBufferModelDvb  M2tsAudioBufferModel = "DVB"
 	M2tsAudioBufferModelAtsc M2tsAudioBufferModel = "ATSC"
 )
+
+// Values returns all known values for M2tsAudioBufferModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsAudioBufferModel) Values() []M2tsAudioBufferModel {
+	return []M2tsAudioBufferModel{
+		"DVB",
+		"ATSC",
+	}
+}
 
 type M2tsBufferModel string
 
@@ -1899,6 +4193,16 @@ const (
 	M2tsBufferModelNone      M2tsBufferModel = "NONE"
 )
 
+// Values returns all known values for M2tsBufferModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsBufferModel) Values() []M2tsBufferModel {
+	return []M2tsBufferModel{
+		"MULTIPLEX",
+		"NONE",
+	}
+}
+
 type M2tsEbpAudioInterval string
 
 // Enum values for M2tsEbpAudioInterval
@@ -1906,6 +4210,16 @@ const (
 	M2tsEbpAudioIntervalVideo_and_fixed_intervals M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"
 	M2tsEbpAudioIntervalVideo_interval            M2tsEbpAudioInterval = "VIDEO_INTERVAL"
 )
+
+// Values returns all known values for M2tsEbpAudioInterval. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsEbpAudioInterval) Values() []M2tsEbpAudioInterval {
+	return []M2tsEbpAudioInterval{
+		"VIDEO_AND_FIXED_INTERVALS",
+		"VIDEO_INTERVAL",
+	}
+}
 
 type M2tsEbpPlacement string
 
@@ -1915,6 +4229,16 @@ const (
 	M2tsEbpPlacementVideo_pid            M2tsEbpPlacement = "VIDEO_PID"
 )
 
+// Values returns all known values for M2tsEbpPlacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsEbpPlacement) Values() []M2tsEbpPlacement {
+	return []M2tsEbpPlacement{
+		"VIDEO_AND_AUDIO_PIDS",
+		"VIDEO_PID",
+	}
+}
+
 type M2tsEsRateInPes string
 
 // Enum values for M2tsEsRateInPes
@@ -1922,6 +4246,16 @@ const (
 	M2tsEsRateInPesInclude M2tsEsRateInPes = "INCLUDE"
 	M2tsEsRateInPesExclude M2tsEsRateInPes = "EXCLUDE"
 )
+
+// Values returns all known values for M2tsEsRateInPes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsEsRateInPes) Values() []M2tsEsRateInPes {
+	return []M2tsEsRateInPes{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
 
 type M2tsForceTsVideoEbpOrder string
 
@@ -1931,6 +4265,16 @@ const (
 	M2tsForceTsVideoEbpOrderDefault M2tsForceTsVideoEbpOrder = "DEFAULT"
 )
 
+// Values returns all known values for M2tsForceTsVideoEbpOrder. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsForceTsVideoEbpOrder) Values() []M2tsForceTsVideoEbpOrder {
+	return []M2tsForceTsVideoEbpOrder{
+		"FORCE",
+		"DEFAULT",
+	}
+}
+
 type M2tsNielsenId3 string
 
 // Enum values for M2tsNielsenId3
@@ -1938,6 +4282,16 @@ const (
 	M2tsNielsenId3Insert M2tsNielsenId3 = "INSERT"
 	M2tsNielsenId3None   M2tsNielsenId3 = "NONE"
 )
+
+// Values returns all known values for M2tsNielsenId3. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsNielsenId3) Values() []M2tsNielsenId3 {
+	return []M2tsNielsenId3{
+		"INSERT",
+		"NONE",
+	}
+}
 
 type M2tsPcrControl string
 
@@ -1947,6 +4301,16 @@ const (
 	M2tsPcrControlConfigured_pcr_period M2tsPcrControl = "CONFIGURED_PCR_PERIOD"
 )
 
+// Values returns all known values for M2tsPcrControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsPcrControl) Values() []M2tsPcrControl {
+	return []M2tsPcrControl{
+		"PCR_EVERY_PES_PACKET",
+		"CONFIGURED_PCR_PERIOD",
+	}
+}
+
 type M2tsRateMode string
 
 // Enum values for M2tsRateMode
@@ -1955,6 +4319,16 @@ const (
 	M2tsRateModeCbr M2tsRateMode = "CBR"
 )
 
+// Values returns all known values for M2tsRateMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (M2tsRateMode) Values() []M2tsRateMode {
+	return []M2tsRateMode{
+		"VBR",
+		"CBR",
+	}
+}
+
 type M2tsScte35Source string
 
 // Enum values for M2tsScte35Source
@@ -1962,6 +4336,16 @@ const (
 	M2tsScte35SourcePassthrough M2tsScte35Source = "PASSTHROUGH"
 	M2tsScte35SourceNone        M2tsScte35Source = "NONE"
 )
+
+// Values returns all known values for M2tsScte35Source. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsScte35Source) Values() []M2tsScte35Source {
+	return []M2tsScte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
 
 type M2tsSegmentationMarkers string
 
@@ -1975,6 +4359,20 @@ const (
 	M2tsSegmentationMarkersEbp_legacy   M2tsSegmentationMarkers = "EBP_LEGACY"
 )
 
+// Values returns all known values for M2tsSegmentationMarkers. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsSegmentationMarkers) Values() []M2tsSegmentationMarkers {
+	return []M2tsSegmentationMarkers{
+		"NONE",
+		"RAI_SEGSTART",
+		"RAI_ADAPT",
+		"PSI_SEGSTART",
+		"EBP",
+		"EBP_LEGACY",
+	}
+}
+
 type M2tsSegmentationStyle string
 
 // Enum values for M2tsSegmentationStyle
@@ -1982,6 +4380,16 @@ const (
 	M2tsSegmentationStyleMaintain_cadence M2tsSegmentationStyle = "MAINTAIN_CADENCE"
 	M2tsSegmentationStyleReset_cadence    M2tsSegmentationStyle = "RESET_CADENCE"
 )
+
+// Values returns all known values for M2tsSegmentationStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsSegmentationStyle) Values() []M2tsSegmentationStyle {
+	return []M2tsSegmentationStyle{
+		"MAINTAIN_CADENCE",
+		"RESET_CADENCE",
+	}
+}
 
 type M3u8NielsenId3 string
 
@@ -1991,6 +4399,16 @@ const (
 	M3u8NielsenId3None   M3u8NielsenId3 = "NONE"
 )
 
+// Values returns all known values for M3u8NielsenId3. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8NielsenId3) Values() []M3u8NielsenId3 {
+	return []M3u8NielsenId3{
+		"INSERT",
+		"NONE",
+	}
+}
+
 type M3u8PcrControl string
 
 // Enum values for M3u8PcrControl
@@ -1998,6 +4416,16 @@ const (
 	M3u8PcrControlPcr_every_pes_packet  M3u8PcrControl = "PCR_EVERY_PES_PACKET"
 	M3u8PcrControlConfigured_pcr_period M3u8PcrControl = "CONFIGURED_PCR_PERIOD"
 )
+
+// Values returns all known values for M3u8PcrControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8PcrControl) Values() []M3u8PcrControl {
+	return []M3u8PcrControl{
+		"PCR_EVERY_PES_PACKET",
+		"CONFIGURED_PCR_PERIOD",
+	}
+}
 
 type M3u8Scte35Source string
 
@@ -2007,6 +4435,16 @@ const (
 	M3u8Scte35SourceNone        M3u8Scte35Source = "NONE"
 )
 
+// Values returns all known values for M3u8Scte35Source. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8Scte35Source) Values() []M3u8Scte35Source {
+	return []M3u8Scte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
 type MotionImageInsertionMode string
 
 // Enum values for MotionImageInsertionMode
@@ -2014,6 +4452,16 @@ const (
 	MotionImageInsertionModeMov MotionImageInsertionMode = "MOV"
 	MotionImageInsertionModePng MotionImageInsertionMode = "PNG"
 )
+
+// Values returns all known values for MotionImageInsertionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MotionImageInsertionMode) Values() []MotionImageInsertionMode {
+	return []MotionImageInsertionMode{
+		"MOV",
+		"PNG",
+	}
+}
 
 type MotionImagePlayback string
 
@@ -2023,6 +4471,16 @@ const (
 	MotionImagePlaybackRepeat MotionImagePlayback = "REPEAT"
 )
 
+// Values returns all known values for MotionImagePlayback. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MotionImagePlayback) Values() []MotionImagePlayback {
+	return []MotionImagePlayback{
+		"ONCE",
+		"REPEAT",
+	}
+}
+
 type MovClapAtom string
 
 // Enum values for MovClapAtom
@@ -2030,6 +4488,16 @@ const (
 	MovClapAtomInclude MovClapAtom = "INCLUDE"
 	MovClapAtomExclude MovClapAtom = "EXCLUDE"
 )
+
+// Values returns all known values for MovClapAtom. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MovClapAtom) Values() []MovClapAtom {
+	return []MovClapAtom{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
 
 type MovCslgAtom string
 
@@ -2039,6 +4507,16 @@ const (
 	MovCslgAtomExclude MovCslgAtom = "EXCLUDE"
 )
 
+// Values returns all known values for MovCslgAtom. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MovCslgAtom) Values() []MovCslgAtom {
+	return []MovCslgAtom{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type MovMpeg2FourCCControl string
 
 // Enum values for MovMpeg2FourCCControl
@@ -2046,6 +4524,16 @@ const (
 	MovMpeg2FourCCControlXdcam MovMpeg2FourCCControl = "XDCAM"
 	MovMpeg2FourCCControlMpeg  MovMpeg2FourCCControl = "MPEG"
 )
+
+// Values returns all known values for MovMpeg2FourCCControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MovMpeg2FourCCControl) Values() []MovMpeg2FourCCControl {
+	return []MovMpeg2FourCCControl{
+		"XDCAM",
+		"MPEG",
+	}
+}
 
 type MovPaddingControl string
 
@@ -2055,6 +4543,16 @@ const (
 	MovPaddingControlNone   MovPaddingControl = "NONE"
 )
 
+// Values returns all known values for MovPaddingControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MovPaddingControl) Values() []MovPaddingControl {
+	return []MovPaddingControl{
+		"OMNEON",
+		"NONE",
+	}
+}
+
 type MovReference string
 
 // Enum values for MovReference
@@ -2062,6 +4560,16 @@ const (
 	MovReferenceSelf_contained MovReference = "SELF_CONTAINED"
 	MovReferenceExternal       MovReference = "EXTERNAL"
 )
+
+// Values returns all known values for MovReference. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MovReference) Values() []MovReference {
+	return []MovReference{
+		"SELF_CONTAINED",
+		"EXTERNAL",
+	}
+}
 
 type Mp3RateControlMode string
 
@@ -2071,6 +4579,16 @@ const (
 	Mp3RateControlModeVbr Mp3RateControlMode = "VBR"
 )
 
+// Values returns all known values for Mp3RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mp3RateControlMode) Values() []Mp3RateControlMode {
+	return []Mp3RateControlMode{
+		"CBR",
+		"VBR",
+	}
+}
+
 type Mp4CslgAtom string
 
 // Enum values for Mp4CslgAtom
@@ -2078,6 +4596,16 @@ const (
 	Mp4CslgAtomInclude Mp4CslgAtom = "INCLUDE"
 	Mp4CslgAtomExclude Mp4CslgAtom = "EXCLUDE"
 )
+
+// Values returns all known values for Mp4CslgAtom. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Mp4CslgAtom) Values() []Mp4CslgAtom {
+	return []Mp4CslgAtom{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
 
 type Mp4FreeSpaceBox string
 
@@ -2087,6 +4615,16 @@ const (
 	Mp4FreeSpaceBoxExclude Mp4FreeSpaceBox = "EXCLUDE"
 )
 
+// Values returns all known values for Mp4FreeSpaceBox. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mp4FreeSpaceBox) Values() []Mp4FreeSpaceBox {
+	return []Mp4FreeSpaceBox{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type Mp4MoovPlacement string
 
 // Enum values for Mp4MoovPlacement
@@ -2094,6 +4632,16 @@ const (
 	Mp4MoovPlacementProgressive_download Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"
 	Mp4MoovPlacementNormal               Mp4MoovPlacement = "NORMAL"
 )
+
+// Values returns all known values for Mp4MoovPlacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mp4MoovPlacement) Values() []Mp4MoovPlacement {
+	return []Mp4MoovPlacement{
+		"PROGRESSIVE_DOWNLOAD",
+		"NORMAL",
+	}
+}
 
 type MpdCaptionContainerType string
 
@@ -2103,6 +4651,16 @@ const (
 	MpdCaptionContainerTypeFragmented_mp4 MpdCaptionContainerType = "FRAGMENTED_MP4"
 )
 
+// Values returns all known values for MpdCaptionContainerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdCaptionContainerType) Values() []MpdCaptionContainerType {
+	return []MpdCaptionContainerType{
+		"RAW",
+		"FRAGMENTED_MP4",
+	}
+}
+
 type MpdScte35Esam string
 
 // Enum values for MpdScte35Esam
@@ -2111,6 +4669,16 @@ const (
 	MpdScte35EsamNone   MpdScte35Esam = "NONE"
 )
 
+// Values returns all known values for MpdScte35Esam. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdScte35Esam) Values() []MpdScte35Esam {
+	return []MpdScte35Esam{
+		"INSERT",
+		"NONE",
+	}
+}
+
 type MpdScte35Source string
 
 // Enum values for MpdScte35Source
@@ -2118,6 +4686,16 @@ const (
 	MpdScte35SourcePassthrough MpdScte35Source = "PASSTHROUGH"
 	MpdScte35SourceNone        MpdScte35Source = "NONE"
 )
+
+// Values returns all known values for MpdScte35Source. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdScte35Source) Values() []MpdScte35Source {
+	return []MpdScte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
 
 type Mpeg2AdaptiveQuantization string
 
@@ -2128,6 +4706,18 @@ const (
 	Mpeg2AdaptiveQuantizationMedium Mpeg2AdaptiveQuantization = "MEDIUM"
 	Mpeg2AdaptiveQuantizationHigh   Mpeg2AdaptiveQuantization = "HIGH"
 )
+
+// Values returns all known values for Mpeg2AdaptiveQuantization. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2AdaptiveQuantization) Values() []Mpeg2AdaptiveQuantization {
+	return []Mpeg2AdaptiveQuantization{
+		"OFF",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
 
 type Mpeg2CodecLevel string
 
@@ -2140,6 +4730,19 @@ const (
 	Mpeg2CodecLevelHigh     Mpeg2CodecLevel = "HIGH"
 )
 
+// Values returns all known values for Mpeg2CodecLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2CodecLevel) Values() []Mpeg2CodecLevel {
+	return []Mpeg2CodecLevel{
+		"AUTO",
+		"LOW",
+		"MAIN",
+		"HIGH1440",
+		"HIGH",
+	}
+}
+
 type Mpeg2CodecProfile string
 
 // Enum values for Mpeg2CodecProfile
@@ -2147,6 +4750,16 @@ const (
 	Mpeg2CodecProfileMain        Mpeg2CodecProfile = "MAIN"
 	Mpeg2CodecProfileProfile_422 Mpeg2CodecProfile = "PROFILE_422"
 )
+
+// Values returns all known values for Mpeg2CodecProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2CodecProfile) Values() []Mpeg2CodecProfile {
+	return []Mpeg2CodecProfile{
+		"MAIN",
+		"PROFILE_422",
+	}
+}
 
 type Mpeg2DynamicSubGop string
 
@@ -2156,6 +4769,16 @@ const (
 	Mpeg2DynamicSubGopStatic   Mpeg2DynamicSubGop = "STATIC"
 )
 
+// Values returns all known values for Mpeg2DynamicSubGop. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2DynamicSubGop) Values() []Mpeg2DynamicSubGop {
+	return []Mpeg2DynamicSubGop{
+		"ADAPTIVE",
+		"STATIC",
+	}
+}
+
 type Mpeg2FramerateControl string
 
 // Enum values for Mpeg2FramerateControl
@@ -2163,6 +4786,16 @@ const (
 	Mpeg2FramerateControlInitialize_from_source Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"
 	Mpeg2FramerateControlSpecified              Mpeg2FramerateControl = "SPECIFIED"
 )
+
+// Values returns all known values for Mpeg2FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2FramerateControl) Values() []Mpeg2FramerateControl {
+	return []Mpeg2FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type Mpeg2FramerateConversionAlgorithm string
 
@@ -2172,6 +4805,17 @@ const (
 	Mpeg2FramerateConversionAlgorithmInterpolate    Mpeg2FramerateConversionAlgorithm = "INTERPOLATE"
 )
 
+// Values returns all known values for Mpeg2FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Mpeg2FramerateConversionAlgorithm) Values() []Mpeg2FramerateConversionAlgorithm {
+	return []Mpeg2FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
+
 type Mpeg2GopSizeUnits string
 
 // Enum values for Mpeg2GopSizeUnits
@@ -2179,6 +4823,16 @@ const (
 	Mpeg2GopSizeUnitsFrames  Mpeg2GopSizeUnits = "FRAMES"
 	Mpeg2GopSizeUnitsSeconds Mpeg2GopSizeUnits = "SECONDS"
 )
+
+// Values returns all known values for Mpeg2GopSizeUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2GopSizeUnits) Values() []Mpeg2GopSizeUnits {
+	return []Mpeg2GopSizeUnits{
+		"FRAMES",
+		"SECONDS",
+	}
+}
 
 type Mpeg2InterlaceMode string
 
@@ -2191,6 +4845,19 @@ const (
 	Mpeg2InterlaceModeFollow_bottom_field Mpeg2InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
+// Values returns all known values for Mpeg2InterlaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2InterlaceMode) Values() []Mpeg2InterlaceMode {
+	return []Mpeg2InterlaceMode{
+		"PROGRESSIVE",
+		"TOP_FIELD",
+		"BOTTOM_FIELD",
+		"FOLLOW_TOP_FIELD",
+		"FOLLOW_BOTTOM_FIELD",
+	}
+}
+
 type Mpeg2IntraDcPrecision string
 
 // Enum values for Mpeg2IntraDcPrecision
@@ -2202,6 +4869,19 @@ const (
 	Mpeg2IntraDcPrecisionIntra_dc_precision_11 Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_11"
 )
 
+// Values returns all known values for Mpeg2IntraDcPrecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2IntraDcPrecision) Values() []Mpeg2IntraDcPrecision {
+	return []Mpeg2IntraDcPrecision{
+		"AUTO",
+		"INTRA_DC_PRECISION_8",
+		"INTRA_DC_PRECISION_9",
+		"INTRA_DC_PRECISION_10",
+		"INTRA_DC_PRECISION_11",
+	}
+}
+
 type Mpeg2ParControl string
 
 // Enum values for Mpeg2ParControl
@@ -2209,6 +4889,16 @@ const (
 	Mpeg2ParControlInitialize_from_source Mpeg2ParControl = "INITIALIZE_FROM_SOURCE"
 	Mpeg2ParControlSpecified              Mpeg2ParControl = "SPECIFIED"
 )
+
+// Values returns all known values for Mpeg2ParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2ParControl) Values() []Mpeg2ParControl {
+	return []Mpeg2ParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type Mpeg2QualityTuningLevel string
 
@@ -2218,6 +4908,16 @@ const (
 	Mpeg2QualityTuningLevelMulti_pass  Mpeg2QualityTuningLevel = "MULTI_PASS"
 )
 
+// Values returns all known values for Mpeg2QualityTuningLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2QualityTuningLevel) Values() []Mpeg2QualityTuningLevel {
+	return []Mpeg2QualityTuningLevel{
+		"SINGLE_PASS",
+		"MULTI_PASS",
+	}
+}
+
 type Mpeg2RateControlMode string
 
 // Enum values for Mpeg2RateControlMode
@@ -2225,6 +4925,16 @@ const (
 	Mpeg2RateControlModeVbr Mpeg2RateControlMode = "VBR"
 	Mpeg2RateControlModeCbr Mpeg2RateControlMode = "CBR"
 )
+
+// Values returns all known values for Mpeg2RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2RateControlMode) Values() []Mpeg2RateControlMode {
+	return []Mpeg2RateControlMode{
+		"VBR",
+		"CBR",
+	}
+}
 
 type Mpeg2SceneChangeDetect string
 
@@ -2234,6 +4944,16 @@ const (
 	Mpeg2SceneChangeDetectEnabled  Mpeg2SceneChangeDetect = "ENABLED"
 )
 
+// Values returns all known values for Mpeg2SceneChangeDetect. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2SceneChangeDetect) Values() []Mpeg2SceneChangeDetect {
+	return []Mpeg2SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type Mpeg2SlowPal string
 
 // Enum values for Mpeg2SlowPal
@@ -2241,6 +4961,16 @@ const (
 	Mpeg2SlowPalDisabled Mpeg2SlowPal = "DISABLED"
 	Mpeg2SlowPalEnabled  Mpeg2SlowPal = "ENABLED"
 )
+
+// Values returns all known values for Mpeg2SlowPal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Mpeg2SlowPal) Values() []Mpeg2SlowPal {
+	return []Mpeg2SlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type Mpeg2SpatialAdaptiveQuantization string
 
@@ -2250,6 +4980,17 @@ const (
 	Mpeg2SpatialAdaptiveQuantizationEnabled  Mpeg2SpatialAdaptiveQuantization = "ENABLED"
 )
 
+// Values returns all known values for Mpeg2SpatialAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Mpeg2SpatialAdaptiveQuantization) Values() []Mpeg2SpatialAdaptiveQuantization {
+	return []Mpeg2SpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type Mpeg2Syntax string
 
 // Enum values for Mpeg2Syntax
@@ -2257,6 +4998,16 @@ const (
 	Mpeg2SyntaxDefault Mpeg2Syntax = "DEFAULT"
 	Mpeg2SyntaxD_10    Mpeg2Syntax = "D_10"
 )
+
+// Values returns all known values for Mpeg2Syntax. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Mpeg2Syntax) Values() []Mpeg2Syntax {
+	return []Mpeg2Syntax{
+		"DEFAULT",
+		"D_10",
+	}
+}
 
 type Mpeg2Telecine string
 
@@ -2267,6 +5018,17 @@ const (
 	Mpeg2TelecineHard Mpeg2Telecine = "HARD"
 )
 
+// Values returns all known values for Mpeg2Telecine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2Telecine) Values() []Mpeg2Telecine {
+	return []Mpeg2Telecine{
+		"NONE",
+		"SOFT",
+		"HARD",
+	}
+}
+
 type Mpeg2TemporalAdaptiveQuantization string
 
 // Enum values for Mpeg2TemporalAdaptiveQuantization
@@ -2274,6 +5036,17 @@ const (
 	Mpeg2TemporalAdaptiveQuantizationDisabled Mpeg2TemporalAdaptiveQuantization = "DISABLED"
 	Mpeg2TemporalAdaptiveQuantizationEnabled  Mpeg2TemporalAdaptiveQuantization = "ENABLED"
 )
+
+// Values returns all known values for Mpeg2TemporalAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Mpeg2TemporalAdaptiveQuantization) Values() []Mpeg2TemporalAdaptiveQuantization {
+	return []Mpeg2TemporalAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type MsSmoothAudioDeduplication string
 
@@ -2283,6 +5056,16 @@ const (
 	MsSmoothAudioDeduplicationNone                      MsSmoothAudioDeduplication = "NONE"
 )
 
+// Values returns all known values for MsSmoothAudioDeduplication. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MsSmoothAudioDeduplication) Values() []MsSmoothAudioDeduplication {
+	return []MsSmoothAudioDeduplication{
+		"COMBINE_DUPLICATE_STREAMS",
+		"NONE",
+	}
+}
+
 type MsSmoothManifestEncoding string
 
 // Enum values for MsSmoothManifestEncoding
@@ -2290,6 +5073,16 @@ const (
 	MsSmoothManifestEncodingUtf8  MsSmoothManifestEncoding = "UTF8"
 	MsSmoothManifestEncodingUtf16 MsSmoothManifestEncoding = "UTF16"
 )
+
+// Values returns all known values for MsSmoothManifestEncoding. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MsSmoothManifestEncoding) Values() []MsSmoothManifestEncoding {
+	return []MsSmoothManifestEncoding{
+		"UTF8",
+		"UTF16",
+	}
+}
 
 type MxfAfdSignaling string
 
@@ -2299,6 +5092,16 @@ const (
 	MxfAfdSignalingCopy_from_video MxfAfdSignaling = "COPY_FROM_VIDEO"
 )
 
+// Values returns all known values for MxfAfdSignaling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MxfAfdSignaling) Values() []MxfAfdSignaling {
+	return []MxfAfdSignaling{
+		"NO_COPY",
+		"COPY_FROM_VIDEO",
+	}
+}
+
 type NoiseFilterPostTemporalSharpening string
 
 // Enum values for NoiseFilterPostTemporalSharpening
@@ -2307,6 +5110,18 @@ const (
 	NoiseFilterPostTemporalSharpeningEnabled  NoiseFilterPostTemporalSharpening = "ENABLED"
 	NoiseFilterPostTemporalSharpeningAuto     NoiseFilterPostTemporalSharpening = "AUTO"
 )
+
+// Values returns all known values for NoiseFilterPostTemporalSharpening. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NoiseFilterPostTemporalSharpening) Values() []NoiseFilterPostTemporalSharpening {
+	return []NoiseFilterPostTemporalSharpening{
+		"DISABLED",
+		"ENABLED",
+		"AUTO",
+	}
+}
 
 type NoiseReducerFilter string
 
@@ -2322,6 +5137,22 @@ const (
 	NoiseReducerFilterTemporal  NoiseReducerFilter = "TEMPORAL"
 )
 
+// Values returns all known values for NoiseReducerFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NoiseReducerFilter) Values() []NoiseReducerFilter {
+	return []NoiseReducerFilter{
+		"BILATERAL",
+		"MEAN",
+		"GAUSSIAN",
+		"LANCZOS",
+		"SHARPEN",
+		"CONSERVE",
+		"SPATIAL",
+		"TEMPORAL",
+	}
+}
+
 type Order string
 
 // Enum values for Order
@@ -2329,6 +5160,16 @@ const (
 	OrderAscending  Order = "ASCENDING"
 	OrderDescending Order = "DESCENDING"
 )
+
+// Values returns all known values for Order. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Order) Values() []Order {
+	return []Order{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
 
 type OutputGroupType string
 
@@ -2341,6 +5182,19 @@ const (
 	OutputGroupTypeCmaf_group_settings      OutputGroupType = "CMAF_GROUP_SETTINGS"
 )
 
+// Values returns all known values for OutputGroupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutputGroupType) Values() []OutputGroupType {
+	return []OutputGroupType{
+		"HLS_GROUP_SETTINGS",
+		"DASH_ISO_GROUP_SETTINGS",
+		"FILE_GROUP_SETTINGS",
+		"MS_SMOOTH_GROUP_SETTINGS",
+		"CMAF_GROUP_SETTINGS",
+	}
+}
+
 type OutputSdt string
 
 // Enum values for OutputSdt
@@ -2351,6 +5205,18 @@ const (
 	OutputSdtSdt_none              OutputSdt = "SDT_NONE"
 )
 
+// Values returns all known values for OutputSdt. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OutputSdt) Values() []OutputSdt {
+	return []OutputSdt{
+		"SDT_FOLLOW",
+		"SDT_FOLLOW_IF_PRESENT",
+		"SDT_MANUAL",
+		"SDT_NONE",
+	}
+}
+
 type PresetListBy string
 
 // Enum values for PresetListBy
@@ -2360,6 +5226,17 @@ const (
 	PresetListBySystem        PresetListBy = "SYSTEM"
 )
 
+// Values returns all known values for PresetListBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PresetListBy) Values() []PresetListBy {
+	return []PresetListBy{
+		"NAME",
+		"CREATION_DATE",
+		"SYSTEM",
+	}
+}
+
 type PricingPlan string
 
 // Enum values for PricingPlan
@@ -2367,6 +5244,16 @@ const (
 	PricingPlanOn_demand PricingPlan = "ON_DEMAND"
 	PricingPlanReserved  PricingPlan = "RESERVED"
 )
+
+// Values returns all known values for PricingPlan. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PricingPlan) Values() []PricingPlan {
+	return []PricingPlan{
+		"ON_DEMAND",
+		"RESERVED",
+	}
+}
 
 type ProresCodecProfile string
 
@@ -2378,6 +5265,18 @@ const (
 	ProresCodecProfileApple_prores_422_proxy ProresCodecProfile = "APPLE_PRORES_422_PROXY"
 )
 
+// Values returns all known values for ProresCodecProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresCodecProfile) Values() []ProresCodecProfile {
+	return []ProresCodecProfile{
+		"APPLE_PRORES_422",
+		"APPLE_PRORES_422_HQ",
+		"APPLE_PRORES_422_LT",
+		"APPLE_PRORES_422_PROXY",
+	}
+}
+
 type ProresFramerateControl string
 
 // Enum values for ProresFramerateControl
@@ -2386,6 +5285,16 @@ const (
 	ProresFramerateControlSpecified              ProresFramerateControl = "SPECIFIED"
 )
 
+// Values returns all known values for ProresFramerateControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresFramerateControl) Values() []ProresFramerateControl {
+	return []ProresFramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
 type ProresFramerateConversionAlgorithm string
 
 // Enum values for ProresFramerateConversionAlgorithm
@@ -2393,6 +5302,17 @@ const (
 	ProresFramerateConversionAlgorithmDuplicate_drop ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"
 	ProresFramerateConversionAlgorithmInterpolate    ProresFramerateConversionAlgorithm = "INTERPOLATE"
 )
+
+// Values returns all known values for ProresFramerateConversionAlgorithm. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ProresFramerateConversionAlgorithm) Values() []ProresFramerateConversionAlgorithm {
+	return []ProresFramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
 
 type ProresInterlaceMode string
 
@@ -2405,6 +5325,19 @@ const (
 	ProresInterlaceModeFollow_bottom_field ProresInterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
+// Values returns all known values for ProresInterlaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresInterlaceMode) Values() []ProresInterlaceMode {
+	return []ProresInterlaceMode{
+		"PROGRESSIVE",
+		"TOP_FIELD",
+		"BOTTOM_FIELD",
+		"FOLLOW_TOP_FIELD",
+		"FOLLOW_BOTTOM_FIELD",
+	}
+}
+
 type ProresParControl string
 
 // Enum values for ProresParControl
@@ -2412,6 +5345,16 @@ const (
 	ProresParControlInitialize_from_source ProresParControl = "INITIALIZE_FROM_SOURCE"
 	ProresParControlSpecified              ProresParControl = "SPECIFIED"
 )
+
+// Values returns all known values for ProresParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresParControl) Values() []ProresParControl {
+	return []ProresParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
 
 type ProresSlowPal string
 
@@ -2421,6 +5364,16 @@ const (
 	ProresSlowPalEnabled  ProresSlowPal = "ENABLED"
 )
 
+// Values returns all known values for ProresSlowPal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresSlowPal) Values() []ProresSlowPal {
+	return []ProresSlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type ProresTelecine string
 
 // Enum values for ProresTelecine
@@ -2428,6 +5381,16 @@ const (
 	ProresTelecineNone ProresTelecine = "NONE"
 	ProresTelecineHard ProresTelecine = "HARD"
 )
+
+// Values returns all known values for ProresTelecine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresTelecine) Values() []ProresTelecine {
+	return []ProresTelecine{
+		"NONE",
+		"HARD",
+	}
+}
 
 type QueueListBy string
 
@@ -2437,6 +5400,16 @@ const (
 	QueueListByCreation_date QueueListBy = "CREATION_DATE"
 )
 
+// Values returns all known values for QueueListBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueueListBy) Values() []QueueListBy {
+	return []QueueListBy{
+		"NAME",
+		"CREATION_DATE",
+	}
+}
+
 type QueueStatus string
 
 // Enum values for QueueStatus
@@ -2444,6 +5417,16 @@ const (
 	QueueStatusActive QueueStatus = "ACTIVE"
 	QueueStatusPaused QueueStatus = "PAUSED"
 )
+
+// Values returns all known values for QueueStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueueStatus) Values() []QueueStatus {
+	return []QueueStatus{
+		"ACTIVE",
+		"PAUSED",
+	}
+}
 
 type RenewalType string
 
@@ -2453,6 +5436,16 @@ const (
 	RenewalTypeExpire     RenewalType = "EXPIRE"
 )
 
+// Values returns all known values for RenewalType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RenewalType) Values() []RenewalType {
+	return []RenewalType{
+		"AUTO_RENEW",
+		"EXPIRE",
+	}
+}
+
 type ReservationPlanStatus string
 
 // Enum values for ReservationPlanStatus
@@ -2460,6 +5453,16 @@ const (
 	ReservationPlanStatusActive  ReservationPlanStatus = "ACTIVE"
 	ReservationPlanStatusExpired ReservationPlanStatus = "EXPIRED"
 )
+
+// Values returns all known values for ReservationPlanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReservationPlanStatus) Values() []ReservationPlanStatus {
+	return []ReservationPlanStatus{
+		"ACTIVE",
+		"EXPIRED",
+	}
+}
 
 type RespondToAfd string
 
@@ -2469,6 +5472,17 @@ const (
 	RespondToAfdRespond     RespondToAfd = "RESPOND"
 	RespondToAfdPassthrough RespondToAfd = "PASSTHROUGH"
 )
+
+// Values returns all known values for RespondToAfd. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RespondToAfd) Values() []RespondToAfd {
+	return []RespondToAfd{
+		"NONE",
+		"RESPOND",
+		"PASSTHROUGH",
+	}
+}
 
 type S3ObjectCannedAcl string
 
@@ -2480,6 +5494,18 @@ const (
 	S3ObjectCannedAclBucket_owner_full_control S3ObjectCannedAcl = "BUCKET_OWNER_FULL_CONTROL"
 )
 
+// Values returns all known values for S3ObjectCannedAcl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectCannedAcl) Values() []S3ObjectCannedAcl {
+	return []S3ObjectCannedAcl{
+		"PUBLIC_READ",
+		"AUTHENTICATED_READ",
+		"BUCKET_OWNER_READ",
+		"BUCKET_OWNER_FULL_CONTROL",
+	}
+}
+
 type S3ServerSideEncryptionType string
 
 // Enum values for S3ServerSideEncryptionType
@@ -2488,6 +5514,16 @@ const (
 	S3ServerSideEncryptionTypeServer_side_encryption_kms S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_KMS"
 )
 
+// Values returns all known values for S3ServerSideEncryptionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ServerSideEncryptionType) Values() []S3ServerSideEncryptionType {
+	return []S3ServerSideEncryptionType{
+		"SERVER_SIDE_ENCRYPTION_S3",
+		"SERVER_SIDE_ENCRYPTION_KMS",
+	}
+}
+
 type ScalingBehavior string
 
 // Enum values for ScalingBehavior
@@ -2495,6 +5531,16 @@ const (
 	ScalingBehaviorDefault           ScalingBehavior = "DEFAULT"
 	ScalingBehaviorStretch_to_output ScalingBehavior = "STRETCH_TO_OUTPUT"
 )
+
+// Values returns all known values for ScalingBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingBehavior) Values() []ScalingBehavior {
+	return []ScalingBehavior{
+		"DEFAULT",
+		"STRETCH_TO_OUTPUT",
+	}
+}
 
 type SccDestinationFramerate string
 
@@ -2507,6 +5553,19 @@ const (
 	SccDestinationFramerateFramerate_29_97_non_dropframe SccDestinationFramerate = "FRAMERATE_29_97_NON_DROPFRAME"
 )
 
+// Values returns all known values for SccDestinationFramerate. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SccDestinationFramerate) Values() []SccDestinationFramerate {
+	return []SccDestinationFramerate{
+		"FRAMERATE_23_97",
+		"FRAMERATE_24",
+		"FRAMERATE_25",
+		"FRAMERATE_29_97_DROPFRAME",
+		"FRAMERATE_29_97_NON_DROPFRAME",
+	}
+}
+
 type SimulateReservedQueue string
 
 // Enum values for SimulateReservedQueue
@@ -2514,6 +5573,16 @@ const (
 	SimulateReservedQueueDisabled SimulateReservedQueue = "DISABLED"
 	SimulateReservedQueueEnabled  SimulateReservedQueue = "ENABLED"
 )
+
+// Values returns all known values for SimulateReservedQueue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SimulateReservedQueue) Values() []SimulateReservedQueue {
+	return []SimulateReservedQueue{
+		"DISABLED",
+		"ENABLED",
+	}
+}
 
 type StatusUpdateInterval string
 
@@ -2536,6 +5605,29 @@ const (
 	StatusUpdateIntervalSeconds_600 StatusUpdateInterval = "SECONDS_600"
 )
 
+// Values returns all known values for StatusUpdateInterval. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatusUpdateInterval) Values() []StatusUpdateInterval {
+	return []StatusUpdateInterval{
+		"SECONDS_10",
+		"SECONDS_12",
+		"SECONDS_15",
+		"SECONDS_20",
+		"SECONDS_30",
+		"SECONDS_60",
+		"SECONDS_120",
+		"SECONDS_180",
+		"SECONDS_240",
+		"SECONDS_300",
+		"SECONDS_360",
+		"SECONDS_420",
+		"SECONDS_480",
+		"SECONDS_540",
+		"SECONDS_600",
+	}
+}
+
 type TeletextPageType string
 
 // Enum values for TeletextPageType
@@ -2546,6 +5638,19 @@ const (
 	TeletextPageTypePage_type_program_schedule          TeletextPageType = "PAGE_TYPE_PROGRAM_SCHEDULE"
 	TeletextPageTypePage_type_hearing_impaired_subtitle TeletextPageType = "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
 )
+
+// Values returns all known values for TeletextPageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TeletextPageType) Values() []TeletextPageType {
+	return []TeletextPageType{
+		"PAGE_TYPE_INITIAL",
+		"PAGE_TYPE_SUBTITLE",
+		"PAGE_TYPE_ADDL_INFO",
+		"PAGE_TYPE_PROGRAM_SCHEDULE",
+		"PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE",
+	}
+}
 
 type TimecodeBurninPosition string
 
@@ -2562,6 +5667,23 @@ const (
 	TimecodeBurninPositionBottom_right  TimecodeBurninPosition = "BOTTOM_RIGHT"
 )
 
+// Values returns all known values for TimecodeBurninPosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeBurninPosition) Values() []TimecodeBurninPosition {
+	return []TimecodeBurninPosition{
+		"TOP_CENTER",
+		"TOP_LEFT",
+		"TOP_RIGHT",
+		"MIDDLE_LEFT",
+		"MIDDLE_CENTER",
+		"MIDDLE_RIGHT",
+		"BOTTOM_LEFT",
+		"BOTTOM_CENTER",
+		"BOTTOM_RIGHT",
+	}
+}
+
 type TimecodeSource string
 
 // Enum values for TimecodeSource
@@ -2571,6 +5693,17 @@ const (
 	TimecodeSourceSpecifiedstart TimecodeSource = "SPECIFIEDSTART"
 )
 
+// Values returns all known values for TimecodeSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeSource) Values() []TimecodeSource {
+	return []TimecodeSource{
+		"EMBEDDED",
+		"ZEROBASED",
+		"SPECIFIEDSTART",
+	}
+}
+
 type TimedMetadata string
 
 // Enum values for TimedMetadata
@@ -2578,6 +5711,16 @@ const (
 	TimedMetadataPassthrough TimedMetadata = "PASSTHROUGH"
 	TimedMetadataNone        TimedMetadata = "NONE"
 )
+
+// Values returns all known values for TimedMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimedMetadata) Values() []TimedMetadata {
+	return []TimedMetadata{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
 
 type TtmlStylePassthrough string
 
@@ -2587,6 +5730,16 @@ const (
 	TtmlStylePassthroughDisabled TtmlStylePassthrough = "DISABLED"
 )
 
+// Values returns all known values for TtmlStylePassthrough. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlStylePassthrough) Values() []TtmlStylePassthrough {
+	return []TtmlStylePassthrough{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Type string
 
 // Enum values for Type
@@ -2594,6 +5747,16 @@ const (
 	TypeSystem Type = "SYSTEM"
 	TypeCustom Type = "CUSTOM"
 )
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"SYSTEM",
+		"CUSTOM",
+	}
+}
 
 type VideoCodec string
 
@@ -2609,6 +5772,22 @@ const (
 	VideoCodecVp9           VideoCodec = "VP9"
 )
 
+// Values returns all known values for VideoCodec. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VideoCodec) Values() []VideoCodec {
+	return []VideoCodec{
+		"FRAME_CAPTURE",
+		"AV1",
+		"H_264",
+		"H_265",
+		"MPEG2",
+		"PRORES",
+		"VP8",
+		"VP9",
+	}
+}
+
 type VideoTimecodeInsertion string
 
 // Enum values for VideoTimecodeInsertion
@@ -2616,6 +5795,16 @@ const (
 	VideoTimecodeInsertionDisabled       VideoTimecodeInsertion = "DISABLED"
 	VideoTimecodeInsertionPic_timing_sei VideoTimecodeInsertion = "PIC_TIMING_SEI"
 )
+
+// Values returns all known values for VideoTimecodeInsertion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoTimecodeInsertion) Values() []VideoTimecodeInsertion {
+	return []VideoTimecodeInsertion{
+		"DISABLED",
+		"PIC_TIMING_SEI",
+	}
+}
 
 type Vp8FramerateControl string
 
@@ -2625,6 +5814,16 @@ const (
 	Vp8FramerateControlSpecified              Vp8FramerateControl = "SPECIFIED"
 )
 
+// Values returns all known values for Vp8FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp8FramerateControl) Values() []Vp8FramerateControl {
+	return []Vp8FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
 type Vp8FramerateConversionAlgorithm string
 
 // Enum values for Vp8FramerateConversionAlgorithm
@@ -2632,6 +5831,17 @@ const (
 	Vp8FramerateConversionAlgorithmDuplicate_drop Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
 	Vp8FramerateConversionAlgorithmInterpolate    Vp8FramerateConversionAlgorithm = "INTERPOLATE"
 )
+
+// Values returns all known values for Vp8FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Vp8FramerateConversionAlgorithm) Values() []Vp8FramerateConversionAlgorithm {
+	return []Vp8FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
 
 type Vp8ParControl string
 
@@ -2641,6 +5851,16 @@ const (
 	Vp8ParControlSpecified              Vp8ParControl = "SPECIFIED"
 )
 
+// Values returns all known values for Vp8ParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp8ParControl) Values() []Vp8ParControl {
+	return []Vp8ParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
 type Vp8QualityTuningLevel string
 
 // Enum values for Vp8QualityTuningLevel
@@ -2649,12 +5869,31 @@ const (
 	Vp8QualityTuningLevelMulti_pass_hq Vp8QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
+// Values returns all known values for Vp8QualityTuningLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp8QualityTuningLevel) Values() []Vp8QualityTuningLevel {
+	return []Vp8QualityTuningLevel{
+		"MULTI_PASS",
+		"MULTI_PASS_HQ",
+	}
+}
+
 type Vp8RateControlMode string
 
 // Enum values for Vp8RateControlMode
 const (
 	Vp8RateControlModeVbr Vp8RateControlMode = "VBR"
 )
+
+// Values returns all known values for Vp8RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp8RateControlMode) Values() []Vp8RateControlMode {
+	return []Vp8RateControlMode{
+		"VBR",
+	}
+}
 
 type Vp9FramerateControl string
 
@@ -2664,6 +5903,16 @@ const (
 	Vp9FramerateControlSpecified              Vp9FramerateControl = "SPECIFIED"
 )
 
+// Values returns all known values for Vp9FramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp9FramerateControl) Values() []Vp9FramerateControl {
+	return []Vp9FramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
 type Vp9FramerateConversionAlgorithm string
 
 // Enum values for Vp9FramerateConversionAlgorithm
@@ -2671,6 +5920,17 @@ const (
 	Vp9FramerateConversionAlgorithmDuplicate_drop Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
 	Vp9FramerateConversionAlgorithmInterpolate    Vp9FramerateConversionAlgorithm = "INTERPOLATE"
 )
+
+// Values returns all known values for Vp9FramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Vp9FramerateConversionAlgorithm) Values() []Vp9FramerateConversionAlgorithm {
+	return []Vp9FramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
 
 type Vp9ParControl string
 
@@ -2680,6 +5940,16 @@ const (
 	Vp9ParControlSpecified              Vp9ParControl = "SPECIFIED"
 )
 
+// Values returns all known values for Vp9ParControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp9ParControl) Values() []Vp9ParControl {
+	return []Vp9ParControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
 type Vp9QualityTuningLevel string
 
 // Enum values for Vp9QualityTuningLevel
@@ -2688,12 +5958,31 @@ const (
 	Vp9QualityTuningLevelMulti_pass_hq Vp9QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
+// Values returns all known values for Vp9QualityTuningLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp9QualityTuningLevel) Values() []Vp9QualityTuningLevel {
+	return []Vp9QualityTuningLevel{
+		"MULTI_PASS",
+		"MULTI_PASS_HQ",
+	}
+}
+
 type Vp9RateControlMode string
 
 // Enum values for Vp9RateControlMode
 const (
 	Vp9RateControlModeVbr Vp9RateControlMode = "VBR"
 )
+
+// Values returns all known values for Vp9RateControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Vp9RateControlMode) Values() []Vp9RateControlMode {
+	return []Vp9RateControlMode{
+		"VBR",
+	}
+}
 
 type WatermarkingStrength string
 
@@ -2706,6 +5995,19 @@ const (
 	WatermarkingStrengthStrongest WatermarkingStrength = "STRONGEST"
 )
 
+// Values returns all known values for WatermarkingStrength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WatermarkingStrength) Values() []WatermarkingStrength {
+	return []WatermarkingStrength{
+		"LIGHTEST",
+		"LIGHTER",
+		"DEFAULT",
+		"STRONGER",
+		"STRONGEST",
+	}
+}
+
 type WavFormat string
 
 // Enum values for WavFormat
@@ -2713,3 +6015,13 @@ const (
 	WavFormatRiff WavFormat = "RIFF"
 	WavFormatRf64 WavFormat = "RF64"
 )
+
+// Values returns all known values for WavFormat. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (WavFormat) Values() []WavFormat {
+	return []WavFormat{
+		"RIFF",
+		"RF64",
+	}
+}

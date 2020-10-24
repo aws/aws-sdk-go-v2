@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAddRoleToDBCluster struct {
 }
 
 func (*validateOpAddRoleToDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddRoleToDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpAddRoleToDBInstance struct {
 }
 
 func (*validateOpAddRoleToDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddRoleToDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpAddSourceIdentifierToSubscription struct {
 }
 
 func (*validateOpAddSourceIdentifierToSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddSourceIdentifierToSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpAddTagsToResource struct {
 }
 
 func (*validateOpAddTagsToResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAddTagsToResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpApplyPendingMaintenanceAction struct {
 }
 
 func (*validateOpApplyPendingMaintenanceAction) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpApplyPendingMaintenanceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -114,7 +115,7 @@ type validateOpAuthorizeDBSecurityGroupIngress struct {
 }
 
 func (*validateOpAuthorizeDBSecurityGroupIngress) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAuthorizeDBSecurityGroupIngress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -134,7 +135,7 @@ type validateOpBacktrackDBCluster struct {
 }
 
 func (*validateOpBacktrackDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpBacktrackDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -154,7 +155,7 @@ type validateOpCancelExportTask struct {
 }
 
 func (*validateOpCancelExportTask) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCancelExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -174,7 +175,7 @@ type validateOpCopyDBClusterParameterGroup struct {
 }
 
 func (*validateOpCopyDBClusterParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyDBClusterParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -194,7 +195,7 @@ type validateOpCopyDBClusterSnapshot struct {
 }
 
 func (*validateOpCopyDBClusterSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyDBClusterSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -214,7 +215,7 @@ type validateOpCopyDBParameterGroup struct {
 }
 
 func (*validateOpCopyDBParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyDBParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -234,7 +235,7 @@ type validateOpCopyDBSnapshot struct {
 }
 
 func (*validateOpCopyDBSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyDBSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -254,7 +255,7 @@ type validateOpCopyOptionGroup struct {
 }
 
 func (*validateOpCopyOptionGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCopyOptionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -274,7 +275,7 @@ type validateOpCreateCustomAvailabilityZone struct {
 }
 
 func (*validateOpCreateCustomAvailabilityZone) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateCustomAvailabilityZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -294,7 +295,7 @@ type validateOpCreateDBClusterEndpoint struct {
 }
 
 func (*validateOpCreateDBClusterEndpoint) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -314,7 +315,7 @@ type validateOpCreateDBCluster struct {
 }
 
 func (*validateOpCreateDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -334,7 +335,7 @@ type validateOpCreateDBClusterParameterGroup struct {
 }
 
 func (*validateOpCreateDBClusterParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBClusterParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -354,7 +355,7 @@ type validateOpCreateDBClusterSnapshot struct {
 }
 
 func (*validateOpCreateDBClusterSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBClusterSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -374,7 +375,7 @@ type validateOpCreateDBInstance struct {
 }
 
 func (*validateOpCreateDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -394,7 +395,7 @@ type validateOpCreateDBInstanceReadReplica struct {
 }
 
 func (*validateOpCreateDBInstanceReadReplica) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBInstanceReadReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -414,7 +415,7 @@ type validateOpCreateDBParameterGroup struct {
 }
 
 func (*validateOpCreateDBParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -434,7 +435,7 @@ type validateOpCreateDBProxy struct {
 }
 
 func (*validateOpCreateDBProxy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -454,7 +455,7 @@ type validateOpCreateDBSecurityGroup struct {
 }
 
 func (*validateOpCreateDBSecurityGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBSecurityGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -474,7 +475,7 @@ type validateOpCreateDBSnapshot struct {
 }
 
 func (*validateOpCreateDBSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -494,7 +495,7 @@ type validateOpCreateDBSubnetGroup struct {
 }
 
 func (*validateOpCreateDBSubnetGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateDBSubnetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -514,7 +515,7 @@ type validateOpCreateEventSubscription struct {
 }
 
 func (*validateOpCreateEventSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -534,7 +535,7 @@ type validateOpCreateOptionGroup struct {
 }
 
 func (*validateOpCreateOptionGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateOptionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -554,7 +555,7 @@ type validateOpDeleteCustomAvailabilityZone struct {
 }
 
 func (*validateOpDeleteCustomAvailabilityZone) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteCustomAvailabilityZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -574,7 +575,7 @@ type validateOpDeleteDBClusterEndpoint struct {
 }
 
 func (*validateOpDeleteDBClusterEndpoint) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -594,7 +595,7 @@ type validateOpDeleteDBCluster struct {
 }
 
 func (*validateOpDeleteDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -614,7 +615,7 @@ type validateOpDeleteDBClusterParameterGroup struct {
 }
 
 func (*validateOpDeleteDBClusterParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBClusterParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -634,7 +635,7 @@ type validateOpDeleteDBClusterSnapshot struct {
 }
 
 func (*validateOpDeleteDBClusterSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBClusterSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -654,7 +655,7 @@ type validateOpDeleteDBInstanceAutomatedBackup struct {
 }
 
 func (*validateOpDeleteDBInstanceAutomatedBackup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBInstanceAutomatedBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -674,7 +675,7 @@ type validateOpDeleteDBInstance struct {
 }
 
 func (*validateOpDeleteDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -694,7 +695,7 @@ type validateOpDeleteDBParameterGroup struct {
 }
 
 func (*validateOpDeleteDBParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -714,7 +715,7 @@ type validateOpDeleteDBProxy struct {
 }
 
 func (*validateOpDeleteDBProxy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -734,7 +735,7 @@ type validateOpDeleteDBSecurityGroup struct {
 }
 
 func (*validateOpDeleteDBSecurityGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBSecurityGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -754,7 +755,7 @@ type validateOpDeleteDBSnapshot struct {
 }
 
 func (*validateOpDeleteDBSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -774,7 +775,7 @@ type validateOpDeleteDBSubnetGroup struct {
 }
 
 func (*validateOpDeleteDBSubnetGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteDBSubnetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -794,7 +795,7 @@ type validateOpDeleteEventSubscription struct {
 }
 
 func (*validateOpDeleteEventSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -814,7 +815,7 @@ type validateOpDeleteGlobalCluster struct {
 }
 
 func (*validateOpDeleteGlobalCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -834,7 +835,7 @@ type validateOpDeleteInstallationMedia struct {
 }
 
 func (*validateOpDeleteInstallationMedia) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -854,7 +855,7 @@ type validateOpDeleteOptionGroup struct {
 }
 
 func (*validateOpDeleteOptionGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteOptionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -874,7 +875,7 @@ type validateOpDeregisterDBProxyTargets struct {
 }
 
 func (*validateOpDeregisterDBProxyTargets) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeregisterDBProxyTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -894,7 +895,7 @@ type validateOpDescribeCertificates struct {
 }
 
 func (*validateOpDescribeCertificates) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeCertificates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -914,7 +915,7 @@ type validateOpDescribeCustomAvailabilityZones struct {
 }
 
 func (*validateOpDescribeCustomAvailabilityZones) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeCustomAvailabilityZones) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -934,7 +935,7 @@ type validateOpDescribeDBClusterBacktracks struct {
 }
 
 func (*validateOpDescribeDBClusterBacktracks) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterBacktracks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -954,7 +955,7 @@ type validateOpDescribeDBClusterEndpoints struct {
 }
 
 func (*validateOpDescribeDBClusterEndpoints) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -974,7 +975,7 @@ type validateOpDescribeDBClusterParameterGroups struct {
 }
 
 func (*validateOpDescribeDBClusterParameterGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterParameterGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -994,7 +995,7 @@ type validateOpDescribeDBClusterParameters struct {
 }
 
 func (*validateOpDescribeDBClusterParameters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterParameters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1014,7 +1015,7 @@ type validateOpDescribeDBClusters struct {
 }
 
 func (*validateOpDescribeDBClusters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1034,7 +1035,7 @@ type validateOpDescribeDBClusterSnapshotAttributes struct {
 }
 
 func (*validateOpDescribeDBClusterSnapshotAttributes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterSnapshotAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1054,7 +1055,7 @@ type validateOpDescribeDBClusterSnapshots struct {
 }
 
 func (*validateOpDescribeDBClusterSnapshots) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBClusterSnapshots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1074,7 +1075,7 @@ type validateOpDescribeDBEngineVersions struct {
 }
 
 func (*validateOpDescribeDBEngineVersions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBEngineVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1094,7 +1095,7 @@ type validateOpDescribeDBInstanceAutomatedBackups struct {
 }
 
 func (*validateOpDescribeDBInstanceAutomatedBackups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBInstanceAutomatedBackups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1114,7 +1115,7 @@ type validateOpDescribeDBInstances struct {
 }
 
 func (*validateOpDescribeDBInstances) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1134,7 +1135,7 @@ type validateOpDescribeDBLogFiles struct {
 }
 
 func (*validateOpDescribeDBLogFiles) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBLogFiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1154,7 +1155,7 @@ type validateOpDescribeDBParameterGroups struct {
 }
 
 func (*validateOpDescribeDBParameterGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBParameterGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1174,7 +1175,7 @@ type validateOpDescribeDBParameters struct {
 }
 
 func (*validateOpDescribeDBParameters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBParameters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1194,7 +1195,7 @@ type validateOpDescribeDBProxies struct {
 }
 
 func (*validateOpDescribeDBProxies) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBProxies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1214,7 +1215,7 @@ type validateOpDescribeDBProxyTargetGroups struct {
 }
 
 func (*validateOpDescribeDBProxyTargetGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBProxyTargetGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1234,7 +1235,7 @@ type validateOpDescribeDBProxyTargets struct {
 }
 
 func (*validateOpDescribeDBProxyTargets) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBProxyTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1254,7 +1255,7 @@ type validateOpDescribeDBSecurityGroups struct {
 }
 
 func (*validateOpDescribeDBSecurityGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBSecurityGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1274,7 +1275,7 @@ type validateOpDescribeDBSnapshotAttributes struct {
 }
 
 func (*validateOpDescribeDBSnapshotAttributes) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBSnapshotAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1294,7 +1295,7 @@ type validateOpDescribeDBSnapshots struct {
 }
 
 func (*validateOpDescribeDBSnapshots) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBSnapshots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1314,7 +1315,7 @@ type validateOpDescribeDBSubnetGroups struct {
 }
 
 func (*validateOpDescribeDBSubnetGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDBSubnetGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1334,7 +1335,7 @@ type validateOpDescribeEngineDefaultClusterParameters struct {
 }
 
 func (*validateOpDescribeEngineDefaultClusterParameters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEngineDefaultClusterParameters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1354,7 +1355,7 @@ type validateOpDescribeEngineDefaultParameters struct {
 }
 
 func (*validateOpDescribeEngineDefaultParameters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEngineDefaultParameters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1374,7 +1375,7 @@ type validateOpDescribeEventCategories struct {
 }
 
 func (*validateOpDescribeEventCategories) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEventCategories) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1394,7 +1395,7 @@ type validateOpDescribeEvents struct {
 }
 
 func (*validateOpDescribeEvents) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1414,7 +1415,7 @@ type validateOpDescribeEventSubscriptions struct {
 }
 
 func (*validateOpDescribeEventSubscriptions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeEventSubscriptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1434,7 +1435,7 @@ type validateOpDescribeExportTasks struct {
 }
 
 func (*validateOpDescribeExportTasks) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeExportTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1454,7 +1455,7 @@ type validateOpDescribeGlobalClusters struct {
 }
 
 func (*validateOpDescribeGlobalClusters) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeGlobalClusters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1474,7 +1475,7 @@ type validateOpDescribeInstallationMedia struct {
 }
 
 func (*validateOpDescribeInstallationMedia) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1494,7 +1495,7 @@ type validateOpDescribeOptionGroupOptions struct {
 }
 
 func (*validateOpDescribeOptionGroupOptions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeOptionGroupOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1514,7 +1515,7 @@ type validateOpDescribeOptionGroups struct {
 }
 
 func (*validateOpDescribeOptionGroups) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeOptionGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1534,7 +1535,7 @@ type validateOpDescribeOrderableDBInstanceOptions struct {
 }
 
 func (*validateOpDescribeOrderableDBInstanceOptions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeOrderableDBInstanceOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1554,7 +1555,7 @@ type validateOpDescribePendingMaintenanceActions struct {
 }
 
 func (*validateOpDescribePendingMaintenanceActions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribePendingMaintenanceActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1574,7 +1575,7 @@ type validateOpDescribeReservedDBInstances struct {
 }
 
 func (*validateOpDescribeReservedDBInstances) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeReservedDBInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1594,7 +1595,7 @@ type validateOpDescribeReservedDBInstancesOfferings struct {
 }
 
 func (*validateOpDescribeReservedDBInstancesOfferings) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeReservedDBInstancesOfferings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1614,7 +1615,7 @@ type validateOpDescribeSourceRegions struct {
 }
 
 func (*validateOpDescribeSourceRegions) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeSourceRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1634,7 +1635,7 @@ type validateOpDescribeValidDBInstanceModifications struct {
 }
 
 func (*validateOpDescribeValidDBInstanceModifications) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeValidDBInstanceModifications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1654,7 +1655,7 @@ type validateOpDownloadDBLogFilePortion struct {
 }
 
 func (*validateOpDownloadDBLogFilePortion) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDownloadDBLogFilePortion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1674,7 +1675,7 @@ type validateOpFailoverDBCluster struct {
 }
 
 func (*validateOpFailoverDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpFailoverDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1694,7 +1695,7 @@ type validateOpImportInstallationMedia struct {
 }
 
 func (*validateOpImportInstallationMedia) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpImportInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1714,7 +1715,7 @@ type validateOpListTagsForResource struct {
 }
 
 func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1734,7 +1735,7 @@ type validateOpModifyCurrentDBClusterCapacity struct {
 }
 
 func (*validateOpModifyCurrentDBClusterCapacity) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyCurrentDBClusterCapacity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1754,7 +1755,7 @@ type validateOpModifyDBClusterEndpoint struct {
 }
 
 func (*validateOpModifyDBClusterEndpoint) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1774,7 +1775,7 @@ type validateOpModifyDBCluster struct {
 }
 
 func (*validateOpModifyDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1794,7 +1795,7 @@ type validateOpModifyDBClusterParameterGroup struct {
 }
 
 func (*validateOpModifyDBClusterParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBClusterParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1814,7 +1815,7 @@ type validateOpModifyDBClusterSnapshotAttribute struct {
 }
 
 func (*validateOpModifyDBClusterSnapshotAttribute) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBClusterSnapshotAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1834,7 +1835,7 @@ type validateOpModifyDBInstance struct {
 }
 
 func (*validateOpModifyDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1854,7 +1855,7 @@ type validateOpModifyDBParameterGroup struct {
 }
 
 func (*validateOpModifyDBParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1874,7 +1875,7 @@ type validateOpModifyDBProxy struct {
 }
 
 func (*validateOpModifyDBProxy) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1894,7 +1895,7 @@ type validateOpModifyDBProxyTargetGroup struct {
 }
 
 func (*validateOpModifyDBProxyTargetGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBProxyTargetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1914,7 +1915,7 @@ type validateOpModifyDBSnapshotAttribute struct {
 }
 
 func (*validateOpModifyDBSnapshotAttribute) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBSnapshotAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1934,7 +1935,7 @@ type validateOpModifyDBSnapshot struct {
 }
 
 func (*validateOpModifyDBSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1954,7 +1955,7 @@ type validateOpModifyDBSubnetGroup struct {
 }
 
 func (*validateOpModifyDBSubnetGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyDBSubnetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1974,7 +1975,7 @@ type validateOpModifyEventSubscription struct {
 }
 
 func (*validateOpModifyEventSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -1994,7 +1995,7 @@ type validateOpModifyOptionGroup struct {
 }
 
 func (*validateOpModifyOptionGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpModifyOptionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2014,7 +2015,7 @@ type validateOpPromoteReadReplicaDBCluster struct {
 }
 
 func (*validateOpPromoteReadReplicaDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPromoteReadReplicaDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2034,7 +2035,7 @@ type validateOpPromoteReadReplica struct {
 }
 
 func (*validateOpPromoteReadReplica) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPromoteReadReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2054,7 +2055,7 @@ type validateOpPurchaseReservedDBInstancesOffering struct {
 }
 
 func (*validateOpPurchaseReservedDBInstancesOffering) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPurchaseReservedDBInstancesOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2074,7 +2075,7 @@ type validateOpRebootDBInstance struct {
 }
 
 func (*validateOpRebootDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRebootDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2094,7 +2095,7 @@ type validateOpRegisterDBProxyTargets struct {
 }
 
 func (*validateOpRegisterDBProxyTargets) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRegisterDBProxyTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2114,7 +2115,7 @@ type validateOpRemoveRoleFromDBCluster struct {
 }
 
 func (*validateOpRemoveRoleFromDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveRoleFromDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2134,7 +2135,7 @@ type validateOpRemoveRoleFromDBInstance struct {
 }
 
 func (*validateOpRemoveRoleFromDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveRoleFromDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2154,7 +2155,7 @@ type validateOpRemoveSourceIdentifierFromSubscription struct {
 }
 
 func (*validateOpRemoveSourceIdentifierFromSubscription) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveSourceIdentifierFromSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2174,7 +2175,7 @@ type validateOpRemoveTagsFromResource struct {
 }
 
 func (*validateOpRemoveTagsFromResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRemoveTagsFromResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2194,7 +2195,7 @@ type validateOpResetDBClusterParameterGroup struct {
 }
 
 func (*validateOpResetDBClusterParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpResetDBClusterParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2214,7 +2215,7 @@ type validateOpResetDBParameterGroup struct {
 }
 
 func (*validateOpResetDBParameterGroup) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpResetDBParameterGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2234,7 +2235,7 @@ type validateOpRestoreDBClusterFromS3 struct {
 }
 
 func (*validateOpRestoreDBClusterFromS3) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBClusterFromS3) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2254,7 +2255,7 @@ type validateOpRestoreDBClusterFromSnapshot struct {
 }
 
 func (*validateOpRestoreDBClusterFromSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBClusterFromSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2274,7 +2275,7 @@ type validateOpRestoreDBClusterToPointInTime struct {
 }
 
 func (*validateOpRestoreDBClusterToPointInTime) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBClusterToPointInTime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2294,7 +2295,7 @@ type validateOpRestoreDBInstanceFromDBSnapshot struct {
 }
 
 func (*validateOpRestoreDBInstanceFromDBSnapshot) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBInstanceFromDBSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2314,7 +2315,7 @@ type validateOpRestoreDBInstanceFromS3 struct {
 }
 
 func (*validateOpRestoreDBInstanceFromS3) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBInstanceFromS3) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2334,7 +2335,7 @@ type validateOpRestoreDBInstanceToPointInTime struct {
 }
 
 func (*validateOpRestoreDBInstanceToPointInTime) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDBInstanceToPointInTime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2354,7 +2355,7 @@ type validateOpRevokeDBSecurityGroupIngress struct {
 }
 
 func (*validateOpRevokeDBSecurityGroupIngress) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRevokeDBSecurityGroupIngress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2374,7 +2375,7 @@ type validateOpStartActivityStream struct {
 }
 
 func (*validateOpStartActivityStream) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartActivityStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2394,7 +2395,7 @@ type validateOpStartDBCluster struct {
 }
 
 func (*validateOpStartDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2414,7 +2415,7 @@ type validateOpStartDBInstance struct {
 }
 
 func (*validateOpStartDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2434,7 +2435,7 @@ type validateOpStartExportTask struct {
 }
 
 func (*validateOpStartExportTask) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2454,7 +2455,7 @@ type validateOpStopActivityStream struct {
 }
 
 func (*validateOpStopActivityStream) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopActivityStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2474,7 +2475,7 @@ type validateOpStopDBCluster struct {
 }
 
 func (*validateOpStopDBCluster) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -2494,7 +2495,7 @@ type validateOpStopDBInstance struct {
 }
 
 func (*validateOpStopDBInstance) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopDBInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpCancelQuantumTask struct {
 }
 
 func (*awsRestjson1_serializeOpCancelQuantumTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCancelQuantumTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -107,7 +108,7 @@ type awsRestjson1_serializeOpCreateQuantumTask struct {
 }
 
 func (*awsRestjson1_serializeOpCreateQuantumTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateQuantumTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -210,7 +211,7 @@ type awsRestjson1_serializeOpGetDevice struct {
 }
 
 func (*awsRestjson1_serializeOpGetDevice) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -276,7 +277,7 @@ type awsRestjson1_serializeOpGetQuantumTask struct {
 }
 
 func (*awsRestjson1_serializeOpGetQuantumTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetQuantumTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -342,7 +343,7 @@ type awsRestjson1_serializeOpSearchDevices struct {
 }
 
 func (*awsRestjson1_serializeOpSearchDevices) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSearchDevices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -427,7 +428,7 @@ type awsRestjson1_serializeOpSearchQuantumTasks struct {
 }
 
 func (*awsRestjson1_serializeOpSearchQuantumTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpSearchQuantumTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

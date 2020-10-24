@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpCreateMedicalVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateMedicalVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateMedicalVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_deserializeOpCreateVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -263,7 +264,7 @@ type awsAwsjson11_deserializeOpCreateVocabularyFilter struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateVocabularyFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateVocabularyFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -383,7 +384,7 @@ type awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -500,7 +501,7 @@ type awsAwsjson11_deserializeOpDeleteMedicalVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteMedicalVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteMedicalVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -620,7 +621,7 @@ type awsAwsjson11_deserializeOpDeleteTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -737,7 +738,7 @@ type awsAwsjson11_deserializeOpDeleteVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -857,7 +858,7 @@ type awsAwsjson11_deserializeOpDeleteVocabularyFilter struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteVocabularyFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteVocabularyFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -977,7 +978,7 @@ type awsAwsjson11_deserializeOpGetMedicalTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetMedicalTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetMedicalTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1097,7 +1098,7 @@ type awsAwsjson11_deserializeOpGetMedicalVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetMedicalVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetMedicalVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1217,7 +1218,7 @@ type awsAwsjson11_deserializeOpGetTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1337,7 +1338,7 @@ type awsAwsjson11_deserializeOpGetVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1457,7 +1458,7 @@ type awsAwsjson11_deserializeOpGetVocabularyFilter struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetVocabularyFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetVocabularyFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1577,7 +1578,7 @@ type awsAwsjson11_deserializeOpListMedicalTranscriptionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListMedicalTranscriptionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListMedicalTranscriptionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1694,7 +1695,7 @@ type awsAwsjson11_deserializeOpListMedicalVocabularies struct {
 }
 
 func (*awsAwsjson11_deserializeOpListMedicalVocabularies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListMedicalVocabularies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1811,7 +1812,7 @@ type awsAwsjson11_deserializeOpListTranscriptionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTranscriptionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTranscriptionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1928,7 +1929,7 @@ type awsAwsjson11_deserializeOpListVocabularies struct {
 }
 
 func (*awsAwsjson11_deserializeOpListVocabularies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListVocabularies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2045,7 +2046,7 @@ type awsAwsjson11_deserializeOpListVocabularyFilters struct {
 }
 
 func (*awsAwsjson11_deserializeOpListVocabularyFilters) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListVocabularyFilters) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2162,7 +2163,7 @@ type awsAwsjson11_deserializeOpStartMedicalTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartMedicalTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartMedicalTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2282,7 +2283,7 @@ type awsAwsjson11_deserializeOpStartTranscriptionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartTranscriptionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartTranscriptionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2402,7 +2403,7 @@ type awsAwsjson11_deserializeOpUpdateMedicalVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateMedicalVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateMedicalVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2525,7 +2526,7 @@ type awsAwsjson11_deserializeOpUpdateVocabulary struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateVocabulary) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateVocabulary) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2648,7 +2649,7 @@ type awsAwsjson11_deserializeOpUpdateVocabularyFilter struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateVocabularyFilter) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateVocabularyFilter) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

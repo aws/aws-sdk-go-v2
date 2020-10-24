@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpCreateBroker struct {
 }
 
 func (*awsRestjson1_serializeOpCreateBroker) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateBroker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -199,7 +200,7 @@ type awsRestjson1_serializeOpCreateConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpCreateConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsRestjson1_serializeOpCreateTags struct {
 }
 
 func (*awsRestjson1_serializeOpCreateTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -385,7 +386,7 @@ type awsRestjson1_serializeOpCreateUser struct {
 }
 
 func (*awsRestjson1_serializeOpCreateUser) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -498,7 +499,7 @@ type awsRestjson1_serializeOpDeleteBroker struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteBroker) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteBroker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -564,7 +565,7 @@ type awsRestjson1_serializeOpDeleteTags struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -639,7 +640,7 @@ type awsRestjson1_serializeOpDeleteUser struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteUser) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -717,7 +718,7 @@ type awsRestjson1_serializeOpDescribeBroker struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeBroker) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeBroker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -783,7 +784,7 @@ type awsRestjson1_serializeOpDescribeBrokerEngineTypes struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeBrokerEngineTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeBrokerEngineTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -849,7 +850,7 @@ type awsRestjson1_serializeOpDescribeBrokerInstanceOptions struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeBrokerInstanceOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeBrokerInstanceOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -923,7 +924,7 @@ type awsRestjson1_serializeOpDescribeConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -989,7 +990,7 @@ type awsRestjson1_serializeOpDescribeConfigurationRevision struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeConfigurationRevision) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeConfigurationRevision) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1067,7 +1068,7 @@ type awsRestjson1_serializeOpDescribeUser struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeUser) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1145,7 +1146,7 @@ type awsRestjson1_serializeOpListBrokers struct {
 }
 
 func (*awsRestjson1_serializeOpListBrokers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListBrokers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1207,7 +1208,7 @@ type awsRestjson1_serializeOpListConfigurationRevisions struct {
 }
 
 func (*awsRestjson1_serializeOpListConfigurationRevisions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListConfigurationRevisions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1281,7 +1282,7 @@ type awsRestjson1_serializeOpListConfigurations struct {
 }
 
 func (*awsRestjson1_serializeOpListConfigurations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1343,7 +1344,7 @@ type awsRestjson1_serializeOpListTags struct {
 }
 
 func (*awsRestjson1_serializeOpListTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1409,7 +1410,7 @@ type awsRestjson1_serializeOpListUsers struct {
 }
 
 func (*awsRestjson1_serializeOpListUsers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListUsers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1483,7 +1484,7 @@ type awsRestjson1_serializeOpRebootBroker struct {
 }
 
 func (*awsRestjson1_serializeOpRebootBroker) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpRebootBroker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1549,7 +1550,7 @@ type awsRestjson1_serializeOpUpdateBroker struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateBroker) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateBroker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1681,7 +1682,7 @@ type awsRestjson1_serializeOpUpdateConfiguration struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1775,7 +1776,7 @@ type awsRestjson1_serializeOpUpdateUser struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateUser) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

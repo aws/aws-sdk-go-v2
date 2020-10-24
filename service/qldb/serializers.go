@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsRestjson1_serializeOpCancelJournalKinesisStream struct {
 }
 
 func (*awsRestjson1_serializeOpCancelJournalKinesisStream) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCancelJournalKinesisStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -97,7 +98,7 @@ type awsRestjson1_serializeOpCreateLedger struct {
 }
 
 func (*awsRestjson1_serializeOpCreateLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -187,7 +188,7 @@ type awsRestjson1_serializeOpDeleteLedger struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -253,7 +254,7 @@ type awsRestjson1_serializeOpDescribeJournalKinesisStream struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeJournalKinesisStream) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeJournalKinesisStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -331,7 +332,7 @@ type awsRestjson1_serializeOpDescribeJournalS3Export struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeJournalS3Export) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeJournalS3Export) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -409,7 +410,7 @@ type awsRestjson1_serializeOpDescribeLedger struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -475,7 +476,7 @@ type awsRestjson1_serializeOpExportJournalToS3 struct {
 }
 
 func (*awsRestjson1_serializeOpExportJournalToS3) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpExportJournalToS3) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -581,7 +582,7 @@ type awsRestjson1_serializeOpGetBlock struct {
 }
 
 func (*awsRestjson1_serializeOpGetBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -679,7 +680,7 @@ type awsRestjson1_serializeOpGetDigest struct {
 }
 
 func (*awsRestjson1_serializeOpGetDigest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetDigest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -745,7 +746,7 @@ type awsRestjson1_serializeOpGetRevision struct {
 }
 
 func (*awsRestjson1_serializeOpGetRevision) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetRevision) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -848,7 +849,7 @@ type awsRestjson1_serializeOpListJournalKinesisStreamsForLedger struct {
 }
 
 func (*awsRestjson1_serializeOpListJournalKinesisStreamsForLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListJournalKinesisStreamsForLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -922,7 +923,7 @@ type awsRestjson1_serializeOpListJournalS3Exports struct {
 }
 
 func (*awsRestjson1_serializeOpListJournalS3Exports) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListJournalS3Exports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -984,7 +985,7 @@ type awsRestjson1_serializeOpListJournalS3ExportsForLedger struct {
 }
 
 func (*awsRestjson1_serializeOpListJournalS3ExportsForLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListJournalS3ExportsForLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1058,7 +1059,7 @@ type awsRestjson1_serializeOpListLedgers struct {
 }
 
 func (*awsRestjson1_serializeOpListLedgers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListLedgers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1120,7 +1121,7 @@ type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
 func (*awsRestjson1_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1186,7 +1187,7 @@ type awsRestjson1_serializeOpStreamJournalToKinesis struct {
 }
 
 func (*awsRestjson1_serializeOpStreamJournalToKinesis) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStreamJournalToKinesis) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1304,7 +1305,7 @@ type awsRestjson1_serializeOpTagResource struct {
 }
 
 func (*awsRestjson1_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1395,7 +1396,7 @@ type awsRestjson1_serializeOpUntagResource struct {
 }
 
 func (*awsRestjson1_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1470,7 +1471,7 @@ type awsRestjson1_serializeOpUpdateLedger struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateLedger) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateLedger) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

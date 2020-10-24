@@ -10,6 +10,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
 )
@@ -18,7 +19,7 @@ type awsRestxml_serializeOpAssociateVPCWithHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpAssociateVPCWithHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpAssociateVPCWithHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -130,7 +131,7 @@ type awsRestxml_serializeOpChangeResourceRecordSets struct {
 }
 
 func (*awsRestxml_serializeOpChangeResourceRecordSets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpChangeResourceRecordSets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -231,7 +232,7 @@ type awsRestxml_serializeOpChangeTagsForResource struct {
 }
 
 func (*awsRestxml_serializeOpChangeTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpChangeTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -357,7 +358,7 @@ type awsRestxml_serializeOpCreateHealthCheck struct {
 }
 
 func (*awsRestxml_serializeOpCreateHealthCheck) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -453,7 +454,7 @@ type awsRestxml_serializeOpCreateHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpCreateHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -584,7 +585,7 @@ type awsRestxml_serializeOpCreateQueryLoggingConfig struct {
 }
 
 func (*awsRestxml_serializeOpCreateQueryLoggingConfig) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateQueryLoggingConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -678,7 +679,7 @@ type awsRestxml_serializeOpCreateReusableDelegationSet struct {
 }
 
 func (*awsRestxml_serializeOpCreateReusableDelegationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateReusableDelegationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -772,7 +773,7 @@ type awsRestxml_serializeOpCreateTrafficPolicy struct {
 }
 
 func (*awsRestxml_serializeOpCreateTrafficPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateTrafficPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -877,7 +878,7 @@ type awsRestxml_serializeOpCreateTrafficPolicyInstance struct {
 }
 
 func (*awsRestxml_serializeOpCreateTrafficPolicyInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateTrafficPolicyInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1004,7 +1005,7 @@ type awsRestxml_serializeOpCreateTrafficPolicyVersion struct {
 }
 
 func (*awsRestxml_serializeOpCreateTrafficPolicyVersion) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateTrafficPolicyVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1114,7 +1115,7 @@ type awsRestxml_serializeOpCreateVPCAssociationAuthorization struct {
 }
 
 func (*awsRestxml_serializeOpCreateVPCAssociationAuthorization) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpCreateVPCAssociationAuthorization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1215,7 +1216,7 @@ type awsRestxml_serializeOpDeleteHealthCheck struct {
 }
 
 func (*awsRestxml_serializeOpDeleteHealthCheck) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1281,7 +1282,7 @@ type awsRestxml_serializeOpDeleteHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpDeleteHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1347,7 +1348,7 @@ type awsRestxml_serializeOpDeleteQueryLoggingConfig struct {
 }
 
 func (*awsRestxml_serializeOpDeleteQueryLoggingConfig) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteQueryLoggingConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1413,7 +1414,7 @@ type awsRestxml_serializeOpDeleteReusableDelegationSet struct {
 }
 
 func (*awsRestxml_serializeOpDeleteReusableDelegationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteReusableDelegationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1479,7 +1480,7 @@ type awsRestxml_serializeOpDeleteTrafficPolicy struct {
 }
 
 func (*awsRestxml_serializeOpDeleteTrafficPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteTrafficPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1554,7 +1555,7 @@ type awsRestxml_serializeOpDeleteTrafficPolicyInstance struct {
 }
 
 func (*awsRestxml_serializeOpDeleteTrafficPolicyInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteTrafficPolicyInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1620,7 +1621,7 @@ type awsRestxml_serializeOpDeleteVPCAssociationAuthorization struct {
 }
 
 func (*awsRestxml_serializeOpDeleteVPCAssociationAuthorization) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDeleteVPCAssociationAuthorization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1721,7 +1722,7 @@ type awsRestxml_serializeOpDisassociateVPCFromHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpDisassociateVPCFromHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpDisassociateVPCFromHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1833,7 +1834,7 @@ type awsRestxml_serializeOpGetAccountLimit struct {
 }
 
 func (*awsRestxml_serializeOpGetAccountLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetAccountLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1899,7 +1900,7 @@ type awsRestxml_serializeOpGetChange struct {
 }
 
 func (*awsRestxml_serializeOpGetChange) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetChange) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1965,7 +1966,7 @@ type awsRestxml_serializeOpGetCheckerIpRanges struct {
 }
 
 func (*awsRestxml_serializeOpGetCheckerIpRanges) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetCheckerIpRanges) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2015,7 +2016,7 @@ type awsRestxml_serializeOpGetGeoLocation struct {
 }
 
 func (*awsRestxml_serializeOpGetGeoLocation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetGeoLocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2081,7 +2082,7 @@ type awsRestxml_serializeOpGetHealthCheck struct {
 }
 
 func (*awsRestxml_serializeOpGetHealthCheck) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2147,7 +2148,7 @@ type awsRestxml_serializeOpGetHealthCheckCount struct {
 }
 
 func (*awsRestxml_serializeOpGetHealthCheckCount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHealthCheckCount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2197,7 +2198,7 @@ type awsRestxml_serializeOpGetHealthCheckLastFailureReason struct {
 }
 
 func (*awsRestxml_serializeOpGetHealthCheckLastFailureReason) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHealthCheckLastFailureReason) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2263,7 +2264,7 @@ type awsRestxml_serializeOpGetHealthCheckStatus struct {
 }
 
 func (*awsRestxml_serializeOpGetHealthCheckStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHealthCheckStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2329,7 +2330,7 @@ type awsRestxml_serializeOpGetHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpGetHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2395,7 +2396,7 @@ type awsRestxml_serializeOpGetHostedZoneCount struct {
 }
 
 func (*awsRestxml_serializeOpGetHostedZoneCount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHostedZoneCount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2445,7 +2446,7 @@ type awsRestxml_serializeOpGetHostedZoneLimit struct {
 }
 
 func (*awsRestxml_serializeOpGetHostedZoneLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetHostedZoneLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2523,7 +2524,7 @@ type awsRestxml_serializeOpGetQueryLoggingConfig struct {
 }
 
 func (*awsRestxml_serializeOpGetQueryLoggingConfig) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetQueryLoggingConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2589,7 +2590,7 @@ type awsRestxml_serializeOpGetReusableDelegationSet struct {
 }
 
 func (*awsRestxml_serializeOpGetReusableDelegationSet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetReusableDelegationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2655,7 +2656,7 @@ type awsRestxml_serializeOpGetReusableDelegationSetLimit struct {
 }
 
 func (*awsRestxml_serializeOpGetReusableDelegationSetLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetReusableDelegationSetLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2733,7 +2734,7 @@ type awsRestxml_serializeOpGetTrafficPolicy struct {
 }
 
 func (*awsRestxml_serializeOpGetTrafficPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetTrafficPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2808,7 +2809,7 @@ type awsRestxml_serializeOpGetTrafficPolicyInstance struct {
 }
 
 func (*awsRestxml_serializeOpGetTrafficPolicyInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetTrafficPolicyInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2874,7 +2875,7 @@ type awsRestxml_serializeOpGetTrafficPolicyInstanceCount struct {
 }
 
 func (*awsRestxml_serializeOpGetTrafficPolicyInstanceCount) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpGetTrafficPolicyInstanceCount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2924,7 +2925,7 @@ type awsRestxml_serializeOpListGeoLocations struct {
 }
 
 func (*awsRestxml_serializeOpListGeoLocations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListGeoLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2994,7 +2995,7 @@ type awsRestxml_serializeOpListHealthChecks struct {
 }
 
 func (*awsRestxml_serializeOpListHealthChecks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListHealthChecks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3056,7 +3057,7 @@ type awsRestxml_serializeOpListHostedZones struct {
 }
 
 func (*awsRestxml_serializeOpListHostedZones) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListHostedZones) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3122,7 +3123,7 @@ type awsRestxml_serializeOpListHostedZonesByName struct {
 }
 
 func (*awsRestxml_serializeOpListHostedZonesByName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListHostedZonesByName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3188,7 +3189,7 @@ type awsRestxml_serializeOpListHostedZonesByVPC struct {
 }
 
 func (*awsRestxml_serializeOpListHostedZonesByVPC) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListHostedZonesByVPC) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3258,7 +3259,7 @@ type awsRestxml_serializeOpListQueryLoggingConfigs struct {
 }
 
 func (*awsRestxml_serializeOpListQueryLoggingConfigs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListQueryLoggingConfigs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3324,7 +3325,7 @@ type awsRestxml_serializeOpListResourceRecordSets struct {
 }
 
 func (*awsRestxml_serializeOpListResourceRecordSets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListResourceRecordSets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3406,7 +3407,7 @@ type awsRestxml_serializeOpListReusableDelegationSets struct {
 }
 
 func (*awsRestxml_serializeOpListReusableDelegationSets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListReusableDelegationSets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3468,7 +3469,7 @@ type awsRestxml_serializeOpListTagsForResource struct {
 }
 
 func (*awsRestxml_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3546,7 +3547,7 @@ type awsRestxml_serializeOpListTagsForResources struct {
 }
 
 func (*awsRestxml_serializeOpListTagsForResources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTagsForResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3647,7 +3648,7 @@ type awsRestxml_serializeOpListTrafficPolicies struct {
 }
 
 func (*awsRestxml_serializeOpListTrafficPolicies) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTrafficPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3709,7 +3710,7 @@ type awsRestxml_serializeOpListTrafficPolicyInstances struct {
 }
 
 func (*awsRestxml_serializeOpListTrafficPolicyInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTrafficPolicyInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3779,7 +3780,7 @@ type awsRestxml_serializeOpListTrafficPolicyInstancesByHostedZone struct {
 }
 
 func (*awsRestxml_serializeOpListTrafficPolicyInstancesByHostedZone) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTrafficPolicyInstancesByHostedZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3849,7 +3850,7 @@ type awsRestxml_serializeOpListTrafficPolicyInstancesByPolicy struct {
 }
 
 func (*awsRestxml_serializeOpListTrafficPolicyInstancesByPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTrafficPolicyInstancesByPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3927,7 +3928,7 @@ type awsRestxml_serializeOpListTrafficPolicyVersions struct {
 }
 
 func (*awsRestxml_serializeOpListTrafficPolicyVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListTrafficPolicyVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4001,7 +4002,7 @@ type awsRestxml_serializeOpListVPCAssociationAuthorizations struct {
 }
 
 func (*awsRestxml_serializeOpListVPCAssociationAuthorizations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpListVPCAssociationAuthorizations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4075,7 +4076,7 @@ type awsRestxml_serializeOpTestDNSAnswer struct {
 }
 
 func (*awsRestxml_serializeOpTestDNSAnswer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpTestDNSAnswer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4153,7 +4154,7 @@ type awsRestxml_serializeOpUpdateHealthCheck struct {
 }
 
 func (*awsRestxml_serializeOpUpdateHealthCheck) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4425,7 +4426,7 @@ type awsRestxml_serializeOpUpdateHostedZoneComment struct {
 }
 
 func (*awsRestxml_serializeOpUpdateHostedZoneComment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateHostedZoneComment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4524,7 +4525,7 @@ type awsRestxml_serializeOpUpdateTrafficPolicyComment struct {
 }
 
 func (*awsRestxml_serializeOpUpdateTrafficPolicyComment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateTrafficPolicyComment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4632,7 +4633,7 @@ type awsRestxml_serializeOpUpdateTrafficPolicyInstance struct {
 }
 
 func (*awsRestxml_serializeOpUpdateTrafficPolicyInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestxml_serializeOpUpdateTrafficPolicyInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

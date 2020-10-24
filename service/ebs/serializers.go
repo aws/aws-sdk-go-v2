@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpCompleteSnapshot struct {
 }
 
 func (*awsRestjson1_serializeOpCompleteSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCompleteSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -106,7 +107,7 @@ type awsRestjson1_serializeOpGetSnapshotBlock struct {
 }
 
 func (*awsRestjson1_serializeOpGetSnapshotBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetSnapshotBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -185,7 +186,7 @@ type awsRestjson1_serializeOpListChangedBlocks struct {
 }
 
 func (*awsRestjson1_serializeOpListChangedBlocks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListChangedBlocks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -267,7 +268,7 @@ type awsRestjson1_serializeOpListSnapshotBlocks struct {
 }
 
 func (*awsRestjson1_serializeOpListSnapshotBlocks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListSnapshotBlocks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -345,7 +346,7 @@ type awsRestjson1_serializeOpPutSnapshotBlock struct {
 }
 
 func (*awsRestjson1_serializeOpPutSnapshotBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutSnapshotBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -453,7 +454,7 @@ type awsRestjson1_serializeOpStartSnapshot struct {
 }
 
 func (*awsRestjson1_serializeOpStartSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpDeleteScalingPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteScalingPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteScalingPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_deserializeOpDeleteScheduledAction struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteScheduledAction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteScheduledAction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -263,7 +264,7 @@ type awsAwsjson11_deserializeOpDeregisterScalableTarget struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeregisterScalableTarget) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeregisterScalableTarget) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -383,7 +384,7 @@ type awsAwsjson11_deserializeOpDescribeScalableTargets struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalableTargets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalableTargets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -503,7 +504,7 @@ type awsAwsjson11_deserializeOpDescribeScalingActivities struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalingActivities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalingActivities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -623,7 +624,7 @@ type awsAwsjson11_deserializeOpDescribeScalingPolicies struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalingPolicies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalingPolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -746,7 +747,7 @@ type awsAwsjson11_deserializeOpDescribeScheduledActions struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScheduledActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScheduledActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -866,7 +867,7 @@ type awsAwsjson11_deserializeOpPutScalingPolicy struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutScalingPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutScalingPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -992,7 +993,7 @@ type awsAwsjson11_deserializeOpPutScheduledAction struct {
 }
 
 func (*awsAwsjson11_deserializeOpPutScheduledAction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpPutScheduledAction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1115,7 +1116,7 @@ type awsAwsjson11_deserializeOpRegisterScalableTarget struct {
 }
 
 func (*awsAwsjson11_deserializeOpRegisterScalableTarget) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRegisterScalableTarget) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

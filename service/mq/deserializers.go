@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpCreateBroker struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateBroker) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateBroker) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -195,7 +196,7 @@ type awsRestjson1_deserializeOpCreateConfiguration struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -400,7 +401,7 @@ type awsRestjson1_deserializeOpCreateTags struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -492,7 +493,7 @@ type awsRestjson1_deserializeOpCreateUser struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateUser) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateUser) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -587,7 +588,7 @@ type awsRestjson1_deserializeOpDeleteBroker struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteBroker) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteBroker) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -747,7 +748,7 @@ type awsRestjson1_deserializeOpDeleteTags struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -839,7 +840,7 @@ type awsRestjson1_deserializeOpDeleteUser struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteUser) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteUser) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -931,7 +932,7 @@ type awsRestjson1_deserializeOpDescribeBroker struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeBroker) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeBroker) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1290,7 +1291,7 @@ type awsRestjson1_deserializeOpDescribeBrokerEngineTypes struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeBrokerEngineTypes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeBrokerEngineTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1465,7 +1466,7 @@ type awsRestjson1_deserializeOpDescribeBrokerInstanceOptions struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeBrokerInstanceOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeBrokerInstanceOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1640,7 +1641,7 @@ type awsRestjson1_deserializeOpDescribeConfiguration struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1877,7 +1878,7 @@ type awsRestjson1_deserializeOpDescribeConfigurationRevision struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeConfigurationRevision) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeConfigurationRevision) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2068,7 +2069,7 @@ type awsRestjson1_deserializeOpDescribeUser struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeUser) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeUser) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2256,7 +2257,7 @@ type awsRestjson1_deserializeOpListBrokers struct {
 }
 
 func (*awsRestjson1_deserializeOpListBrokers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListBrokers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2418,7 +2419,7 @@ type awsRestjson1_deserializeOpListConfigurationRevisions struct {
 }
 
 func (*awsRestjson1_deserializeOpListConfigurationRevisions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListConfigurationRevisions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2605,7 +2606,7 @@ type awsRestjson1_deserializeOpListConfigurations struct {
 }
 
 func (*awsRestjson1_deserializeOpListConfigurations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListConfigurations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2780,7 +2781,7 @@ type awsRestjson1_deserializeOpListTags struct {
 }
 
 func (*awsRestjson1_deserializeOpListTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2936,7 +2937,7 @@ type awsRestjson1_deserializeOpListUsers struct {
 }
 
 func (*awsRestjson1_deserializeOpListUsers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListUsers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3123,7 +3124,7 @@ type awsRestjson1_deserializeOpRebootBroker struct {
 }
 
 func (*awsRestjson1_deserializeOpRebootBroker) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpRebootBroker) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3215,7 +3216,7 @@ type awsRestjson1_deserializeOpUpdateBroker struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateBroker) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateBroker) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3434,7 +3435,7 @@ type awsRestjson1_deserializeOpUpdateConfiguration struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3638,7 +3639,7 @@ type awsRestjson1_deserializeOpUpdateUser struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateUser) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateUser) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

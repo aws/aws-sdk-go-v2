@@ -14,6 +14,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
@@ -26,7 +27,7 @@ type awsAwsquery_deserializeOpAddPermission struct {
 }
 
 func (*awsAwsquery_deserializeOpAddPermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAddPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -122,7 +123,7 @@ type awsAwsquery_deserializeOpChangeMessageVisibility struct {
 }
 
 func (*awsAwsquery_deserializeOpChangeMessageVisibility) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpChangeMessageVisibility) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -221,7 +222,7 @@ type awsAwsquery_deserializeOpChangeMessageVisibilityBatch struct {
 }
 
 func (*awsAwsquery_deserializeOpChangeMessageVisibilityBatch) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpChangeMessageVisibilityBatch) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -326,7 +327,7 @@ type awsAwsquery_deserializeOpCreateQueue struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -425,7 +426,7 @@ type awsAwsquery_deserializeOpDeleteMessage struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteMessage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteMessage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -524,7 +525,7 @@ type awsAwsquery_deserializeOpDeleteMessageBatch struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteMessageBatch) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteMessageBatch) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -629,7 +630,7 @@ type awsAwsquery_deserializeOpDeleteQueue struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -722,7 +723,7 @@ type awsAwsquery_deserializeOpGetQueueAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpGetQueueAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetQueueAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -818,7 +819,7 @@ type awsAwsquery_deserializeOpGetQueueUrl struct {
 }
 
 func (*awsAwsquery_deserializeOpGetQueueUrl) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetQueueUrl) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -914,7 +915,7 @@ type awsAwsquery_deserializeOpListDeadLetterSourceQueues struct {
 }
 
 func (*awsAwsquery_deserializeOpListDeadLetterSourceQueues) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListDeadLetterSourceQueues) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1010,7 +1011,7 @@ type awsAwsquery_deserializeOpListQueues struct {
 }
 
 func (*awsAwsquery_deserializeOpListQueues) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListQueues) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1103,7 +1104,7 @@ type awsAwsquery_deserializeOpListQueueTags struct {
 }
 
 func (*awsAwsquery_deserializeOpListQueueTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListQueueTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1196,7 +1197,7 @@ type awsAwsquery_deserializeOpPurgeQueue struct {
 }
 
 func (*awsAwsquery_deserializeOpPurgeQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPurgeQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1295,7 +1296,7 @@ type awsAwsquery_deserializeOpReceiveMessage struct {
 }
 
 func (*awsAwsquery_deserializeOpReceiveMessage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpReceiveMessage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1391,7 +1392,7 @@ type awsAwsquery_deserializeOpRemovePermission struct {
 }
 
 func (*awsAwsquery_deserializeOpRemovePermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRemovePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1484,7 +1485,7 @@ type awsAwsquery_deserializeOpSendMessage struct {
 }
 
 func (*awsAwsquery_deserializeOpSendMessage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendMessage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1583,7 +1584,7 @@ type awsAwsquery_deserializeOpSendMessageBatch struct {
 }
 
 func (*awsAwsquery_deserializeOpSendMessageBatch) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSendMessageBatch) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1694,7 +1695,7 @@ type awsAwsquery_deserializeOpSetQueueAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpSetQueueAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetQueueAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1790,7 +1791,7 @@ type awsAwsquery_deserializeOpTagQueue struct {
 }
 
 func (*awsAwsquery_deserializeOpTagQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpTagQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1883,7 +1884,7 @@ type awsAwsquery_deserializeOpUntagQueue struct {
 }
 
 func (*awsAwsquery_deserializeOpUntagQueue) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUntagQueue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

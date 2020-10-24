@@ -11,6 +11,17 @@ const (
 	ApplicationRestoreTypeRestore_from_custom_snapshot ApplicationRestoreType = "RESTORE_FROM_CUSTOM_SNAPSHOT"
 )
 
+// Values returns all known values for ApplicationRestoreType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationRestoreType) Values() []ApplicationRestoreType {
+	return []ApplicationRestoreType{
+		"SKIP_RESTORE_FROM_SNAPSHOT",
+		"RESTORE_FROM_LATEST_SNAPSHOT",
+		"RESTORE_FROM_CUSTOM_SNAPSHOT",
+	}
+}
+
 type ApplicationStatus string
 
 // Enum values for ApplicationStatus
@@ -23,6 +34,20 @@ const (
 	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
 )
 
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"DELETING",
+		"STARTING",
+		"STOPPING",
+		"READY",
+		"RUNNING",
+		"UPDATING",
+	}
+}
+
 type CodeContentType string
 
 // Enum values for CodeContentType
@@ -30,6 +55,16 @@ const (
 	CodeContentTypePlaintext CodeContentType = "PLAINTEXT"
 	CodeContentTypeZipfile   CodeContentType = "ZIPFILE"
 )
+
+// Values returns all known values for CodeContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodeContentType) Values() []CodeContentType {
+	return []CodeContentType{
+		"PLAINTEXT",
+		"ZIPFILE",
+	}
+}
 
 type ConfigurationType string
 
@@ -39,6 +74,16 @@ const (
 	ConfigurationTypeCustom  ConfigurationType = "CUSTOM"
 )
 
+// Values returns all known values for ConfigurationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationType) Values() []ConfigurationType {
+	return []ConfigurationType{
+		"DEFAULT",
+		"CUSTOM",
+	}
+}
+
 type InputStartingPosition string
 
 // Enum values for InputStartingPosition
@@ -47,6 +92,17 @@ const (
 	InputStartingPositionTrim_horizon       InputStartingPosition = "TRIM_HORIZON"
 	InputStartingPositionLast_stopped_point InputStartingPosition = "LAST_STOPPED_POINT"
 )
+
+// Values returns all known values for InputStartingPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputStartingPosition) Values() []InputStartingPosition {
+	return []InputStartingPosition{
+		"NOW",
+		"TRIM_HORIZON",
+		"LAST_STOPPED_POINT",
+	}
+}
 
 type LogLevel string
 
@@ -58,6 +114,18 @@ const (
 	LogLevelDebug LogLevel = "DEBUG"
 )
 
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogLevel) Values() []LogLevel {
+	return []LogLevel{
+		"INFO",
+		"WARN",
+		"ERROR",
+		"DEBUG",
+	}
+}
+
 type MetricsLevel string
 
 // Enum values for MetricsLevel
@@ -68,6 +136,18 @@ const (
 	MetricsLevelParallelism MetricsLevel = "PARALLELISM"
 )
 
+// Values returns all known values for MetricsLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricsLevel) Values() []MetricsLevel {
+	return []MetricsLevel{
+		"APPLICATION",
+		"TASK",
+		"OPERATOR",
+		"PARALLELISM",
+	}
+}
+
 type RecordFormatType string
 
 // Enum values for RecordFormatType
@@ -75,6 +155,16 @@ const (
 	RecordFormatTypeJson RecordFormatType = "JSON"
 	RecordFormatTypeCsv  RecordFormatType = "CSV"
 )
+
+// Values returns all known values for RecordFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordFormatType) Values() []RecordFormatType {
+	return []RecordFormatType{
+		"JSON",
+		"CSV",
+	}
+}
 
 type RuntimeEnvironment string
 
@@ -85,6 +175,17 @@ const (
 	RuntimeEnvironmentFlink_1_8 RuntimeEnvironment = "FLINK-1_8"
 )
 
+// Values returns all known values for RuntimeEnvironment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeEnvironment) Values() []RuntimeEnvironment {
+	return []RuntimeEnvironment{
+		"SQL-1_0",
+		"FLINK-1_6",
+		"FLINK-1_8",
+	}
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus
@@ -94,3 +195,15 @@ const (
 	SnapshotStatusDeleting SnapshotStatus = "DELETING"
 	SnapshotStatusFailed   SnapshotStatus = "FAILED"
 )
+
+// Values returns all known values for SnapshotStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotStatus) Values() []SnapshotStatus {
+	return []SnapshotStatus{
+		"CREATING",
+		"READY",
+		"DELETING",
+		"FAILED",
+	}
+}

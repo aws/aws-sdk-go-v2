@@ -11,6 +11,17 @@ const (
 	ActionHistoryStatusUnknown   ActionHistoryStatus = "Unknown"
 )
 
+// Values returns all known values for ActionHistoryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionHistoryStatus) Values() []ActionHistoryStatus {
+	return []ActionHistoryStatus{
+		"Completed",
+		"Failed",
+		"Unknown",
+	}
+}
+
 type ActionStatus string
 
 // Enum values for ActionStatus
@@ -21,6 +32,18 @@ const (
 	ActionStatusUnknown   ActionStatus = "Unknown"
 )
 
+// Values returns all known values for ActionStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionStatus) Values() []ActionStatus {
+	return []ActionStatus{
+		"Scheduled",
+		"Pending",
+		"Running",
+		"Unknown",
+	}
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -29,6 +52,17 @@ const (
 	ActionTypePlatformupdate  ActionType = "PlatformUpdate"
 	ActionTypeUnknown         ActionType = "Unknown"
 )
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"InstanceRefresh",
+		"PlatformUpdate",
+		"Unknown",
+	}
+}
 
 type ApplicationVersionStatus string
 
@@ -41,6 +75,19 @@ const (
 	ApplicationVersionStatusBuilding    ApplicationVersionStatus = "Building"
 )
 
+// Values returns all known values for ApplicationVersionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationVersionStatus) Values() []ApplicationVersionStatus {
+	return []ApplicationVersionStatus{
+		"Processed",
+		"Unprocessed",
+		"Failed",
+		"Processing",
+		"Building",
+	}
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
@@ -49,6 +96,17 @@ const (
 	ComputeTypeBuild_general1_medium ComputeType = "BUILD_GENERAL1_MEDIUM"
 	ComputeTypeBuild_general1_large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
+
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ComputeType) Values() []ComputeType {
+	return []ComputeType{
+		"BUILD_GENERAL1_SMALL",
+		"BUILD_GENERAL1_MEDIUM",
+		"BUILD_GENERAL1_LARGE",
+	}
+}
 
 type ConfigurationDeploymentStatus string
 
@@ -59,6 +117,18 @@ const (
 	ConfigurationDeploymentStatusFailed   ConfigurationDeploymentStatus = "failed"
 )
 
+// Values returns all known values for ConfigurationDeploymentStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConfigurationDeploymentStatus) Values() []ConfigurationDeploymentStatus {
+	return []ConfigurationDeploymentStatus{
+		"deployed",
+		"pending",
+		"failed",
+	}
+}
+
 type ConfigurationOptionValueType string
 
 // Enum values for ConfigurationOptionValueType
@@ -66,6 +136,16 @@ const (
 	ConfigurationOptionValueTypeScalar ConfigurationOptionValueType = "Scalar"
 	ConfigurationOptionValueTypeList   ConfigurationOptionValueType = "List"
 )
+
+// Values returns all known values for ConfigurationOptionValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationOptionValueType) Values() []ConfigurationOptionValueType {
+	return []ConfigurationOptionValueType{
+		"Scalar",
+		"List",
+	}
+}
 
 type EnvironmentHealth string
 
@@ -76,6 +156,18 @@ const (
 	EnvironmentHealthRed    EnvironmentHealth = "Red"
 	EnvironmentHealthGrey   EnvironmentHealth = "Grey"
 )
+
+// Values returns all known values for EnvironmentHealth. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentHealth) Values() []EnvironmentHealth {
+	return []EnvironmentHealth{
+		"Green",
+		"Yellow",
+		"Red",
+		"Grey",
+	}
+}
 
 type EnvironmentHealthAttribute string
 
@@ -90,6 +182,22 @@ const (
 	EnvironmentHealthAttributeHealthstatus       EnvironmentHealthAttribute = "HealthStatus"
 	EnvironmentHealthAttributeRefreshedat        EnvironmentHealthAttribute = "RefreshedAt"
 )
+
+// Values returns all known values for EnvironmentHealthAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentHealthAttribute) Values() []EnvironmentHealthAttribute {
+	return []EnvironmentHealthAttribute{
+		"Status",
+		"Color",
+		"Causes",
+		"ApplicationMetrics",
+		"InstancesHealth",
+		"All",
+		"HealthStatus",
+		"RefreshedAt",
+	}
+}
 
 type EnvironmentHealthStatus string
 
@@ -106,6 +214,23 @@ const (
 	EnvironmentHealthStatusSuspended EnvironmentHealthStatus = "Suspended"
 )
 
+// Values returns all known values for EnvironmentHealthStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentHealthStatus) Values() []EnvironmentHealthStatus {
+	return []EnvironmentHealthStatus{
+		"NoData",
+		"Unknown",
+		"Pending",
+		"Ok",
+		"Info",
+		"Warning",
+		"Degraded",
+		"Severe",
+		"Suspended",
+	}
+}
+
 type EnvironmentInfoType string
 
 // Enum values for EnvironmentInfoType
@@ -113,6 +238,16 @@ const (
 	EnvironmentInfoTypeTail   EnvironmentInfoType = "tail"
 	EnvironmentInfoTypeBundle EnvironmentInfoType = "bundle"
 )
+
+// Values returns all known values for EnvironmentInfoType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentInfoType) Values() []EnvironmentInfoType {
+	return []EnvironmentInfoType{
+		"tail",
+		"bundle",
+	}
+}
 
 type EnvironmentStatus string
 
@@ -124,6 +259,19 @@ const (
 	EnvironmentStatusTerminating EnvironmentStatus = "Terminating"
 	EnvironmentStatusTerminated  EnvironmentStatus = "Terminated"
 )
+
+// Values returns all known values for EnvironmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentStatus) Values() []EnvironmentStatus {
+	return []EnvironmentStatus{
+		"Launching",
+		"Updating",
+		"Ready",
+		"Terminating",
+		"Terminated",
+	}
+}
 
 type EventSeverity string
 
@@ -137,6 +285,20 @@ const (
 	EventSeverityFatal EventSeverity = "FATAL"
 )
 
+// Values returns all known values for EventSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSeverity) Values() []EventSeverity {
+	return []EventSeverity{
+		"TRACE",
+		"DEBUG",
+		"INFO",
+		"WARN",
+		"ERROR",
+		"FATAL",
+	}
+}
+
 type FailureType string
 
 // Enum values for FailureType
@@ -149,6 +311,21 @@ const (
 	FailureTypeInvalidenvironmentstate FailureType = "InvalidEnvironmentState"
 	FailureTypePermissionserror        FailureType = "PermissionsError"
 )
+
+// Values returns all known values for FailureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FailureType) Values() []FailureType {
+	return []FailureType{
+		"UpdateCancelled",
+		"CancellationFailed",
+		"RollbackFailed",
+		"RollbackSuccessful",
+		"InternalFailure",
+		"InvalidEnvironmentState",
+		"PermissionsError",
+	}
+}
 
 type InstancesHealthAttribute string
 
@@ -167,6 +344,25 @@ const (
 	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
+// Values returns all known values for InstancesHealthAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstancesHealthAttribute) Values() []InstancesHealthAttribute {
+	return []InstancesHealthAttribute{
+		"HealthStatus",
+		"Color",
+		"Causes",
+		"ApplicationMetrics",
+		"RefreshedAt",
+		"LaunchedAt",
+		"System",
+		"Deployment",
+		"AvailabilityZone",
+		"InstanceType",
+		"All",
+	}
+}
+
 type PlatformStatus string
 
 // Enum values for PlatformStatus
@@ -178,6 +374,19 @@ const (
 	PlatformStatusDeleted  PlatformStatus = "Deleted"
 )
 
+// Values returns all known values for PlatformStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlatformStatus) Values() []PlatformStatus {
+	return []PlatformStatus{
+		"Creating",
+		"Failed",
+		"Ready",
+		"Deleting",
+		"Deleted",
+	}
+}
+
 type SourceRepository string
 
 // Enum values for SourceRepository
@@ -185,6 +394,16 @@ const (
 	SourceRepositoryCodecommit SourceRepository = "CodeCommit"
 	SourceRepositoryS3         SourceRepository = "S3"
 )
+
+// Values returns all known values for SourceRepository. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceRepository) Values() []SourceRepository {
+	return []SourceRepository{
+		"CodeCommit",
+		"S3",
+	}
+}
 
 type SourceType string
 
@@ -194,6 +413,16 @@ const (
 	SourceTypeZip SourceType = "Zip"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"Git",
+		"Zip",
+	}
+}
+
 type ValidationSeverity string
 
 // Enum values for ValidationSeverity
@@ -201,3 +430,13 @@ const (
 	ValidationSeverityError   ValidationSeverity = "error"
 	ValidationSeverityWarning ValidationSeverity = "warning"
 )
+
+// Values returns all known values for ValidationSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationSeverity) Values() []ValidationSeverity {
+	return []ValidationSeverity{
+		"error",
+		"warning",
+	}
+}

@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -22,7 +23,7 @@ type awsAwsjson11_deserializeOpAnalyzeDocument struct {
 }
 
 func (*awsAwsjson11_deserializeOpAnalyzeDocument) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAnalyzeDocument) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -160,7 +161,7 @@ type awsAwsjson11_deserializeOpDetectDocumentText struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectDocumentText) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectDocumentText) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -295,7 +296,7 @@ type awsAwsjson11_deserializeOpGetDocumentAnalysis struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDocumentAnalysis) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDocumentAnalysis) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -421,7 +422,7 @@ type awsAwsjson11_deserializeOpGetDocumentTextDetection struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDocumentTextDetection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDocumentTextDetection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -547,7 +548,7 @@ type awsAwsjson11_deserializeOpStartDocumentAnalysis struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartDocumentAnalysis) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartDocumentAnalysis) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -688,7 +689,7 @@ type awsAwsjson11_deserializeOpStartDocumentTextDetection struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartDocumentTextDetection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartDocumentTextDetection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

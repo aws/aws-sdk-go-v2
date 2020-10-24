@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsRestjson1_serializeOpDeleteHumanLoop struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteHumanLoop) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteHumanLoop) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -85,7 +86,7 @@ type awsRestjson1_serializeOpDescribeHumanLoop struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeHumanLoop) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeHumanLoop) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -151,7 +152,7 @@ type awsRestjson1_serializeOpListHumanLoops struct {
 }
 
 func (*awsRestjson1_serializeOpListHumanLoops) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListHumanLoops) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -229,7 +230,7 @@ type awsRestjson1_serializeOpStartHumanLoop struct {
 }
 
 func (*awsRestjson1_serializeOpStartHumanLoop) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartHumanLoop) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -321,7 +322,7 @@ type awsRestjson1_serializeOpStopHumanLoop struct {
 }
 
 func (*awsRestjson1_serializeOpStopHumanLoop) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStopHumanLoop) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

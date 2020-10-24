@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpAcceptResourceShareInvitation struct {
 }
 
 func (*awsRestjson1_deserializeOpAcceptResourceShareInvitation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpAcceptResourceShareInvitation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -206,7 +207,7 @@ type awsRestjson1_deserializeOpAssociateResourceShare struct {
 }
 
 func (*awsRestjson1_deserializeOpAssociateResourceShare) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpAssociateResourceShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -389,7 +390,7 @@ type awsRestjson1_deserializeOpAssociateResourceSharePermission struct {
 }
 
 func (*awsRestjson1_deserializeOpAssociateResourceSharePermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpAssociateResourceSharePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -567,7 +568,7 @@ type awsRestjson1_deserializeOpCreateResourceShare struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateResourceShare) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateResourceShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -753,7 +754,7 @@ type awsRestjson1_deserializeOpDeleteResourceShare struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteResourceShare) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteResourceShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -937,7 +938,7 @@ type awsRestjson1_deserializeOpDisassociateResourceShare struct {
 }
 
 func (*awsRestjson1_deserializeOpDisassociateResourceShare) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDisassociateResourceShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1120,7 +1121,7 @@ type awsRestjson1_deserializeOpDisassociateResourceSharePermission struct {
 }
 
 func (*awsRestjson1_deserializeOpDisassociateResourceSharePermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDisassociateResourceSharePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1298,7 +1299,7 @@ type awsRestjson1_deserializeOpEnableSharingWithAwsOrganization struct {
 }
 
 func (*awsRestjson1_deserializeOpEnableSharingWithAwsOrganization) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpEnableSharingWithAwsOrganization) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1455,7 +1456,7 @@ type awsRestjson1_deserializeOpGetPermission struct {
 }
 
 func (*awsRestjson1_deserializeOpGetPermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1617,7 +1618,7 @@ type awsRestjson1_deserializeOpGetResourcePolicies struct {
 }
 
 func (*awsRestjson1_deserializeOpGetResourcePolicies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetResourcePolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1788,7 +1789,7 @@ type awsRestjson1_deserializeOpGetResourceShareAssociations struct {
 }
 
 func (*awsRestjson1_deserializeOpGetResourceShareAssociations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetResourceShareAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1962,7 +1963,7 @@ type awsRestjson1_deserializeOpGetResourceShareInvitations struct {
 }
 
 func (*awsRestjson1_deserializeOpGetResourceShareInvitations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetResourceShareInvitations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2139,7 +2140,7 @@ type awsRestjson1_deserializeOpGetResourceShares struct {
 }
 
 func (*awsRestjson1_deserializeOpGetResourceShares) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetResourceShares) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2310,7 +2311,7 @@ type awsRestjson1_deserializeOpListPendingInvitationResources struct {
 }
 
 func (*awsRestjson1_deserializeOpListPendingInvitationResources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListPendingInvitationResources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2490,7 +2491,7 @@ type awsRestjson1_deserializeOpListPermissions struct {
 }
 
 func (*awsRestjson1_deserializeOpListPermissions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListPermissions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2658,7 +2659,7 @@ type awsRestjson1_deserializeOpListPrincipals struct {
 }
 
 func (*awsRestjson1_deserializeOpListPrincipals) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListPrincipals) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2829,7 +2830,7 @@ type awsRestjson1_deserializeOpListResources struct {
 }
 
 func (*awsRestjson1_deserializeOpListResources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListResources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3003,7 +3004,7 @@ type awsRestjson1_deserializeOpListResourceSharePermissions struct {
 }
 
 func (*awsRestjson1_deserializeOpListResourceSharePermissions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListResourceSharePermissions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3177,7 +3178,7 @@ type awsRestjson1_deserializeOpListResourceTypes struct {
 }
 
 func (*awsRestjson1_deserializeOpListResourceTypes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListResourceTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3342,7 +3343,7 @@ type awsRestjson1_deserializeOpPromoteResourceShareCreatedFromPolicy struct {
 }
 
 func (*awsRestjson1_deserializeOpPromoteResourceShareCreatedFromPolicy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpPromoteResourceShareCreatedFromPolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3511,7 +3512,7 @@ type awsRestjson1_deserializeOpRejectResourceShareInvitation struct {
 }
 
 func (*awsRestjson1_deserializeOpRejectResourceShareInvitation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpRejectResourceShareInvitation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3694,7 +3695,7 @@ type awsRestjson1_deserializeOpTagResource struct {
 }
 
 func (*awsRestjson1_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3795,7 +3796,7 @@ type awsRestjson1_deserializeOpUntagResource struct {
 }
 
 func (*awsRestjson1_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3884,7 +3885,7 @@ type awsRestjson1_deserializeOpUpdateResourceShare struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateResourceShare) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateResourceShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

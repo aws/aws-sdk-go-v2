@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -24,7 +25,7 @@ type awsAwsjson10_deserializeOpDescribeStream struct {
 }
 
 func (*awsAwsjson10_deserializeOpDescribeStream) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpDescribeStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -138,7 +139,7 @@ type awsAwsjson10_deserializeOpGetRecords struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetRecords) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetRecords) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -261,7 +262,7 @@ type awsAwsjson10_deserializeOpGetShardIterator struct {
 }
 
 func (*awsAwsjson10_deserializeOpGetShardIterator) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpGetShardIterator) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -378,7 +379,7 @@ type awsAwsjson10_deserializeOpListStreams struct {
 }
 
 func (*awsAwsjson10_deserializeOpListStreams) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson10_deserializeOpListStreams) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

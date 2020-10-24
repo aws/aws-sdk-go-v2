@@ -156,12 +156,12 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("costexplorer")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("costexplorer")(stack)
 }
 
-func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
+	return stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
 }
 
 type HTTPSignerV4 interface {
@@ -187,10 +187,10 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	return retry.AddRetryMiddlewares(stack, mo)
 }
 
-func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
-	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	awshttp.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return awshttp.AddResponseErrorMiddleware(stack)
 }

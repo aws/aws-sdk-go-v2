@@ -11,6 +11,17 @@ const (
 	ChannelStatusFailed      ChannelStatus = "FAILED"
 )
 
+// Values returns all known values for ChannelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelStatus) Values() []ChannelStatus {
+	return []ChannelStatus{
+		"IN_PROGRESS",
+		"CREATED",
+		"FAILED",
+	}
+}
+
 type ChannelType string
 
 // Enum values for ChannelType
@@ -21,6 +32,18 @@ const (
 	ChannelTypeKik        ChannelType = "Kik"
 )
 
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChannelType) Values() []ChannelType {
+	return []ChannelType{
+		"Facebook",
+		"Slack",
+		"Twilio-Sms",
+		"Kik",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -30,6 +53,17 @@ const (
 	ContentTypeCustom_payload ContentType = "CustomPayload"
 )
 
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"PlainText",
+		"SSML",
+		"CustomPayload",
+	}
+}
+
 type Destination string
 
 // Enum values for Destination
@@ -37,6 +71,16 @@ const (
 	DestinationCloudwatch_logs Destination = "CLOUDWATCH_LOGS"
 	DestinationS3              Destination = "S3"
 )
+
+// Values returns all known values for Destination. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Destination) Values() []Destination {
+	return []Destination{
+		"CLOUDWATCH_LOGS",
+		"S3",
+	}
+}
 
 type ExportStatus string
 
@@ -47,6 +91,17 @@ const (
 	ExportStatusFailed      ExportStatus = "FAILED"
 )
 
+// Values returns all known values for ExportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"IN_PROGRESS",
+		"READY",
+		"FAILED",
+	}
+}
+
 type ExportType string
 
 // Enum values for ExportType
@@ -55,6 +110,16 @@ const (
 	ExportTypeLex              ExportType = "LEX"
 )
 
+// Values returns all known values for ExportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportType) Values() []ExportType {
+	return []ExportType{
+		"ALEXA_SKILLS_KIT",
+		"LEX",
+	}
+}
+
 type FulfillmentActivityType string
 
 // Enum values for FulfillmentActivityType
@@ -62,6 +127,16 @@ const (
 	FulfillmentActivityTypeReturn_intent FulfillmentActivityType = "ReturnIntent"
 	FulfillmentActivityTypeCode_hook     FulfillmentActivityType = "CodeHook"
 )
+
+// Values returns all known values for FulfillmentActivityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FulfillmentActivityType) Values() []FulfillmentActivityType {
+	return []FulfillmentActivityType{
+		"ReturnIntent",
+		"CodeHook",
+	}
+}
 
 type ImportStatus string
 
@@ -72,6 +147,17 @@ const (
 	ImportStatusFailed      ImportStatus = "FAILED"
 )
 
+// Values returns all known values for ImportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
 type Locale string
 
 // Enum values for Locale
@@ -81,6 +167,17 @@ const (
 	LocaleDe_de Locale = "de-DE"
 )
 
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"en-US",
+		"en-GB",
+		"de-DE",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -88,6 +185,16 @@ const (
 	LogTypeAudio LogType = "AUDIO"
 	LogTypeText  LogType = "TEXT"
 )
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"AUDIO",
+		"TEXT",
+	}
+}
 
 type MergeStrategy string
 
@@ -97,6 +204,16 @@ const (
 	MergeStrategyFail_on_conflict MergeStrategy = "FAIL_ON_CONFLICT"
 )
 
+// Values returns all known values for MergeStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MergeStrategy) Values() []MergeStrategy {
+	return []MergeStrategy{
+		"OVERWRITE_LATEST",
+		"FAIL_ON_CONFLICT",
+	}
+}
+
 type ObfuscationSetting string
 
 // Enum values for ObfuscationSetting
@@ -105,6 +222,16 @@ const (
 	ObfuscationSettingDefault_obfuscation ObfuscationSetting = "DEFAULT_OBFUSCATION"
 )
 
+// Values returns all known values for ObfuscationSetting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ObfuscationSetting) Values() []ObfuscationSetting {
+	return []ObfuscationSetting{
+		"NONE",
+		"DEFAULT_OBFUSCATION",
+	}
+}
+
 type ProcessBehavior string
 
 // Enum values for ProcessBehavior
@@ -112,6 +239,16 @@ const (
 	ProcessBehaviorSave  ProcessBehavior = "SAVE"
 	ProcessBehaviorBuild ProcessBehavior = "BUILD"
 )
+
+// Values returns all known values for ProcessBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProcessBehavior) Values() []ProcessBehavior {
+	return []ProcessBehavior{
+		"SAVE",
+		"BUILD",
+	}
+}
 
 type ReferenceType string
 
@@ -123,6 +260,18 @@ const (
 	ReferenceTypeBotchannel ReferenceType = "BotChannel"
 )
 
+// Values returns all known values for ReferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceType) Values() []ReferenceType {
+	return []ReferenceType{
+		"Intent",
+		"Bot",
+		"BotAlias",
+		"BotChannel",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -132,6 +281,17 @@ const (
 	ResourceTypeSlot_type ResourceType = "SLOT_TYPE"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"BOT",
+		"INTENT",
+		"SLOT_TYPE",
+	}
+}
+
 type SlotConstraint string
 
 // Enum values for SlotConstraint
@@ -140,6 +300,16 @@ const (
 	SlotConstraintOptional SlotConstraint = "Optional"
 )
 
+// Values returns all known values for SlotConstraint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SlotConstraint) Values() []SlotConstraint {
+	return []SlotConstraint{
+		"Required",
+		"Optional",
+	}
+}
+
 type SlotValueSelectionStrategy string
 
 // Enum values for SlotValueSelectionStrategy
@@ -147,6 +317,16 @@ const (
 	SlotValueSelectionStrategyOriginal_value SlotValueSelectionStrategy = "ORIGINAL_VALUE"
 	SlotValueSelectionStrategyTop_resolution SlotValueSelectionStrategy = "TOP_RESOLUTION"
 )
+
+// Values returns all known values for SlotValueSelectionStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlotValueSelectionStrategy) Values() []SlotValueSelectionStrategy {
+	return []SlotValueSelectionStrategy{
+		"ORIGINAL_VALUE",
+		"TOP_RESOLUTION",
+	}
+}
 
 type Status string
 
@@ -159,6 +339,19 @@ const (
 	StatusNot_built           Status = "NOT_BUILT"
 )
 
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"BUILDING",
+		"READY",
+		"READY_BASIC_TESTING",
+		"FAILED",
+		"NOT_BUILT",
+	}
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -166,3 +359,13 @@ const (
 	StatusTypeDetected StatusType = "Detected"
 	StatusTypeMissed   StatusType = "Missed"
 )
+
+// Values returns all known values for StatusType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusType) Values() []StatusType {
+	return []StatusType{
+		"Detected",
+		"Missed",
+	}
+}

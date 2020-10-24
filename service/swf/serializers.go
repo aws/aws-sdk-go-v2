@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson10_serializeOpCountClosedWorkflowExecutions struct {
 }
 
 func (*awsAwsjson10_serializeOpCountClosedWorkflowExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpCountClosedWorkflowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -65,7 +66,7 @@ type awsAwsjson10_serializeOpCountOpenWorkflowExecutions struct {
 }
 
 func (*awsAwsjson10_serializeOpCountOpenWorkflowExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpCountOpenWorkflowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -111,7 +112,7 @@ type awsAwsjson10_serializeOpCountPendingActivityTasks struct {
 }
 
 func (*awsAwsjson10_serializeOpCountPendingActivityTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpCountPendingActivityTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -157,7 +158,7 @@ type awsAwsjson10_serializeOpCountPendingDecisionTasks struct {
 }
 
 func (*awsAwsjson10_serializeOpCountPendingDecisionTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpCountPendingDecisionTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -203,7 +204,7 @@ type awsAwsjson10_serializeOpDeprecateActivityType struct {
 }
 
 func (*awsAwsjson10_serializeOpDeprecateActivityType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDeprecateActivityType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -249,7 +250,7 @@ type awsAwsjson10_serializeOpDeprecateDomain struct {
 }
 
 func (*awsAwsjson10_serializeOpDeprecateDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDeprecateDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -295,7 +296,7 @@ type awsAwsjson10_serializeOpDeprecateWorkflowType struct {
 }
 
 func (*awsAwsjson10_serializeOpDeprecateWorkflowType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDeprecateWorkflowType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -341,7 +342,7 @@ type awsAwsjson10_serializeOpDescribeActivityType struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeActivityType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeActivityType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -387,7 +388,7 @@ type awsAwsjson10_serializeOpDescribeDomain struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -433,7 +434,7 @@ type awsAwsjson10_serializeOpDescribeWorkflowExecution struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeWorkflowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -479,7 +480,7 @@ type awsAwsjson10_serializeOpDescribeWorkflowType struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeWorkflowType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeWorkflowType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -525,7 +526,7 @@ type awsAwsjson10_serializeOpGetWorkflowExecutionHistory struct {
 }
 
 func (*awsAwsjson10_serializeOpGetWorkflowExecutionHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetWorkflowExecutionHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -571,7 +572,7 @@ type awsAwsjson10_serializeOpListActivityTypes struct {
 }
 
 func (*awsAwsjson10_serializeOpListActivityTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListActivityTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -617,7 +618,7 @@ type awsAwsjson10_serializeOpListClosedWorkflowExecutions struct {
 }
 
 func (*awsAwsjson10_serializeOpListClosedWorkflowExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListClosedWorkflowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -663,7 +664,7 @@ type awsAwsjson10_serializeOpListDomains struct {
 }
 
 func (*awsAwsjson10_serializeOpListDomains) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListDomains) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -709,7 +710,7 @@ type awsAwsjson10_serializeOpListOpenWorkflowExecutions struct {
 }
 
 func (*awsAwsjson10_serializeOpListOpenWorkflowExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListOpenWorkflowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -755,7 +756,7 @@ type awsAwsjson10_serializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson10_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -801,7 +802,7 @@ type awsAwsjson10_serializeOpListWorkflowTypes struct {
 }
 
 func (*awsAwsjson10_serializeOpListWorkflowTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListWorkflowTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -847,7 +848,7 @@ type awsAwsjson10_serializeOpPollForActivityTask struct {
 }
 
 func (*awsAwsjson10_serializeOpPollForActivityTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpPollForActivityTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -893,7 +894,7 @@ type awsAwsjson10_serializeOpPollForDecisionTask struct {
 }
 
 func (*awsAwsjson10_serializeOpPollForDecisionTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpPollForDecisionTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -939,7 +940,7 @@ type awsAwsjson10_serializeOpRecordActivityTaskHeartbeat struct {
 }
 
 func (*awsAwsjson10_serializeOpRecordActivityTaskHeartbeat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRecordActivityTaskHeartbeat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -985,7 +986,7 @@ type awsAwsjson10_serializeOpRegisterActivityType struct {
 }
 
 func (*awsAwsjson10_serializeOpRegisterActivityType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRegisterActivityType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1031,7 +1032,7 @@ type awsAwsjson10_serializeOpRegisterDomain struct {
 }
 
 func (*awsAwsjson10_serializeOpRegisterDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRegisterDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1077,7 +1078,7 @@ type awsAwsjson10_serializeOpRegisterWorkflowType struct {
 }
 
 func (*awsAwsjson10_serializeOpRegisterWorkflowType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRegisterWorkflowType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1123,7 +1124,7 @@ type awsAwsjson10_serializeOpRequestCancelWorkflowExecution struct {
 }
 
 func (*awsAwsjson10_serializeOpRequestCancelWorkflowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRequestCancelWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1169,7 +1170,7 @@ type awsAwsjson10_serializeOpRespondActivityTaskCanceled struct {
 }
 
 func (*awsAwsjson10_serializeOpRespondActivityTaskCanceled) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRespondActivityTaskCanceled) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1215,7 +1216,7 @@ type awsAwsjson10_serializeOpRespondActivityTaskCompleted struct {
 }
 
 func (*awsAwsjson10_serializeOpRespondActivityTaskCompleted) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRespondActivityTaskCompleted) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1261,7 +1262,7 @@ type awsAwsjson10_serializeOpRespondActivityTaskFailed struct {
 }
 
 func (*awsAwsjson10_serializeOpRespondActivityTaskFailed) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRespondActivityTaskFailed) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1307,7 +1308,7 @@ type awsAwsjson10_serializeOpRespondDecisionTaskCompleted struct {
 }
 
 func (*awsAwsjson10_serializeOpRespondDecisionTaskCompleted) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpRespondDecisionTaskCompleted) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1353,7 +1354,7 @@ type awsAwsjson10_serializeOpSignalWorkflowExecution struct {
 }
 
 func (*awsAwsjson10_serializeOpSignalWorkflowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpSignalWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1399,7 +1400,7 @@ type awsAwsjson10_serializeOpStartWorkflowExecution struct {
 }
 
 func (*awsAwsjson10_serializeOpStartWorkflowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpStartWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1445,7 +1446,7 @@ type awsAwsjson10_serializeOpTagResource struct {
 }
 
 func (*awsAwsjson10_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1491,7 +1492,7 @@ type awsAwsjson10_serializeOpTerminateWorkflowExecution struct {
 }
 
 func (*awsAwsjson10_serializeOpTerminateWorkflowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpTerminateWorkflowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1537,7 +1538,7 @@ type awsAwsjson10_serializeOpUndeprecateActivityType struct {
 }
 
 func (*awsAwsjson10_serializeOpUndeprecateActivityType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpUndeprecateActivityType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1583,7 +1584,7 @@ type awsAwsjson10_serializeOpUndeprecateDomain struct {
 }
 
 func (*awsAwsjson10_serializeOpUndeprecateDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpUndeprecateDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1629,7 +1630,7 @@ type awsAwsjson10_serializeOpUndeprecateWorkflowType struct {
 }
 
 func (*awsAwsjson10_serializeOpUndeprecateWorkflowType) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpUndeprecateWorkflowType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1675,7 +1676,7 @@ type awsAwsjson10_serializeOpUntagResource struct {
 }
 
 func (*awsAwsjson10_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

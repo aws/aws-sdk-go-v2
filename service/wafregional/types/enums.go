@@ -10,6 +10,16 @@ const (
 	ChangeActionDelete ChangeAction = "DELETE"
 )
 
+// Values returns all known values for ChangeAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeAction) Values() []ChangeAction {
+	return []ChangeAction{
+		"INSERT",
+		"DELETE",
+	}
+}
+
 type ChangeTokenStatus string
 
 // Enum values for ChangeTokenStatus
@@ -18,6 +28,17 @@ const (
 	ChangeTokenStatusPending     ChangeTokenStatus = "PENDING"
 	ChangeTokenStatusInsync      ChangeTokenStatus = "INSYNC"
 )
+
+// Values returns all known values for ChangeTokenStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeTokenStatus) Values() []ChangeTokenStatus {
+	return []ChangeTokenStatus{
+		"PROVISIONED",
+		"PENDING",
+		"INSYNC",
+	}
+}
 
 type ComparisonOperator string
 
@@ -31,12 +52,35 @@ const (
 	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"EQ",
+		"NE",
+		"LE",
+		"LT",
+		"GE",
+		"GT",
+	}
+}
+
 type GeoMatchConstraintType string
 
 // Enum values for GeoMatchConstraintType
 const (
 	GeoMatchConstraintTypeCountry GeoMatchConstraintType = "Country"
 )
+
+// Values returns all known values for GeoMatchConstraintType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeoMatchConstraintType) Values() []GeoMatchConstraintType {
+	return []GeoMatchConstraintType{
+		"Country",
+	}
+}
 
 type GeoMatchConstraintValue string
 
@@ -293,6 +337,263 @@ const (
 	GeoMatchConstraintValueZw GeoMatchConstraintValue = "ZW"
 )
 
+// Values returns all known values for GeoMatchConstraintValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeoMatchConstraintValue) Values() []GeoMatchConstraintValue {
+	return []GeoMatchConstraintValue{
+		"AF",
+		"AX",
+		"AL",
+		"DZ",
+		"AS",
+		"AD",
+		"AO",
+		"AI",
+		"AQ",
+		"AG",
+		"AR",
+		"AM",
+		"AW",
+		"AU",
+		"AT",
+		"AZ",
+		"BS",
+		"BH",
+		"BD",
+		"BB",
+		"BY",
+		"BE",
+		"BZ",
+		"BJ",
+		"BM",
+		"BT",
+		"BO",
+		"BQ",
+		"BA",
+		"BW",
+		"BV",
+		"BR",
+		"IO",
+		"BN",
+		"BG",
+		"BF",
+		"BI",
+		"KH",
+		"CM",
+		"CA",
+		"CV",
+		"KY",
+		"CF",
+		"TD",
+		"CL",
+		"CN",
+		"CX",
+		"CC",
+		"CO",
+		"KM",
+		"CG",
+		"CD",
+		"CK",
+		"CR",
+		"CI",
+		"HR",
+		"CU",
+		"CW",
+		"CY",
+		"CZ",
+		"DK",
+		"DJ",
+		"DM",
+		"DO",
+		"EC",
+		"EG",
+		"SV",
+		"GQ",
+		"ER",
+		"EE",
+		"ET",
+		"FK",
+		"FO",
+		"FJ",
+		"FI",
+		"FR",
+		"GF",
+		"PF",
+		"TF",
+		"GA",
+		"GM",
+		"GE",
+		"DE",
+		"GH",
+		"GI",
+		"GR",
+		"GL",
+		"GD",
+		"GP",
+		"GU",
+		"GT",
+		"GG",
+		"GN",
+		"GW",
+		"GY",
+		"HT",
+		"HM",
+		"VA",
+		"HN",
+		"HK",
+		"HU",
+		"IS",
+		"IN",
+		"ID",
+		"IR",
+		"IQ",
+		"IE",
+		"IM",
+		"IL",
+		"IT",
+		"JM",
+		"JP",
+		"JE",
+		"JO",
+		"KZ",
+		"KE",
+		"KI",
+		"KP",
+		"KR",
+		"KW",
+		"KG",
+		"LA",
+		"LV",
+		"LB",
+		"LS",
+		"LR",
+		"LY",
+		"LI",
+		"LT",
+		"LU",
+		"MO",
+		"MK",
+		"MG",
+		"MW",
+		"MY",
+		"MV",
+		"ML",
+		"MT",
+		"MH",
+		"MQ",
+		"MR",
+		"MU",
+		"YT",
+		"MX",
+		"FM",
+		"MD",
+		"MC",
+		"MN",
+		"ME",
+		"MS",
+		"MA",
+		"MZ",
+		"MM",
+		"NA",
+		"NR",
+		"NP",
+		"NL",
+		"NC",
+		"NZ",
+		"NI",
+		"NE",
+		"NG",
+		"NU",
+		"NF",
+		"MP",
+		"NO",
+		"OM",
+		"PK",
+		"PW",
+		"PS",
+		"PA",
+		"PG",
+		"PY",
+		"PE",
+		"PH",
+		"PN",
+		"PL",
+		"PT",
+		"PR",
+		"QA",
+		"RE",
+		"RO",
+		"RU",
+		"RW",
+		"BL",
+		"SH",
+		"KN",
+		"LC",
+		"MF",
+		"PM",
+		"VC",
+		"WS",
+		"SM",
+		"ST",
+		"SA",
+		"SN",
+		"RS",
+		"SC",
+		"SL",
+		"SG",
+		"SX",
+		"SK",
+		"SI",
+		"SB",
+		"SO",
+		"ZA",
+		"GS",
+		"SS",
+		"ES",
+		"LK",
+		"SD",
+		"SR",
+		"SJ",
+		"SZ",
+		"SE",
+		"CH",
+		"SY",
+		"TW",
+		"TJ",
+		"TZ",
+		"TH",
+		"TL",
+		"TG",
+		"TK",
+		"TO",
+		"TT",
+		"TN",
+		"TR",
+		"TM",
+		"TC",
+		"TV",
+		"UG",
+		"UA",
+		"AE",
+		"GB",
+		"US",
+		"UM",
+		"UY",
+		"UZ",
+		"VU",
+		"VE",
+		"VN",
+		"VG",
+		"VI",
+		"WF",
+		"EH",
+		"YE",
+		"ZM",
+		"ZW",
+	}
+}
+
 type IPSetDescriptorType string
 
 // Enum values for IPSetDescriptorType
@@ -300,6 +601,16 @@ const (
 	IPSetDescriptorTypeIpv4 IPSetDescriptorType = "IPV4"
 	IPSetDescriptorTypeIpv6 IPSetDescriptorType = "IPV6"
 )
+
+// Values returns all known values for IPSetDescriptorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IPSetDescriptorType) Values() []IPSetDescriptorType {
+	return []IPSetDescriptorType{
+		"IPV4",
+		"IPV6",
+	}
+}
 
 type MatchFieldType string
 
@@ -314,6 +625,21 @@ const (
 	MatchFieldTypeAll_query_args   MatchFieldType = "ALL_QUERY_ARGS"
 )
 
+// Values returns all known values for MatchFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MatchFieldType) Values() []MatchFieldType {
+	return []MatchFieldType{
+		"URI",
+		"QUERY_STRING",
+		"HEADER",
+		"METHOD",
+		"BODY",
+		"SINGLE_QUERY_ARG",
+		"ALL_QUERY_ARGS",
+	}
+}
+
 type MigrationErrorType string
 
 // Enum values for MigrationErrorType
@@ -326,6 +652,21 @@ const (
 	MigrationErrorTypeS3_bucket_invalid_region MigrationErrorType = "S3_BUCKET_INVALID_REGION"
 	MigrationErrorTypeS3_internal_error        MigrationErrorType = "S3_INTERNAL_ERROR"
 )
+
+// Values returns all known values for MigrationErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationErrorType) Values() []MigrationErrorType {
+	return []MigrationErrorType{
+		"ENTITY_NOT_SUPPORTED",
+		"ENTITY_NOT_FOUND",
+		"S3_BUCKET_NO_PERMISSION",
+		"S3_BUCKET_NOT_ACCESSIBLE",
+		"S3_BUCKET_NOT_FOUND",
+		"S3_BUCKET_INVALID_REGION",
+		"S3_INTERNAL_ERROR",
+	}
+}
 
 type ParameterExceptionField string
 
@@ -351,6 +692,32 @@ const (
 	ParameterExceptionFieldTag_keys                            ParameterExceptionField = "TAG_KEYS"
 )
 
+// Values returns all known values for ParameterExceptionField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterExceptionField) Values() []ParameterExceptionField {
+	return []ParameterExceptionField{
+		"CHANGE_ACTION",
+		"WAF_ACTION",
+		"WAF_OVERRIDE_ACTION",
+		"PREDICATE_TYPE",
+		"IPSET_TYPE",
+		"BYTE_MATCH_FIELD_TYPE",
+		"SQL_INJECTION_MATCH_FIELD_TYPE",
+		"BYTE_MATCH_TEXT_TRANSFORMATION",
+		"BYTE_MATCH_POSITIONAL_CONSTRAINT",
+		"SIZE_CONSTRAINT_COMPARISON_OPERATOR",
+		"GEO_MATCH_LOCATION_TYPE",
+		"GEO_MATCH_LOCATION_VALUE",
+		"RATE_KEY",
+		"RULE_TYPE",
+		"NEXT_MARKER",
+		"RESOURCE_ARN",
+		"TAGS",
+		"TAG_KEYS",
+	}
+}
+
 type ParameterExceptionReason string
 
 // Enum values for ParameterExceptionReason
@@ -360,6 +727,18 @@ const (
 	ParameterExceptionReasonIllegal_argument    ParameterExceptionReason = "ILLEGAL_ARGUMENT"
 	ParameterExceptionReasonInvalid_tag_key     ParameterExceptionReason = "INVALID_TAG_KEY"
 )
+
+// Values returns all known values for ParameterExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterExceptionReason) Values() []ParameterExceptionReason {
+	return []ParameterExceptionReason{
+		"INVALID_OPTION",
+		"ILLEGAL_COMBINATION",
+		"ILLEGAL_ARGUMENT",
+		"INVALID_TAG_KEY",
+	}
+}
 
 type PositionalConstraint string
 
@@ -371,6 +750,19 @@ const (
 	PositionalConstraintContains      PositionalConstraint = "CONTAINS"
 	PositionalConstraintContains_word PositionalConstraint = "CONTAINS_WORD"
 )
+
+// Values returns all known values for PositionalConstraint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionalConstraint) Values() []PositionalConstraint {
+	return []PositionalConstraint{
+		"EXACTLY",
+		"STARTS_WITH",
+		"ENDS_WITH",
+		"CONTAINS",
+		"CONTAINS_WORD",
+	}
+}
 
 type PredicateType string
 
@@ -385,12 +777,36 @@ const (
 	PredicateTypeRegex_match         PredicateType = "RegexMatch"
 )
 
+// Values returns all known values for PredicateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PredicateType) Values() []PredicateType {
+	return []PredicateType{
+		"IPMatch",
+		"ByteMatch",
+		"SqlInjectionMatch",
+		"GeoMatch",
+		"SizeConstraint",
+		"XssMatch",
+		"RegexMatch",
+	}
+}
+
 type RateKey string
 
 // Enum values for RateKey
 const (
 	RateKeyIp RateKey = "IP"
 )
+
+// Values returns all known values for RateKey. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RateKey) Values() []RateKey {
+	return []RateKey{
+		"IP",
+	}
+}
 
 type ResourceType string
 
@@ -399,6 +815,16 @@ const (
 	ResourceTypeApplication_load_balancer ResourceType = "APPLICATION_LOAD_BALANCER"
 	ResourceTypeApi_gateway               ResourceType = "API_GATEWAY"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"APPLICATION_LOAD_BALANCER",
+		"API_GATEWAY",
+	}
+}
 
 type TextTransformation string
 
@@ -412,6 +838,20 @@ const (
 	TextTransformationUrl_decode           TextTransformation = "URL_DECODE"
 )
 
+// Values returns all known values for TextTransformation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TextTransformation) Values() []TextTransformation {
+	return []TextTransformation{
+		"NONE",
+		"COMPRESS_WHITE_SPACE",
+		"HTML_ENTITY_DECODE",
+		"LOWERCASE",
+		"CMD_LINE",
+		"URL_DECODE",
+	}
+}
+
 type WafActionType string
 
 // Enum values for WafActionType
@@ -421,6 +861,17 @@ const (
 	WafActionTypeCount WafActionType = "COUNT"
 )
 
+// Values returns all known values for WafActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WafActionType) Values() []WafActionType {
+	return []WafActionType{
+		"BLOCK",
+		"ALLOW",
+		"COUNT",
+	}
+}
+
 type WafOverrideActionType string
 
 // Enum values for WafOverrideActionType
@@ -428,6 +879,16 @@ const (
 	WafOverrideActionTypeNone  WafOverrideActionType = "NONE"
 	WafOverrideActionTypeCount WafOverrideActionType = "COUNT"
 )
+
+// Values returns all known values for WafOverrideActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WafOverrideActionType) Values() []WafOverrideActionType {
+	return []WafOverrideActionType{
+		"NONE",
+		"COUNT",
+	}
+}
 
 type WafRuleType string
 
@@ -437,3 +898,14 @@ const (
 	WafRuleTypeRate_based WafRuleType = "RATE_BASED"
 	WafRuleTypeGroup      WafRuleType = "GROUP"
 )
+
+// Values returns all known values for WafRuleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WafRuleType) Values() []WafRuleType {
+	return []WafRuleType{
+		"REGULAR",
+		"RATE_BASED",
+		"GROUP",
+	}
+}

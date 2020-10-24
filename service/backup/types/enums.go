@@ -16,6 +16,22 @@ const (
 	BackupJobStateExpired   BackupJobState = "EXPIRED"
 )
 
+// Values returns all known values for BackupJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackupJobState) Values() []BackupJobState {
+	return []BackupJobState{
+		"CREATED",
+		"PENDING",
+		"RUNNING",
+		"ABORTING",
+		"ABORTED",
+		"COMPLETED",
+		"FAILED",
+		"EXPIRED",
+	}
+}
+
 type BackupVaultEvent string
 
 // Enum values for BackupVaultEvent
@@ -37,12 +53,44 @@ const (
 	BackupVaultEventBackup_plan_modified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
 )
 
+// Values returns all known values for BackupVaultEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackupVaultEvent) Values() []BackupVaultEvent {
+	return []BackupVaultEvent{
+		"BACKUP_JOB_STARTED",
+		"BACKUP_JOB_COMPLETED",
+		"BACKUP_JOB_SUCCESSFUL",
+		"BACKUP_JOB_FAILED",
+		"BACKUP_JOB_EXPIRED",
+		"RESTORE_JOB_STARTED",
+		"RESTORE_JOB_COMPLETED",
+		"RESTORE_JOB_SUCCESSFUL",
+		"RESTORE_JOB_FAILED",
+		"COPY_JOB_STARTED",
+		"COPY_JOB_SUCCESSFUL",
+		"COPY_JOB_FAILED",
+		"RECOVERY_POINT_MODIFIED",
+		"BACKUP_PLAN_CREATED",
+		"BACKUP_PLAN_MODIFIED",
+	}
+}
+
 type ConditionType string
 
 // Enum values for ConditionType
 const (
 	ConditionTypeStringequals ConditionType = "STRINGEQUALS"
 )
+
+// Values returns all known values for ConditionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionType) Values() []ConditionType {
+	return []ConditionType{
+		"STRINGEQUALS",
+	}
+}
 
 type CopyJobState string
 
@@ -54,6 +102,18 @@ const (
 	CopyJobStateFailed    CopyJobState = "FAILED"
 )
 
+// Values returns all known values for CopyJobState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CopyJobState) Values() []CopyJobState {
+	return []CopyJobState{
+		"CREATED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type RecoveryPointStatus string
 
 // Enum values for RecoveryPointStatus
@@ -63,6 +123,18 @@ const (
 	RecoveryPointStatusDeleting  RecoveryPointStatus = "DELETING"
 	RecoveryPointStatusExpired   RecoveryPointStatus = "EXPIRED"
 )
+
+// Values returns all known values for RecoveryPointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPointStatus) Values() []RecoveryPointStatus {
+	return []RecoveryPointStatus{
+		"COMPLETED",
+		"PARTIAL",
+		"DELETING",
+		"EXPIRED",
+	}
+}
 
 type RestoreJobStatus string
 
@@ -75,6 +147,19 @@ const (
 	RestoreJobStatusFailed    RestoreJobStatus = "FAILED"
 )
 
+// Values returns all known values for RestoreJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreJobStatus) Values() []RestoreJobStatus {
+	return []RestoreJobStatus{
+		"PENDING",
+		"RUNNING",
+		"COMPLETED",
+		"ABORTED",
+		"FAILED",
+	}
+}
+
 type StorageClass string
 
 // Enum values for StorageClass
@@ -83,3 +168,14 @@ const (
 	StorageClassCold    StorageClass = "COLD"
 	StorageClassDeleted StorageClass = "DELETED"
 )
+
+// Values returns all known values for StorageClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageClass) Values() []StorageClass {
+	return []StorageClass{
+		"WARM",
+		"COLD",
+		"DELETED",
+	}
+}

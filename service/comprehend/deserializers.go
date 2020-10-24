@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpBatchDetectDominantLanguage struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDetectDominantLanguage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDetectDominantLanguage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_deserializeOpBatchDetectEntities struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDetectEntities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDetectEntities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -266,7 +267,7 @@ type awsAwsjson11_deserializeOpBatchDetectKeyPhrases struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDetectKeyPhrases) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDetectKeyPhrases) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -389,7 +390,7 @@ type awsAwsjson11_deserializeOpBatchDetectSentiment struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDetectSentiment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDetectSentiment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -512,7 +513,7 @@ type awsAwsjson11_deserializeOpBatchDetectSyntax struct {
 }
 
 func (*awsAwsjson11_deserializeOpBatchDetectSyntax) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpBatchDetectSyntax) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -635,7 +636,7 @@ type awsAwsjson11_deserializeOpClassifyDocument struct {
 }
 
 func (*awsAwsjson11_deserializeOpClassifyDocument) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpClassifyDocument) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -755,7 +756,7 @@ type awsAwsjson11_deserializeOpCreateDocumentClassifier struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDocumentClassifier) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDocumentClassifier) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -887,7 +888,7 @@ type awsAwsjson11_deserializeOpCreateEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1019,7 +1020,7 @@ type awsAwsjson11_deserializeOpCreateEntityRecognizer struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateEntityRecognizer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateEntityRecognizer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1151,7 +1152,7 @@ type awsAwsjson11_deserializeOpDeleteDocumentClassifier struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteDocumentClassifier) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteDocumentClassifier) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1277,7 +1278,7 @@ type awsAwsjson11_deserializeOpDeleteEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1400,7 +1401,7 @@ type awsAwsjson11_deserializeOpDeleteEntityRecognizer struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteEntityRecognizer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteEntityRecognizer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1526,7 +1527,7 @@ type awsAwsjson11_deserializeOpDescribeDocumentClassificationJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDocumentClassificationJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDocumentClassificationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1646,7 +1647,7 @@ type awsAwsjson11_deserializeOpDescribeDocumentClassifier struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDocumentClassifier) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDocumentClassifier) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1766,7 +1767,7 @@ type awsAwsjson11_deserializeOpDescribeDominantLanguageDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDominantLanguageDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDominantLanguageDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1886,7 +1887,7 @@ type awsAwsjson11_deserializeOpDescribeEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2006,7 +2007,7 @@ type awsAwsjson11_deserializeOpDescribeEntitiesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeEntitiesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeEntitiesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2126,7 +2127,7 @@ type awsAwsjson11_deserializeOpDescribeEntityRecognizer struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeEntityRecognizer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeEntityRecognizer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2246,7 +2247,7 @@ type awsAwsjson11_deserializeOpDescribeKeyPhrasesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeKeyPhrasesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeKeyPhrasesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2366,7 +2367,7 @@ type awsAwsjson11_deserializeOpDescribeSentimentDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeSentimentDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeSentimentDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2486,7 +2487,7 @@ type awsAwsjson11_deserializeOpDescribeTopicsDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeTopicsDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeTopicsDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2606,7 +2607,7 @@ type awsAwsjson11_deserializeOpDetectDominantLanguage struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectDominantLanguage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectDominantLanguage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2723,7 +2724,7 @@ type awsAwsjson11_deserializeOpDetectEntities struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectEntities) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectEntities) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2846,7 +2847,7 @@ type awsAwsjson11_deserializeOpDetectKeyPhrases struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectKeyPhrases) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectKeyPhrases) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2966,7 +2967,7 @@ type awsAwsjson11_deserializeOpDetectSentiment struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectSentiment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectSentiment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3086,7 +3087,7 @@ type awsAwsjson11_deserializeOpDetectSyntax struct {
 }
 
 func (*awsAwsjson11_deserializeOpDetectSyntax) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDetectSyntax) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3206,7 +3207,7 @@ type awsAwsjson11_deserializeOpListDocumentClassificationJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListDocumentClassificationJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListDocumentClassificationJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3326,7 +3327,7 @@ type awsAwsjson11_deserializeOpListDocumentClassifiers struct {
 }
 
 func (*awsAwsjson11_deserializeOpListDocumentClassifiers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListDocumentClassifiers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3446,7 +3447,7 @@ type awsAwsjson11_deserializeOpListDominantLanguageDetectionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListDominantLanguageDetectionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListDominantLanguageDetectionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3566,7 +3567,7 @@ type awsAwsjson11_deserializeOpListEndpoints struct {
 }
 
 func (*awsAwsjson11_deserializeOpListEndpoints) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListEndpoints) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3683,7 +3684,7 @@ type awsAwsjson11_deserializeOpListEntitiesDetectionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListEntitiesDetectionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListEntitiesDetectionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3803,7 +3804,7 @@ type awsAwsjson11_deserializeOpListEntityRecognizers struct {
 }
 
 func (*awsAwsjson11_deserializeOpListEntityRecognizers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListEntityRecognizers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3923,7 +3924,7 @@ type awsAwsjson11_deserializeOpListKeyPhrasesDetectionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListKeyPhrasesDetectionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListKeyPhrasesDetectionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4043,7 +4044,7 @@ type awsAwsjson11_deserializeOpListSentimentDetectionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListSentimentDetectionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListSentimentDetectionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4163,7 +4164,7 @@ type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4280,7 +4281,7 @@ type awsAwsjson11_deserializeOpListTopicsDetectionJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTopicsDetectionJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTopicsDetectionJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4400,7 +4401,7 @@ type awsAwsjson11_deserializeOpStartDocumentClassificationJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartDocumentClassificationJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartDocumentClassificationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4526,7 +4527,7 @@ type awsAwsjson11_deserializeOpStartDominantLanguageDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartDominantLanguageDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartDominantLanguageDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4646,7 +4647,7 @@ type awsAwsjson11_deserializeOpStartEntitiesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartEntitiesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartEntitiesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4772,7 +4773,7 @@ type awsAwsjson11_deserializeOpStartKeyPhrasesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartKeyPhrasesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartKeyPhrasesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4892,7 +4893,7 @@ type awsAwsjson11_deserializeOpStartSentimentDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartSentimentDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartSentimentDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5012,7 +5013,7 @@ type awsAwsjson11_deserializeOpStartTopicsDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartTopicsDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartTopicsDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5132,7 +5133,7 @@ type awsAwsjson11_deserializeOpStopDominantLanguageDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopDominantLanguageDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopDominantLanguageDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5249,7 +5250,7 @@ type awsAwsjson11_deserializeOpStopEntitiesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopEntitiesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopEntitiesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5366,7 +5367,7 @@ type awsAwsjson11_deserializeOpStopKeyPhrasesDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopKeyPhrasesDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopKeyPhrasesDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5483,7 +5484,7 @@ type awsAwsjson11_deserializeOpStopSentimentDetectionJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopSentimentDetectionJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopSentimentDetectionJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5600,7 +5601,7 @@ type awsAwsjson11_deserializeOpStopTrainingDocumentClassifier struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopTrainingDocumentClassifier) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopTrainingDocumentClassifier) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5720,7 +5721,7 @@ type awsAwsjson11_deserializeOpStopTrainingEntityRecognizer struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopTrainingEntityRecognizer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopTrainingEntityRecognizer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5840,7 +5841,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5963,7 +5964,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6086,7 +6087,7 @@ type awsAwsjson11_deserializeOpUpdateEndpoint struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateEndpoint) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

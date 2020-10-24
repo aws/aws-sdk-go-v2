@@ -174,12 +174,12 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("s3")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("s3")(stack)
 }
 
-func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
+	return stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
 }
 
 type HTTPSignerV4 interface {
@@ -206,12 +206,12 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	return retry.AddRetryMiddlewares(stack, mo)
 }
 
-func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
-	s3shared.AddMetadataRetrieverMiddleware(stack)
+func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
+	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
-	s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
+func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
 		Region:             options.Region,
 		GetBucketFromInput: getBucketFromInput,
 		UsePathStyle:       options.UsePathStyle,
@@ -407,10 +407,10 @@ func supportAccelerate(input interface{}) bool {
 	}
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	s3shared.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return s3shared.AddResponseErrorMiddleware(stack)
 }
 
-func disableAcceptEncodingGzip(stack *middleware.Stack) {
-	acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{})
+func disableAcceptEncodingGzip(stack *middleware.Stack) error {
+	return acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{})
 }

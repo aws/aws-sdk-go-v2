@@ -11,6 +11,17 @@ const (
 	AlgorithmAes256 Algorithm = "aes256"
 )
 
+// Values returns all known values for Algorithm. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Algorithm) Values() []Algorithm {
+	return []Algorithm{
+		"aes128",
+		"aes192",
+		"aes256",
+	}
+}
+
 type EntitlementStatus string
 
 // Enum values for EntitlementStatus
@@ -19,6 +30,16 @@ const (
 	EntitlementStatusDisabled EntitlementStatus = "DISABLED"
 )
 
+// Values returns all known values for EntitlementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntitlementStatus) Values() []EntitlementStatus {
+	return []EntitlementStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -26,6 +47,16 @@ const (
 	KeyTypeSpeke      KeyType = "speke"
 	KeyTypeStatic_key KeyType = "static-key"
 )
+
+// Values returns all known values for KeyType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyType) Values() []KeyType {
+	return []KeyType{
+		"speke",
+		"static-key",
+	}
+}
 
 type Protocol string
 
@@ -38,6 +69,19 @@ const (
 	ProtocolRist      Protocol = "rist"
 )
 
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"zixi-push",
+		"rtp-fec",
+		"rtp",
+		"zixi-pull",
+		"rist",
+	}
+}
+
 type SourceType string
 
 // Enum values for SourceType
@@ -46,6 +90,16 @@ const (
 	SourceTypeEntitled SourceType = "ENTITLED"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"OWNED",
+		"ENTITLED",
+	}
+}
+
 type State string
 
 // Enum values for State
@@ -53,6 +107,16 @@ const (
 	StateEnabled  State = "ENABLED"
 	StateDisabled State = "DISABLED"
 )
+
+// Values returns all known values for State. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Status string
 
@@ -66,3 +130,18 @@ const (
 	StatusStopping Status = "STOPPING"
 	StatusError    Status = "ERROR"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"STANDBY",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"STARTING",
+		"STOPPING",
+		"ERROR",
+	}
+}

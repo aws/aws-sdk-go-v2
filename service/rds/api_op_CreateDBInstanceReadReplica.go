@@ -6,11 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"net/http"
 )
@@ -362,7 +364,73 @@ type CreateDBInstanceReadReplicaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
+func addOperationCreateDBInstanceReadReplicaStackSlots(stack *middleware.Stack) error {
+	if err := stack.Initialize.AddSlot(middleware.After,
+		smithyid.OperationIdempotencyTokenAutoFill,
+		smithyid.OperationInputValidation,
+	); err != nil {
+		return err
+	}
+	if err := stack.Initialize.AddSlot(middleware.Before,
+		awsid.RegisterServiceMetadata,
+		awsid.Presigning,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.AddSlot(middleware.After,
+		smithyid.OperationSerializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.InsertSlot(smithyid.OperationSerializer, middleware.Before,
+		awsid.ResolveEndpoint,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		smithyid.ContentChecksum,
+		smithyid.ComputeContentLength,
+		smithyid.ValidateContentLength,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		awsid.ClientRequestID,
+		awsid.ComputePayloadHash,
+		awsid.UserAgent,
+	); err != nil {
+		return err
+	}
+	if err := stack.Finalize.AddSlot(middleware.After,
+		awsid.Retry,
+		awsid.Signing,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.After,
+		smithyid.ErrorCloseResponseBody,
+		smithyid.CloseResponseBody,
+		smithyid.OperationDeserializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.Before,
+		awsid.ResponseErrorWrapper,
+		awsid.RequestIDRetriever,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.InsertSlot(smithyid.OperationDeserializer, middleware.After,
+		awsid.ResponseReadTimeout,
+	); err != nil {
+		return err
+	}
+	return nil
+}
 func addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := addOperationCreateDBInstanceReadReplicaStackSlots(stack); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstanceReadReplica{}, middleware.After)
 	if err != nil {
 		return err
@@ -371,21 +439,51 @@ func addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack,
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addCreateDBInstanceReadReplicaPresignURLMiddleware(stack, options)
-	addOpCreateDBInstanceReadReplicaValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err := awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err := v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
+	if err := addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err := addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err := awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addCreateDBInstanceReadReplicaPresignURLMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err := addOpCreateDBInstanceReadReplicaValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err := stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err := addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -469,7 +567,7 @@ func (c *createDBInstanceReadReplicaHTTPPresignURLClient) PresignCreateDBInstanc
 func (c *createDBInstanceReadReplicaHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()
-	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+	stack.Build.Remove(awsid.ClientRequestID)
 	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
 	if err != nil {
 		return err
@@ -509,8 +607,8 @@ func (c *presignAutoFillCreateDBInstanceReadReplicaClient) PresignURL(ctx contex
 	return c.client.PresignCreateDBInstanceReadReplica(ctx, input, optFn)
 }
 
-func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rds",

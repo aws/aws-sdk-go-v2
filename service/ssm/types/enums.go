@@ -13,6 +13,20 @@ const (
 	AssociationComplianceSeverityUnspecified AssociationComplianceSeverity = "UNSPECIFIED"
 )
 
+// Values returns all known values for AssociationComplianceSeverity. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssociationComplianceSeverity) Values() []AssociationComplianceSeverity {
+	return []AssociationComplianceSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"UNSPECIFIED",
+	}
+}
+
 type AssociationExecutionFilterKey string
 
 // Enum values for AssociationExecutionFilterKey
@@ -22,6 +36,18 @@ const (
 	AssociationExecutionFilterKeyCreatedtime AssociationExecutionFilterKey = "CreatedTime"
 )
 
+// Values returns all known values for AssociationExecutionFilterKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssociationExecutionFilterKey) Values() []AssociationExecutionFilterKey {
+	return []AssociationExecutionFilterKey{
+		"ExecutionId",
+		"Status",
+		"CreatedTime",
+	}
+}
+
 type AssociationExecutionTargetsFilterKey string
 
 // Enum values for AssociationExecutionTargetsFilterKey
@@ -30,6 +56,18 @@ const (
 	AssociationExecutionTargetsFilterKeyResourceid   AssociationExecutionTargetsFilterKey = "ResourceId"
 	AssociationExecutionTargetsFilterKeyResourcetype AssociationExecutionTargetsFilterKey = "ResourceType"
 )
+
+// Values returns all known values for AssociationExecutionTargetsFilterKey. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssociationExecutionTargetsFilterKey) Values() []AssociationExecutionTargetsFilterKey {
+	return []AssociationExecutionTargetsFilterKey{
+		"Status",
+		"ResourceId",
+		"ResourceType",
+	}
+}
 
 type AssociationFilterKey string
 
@@ -45,6 +83,22 @@ const (
 	AssociationFilterKeyResourcegroupname  AssociationFilterKey = "ResourceGroupName"
 )
 
+// Values returns all known values for AssociationFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationFilterKey) Values() []AssociationFilterKey {
+	return []AssociationFilterKey{
+		"InstanceId",
+		"Name",
+		"AssociationId",
+		"AssociationStatusName",
+		"LastExecutedBefore",
+		"LastExecutedAfter",
+		"AssociationName",
+		"ResourceGroupName",
+	}
+}
+
 type AssociationFilterOperatorType string
 
 // Enum values for AssociationFilterOperatorType
@@ -53,6 +107,18 @@ const (
 	AssociationFilterOperatorTypeLessthan    AssociationFilterOperatorType = "LESS_THAN"
 	AssociationFilterOperatorTypeGreaterthan AssociationFilterOperatorType = "GREATER_THAN"
 )
+
+// Values returns all known values for AssociationFilterOperatorType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssociationFilterOperatorType) Values() []AssociationFilterOperatorType {
+	return []AssociationFilterOperatorType{
+		"EQUAL",
+		"LESS_THAN",
+		"GREATER_THAN",
+	}
+}
 
 type AssociationStatusName string
 
@@ -63,6 +129,17 @@ const (
 	AssociationStatusNameFailed  AssociationStatusName = "Failed"
 )
 
+// Values returns all known values for AssociationStatusName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatusName) Values() []AssociationStatusName {
+	return []AssociationStatusName{
+		"Pending",
+		"Success",
+		"Failed",
+	}
+}
+
 type AssociationSyncCompliance string
 
 // Enum values for AssociationSyncCompliance
@@ -71,12 +148,31 @@ const (
 	AssociationSyncComplianceManual AssociationSyncCompliance = "MANUAL"
 )
 
+// Values returns all known values for AssociationSyncCompliance. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationSyncCompliance) Values() []AssociationSyncCompliance {
+	return []AssociationSyncCompliance{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
 type AttachmentHashType string
 
 // Enum values for AttachmentHashType
 const (
 	AttachmentHashTypeSha256 AttachmentHashType = "Sha256"
 )
+
+// Values returns all known values for AttachmentHashType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentHashType) Values() []AttachmentHashType {
+	return []AttachmentHashType{
+		"Sha256",
+	}
+}
 
 type AttachmentsSourceKey string
 
@@ -86,6 +182,17 @@ const (
 	AttachmentsSourceKeyS3fileurl           AttachmentsSourceKey = "S3FileUrl"
 	AttachmentsSourceKeyAttachmentreference AttachmentsSourceKey = "AttachmentReference"
 )
+
+// Values returns all known values for AttachmentsSourceKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentsSourceKey) Values() []AttachmentsSourceKey {
+	return []AttachmentsSourceKey{
+		"SourceUrl",
+		"S3FileUrl",
+		"AttachmentReference",
+	}
+}
 
 type AutomationExecutionFilterKey string
 
@@ -102,6 +209,23 @@ const (
 	AutomationExecutionFilterKeyTag_key              AutomationExecutionFilterKey = "TagKey"
 )
 
+// Values returns all known values for AutomationExecutionFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationExecutionFilterKey) Values() []AutomationExecutionFilterKey {
+	return []AutomationExecutionFilterKey{
+		"DocumentNamePrefix",
+		"ExecutionStatus",
+		"ExecutionId",
+		"ParentExecutionId",
+		"CurrentAction",
+		"StartTimeBefore",
+		"StartTimeAfter",
+		"AutomationType",
+		"TagKey",
+	}
+}
+
 type AutomationExecutionStatus string
 
 // Enum values for AutomationExecutionStatus
@@ -116,6 +240,22 @@ const (
 	AutomationExecutionStatusFailed     AutomationExecutionStatus = "Failed"
 )
 
+// Values returns all known values for AutomationExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationExecutionStatus) Values() []AutomationExecutionStatus {
+	return []AutomationExecutionStatus{
+		"Pending",
+		"InProgress",
+		"Waiting",
+		"Success",
+		"TimedOut",
+		"Cancelling",
+		"Cancelled",
+		"Failed",
+	}
+}
+
 type AutomationType string
 
 // Enum values for AutomationType
@@ -124,6 +264,16 @@ const (
 	AutomationTypeLocal        AutomationType = "Local"
 )
 
+// Values returns all known values for AutomationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationType) Values() []AutomationType {
+	return []AutomationType{
+		"CrossAccount",
+		"Local",
+	}
+}
+
 type CalendarState string
 
 // Enum values for CalendarState
@@ -131,6 +281,16 @@ const (
 	CalendarStateOpen   CalendarState = "OPEN"
 	CalendarStateClosed CalendarState = "CLOSED"
 )
+
+// Values returns all known values for CalendarState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CalendarState) Values() []CalendarState {
+	return []CalendarState{
+		"OPEN",
+		"CLOSED",
+	}
+}
 
 type CommandFilterKey string
 
@@ -142,6 +302,19 @@ const (
 	CommandFilterKeyExecution_stage CommandFilterKey = "ExecutionStage"
 	CommandFilterKeyDocument_name   CommandFilterKey = "DocumentName"
 )
+
+// Values returns all known values for CommandFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommandFilterKey) Values() []CommandFilterKey {
+	return []CommandFilterKey{
+		"InvokedAfter",
+		"InvokedBefore",
+		"Status",
+		"ExecutionStage",
+		"DocumentName",
+	}
+}
 
 type CommandInvocationStatus string
 
@@ -157,6 +330,22 @@ const (
 	CommandInvocationStatusCancelling  CommandInvocationStatus = "Cancelling"
 )
 
+// Values returns all known values for CommandInvocationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommandInvocationStatus) Values() []CommandInvocationStatus {
+	return []CommandInvocationStatus{
+		"Pending",
+		"InProgress",
+		"Delayed",
+		"Success",
+		"Cancelled",
+		"TimedOut",
+		"Failed",
+		"Cancelling",
+	}
+}
+
 type CommandPluginStatus string
 
 // Enum values for CommandPluginStatus
@@ -168,6 +357,20 @@ const (
 	CommandPluginStatusCancelled   CommandPluginStatus = "Cancelled"
 	CommandPluginStatusFailed      CommandPluginStatus = "Failed"
 )
+
+// Values returns all known values for CommandPluginStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommandPluginStatus) Values() []CommandPluginStatus {
+	return []CommandPluginStatus{
+		"Pending",
+		"InProgress",
+		"Success",
+		"TimedOut",
+		"Cancelled",
+		"Failed",
+	}
+}
 
 type CommandStatus string
 
@@ -182,6 +385,21 @@ const (
 	CommandStatusCancelling  CommandStatus = "Cancelling"
 )
 
+// Values returns all known values for CommandStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommandStatus) Values() []CommandStatus {
+	return []CommandStatus{
+		"Pending",
+		"InProgress",
+		"Success",
+		"Cancelled",
+		"Failed",
+		"TimedOut",
+		"Cancelling",
+	}
+}
+
 type ComplianceQueryOperatorType string
 
 // Enum values for ComplianceQueryOperatorType
@@ -192,6 +410,19 @@ const (
 	ComplianceQueryOperatorTypeLessthan    ComplianceQueryOperatorType = "LESS_THAN"
 	ComplianceQueryOperatorTypeGreaterthan ComplianceQueryOperatorType = "GREATER_THAN"
 )
+
+// Values returns all known values for ComplianceQueryOperatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceQueryOperatorType) Values() []ComplianceQueryOperatorType {
+	return []ComplianceQueryOperatorType{
+		"EQUAL",
+		"NOT_EQUAL",
+		"BEGIN_WITH",
+		"LESS_THAN",
+		"GREATER_THAN",
+	}
+}
 
 type ComplianceSeverity string
 
@@ -205,6 +436,20 @@ const (
 	ComplianceSeverityUnspecified   ComplianceSeverity = "UNSPECIFIED"
 )
 
+// Values returns all known values for ComplianceSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceSeverity) Values() []ComplianceSeverity {
+	return []ComplianceSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"INFORMATIONAL",
+		"UNSPECIFIED",
+	}
+}
+
 type ComplianceStatus string
 
 // Enum values for ComplianceStatus
@@ -212,6 +457,16 @@ const (
 	ComplianceStatusCompliant    ComplianceStatus = "COMPLIANT"
 	ComplianceStatusNoncompliant ComplianceStatus = "NON_COMPLIANT"
 )
+
+// Values returns all known values for ComplianceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceStatus) Values() []ComplianceStatus {
+	return []ComplianceStatus{
+		"COMPLIANT",
+		"NON_COMPLIANT",
+	}
+}
 
 type ComplianceUploadType string
 
@@ -221,6 +476,16 @@ const (
 	ComplianceUploadTypePartial  ComplianceUploadType = "PARTIAL"
 )
 
+// Values returns all known values for ComplianceUploadType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceUploadType) Values() []ComplianceUploadType {
+	return []ComplianceUploadType{
+		"COMPLETE",
+		"PARTIAL",
+	}
+}
+
 type ConnectionStatus string
 
 // Enum values for ConnectionStatus
@@ -228,6 +493,16 @@ const (
 	ConnectionStatusConnected     ConnectionStatus = "Connected"
 	ConnectionStatusNot_connected ConnectionStatus = "NotConnected"
 )
+
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"Connected",
+		"NotConnected",
+	}
+}
 
 type DescribeActivationsFilterKeys string
 
@@ -237,6 +512,18 @@ const (
 	DescribeActivationsFilterKeysDefault_instance_name DescribeActivationsFilterKeys = "DefaultInstanceName"
 	DescribeActivationsFilterKeysIam_role              DescribeActivationsFilterKeys = "IamRole"
 )
+
+// Values returns all known values for DescribeActivationsFilterKeys. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DescribeActivationsFilterKeys) Values() []DescribeActivationsFilterKeys {
+	return []DescribeActivationsFilterKeys{
+		"ActivationIds",
+		"DefaultInstanceName",
+		"IamRole",
+	}
+}
 
 type DocumentFilterKey string
 
@@ -248,6 +535,18 @@ const (
 	DocumentFilterKeyDocumenttype  DocumentFilterKey = "DocumentType"
 )
 
+// Values returns all known values for DocumentFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentFilterKey) Values() []DocumentFilterKey {
+	return []DocumentFilterKey{
+		"Name",
+		"Owner",
+		"PlatformTypes",
+		"DocumentType",
+	}
+}
+
 type DocumentFormat string
 
 // Enum values for DocumentFormat
@@ -257,6 +556,17 @@ const (
 	DocumentFormatText DocumentFormat = "TEXT"
 )
 
+// Values returns all known values for DocumentFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentFormat) Values() []DocumentFormat {
+	return []DocumentFormat{
+		"YAML",
+		"JSON",
+		"TEXT",
+	}
+}
+
 type DocumentHashType string
 
 // Enum values for DocumentHashType
@@ -264,6 +574,16 @@ const (
 	DocumentHashTypeSha256 DocumentHashType = "Sha256"
 	DocumentHashTypeSha1   DocumentHashType = "Sha1"
 )
+
+// Values returns all known values for DocumentHashType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentHashType) Values() []DocumentHashType {
+	return []DocumentHashType{
+		"Sha256",
+		"Sha1",
+	}
+}
 
 type DocumentParameterType string
 
@@ -273,12 +593,31 @@ const (
 	DocumentParameterTypeStringlist DocumentParameterType = "StringList"
 )
 
+// Values returns all known values for DocumentParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentParameterType) Values() []DocumentParameterType {
+	return []DocumentParameterType{
+		"String",
+		"StringList",
+	}
+}
+
 type DocumentPermissionType string
 
 // Enum values for DocumentPermissionType
 const (
 	DocumentPermissionTypeShare DocumentPermissionType = "Share"
 )
+
+// Values returns all known values for DocumentPermissionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentPermissionType) Values() []DocumentPermissionType {
+	return []DocumentPermissionType{
+		"Share",
+	}
+}
 
 type DocumentStatus string
 
@@ -290,6 +629,19 @@ const (
 	DocumentStatusDeleting DocumentStatus = "Deleting"
 	DocumentStatusFailed   DocumentStatus = "Failed"
 )
+
+// Values returns all known values for DocumentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentStatus) Values() []DocumentStatus {
+	return []DocumentStatus{
+		"Creating",
+		"Active",
+		"Updating",
+		"Deleting",
+		"Failed",
+	}
+}
 
 type DocumentType string
 
@@ -306,6 +658,23 @@ const (
 	DocumentTypeChangecalendar                 DocumentType = "ChangeCalendar"
 )
 
+// Values returns all known values for DocumentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DocumentType) Values() []DocumentType {
+	return []DocumentType{
+		"Command",
+		"Policy",
+		"Automation",
+		"Session",
+		"Package",
+		"ApplicationConfiguration",
+		"ApplicationConfigurationSchema",
+		"DeploymentStrategy",
+		"ChangeCalendar",
+	}
+}
+
 type ExecutionMode string
 
 // Enum values for ExecutionMode
@@ -313,6 +682,16 @@ const (
 	ExecutionModeAuto        ExecutionMode = "Auto"
 	ExecutionModeInteractive ExecutionMode = "Interactive"
 )
+
+// Values returns all known values for ExecutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionMode) Values() []ExecutionMode {
+	return []ExecutionMode{
+		"Auto",
+		"Interactive",
+	}
+}
 
 type Fault string
 
@@ -322,6 +701,17 @@ const (
 	FaultServer  Fault = "Server"
 	FaultUnknown Fault = "Unknown"
 )
+
+// Values returns all known values for Fault. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Fault) Values() []Fault {
+	return []Fault{
+		"Client",
+		"Server",
+		"Unknown",
+	}
+}
 
 type InstanceInformationFilterKey string
 
@@ -337,6 +727,22 @@ const (
 	InstanceInformationFilterKeyAssociation_status InstanceInformationFilterKey = "AssociationStatus"
 )
 
+// Values returns all known values for InstanceInformationFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceInformationFilterKey) Values() []InstanceInformationFilterKey {
+	return []InstanceInformationFilterKey{
+		"InstanceIds",
+		"AgentVersion",
+		"PingStatus",
+		"PlatformTypes",
+		"ActivationIds",
+		"IamRole",
+		"ResourceType",
+		"AssociationStatus",
+	}
+}
+
 type InstancePatchStateOperatorType string
 
 // Enum values for InstancePatchStateOperatorType
@@ -347,6 +753,19 @@ const (
 	InstancePatchStateOperatorTypeGreater_than InstancePatchStateOperatorType = "GreaterThan"
 )
 
+// Values returns all known values for InstancePatchStateOperatorType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstancePatchStateOperatorType) Values() []InstancePatchStateOperatorType {
+	return []InstancePatchStateOperatorType{
+		"Equal",
+		"NotEqual",
+		"LessThan",
+		"GreaterThan",
+	}
+}
+
 type InventoryAttributeDataType string
 
 // Enum values for InventoryAttributeDataType
@@ -355,6 +774,16 @@ const (
 	InventoryAttributeDataTypeNumber InventoryAttributeDataType = "number"
 )
 
+// Values returns all known values for InventoryAttributeDataType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InventoryAttributeDataType) Values() []InventoryAttributeDataType {
+	return []InventoryAttributeDataType{
+		"string",
+		"number",
+	}
+}
+
 type InventoryDeletionStatus string
 
 // Enum values for InventoryDeletionStatus
@@ -362,6 +791,16 @@ const (
 	InventoryDeletionStatusIn_progress InventoryDeletionStatus = "InProgress"
 	InventoryDeletionStatusComplete    InventoryDeletionStatus = "Complete"
 )
+
+// Values returns all known values for InventoryDeletionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InventoryDeletionStatus) Values() []InventoryDeletionStatus {
+	return []InventoryDeletionStatus{
+		"InProgress",
+		"Complete",
+	}
+}
 
 type InventoryQueryOperatorType string
 
@@ -375,6 +814,20 @@ const (
 	InventoryQueryOperatorTypeExists       InventoryQueryOperatorType = "Exists"
 )
 
+// Values returns all known values for InventoryQueryOperatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InventoryQueryOperatorType) Values() []InventoryQueryOperatorType {
+	return []InventoryQueryOperatorType{
+		"Equal",
+		"NotEqual",
+		"BeginWith",
+		"LessThan",
+		"GreaterThan",
+		"Exists",
+	}
+}
+
 type InventorySchemaDeleteOption string
 
 // Enum values for InventorySchemaDeleteOption
@@ -382,6 +835,16 @@ const (
 	InventorySchemaDeleteOptionDisable_schema InventorySchemaDeleteOption = "DisableSchema"
 	InventorySchemaDeleteOptionDelete_schema  InventorySchemaDeleteOption = "DeleteSchema"
 )
+
+// Values returns all known values for InventorySchemaDeleteOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InventorySchemaDeleteOption) Values() []InventorySchemaDeleteOption {
+	return []InventorySchemaDeleteOption{
+		"DisableSchema",
+		"DeleteSchema",
+	}
+}
 
 type LastResourceDataSyncStatus string
 
@@ -391,6 +854,17 @@ const (
 	LastResourceDataSyncStatusFailed     LastResourceDataSyncStatus = "Failed"
 	LastResourceDataSyncStatusInprogress LastResourceDataSyncStatus = "InProgress"
 )
+
+// Values returns all known values for LastResourceDataSyncStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LastResourceDataSyncStatus) Values() []LastResourceDataSyncStatus {
+	return []LastResourceDataSyncStatus{
+		"Successful",
+		"Failed",
+		"InProgress",
+	}
+}
 
 type MaintenanceWindowExecutionStatus string
 
@@ -406,6 +880,23 @@ const (
 	MaintenanceWindowExecutionStatusSkippedoverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
 )
 
+// Values returns all known values for MaintenanceWindowExecutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MaintenanceWindowExecutionStatus) Values() []MaintenanceWindowExecutionStatus {
+	return []MaintenanceWindowExecutionStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
+		"TIMED_OUT",
+		"CANCELLING",
+		"CANCELLED",
+		"SKIPPED_OVERLAPPING",
+	}
+}
+
 type MaintenanceWindowResourceType string
 
 // Enum values for MaintenanceWindowResourceType
@@ -413,6 +904,17 @@ const (
 	MaintenanceWindowResourceTypeInstance      MaintenanceWindowResourceType = "INSTANCE"
 	MaintenanceWindowResourceTypeResourcegroup MaintenanceWindowResourceType = "RESOURCE_GROUP"
 )
+
+// Values returns all known values for MaintenanceWindowResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MaintenanceWindowResourceType) Values() []MaintenanceWindowResourceType {
+	return []MaintenanceWindowResourceType{
+		"INSTANCE",
+		"RESOURCE_GROUP",
+	}
+}
 
 type MaintenanceWindowTaskType string
 
@@ -423,6 +925,18 @@ const (
 	MaintenanceWindowTaskTypeStepfunctions MaintenanceWindowTaskType = "STEP_FUNCTIONS"
 	MaintenanceWindowTaskTypeLambda        MaintenanceWindowTaskType = "LAMBDA"
 )
+
+// Values returns all known values for MaintenanceWindowTaskType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceWindowTaskType) Values() []MaintenanceWindowTaskType {
+	return []MaintenanceWindowTaskType{
+		"RUN_COMMAND",
+		"AUTOMATION",
+		"STEP_FUNCTIONS",
+		"LAMBDA",
+	}
+}
 
 type NotificationEvent string
 
@@ -436,6 +950,20 @@ const (
 	NotificationEventFailed      NotificationEvent = "Failed"
 )
 
+// Values returns all known values for NotificationEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationEvent) Values() []NotificationEvent {
+	return []NotificationEvent{
+		"All",
+		"InProgress",
+		"Success",
+		"TimedOut",
+		"Cancelled",
+		"Failed",
+	}
+}
+
 type NotificationType string
 
 // Enum values for NotificationType
@@ -443,6 +971,16 @@ const (
 	NotificationTypeCommand    NotificationType = "Command"
 	NotificationTypeInvocation NotificationType = "Invocation"
 )
+
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"Command",
+		"Invocation",
+	}
+}
 
 type OperatingSystem string
 
@@ -459,6 +997,23 @@ const (
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
 )
 
+// Values returns all known values for OperatingSystem. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperatingSystem) Values() []OperatingSystem {
+	return []OperatingSystem{
+		"WINDOWS",
+		"AMAZON_LINUX",
+		"AMAZON_LINUX_2",
+		"UBUNTU",
+		"REDHAT_ENTERPRISE_LINUX",
+		"SUSE",
+		"CENTOS",
+		"ORACLE_LINUX",
+		"DEBIAN",
+	}
+}
+
 type OpsFilterOperatorType string
 
 // Enum values for OpsFilterOperatorType
@@ -471,6 +1026,20 @@ const (
 	OpsFilterOperatorTypeExists       OpsFilterOperatorType = "Exists"
 )
 
+// Values returns all known values for OpsFilterOperatorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsFilterOperatorType) Values() []OpsFilterOperatorType {
+	return []OpsFilterOperatorType{
+		"Equal",
+		"NotEqual",
+		"BeginWith",
+		"LessThan",
+		"GreaterThan",
+		"Exists",
+	}
+}
+
 type OpsItemDataType string
 
 // Enum values for OpsItemDataType
@@ -478,6 +1047,16 @@ const (
 	OpsItemDataTypeSearchable_string OpsItemDataType = "SearchableString"
 	OpsItemDataTypeString            OpsItemDataType = "String"
 )
+
+// Values returns all known values for OpsItemDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemDataType) Values() []OpsItemDataType {
+	return []OpsItemDataType{
+		"SearchableString",
+		"String",
+	}
+}
 
 type OpsItemFilterKey string
 
@@ -500,6 +1079,29 @@ const (
 	OpsItemFilterKeySeverity               OpsItemFilterKey = "Severity"
 )
 
+// Values returns all known values for OpsItemFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemFilterKey) Values() []OpsItemFilterKey {
+	return []OpsItemFilterKey{
+		"Status",
+		"CreatedBy",
+		"Source",
+		"Priority",
+		"Title",
+		"OpsItemId",
+		"CreatedTime",
+		"LastModifiedTime",
+		"OperationalData",
+		"OperationalDataKey",
+		"OperationalDataValue",
+		"ResourceId",
+		"AutomationId",
+		"Category",
+		"Severity",
+	}
+}
+
 type OpsItemFilterOperator string
 
 // Enum values for OpsItemFilterOperator
@@ -510,6 +1112,18 @@ const (
 	OpsItemFilterOperatorLess_than    OpsItemFilterOperator = "LessThan"
 )
 
+// Values returns all known values for OpsItemFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemFilterOperator) Values() []OpsItemFilterOperator {
+	return []OpsItemFilterOperator{
+		"Equal",
+		"Contains",
+		"GreaterThan",
+		"LessThan",
+	}
+}
+
 type OpsItemStatus string
 
 // Enum values for OpsItemStatus
@@ -518,6 +1132,17 @@ const (
 	OpsItemStatusIn_progress OpsItemStatus = "InProgress"
 	OpsItemStatusResolved    OpsItemStatus = "Resolved"
 )
+
+// Values returns all known values for OpsItemStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemStatus) Values() []OpsItemStatus {
+	return []OpsItemStatus{
+		"Open",
+		"InProgress",
+		"Resolved",
+	}
+}
 
 type ParametersFilterKey string
 
@@ -528,6 +1153,17 @@ const (
 	ParametersFilterKeyKey_id ParametersFilterKey = "KeyId"
 )
 
+// Values returns all known values for ParametersFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParametersFilterKey) Values() []ParametersFilterKey {
+	return []ParametersFilterKey{
+		"Name",
+		"Type",
+		"KeyId",
+	}
+}
+
 type ParameterTier string
 
 // Enum values for ParameterTier
@@ -536,6 +1172,17 @@ const (
 	ParameterTierAdvanced            ParameterTier = "Advanced"
 	ParameterTierIntelligent_tiering ParameterTier = "Intelligent-Tiering"
 )
+
+// Values returns all known values for ParameterTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterTier) Values() []ParameterTier {
+	return []ParameterTier{
+		"Standard",
+		"Advanced",
+		"Intelligent-Tiering",
+	}
+}
 
 type ParameterType string
 
@@ -546,6 +1193,17 @@ const (
 	ParameterTypeSecure_string ParameterType = "SecureString"
 )
 
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"String",
+		"StringList",
+		"SecureString",
+	}
+}
+
 type PatchAction string
 
 // Enum values for PatchAction
@@ -553,6 +1211,16 @@ const (
 	PatchActionAllowasdependency PatchAction = "ALLOW_AS_DEPENDENCY"
 	PatchActionBlock             PatchAction = "BLOCK"
 )
+
+// Values returns all known values for PatchAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PatchAction) Values() []PatchAction {
+	return []PatchAction{
+		"ALLOW_AS_DEPENDENCY",
+		"BLOCK",
+	}
+}
 
 type PatchComplianceDataState string
 
@@ -567,6 +1235,21 @@ const (
 	PatchComplianceDataStateFailed                 PatchComplianceDataState = "FAILED"
 )
 
+// Values returns all known values for PatchComplianceDataState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchComplianceDataState) Values() []PatchComplianceDataState {
+	return []PatchComplianceDataState{
+		"INSTALLED",
+		"INSTALLED_OTHER",
+		"INSTALLED_PENDING_REBOOT",
+		"INSTALLED_REJECTED",
+		"MISSING",
+		"NOT_APPLICABLE",
+		"FAILED",
+	}
+}
+
 type PatchComplianceLevel string
 
 // Enum values for PatchComplianceLevel
@@ -579,6 +1262,20 @@ const (
 	PatchComplianceLevelUnspecified   PatchComplianceLevel = "UNSPECIFIED"
 )
 
+// Values returns all known values for PatchComplianceLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchComplianceLevel) Values() []PatchComplianceLevel {
+	return []PatchComplianceLevel{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"INFORMATIONAL",
+		"UNSPECIFIED",
+	}
+}
+
 type PatchDeploymentStatus string
 
 // Enum values for PatchDeploymentStatus
@@ -588,6 +1285,18 @@ const (
 	PatchDeploymentStatusExplicitapproved PatchDeploymentStatus = "EXPLICIT_APPROVED"
 	PatchDeploymentStatusExplicitrejected PatchDeploymentStatus = "EXPLICIT_REJECTED"
 )
+
+// Values returns all known values for PatchDeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchDeploymentStatus) Values() []PatchDeploymentStatus {
+	return []PatchDeploymentStatus{
+		"APPROVED",
+		"PENDING_APPROVAL",
+		"EXPLICIT_APPROVED",
+		"EXPLICIT_REJECTED",
+	}
+}
 
 type PatchFilterKey string
 
@@ -604,6 +1313,23 @@ const (
 	PatchFilterKeySeverity       PatchFilterKey = "SEVERITY"
 )
 
+// Values returns all known values for PatchFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchFilterKey) Values() []PatchFilterKey {
+	return []PatchFilterKey{
+		"PATCH_SET",
+		"PRODUCT",
+		"PRODUCT_FAMILY",
+		"CLASSIFICATION",
+		"MSRC_SEVERITY",
+		"PATCH_ID",
+		"SECTION",
+		"PRIORITY",
+		"SEVERITY",
+	}
+}
+
 type PatchOperationType string
 
 // Enum values for PatchOperationType
@@ -611,6 +1337,16 @@ const (
 	PatchOperationTypeScan    PatchOperationType = "Scan"
 	PatchOperationTypeInstall PatchOperationType = "Install"
 )
+
+// Values returns all known values for PatchOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchOperationType) Values() []PatchOperationType {
+	return []PatchOperationType{
+		"Scan",
+		"Install",
+	}
+}
 
 type PatchProperty string
 
@@ -624,6 +1360,20 @@ const (
 	PatchPropertyPatchseverity       PatchProperty = "SEVERITY"
 )
 
+// Values returns all known values for PatchProperty. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PatchProperty) Values() []PatchProperty {
+	return []PatchProperty{
+		"PRODUCT",
+		"PRODUCT_FAMILY",
+		"CLASSIFICATION",
+		"MSRC_SEVERITY",
+		"PRIORITY",
+		"SEVERITY",
+	}
+}
+
 type PatchSet string
 
 // Enum values for PatchSet
@@ -631,6 +1381,16 @@ const (
 	PatchSetOs          PatchSet = "OS"
 	PatchSetApplication PatchSet = "APPLICATION"
 )
+
+// Values returns all known values for PatchSet. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PatchSet) Values() []PatchSet {
+	return []PatchSet{
+		"OS",
+		"APPLICATION",
+	}
+}
 
 type PingStatus string
 
@@ -641,6 +1401,17 @@ const (
 	PingStatusInactive        PingStatus = "Inactive"
 )
 
+// Values returns all known values for PingStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PingStatus) Values() []PingStatus {
+	return []PingStatus{
+		"Online",
+		"ConnectionLost",
+		"Inactive",
+	}
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
@@ -648,6 +1419,16 @@ const (
 	PlatformTypeWindows PlatformType = "Windows"
 	PlatformTypeLinux   PlatformType = "Linux"
 )
+
+// Values returns all known values for PlatformType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PlatformType) Values() []PlatformType {
+	return []PlatformType{
+		"Windows",
+		"Linux",
+	}
+}
 
 type RebootOption string
 
@@ -657,12 +1438,31 @@ const (
 	RebootOptionNo_reboot        RebootOption = "NoReboot"
 )
 
+// Values returns all known values for RebootOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RebootOption) Values() []RebootOption {
+	return []RebootOption{
+		"RebootIfNeeded",
+		"NoReboot",
+	}
+}
+
 type ResourceDataSyncS3Format string
 
 // Enum values for ResourceDataSyncS3Format
 const (
 	ResourceDataSyncS3FormatJson_serde ResourceDataSyncS3Format = "JsonSerDe"
 )
+
+// Values returns all known values for ResourceDataSyncS3Format. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceDataSyncS3Format) Values() []ResourceDataSyncS3Format {
+	return []ResourceDataSyncS3Format{
+		"JsonSerDe",
+	}
+}
 
 type ResourceType string
 
@@ -672,6 +1472,17 @@ const (
 	ResourceTypeDocument         ResourceType = "Document"
 	ResourceTypeEc2_instance     ResourceType = "EC2Instance"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"ManagedInstance",
+		"Document",
+		"EC2Instance",
+	}
+}
 
 type ResourceTypeForTagging string
 
@@ -685,6 +1496,20 @@ const (
 	ResourceTypeForTaggingOps_item           ResourceTypeForTagging = "OpsItem"
 )
 
+// Values returns all known values for ResourceTypeForTagging. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceTypeForTagging) Values() []ResourceTypeForTagging {
+	return []ResourceTypeForTagging{
+		"Document",
+		"ManagedInstance",
+		"MaintenanceWindow",
+		"Parameter",
+		"PatchBaseline",
+		"OpsItem",
+	}
+}
+
 type SessionFilterKey string
 
 // Enum values for SessionFilterKey
@@ -696,6 +1521,19 @@ const (
 	SessionFilterKeyStatus         SessionFilterKey = "Status"
 )
 
+// Values returns all known values for SessionFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SessionFilterKey) Values() []SessionFilterKey {
+	return []SessionFilterKey{
+		"InvokedAfter",
+		"InvokedBefore",
+		"Target",
+		"Owner",
+		"Status",
+	}
+}
+
 type SessionState string
 
 // Enum values for SessionState
@@ -703,6 +1541,16 @@ const (
 	SessionStateActive  SessionState = "Active"
 	SessionStateHistory SessionState = "History"
 )
+
+// Values returns all known values for SessionState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SessionState) Values() []SessionState {
+	return []SessionState{
+		"Active",
+		"History",
+	}
+}
 
 type SessionStatus string
 
@@ -716,6 +1564,20 @@ const (
 	SessionStatusFailed       SessionStatus = "Failed"
 )
 
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"Connected",
+		"Connecting",
+		"Disconnected",
+		"Terminated",
+		"Terminating",
+		"Failed",
+	}
+}
+
 type SignalType string
 
 // Enum values for SignalType
@@ -726,6 +1588,19 @@ const (
 	SignalTypeStop_step  SignalType = "StopStep"
 	SignalTypeResume     SignalType = "Resume"
 )
+
+// Values returns all known values for SignalType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SignalType) Values() []SignalType {
+	return []SignalType{
+		"Approve",
+		"Reject",
+		"StartStep",
+		"StopStep",
+		"Resume",
+	}
+}
 
 type StepExecutionFilterKey string
 
@@ -739,6 +1614,20 @@ const (
 	StepExecutionFilterKeyAction                StepExecutionFilterKey = "Action"
 )
 
+// Values returns all known values for StepExecutionFilterKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StepExecutionFilterKey) Values() []StepExecutionFilterKey {
+	return []StepExecutionFilterKey{
+		"StartTimeBefore",
+		"StartTimeAfter",
+		"StepExecutionStatus",
+		"StepExecutionId",
+		"StepName",
+		"Action",
+	}
+}
+
 type StopType string
 
 // Enum values for StopType
@@ -746,3 +1635,13 @@ const (
 	StopTypeComplete StopType = "Complete"
 	StopTypeCancel   StopType = "Cancel"
 )
+
+// Values returns all known values for StopType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (StopType) Values() []StopType {
+	return []StopType{
+		"Complete",
+		"Cancel",
+	}
+}

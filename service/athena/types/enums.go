@@ -11,6 +11,17 @@ const (
 	ColumnNullableUnknown  ColumnNullable = "UNKNOWN"
 )
 
+// Values returns all known values for ColumnNullable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnNullable) Values() []ColumnNullable {
+	return []ColumnNullable{
+		"NOT_NULL",
+		"NULLABLE",
+		"UNKNOWN",
+	}
+}
+
 type DataCatalogType string
 
 // Enum values for DataCatalogType
@@ -20,6 +31,17 @@ const (
 	DataCatalogTypeHive   DataCatalogType = "HIVE"
 )
 
+// Values returns all known values for DataCatalogType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataCatalogType) Values() []DataCatalogType {
+	return []DataCatalogType{
+		"LAMBDA",
+		"GLUE",
+		"HIVE",
+	}
+}
+
 type EncryptionOption string
 
 // Enum values for EncryptionOption
@@ -28,6 +50,17 @@ const (
 	EncryptionOptionSse_kms EncryptionOption = "SSE_KMS"
 	EncryptionOptionCse_kms EncryptionOption = "CSE_KMS"
 )
+
+// Values returns all known values for EncryptionOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionOption) Values() []EncryptionOption {
+	return []EncryptionOption{
+		"SSE_S3",
+		"SSE_KMS",
+		"CSE_KMS",
+	}
+}
 
 type QueryExecutionState string
 
@@ -40,6 +73,19 @@ const (
 	QueryExecutionStateCancelled QueryExecutionState = "CANCELLED"
 )
 
+// Values returns all known values for QueryExecutionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryExecutionState) Values() []QueryExecutionState {
+	return []QueryExecutionState{
+		"QUEUED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLED",
+	}
+}
+
 type StatementType string
 
 // Enum values for StatementType
@@ -49,12 +95,32 @@ const (
 	StatementTypeUtility StatementType = "UTILITY"
 )
 
+// Values returns all known values for StatementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatementType) Values() []StatementType {
+	return []StatementType{
+		"DDL",
+		"DML",
+		"UTILITY",
+	}
+}
+
 type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
 	ThrottleReasonConcurrent_query_limit_exceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
 )
+
+// Values returns all known values for ThrottleReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThrottleReason) Values() []ThrottleReason {
+	return []ThrottleReason{
+		"CONCURRENT_QUERY_LIMIT_EXCEEDED",
+	}
+}
 
 type WorkGroupState string
 
@@ -63,3 +129,13 @@ const (
 	WorkGroupStateEnabled  WorkGroupState = "ENABLED"
 	WorkGroupStateDisabled WorkGroupState = "DISABLED"
 )
+
+// Values returns all known values for WorkGroupState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkGroupState) Values() []WorkGroupState {
+	return []WorkGroupState{
+		"ENABLED",
+		"DISABLED",
+	}
+}

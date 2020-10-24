@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpDeleteHumanLoop struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteHumanLoop) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteHumanLoop) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -115,7 +116,7 @@ type awsRestjson1_deserializeOpDescribeHumanLoop struct {
 }
 
 func (*awsRestjson1_deserializeOpDescribeHumanLoop) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDescribeHumanLoop) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -338,7 +339,7 @@ type awsRestjson1_deserializeOpListHumanLoops struct {
 }
 
 func (*awsRestjson1_deserializeOpListHumanLoops) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListHumanLoops) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -503,7 +504,7 @@ type awsRestjson1_deserializeOpStartHumanLoop struct {
 }
 
 func (*awsRestjson1_deserializeOpStartHumanLoop) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpStartHumanLoop) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -666,7 +667,7 @@ type awsRestjson1_deserializeOpStopHumanLoop struct {
 }
 
 func (*awsRestjson1_deserializeOpStopHumanLoop) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpStopHumanLoop) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

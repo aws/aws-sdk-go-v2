@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -24,7 +25,7 @@ type awsAwsjson11_deserializeOpAcceptDirectConnectGatewayAssociationProposal str
 }
 
 func (*awsAwsjson11_deserializeOpAcceptDirectConnectGatewayAssociationProposal) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAcceptDirectConnectGatewayAssociationProposal) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -138,7 +139,7 @@ type awsAwsjson11_deserializeOpAllocateConnectionOnInterconnect struct {
 }
 
 func (*awsAwsjson11_deserializeOpAllocateConnectionOnInterconnect) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAllocateConnectionOnInterconnect) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -252,7 +253,7 @@ type awsAwsjson11_deserializeOpAllocateHostedConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpAllocateHostedConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAllocateHostedConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -372,7 +373,7 @@ type awsAwsjson11_deserializeOpAllocatePrivateVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpAllocatePrivateVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAllocatePrivateVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -492,7 +493,7 @@ type awsAwsjson11_deserializeOpAllocatePublicVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpAllocatePublicVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAllocatePublicVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -612,7 +613,7 @@ type awsAwsjson11_deserializeOpAllocateTransitVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpAllocateTransitVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAllocateTransitVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -732,7 +733,7 @@ type awsAwsjson11_deserializeOpAssociateConnectionWithLag struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateConnectionWithLag) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateConnectionWithLag) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -846,7 +847,7 @@ type awsAwsjson11_deserializeOpAssociateHostedConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateHostedConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateHostedConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -960,7 +961,7 @@ type awsAwsjson11_deserializeOpAssociateVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1074,7 +1075,7 @@ type awsAwsjson11_deserializeOpConfirmConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpConfirmConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpConfirmConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1188,7 +1189,7 @@ type awsAwsjson11_deserializeOpConfirmPrivateVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpConfirmPrivateVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpConfirmPrivateVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1302,7 +1303,7 @@ type awsAwsjson11_deserializeOpConfirmPublicVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpConfirmPublicVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpConfirmPublicVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1416,7 +1417,7 @@ type awsAwsjson11_deserializeOpConfirmTransitVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpConfirmTransitVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpConfirmTransitVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1530,7 +1531,7 @@ type awsAwsjson11_deserializeOpCreateBGPPeer struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateBGPPeer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateBGPPeer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1644,7 +1645,7 @@ type awsAwsjson11_deserializeOpCreateConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1764,7 +1765,7 @@ type awsAwsjson11_deserializeOpCreateDirectConnectGateway struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDirectConnectGateway) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDirectConnectGateway) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1878,7 +1879,7 @@ type awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociation struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1992,7 +1993,7 @@ type awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociationProposal str
 }
 
 func (*awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociationProposal) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociationProposal) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2106,7 +2107,7 @@ type awsAwsjson11_deserializeOpCreateInterconnect struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateInterconnect) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateInterconnect) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2226,7 +2227,7 @@ type awsAwsjson11_deserializeOpCreateLag struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateLag) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateLag) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2346,7 +2347,7 @@ type awsAwsjson11_deserializeOpCreatePrivateVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePrivateVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePrivateVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2466,7 +2467,7 @@ type awsAwsjson11_deserializeOpCreatePublicVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePublicVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePublicVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2586,7 +2587,7 @@ type awsAwsjson11_deserializeOpCreateTransitVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateTransitVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateTransitVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2706,7 +2707,7 @@ type awsAwsjson11_deserializeOpDeleteBGPPeer struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteBGPPeer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteBGPPeer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2820,7 +2821,7 @@ type awsAwsjson11_deserializeOpDeleteConnection struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteConnection) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2934,7 +2935,7 @@ type awsAwsjson11_deserializeOpDeleteDirectConnectGateway struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteDirectConnectGateway) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGateway) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3048,7 +3049,7 @@ type awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociation struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3162,7 +3163,7 @@ type awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociationProposal str
 }
 
 func (*awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociationProposal) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociationProposal) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3276,7 +3277,7 @@ type awsAwsjson11_deserializeOpDeleteInterconnect struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteInterconnect) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteInterconnect) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3390,7 +3391,7 @@ type awsAwsjson11_deserializeOpDeleteLag struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteLag) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteLag) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3504,7 +3505,7 @@ type awsAwsjson11_deserializeOpDeleteVirtualInterface struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteVirtualInterface) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteVirtualInterface) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3618,7 +3619,7 @@ type awsAwsjson11_deserializeOpDescribeConnectionLoa struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeConnectionLoa) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeConnectionLoa) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3732,7 +3733,7 @@ type awsAwsjson11_deserializeOpDescribeConnections struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeConnections) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeConnections) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3846,7 +3847,7 @@ type awsAwsjson11_deserializeOpDescribeConnectionsOnInterconnect struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeConnectionsOnInterconnect) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeConnectionsOnInterconnect) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3960,7 +3961,7 @@ type awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociationProposals 
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociationProposals) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociationProposals) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4074,7 +4075,7 @@ type awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociations struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4188,7 +4189,7 @@ type awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAttachments struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAttachments) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAttachments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4302,7 +4303,7 @@ type awsAwsjson11_deserializeOpDescribeDirectConnectGateways struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeDirectConnectGateways) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGateways) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4416,7 +4417,7 @@ type awsAwsjson11_deserializeOpDescribeHostedConnections struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeHostedConnections) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeHostedConnections) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4530,7 +4531,7 @@ type awsAwsjson11_deserializeOpDescribeInterconnectLoa struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeInterconnectLoa) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeInterconnectLoa) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4644,7 +4645,7 @@ type awsAwsjson11_deserializeOpDescribeInterconnects struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeInterconnects) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeInterconnects) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4758,7 +4759,7 @@ type awsAwsjson11_deserializeOpDescribeLags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeLags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeLags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4872,7 +4873,7 @@ type awsAwsjson11_deserializeOpDescribeLoa struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeLoa) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeLoa) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4986,7 +4987,7 @@ type awsAwsjson11_deserializeOpDescribeLocations struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeLocations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeLocations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5100,7 +5101,7 @@ type awsAwsjson11_deserializeOpDescribeTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5214,7 +5215,7 @@ type awsAwsjson11_deserializeOpDescribeVirtualGateways struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeVirtualGateways) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeVirtualGateways) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5328,7 +5329,7 @@ type awsAwsjson11_deserializeOpDescribeVirtualInterfaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeVirtualInterfaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeVirtualInterfaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5442,7 +5443,7 @@ type awsAwsjson11_deserializeOpDisassociateConnectionFromLag struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisassociateConnectionFromLag) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisassociateConnectionFromLag) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5556,7 +5557,7 @@ type awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory struct {
 }
 
 func (*awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5670,7 +5671,7 @@ type awsAwsjson11_deserializeOpStartBgpFailoverTest struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartBgpFailoverTest) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartBgpFailoverTest) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5784,7 +5785,7 @@ type awsAwsjson11_deserializeOpStopBgpFailoverTest struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopBgpFailoverTest) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopBgpFailoverTest) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -5898,7 +5899,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6018,7 +6019,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6132,7 +6133,7 @@ type awsAwsjson11_deserializeOpUpdateDirectConnectGatewayAssociation struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateDirectConnectGatewayAssociation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateDirectConnectGatewayAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6246,7 +6247,7 @@ type awsAwsjson11_deserializeOpUpdateLag struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateLag) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateLag) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -6360,7 +6361,7 @@ type awsAwsjson11_deserializeOpUpdateVirtualInterfaceAttributes struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateVirtualInterfaceAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateVirtualInterfaceAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

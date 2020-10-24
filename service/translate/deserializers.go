@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpDeleteTerminology struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteTerminology) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteTerminology) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -140,7 +141,7 @@ type awsAwsjson11_deserializeOpDescribeTextTranslationJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeTextTranslationJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeTextTranslationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -257,7 +258,7 @@ type awsAwsjson11_deserializeOpGetTerminology struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetTerminology) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetTerminology) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -377,7 +378,7 @@ type awsAwsjson11_deserializeOpImportTerminology struct {
 }
 
 func (*awsAwsjson11_deserializeOpImportTerminology) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpImportTerminology) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -497,7 +498,7 @@ type awsAwsjson11_deserializeOpListTerminologies struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTerminologies) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTerminologies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -614,7 +615,7 @@ type awsAwsjson11_deserializeOpListTextTranslationJobs struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTextTranslationJobs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTextTranslationJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -734,7 +735,7 @@ type awsAwsjson11_deserializeOpStartTextTranslationJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartTextTranslationJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartTextTranslationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -857,7 +858,7 @@ type awsAwsjson11_deserializeOpStopTextTranslationJob struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopTextTranslationJob) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopTextTranslationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -974,7 +975,7 @@ type awsAwsjson11_deserializeOpTranslateText struct {
 }
 
 func (*awsAwsjson11_deserializeOpTranslateText) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTranslateText) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

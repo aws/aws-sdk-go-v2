@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDeleteHumanLoop struct {
 }
 
 func (*validateOpDeleteHumanLoop) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteHumanLoop) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -34,7 +35,7 @@ type validateOpDescribeHumanLoop struct {
 }
 
 func (*validateOpDescribeHumanLoop) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeHumanLoop) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -54,7 +55,7 @@ type validateOpListHumanLoops struct {
 }
 
 func (*validateOpListHumanLoops) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListHumanLoops) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -74,7 +75,7 @@ type validateOpStartHumanLoop struct {
 }
 
 func (*validateOpStartHumanLoop) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStartHumanLoop) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -94,7 +95,7 @@ type validateOpStopHumanLoop struct {
 }
 
 func (*validateOpStopHumanLoop) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpStopHumanLoop) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

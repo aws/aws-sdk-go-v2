@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -26,7 +27,7 @@ type awsAwsquery_deserializeOpAbortEnvironmentUpdate struct {
 }
 
 func (*awsAwsquery_deserializeOpAbortEnvironmentUpdate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAbortEnvironmentUpdate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -122,7 +123,7 @@ type awsAwsquery_deserializeOpApplyEnvironmentManagedAction struct {
 }
 
 func (*awsAwsquery_deserializeOpApplyEnvironmentManagedAction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpApplyEnvironmentManagedAction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -221,7 +222,7 @@ type awsAwsquery_deserializeOpAssociateEnvironmentOperationsRole struct {
 }
 
 func (*awsAwsquery_deserializeOpAssociateEnvironmentOperationsRole) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpAssociateEnvironmentOperationsRole) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -317,7 +318,7 @@ type awsAwsquery_deserializeOpCheckDNSAvailability struct {
 }
 
 func (*awsAwsquery_deserializeOpCheckDNSAvailability) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCheckDNSAvailability) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -410,7 +411,7 @@ type awsAwsquery_deserializeOpComposeEnvironments struct {
 }
 
 func (*awsAwsquery_deserializeOpComposeEnvironments) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpComposeEnvironments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -509,7 +510,7 @@ type awsAwsquery_deserializeOpCreateApplication struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateApplication) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateApplication) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -605,7 +606,7 @@ type awsAwsquery_deserializeOpCreateApplicationVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateApplicationVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateApplicationVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -713,7 +714,7 @@ type awsAwsquery_deserializeOpCreateConfigurationTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateConfigurationTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateConfigurationTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -815,7 +816,7 @@ type awsAwsquery_deserializeOpCreateEnvironment struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateEnvironment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateEnvironment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -914,7 +915,7 @@ type awsAwsquery_deserializeOpCreatePlatformVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpCreatePlatformVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreatePlatformVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1016,7 +1017,7 @@ type awsAwsquery_deserializeOpCreateStorageLocation struct {
 }
 
 func (*awsAwsquery_deserializeOpCreateStorageLocation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpCreateStorageLocation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1118,7 +1119,7 @@ type awsAwsquery_deserializeOpDeleteApplication struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteApplication) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteApplication) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1214,7 +1215,7 @@ type awsAwsquery_deserializeOpDeleteApplicationVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteApplicationVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteApplicationVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1319,7 +1320,7 @@ type awsAwsquery_deserializeOpDeleteConfigurationTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteConfigurationTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteConfigurationTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1415,7 +1416,7 @@ type awsAwsquery_deserializeOpDeleteEnvironmentConfiguration struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteEnvironmentConfiguration) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteEnvironmentConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1508,7 +1509,7 @@ type awsAwsquery_deserializeOpDeletePlatformVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpDeletePlatformVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeletePlatformVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1613,7 +1614,7 @@ type awsAwsquery_deserializeOpDescribeAccountAttributes struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeAccountAttributes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeAccountAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1709,7 +1710,7 @@ type awsAwsquery_deserializeOpDescribeApplications struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeApplications) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeApplications) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1802,7 +1803,7 @@ type awsAwsquery_deserializeOpDescribeApplicationVersions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeApplicationVersions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeApplicationVersions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1895,7 +1896,7 @@ type awsAwsquery_deserializeOpDescribeConfigurationOptions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeConfigurationOptions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeConfigurationOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1991,7 +1992,7 @@ type awsAwsquery_deserializeOpDescribeConfigurationSettings struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeConfigurationSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeConfigurationSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2087,7 +2088,7 @@ type awsAwsquery_deserializeOpDescribeEnvironmentHealth struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEnvironmentHealth) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEnvironmentHealth) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2186,7 +2187,7 @@ type awsAwsquery_deserializeOpDescribeEnvironmentManagedActionHistory struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEnvironmentManagedActionHistory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEnvironmentManagedActionHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2282,7 +2283,7 @@ type awsAwsquery_deserializeOpDescribeEnvironmentManagedActions struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEnvironmentManagedActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEnvironmentManagedActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2378,7 +2379,7 @@ type awsAwsquery_deserializeOpDescribeEnvironmentResources struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEnvironmentResources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEnvironmentResources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2474,7 +2475,7 @@ type awsAwsquery_deserializeOpDescribeEnvironments struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEnvironments) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEnvironments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2567,7 +2568,7 @@ type awsAwsquery_deserializeOpDescribeEvents struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeEvents) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeEvents) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2660,7 +2661,7 @@ type awsAwsquery_deserializeOpDescribeInstancesHealth struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeInstancesHealth) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeInstancesHealth) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2759,7 +2760,7 @@ type awsAwsquery_deserializeOpDescribePlatformVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribePlatformVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribePlatformVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2858,7 +2859,7 @@ type awsAwsquery_deserializeOpDisassociateEnvironmentOperationsRole struct {
 }
 
 func (*awsAwsquery_deserializeOpDisassociateEnvironmentOperationsRole) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDisassociateEnvironmentOperationsRole) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2954,7 +2955,7 @@ type awsAwsquery_deserializeOpListAvailableSolutionStacks struct {
 }
 
 func (*awsAwsquery_deserializeOpListAvailableSolutionStacks) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListAvailableSolutionStacks) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3047,7 +3048,7 @@ type awsAwsquery_deserializeOpListPlatformBranches struct {
 }
 
 func (*awsAwsquery_deserializeOpListPlatformBranches) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListPlatformBranches) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3140,7 +3141,7 @@ type awsAwsquery_deserializeOpListPlatformVersions struct {
 }
 
 func (*awsAwsquery_deserializeOpListPlatformVersions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListPlatformVersions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3239,7 +3240,7 @@ type awsAwsquery_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsquery_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3341,7 +3342,7 @@ type awsAwsquery_deserializeOpRebuildEnvironment struct {
 }
 
 func (*awsAwsquery_deserializeOpRebuildEnvironment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRebuildEnvironment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3437,7 +3438,7 @@ type awsAwsquery_deserializeOpRequestEnvironmentInfo struct {
 }
 
 func (*awsAwsquery_deserializeOpRequestEnvironmentInfo) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRequestEnvironmentInfo) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3530,7 +3531,7 @@ type awsAwsquery_deserializeOpRestartAppServer struct {
 }
 
 func (*awsAwsquery_deserializeOpRestartAppServer) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRestartAppServer) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3623,7 +3624,7 @@ type awsAwsquery_deserializeOpRetrieveEnvironmentInfo struct {
 }
 
 func (*awsAwsquery_deserializeOpRetrieveEnvironmentInfo) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpRetrieveEnvironmentInfo) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3716,7 +3717,7 @@ type awsAwsquery_deserializeOpSwapEnvironmentCNAMEs struct {
 }
 
 func (*awsAwsquery_deserializeOpSwapEnvironmentCNAMEs) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSwapEnvironmentCNAMEs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3809,7 +3810,7 @@ type awsAwsquery_deserializeOpTerminateEnvironment struct {
 }
 
 func (*awsAwsquery_deserializeOpTerminateEnvironment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpTerminateEnvironment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3905,7 +3906,7 @@ type awsAwsquery_deserializeOpUpdateApplication struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateApplication) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateApplication) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3998,7 +3999,7 @@ type awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4094,7 +4095,7 @@ type awsAwsquery_deserializeOpUpdateApplicationVersion struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateApplicationVersion) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateApplicationVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4187,7 +4188,7 @@ type awsAwsquery_deserializeOpUpdateConfigurationTemplate struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateConfigurationTemplate) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateConfigurationTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4286,7 +4287,7 @@ type awsAwsquery_deserializeOpUpdateEnvironment struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateEnvironment) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateEnvironment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4385,7 +4386,7 @@ type awsAwsquery_deserializeOpUpdateTagsForResource struct {
 }
 
 func (*awsAwsquery_deserializeOpUpdateTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUpdateTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4493,7 +4494,7 @@ type awsAwsquery_deserializeOpValidateConfigurationSettings struct {
 }
 
 func (*awsAwsquery_deserializeOpValidateConfigurationSettings) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpValidateConfigurationSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

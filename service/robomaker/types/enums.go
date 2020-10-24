@@ -11,6 +11,17 @@ const (
 	ArchitectureArmhf  Architecture = "ARMHF"
 )
 
+// Values returns all known values for Architecture. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Architecture) Values() []Architecture {
+	return []Architecture{
+		"X86_64",
+		"ARM64",
+		"ARMHF",
+	}
+}
+
 type DeploymentJobErrorCode string
 
 // Enum values for DeploymentJobErrorCode
@@ -37,6 +48,34 @@ const (
 	DeploymentJobErrorCodeInternalservererror                 DeploymentJobErrorCode = "InternalServerError"
 )
 
+// Values returns all known values for DeploymentJobErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentJobErrorCode) Values() []DeploymentJobErrorCode {
+	return []DeploymentJobErrorCode{
+		"ResourceNotFound",
+		"EnvironmentSetupError",
+		"EtagMismatch",
+		"FailureThresholdBreached",
+		"RobotDeploymentAborted",
+		"RobotDeploymentNoResponse",
+		"RobotAgentConnectionTimeout",
+		"GreengrassDeploymentFailed",
+		"InvalidGreengrassGroup",
+		"MissingRobotArchitecture",
+		"MissingRobotApplicationArchitecture",
+		"MissingRobotDeploymentResource",
+		"GreengrassGroupVersionDoesNotExist",
+		"LambdaDeleted",
+		"ExtractingBundleFailure",
+		"PreLaunchFileFailure",
+		"PostLaunchFileFailure",
+		"BadPermissionError",
+		"DownloadConditionFailed",
+		"InternalServerError",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
@@ -49,6 +88,20 @@ const (
 	DeploymentStatusCanceled   DeploymentStatus = "Canceled"
 )
 
+// Values returns all known values for DeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStatus) Values() []DeploymentStatus {
+	return []DeploymentStatus{
+		"Pending",
+		"Preparing",
+		"InProgress",
+		"Failed",
+		"Succeeded",
+		"Canceled",
+	}
+}
+
 type FailureBehavior string
 
 // Enum values for FailureBehavior
@@ -57,12 +110,31 @@ const (
 	FailureBehaviorContinue FailureBehavior = "Continue"
 )
 
+// Values returns all known values for FailureBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailureBehavior) Values() []FailureBehavior {
+	return []FailureBehavior{
+		"Fail",
+		"Continue",
+	}
+}
+
 type RenderingEngineType string
 
 // Enum values for RenderingEngineType
 const (
 	RenderingEngineTypeOgre RenderingEngineType = "OGRE"
 )
+
+// Values returns all known values for RenderingEngineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RenderingEngineType) Values() []RenderingEngineType {
+	return []RenderingEngineType{
+		"OGRE",
+	}
+}
 
 type RobotDeploymentStep string
 
@@ -77,6 +149,21 @@ const (
 	RobotDeploymentStepFinishedstep               RobotDeploymentStep = "Finished"
 )
 
+// Values returns all known values for RobotDeploymentStep. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RobotDeploymentStep) Values() []RobotDeploymentStep {
+	return []RobotDeploymentStep{
+		"Validating",
+		"DownloadingExtracting",
+		"ExecutingDownloadCondition",
+		"ExecutingPreLaunch",
+		"Launching",
+		"ExecutingPostLaunch",
+		"Finished",
+	}
+}
+
 type RobotSoftwareSuiteType string
 
 // Enum values for RobotSoftwareSuiteType
@@ -84,6 +171,16 @@ const (
 	RobotSoftwareSuiteTypeRos  RobotSoftwareSuiteType = "ROS"
 	RobotSoftwareSuiteTypeRos2 RobotSoftwareSuiteType = "ROS2"
 )
+
+// Values returns all known values for RobotSoftwareSuiteType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RobotSoftwareSuiteType) Values() []RobotSoftwareSuiteType {
+	return []RobotSoftwareSuiteType{
+		"ROS",
+		"ROS2",
+	}
+}
 
 type RobotSoftwareSuiteVersionType string
 
@@ -93,6 +190,18 @@ const (
 	RobotSoftwareSuiteVersionTypeMelodic RobotSoftwareSuiteVersionType = "Melodic"
 	RobotSoftwareSuiteVersionTypeDashing RobotSoftwareSuiteVersionType = "Dashing"
 )
+
+// Values returns all known values for RobotSoftwareSuiteVersionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RobotSoftwareSuiteVersionType) Values() []RobotSoftwareSuiteVersionType {
+	return []RobotSoftwareSuiteVersionType{
+		"Kinetic",
+		"Melodic",
+		"Dashing",
+	}
+}
 
 type RobotStatus string
 
@@ -107,12 +216,36 @@ const (
 	RobotStatusNoresponse           RobotStatus = "NoResponse"
 )
 
+// Values returns all known values for RobotStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RobotStatus) Values() []RobotStatus {
+	return []RobotStatus{
+		"Available",
+		"Registered",
+		"PendingNewDeployment",
+		"Deploying",
+		"Failed",
+		"InSync",
+		"NoResponse",
+	}
+}
+
 type SimulationJobBatchErrorCode string
 
 // Enum values for SimulationJobBatchErrorCode
 const (
 	SimulationJobBatchErrorCodeInternalserviceerror SimulationJobBatchErrorCode = "InternalServiceError"
 )
+
+// Values returns all known values for SimulationJobBatchErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SimulationJobBatchErrorCode) Values() []SimulationJobBatchErrorCode {
+	return []SimulationJobBatchErrorCode{
+		"InternalServiceError",
+	}
+}
 
 type SimulationJobBatchStatus string
 
@@ -128,6 +261,23 @@ const (
 	SimulationJobBatchStatusTimingout  SimulationJobBatchStatus = "TimingOut"
 	SimulationJobBatchStatusTimedout   SimulationJobBatchStatus = "TimedOut"
 )
+
+// Values returns all known values for SimulationJobBatchStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SimulationJobBatchStatus) Values() []SimulationJobBatchStatus {
+	return []SimulationJobBatchStatus{
+		"Pending",
+		"InProgress",
+		"Failed",
+		"Completed",
+		"Canceled",
+		"Canceling",
+		"Completing",
+		"TimingOut",
+		"TimedOut",
+	}
+}
 
 type SimulationJobErrorCode string
 
@@ -162,6 +312,41 @@ const (
 	SimulationJobErrorCodeWrongregionsimulationapplication           SimulationJobErrorCode = "WrongRegionSimulationApplication"
 )
 
+// Values returns all known values for SimulationJobErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SimulationJobErrorCode) Values() []SimulationJobErrorCode {
+	return []SimulationJobErrorCode{
+		"InternalServiceError",
+		"RobotApplicationCrash",
+		"SimulationApplicationCrash",
+		"BadPermissionsRobotApplication",
+		"BadPermissionsSimulationApplication",
+		"BadPermissionsS3Object",
+		"BadPermissionsS3Output",
+		"BadPermissionsCloudwatchLogs",
+		"SubnetIpLimitExceeded",
+		"ENILimitExceeded",
+		"BadPermissionsUserCredentials",
+		"InvalidBundleRobotApplication",
+		"InvalidBundleSimulationApplication",
+		"InvalidS3Resource",
+		"LimitExceeded",
+		"MismatchedEtag",
+		"RobotApplicationVersionMismatchedEtag",
+		"SimulationApplicationVersionMismatchedEtag",
+		"ResourceNotFound",
+		"RequestThrottled",
+		"BatchTimedOut",
+		"BatchCanceled",
+		"InvalidInput",
+		"WrongRegionS3Bucket",
+		"WrongRegionS3Output",
+		"WrongRegionRobotApplication",
+		"WrongRegionSimulationApplication",
+	}
+}
+
 type SimulationJobStatus string
 
 // Enum values for SimulationJobStatus
@@ -178,6 +363,24 @@ const (
 	SimulationJobStatusCanceled      SimulationJobStatus = "Canceled"
 )
 
+// Values returns all known values for SimulationJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SimulationJobStatus) Values() []SimulationJobStatus {
+	return []SimulationJobStatus{
+		"Pending",
+		"Preparing",
+		"Running",
+		"Restarting",
+		"Completed",
+		"Failed",
+		"RunningFailed",
+		"Terminating",
+		"Terminated",
+		"Canceled",
+	}
+}
+
 type SimulationSoftwareSuiteType string
 
 // Enum values for SimulationSoftwareSuiteType
@@ -185,3 +388,13 @@ const (
 	SimulationSoftwareSuiteTypeGazebo     SimulationSoftwareSuiteType = "Gazebo"
 	SimulationSoftwareSuiteTypeRosbagplay SimulationSoftwareSuiteType = "RosbagPlay"
 )
+
+// Values returns all known values for SimulationSoftwareSuiteType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SimulationSoftwareSuiteType) Values() []SimulationSoftwareSuiteType {
+	return []SimulationSoftwareSuiteType{
+		"Gazebo",
+		"RosbagPlay",
+	}
+}

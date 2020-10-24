@@ -14,6 +14,20 @@ const (
 	BudgetTypeSpcoverage    BudgetType = "SAVINGS_PLANS_COVERAGE"
 )
 
+// Values returns all known values for BudgetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BudgetType) Values() []BudgetType {
+	return []BudgetType{
+		"USAGE",
+		"COST",
+		"RI_UTILIZATION",
+		"RI_COVERAGE",
+		"SAVINGS_PLANS_UTILIZATION",
+		"SAVINGS_PLANS_COVERAGE",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -23,6 +37,17 @@ const (
 	ComparisonOperatorEqual_to     ComparisonOperator = "EQUAL_TO"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GREATER_THAN",
+		"LESS_THAN",
+		"EQUAL_TO",
+	}
+}
+
 type NotificationState string
 
 // Enum values for NotificationState
@@ -30,6 +55,16 @@ const (
 	NotificationStateOk    NotificationState = "OK"
 	NotificationStateAlarm NotificationState = "ALARM"
 )
+
+// Values returns all known values for NotificationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationState) Values() []NotificationState {
+	return []NotificationState{
+		"OK",
+		"ALARM",
+	}
+}
 
 type NotificationType string
 
@@ -39,6 +74,16 @@ const (
 	NotificationTypeForecasted NotificationType = "FORECASTED"
 )
 
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"ACTUAL",
+		"FORECASTED",
+	}
+}
+
 type SubscriptionType string
 
 // Enum values for SubscriptionType
@@ -47,6 +92,16 @@ const (
 	SubscriptionTypeEmail SubscriptionType = "EMAIL"
 )
 
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"SNS",
+		"EMAIL",
+	}
+}
+
 type ThresholdType string
 
 // Enum values for ThresholdType
@@ -54,6 +109,16 @@ const (
 	ThresholdTypePercentage     ThresholdType = "PERCENTAGE"
 	ThresholdTypeAbsolute_value ThresholdType = "ABSOLUTE_VALUE"
 )
+
+// Values returns all known values for ThresholdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdType) Values() []ThresholdType {
+	return []ThresholdType{
+		"PERCENTAGE",
+		"ABSOLUTE_VALUE",
+	}
+}
 
 type TimeUnit string
 
@@ -64,3 +129,15 @@ const (
 	TimeUnitQuarterly TimeUnit = "QUARTERLY"
 	TimeUnitAnnually  TimeUnit = "ANNUALLY"
 )
+
+// Values returns all known values for TimeUnit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TimeUnit) Values() []TimeUnit {
+	return []TimeUnit{
+		"DAILY",
+		"MONTHLY",
+		"QUARTERLY",
+		"ANNUALLY",
+	}
+}

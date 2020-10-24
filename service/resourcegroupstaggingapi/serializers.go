@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsAwsjson11_serializeOpDescribeReportCreation struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeReportCreation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeReportCreation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -57,7 +58,7 @@ type awsAwsjson11_serializeOpGetComplianceSummary struct {
 }
 
 func (*awsAwsjson11_serializeOpGetComplianceSummary) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetComplianceSummary) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -103,7 +104,7 @@ type awsAwsjson11_serializeOpGetResources struct {
 }
 
 func (*awsAwsjson11_serializeOpGetResources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -149,7 +150,7 @@ type awsAwsjson11_serializeOpGetTagKeys struct {
 }
 
 func (*awsAwsjson11_serializeOpGetTagKeys) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetTagKeys) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -195,7 +196,7 @@ type awsAwsjson11_serializeOpGetTagValues struct {
 }
 
 func (*awsAwsjson11_serializeOpGetTagValues) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetTagValues) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -241,7 +242,7 @@ type awsAwsjson11_serializeOpStartReportCreation struct {
 }
 
 func (*awsAwsjson11_serializeOpStartReportCreation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpStartReportCreation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -287,7 +288,7 @@ type awsAwsjson11_serializeOpTagResources struct {
 }
 
 func (*awsAwsjson11_serializeOpTagResources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpTagResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -333,7 +334,7 @@ type awsAwsjson11_serializeOpUntagResources struct {
 }
 
 func (*awsAwsjson11_serializeOpUntagResources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUntagResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpQueryForecast struct {
 }
 
 func (*validateOpQueryForecast) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpQueryForecast) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

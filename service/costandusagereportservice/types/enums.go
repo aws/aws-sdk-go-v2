@@ -11,6 +11,17 @@ const (
 	AdditionalArtifactAthena     AdditionalArtifact = "ATHENA"
 )
 
+// Values returns all known values for AdditionalArtifact. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdditionalArtifact) Values() []AdditionalArtifact {
+	return []AdditionalArtifact{
+		"REDSHIFT",
+		"QUICKSIGHT",
+		"ATHENA",
+	}
+}
+
 type AWSRegion string
 
 // Enum values for AWSRegion
@@ -28,6 +39,25 @@ const (
 	AWSRegionHong_kong           AWSRegion = "ap-east-1"
 )
 
+// Values returns all known values for AWSRegion. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AWSRegion) Values() []AWSRegion {
+	return []AWSRegion{
+		"us-east-1",
+		"us-west-1",
+		"us-west-2",
+		"eu-central-1",
+		"eu-west-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"eu-north-1",
+		"ap-northeast-3",
+		"ap-east-1",
+	}
+}
+
 type CompressionFormat string
 
 // Enum values for CompressionFormat
@@ -37,6 +67,17 @@ const (
 	CompressionFormatParquet CompressionFormat = "Parquet"
 )
 
+// Values returns all known values for CompressionFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionFormat) Values() []CompressionFormat {
+	return []CompressionFormat{
+		"ZIP",
+		"GZIP",
+		"Parquet",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -44,6 +85,16 @@ const (
 	ReportFormatCsv     ReportFormat = "textORcsv"
 	ReportFormatParquet ReportFormat = "Parquet"
 )
+
+// Values returns all known values for ReportFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportFormat) Values() []ReportFormat {
+	return []ReportFormat{
+		"textORcsv",
+		"Parquet",
+	}
+}
 
 type ReportVersioning string
 
@@ -53,12 +104,31 @@ const (
 	ReportVersioningOverwrite_report  ReportVersioning = "OVERWRITE_REPORT"
 )
 
+// Values returns all known values for ReportVersioning. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportVersioning) Values() []ReportVersioning {
+	return []ReportVersioning{
+		"CREATE_NEW_REPORT",
+		"OVERWRITE_REPORT",
+	}
+}
+
 type SchemaElement string
 
 // Enum values for SchemaElement
 const (
 	SchemaElementResources SchemaElement = "RESOURCES"
 )
+
+// Values returns all known values for SchemaElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaElement) Values() []SchemaElement {
+	return []SchemaElement{
+		"RESOURCES",
+	}
+}
 
 type TimeUnit string
 
@@ -67,3 +137,13 @@ const (
 	TimeUnitHourly TimeUnit = "HOURLY"
 	TimeUnitDaily  TimeUnit = "DAILY"
 )
+
+// Values returns all known values for TimeUnit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TimeUnit) Values() []TimeUnit {
+	return []TimeUnit{
+		"HOURLY",
+		"DAILY",
+	}
+}

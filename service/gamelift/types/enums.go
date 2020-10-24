@@ -10,6 +10,16 @@ const (
 	AcceptanceTypeReject AcceptanceType = "REJECT"
 )
 
+// Values returns all known values for AcceptanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AcceptanceType) Values() []AcceptanceType {
+	return []AcceptanceType{
+		"ACCEPT",
+		"REJECT",
+	}
+}
+
 type BackfillMode string
 
 // Enum values for BackfillMode
@@ -18,6 +28,16 @@ const (
 	BackfillModeManual    BackfillMode = "MANUAL"
 )
 
+// Values returns all known values for BackfillMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BackfillMode) Values() []BackfillMode {
+	return []BackfillMode{
+		"AUTOMATIC",
+		"MANUAL",
+	}
+}
+
 type BalancingStrategy string
 
 // Enum values for BalancingStrategy
@@ -25,6 +45,16 @@ const (
 	BalancingStrategySpot_only      BalancingStrategy = "SPOT_ONLY"
 	BalancingStrategySpot_preferred BalancingStrategy = "SPOT_PREFERRED"
 )
+
+// Values returns all known values for BalancingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BalancingStrategy) Values() []BalancingStrategy {
+	return []BalancingStrategy{
+		"SPOT_ONLY",
+		"SPOT_PREFERRED",
+	}
+}
 
 type BuildStatus string
 
@@ -35,6 +65,17 @@ const (
 	BuildStatusFailed      BuildStatus = "FAILED"
 )
 
+// Values returns all known values for BuildStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BuildStatus) Values() []BuildStatus {
+	return []BuildStatus{
+		"INITIALIZED",
+		"READY",
+		"FAILED",
+	}
+}
+
 type CertificateType string
 
 // Enum values for CertificateType
@@ -42,6 +83,16 @@ const (
 	CertificateTypeDisabled  CertificateType = "DISABLED"
 	CertificateTypeGenerated CertificateType = "GENERATED"
 )
+
+// Values returns all known values for CertificateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateType) Values() []CertificateType {
+	return []CertificateType{
+		"DISABLED",
+		"GENERATED",
+	}
+}
 
 type ComparisonOperatorType string
 
@@ -52,6 +103,18 @@ const (
 	ComparisonOperatorTypeLessthanthreshold             ComparisonOperatorType = "LessThanThreshold"
 	ComparisonOperatorTypeLessthanorequaltothreshold    ComparisonOperatorType = "LessThanOrEqualToThreshold"
 )
+
+// Values returns all known values for ComparisonOperatorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperatorType) Values() []ComparisonOperatorType {
+	return []ComparisonOperatorType{
+		"GreaterThanOrEqualToThreshold",
+		"GreaterThanThreshold",
+		"LessThanThreshold",
+		"LessThanOrEqualToThreshold",
+	}
+}
 
 type EC2InstanceType string
 
@@ -117,6 +180,72 @@ const (
 	EC2InstanceTypeM524xlarge EC2InstanceType = "m5.24xlarge"
 )
 
+// Values returns all known values for EC2InstanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EC2InstanceType) Values() []EC2InstanceType {
+	return []EC2InstanceType{
+		"t2.micro",
+		"t2.small",
+		"t2.medium",
+		"t2.large",
+		"c3.large",
+		"c3.xlarge",
+		"c3.2xlarge",
+		"c3.4xlarge",
+		"c3.8xlarge",
+		"c4.large",
+		"c4.xlarge",
+		"c4.2xlarge",
+		"c4.4xlarge",
+		"c4.8xlarge",
+		"c5.large",
+		"c5.xlarge",
+		"c5.2xlarge",
+		"c5.4xlarge",
+		"c5.9xlarge",
+		"c5.12xlarge",
+		"c5.18xlarge",
+		"c5.24xlarge",
+		"r3.large",
+		"r3.xlarge",
+		"r3.2xlarge",
+		"r3.4xlarge",
+		"r3.8xlarge",
+		"r4.large",
+		"r4.xlarge",
+		"r4.2xlarge",
+		"r4.4xlarge",
+		"r4.8xlarge",
+		"r4.16xlarge",
+		"r5.large",
+		"r5.xlarge",
+		"r5.2xlarge",
+		"r5.4xlarge",
+		"r5.8xlarge",
+		"r5.12xlarge",
+		"r5.16xlarge",
+		"r5.24xlarge",
+		"m3.medium",
+		"m3.large",
+		"m3.xlarge",
+		"m3.2xlarge",
+		"m4.large",
+		"m4.xlarge",
+		"m4.2xlarge",
+		"m4.4xlarge",
+		"m4.10xlarge",
+		"m5.large",
+		"m5.xlarge",
+		"m5.2xlarge",
+		"m5.4xlarge",
+		"m5.8xlarge",
+		"m5.12xlarge",
+		"m5.16xlarge",
+		"m5.24xlarge",
+	}
+}
+
 type EventCode string
 
 // Enum values for EventCode
@@ -156,12 +285,62 @@ const (
 	EventCodeInstance_interrupted                             EventCode = "INSTANCE_INTERRUPTED"
 )
 
+// Values returns all known values for EventCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventCode) Values() []EventCode {
+	return []EventCode{
+		"GENERIC_EVENT",
+		"FLEET_CREATED",
+		"FLEET_DELETED",
+		"FLEET_SCALING_EVENT",
+		"FLEET_STATE_DOWNLOADING",
+		"FLEET_STATE_VALIDATING",
+		"FLEET_STATE_BUILDING",
+		"FLEET_STATE_ACTIVATING",
+		"FLEET_STATE_ACTIVE",
+		"FLEET_STATE_ERROR",
+		"FLEET_INITIALIZATION_FAILED",
+		"FLEET_BINARY_DOWNLOAD_FAILED",
+		"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND",
+		"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE",
+		"FLEET_VALIDATION_TIMED_OUT",
+		"FLEET_ACTIVATION_FAILED",
+		"FLEET_ACTIVATION_FAILED_NO_INSTANCES",
+		"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED",
+		"SERVER_PROCESS_INVALID_PATH",
+		"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT",
+		"SERVER_PROCESS_PROCESS_READY_TIMEOUT",
+		"SERVER_PROCESS_CRASHED",
+		"SERVER_PROCESS_TERMINATED_UNHEALTHY",
+		"SERVER_PROCESS_FORCE_TERMINATED",
+		"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT",
+		"GAME_SESSION_ACTIVATION_TIMEOUT",
+		"FLEET_CREATION_EXTRACTING_BUILD",
+		"FLEET_CREATION_RUNNING_INSTALLER",
+		"FLEET_CREATION_VALIDATING_RUNTIME_CONFIG",
+		"FLEET_VPC_PEERING_SUCCEEDED",
+		"FLEET_VPC_PEERING_FAILED",
+		"FLEET_VPC_PEERING_DELETED",
+		"INSTANCE_INTERRUPTED",
+	}
+}
+
 type FleetAction string
 
 // Enum values for FleetAction
 const (
 	FleetActionAutoscaling FleetAction = "AUTO_SCALING"
 )
+
+// Values returns all known values for FleetAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FleetAction) Values() []FleetAction {
+	return []FleetAction{
+		"AUTO_SCALING",
+	}
+}
 
 type FleetStatus string
 
@@ -178,6 +357,23 @@ const (
 	FleetStatusTerminated  FleetStatus = "TERMINATED"
 )
 
+// Values returns all known values for FleetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FleetStatus) Values() []FleetStatus {
+	return []FleetStatus{
+		"NEW",
+		"DOWNLOADING",
+		"VALIDATING",
+		"BUILDING",
+		"ACTIVATING",
+		"ACTIVE",
+		"DELETING",
+		"ERROR",
+		"TERMINATED",
+	}
+}
+
 type FleetType string
 
 // Enum values for FleetType
@@ -186,6 +382,16 @@ const (
 	FleetTypeSpot     FleetType = "SPOT"
 )
 
+// Values returns all known values for FleetType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (FleetType) Values() []FleetType {
+	return []FleetType{
+		"ON_DEMAND",
+		"SPOT",
+	}
+}
+
 type GameServerClaimStatus string
 
 // Enum values for GameServerClaimStatus
@@ -193,12 +399,30 @@ const (
 	GameServerClaimStatusClaimed GameServerClaimStatus = "CLAIMED"
 )
 
+// Values returns all known values for GameServerClaimStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerClaimStatus) Values() []GameServerClaimStatus {
+	return []GameServerClaimStatus{
+		"CLAIMED",
+	}
+}
+
 type GameServerGroupAction string
 
 // Enum values for GameServerGroupAction
 const (
 	GameServerGroupActionReplace_instance_types GameServerGroupAction = "REPLACE_INSTANCE_TYPES"
 )
+
+// Values returns all known values for GameServerGroupAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerGroupAction) Values() []GameServerGroupAction {
+	return []GameServerGroupAction{
+		"REPLACE_INSTANCE_TYPES",
+	}
+}
 
 type GameServerGroupDeleteOption string
 
@@ -208,6 +432,17 @@ const (
 	GameServerGroupDeleteOptionForce_delete GameServerGroupDeleteOption = "FORCE_DELETE"
 	GameServerGroupDeleteOptionRetain       GameServerGroupDeleteOption = "RETAIN"
 )
+
+// Values returns all known values for GameServerGroupDeleteOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerGroupDeleteOption) Values() []GameServerGroupDeleteOption {
+	return []GameServerGroupDeleteOption{
+		"SAFE_DELETE",
+		"FORCE_DELETE",
+		"RETAIN",
+	}
+}
 
 type GameServerGroupInstanceType string
 
@@ -255,6 +490,54 @@ const (
 	GameServerGroupInstanceTypeM524xlarge GameServerGroupInstanceType = "m5.24xlarge"
 )
 
+// Values returns all known values for GameServerGroupInstanceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
+	return []GameServerGroupInstanceType{
+		"c4.large",
+		"c4.xlarge",
+		"c4.2xlarge",
+		"c4.4xlarge",
+		"c4.8xlarge",
+		"c5.large",
+		"c5.xlarge",
+		"c5.2xlarge",
+		"c5.4xlarge",
+		"c5.9xlarge",
+		"c5.12xlarge",
+		"c5.18xlarge",
+		"c5.24xlarge",
+		"r4.large",
+		"r4.xlarge",
+		"r4.2xlarge",
+		"r4.4xlarge",
+		"r4.8xlarge",
+		"r4.16xlarge",
+		"r5.large",
+		"r5.xlarge",
+		"r5.2xlarge",
+		"r5.4xlarge",
+		"r5.8xlarge",
+		"r5.12xlarge",
+		"r5.16xlarge",
+		"r5.24xlarge",
+		"m4.large",
+		"m4.xlarge",
+		"m4.2xlarge",
+		"m4.4xlarge",
+		"m4.10xlarge",
+		"m5.large",
+		"m5.xlarge",
+		"m5.2xlarge",
+		"m5.4xlarge",
+		"m5.8xlarge",
+		"m5.12xlarge",
+		"m5.16xlarge",
+		"m5.24xlarge",
+	}
+}
+
 type GameServerGroupStatus string
 
 // Enum values for GameServerGroupStatus
@@ -268,12 +551,36 @@ const (
 	GameServerGroupStatusError            GameServerGroupStatus = "ERROR"
 )
 
+// Values returns all known values for GameServerGroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerGroupStatus) Values() []GameServerGroupStatus {
+	return []GameServerGroupStatus{
+		"NEW",
+		"ACTIVATING",
+		"ACTIVE",
+		"DELETE_SCHEDULED",
+		"DELETING",
+		"DELETED",
+		"ERROR",
+	}
+}
+
 type GameServerHealthCheck string
 
 // Enum values for GameServerHealthCheck
 const (
 	GameServerHealthCheckHealthy GameServerHealthCheck = "HEALTHY"
 )
+
+// Values returns all known values for GameServerHealthCheck. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerHealthCheck) Values() []GameServerHealthCheck {
+	return []GameServerHealthCheck{
+		"HEALTHY",
+	}
+}
 
 type GameServerProtectionPolicy string
 
@@ -283,6 +590,16 @@ const (
 	GameServerProtectionPolicyFull_protection GameServerProtectionPolicy = "FULL_PROTECTION"
 )
 
+// Values returns all known values for GameServerProtectionPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerProtectionPolicy) Values() []GameServerProtectionPolicy {
+	return []GameServerProtectionPolicy{
+		"NO_PROTECTION",
+		"FULL_PROTECTION",
+	}
+}
+
 type GameServerUtilizationStatus string
 
 // Enum values for GameServerUtilizationStatus
@@ -290,6 +607,16 @@ const (
 	GameServerUtilizationStatusAvailable GameServerUtilizationStatus = "AVAILABLE"
 	GameServerUtilizationStatusUtilized  GameServerUtilizationStatus = "UTILIZED"
 )
+
+// Values returns all known values for GameServerUtilizationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameServerUtilizationStatus) Values() []GameServerUtilizationStatus {
+	return []GameServerUtilizationStatus{
+		"AVAILABLE",
+		"UTILIZED",
+	}
+}
 
 type GameSessionPlacementState string
 
@@ -302,6 +629,19 @@ const (
 	GameSessionPlacementStateFailed    GameSessionPlacementState = "FAILED"
 )
 
+// Values returns all known values for GameSessionPlacementState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GameSessionPlacementState) Values() []GameSessionPlacementState {
+	return []GameSessionPlacementState{
+		"PENDING",
+		"FULFILLED",
+		"CANCELLED",
+		"TIMED_OUT",
+		"FAILED",
+	}
+}
+
 type GameSessionStatus string
 
 // Enum values for GameSessionStatus
@@ -313,12 +653,34 @@ const (
 	GameSessionStatusError       GameSessionStatus = "ERROR"
 )
 
+// Values returns all known values for GameSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameSessionStatus) Values() []GameSessionStatus {
+	return []GameSessionStatus{
+		"ACTIVE",
+		"ACTIVATING",
+		"TERMINATED",
+		"TERMINATING",
+		"ERROR",
+	}
+}
+
 type GameSessionStatusReason string
 
 // Enum values for GameSessionStatusReason
 const (
 	GameSessionStatusReasonInterrupted GameSessionStatusReason = "INTERRUPTED"
 )
+
+// Values returns all known values for GameSessionStatusReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GameSessionStatusReason) Values() []GameSessionStatusReason {
+	return []GameSessionStatusReason{
+		"INTERRUPTED",
+	}
+}
 
 type InstanceStatus string
 
@@ -329,6 +691,17 @@ const (
 	InstanceStatusTerminating InstanceStatus = "TERMINATING"
 )
 
+// Values returns all known values for InstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStatus) Values() []InstanceStatus {
+	return []InstanceStatus{
+		"PENDING",
+		"ACTIVE",
+		"TERMINATING",
+	}
+}
+
 type IpProtocol string
 
 // Enum values for IpProtocol
@@ -336,6 +709,16 @@ const (
 	IpProtocolTcp IpProtocol = "TCP"
 	IpProtocolUdp IpProtocol = "UDP"
 )
+
+// Values returns all known values for IpProtocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IpProtocol) Values() []IpProtocol {
+	return []IpProtocol{
+		"TCP",
+		"UDP",
+	}
+}
 
 type MatchmakingConfigurationStatus string
 
@@ -350,6 +733,23 @@ const (
 	MatchmakingConfigurationStatusSearching           MatchmakingConfigurationStatus = "SEARCHING"
 	MatchmakingConfigurationStatusTimed_out           MatchmakingConfigurationStatus = "TIMED_OUT"
 )
+
+// Values returns all known values for MatchmakingConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MatchmakingConfigurationStatus) Values() []MatchmakingConfigurationStatus {
+	return []MatchmakingConfigurationStatus{
+		"CANCELLED",
+		"COMPLETED",
+		"FAILED",
+		"PLACING",
+		"QUEUED",
+		"REQUIRES_ACCEPTANCE",
+		"SEARCHING",
+		"TIMED_OUT",
+	}
+}
 
 type MetricName string
 
@@ -368,6 +768,25 @@ const (
 	MetricNameWaittime                     MetricName = "WaitTime"
 )
 
+// Values returns all known values for MetricName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricName) Values() []MetricName {
+	return []MetricName{
+		"ActivatingGameSessions",
+		"ActiveGameSessions",
+		"ActiveInstances",
+		"AvailableGameSessions",
+		"AvailablePlayerSessions",
+		"CurrentPlayerSessions",
+		"IdleInstances",
+		"PercentAvailableGameSessions",
+		"PercentIdleInstances",
+		"QueueDepth",
+		"WaitTime",
+	}
+}
+
 type OperatingSystem string
 
 // Enum values for OperatingSystem
@@ -377,6 +796,17 @@ const (
 	OperatingSystemAmazon_linux_2 OperatingSystem = "AMAZON_LINUX_2"
 )
 
+// Values returns all known values for OperatingSystem. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperatingSystem) Values() []OperatingSystem {
+	return []OperatingSystem{
+		"WINDOWS_2012",
+		"AMAZON_LINUX",
+		"AMAZON_LINUX_2",
+	}
+}
+
 type PlayerSessionCreationPolicy string
 
 // Enum values for PlayerSessionCreationPolicy
@@ -384,6 +814,16 @@ const (
 	PlayerSessionCreationPolicyAccept_all PlayerSessionCreationPolicy = "ACCEPT_ALL"
 	PlayerSessionCreationPolicyDeny_all   PlayerSessionCreationPolicy = "DENY_ALL"
 )
+
+// Values returns all known values for PlayerSessionCreationPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlayerSessionCreationPolicy) Values() []PlayerSessionCreationPolicy {
+	return []PlayerSessionCreationPolicy{
+		"ACCEPT_ALL",
+		"DENY_ALL",
+	}
+}
 
 type PlayerSessionStatus string
 
@@ -395,6 +835,18 @@ const (
 	PlayerSessionStatusTimedout  PlayerSessionStatus = "TIMEDOUT"
 )
 
+// Values returns all known values for PlayerSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlayerSessionStatus) Values() []PlayerSessionStatus {
+	return []PlayerSessionStatus{
+		"RESERVED",
+		"ACTIVE",
+		"COMPLETED",
+		"TIMEDOUT",
+	}
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
@@ -402,6 +854,16 @@ const (
 	PolicyTypeRulebased   PolicyType = "RuleBased"
 	PolicyTypeTargetbased PolicyType = "TargetBased"
 )
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"RuleBased",
+		"TargetBased",
+	}
+}
 
 type ProtectionPolicy string
 
@@ -411,6 +873,16 @@ const (
 	ProtectionPolicyFullprotection ProtectionPolicy = "FullProtection"
 )
 
+// Values returns all known values for ProtectionPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectionPolicy) Values() []ProtectionPolicy {
+	return []ProtectionPolicy{
+		"NoProtection",
+		"FullProtection",
+	}
+}
+
 type RoutingStrategyType string
 
 // Enum values for RoutingStrategyType
@@ -418,6 +890,16 @@ const (
 	RoutingStrategyTypeSimple   RoutingStrategyType = "SIMPLE"
 	RoutingStrategyTypeTerminal RoutingStrategyType = "TERMINAL"
 )
+
+// Values returns all known values for RoutingStrategyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingStrategyType) Values() []RoutingStrategyType {
+	return []RoutingStrategyType{
+		"SIMPLE",
+		"TERMINAL",
+	}
+}
 
 type ScalingAdjustmentType string
 
@@ -427,6 +909,17 @@ const (
 	ScalingAdjustmentTypeExactcapacity           ScalingAdjustmentType = "ExactCapacity"
 	ScalingAdjustmentTypePercentchangeincapacity ScalingAdjustmentType = "PercentChangeInCapacity"
 )
+
+// Values returns all known values for ScalingAdjustmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingAdjustmentType) Values() []ScalingAdjustmentType {
+	return []ScalingAdjustmentType{
+		"ChangeInCapacity",
+		"ExactCapacity",
+		"PercentChangeInCapacity",
+	}
+}
 
 type ScalingStatusType string
 
@@ -441,6 +934,21 @@ const (
 	ScalingStatusTypeError            ScalingStatusType = "ERROR"
 )
 
+// Values returns all known values for ScalingStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingStatusType) Values() []ScalingStatusType {
+	return []ScalingStatusType{
+		"ACTIVE",
+		"UPDATE_REQUESTED",
+		"UPDATING",
+		"DELETE_REQUESTED",
+		"DELETING",
+		"DELETED",
+		"ERROR",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -448,3 +956,13 @@ const (
 	SortOrderAscending  SortOrder = "ASCENDING"
 	SortOrderDescending SortOrder = "DESCENDING"
 )
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}

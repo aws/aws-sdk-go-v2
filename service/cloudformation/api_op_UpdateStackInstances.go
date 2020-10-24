@@ -6,9 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -133,7 +135,73 @@ type UpdateStackInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
+func addOperationUpdateStackInstancesStackSlots(stack *middleware.Stack) error {
+	if err := stack.Initialize.AddSlot(middleware.After,
+		smithyid.OperationIdempotencyTokenAutoFill,
+		smithyid.OperationInputValidation,
+	); err != nil {
+		return err
+	}
+	if err := stack.Initialize.AddSlot(middleware.Before,
+		awsid.RegisterServiceMetadata,
+		awsid.Presigning,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.AddSlot(middleware.After,
+		smithyid.OperationSerializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.InsertSlot(smithyid.OperationSerializer, middleware.Before,
+		awsid.ResolveEndpoint,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		smithyid.ContentChecksum,
+		smithyid.ComputeContentLength,
+		smithyid.ValidateContentLength,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		awsid.ClientRequestID,
+		awsid.ComputePayloadHash,
+		awsid.UserAgent,
+	); err != nil {
+		return err
+	}
+	if err := stack.Finalize.AddSlot(middleware.After,
+		awsid.Retry,
+		awsid.Signing,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.After,
+		smithyid.ErrorCloseResponseBody,
+		smithyid.CloseResponseBody,
+		smithyid.OperationDeserializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.Before,
+		awsid.ResponseErrorWrapper,
+		awsid.RequestIDRetriever,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.InsertSlot(smithyid.OperationDeserializer, middleware.After,
+		awsid.ResponseReadTimeout,
+	); err != nil {
+		return err
+	}
+	return nil
+}
 func addOperationUpdateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := addOperationUpdateStackInstancesStackSlots(stack); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateStackInstances{}, middleware.After)
 	if err != nil {
 		return err
@@ -142,21 +210,51 @@ func addOperationUpdateStackInstancesMiddlewares(stack *middleware.Stack, option
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opUpdateStackInstancesMiddleware(stack, options)
-	addOpUpdateStackInstancesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStackInstances(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err := awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err := v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
+	if err := addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err := addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err := awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addIdempotencyToken_opUpdateStackInstancesMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err := addOpUpdateStackInstancesValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err := stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStackInstances(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err := addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -189,12 +287,12 @@ func (m *idempotencyToken_initializeOpUpdateStackInstances) HandleInitialize(ctx
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opUpdateStackInstancesMiddleware(stack *middleware.Stack, cfg Options) {
-	stack.Initialize.Add(&idempotencyToken_initializeOpUpdateStackInstances{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opUpdateStackInstancesMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateStackInstances{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opUpdateStackInstances(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opUpdateStackInstances(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "cloudformation",

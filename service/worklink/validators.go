@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpAssociateDomain struct {
 }
 
 func (*validateOpAssociateDomain) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAssociateDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpAssociateWebsiteAuthorizationProvider struct {
 }
 
 func (*validateOpAssociateWebsiteAuthorizationProvider) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAssociateWebsiteAuthorizationProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpAssociateWebsiteCertificateAuthority struct {
 }
 
 func (*validateOpAssociateWebsiteCertificateAuthority) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpAssociateWebsiteCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpCreateFleet struct {
 }
 
 func (*validateOpCreateFleet) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpCreateFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -93,7 +94,7 @@ type validateOpDeleteFleet struct {
 }
 
 func (*validateOpDeleteFleet) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -113,7 +114,7 @@ type validateOpDescribeAuditStreamConfiguration struct {
 }
 
 func (*validateOpDescribeAuditStreamConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeAuditStreamConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -133,7 +134,7 @@ type validateOpDescribeCompanyNetworkConfiguration struct {
 }
 
 func (*validateOpDescribeCompanyNetworkConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeCompanyNetworkConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -153,7 +154,7 @@ type validateOpDescribeDevice struct {
 }
 
 func (*validateOpDescribeDevice) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -173,7 +174,7 @@ type validateOpDescribeDevicePolicyConfiguration struct {
 }
 
 func (*validateOpDescribeDevicePolicyConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDevicePolicyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -193,7 +194,7 @@ type validateOpDescribeDomain struct {
 }
 
 func (*validateOpDescribeDomain) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -213,7 +214,7 @@ type validateOpDescribeFleetMetadata struct {
 }
 
 func (*validateOpDescribeFleetMetadata) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeFleetMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -233,7 +234,7 @@ type validateOpDescribeIdentityProviderConfiguration struct {
 }
 
 func (*validateOpDescribeIdentityProviderConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeIdentityProviderConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -253,7 +254,7 @@ type validateOpDescribeWebsiteCertificateAuthority struct {
 }
 
 func (*validateOpDescribeWebsiteCertificateAuthority) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDescribeWebsiteCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -273,7 +274,7 @@ type validateOpDisassociateDomain struct {
 }
 
 func (*validateOpDisassociateDomain) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisassociateDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -293,7 +294,7 @@ type validateOpDisassociateWebsiteAuthorizationProvider struct {
 }
 
 func (*validateOpDisassociateWebsiteAuthorizationProvider) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisassociateWebsiteAuthorizationProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -313,7 +314,7 @@ type validateOpDisassociateWebsiteCertificateAuthority struct {
 }
 
 func (*validateOpDisassociateWebsiteCertificateAuthority) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDisassociateWebsiteCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -333,7 +334,7 @@ type validateOpListDevices struct {
 }
 
 func (*validateOpListDevices) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -353,7 +354,7 @@ type validateOpListDomains struct {
 }
 
 func (*validateOpListDomains) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -373,7 +374,7 @@ type validateOpListTagsForResource struct {
 }
 
 func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -393,7 +394,7 @@ type validateOpListWebsiteAuthorizationProviders struct {
 }
 
 func (*validateOpListWebsiteAuthorizationProviders) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListWebsiteAuthorizationProviders) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -413,7 +414,7 @@ type validateOpListWebsiteCertificateAuthorities struct {
 }
 
 func (*validateOpListWebsiteCertificateAuthorities) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListWebsiteCertificateAuthorities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -433,7 +434,7 @@ type validateOpRestoreDomainAccess struct {
 }
 
 func (*validateOpRestoreDomainAccess) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRestoreDomainAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -453,7 +454,7 @@ type validateOpRevokeDomainAccess struct {
 }
 
 func (*validateOpRevokeDomainAccess) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRevokeDomainAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -473,7 +474,7 @@ type validateOpSignOutUser struct {
 }
 
 func (*validateOpSignOutUser) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSignOutUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -493,7 +494,7 @@ type validateOpTagResource struct {
 }
 
 func (*validateOpTagResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -513,7 +514,7 @@ type validateOpUntagResource struct {
 }
 
 func (*validateOpUntagResource) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -533,7 +534,7 @@ type validateOpUpdateAuditStreamConfiguration struct {
 }
 
 func (*validateOpUpdateAuditStreamConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateAuditStreamConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -553,7 +554,7 @@ type validateOpUpdateCompanyNetworkConfiguration struct {
 }
 
 func (*validateOpUpdateCompanyNetworkConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateCompanyNetworkConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -573,7 +574,7 @@ type validateOpUpdateDevicePolicyConfiguration struct {
 }
 
 func (*validateOpUpdateDevicePolicyConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateDevicePolicyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -593,7 +594,7 @@ type validateOpUpdateDomainMetadata struct {
 }
 
 func (*validateOpUpdateDomainMetadata) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateDomainMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -613,7 +614,7 @@ type validateOpUpdateFleetMetadata struct {
 }
 
 func (*validateOpUpdateFleetMetadata) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateFleetMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -633,7 +634,7 @@ type validateOpUpdateIdentityProviderConfiguration struct {
 }
 
 func (*validateOpUpdateIdentityProviderConfiguration) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpUpdateIdentityProviderConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

@@ -10,6 +10,16 @@ const (
 	CancellationStatusCancelled  CancellationStatus = "CANCELLED"
 )
 
+// Values returns all known values for CancellationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CancellationStatus) Values() []CancellationStatus {
+	return []CancellationStatus{
+		"CANCELLING",
+		"CANCELLED",
+	}
+}
+
 type DeviceStatus string
 
 // Enum values for DeviceStatus
@@ -18,6 +28,16 @@ const (
 	DeviceStatusOffline DeviceStatus = "OFFLINE"
 )
 
+// Values returns all known values for DeviceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceStatus) Values() []DeviceStatus {
+	return []DeviceStatus{
+		"ONLINE",
+		"OFFLINE",
+	}
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -25,6 +45,16 @@ const (
 	DeviceTypeQpu       DeviceType = "QPU"
 	DeviceTypeSimulator DeviceType = "SIMULATOR"
 )
+
+// Values returns all known values for DeviceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceType) Values() []DeviceType {
+	return []DeviceType{
+		"QPU",
+		"SIMULATOR",
+	}
+}
 
 type QuantumTaskStatus string
 
@@ -39,6 +69,21 @@ const (
 	QuantumTaskStatusCancelled  QuantumTaskStatus = "CANCELLED"
 )
 
+// Values returns all known values for QuantumTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuantumTaskStatus) Values() []QuantumTaskStatus {
+	return []QuantumTaskStatus{
+		"CREATED",
+		"QUEUED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLING",
+		"CANCELLED",
+	}
+}
+
 type SearchQuantumTasksFilterOperator string
 
 // Enum values for SearchQuantumTasksFilterOperator
@@ -50,3 +95,18 @@ const (
 	SearchQuantumTasksFilterOperatorGte     SearchQuantumTasksFilterOperator = "GTE"
 	SearchQuantumTasksFilterOperatorBetween SearchQuantumTasksFilterOperator = "BETWEEN"
 )
+
+// Values returns all known values for SearchQuantumTasksFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SearchQuantumTasksFilterOperator) Values() []SearchQuantumTasksFilterOperator {
+	return []SearchQuantumTasksFilterOperator{
+		"LT",
+		"LTE",
+		"EQUAL",
+		"GT",
+		"GTE",
+		"BETWEEN",
+	}
+}

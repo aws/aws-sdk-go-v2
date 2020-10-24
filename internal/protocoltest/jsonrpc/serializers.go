@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson11_serializeOpEmptyOperation struct {
 }
 
 func (*awsAwsjson11_serializeOpEmptyOperation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpEmptyOperation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -58,7 +59,7 @@ type awsAwsjson11_serializeOpGreetingWithErrors struct {
 }
 
 func (*awsAwsjson11_serializeOpGreetingWithErrors) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGreetingWithErrors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -97,7 +98,7 @@ type awsAwsjson11_serializeOpJsonEnums struct {
 }
 
 func (*awsAwsjson11_serializeOpJsonEnums) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpJsonEnums) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_serializeOpJsonUnions struct {
 }
 
 func (*awsAwsjson11_serializeOpJsonUnions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpJsonUnions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -189,7 +190,7 @@ type awsAwsjson11_serializeOpKitchenSinkOperation struct {
 }
 
 func (*awsAwsjson11_serializeOpKitchenSinkOperation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpKitchenSinkOperation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -235,7 +236,7 @@ type awsAwsjson11_serializeOpNullOperation struct {
 }
 
 func (*awsAwsjson11_serializeOpNullOperation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpNullOperation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -281,7 +282,7 @@ type awsAwsjson11_serializeOpOperationWithOptionalInputOutput struct {
 }
 
 func (*awsAwsjson11_serializeOpOperationWithOptionalInputOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpOperationWithOptionalInputOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -327,7 +328,7 @@ type awsAwsjson11_serializeOpPutAndGetInlineDocuments struct {
 }
 
 func (*awsAwsjson11_serializeOpPutAndGetInlineDocuments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutAndGetInlineDocuments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

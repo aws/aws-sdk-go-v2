@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpAssociateIpGroups struct {
 }
 
 func (*awsAwsjson11_deserializeOpAssociateIpGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAssociateIpGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -149,7 +150,7 @@ type awsAwsjson11_deserializeOpAuthorizeIpRules struct {
 }
 
 func (*awsAwsjson11_deserializeOpAuthorizeIpRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAuthorizeIpRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -272,7 +273,7 @@ type awsAwsjson11_deserializeOpCopyWorkspaceImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpCopyWorkspaceImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCopyWorkspaceImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -401,7 +402,7 @@ type awsAwsjson11_deserializeOpCreateIpGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateIpGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateIpGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -524,7 +525,7 @@ type awsAwsjson11_deserializeOpCreateTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -641,7 +642,7 @@ type awsAwsjson11_deserializeOpCreateWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -755,7 +756,7 @@ type awsAwsjson11_deserializeOpDeleteIpGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteIpGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteIpGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -875,7 +876,7 @@ type awsAwsjson11_deserializeOpDeleteTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -989,7 +990,7 @@ type awsAwsjson11_deserializeOpDeleteWorkspaceImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteWorkspaceImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteWorkspaceImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1106,7 +1107,7 @@ type awsAwsjson11_deserializeOpDeregisterWorkspaceDirectory struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeregisterWorkspaceDirectory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeregisterWorkspaceDirectory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1229,7 +1230,7 @@ type awsAwsjson11_deserializeOpDescribeAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1340,7 +1341,7 @@ type awsAwsjson11_deserializeOpDescribeAccountModifications struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeAccountModifications) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeAccountModifications) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1451,7 +1452,7 @@ type awsAwsjson11_deserializeOpDescribeClientProperties struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeClientProperties) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeClientProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1568,7 +1569,7 @@ type awsAwsjson11_deserializeOpDescribeIpGroups struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeIpGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeIpGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1682,7 +1683,7 @@ type awsAwsjson11_deserializeOpDescribeTags struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeTags) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeTags) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1793,7 +1794,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaceBundles struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaceBundles) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaceBundles) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1904,7 +1905,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaceDirectories struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaceDirectories) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaceDirectories) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2015,7 +2016,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaceImagePermissions struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaceImagePermissions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaceImagePermissions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2132,7 +2133,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaceImages struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaceImages) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaceImages) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2243,7 +2244,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2357,7 +2358,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspacesConnectionStatus struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspacesConnectionStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspacesConnectionStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2468,7 +2469,7 @@ type awsAwsjson11_deserializeOpDescribeWorkspaceSnapshots struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeWorkspaceSnapshots) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeWorkspaceSnapshots) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2585,7 +2586,7 @@ type awsAwsjson11_deserializeOpDisassociateIpGroups struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisassociateIpGroups) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisassociateIpGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2705,7 +2706,7 @@ type awsAwsjson11_deserializeOpImportWorkspaceImage struct {
 }
 
 func (*awsAwsjson11_deserializeOpImportWorkspaceImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpImportWorkspaceImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2831,7 +2832,7 @@ type awsAwsjson11_deserializeOpListAvailableManagementCidrRanges struct {
 }
 
 func (*awsAwsjson11_deserializeOpListAvailableManagementCidrRanges) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListAvailableManagementCidrRanges) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2945,7 +2946,7 @@ type awsAwsjson11_deserializeOpMigrateWorkspace struct {
 }
 
 func (*awsAwsjson11_deserializeOpMigrateWorkspace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpMigrateWorkspace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3071,7 +3072,7 @@ type awsAwsjson11_deserializeOpModifyAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3194,7 +3195,7 @@ type awsAwsjson11_deserializeOpModifyClientProperties struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyClientProperties) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyClientProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3311,7 +3312,7 @@ type awsAwsjson11_deserializeOpModifySelfservicePermissions struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifySelfservicePermissions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifySelfservicePermissions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3428,7 +3429,7 @@ type awsAwsjson11_deserializeOpModifyWorkspaceAccessProperties struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyWorkspaceAccessProperties) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyWorkspaceAccessProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3542,7 +3543,7 @@ type awsAwsjson11_deserializeOpModifyWorkspaceCreationProperties struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyWorkspaceCreationProperties) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyWorkspaceCreationProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3659,7 +3660,7 @@ type awsAwsjson11_deserializeOpModifyWorkspaceProperties struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyWorkspaceProperties) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyWorkspaceProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3788,7 +3789,7 @@ type awsAwsjson11_deserializeOpModifyWorkspaceState struct {
 }
 
 func (*awsAwsjson11_deserializeOpModifyWorkspaceState) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpModifyWorkspaceState) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3905,7 +3906,7 @@ type awsAwsjson11_deserializeOpRebootWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpRebootWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRebootWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4013,7 +4014,7 @@ type awsAwsjson11_deserializeOpRebuildWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpRebuildWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRebuildWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4121,7 +4122,7 @@ type awsAwsjson11_deserializeOpRegisterWorkspaceDirectory struct {
 }
 
 func (*awsAwsjson11_deserializeOpRegisterWorkspaceDirectory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRegisterWorkspaceDirectory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4253,7 +4254,7 @@ type awsAwsjson11_deserializeOpRestoreWorkspace struct {
 }
 
 func (*awsAwsjson11_deserializeOpRestoreWorkspace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRestoreWorkspace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4370,7 +4371,7 @@ type awsAwsjson11_deserializeOpRevokeIpRules struct {
 }
 
 func (*awsAwsjson11_deserializeOpRevokeIpRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRevokeIpRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4490,7 +4491,7 @@ type awsAwsjson11_deserializeOpStartWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpStartWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStartWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4598,7 +4599,7 @@ type awsAwsjson11_deserializeOpStopWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpStopWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpStopWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4706,7 +4707,7 @@ type awsAwsjson11_deserializeOpTerminateWorkspaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpTerminateWorkspaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTerminateWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4814,7 +4815,7 @@ type awsAwsjson11_deserializeOpUpdateRulesOfIpGroup struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateRulesOfIpGroup) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateRulesOfIpGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -4937,7 +4938,7 @@ type awsAwsjson11_deserializeOpUpdateWorkspaceImagePermission struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateWorkspaceImagePermission) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateWorkspaceImagePermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

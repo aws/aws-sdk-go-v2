@@ -14,6 +14,20 @@ const (
 	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"EQ",
+		"NE",
+		"LE",
+		"LT",
+		"GE",
+		"GT",
+	}
+}
+
 type CountryCode string
 
 // Enum values for CountryCode
@@ -269,6 +283,263 @@ const (
 	CountryCodeZw CountryCode = "ZW"
 )
 
+// Values returns all known values for CountryCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CountryCode) Values() []CountryCode {
+	return []CountryCode{
+		"AF",
+		"AX",
+		"AL",
+		"DZ",
+		"AS",
+		"AD",
+		"AO",
+		"AI",
+		"AQ",
+		"AG",
+		"AR",
+		"AM",
+		"AW",
+		"AU",
+		"AT",
+		"AZ",
+		"BS",
+		"BH",
+		"BD",
+		"BB",
+		"BY",
+		"BE",
+		"BZ",
+		"BJ",
+		"BM",
+		"BT",
+		"BO",
+		"BQ",
+		"BA",
+		"BW",
+		"BV",
+		"BR",
+		"IO",
+		"BN",
+		"BG",
+		"BF",
+		"BI",
+		"KH",
+		"CM",
+		"CA",
+		"CV",
+		"KY",
+		"CF",
+		"TD",
+		"CL",
+		"CN",
+		"CX",
+		"CC",
+		"CO",
+		"KM",
+		"CG",
+		"CD",
+		"CK",
+		"CR",
+		"CI",
+		"HR",
+		"CU",
+		"CW",
+		"CY",
+		"CZ",
+		"DK",
+		"DJ",
+		"DM",
+		"DO",
+		"EC",
+		"EG",
+		"SV",
+		"GQ",
+		"ER",
+		"EE",
+		"ET",
+		"FK",
+		"FO",
+		"FJ",
+		"FI",
+		"FR",
+		"GF",
+		"PF",
+		"TF",
+		"GA",
+		"GM",
+		"GE",
+		"DE",
+		"GH",
+		"GI",
+		"GR",
+		"GL",
+		"GD",
+		"GP",
+		"GU",
+		"GT",
+		"GG",
+		"GN",
+		"GW",
+		"GY",
+		"HT",
+		"HM",
+		"VA",
+		"HN",
+		"HK",
+		"HU",
+		"IS",
+		"IN",
+		"ID",
+		"IR",
+		"IQ",
+		"IE",
+		"IM",
+		"IL",
+		"IT",
+		"JM",
+		"JP",
+		"JE",
+		"JO",
+		"KZ",
+		"KE",
+		"KI",
+		"KP",
+		"KR",
+		"KW",
+		"KG",
+		"LA",
+		"LV",
+		"LB",
+		"LS",
+		"LR",
+		"LY",
+		"LI",
+		"LT",
+		"LU",
+		"MO",
+		"MK",
+		"MG",
+		"MW",
+		"MY",
+		"MV",
+		"ML",
+		"MT",
+		"MH",
+		"MQ",
+		"MR",
+		"MU",
+		"YT",
+		"MX",
+		"FM",
+		"MD",
+		"MC",
+		"MN",
+		"ME",
+		"MS",
+		"MA",
+		"MZ",
+		"MM",
+		"NA",
+		"NR",
+		"NP",
+		"NL",
+		"NC",
+		"NZ",
+		"NI",
+		"NE",
+		"NG",
+		"NU",
+		"NF",
+		"MP",
+		"NO",
+		"OM",
+		"PK",
+		"PW",
+		"PS",
+		"PA",
+		"PG",
+		"PY",
+		"PE",
+		"PH",
+		"PN",
+		"PL",
+		"PT",
+		"PR",
+		"QA",
+		"RE",
+		"RO",
+		"RU",
+		"RW",
+		"BL",
+		"SH",
+		"KN",
+		"LC",
+		"MF",
+		"PM",
+		"VC",
+		"WS",
+		"SM",
+		"ST",
+		"SA",
+		"SN",
+		"RS",
+		"SC",
+		"SL",
+		"SG",
+		"SX",
+		"SK",
+		"SI",
+		"SB",
+		"SO",
+		"ZA",
+		"GS",
+		"SS",
+		"ES",
+		"LK",
+		"SD",
+		"SR",
+		"SJ",
+		"SZ",
+		"SE",
+		"CH",
+		"SY",
+		"TW",
+		"TJ",
+		"TZ",
+		"TH",
+		"TL",
+		"TG",
+		"TK",
+		"TO",
+		"TT",
+		"TN",
+		"TR",
+		"TM",
+		"TC",
+		"TV",
+		"UG",
+		"UA",
+		"AE",
+		"GB",
+		"US",
+		"UM",
+		"UY",
+		"UZ",
+		"VU",
+		"VE",
+		"VN",
+		"VG",
+		"VI",
+		"WF",
+		"EH",
+		"YE",
+		"ZM",
+		"ZW",
+	}
+}
+
 type FallbackBehavior string
 
 // Enum values for FallbackBehavior
@@ -276,6 +547,16 @@ const (
 	FallbackBehaviorMatch    FallbackBehavior = "MATCH"
 	FallbackBehaviorNo_match FallbackBehavior = "NO_MATCH"
 )
+
+// Values returns all known values for FallbackBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FallbackBehavior) Values() []FallbackBehavior {
+	return []FallbackBehavior{
+		"MATCH",
+		"NO_MATCH",
+	}
+}
 
 type ForwardedIPPosition string
 
@@ -286,6 +567,17 @@ const (
 	ForwardedIPPositionAny   ForwardedIPPosition = "ANY"
 )
 
+// Values returns all known values for ForwardedIPPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ForwardedIPPosition) Values() []ForwardedIPPosition {
+	return []ForwardedIPPosition{
+		"FIRST",
+		"LAST",
+		"ANY",
+	}
+}
+
 type IPAddressVersion string
 
 // Enum values for IPAddressVersion
@@ -293,6 +585,16 @@ const (
 	IPAddressVersionIpv4 IPAddressVersion = "IPV4"
 	IPAddressVersionIpv6 IPAddressVersion = "IPV6"
 )
+
+// Values returns all known values for IPAddressVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IPAddressVersion) Values() []IPAddressVersion {
+	return []IPAddressVersion{
+		"IPV4",
+		"IPV6",
+	}
+}
 
 type ParameterExceptionField string
 
@@ -343,6 +645,57 @@ const (
 	ParameterExceptionFieldHeader_name                       ParameterExceptionField = "HEADER_NAME"
 )
 
+// Values returns all known values for ParameterExceptionField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterExceptionField) Values() []ParameterExceptionField {
+	return []ParameterExceptionField{
+		"WEB_ACL",
+		"RULE_GROUP",
+		"REGEX_PATTERN_SET",
+		"IP_SET",
+		"MANAGED_RULE_SET",
+		"RULE",
+		"EXCLUDED_RULE",
+		"STATEMENT",
+		"BYTE_MATCH_STATEMENT",
+		"SQLI_MATCH_STATEMENT",
+		"XSS_MATCH_STATEMENT",
+		"SIZE_CONSTRAINT_STATEMENT",
+		"GEO_MATCH_STATEMENT",
+		"RATE_BASED_STATEMENT",
+		"RULE_GROUP_REFERENCE_STATEMENT",
+		"REGEX_PATTERN_REFERENCE_STATEMENT",
+		"IP_SET_REFERENCE_STATEMENT",
+		"MANAGED_RULE_SET_STATEMENT",
+		"AND_STATEMENT",
+		"OR_STATEMENT",
+		"NOT_STATEMENT",
+		"IP_ADDRESS",
+		"IP_ADDRESS_VERSION",
+		"FIELD_TO_MATCH",
+		"TEXT_TRANSFORMATION",
+		"SINGLE_QUERY_ARGUMENT",
+		"SINGLE_HEADER",
+		"DEFAULT_ACTION",
+		"RULE_ACTION",
+		"ENTITY_LIMIT",
+		"OVERRIDE_ACTION",
+		"SCOPE_VALUE",
+		"RESOURCE_ARN",
+		"RESOURCE_TYPE",
+		"TAGS",
+		"TAG_KEYS",
+		"METRIC_NAME",
+		"FIREWALL_MANAGER_STATEMENT",
+		"FALLBACK_BEHAVIOR",
+		"POSITION",
+		"FORWARDED_IP_CONFIG",
+		"IP_SET_FORWARDED_IP_CONFIG",
+		"HEADER_NAME",
+	}
+}
+
 type PositionalConstraint string
 
 // Enum values for PositionalConstraint
@@ -354,6 +707,19 @@ const (
 	PositionalConstraintContains_word PositionalConstraint = "CONTAINS_WORD"
 )
 
+// Values returns all known values for PositionalConstraint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionalConstraint) Values() []PositionalConstraint {
+	return []PositionalConstraint{
+		"EXACTLY",
+		"STARTS_WITH",
+		"ENDS_WITH",
+		"CONTAINS",
+		"CONTAINS_WORD",
+	}
+}
+
 type RateBasedStatementAggregateKeyType string
 
 // Enum values for RateBasedStatementAggregateKeyType
@@ -361,6 +727,17 @@ const (
 	RateBasedStatementAggregateKeyTypeIp           RateBasedStatementAggregateKeyType = "IP"
 	RateBasedStatementAggregateKeyTypeForwarded_ip RateBasedStatementAggregateKeyType = "FORWARDED_IP"
 )
+
+// Values returns all known values for RateBasedStatementAggregateKeyType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RateBasedStatementAggregateKeyType) Values() []RateBasedStatementAggregateKeyType {
+	return []RateBasedStatementAggregateKeyType{
+		"IP",
+		"FORWARDED_IP",
+	}
+}
 
 type ResourceType string
 
@@ -370,6 +747,16 @@ const (
 	ResourceTypeApi_gateway               ResourceType = "API_GATEWAY"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"APPLICATION_LOAD_BALANCER",
+		"API_GATEWAY",
+	}
+}
+
 type Scope string
 
 // Enum values for Scope
@@ -377,6 +764,16 @@ const (
 	ScopeCloudfront Scope = "CLOUDFRONT"
 	ScopeRegional   Scope = "REGIONAL"
 )
+
+// Values returns all known values for Scope. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Scope) Values() []Scope {
+	return []Scope{
+		"CLOUDFRONT",
+		"REGIONAL",
+	}
+}
 
 type TextTransformationType string
 
@@ -389,3 +786,17 @@ const (
 	TextTransformationTypeCmd_line             TextTransformationType = "CMD_LINE"
 	TextTransformationTypeUrl_decode           TextTransformationType = "URL_DECODE"
 )
+
+// Values returns all known values for TextTransformationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TextTransformationType) Values() []TextTransformationType {
+	return []TextTransformationType{
+		"NONE",
+		"COMPRESS_WHITE_SPACE",
+		"HTML_ENTITY_DECODE",
+		"LOWERCASE",
+		"CMD_LINE",
+		"URL_DECODE",
+	}
+}

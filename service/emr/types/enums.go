@@ -12,6 +12,18 @@ const (
 	ActionOnFailureContinue           ActionOnFailure = "CONTINUE"
 )
 
+// Values returns all known values for ActionOnFailure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionOnFailure) Values() []ActionOnFailure {
+	return []ActionOnFailure{
+		"TERMINATE_JOB_FLOW",
+		"TERMINATE_CLUSTER",
+		"CANCEL_AND_WAIT",
+		"CONTINUE",
+	}
+}
+
 type AdjustmentType string
 
 // Enum values for AdjustmentType
@@ -20,6 +32,17 @@ const (
 	AdjustmentTypePercent_change_in_capacity AdjustmentType = "PERCENT_CHANGE_IN_CAPACITY"
 	AdjustmentTypeExact_capacity             AdjustmentType = "EXACT_CAPACITY"
 )
+
+// Values returns all known values for AdjustmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdjustmentType) Values() []AdjustmentType {
+	return []AdjustmentType{
+		"CHANGE_IN_CAPACITY",
+		"PERCENT_CHANGE_IN_CAPACITY",
+		"EXACT_CAPACITY",
+	}
+}
 
 type AutoScalingPolicyState string
 
@@ -33,6 +56,20 @@ const (
 	AutoScalingPolicyStateFailed    AutoScalingPolicyState = "FAILED"
 )
 
+// Values returns all known values for AutoScalingPolicyState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoScalingPolicyState) Values() []AutoScalingPolicyState {
+	return []AutoScalingPolicyState{
+		"PENDING",
+		"ATTACHING",
+		"ATTACHED",
+		"DETACHING",
+		"DETACHED",
+		"FAILED",
+	}
+}
+
 type AutoScalingPolicyStateChangeReasonCode string
 
 // Enum values for AutoScalingPolicyStateChangeReasonCode
@@ -42,6 +79,18 @@ const (
 	AutoScalingPolicyStateChangeReasonCodeCleanup_failure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
 )
 
+// Values returns all known values for AutoScalingPolicyStateChangeReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AutoScalingPolicyStateChangeReasonCode) Values() []AutoScalingPolicyStateChangeReasonCode {
+	return []AutoScalingPolicyStateChangeReasonCode{
+		"USER_REQUEST",
+		"PROVISION_FAILURE",
+		"CLEANUP_FAILURE",
+	}
+}
+
 type CancelStepsRequestStatus string
 
 // Enum values for CancelStepsRequestStatus
@@ -49,6 +98,16 @@ const (
 	CancelStepsRequestStatusSubmitted CancelStepsRequestStatus = "SUBMITTED"
 	CancelStepsRequestStatusFailed    CancelStepsRequestStatus = "FAILED"
 )
+
+// Values returns all known values for CancelStepsRequestStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CancelStepsRequestStatus) Values() []CancelStepsRequestStatus {
+	return []CancelStepsRequestStatus{
+		"SUBMITTED",
+		"FAILED",
+	}
+}
 
 type ClusterState string
 
@@ -62,6 +121,21 @@ const (
 	ClusterStateTerminated             ClusterState = "TERMINATED"
 	ClusterStateTerminated_with_errors ClusterState = "TERMINATED_WITH_ERRORS"
 )
+
+// Values returns all known values for ClusterState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ClusterState) Values() []ClusterState {
+	return []ClusterState{
+		"STARTING",
+		"BOOTSTRAPPING",
+		"RUNNING",
+		"WAITING",
+		"TERMINATING",
+		"TERMINATED",
+		"TERMINATED_WITH_ERRORS",
+	}
+}
 
 type ClusterStateChangeReasonCode string
 
@@ -77,6 +151,22 @@ const (
 	ClusterStateChangeReasonCodeAll_steps_completed    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
 )
 
+// Values returns all known values for ClusterStateChangeReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStateChangeReasonCode) Values() []ClusterStateChangeReasonCode {
+	return []ClusterStateChangeReasonCode{
+		"INTERNAL_ERROR",
+		"VALIDATION_ERROR",
+		"INSTANCE_FAILURE",
+		"INSTANCE_FLEET_TIMEOUT",
+		"BOOTSTRAP_FAILURE",
+		"USER_REQUEST",
+		"STEP_FAILURE",
+		"ALL_STEPS_COMPLETED",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -87,6 +177,18 @@ const (
 	ComparisonOperatorLess_than_or_equal    ComparisonOperator = "LESS_THAN_OR_EQUAL"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GREATER_THAN_OR_EQUAL",
+		"GREATER_THAN",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUAL",
+	}
+}
+
 type ComputeLimitsUnitType string
 
 // Enum values for ComputeLimitsUnitType
@@ -96,6 +198,17 @@ const (
 	ComputeLimitsUnitTypeVcpu               ComputeLimitsUnitType = "VCPU"
 )
 
+// Values returns all known values for ComputeLimitsUnitType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeLimitsUnitType) Values() []ComputeLimitsUnitType {
+	return []ComputeLimitsUnitType{
+		"InstanceFleetUnits",
+		"Instances",
+		"VCPU",
+	}
+}
+
 type InstanceCollectionType string
 
 // Enum values for InstanceCollectionType
@@ -103,6 +216,16 @@ const (
 	InstanceCollectionTypeInstance_fleet InstanceCollectionType = "INSTANCE_FLEET"
 	InstanceCollectionTypeInstance_group InstanceCollectionType = "INSTANCE_GROUP"
 )
+
+// Values returns all known values for InstanceCollectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceCollectionType) Values() []InstanceCollectionType {
+	return []InstanceCollectionType{
+		"INSTANCE_FLEET",
+		"INSTANCE_GROUP",
+	}
+}
 
 type InstanceFleetState string
 
@@ -117,6 +240,21 @@ const (
 	InstanceFleetStateTerminated    InstanceFleetState = "TERMINATED"
 )
 
+// Values returns all known values for InstanceFleetState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceFleetState) Values() []InstanceFleetState {
+	return []InstanceFleetState{
+		"PROVISIONING",
+		"BOOTSTRAPPING",
+		"RUNNING",
+		"RESIZING",
+		"SUSPENDED",
+		"TERMINATING",
+		"TERMINATED",
+	}
+}
+
 type InstanceFleetStateChangeReasonCode string
 
 // Enum values for InstanceFleetStateChangeReasonCode
@@ -127,6 +265,19 @@ const (
 	InstanceFleetStateChangeReasonCodeCluster_terminated InstanceFleetStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+// Values returns all known values for InstanceFleetStateChangeReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceFleetStateChangeReasonCode) Values() []InstanceFleetStateChangeReasonCode {
+	return []InstanceFleetStateChangeReasonCode{
+		"INTERNAL_ERROR",
+		"VALIDATION_ERROR",
+		"INSTANCE_FAILURE",
+		"CLUSTER_TERMINATED",
+	}
+}
+
 type InstanceFleetType string
 
 // Enum values for InstanceFleetType
@@ -135,6 +286,17 @@ const (
 	InstanceFleetTypeCore   InstanceFleetType = "CORE"
 	InstanceFleetTypeTask   InstanceFleetType = "TASK"
 )
+
+// Values returns all known values for InstanceFleetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceFleetType) Values() []InstanceFleetType {
+	return []InstanceFleetType{
+		"MASTER",
+		"CORE",
+		"TASK",
+	}
+}
 
 type InstanceGroupState string
 
@@ -153,6 +315,25 @@ const (
 	InstanceGroupStateEnded         InstanceGroupState = "ENDED"
 )
 
+// Values returns all known values for InstanceGroupState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceGroupState) Values() []InstanceGroupState {
+	return []InstanceGroupState{
+		"PROVISIONING",
+		"BOOTSTRAPPING",
+		"RUNNING",
+		"RECONFIGURING",
+		"RESIZING",
+		"SUSPENDED",
+		"TERMINATING",
+		"TERMINATED",
+		"ARRESTED",
+		"SHUTTING_DOWN",
+		"ENDED",
+	}
+}
+
 type InstanceGroupStateChangeReasonCode string
 
 // Enum values for InstanceGroupStateChangeReasonCode
@@ -163,6 +344,19 @@ const (
 	InstanceGroupStateChangeReasonCodeCluster_terminated InstanceGroupStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+// Values returns all known values for InstanceGroupStateChangeReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceGroupStateChangeReasonCode) Values() []InstanceGroupStateChangeReasonCode {
+	return []InstanceGroupStateChangeReasonCode{
+		"INTERNAL_ERROR",
+		"VALIDATION_ERROR",
+		"INSTANCE_FAILURE",
+		"CLUSTER_TERMINATED",
+	}
+}
+
 type InstanceGroupType string
 
 // Enum values for InstanceGroupType
@@ -172,6 +366,17 @@ const (
 	InstanceGroupTypeTask   InstanceGroupType = "TASK"
 )
 
+// Values returns all known values for InstanceGroupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceGroupType) Values() []InstanceGroupType {
+	return []InstanceGroupType{
+		"MASTER",
+		"CORE",
+		"TASK",
+	}
+}
+
 type InstanceRoleType string
 
 // Enum values for InstanceRoleType
@@ -180,6 +385,17 @@ const (
 	InstanceRoleTypeCore   InstanceRoleType = "CORE"
 	InstanceRoleTypeTask   InstanceRoleType = "TASK"
 )
+
+// Values returns all known values for InstanceRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceRoleType) Values() []InstanceRoleType {
+	return []InstanceRoleType{
+		"MASTER",
+		"CORE",
+		"TASK",
+	}
+}
 
 type InstanceState string
 
@@ -192,6 +408,19 @@ const (
 	InstanceStateTerminated           InstanceState = "TERMINATED"
 )
 
+// Values returns all known values for InstanceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceState) Values() []InstanceState {
+	return []InstanceState{
+		"AWAITING_FULFILLMENT",
+		"PROVISIONING",
+		"BOOTSTRAPPING",
+		"RUNNING",
+		"TERMINATED",
+	}
+}
+
 type InstanceStateChangeReasonCode string
 
 // Enum values for InstanceStateChangeReasonCode
@@ -202,6 +431,20 @@ const (
 	InstanceStateChangeReasonCodeBootstrap_failure  InstanceStateChangeReasonCode = "BOOTSTRAP_FAILURE"
 	InstanceStateChangeReasonCodeCluster_terminated InstanceStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
+
+// Values returns all known values for InstanceStateChangeReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceStateChangeReasonCode) Values() []InstanceStateChangeReasonCode {
+	return []InstanceStateChangeReasonCode{
+		"INTERNAL_ERROR",
+		"VALIDATION_ERROR",
+		"INSTANCE_FAILURE",
+		"BOOTSTRAP_FAILURE",
+		"CLUSTER_TERMINATED",
+	}
+}
 
 type JobFlowExecutionState string
 
@@ -217,6 +460,22 @@ const (
 	JobFlowExecutionStateFailed        JobFlowExecutionState = "FAILED"
 )
 
+// Values returns all known values for JobFlowExecutionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobFlowExecutionState) Values() []JobFlowExecutionState {
+	return []JobFlowExecutionState{
+		"STARTING",
+		"BOOTSTRAPPING",
+		"RUNNING",
+		"WAITING",
+		"SHUTTING_DOWN",
+		"TERMINATED",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type MarketType string
 
 // Enum values for MarketType
@@ -225,12 +484,32 @@ const (
 	MarketTypeSpot      MarketType = "SPOT"
 )
 
+// Values returns all known values for MarketType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MarketType) Values() []MarketType {
+	return []MarketType{
+		"ON_DEMAND",
+		"SPOT",
+	}
+}
+
 type OnDemandProvisioningAllocationStrategy string
 
 // Enum values for OnDemandProvisioningAllocationStrategy
 const (
 	OnDemandProvisioningAllocationStrategyLowest_price OnDemandProvisioningAllocationStrategy = "lowest-price"
 )
+
+// Values returns all known values for OnDemandProvisioningAllocationStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OnDemandProvisioningAllocationStrategy) Values() []OnDemandProvisioningAllocationStrategy {
+	return []OnDemandProvisioningAllocationStrategy{
+		"lowest-price",
+	}
+}
 
 type RepoUpgradeOnBoot string
 
@@ -240,6 +519,16 @@ const (
 	RepoUpgradeOnBootNone     RepoUpgradeOnBoot = "NONE"
 )
 
+// Values returns all known values for RepoUpgradeOnBoot. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RepoUpgradeOnBoot) Values() []RepoUpgradeOnBoot {
+	return []RepoUpgradeOnBoot{
+		"SECURITY",
+		"NONE",
+	}
+}
+
 type ScaleDownBehavior string
 
 // Enum values for ScaleDownBehavior
@@ -248,12 +537,32 @@ const (
 	ScaleDownBehaviorTerminate_at_task_completion ScaleDownBehavior = "TERMINATE_AT_TASK_COMPLETION"
 )
 
+// Values returns all known values for ScaleDownBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScaleDownBehavior) Values() []ScaleDownBehavior {
+	return []ScaleDownBehavior{
+		"TERMINATE_AT_INSTANCE_HOUR",
+		"TERMINATE_AT_TASK_COMPLETION",
+	}
+}
+
 type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy
 const (
 	SpotProvisioningAllocationStrategyCapacity_optimized SpotProvisioningAllocationStrategy = "capacity-optimized"
 )
+
+// Values returns all known values for SpotProvisioningAllocationStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SpotProvisioningAllocationStrategy) Values() []SpotProvisioningAllocationStrategy {
+	return []SpotProvisioningAllocationStrategy{
+		"capacity-optimized",
+	}
+}
 
 type SpotProvisioningTimeoutAction string
 
@@ -262,6 +571,17 @@ const (
 	SpotProvisioningTimeoutActionSwitch_to_on_demand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
 	SpotProvisioningTimeoutActionTerminate_cluster   SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
 )
+
+// Values returns all known values for SpotProvisioningTimeoutAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SpotProvisioningTimeoutAction) Values() []SpotProvisioningTimeoutAction {
+	return []SpotProvisioningTimeoutAction{
+		"SWITCH_TO_ON_DEMAND",
+		"TERMINATE_CLUSTER",
+	}
+}
 
 type Statistic string
 
@@ -274,6 +594,19 @@ const (
 	StatisticMaximum      Statistic = "MAXIMUM"
 )
 
+// Values returns all known values for Statistic. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"SAMPLE_COUNT",
+		"AVERAGE",
+		"SUM",
+		"MINIMUM",
+		"MAXIMUM",
+	}
+}
+
 type StepCancellationOption string
 
 // Enum values for StepCancellationOption
@@ -281,6 +614,16 @@ const (
 	StepCancellationOptionSend_interrupt    StepCancellationOption = "SEND_INTERRUPT"
 	StepCancellationOptionTerminate_process StepCancellationOption = "TERMINATE_PROCESS"
 )
+
+// Values returns all known values for StepCancellationOption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StepCancellationOption) Values() []StepCancellationOption {
+	return []StepCancellationOption{
+		"SEND_INTERRUPT",
+		"TERMINATE_PROCESS",
+	}
+}
 
 type StepExecutionState string
 
@@ -295,6 +638,21 @@ const (
 	StepExecutionStateInterrupted StepExecutionState = "INTERRUPTED"
 )
 
+// Values returns all known values for StepExecutionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StepExecutionState) Values() []StepExecutionState {
+	return []StepExecutionState{
+		"PENDING",
+		"RUNNING",
+		"CONTINUE",
+		"COMPLETED",
+		"CANCELLED",
+		"FAILED",
+		"INTERRUPTED",
+	}
+}
+
 type StepState string
 
 // Enum values for StepState
@@ -308,12 +666,36 @@ const (
 	StepStateInterrupted    StepState = "INTERRUPTED"
 )
 
+// Values returns all known values for StepState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (StepState) Values() []StepState {
+	return []StepState{
+		"PENDING",
+		"CANCEL_PENDING",
+		"RUNNING",
+		"COMPLETED",
+		"CANCELLED",
+		"FAILED",
+		"INTERRUPTED",
+	}
+}
+
 type StepStateChangeReasonCode string
 
 // Enum values for StepStateChangeReasonCode
 const (
 	StepStateChangeReasonCodeNone StepStateChangeReasonCode = "NONE"
 )
+
+// Values returns all known values for StepStateChangeReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StepStateChangeReasonCode) Values() []StepStateChangeReasonCode {
+	return []StepStateChangeReasonCode{
+		"NONE",
+	}
+}
 
 type Unit string
 
@@ -347,3 +729,38 @@ const (
 	UnitTera_bits_per_second  Unit = "TERA_BITS_PER_SECOND"
 	UnitCount_per_second      Unit = "COUNT_PER_SECOND"
 )
+
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Unit) Values() []Unit {
+	return []Unit{
+		"NONE",
+		"SECONDS",
+		"MICRO_SECONDS",
+		"MILLI_SECONDS",
+		"BYTES",
+		"KILO_BYTES",
+		"MEGA_BYTES",
+		"GIGA_BYTES",
+		"TERA_BYTES",
+		"BITS",
+		"KILO_BITS",
+		"MEGA_BITS",
+		"GIGA_BITS",
+		"TERA_BITS",
+		"PERCENT",
+		"COUNT",
+		"BYTES_PER_SECOND",
+		"KILO_BYTES_PER_SECOND",
+		"MEGA_BYTES_PER_SECOND",
+		"GIGA_BYTES_PER_SECOND",
+		"TERA_BYTES_PER_SECOND",
+		"BITS_PER_SECOND",
+		"KILO_BITS_PER_SECOND",
+		"MEGA_BITS_PER_SECOND",
+		"GIGA_BITS_PER_SECOND",
+		"TERA_BITS_PER_SECOND",
+		"COUNT_PER_SECOND",
+	}
+}

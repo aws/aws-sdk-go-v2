@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpCreateScalingPlan struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateScalingPlan) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateScalingPlan) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -143,7 +144,7 @@ type awsAwsjson11_deserializeOpDeleteScalingPlan struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteScalingPlan) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteScalingPlan) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -263,7 +264,7 @@ type awsAwsjson11_deserializeOpDescribeScalingPlanResources struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalingPlanResources) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalingPlanResources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -383,7 +384,7 @@ type awsAwsjson11_deserializeOpDescribeScalingPlans struct {
 }
 
 func (*awsAwsjson11_deserializeOpDescribeScalingPlans) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDescribeScalingPlans) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -503,7 +504,7 @@ type awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -617,7 +618,7 @@ type awsAwsjson11_deserializeOpUpdateScalingPlan struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateScalingPlan) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateScalingPlan) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

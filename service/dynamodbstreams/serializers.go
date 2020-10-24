@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -17,7 +18,7 @@ type awsAwsjson10_serializeOpDescribeStream struct {
 }
 
 func (*awsAwsjson10_serializeOpDescribeStream) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpDescribeStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -63,7 +64,7 @@ type awsAwsjson10_serializeOpGetRecords struct {
 }
 
 func (*awsAwsjson10_serializeOpGetRecords) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetRecords) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -109,7 +110,7 @@ type awsAwsjson10_serializeOpGetShardIterator struct {
 }
 
 func (*awsAwsjson10_serializeOpGetShardIterator) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpGetShardIterator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -155,7 +156,7 @@ type awsAwsjson10_serializeOpListStreams struct {
 }
 
 func (*awsAwsjson10_serializeOpListStreams) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson10_serializeOpListStreams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

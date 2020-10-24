@@ -10,6 +10,16 @@ const (
 	AuthTokenUpdateStatusRotating AuthTokenUpdateStatus = "ROTATING"
 )
 
+// Values returns all known values for AuthTokenUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthTokenUpdateStatus) Values() []AuthTokenUpdateStatus {
+	return []AuthTokenUpdateStatus{
+		"SETTING",
+		"ROTATING",
+	}
+}
+
 type AuthTokenUpdateStrategyType string
 
 // Enum values for AuthTokenUpdateStrategyType
@@ -17,6 +27,16 @@ const (
 	AuthTokenUpdateStrategyTypeSet    AuthTokenUpdateStrategyType = "SET"
 	AuthTokenUpdateStrategyTypeRotate AuthTokenUpdateStrategyType = "ROTATE"
 )
+
+// Values returns all known values for AuthTokenUpdateStrategyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthTokenUpdateStrategyType) Values() []AuthTokenUpdateStrategyType {
+	return []AuthTokenUpdateStrategyType{
+		"SET",
+		"ROTATE",
+	}
+}
 
 type AutomaticFailoverStatus string
 
@@ -28,6 +48,18 @@ const (
 	AutomaticFailoverStatusDisabling AutomaticFailoverStatus = "disabling"
 )
 
+// Values returns all known values for AutomaticFailoverStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutomaticFailoverStatus) Values() []AutomaticFailoverStatus {
+	return []AutomaticFailoverStatus{
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+	}
+}
+
 type AZMode string
 
 // Enum values for AZMode
@@ -35,6 +67,16 @@ const (
 	AZModeSingle_az AZMode = "single-az"
 	AZModeCross_az  AZMode = "cross-az"
 )
+
+// Values returns all known values for AZMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AZMode) Values() []AZMode {
+	return []AZMode{
+		"single-az",
+		"cross-az",
+	}
+}
 
 type ChangeType string
 
@@ -44,6 +86,16 @@ const (
 	ChangeTypeRequiresReboot ChangeType = "requires-reboot"
 )
 
+// Values returns all known values for ChangeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeType) Values() []ChangeType {
+	return []ChangeType{
+		"immediate",
+		"requires-reboot",
+	}
+}
+
 type MultiAZStatus string
 
 // Enum values for MultiAZStatus
@@ -52,6 +104,16 @@ const (
 	MultiAZStatusDisabled MultiAZStatus = "disabled"
 )
 
+// Values returns all known values for MultiAZStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MultiAZStatus) Values() []MultiAZStatus {
+	return []MultiAZStatus{
+		"enabled",
+		"disabled",
+	}
+}
+
 type NodeUpdateInitiatedBy string
 
 // Enum values for NodeUpdateInitiatedBy
@@ -59,6 +121,16 @@ const (
 	NodeUpdateInitiatedBySystem   NodeUpdateInitiatedBy = "system"
 	NodeUpdateInitiatedByCustomer NodeUpdateInitiatedBy = "customer"
 )
+
+// Values returns all known values for NodeUpdateInitiatedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NodeUpdateInitiatedBy) Values() []NodeUpdateInitiatedBy {
+	return []NodeUpdateInitiatedBy{
+		"system",
+		"customer",
+	}
+}
 
 type NodeUpdateStatus string
 
@@ -72,6 +144,20 @@ const (
 	NodeUpdateStatusComplete         NodeUpdateStatus = "complete"
 )
 
+// Values returns all known values for NodeUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NodeUpdateStatus) Values() []NodeUpdateStatus {
+	return []NodeUpdateStatus{
+		"not-applied",
+		"waiting-to-start",
+		"in-progress",
+		"stopping",
+		"stopped",
+		"complete",
+	}
+}
+
 type PendingAutomaticFailoverStatus string
 
 // Enum values for PendingAutomaticFailoverStatus
@@ -79,6 +165,17 @@ const (
 	PendingAutomaticFailoverStatusEnabled  PendingAutomaticFailoverStatus = "enabled"
 	PendingAutomaticFailoverStatusDisabled PendingAutomaticFailoverStatus = "disabled"
 )
+
+// Values returns all known values for PendingAutomaticFailoverStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PendingAutomaticFailoverStatus) Values() []PendingAutomaticFailoverStatus {
+	return []PendingAutomaticFailoverStatus{
+		"enabled",
+		"disabled",
+	}
+}
 
 type ServiceUpdateSeverity string
 
@@ -90,6 +187,18 @@ const (
 	ServiceUpdateSeverityLow       ServiceUpdateSeverity = "low"
 )
 
+// Values returns all known values for ServiceUpdateSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceUpdateSeverity) Values() []ServiceUpdateSeverity {
+	return []ServiceUpdateSeverity{
+		"critical",
+		"important",
+		"medium",
+		"low",
+	}
+}
+
 type ServiceUpdateStatus string
 
 // Enum values for ServiceUpdateStatus
@@ -99,12 +208,32 @@ const (
 	ServiceUpdateStatusExpired   ServiceUpdateStatus = "expired"
 )
 
+// Values returns all known values for ServiceUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceUpdateStatus) Values() []ServiceUpdateStatus {
+	return []ServiceUpdateStatus{
+		"available",
+		"cancelled",
+		"expired",
+	}
+}
+
 type ServiceUpdateType string
 
 // Enum values for ServiceUpdateType
 const (
 	ServiceUpdateTypeSecurity_update ServiceUpdateType = "security-update"
 )
+
+// Values returns all known values for ServiceUpdateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceUpdateType) Values() []ServiceUpdateType {
+	return []ServiceUpdateType{
+		"security-update",
+	}
+}
 
 type SlaMet string
 
@@ -114,6 +243,17 @@ const (
 	SlaMetNo  SlaMet = "no"
 	SlaMetNa  SlaMet = "n/a"
 )
+
+// Values returns all known values for SlaMet. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SlaMet) Values() []SlaMet {
+	return []SlaMet{
+		"yes",
+		"no",
+		"n/a",
+	}
+}
 
 type SourceType string
 
@@ -125,6 +265,19 @@ const (
 	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
 	SourceTypeReplicationGroup    SourceType = "replication-group"
 )
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"cache-cluster",
+		"cache-parameter-group",
+		"cache-security-group",
+		"cache-subnet-group",
+		"replication-group",
+	}
+}
 
 type UpdateActionStatus string
 
@@ -140,3 +293,20 @@ const (
 	UpdateActionStatusScheduled        UpdateActionStatus = "scheduled"
 	UpdateActionStatusNot_applicable   UpdateActionStatus = "not-applicable"
 )
+
+// Values returns all known values for UpdateActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateActionStatus) Values() []UpdateActionStatus {
+	return []UpdateActionStatus{
+		"not-applied",
+		"waiting-to-start",
+		"in-progress",
+		"stopping",
+		"stopped",
+		"complete",
+		"scheduling",
+		"scheduled",
+		"not-applicable",
+	}
+}

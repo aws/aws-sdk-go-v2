@@ -5,8 +5,10 @@ package restxml
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -37,7 +39,73 @@ type HttpPayloadWithXmlNamespaceAndPrefixOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
+func addOperationHttpPayloadWithXmlNamespaceAndPrefixStackSlots(stack *middleware.Stack) error {
+	if err := stack.Initialize.AddSlot(middleware.After,
+		smithyid.OperationIdempotencyTokenAutoFill,
+		smithyid.OperationInputValidation,
+	); err != nil {
+		return err
+	}
+	if err := stack.Initialize.AddSlot(middleware.Before,
+		awsid.RegisterServiceMetadata,
+		awsid.Presigning,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.AddSlot(middleware.After,
+		smithyid.OperationSerializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Serialize.InsertSlot(smithyid.OperationSerializer, middleware.Before,
+		awsid.ResolveEndpoint,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		smithyid.ContentChecksum,
+		smithyid.ComputeContentLength,
+		smithyid.ValidateContentLength,
+	); err != nil {
+		return err
+	}
+	if err := stack.Build.AddSlot(middleware.After,
+		awsid.ClientRequestID,
+		awsid.ComputePayloadHash,
+		awsid.UserAgent,
+	); err != nil {
+		return err
+	}
+	if err := stack.Finalize.AddSlot(middleware.After,
+		awsid.Retry,
+		awsid.Signing,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.After,
+		smithyid.ErrorCloseResponseBody,
+		smithyid.CloseResponseBody,
+		smithyid.OperationDeserializer,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.AddSlot(middleware.Before,
+		awsid.ResponseErrorWrapper,
+		awsid.RequestIDRetriever,
+	); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.InsertSlot(smithyid.OperationDeserializer, middleware.After,
+		awsid.ResponseReadTimeout,
+	); err != nil {
+		return err
+	}
+	return nil
+}
 func addOperationHttpPayloadWithXmlNamespaceAndPrefixMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	if err := addOperationHttpPayloadWithXmlNamespaceAndPrefixStackSlots(stack); err != nil {
+		return err
+	}
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlNamespaceAndPrefix{}, middleware.After)
 	if err != nil {
 		return err
@@ -46,22 +114,44 @@ func addOperationHttpPayloadWithXmlNamespaceAndPrefixMiddlewares(stack *middlewa
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err := awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err := addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err := awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err := stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err := addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
-func newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		OperationName: "HttpPayloadWithXmlNamespaceAndPrefix",

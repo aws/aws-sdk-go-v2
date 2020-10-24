@@ -11,6 +11,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsEc2query_serializeOpAcceptReservedInstancesExchangeQuote struct {
 }
 
 func (*awsEc2query_serializeOpAcceptReservedInstancesExchangeQuote) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAcceptReservedInstancesExchangeQuote) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -74,7 +75,7 @@ type awsEc2query_serializeOpAcceptTransitGatewayPeeringAttachment struct {
 }
 
 func (*awsEc2query_serializeOpAcceptTransitGatewayPeeringAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAcceptTransitGatewayPeeringAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -129,7 +130,7 @@ type awsEc2query_serializeOpAcceptTransitGatewayVpcAttachment struct {
 }
 
 func (*awsEc2query_serializeOpAcceptTransitGatewayVpcAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAcceptTransitGatewayVpcAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -184,7 +185,7 @@ type awsEc2query_serializeOpAcceptVpcEndpointConnections struct {
 }
 
 func (*awsEc2query_serializeOpAcceptVpcEndpointConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAcceptVpcEndpointConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -239,7 +240,7 @@ type awsEc2query_serializeOpAcceptVpcPeeringConnection struct {
 }
 
 func (*awsEc2query_serializeOpAcceptVpcPeeringConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAcceptVpcPeeringConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsEc2query_serializeOpAdvertiseByoipCidr struct {
 }
 
 func (*awsEc2query_serializeOpAdvertiseByoipCidr) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAdvertiseByoipCidr) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -349,7 +350,7 @@ type awsEc2query_serializeOpAllocateAddress struct {
 }
 
 func (*awsEc2query_serializeOpAllocateAddress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAllocateAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -404,7 +405,7 @@ type awsEc2query_serializeOpAllocateHosts struct {
 }
 
 func (*awsEc2query_serializeOpAllocateHosts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAllocateHosts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -459,7 +460,7 @@ type awsEc2query_serializeOpApplySecurityGroupsToClientVpnTargetNetwork struct {
 }
 
 func (*awsEc2query_serializeOpApplySecurityGroupsToClientVpnTargetNetwork) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpApplySecurityGroupsToClientVpnTargetNetwork) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -514,7 +515,7 @@ type awsEc2query_serializeOpAssignIpv6Addresses struct {
 }
 
 func (*awsEc2query_serializeOpAssignIpv6Addresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssignIpv6Addresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -569,7 +570,7 @@ type awsEc2query_serializeOpAssignPrivateIpAddresses struct {
 }
 
 func (*awsEc2query_serializeOpAssignPrivateIpAddresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssignPrivateIpAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -624,7 +625,7 @@ type awsEc2query_serializeOpAssociateAddress struct {
 }
 
 func (*awsEc2query_serializeOpAssociateAddress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -679,7 +680,7 @@ type awsEc2query_serializeOpAssociateClientVpnTargetNetwork struct {
 }
 
 func (*awsEc2query_serializeOpAssociateClientVpnTargetNetwork) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateClientVpnTargetNetwork) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -734,7 +735,7 @@ type awsEc2query_serializeOpAssociateDhcpOptions struct {
 }
 
 func (*awsEc2query_serializeOpAssociateDhcpOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateDhcpOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -789,7 +790,7 @@ type awsEc2query_serializeOpAssociateIamInstanceProfile struct {
 }
 
 func (*awsEc2query_serializeOpAssociateIamInstanceProfile) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateIamInstanceProfile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -844,7 +845,7 @@ type awsEc2query_serializeOpAssociateRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpAssociateRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -899,7 +900,7 @@ type awsEc2query_serializeOpAssociateSubnetCidrBlock struct {
 }
 
 func (*awsEc2query_serializeOpAssociateSubnetCidrBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateSubnetCidrBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -954,7 +955,7 @@ type awsEc2query_serializeOpAssociateTransitGatewayMulticastDomain struct {
 }
 
 func (*awsEc2query_serializeOpAssociateTransitGatewayMulticastDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateTransitGatewayMulticastDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1009,7 +1010,7 @@ type awsEc2query_serializeOpAssociateTransitGatewayRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpAssociateTransitGatewayRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateTransitGatewayRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1064,7 +1065,7 @@ type awsEc2query_serializeOpAssociateVpcCidrBlock struct {
 }
 
 func (*awsEc2query_serializeOpAssociateVpcCidrBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAssociateVpcCidrBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1119,7 +1120,7 @@ type awsEc2query_serializeOpAttachClassicLinkVpc struct {
 }
 
 func (*awsEc2query_serializeOpAttachClassicLinkVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAttachClassicLinkVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1174,7 +1175,7 @@ type awsEc2query_serializeOpAttachInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpAttachInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAttachInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1229,7 +1230,7 @@ type awsEc2query_serializeOpAttachNetworkInterface struct {
 }
 
 func (*awsEc2query_serializeOpAttachNetworkInterface) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAttachNetworkInterface) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1284,7 +1285,7 @@ type awsEc2query_serializeOpAttachVolume struct {
 }
 
 func (*awsEc2query_serializeOpAttachVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAttachVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1339,7 +1340,7 @@ type awsEc2query_serializeOpAttachVpnGateway struct {
 }
 
 func (*awsEc2query_serializeOpAttachVpnGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAttachVpnGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1394,7 +1395,7 @@ type awsEc2query_serializeOpAuthorizeClientVpnIngress struct {
 }
 
 func (*awsEc2query_serializeOpAuthorizeClientVpnIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAuthorizeClientVpnIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1449,7 +1450,7 @@ type awsEc2query_serializeOpAuthorizeSecurityGroupEgress struct {
 }
 
 func (*awsEc2query_serializeOpAuthorizeSecurityGroupEgress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAuthorizeSecurityGroupEgress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1504,7 +1505,7 @@ type awsEc2query_serializeOpAuthorizeSecurityGroupIngress struct {
 }
 
 func (*awsEc2query_serializeOpAuthorizeSecurityGroupIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpAuthorizeSecurityGroupIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1559,7 +1560,7 @@ type awsEc2query_serializeOpBundleInstance struct {
 }
 
 func (*awsEc2query_serializeOpBundleInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpBundleInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1614,7 +1615,7 @@ type awsEc2query_serializeOpCancelBundleTask struct {
 }
 
 func (*awsEc2query_serializeOpCancelBundleTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelBundleTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1669,7 +1670,7 @@ type awsEc2query_serializeOpCancelCapacityReservation struct {
 }
 
 func (*awsEc2query_serializeOpCancelCapacityReservation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1724,7 +1725,7 @@ type awsEc2query_serializeOpCancelConversionTask struct {
 }
 
 func (*awsEc2query_serializeOpCancelConversionTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelConversionTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1779,7 +1780,7 @@ type awsEc2query_serializeOpCancelExportTask struct {
 }
 
 func (*awsEc2query_serializeOpCancelExportTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelExportTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1834,7 +1835,7 @@ type awsEc2query_serializeOpCancelImportTask struct {
 }
 
 func (*awsEc2query_serializeOpCancelImportTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelImportTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1889,7 +1890,7 @@ type awsEc2query_serializeOpCancelReservedInstancesListing struct {
 }
 
 func (*awsEc2query_serializeOpCancelReservedInstancesListing) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelReservedInstancesListing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1944,7 +1945,7 @@ type awsEc2query_serializeOpCancelSpotFleetRequests struct {
 }
 
 func (*awsEc2query_serializeOpCancelSpotFleetRequests) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelSpotFleetRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1999,7 +2000,7 @@ type awsEc2query_serializeOpCancelSpotInstanceRequests struct {
 }
 
 func (*awsEc2query_serializeOpCancelSpotInstanceRequests) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCancelSpotInstanceRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2054,7 +2055,7 @@ type awsEc2query_serializeOpConfirmProductInstance struct {
 }
 
 func (*awsEc2query_serializeOpConfirmProductInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpConfirmProductInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2109,7 +2110,7 @@ type awsEc2query_serializeOpCopyFpgaImage struct {
 }
 
 func (*awsEc2query_serializeOpCopyFpgaImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCopyFpgaImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2164,7 +2165,7 @@ type awsEc2query_serializeOpCopyImage struct {
 }
 
 func (*awsEc2query_serializeOpCopyImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCopyImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2219,7 +2220,7 @@ type awsEc2query_serializeOpCopySnapshot struct {
 }
 
 func (*awsEc2query_serializeOpCopySnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCopySnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2274,7 +2275,7 @@ type awsEc2query_serializeOpCreateCapacityReservation struct {
 }
 
 func (*awsEc2query_serializeOpCreateCapacityReservation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2329,7 +2330,7 @@ type awsEc2query_serializeOpCreateClientVpnEndpoint struct {
 }
 
 func (*awsEc2query_serializeOpCreateClientVpnEndpoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateClientVpnEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2384,7 +2385,7 @@ type awsEc2query_serializeOpCreateClientVpnRoute struct {
 }
 
 func (*awsEc2query_serializeOpCreateClientVpnRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateClientVpnRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2439,7 +2440,7 @@ type awsEc2query_serializeOpCreateCustomerGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateCustomerGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateCustomerGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2494,7 +2495,7 @@ type awsEc2query_serializeOpCreateDefaultSubnet struct {
 }
 
 func (*awsEc2query_serializeOpCreateDefaultSubnet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateDefaultSubnet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2549,7 +2550,7 @@ type awsEc2query_serializeOpCreateDefaultVpc struct {
 }
 
 func (*awsEc2query_serializeOpCreateDefaultVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateDefaultVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2604,7 +2605,7 @@ type awsEc2query_serializeOpCreateDhcpOptions struct {
 }
 
 func (*awsEc2query_serializeOpCreateDhcpOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateDhcpOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2659,7 +2660,7 @@ type awsEc2query_serializeOpCreateEgressOnlyInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateEgressOnlyInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateEgressOnlyInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2714,7 +2715,7 @@ type awsEc2query_serializeOpCreateFleet struct {
 }
 
 func (*awsEc2query_serializeOpCreateFleet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateFleet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2769,7 +2770,7 @@ type awsEc2query_serializeOpCreateFlowLogs struct {
 }
 
 func (*awsEc2query_serializeOpCreateFlowLogs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateFlowLogs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2824,7 +2825,7 @@ type awsEc2query_serializeOpCreateFpgaImage struct {
 }
 
 func (*awsEc2query_serializeOpCreateFpgaImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateFpgaImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2879,7 +2880,7 @@ type awsEc2query_serializeOpCreateImage struct {
 }
 
 func (*awsEc2query_serializeOpCreateImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2934,7 +2935,7 @@ type awsEc2query_serializeOpCreateInstanceExportTask struct {
 }
 
 func (*awsEc2query_serializeOpCreateInstanceExportTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateInstanceExportTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2989,7 +2990,7 @@ type awsEc2query_serializeOpCreateInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3044,7 +3045,7 @@ type awsEc2query_serializeOpCreateKeyPair struct {
 }
 
 func (*awsEc2query_serializeOpCreateKeyPair) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateKeyPair) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3099,7 +3100,7 @@ type awsEc2query_serializeOpCreateLaunchTemplate struct {
 }
 
 func (*awsEc2query_serializeOpCreateLaunchTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateLaunchTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3154,7 +3155,7 @@ type awsEc2query_serializeOpCreateLaunchTemplateVersion struct {
 }
 
 func (*awsEc2query_serializeOpCreateLaunchTemplateVersion) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateLaunchTemplateVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3209,7 +3210,7 @@ type awsEc2query_serializeOpCreateLocalGatewayRoute struct {
 }
 
 func (*awsEc2query_serializeOpCreateLocalGatewayRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateLocalGatewayRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3264,7 +3265,7 @@ type awsEc2query_serializeOpCreateLocalGatewayRouteTableVpcAssociation struct {
 }
 
 func (*awsEc2query_serializeOpCreateLocalGatewayRouteTableVpcAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateLocalGatewayRouteTableVpcAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3319,7 +3320,7 @@ type awsEc2query_serializeOpCreateManagedPrefixList struct {
 }
 
 func (*awsEc2query_serializeOpCreateManagedPrefixList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateManagedPrefixList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3374,7 +3375,7 @@ type awsEc2query_serializeOpCreateNatGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateNatGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateNatGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3429,7 +3430,7 @@ type awsEc2query_serializeOpCreateNetworkAcl struct {
 }
 
 func (*awsEc2query_serializeOpCreateNetworkAcl) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateNetworkAcl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3484,7 +3485,7 @@ type awsEc2query_serializeOpCreateNetworkAclEntry struct {
 }
 
 func (*awsEc2query_serializeOpCreateNetworkAclEntry) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateNetworkAclEntry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3539,7 +3540,7 @@ type awsEc2query_serializeOpCreateNetworkInterface struct {
 }
 
 func (*awsEc2query_serializeOpCreateNetworkInterface) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateNetworkInterface) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3594,7 +3595,7 @@ type awsEc2query_serializeOpCreateNetworkInterfacePermission struct {
 }
 
 func (*awsEc2query_serializeOpCreateNetworkInterfacePermission) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateNetworkInterfacePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3649,7 +3650,7 @@ type awsEc2query_serializeOpCreatePlacementGroup struct {
 }
 
 func (*awsEc2query_serializeOpCreatePlacementGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreatePlacementGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3704,7 +3705,7 @@ type awsEc2query_serializeOpCreateReservedInstancesListing struct {
 }
 
 func (*awsEc2query_serializeOpCreateReservedInstancesListing) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateReservedInstancesListing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3759,7 +3760,7 @@ type awsEc2query_serializeOpCreateRoute struct {
 }
 
 func (*awsEc2query_serializeOpCreateRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3814,7 +3815,7 @@ type awsEc2query_serializeOpCreateRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpCreateRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3869,7 +3870,7 @@ type awsEc2query_serializeOpCreateSecurityGroup struct {
 }
 
 func (*awsEc2query_serializeOpCreateSecurityGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateSecurityGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3924,7 +3925,7 @@ type awsEc2query_serializeOpCreateSnapshot struct {
 }
 
 func (*awsEc2query_serializeOpCreateSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3979,7 +3980,7 @@ type awsEc2query_serializeOpCreateSnapshots struct {
 }
 
 func (*awsEc2query_serializeOpCreateSnapshots) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4034,7 +4035,7 @@ type awsEc2query_serializeOpCreateSpotDatafeedSubscription struct {
 }
 
 func (*awsEc2query_serializeOpCreateSpotDatafeedSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateSpotDatafeedSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4089,7 +4090,7 @@ type awsEc2query_serializeOpCreateSubnet struct {
 }
 
 func (*awsEc2query_serializeOpCreateSubnet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateSubnet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4144,7 +4145,7 @@ type awsEc2query_serializeOpCreateTags struct {
 }
 
 func (*awsEc2query_serializeOpCreateTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4199,7 +4200,7 @@ type awsEc2query_serializeOpCreateTrafficMirrorFilter struct {
 }
 
 func (*awsEc2query_serializeOpCreateTrafficMirrorFilter) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTrafficMirrorFilter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4254,7 +4255,7 @@ type awsEc2query_serializeOpCreateTrafficMirrorFilterRule struct {
 }
 
 func (*awsEc2query_serializeOpCreateTrafficMirrorFilterRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTrafficMirrorFilterRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4309,7 +4310,7 @@ type awsEc2query_serializeOpCreateTrafficMirrorSession struct {
 }
 
 func (*awsEc2query_serializeOpCreateTrafficMirrorSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTrafficMirrorSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4364,7 +4365,7 @@ type awsEc2query_serializeOpCreateTrafficMirrorTarget struct {
 }
 
 func (*awsEc2query_serializeOpCreateTrafficMirrorTarget) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTrafficMirrorTarget) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4419,7 +4420,7 @@ type awsEc2query_serializeOpCreateTransitGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4474,7 +4475,7 @@ type awsEc2query_serializeOpCreateTransitGatewayMulticastDomain struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGatewayMulticastDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGatewayMulticastDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4529,7 +4530,7 @@ type awsEc2query_serializeOpCreateTransitGatewayPeeringAttachment struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGatewayPeeringAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGatewayPeeringAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4584,7 +4585,7 @@ type awsEc2query_serializeOpCreateTransitGatewayRoute struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGatewayRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGatewayRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4639,7 +4640,7 @@ type awsEc2query_serializeOpCreateTransitGatewayRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGatewayRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGatewayRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4694,7 +4695,7 @@ type awsEc2query_serializeOpCreateTransitGatewayVpcAttachment struct {
 }
 
 func (*awsEc2query_serializeOpCreateTransitGatewayVpcAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateTransitGatewayVpcAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4749,7 +4750,7 @@ type awsEc2query_serializeOpCreateVolume struct {
 }
 
 func (*awsEc2query_serializeOpCreateVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4804,7 +4805,7 @@ type awsEc2query_serializeOpCreateVpc struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4859,7 +4860,7 @@ type awsEc2query_serializeOpCreateVpcEndpoint struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpcEndpoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpcEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4914,7 +4915,7 @@ type awsEc2query_serializeOpCreateVpcEndpointConnectionNotification struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpcEndpointConnectionNotification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpcEndpointConnectionNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4969,7 +4970,7 @@ type awsEc2query_serializeOpCreateVpcEndpointServiceConfiguration struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpcEndpointServiceConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpcEndpointServiceConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5024,7 +5025,7 @@ type awsEc2query_serializeOpCreateVpcPeeringConnection struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpcPeeringConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpcPeeringConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5079,7 +5080,7 @@ type awsEc2query_serializeOpCreateVpnConnection struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpnConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpnConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5134,7 +5135,7 @@ type awsEc2query_serializeOpCreateVpnConnectionRoute struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpnConnectionRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpnConnectionRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5189,7 +5190,7 @@ type awsEc2query_serializeOpCreateVpnGateway struct {
 }
 
 func (*awsEc2query_serializeOpCreateVpnGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpCreateVpnGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5244,7 +5245,7 @@ type awsEc2query_serializeOpDeleteClientVpnEndpoint struct {
 }
 
 func (*awsEc2query_serializeOpDeleteClientVpnEndpoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteClientVpnEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5299,7 +5300,7 @@ type awsEc2query_serializeOpDeleteClientVpnRoute struct {
 }
 
 func (*awsEc2query_serializeOpDeleteClientVpnRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteClientVpnRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5354,7 +5355,7 @@ type awsEc2query_serializeOpDeleteCustomerGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteCustomerGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteCustomerGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5409,7 +5410,7 @@ type awsEc2query_serializeOpDeleteDhcpOptions struct {
 }
 
 func (*awsEc2query_serializeOpDeleteDhcpOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteDhcpOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5464,7 +5465,7 @@ type awsEc2query_serializeOpDeleteEgressOnlyInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteEgressOnlyInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteEgressOnlyInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5519,7 +5520,7 @@ type awsEc2query_serializeOpDeleteFleets struct {
 }
 
 func (*awsEc2query_serializeOpDeleteFleets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteFleets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5574,7 +5575,7 @@ type awsEc2query_serializeOpDeleteFlowLogs struct {
 }
 
 func (*awsEc2query_serializeOpDeleteFlowLogs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteFlowLogs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5629,7 +5630,7 @@ type awsEc2query_serializeOpDeleteFpgaImage struct {
 }
 
 func (*awsEc2query_serializeOpDeleteFpgaImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteFpgaImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5684,7 +5685,7 @@ type awsEc2query_serializeOpDeleteInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5739,7 +5740,7 @@ type awsEc2query_serializeOpDeleteKeyPair struct {
 }
 
 func (*awsEc2query_serializeOpDeleteKeyPair) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteKeyPair) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5794,7 +5795,7 @@ type awsEc2query_serializeOpDeleteLaunchTemplate struct {
 }
 
 func (*awsEc2query_serializeOpDeleteLaunchTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteLaunchTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5849,7 +5850,7 @@ type awsEc2query_serializeOpDeleteLaunchTemplateVersions struct {
 }
 
 func (*awsEc2query_serializeOpDeleteLaunchTemplateVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteLaunchTemplateVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5904,7 +5905,7 @@ type awsEc2query_serializeOpDeleteLocalGatewayRoute struct {
 }
 
 func (*awsEc2query_serializeOpDeleteLocalGatewayRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteLocalGatewayRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5959,7 +5960,7 @@ type awsEc2query_serializeOpDeleteLocalGatewayRouteTableVpcAssociation struct {
 }
 
 func (*awsEc2query_serializeOpDeleteLocalGatewayRouteTableVpcAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteLocalGatewayRouteTableVpcAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6014,7 +6015,7 @@ type awsEc2query_serializeOpDeleteManagedPrefixList struct {
 }
 
 func (*awsEc2query_serializeOpDeleteManagedPrefixList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteManagedPrefixList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6069,7 +6070,7 @@ type awsEc2query_serializeOpDeleteNatGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteNatGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteNatGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6124,7 +6125,7 @@ type awsEc2query_serializeOpDeleteNetworkAcl struct {
 }
 
 func (*awsEc2query_serializeOpDeleteNetworkAcl) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteNetworkAcl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6179,7 +6180,7 @@ type awsEc2query_serializeOpDeleteNetworkAclEntry struct {
 }
 
 func (*awsEc2query_serializeOpDeleteNetworkAclEntry) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteNetworkAclEntry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6234,7 +6235,7 @@ type awsEc2query_serializeOpDeleteNetworkInterface struct {
 }
 
 func (*awsEc2query_serializeOpDeleteNetworkInterface) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteNetworkInterface) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6289,7 +6290,7 @@ type awsEc2query_serializeOpDeleteNetworkInterfacePermission struct {
 }
 
 func (*awsEc2query_serializeOpDeleteNetworkInterfacePermission) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteNetworkInterfacePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6344,7 +6345,7 @@ type awsEc2query_serializeOpDeletePlacementGroup struct {
 }
 
 func (*awsEc2query_serializeOpDeletePlacementGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeletePlacementGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6399,7 +6400,7 @@ type awsEc2query_serializeOpDeleteQueuedReservedInstances struct {
 }
 
 func (*awsEc2query_serializeOpDeleteQueuedReservedInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteQueuedReservedInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6454,7 +6455,7 @@ type awsEc2query_serializeOpDeleteRoute struct {
 }
 
 func (*awsEc2query_serializeOpDeleteRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6509,7 +6510,7 @@ type awsEc2query_serializeOpDeleteRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpDeleteRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6564,7 +6565,7 @@ type awsEc2query_serializeOpDeleteSecurityGroup struct {
 }
 
 func (*awsEc2query_serializeOpDeleteSecurityGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteSecurityGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6619,7 +6620,7 @@ type awsEc2query_serializeOpDeleteSnapshot struct {
 }
 
 func (*awsEc2query_serializeOpDeleteSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6674,7 +6675,7 @@ type awsEc2query_serializeOpDeleteSpotDatafeedSubscription struct {
 }
 
 func (*awsEc2query_serializeOpDeleteSpotDatafeedSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteSpotDatafeedSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6729,7 +6730,7 @@ type awsEc2query_serializeOpDeleteSubnet struct {
 }
 
 func (*awsEc2query_serializeOpDeleteSubnet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteSubnet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6784,7 +6785,7 @@ type awsEc2query_serializeOpDeleteTags struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6839,7 +6840,7 @@ type awsEc2query_serializeOpDeleteTrafficMirrorFilter struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTrafficMirrorFilter) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTrafficMirrorFilter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6894,7 +6895,7 @@ type awsEc2query_serializeOpDeleteTrafficMirrorFilterRule struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTrafficMirrorFilterRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTrafficMirrorFilterRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -6949,7 +6950,7 @@ type awsEc2query_serializeOpDeleteTrafficMirrorSession struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTrafficMirrorSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTrafficMirrorSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7004,7 +7005,7 @@ type awsEc2query_serializeOpDeleteTrafficMirrorTarget struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTrafficMirrorTarget) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTrafficMirrorTarget) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7059,7 +7060,7 @@ type awsEc2query_serializeOpDeleteTransitGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7114,7 +7115,7 @@ type awsEc2query_serializeOpDeleteTransitGatewayMulticastDomain struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGatewayMulticastDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGatewayMulticastDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7169,7 +7170,7 @@ type awsEc2query_serializeOpDeleteTransitGatewayPeeringAttachment struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGatewayPeeringAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGatewayPeeringAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7224,7 +7225,7 @@ type awsEc2query_serializeOpDeleteTransitGatewayRoute struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGatewayRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGatewayRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7279,7 +7280,7 @@ type awsEc2query_serializeOpDeleteTransitGatewayRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGatewayRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGatewayRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7334,7 +7335,7 @@ type awsEc2query_serializeOpDeleteTransitGatewayVpcAttachment struct {
 }
 
 func (*awsEc2query_serializeOpDeleteTransitGatewayVpcAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteTransitGatewayVpcAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7389,7 +7390,7 @@ type awsEc2query_serializeOpDeleteVolume struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7444,7 +7445,7 @@ type awsEc2query_serializeOpDeleteVpc struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7499,7 +7500,7 @@ type awsEc2query_serializeOpDeleteVpcEndpointConnectionNotifications struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpcEndpointConnectionNotifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpcEndpointConnectionNotifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7554,7 +7555,7 @@ type awsEc2query_serializeOpDeleteVpcEndpoints struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpcEndpoints) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpcEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7609,7 +7610,7 @@ type awsEc2query_serializeOpDeleteVpcEndpointServiceConfigurations struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpcEndpointServiceConfigurations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpcEndpointServiceConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7664,7 +7665,7 @@ type awsEc2query_serializeOpDeleteVpcPeeringConnection struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpcPeeringConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpcPeeringConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7719,7 +7720,7 @@ type awsEc2query_serializeOpDeleteVpnConnection struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpnConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpnConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7774,7 +7775,7 @@ type awsEc2query_serializeOpDeleteVpnConnectionRoute struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpnConnectionRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpnConnectionRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7829,7 +7830,7 @@ type awsEc2query_serializeOpDeleteVpnGateway struct {
 }
 
 func (*awsEc2query_serializeOpDeleteVpnGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeleteVpnGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7884,7 +7885,7 @@ type awsEc2query_serializeOpDeprovisionByoipCidr struct {
 }
 
 func (*awsEc2query_serializeOpDeprovisionByoipCidr) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeprovisionByoipCidr) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7939,7 +7940,7 @@ type awsEc2query_serializeOpDeregisterImage struct {
 }
 
 func (*awsEc2query_serializeOpDeregisterImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeregisterImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -7994,7 +7995,7 @@ type awsEc2query_serializeOpDeregisterInstanceEventNotificationAttributes struct
 }
 
 func (*awsEc2query_serializeOpDeregisterInstanceEventNotificationAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeregisterInstanceEventNotificationAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8049,7 +8050,7 @@ type awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupMembers struct
 }
 
 func (*awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupMembers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupMembers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8104,7 +8105,7 @@ type awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupSources struct
 }
 
 func (*awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupSources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8159,7 +8160,7 @@ type awsEc2query_serializeOpDescribeAccountAttributes struct {
 }
 
 func (*awsEc2query_serializeOpDescribeAccountAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeAccountAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8214,7 +8215,7 @@ type awsEc2query_serializeOpDescribeAddresses struct {
 }
 
 func (*awsEc2query_serializeOpDescribeAddresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8269,7 +8270,7 @@ type awsEc2query_serializeOpDescribeAggregateIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpDescribeAggregateIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeAggregateIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8324,7 +8325,7 @@ type awsEc2query_serializeOpDescribeAvailabilityZones struct {
 }
 
 func (*awsEc2query_serializeOpDescribeAvailabilityZones) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeAvailabilityZones) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8379,7 +8380,7 @@ type awsEc2query_serializeOpDescribeBundleTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeBundleTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeBundleTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8434,7 +8435,7 @@ type awsEc2query_serializeOpDescribeByoipCidrs struct {
 }
 
 func (*awsEc2query_serializeOpDescribeByoipCidrs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeByoipCidrs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8489,7 +8490,7 @@ type awsEc2query_serializeOpDescribeCapacityReservations struct {
 }
 
 func (*awsEc2query_serializeOpDescribeCapacityReservations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeCapacityReservations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8544,7 +8545,7 @@ type awsEc2query_serializeOpDescribeClassicLinkInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClassicLinkInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClassicLinkInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8599,7 +8600,7 @@ type awsEc2query_serializeOpDescribeClientVpnAuthorizationRules struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClientVpnAuthorizationRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClientVpnAuthorizationRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8654,7 +8655,7 @@ type awsEc2query_serializeOpDescribeClientVpnConnections struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClientVpnConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClientVpnConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8709,7 +8710,7 @@ type awsEc2query_serializeOpDescribeClientVpnEndpoints struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClientVpnEndpoints) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClientVpnEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8764,7 +8765,7 @@ type awsEc2query_serializeOpDescribeClientVpnRoutes struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClientVpnRoutes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClientVpnRoutes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8819,7 +8820,7 @@ type awsEc2query_serializeOpDescribeClientVpnTargetNetworks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeClientVpnTargetNetworks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeClientVpnTargetNetworks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8874,7 +8875,7 @@ type awsEc2query_serializeOpDescribeCoipPools struct {
 }
 
 func (*awsEc2query_serializeOpDescribeCoipPools) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeCoipPools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8929,7 +8930,7 @@ type awsEc2query_serializeOpDescribeConversionTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeConversionTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeConversionTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -8984,7 +8985,7 @@ type awsEc2query_serializeOpDescribeCustomerGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeCustomerGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeCustomerGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9039,7 +9040,7 @@ type awsEc2query_serializeOpDescribeDhcpOptions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeDhcpOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeDhcpOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9094,7 +9095,7 @@ type awsEc2query_serializeOpDescribeEgressOnlyInternetGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeEgressOnlyInternetGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeEgressOnlyInternetGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9149,7 +9150,7 @@ type awsEc2query_serializeOpDescribeElasticGpus struct {
 }
 
 func (*awsEc2query_serializeOpDescribeElasticGpus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeElasticGpus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9204,7 +9205,7 @@ type awsEc2query_serializeOpDescribeExportImageTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeExportImageTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeExportImageTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9259,7 +9260,7 @@ type awsEc2query_serializeOpDescribeExportTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeExportTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeExportTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9314,7 +9315,7 @@ type awsEc2query_serializeOpDescribeFastSnapshotRestores struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFastSnapshotRestores) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFastSnapshotRestores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9369,7 +9370,7 @@ type awsEc2query_serializeOpDescribeFleetHistory struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFleetHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFleetHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9424,7 +9425,7 @@ type awsEc2query_serializeOpDescribeFleetInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFleetInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFleetInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9479,7 +9480,7 @@ type awsEc2query_serializeOpDescribeFleets struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFleets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFleets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9534,7 +9535,7 @@ type awsEc2query_serializeOpDescribeFlowLogs struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFlowLogs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFlowLogs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9589,7 +9590,7 @@ type awsEc2query_serializeOpDescribeFpgaImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFpgaImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFpgaImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9644,7 +9645,7 @@ type awsEc2query_serializeOpDescribeFpgaImages struct {
 }
 
 func (*awsEc2query_serializeOpDescribeFpgaImages) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeFpgaImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9699,7 +9700,7 @@ type awsEc2query_serializeOpDescribeHostReservationOfferings struct {
 }
 
 func (*awsEc2query_serializeOpDescribeHostReservationOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeHostReservationOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9754,7 +9755,7 @@ type awsEc2query_serializeOpDescribeHostReservations struct {
 }
 
 func (*awsEc2query_serializeOpDescribeHostReservations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeHostReservations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9809,7 +9810,7 @@ type awsEc2query_serializeOpDescribeHosts struct {
 }
 
 func (*awsEc2query_serializeOpDescribeHosts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeHosts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9864,7 +9865,7 @@ type awsEc2query_serializeOpDescribeIamInstanceProfileAssociations struct {
 }
 
 func (*awsEc2query_serializeOpDescribeIamInstanceProfileAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeIamInstanceProfileAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9919,7 +9920,7 @@ type awsEc2query_serializeOpDescribeIdentityIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpDescribeIdentityIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeIdentityIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -9974,7 +9975,7 @@ type awsEc2query_serializeOpDescribeIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpDescribeIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10029,7 +10030,7 @@ type awsEc2query_serializeOpDescribeImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10084,7 +10085,7 @@ type awsEc2query_serializeOpDescribeImages struct {
 }
 
 func (*awsEc2query_serializeOpDescribeImages) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10139,7 +10140,7 @@ type awsEc2query_serializeOpDescribeImportImageTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeImportImageTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeImportImageTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10194,7 +10195,7 @@ type awsEc2query_serializeOpDescribeImportSnapshotTasks struct {
 }
 
 func (*awsEc2query_serializeOpDescribeImportSnapshotTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeImportSnapshotTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10249,7 +10250,7 @@ type awsEc2query_serializeOpDescribeInstanceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10304,7 +10305,7 @@ type awsEc2query_serializeOpDescribeInstanceCreditSpecifications struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceCreditSpecifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceCreditSpecifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10359,7 +10360,7 @@ type awsEc2query_serializeOpDescribeInstanceEventNotificationAttributes struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceEventNotificationAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceEventNotificationAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10414,7 +10415,7 @@ type awsEc2query_serializeOpDescribeInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10469,7 +10470,7 @@ type awsEc2query_serializeOpDescribeInstanceStatus struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10524,7 +10525,7 @@ type awsEc2query_serializeOpDescribeInstanceTypeOfferings struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceTypeOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceTypeOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10579,7 +10580,7 @@ type awsEc2query_serializeOpDescribeInstanceTypes struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInstanceTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInstanceTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10634,7 +10635,7 @@ type awsEc2query_serializeOpDescribeInternetGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeInternetGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeInternetGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10689,7 +10690,7 @@ type awsEc2query_serializeOpDescribeIpv6Pools struct {
 }
 
 func (*awsEc2query_serializeOpDescribeIpv6Pools) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeIpv6Pools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10744,7 +10745,7 @@ type awsEc2query_serializeOpDescribeKeyPairs struct {
 }
 
 func (*awsEc2query_serializeOpDescribeKeyPairs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeKeyPairs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10799,7 +10800,7 @@ type awsEc2query_serializeOpDescribeLaunchTemplates struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLaunchTemplates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLaunchTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10854,7 +10855,7 @@ type awsEc2query_serializeOpDescribeLaunchTemplateVersions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLaunchTemplateVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLaunchTemplateVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10909,7 +10910,7 @@ type awsEc2query_serializeOpDescribeLocalGatewayRouteTables struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGatewayRouteTables) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGatewayRouteTables) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -10964,7 +10965,7 @@ type awsEc2query_serializeOpDescribeLocalGatewayRouteTableVirtualInterfaceGroupA
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11019,7 +11020,7 @@ type awsEc2query_serializeOpDescribeLocalGatewayRouteTableVpcAssociations struct
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGatewayRouteTableVpcAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGatewayRouteTableVpcAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11074,7 +11075,7 @@ type awsEc2query_serializeOpDescribeLocalGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11129,7 +11130,7 @@ type awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaceGroups struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaceGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaceGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11184,7 +11185,7 @@ type awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaces struct {
 }
 
 func (*awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaces) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeLocalGatewayVirtualInterfaces) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11239,7 +11240,7 @@ type awsEc2query_serializeOpDescribeManagedPrefixLists struct {
 }
 
 func (*awsEc2query_serializeOpDescribeManagedPrefixLists) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeManagedPrefixLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11294,7 +11295,7 @@ type awsEc2query_serializeOpDescribeMovingAddresses struct {
 }
 
 func (*awsEc2query_serializeOpDescribeMovingAddresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeMovingAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11349,7 +11350,7 @@ type awsEc2query_serializeOpDescribeNatGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeNatGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeNatGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11404,7 +11405,7 @@ type awsEc2query_serializeOpDescribeNetworkAcls struct {
 }
 
 func (*awsEc2query_serializeOpDescribeNetworkAcls) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeNetworkAcls) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11459,7 +11460,7 @@ type awsEc2query_serializeOpDescribeNetworkInterfaceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeNetworkInterfaceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeNetworkInterfaceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11514,7 +11515,7 @@ type awsEc2query_serializeOpDescribeNetworkInterfacePermissions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeNetworkInterfacePermissions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeNetworkInterfacePermissions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11569,7 +11570,7 @@ type awsEc2query_serializeOpDescribeNetworkInterfaces struct {
 }
 
 func (*awsEc2query_serializeOpDescribeNetworkInterfaces) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeNetworkInterfaces) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11624,7 +11625,7 @@ type awsEc2query_serializeOpDescribePlacementGroups struct {
 }
 
 func (*awsEc2query_serializeOpDescribePlacementGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribePlacementGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11679,7 +11680,7 @@ type awsEc2query_serializeOpDescribePrefixLists struct {
 }
 
 func (*awsEc2query_serializeOpDescribePrefixLists) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribePrefixLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11734,7 +11735,7 @@ type awsEc2query_serializeOpDescribePrincipalIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpDescribePrincipalIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribePrincipalIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11789,7 +11790,7 @@ type awsEc2query_serializeOpDescribePublicIpv4Pools struct {
 }
 
 func (*awsEc2query_serializeOpDescribePublicIpv4Pools) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribePublicIpv4Pools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11844,7 +11845,7 @@ type awsEc2query_serializeOpDescribeRegions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeRegions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeRegions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11899,7 +11900,7 @@ type awsEc2query_serializeOpDescribeReservedInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeReservedInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeReservedInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -11954,7 +11955,7 @@ type awsEc2query_serializeOpDescribeReservedInstancesListings struct {
 }
 
 func (*awsEc2query_serializeOpDescribeReservedInstancesListings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeReservedInstancesListings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12009,7 +12010,7 @@ type awsEc2query_serializeOpDescribeReservedInstancesModifications struct {
 }
 
 func (*awsEc2query_serializeOpDescribeReservedInstancesModifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeReservedInstancesModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12064,7 +12065,7 @@ type awsEc2query_serializeOpDescribeReservedInstancesOfferings struct {
 }
 
 func (*awsEc2query_serializeOpDescribeReservedInstancesOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeReservedInstancesOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12119,7 +12120,7 @@ type awsEc2query_serializeOpDescribeRouteTables struct {
 }
 
 func (*awsEc2query_serializeOpDescribeRouteTables) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeRouteTables) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12174,7 +12175,7 @@ type awsEc2query_serializeOpDescribeScheduledInstanceAvailability struct {
 }
 
 func (*awsEc2query_serializeOpDescribeScheduledInstanceAvailability) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeScheduledInstanceAvailability) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12229,7 +12230,7 @@ type awsEc2query_serializeOpDescribeScheduledInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeScheduledInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeScheduledInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12284,7 +12285,7 @@ type awsEc2query_serializeOpDescribeSecurityGroupReferences struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSecurityGroupReferences) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSecurityGroupReferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12339,7 +12340,7 @@ type awsEc2query_serializeOpDescribeSecurityGroups struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSecurityGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSecurityGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12394,7 +12395,7 @@ type awsEc2query_serializeOpDescribeSnapshotAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSnapshotAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSnapshotAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12449,7 +12450,7 @@ type awsEc2query_serializeOpDescribeSnapshots struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSnapshots) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12504,7 +12505,7 @@ type awsEc2query_serializeOpDescribeSpotDatafeedSubscription struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotDatafeedSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotDatafeedSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12559,7 +12560,7 @@ type awsEc2query_serializeOpDescribeSpotFleetInstances struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotFleetInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotFleetInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12614,7 +12615,7 @@ type awsEc2query_serializeOpDescribeSpotFleetRequestHistory struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotFleetRequestHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotFleetRequestHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12669,7 +12670,7 @@ type awsEc2query_serializeOpDescribeSpotFleetRequests struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotFleetRequests) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotFleetRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12724,7 +12725,7 @@ type awsEc2query_serializeOpDescribeSpotInstanceRequests struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotInstanceRequests) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotInstanceRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12779,7 +12780,7 @@ type awsEc2query_serializeOpDescribeSpotPriceHistory struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSpotPriceHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSpotPriceHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12834,7 +12835,7 @@ type awsEc2query_serializeOpDescribeStaleSecurityGroups struct {
 }
 
 func (*awsEc2query_serializeOpDescribeStaleSecurityGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeStaleSecurityGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12889,7 +12890,7 @@ type awsEc2query_serializeOpDescribeSubnets struct {
 }
 
 func (*awsEc2query_serializeOpDescribeSubnets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeSubnets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12944,7 +12945,7 @@ type awsEc2query_serializeOpDescribeTags struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -12999,7 +13000,7 @@ type awsEc2query_serializeOpDescribeTrafficMirrorFilters struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTrafficMirrorFilters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTrafficMirrorFilters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13054,7 +13055,7 @@ type awsEc2query_serializeOpDescribeTrafficMirrorSessions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTrafficMirrorSessions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTrafficMirrorSessions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13109,7 +13110,7 @@ type awsEc2query_serializeOpDescribeTrafficMirrorTargets struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTrafficMirrorTargets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTrafficMirrorTargets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13164,7 +13165,7 @@ type awsEc2query_serializeOpDescribeTransitGatewayAttachments struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGatewayAttachments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGatewayAttachments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13219,7 +13220,7 @@ type awsEc2query_serializeOpDescribeTransitGatewayMulticastDomains struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGatewayMulticastDomains) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGatewayMulticastDomains) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13274,7 +13275,7 @@ type awsEc2query_serializeOpDescribeTransitGatewayPeeringAttachments struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGatewayPeeringAttachments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGatewayPeeringAttachments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13329,7 +13330,7 @@ type awsEc2query_serializeOpDescribeTransitGatewayRouteTables struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGatewayRouteTables) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGatewayRouteTables) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13384,7 +13385,7 @@ type awsEc2query_serializeOpDescribeTransitGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13439,7 +13440,7 @@ type awsEc2query_serializeOpDescribeTransitGatewayVpcAttachments struct {
 }
 
 func (*awsEc2query_serializeOpDescribeTransitGatewayVpcAttachments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeTransitGatewayVpcAttachments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13494,7 +13495,7 @@ type awsEc2query_serializeOpDescribeVolumeAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVolumeAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVolumeAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13549,7 +13550,7 @@ type awsEc2query_serializeOpDescribeVolumes struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVolumes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVolumes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13604,7 +13605,7 @@ type awsEc2query_serializeOpDescribeVolumesModifications struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVolumesModifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVolumesModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13659,7 +13660,7 @@ type awsEc2query_serializeOpDescribeVolumeStatus struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVolumeStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVolumeStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13714,7 +13715,7 @@ type awsEc2query_serializeOpDescribeVpcAttribute struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13769,7 +13770,7 @@ type awsEc2query_serializeOpDescribeVpcClassicLink struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcClassicLink) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcClassicLink) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13824,7 +13825,7 @@ type awsEc2query_serializeOpDescribeVpcClassicLinkDnsSupport struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcClassicLinkDnsSupport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcClassicLinkDnsSupport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13879,7 +13880,7 @@ type awsEc2query_serializeOpDescribeVpcEndpointConnectionNotifications struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpointConnectionNotifications) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpointConnectionNotifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13934,7 +13935,7 @@ type awsEc2query_serializeOpDescribeVpcEndpointConnections struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpointConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpointConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -13989,7 +13990,7 @@ type awsEc2query_serializeOpDescribeVpcEndpoints struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpoints) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14044,7 +14045,7 @@ type awsEc2query_serializeOpDescribeVpcEndpointServiceConfigurations struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpointServiceConfigurations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpointServiceConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14099,7 +14100,7 @@ type awsEc2query_serializeOpDescribeVpcEndpointServicePermissions struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpointServicePermissions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpointServicePermissions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14154,7 +14155,7 @@ type awsEc2query_serializeOpDescribeVpcEndpointServices struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcEndpointServices) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcEndpointServices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14209,7 +14210,7 @@ type awsEc2query_serializeOpDescribeVpcPeeringConnections struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcPeeringConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcPeeringConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14264,7 +14265,7 @@ type awsEc2query_serializeOpDescribeVpcs struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpcs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpcs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14319,7 +14320,7 @@ type awsEc2query_serializeOpDescribeVpnConnections struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpnConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpnConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14374,7 +14375,7 @@ type awsEc2query_serializeOpDescribeVpnGateways struct {
 }
 
 func (*awsEc2query_serializeOpDescribeVpnGateways) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDescribeVpnGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14429,7 +14430,7 @@ type awsEc2query_serializeOpDetachClassicLinkVpc struct {
 }
 
 func (*awsEc2query_serializeOpDetachClassicLinkVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDetachClassicLinkVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14484,7 +14485,7 @@ type awsEc2query_serializeOpDetachInternetGateway struct {
 }
 
 func (*awsEc2query_serializeOpDetachInternetGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDetachInternetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14539,7 +14540,7 @@ type awsEc2query_serializeOpDetachNetworkInterface struct {
 }
 
 func (*awsEc2query_serializeOpDetachNetworkInterface) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDetachNetworkInterface) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14594,7 +14595,7 @@ type awsEc2query_serializeOpDetachVolume struct {
 }
 
 func (*awsEc2query_serializeOpDetachVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDetachVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14649,7 +14650,7 @@ type awsEc2query_serializeOpDetachVpnGateway struct {
 }
 
 func (*awsEc2query_serializeOpDetachVpnGateway) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDetachVpnGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14704,7 +14705,7 @@ type awsEc2query_serializeOpDisableEbsEncryptionByDefault struct {
 }
 
 func (*awsEc2query_serializeOpDisableEbsEncryptionByDefault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableEbsEncryptionByDefault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14759,7 +14760,7 @@ type awsEc2query_serializeOpDisableFastSnapshotRestores struct {
 }
 
 func (*awsEc2query_serializeOpDisableFastSnapshotRestores) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableFastSnapshotRestores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14814,7 +14815,7 @@ type awsEc2query_serializeOpDisableTransitGatewayRouteTablePropagation struct {
 }
 
 func (*awsEc2query_serializeOpDisableTransitGatewayRouteTablePropagation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableTransitGatewayRouteTablePropagation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14869,7 +14870,7 @@ type awsEc2query_serializeOpDisableVgwRoutePropagation struct {
 }
 
 func (*awsEc2query_serializeOpDisableVgwRoutePropagation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableVgwRoutePropagation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14924,7 +14925,7 @@ type awsEc2query_serializeOpDisableVpcClassicLink struct {
 }
 
 func (*awsEc2query_serializeOpDisableVpcClassicLink) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableVpcClassicLink) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -14979,7 +14980,7 @@ type awsEc2query_serializeOpDisableVpcClassicLinkDnsSupport struct {
 }
 
 func (*awsEc2query_serializeOpDisableVpcClassicLinkDnsSupport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisableVpcClassicLinkDnsSupport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15034,7 +15035,7 @@ type awsEc2query_serializeOpDisassociateAddress struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateAddress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15089,7 +15090,7 @@ type awsEc2query_serializeOpDisassociateClientVpnTargetNetwork struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateClientVpnTargetNetwork) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateClientVpnTargetNetwork) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15144,7 +15145,7 @@ type awsEc2query_serializeOpDisassociateIamInstanceProfile struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateIamInstanceProfile) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateIamInstanceProfile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15199,7 +15200,7 @@ type awsEc2query_serializeOpDisassociateRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15254,7 +15255,7 @@ type awsEc2query_serializeOpDisassociateSubnetCidrBlock struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateSubnetCidrBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateSubnetCidrBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15309,7 +15310,7 @@ type awsEc2query_serializeOpDisassociateTransitGatewayMulticastDomain struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateTransitGatewayMulticastDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateTransitGatewayMulticastDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15364,7 +15365,7 @@ type awsEc2query_serializeOpDisassociateTransitGatewayRouteTable struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateTransitGatewayRouteTable) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateTransitGatewayRouteTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15419,7 +15420,7 @@ type awsEc2query_serializeOpDisassociateVpcCidrBlock struct {
 }
 
 func (*awsEc2query_serializeOpDisassociateVpcCidrBlock) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpDisassociateVpcCidrBlock) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15474,7 +15475,7 @@ type awsEc2query_serializeOpEnableEbsEncryptionByDefault struct {
 }
 
 func (*awsEc2query_serializeOpEnableEbsEncryptionByDefault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableEbsEncryptionByDefault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15529,7 +15530,7 @@ type awsEc2query_serializeOpEnableFastSnapshotRestores struct {
 }
 
 func (*awsEc2query_serializeOpEnableFastSnapshotRestores) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableFastSnapshotRestores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15584,7 +15585,7 @@ type awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation struct {
 }
 
 func (*awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15639,7 +15640,7 @@ type awsEc2query_serializeOpEnableVgwRoutePropagation struct {
 }
 
 func (*awsEc2query_serializeOpEnableVgwRoutePropagation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableVgwRoutePropagation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15694,7 +15695,7 @@ type awsEc2query_serializeOpEnableVolumeIO struct {
 }
 
 func (*awsEc2query_serializeOpEnableVolumeIO) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableVolumeIO) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15749,7 +15750,7 @@ type awsEc2query_serializeOpEnableVpcClassicLink struct {
 }
 
 func (*awsEc2query_serializeOpEnableVpcClassicLink) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableVpcClassicLink) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15804,7 +15805,7 @@ type awsEc2query_serializeOpEnableVpcClassicLinkDnsSupport struct {
 }
 
 func (*awsEc2query_serializeOpEnableVpcClassicLinkDnsSupport) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpEnableVpcClassicLinkDnsSupport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15859,7 +15860,7 @@ type awsEc2query_serializeOpExportClientVpnClientCertificateRevocationList struc
 }
 
 func (*awsEc2query_serializeOpExportClientVpnClientCertificateRevocationList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpExportClientVpnClientCertificateRevocationList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15914,7 +15915,7 @@ type awsEc2query_serializeOpExportClientVpnClientConfiguration struct {
 }
 
 func (*awsEc2query_serializeOpExportClientVpnClientConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpExportClientVpnClientConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -15969,7 +15970,7 @@ type awsEc2query_serializeOpExportImage struct {
 }
 
 func (*awsEc2query_serializeOpExportImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpExportImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16024,7 +16025,7 @@ type awsEc2query_serializeOpExportTransitGatewayRoutes struct {
 }
 
 func (*awsEc2query_serializeOpExportTransitGatewayRoutes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpExportTransitGatewayRoutes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16079,7 +16080,7 @@ type awsEc2query_serializeOpGetAssociatedIpv6PoolCidrs struct {
 }
 
 func (*awsEc2query_serializeOpGetAssociatedIpv6PoolCidrs) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetAssociatedIpv6PoolCidrs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16134,7 +16135,7 @@ type awsEc2query_serializeOpGetCapacityReservationUsage struct {
 }
 
 func (*awsEc2query_serializeOpGetCapacityReservationUsage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetCapacityReservationUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16189,7 +16190,7 @@ type awsEc2query_serializeOpGetCoipPoolUsage struct {
 }
 
 func (*awsEc2query_serializeOpGetCoipPoolUsage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetCoipPoolUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16244,7 +16245,7 @@ type awsEc2query_serializeOpGetConsoleOutput struct {
 }
 
 func (*awsEc2query_serializeOpGetConsoleOutput) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetConsoleOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16299,7 +16300,7 @@ type awsEc2query_serializeOpGetConsoleScreenshot struct {
 }
 
 func (*awsEc2query_serializeOpGetConsoleScreenshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetConsoleScreenshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16354,7 +16355,7 @@ type awsEc2query_serializeOpGetDefaultCreditSpecification struct {
 }
 
 func (*awsEc2query_serializeOpGetDefaultCreditSpecification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetDefaultCreditSpecification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16409,7 +16410,7 @@ type awsEc2query_serializeOpGetEbsDefaultKmsKeyId struct {
 }
 
 func (*awsEc2query_serializeOpGetEbsDefaultKmsKeyId) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetEbsDefaultKmsKeyId) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16464,7 +16465,7 @@ type awsEc2query_serializeOpGetEbsEncryptionByDefault struct {
 }
 
 func (*awsEc2query_serializeOpGetEbsEncryptionByDefault) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetEbsEncryptionByDefault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16519,7 +16520,7 @@ type awsEc2query_serializeOpGetGroupsForCapacityReservation struct {
 }
 
 func (*awsEc2query_serializeOpGetGroupsForCapacityReservation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetGroupsForCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16574,7 +16575,7 @@ type awsEc2query_serializeOpGetHostReservationPurchasePreview struct {
 }
 
 func (*awsEc2query_serializeOpGetHostReservationPurchasePreview) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetHostReservationPurchasePreview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16629,7 +16630,7 @@ type awsEc2query_serializeOpGetLaunchTemplateData struct {
 }
 
 func (*awsEc2query_serializeOpGetLaunchTemplateData) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetLaunchTemplateData) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16684,7 +16685,7 @@ type awsEc2query_serializeOpGetManagedPrefixListAssociations struct {
 }
 
 func (*awsEc2query_serializeOpGetManagedPrefixListAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetManagedPrefixListAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16739,7 +16740,7 @@ type awsEc2query_serializeOpGetManagedPrefixListEntries struct {
 }
 
 func (*awsEc2query_serializeOpGetManagedPrefixListEntries) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetManagedPrefixListEntries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16794,7 +16795,7 @@ type awsEc2query_serializeOpGetPasswordData struct {
 }
 
 func (*awsEc2query_serializeOpGetPasswordData) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetPasswordData) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16849,7 +16850,7 @@ type awsEc2query_serializeOpGetReservedInstancesExchangeQuote struct {
 }
 
 func (*awsEc2query_serializeOpGetReservedInstancesExchangeQuote) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetReservedInstancesExchangeQuote) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16904,7 +16905,7 @@ type awsEc2query_serializeOpGetTransitGatewayAttachmentPropagations struct {
 }
 
 func (*awsEc2query_serializeOpGetTransitGatewayAttachmentPropagations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetTransitGatewayAttachmentPropagations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -16959,7 +16960,7 @@ type awsEc2query_serializeOpGetTransitGatewayMulticastDomainAssociations struct 
 }
 
 func (*awsEc2query_serializeOpGetTransitGatewayMulticastDomainAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetTransitGatewayMulticastDomainAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17014,7 +17015,7 @@ type awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations struct {
 }
 
 func (*awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17069,7 +17070,7 @@ type awsEc2query_serializeOpGetTransitGatewayRouteTablePropagations struct {
 }
 
 func (*awsEc2query_serializeOpGetTransitGatewayRouteTablePropagations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpGetTransitGatewayRouteTablePropagations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17124,7 +17125,7 @@ type awsEc2query_serializeOpImportClientVpnClientCertificateRevocationList struc
 }
 
 func (*awsEc2query_serializeOpImportClientVpnClientCertificateRevocationList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportClientVpnClientCertificateRevocationList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17179,7 +17180,7 @@ type awsEc2query_serializeOpImportImage struct {
 }
 
 func (*awsEc2query_serializeOpImportImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17234,7 +17235,7 @@ type awsEc2query_serializeOpImportInstance struct {
 }
 
 func (*awsEc2query_serializeOpImportInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17289,7 +17290,7 @@ type awsEc2query_serializeOpImportKeyPair struct {
 }
 
 func (*awsEc2query_serializeOpImportKeyPair) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportKeyPair) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17344,7 +17345,7 @@ type awsEc2query_serializeOpImportSnapshot struct {
 }
 
 func (*awsEc2query_serializeOpImportSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17399,7 +17400,7 @@ type awsEc2query_serializeOpImportVolume struct {
 }
 
 func (*awsEc2query_serializeOpImportVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpImportVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17454,7 +17455,7 @@ type awsEc2query_serializeOpModifyAvailabilityZoneGroup struct {
 }
 
 func (*awsEc2query_serializeOpModifyAvailabilityZoneGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyAvailabilityZoneGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17509,7 +17510,7 @@ type awsEc2query_serializeOpModifyCapacityReservation struct {
 }
 
 func (*awsEc2query_serializeOpModifyCapacityReservation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17564,7 +17565,7 @@ type awsEc2query_serializeOpModifyClientVpnEndpoint struct {
 }
 
 func (*awsEc2query_serializeOpModifyClientVpnEndpoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyClientVpnEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17619,7 +17620,7 @@ type awsEc2query_serializeOpModifyDefaultCreditSpecification struct {
 }
 
 func (*awsEc2query_serializeOpModifyDefaultCreditSpecification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyDefaultCreditSpecification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17674,7 +17675,7 @@ type awsEc2query_serializeOpModifyEbsDefaultKmsKeyId struct {
 }
 
 func (*awsEc2query_serializeOpModifyEbsDefaultKmsKeyId) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyEbsDefaultKmsKeyId) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17729,7 +17730,7 @@ type awsEc2query_serializeOpModifyFleet struct {
 }
 
 func (*awsEc2query_serializeOpModifyFleet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyFleet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17784,7 +17785,7 @@ type awsEc2query_serializeOpModifyFpgaImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyFpgaImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyFpgaImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17839,7 +17840,7 @@ type awsEc2query_serializeOpModifyHosts struct {
 }
 
 func (*awsEc2query_serializeOpModifyHosts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyHosts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17894,7 +17895,7 @@ type awsEc2query_serializeOpModifyIdentityIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpModifyIdentityIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyIdentityIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -17949,7 +17950,7 @@ type awsEc2query_serializeOpModifyIdFormat struct {
 }
 
 func (*awsEc2query_serializeOpModifyIdFormat) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyIdFormat) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18004,7 +18005,7 @@ type awsEc2query_serializeOpModifyImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18059,7 +18060,7 @@ type awsEc2query_serializeOpModifyInstanceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstanceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstanceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18114,7 +18115,7 @@ type awsEc2query_serializeOpModifyInstanceCapacityReservationAttributes struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstanceCapacityReservationAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstanceCapacityReservationAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18169,7 +18170,7 @@ type awsEc2query_serializeOpModifyInstanceCreditSpecification struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstanceCreditSpecification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstanceCreditSpecification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18224,7 +18225,7 @@ type awsEc2query_serializeOpModifyInstanceEventStartTime struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstanceEventStartTime) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstanceEventStartTime) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18279,7 +18280,7 @@ type awsEc2query_serializeOpModifyInstanceMetadataOptions struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstanceMetadataOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstanceMetadataOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18334,7 +18335,7 @@ type awsEc2query_serializeOpModifyInstancePlacement struct {
 }
 
 func (*awsEc2query_serializeOpModifyInstancePlacement) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyInstancePlacement) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18389,7 +18390,7 @@ type awsEc2query_serializeOpModifyLaunchTemplate struct {
 }
 
 func (*awsEc2query_serializeOpModifyLaunchTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyLaunchTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18444,7 +18445,7 @@ type awsEc2query_serializeOpModifyManagedPrefixList struct {
 }
 
 func (*awsEc2query_serializeOpModifyManagedPrefixList) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyManagedPrefixList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18499,7 +18500,7 @@ type awsEc2query_serializeOpModifyNetworkInterfaceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyNetworkInterfaceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyNetworkInterfaceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18554,7 +18555,7 @@ type awsEc2query_serializeOpModifyReservedInstances struct {
 }
 
 func (*awsEc2query_serializeOpModifyReservedInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyReservedInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18609,7 +18610,7 @@ type awsEc2query_serializeOpModifySnapshotAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifySnapshotAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifySnapshotAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18664,7 +18665,7 @@ type awsEc2query_serializeOpModifySpotFleetRequest struct {
 }
 
 func (*awsEc2query_serializeOpModifySpotFleetRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifySpotFleetRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18719,7 +18720,7 @@ type awsEc2query_serializeOpModifySubnetAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifySubnetAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifySubnetAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18774,7 +18775,7 @@ type awsEc2query_serializeOpModifyTrafficMirrorFilterNetworkServices struct {
 }
 
 func (*awsEc2query_serializeOpModifyTrafficMirrorFilterNetworkServices) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyTrafficMirrorFilterNetworkServices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18829,7 +18830,7 @@ type awsEc2query_serializeOpModifyTrafficMirrorFilterRule struct {
 }
 
 func (*awsEc2query_serializeOpModifyTrafficMirrorFilterRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyTrafficMirrorFilterRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18884,7 +18885,7 @@ type awsEc2query_serializeOpModifyTrafficMirrorSession struct {
 }
 
 func (*awsEc2query_serializeOpModifyTrafficMirrorSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyTrafficMirrorSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18939,7 +18940,7 @@ type awsEc2query_serializeOpModifyTransitGatewayVpcAttachment struct {
 }
 
 func (*awsEc2query_serializeOpModifyTransitGatewayVpcAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyTransitGatewayVpcAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -18994,7 +18995,7 @@ type awsEc2query_serializeOpModifyVolume struct {
 }
 
 func (*awsEc2query_serializeOpModifyVolume) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19049,7 +19050,7 @@ type awsEc2query_serializeOpModifyVolumeAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyVolumeAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVolumeAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19104,7 +19105,7 @@ type awsEc2query_serializeOpModifyVpcAttribute struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19159,7 +19160,7 @@ type awsEc2query_serializeOpModifyVpcEndpoint struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcEndpoint) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19214,7 +19215,7 @@ type awsEc2query_serializeOpModifyVpcEndpointConnectionNotification struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcEndpointConnectionNotification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcEndpointConnectionNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19269,7 +19270,7 @@ type awsEc2query_serializeOpModifyVpcEndpointServiceConfiguration struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcEndpointServiceConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcEndpointServiceConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19324,7 +19325,7 @@ type awsEc2query_serializeOpModifyVpcEndpointServicePermissions struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcEndpointServicePermissions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcEndpointServicePermissions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19379,7 +19380,7 @@ type awsEc2query_serializeOpModifyVpcPeeringConnectionOptions struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcPeeringConnectionOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcPeeringConnectionOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19434,7 +19435,7 @@ type awsEc2query_serializeOpModifyVpcTenancy struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpcTenancy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpcTenancy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19489,7 +19490,7 @@ type awsEc2query_serializeOpModifyVpnConnection struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpnConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpnConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19544,7 +19545,7 @@ type awsEc2query_serializeOpModifyVpnTunnelCertificate struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpnTunnelCertificate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpnTunnelCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19599,7 +19600,7 @@ type awsEc2query_serializeOpModifyVpnTunnelOptions struct {
 }
 
 func (*awsEc2query_serializeOpModifyVpnTunnelOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpModifyVpnTunnelOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19654,7 +19655,7 @@ type awsEc2query_serializeOpMonitorInstances struct {
 }
 
 func (*awsEc2query_serializeOpMonitorInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpMonitorInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19709,7 +19710,7 @@ type awsEc2query_serializeOpMoveAddressToVpc struct {
 }
 
 func (*awsEc2query_serializeOpMoveAddressToVpc) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpMoveAddressToVpc) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19764,7 +19765,7 @@ type awsEc2query_serializeOpProvisionByoipCidr struct {
 }
 
 func (*awsEc2query_serializeOpProvisionByoipCidr) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpProvisionByoipCidr) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19819,7 +19820,7 @@ type awsEc2query_serializeOpPurchaseHostReservation struct {
 }
 
 func (*awsEc2query_serializeOpPurchaseHostReservation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpPurchaseHostReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19874,7 +19875,7 @@ type awsEc2query_serializeOpPurchaseReservedInstancesOffering struct {
 }
 
 func (*awsEc2query_serializeOpPurchaseReservedInstancesOffering) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpPurchaseReservedInstancesOffering) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19929,7 +19930,7 @@ type awsEc2query_serializeOpPurchaseScheduledInstances struct {
 }
 
 func (*awsEc2query_serializeOpPurchaseScheduledInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpPurchaseScheduledInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -19984,7 +19985,7 @@ type awsEc2query_serializeOpRebootInstances struct {
 }
 
 func (*awsEc2query_serializeOpRebootInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRebootInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20039,7 +20040,7 @@ type awsEc2query_serializeOpRegisterImage struct {
 }
 
 func (*awsEc2query_serializeOpRegisterImage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRegisterImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20094,7 +20095,7 @@ type awsEc2query_serializeOpRegisterInstanceEventNotificationAttributes struct {
 }
 
 func (*awsEc2query_serializeOpRegisterInstanceEventNotificationAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRegisterInstanceEventNotificationAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20149,7 +20150,7 @@ type awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupMembers struct {
 }
 
 func (*awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupMembers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupMembers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20204,7 +20205,7 @@ type awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupSources struct {
 }
 
 func (*awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupSources) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRegisterTransitGatewayMulticastGroupSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20259,7 +20260,7 @@ type awsEc2query_serializeOpRejectTransitGatewayPeeringAttachment struct {
 }
 
 func (*awsEc2query_serializeOpRejectTransitGatewayPeeringAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRejectTransitGatewayPeeringAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20314,7 +20315,7 @@ type awsEc2query_serializeOpRejectTransitGatewayVpcAttachment struct {
 }
 
 func (*awsEc2query_serializeOpRejectTransitGatewayVpcAttachment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRejectTransitGatewayVpcAttachment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20369,7 +20370,7 @@ type awsEc2query_serializeOpRejectVpcEndpointConnections struct {
 }
 
 func (*awsEc2query_serializeOpRejectVpcEndpointConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRejectVpcEndpointConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20424,7 +20425,7 @@ type awsEc2query_serializeOpRejectVpcPeeringConnection struct {
 }
 
 func (*awsEc2query_serializeOpRejectVpcPeeringConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRejectVpcPeeringConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20479,7 +20480,7 @@ type awsEc2query_serializeOpReleaseAddress struct {
 }
 
 func (*awsEc2query_serializeOpReleaseAddress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReleaseAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20534,7 +20535,7 @@ type awsEc2query_serializeOpReleaseHosts struct {
 }
 
 func (*awsEc2query_serializeOpReleaseHosts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReleaseHosts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20589,7 +20590,7 @@ type awsEc2query_serializeOpReplaceIamInstanceProfileAssociation struct {
 }
 
 func (*awsEc2query_serializeOpReplaceIamInstanceProfileAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceIamInstanceProfileAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20644,7 +20645,7 @@ type awsEc2query_serializeOpReplaceNetworkAclAssociation struct {
 }
 
 func (*awsEc2query_serializeOpReplaceNetworkAclAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceNetworkAclAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20699,7 +20700,7 @@ type awsEc2query_serializeOpReplaceNetworkAclEntry struct {
 }
 
 func (*awsEc2query_serializeOpReplaceNetworkAclEntry) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceNetworkAclEntry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20754,7 +20755,7 @@ type awsEc2query_serializeOpReplaceRoute struct {
 }
 
 func (*awsEc2query_serializeOpReplaceRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20809,7 +20810,7 @@ type awsEc2query_serializeOpReplaceRouteTableAssociation struct {
 }
 
 func (*awsEc2query_serializeOpReplaceRouteTableAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceRouteTableAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20864,7 +20865,7 @@ type awsEc2query_serializeOpReplaceTransitGatewayRoute struct {
 }
 
 func (*awsEc2query_serializeOpReplaceTransitGatewayRoute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReplaceTransitGatewayRoute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20919,7 +20920,7 @@ type awsEc2query_serializeOpReportInstanceStatus struct {
 }
 
 func (*awsEc2query_serializeOpReportInstanceStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpReportInstanceStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -20974,7 +20975,7 @@ type awsEc2query_serializeOpRequestSpotFleet struct {
 }
 
 func (*awsEc2query_serializeOpRequestSpotFleet) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRequestSpotFleet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21029,7 +21030,7 @@ type awsEc2query_serializeOpRequestSpotInstances struct {
 }
 
 func (*awsEc2query_serializeOpRequestSpotInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRequestSpotInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21084,7 +21085,7 @@ type awsEc2query_serializeOpResetEbsDefaultKmsKeyId struct {
 }
 
 func (*awsEc2query_serializeOpResetEbsDefaultKmsKeyId) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetEbsDefaultKmsKeyId) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21139,7 +21140,7 @@ type awsEc2query_serializeOpResetFpgaImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpResetFpgaImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetFpgaImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21194,7 +21195,7 @@ type awsEc2query_serializeOpResetImageAttribute struct {
 }
 
 func (*awsEc2query_serializeOpResetImageAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetImageAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21249,7 +21250,7 @@ type awsEc2query_serializeOpResetInstanceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpResetInstanceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetInstanceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21304,7 +21305,7 @@ type awsEc2query_serializeOpResetNetworkInterfaceAttribute struct {
 }
 
 func (*awsEc2query_serializeOpResetNetworkInterfaceAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetNetworkInterfaceAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21359,7 +21360,7 @@ type awsEc2query_serializeOpResetSnapshotAttribute struct {
 }
 
 func (*awsEc2query_serializeOpResetSnapshotAttribute) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpResetSnapshotAttribute) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21414,7 +21415,7 @@ type awsEc2query_serializeOpRestoreAddressToClassic struct {
 }
 
 func (*awsEc2query_serializeOpRestoreAddressToClassic) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRestoreAddressToClassic) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21469,7 +21470,7 @@ type awsEc2query_serializeOpRestoreManagedPrefixListVersion struct {
 }
 
 func (*awsEc2query_serializeOpRestoreManagedPrefixListVersion) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRestoreManagedPrefixListVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21524,7 +21525,7 @@ type awsEc2query_serializeOpRevokeClientVpnIngress struct {
 }
 
 func (*awsEc2query_serializeOpRevokeClientVpnIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRevokeClientVpnIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21579,7 +21580,7 @@ type awsEc2query_serializeOpRevokeSecurityGroupEgress struct {
 }
 
 func (*awsEc2query_serializeOpRevokeSecurityGroupEgress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRevokeSecurityGroupEgress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21634,7 +21635,7 @@ type awsEc2query_serializeOpRevokeSecurityGroupIngress struct {
 }
 
 func (*awsEc2query_serializeOpRevokeSecurityGroupIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRevokeSecurityGroupIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21689,7 +21690,7 @@ type awsEc2query_serializeOpRunInstances struct {
 }
 
 func (*awsEc2query_serializeOpRunInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRunInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21744,7 +21745,7 @@ type awsEc2query_serializeOpRunScheduledInstances struct {
 }
 
 func (*awsEc2query_serializeOpRunScheduledInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpRunScheduledInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21799,7 +21800,7 @@ type awsEc2query_serializeOpSearchLocalGatewayRoutes struct {
 }
 
 func (*awsEc2query_serializeOpSearchLocalGatewayRoutes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpSearchLocalGatewayRoutes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21854,7 +21855,7 @@ type awsEc2query_serializeOpSearchTransitGatewayMulticastGroups struct {
 }
 
 func (*awsEc2query_serializeOpSearchTransitGatewayMulticastGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpSearchTransitGatewayMulticastGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21909,7 +21910,7 @@ type awsEc2query_serializeOpSearchTransitGatewayRoutes struct {
 }
 
 func (*awsEc2query_serializeOpSearchTransitGatewayRoutes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpSearchTransitGatewayRoutes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -21964,7 +21965,7 @@ type awsEc2query_serializeOpSendDiagnosticInterrupt struct {
 }
 
 func (*awsEc2query_serializeOpSendDiagnosticInterrupt) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpSendDiagnosticInterrupt) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22019,7 +22020,7 @@ type awsEc2query_serializeOpStartInstances struct {
 }
 
 func (*awsEc2query_serializeOpStartInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpStartInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22074,7 +22075,7 @@ type awsEc2query_serializeOpStartVpcEndpointServicePrivateDnsVerification struct
 }
 
 func (*awsEc2query_serializeOpStartVpcEndpointServicePrivateDnsVerification) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpStartVpcEndpointServicePrivateDnsVerification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22129,7 +22130,7 @@ type awsEc2query_serializeOpStopInstances struct {
 }
 
 func (*awsEc2query_serializeOpStopInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpStopInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22184,7 +22185,7 @@ type awsEc2query_serializeOpTerminateClientVpnConnections struct {
 }
 
 func (*awsEc2query_serializeOpTerminateClientVpnConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpTerminateClientVpnConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22239,7 +22240,7 @@ type awsEc2query_serializeOpTerminateInstances struct {
 }
 
 func (*awsEc2query_serializeOpTerminateInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpTerminateInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22294,7 +22295,7 @@ type awsEc2query_serializeOpUnassignIpv6Addresses struct {
 }
 
 func (*awsEc2query_serializeOpUnassignIpv6Addresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpUnassignIpv6Addresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22349,7 +22350,7 @@ type awsEc2query_serializeOpUnassignPrivateIpAddresses struct {
 }
 
 func (*awsEc2query_serializeOpUnassignPrivateIpAddresses) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpUnassignPrivateIpAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22404,7 +22405,7 @@ type awsEc2query_serializeOpUnmonitorInstances struct {
 }
 
 func (*awsEc2query_serializeOpUnmonitorInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpUnmonitorInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22459,7 +22460,7 @@ type awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsEgress struct {
 }
 
 func (*awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsEgress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsEgress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22514,7 +22515,7 @@ type awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress struct {
 }
 
 func (*awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -22569,7 +22570,7 @@ type awsEc2query_serializeOpWithdrawByoipCidr struct {
 }
 
 func (*awsEc2query_serializeOpWithdrawByoipCidr) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsEc2query_serializeOpWithdrawByoipCidr) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

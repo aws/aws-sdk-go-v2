@@ -14,6 +14,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -28,7 +29,7 @@ type awsAwsquery_deserializeOpDeleteAlarms struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteAlarms) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteAlarms) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -124,7 +125,7 @@ type awsAwsquery_deserializeOpDeleteAnomalyDetector struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteAnomalyDetector) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteAnomalyDetector) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -229,7 +230,7 @@ type awsAwsquery_deserializeOpDeleteDashboards struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteDashboards) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteDashboards) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -331,7 +332,7 @@ type awsAwsquery_deserializeOpDeleteInsightRules struct {
 }
 
 func (*awsAwsquery_deserializeOpDeleteInsightRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDeleteInsightRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -430,7 +431,7 @@ type awsAwsquery_deserializeOpDescribeAlarmHistory struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeAlarmHistory) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeAlarmHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -526,7 +527,7 @@ type awsAwsquery_deserializeOpDescribeAlarms struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeAlarms) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeAlarms) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -622,7 +623,7 @@ type awsAwsquery_deserializeOpDescribeAlarmsForMetric struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeAlarmsForMetric) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeAlarmsForMetric) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -715,7 +716,7 @@ type awsAwsquery_deserializeOpDescribeAnomalyDetectors struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeAnomalyDetectors) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeAnomalyDetectors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -817,7 +818,7 @@ type awsAwsquery_deserializeOpDescribeInsightRules struct {
 }
 
 func (*awsAwsquery_deserializeOpDescribeInsightRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDescribeInsightRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -913,7 +914,7 @@ type awsAwsquery_deserializeOpDisableAlarmActions struct {
 }
 
 func (*awsAwsquery_deserializeOpDisableAlarmActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDisableAlarmActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1006,7 +1007,7 @@ type awsAwsquery_deserializeOpDisableInsightRules struct {
 }
 
 func (*awsAwsquery_deserializeOpDisableInsightRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpDisableInsightRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1105,7 +1106,7 @@ type awsAwsquery_deserializeOpEnableAlarmActions struct {
 }
 
 func (*awsAwsquery_deserializeOpEnableAlarmActions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpEnableAlarmActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1198,7 +1199,7 @@ type awsAwsquery_deserializeOpEnableInsightRules struct {
 }
 
 func (*awsAwsquery_deserializeOpEnableInsightRules) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpEnableInsightRules) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1300,7 +1301,7 @@ type awsAwsquery_deserializeOpGetDashboard struct {
 }
 
 func (*awsAwsquery_deserializeOpGetDashboard) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetDashboard) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1402,7 +1403,7 @@ type awsAwsquery_deserializeOpGetInsightRuleReport struct {
 }
 
 func (*awsAwsquery_deserializeOpGetInsightRuleReport) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetInsightRuleReport) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1504,7 +1505,7 @@ type awsAwsquery_deserializeOpGetMetricData struct {
 }
 
 func (*awsAwsquery_deserializeOpGetMetricData) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetMetricData) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1600,7 +1601,7 @@ type awsAwsquery_deserializeOpGetMetricStatistics struct {
 }
 
 func (*awsAwsquery_deserializeOpGetMetricStatistics) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetMetricStatistics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1705,7 +1706,7 @@ type awsAwsquery_deserializeOpGetMetricWidgetImage struct {
 }
 
 func (*awsAwsquery_deserializeOpGetMetricWidgetImage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpGetMetricWidgetImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1798,7 +1799,7 @@ type awsAwsquery_deserializeOpListDashboards struct {
 }
 
 func (*awsAwsquery_deserializeOpListDashboards) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListDashboards) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1897,7 +1898,7 @@ type awsAwsquery_deserializeOpListMetrics struct {
 }
 
 func (*awsAwsquery_deserializeOpListMetrics) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListMetrics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1996,7 +1997,7 @@ type awsAwsquery_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsquery_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2098,7 +2099,7 @@ type awsAwsquery_deserializeOpPutAnomalyDetector struct {
 }
 
 func (*awsAwsquery_deserializeOpPutAnomalyDetector) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutAnomalyDetector) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2203,7 +2204,7 @@ type awsAwsquery_deserializeOpPutCompositeAlarm struct {
 }
 
 func (*awsAwsquery_deserializeOpPutCompositeAlarm) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutCompositeAlarm) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2299,7 +2300,7 @@ type awsAwsquery_deserializeOpPutDashboard struct {
 }
 
 func (*awsAwsquery_deserializeOpPutDashboard) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutDashboard) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2398,7 +2399,7 @@ type awsAwsquery_deserializeOpPutInsightRule struct {
 }
 
 func (*awsAwsquery_deserializeOpPutInsightRule) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutInsightRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2500,7 +2501,7 @@ type awsAwsquery_deserializeOpPutMetricAlarm struct {
 }
 
 func (*awsAwsquery_deserializeOpPutMetricAlarm) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutMetricAlarm) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2596,7 +2597,7 @@ type awsAwsquery_deserializeOpPutMetricData struct {
 }
 
 func (*awsAwsquery_deserializeOpPutMetricData) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpPutMetricData) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2701,7 +2702,7 @@ type awsAwsquery_deserializeOpSetAlarmState struct {
 }
 
 func (*awsAwsquery_deserializeOpSetAlarmState) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpSetAlarmState) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2800,7 +2801,7 @@ type awsAwsquery_deserializeOpTagResource struct {
 }
 
 func (*awsAwsquery_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2905,7 +2906,7 @@ type awsAwsquery_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsquery_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsquery_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

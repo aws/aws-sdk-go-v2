@@ -10,6 +10,17 @@ const (
 	AccessAdvisorUsageGranularityTypeAction_level  AccessAdvisorUsageGranularityType = "ACTION_LEVEL"
 )
 
+// Values returns all known values for AccessAdvisorUsageGranularityType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AccessAdvisorUsageGranularityType) Values() []AccessAdvisorUsageGranularityType {
+	return []AccessAdvisorUsageGranularityType{
+		"SERVICE_LEVEL",
+		"ACTION_LEVEL",
+	}
+}
+
 type AssignmentStatusType string
 
 // Enum values for AssignmentStatusType
@@ -18,6 +29,17 @@ const (
 	AssignmentStatusTypeUnassigned AssignmentStatusType = "Unassigned"
 	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
+
+// Values returns all known values for AssignmentStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssignmentStatusType) Values() []AssignmentStatusType {
+	return []AssignmentStatusType{
+		"Assigned",
+		"Unassigned",
+		"Any",
+	}
+}
 
 type ContextKeyTypeEnum string
 
@@ -37,6 +59,26 @@ const (
 	ContextKeyTypeEnumDate_list    ContextKeyTypeEnum = "dateList"
 )
 
+// Values returns all known values for ContextKeyTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContextKeyTypeEnum) Values() []ContextKeyTypeEnum {
+	return []ContextKeyTypeEnum{
+		"string",
+		"stringList",
+		"numeric",
+		"numericList",
+		"boolean",
+		"booleanList",
+		"ip",
+		"ipList",
+		"binary",
+		"binaryList",
+		"date",
+		"dateList",
+	}
+}
+
 type DeletionTaskStatusType string
 
 // Enum values for DeletionTaskStatusType
@@ -47,6 +89,18 @@ const (
 	DeletionTaskStatusTypeNot_started DeletionTaskStatusType = "NOT_STARTED"
 )
 
+// Values returns all known values for DeletionTaskStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionTaskStatusType) Values() []DeletionTaskStatusType {
+	return []DeletionTaskStatusType{
+		"SUCCEEDED",
+		"IN_PROGRESS",
+		"FAILED",
+		"NOT_STARTED",
+	}
+}
+
 type EncodingType string
 
 // Enum values for EncodingType
@@ -54,6 +108,16 @@ const (
 	EncodingTypeSsh EncodingType = "SSH"
 	EncodingTypePem EncodingType = "PEM"
 )
+
+// Values returns all known values for EncodingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EncodingType) Values() []EncodingType {
+	return []EncodingType{
+		"SSH",
+		"PEM",
+	}
+}
 
 type EntityType string
 
@@ -66,6 +130,19 @@ const (
 	EntityTypeAwsmanagedpolicy   EntityType = "AWSManagedPolicy"
 )
 
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"User",
+		"Role",
+		"Group",
+		"LocalManagedPolicy",
+		"AWSManagedPolicy",
+	}
+}
+
 type GlobalEndpointTokenVersion string
 
 // Enum values for GlobalEndpointTokenVersion
@@ -73,6 +150,16 @@ const (
 	GlobalEndpointTokenVersionV1token GlobalEndpointTokenVersion = "v1Token"
 	GlobalEndpointTokenVersionV2token GlobalEndpointTokenVersion = "v2Token"
 )
+
+// Values returns all known values for GlobalEndpointTokenVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalEndpointTokenVersion) Values() []GlobalEndpointTokenVersion {
+	return []GlobalEndpointTokenVersion{
+		"v1Token",
+		"v2Token",
+	}
+}
 
 type JobStatusType string
 
@@ -83,12 +170,33 @@ const (
 	JobStatusTypeFailed      JobStatusType = "FAILED"
 )
 
+// Values returns all known values for JobStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobStatusType) Values() []JobStatusType {
+	return []JobStatusType{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type PermissionsBoundaryAttachmentType string
 
 // Enum values for PermissionsBoundaryAttachmentType
 const (
 	PermissionsBoundaryAttachmentTypePolicy PermissionsBoundaryAttachmentType = "PermissionsBoundaryPolicy"
 )
+
+// Values returns all known values for PermissionsBoundaryAttachmentType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PermissionsBoundaryAttachmentType) Values() []PermissionsBoundaryAttachmentType {
+	return []PermissionsBoundaryAttachmentType{
+		"PermissionsBoundaryPolicy",
+	}
+}
 
 type PolicyEvaluationDecisionType string
 
@@ -99,6 +207,17 @@ const (
 	PolicyEvaluationDecisionTypeImplicit_deny PolicyEvaluationDecisionType = "implicitDeny"
 )
 
+// Values returns all known values for PolicyEvaluationDecisionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEvaluationDecisionType) Values() []PolicyEvaluationDecisionType {
+	return []PolicyEvaluationDecisionType{
+		"allowed",
+		"explicitDeny",
+		"implicitDeny",
+	}
+}
+
 type PolicyOwnerEntityType string
 
 // Enum values for PolicyOwnerEntityType
@@ -108,6 +227,17 @@ const (
 	PolicyOwnerEntityTypeGroup PolicyOwnerEntityType = "GROUP"
 )
 
+// Values returns all known values for PolicyOwnerEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyOwnerEntityType) Values() []PolicyOwnerEntityType {
+	return []PolicyOwnerEntityType{
+		"USER",
+		"ROLE",
+		"GROUP",
+	}
+}
+
 type PolicyScopeType string
 
 // Enum values for PolicyScopeType
@@ -116,6 +246,17 @@ const (
 	PolicyScopeTypeAws   PolicyScopeType = "AWS"
 	PolicyScopeTypeLocal PolicyScopeType = "Local"
 )
+
+// Values returns all known values for PolicyScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyScopeType) Values() []PolicyScopeType {
+	return []PolicyScopeType{
+		"All",
+		"AWS",
+		"Local",
+	}
+}
 
 type PolicySourceType string
 
@@ -130,6 +271,21 @@ const (
 	PolicySourceTypeNone         PolicySourceType = "none"
 )
 
+// Values returns all known values for PolicySourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicySourceType) Values() []PolicySourceType {
+	return []PolicySourceType{
+		"user",
+		"group",
+		"role",
+		"aws-managed",
+		"user-managed",
+		"resource",
+		"none",
+	}
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
@@ -137,6 +293,16 @@ const (
 	PolicyTypeInline  PolicyType = "INLINE"
 	PolicyTypeManaged PolicyType = "MANAGED"
 )
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"INLINE",
+		"MANAGED",
+	}
+}
 
 type PolicyUsageType string
 
@@ -146,12 +312,31 @@ const (
 	PolicyUsageTypePermissionsboundary PolicyUsageType = "PermissionsBoundary"
 )
 
+// Values returns all known values for PolicyUsageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyUsageType) Values() []PolicyUsageType {
+	return []PolicyUsageType{
+		"PermissionsPolicy",
+		"PermissionsBoundary",
+	}
+}
+
 type ReportFormatType string
 
 // Enum values for ReportFormatType
 const (
 	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
 )
+
+// Values returns all known values for ReportFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportFormatType) Values() []ReportFormatType {
+	return []ReportFormatType{
+		"text/csv",
+	}
+}
 
 type ReportStateType string
 
@@ -161,6 +346,17 @@ const (
 	ReportStateTypeInprogress ReportStateType = "INPROGRESS"
 	ReportStateTypeComplete   ReportStateType = "COMPLETE"
 )
+
+// Values returns all known values for ReportStateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportStateType) Values() []ReportStateType {
+	return []ReportStateType{
+		"STARTED",
+		"INPROGRESS",
+		"COMPLETE",
+	}
+}
 
 type SortKeyType string
 
@@ -172,6 +368,18 @@ const (
 	SortKeyTypeLast_authenticated_time_descending SortKeyType = "LAST_AUTHENTICATED_TIME_DESCENDING"
 )
 
+// Values returns all known values for SortKeyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SortKeyType) Values() []SortKeyType {
+	return []SortKeyType{
+		"SERVICE_NAMESPACE_ASCENDING",
+		"SERVICE_NAMESPACE_DESCENDING",
+		"LAST_AUTHENTICATED_TIME_ASCENDING",
+		"LAST_AUTHENTICATED_TIME_DESCENDING",
+	}
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -179,6 +387,16 @@ const (
 	StatusTypeActive   StatusType = "Active"
 	StatusTypeInactive StatusType = "Inactive"
 )
+
+// Values returns all known values for StatusType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusType) Values() []StatusType {
+	return []StatusType{
+		"Active",
+		"Inactive",
+	}
+}
 
 type SummaryKeyType string
 
@@ -211,3 +429,37 @@ const (
 	SummaryKeyTypeVersionsperpolicyquota            SummaryKeyType = "VersionsPerPolicyQuota"
 	SummaryKeyTypeGlobalendpointtokenversion        SummaryKeyType = "GlobalEndpointTokenVersion"
 )
+
+// Values returns all known values for SummaryKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryKeyType) Values() []SummaryKeyType {
+	return []SummaryKeyType{
+		"Users",
+		"UsersQuota",
+		"Groups",
+		"GroupsQuota",
+		"ServerCertificates",
+		"ServerCertificatesQuota",
+		"UserPolicySizeQuota",
+		"GroupPolicySizeQuota",
+		"GroupsPerUserQuota",
+		"SigningCertificatesPerUserQuota",
+		"AccessKeysPerUserQuota",
+		"MFADevices",
+		"MFADevicesInUse",
+		"AccountMFAEnabled",
+		"AccountAccessKeysPresent",
+		"AccountSigningCertificatesPresent",
+		"AttachedPoliciesPerGroupQuota",
+		"AttachedPoliciesPerRoleQuota",
+		"AttachedPoliciesPerUserQuota",
+		"Policies",
+		"PoliciesQuota",
+		"PolicySizeQuota",
+		"PolicyVersionsInUse",
+		"PolicyVersionsInUseQuota",
+		"VersionsPerPolicyQuota",
+		"GlobalEndpointTokenVersion",
+	}
+}

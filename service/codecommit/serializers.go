@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository struct 
 }
 
 func (*awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -64,7 +65,7 @@ type awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositories 
 }
 
 func (*awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositories) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -110,7 +111,7 @@ type awsAwsjson11_serializeOpBatchDescribeMergeConflicts struct {
 }
 
 func (*awsAwsjson11_serializeOpBatchDescribeMergeConflicts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpBatchDescribeMergeConflicts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -156,7 +157,7 @@ type awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositori
 }
 
 func (*awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositories) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -202,7 +203,7 @@ type awsAwsjson11_serializeOpBatchGetCommits struct {
 }
 
 func (*awsAwsjson11_serializeOpBatchGetCommits) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpBatchGetCommits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -248,7 +249,7 @@ type awsAwsjson11_serializeOpBatchGetRepositories struct {
 }
 
 func (*awsAwsjson11_serializeOpBatchGetRepositories) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpBatchGetRepositories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsAwsjson11_serializeOpCreateApprovalRuleTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateApprovalRuleTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateApprovalRuleTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -340,7 +341,7 @@ type awsAwsjson11_serializeOpCreateBranch struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateBranch) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateBranch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -386,7 +387,7 @@ type awsAwsjson11_serializeOpCreateCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -432,7 +433,7 @@ type awsAwsjson11_serializeOpCreatePullRequest struct {
 }
 
 func (*awsAwsjson11_serializeOpCreatePullRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreatePullRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -478,7 +479,7 @@ type awsAwsjson11_serializeOpCreatePullRequestApprovalRule struct {
 }
 
 func (*awsAwsjson11_serializeOpCreatePullRequestApprovalRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreatePullRequestApprovalRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -524,7 +525,7 @@ type awsAwsjson11_serializeOpCreateRepository struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -570,7 +571,7 @@ type awsAwsjson11_serializeOpCreateUnreferencedMergeCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateUnreferencedMergeCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateUnreferencedMergeCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -616,7 +617,7 @@ type awsAwsjson11_serializeOpDeleteApprovalRuleTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteApprovalRuleTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteApprovalRuleTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -662,7 +663,7 @@ type awsAwsjson11_serializeOpDeleteBranch struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteBranch) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteBranch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -708,7 +709,7 @@ type awsAwsjson11_serializeOpDeleteCommentContent struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteCommentContent) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteCommentContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -754,7 +755,7 @@ type awsAwsjson11_serializeOpDeleteFile struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteFile) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteFile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -800,7 +801,7 @@ type awsAwsjson11_serializeOpDeletePullRequestApprovalRule struct {
 }
 
 func (*awsAwsjson11_serializeOpDeletePullRequestApprovalRule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeletePullRequestApprovalRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -846,7 +847,7 @@ type awsAwsjson11_serializeOpDeleteRepository struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -892,7 +893,7 @@ type awsAwsjson11_serializeOpDescribeMergeConflicts struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMergeConflicts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMergeConflicts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -938,7 +939,7 @@ type awsAwsjson11_serializeOpDescribePullRequestEvents struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribePullRequestEvents) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribePullRequestEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -984,7 +985,7 @@ type awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository stru
 }
 
 func (*awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1030,7 +1031,7 @@ type awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules struct {
 }
 
 func (*awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1076,7 +1077,7 @@ type awsAwsjson11_serializeOpGetApprovalRuleTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpGetApprovalRuleTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetApprovalRuleTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1122,7 +1123,7 @@ type awsAwsjson11_serializeOpGetBlob struct {
 }
 
 func (*awsAwsjson11_serializeOpGetBlob) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetBlob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1168,7 +1169,7 @@ type awsAwsjson11_serializeOpGetBranch struct {
 }
 
 func (*awsAwsjson11_serializeOpGetBranch) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetBranch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1214,7 +1215,7 @@ type awsAwsjson11_serializeOpGetComment struct {
 }
 
 func (*awsAwsjson11_serializeOpGetComment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetComment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1260,7 +1261,7 @@ type awsAwsjson11_serializeOpGetCommentReactions struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCommentReactions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCommentReactions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1306,7 +1307,7 @@ type awsAwsjson11_serializeOpGetCommentsForComparedCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCommentsForComparedCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCommentsForComparedCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1352,7 +1353,7 @@ type awsAwsjson11_serializeOpGetCommentsForPullRequest struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCommentsForPullRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCommentsForPullRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1398,7 +1399,7 @@ type awsAwsjson11_serializeOpGetCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1444,7 +1445,7 @@ type awsAwsjson11_serializeOpGetDifferences struct {
 }
 
 func (*awsAwsjson11_serializeOpGetDifferences) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetDifferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1490,7 +1491,7 @@ type awsAwsjson11_serializeOpGetFile struct {
 }
 
 func (*awsAwsjson11_serializeOpGetFile) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetFile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1536,7 +1537,7 @@ type awsAwsjson11_serializeOpGetFolder struct {
 }
 
 func (*awsAwsjson11_serializeOpGetFolder) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetFolder) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1582,7 +1583,7 @@ type awsAwsjson11_serializeOpGetMergeCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMergeCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMergeCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1628,7 +1629,7 @@ type awsAwsjson11_serializeOpGetMergeConflicts struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMergeConflicts) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMergeConflicts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1674,7 +1675,7 @@ type awsAwsjson11_serializeOpGetMergeOptions struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMergeOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMergeOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1720,7 +1721,7 @@ type awsAwsjson11_serializeOpGetPullRequest struct {
 }
 
 func (*awsAwsjson11_serializeOpGetPullRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetPullRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1766,7 +1767,7 @@ type awsAwsjson11_serializeOpGetPullRequestApprovalStates struct {
 }
 
 func (*awsAwsjson11_serializeOpGetPullRequestApprovalStates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetPullRequestApprovalStates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1812,7 +1813,7 @@ type awsAwsjson11_serializeOpGetPullRequestOverrideState struct {
 }
 
 func (*awsAwsjson11_serializeOpGetPullRequestOverrideState) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetPullRequestOverrideState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1858,7 +1859,7 @@ type awsAwsjson11_serializeOpGetRepository struct {
 }
 
 func (*awsAwsjson11_serializeOpGetRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1904,7 +1905,7 @@ type awsAwsjson11_serializeOpGetRepositoryTriggers struct {
 }
 
 func (*awsAwsjson11_serializeOpGetRepositoryTriggers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetRepositoryTriggers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1950,7 +1951,7 @@ type awsAwsjson11_serializeOpListApprovalRuleTemplates struct {
 }
 
 func (*awsAwsjson11_serializeOpListApprovalRuleTemplates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListApprovalRuleTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1996,7 +1997,7 @@ type awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepository st
 }
 
 func (*awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2042,7 +2043,7 @@ type awsAwsjson11_serializeOpListBranches struct {
 }
 
 func (*awsAwsjson11_serializeOpListBranches) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListBranches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2088,7 +2089,7 @@ type awsAwsjson11_serializeOpListPullRequests struct {
 }
 
 func (*awsAwsjson11_serializeOpListPullRequests) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListPullRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2134,7 +2135,7 @@ type awsAwsjson11_serializeOpListRepositories struct {
 }
 
 func (*awsAwsjson11_serializeOpListRepositories) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListRepositories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2180,7 +2181,7 @@ type awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2226,7 +2227,7 @@ type awsAwsjson11_serializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2272,7 +2273,7 @@ type awsAwsjson11_serializeOpMergeBranchesByFastForward struct {
 }
 
 func (*awsAwsjson11_serializeOpMergeBranchesByFastForward) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergeBranchesByFastForward) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2318,7 +2319,7 @@ type awsAwsjson11_serializeOpMergeBranchesBySquash struct {
 }
 
 func (*awsAwsjson11_serializeOpMergeBranchesBySquash) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergeBranchesBySquash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2364,7 +2365,7 @@ type awsAwsjson11_serializeOpMergeBranchesByThreeWay struct {
 }
 
 func (*awsAwsjson11_serializeOpMergeBranchesByThreeWay) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergeBranchesByThreeWay) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2410,7 +2411,7 @@ type awsAwsjson11_serializeOpMergePullRequestByFastForward struct {
 }
 
 func (*awsAwsjson11_serializeOpMergePullRequestByFastForward) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergePullRequestByFastForward) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2456,7 +2457,7 @@ type awsAwsjson11_serializeOpMergePullRequestBySquash struct {
 }
 
 func (*awsAwsjson11_serializeOpMergePullRequestBySquash) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergePullRequestBySquash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2502,7 +2503,7 @@ type awsAwsjson11_serializeOpMergePullRequestByThreeWay struct {
 }
 
 func (*awsAwsjson11_serializeOpMergePullRequestByThreeWay) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpMergePullRequestByThreeWay) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2548,7 +2549,7 @@ type awsAwsjson11_serializeOpOverridePullRequestApprovalRules struct {
 }
 
 func (*awsAwsjson11_serializeOpOverridePullRequestApprovalRules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpOverridePullRequestApprovalRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2594,7 +2595,7 @@ type awsAwsjson11_serializeOpPostCommentForComparedCommit struct {
 }
 
 func (*awsAwsjson11_serializeOpPostCommentForComparedCommit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPostCommentForComparedCommit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2640,7 +2641,7 @@ type awsAwsjson11_serializeOpPostCommentForPullRequest struct {
 }
 
 func (*awsAwsjson11_serializeOpPostCommentForPullRequest) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPostCommentForPullRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2686,7 +2687,7 @@ type awsAwsjson11_serializeOpPostCommentReply struct {
 }
 
 func (*awsAwsjson11_serializeOpPostCommentReply) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPostCommentReply) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2732,7 +2733,7 @@ type awsAwsjson11_serializeOpPutCommentReaction struct {
 }
 
 func (*awsAwsjson11_serializeOpPutCommentReaction) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutCommentReaction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2778,7 +2779,7 @@ type awsAwsjson11_serializeOpPutFile struct {
 }
 
 func (*awsAwsjson11_serializeOpPutFile) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutFile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2824,7 +2825,7 @@ type awsAwsjson11_serializeOpPutRepositoryTriggers struct {
 }
 
 func (*awsAwsjson11_serializeOpPutRepositoryTriggers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutRepositoryTriggers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2870,7 +2871,7 @@ type awsAwsjson11_serializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_serializeOpTagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2916,7 +2917,7 @@ type awsAwsjson11_serializeOpTestRepositoryTriggers struct {
 }
 
 func (*awsAwsjson11_serializeOpTestRepositoryTriggers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpTestRepositoryTriggers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2962,7 +2963,7 @@ type awsAwsjson11_serializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_serializeOpUntagResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3008,7 +3009,7 @@ type awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3054,7 +3055,7 @@ type awsAwsjson11_serializeOpUpdateApprovalRuleTemplateDescription struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateApprovalRuleTemplateDescription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateDescription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3100,7 +3101,7 @@ type awsAwsjson11_serializeOpUpdateApprovalRuleTemplateName struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateApprovalRuleTemplateName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3146,7 +3147,7 @@ type awsAwsjson11_serializeOpUpdateComment struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateComment) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateComment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3192,7 +3193,7 @@ type awsAwsjson11_serializeOpUpdateDefaultBranch struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateDefaultBranch) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateDefaultBranch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3238,7 +3239,7 @@ type awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3284,7 +3285,7 @@ type awsAwsjson11_serializeOpUpdatePullRequestApprovalState struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePullRequestApprovalState) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3330,7 +3331,7 @@ type awsAwsjson11_serializeOpUpdatePullRequestDescription struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePullRequestDescription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePullRequestDescription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3376,7 +3377,7 @@ type awsAwsjson11_serializeOpUpdatePullRequestStatus struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePullRequestStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePullRequestStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3422,7 +3423,7 @@ type awsAwsjson11_serializeOpUpdatePullRequestTitle struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePullRequestTitle) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePullRequestTitle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3468,7 +3469,7 @@ type awsAwsjson11_serializeOpUpdateRepositoryDescription struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateRepositoryDescription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateRepositoryDescription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3514,7 +3515,7 @@ type awsAwsjson11_serializeOpUpdateRepositoryName struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateRepositoryName) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateRepositoryName) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

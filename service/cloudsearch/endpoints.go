@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/cloudsearch/internal/endpoints"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -51,7 +52,7 @@ type ResolveEndpoint struct {
 }
 
 func (*ResolveEndpoint) ID() string {
-	return "ResolveEndpoint"
+	return awsid.ResolveEndpoint
 }
 
 func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -89,10 +90,10 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	return next.HandleSerialize(ctx, in)
 }
 func addResolveEndpointMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&ResolveEndpoint{
+	return stack.Serialize.Add(&ResolveEndpoint{
 		Resolver: o.EndpointResolver,
 		Options:  o.EndpointOptions,
-	}, "OperationSerializer", middleware.Before)
+	}, middleware.Before)
 }
 
 func removeResolveEndpointMiddleware(stack *middleware.Stack) error {

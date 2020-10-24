@@ -10,6 +10,16 @@ const (
 	ActivityStreamModeAsync ActivityStreamMode = "async"
 )
 
+// Values returns all known values for ActivityStreamMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityStreamMode) Values() []ActivityStreamMode {
+	return []ActivityStreamMode{
+		"sync",
+		"async",
+	}
+}
+
 type ActivityStreamStatus string
 
 // Enum values for ActivityStreamStatus
@@ -20,6 +30,18 @@ const (
 	ActivityStreamStatusStopping ActivityStreamStatus = "stopping"
 )
 
+// Values returns all known values for ActivityStreamStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityStreamStatus) Values() []ActivityStreamStatus {
+	return []ActivityStreamStatus{
+		"stopped",
+		"starting",
+		"started",
+		"stopping",
+	}
+}
+
 type ApplyMethod string
 
 // Enum values for ApplyMethod
@@ -28,12 +50,31 @@ const (
 	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
 )
 
+// Values returns all known values for ApplyMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ApplyMethod) Values() []ApplyMethod {
+	return []ApplyMethod{
+		"immediate",
+		"pending-reboot",
+	}
+}
+
 type AuthScheme string
 
 // Enum values for AuthScheme
 const (
 	AuthSchemeSecrets AuthScheme = "SECRETS"
 )
+
+// Values returns all known values for AuthScheme. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AuthScheme) Values() []AuthScheme {
+	return []AuthScheme{
+		"SECRETS",
+	}
+}
 
 type DBProxyStatus string
 
@@ -50,6 +91,23 @@ const (
 	DBProxyStatusReactivating                 DBProxyStatus = "reactivating"
 )
 
+// Values returns all known values for DBProxyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DBProxyStatus) Values() []DBProxyStatus {
+	return []DBProxyStatus{
+		"available",
+		"modifying",
+		"incompatible-network",
+		"insufficient-resource-limits",
+		"creating",
+		"deleting",
+		"suspended",
+		"suspending",
+		"reactivating",
+	}
+}
+
 type EngineFamily string
 
 // Enum values for EngineFamily
@@ -58,6 +116,16 @@ const (
 	EngineFamilyPostgresql EngineFamily = "POSTGRESQL"
 )
 
+// Values returns all known values for EngineFamily. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EngineFamily) Values() []EngineFamily {
+	return []EngineFamily{
+		"MYSQL",
+		"POSTGRESQL",
+	}
+}
+
 type IAMAuthMode string
 
 // Enum values for IAMAuthMode
@@ -65,6 +133,16 @@ const (
 	IAMAuthModeDisabled IAMAuthMode = "DISABLED"
 	IAMAuthModeRequired IAMAuthMode = "REQUIRED"
 )
+
+// Values returns all known values for IAMAuthMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IAMAuthMode) Values() []IAMAuthMode {
+	return []IAMAuthMode{
+		"DISABLED",
+		"REQUIRED",
+	}
+}
 
 type SourceType string
 
@@ -78,6 +156,20 @@ const (
 	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"db-instance",
+		"db-parameter-group",
+		"db-security-group",
+		"db-snapshot",
+		"db-cluster",
+		"db-cluster-snapshot",
+	}
+}
+
 type TargetHealthReason string
 
 // Enum values for TargetHealthReason
@@ -88,6 +180,18 @@ const (
 	TargetHealthReasonPending_proxy_capacity TargetHealthReason = "PENDING_PROXY_CAPACITY"
 )
 
+// Values returns all known values for TargetHealthReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetHealthReason) Values() []TargetHealthReason {
+	return []TargetHealthReason{
+		"UNREACHABLE",
+		"CONNECTION_FAILED",
+		"AUTH_FAILURE",
+		"PENDING_PROXY_CAPACITY",
+	}
+}
+
 type TargetState string
 
 // Enum values for TargetState
@@ -97,6 +201,17 @@ const (
 	TargetStateUnavailable TargetState = "UNAVAILABLE"
 )
 
+// Values returns all known values for TargetState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetState) Values() []TargetState {
+	return []TargetState{
+		"REGISTERING",
+		"AVAILABLE",
+		"UNAVAILABLE",
+	}
+}
+
 type TargetType string
 
 // Enum values for TargetType
@@ -105,6 +220,17 @@ const (
 	TargetTypeRds_serverless_endpoint TargetType = "RDS_SERVERLESS_ENDPOINT"
 	TargetTypeTracked_cluster         TargetType = "TRACKED_CLUSTER"
 )
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"RDS_INSTANCE",
+		"RDS_SERVERLESS_ENDPOINT",
+		"TRACKED_CLUSTER",
+	}
+}
 
 type WriteForwardingStatus string
 
@@ -116,3 +242,16 @@ const (
 	WriteForwardingStatusDisabling WriteForwardingStatus = "disabling"
 	WriteForwardingStatusUnknown   WriteForwardingStatus = "unknown"
 )
+
+// Values returns all known values for WriteForwardingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WriteForwardingStatus) Values() []WriteForwardingStatus {
+	return []WriteForwardingStatus{
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+		"unknown",
+	}
+}

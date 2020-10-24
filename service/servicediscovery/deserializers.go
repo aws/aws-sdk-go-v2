@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpCreateHttpNamespace struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateHttpNamespace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateHttpNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -146,7 +147,7 @@ type awsAwsjson11_deserializeOpCreatePrivateDnsNamespace struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePrivateDnsNamespace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePrivateDnsNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -269,7 +270,7 @@ type awsAwsjson11_deserializeOpCreatePublicDnsNamespace struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreatePublicDnsNamespace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreatePublicDnsNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -392,7 +393,7 @@ type awsAwsjson11_deserializeOpCreateService struct {
 }
 
 func (*awsAwsjson11_deserializeOpCreateService) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCreateService) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -515,7 +516,7 @@ type awsAwsjson11_deserializeOpDeleteNamespace struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteNamespace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -635,7 +636,7 @@ type awsAwsjson11_deserializeOpDeleteService struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteService) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteService) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -752,7 +753,7 @@ type awsAwsjson11_deserializeOpDeregisterInstance struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeregisterInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeregisterInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -875,7 +876,7 @@ type awsAwsjson11_deserializeOpDiscoverInstances struct {
 }
 
 func (*awsAwsjson11_deserializeOpDiscoverInstances) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDiscoverInstances) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -995,7 +996,7 @@ type awsAwsjson11_deserializeOpGetInstance struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1112,7 +1113,7 @@ type awsAwsjson11_deserializeOpGetInstancesHealthStatus struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetInstancesHealthStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetInstancesHealthStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1229,7 +1230,7 @@ type awsAwsjson11_deserializeOpGetNamespace struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetNamespace) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetNamespace) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1343,7 +1344,7 @@ type awsAwsjson11_deserializeOpGetOperation struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetOperation) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetOperation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1457,7 +1458,7 @@ type awsAwsjson11_deserializeOpGetService struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetService) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetService) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1571,7 +1572,7 @@ type awsAwsjson11_deserializeOpListInstances struct {
 }
 
 func (*awsAwsjson11_deserializeOpListInstances) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListInstances) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1685,7 +1686,7 @@ type awsAwsjson11_deserializeOpListNamespaces struct {
 }
 
 func (*awsAwsjson11_deserializeOpListNamespaces) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListNamespaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1796,7 +1797,7 @@ type awsAwsjson11_deserializeOpListOperations struct {
 }
 
 func (*awsAwsjson11_deserializeOpListOperations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListOperations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1907,7 +1908,7 @@ type awsAwsjson11_deserializeOpListServices struct {
 }
 
 func (*awsAwsjson11_deserializeOpListServices) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListServices) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2018,7 +2019,7 @@ type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2132,7 +2133,7 @@ type awsAwsjson11_deserializeOpRegisterInstance struct {
 }
 
 func (*awsAwsjson11_deserializeOpRegisterInstance) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRegisterInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2255,7 +2256,7 @@ type awsAwsjson11_deserializeOpTagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpTagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2372,7 +2373,7 @@ type awsAwsjson11_deserializeOpUntagResource struct {
 }
 
 func (*awsAwsjson11_deserializeOpUntagResource) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2486,7 +2487,7 @@ type awsAwsjson11_deserializeOpUpdateInstanceCustomHealthStatus struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateInstanceCustomHealthStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateInstanceCustomHealthStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2606,7 +2607,7 @@ type awsAwsjson11_deserializeOpUpdateService struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateService) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateService) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

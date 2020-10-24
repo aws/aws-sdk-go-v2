@@ -14,6 +14,20 @@ const (
 	BulkDeploymentStatusFailed       BulkDeploymentStatus = "Failed"
 )
 
+// Values returns all known values for BulkDeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BulkDeploymentStatus) Values() []BulkDeploymentStatus {
+	return []BulkDeploymentStatus{
+		"Initializing",
+		"Running",
+		"Completed",
+		"Stopping",
+		"Stopped",
+		"Failed",
+	}
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -24,6 +38,18 @@ const (
 	DeploymentTypeForceresetdeployment DeploymentType = "ForceResetDeployment"
 )
 
+// Values returns all known values for DeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentType) Values() []DeploymentType {
+	return []DeploymentType{
+		"NewDeployment",
+		"Redeployment",
+		"ResetDeployment",
+		"ForceResetDeployment",
+	}
+}
+
 type EncodingType string
 
 // Enum values for EncodingType
@@ -31,6 +57,16 @@ const (
 	EncodingTypeBinary EncodingType = "binary"
 	EncodingTypeJson   EncodingType = "json"
 )
+
+// Values returns all known values for EncodingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EncodingType) Values() []EncodingType {
+	return []EncodingType{
+		"binary",
+		"json",
+	}
+}
 
 type FunctionIsolationMode string
 
@@ -40,6 +76,16 @@ const (
 	FunctionIsolationModeNocontainer         FunctionIsolationMode = "NoContainer"
 )
 
+// Values returns all known values for FunctionIsolationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionIsolationMode) Values() []FunctionIsolationMode {
+	return []FunctionIsolationMode{
+		"GreengrassContainer",
+		"NoContainer",
+	}
+}
+
 type LoggerComponent string
 
 // Enum values for LoggerComponent
@@ -47,6 +93,16 @@ const (
 	LoggerComponentGreengrasssystem LoggerComponent = "GreengrassSystem"
 	LoggerComponentLambda           LoggerComponent = "Lambda"
 )
+
+// Values returns all known values for LoggerComponent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoggerComponent) Values() []LoggerComponent {
+	return []LoggerComponent{
+		"GreengrassSystem",
+		"Lambda",
+	}
+}
 
 type LoggerLevel string
 
@@ -59,6 +115,19 @@ const (
 	LoggerLevelFatal LoggerLevel = "FATAL"
 )
 
+// Values returns all known values for LoggerLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LoggerLevel) Values() []LoggerLevel {
+	return []LoggerLevel{
+		"DEBUG",
+		"INFO",
+		"WARN",
+		"ERROR",
+		"FATAL",
+	}
+}
+
 type LoggerType string
 
 // Enum values for LoggerType
@@ -66,6 +135,16 @@ const (
 	LoggerTypeFilesystem    LoggerType = "FileSystem"
 	LoggerTypeAwscloudwatch LoggerType = "AWSCloudWatch"
 )
+
+// Values returns all known values for LoggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LoggerType) Values() []LoggerType {
+	return []LoggerType{
+		"FileSystem",
+		"AWSCloudWatch",
+	}
+}
 
 type Permission string
 
@@ -75,6 +154,16 @@ const (
 	PermissionRw Permission = "rw"
 )
 
+// Values returns all known values for Permission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Permission) Values() []Permission {
+	return []Permission{
+		"ro",
+		"rw",
+	}
+}
+
 type SoftwareToUpdate string
 
 // Enum values for SoftwareToUpdate
@@ -82,6 +171,16 @@ const (
 	SoftwareToUpdateCore      SoftwareToUpdate = "core"
 	SoftwareToUpdateOta_agent SoftwareToUpdate = "ota_agent"
 )
+
+// Values returns all known values for SoftwareToUpdate. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SoftwareToUpdate) Values() []SoftwareToUpdate {
+	return []SoftwareToUpdate{
+		"core",
+		"ota_agent",
+	}
+}
 
 type UpdateAgentLogLevel string
 
@@ -97,6 +196,22 @@ const (
 	UpdateAgentLogLevelFatal   UpdateAgentLogLevel = "FATAL"
 )
 
+// Values returns all known values for UpdateAgentLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateAgentLogLevel) Values() []UpdateAgentLogLevel {
+	return []UpdateAgentLogLevel{
+		"NONE",
+		"TRACE",
+		"DEBUG",
+		"VERBOSE",
+		"INFO",
+		"WARN",
+		"ERROR",
+		"FATAL",
+	}
+}
+
 type UpdateTargetsArchitecture string
 
 // Enum values for UpdateTargetsArchitecture
@@ -107,6 +222,18 @@ const (
 	UpdateTargetsArchitectureAarch64 UpdateTargetsArchitecture = "aarch64"
 )
 
+// Values returns all known values for UpdateTargetsArchitecture. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateTargetsArchitecture) Values() []UpdateTargetsArchitecture {
+	return []UpdateTargetsArchitecture{
+		"armv6l",
+		"armv7l",
+		"x86_64",
+		"aarch64",
+	}
+}
+
 type UpdateTargetsOperatingSystem string
 
 // Enum values for UpdateTargetsOperatingSystem
@@ -116,3 +243,15 @@ const (
 	UpdateTargetsOperatingSystemAmazon_linux UpdateTargetsOperatingSystem = "amazon_linux"
 	UpdateTargetsOperatingSystemOpenwrt      UpdateTargetsOperatingSystem = "openwrt"
 )
+
+// Values returns all known values for UpdateTargetsOperatingSystem. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateTargetsOperatingSystem) Values() []UpdateTargetsOperatingSystem {
+	return []UpdateTargetsOperatingSystem{
+		"ubuntu",
+		"raspbian",
+		"amazon_linux",
+		"openwrt",
+	}
+}

@@ -11,6 +11,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsquery_serializeOpAcceptReservedNodeExchange struct {
 }
 
 func (*awsAwsquery_serializeOpAcceptReservedNodeExchange) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpAcceptReservedNodeExchange) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -74,7 +75,7 @@ type awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress struct {
 }
 
 func (*awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -129,7 +130,7 @@ type awsAwsquery_serializeOpAuthorizeSnapshotAccess struct {
 }
 
 func (*awsAwsquery_serializeOpAuthorizeSnapshotAccess) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpAuthorizeSnapshotAccess) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -184,7 +185,7 @@ type awsAwsquery_serializeOpBatchDeleteClusterSnapshots struct {
 }
 
 func (*awsAwsquery_serializeOpBatchDeleteClusterSnapshots) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpBatchDeleteClusterSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -239,7 +240,7 @@ type awsAwsquery_serializeOpBatchModifyClusterSnapshots struct {
 }
 
 func (*awsAwsquery_serializeOpBatchModifyClusterSnapshots) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpBatchModifyClusterSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -294,7 +295,7 @@ type awsAwsquery_serializeOpCancelResize struct {
 }
 
 func (*awsAwsquery_serializeOpCancelResize) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCancelResize) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -349,7 +350,7 @@ type awsAwsquery_serializeOpCopyClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpCopyClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCopyClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -404,7 +405,7 @@ type awsAwsquery_serializeOpCreateCluster struct {
 }
 
 func (*awsAwsquery_serializeOpCreateCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -459,7 +460,7 @@ type awsAwsquery_serializeOpCreateClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_serializeOpCreateClusterParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateClusterParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -514,7 +515,7 @@ type awsAwsquery_serializeOpCreateClusterSecurityGroup struct {
 }
 
 func (*awsAwsquery_serializeOpCreateClusterSecurityGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateClusterSecurityGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -569,7 +570,7 @@ type awsAwsquery_serializeOpCreateClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpCreateClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -624,7 +625,7 @@ type awsAwsquery_serializeOpCreateClusterSubnetGroup struct {
 }
 
 func (*awsAwsquery_serializeOpCreateClusterSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateClusterSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -679,7 +680,7 @@ type awsAwsquery_serializeOpCreateEventSubscription struct {
 }
 
 func (*awsAwsquery_serializeOpCreateEventSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -734,7 +735,7 @@ type awsAwsquery_serializeOpCreateHsmClientCertificate struct {
 }
 
 func (*awsAwsquery_serializeOpCreateHsmClientCertificate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateHsmClientCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -789,7 +790,7 @@ type awsAwsquery_serializeOpCreateHsmConfiguration struct {
 }
 
 func (*awsAwsquery_serializeOpCreateHsmConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateHsmConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -844,7 +845,7 @@ type awsAwsquery_serializeOpCreateScheduledAction struct {
 }
 
 func (*awsAwsquery_serializeOpCreateScheduledAction) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateScheduledAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -899,7 +900,7 @@ type awsAwsquery_serializeOpCreateSnapshotCopyGrant struct {
 }
 
 func (*awsAwsquery_serializeOpCreateSnapshotCopyGrant) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateSnapshotCopyGrant) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -954,7 +955,7 @@ type awsAwsquery_serializeOpCreateSnapshotSchedule struct {
 }
 
 func (*awsAwsquery_serializeOpCreateSnapshotSchedule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateSnapshotSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1009,7 +1010,7 @@ type awsAwsquery_serializeOpCreateTags struct {
 }
 
 func (*awsAwsquery_serializeOpCreateTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1064,7 +1065,7 @@ type awsAwsquery_serializeOpCreateUsageLimit struct {
 }
 
 func (*awsAwsquery_serializeOpCreateUsageLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateUsageLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1119,7 +1120,7 @@ type awsAwsquery_serializeOpDeleteCluster struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1174,7 +1175,7 @@ type awsAwsquery_serializeOpDeleteClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteClusterParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteClusterParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1229,7 +1230,7 @@ type awsAwsquery_serializeOpDeleteClusterSecurityGroup struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteClusterSecurityGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteClusterSecurityGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1284,7 +1285,7 @@ type awsAwsquery_serializeOpDeleteClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1339,7 +1340,7 @@ type awsAwsquery_serializeOpDeleteClusterSubnetGroup struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteClusterSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteClusterSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1394,7 +1395,7 @@ type awsAwsquery_serializeOpDeleteEventSubscription struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteEventSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1449,7 +1450,7 @@ type awsAwsquery_serializeOpDeleteHsmClientCertificate struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteHsmClientCertificate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteHsmClientCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1504,7 +1505,7 @@ type awsAwsquery_serializeOpDeleteHsmConfiguration struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteHsmConfiguration) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteHsmConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1559,7 +1560,7 @@ type awsAwsquery_serializeOpDeleteScheduledAction struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteScheduledAction) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteScheduledAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1614,7 +1615,7 @@ type awsAwsquery_serializeOpDeleteSnapshotCopyGrant struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteSnapshotCopyGrant) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteSnapshotCopyGrant) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1669,7 +1670,7 @@ type awsAwsquery_serializeOpDeleteSnapshotSchedule struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteSnapshotSchedule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteSnapshotSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1724,7 +1725,7 @@ type awsAwsquery_serializeOpDeleteTags struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1779,7 +1780,7 @@ type awsAwsquery_serializeOpDeleteUsageLimit struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteUsageLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteUsageLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1834,7 +1835,7 @@ type awsAwsquery_serializeOpDescribeAccountAttributes struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAccountAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAccountAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1889,7 +1890,7 @@ type awsAwsquery_serializeOpDescribeClusterDbRevisions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterDbRevisions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterDbRevisions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1944,7 +1945,7 @@ type awsAwsquery_serializeOpDescribeClusterParameterGroups struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterParameterGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterParameterGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1999,7 +2000,7 @@ type awsAwsquery_serializeOpDescribeClusterParameters struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2054,7 +2055,7 @@ type awsAwsquery_serializeOpDescribeClusters struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2109,7 +2110,7 @@ type awsAwsquery_serializeOpDescribeClusterSecurityGroups struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterSecurityGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterSecurityGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2164,7 +2165,7 @@ type awsAwsquery_serializeOpDescribeClusterSnapshots struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterSnapshots) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2219,7 +2220,7 @@ type awsAwsquery_serializeOpDescribeClusterSubnetGroups struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterSubnetGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterSubnetGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2274,7 +2275,7 @@ type awsAwsquery_serializeOpDescribeClusterTracks struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterTracks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterTracks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2329,7 +2330,7 @@ type awsAwsquery_serializeOpDescribeClusterVersions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeClusterVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeClusterVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2384,7 +2385,7 @@ type awsAwsquery_serializeOpDescribeDefaultClusterParameters struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeDefaultClusterParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeDefaultClusterParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2439,7 +2440,7 @@ type awsAwsquery_serializeOpDescribeEventCategories struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeEventCategories) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeEventCategories) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2494,7 +2495,7 @@ type awsAwsquery_serializeOpDescribeEvents struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeEvents) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2549,7 +2550,7 @@ type awsAwsquery_serializeOpDescribeEventSubscriptions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeEventSubscriptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeEventSubscriptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2604,7 +2605,7 @@ type awsAwsquery_serializeOpDescribeHsmClientCertificates struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeHsmClientCertificates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeHsmClientCertificates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2659,7 +2660,7 @@ type awsAwsquery_serializeOpDescribeHsmConfigurations struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeHsmConfigurations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeHsmConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2714,7 +2715,7 @@ type awsAwsquery_serializeOpDescribeLoggingStatus struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeLoggingStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeLoggingStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2769,7 +2770,7 @@ type awsAwsquery_serializeOpDescribeNodeConfigurationOptions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeNodeConfigurationOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeNodeConfigurationOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2824,7 +2825,7 @@ type awsAwsquery_serializeOpDescribeOrderableClusterOptions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeOrderableClusterOptions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeOrderableClusterOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2879,7 +2880,7 @@ type awsAwsquery_serializeOpDescribeReservedNodeOfferings struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeReservedNodeOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeReservedNodeOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2934,7 +2935,7 @@ type awsAwsquery_serializeOpDescribeReservedNodes struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeReservedNodes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeReservedNodes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2989,7 +2990,7 @@ type awsAwsquery_serializeOpDescribeResize struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeResize) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeResize) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3044,7 +3045,7 @@ type awsAwsquery_serializeOpDescribeScheduledActions struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeScheduledActions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeScheduledActions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3099,7 +3100,7 @@ type awsAwsquery_serializeOpDescribeSnapshotCopyGrants struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeSnapshotCopyGrants) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeSnapshotCopyGrants) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3154,7 +3155,7 @@ type awsAwsquery_serializeOpDescribeSnapshotSchedules struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeSnapshotSchedules) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeSnapshotSchedules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3209,7 +3210,7 @@ type awsAwsquery_serializeOpDescribeStorage struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeStorage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeStorage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3262,7 +3263,7 @@ type awsAwsquery_serializeOpDescribeTableRestoreStatus struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeTableRestoreStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeTableRestoreStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3317,7 +3318,7 @@ type awsAwsquery_serializeOpDescribeTags struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3372,7 +3373,7 @@ type awsAwsquery_serializeOpDescribeUsageLimits struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeUsageLimits) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeUsageLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3427,7 +3428,7 @@ type awsAwsquery_serializeOpDisableLogging struct {
 }
 
 func (*awsAwsquery_serializeOpDisableLogging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDisableLogging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3482,7 +3483,7 @@ type awsAwsquery_serializeOpDisableSnapshotCopy struct {
 }
 
 func (*awsAwsquery_serializeOpDisableSnapshotCopy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDisableSnapshotCopy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3537,7 +3538,7 @@ type awsAwsquery_serializeOpEnableLogging struct {
 }
 
 func (*awsAwsquery_serializeOpEnableLogging) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEnableLogging) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3592,7 +3593,7 @@ type awsAwsquery_serializeOpEnableSnapshotCopy struct {
 }
 
 func (*awsAwsquery_serializeOpEnableSnapshotCopy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEnableSnapshotCopy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3647,7 +3648,7 @@ type awsAwsquery_serializeOpGetClusterCredentials struct {
 }
 
 func (*awsAwsquery_serializeOpGetClusterCredentials) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetClusterCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3702,7 +3703,7 @@ type awsAwsquery_serializeOpGetReservedNodeExchangeOfferings struct {
 }
 
 func (*awsAwsquery_serializeOpGetReservedNodeExchangeOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpGetReservedNodeExchangeOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3757,7 +3758,7 @@ type awsAwsquery_serializeOpModifyCluster struct {
 }
 
 func (*awsAwsquery_serializeOpModifyCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3812,7 +3813,7 @@ type awsAwsquery_serializeOpModifyClusterDbRevision struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterDbRevision) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterDbRevision) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3867,7 +3868,7 @@ type awsAwsquery_serializeOpModifyClusterIamRoles struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterIamRoles) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterIamRoles) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3922,7 +3923,7 @@ type awsAwsquery_serializeOpModifyClusterMaintenance struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterMaintenance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterMaintenance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3977,7 +3978,7 @@ type awsAwsquery_serializeOpModifyClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4032,7 +4033,7 @@ type awsAwsquery_serializeOpModifyClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4087,7 +4088,7 @@ type awsAwsquery_serializeOpModifyClusterSnapshotSchedule struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterSnapshotSchedule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterSnapshotSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4142,7 +4143,7 @@ type awsAwsquery_serializeOpModifyClusterSubnetGroup struct {
 }
 
 func (*awsAwsquery_serializeOpModifyClusterSubnetGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyClusterSubnetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4197,7 +4198,7 @@ type awsAwsquery_serializeOpModifyEventSubscription struct {
 }
 
 func (*awsAwsquery_serializeOpModifyEventSubscription) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4252,7 +4253,7 @@ type awsAwsquery_serializeOpModifyScheduledAction struct {
 }
 
 func (*awsAwsquery_serializeOpModifyScheduledAction) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyScheduledAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4307,7 +4308,7 @@ type awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod struct {
 }
 
 func (*awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4362,7 +4363,7 @@ type awsAwsquery_serializeOpModifySnapshotSchedule struct {
 }
 
 func (*awsAwsquery_serializeOpModifySnapshotSchedule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifySnapshotSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4417,7 +4418,7 @@ type awsAwsquery_serializeOpModifyUsageLimit struct {
 }
 
 func (*awsAwsquery_serializeOpModifyUsageLimit) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyUsageLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4472,7 +4473,7 @@ type awsAwsquery_serializeOpPauseCluster struct {
 }
 
 func (*awsAwsquery_serializeOpPauseCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPauseCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4527,7 +4528,7 @@ type awsAwsquery_serializeOpPurchaseReservedNodeOffering struct {
 }
 
 func (*awsAwsquery_serializeOpPurchaseReservedNodeOffering) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpPurchaseReservedNodeOffering) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4582,7 +4583,7 @@ type awsAwsquery_serializeOpRebootCluster struct {
 }
 
 func (*awsAwsquery_serializeOpRebootCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRebootCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4637,7 +4638,7 @@ type awsAwsquery_serializeOpResetClusterParameterGroup struct {
 }
 
 func (*awsAwsquery_serializeOpResetClusterParameterGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpResetClusterParameterGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4692,7 +4693,7 @@ type awsAwsquery_serializeOpResizeCluster struct {
 }
 
 func (*awsAwsquery_serializeOpResizeCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpResizeCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4747,7 +4748,7 @@ type awsAwsquery_serializeOpRestoreFromClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpRestoreFromClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRestoreFromClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4802,7 +4803,7 @@ type awsAwsquery_serializeOpRestoreTableFromClusterSnapshot struct {
 }
 
 func (*awsAwsquery_serializeOpRestoreTableFromClusterSnapshot) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRestoreTableFromClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4857,7 +4858,7 @@ type awsAwsquery_serializeOpResumeCluster struct {
 }
 
 func (*awsAwsquery_serializeOpResumeCluster) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpResumeCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4912,7 +4913,7 @@ type awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress struct {
 }
 
 func (*awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4967,7 +4968,7 @@ type awsAwsquery_serializeOpRevokeSnapshotAccess struct {
 }
 
 func (*awsAwsquery_serializeOpRevokeSnapshotAccess) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRevokeSnapshotAccess) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5022,7 +5023,7 @@ type awsAwsquery_serializeOpRotateEncryptionKey struct {
 }
 
 func (*awsAwsquery_serializeOpRotateEncryptionKey) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRotateEncryptionKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

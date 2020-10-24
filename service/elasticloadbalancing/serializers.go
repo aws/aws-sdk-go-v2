@@ -11,6 +11,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsAwsquery_serializeOpAddTags struct {
 }
 
 func (*awsAwsquery_serializeOpAddTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpAddTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -73,7 +74,7 @@ type awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -128,7 +129,7 @@ type awsAwsquery_serializeOpAttachLoadBalancerToSubnets struct {
 }
 
 func (*awsAwsquery_serializeOpAttachLoadBalancerToSubnets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpAttachLoadBalancerToSubnets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -183,7 +184,7 @@ type awsAwsquery_serializeOpConfigureHealthCheck struct {
 }
 
 func (*awsAwsquery_serializeOpConfigureHealthCheck) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpConfigureHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -238,7 +239,7 @@ type awsAwsquery_serializeOpCreateAppCookieStickinessPolicy struct {
 }
 
 func (*awsAwsquery_serializeOpCreateAppCookieStickinessPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateAppCookieStickinessPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -293,7 +294,7 @@ type awsAwsquery_serializeOpCreateLBCookieStickinessPolicy struct {
 }
 
 func (*awsAwsquery_serializeOpCreateLBCookieStickinessPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateLBCookieStickinessPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -348,7 +349,7 @@ type awsAwsquery_serializeOpCreateLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpCreateLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -403,7 +404,7 @@ type awsAwsquery_serializeOpCreateLoadBalancerListeners struct {
 }
 
 func (*awsAwsquery_serializeOpCreateLoadBalancerListeners) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateLoadBalancerListeners) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -458,7 +459,7 @@ type awsAwsquery_serializeOpCreateLoadBalancerPolicy struct {
 }
 
 func (*awsAwsquery_serializeOpCreateLoadBalancerPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpCreateLoadBalancerPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -513,7 +514,7 @@ type awsAwsquery_serializeOpDeleteLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -568,7 +569,7 @@ type awsAwsquery_serializeOpDeleteLoadBalancerListeners struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteLoadBalancerListeners) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteLoadBalancerListeners) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -623,7 +624,7 @@ type awsAwsquery_serializeOpDeleteLoadBalancerPolicy struct {
 }
 
 func (*awsAwsquery_serializeOpDeleteLoadBalancerPolicy) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeleteLoadBalancerPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -678,7 +679,7 @@ type awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -733,7 +734,7 @@ type awsAwsquery_serializeOpDescribeAccountLimits struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeAccountLimits) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -788,7 +789,7 @@ type awsAwsquery_serializeOpDescribeInstanceHealth struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeInstanceHealth) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeInstanceHealth) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -843,7 +844,7 @@ type awsAwsquery_serializeOpDescribeLoadBalancerAttributes struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeLoadBalancerAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeLoadBalancerAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -898,7 +899,7 @@ type awsAwsquery_serializeOpDescribeLoadBalancerPolicies struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeLoadBalancerPolicies) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -953,7 +954,7 @@ type awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1008,7 +1009,7 @@ type awsAwsquery_serializeOpDescribeLoadBalancers struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeLoadBalancers) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeLoadBalancers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1063,7 +1064,7 @@ type awsAwsquery_serializeOpDescribeTags struct {
 }
 
 func (*awsAwsquery_serializeOpDescribeTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1118,7 +1119,7 @@ type awsAwsquery_serializeOpDetachLoadBalancerFromSubnets struct {
 }
 
 func (*awsAwsquery_serializeOpDetachLoadBalancerFromSubnets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDetachLoadBalancerFromSubnets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1173,7 +1174,7 @@ type awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1228,7 +1229,7 @@ type awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1283,7 +1284,7 @@ type awsAwsquery_serializeOpModifyLoadBalancerAttributes struct {
 }
 
 func (*awsAwsquery_serializeOpModifyLoadBalancerAttributes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpModifyLoadBalancerAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1338,7 +1339,7 @@ type awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer struct {
 }
 
 func (*awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1393,7 +1394,7 @@ type awsAwsquery_serializeOpRemoveTags struct {
 }
 
 func (*awsAwsquery_serializeOpRemoveTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpRemoveTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1448,7 +1449,7 @@ type awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate struct {
 }
 
 func (*awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1503,7 +1504,7 @@ type awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer struct {
 }
 
 func (*awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1558,7 +1559,7 @@ type awsAwsquery_serializeOpSetLoadBalancerPoliciesOfListener struct {
 }
 
 func (*awsAwsquery_serializeOpSetLoadBalancerPoliciesOfListener) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesOfListener) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

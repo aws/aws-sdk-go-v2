@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -21,7 +22,7 @@ type awsRestjson1_deserializeOpCreateConfigurationSet struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateConfigurationSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -116,7 +117,7 @@ type awsRestjson1_deserializeOpCreateConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -214,7 +215,7 @@ type awsRestjson1_deserializeOpDeleteConfigurationSet struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteConfigurationSet) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -306,7 +307,7 @@ type awsRestjson1_deserializeOpDeleteConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -398,7 +399,7 @@ type awsRestjson1_deserializeOpGetConfigurationSetEventDestinations struct {
 }
 
 func (*awsRestjson1_deserializeOpGetConfigurationSetEventDestinations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetConfigurationSetEventDestinations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -554,7 +555,7 @@ type awsRestjson1_deserializeOpListConfigurationSets struct {
 }
 
 func (*awsRestjson1_deserializeOpListConfigurationSets) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListConfigurationSets) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -716,7 +717,7 @@ type awsRestjson1_deserializeOpSendVoiceMessage struct {
 }
 
 func (*awsRestjson1_deserializeOpSendVoiceMessage) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpSendVoiceMessage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -873,7 +874,7 @@ type awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination struct {
 }
 
 func (*awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

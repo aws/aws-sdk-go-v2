@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsAwsjson11_deserializeOpAcceptDomainTransferFromAnotherAwsAccount struct 
 }
 
 func (*awsAwsjson11_deserializeOpAcceptDomainTransferFromAnotherAwsAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpAcceptDomainTransferFromAnotherAwsAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -140,7 +141,7 @@ type awsAwsjson11_deserializeOpCancelDomainTransferToAnotherAwsAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpCancelDomainTransferToAnotherAwsAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCancelDomainTransferToAnotherAwsAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -254,7 +255,7 @@ type awsAwsjson11_deserializeOpCheckDomainAvailability struct {
 }
 
 func (*awsAwsjson11_deserializeOpCheckDomainAvailability) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCheckDomainAvailability) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -368,7 +369,7 @@ type awsAwsjson11_deserializeOpCheckDomainTransferability struct {
 }
 
 func (*awsAwsjson11_deserializeOpCheckDomainTransferability) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpCheckDomainTransferability) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -482,7 +483,7 @@ type awsAwsjson11_deserializeOpDeleteTagsForDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpDeleteTagsForDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDeleteTagsForDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -599,7 +600,7 @@ type awsAwsjson11_deserializeOpDisableDomainAutoRenew struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisableDomainAutoRenew) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisableDomainAutoRenew) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -713,7 +714,7 @@ type awsAwsjson11_deserializeOpDisableDomainTransferLock struct {
 }
 
 func (*awsAwsjson11_deserializeOpDisableDomainTransferLock) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpDisableDomainTransferLock) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -836,7 +837,7 @@ type awsAwsjson11_deserializeOpEnableDomainAutoRenew struct {
 }
 
 func (*awsAwsjson11_deserializeOpEnableDomainAutoRenew) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpEnableDomainAutoRenew) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -953,7 +954,7 @@ type awsAwsjson11_deserializeOpEnableDomainTransferLock struct {
 }
 
 func (*awsAwsjson11_deserializeOpEnableDomainTransferLock) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpEnableDomainTransferLock) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1076,7 +1077,7 @@ type awsAwsjson11_deserializeOpGetContactReachabilityStatus struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetContactReachabilityStatus) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetContactReachabilityStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1193,7 +1194,7 @@ type awsAwsjson11_deserializeOpGetDomainDetail struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDomainDetail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDomainDetail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1307,7 +1308,7 @@ type awsAwsjson11_deserializeOpGetDomainSuggestions struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetDomainSuggestions) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetDomainSuggestions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1421,7 +1422,7 @@ type awsAwsjson11_deserializeOpGetOperationDetail struct {
 }
 
 func (*awsAwsjson11_deserializeOpGetOperationDetail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpGetOperationDetail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1532,7 +1533,7 @@ type awsAwsjson11_deserializeOpListDomains struct {
 }
 
 func (*awsAwsjson11_deserializeOpListDomains) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListDomains) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1643,7 +1644,7 @@ type awsAwsjson11_deserializeOpListOperations struct {
 }
 
 func (*awsAwsjson11_deserializeOpListOperations) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListOperations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1754,7 +1755,7 @@ type awsAwsjson11_deserializeOpListTagsForDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpListTagsForDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpListTagsForDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1871,7 +1872,7 @@ type awsAwsjson11_deserializeOpRegisterDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpRegisterDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRegisterDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -1997,7 +1998,7 @@ type awsAwsjson11_deserializeOpRejectDomainTransferFromAnotherAwsAccount struct 
 }
 
 func (*awsAwsjson11_deserializeOpRejectDomainTransferFromAnotherAwsAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRejectDomainTransferFromAnotherAwsAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2111,7 +2112,7 @@ type awsAwsjson11_deserializeOpRenewDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpRenewDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRenewDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2234,7 +2235,7 @@ type awsAwsjson11_deserializeOpResendContactReachabilityEmail struct {
 }
 
 func (*awsAwsjson11_deserializeOpResendContactReachabilityEmail) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpResendContactReachabilityEmail) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2351,7 +2352,7 @@ type awsAwsjson11_deserializeOpRetrieveDomainAuthCode struct {
 }
 
 func (*awsAwsjson11_deserializeOpRetrieveDomainAuthCode) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpRetrieveDomainAuthCode) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2465,7 +2466,7 @@ type awsAwsjson11_deserializeOpTransferDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpTransferDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTransferDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2591,7 +2592,7 @@ type awsAwsjson11_deserializeOpTransferDomainToAnotherAwsAccount struct {
 }
 
 func (*awsAwsjson11_deserializeOpTransferDomainToAnotherAwsAccount) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpTransferDomainToAnotherAwsAccount) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2708,7 +2709,7 @@ type awsAwsjson11_deserializeOpUpdateDomainContact struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateDomainContact) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateDomainContact) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2831,7 +2832,7 @@ type awsAwsjson11_deserializeOpUpdateDomainContactPrivacy struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateDomainContactPrivacy) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateDomainContactPrivacy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -2954,7 +2955,7 @@ type awsAwsjson11_deserializeOpUpdateDomainNameservers struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateDomainNameservers) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateDomainNameservers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3077,7 +3078,7 @@ type awsAwsjson11_deserializeOpUpdateTagsForDomain struct {
 }
 
 func (*awsAwsjson11_deserializeOpUpdateTagsForDomain) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpUpdateTagsForDomain) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -3194,7 +3195,7 @@ type awsAwsjson11_deserializeOpViewBilling struct {
 }
 
 func (*awsAwsjson11_deserializeOpViewBilling) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsAwsjson11_deserializeOpViewBilling) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

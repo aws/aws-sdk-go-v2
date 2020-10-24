@@ -7,13 +7,14 @@ import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpDeleteServiceQuotaIncreaseRequestFromTemplate struct {
 }
 
 func (*validateOpDeleteServiceQuotaIncreaseRequestFromTemplate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpDeleteServiceQuotaIncreaseRequestFromTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -33,7 +34,7 @@ type validateOpGetAWSDefaultServiceQuota struct {
 }
 
 func (*validateOpGetAWSDefaultServiceQuota) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetAWSDefaultServiceQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -53,7 +54,7 @@ type validateOpGetRequestedServiceQuotaChange struct {
 }
 
 func (*validateOpGetRequestedServiceQuotaChange) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetRequestedServiceQuotaChange) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -73,7 +74,7 @@ type validateOpGetServiceQuotaIncreaseRequestFromTemplate struct {
 }
 
 func (*validateOpGetServiceQuotaIncreaseRequestFromTemplate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetServiceQuotaIncreaseRequestFromTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -93,7 +94,7 @@ type validateOpGetServiceQuota struct {
 }
 
 func (*validateOpGetServiceQuota) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpGetServiceQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -113,7 +114,7 @@ type validateOpListAWSDefaultServiceQuotas struct {
 }
 
 func (*validateOpListAWSDefaultServiceQuotas) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListAWSDefaultServiceQuotas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -133,7 +134,7 @@ type validateOpListRequestedServiceQuotaChangeHistoryByQuota struct {
 }
 
 func (*validateOpListRequestedServiceQuotaChangeHistoryByQuota) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListRequestedServiceQuotaChangeHistoryByQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -153,7 +154,7 @@ type validateOpListServiceQuotas struct {
 }
 
 func (*validateOpListServiceQuotas) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpListServiceQuotas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -173,7 +174,7 @@ type validateOpPutServiceQuotaIncreaseRequestIntoTemplate struct {
 }
 
 func (*validateOpPutServiceQuotaIncreaseRequestIntoTemplate) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpPutServiceQuotaIncreaseRequestIntoTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
@@ -193,7 +194,7 @@ type validateOpRequestServiceQuotaIncrease struct {
 }
 
 func (*validateOpRequestServiceQuotaIncrease) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpRequestServiceQuotaIncrease) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

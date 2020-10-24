@@ -10,6 +10,16 @@ const (
 	ConnectionStatusDisconnected ConnectionStatus = "DISCONNECTED"
 )
 
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"CONNECTED",
+		"DISCONNECTED",
+	}
+}
+
 type TunnelStatus string
 
 // Enum values for TunnelStatus
@@ -17,3 +27,13 @@ const (
 	TunnelStatusOpen   TunnelStatus = "OPEN"
 	TunnelStatusClosed TunnelStatus = "CLOSED"
 )
+
+// Values returns all known values for TunnelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TunnelStatus) Values() []TunnelStatus {
+	return []TunnelStatus{
+		"OPEN",
+		"CLOSED",
+	}
+}

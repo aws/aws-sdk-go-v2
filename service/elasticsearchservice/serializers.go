@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection struct {
 }
 
 func (*awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -84,7 +85,7 @@ type awsRestjson1_serializeOpAddTags struct {
 }
 
 func (*awsRestjson1_serializeOpAddTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAddTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -164,7 +165,7 @@ type awsRestjson1_serializeOpAssociatePackage struct {
 }
 
 func (*awsRestjson1_serializeOpAssociatePackage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAssociatePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -242,7 +243,7 @@ type awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate struct {
 }
 
 func (*awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -315,7 +316,7 @@ type awsRestjson1_serializeOpCreateElasticsearchDomain struct {
 }
 
 func (*awsRestjson1_serializeOpCreateElasticsearchDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateElasticsearchDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -475,7 +476,7 @@ type awsRestjson1_serializeOpCreateOutboundCrossClusterSearchConnection struct {
 }
 
 func (*awsRestjson1_serializeOpCreateOutboundCrossClusterSearchConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreateOutboundCrossClusterSearchConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -562,7 +563,7 @@ type awsRestjson1_serializeOpCreatePackage struct {
 }
 
 func (*awsRestjson1_serializeOpCreatePackage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpCreatePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -652,7 +653,7 @@ type awsRestjson1_serializeOpDeleteElasticsearchDomain struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteElasticsearchDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteElasticsearchDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -718,7 +719,7 @@ type awsRestjson1_serializeOpDeleteElasticsearchServiceRole struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteElasticsearchServiceRole) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteElasticsearchServiceRole) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -768,7 +769,7 @@ type awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -834,7 +835,7 @@ type awsRestjson1_serializeOpDeleteOutboundCrossClusterSearchConnection struct {
 }
 
 func (*awsRestjson1_serializeOpDeleteOutboundCrossClusterSearchConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeleteOutboundCrossClusterSearchConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -900,7 +901,7 @@ type awsRestjson1_serializeOpDeletePackage struct {
 }
 
 func (*awsRestjson1_serializeOpDeletePackage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDeletePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -966,7 +967,7 @@ type awsRestjson1_serializeOpDescribeElasticsearchDomain struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeElasticsearchDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeElasticsearchDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1032,7 +1033,7 @@ type awsRestjson1_serializeOpDescribeElasticsearchDomainConfig struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeElasticsearchDomainConfig) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeElasticsearchDomainConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1098,7 +1099,7 @@ type awsRestjson1_serializeOpDescribeElasticsearchDomains struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeElasticsearchDomains) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeElasticsearchDomains) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1173,7 +1174,7 @@ type awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1255,7 +1256,7 @@ type awsRestjson1_serializeOpDescribeInboundCrossClusterSearchConnections struct
 }
 
 func (*awsRestjson1_serializeOpDescribeInboundCrossClusterSearchConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeInboundCrossClusterSearchConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1340,7 +1341,7 @@ type awsRestjson1_serializeOpDescribeOutboundCrossClusterSearchConnections struc
 }
 
 func (*awsRestjson1_serializeOpDescribeOutboundCrossClusterSearchConnections) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeOutboundCrossClusterSearchConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1425,7 +1426,7 @@ type awsRestjson1_serializeOpDescribePackages struct {
 }
 
 func (*awsRestjson1_serializeOpDescribePackages) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribePackages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1510,7 +1511,7 @@ type awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings stru
 }
 
 func (*awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1576,7 +1577,7 @@ type awsRestjson1_serializeOpDescribeReservedElasticsearchInstances struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeReservedElasticsearchInstances) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeReservedElasticsearchInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1642,7 +1643,7 @@ type awsRestjson1_serializeOpDissociatePackage struct {
 }
 
 func (*awsRestjson1_serializeOpDissociatePackage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDissociatePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1720,7 +1721,7 @@ type awsRestjson1_serializeOpGetCompatibleElasticsearchVersions struct {
 }
 
 func (*awsRestjson1_serializeOpGetCompatibleElasticsearchVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetCompatibleElasticsearchVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1778,7 +1779,7 @@ type awsRestjson1_serializeOpGetUpgradeHistory struct {
 }
 
 func (*awsRestjson1_serializeOpGetUpgradeHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetUpgradeHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1852,7 +1853,7 @@ type awsRestjson1_serializeOpGetUpgradeStatus struct {
 }
 
 func (*awsRestjson1_serializeOpGetUpgradeStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpGetUpgradeStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1918,7 +1919,7 @@ type awsRestjson1_serializeOpListDomainNames struct {
 }
 
 func (*awsRestjson1_serializeOpListDomainNames) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListDomainNames) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1968,7 +1969,7 @@ type awsRestjson1_serializeOpListDomainsForPackage struct {
 }
 
 func (*awsRestjson1_serializeOpListDomainsForPackage) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListDomainsForPackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2042,7 +2043,7 @@ type awsRestjson1_serializeOpListElasticsearchInstanceTypes struct {
 }
 
 func (*awsRestjson1_serializeOpListElasticsearchInstanceTypes) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListElasticsearchInstanceTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2120,7 +2121,7 @@ type awsRestjson1_serializeOpListElasticsearchVersions struct {
 }
 
 func (*awsRestjson1_serializeOpListElasticsearchVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListElasticsearchVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2182,7 +2183,7 @@ type awsRestjson1_serializeOpListPackagesForDomain struct {
 }
 
 func (*awsRestjson1_serializeOpListPackagesForDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListPackagesForDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2256,7 +2257,7 @@ type awsRestjson1_serializeOpListTags struct {
 }
 
 func (*awsRestjson1_serializeOpListTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2314,7 +2315,7 @@ type awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering struc
 }
 
 func (*awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2397,7 +2398,7 @@ type awsRestjson1_serializeOpRejectInboundCrossClusterSearchConnection struct {
 }
 
 func (*awsRestjson1_serializeOpRejectInboundCrossClusterSearchConnection) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpRejectInboundCrossClusterSearchConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2463,7 +2464,7 @@ type awsRestjson1_serializeOpRemoveTags struct {
 }
 
 func (*awsRestjson1_serializeOpRemoveTags) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpRemoveTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2543,7 +2544,7 @@ type awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate struct {
 }
 
 func (*awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2616,7 +2617,7 @@ type awsRestjson1_serializeOpUpdateElasticsearchDomainConfig struct {
 }
 
 func (*awsRestjson1_serializeOpUpdateElasticsearchDomainConfig) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpdateElasticsearchDomainConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2768,7 +2769,7 @@ type awsRestjson1_serializeOpUpgradeElasticsearchDomain struct {
 }
 
 func (*awsRestjson1_serializeOpUpgradeElasticsearchDomain) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpUpgradeElasticsearchDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

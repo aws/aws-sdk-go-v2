@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpBatchExecuteStatement struct {
 }
 
 func (*awsRestjson1_deserializeOpBatchExecuteStatement) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpBatchExecuteStatement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -182,7 +183,7 @@ type awsRestjson1_deserializeOpBeginTransaction struct {
 }
 
 func (*awsRestjson1_deserializeOpBeginTransaction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpBeginTransaction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -345,7 +346,7 @@ type awsRestjson1_deserializeOpCommitTransaction struct {
 }
 
 func (*awsRestjson1_deserializeOpCommitTransaction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCommitTransaction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -511,7 +512,7 @@ type awsRestjson1_deserializeOpExecuteSql struct {
 }
 
 func (*awsRestjson1_deserializeOpExecuteSql) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpExecuteSql) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -667,7 +668,7 @@ type awsRestjson1_deserializeOpExecuteStatement struct {
 }
 
 func (*awsRestjson1_deserializeOpExecuteStatement) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpExecuteStatement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -849,7 +850,7 @@ type awsRestjson1_deserializeOpRollbackTransaction struct {
 }
 
 func (*awsRestjson1_deserializeOpRollbackTransaction) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpRollbackTransaction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

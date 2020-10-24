@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -17,7 +18,7 @@ type awsAwsjson11_serializeOpAssociateServiceQuotaTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpAssociateServiceQuotaTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpAssociateServiceQuotaTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -56,7 +57,7 @@ type awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate struc
 }
 
 func (*awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -102,7 +103,7 @@ type awsAwsjson11_serializeOpDisassociateServiceQuotaTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpDisassociateServiceQuotaTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDisassociateServiceQuotaTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -141,7 +142,7 @@ type awsAwsjson11_serializeOpGetAssociationForServiceQuotaTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpGetAssociationForServiceQuotaTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetAssociationForServiceQuotaTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -180,7 +181,7 @@ type awsAwsjson11_serializeOpGetAWSDefaultServiceQuota struct {
 }
 
 func (*awsAwsjson11_serializeOpGetAWSDefaultServiceQuota) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetAWSDefaultServiceQuota) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -226,7 +227,7 @@ type awsAwsjson11_serializeOpGetRequestedServiceQuotaChange struct {
 }
 
 func (*awsAwsjson11_serializeOpGetRequestedServiceQuotaChange) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetRequestedServiceQuotaChange) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -272,7 +273,7 @@ type awsAwsjson11_serializeOpGetServiceQuota struct {
 }
 
 func (*awsAwsjson11_serializeOpGetServiceQuota) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetServiceQuota) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -318,7 +319,7 @@ type awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -364,7 +365,7 @@ type awsAwsjson11_serializeOpListAWSDefaultServiceQuotas struct {
 }
 
 func (*awsAwsjson11_serializeOpListAWSDefaultServiceQuotas) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListAWSDefaultServiceQuotas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -410,7 +411,7 @@ type awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory struct {
 }
 
 func (*awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -456,7 +457,7 @@ type awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistoryByQuota struc
 }
 
 func (*awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistoryByQuota) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistoryByQuota) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -502,7 +503,7 @@ type awsAwsjson11_serializeOpListServiceQuotaIncreaseRequestsInTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpListServiceQuotaIncreaseRequestsInTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListServiceQuotaIncreaseRequestsInTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -548,7 +549,7 @@ type awsAwsjson11_serializeOpListServiceQuotas struct {
 }
 
 func (*awsAwsjson11_serializeOpListServiceQuotas) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListServiceQuotas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -594,7 +595,7 @@ type awsAwsjson11_serializeOpListServices struct {
 }
 
 func (*awsAwsjson11_serializeOpListServices) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListServices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -640,7 +641,7 @@ type awsAwsjson11_serializeOpPutServiceQuotaIncreaseRequestIntoTemplate struct {
 }
 
 func (*awsAwsjson11_serializeOpPutServiceQuotaIncreaseRequestIntoTemplate) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutServiceQuotaIncreaseRequestIntoTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -686,7 +687,7 @@ type awsAwsjson11_serializeOpRequestServiceQuotaIncrease struct {
 }
 
 func (*awsAwsjson11_serializeOpRequestServiceQuotaIncrease) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRequestServiceQuotaIncrease) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

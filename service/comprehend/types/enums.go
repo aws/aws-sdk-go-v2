@@ -10,6 +10,16 @@ const (
 	DocumentClassifierModeMulti_label DocumentClassifierMode = "MULTI_LABEL"
 )
 
+// Values returns all known values for DocumentClassifierMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentClassifierMode) Values() []DocumentClassifierMode {
+	return []DocumentClassifierMode{
+		"MULTI_CLASS",
+		"MULTI_LABEL",
+	}
+}
+
 type EndpointStatus string
 
 // Enum values for EndpointStatus
@@ -20,6 +30,19 @@ const (
 	EndpointStatusIn_service EndpointStatus = "IN_SERVICE"
 	EndpointStatusUpdating   EndpointStatus = "UPDATING"
 )
+
+// Values returns all known values for EndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointStatus) Values() []EndpointStatus {
+	return []EndpointStatus{
+		"CREATING",
+		"DELETING",
+		"FAILED",
+		"IN_SERVICE",
+		"UPDATING",
+	}
+}
 
 type EntityType string
 
@@ -36,6 +59,23 @@ const (
 	EntityTypeOther           EntityType = "OTHER"
 )
 
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"PERSON",
+		"LOCATION",
+		"ORGANIZATION",
+		"COMMERCIAL_ITEM",
+		"EVENT",
+		"DATE",
+		"QUANTITY",
+		"TITLE",
+		"OTHER",
+	}
+}
+
 type InputFormat string
 
 // Enum values for InputFormat
@@ -43,6 +83,16 @@ const (
 	InputFormatOne_doc_per_file InputFormat = "ONE_DOC_PER_FILE"
 	InputFormatOne_doc_per_line InputFormat = "ONE_DOC_PER_LINE"
 )
+
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputFormat) Values() []InputFormat {
+	return []InputFormat{
+		"ONE_DOC_PER_FILE",
+		"ONE_DOC_PER_LINE",
+	}
+}
 
 type JobStatus string
 
@@ -55,6 +105,20 @@ const (
 	JobStatusStop_requested JobStatus = "STOP_REQUESTED"
 	JobStatusStopped        JobStatus = "STOPPED"
 )
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"STOP_REQUESTED",
+		"STOPPED",
+	}
+}
 
 type LanguageCode string
 
@@ -74,6 +138,26 @@ const (
 	LanguageCodeZh_tw LanguageCode = "zh-TW"
 )
 
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en",
+		"es",
+		"fr",
+		"de",
+		"it",
+		"pt",
+		"ar",
+		"hi",
+		"ja",
+		"ko",
+		"zh",
+		"zh-TW",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus
@@ -86,6 +170,21 @@ const (
 	ModelStatusIn_error       ModelStatus = "IN_ERROR"
 	ModelStatusTrained        ModelStatus = "TRAINED"
 )
+
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ModelStatus) Values() []ModelStatus {
+	return []ModelStatus{
+		"SUBMITTED",
+		"TRAINING",
+		"DELETING",
+		"STOP_REQUESTED",
+		"STOPPED",
+		"IN_ERROR",
+		"TRAINED",
+	}
+}
 
 type PartOfSpeechTagType string
 
@@ -111,6 +210,32 @@ const (
 	PartOfSpeechTagTypeVerb  PartOfSpeechTagType = "VERB"
 )
 
+// Values returns all known values for PartOfSpeechTagType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartOfSpeechTagType) Values() []PartOfSpeechTagType {
+	return []PartOfSpeechTagType{
+		"ADJ",
+		"ADP",
+		"ADV",
+		"AUX",
+		"CONJ",
+		"CCONJ",
+		"DET",
+		"INTJ",
+		"NOUN",
+		"NUM",
+		"O",
+		"PART",
+		"PRON",
+		"PROPN",
+		"PUNCT",
+		"SCONJ",
+		"SYM",
+		"VERB",
+	}
+}
+
 type SentimentType string
 
 // Enum values for SentimentType
@@ -120,6 +245,18 @@ const (
 	SentimentTypeNeutral  SentimentType = "NEUTRAL"
 	SentimentTypeMixed    SentimentType = "MIXED"
 )
+
+// Values returns all known values for SentimentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SentimentType) Values() []SentimentType {
+	return []SentimentType{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
+		"MIXED",
+	}
+}
 
 type SyntaxLanguageCode string
 
@@ -132,3 +269,17 @@ const (
 	SyntaxLanguageCodeIt SyntaxLanguageCode = "it"
 	SyntaxLanguageCodePt SyntaxLanguageCode = "pt"
 )
+
+// Values returns all known values for SyntaxLanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyntaxLanguageCode) Values() []SyntaxLanguageCode {
+	return []SyntaxLanguageCode{
+		"en",
+		"es",
+		"fr",
+		"de",
+		"it",
+		"pt",
+	}
+}

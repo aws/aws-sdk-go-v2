@@ -12,6 +12,18 @@ const (
 	CachePolicyCookieBehaviorAll       CachePolicyCookieBehavior = "all"
 )
 
+// Values returns all known values for CachePolicyCookieBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CachePolicyCookieBehavior) Values() []CachePolicyCookieBehavior {
+	return []CachePolicyCookieBehavior{
+		"none",
+		"whitelist",
+		"allExcept",
+		"all",
+	}
+}
+
 type CachePolicyHeaderBehavior string
 
 // Enum values for CachePolicyHeaderBehavior
@@ -19,6 +31,16 @@ const (
 	CachePolicyHeaderBehaviorNone      CachePolicyHeaderBehavior = "none"
 	CachePolicyHeaderBehaviorWhitelist CachePolicyHeaderBehavior = "whitelist"
 )
+
+// Values returns all known values for CachePolicyHeaderBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CachePolicyHeaderBehavior) Values() []CachePolicyHeaderBehavior {
+	return []CachePolicyHeaderBehavior{
+		"none",
+		"whitelist",
+	}
+}
 
 type CachePolicyQueryStringBehavior string
 
@@ -30,6 +52,19 @@ const (
 	CachePolicyQueryStringBehaviorAll       CachePolicyQueryStringBehavior = "all"
 )
 
+// Values returns all known values for CachePolicyQueryStringBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CachePolicyQueryStringBehavior) Values() []CachePolicyQueryStringBehavior {
+	return []CachePolicyQueryStringBehavior{
+		"none",
+		"whitelist",
+		"allExcept",
+		"all",
+	}
+}
+
 type CachePolicyType string
 
 // Enum values for CachePolicyType
@@ -37,6 +72,16 @@ const (
 	CachePolicyTypeManaged CachePolicyType = "managed"
 	CachePolicyTypeCustom  CachePolicyType = "custom"
 )
+
+// Values returns all known values for CachePolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CachePolicyType) Values() []CachePolicyType {
+	return []CachePolicyType{
+		"managed",
+		"custom",
+	}
+}
 
 type CertificateSource string
 
@@ -46,6 +91,17 @@ const (
 	CertificateSourceIam        CertificateSource = "iam"
 	CertificateSourceAcm        CertificateSource = "acm"
 )
+
+// Values returns all known values for CertificateSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateSource) Values() []CertificateSource {
+	return []CertificateSource{
+		"cloudfront",
+		"iam",
+		"acm",
+	}
+}
 
 type EventType string
 
@@ -57,12 +113,33 @@ const (
 	EventTypeOriginResponse EventType = "origin-response"
 )
 
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"viewer-request",
+		"viewer-response",
+		"origin-request",
+		"origin-response",
+	}
+}
+
 type Format string
 
 // Enum values for Format
 const (
 	FormatUrlencoded Format = "URLEncoded"
 )
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"URLEncoded",
+	}
+}
 
 type GeoRestrictionType string
 
@@ -73,6 +150,17 @@ const (
 	GeoRestrictionTypeNone      GeoRestrictionType = "none"
 )
 
+// Values returns all known values for GeoRestrictionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeoRestrictionType) Values() []GeoRestrictionType {
+	return []GeoRestrictionType{
+		"blacklist",
+		"whitelist",
+		"none",
+	}
+}
+
 type HttpVersion string
 
 // Enum values for HttpVersion
@@ -80,6 +168,16 @@ const (
 	HttpVersionHttp11 HttpVersion = "http1.1"
 	HttpVersionHttp2  HttpVersion = "http2"
 )
+
+// Values returns all known values for HttpVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpVersion) Values() []HttpVersion {
+	return []HttpVersion{
+		"http1.1",
+		"http2",
+	}
+}
 
 type ICPRecordalStatus string
 
@@ -90,6 +188,17 @@ const (
 	ICPRecordalStatusPending   ICPRecordalStatus = "PENDING"
 )
 
+// Values returns all known values for ICPRecordalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICPRecordalStatus) Values() []ICPRecordalStatus {
+	return []ICPRecordalStatus{
+		"APPROVED",
+		"SUSPENDED",
+		"PENDING",
+	}
+}
+
 type ItemSelection string
 
 // Enum values for ItemSelection
@@ -98,6 +207,17 @@ const (
 	ItemSelectionWhitelist ItemSelection = "whitelist"
 	ItemSelectionAll       ItemSelection = "all"
 )
+
+// Values returns all known values for ItemSelection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ItemSelection) Values() []ItemSelection {
+	return []ItemSelection{
+		"none",
+		"whitelist",
+		"all",
+	}
+}
 
 type Method string
 
@@ -112,6 +232,21 @@ const (
 	MethodDelete  Method = "DELETE"
 )
 
+// Values returns all known values for Method. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Method) Values() []Method {
+	return []Method{
+		"GET",
+		"HEAD",
+		"POST",
+		"PUT",
+		"PATCH",
+		"OPTIONS",
+		"DELETE",
+	}
+}
+
 type MinimumProtocolVersion string
 
 // Enum values for MinimumProtocolVersion
@@ -124,6 +259,20 @@ const (
 	MinimumProtocolVersionTlsv12_2019 MinimumProtocolVersion = "TLSv1.2_2019"
 )
 
+// Values returns all known values for MinimumProtocolVersion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MinimumProtocolVersion) Values() []MinimumProtocolVersion {
+	return []MinimumProtocolVersion{
+		"SSLv3",
+		"TLSv1",
+		"TLSv1_2016",
+		"TLSv1.1_2016",
+		"TLSv1.2_2018",
+		"TLSv1.2_2019",
+	}
+}
+
 type OriginProtocolPolicy string
 
 // Enum values for OriginProtocolPolicy
@@ -133,6 +282,17 @@ const (
 	OriginProtocolPolicyHttpsOnly   OriginProtocolPolicy = "https-only"
 )
 
+// Values returns all known values for OriginProtocolPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OriginProtocolPolicy) Values() []OriginProtocolPolicy {
+	return []OriginProtocolPolicy{
+		"http-only",
+		"match-viewer",
+		"https-only",
+	}
+}
+
 type OriginRequestPolicyCookieBehavior string
 
 // Enum values for OriginRequestPolicyCookieBehavior
@@ -141,6 +301,18 @@ const (
 	OriginRequestPolicyCookieBehaviorWhitelist OriginRequestPolicyCookieBehavior = "whitelist"
 	OriginRequestPolicyCookieBehaviorAll       OriginRequestPolicyCookieBehavior = "all"
 )
+
+// Values returns all known values for OriginRequestPolicyCookieBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginRequestPolicyCookieBehavior) Values() []OriginRequestPolicyCookieBehavior {
+	return []OriginRequestPolicyCookieBehavior{
+		"none",
+		"whitelist",
+		"all",
+	}
+}
 
 type OriginRequestPolicyHeaderBehavior string
 
@@ -152,6 +324,19 @@ const (
 	OriginRequestPolicyHeaderBehaviorAllviewerandwhitelistcloudfront OriginRequestPolicyHeaderBehavior = "allViewerAndWhitelistCloudFront"
 )
 
+// Values returns all known values for OriginRequestPolicyHeaderBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginRequestPolicyHeaderBehavior) Values() []OriginRequestPolicyHeaderBehavior {
+	return []OriginRequestPolicyHeaderBehavior{
+		"none",
+		"whitelist",
+		"allViewer",
+		"allViewerAndWhitelistCloudFront",
+	}
+}
+
 type OriginRequestPolicyQueryStringBehavior string
 
 // Enum values for OriginRequestPolicyQueryStringBehavior
@@ -161,6 +346,18 @@ const (
 	OriginRequestPolicyQueryStringBehaviorAll       OriginRequestPolicyQueryStringBehavior = "all"
 )
 
+// Values returns all known values for OriginRequestPolicyQueryStringBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginRequestPolicyQueryStringBehavior) Values() []OriginRequestPolicyQueryStringBehavior {
+	return []OriginRequestPolicyQueryStringBehavior{
+		"none",
+		"whitelist",
+		"all",
+	}
+}
+
 type OriginRequestPolicyType string
 
 // Enum values for OriginRequestPolicyType
@@ -168,6 +365,16 @@ const (
 	OriginRequestPolicyTypeManaged OriginRequestPolicyType = "managed"
 	OriginRequestPolicyTypeCustom  OriginRequestPolicyType = "custom"
 )
+
+// Values returns all known values for OriginRequestPolicyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OriginRequestPolicyType) Values() []OriginRequestPolicyType {
+	return []OriginRequestPolicyType{
+		"managed",
+		"custom",
+	}
+}
 
 type PriceClass string
 
@@ -177,6 +384,17 @@ const (
 	PriceClassPriceclass_200 PriceClass = "PriceClass_200"
 	PriceClassPriceclass_all PriceClass = "PriceClass_All"
 )
+
+// Values returns all known values for PriceClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PriceClass) Values() []PriceClass {
+	return []PriceClass{
+		"PriceClass_100",
+		"PriceClass_200",
+		"PriceClass_All",
+	}
+}
 
 type SslProtocol string
 
@@ -188,6 +406,18 @@ const (
 	SslProtocolTlsv12 SslProtocol = "TLSv1.2"
 )
 
+// Values returns all known values for SslProtocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SslProtocol) Values() []SslProtocol {
+	return []SslProtocol{
+		"SSLv3",
+		"TLSv1",
+		"TLSv1.1",
+		"TLSv1.2",
+	}
+}
+
 type SSLSupportMethod string
 
 // Enum values for SSLSupportMethod
@@ -195,6 +425,16 @@ const (
 	SSLSupportMethodSniOnly SSLSupportMethod = "sni-only"
 	SSLSupportMethodVip     SSLSupportMethod = "vip"
 )
+
+// Values returns all known values for SSLSupportMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SSLSupportMethod) Values() []SSLSupportMethod {
+	return []SSLSupportMethod{
+		"sni-only",
+		"vip",
+	}
+}
 
 type ViewerProtocolPolicy string
 
@@ -204,3 +444,14 @@ const (
 	ViewerProtocolPolicyHttpsOnly       ViewerProtocolPolicy = "https-only"
 	ViewerProtocolPolicyRedirectToHttps ViewerProtocolPolicy = "redirect-to-https"
 )
+
+// Values returns all known values for ViewerProtocolPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ViewerProtocolPolicy) Values() []ViewerProtocolPolicy {
+	return []ViewerProtocolPolicy{
+		"allow-all",
+		"https-only",
+		"redirect-to-https",
+	}
+}

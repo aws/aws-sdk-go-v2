@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -21,7 +22,7 @@ type awsRestjson1_deserializeOpCreateOutpost struct {
 }
 
 func (*awsRestjson1_deserializeOpCreateOutpost) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpCreateOutpost) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -180,7 +181,7 @@ type awsRestjson1_deserializeOpDeleteOutpost struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteOutpost) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteOutpost) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -272,7 +273,7 @@ type awsRestjson1_deserializeOpDeleteSite struct {
 }
 
 func (*awsRestjson1_deserializeOpDeleteSite) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpDeleteSite) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -364,7 +365,7 @@ type awsRestjson1_deserializeOpGetOutpost struct {
 }
 
 func (*awsRestjson1_deserializeOpGetOutpost) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetOutpost) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -520,7 +521,7 @@ type awsRestjson1_deserializeOpGetOutpostInstanceTypes struct {
 }
 
 func (*awsRestjson1_deserializeOpGetOutpostInstanceTypes) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetOutpostInstanceTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -703,7 +704,7 @@ type awsRestjson1_deserializeOpListOutposts struct {
 }
 
 func (*awsRestjson1_deserializeOpListOutposts) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListOutposts) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -865,7 +866,7 @@ type awsRestjson1_deserializeOpListSites struct {
 }
 
 func (*awsRestjson1_deserializeOpListSites) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListSites) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

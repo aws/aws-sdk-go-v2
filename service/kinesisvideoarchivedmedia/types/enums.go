@@ -10,6 +10,16 @@ const (
 	ClipFragmentSelectorTypeServer_timestamp   ClipFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
+// Values returns all known values for ClipFragmentSelectorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClipFragmentSelectorType) Values() []ClipFragmentSelectorType {
+	return []ClipFragmentSelectorType{
+		"PRODUCER_TIMESTAMP",
+		"SERVER_TIMESTAMP",
+	}
+}
+
 type ContainerFormat string
 
 // Enum values for ContainerFormat
@@ -17,6 +27,16 @@ const (
 	ContainerFormatFragmented_mp4 ContainerFormat = "FRAGMENTED_MP4"
 	ContainerFormatMpeg_ts        ContainerFormat = "MPEG_TS"
 )
+
+// Values returns all known values for ContainerFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFormat) Values() []ContainerFormat {
+	return []ContainerFormat{
+		"FRAGMENTED_MP4",
+		"MPEG_TS",
+	}
+}
 
 type DASHDisplayFragmentNumber string
 
@@ -26,6 +46,16 @@ const (
 	DASHDisplayFragmentNumberNever  DASHDisplayFragmentNumber = "NEVER"
 )
 
+// Values returns all known values for DASHDisplayFragmentNumber. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DASHDisplayFragmentNumber) Values() []DASHDisplayFragmentNumber {
+	return []DASHDisplayFragmentNumber{
+		"ALWAYS",
+		"NEVER",
+	}
+}
+
 type DASHDisplayFragmentTimestamp string
 
 // Enum values for DASHDisplayFragmentTimestamp
@@ -34,6 +64,16 @@ const (
 	DASHDisplayFragmentTimestampNever  DASHDisplayFragmentTimestamp = "NEVER"
 )
 
+// Values returns all known values for DASHDisplayFragmentTimestamp. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DASHDisplayFragmentTimestamp) Values() []DASHDisplayFragmentTimestamp {
+	return []DASHDisplayFragmentTimestamp{
+		"ALWAYS",
+		"NEVER",
+	}
+}
+
 type DASHFragmentSelectorType string
 
 // Enum values for DASHFragmentSelectorType
@@ -41,6 +81,16 @@ const (
 	DASHFragmentSelectorTypeProducer_timestamp DASHFragmentSelectorType = "PRODUCER_TIMESTAMP"
 	DASHFragmentSelectorTypeServer_timestamp   DASHFragmentSelectorType = "SERVER_TIMESTAMP"
 )
+
+// Values returns all known values for DASHFragmentSelectorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DASHFragmentSelectorType) Values() []DASHFragmentSelectorType {
+	return []DASHFragmentSelectorType{
+		"PRODUCER_TIMESTAMP",
+		"SERVER_TIMESTAMP",
+	}
+}
 
 type DASHPlaybackMode string
 
@@ -51,6 +101,17 @@ const (
 	DASHPlaybackModeOn_demand   DASHPlaybackMode = "ON_DEMAND"
 )
 
+// Values returns all known values for DASHPlaybackMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DASHPlaybackMode) Values() []DASHPlaybackMode {
+	return []DASHPlaybackMode{
+		"LIVE",
+		"LIVE_REPLAY",
+		"ON_DEMAND",
+	}
+}
+
 type FragmentSelectorType string
 
 // Enum values for FragmentSelectorType
@@ -58,6 +119,16 @@ const (
 	FragmentSelectorTypeProducer_timestamp FragmentSelectorType = "PRODUCER_TIMESTAMP"
 	FragmentSelectorTypeServer_timestamp   FragmentSelectorType = "SERVER_TIMESTAMP"
 )
+
+// Values returns all known values for FragmentSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FragmentSelectorType) Values() []FragmentSelectorType {
+	return []FragmentSelectorType{
+		"PRODUCER_TIMESTAMP",
+		"SERVER_TIMESTAMP",
+	}
+}
 
 type HLSDiscontinuityMode string
 
@@ -68,6 +139,17 @@ const (
 	HLSDiscontinuityModeOn_discontinuity HLSDiscontinuityMode = "ON_DISCONTINUITY"
 )
 
+// Values returns all known values for HLSDiscontinuityMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HLSDiscontinuityMode) Values() []HLSDiscontinuityMode {
+	return []HLSDiscontinuityMode{
+		"ALWAYS",
+		"NEVER",
+		"ON_DISCONTINUITY",
+	}
+}
+
 type HLSDisplayFragmentTimestamp string
 
 // Enum values for HLSDisplayFragmentTimestamp
@@ -75,6 +157,16 @@ const (
 	HLSDisplayFragmentTimestampAlways HLSDisplayFragmentTimestamp = "ALWAYS"
 	HLSDisplayFragmentTimestampNever  HLSDisplayFragmentTimestamp = "NEVER"
 )
+
+// Values returns all known values for HLSDisplayFragmentTimestamp. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HLSDisplayFragmentTimestamp) Values() []HLSDisplayFragmentTimestamp {
+	return []HLSDisplayFragmentTimestamp{
+		"ALWAYS",
+		"NEVER",
+	}
+}
 
 type HLSFragmentSelectorType string
 
@@ -84,6 +176,16 @@ const (
 	HLSFragmentSelectorTypeServer_timestamp   HLSFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
+// Values returns all known values for HLSFragmentSelectorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HLSFragmentSelectorType) Values() []HLSFragmentSelectorType {
+	return []HLSFragmentSelectorType{
+		"PRODUCER_TIMESTAMP",
+		"SERVER_TIMESTAMP",
+	}
+}
+
 type HLSPlaybackMode string
 
 // Enum values for HLSPlaybackMode
@@ -92,3 +194,14 @@ const (
 	HLSPlaybackModeLive_replay HLSPlaybackMode = "LIVE_REPLAY"
 	HLSPlaybackModeOn_demand   HLSPlaybackMode = "ON_DEMAND"
 )
+
+// Values returns all known values for HLSPlaybackMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HLSPlaybackMode) Values() []HLSPlaybackMode {
+	return []HLSPlaybackMode{
+		"LIVE",
+		"LIVE_REPLAY",
+		"ON_DEMAND",
+	}
+}

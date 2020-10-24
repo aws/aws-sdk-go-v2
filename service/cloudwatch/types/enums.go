@@ -10,6 +10,16 @@ const (
 	AlarmTypeMetricalarm    AlarmType = "MetricAlarm"
 )
 
+// Values returns all known values for AlarmType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AlarmType) Values() []AlarmType {
+	return []AlarmType{
+		"CompositeAlarm",
+		"MetricAlarm",
+	}
+}
+
 type AnomalyDetectorStateValue string
 
 // Enum values for AnomalyDetectorStateValue
@@ -18,6 +28,17 @@ const (
 	AnomalyDetectorStateValueTrained_insufficient_data AnomalyDetectorStateValue = "TRAINED_INSUFFICIENT_DATA"
 	AnomalyDetectorStateValueTrained                   AnomalyDetectorStateValue = "TRAINED"
 )
+
+// Values returns all known values for AnomalyDetectorStateValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyDetectorStateValue) Values() []AnomalyDetectorStateValue {
+	return []AnomalyDetectorStateValue{
+		"PENDING_TRAINING",
+		"TRAINED_INSUFFICIENT_DATA",
+		"TRAINED",
+	}
+}
 
 type ComparisonOperator string
 
@@ -32,6 +53,21 @@ const (
 	ComparisonOperatorGreaterthanupperthreshold                ComparisonOperator = "GreaterThanUpperThreshold"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GreaterThanOrEqualToThreshold",
+		"GreaterThanThreshold",
+		"LessThanThreshold",
+		"LessThanOrEqualToThreshold",
+		"LessThanLowerOrGreaterThanUpperThreshold",
+		"LessThanLowerThreshold",
+		"GreaterThanUpperThreshold",
+	}
+}
+
 type HistoryItemType string
 
 // Enum values for HistoryItemType
@@ -41,12 +77,32 @@ const (
 	HistoryItemTypeAction              HistoryItemType = "Action"
 )
 
+// Values returns all known values for HistoryItemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HistoryItemType) Values() []HistoryItemType {
+	return []HistoryItemType{
+		"ConfigurationUpdate",
+		"StateUpdate",
+		"Action",
+	}
+}
+
 type RecentlyActive string
 
 // Enum values for RecentlyActive
 const (
 	RecentlyActivePt3h RecentlyActive = "PT3H"
 )
+
+// Values returns all known values for RecentlyActive. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecentlyActive) Values() []RecentlyActive {
+	return []RecentlyActive{
+		"PT3H",
+	}
+}
 
 type ScanBy string
 
@@ -55,6 +111,16 @@ const (
 	ScanByTimestamp_descending ScanBy = "TimestampDescending"
 	ScanByTimestamp_ascending  ScanBy = "TimestampAscending"
 )
+
+// Values returns all known values for ScanBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ScanBy) Values() []ScanBy {
+	return []ScanBy{
+		"TimestampDescending",
+		"TimestampAscending",
+	}
+}
 
 type StandardUnit string
 
@@ -89,6 +155,41 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
+// Values returns all known values for StandardUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StandardUnit) Values() []StandardUnit {
+	return []StandardUnit{
+		"Seconds",
+		"Microseconds",
+		"Milliseconds",
+		"Bytes",
+		"Kilobytes",
+		"Megabytes",
+		"Gigabytes",
+		"Terabytes",
+		"Bits",
+		"Kilobits",
+		"Megabits",
+		"Gigabits",
+		"Terabits",
+		"Percent",
+		"Count",
+		"Bytes/Second",
+		"Kilobytes/Second",
+		"Megabytes/Second",
+		"Gigabytes/Second",
+		"Terabytes/Second",
+		"Bits/Second",
+		"Kilobits/Second",
+		"Megabits/Second",
+		"Gigabits/Second",
+		"Terabits/Second",
+		"Count/Second",
+		"None",
+	}
+}
+
 type StateValue string
 
 // Enum values for StateValue
@@ -97,6 +198,17 @@ const (
 	StateValueAlarm             StateValue = "ALARM"
 	StateValueInsufficient_data StateValue = "INSUFFICIENT_DATA"
 )
+
+// Values returns all known values for StateValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StateValue) Values() []StateValue {
+	return []StateValue{
+		"OK",
+		"ALARM",
+		"INSUFFICIENT_DATA",
+	}
+}
 
 type Statistic string
 
@@ -109,6 +221,19 @@ const (
 	StatisticMaximum     Statistic = "Maximum"
 )
 
+// Values returns all known values for Statistic. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"SampleCount",
+		"Average",
+		"Sum",
+		"Minimum",
+		"Maximum",
+	}
+}
+
 type StatusCode string
 
 // Enum values for StatusCode
@@ -117,3 +242,14 @@ const (
 	StatusCodeInternal_error StatusCode = "InternalError"
 	StatusCodePartial_data   StatusCode = "PartialData"
 )
+
+// Values returns all known values for StatusCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusCode) Values() []StatusCode {
+	return []StatusCode{
+		"Complete",
+		"InternalError",
+		"PartialData",
+	}
+}

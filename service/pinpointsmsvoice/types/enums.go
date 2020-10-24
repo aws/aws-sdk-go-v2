@@ -14,3 +14,18 @@ const (
 	EventTypeFailed         EventType = "FAILED"
 	EventTypeNo_answer      EventType = "NO_ANSWER"
 )
+
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"INITIATED_CALL",
+		"RINGING",
+		"ANSWERED",
+		"COMPLETED_CALL",
+		"BUSY",
+		"FAILED",
+		"NO_ANSWER",
+	}
+}

@@ -10,12 +10,31 @@ const (
 	ChannelChat  Channel = "CHAT"
 )
 
+// Values returns all known values for Channel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Channel) Values() []Channel {
+	return []Channel{
+		"VOICE",
+		"CHAT",
+	}
+}
+
 type Comparison string
 
 // Enum values for Comparison
 const (
 	ComparisonLt Comparison = "LT"
 )
+
+// Values returns all known values for Comparison. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Comparison) Values() []Comparison {
+	return []Comparison{
+		"LT",
+	}
+}
 
 type ContactFlowType string
 
@@ -31,6 +50,23 @@ const (
 	ContactFlowTypeAgent_transfer   ContactFlowType = "AGENT_TRANSFER"
 	ContactFlowTypeQueue_transfer   ContactFlowType = "QUEUE_TRANSFER"
 )
+
+// Values returns all known values for ContactFlowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactFlowType) Values() []ContactFlowType {
+	return []ContactFlowType{
+		"CONTACT_FLOW",
+		"CUSTOMER_QUEUE",
+		"CUSTOMER_HOLD",
+		"CUSTOMER_WHISPER",
+		"AGENT_HOLD",
+		"AGENT_WHISPER",
+		"OUTBOUND_WHISPER",
+		"AGENT_TRANSFER",
+		"QUEUE_TRANSFER",
+	}
+}
 
 type CurrentMetricName string
 
@@ -51,6 +87,27 @@ const (
 	CurrentMetricNameSlots_available           CurrentMetricName = "SLOTS_AVAILABLE"
 )
 
+// Values returns all known values for CurrentMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CurrentMetricName) Values() []CurrentMetricName {
+	return []CurrentMetricName{
+		"AGENTS_ONLINE",
+		"AGENTS_AVAILABLE",
+		"AGENTS_ON_CALL",
+		"AGENTS_NON_PRODUCTIVE",
+		"AGENTS_AFTER_CONTACT_WORK",
+		"AGENTS_ERROR",
+		"AGENTS_STAFFED",
+		"CONTACTS_IN_QUEUE",
+		"OLDEST_CONTACT_AGE",
+		"CONTACTS_SCHEDULED",
+		"AGENTS_ON_CONTACT",
+		"SLOTS_ACTIVE",
+		"SLOTS_AVAILABLE",
+	}
+}
+
 type Grouping string
 
 // Enum values for Grouping
@@ -58,6 +115,16 @@ const (
 	GroupingQueue   Grouping = "QUEUE"
 	GroupingChannel Grouping = "CHANNEL"
 )
+
+// Values returns all known values for Grouping. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Grouping) Values() []Grouping {
+	return []Grouping{
+		"QUEUE",
+		"CHANNEL",
+	}
+}
 
 type HistoricalMetricName string
 
@@ -89,6 +156,39 @@ const (
 	HistoricalMetricNameInteraction_and_hold_time           HistoricalMetricName = "INTERACTION_AND_HOLD_TIME"
 	HistoricalMetricNameService_level                       HistoricalMetricName = "SERVICE_LEVEL"
 )
+
+// Values returns all known values for HistoricalMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HistoricalMetricName) Values() []HistoricalMetricName {
+	return []HistoricalMetricName{
+		"CONTACTS_QUEUED",
+		"CONTACTS_HANDLED",
+		"CONTACTS_ABANDONED",
+		"CONTACTS_CONSULTED",
+		"CONTACTS_AGENT_HUNG_UP_FIRST",
+		"CONTACTS_HANDLED_INCOMING",
+		"CONTACTS_HANDLED_OUTBOUND",
+		"CONTACTS_HOLD_ABANDONS",
+		"CONTACTS_TRANSFERRED_IN",
+		"CONTACTS_TRANSFERRED_OUT",
+		"CONTACTS_TRANSFERRED_IN_FROM_QUEUE",
+		"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE",
+		"CONTACTS_MISSED",
+		"CALLBACK_CONTACTS_HANDLED",
+		"API_CONTACTS_HANDLED",
+		"OCCUPANCY",
+		"HANDLE_TIME",
+		"AFTER_CONTACT_WORK_TIME",
+		"QUEUED_TIME",
+		"ABANDON_TIME",
+		"QUEUE_ANSWER_TIME",
+		"HOLD_TIME",
+		"INTERACTION_TIME",
+		"INTERACTION_AND_HOLD_TIME",
+		"SERVICE_LEVEL",
+	}
+}
 
 type PhoneNumberCountryCode string
 
@@ -333,6 +433,251 @@ const (
 	PhoneNumberCountryCodeZw PhoneNumberCountryCode = "ZW"
 )
 
+// Values returns all known values for PhoneNumberCountryCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberCountryCode) Values() []PhoneNumberCountryCode {
+	return []PhoneNumberCountryCode{
+		"AF",
+		"AL",
+		"DZ",
+		"AS",
+		"AD",
+		"AO",
+		"AI",
+		"AQ",
+		"AG",
+		"AR",
+		"AM",
+		"AW",
+		"AU",
+		"AT",
+		"AZ",
+		"BS",
+		"BH",
+		"BD",
+		"BB",
+		"BY",
+		"BE",
+		"BZ",
+		"BJ",
+		"BM",
+		"BT",
+		"BO",
+		"BA",
+		"BW",
+		"BR",
+		"IO",
+		"VG",
+		"BN",
+		"BG",
+		"BF",
+		"BI",
+		"KH",
+		"CM",
+		"CA",
+		"CV",
+		"KY",
+		"CF",
+		"TD",
+		"CL",
+		"CN",
+		"CX",
+		"CC",
+		"CO",
+		"KM",
+		"CK",
+		"CR",
+		"HR",
+		"CU",
+		"CW",
+		"CY",
+		"CZ",
+		"CD",
+		"DK",
+		"DJ",
+		"DM",
+		"DO",
+		"TL",
+		"EC",
+		"EG",
+		"SV",
+		"GQ",
+		"ER",
+		"EE",
+		"ET",
+		"FK",
+		"FO",
+		"FJ",
+		"FI",
+		"FR",
+		"PF",
+		"GA",
+		"GM",
+		"GE",
+		"DE",
+		"GH",
+		"GI",
+		"GR",
+		"GL",
+		"GD",
+		"GU",
+		"GT",
+		"GG",
+		"GN",
+		"GW",
+		"GY",
+		"HT",
+		"HN",
+		"HK",
+		"HU",
+		"IS",
+		"IN",
+		"ID",
+		"IR",
+		"IQ",
+		"IE",
+		"IM",
+		"IL",
+		"IT",
+		"CI",
+		"JM",
+		"JP",
+		"JE",
+		"JO",
+		"KZ",
+		"KE",
+		"KI",
+		"KW",
+		"KG",
+		"LA",
+		"LV",
+		"LB",
+		"LS",
+		"LR",
+		"LY",
+		"LI",
+		"LT",
+		"LU",
+		"MO",
+		"MK",
+		"MG",
+		"MW",
+		"MY",
+		"MV",
+		"ML",
+		"MT",
+		"MH",
+		"MR",
+		"MU",
+		"YT",
+		"MX",
+		"FM",
+		"MD",
+		"MC",
+		"MN",
+		"ME",
+		"MS",
+		"MA",
+		"MZ",
+		"MM",
+		"NA",
+		"NR",
+		"NP",
+		"NL",
+		"AN",
+		"NC",
+		"NZ",
+		"NI",
+		"NE",
+		"NG",
+		"NU",
+		"KP",
+		"MP",
+		"NO",
+		"OM",
+		"PK",
+		"PW",
+		"PA",
+		"PG",
+		"PY",
+		"PE",
+		"PH",
+		"PN",
+		"PL",
+		"PT",
+		"PR",
+		"QA",
+		"CG",
+		"RE",
+		"RO",
+		"RU",
+		"RW",
+		"BL",
+		"SH",
+		"KN",
+		"LC",
+		"MF",
+		"PM",
+		"VC",
+		"WS",
+		"SM",
+		"ST",
+		"SA",
+		"SN",
+		"RS",
+		"SC",
+		"SL",
+		"SG",
+		"SX",
+		"SK",
+		"SI",
+		"SB",
+		"SO",
+		"ZA",
+		"KR",
+		"ES",
+		"LK",
+		"SD",
+		"SR",
+		"SJ",
+		"SZ",
+		"SE",
+		"CH",
+		"SY",
+		"TW",
+		"TJ",
+		"TZ",
+		"TH",
+		"TG",
+		"TK",
+		"TO",
+		"TT",
+		"TN",
+		"TR",
+		"TM",
+		"TC",
+		"TV",
+		"VI",
+		"UG",
+		"UA",
+		"AE",
+		"GB",
+		"US",
+		"UY",
+		"UZ",
+		"VU",
+		"VA",
+		"VE",
+		"VN",
+		"WF",
+		"EH",
+		"YE",
+		"ZM",
+		"ZW",
+	}
+}
+
 type PhoneNumberType string
 
 // Enum values for PhoneNumberType
@@ -340,6 +685,16 @@ const (
 	PhoneNumberTypeToll_free PhoneNumberType = "TOLL_FREE"
 	PhoneNumberTypeDid       PhoneNumberType = "DID"
 )
+
+// Values returns all known values for PhoneNumberType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberType) Values() []PhoneNumberType {
+	return []PhoneNumberType{
+		"TOLL_FREE",
+		"DID",
+	}
+}
 
 type PhoneType string
 
@@ -349,6 +704,16 @@ const (
 	PhoneTypeDesk_phone PhoneType = "DESK_PHONE"
 )
 
+// Values returns all known values for PhoneType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PhoneType) Values() []PhoneType {
+	return []PhoneType{
+		"SOFT_PHONE",
+		"DESK_PHONE",
+	}
+}
+
 type QueueType string
 
 // Enum values for QueueType
@@ -356,6 +721,16 @@ const (
 	QueueTypeStandard QueueType = "STANDARD"
 	QueueTypeAgent    QueueType = "AGENT"
 )
+
+// Values returns all known values for QueueType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (QueueType) Values() []QueueType {
+	return []QueueType{
+		"STANDARD",
+		"AGENT",
+	}
+}
 
 type Statistic string
 
@@ -366,6 +741,17 @@ const (
 	StatisticAvg Statistic = "AVG"
 )
 
+// Values returns all known values for Statistic. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"SUM",
+		"MAX",
+		"AVG",
+	}
+}
+
 type Unit string
 
 // Enum values for Unit
@@ -375,6 +761,17 @@ const (
 	UnitPercent Unit = "PERCENT"
 )
 
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Unit) Values() []Unit {
+	return []Unit{
+		"SECONDS",
+		"COUNT",
+		"PERCENT",
+	}
+}
+
 type VoiceRecordingTrack string
 
 // Enum values for VoiceRecordingTrack
@@ -383,3 +780,14 @@ const (
 	VoiceRecordingTrackTo_agent   VoiceRecordingTrack = "TO_AGENT"
 	VoiceRecordingTrackAll        VoiceRecordingTrack = "ALL"
 )
+
+// Values returns all known values for VoiceRecordingTrack. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceRecordingTrack) Values() []VoiceRecordingTrack {
+	return []VoiceRecordingTrack{
+		"FROM_AGENT",
+		"TO_AGENT",
+		"ALL",
+	}
+}

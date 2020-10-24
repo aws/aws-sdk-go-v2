@@ -41,6 +41,48 @@ const (
 	ExportableAutoScalingGroupFieldLast_refresh_timestamp                                               ExportableAutoScalingGroupField = "LastRefreshTimestamp"
 )
 
+// Values returns all known values for ExportableAutoScalingGroupField. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupField {
+	return []ExportableAutoScalingGroupField{
+		"AccountId",
+		"AutoScalingGroupArn",
+		"AutoScalingGroupName",
+		"Finding",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"LookbackPeriodInDays",
+		"CurrentConfigurationInstanceType",
+		"CurrentConfigurationDesiredCapacity",
+		"CurrentConfigurationMinSize",
+		"CurrentConfigurationMaxSize",
+		"CurrentOnDemandPrice",
+		"CurrentStandardOneYearNoUpfrontReservedPrice",
+		"CurrentStandardThreeYearNoUpfrontReservedPrice",
+		"CurrentVCpus",
+		"CurrentMemory",
+		"CurrentStorage",
+		"CurrentNetwork",
+		"RecommendationOptionsConfigurationInstanceType",
+		"RecommendationOptionsConfigurationDesiredCapacity",
+		"RecommendationOptionsConfigurationMinSize",
+		"RecommendationOptionsConfigurationMaxSize",
+		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"RecommendationOptionsPerformanceRisk",
+		"RecommendationOptionsOnDemandPrice",
+		"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+		"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+		"RecommendationOptionsVcpus",
+		"RecommendationOptionsMemory",
+		"RecommendationOptionsStorage",
+		"RecommendationOptionsNetwork",
+		"LastRefreshTimestamp",
+	}
+}
+
 type ExportableInstanceField string
 
 // Enum values for ExportableInstanceField
@@ -76,12 +118,58 @@ const (
 	ExportableInstanceFieldLast_refresh_timestamp                                               ExportableInstanceField = "LastRefreshTimestamp"
 )
 
+// Values returns all known values for ExportableInstanceField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableInstanceField) Values() []ExportableInstanceField {
+	return []ExportableInstanceField{
+		"AccountId",
+		"InstanceArn",
+		"InstanceName",
+		"Finding",
+		"LookbackPeriodInDays",
+		"CurrentInstanceType",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"CurrentOnDemandPrice",
+		"CurrentStandardOneYearNoUpfrontReservedPrice",
+		"CurrentStandardThreeYearNoUpfrontReservedPrice",
+		"CurrentVCpus",
+		"CurrentMemory",
+		"CurrentStorage",
+		"CurrentNetwork",
+		"RecommendationOptionsInstanceType",
+		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"RecommendationOptionsPerformanceRisk",
+		"RecommendationOptionsVcpus",
+		"RecommendationOptionsMemory",
+		"RecommendationOptionsStorage",
+		"RecommendationOptionsNetwork",
+		"RecommendationOptionsOnDemandPrice",
+		"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+		"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+		"RecommendationsSourcesRecommendationSourceArn",
+		"RecommendationsSourcesRecommendationSourceType",
+		"LastRefreshTimestamp",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
 const (
 	FileFormatCsv FileFormat = "Csv"
 )
+
+// Values returns all known values for FileFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FileFormat) Values() []FileFormat {
+	return []FileFormat{
+		"Csv",
+	}
+}
 
 type FilterName string
 
@@ -90,6 +178,16 @@ const (
 	FilterNameFinding                    FilterName = "Finding"
 	FilterNameRecommendation_source_type FilterName = "RecommendationSourceType"
 )
+
+// Values returns all known values for FilterName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FilterName) Values() []FilterName {
+	return []FilterName{
+		"Finding",
+		"RecommendationSourceType",
+	}
+}
 
 type Finding string
 
@@ -101,6 +199,18 @@ const (
 	FindingNot_optimized     Finding = "NotOptimized"
 )
 
+// Values returns all known values for Finding. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Finding) Values() []Finding {
+	return []Finding{
+		"Underprovisioned",
+		"Overprovisioned",
+		"Optimized",
+		"NotOptimized",
+	}
+}
+
 type JobFilterName string
 
 // Enum values for JobFilterName
@@ -108,6 +218,16 @@ const (
 	JobFilterNameResource_type JobFilterName = "ResourceType"
 	JobFilterNameJob_status    JobFilterName = "JobStatus"
 )
+
+// Values returns all known values for JobFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobFilterName) Values() []JobFilterName {
+	return []JobFilterName{
+		"ResourceType",
+		"JobStatus",
+	}
+}
 
 type JobStatus string
 
@@ -119,6 +239,18 @@ const (
 	JobStatusFailed      JobStatus = "Failed"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"Queued",
+		"InProgress",
+		"Complete",
+		"Failed",
+	}
+}
+
 type MetricName string
 
 // Enum values for MetricName
@@ -126,6 +258,16 @@ const (
 	MetricNameCpu    MetricName = "Cpu"
 	MetricNameMemory MetricName = "Memory"
 )
+
+// Values returns all known values for MetricName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricName) Values() []MetricName {
+	return []MetricName{
+		"Cpu",
+		"Memory",
+	}
+}
 
 type MetricStatistic string
 
@@ -135,6 +277,16 @@ const (
 	MetricStatisticAverage MetricStatistic = "Average"
 )
 
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Maximum",
+		"Average",
+	}
+}
+
 type RecommendationSourceType string
 
 // Enum values for RecommendationSourceType
@@ -143,6 +295,16 @@ const (
 	RecommendationSourceTypeAuto_scaling_group RecommendationSourceType = "AutoScalingGroup"
 )
 
+// Values returns all known values for RecommendationSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationSourceType) Values() []RecommendationSourceType {
+	return []RecommendationSourceType{
+		"Ec2Instance",
+		"AutoScalingGroup",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -150,6 +312,16 @@ const (
 	ResourceTypeEc2_instance       ResourceType = "Ec2Instance"
 	ResourceTypeAuto_scaling_group ResourceType = "AutoScalingGroup"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"Ec2Instance",
+		"AutoScalingGroup",
+	}
+}
 
 type Status string
 
@@ -160,3 +332,15 @@ const (
 	StatusPending  Status = "Pending"
 	StatusFailed   Status = "Failed"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"Active",
+		"Inactive",
+		"Pending",
+		"Failed",
+	}
+}

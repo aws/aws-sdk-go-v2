@@ -11,6 +11,17 @@ const (
 	ConsumerStatusActive   ConsumerStatus = "ACTIVE"
 )
 
+// Values returns all known values for ConsumerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConsumerStatus) Values() []ConsumerStatus {
+	return []ConsumerStatus{
+		"CREATING",
+		"DELETING",
+		"ACTIVE",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType
@@ -18,6 +29,16 @@ const (
 	EncryptionTypeNone EncryptionType = "NONE"
 	EncryptionTypeKms  EncryptionType = "KMS"
 )
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"NONE",
+		"KMS",
+	}
+}
 
 type MetricsName string
 
@@ -33,12 +54,37 @@ const (
 	MetricsNameAll                                   MetricsName = "ALL"
 )
 
+// Values returns all known values for MetricsName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricsName) Values() []MetricsName {
+	return []MetricsName{
+		"IncomingBytes",
+		"IncomingRecords",
+		"OutgoingBytes",
+		"OutgoingRecords",
+		"WriteProvisionedThroughputExceeded",
+		"ReadProvisionedThroughputExceeded",
+		"IteratorAgeMilliseconds",
+		"ALL",
+	}
+}
+
 type ScalingType string
 
 // Enum values for ScalingType
 const (
 	ScalingTypeUniform_scaling ScalingType = "UNIFORM_SCALING"
 )
+
+// Values returns all known values for ScalingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScalingType) Values() []ScalingType {
+	return []ScalingType{
+		"UNIFORM_SCALING",
+	}
+}
 
 type ShardIteratorType string
 
@@ -51,6 +97,19 @@ const (
 	ShardIteratorTypeAt_timestamp          ShardIteratorType = "AT_TIMESTAMP"
 )
 
+// Values returns all known values for ShardIteratorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShardIteratorType) Values() []ShardIteratorType {
+	return []ShardIteratorType{
+		"AT_SEQUENCE_NUMBER",
+		"AFTER_SEQUENCE_NUMBER",
+		"TRIM_HORIZON",
+		"LATEST",
+		"AT_TIMESTAMP",
+	}
+}
+
 type StreamStatus string
 
 // Enum values for StreamStatus
@@ -60,3 +119,15 @@ const (
 	StreamStatusActive   StreamStatus = "ACTIVE"
 	StreamStatusUpdating StreamStatus = "UPDATING"
 )
+
+// Values returns all known values for StreamStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StreamStatus) Values() []StreamStatus {
+	return []StreamStatus{
+		"CREATING",
+		"DELETING",
+		"ACTIVE",
+		"UPDATING",
+	}
+}

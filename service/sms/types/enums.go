@@ -22,6 +22,28 @@ const (
 	AppLaunchStatusTerminated              AppLaunchStatus = "TERMINATED"
 )
 
+// Values returns all known values for AppLaunchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppLaunchStatus) Values() []AppLaunchStatus {
+	return []AppLaunchStatus{
+		"READY_FOR_CONFIGURATION",
+		"CONFIGURATION_IN_PROGRESS",
+		"CONFIGURATION_INVALID",
+		"READY_FOR_LAUNCH",
+		"VALIDATION_IN_PROGRESS",
+		"LAUNCH_PENDING",
+		"LAUNCH_IN_PROGRESS",
+		"LAUNCHED",
+		"DELTA_LAUNCH_IN_PROGRESS",
+		"DELTA_LAUNCH_FAILED",
+		"LAUNCH_FAILED",
+		"TERMINATE_IN_PROGRESS",
+		"TERMINATE_FAILED",
+		"TERMINATED",
+	}
+}
+
 type AppReplicationStatus string
 
 // Enum values for AppReplicationStatus
@@ -43,6 +65,29 @@ const (
 	AppReplicationStatusReplicationstopped         AppReplicationStatus = "REPLICATION_STOPPED"
 )
 
+// Values returns all known values for AppReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppReplicationStatus) Values() []AppReplicationStatus {
+	return []AppReplicationStatus{
+		"READY_FOR_CONFIGURATION",
+		"CONFIGURATION_IN_PROGRESS",
+		"CONFIGURATION_INVALID",
+		"READY_FOR_REPLICATION",
+		"VALIDATION_IN_PROGRESS",
+		"REPLICATION_PENDING",
+		"REPLICATION_IN_PROGRESS",
+		"REPLICATED",
+		"DELTA_REPLICATION_IN_PROGRESS",
+		"DELTA_REPLICATED",
+		"DELTA_REPLICATION_FAILED",
+		"REPLICATION_FAILED",
+		"REPLICATION_STOPPING",
+		"REPLICATION_STOP_FAILED",
+		"REPLICATION_STOPPED",
+	}
+}
+
 type AppStatus string
 
 // Enum values for AppStatus
@@ -55,6 +100,20 @@ const (
 	AppStatusDelete_failed AppStatus = "DELETE_FAILED"
 )
 
+// Values returns all known values for AppStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AppStatus) Values() []AppStatus {
+	return []AppStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"DELETE_FAILED",
+	}
+}
+
 type ConnectorCapability string
 
 // Enum values for ConnectorCapability
@@ -65,6 +124,18 @@ const (
 	ConnectorCapabilitySnapshotbatching ConnectorCapability = "SNAPSHOT_BATCHING"
 )
 
+// Values returns all known values for ConnectorCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorCapability) Values() []ConnectorCapability {
+	return []ConnectorCapability{
+		"VSPHERE",
+		"SCVMM",
+		"HYPERV-MANAGER",
+		"SNAPSHOT_BATCHING",
+	}
+}
+
 type ConnectorStatus string
 
 // Enum values for ConnectorStatus
@@ -72,6 +143,16 @@ const (
 	ConnectorStatusHealthy   ConnectorStatus = "HEALTHY"
 	ConnectorStatusUnhealthy ConnectorStatus = "UNHEALTHY"
 )
+
+// Values returns all known values for ConnectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorStatus) Values() []ConnectorStatus {
+	return []ConnectorStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
 
 type LicenseType string
 
@@ -81,6 +162,16 @@ const (
 	LicenseTypeByol LicenseType = "BYOL"
 )
 
+// Values returns all known values for LicenseType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LicenseType) Values() []LicenseType {
+	return []LicenseType{
+		"AWS",
+		"BYOL",
+	}
+}
+
 type OutputFormat string
 
 // Enum values for OutputFormat
@@ -88,6 +179,16 @@ const (
 	OutputFormatJson OutputFormat = "JSON"
 	OutputFormatYaml OutputFormat = "YAML"
 )
+
+// Values returns all known values for OutputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OutputFormat) Values() []OutputFormat {
+	return []OutputFormat{
+		"JSON",
+		"YAML",
+	}
+}
 
 type ReplicationJobState string
 
@@ -103,6 +204,22 @@ const (
 	ReplicationJobStateFailing         ReplicationJobState = "FAILING"
 )
 
+// Values returns all known values for ReplicationJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationJobState) Values() []ReplicationJobState {
+	return []ReplicationJobState{
+		"PENDING",
+		"ACTIVE",
+		"FAILED",
+		"DELETING",
+		"DELETED",
+		"COMPLETED",
+		"PAUSED_ON_FAILURE",
+		"FAILING",
+	}
+}
+
 type ReplicationRunState string
 
 // Enum values for ReplicationRunState
@@ -116,6 +233,21 @@ const (
 	ReplicationRunStateDeleted   ReplicationRunState = "DELETED"
 )
 
+// Values returns all known values for ReplicationRunState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationRunState) Values() []ReplicationRunState {
+	return []ReplicationRunState{
+		"PENDING",
+		"MISSED",
+		"ACTIVE",
+		"FAILED",
+		"COMPLETED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type ReplicationRunType string
 
 // Enum values for ReplicationRunType
@@ -123,6 +255,16 @@ const (
 	ReplicationRunTypeOndemand  ReplicationRunType = "ON_DEMAND"
 	ReplicationRunTypeAutomatic ReplicationRunType = "AUTOMATIC"
 )
+
+// Values returns all known values for ReplicationRunType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationRunType) Values() []ReplicationRunType {
+	return []ReplicationRunType{
+		"ON_DEMAND",
+		"AUTOMATIC",
+	}
+}
 
 type ServerCatalogStatus string
 
@@ -135,12 +277,34 @@ const (
 	ServerCatalogStatusExpired     ServerCatalogStatus = "EXPIRED"
 )
 
+// Values returns all known values for ServerCatalogStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServerCatalogStatus) Values() []ServerCatalogStatus {
+	return []ServerCatalogStatus{
+		"NOT_IMPORTED",
+		"IMPORTING",
+		"AVAILABLE",
+		"DELETED",
+		"EXPIRED",
+	}
+}
+
 type ServerType string
 
 // Enum values for ServerType
 const (
 	ServerTypeVirtualmachine ServerType = "VIRTUAL_MACHINE"
 )
+
+// Values returns all known values for ServerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServerType) Values() []ServerType {
+	return []ServerType{
+		"VIRTUAL_MACHINE",
+	}
+}
 
 type VmManagerType string
 
@@ -150,3 +314,14 @@ const (
 	VmManagerTypeScvmm         VmManagerType = "SCVMM"
 	VmManagerTypeHypervmanager VmManagerType = "HYPERV-MANAGER"
 )
+
+// Values returns all known values for VmManagerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VmManagerType) Values() []VmManagerType {
+	return []VmManagerType{
+		"VSPHERE",
+		"SCVMM",
+		"HYPERV-MANAGER",
+	}
+}

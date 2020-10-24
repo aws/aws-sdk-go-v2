@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -23,7 +24,7 @@ type awsRestjson1_deserializeOpGetClip struct {
 }
 
 func (*awsRestjson1_deserializeOpGetClip) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetClip) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -161,7 +162,7 @@ type awsRestjson1_deserializeOpGetDASHStreamingSessionURL struct {
 }
 
 func (*awsRestjson1_deserializeOpGetDASHStreamingSessionURL) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetDASHStreamingSessionURL) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -333,7 +334,7 @@ type awsRestjson1_deserializeOpGetHLSStreamingSessionURL struct {
 }
 
 func (*awsRestjson1_deserializeOpGetHLSStreamingSessionURL) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetHLSStreamingSessionURL) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -505,7 +506,7 @@ type awsRestjson1_deserializeOpGetMediaForFragmentList struct {
 }
 
 func (*awsRestjson1_deserializeOpGetMediaForFragmentList) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpGetMediaForFragmentList) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
@@ -628,7 +629,7 @@ type awsRestjson1_deserializeOpListFragments struct {
 }
 
 func (*awsRestjson1_deserializeOpListFragments) ID() string {
-	return "OperationDeserializer"
+	return smithyid.OperationDeserializer
 }
 
 func (m *awsRestjson1_deserializeOpListFragments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

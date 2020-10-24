@@ -11,6 +11,17 @@ const (
 	AssignmentStatusDisabled AssignmentStatus = "DISABLED"
 )
 
+// Values returns all known values for AssignmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssignmentStatus) Values() []AssignmentStatus {
+	return []AssignmentStatus{
+		"ENABLED",
+		"DRAFT",
+		"DISABLED",
+	}
+}
+
 type ColumnDataType string
 
 // Enum values for ColumnDataType
@@ -21,6 +32,18 @@ const (
 	ColumnDataTypeDatetime ColumnDataType = "DATETIME"
 )
 
+// Values returns all known values for ColumnDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnDataType) Values() []ColumnDataType {
+	return []ColumnDataType{
+		"STRING",
+		"INTEGER",
+		"DECIMAL",
+		"DATETIME",
+	}
+}
+
 type DashboardBehavior string
 
 // Enum values for DashboardBehavior
@@ -28,6 +51,16 @@ const (
 	DashboardBehaviorEnabled  DashboardBehavior = "ENABLED"
 	DashboardBehaviorDisabled DashboardBehavior = "DISABLED"
 )
+
+// Values returns all known values for DashboardBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardBehavior) Values() []DashboardBehavior {
+	return []DashboardBehavior{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type DashboardErrorType string
 
@@ -45,12 +78,39 @@ const (
 	DashboardErrorTypeColumn_replacement_missing      DashboardErrorType = "COLUMN_REPLACEMENT_MISSING"
 )
 
+// Values returns all known values for DashboardErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardErrorType) Values() []DashboardErrorType {
+	return []DashboardErrorType{
+		"ACCESS_DENIED",
+		"SOURCE_NOT_FOUND",
+		"DATA_SET_NOT_FOUND",
+		"INTERNAL_FAILURE",
+		"PARAMETER_VALUE_INCOMPATIBLE",
+		"PARAMETER_TYPE_INVALID",
+		"PARAMETER_NOT_FOUND",
+		"COLUMN_TYPE_MISMATCH",
+		"COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
+		"COLUMN_REPLACEMENT_MISSING",
+	}
+}
+
 type DashboardFilterAttribute string
 
 // Enum values for DashboardFilterAttribute
 const (
 	DashboardFilterAttributeQuicksight_user DashboardFilterAttribute = "QUICKSIGHT_USER"
 )
+
+// Values returns all known values for DashboardFilterAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardFilterAttribute) Values() []DashboardFilterAttribute {
+	return []DashboardFilterAttribute{
+		"QUICKSIGHT_USER",
+	}
+}
 
 type DashboardUIState string
 
@@ -60,6 +120,16 @@ const (
 	DashboardUIStateCollapsed DashboardUIState = "COLLAPSED"
 )
 
+// Values returns all known values for DashboardUIState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardUIState) Values() []DashboardUIState {
+	return []DashboardUIState{
+		"EXPANDED",
+		"COLLAPSED",
+	}
+}
+
 type DataSetImportMode string
 
 // Enum values for DataSetImportMode
@@ -67,6 +137,16 @@ const (
 	DataSetImportModeSpice        DataSetImportMode = "SPICE"
 	DataSetImportModeDirect_query DataSetImportMode = "DIRECT_QUERY"
 )
+
+// Values returns all known values for DataSetImportMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetImportMode) Values() []DataSetImportMode {
+	return []DataSetImportMode{
+		"SPICE",
+		"DIRECT_QUERY",
+	}
+}
 
 type DataSourceErrorInfoType string
 
@@ -81,6 +161,22 @@ const (
 	DataSourceErrorInfoTypeConflict                     DataSourceErrorInfoType = "CONFLICT"
 	DataSourceErrorInfoTypeUnknown                      DataSourceErrorInfoType = "UNKNOWN"
 )
+
+// Values returns all known values for DataSourceErrorInfoType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceErrorInfoType) Values() []DataSourceErrorInfoType {
+	return []DataSourceErrorInfoType{
+		"ACCESS_DENIED",
+		"COPY_SOURCE_NOT_FOUND",
+		"TIMEOUT",
+		"ENGINE_VERSION_NOT_SUPPORTED",
+		"UNKNOWN_HOST",
+		"GENERIC_SQL_FAILURE",
+		"CONFLICT",
+		"UNKNOWN",
+	}
+}
 
 type DataSourceType string
 
@@ -109,6 +205,35 @@ const (
 	DataSourceTypeTwitter              DataSourceType = "TWITTER"
 )
 
+// Values returns all known values for DataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceType) Values() []DataSourceType {
+	return []DataSourceType{
+		"ADOBE_ANALYTICS",
+		"AMAZON_ELASTICSEARCH",
+		"ATHENA",
+		"AURORA",
+		"AURORA_POSTGRESQL",
+		"AWS_IOT_ANALYTICS",
+		"GITHUB",
+		"JIRA",
+		"MARIADB",
+		"MYSQL",
+		"POSTGRESQL",
+		"PRESTO",
+		"REDSHIFT",
+		"S3",
+		"SALESFORCE",
+		"SERVICENOW",
+		"SNOWFLAKE",
+		"SPARK",
+		"SQLSERVER",
+		"TERADATA",
+		"TWITTER",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition
@@ -116,6 +241,16 @@ const (
 	EditionStandard   Edition = "STANDARD"
 	EditionEnterprise Edition = "ENTERPRISE"
 )
+
+// Values returns all known values for Edition. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Edition) Values() []Edition {
+	return []Edition{
+		"STANDARD",
+		"ENTERPRISE",
+	}
+}
 
 type ExceptionResourceType string
 
@@ -132,6 +267,23 @@ const (
 	ExceptionResourceTypeIngestion            ExceptionResourceType = "INGESTION"
 )
 
+// Values returns all known values for ExceptionResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExceptionResourceType) Values() []ExceptionResourceType {
+	return []ExceptionResourceType{
+		"USER",
+		"GROUP",
+		"NAMESPACE",
+		"ACCOUNT_SETTINGS",
+		"IAMPOLICY_ASSIGNMENT",
+		"DATA_SOURCE",
+		"DATA_SET",
+		"VPC_CONNECTION",
+		"INGESTION",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
@@ -144,6 +296,20 @@ const (
 	FileFormatJson FileFormat = "JSON"
 )
 
+// Values returns all known values for FileFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FileFormat) Values() []FileFormat {
+	return []FileFormat{
+		"CSV",
+		"TSV",
+		"CLF",
+		"ELF",
+		"XLSX",
+		"JSON",
+	}
+}
+
 type FilterOperator string
 
 // Enum values for FilterOperator
@@ -151,12 +317,30 @@ const (
 	FilterOperatorStringequals FilterOperator = "StringEquals"
 )
 
+// Values returns all known values for FilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperator) Values() []FilterOperator {
+	return []FilterOperator{
+		"StringEquals",
+	}
+}
+
 type GeoSpatialCountryCode string
 
 // Enum values for GeoSpatialCountryCode
 const (
 	GeoSpatialCountryCodeUs GeoSpatialCountryCode = "US"
 )
+
+// Values returns all known values for GeoSpatialCountryCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeoSpatialCountryCode) Values() []GeoSpatialCountryCode {
+	return []GeoSpatialCountryCode{
+		"US",
+	}
+}
 
 type GeoSpatialDataRole string
 
@@ -171,12 +355,36 @@ const (
 	GeoSpatialDataRoleLatitude  GeoSpatialDataRole = "LATITUDE"
 )
 
+// Values returns all known values for GeoSpatialDataRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeoSpatialDataRole) Values() []GeoSpatialDataRole {
+	return []GeoSpatialDataRole{
+		"COUNTRY",
+		"STATE",
+		"COUNTY",
+		"CITY",
+		"POSTCODE",
+		"LONGITUDE",
+		"LATITUDE",
+	}
+}
+
 type IdentityStore string
 
 // Enum values for IdentityStore
 const (
 	IdentityStoreQuicksight IdentityStore = "QUICKSIGHT"
 )
+
+// Values returns all known values for IdentityStore. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityStore) Values() []IdentityStore {
+	return []IdentityStore{
+		"QUICKSIGHT",
+	}
+}
 
 type IdentityType string
 
@@ -185,6 +393,16 @@ const (
 	IdentityTypeIam        IdentityType = "IAM"
 	IdentityTypeQuicksight IdentityType = "QUICKSIGHT"
 )
+
+// Values returns all known values for IdentityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"IAM",
+		"QUICKSIGHT",
+	}
+}
 
 type IngestionErrorType string
 
@@ -232,6 +450,54 @@ const (
 	IngestionErrorTypeInternal_service_error             IngestionErrorType = "INTERNAL_SERVICE_ERROR"
 )
 
+// Values returns all known values for IngestionErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionErrorType) Values() []IngestionErrorType {
+	return []IngestionErrorType{
+		"FAILURE_TO_ASSUME_ROLE",
+		"INGESTION_SUPERSEDED",
+		"INGESTION_CANCELED",
+		"DATA_SET_DELETED",
+		"DATA_SET_NOT_SPICE",
+		"S3_UPLOADED_FILE_DELETED",
+		"S3_MANIFEST_ERROR",
+		"DATA_TOLERANCE_EXCEPTION",
+		"SPICE_TABLE_NOT_FOUND",
+		"DATA_SET_SIZE_LIMIT_EXCEEDED",
+		"ROW_SIZE_LIMIT_EXCEEDED",
+		"ACCOUNT_CAPACITY_LIMIT_EXCEEDED",
+		"CUSTOMER_ERROR",
+		"DATA_SOURCE_NOT_FOUND",
+		"IAM_ROLE_NOT_AVAILABLE",
+		"CONNECTION_FAILURE",
+		"SQL_TABLE_NOT_FOUND",
+		"PERMISSION_DENIED",
+		"SSL_CERTIFICATE_VALIDATION_FAILURE",
+		"OAUTH_TOKEN_FAILURE",
+		"SOURCE_API_LIMIT_EXCEEDED_FAILURE",
+		"PASSWORD_AUTHENTICATION_FAILURE",
+		"SQL_SCHEMA_MISMATCH_ERROR",
+		"INVALID_DATE_FORMAT",
+		"INVALID_DATAPREP_SYNTAX",
+		"SOURCE_RESOURCE_LIMIT_EXCEEDED",
+		"SQL_INVALID_PARAMETER_VALUE",
+		"QUERY_TIMEOUT",
+		"SQL_NUMERIC_OVERFLOW",
+		"UNRESOLVABLE_HOST",
+		"UNROUTABLE_HOST",
+		"SQL_EXCEPTION",
+		"S3_FILE_INACCESSIBLE",
+		"IOT_FILE_NOT_FOUND",
+		"IOT_DATA_SET_FILE_EMPTY",
+		"INVALID_DATA_SOURCE_CONFIG",
+		"DATA_SOURCE_AUTH_FAILED",
+		"DATA_SOURCE_CONNECTION_FAILED",
+		"FAILURE_TO_PROCESS_JSON_FILE",
+		"INTERNAL_SERVICE_ERROR",
+	}
+}
+
 type IngestionRequestSource string
 
 // Enum values for IngestionRequestSource
@@ -239,6 +505,16 @@ const (
 	IngestionRequestSourceManual    IngestionRequestSource = "MANUAL"
 	IngestionRequestSourceScheduled IngestionRequestSource = "SCHEDULED"
 )
+
+// Values returns all known values for IngestionRequestSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionRequestSource) Values() []IngestionRequestSource {
+	return []IngestionRequestSource{
+		"MANUAL",
+		"SCHEDULED",
+	}
+}
 
 type IngestionRequestType string
 
@@ -249,6 +525,18 @@ const (
 	IngestionRequestTypeIncremental_refresh IngestionRequestType = "INCREMENTAL_REFRESH"
 	IngestionRequestTypeFull_refresh        IngestionRequestType = "FULL_REFRESH"
 )
+
+// Values returns all known values for IngestionRequestType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionRequestType) Values() []IngestionRequestType {
+	return []IngestionRequestType{
+		"INITIAL_INGESTION",
+		"EDIT",
+		"INCREMENTAL_REFRESH",
+		"FULL_REFRESH",
+	}
+}
 
 type IngestionStatus string
 
@@ -261,6 +549,20 @@ const (
 	IngestionStatusCompleted   IngestionStatus = "COMPLETED"
 	IngestionStatusCancelled   IngestionStatus = "CANCELLED"
 )
+
+// Values returns all known values for IngestionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionStatus) Values() []IngestionStatus {
+	return []IngestionStatus{
+		"INITIALIZED",
+		"QUEUED",
+		"RUNNING",
+		"FAILED",
+		"COMPLETED",
+		"CANCELLED",
+	}
+}
 
 type InputColumnDataType string
 
@@ -275,6 +577,21 @@ const (
 	InputColumnDataTypeJson     InputColumnDataType = "JSON"
 )
 
+// Values returns all known values for InputColumnDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputColumnDataType) Values() []InputColumnDataType {
+	return []InputColumnDataType{
+		"STRING",
+		"INTEGER",
+		"DECIMAL",
+		"DATETIME",
+		"BIT",
+		"BOOLEAN",
+		"JSON",
+	}
+}
+
 type JoinType string
 
 // Enum values for JoinType
@@ -285,6 +602,18 @@ const (
 	JoinTypeRight JoinType = "RIGHT"
 )
 
+// Values returns all known values for JoinType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JoinType) Values() []JoinType {
+	return []JoinType{
+		"INNER",
+		"OUTER",
+		"LEFT",
+		"RIGHT",
+	}
+}
+
 type NamespaceErrorType string
 
 // Enum values for NamespaceErrorType
@@ -292,6 +621,16 @@ const (
 	NamespaceErrorTypePermission_denied      NamespaceErrorType = "PERMISSION_DENIED"
 	NamespaceErrorTypeInternal_service_error NamespaceErrorType = "INTERNAL_SERVICE_ERROR"
 )
+
+// Values returns all known values for NamespaceErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamespaceErrorType) Values() []NamespaceErrorType {
+	return []NamespaceErrorType{
+		"PERMISSION_DENIED",
+		"INTERNAL_SERVICE_ERROR",
+	}
+}
 
 type NamespaceStatus string
 
@@ -303,6 +642,19 @@ const (
 	NamespaceStatusRetryable_failure     NamespaceStatus = "RETRYABLE_FAILURE"
 	NamespaceStatusNon_retryable_failure NamespaceStatus = "NON_RETRYABLE_FAILURE"
 )
+
+// Values returns all known values for NamespaceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamespaceStatus) Values() []NamespaceStatus {
+	return []NamespaceStatus{
+		"CREATED",
+		"CREATING",
+		"DELETING",
+		"RETRYABLE_FAILURE",
+		"NON_RETRYABLE_FAILURE",
+	}
+}
 
 type ResourceStatus string
 
@@ -316,6 +668,20 @@ const (
 	ResourceStatusUpdate_failed        ResourceStatus = "UPDATE_FAILED"
 )
 
+// Values returns all known values for ResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatus) Values() []ResourceStatus {
+	return []ResourceStatus{
+		"CREATION_IN_PROGRESS",
+		"CREATION_SUCCESSFUL",
+		"CREATION_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_FAILED",
+	}
+}
+
 type RowLevelPermissionPolicy string
 
 // Enum values for RowLevelPermissionPolicy
@@ -323,6 +689,16 @@ const (
 	RowLevelPermissionPolicyGrant_access RowLevelPermissionPolicy = "GRANT_ACCESS"
 	RowLevelPermissionPolicyDeny_access  RowLevelPermissionPolicy = "DENY_ACCESS"
 )
+
+// Values returns all known values for RowLevelPermissionPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
+	return []RowLevelPermissionPolicy{
+		"GRANT_ACCESS",
+		"DENY_ACCESS",
+	}
+}
 
 type TemplateErrorType string
 
@@ -333,6 +709,17 @@ const (
 	TemplateErrorTypeInternal_failure   TemplateErrorType = "INTERNAL_FAILURE"
 )
 
+// Values returns all known values for TemplateErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateErrorType) Values() []TemplateErrorType {
+	return []TemplateErrorType{
+		"SOURCE_NOT_FOUND",
+		"DATA_SET_NOT_FOUND",
+		"INTERNAL_FAILURE",
+	}
+}
+
 type TextQualifier string
 
 // Enum values for TextQualifier
@@ -341,12 +728,31 @@ const (
 	TextQualifierSingle_quote TextQualifier = "SINGLE_QUOTE"
 )
 
+// Values returns all known values for TextQualifier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TextQualifier) Values() []TextQualifier {
+	return []TextQualifier{
+		"DOUBLE_QUOTE",
+		"SINGLE_QUOTE",
+	}
+}
+
 type ThemeErrorType string
 
 // Enum values for ThemeErrorType
 const (
 	ThemeErrorTypeInternal_failure ThemeErrorType = "INTERNAL_FAILURE"
 )
+
+// Values returns all known values for ThemeErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThemeErrorType) Values() []ThemeErrorType {
+	return []ThemeErrorType{
+		"INTERNAL_FAILURE",
+	}
+}
 
 type ThemeType string
 
@@ -356,6 +762,17 @@ const (
 	ThemeTypeCustom     ThemeType = "CUSTOM"
 	ThemeTypeAll        ThemeType = "ALL"
 )
+
+// Values returns all known values for ThemeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ThemeType) Values() []ThemeType {
+	return []ThemeType{
+		"QUICKSIGHT",
+		"CUSTOM",
+		"ALL",
+	}
+}
 
 type UserRole string
 
@@ -367,3 +784,16 @@ const (
 	UserRoleRestricted_author UserRole = "RESTRICTED_AUTHOR"
 	UserRoleRestricted_reader UserRole = "RESTRICTED_READER"
 )
+
+// Values returns all known values for UserRole. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UserRole) Values() []UserRole {
+	return []UserRole{
+		"ADMIN",
+		"AUTHOR",
+		"READER",
+		"RESTRICTED_AUTHOR",
+		"RESTRICTED_READER",
+	}
+}

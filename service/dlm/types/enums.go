@@ -11,12 +11,32 @@ const (
 	GettablePolicyStateValuesError    GettablePolicyStateValues = "ERROR"
 )
 
+// Values returns all known values for GettablePolicyStateValues. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GettablePolicyStateValues) Values() []GettablePolicyStateValues {
+	return []GettablePolicyStateValues{
+		"ENABLED",
+		"DISABLED",
+		"ERROR",
+	}
+}
+
 type IntervalUnitValues string
 
 // Enum values for IntervalUnitValues
 const (
 	IntervalUnitValuesHours IntervalUnitValues = "HOURS"
 )
+
+// Values returns all known values for IntervalUnitValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntervalUnitValues) Values() []IntervalUnitValues {
+	return []IntervalUnitValues{
+		"HOURS",
+	}
+}
 
 type PolicyTypeValues string
 
@@ -25,6 +45,15 @@ const (
 	PolicyTypeValuesEbs_snapshot_management PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
 )
 
+// Values returns all known values for PolicyTypeValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyTypeValues) Values() []PolicyTypeValues {
+	return []PolicyTypeValues{
+		"EBS_SNAPSHOT_MANAGEMENT",
+	}
+}
+
 type ResourceTypeValues string
 
 // Enum values for ResourceTypeValues
@@ -32,6 +61,16 @@ const (
 	ResourceTypeValuesVolume   ResourceTypeValues = "VOLUME"
 	ResourceTypeValuesInstance ResourceTypeValues = "INSTANCE"
 )
+
+// Values returns all known values for ResourceTypeValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceTypeValues) Values() []ResourceTypeValues {
+	return []ResourceTypeValues{
+		"VOLUME",
+		"INSTANCE",
+	}
+}
 
 type RetentionIntervalUnitValues string
 
@@ -43,6 +82,18 @@ const (
 	RetentionIntervalUnitValuesYears  RetentionIntervalUnitValues = "YEARS"
 )
 
+// Values returns all known values for RetentionIntervalUnitValues. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetentionIntervalUnitValues) Values() []RetentionIntervalUnitValues {
+	return []RetentionIntervalUnitValues{
+		"DAYS",
+		"WEEKS",
+		"MONTHS",
+		"YEARS",
+	}
+}
+
 type SettablePolicyStateValues string
 
 // Enum values for SettablePolicyStateValues
@@ -50,3 +101,13 @@ const (
 	SettablePolicyStateValuesEnabled  SettablePolicyStateValues = "ENABLED"
 	SettablePolicyStateValuesDisabled SettablePolicyStateValues = "DISABLED"
 )
+
+// Values returns all known values for SettablePolicyStateValues. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SettablePolicyStateValues) Values() []SettablePolicyStateValues {
+	return []SettablePolicyStateValues{
+		"ENABLED",
+		"DISABLED",
+	}
+}

@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ type awsAwsjson11_serializeOpAddTagsToResource struct {
 }
 
 func (*awsAwsjson11_serializeOpAddTagsToResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpAddTagsToResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -65,7 +66,7 @@ type awsAwsjson11_serializeOpCancelCommand struct {
 }
 
 func (*awsAwsjson11_serializeOpCancelCommand) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCancelCommand) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -111,7 +112,7 @@ type awsAwsjson11_serializeOpCancelMaintenanceWindowExecution struct {
 }
 
 func (*awsAwsjson11_serializeOpCancelMaintenanceWindowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCancelMaintenanceWindowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -157,7 +158,7 @@ type awsAwsjson11_serializeOpCreateActivation struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateActivation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateActivation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -203,7 +204,7 @@ type awsAwsjson11_serializeOpCreateAssociation struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -249,7 +250,7 @@ type awsAwsjson11_serializeOpCreateAssociationBatch struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateAssociationBatch) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateAssociationBatch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -295,7 +296,7 @@ type awsAwsjson11_serializeOpCreateDocument struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateDocument) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -341,7 +342,7 @@ type awsAwsjson11_serializeOpCreateMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -387,7 +388,7 @@ type awsAwsjson11_serializeOpCreateOpsItem struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateOpsItem) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateOpsItem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -433,7 +434,7 @@ type awsAwsjson11_serializeOpCreatePatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpCreatePatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreatePatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -479,7 +480,7 @@ type awsAwsjson11_serializeOpCreateResourceDataSync struct {
 }
 
 func (*awsAwsjson11_serializeOpCreateResourceDataSync) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpCreateResourceDataSync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -525,7 +526,7 @@ type awsAwsjson11_serializeOpDeleteActivation struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteActivation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteActivation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -571,7 +572,7 @@ type awsAwsjson11_serializeOpDeleteAssociation struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -617,7 +618,7 @@ type awsAwsjson11_serializeOpDeleteDocument struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteDocument) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -663,7 +664,7 @@ type awsAwsjson11_serializeOpDeleteInventory struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteInventory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteInventory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -709,7 +710,7 @@ type awsAwsjson11_serializeOpDeleteMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -755,7 +756,7 @@ type awsAwsjson11_serializeOpDeleteParameter struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteParameter) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteParameter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -801,7 +802,7 @@ type awsAwsjson11_serializeOpDeleteParameters struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -847,7 +848,7 @@ type awsAwsjson11_serializeOpDeletePatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpDeletePatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeletePatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -893,7 +894,7 @@ type awsAwsjson11_serializeOpDeleteResourceDataSync struct {
 }
 
 func (*awsAwsjson11_serializeOpDeleteResourceDataSync) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeleteResourceDataSync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -939,7 +940,7 @@ type awsAwsjson11_serializeOpDeregisterManagedInstance struct {
 }
 
 func (*awsAwsjson11_serializeOpDeregisterManagedInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeregisterManagedInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -985,7 +986,7 @@ type awsAwsjson11_serializeOpDeregisterPatchBaselineForPatchGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpDeregisterPatchBaselineForPatchGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeregisterPatchBaselineForPatchGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1031,7 +1032,7 @@ type awsAwsjson11_serializeOpDeregisterTargetFromMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpDeregisterTargetFromMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeregisterTargetFromMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1077,7 +1078,7 @@ type awsAwsjson11_serializeOpDeregisterTaskFromMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpDeregisterTaskFromMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDeregisterTaskFromMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1123,7 +1124,7 @@ type awsAwsjson11_serializeOpDescribeActivations struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeActivations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeActivations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1169,7 +1170,7 @@ type awsAwsjson11_serializeOpDescribeAssociation struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1215,7 +1216,7 @@ type awsAwsjson11_serializeOpDescribeAssociationExecutions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAssociationExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAssociationExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1261,7 +1262,7 @@ type awsAwsjson11_serializeOpDescribeAssociationExecutionTargets struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAssociationExecutionTargets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAssociationExecutionTargets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1307,7 +1308,7 @@ type awsAwsjson11_serializeOpDescribeAutomationExecutions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAutomationExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAutomationExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1353,7 +1354,7 @@ type awsAwsjson11_serializeOpDescribeAutomationStepExecutions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAutomationStepExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAutomationStepExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1399,7 +1400,7 @@ type awsAwsjson11_serializeOpDescribeAvailablePatches struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeAvailablePatches) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeAvailablePatches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1445,7 +1446,7 @@ type awsAwsjson11_serializeOpDescribeDocument struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeDocument) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1491,7 +1492,7 @@ type awsAwsjson11_serializeOpDescribeDocumentPermission struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeDocumentPermission) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeDocumentPermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1537,7 +1538,7 @@ type awsAwsjson11_serializeOpDescribeEffectiveInstanceAssociations struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeEffectiveInstanceAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeEffectiveInstanceAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1583,7 +1584,7 @@ type awsAwsjson11_serializeOpDescribeEffectivePatchesForPatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeEffectivePatchesForPatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeEffectivePatchesForPatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1629,7 +1630,7 @@ type awsAwsjson11_serializeOpDescribeInstanceAssociationsStatus struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInstanceAssociationsStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInstanceAssociationsStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1675,7 +1676,7 @@ type awsAwsjson11_serializeOpDescribeInstanceInformation struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInstanceInformation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInstanceInformation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1721,7 +1722,7 @@ type awsAwsjson11_serializeOpDescribeInstancePatches struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInstancePatches) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInstancePatches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1767,7 +1768,7 @@ type awsAwsjson11_serializeOpDescribeInstancePatchStates struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInstancePatchStates) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInstancePatchStates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1813,7 +1814,7 @@ type awsAwsjson11_serializeOpDescribeInstancePatchStatesForPatchGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInstancePatchStatesForPatchGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInstancePatchStatesForPatchGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1859,7 +1860,7 @@ type awsAwsjson11_serializeOpDescribeInventoryDeletions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeInventoryDeletions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeInventoryDeletions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1905,7 +1906,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1951,7 +1952,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTaskInvocations s
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTaskInvocations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTaskInvocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -1997,7 +1998,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTasks struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2043,7 +2044,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindows struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindows) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindows) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2089,7 +2090,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowSchedule struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowSchedule) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2135,7 +2136,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowsForTarget struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowsForTarget) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowsForTarget) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2181,7 +2182,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowTargets struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowTargets) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowTargets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2227,7 +2228,7 @@ type awsAwsjson11_serializeOpDescribeMaintenanceWindowTasks struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeMaintenanceWindowTasks) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeMaintenanceWindowTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2273,7 +2274,7 @@ type awsAwsjson11_serializeOpDescribeOpsItems struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeOpsItems) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeOpsItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2319,7 +2320,7 @@ type awsAwsjson11_serializeOpDescribeParameters struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2365,7 +2366,7 @@ type awsAwsjson11_serializeOpDescribePatchBaselines struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribePatchBaselines) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribePatchBaselines) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2411,7 +2412,7 @@ type awsAwsjson11_serializeOpDescribePatchGroups struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribePatchGroups) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribePatchGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2457,7 +2458,7 @@ type awsAwsjson11_serializeOpDescribePatchGroupState struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribePatchGroupState) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribePatchGroupState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2503,7 +2504,7 @@ type awsAwsjson11_serializeOpDescribePatchProperties struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribePatchProperties) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribePatchProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2549,7 +2550,7 @@ type awsAwsjson11_serializeOpDescribeSessions struct {
 }
 
 func (*awsAwsjson11_serializeOpDescribeSessions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpDescribeSessions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2595,7 +2596,7 @@ type awsAwsjson11_serializeOpGetAutomationExecution struct {
 }
 
 func (*awsAwsjson11_serializeOpGetAutomationExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetAutomationExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2641,7 +2642,7 @@ type awsAwsjson11_serializeOpGetCalendarState struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCalendarState) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCalendarState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2687,7 +2688,7 @@ type awsAwsjson11_serializeOpGetCommandInvocation struct {
 }
 
 func (*awsAwsjson11_serializeOpGetCommandInvocation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetCommandInvocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2733,7 +2734,7 @@ type awsAwsjson11_serializeOpGetConnectionStatus struct {
 }
 
 func (*awsAwsjson11_serializeOpGetConnectionStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetConnectionStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2779,7 +2780,7 @@ type awsAwsjson11_serializeOpGetDefaultPatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpGetDefaultPatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetDefaultPatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2825,7 +2826,7 @@ type awsAwsjson11_serializeOpGetDeployablePatchSnapshotForInstance struct {
 }
 
 func (*awsAwsjson11_serializeOpGetDeployablePatchSnapshotForInstance) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetDeployablePatchSnapshotForInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2871,7 +2872,7 @@ type awsAwsjson11_serializeOpGetDocument struct {
 }
 
 func (*awsAwsjson11_serializeOpGetDocument) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2917,7 +2918,7 @@ type awsAwsjson11_serializeOpGetInventory struct {
 }
 
 func (*awsAwsjson11_serializeOpGetInventory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetInventory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -2963,7 +2964,7 @@ type awsAwsjson11_serializeOpGetInventorySchema struct {
 }
 
 func (*awsAwsjson11_serializeOpGetInventorySchema) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetInventorySchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3009,7 +3010,7 @@ type awsAwsjson11_serializeOpGetMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3055,7 +3056,7 @@ type awsAwsjson11_serializeOpGetMaintenanceWindowExecution struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMaintenanceWindowExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMaintenanceWindowExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3101,7 +3102,7 @@ type awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTask struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3147,7 +3148,7 @@ type awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTaskInvocation struct 
 }
 
 func (*awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTaskInvocation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMaintenanceWindowExecutionTaskInvocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3193,7 +3194,7 @@ type awsAwsjson11_serializeOpGetMaintenanceWindowTask struct {
 }
 
 func (*awsAwsjson11_serializeOpGetMaintenanceWindowTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetMaintenanceWindowTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3239,7 +3240,7 @@ type awsAwsjson11_serializeOpGetOpsItem struct {
 }
 
 func (*awsAwsjson11_serializeOpGetOpsItem) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetOpsItem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3285,7 +3286,7 @@ type awsAwsjson11_serializeOpGetOpsSummary struct {
 }
 
 func (*awsAwsjson11_serializeOpGetOpsSummary) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetOpsSummary) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3331,7 +3332,7 @@ type awsAwsjson11_serializeOpGetParameter struct {
 }
 
 func (*awsAwsjson11_serializeOpGetParameter) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetParameter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3377,7 +3378,7 @@ type awsAwsjson11_serializeOpGetParameterHistory struct {
 }
 
 func (*awsAwsjson11_serializeOpGetParameterHistory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetParameterHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3423,7 +3424,7 @@ type awsAwsjson11_serializeOpGetParameters struct {
 }
 
 func (*awsAwsjson11_serializeOpGetParameters) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetParameters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3469,7 +3470,7 @@ type awsAwsjson11_serializeOpGetParametersByPath struct {
 }
 
 func (*awsAwsjson11_serializeOpGetParametersByPath) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetParametersByPath) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3515,7 +3516,7 @@ type awsAwsjson11_serializeOpGetPatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpGetPatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetPatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3561,7 +3562,7 @@ type awsAwsjson11_serializeOpGetPatchBaselineForPatchGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpGetPatchBaselineForPatchGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetPatchBaselineForPatchGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3607,7 +3608,7 @@ type awsAwsjson11_serializeOpGetServiceSetting struct {
 }
 
 func (*awsAwsjson11_serializeOpGetServiceSetting) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpGetServiceSetting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3653,7 +3654,7 @@ type awsAwsjson11_serializeOpLabelParameterVersion struct {
 }
 
 func (*awsAwsjson11_serializeOpLabelParameterVersion) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpLabelParameterVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3699,7 +3700,7 @@ type awsAwsjson11_serializeOpListAssociations struct {
 }
 
 func (*awsAwsjson11_serializeOpListAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3745,7 +3746,7 @@ type awsAwsjson11_serializeOpListAssociationVersions struct {
 }
 
 func (*awsAwsjson11_serializeOpListAssociationVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListAssociationVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3791,7 +3792,7 @@ type awsAwsjson11_serializeOpListCommandInvocations struct {
 }
 
 func (*awsAwsjson11_serializeOpListCommandInvocations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListCommandInvocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3837,7 +3838,7 @@ type awsAwsjson11_serializeOpListCommands struct {
 }
 
 func (*awsAwsjson11_serializeOpListCommands) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListCommands) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3883,7 +3884,7 @@ type awsAwsjson11_serializeOpListComplianceItems struct {
 }
 
 func (*awsAwsjson11_serializeOpListComplianceItems) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListComplianceItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3929,7 +3930,7 @@ type awsAwsjson11_serializeOpListComplianceSummaries struct {
 }
 
 func (*awsAwsjson11_serializeOpListComplianceSummaries) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListComplianceSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -3975,7 +3976,7 @@ type awsAwsjson11_serializeOpListDocuments struct {
 }
 
 func (*awsAwsjson11_serializeOpListDocuments) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListDocuments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4021,7 +4022,7 @@ type awsAwsjson11_serializeOpListDocumentVersions struct {
 }
 
 func (*awsAwsjson11_serializeOpListDocumentVersions) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListDocumentVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4067,7 +4068,7 @@ type awsAwsjson11_serializeOpListInventoryEntries struct {
 }
 
 func (*awsAwsjson11_serializeOpListInventoryEntries) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListInventoryEntries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4113,7 +4114,7 @@ type awsAwsjson11_serializeOpListResourceComplianceSummaries struct {
 }
 
 func (*awsAwsjson11_serializeOpListResourceComplianceSummaries) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListResourceComplianceSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4159,7 +4160,7 @@ type awsAwsjson11_serializeOpListResourceDataSync struct {
 }
 
 func (*awsAwsjson11_serializeOpListResourceDataSync) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListResourceDataSync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4205,7 +4206,7 @@ type awsAwsjson11_serializeOpListTagsForResource struct {
 }
 
 func (*awsAwsjson11_serializeOpListTagsForResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4251,7 +4252,7 @@ type awsAwsjson11_serializeOpModifyDocumentPermission struct {
 }
 
 func (*awsAwsjson11_serializeOpModifyDocumentPermission) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpModifyDocumentPermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4297,7 +4298,7 @@ type awsAwsjson11_serializeOpPutComplianceItems struct {
 }
 
 func (*awsAwsjson11_serializeOpPutComplianceItems) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutComplianceItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4343,7 +4344,7 @@ type awsAwsjson11_serializeOpPutInventory struct {
 }
 
 func (*awsAwsjson11_serializeOpPutInventory) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutInventory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4389,7 +4390,7 @@ type awsAwsjson11_serializeOpPutParameter struct {
 }
 
 func (*awsAwsjson11_serializeOpPutParameter) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpPutParameter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4435,7 +4436,7 @@ type awsAwsjson11_serializeOpRegisterDefaultPatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpRegisterDefaultPatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRegisterDefaultPatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4481,7 +4482,7 @@ type awsAwsjson11_serializeOpRegisterPatchBaselineForPatchGroup struct {
 }
 
 func (*awsAwsjson11_serializeOpRegisterPatchBaselineForPatchGroup) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRegisterPatchBaselineForPatchGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4527,7 +4528,7 @@ type awsAwsjson11_serializeOpRegisterTargetWithMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpRegisterTargetWithMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRegisterTargetWithMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4573,7 +4574,7 @@ type awsAwsjson11_serializeOpRegisterTaskWithMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpRegisterTaskWithMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRegisterTaskWithMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4619,7 +4620,7 @@ type awsAwsjson11_serializeOpRemoveTagsFromResource struct {
 }
 
 func (*awsAwsjson11_serializeOpRemoveTagsFromResource) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpRemoveTagsFromResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4665,7 +4666,7 @@ type awsAwsjson11_serializeOpResetServiceSetting struct {
 }
 
 func (*awsAwsjson11_serializeOpResetServiceSetting) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpResetServiceSetting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4711,7 +4712,7 @@ type awsAwsjson11_serializeOpResumeSession struct {
 }
 
 func (*awsAwsjson11_serializeOpResumeSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpResumeSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4757,7 +4758,7 @@ type awsAwsjson11_serializeOpSendAutomationSignal struct {
 }
 
 func (*awsAwsjson11_serializeOpSendAutomationSignal) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpSendAutomationSignal) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4803,7 +4804,7 @@ type awsAwsjson11_serializeOpSendCommand struct {
 }
 
 func (*awsAwsjson11_serializeOpSendCommand) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpSendCommand) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4849,7 +4850,7 @@ type awsAwsjson11_serializeOpStartAssociationsOnce struct {
 }
 
 func (*awsAwsjson11_serializeOpStartAssociationsOnce) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpStartAssociationsOnce) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4895,7 +4896,7 @@ type awsAwsjson11_serializeOpStartAutomationExecution struct {
 }
 
 func (*awsAwsjson11_serializeOpStartAutomationExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpStartAutomationExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4941,7 +4942,7 @@ type awsAwsjson11_serializeOpStartSession struct {
 }
 
 func (*awsAwsjson11_serializeOpStartSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpStartSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -4987,7 +4988,7 @@ type awsAwsjson11_serializeOpStopAutomationExecution struct {
 }
 
 func (*awsAwsjson11_serializeOpStopAutomationExecution) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpStopAutomationExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5033,7 +5034,7 @@ type awsAwsjson11_serializeOpTerminateSession struct {
 }
 
 func (*awsAwsjson11_serializeOpTerminateSession) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpTerminateSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5079,7 +5080,7 @@ type awsAwsjson11_serializeOpUpdateAssociation struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5125,7 +5126,7 @@ type awsAwsjson11_serializeOpUpdateAssociationStatus struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateAssociationStatus) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateAssociationStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5171,7 +5172,7 @@ type awsAwsjson11_serializeOpUpdateDocument struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateDocument) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateDocument) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5217,7 +5218,7 @@ type awsAwsjson11_serializeOpUpdateDocumentDefaultVersion struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateDocumentDefaultVersion) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateDocumentDefaultVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5263,7 +5264,7 @@ type awsAwsjson11_serializeOpUpdateMaintenanceWindow struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateMaintenanceWindow) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5309,7 +5310,7 @@ type awsAwsjson11_serializeOpUpdateMaintenanceWindowTarget struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateMaintenanceWindowTarget) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateMaintenanceWindowTarget) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5355,7 +5356,7 @@ type awsAwsjson11_serializeOpUpdateMaintenanceWindowTask struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateMaintenanceWindowTask) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateMaintenanceWindowTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5401,7 +5402,7 @@ type awsAwsjson11_serializeOpUpdateManagedInstanceRole struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateManagedInstanceRole) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateManagedInstanceRole) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5447,7 +5448,7 @@ type awsAwsjson11_serializeOpUpdateOpsItem struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateOpsItem) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateOpsItem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5493,7 +5494,7 @@ type awsAwsjson11_serializeOpUpdatePatchBaseline struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdatePatchBaseline) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdatePatchBaseline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5539,7 +5540,7 @@ type awsAwsjson11_serializeOpUpdateResourceDataSync struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateResourceDataSync) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateResourceDataSync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -5585,7 +5586,7 @@ type awsAwsjson11_serializeOpUpdateServiceSetting struct {
 }
 
 func (*awsAwsjson11_serializeOpUpdateServiceSetting) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsAwsjson11_serializeOpUpdateServiceSetting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

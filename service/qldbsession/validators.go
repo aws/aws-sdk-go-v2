@@ -8,13 +8,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/qldbsession/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 )
 
 type validateOpSendCommand struct {
 }
 
 func (*validateOpSendCommand) ID() string {
-	return "OperationInputValidation"
+	return smithyid.OperationInputValidation
 }
 
 func (m *validateOpSendCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

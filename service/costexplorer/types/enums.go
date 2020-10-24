@@ -10,6 +10,16 @@ const (
 	AccountScopeLinked AccountScope = "LINKED"
 )
 
+// Values returns all known values for AccountScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AccountScope) Values() []AccountScope {
+	return []AccountScope{
+		"PAYER",
+		"LINKED",
+	}
+}
+
 type Context string
 
 // Enum values for Context
@@ -19,12 +29,32 @@ const (
 	ContextSavings_plans  Context = "SAVINGS_PLANS"
 )
 
+// Values returns all known values for Context. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Context) Values() []Context {
+	return []Context{
+		"COST_AND_USAGE",
+		"RESERVATIONS",
+		"SAVINGS_PLANS",
+	}
+}
+
 type CostCategoryRuleVersion string
 
 // Enum values for CostCategoryRuleVersion
 const (
 	CostCategoryRuleVersionCostcategoryexpressionv1 CostCategoryRuleVersion = "CostCategoryExpression.v1"
 )
+
+// Values returns all known values for CostCategoryRuleVersion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CostCategoryRuleVersion) Values() []CostCategoryRuleVersion {
+	return []CostCategoryRuleVersion{
+		"CostCategoryExpression.v1",
+	}
+}
 
 type Dimension string
 
@@ -61,6 +91,43 @@ const (
 	DimensionPayment_option       Dimension = "PAYMENT_OPTION"
 )
 
+// Values returns all known values for Dimension. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Dimension) Values() []Dimension {
+	return []Dimension{
+		"AZ",
+		"INSTANCE_TYPE",
+		"LINKED_ACCOUNT",
+		"LINKED_ACCOUNT_NAME",
+		"OPERATION",
+		"PURCHASE_TYPE",
+		"REGION",
+		"SERVICE",
+		"SERVICE_CODE",
+		"USAGE_TYPE",
+		"USAGE_TYPE_GROUP",
+		"RECORD_TYPE",
+		"OPERATING_SYSTEM",
+		"TENANCY",
+		"SCOPE",
+		"PLATFORM",
+		"SUBSCRIPTION_ID",
+		"LEGAL_ENTITY_NAME",
+		"DEPLOYMENT_OPTION",
+		"DATABASE_ENGINE",
+		"CACHE_ENGINE",
+		"INSTANCE_TYPE_FAMILY",
+		"BILLING_ENTITY",
+		"RESERVATION_ID",
+		"RESOURCE_ID",
+		"RIGHTSIZING_TYPE",
+		"SAVINGS_PLANS_TYPE",
+		"SAVINGS_PLAN_ARN",
+		"PAYMENT_OPTION",
+	}
+}
+
 type Granularity string
 
 // Enum values for Granularity
@@ -69,6 +136,17 @@ const (
 	GranularityMonthly Granularity = "MONTHLY"
 	GranularityHourly  Granularity = "HOURLY"
 )
+
+// Values returns all known values for Granularity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Granularity) Values() []Granularity {
+	return []Granularity{
+		"DAILY",
+		"MONTHLY",
+		"HOURLY",
+	}
+}
 
 type GroupDefinitionType string
 
@@ -79,6 +157,17 @@ const (
 	GroupDefinitionTypeCost_category GroupDefinitionType = "COST_CATEGORY"
 )
 
+// Values returns all known values for GroupDefinitionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GroupDefinitionType) Values() []GroupDefinitionType {
+	return []GroupDefinitionType{
+		"DIMENSION",
+		"TAG",
+		"COST_CATEGORY",
+	}
+}
+
 type LookbackPeriodInDays string
 
 // Enum values for LookbackPeriodInDays
@@ -87,6 +176,17 @@ const (
 	LookbackPeriodInDaysThirty_days LookbackPeriodInDays = "THIRTY_DAYS"
 	LookbackPeriodInDaysSixty_days  LookbackPeriodInDays = "SIXTY_DAYS"
 )
+
+// Values returns all known values for LookbackPeriodInDays. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LookbackPeriodInDays) Values() []LookbackPeriodInDays {
+	return []LookbackPeriodInDays{
+		"SEVEN_DAYS",
+		"THIRTY_DAYS",
+		"SIXTY_DAYS",
+	}
+}
 
 type MatchOption string
 
@@ -99,6 +199,20 @@ const (
 	MatchOptionCase_sensitive   MatchOption = "CASE_SENSITIVE"
 	MatchOptionCase_insensitive MatchOption = "CASE_INSENSITIVE"
 )
+
+// Values returns all known values for MatchOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MatchOption) Values() []MatchOption {
+	return []MatchOption{
+		"EQUALS",
+		"STARTS_WITH",
+		"ENDS_WITH",
+		"CONTAINS",
+		"CASE_SENSITIVE",
+		"CASE_INSENSITIVE",
+	}
+}
 
 type Metric string
 
@@ -113,6 +227,21 @@ const (
 	MetricNormalized_usage_amount Metric = "NORMALIZED_USAGE_AMOUNT"
 )
 
+// Values returns all known values for Metric. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Metric) Values() []Metric {
+	return []Metric{
+		"BLENDED_COST",
+		"UNBLENDED_COST",
+		"AMORTIZED_COST",
+		"NET_UNBLENDED_COST",
+		"NET_AMORTIZED_COST",
+		"USAGE_QUANTITY",
+		"NORMALIZED_USAGE_AMOUNT",
+	}
+}
+
 type OfferingClass string
 
 // Enum values for OfferingClass
@@ -120,6 +249,16 @@ const (
 	OfferingClassStandard    OfferingClass = "STANDARD"
 	OfferingClassConvertible OfferingClass = "CONVERTIBLE"
 )
+
+// Values returns all known values for OfferingClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfferingClass) Values() []OfferingClass {
+	return []OfferingClass{
+		"STANDARD",
+		"CONVERTIBLE",
+	}
+}
 
 type PaymentOption string
 
@@ -133,6 +272,20 @@ const (
 	PaymentOptionHeavy_utilization  PaymentOption = "HEAVY_UTILIZATION"
 )
 
+// Values returns all known values for PaymentOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentOption) Values() []PaymentOption {
+	return []PaymentOption{
+		"NO_UPFRONT",
+		"PARTIAL_UPFRONT",
+		"ALL_UPFRONT",
+		"LIGHT_UTILIZATION",
+		"MEDIUM_UTILIZATION",
+		"HEAVY_UTILIZATION",
+	}
+}
+
 type RecommendationTarget string
 
 // Enum values for RecommendationTarget
@@ -140,6 +293,16 @@ const (
 	RecommendationTargetSame_instance_family  RecommendationTarget = "SAME_INSTANCE_FAMILY"
 	RecommendationTargetCross_instance_family RecommendationTarget = "CROSS_INSTANCE_FAMILY"
 )
+
+// Values returns all known values for RecommendationTarget. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationTarget) Values() []RecommendationTarget {
+	return []RecommendationTarget{
+		"SAME_INSTANCE_FAMILY",
+		"CROSS_INSTANCE_FAMILY",
+	}
+}
 
 type RightsizingType string
 
@@ -149,6 +312,16 @@ const (
 	RightsizingTypeModify    RightsizingType = "MODIFY"
 )
 
+// Values returns all known values for RightsizingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RightsizingType) Values() []RightsizingType {
+	return []RightsizingType{
+		"TERMINATE",
+		"MODIFY",
+	}
+}
+
 type SupportedSavingsPlansType string
 
 // Enum values for SupportedSavingsPlansType
@@ -157,6 +330,16 @@ const (
 	SupportedSavingsPlansTypeEc2_instance_sp SupportedSavingsPlansType = "EC2_INSTANCE_SP"
 )
 
+// Values returns all known values for SupportedSavingsPlansType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedSavingsPlansType) Values() []SupportedSavingsPlansType {
+	return []SupportedSavingsPlansType{
+		"COMPUTE_SP",
+		"EC2_INSTANCE_SP",
+	}
+}
+
 type TermInYears string
 
 // Enum values for TermInYears
@@ -164,3 +347,13 @@ const (
 	TermInYearsOne_year    TermInYears = "ONE_YEAR"
 	TermInYearsThree_years TermInYears = "THREE_YEARS"
 )
+
+// Values returns all known values for TermInYears. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TermInYears) Values() []TermInYears {
+	return []TermInYears{
+		"ONE_YEAR",
+		"THREE_YEARS",
+	}
+}

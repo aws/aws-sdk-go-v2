@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -18,7 +19,7 @@ type awsRestjson1_serializeOpAssociateRepository struct {
 }
 
 func (*awsRestjson1_serializeOpAssociateRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpAssociateRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -98,7 +99,7 @@ type awsRestjson1_serializeOpDescribeCodeReview struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeCodeReview) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeCodeReview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -164,7 +165,7 @@ type awsRestjson1_serializeOpDescribeRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeRecommendationFeedback) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeRecommendationFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -238,7 +239,7 @@ type awsRestjson1_serializeOpDescribeRepositoryAssociation struct {
 }
 
 func (*awsRestjson1_serializeOpDescribeRepositoryAssociation) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDescribeRepositoryAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -304,7 +305,7 @@ type awsRestjson1_serializeOpDisassociateRepository struct {
 }
 
 func (*awsRestjson1_serializeOpDisassociateRepository) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpDisassociateRepository) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -370,7 +371,7 @@ type awsRestjson1_serializeOpListCodeReviews struct {
 }
 
 func (*awsRestjson1_serializeOpListCodeReviews) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListCodeReviews) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -457,7 +458,7 @@ type awsRestjson1_serializeOpListRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_serializeOpListRecommendationFeedback) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListRecommendationFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -549,7 +550,7 @@ type awsRestjson1_serializeOpListRecommendations struct {
 }
 
 func (*awsRestjson1_serializeOpListRecommendations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -623,7 +624,7 @@ type awsRestjson1_serializeOpListRepositoryAssociations struct {
 }
 
 func (*awsRestjson1_serializeOpListRepositoryAssociations) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpListRepositoryAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -715,7 +716,7 @@ type awsRestjson1_serializeOpPutRecommendationFeedback struct {
 }
 
 func (*awsRestjson1_serializeOpPutRecommendationFeedback) ID() string {
-	return "OperationSerializer"
+	return smithyid.OperationSerializer
 }
 
 func (m *awsRestjson1_serializeOpPutRecommendationFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
