@@ -3,12 +3,13 @@ package http
 import (
 	"context"
 	"fmt"
-	"github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
+	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 type readResult struct {
@@ -65,8 +66,7 @@ func (r *timeoutReadCloser) Close() error {
 // AddResponseReadTimeoutMiddleware adds a middleware to the stack that wraps the
 // response body so that a read that takes too long will return an error.
 func AddResponseReadTimeoutMiddleware(stack *middleware.Stack, duration time.Duration) error {
-	return stack.Deserialize.Insert(&readTimeout{duration: duration}, smithyid.OperationDeserializer,
-		middleware.After)
+	return stack.Deserialize.Add(&readTimeout{duration: duration}, middleware.After)
 }
 
 // readTimeout wraps the response body with a timeoutReadCloser
@@ -76,7 +76,7 @@ type readTimeout struct {
 
 // ID returns the id of the middleware
 func (*readTimeout) ID() string {
-	return "Kinesis:ReadTimeoutMiddleware"
+	return id.ResponseReadTimeout
 }
 
 // HandleDeserialize implements the DeserializeMiddleware interface

@@ -5,6 +5,9 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+// AccountIDMiddlewareID is the default account id middleware id.
+const AccountIDMiddlewareID = "Glacier:DefaultAccountID"
+
 type setDefaultAccountID func(input interface{}, accountID string) interface{}
 
 // AddDefaultAccountIDMiddleware adds the DefaultAccountID to the stack using
@@ -21,7 +24,9 @@ type DefaultAccountID struct {
 }
 
 // ID returns the id of the middleware
-func (*DefaultAccountID) ID() string { return "Glacier:DefaultAccountID" }
+func (*DefaultAccountID) ID() string {
+	return AccountIDMiddlewareID
+}
 
 // HandleInitialize implements the InitializeMiddleware interface
 func (m *DefaultAccountID) HandleInitialize(

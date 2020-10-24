@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 
 	"github.com/awslabs/smithy-go/middleware"
+	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -14,7 +15,7 @@ import (
 // operation with the query message in the HTTP request querystring.
 func AddAsGetRequestMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&asGetRequestMiddleware{},
-		"OperationSerializer", middleware.After)
+		smithyid.OperationSerializer, middleware.After)
 }
 
 type asGetRequestMiddleware struct{}

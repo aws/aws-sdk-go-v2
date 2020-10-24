@@ -8,7 +8,7 @@ import (
 	"time"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
+	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyid "github.com/awslabs/smithy-go/middleware/id"
@@ -27,7 +27,7 @@ func addAPIRequestMiddleware(stack *middleware.Stack,
 
 	// Token Serializer build and state management.
 	if !options.disableAPIToken {
-		err = stack.Finalize.Insert(options.tokenProvider, id.Retry, middleware.After)
+		err = stack.Finalize.Insert(options.tokenProvider, awsid.Retry, middleware.After)
 		if err != nil {
 			return err
 		}
@@ -170,7 +170,7 @@ type resolveEndpoint struct {
 }
 
 func (*resolveEndpoint) ID() string {
-	return "EndpointResolver"
+	return awsid.ResolveEndpoint
 }
 
 func (m *resolveEndpoint) HandleSerialize(

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
-	smithymwid "github.com/awslabs/smithy-go/middleware/id"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -50,7 +49,7 @@ type AttemptClockSkewMiddleware struct{}
 
 // ID is the middleware identifier
 func (a *AttemptClockSkewMiddleware) ID() string {
-	return "AttemptClockSkewMiddleware"
+	return "AttemptClockSkew"
 }
 
 // HandleDeserialize calculates response metadata and clock skew
@@ -105,7 +104,7 @@ func setResponseMetadata(metadata *middleware.Metadata, responseMetadata Respons
 	metadata.Set(responseMetadataKey{}, responseMetadata)
 }
 
-// AddClientRequestID adds ClientRequestID to the middleware stack
+// AddClientRequestIDMiddleware adds ClientRequestID to the middleware stack
 func AddClientRequestIDMiddleware(stack *middleware.Stack) error {
 	m := &ClientRequestID{}
 	return stack.Build.Add(m, middleware.After)
@@ -114,5 +113,5 @@ func AddClientRequestIDMiddleware(stack *middleware.Stack) error {
 // AddAttemptClockSkewMiddleware adds AttemptClockSkewMiddleware to the middleware stack
 func AddAttemptClockSkewMiddleware(stack *middleware.Stack) error {
 	attemptClockSkeyMiddleware := &AttemptClockSkewMiddleware{}
-	return stack.Deserialize.Insert(attemptClockSkeyMiddleware, smithymwid.OperationDeserializer, middleware.After)
+	return stack.Deserialize.Add(attemptClockSkeyMiddleware, middleware.After)
 }

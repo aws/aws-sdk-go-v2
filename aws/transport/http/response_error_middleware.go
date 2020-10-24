@@ -13,7 +13,7 @@ import (
 func AddResponseErrorMiddleware(stack *middleware.Stack) error {
 	// add error wrapper middleware before request id retriever middleware so that it can wrap the error response
 	// returned by operation deserializers
-	return stack.Deserialize.Insert(&errorWrapperMiddleware{}, "RequestIDRetriever", middleware.Before)
+	return stack.Deserialize.Add(&errorWrapperMiddleware{}, middleware.Before)
 }
 
 type errorWrapperMiddleware struct {

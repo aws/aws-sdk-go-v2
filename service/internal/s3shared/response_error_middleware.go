@@ -14,18 +14,18 @@ import (
 func AddResponseErrorMiddleware(stack *middleware.Stack) error {
 	// add error wrapper middleware before request id retriever middleware so that it can wrap the error response
 	// returned by operation deserializers
-	return stack.Deserialize.Add(&errorWrapperMiddleware{}, middleware.Before)
+	return stack.Deserialize.Add(&errorWrapper{}, middleware.Before)
 }
 
-type errorWrapperMiddleware struct {
+type errorWrapper struct {
 }
 
 // ID returns the middleware identifier
-func (m *errorWrapperMiddleware) ID() string {
+func (m *errorWrapper) ID() string {
 	return id.ResponseErrorWrapper
 }
 
-func (m *errorWrapperMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *errorWrapper) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)

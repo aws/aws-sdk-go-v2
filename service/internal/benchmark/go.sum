@@ -2,6 +2,8 @@ github.com/aws/aws-sdk-go v1.34.33 h1:ymkFm0rNPEOlgjyX3ojEd4zqzW6kGICBkqWs7LqgHt
 github.com/aws/aws-sdk-go v1.34.33/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=
 github.com/awslabs/smithy-go v0.2.1-0.20201023021502-2e30e33fd215 h1:/HDr7hoPn6GGOgx8U+LgrJN55m6IDBgo8w12CWEFUeY=
 github.com/awslabs/smithy-go v0.2.1-0.20201023021502-2e30e33fd215/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.2.1-0.20201023220843-5834338b6151 h1:hZ4xwFCq2D85OIB+RVyMY5PQR5SLMqRyB140NCBaSZM=
+github.com/awslabs/smithy-go v0.2.1-0.20201023220843-5834338b6151/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=

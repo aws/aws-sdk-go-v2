@@ -11,7 +11,6 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
@@ -20,18 +19,23 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
+// CustomErrorResponseMiddlewareID is the middleware ID for the custom error response middleware.
+const CustomErrorResponseMiddlewareID = "Route53:ProcessResponseForCustomErrorResponse"
+
 // HandleCustomErrorDeserialization check if Route53 response is an error and needs
 // custom error deserialization.
 //
 func HandleCustomErrorDeserialization(stack *middleware.Stack) error {
-	return stack.Deserialize.Insert(&processResponseMiddleware{}, smithyid.OperationDeserializer, middleware.After)
+	return stack.Deserialize.Add(&processResponseMiddleware{}, middleware.After)
 }
 
 // middleware to process raw response and look for error response with InvalidChangeBatch error tag
 type processResponseMiddleware struct{}
 
 // ID returns the middleware ID.
-func (*processResponseMiddleware) ID() string { return "Route53:ProcessResponseForCustomErrorResponse" }
+func (*processResponseMiddleware) ID() string {
+	return CustomErrorResponseMiddlewareID
+}
 
 func (m *processResponseMiddleware) HandleDeserialize(
 	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -8,6 +8,9 @@ import (
 	"github.com/awslabs/smithy-go/transport/http"
 )
 
+// AcceptHeaderMiddlewareID is the accept-header middleware id.
+const AcceptHeaderMiddlewareID = "APIGATEWAY:AcceptHeader"
+
 // AddAcceptHeader is the helper function used to add middleware to the stack
 func AddAcceptHeader(stack *middleware.Stack) error {
 	return stack.Build.Add(&acceptHeader{}, middleware.After)
@@ -16,7 +19,9 @@ func AddAcceptHeader(stack *middleware.Stack) error {
 type acceptHeader struct{}
 
 // ID returns the middleware ID.
-func (*acceptHeader) ID() string { return "APIGATEWAY:AcceptHeader" }
+func (*acceptHeader) ID() string {
+	return AcceptHeaderMiddlewareID
+}
 
 // HandleBuild handles the associated build step of middleware stack
 func (m *acceptHeader) HandleBuild(

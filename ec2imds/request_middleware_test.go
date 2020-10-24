@@ -43,16 +43,16 @@ func TestAddRequestMiddleware(t *testing.T) {
 				(*operationTimeoutMiddleware)(nil).ID(),
 			},
 			ExpectSerialize: []string{
-				"EndpointResolver",
+				"ResolveEndpoint",
 				"OperationSerializer",
 			},
 			ExpectBuild: []string{
-				"requestUserAgent",
+				"UserAgent",
 			},
 			ExpectFinalize: []string{
-				"RetryAttemptMiddleware",
+				"Retry",
 				"APITokenProvider",
-				"MetricsHeaderMiddleware",
+				"RetryMetricsHeader",
 			},
 			ExpectDeserialize: []string{
 				"APITokenProvider",
@@ -75,15 +75,15 @@ func TestAddRequestMiddleware(t *testing.T) {
 				(*operationTimeoutMiddleware)(nil).ID(),
 			},
 			ExpectSerialize: []string{
-				"EndpointResolver",
+				"ResolveEndpoint",
 				"OperationSerializer",
 			},
 			ExpectBuild: []string{
-				"requestUserAgent",
+				"UserAgent",
 			},
 			ExpectFinalize: []string{
-				"RetryAttemptMiddleware",
-				"MetricsHeaderMiddleware",
+				"Retry",
+				"RetryMetricsHeader",
 			},
 			ExpectDeserialize: []string{
 				"OperationDeserializer",

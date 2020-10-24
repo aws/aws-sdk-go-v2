@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/awslabs/smithy-go/middleware"
 )
 
@@ -36,21 +37,21 @@ type Options struct {
 
 // AddMiddleware adds the Presign URL middleware to the middleware stack.
 func AddMiddleware(stack *middleware.Stack, opts Options) error {
-	return stack.Initialize.Add(&presignMiddleware{options: opts}, middleware.Before)
+	return stack.Initialize.Add(&presign{options: opts}, middleware.Before)
 }
 
 // RemoveMiddleware removes the Presign URL middleware from the stack.
 func RemoveMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Remove((*presignMiddleware)(nil).ID())
+	return stack.Initialize.Remove((*presign)(nil).ID())
 }
 
-type presignMiddleware struct {
+type presign struct {
 	options Options
 }
 
-func (m *presignMiddleware) ID() string { return "PresignURLCustomization" }
+func (m *presign) ID() string { return id.Presigning }
 
-func (m *presignMiddleware) HandleInitialize(
+func (m *presign) HandleInitialize(
 	ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler,
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,

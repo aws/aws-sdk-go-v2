@@ -8,11 +8,13 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	"github.com/awslabs/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 )
+
+// UpdateEndpointMiddlewareID is the update endpoint middleware id.
+const UpdateEndpointMiddlewareID = "S3:UpdateEndpoint"
 
 // UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
 type UpdateEndpointOptions struct {
@@ -43,21 +45,21 @@ type UpdateEndpointOptions struct {
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) error {
 	// enable dual stack support
-	if err := stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
+	if err := stack.Serialize.Add(&s3shared.EnableDualstack{
 		UseDualstack: options.UseDualstack,
 		ServiceID:    "s3",
-	}, smithyid.OperationSerializer, middleware.After); err != nil {
+	}, middleware.After); err != nil {
 		return err
 	}
 
 	// update endpoint to use options for path style and accelerate
-	return stack.Serialize.Insert(&updateEndpointMiddleware{
+	return stack.Serialize.Add(&updateEndpoint{
 		region:             options.Region,
 		usePathStyle:       options.UsePathStyle,
 		getBucketFromInput: options.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
 		supportsAccelerate: options.SupportsAccelerate,
-	}, (&s3shared.EnableDualstackMiddleware{}).ID(), middleware.After)
+	}, middleware.After)
 }
 
 type updateEndpoint struct {
@@ -73,7 +75,9 @@ type updateEndpoint struct {
 }
 
 // ID returns the middleware ID.
-func (*updateEndpoint) ID() string { return "S3:UpdateEndpoint" }
+func (*updateEndpoint) ID() string {
+	return UpdateEndpointMiddlewareID
+}
 
 func (u *updateEndpoint) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,

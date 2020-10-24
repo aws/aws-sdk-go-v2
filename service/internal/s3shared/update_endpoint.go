@@ -9,8 +9,11 @@ import (
 	"github.com/awslabs/smithy-go/transport/http"
 )
 
-// EnableDualstackMiddleware represents middleware struct for enabling dualstack support
-type EnableDualstackMiddleware struct {
+// EnableDualstackMiddlewareID is the enable dual stack middleware id.
+const EnableDualstackMiddlewareID = "EnableDualstack"
+
+// EnableDualstack represents middleware struct for enabling dualstack support
+type EnableDualstack struct {
 	// UseDualstack indicates if dualstack endpoint resolving is to be enabled
 	UseDualstack bool
 
@@ -20,10 +23,12 @@ type EnableDualstackMiddleware struct {
 }
 
 // ID returns the middleware ID.
-func (*EnableDualstackMiddleware) ID() string { return "EnableDualstackMiddleware" }
+func (*EnableDualstack) ID() string {
+	return EnableDualstackMiddlewareID
+}
 
 // HandleSerialize handles serializer middleware behavior when middleware is executed
-func (u *EnableDualstackMiddleware) HandleSerialize(
+func (u *EnableDualstack) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,

@@ -8,6 +8,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+// MetadataRetrieverMiddlewareID is the s3 metadata retriever middleware.
+const MetadataRetrieverMiddlewareID = "S3MetadataRetriever"
+
 // AddMetadataRetrieverMiddleware adds request id, host id retriever middleware
 func AddMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	// add metadata retriever middleware before operation deserializers so that it can retrieve metadata such as
@@ -20,7 +23,7 @@ type metadataRetriever struct {
 
 // ID returns the middleware identifier
 func (m *metadataRetriever) ID() string {
-	return "S3MetadataRetriever"
+	return MetadataRetrieverMiddlewareID
 }
 
 func (m *metadataRetriever) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -8,9 +8,17 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
+
+// DisableGzipMiddlewareID is the disable gzip middleware id.
+const DisableGzipMiddlewareID = "DisableAcceptEncodingGzip"
+
+// EnableGzipMiddlewareID is the accept encoding gzip middleware id.
+const EnableGzipMiddlewareID = "AcceptEncodingGzip"
+
+// DecompressGzipMiddlewareID is the decompress gzip middleware id.
+const DecompressGzipMiddlewareID = "DecompressGzip"
 
 const acceptEncodingHeaderKey = "Accept-Encoding"
 const contentEncodingHeaderKey = "Content-Encoding"
@@ -29,7 +37,7 @@ func AddAcceptEncodingGzip(stack *middleware.Stack, options AddAcceptEncodingGzi
 		if err := stack.Finalize.Add(&EnableGzip{}, middleware.Before); err != nil {
 			return err
 		}
-		if err := stack.Deserialize.Insert(&DecompressGzip{}, smithyid.OperationDeserializer, middleware.After); err != nil {
+		if err := stack.Deserialize.Add(&DecompressGzip{}, middleware.After); err != nil {
 			return err
 		}
 		return nil
@@ -45,7 +53,7 @@ type DisableGzip struct{}
 
 // ID returns the id for the middleware.
 func (*DisableGzip) ID() string {
-	return "DisableAcceptEncodingGzip"
+	return DisableGzipMiddlewareID
 }
 
 // HandleFinalize implements the FinalizeMiddleware interface.
@@ -74,7 +82,9 @@ func (*DisableGzip) HandleFinalize(
 type EnableGzip struct{}
 
 // ID returns the id for the middleware.
-func (*EnableGzip) ID() string { return "AcceptEncodingGzip" }
+func (*EnableGzip) ID() string {
+	return EnableGzipMiddlewareID
+}
 
 // HandleFinalize implements the FinalizeMiddleware interface.
 func (*EnableGzip) HandleFinalize(
@@ -101,7 +111,9 @@ func (*EnableGzip) HandleFinalize(
 type DecompressGzip struct{}
 
 // ID returns the id for the middleware.
-func (*DecompressGzip) ID() string { return "DecompressGzip" }
+func (*DecompressGzip) ID() string {
+	return DecompressGzipMiddlewareID
+}
 
 // HandleDeserialize implements the DeserializeMiddlware interface.
 func (*DecompressGzip) HandleDeserialize(

@@ -8,6 +8,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+// APIVersionMiddlewareID is the API version middleware id.
+const APIVersionMiddlewareID = "Glacier:APIVersion"
+
 const glacierAPIVersionHeaderKey = "X-Amz-Glacier-Version"
 
 // AddGlacierAPIVersionMiddleware explicitly add handling for the Glacier api version
@@ -22,7 +25,9 @@ type GlacierAPIVersion struct {
 }
 
 // ID returns the id for the middleware.
-func (*GlacierAPIVersion) ID() string { return "Glacier:APIVersion" }
+func (*GlacierAPIVersion) ID() string {
+	return APIVersionMiddlewareID
+}
 
 // HandleSerialize implements the SerializeMiddleware interface
 func (m *GlacierAPIVersion) HandleSerialize(

@@ -1,7 +1,7 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.27.0
+	github.com/aws/aws-sdk-go-v2 v0.27.1-0.20201022222834-4451b4af620e
 	github.com/aws/aws-sdk-go-v2/config v0.2.0
 	github.com/aws/aws-sdk-go-v2/service/acm v0.27.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v0.27.0
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v0.27.0
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v0.27.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v0.27.0
-	github.com/awslabs/smithy-go v0.2.1-0.20201023021502-2e30e33fd215
+	github.com/awslabs/smithy-go v0.2.1-0.20201023220843-5834338b6151
 )
 
 go 1.15

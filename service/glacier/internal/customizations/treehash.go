@@ -11,6 +11,9 @@ import (
 	"io"
 )
 
+// TreeHashMiddlewareID is the TreeHash middleware id.
+const TreeHashMiddlewareID = "Glacier:TreeHash"
+
 // AddTreeHashMiddleware adds middleware needed to automatically
 // calculate Glacier's required checksum headers.
 func AddTreeHashMiddleware(stack *middleware.Stack) error {
@@ -23,7 +26,9 @@ func AddTreeHashMiddleware(stack *middleware.Stack) error {
 type TreeHash struct{}
 
 // ID returns the middleware ID.
-func (*TreeHash) ID() string { return "Glacier:TreeHash" }
+func (*TreeHash) ID() string {
+	return TreeHashMiddlewareID
+}
 
 // HandleFinalize implements the finalize middleware handler method
 func (*TreeHash) HandleFinalize(

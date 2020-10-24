@@ -6,9 +6,11 @@ import (
 
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
+
+// SanitizeURLMiddlewareID is the sanitize url middleware id.
+const SanitizeURLMiddlewareID = "Route53:SanitizeURL"
 
 // AddSanitizeURLMiddlewareOptions provides the options for Route53SanitizeURL middleware setup
 type AddSanitizeURLMiddlewareOptions struct {
@@ -24,25 +26,27 @@ type AddSanitizeURLMiddlewareOptions struct {
 
 // AddSanitizeURLMiddleware add the middleware necessary to modify Route53 input before op serialization.
 func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) error {
-	return stack.Serialize.Insert(&sanitizeURLMiddleware{
+	return stack.Serialize.Add(&sanitizeURL{
 		sanitizeHostedZoneIDInput: options.SanitizeHostedZoneIDInput,
-	}, smithyid.OperationSerializer, middleware.Before)
+	}, middleware.Before)
 }
 
-// sanitizeURLMiddleware cleans up potential formatting issues in the Route53 path.
+// sanitizeURL cleans up potential formatting issues in the Route53 path.
 //
 // Notably it will strip out an excess `/hostedzone/` prefix that can be present in
 // the hosted zone id input member. That excess prefix is there because some route53 apis return
 // the id in that format, so this middleware enables round-tripping those values.
-type sanitizeURLMiddleware struct {
+type sanitizeURL struct {
 	sanitizeHostedZoneIDInput func(interface{}) error
 }
 
 // ID returns the id for the middleware.
-func (*sanitizeURLMiddleware) ID() string { return "Route53:SanitizeURL" }
+func (*sanitizeURL) ID() string {
+	return SanitizeURLMiddlewareID
+}
 
 // HandleSerialize implements the SerializeMiddleware interface.
-func (m *sanitizeURLMiddleware) HandleSerialize(
+func (m *sanitizeURL) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,

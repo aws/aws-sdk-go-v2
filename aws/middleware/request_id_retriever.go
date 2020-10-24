@@ -5,7 +5,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/middleware/id"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyid "github.com/awslabs/smithy-go/middleware/id"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -13,7 +12,7 @@ import (
 func AddRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
 	// add error wrapper middleware before operation deserializers so that it can wrap the error response
 	// returned by operation deserializers
-	return stack.Deserialize.Insert(&requestIDRetriever{}, smithyid.OperationDeserializer, middleware.Before)
+	return stack.Deserialize.Add(&requestIDRetriever{}, middleware.Before)
 }
 
 type requestIDRetriever struct {

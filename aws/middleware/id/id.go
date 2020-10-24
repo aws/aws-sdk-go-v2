@@ -9,10 +9,14 @@ const (
 	ClientRequestID = "ClientRequestID"
 	// ComputePayloadHash is the slot ID for middleware that compute hashes of the transport body payload
 	ComputePayloadHash = "ComputePayloadHash"
+	// Presigning is the slot ID for middleware that handles presigning transport requests.
+	Presigning = "Presigning"
 	// Retry is the slot ID for middleware that handles retrying on transport requests.
 	Retry = "Retry"
 	// Signing is the slot ID for middleware that handles signing a transport request.
 	Signing = "Signing"
+	// ResponseReadTimeout is a the slot ID for middleware that handles transport
+	ResponseReadTimeout = "ResponseReadTimeout"
 	// ResponseErrorWrapper is the slot ID for middleware that wraps or decorates middleware errors.
 	ResponseErrorWrapper = "ResponseErrorWrapper"
 	// RequestIDRetriever is the slot ID for middleware that retrieves the response request-id.

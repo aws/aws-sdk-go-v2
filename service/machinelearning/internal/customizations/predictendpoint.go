@@ -3,17 +3,20 @@ package customizations
 import (
 	"context"
 	"fmt"
-	awsid "github.com/aws/aws-sdk-go-v2/aws/middleware/id"
+	"net/url"
+
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"net/url"
 )
+
+// PredictEndpointMiddlewareID is the predictEndpoint middleware identifier
+const PredictEndpointMiddlewareID = "MachineLearning:PredictEndpoint"
 
 // AddPredictEndpointMiddleware adds the middleware required to set the endpoint
 // based on Predict's PredictEndpoint input member.
 func AddPredictEndpointMiddleware(stack *middleware.Stack, endpoint func(interface{}) (*string, error)) error {
-	return stack.Serialize.Insert(&predictEndpoint{}, awsid.ResolveEndpoint, middleware.After)
+	return stack.Serialize.Add(&predictEndpoint{}, middleware.After)
 }
 
 // predictEndpoint rewrites the endpoint with whatever is specified in the
@@ -23,7 +26,7 @@ type predictEndpoint struct {
 }
 
 // ID returns the id for the middleware.
-func (*predictEndpoint) ID() string { return "MachineLearning:PredictEndpoint" }
+func (*predictEndpoint) ID() string { return PredictEndpointMiddlewareID }
 
 // HandleSerialize implements the SerializeMiddleware interface.
 func (m *predictEndpoint) HandleSerialize(

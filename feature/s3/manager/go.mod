@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/feature/s3/manager
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.27.0
+	github.com/aws/aws-sdk-go-v2 v0.27.1-0.20201022222834-4451b4af620e
 	github.com/aws/aws-sdk-go-v2/config v0.2.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.27.0
-	github.com/awslabs/smithy-go v0.2.1-0.20201023021502-2e30e33fd215
+	github.com/awslabs/smithy-go v0.2.1-0.20201023220843-5834338b6151
 	github.com/google/go-cmp v0.4.1
 )
 
