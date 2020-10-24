@@ -3,16 +3,19 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.StackSlotRegistrar;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -36,14 +39,25 @@ public class MachineLearningCustomizations implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .operationPredicate(MachineLearningCustomizations::isPredict)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_PREDICT_ENDPOINT,
-                                        AwsCustomGoDependency.MACHINE_LEARNING_CUSTOMIZATION).build())
+                                .resolvedFunction(customizationValueSymbol(ADD_PREDICT_ENDPOINT))
                                 .functionArguments(ListUtils.of(
                                         SymbolUtils.createValueSymbolBuilder(ENDPOINT_ACCESSOR).build()
                                 ))
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addSerializeSlotMutator(AwsSlotUtils.insertAfter(
+                                        AwsSlotUtils.awsSymbolId("ResolveEndpoint"),
+                                        ListUtils.of(MiddlewareIdentifier.symbol(
+                                                customizationValueSymbol("PredictEndpointMiddlewareID")))
+                                ))
+                                .build())
                         .build()
         );
+    }
+
+    private Symbol customizationValueSymbol(String name) {
+        return SymbolUtils.createValueSymbolBuilder(name, AwsCustomGoDependency.MACHINE_LEARNING_CUSTOMIZATION)
+                .build();
     }
 
     @Override

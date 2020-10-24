@@ -2,16 +2,20 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.StackSlotRegistrar;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
@@ -37,29 +41,45 @@ public class GlacierCustomizations implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(GlacierCustomizations::isGlacier)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(TREE_HASH_ADDER,
-                                        AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
+                                .resolvedFunction(customizationValue(TREE_HASH_ADDER))
+                                .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addFinalizeSlotMutators(AwsSlotUtils.addBefore(ListUtils.of(
+                                        MiddlewareIdentifier.symbol(customizationValue("TreeHashMiddlewareID"))
+                                )))
                                 .build())
                         .build(),
                 RuntimeClientPlugin.builder()
                         .servicePredicate(GlacierCustomizations::isGlacier)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(API_VERSION_ADDER,
-                                        AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
+                                .resolvedFunction(customizationValue(API_VERSION_ADDER))
                                 .functionArguments(ListUtils.of(
                                         SymbolUtils.createValueSymbolBuilder("ServiceAPIVersion").build()))
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addSerializeSlotMutator(AwsSlotUtils.addBefore(ListUtils.of(
+                                        MiddlewareIdentifier.symbol(customizationValue("APIVersionMiddlewareID"))
+                                )))
+                                .build())
                         .build(),
                 RuntimeClientPlugin.builder()
                         .servicePredicate(GlacierCustomizations::isGlacier)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ACCOUNT_ID_ADDER,
-                                        AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
+                                .resolvedFunction(customizationValue(ACCOUNT_ID_ADDER))
                                 .functionArguments(ListUtils.of(
                                         SymbolUtils.createValueSymbolBuilder(SET_DEFAULT_ACCOUNT_ID).build()))
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addInitializeSlotMutator(AwsSlotUtils.addBefore(ListUtils.of(
+                                        MiddlewareIdentifier.symbol(customizationValue("AccountIDMiddlewareID"))
+                                )))
+                                .build())
                         .build()
         );
+    }
+
+    private Symbol customizationValue(String name) {
+        return SymbolUtils.createValueSymbolBuilder(name, AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build();
     }
 
     @Override

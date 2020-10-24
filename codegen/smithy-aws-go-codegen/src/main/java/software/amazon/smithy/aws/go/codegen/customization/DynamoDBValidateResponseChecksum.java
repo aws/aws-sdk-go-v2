@@ -19,16 +19,21 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields.AwsConfigField;
+import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.StackSlotRegistrar;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
@@ -134,8 +139,25 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
                                 .useClientOptions()
                                 .build()
                         )
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addDeserializeSlotMutators(AwsSlotUtils.insertAfter(
+                                        MiddlewareIdentifier.symbol(ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID),
+                                        ListUtils.of(
+                                                MiddlewareIdentifier.symbol(
+                                                        acceptEncodingConstant("DecompressGzipMiddlewareID"))
+                                        )
+                                ))
+                                .addFinalizeSlotMutators(AwsSlotUtils.addBefore(ListUtils.of(
+                                        MiddlewareIdentifier.symbol(acceptEncodingConstant("EnableGzipMiddlewareID")),
+                                        MiddlewareIdentifier.symbol(acceptEncodingConstant("DisableGzipMiddlewareID"))
+                                )))
+                                .build())
                         .build()
         );
+    }
+
+    private Symbol acceptEncodingConstant(String name) {
+        return SymbolUtils.createValueSymbolBuilder(name, AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION).build();
     }
 
     private static boolean isDynamoDBService(Model model, ServiceShape service) {

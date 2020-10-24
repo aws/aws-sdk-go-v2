@@ -38,7 +38,8 @@ public class AwsStackSlots implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerStackSlots(StackSlotRegistrar.builder()
                                 .addInitializeSlotMutator(AwsSlotUtils.addBefore(ListUtils.of(
-                                        AwsSlotUtils.awsSymbolId("RegisterServiceMetadata")
+                                        AwsSlotUtils.awsSymbolId("RegisterServiceMetadata"),
+                                        AwsSlotUtils.awsSymbolId("Presigning")
                                 )))
                                 .addSerializeSlotMutator(AwsSlotUtils.insertBefore(
                                         MiddlewareIdentifier.symbol(ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID),
@@ -54,11 +55,14 @@ public class AwsStackSlots implements GoIntegration {
                                         AwsSlotUtils.awsSymbolId("Retry"),
                                         AwsSlotUtils.awsSymbolId("Signing")
                                 )))
-                                .addDeserializeSlotMutators(AwsSlotUtils.insertBefore(
+                                .addDeserializeSlotMutators(AwsSlotUtils.addBefore(ListUtils.of(
+                                        AwsSlotUtils.awsSymbolId("ResponseErrorWrapper"),
+                                        AwsSlotUtils.awsSymbolId("RequestIDRetriever")
+                                )))
+                                .addDeserializeSlotMutators(AwsSlotUtils.insertAfter(
                                         MiddlewareIdentifier.symbol(ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID),
                                         ListUtils.of(
-                                                AwsSlotUtils.awsSymbolId("ResponseErrorWrapper"),
-                                                AwsSlotUtils.awsSymbolId("RequestIDRetriever")
+                                                AwsSlotUtils.awsSymbolId("ResponseReadTimeout")
                                         )))
                                 .build())
                         .build());

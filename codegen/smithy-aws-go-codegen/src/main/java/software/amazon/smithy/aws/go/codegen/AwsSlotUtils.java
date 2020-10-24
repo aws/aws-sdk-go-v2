@@ -50,7 +50,7 @@ public class AwsSlotUtils {
         return StackSlotRegistrar.SlotMutator.insertBefore(relativeTo).identifiers(identifiers).build();
     }
 
-    static StackSlotRegistrar.SlotMutator insertAfter(
+    public static StackSlotRegistrar.SlotMutator insertAfter(
             MiddlewareIdentifier relativeTo,
             List<MiddlewareIdentifier> identifiers
     ) {

@@ -18,16 +18,20 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
+import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.StackSlotRegistrar;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
@@ -67,10 +71,7 @@ public class APIGatewayAcceptHeader implements GoIntegration {
 
     private void writeMiddlewareHelper(GoWriter writer) {
         writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_ACCEPT_HEADER, () -> {
-            writer.write("return $T(stack)",
-                    SymbolUtils.createValueSymbolBuilder(ACCEPT_HEADER_INTERNAL_ADDER,
-                            AwsCustomGoDependency.APIGATEWAY_CUSTOMIZATION).build()
-            );
+            writer.write("return $T(stack)", customizationValue(ACCEPT_HEADER_INTERNAL_ADDER));
         });
         writer.insertTrailingNewline();
     }
@@ -83,8 +84,17 @@ public class APIGatewayAcceptHeader implements GoIntegration {
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_ACCEPT_HEADER).build())
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addBuildSlotMutator(AwsSlotUtils.addAfter(ListUtils.of(
+                                        MiddlewareIdentifier.symbol(customizationValue("AcceptHeaderMiddlewareID"))
+                                )))
+                                .build())
                         .build()
         );
+    }
+
+    private Symbol customizationValue(String name) {
+        return SymbolUtils.createValueSymbolBuilder(name, AwsCustomGoDependency.APIGATEWAY_CUSTOMIZATION).build();
     }
 
 

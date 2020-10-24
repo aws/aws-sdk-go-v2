@@ -196,9 +196,7 @@ final class EndpointGenerator implements Runnable {
         // Generate Middleware Adder Helper
         writer.openBlock("func $L(stack $P, o Options) error {", "}", ADD_MIDDLEWARE_HELPER_NAME, stackSymbol, () -> {
             writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-            String closeBlock = String.format("}, \"%s\", middleware.Before)",
-                    ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID);
-            writer.openBlock("return stack.Serialize.Insert(&$T{", closeBlock,
+            writer.openBlock("return stack.Serialize.Add(&$T{", "}, middleware.Before)",
                     middleware.getMiddlewareSymbol(),
                     () -> {
                         writer.write("Resolver: o.EndpointResolver,");

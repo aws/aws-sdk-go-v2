@@ -3,16 +3,21 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import software.amazon.smithy.aws.go.codegen.AwsSlotUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.StackSlotRegistrar;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
@@ -23,7 +28,7 @@ import software.amazon.smithy.utils.ListUtils;
 public class Route53Customizations implements GoIntegration {
     private static final String ADD_ERROR_HANDLER_INTERNAL = "HandleCustomErrorDeserialization";
     private static final String URL_SANITIZE_ADDER = "addSanitizeURLMiddleware";
-    private static final String URL_SANITIZE_INTERNAL_ADDER= "AddSanitizeURLMiddleware";
+    private static final String URL_SANITIZE_INTERNAL_ADDER = "AddSanitizeURLMiddleware";
     private static final String SANITIZE_HOSTED_ZONE_ID_INPUT = "sanitizeHostedZoneIDInput";
 
     @Override
@@ -39,17 +44,35 @@ public class Route53Customizations implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .operationPredicate(Route53Customizations::supportsCustomError)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_ERROR_HANDLER_INTERNAL,
-                                        AwsCustomGoDependency.ROUTE53_CUSTOMIZATION).build())
+                                .resolvedFunction(customizationValueSymbol(ADD_ERROR_HANDLER_INTERNAL))
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addDeserializeSlotMutators(AwsSlotUtils.insertAfter(
+                                        MiddlewareIdentifier.symbol(ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID),
+                                        ListUtils.of(MiddlewareIdentifier.symbol(
+                                                customizationValueSymbol("CustomErrorResponseMiddlewareID")))))
+                                .build()
+                        )
                         .build(),
                 RuntimeClientPlugin.builder()
                         .operationPredicate(Route53Customizations::supportsHostedZoneIDValue)
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_ADDER).build())
                                 .build())
+                        .registerStackSlots(StackSlotRegistrar.builder()
+                                .addSerializeSlotMutator(AwsSlotUtils.insertBefore(
+                                        MiddlewareIdentifier.symbol(ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID),
+                                        ListUtils.of(MiddlewareIdentifier.symbol(
+                                                customizationValueSymbol("SanitizeURLMiddlewareID")
+                                        ))))
+                                .build()
+                        )
                         .build()
         );
+    }
+
+    private Symbol customizationValueSymbol(String name) {
+        return SymbolUtils.createValueSymbolBuilder(name, AwsCustomGoDependency.ROUTE53_CUSTOMIZATION).build();
     }
 
 
@@ -67,8 +90,8 @@ public class Route53Customizations implements GoIntegration {
         goDelegator.useShapeWriter(service, this::writeMiddlewareHelper);
 
         goDelegator.useShapeWriter(service, writer -> {
-                writeHostedZoneIDInputSanitizer(writer, model, symbolProvider, service);
-            });
+            writeHostedZoneIDInputSanitizer(writer, model, symbolProvider, service);
+        });
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
@@ -97,7 +120,7 @@ public class Route53Customizations implements GoIntegration {
 
         writer.openBlock("func sanitizeHostedZoneIDInput(input interface{}) error {", "}", () -> {
             writer.openBlock("switch i:= input.(type) {", "}", () -> {
-                service.getAllOperations().forEach((operationId)-> {
+                service.getAllOperations().forEach((operationId) -> {
                     OperationShape operation = model.expectShape(operationId, OperationShape.class);
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
                     List<MemberShape> hostedZoneIDMembers = input.getAllMembers().values().stream()
@@ -105,16 +128,16 @@ public class Route53Customizations implements GoIntegration {
                                     || m.getTarget().getName().equalsIgnoreCase("DelegationSetId"))
                             .collect(Collectors.toList());
 
-                    if (!hostedZoneIDMembers.isEmpty()){
+                    if (!hostedZoneIDMembers.isEmpty()) {
                         writer.openBlock("case $P :", "", symbolProvider.toSymbol(input), () -> {
                             writer.addUseImports(SmithyGoDependency.STRINGS);
                             for (MemberShape member : hostedZoneIDMembers) {
                                 String memberName = member.getMemberName();
-                               writer.openBlock("if i.$L != nil {", "}", memberName, () -> {
-                                writer.write("idx := strings.LastIndex(*i.$L, `/`)", memberName);
-                                writer.write("v := (*i.$L)[idx+1:]", memberName);
-                                writer.write("i.$L = &v", memberName);
-                               });
+                                writer.openBlock("if i.$L != nil {", "}", memberName, () -> {
+                                    writer.write("idx := strings.LastIndex(*i.$L, `/`)", memberName);
+                                    writer.write("v := (*i.$L)[idx+1:]", memberName);
+                                    writer.write("i.$L = &v", memberName);
+                                });
                             }
                         });
                     }
@@ -153,7 +176,7 @@ public class Route53Customizations implements GoIntegration {
 
     // returns true if service is route53
     private static boolean isRoute53Service(Model model, ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
+        String serviceId = service.expectTrait(ServiceTrait.class).getSdkId();
         return serviceId.equalsIgnoreCase("Route 53");
     }
 }
