@@ -1,3 +1,24 @@
+# Pending Changes
+
+## New Features
+* `service/s3`: Add support for Accelerate, and Dualstack ([#836](https://github.com/aws/aws-sdk-go-v2/pull/836))
+* `service/s3control`: Add support for Dualstack ([#836](https://github.com/aws/aws-sdk-go-v2/pull/836))
+
+## Service Client Highlights
+* API Clients have been bumped to version `v0.28.0`
+    * Regenerate API Clients from update API models.
+* `service/s3`: Add support for Accelerate, and Dualstack ([#836](https://github.com/aws/aws-sdk-go-v2/pull/836))
+* `service/s3control`: Add support for Dualstack ([#836](https://github.com/aws/aws-sdk-go-v2/pull/836))
+* `service/route53`: Fix sanitizeURL customization to handle leading slash(`/`) [#846](https://github.com/aws/aws-sdk-go-v2/pull/846)
+    * Fixes [#843](https://github.com/aws/aws-sdk-go-v2/issues/843)
+* `service/route53`: Fix codegen to correctly look for operations that need sanitize url ([#851](https://github.com/aws/aws-sdk-go-v2/pull/851))
+
+## Core SDK Highlights
+* `aws/protocol/restjson`: Fix unexpected JSON error response deserialization ([#837](https://github.com/aws/aws-sdk-go-v2/pull/837))
+    * Fixes [#832](https://github.com/aws/aws-sdk-go-v2/issues/832)
+* `example/service/s3/listobjects`: Add example for Amazon S3 ListObjectsV2 ([#838](https://github.com/aws/aws-sdk-go-v2/pull/838))
+
+
 # Release 2020-10-16
 
 ## New Features
