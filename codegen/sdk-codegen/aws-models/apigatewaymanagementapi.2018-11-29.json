@@ -46,7 +46,7 @@
       "traits": {
         "aws.api#service": {
           "sdkId": "ApiGatewayManagementApi",
-          "arnNamespace": "execute-api",
+          "arnNamespace": "apigateway",
           "cloudFormationName": "ApiGatewayManagementApi",
           "cloudTrailEventSource": "apigatewaymanagementapi.amazonaws.com"
         },
@@ -163,18 +163,18 @@
             "smithy.api#jsonName": "identity"
           }
         },
-        "ConnectedAt": {
-          "target": "com.amazonaws.apigatewaymanagementapi#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time in ISO 8601 format for when the connection was established.</p>",
-            "smithy.api#jsonName": "connectedAt"
-          }
-        },
         "LastActiveAt": {
           "target": "com.amazonaws.apigatewaymanagementapi#__timestampIso8601",
           "traits": {
             "smithy.api#documentation": "<p>The time in ISO 8601 format for when the connection was last active.</p>",
             "smithy.api#jsonName": "lastActiveAt"
+          }
+        },
+        "ConnectedAt": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time in ISO 8601 format for when the connection was established.</p>",
+            "smithy.api#jsonName": "connectedAt"
           }
         }
       }
@@ -191,19 +191,19 @@
     "com.amazonaws.apigatewaymanagementapi#Identity": {
       "type": "structure",
       "members": {
-        "SourceIp": {
-          "target": "com.amazonaws.apigatewaymanagementapi#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The source IP address of the TCP connection making the request to API Gateway.</p>",
-            "smithy.api#jsonName": "sourceIp",
-            "smithy.api#required": {}
-          }
-        },
         "UserAgent": {
           "target": "com.amazonaws.apigatewaymanagementapi#__string",
           "traits": {
             "smithy.api#documentation": "<p>The User Agent of the API caller.</p>",
             "smithy.api#jsonName": "userAgent",
+            "smithy.api#required": {}
+          }
+        },
+        "SourceIp": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The source IP address of the TCP connection making the request to API Gateway.</p>",
+            "smithy.api#jsonName": "sourceIp",
             "smithy.api#required": {}
           }
         }

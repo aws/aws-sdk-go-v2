@@ -73,16 +73,16 @@
             "smithy.api#documentation": "<p>The description of the address book.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.alexaforbusiness#AddressBookName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the address book.</p>"
-          }
-        },
         "AddressBookArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the address book.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.alexaforbusiness#AddressBookName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the address book.</p>"
           }
         }
       },
@@ -405,7 +405,7 @@
           "sdkId": "Alexa For Business",
           "arnNamespace": "a4b",
           "cloudFormationName": "AlexaForBusiness",
-          "cloudTrailEventSource": "awsmoneypennyresourcemanagement.amazonaws.com"
+          "cloudTrailEventSource": "alexaforbusiness.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "a4b"
@@ -599,16 +599,16 @@
     "com.amazonaws.alexaforbusiness#AssociateDeviceWithRoomRequest": {
       "type": "structure",
       "members": {
-        "RoomArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the room with which to associate the device. Required.</p>"
-          }
-        },
         "DeviceArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the device to associate to a room. Required.</p>"
+          }
+        },
+        "RoomArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the room with which to associate the device. Required.</p>"
           }
         }
       }
@@ -637,16 +637,16 @@
     "com.amazonaws.alexaforbusiness#AssociateSkillGroupWithRoomRequest": {
       "type": "structure",
       "members": {
-        "SkillGroupArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the skill group to associate with a room. Required.</p>"
-          }
-        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the room with which to associate the skill group. Required.</p>"
+          }
+        },
+        "SkillGroupArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the skill group to associate with a room. Required.</p>"
           }
         }
       }
@@ -681,17 +681,17 @@
     "com.amazonaws.alexaforbusiness#AssociateSkillWithSkillGroupRequest": {
       "type": "structure",
       "members": {
-        "SkillGroupArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the skill group to associate the skill to. Required.</p>"
-          }
-        },
         "SkillId": {
           "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier of the skill.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "SkillGroupArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the skill group to associate the skill to. Required.</p>"
           }
         }
       }
@@ -813,16 +813,16 @@
     "com.amazonaws.alexaforbusiness#BusinessReport": {
       "type": "structure",
       "members": {
+        "Status": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the report generation execution (RUNNING, SUCCEEDED, or\n         FAILED).</p>"
+          }
+        },
         "FailureCode": {
           "target": "com.amazonaws.alexaforbusiness#BusinessReportFailureCode",
           "traits": {
             "smithy.api#documentation": "<p>The failure code.</p>"
-          }
-        },
-        "S3Location": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportS3Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 location of the output reports.</p>"
           }
         },
         "DeliveryTime": {
@@ -837,10 +837,10 @@
             "smithy.api#documentation": "<p>The download link where a user can download the report.</p>"
           }
         },
-        "Status": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportStatus",
+        "S3Location": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportS3Location",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the report generation execution (RUNNING, SUCCEEDED, or\n         FAILED).</p>"
+            "smithy.api#documentation": "<p>The S3 location of the output reports.</p>"
           }
         }
       },
@@ -939,16 +939,16 @@
     "com.amazonaws.alexaforbusiness#BusinessReportS3Location": {
       "type": "structure",
       "members": {
-        "BucketName": {
-          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 bucket name of the output reports.</p>"
-          }
-        },
         "Path": {
           "target": "com.amazonaws.alexaforbusiness#BusinessReportS3Path",
           "traits": {
             "smithy.api#documentation": "<p>The path of the business report.</p>"
+          }
+        },
+        "BucketName": {
+          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket name of the output reports.</p>"
           }
         }
       },
@@ -962,10 +962,10 @@
     "com.amazonaws.alexaforbusiness#BusinessReportSchedule": {
       "type": "structure",
       "members": {
-        "ScheduleName": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleName",
+        "S3BucketName": {
+          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
           "traits": {
-            "smithy.api#documentation": "<p>The name identifier of the schedule.</p>"
+            "smithy.api#documentation": "<p>The S3 bucket name of the output reports.</p>"
           }
         },
         "ContentRange": {
@@ -974,28 +974,16 @@
             "smithy.api#documentation": "<p>The content range of the reports.</p>"
           }
         },
-        "S3BucketName": {
-          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
+        "S3KeyPrefix": {
+          "target": "com.amazonaws.alexaforbusiness#S3KeyPrefix",
           "traits": {
-            "smithy.api#documentation": "<p>The S3 bucket name of the output reports.</p>"
-          }
-        },
-        "Recurrence": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
-          "traits": {
-            "smithy.api#documentation": "<p>The recurrence of the reports.</p>"
+            "smithy.api#documentation": "<p>The S3 key where the report is delivered.</p>"
           }
         },
         "LastBusinessReport": {
           "target": "com.amazonaws.alexaforbusiness#BusinessReport",
           "traits": {
             "smithy.api#documentation": "<p>The details of the last business report delivery for a specified time\n         interval.</p>"
-          }
-        },
-        "S3KeyPrefix": {
-          "target": "com.amazonaws.alexaforbusiness#S3KeyPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 key where the report is delivered.</p>"
           }
         },
         "ScheduleArn": {
@@ -1008,6 +996,18 @@
           "target": "com.amazonaws.alexaforbusiness#BusinessReportFormat",
           "traits": {
             "smithy.api#documentation": "<p>The format of the generated report (individual CSV files or zipped files of\n         individual files).</p>"
+          }
+        },
+        "Recurrence": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
+          "traits": {
+            "smithy.api#documentation": "<p>The recurrence of the reports.</p>"
+          }
+        },
+        "ScheduleName": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name identifier of the schedule.</p>"
           }
         }
       },
@@ -1156,28 +1156,10 @@
     "com.amazonaws.alexaforbusiness#ConferenceProvider": {
       "type": "structure",
       "members": {
-        "IPDialIn": {
-          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
+        "Arn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of conference providers.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the conference provider.</p>"
-          }
-        },
-        "MeetingSetting": {
-          "target": "com.amazonaws.alexaforbusiness#MeetingSetting",
-          "traits": {
-            "smithy.api#documentation": "<p>The meeting settings for the conference provider.</p>"
+            "smithy.api#documentation": "<p>The ARN of the newly created conference provider.</p>"
           }
         },
         "PSTNDialIn": {
@@ -1186,10 +1168,28 @@
             "smithy.api#documentation": "<p>The information for PSTN conferencing.</p>"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "MeetingSetting": {
+          "target": "com.amazonaws.alexaforbusiness#MeetingSetting",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the newly created conference provider.</p>"
+            "smithy.api#documentation": "<p>The meeting settings for the conference provider.</p>"
+          }
+        },
+        "IPDialIn": {
+          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the conference provider.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of conference providers.</p>"
           }
         }
       },
@@ -1281,36 +1281,6 @@
     "com.amazonaws.alexaforbusiness#Contact": {
       "type": "structure",
       "members": {
-        "PhoneNumber": {
-          "target": "com.amazonaws.alexaforbusiness#RawPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number of the contact. The phone number type defaults to WORK. You can\n         either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which\n         lets you specify the phone number type and multiple numbers.</p>"
-          }
-        },
-        "SipAddresses": {
-          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the contact to display on the console.</p>"
-          }
-        },
-        "ContactArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the contact.</p>"
-          }
-        },
-        "LastName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
-          }
-        },
         "FirstName": {
           "target": "com.amazonaws.alexaforbusiness#ContactName",
           "traits": {
@@ -1322,6 +1292,36 @@
           "traits": {
             "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
           }
+        },
+        "SipAddresses": {
+          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
+          }
+        },
+        "PhoneNumber": {
+          "target": "com.amazonaws.alexaforbusiness#RawPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number of the contact. The phone number type defaults to WORK. You can\n         either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers, which\n         lets you specify the phone number type and multiple numbers.</p>"
+          }
+        },
+        "ContactArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the contact.</p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the contact to display on the console.</p>"
+          }
+        },
+        "LastName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
+          }
         }
       },
       "traits": {
@@ -1331,6 +1331,24 @@
     "com.amazonaws.alexaforbusiness#ContactData": {
       "type": "structure",
       "members": {
+        "PhoneNumbers": {
+          "target": "com.amazonaws.alexaforbusiness#PhoneNumberList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
+          }
+        },
+        "FirstName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>The first name of the contact, used to call the contact on the device.</p>"
+          }
+        },
+        "SipAddresses": {
+          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
+          }
+        },
         "PhoneNumber": {
           "target": "com.amazonaws.alexaforbusiness#RawPhoneNumber",
           "traits": {
@@ -1343,34 +1361,16 @@
             "smithy.api#documentation": "<p>The name of the contact to display on the console.</p>"
           }
         },
-        "LastName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
-          }
-        },
-        "SipAddresses": {
-          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
-          }
-        },
         "ContactArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the contact.</p>"
           }
         },
-        "PhoneNumbers": {
-          "target": "com.amazonaws.alexaforbusiness#PhoneNumberList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
-          }
-        },
-        "FirstName": {
+        "LastName": {
           "target": "com.amazonaws.alexaforbusiness#ContactName",
           "traits": {
-            "smithy.api#documentation": "<p>The first name of the contact, used to call the contact on the device.</p>"
+            "smithy.api#documentation": "<p>The last name of the contact, used to call the contact on the device.</p>"
           }
         }
       },
@@ -1449,17 +1449,17 @@
     "com.amazonaws.alexaforbusiness#CreateAddressBookRequest": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#AddressBookDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the address book.</p>"
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A unique, user-specified identifier for the request that ensures\n         idempotency.</p>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#AddressBookDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the address book.</p>"
           }
         },
         "Name": {
@@ -1508,19 +1508,6 @@
             "smithy.api#documentation": "<p>The S3 key where the report is delivered.</p>"
           }
         },
-        "S3BucketName": {
-          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>The S3 bucket name of the output reports. If this isn't specified, the report can be\n         retrieved from a download link by calling ListBusinessReportSchedule. </p>"
-          }
-        },
-        "ContentRange": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportContentRange",
-          "traits": {
-            "smithy.api#documentation": "<p>The content range of the reports.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
@@ -1528,16 +1515,11 @@
             "smithy.api#idempotencyToken": {}
           }
         },
-        "Recurrence": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
+        "ContentRange": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportContentRange",
           "traits": {
-            "smithy.api#documentation": "<p>The recurrence of the reports. If this isn't specified, the report will only be\n         delivered one time when the API is called. </p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.alexaforbusiness#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags for the business report schedule.</p>"
+            "smithy.api#documentation": "<p>The content range of the reports.</p>",
+            "smithy.api#required": {}
           }
         },
         "ScheduleName": {
@@ -1551,6 +1533,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The format of the generated report (individual CSV files or zipped files of\n         individual files).</p>",
             "smithy.api#required": {}
+          }
+        },
+        "S3BucketName": {
+          "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket name of the output reports. If this isn't specified, the report can be\n         retrieved from a download link by calling ListBusinessReportSchedule. </p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.alexaforbusiness#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags for the business report schedule.</p>"
+          }
+        },
+        "Recurrence": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
+          "traits": {
+            "smithy.api#documentation": "<p>The recurrence of the reports. If this isn't specified, the report will only be\n         delivered one time when the API is called. </p>"
           }
         }
       }
@@ -1586,30 +1586,23 @@
     "com.amazonaws.alexaforbusiness#CreateConferenceProviderRequest": {
       "type": "structure",
       "members": {
-        "IPDialIn": {
-          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
-          "traits": {
-            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
-          }
-        },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The request token of the client.</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
         "PSTNDialIn": {
           "target": "com.amazonaws.alexaforbusiness#PSTNDialIn",
           "traits": {
             "smithy.api#documentation": "<p>The information for PSTN conferencing.</p>"
           }
         },
-        "MeetingSetting": {
-          "target": "com.amazonaws.alexaforbusiness#MeetingSetting",
+        "ConferenceProviderType": {
+          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderType",
           "traits": {
-            "smithy.api#documentation": "<p>The meeting settings for the conference provider.</p>",
+            "smithy.api#documentation": "<p>Represents a type within a list of predefined types.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "IPDialIn": {
+          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
           }
         },
         "ConferenceProviderName": {
@@ -1619,11 +1612,18 @@
             "smithy.api#required": {}
           }
         },
-        "ConferenceProviderType": {
-          "target": "com.amazonaws.alexaforbusiness#ConferenceProviderType",
+        "MeetingSetting": {
+          "target": "com.amazonaws.alexaforbusiness#MeetingSetting",
           "traits": {
-            "smithy.api#documentation": "<p>Represents a type within a list of predefined types.</p>",
+            "smithy.api#documentation": "<p>The meeting settings for the conference provider.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "ClientRequestToken": {
+          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The request token of the client.</p>",
+            "smithy.api#idempotencyToken": {}
           }
         }
       }
@@ -1662,24 +1662,16 @@
     "com.amazonaws.alexaforbusiness#CreateContactRequest": {
       "type": "structure",
       "members": {
-        "FirstName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The first name of the contact that is used to call the contact on the\n         device.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique, user-specified identifier for this request that ensures\n         idempotency.</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
         "PhoneNumbers": {
           "target": "com.amazonaws.alexaforbusiness#PhoneNumberList",
           "traits": {
             "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
+          }
+        },
+        "SipAddresses": {
+          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
           }
         },
         "LastName": {
@@ -1700,10 +1692,18 @@
             "smithy.api#documentation": "<p>The phone number of the contact in E.164 format. The phone number type defaults to\n         WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,\n         which lets you specify the phone number type and multiple numbers.</p>"
           }
         },
-        "SipAddresses": {
-          "target": "com.amazonaws.alexaforbusiness#SipAddressList",
+        "ClientRequestToken": {
+          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
-            "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
+            "smithy.api#documentation": "<p>A unique, user-specified identifier for this request that ensures\n         idempotency.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "FirstName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>The first name of the contact that is used to call the contact on the\n         device.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -1722,17 +1722,17 @@
     "com.amazonaws.alexaforbusiness#CreateEndOfMeetingReminder": {
       "type": "structure",
       "members": {
-        "ReminderType": {
-          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "ReminderAtMinutes": {
           "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderMinutesList",
           "traits": {
             "smithy.api#documentation": "<p> A range of 3 to 15 minutes that determines when the reminder begins.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ReminderType": {
+          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>",
             "smithy.api#required": {}
           }
         },
@@ -1777,18 +1777,18 @@
             "smithy.api#documentation": "<p>The description of the gateway group.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the gateway group.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p> A unique, user-specified identifier for the request that ensures idempotency.</p>",
             "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the gateway group.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1808,17 +1808,17 @@
     "com.amazonaws.alexaforbusiness#CreateInstantBooking": {
       "type": "structure",
       "members": {
-        "DurationInMinutes": {
-          "target": "com.amazonaws.alexaforbusiness#Minutes",
-          "traits": {
-            "smithy.api#documentation": "<p>Duration between 15 and 240 minutes at increments of 15 that determines how long to book\n         an available room when a meeting is started with Alexa.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Enabled": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether instant booking is enabled or not.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DurationInMinutes": {
+          "target": "com.amazonaws.alexaforbusiness#Minutes",
+          "traits": {
+            "smithy.api#documentation": "<p>Duration between 15 and 240 minutes at increments of 15 that determines how long to book\n         an available room when a meeting is started with Alexa.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1830,12 +1830,6 @@
     "com.amazonaws.alexaforbusiness#CreateMeetingRoomConfiguration": {
       "type": "structure",
       "members": {
-        "InstantBooking": {
-          "target": "com.amazonaws.alexaforbusiness#CreateInstantBooking",
-          "traits": {
-            "smithy.api#documentation": "<p>Settings to automatically book a room for a configured duration if it's free when joining a meeting with Alexa.</p>"
-          }
-        },
         "RequireCheckIn": {
           "target": "com.amazonaws.alexaforbusiness#CreateRequireCheckIn",
           "traits": {
@@ -1846,6 +1840,12 @@
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
+          }
+        },
+        "InstantBooking": {
+          "target": "com.amazonaws.alexaforbusiness#CreateInstantBooking",
+          "traits": {
+            "smithy.api#documentation": "<p>Settings to automatically book a room for a configured duration if it's free when joining a meeting with Alexa.</p>"
           }
         },
         "EndOfMeetingReminder": {
@@ -1888,10 +1888,44 @@
     "com.amazonaws.alexaforbusiness#CreateNetworkProfileRequest": {
       "type": "structure",
       "members": {
-        "EapMethod": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkEapMethod",
+        "SecurityType": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkSecurityType",
           "traits": {
-            "smithy.api#documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is\n         supported.</p>"
+            "smithy.api#documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK,\n         WEP, or OPEN.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Ssid": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkSsid",
+          "traits": {
+            "smithy.api#documentation": "<p>The SSID of the Wi-Fi network.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CertificateAuthorityArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
+          }
+        },
+        "ClientRequestToken": {
+          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
+          "traits": {
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        },
+        "CurrentPassword": {
+          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
+          "traits": {
+            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
+          }
+        },
+        "NetworkProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>",
+            "smithy.api#required": {}
           }
         },
         "Description": {
@@ -1912,44 +1946,10 @@
             "smithy.api#documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously\n         transmitted to the device and is used when the password of the network changes to\n         NextPassword. </p>"
           }
         },
-        "Ssid": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkSsid",
+        "EapMethod": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkEapMethod",
           "traits": {
-            "smithy.api#documentation": "<p>The SSID of the Wi-Fi network.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "SecurityType": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkSecurityType",
-          "traits": {
-            "smithy.api#documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK,\n         WEP, or OPEN.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "CertificateAuthorityArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
-          }
-        },
-        "CurrentPassword": {
-          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
-          "traits": {
-            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
-          }
-        },
-        "NetworkProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
-          "traits": {
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is\n         supported.</p>"
           }
         }
       }
@@ -1991,17 +1991,29 @@
     "com.amazonaws.alexaforbusiness#CreateProfileRequest": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.alexaforbusiness#TagList",
+        "MeetingRoomConfiguration": {
+          "target": "com.amazonaws.alexaforbusiness#CreateMeetingRoomConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The tags for the profile.</p>"
+            "smithy.api#documentation": "<p>The meeting room settings of a room profile.</p>"
           }
         },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
+        "Locale": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
           "traits": {
-            "smithy.api#documentation": "<p>The user-specified token that is used during the creation of a profile.</p>",
-            "smithy.api#idempotencyToken": {}
+            "smithy.api#documentation": "<p>The locale of the room profile. (This is currently only available to a limited preview audience.)</p>"
+          }
+        },
+        "Timezone": {
+          "target": "com.amazonaws.alexaforbusiness#Timezone",
+          "traits": {
+            "smithy.api#documentation": "<p>The time zone used by a room profile.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxVolumeLimit": {
+          "target": "com.amazonaws.alexaforbusiness#MaxVolumeLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum volume limit for a room profile.</p>"
           }
         },
         "ProfileName": {
@@ -2011,6 +2023,19 @@
             "smithy.api#required": {}
           }
         },
+        "DistanceUnit": {
+          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
+          "traits": {
+            "smithy.api#documentation": "<p>The distance unit to be used by devices in the profile.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SetupModeDisabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether room profile setup is enabled.</p>"
+          }
+        },
         "TemperatureUnit": {
           "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
           "traits": {
@@ -2018,10 +2043,24 @@
             "smithy.api#required": {}
           }
         },
-        "MeetingRoomConfiguration": {
-          "target": "com.amazonaws.alexaforbusiness#CreateMeetingRoomConfiguration",
+        "ClientRequestToken": {
+          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
-            "smithy.api#documentation": "<p>The meeting room settings of a room profile.</p>"
+            "smithy.api#documentation": "<p>The user-specified token that is used during the creation of a profile.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "WakeWord": {
+          "target": "com.amazonaws.alexaforbusiness#WakeWord",
+          "traits": {
+            "smithy.api#documentation": "<p>A wake word for Alexa, Echo, Amazon, or a computer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.alexaforbusiness#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags for the profile.</p>"
           }
         },
         "Address": {
@@ -2035,45 +2074,6 @@
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether PSTN calling is enabled.</p>"
-          }
-        },
-        "Timezone": {
-          "target": "com.amazonaws.alexaforbusiness#Timezone",
-          "traits": {
-            "smithy.api#documentation": "<p>The time zone used by a room profile.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Locale": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
-          "traits": {
-            "smithy.api#documentation": "<p>The locale of the room profile. (This is currently only available to a limited preview audience.)</p>"
-          }
-        },
-        "MaxVolumeLimit": {
-          "target": "com.amazonaws.alexaforbusiness#MaxVolumeLimit",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum volume limit for a room profile.</p>"
-          }
-        },
-        "SetupModeDisabled": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether room profile setup is enabled.</p>"
-          }
-        },
-        "DistanceUnit": {
-          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The distance unit to be used by devices in the profile.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "WakeWord": {
-          "target": "com.amazonaws.alexaforbusiness#WakeWord",
-          "traits": {
-            "smithy.api#documentation": "<p>A wake word for Alexa, Echo, Amazon, or a computer.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -2140,11 +2140,16 @@
             "smithy.api#documentation": "<p>The calendar ARN for the room.</p>"
           }
         },
-        "RoomName": {
-          "target": "com.amazonaws.alexaforbusiness#RoomName",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#RoomDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The name for the room.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The description for the room.</p>"
+          }
+        },
+        "ProfileArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The profile ARN for the room. This is required.</p>"
           }
         },
         "ClientRequestToken": {
@@ -2154,16 +2159,11 @@
             "smithy.api#idempotencyToken": {}
           }
         },
-        "ProfileArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "RoomName": {
+          "target": "com.amazonaws.alexaforbusiness#RoomName",
           "traits": {
-            "smithy.api#documentation": "<p>The profile ARN for the room. This is required.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#RoomDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description for the room.</p>"
+            "smithy.api#documentation": "<p>The name for the room.</p>",
+            "smithy.api#required": {}
           }
         },
         "Tags": {
@@ -2211,19 +2211,6 @@
     "com.amazonaws.alexaforbusiness#CreateSkillGroupRequest": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description for the skill group.</p>"
-          }
-        },
-        "SkillGroupName": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name for the skill group.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
@@ -2235,6 +2222,19 @@
           "target": "com.amazonaws.alexaforbusiness#TagList",
           "traits": {
             "smithy.api#documentation": "<p>The tags for the skill group.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description for the skill group.</p>"
+          }
+        },
+        "SkillGroupName": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name for the skill group.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -2276,17 +2276,10 @@
     "com.amazonaws.alexaforbusiness#CreateUserRequest": {
       "type": "structure",
       "members": {
-        "UserId": {
-          "target": "com.amazonaws.alexaforbusiness#user_UserId",
+        "Email": {
+          "target": "com.amazonaws.alexaforbusiness#Email",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN for the user.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.alexaforbusiness#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags for the user.</p>"
+            "smithy.api#documentation": "<p>The email address for the user.</p>"
           }
         },
         "ClientRequestToken": {
@@ -2302,16 +2295,23 @@
             "smithy.api#documentation": "<p>The first name for the user.</p>"
           }
         },
-        "Email": {
-          "target": "com.amazonaws.alexaforbusiness#Email",
+        "UserId": {
+          "target": "com.amazonaws.alexaforbusiness#user_UserId",
           "traits": {
-            "smithy.api#documentation": "<p>The email address for the user.</p>"
+            "smithy.api#documentation": "<p>The ARN for the user.</p>",
+            "smithy.api#required": {}
           }
         },
         "LastName": {
           "target": "com.amazonaws.alexaforbusiness#user_LastName",
           "traits": {
             "smithy.api#documentation": "<p>The last name for the user.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.alexaforbusiness#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags for the user.</p>"
           }
         }
       }
@@ -2556,17 +2556,17 @@
     "com.amazonaws.alexaforbusiness#DeleteDeviceUsageDataRequest": {
       "type": "structure",
       "members": {
-        "DeviceArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the device.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DeviceUsageType": {
           "target": "com.amazonaws.alexaforbusiness#DeviceUsageType",
           "traits": {
             "smithy.api#documentation": "<p>The type of usage data to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DeviceArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2738,11 +2738,10 @@
     "com.amazonaws.alexaforbusiness#DeleteRoomSkillParameterRequest": {
       "type": "structure",
       "members": {
-        "SkillId": {
-          "target": "com.amazonaws.alexaforbusiness#SkillId",
+        "RoomArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the skill from which to remove the room skill parameter details.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The ARN of the room from which to remove the room skill parameter details.</p>"
           }
         },
         "ParameterKey": {
@@ -2752,10 +2751,11 @@
             "smithy.api#required": {}
           }
         },
-        "RoomArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "SkillId": {
+          "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the room from which to remove the room skill parameter details.</p>"
+            "smithy.api#documentation": "<p>The ID of the skill from which to remove the room skill parameter details.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -2787,17 +2787,17 @@
     "com.amazonaws.alexaforbusiness#DeleteSkillAuthorizationRequest": {
       "type": "structure",
       "members": {
+        "RoomArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The room that the skill is authorized for.</p>"
+          }
+        },
         "SkillId": {
           "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier of a skill.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "RoomArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The room that the skill is authorized for.</p>"
           }
         }
       }
@@ -2864,17 +2864,17 @@
     "com.amazonaws.alexaforbusiness#DeleteUserRequest": {
       "type": "structure",
       "members": {
+        "UserArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the user to delete in the organization. Required.</p>"
+          }
+        },
         "EnrollmentId": {
           "target": "com.amazonaws.alexaforbusiness#EnrollmentId",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the user's enrollment in the organization. Required.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "UserArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the user to delete in the organization. Required.</p>"
           }
         }
       }
@@ -2886,6 +2886,18 @@
     "com.amazonaws.alexaforbusiness#DeveloperInfo": {
       "type": "structure",
       "members": {
+        "Url": {
+          "target": "com.amazonaws.alexaforbusiness#Url",
+          "traits": {
+            "smithy.api#documentation": "<p>The website of the developer.</p>"
+          }
+        },
+        "PrivacyPolicy": {
+          "target": "com.amazonaws.alexaforbusiness#PrivacyPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the privacy policy.</p>"
+          }
+        },
         "Email": {
           "target": "com.amazonaws.alexaforbusiness#Email",
           "traits": {
@@ -2896,18 +2908,6 @@
           "target": "com.amazonaws.alexaforbusiness#DeveloperName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the developer.</p>"
-          }
-        },
-        "PrivacyPolicy": {
-          "target": "com.amazonaws.alexaforbusiness#PrivacyPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the privacy policy.</p>"
-          }
-        },
-        "Url": {
-          "target": "com.amazonaws.alexaforbusiness#Url",
-          "traits": {
-            "smithy.api#documentation": "<p>The website of the developer.</p>"
           }
         }
       },
@@ -2933,10 +2933,28 @@
             "smithy.api#documentation": "<p>The serial number of a device.</p>"
           }
         },
-        "DeviceStatus": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceStatus",
+        "DeviceStatusInfo": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceStatusInfo",
           "traits": {
-            "smithy.api#documentation": "<p>The status of a device. If the status is not READY, check the DeviceStatusInfo value\n         for details.</p>"
+            "smithy.api#documentation": "<p>Detailed information about a device's status.</p>"
+          }
+        },
+        "NetworkProfileInfo": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceNetworkProfileInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
+          }
+        },
+        "SoftwareVersion": {
+          "target": "com.amazonaws.alexaforbusiness#SoftwareVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The software version of a device.</p>"
+          }
+        },
+        "DeviceType": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of a device.</p>"
           }
         },
         "DeviceName": {
@@ -2951,34 +2969,16 @@
             "smithy.api#documentation": "<p>The MAC address of a device.</p>"
           }
         },
-        "DeviceStatusInfo": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceStatusInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Detailed information about a device's status.</p>"
-          }
-        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The room ARN of a device.</p>"
           }
         },
-        "DeviceType": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceType",
+        "DeviceStatus": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The type of a device.</p>"
-          }
-        },
-        "SoftwareVersion": {
-          "target": "com.amazonaws.alexaforbusiness#SoftwareVersion",
-          "traits": {
-            "smithy.api#documentation": "<p>The software version of a device.</p>"
-          }
-        },
-        "NetworkProfileInfo": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceNetworkProfileInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
+            "smithy.api#documentation": "<p>The status of a device. If the status is not READY, check the DeviceStatusInfo value\n         for details.</p>"
           }
         }
       },
@@ -2989,10 +2989,34 @@
     "com.amazonaws.alexaforbusiness#DeviceData": {
       "type": "structure",
       "members": {
+        "MacAddress": {
+          "target": "com.amazonaws.alexaforbusiness#MacAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The MAC address of a device.</p>"
+          }
+        },
+        "CreatedTime": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceDataCreatedTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time (in epoch) when the device data was created.</p>"
+          }
+        },
+        "DeviceStatus": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of a device.</p>"
+          }
+        },
         "RoomName": {
           "target": "com.amazonaws.alexaforbusiness#DeviceRoomName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the room associated with a device.</p>"
+          }
+        },
+        "DeviceName": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a device.</p>"
           }
         },
         "RoomArn": {
@@ -3007,16 +3031,10 @@
             "smithy.api#documentation": "<p>Detailed information about a device's status.</p>"
           }
         },
-        "DeviceName": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceName",
+        "DeviceSerialNumber": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceSerialNumber",
           "traits": {
-            "smithy.api#documentation": "<p>The name of a device.</p>"
-          }
-        },
-        "DeviceStatus": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of a device.</p>"
+            "smithy.api#documentation": "<p>The serial number of a device.</p>"
           }
         },
         "DeviceArn": {
@@ -3025,16 +3043,10 @@
             "smithy.api#documentation": "<p>The ARN of a device.</p>"
           }
         },
-        "NetworkProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
+        "NetworkProfileArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
-          }
-        },
-        "DeviceType": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of a device.</p>"
+            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
           }
         },
         "SoftwareVersion": {
@@ -3043,28 +3055,16 @@
             "smithy.api#documentation": "<p>The software version of a device.</p>"
           }
         },
-        "CreatedTime": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceDataCreatedTime",
+        "DeviceType": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceType",
           "traits": {
-            "smithy.api#documentation": "<p>The time (in epoch) when the device data was created.</p>"
+            "smithy.api#documentation": "<p>The type of a device.</p>"
           }
         },
-        "DeviceSerialNumber": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceSerialNumber",
+        "NetworkProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
           "traits": {
-            "smithy.api#documentation": "<p>The serial number of a device.</p>"
-          }
-        },
-        "MacAddress": {
-          "target": "com.amazonaws.alexaforbusiness#MacAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The MAC address of a device.</p>"
-          }
-        },
-        "NetworkProfileArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
+            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
           }
         }
       },
@@ -3084,10 +3084,10 @@
     "com.amazonaws.alexaforbusiness#DeviceEvent": {
       "type": "structure",
       "members": {
-        "Type": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceEventType",
+        "Value": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceEventValue",
           "traits": {
-            "smithy.api#documentation": "<p>The type of device event.</p>"
+            "smithy.api#documentation": "<p>The value of the event.</p>"
           }
         },
         "Timestamp": {
@@ -3096,10 +3096,10 @@
             "smithy.api#documentation": "<p>The time (in epoch) when the event occurred. </p>"
           }
         },
-        "Value": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceEventValue",
+        "Type": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceEventType",
           "traits": {
-            "smithy.api#documentation": "<p>The value of the event.</p>"
+            "smithy.api#documentation": "<p>The type of device event.</p>"
           }
         }
       },
@@ -3156,6 +3156,12 @@
     "com.amazonaws.alexaforbusiness#DeviceNetworkProfileInfo": {
       "type": "structure",
       "members": {
+        "CertificateArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the certificate associated with a device.</p>"
+          }
+        },
         "NetworkProfileArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
@@ -3166,12 +3172,6 @@
           "target": "com.amazonaws.alexaforbusiness#CertificateTime",
           "traits": {
             "smithy.api#documentation": "<p>The time (in epoch) when the certificate expires.</p>"
-          }
-        },
-        "CertificateArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the certificate associated with a device.</p>"
           }
         }
       },
@@ -3243,16 +3243,16 @@
     "com.amazonaws.alexaforbusiness#DeviceStatusDetail": {
       "type": "structure",
       "members": {
-        "Feature": {
-          "target": "com.amazonaws.alexaforbusiness#Feature",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of available features on the device.</p>"
-          }
-        },
         "Code": {
           "target": "com.amazonaws.alexaforbusiness#DeviceStatusDetailCode",
           "traits": {
             "smithy.api#documentation": "<p>The device status detail code.</p>"
+          }
+        },
+        "Feature": {
+          "target": "com.amazonaws.alexaforbusiness#Feature",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of available features on the device.</p>"
           }
         }
       },
@@ -3344,16 +3344,16 @@
     "com.amazonaws.alexaforbusiness#DeviceStatusInfo": {
       "type": "structure",
       "members": {
-        "ConnectionStatusUpdatedTime": {
-          "target": "com.amazonaws.alexaforbusiness#ConnectionStatusUpdatedTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The time (in epoch) when the device connection status changed.</p>"
-          }
-        },
         "ConnectionStatus": {
           "target": "com.amazonaws.alexaforbusiness#ConnectionStatus",
           "traits": {
             "smithy.api#documentation": "<p>The latest available information about the connection status of a device. </p>"
+          }
+        },
+        "ConnectionStatusUpdatedTime": {
+          "target": "com.amazonaws.alexaforbusiness#ConnectionStatusUpdatedTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time (in epoch) when the device connection status changed.</p>"
           }
         },
         "DeviceStatusDetails": {
@@ -3477,17 +3477,17 @@
     "com.amazonaws.alexaforbusiness#DisassociateSkillFromSkillGroupRequest": {
       "type": "structure",
       "members": {
+        "SkillGroupArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of a skill. Required.</p>"
+          }
+        },
         "SkillId": {
           "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a skill group to associate to a skill.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "SkillGroupArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of a skill. Required.</p>"
           }
         }
       }
@@ -3552,16 +3552,16 @@
     "com.amazonaws.alexaforbusiness#DisassociateSkillGroupFromRoomRequest": {
       "type": "structure",
       "members": {
-        "SkillGroupArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the skill group to disassociate from a room. Required.</p>"
-          }
-        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the room from which the skill group is to be disassociated.\n         Required.</p>"
+          }
+        },
+        "SkillGroupArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the skill group to disassociate from a room. Required.</p>"
           }
         }
       }
@@ -3628,6 +3628,12 @@
     "com.amazonaws.alexaforbusiness#EndOfMeetingReminder": {
       "type": "structure",
       "members": {
+        "ReminderAtMinutes": {
+          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderMinutesList",
+          "traits": {
+            "smithy.api#documentation": "<p>A range of 3 to 15 minutes that determines when the reminder begins.</p>"
+          }
+        },
         "Enabled": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
@@ -3638,12 +3644,6 @@
           "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderType",
           "traits": {
             "smithy.api#documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>"
-          }
-        },
-        "ReminderAtMinutes": {
-          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderMinutesList",
-          "traits": {
-            "smithy.api#documentation": "<p>A range of 3 to 15 minutes that determines when the reminder begins.</p>"
           }
         }
       },
@@ -3785,17 +3785,17 @@
     "com.amazonaws.alexaforbusiness#Filter": {
       "type": "structure",
       "members": {
-        "Values": {
-          "target": "com.amazonaws.alexaforbusiness#FilterValueList",
-          "traits": {
-            "smithy.api#documentation": "<p>The values of a filter.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.alexaforbusiness#FilterKey",
           "traits": {
             "smithy.api#documentation": "<p>The key of a filter.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.alexaforbusiness#FilterValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>The values of a filter.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3882,10 +3882,10 @@
     "com.amazonaws.alexaforbusiness#Gateway": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "SoftwareVersion": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayVersion",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the gateway.</p>"
+            "smithy.api#documentation": "<p>The software version of the gateway. The gateway automatically updates its software\n         version during normal operation.</p>"
           }
         },
         "Description": {
@@ -3900,10 +3900,10 @@
             "smithy.api#documentation": "<p>The ARN of the gateway group that the gateway is associated to.</p>"
           }
         },
-        "SoftwareVersion": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayVersion",
+        "Arn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The software version of the gateway. The gateway automatically updates its software\n         version during normal operation.</p>"
+            "smithy.api#documentation": "<p>The ARN of the gateway.</p>"
           }
         },
         "Name": {
@@ -3930,16 +3930,16 @@
     "com.amazonaws.alexaforbusiness#GatewayGroup": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the gateway group.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.alexaforbusiness#GatewayGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the gateway group.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the gateway group.</p>"
           }
         },
         "Arn": {
@@ -3981,10 +3981,10 @@
     "com.amazonaws.alexaforbusiness#GatewayGroupSummary": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayGroupName",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the gateway group.</p>"
+            "smithy.api#documentation": "<p>The description of the gateway group.</p>"
           }
         },
         "Arn": {
@@ -3993,10 +3993,10 @@
             "smithy.api#documentation": "<p>The ARN of the gateway group.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
+        "Name": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the gateway group.</p>"
+            "smithy.api#documentation": "<p>The name of the gateway group.</p>"
           }
         }
       },
@@ -4023,10 +4023,10 @@
     "com.amazonaws.alexaforbusiness#GatewaySummary": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayDescription",
+        "SoftwareVersion": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayVersion",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the gateway.</p>"
+            "smithy.api#documentation": "<p>The software version of the gateway. The gateway automatically updates its software\n         version during normal operation.</p>"
           }
         },
         "Arn": {
@@ -4047,10 +4047,10 @@
             "smithy.api#documentation": "<p>The name of the gateway.</p>"
           }
         },
-        "SoftwareVersion": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayVersion",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The software version of the gateway. The gateway automatically updates its software\n         version during normal operation.</p>"
+            "smithy.api#documentation": "<p>The description of the gateway.</p>"
           }
         }
       },
@@ -4368,10 +4368,10 @@
     "com.amazonaws.alexaforbusiness#GetInvitationConfigurationResponse": {
       "type": "structure",
       "members": {
-        "ContactEmail": {
-          "target": "com.amazonaws.alexaforbusiness#Email",
+        "OrganizationName": {
+          "target": "com.amazonaws.alexaforbusiness#OrganizationName",
           "traits": {
-            "smithy.api#documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use.\n      </p>"
+            "smithy.api#documentation": "<p>The name of the organization sending the enrollment invite to a user.</p>"
           }
         },
         "PrivateSkillIds": {
@@ -4380,10 +4380,10 @@
             "smithy.api#documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the\n         invitation.</p>"
           }
         },
-        "OrganizationName": {
-          "target": "com.amazonaws.alexaforbusiness#OrganizationName",
+        "ContactEmail": {
+          "target": "com.amazonaws.alexaforbusiness#Email",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the organization sending the enrollment invite to a user.</p>"
+            "smithy.api#documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use.\n      </p>"
           }
         }
       }
@@ -4529,13 +4529,6 @@
     "com.amazonaws.alexaforbusiness#GetRoomSkillParameterRequest": {
       "type": "structure",
       "members": {
-        "ParameterKey": {
-          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameterKey",
-          "traits": {
-            "smithy.api#documentation": "<p>The room skill parameter key for which to get details. Required.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "SkillId": {
           "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
@@ -4547,6 +4540,13 @@
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the room from which to get the room skill parameter details. </p>"
+          }
+        },
+        "ParameterKey": {
+          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameterKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The room skill parameter key for which to get details. Required.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -4604,17 +4604,17 @@
     "com.amazonaws.alexaforbusiness#IPDialIn": {
       "type": "structure",
       "members": {
-        "Endpoint": {
-          "target": "com.amazonaws.alexaforbusiness#Endpoint",
-          "traits": {
-            "smithy.api#documentation": "<p>The IP address.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "CommsProtocol": {
           "target": "com.amazonaws.alexaforbusiness#CommsProtocol",
           "traits": {
             "smithy.api#documentation": "<p>The protocol, including SIP, SIPS, and H323.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Endpoint": {
+          "target": "com.amazonaws.alexaforbusiness#Endpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>The IP address.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4766,16 +4766,16 @@
     "com.amazonaws.alexaforbusiness#ListBusinessReportSchedulesResponse": {
       "type": "structure",
       "members": {
-        "BusinessReportSchedules": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleList",
-          "traits": {
-            "smithy.api#documentation": "<p>The schedule of the reports.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The token used to list the remaining schedules from the previous API call.</p>"
+          }
+        },
+        "BusinessReportSchedules": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleList",
+          "traits": {
+            "smithy.api#documentation": "<p>The schedule of the reports.</p>"
           }
         }
       }
@@ -4800,16 +4800,16 @@
     "com.amazonaws.alexaforbusiness#ListConferenceProvidersRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of conference providers to be returned, per paginated\n         calls.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
           }
         }
       }
@@ -4856,22 +4856,16 @@
     "com.amazonaws.alexaforbusiness#ListDeviceEventsRequest": {
       "type": "structure",
       "members": {
-        "EventType": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceEventType",
-          "traits": {
-            "smithy.api#documentation": "<p>The event type to filter device events. If EventType isn't specified, this returns a\n         list of all device events in reverse chronological order. If EventType is specified, this\n         returns a list of device events for that EventType in reverse chronological order.\n      </p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to include in the response. The default value is 50. If\n         more results exist than the specified MaxResults value, a token is included in the response\n         so that the remaining results can be retrieved. </p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
+        "EventType": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceEventType",
           "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response only includes\n         results beyond the token, up to the value specified by MaxResults. When the end of results\n         is reached, the response has a value of null.</p>"
+            "smithy.api#documentation": "<p>The event type to filter device events. If EventType isn't specified, this returns a\n         list of all device events in reverse chronological order. If EventType is specified, this\n         returns a list of device events for that EventType in reverse chronological order.\n      </p>"
           }
         },
         "DeviceArn": {
@@ -4879,6 +4873,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a device.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response only includes\n         results beyond the token, up to the value specified by MaxResults. When the end of results\n         is reached, the response has a value of null.</p>"
           }
         }
       }
@@ -4920,16 +4920,16 @@
     "com.amazonaws.alexaforbusiness#ListGatewayGroupsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of gateway group summaries to return. The default is 50.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
           }
         }
       }
@@ -4937,16 +4937,16 @@
     "com.amazonaws.alexaforbusiness#ListGatewayGroupsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
-          }
-        },
         "GatewayGroups": {
           "target": "com.amazonaws.alexaforbusiness#GatewayGroupSummaries",
           "traits": {
             "smithy.api#documentation": "<p>The gateway groups in the list.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
           }
         }
       }
@@ -4971,6 +4971,12 @@
     "com.amazonaws.alexaforbusiness#ListGatewaysRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of gateway summaries to return. The default is 50.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
@@ -4981,12 +4987,6 @@
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The gateway group ARN for which to list gateways.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.alexaforbusiness#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of gateway summaries to return. The default is 50.</p>"
           }
         }
       }
@@ -5028,10 +5028,22 @@
     "com.amazonaws.alexaforbusiness#ListSkillsRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
+          }
+        },
         "SkillGroupArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the skill group for which to list enabled skills.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.alexaforbusiness#SkillListMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
           }
         },
         "SkillType": {
@@ -5044,18 +5056,6 @@
           "target": "com.amazonaws.alexaforbusiness#EnablementTypeFilter",
           "traits": {
             "smithy.api#documentation": "<p>Whether the skill is enabled under the user's account.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.alexaforbusiness#SkillListMaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
           }
         }
       }
@@ -5148,17 +5148,17 @@
     "com.amazonaws.alexaforbusiness#ListSkillsStoreSkillsByCategoryRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
+          }
+        },
         "CategoryId": {
           "target": "com.amazonaws.alexaforbusiness#CategoryId",
           "traits": {
             "smithy.api#documentation": "<p>The category ID for which the skills are being retrieved from the skill\n         store.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
           }
         },
         "MaxResults": {
@@ -5172,16 +5172,16 @@
     "com.amazonaws.alexaforbusiness#ListSkillsStoreSkillsByCategoryResponse": {
       "type": "structure",
       "members": {
-        "SkillsStoreSkills": {
-          "target": "com.amazonaws.alexaforbusiness#SkillsStoreSkillList",
-          "traits": {
-            "smithy.api#documentation": "<p>The skill store skills.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
+          }
+        },
+        "SkillsStoreSkills": {
+          "target": "com.amazonaws.alexaforbusiness#SkillsStoreSkillList",
+          "traits": {
+            "smithy.api#documentation": "<p>The skill store skills.</p>"
           }
         }
       }
@@ -5235,16 +5235,16 @@
     "com.amazonaws.alexaforbusiness#ListSmartHomeAppliancesResponse": {
       "type": "structure",
       "members": {
-        "SmartHomeAppliances": {
-          "target": "com.amazonaws.alexaforbusiness#SmartHomeApplianceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The smart home appliances.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
+          }
+        },
+        "SmartHomeAppliances": {
+          "target": "com.amazonaws.alexaforbusiness#SmartHomeApplianceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The smart home appliances.</p>"
           }
         }
       }
@@ -5274,6 +5274,13 @@
     "com.amazonaws.alexaforbusiness#ListTagsRequest": {
       "type": "structure",
       "members": {
+        "Arn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the specified resource for which to list tags.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
@@ -5284,13 +5291,6 @@
           "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the specified resource for which to list tags.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -5345,18 +5345,6 @@
     "com.amazonaws.alexaforbusiness#MeetingRoomConfiguration": {
       "type": "structure",
       "members": {
-        "InstantBooking": {
-          "target": "com.amazonaws.alexaforbusiness#InstantBooking",
-          "traits": {
-            "smithy.api#documentation": "<p>Settings to automatically book the room if available for a configured duration when\n         joining a meeting with Alexa. </p>"
-          }
-        },
-        "RoomUtilizationMetricsEnabled": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
-          }
-        },
         "RequireCheckIn": {
           "target": "com.amazonaws.alexaforbusiness#RequireCheckIn",
           "traits": {
@@ -5367,6 +5355,18 @@
           "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminder",
           "traits": {
             "smithy.api#documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The\n         end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
+          }
+        },
+        "RoomUtilizationMetricsEnabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether room utilization metrics are enabled or not.</p>"
+          }
+        },
+        "InstantBooking": {
+          "target": "com.amazonaws.alexaforbusiness#InstantBooking",
+          "traits": {
+            "smithy.api#documentation": "<p>Settings to automatically book the room if available for a configured duration when\n         joining a meeting with Alexa. </p>"
           }
         }
       },
@@ -5421,46 +5421,10 @@
     "com.amazonaws.alexaforbusiness#NetworkProfile": {
       "type": "structure",
       "members": {
-        "TrustAnchors": {
-          "target": "com.amazonaws.alexaforbusiness#TrustAnchorList",
-          "traits": {
-            "smithy.api#documentation": "<p>The root certificates of your authentication server, which is installed on your devices\n         and used to trust your authentication server during EAP negotiation.</p>"
-          }
-        },
-        "EapMethod": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkEapMethod",
-          "traits": {
-            "smithy.api#documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is\n         supported. </p>"
-          }
-        },
-        "NextPassword": {
-          "target": "com.amazonaws.alexaforbusiness#NextWiFiPassword",
-          "traits": {
-            "smithy.api#documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously\n         transmitted to the device and is used when the password of the network changes to\n         NextPassword. </p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
-          }
-        },
-        "CurrentPassword": {
-          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
-          "traits": {
-            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
-          }
-        },
-        "NetworkProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
-          }
-        },
-        "NetworkProfileArn": {
+        "CertificateAuthorityArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
+            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
           }
         },
         "SecurityType": {
@@ -5469,16 +5433,52 @@
             "smithy.api#documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK,\n         WEP, or OPEN.</p>"
           }
         },
+        "TrustAnchors": {
+          "target": "com.amazonaws.alexaforbusiness#TrustAnchorList",
+          "traits": {
+            "smithy.api#documentation": "<p>The root certificates of your authentication server, which is installed on your devices\n         and used to trust your authentication server during EAP negotiation.</p>"
+          }
+        },
+        "NextPassword": {
+          "target": "com.amazonaws.alexaforbusiness#NextWiFiPassword",
+          "traits": {
+            "smithy.api#documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously\n         transmitted to the device and is used when the password of the network changes to\n         NextPassword. </p>"
+          }
+        },
+        "CurrentPassword": {
+          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
+          "traits": {
+            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
+          }
+        },
         "Ssid": {
           "target": "com.amazonaws.alexaforbusiness#NetworkSsid",
           "traits": {
             "smithy.api#documentation": "<p>The SSID of the Wi-Fi network.</p>"
           }
         },
-        "CertificateAuthorityArn": {
+        "EapMethod": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkEapMethod",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is\n         supported. </p>"
+          }
+        },
+        "NetworkProfileArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
+            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
+          }
+        },
+        "NetworkProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
           }
         }
       },
@@ -5489,34 +5489,22 @@
     "com.amazonaws.alexaforbusiness#NetworkProfileData": {
       "type": "structure",
       "members": {
-        "Ssid": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkSsid",
-          "traits": {
-            "smithy.api#documentation": "<p>The SSID of the Wi-Fi network.</p>"
-          }
-        },
-        "NetworkProfileArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
-          }
-        },
         "EapMethod": {
           "target": "com.amazonaws.alexaforbusiness#NetworkEapMethod",
           "traits": {
             "smithy.api#documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is\n         supported.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDescription",
+        "NetworkProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
           "traits": {
-            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
+            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
           }
         },
-        "SecurityType": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkSecurityType",
+        "Ssid": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkSsid",
           "traits": {
-            "smithy.api#documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK,\n         WEP, or OPEN.</p>"
+            "smithy.api#documentation": "<p>The SSID of the Wi-Fi network.</p>"
           }
         },
         "CertificateAuthorityArn": {
@@ -5525,10 +5513,22 @@
             "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices.</p>"
           }
         },
-        "NetworkProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
+        "SecurityType": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkSecurityType",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
+            "smithy.api#documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK,\n         WEP, or OPEN.</p>"
+          }
+        },
+        "NetworkProfileArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Detailed information about a device's network profile.</p>"
           }
         }
       },
@@ -5674,13 +5674,6 @@
     "com.amazonaws.alexaforbusiness#PSTNDialIn": {
       "type": "structure",
       "members": {
-        "OneClickPinDelay": {
-          "target": "com.amazonaws.alexaforbusiness#OneClickPinDelay",
-          "traits": {
-            "smithy.api#documentation": "<p>The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "PhoneNumber": {
           "target": "com.amazonaws.alexaforbusiness#OutboundPhoneNumber",
           "traits": {
@@ -5688,10 +5681,10 @@
             "smithy.api#required": {}
           }
         },
-        "CountryCode": {
-          "target": "com.amazonaws.alexaforbusiness#CountryCode",
+        "OneClickPinDelay": {
+          "target": "com.amazonaws.alexaforbusiness#OneClickPinDelay",
           "traits": {
-            "smithy.api#documentation": "<p>The zip code.</p>",
+            "smithy.api#documentation": "<p>The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5699,6 +5692,13 @@
           "target": "com.amazonaws.alexaforbusiness#OneClickIdDelay",
           "traits": {
             "smithy.api#documentation": "<p>The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CountryCode": {
+          "target": "com.amazonaws.alexaforbusiness#CountryCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The zip code.</p>",
             "smithy.api#required": {}
           }
         }
@@ -5710,17 +5710,17 @@
     "com.amazonaws.alexaforbusiness#PhoneNumber": {
       "type": "structure",
       "members": {
-        "Number": {
-          "target": "com.amazonaws.alexaforbusiness#RawPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The raw value of the phone number.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Type": {
           "target": "com.amazonaws.alexaforbusiness#PhoneNumberType",
           "traits": {
             "smithy.api#documentation": "<p>The type of the phone number.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Number": {
+          "target": "com.amazonaws.alexaforbusiness#RawPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The raw value of the phone number.</p>",
             "smithy.api#required": {}
           }
         }
@@ -5776,10 +5776,64 @@
     "com.amazonaws.alexaforbusiness#Profile": {
       "type": "structure",
       "members": {
-        "Timezone": {
-          "target": "com.amazonaws.alexaforbusiness#Timezone",
+        "DistanceUnit": {
+          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
           "traits": {
-            "smithy.api#documentation": "<p>The time zone of a room profile.</p>"
+            "smithy.api#documentation": "<p>The distance unit of a room profile.</p>"
+          }
+        },
+        "AddressBookArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the address book.</p>"
+          }
+        },
+        "MeetingRoomConfiguration": {
+          "target": "com.amazonaws.alexaforbusiness#MeetingRoomConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Meeting room settings of a room profile.</p>"
+          }
+        },
+        "ProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a room profile.</p>"
+          }
+        },
+        "SetupModeDisabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The setup mode of a room profile.</p>"
+          }
+        },
+        "TemperatureUnit": {
+          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
+          "traits": {
+            "smithy.api#documentation": "<p>The temperature unit of a room profile.</p>"
+          }
+        },
+        "PSTNEnabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The PSTN setting of a room profile.</p>"
+          }
+        },
+        "Locale": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
+          "traits": {
+            "smithy.api#documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview\n         audience.)</p>"
+          }
+        },
+        "Address": {
+          "target": "com.amazonaws.alexaforbusiness#Address",
+          "traits": {
+            "smithy.api#documentation": "<p>The address of a room profile.</p>"
+          }
+        },
+        "MaxVolumeLimit": {
+          "target": "com.amazonaws.alexaforbusiness#MaxVolumeLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The max volume limit of a room profile.</p>"
           }
         },
         "IsDefault": {
@@ -5788,10 +5842,10 @@
             "smithy.api#documentation": "<p>Retrieves if the profile is default or not.</p>"
           }
         },
-        "Locale": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
+        "Timezone": {
+          "target": "com.amazonaws.alexaforbusiness#Timezone",
           "traits": {
-            "smithy.api#documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview\n         audience.)</p>"
+            "smithy.api#documentation": "<p>The time zone of a room profile.</p>"
           }
         },
         "WakeWord": {
@@ -5804,60 +5858,6 @@
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a room profile.</p>"
-          }
-        },
-        "TemperatureUnit": {
-          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The temperature unit of a room profile.</p>"
-          }
-        },
-        "ProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#ProfileName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a room profile.</p>"
-          }
-        },
-        "MaxVolumeLimit": {
-          "target": "com.amazonaws.alexaforbusiness#MaxVolumeLimit",
-          "traits": {
-            "smithy.api#documentation": "<p>The max volume limit of a room profile.</p>"
-          }
-        },
-        "MeetingRoomConfiguration": {
-          "target": "com.amazonaws.alexaforbusiness#MeetingRoomConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Meeting room settings of a room profile.</p>"
-          }
-        },
-        "AddressBookArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the address book.</p>"
-          }
-        },
-        "DistanceUnit": {
-          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The distance unit of a room profile.</p>"
-          }
-        },
-        "SetupModeDisabled": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The setup mode of a room profile.</p>"
-          }
-        },
-        "Address": {
-          "target": "com.amazonaws.alexaforbusiness#Address",
-          "traits": {
-            "smithy.api#documentation": "<p>The address of a room profile.</p>"
-          }
-        },
-        "PSTNEnabled": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The PSTN setting of a room profile.</p>"
           }
         }
       },
@@ -5868,10 +5868,10 @@
     "com.amazonaws.alexaforbusiness#ProfileData": {
       "type": "structure",
       "members": {
-        "ProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+        "IsDefault": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>The name of a room profile.</p>"
+            "smithy.api#documentation": "<p>Retrieves if the profile data is default or not.</p>"
           }
         },
         "ProfileArn": {
@@ -5880,10 +5880,16 @@
             "smithy.api#documentation": "<p>The ARN of a room profile.</p>"
           }
         },
-        "Locale": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
+        "TemperatureUnit": {
+          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
           "traits": {
-            "smithy.api#documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview\n         audience.)</p>"
+            "smithy.api#documentation": "<p>The temperature unit of a room profile.</p>"
+          }
+        },
+        "ProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a room profile.</p>"
           }
         },
         "Timezone": {
@@ -5892,22 +5898,10 @@
             "smithy.api#documentation": "<p>The time zone of a room profile.</p>"
           }
         },
-        "IsDefault": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
+        "Locale": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
           "traits": {
-            "smithy.api#documentation": "<p>Retrieves if the profile data is default or not.</p>"
-          }
-        },
-        "Address": {
-          "target": "com.amazonaws.alexaforbusiness#Address",
-          "traits": {
-            "smithy.api#documentation": "<p>The address of a room profile.</p>"
-          }
-        },
-        "TemperatureUnit": {
-          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The temperature unit of a room profile.</p>"
+            "smithy.api#documentation": "<p>The locale of a room profile. (This is currently available only to a limited preview\n         audience.)</p>"
           }
         },
         "DistanceUnit": {
@@ -5920,6 +5914,12 @@
           "target": "com.amazonaws.alexaforbusiness#WakeWord",
           "traits": {
             "smithy.api#documentation": "<p>The wake word of a room profile.</p>"
+          }
+        },
+        "Address": {
+          "target": "com.amazonaws.alexaforbusiness#Address",
+          "traits": {
+            "smithy.api#documentation": "<p>The address of a room profile.</p>"
           }
         }
       },
@@ -6008,6 +6008,12 @@
     "com.amazonaws.alexaforbusiness#PutInvitationConfigurationRequest": {
       "type": "structure",
       "members": {
+        "ContactEmail": {
+          "target": "com.amazonaws.alexaforbusiness#Email",
+          "traits": {
+            "smithy.api#documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use.\n      </p>"
+          }
+        },
         "OrganizationName": {
           "target": "com.amazonaws.alexaforbusiness#OrganizationName",
           "traits": {
@@ -6019,12 +6025,6 @@
           "target": "com.amazonaws.alexaforbusiness#ShortSkillIdList",
           "traits": {
             "smithy.api#documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the\n         invitation.</p>"
-          }
-        },
-        "ContactEmail": {
-          "target": "com.amazonaws.alexaforbusiness#Email",
-          "traits": {
-            "smithy.api#documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use.\n      </p>"
           }
         }
       }
@@ -6059,17 +6059,17 @@
             "smithy.api#documentation": "<p>The ARN of the room associated with the room skill parameter. Required.</p>"
           }
         },
-        "RoomSkillParameter": {
-          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameter",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated room skill parameter. Required.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "SkillId": {
           "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the skill associated with the room skill parameter. Required.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoomSkillParameter": {
+          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameter",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated room skill parameter. Required.</p>",
             "smithy.api#required": {}
           }
         }
@@ -6102,13 +6102,6 @@
     "com.amazonaws.alexaforbusiness#PutSkillAuthorizationRequest": {
       "type": "structure",
       "members": {
-        "SkillId": {
-          "target": "com.amazonaws.alexaforbusiness#SkillId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of a skill.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
@@ -6119,6 +6112,13 @@
           "target": "com.amazonaws.alexaforbusiness#AuthorizationResult",
           "traits": {
             "smithy.api#documentation": "<p>The authorization result specific to OAUTH code grant output. \"Code” must be\n         populated in the AuthorizationResult map to establish the authorization.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SkillId": {
+          "target": "com.amazonaws.alexaforbusiness#SkillId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of a skill.</p>",
             "smithy.api#required": {}
           }
         }
@@ -6168,13 +6168,6 @@
     "com.amazonaws.alexaforbusiness#RegisterAVSDeviceRequest": {
       "type": "structure",
       "members": {
-        "AmazonId": {
-          "target": "com.amazonaws.alexaforbusiness#AmazonId",
-          "traits": {
-            "smithy.api#documentation": "<p>The device type ID for your AVS device generated by Amazon when the OEM creates a new\n         product on Amazon's Developer Console.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
@@ -6206,6 +6199,13 @@
           "target": "com.amazonaws.alexaforbusiness#DeviceSerialNumberForAVS",
           "traits": {
             "smithy.api#documentation": "<p>The key generated by the OEM that uniquely identifies a specified instance of your\n         AVS device.</p>"
+          }
+        },
+        "AmazonId": {
+          "target": "com.amazonaws.alexaforbusiness#AmazonId",
+          "traits": {
+            "smithy.api#documentation": "<p>The device type ID for your AVS device generated by Amazon when the OEM creates a new\n         product on Amazon's Developer Console.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -6319,17 +6319,17 @@
     "com.amazonaws.alexaforbusiness#ResolveRoomRequest": {
       "type": "structure",
       "members": {
-        "SkillId": {
-          "target": "com.amazonaws.alexaforbusiness#SkillId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the skill that was requested. Required.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "UserId": {
           "target": "com.amazonaws.alexaforbusiness#UserId",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the user. Required.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SkillId": {
+          "target": "com.amazonaws.alexaforbusiness#SkillId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the skill that was requested. Required.</p>",
             "smithy.api#required": {}
           }
         }
@@ -6338,10 +6338,10 @@
     "com.amazonaws.alexaforbusiness#ResolveRoomResponse": {
       "type": "structure",
       "members": {
-        "RoomName": {
-          "target": "com.amazonaws.alexaforbusiness#RoomName",
+        "RoomSkillParameters": {
+          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameters",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the room from which the skill request was invoked.</p>"
+            "smithy.api#documentation": "<p>Response to get the room profile request. Required.</p>"
           }
         },
         "RoomArn": {
@@ -6350,10 +6350,10 @@
             "smithy.api#documentation": "<p>The ARN of the room from which the skill request was invoked.</p>"
           }
         },
-        "RoomSkillParameters": {
-          "target": "com.amazonaws.alexaforbusiness#RoomSkillParameters",
+        "RoomName": {
+          "target": "com.amazonaws.alexaforbusiness#RoomName",
           "traits": {
-            "smithy.api#documentation": "<p>Response to get the room profile request. Required.</p>"
+            "smithy.api#documentation": "<p>The name of the room from which the skill request was invoked.</p>"
           }
         }
       }
@@ -6373,11 +6373,11 @@
     "com.amazonaws.alexaforbusiness#ResourceInUseException": {
       "type": "structure",
       "members": {
-        "ClientRequestToken": {
-          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken"
-        },
         "Message": {
           "target": "com.amazonaws.alexaforbusiness#ErrorMessage"
+        },
+        "ClientRequestToken": {
+          "target": "com.amazonaws.alexaforbusiness#ClientRequestToken"
         }
       },
       "traits": {
@@ -6444,18 +6444,6 @@
     "com.amazonaws.alexaforbusiness#Room": {
       "type": "structure",
       "members": {
-        "RoomArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of a room.</p>"
-          }
-        },
-        "ProviderCalendarId": {
-          "target": "com.amazonaws.alexaforbusiness#ProviderCalendarId",
-          "traits": {
-            "smithy.api#documentation": "<p>The provider calendar ARN of a room.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.alexaforbusiness#RoomDescription",
           "traits": {
@@ -6468,10 +6456,22 @@
             "smithy.api#documentation": "<p>The profile ARN of a room.</p>"
           }
         },
+        "ProviderCalendarId": {
+          "target": "com.amazonaws.alexaforbusiness#ProviderCalendarId",
+          "traits": {
+            "smithy.api#documentation": "<p>The provider calendar ARN of a room.</p>"
+          }
+        },
         "RoomName": {
           "target": "com.amazonaws.alexaforbusiness#RoomName",
           "traits": {
             "smithy.api#documentation": "<p>The name of a room.</p>"
+          }
+        },
+        "RoomArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of a room.</p>"
           }
         }
       },
@@ -6482,10 +6482,10 @@
     "com.amazonaws.alexaforbusiness#RoomData": {
       "type": "structure",
       "members": {
-        "ProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#RoomDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The profile name of a room.</p>"
+            "smithy.api#documentation": "<p>The description of a room.</p>"
           }
         },
         "RoomName": {
@@ -6506,16 +6506,16 @@
             "smithy.api#documentation": "<p>The provider calendar ARN of a room.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#RoomDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of a room.</p>"
-          }
-        },
         "ProfileArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The profile ARN of a room.</p>"
+          }
+        },
+        "ProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+          "traits": {
+            "smithy.api#documentation": "<p>The profile name of a room.</p>"
           }
         }
       },
@@ -6637,10 +6637,10 @@
             "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response only includes\n         results beyond the token, up to the value specified by MaxResults.</p>"
           }
         },
-        "Filters": {
-          "target": "com.amazonaws.alexaforbusiness#FilterList",
+        "MaxResults": {
+          "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The filters to use to list a specified set of address books. The supported filter key\n         is AddressBookName.</p>"
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified MaxResults value, a token is included in the response so that the remaining\n         results can be retrieved.</p>"
           }
         },
         "SortCriteria": {
@@ -6649,10 +6649,10 @@
             "smithy.api#documentation": "<p>The sort order to use in listing the specified set of address books. The supported\n         sort key is AddressBookName.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+        "Filters": {
+          "target": "com.amazonaws.alexaforbusiness#FilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified MaxResults value, a token is included in the response so that the remaining\n         results can be retrieved.</p>"
+            "smithy.api#documentation": "<p>The filters to use to list a specified set of address books. The supported filter key\n         is AddressBookName.</p>"
           }
         }
       }
@@ -6706,16 +6706,16 @@
             "smithy.api#documentation": "<p>The sort order to use in listing the specified set of contacts. The supported sort\n         keys are DisplayName, FirstName, and LastName.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response only includes\n         results beyond the token, up to the value specified by MaxResults.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.alexaforbusiness#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified MaxResults value, a token is included in the response so that the remaining\n         results can be retrieved.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response only includes\n         results beyond the token, up to the value specified by MaxResults.</p>"
           }
         },
         "Filters": {
@@ -6729,10 +6729,10 @@
     "com.amazonaws.alexaforbusiness#SearchContactsResponse": {
       "type": "structure",
       "members": {
-        "Contacts": {
-          "target": "com.amazonaws.alexaforbusiness#ContactDataList",
+        "TotalCount": {
+          "target": "com.amazonaws.alexaforbusiness#TotalCount",
           "traits": {
-            "smithy.api#documentation": "<p>The contacts that meet the specified set of filter criteria, in sort order.</p>"
+            "smithy.api#documentation": "<p>The total number of contacts returned.</p>"
           }
         },
         "NextToken": {
@@ -6741,10 +6741,10 @@
             "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
           }
         },
-        "TotalCount": {
-          "target": "com.amazonaws.alexaforbusiness#TotalCount",
+        "Contacts": {
+          "target": "com.amazonaws.alexaforbusiness#ContactDataList",
           "traits": {
-            "smithy.api#documentation": "<p>The total number of contacts returned.</p>"
+            "smithy.api#documentation": "<p>The contacts that meet the specified set of filter criteria, in sort order.</p>"
           }
         }
       }
@@ -6769,6 +6769,12 @@
     "com.amazonaws.alexaforbusiness#SearchDevicesRequest": {
       "type": "structure",
       "members": {
+        "Filters": {
+          "target": "com.amazonaws.alexaforbusiness#FilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The filters to use to list a specified set of devices. Supported filter keys are\n         DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber,\n         UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName,\n         NetworkProfileArn, Feature, and FailureCode.</p>"
+          }
+        },
         "SortCriteria": {
           "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
@@ -6785,12 +6791,6 @@
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
-          }
-        },
-        "Filters": {
-          "target": "com.amazonaws.alexaforbusiness#FilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>The filters to use to list a specified set of devices. Supported filter keys are\n         DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber,\n         UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName,\n         NetworkProfileArn, Feature, and FailureCode.</p>"
           }
         }
       }
@@ -6838,10 +6838,10 @@
     "com.amazonaws.alexaforbusiness#SearchNetworkProfilesRequest": {
       "type": "structure",
       "members": {
-        "SortCriteria": {
-          "target": "com.amazonaws.alexaforbusiness#SortList",
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The sort order to use to list the specified set of network profiles. Valid sort criteria\n         includes NetworkProfileName, Ssid, and SecurityType.</p>"
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by MaxResults. </p>"
           }
         },
         "Filters": {
@@ -6850,10 +6850,10 @@
             "smithy.api#documentation": "<p>The filters to use to list a specified set of network profiles. Valid filters are\n         NetworkProfileName, Ssid, and SecurityType.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
+        "SortCriteria": {
+          "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by MaxResults. </p>"
+            "smithy.api#documentation": "<p>The sort order to use to list the specified set of network profiles. Valid sort criteria\n         includes NetworkProfileName, Ssid, and SecurityType.</p>"
           }
         },
         "MaxResults": {
@@ -6867,10 +6867,10 @@
     "com.amazonaws.alexaforbusiness#SearchNetworkProfilesResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
+        "NetworkProfiles": {
+          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDataList",
           "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by MaxResults.</p>"
+            "smithy.api#documentation": "<p>The network profiles that meet the specified set of filter criteria, in sort order. It\n         is a list of NetworkProfileData objects. </p>"
           }
         },
         "TotalCount": {
@@ -6879,10 +6879,10 @@
             "smithy.api#documentation": "<p>The total number of network profiles returned.</p>"
           }
         },
-        "NetworkProfiles": {
-          "target": "com.amazonaws.alexaforbusiness#NetworkProfileDataList",
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The network profiles that meet the specified set of filter criteria, in sort order. It\n         is a list of NetworkProfileData objects. </p>"
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by MaxResults.</p>"
           }
         }
       }
@@ -6907,16 +6907,16 @@
     "com.amazonaws.alexaforbusiness#SearchProfilesRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
+          }
+        },
         "Filters": {
           "target": "com.amazonaws.alexaforbusiness#FilterList",
           "traits": {
             "smithy.api#documentation": "<p>The filters to use to list a specified set of room profiles. Supported filter keys\n         are ProfileName and Address. Required. </p>"
-          }
-        },
-        "SortCriteria": {
-          "target": "com.amazonaws.alexaforbusiness#SortList",
-          "traits": {
-            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of room profiles. Supported sort\n         keys are ProfileName and Address.</p>"
           }
         },
         "MaxResults": {
@@ -6925,10 +6925,10 @@
             "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
+        "SortCriteria": {
+          "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
+            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of room profiles. Supported sort\n         keys are ProfileName and Address.</p>"
           }
         }
       }
@@ -6936,6 +6936,12 @@
     "com.amazonaws.alexaforbusiness#SearchProfilesResponse": {
       "type": "structure",
       "members": {
+        "Profiles": {
+          "target": "com.amazonaws.alexaforbusiness#ProfileDataList",
+          "traits": {
+            "smithy.api#documentation": "<p>The profiles that meet the specified set of filter criteria, in sort order.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
@@ -6946,12 +6952,6 @@
           "target": "com.amazonaws.alexaforbusiness#TotalCount",
           "traits": {
             "smithy.api#documentation": "<p>The total number of room profiles returned.</p>"
-          }
-        },
-        "Profiles": {
-          "target": "com.amazonaws.alexaforbusiness#ProfileDataList",
-          "traits": {
-            "smithy.api#documentation": "<p>The profiles that meet the specified set of filter criteria, in sort order.</p>"
           }
         }
       }
@@ -6976,10 +6976,10 @@
     "com.amazonaws.alexaforbusiness#SearchRoomsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+        "SortCriteria": {
+          "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved. </p>"
+            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of rooms. The supported sort keys\n         are RoomName and ProfileName.</p>"
           }
         },
         "Filters": {
@@ -6988,16 +6988,16 @@
             "smithy.api#documentation": "<p>The filters to use to list a specified set of rooms. The supported filter keys are\n         RoomName and ProfileName.</p>"
           }
         },
+        "MaxResults": {
+          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved. </p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.alexaforbusiness#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
-          }
-        },
-        "SortCriteria": {
-          "target": "com.amazonaws.alexaforbusiness#SortList",
-          "traits": {
-            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of rooms. The supported sort keys\n         are RoomName and ProfileName.</p>"
           }
         }
       }
@@ -7011,16 +7011,16 @@
             "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
           }
         },
-        "TotalCount": {
-          "target": "com.amazonaws.alexaforbusiness#TotalCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of rooms returned.</p>"
-          }
-        },
         "Rooms": {
           "target": "com.amazonaws.alexaforbusiness#RoomDataList",
           "traits": {
             "smithy.api#documentation": "<p>The rooms that meet the specified set of filter criteria, in sort order.</p>"
+          }
+        },
+        "TotalCount": {
+          "target": "com.amazonaws.alexaforbusiness#TotalCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of rooms returned.</p>"
           }
         }
       }
@@ -7045,16 +7045,16 @@
     "com.amazonaws.alexaforbusiness#SearchSkillGroupsRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved. </p>"
+          }
+        },
         "Filters": {
           "target": "com.amazonaws.alexaforbusiness#FilterList",
           "traits": {
             "smithy.api#documentation": "<p>The filters to use to list a specified set of skill groups. The supported filter key\n         is SkillGroupName. </p>"
-          }
-        },
-        "SortCriteria": {
-          "target": "com.amazonaws.alexaforbusiness#SortList",
-          "traits": {
-            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of skill groups. The supported\n         sort key is SkillGroupName. </p>"
           }
         },
         "NextToken": {
@@ -7063,10 +7063,10 @@
             "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.\n         Required.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.alexaforbusiness#MaxResults",
+        "SortCriteria": {
+          "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved. </p>"
+            "smithy.api#documentation": "<p>The sort order to use in listing the specified set of skill groups. The supported\n         sort key is SkillGroupName. </p>"
           }
         }
       }
@@ -7074,6 +7074,12 @@
     "com.amazonaws.alexaforbusiness#SearchSkillGroupsResponse": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
+          }
+        },
         "TotalCount": {
           "target": "com.amazonaws.alexaforbusiness#TotalCount",
           "traits": {
@@ -7084,12 +7090,6 @@
           "target": "com.amazonaws.alexaforbusiness#SkillGroupDataList",
           "traits": {
             "smithy.api#documentation": "<p>The skill groups that meet the filter criteria, in sort order.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
           }
         }
       }
@@ -7114,16 +7114,10 @@
     "com.amazonaws.alexaforbusiness#SearchUsersRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.alexaforbusiness#NextToken",
+        "Filters": {
+          "target": "com.amazonaws.alexaforbusiness#FilterList",
           "traits": {
-            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.\n         Required.</p>"
-          }
-        },
-        "SortCriteria": {
-          "target": "com.amazonaws.alexaforbusiness#SortList",
-          "traits": {
-            "smithy.api#documentation": "<p>The sort order to use in listing the filtered set of users. Required. Supported sort\n         keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.</p>"
+            "smithy.api#documentation": "<p>The filters to use for listing a specific set of users. Required. Supported filter\n         keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.</p>"
           }
         },
         "MaxResults": {
@@ -7132,10 +7126,16 @@
             "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved. Required.</p>"
           }
         },
-        "Filters": {
-          "target": "com.amazonaws.alexaforbusiness#FilterList",
+        "SortCriteria": {
+          "target": "com.amazonaws.alexaforbusiness#SortList",
           "traits": {
-            "smithy.api#documentation": "<p>The filters to use for listing a specific set of users. Required. Supported filter\n         keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.</p>"
+            "smithy.api#documentation": "<p>The sort order to use in listing the filtered set of users. Required. Supported sort\n         keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.alexaforbusiness#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of\n         results from this action. If this parameter is specified, the response includes only\n         results beyond the token, up to the value specified by <code>MaxResults</code>.\n         Required.</p>"
           }
         }
       }
@@ -7186,19 +7186,6 @@
     "com.amazonaws.alexaforbusiness#SendAnnouncementRequest": {
       "type": "structure",
       "members": {
-        "TimeToLiveInSeconds": {
-          "target": "com.amazonaws.alexaforbusiness#TimeToLiveInSeconds",
-          "traits": {
-            "smithy.api#documentation": "<p>The time to live for an announcement. Default is 300. If delivery doesn't occur within this time, the\n         announcement is not delivered.</p>"
-          }
-        },
-        "Content": {
-          "target": "com.amazonaws.alexaforbusiness#Content",
-          "traits": {
-            "smithy.api#documentation": "<p>The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.alexaforbusiness#ClientRequestToken",
           "traits": {
@@ -7211,6 +7198,19 @@
           "target": "com.amazonaws.alexaforbusiness#FilterList",
           "traits": {
             "smithy.api#documentation": "<p>The filters to use to send an announcement to a specified list of rooms. The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn. To send to all rooms, specify an empty RoomFilters list.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TimeToLiveInSeconds": {
+          "target": "com.amazonaws.alexaforbusiness#TimeToLiveInSeconds",
+          "traits": {
+            "smithy.api#documentation": "<p>The time to live for an announcement. Default is 300. If delivery doesn't occur within this time, the\n         announcement is not delivered.</p>"
+          }
+        },
+        "Content": {
+          "target": "com.amazonaws.alexaforbusiness#Content",
+          "traits": {
+            "smithy.api#documentation": "<p>The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).</p>",
             "smithy.api#required": {}
           }
         }
@@ -7283,17 +7283,17 @@
     "com.amazonaws.alexaforbusiness#SipAddress": {
       "type": "structure",
       "members": {
-        "Uri": {
-          "target": "com.amazonaws.alexaforbusiness#SipUri",
-          "traits": {
-            "smithy.api#documentation": "<p>The URI for the SIP address.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Type": {
           "target": "com.amazonaws.alexaforbusiness#SipType",
           "traits": {
             "smithy.api#documentation": "<p>The type of the SIP address.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Uri": {
+          "target": "com.amazonaws.alexaforbusiness#SipUri",
+          "traits": {
+            "smithy.api#documentation": "<p>The URI for the SIP address.</p>",
             "smithy.api#required": {}
           }
         }
@@ -7340,52 +7340,10 @@
     "com.amazonaws.alexaforbusiness#SkillDetails": {
       "type": "structure",
       "members": {
-        "BulletPoints": {
-          "target": "com.amazonaws.alexaforbusiness#BulletPoints",
-          "traits": {
-            "smithy.api#documentation": "<p>The details about what the skill supports organized as bullet points.</p>"
-          }
-        },
-        "SkillTypes": {
-          "target": "com.amazonaws.alexaforbusiness#SkillTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>The types of skills.</p>"
-          }
-        },
-        "NewInThisVersionBulletPoints": {
-          "target": "com.amazonaws.alexaforbusiness#NewInThisVersionBulletPoints",
-          "traits": {
-            "smithy.api#documentation": "<p>The updates added in bullet points.</p>"
-          }
-        },
-        "ReleaseDate": {
-          "target": "com.amazonaws.alexaforbusiness#ReleaseDate",
-          "traits": {
-            "smithy.api#documentation": "<p>The date when the skill was released.</p>"
-          }
-        },
         "DeveloperInfo": {
           "target": "com.amazonaws.alexaforbusiness#DeveloperInfo",
           "traits": {
             "smithy.api#documentation": "<p>The details about the developer that published the skill.</p>"
-          }
-        },
-        "ProductDescription": {
-          "target": "com.amazonaws.alexaforbusiness#ProductDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the product.</p>"
-          }
-        },
-        "Reviews": {
-          "target": "com.amazonaws.alexaforbusiness#Reviews",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <i>This member has been deprecated.</i>\n         </p>\n         <p>The list of reviews for the skill, including Key and Value pair.</p>"
-          }
-        },
-        "InvocationPhrase": {
-          "target": "com.amazonaws.alexaforbusiness#InvocationPhrase",
-          "traits": {
-            "smithy.api#documentation": "<p>The phrase used to trigger the skill.</p>"
           }
         },
         "GenericKeywords": {
@@ -7394,10 +7352,52 @@
             "smithy.api#documentation": "<p>The generic keywords associated with the skill that can be used to find a\n         skill.</p>"
           }
         },
+        "ProductDescription": {
+          "target": "com.amazonaws.alexaforbusiness#ProductDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the product.</p>"
+          }
+        },
+        "SkillTypes": {
+          "target": "com.amazonaws.alexaforbusiness#SkillTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>The types of skills.</p>"
+          }
+        },
+        "Reviews": {
+          "target": "com.amazonaws.alexaforbusiness#Reviews",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <i>This member has been deprecated.</i>\n         </p>\n         <p>The list of reviews for the skill, including Key and Value pair.</p>"
+          }
+        },
         "EndUserLicenseAgreement": {
           "target": "com.amazonaws.alexaforbusiness#EndUserLicenseAgreement",
           "traits": {
             "smithy.api#documentation": "<p>The URL of the end user license agreement.</p>"
+          }
+        },
+        "InvocationPhrase": {
+          "target": "com.amazonaws.alexaforbusiness#InvocationPhrase",
+          "traits": {
+            "smithy.api#documentation": "<p>The phrase used to trigger the skill.</p>"
+          }
+        },
+        "ReleaseDate": {
+          "target": "com.amazonaws.alexaforbusiness#ReleaseDate",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the skill was released.</p>"
+          }
+        },
+        "BulletPoints": {
+          "target": "com.amazonaws.alexaforbusiness#BulletPoints",
+          "traits": {
+            "smithy.api#documentation": "<p>The details about what the skill supports organized as bullet points.</p>"
+          }
+        },
+        "NewInThisVersionBulletPoints": {
+          "target": "com.amazonaws.alexaforbusiness#NewInThisVersionBulletPoints",
+          "traits": {
+            "smithy.api#documentation": "<p>The updates added in bullet points.</p>"
           }
         }
       },
@@ -7408,16 +7408,16 @@
     "com.amazonaws.alexaforbusiness#SkillGroup": {
       "type": "structure",
       "members": {
-        "SkillGroupName": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a skill group.</p>"
-          }
-        },
         "SkillGroupArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a skill group.</p>"
+          }
+        },
+        "SkillGroupName": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a skill group.</p>"
           }
         },
         "Description": {
@@ -7434,12 +7434,6 @@
     "com.amazonaws.alexaforbusiness#SkillGroupData": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of a skill group.</p>"
-          }
-        },
         "SkillGroupArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
@@ -7450,6 +7444,12 @@
           "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The skill group name of a skill group.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of a skill group.</p>"
           }
         }
       },
@@ -7533,6 +7533,18 @@
             "smithy.api#documentation": "<p>The ARN of the skill summary.</p>"
           }
         },
+        "SkillName": {
+          "target": "com.amazonaws.alexaforbusiness#SkillName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the skill.</p>"
+          }
+        },
+        "SkillType": {
+          "target": "com.amazonaws.alexaforbusiness#SkillType",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the skill is publicly available or is a private skill.</p>"
+          }
+        },
         "EnablementType": {
           "target": "com.amazonaws.alexaforbusiness#EnablementType",
           "traits": {
@@ -7543,18 +7555,6 @@
           "target": "com.amazonaws.alexaforbusiness#Boolean2",
           "traits": {
             "smithy.api#documentation": "<p>Linking support for a skill.</p>"
-          }
-        },
-        "SkillType": {
-          "target": "com.amazonaws.alexaforbusiness#SkillType",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the skill is publicly available or is a private skill.</p>"
-          }
-        },
-        "SkillName": {
-          "target": "com.amazonaws.alexaforbusiness#SkillName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the skill.</p>"
           }
         }
       },
@@ -7616,16 +7616,16 @@
     "com.amazonaws.alexaforbusiness#SkillsStoreSkill": {
       "type": "structure",
       "members": {
-        "IconUrl": {
-          "target": "com.amazonaws.alexaforbusiness#IconUrl",
+        "SkillId": {
+          "target": "com.amazonaws.alexaforbusiness#SkillId",
           "traits": {
-            "smithy.api#documentation": "<p>The URL where the skill icon resides.</p>"
+            "smithy.api#documentation": "<p>The ARN of the skill.</p>"
           }
         },
-        "SkillName": {
-          "target": "com.amazonaws.alexaforbusiness#SkillName",
+        "SkillDetails": {
+          "target": "com.amazonaws.alexaforbusiness#SkillDetails",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the skill.</p>"
+            "smithy.api#documentation": "<p>Information about the skill.</p>"
           }
         },
         "SampleUtterances": {
@@ -7640,22 +7640,22 @@
             "smithy.api#documentation": "<p>Linking support for a skill.</p>"
           }
         },
-        "SkillId": {
-          "target": "com.amazonaws.alexaforbusiness#SkillId",
+        "IconUrl": {
+          "target": "com.amazonaws.alexaforbusiness#IconUrl",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the skill.</p>"
+            "smithy.api#documentation": "<p>The URL where the skill icon resides.</p>"
+          }
+        },
+        "SkillName": {
+          "target": "com.amazonaws.alexaforbusiness#SkillName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the skill.</p>"
           }
         },
         "ShortDescription": {
           "target": "com.amazonaws.alexaforbusiness#ShortDescription",
           "traits": {
             "smithy.api#documentation": "<p>Short description about the skill.</p>"
-          }
-        },
-        "SkillDetails": {
-          "target": "com.amazonaws.alexaforbusiness#SkillDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the skill.</p>"
           }
         }
       },
@@ -7672,10 +7672,10 @@
     "com.amazonaws.alexaforbusiness#SmartHomeAppliance": {
       "type": "structure",
       "members": {
-        "FriendlyName": {
-          "target": "com.amazonaws.alexaforbusiness#ApplianceFriendlyName",
+        "ManufacturerName": {
+          "target": "com.amazonaws.alexaforbusiness#ApplianceManufacturerName",
           "traits": {
-            "smithy.api#documentation": "<p>The friendly name of the smart home appliance.</p>"
+            "smithy.api#documentation": "<p>The name of the manufacturer of the smart home appliance.</p>"
           }
         },
         "Description": {
@@ -7684,10 +7684,10 @@
             "smithy.api#documentation": "<p>The description of the smart home appliance.</p>"
           }
         },
-        "ManufacturerName": {
-          "target": "com.amazonaws.alexaforbusiness#ApplianceManufacturerName",
+        "FriendlyName": {
+          "target": "com.amazonaws.alexaforbusiness#ApplianceFriendlyName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the manufacturer of the smart home appliance.</p>"
+            "smithy.api#documentation": "<p>The friendly name of the smart home appliance.</p>"
           }
         }
       },
@@ -7765,17 +7765,17 @@
     "com.amazonaws.alexaforbusiness#Ssml": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.alexaforbusiness#SsmlValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the SSML message in the correct SSML format. The audio tag is not supported.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Locale": {
           "target": "com.amazonaws.alexaforbusiness#Locale",
           "traits": {
             "smithy.api#documentation": "<p>The locale of the SSML message. Currently, en-US is supported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.alexaforbusiness#SsmlValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the SSML message in the correct SSML format. The audio tag is not supported.</p>",
             "smithy.api#required": {}
           }
         }
@@ -7826,6 +7826,13 @@
     "com.amazonaws.alexaforbusiness#StartDeviceSyncRequest": {
       "type": "structure",
       "members": {
+        "Features": {
+          "target": "com.amazonaws.alexaforbusiness#Features",
+          "traits": {
+            "smithy.api#documentation": "<p>Request structure to start the device sync. Required.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "RoomArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
@@ -7836,13 +7843,6 @@
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the device to sync. Required.</p>"
-          }
-        },
-        "Features": {
-          "target": "com.amazonaws.alexaforbusiness#Features",
-          "traits": {
-            "smithy.api#documentation": "<p>Request structure to start the device sync. Required.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -7887,17 +7887,17 @@
     "com.amazonaws.alexaforbusiness#Tag": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.alexaforbusiness#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of a tag. Tag values are case sensitive and can be null.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.alexaforbusiness#TagKey",
           "traits": {
             "smithy.api#documentation": "<p>The key of a tag. Tag keys are case-sensitive. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.alexaforbusiness#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of a tag. Tag values are case sensitive and can be null.</p>",
             "smithy.api#required": {}
           }
         }
@@ -7948,17 +7948,17 @@
     "com.amazonaws.alexaforbusiness#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource to which to add metadata tags. Required. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.alexaforbusiness#TagList",
           "traits": {
             "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags. Required.\n      </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to which to add metadata tags. Required. </p>",
             "smithy.api#required": {}
           }
         }
@@ -7996,17 +7996,17 @@
     "com.amazonaws.alexaforbusiness#Text": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.alexaforbusiness#TextValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the text message.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Locale": {
           "target": "com.amazonaws.alexaforbusiness#Locale",
           "traits": {
             "smithy.api#documentation": "<p>The locale of the text message. Currently, en-US is supported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.alexaforbusiness#TextValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the text message.</p>",
             "smithy.api#required": {}
           }
         }
@@ -8112,17 +8112,17 @@
     "com.amazonaws.alexaforbusiness#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.alexaforbusiness#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be removed from the specified resource. Do not provide system tags.\n         Required. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "Arn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource from which to remove metadata tags. Required. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.alexaforbusiness#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be removed from the specified resource. Do not provide system tags.\n         Required. </p>",
             "smithy.api#required": {}
           }
         }
@@ -8164,17 +8164,17 @@
             "smithy.api#documentation": "<p>The updated name of the room.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#AddressBookDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated description of the room.</p>"
-          }
-        },
         "AddressBookArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the room to update.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#AddressBookDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated description of the room.</p>"
           }
         }
       }
@@ -8206,23 +8206,23 @@
     "com.amazonaws.alexaforbusiness#UpdateBusinessReportScheduleRequest": {
       "type": "structure",
       "members": {
+        "Format": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the generated report (individual CSV files or zipped files of\n         individual files).</p>"
+          }
+        },
+        "ScheduleName": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name identifier of the schedule.</p>"
+          }
+        },
         "ScheduleArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the business report schedule.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Recurrence": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
-          "traits": {
-            "smithy.api#documentation": "<p>The recurrence of the reports.</p>"
-          }
-        },
-        "Format": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of the generated report (individual CSV files or zipped files of\n         individual files).</p>"
           }
         },
         "S3KeyPrefix": {
@@ -8231,16 +8231,16 @@
             "smithy.api#documentation": "<p>The S3 key where the report is delivered.</p>"
           }
         },
+        "Recurrence": {
+          "target": "com.amazonaws.alexaforbusiness#BusinessReportRecurrence",
+          "traits": {
+            "smithy.api#documentation": "<p>The recurrence of the reports.</p>"
+          }
+        },
         "S3BucketName": {
           "target": "com.amazonaws.alexaforbusiness#CustomerS3BucketName",
           "traits": {
             "smithy.api#documentation": "<p>The S3 location of the output reports.</p>"
-          }
-        },
-        "ScheduleName": {
-          "target": "com.amazonaws.alexaforbusiness#BusinessReportScheduleName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name identifier of the schedule.</p>"
           }
         }
       }
@@ -8269,17 +8269,23 @@
     "com.amazonaws.alexaforbusiness#UpdateConferenceProviderRequest": {
       "type": "structure",
       "members": {
+        "IPDialIn": {
+          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
+          }
+        },
+        "PSTNDialIn": {
+          "target": "com.amazonaws.alexaforbusiness#PSTNDialIn",
+          "traits": {
+            "smithy.api#documentation": "<p>The information for PSTN conferencing.</p>"
+          }
+        },
         "ConferenceProviderArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the conference provider.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "IPDialIn": {
-          "target": "com.amazonaws.alexaforbusiness#IPDialIn",
-          "traits": {
-            "smithy.api#documentation": "<p>The IP endpoint and protocol for calling.</p>"
           }
         },
         "MeetingSetting": {
@@ -8294,12 +8300,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The type of the conference provider.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "PSTNDialIn": {
-          "target": "com.amazonaws.alexaforbusiness#PSTNDialIn",
-          "traits": {
-            "smithy.api#documentation": "<p>The information for PSTN conferencing.</p>"
           }
         }
       }
@@ -8331,28 +8331,17 @@
     "com.amazonaws.alexaforbusiness#UpdateContactRequest": {
       "type": "structure",
       "members": {
+        "ContactArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the contact to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "SipAddresses": {
           "target": "com.amazonaws.alexaforbusiness#SipAddressList",
           "traits": {
             "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
-          }
-        },
-        "FirstName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated first name of the contact.</p>"
-          }
-        },
-        "PhoneNumbers": {
-          "target": "com.amazonaws.alexaforbusiness#PhoneNumberList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
-          }
-        },
-        "LastName": {
-          "target": "com.amazonaws.alexaforbusiness#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated last name of the contact.</p>"
           }
         },
         "DisplayName": {
@@ -8367,11 +8356,22 @@
             "smithy.api#documentation": "<p>The updated phone number of the contact. The phone number type defaults to WORK. You\n         can either specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,\n         which lets you specify the phone number type and multiple numbers.</p>"
           }
         },
-        "ContactArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "FirstName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the contact to update.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The updated first name of the contact.</p>"
+          }
+        },
+        "LastName": {
+          "target": "com.amazonaws.alexaforbusiness#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated last name of the contact.</p>"
+          }
+        },
+        "PhoneNumbers": {
+          "target": "com.amazonaws.alexaforbusiness#PhoneNumberList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of phone numbers for the contact.</p>"
           }
         }
       }
@@ -8427,10 +8427,10 @@
     "com.amazonaws.alexaforbusiness#UpdateEndOfMeetingReminder": {
       "type": "structure",
       "members": {
-        "ReminderAtMinutes": {
-          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderMinutesList",
+        "Enabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Updates settings for the end of meeting reminder feature that are applied to a room\n         profile. The end of meeting reminder enables Alexa to remind users when a meeting is\n         ending. </p>"
+            "smithy.api#documentation": "<p>Whether an end of meeting reminder is enabled or not.</p>"
           }
         },
         "ReminderType": {
@@ -8439,10 +8439,10 @@
             "smithy.api#documentation": "<p>The type of sound that users hear during the end of meeting reminder. </p>"
           }
         },
-        "Enabled": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
+        "ReminderAtMinutes": {
+          "target": "com.amazonaws.alexaforbusiness#EndOfMeetingReminderMinutesList",
           "traits": {
-            "smithy.api#documentation": "<p>Whether an end of meeting reminder is enabled or not.</p>"
+            "smithy.api#documentation": "<p>Updates settings for the end of meeting reminder feature that are applied to a room\n         profile. The end of meeting reminder enables Alexa to remind users when a meeting is\n         ending. </p>"
           }
         }
       },
@@ -8493,11 +8493,10 @@
     "com.amazonaws.alexaforbusiness#UpdateGatewayGroupRequest": {
       "type": "structure",
       "members": {
-        "GatewayGroupArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the gateway group to update.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The updated description of the gateway group.</p>"
           }
         },
         "Name": {
@@ -8506,10 +8505,11 @@
             "smithy.api#documentation": "<p>The updated name of the gateway group.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayGroupDescription",
+        "GatewayGroupArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The updated description of the gateway group.</p>"
+            "smithy.api#documentation": "<p>The ARN of the gateway group to update.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -8521,11 +8521,10 @@
     "com.amazonaws.alexaforbusiness#UpdateGatewayRequest": {
       "type": "structure",
       "members": {
-        "GatewayArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#GatewayDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the gateway to update.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The updated description of the gateway.</p>"
           }
         },
         "SoftwareVersion": {
@@ -8540,10 +8539,11 @@
             "smithy.api#documentation": "<p>The updated name of the gateway.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#GatewayDescription",
+        "GatewayArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The updated description of the gateway.</p>"
+            "smithy.api#documentation": "<p>The ARN of the gateway to update.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -8575,18 +8575,6 @@
     "com.amazonaws.alexaforbusiness#UpdateMeetingRoomConfiguration": {
       "type": "structure",
       "members": {
-        "EndOfMeetingReminder": {
-          "target": "com.amazonaws.alexaforbusiness#UpdateEndOfMeetingReminder",
-          "traits": {
-            "smithy.api#documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The\n         end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
-          }
-        },
-        "RequireCheckIn": {
-          "target": "com.amazonaws.alexaforbusiness#UpdateRequireCheckIn",
-          "traits": {
-            "smithy.api#documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” </p>"
-          }
-        },
         "RoomUtilizationMetricsEnabled": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
@@ -8597,6 +8585,18 @@
           "target": "com.amazonaws.alexaforbusiness#UpdateInstantBooking",
           "traits": {
             "smithy.api#documentation": "<p>Settings to automatically book an available room available for a configured duration\n         when joining a meeting with Alexa.</p>"
+          }
+        },
+        "RequireCheckIn": {
+          "target": "com.amazonaws.alexaforbusiness#UpdateRequireCheckIn",
+          "traits": {
+            "smithy.api#documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” </p>"
+          }
+        },
+        "EndOfMeetingReminder": {
+          "target": "com.amazonaws.alexaforbusiness#UpdateEndOfMeetingReminder",
+          "traits": {
+            "smithy.api#documentation": "<p>Settings for the end of meeting reminder feature that are applied to a room profile. The\n         end of meeting reminder enables Alexa to remind users when a meeting is ending. </p>"
           }
         }
       },
@@ -8636,6 +8636,18 @@
     "com.amazonaws.alexaforbusiness#UpdateNetworkProfileRequest": {
       "type": "structure",
       "members": {
+        "CertificateAuthorityArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
+          }
+        },
+        "CurrentPassword": {
+          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
+          "traits": {
+            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
+          }
+        },
         "TrustAnchors": {
           "target": "com.amazonaws.alexaforbusiness#TrustAnchorList",
           "traits": {
@@ -8648,6 +8660,13 @@
             "smithy.api#documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously\n         transmitted to the device and is used when the password of the network changes to\n         NextPassword. </p>"
           }
         },
+        "NetworkProfileArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Description": {
           "target": "com.amazonaws.alexaforbusiness#NetworkProfileDescription",
           "traits": {
@@ -8658,25 +8677,6 @@
           "target": "com.amazonaws.alexaforbusiness#NetworkProfileName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the network profile associated with a device.</p>"
-          }
-        },
-        "NetworkProfileArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "CertificateAuthorityArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager\n         (ACM). This is used to issue certificates to the devices. </p>"
-          }
-        },
-        "CurrentPassword": {
-          "target": "com.amazonaws.alexaforbusiness#CurrentWiFiPassword",
-          "traits": {
-            "smithy.api#documentation": "<p>The current password of the Wi-Fi network.</p>"
           }
         }
       }
@@ -8711,28 +8711,10 @@
     "com.amazonaws.alexaforbusiness#UpdateProfileRequest": {
       "type": "structure",
       "members": {
-        "ProfileName": {
-          "target": "com.amazonaws.alexaforbusiness#ProfileName",
+        "Timezone": {
+          "target": "com.amazonaws.alexaforbusiness#Timezone",
           "traits": {
-            "smithy.api#documentation": "<p>The updated name for the room profile.</p>"
-          }
-        },
-        "DistanceUnit": {
-          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated distance unit for the room profile.</p>"
-          }
-        },
-        "TemperatureUnit": {
-          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated temperature unit for the room profile.</p>"
-          }
-        },
-        "Locale": {
-          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated locale for the room profile. (This is currently only available to a limited preview audience.)</p>"
+            "smithy.api#documentation": "<p>The updated timezone for the room profile.</p>"
           }
         },
         "MeetingRoomConfiguration": {
@@ -8741,22 +8723,10 @@
             "smithy.api#documentation": "<p>The updated meeting room settings of a room profile.</p>"
           }
         },
-        "Timezone": {
-          "target": "com.amazonaws.alexaforbusiness#Timezone",
+        "ProfileName": {
+          "target": "com.amazonaws.alexaforbusiness#ProfileName",
           "traits": {
-            "smithy.api#documentation": "<p>The updated timezone for the room profile.</p>"
-          }
-        },
-        "IsDefault": {
-          "target": "com.amazonaws.alexaforbusiness#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Sets the profile as default if selected. If this is missing, no update is done to the\n         default status.</p>"
-          }
-        },
-        "ProfileArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the room profile to update. Required.</p>"
+            "smithy.api#documentation": "<p>The updated name for the room profile.</p>"
           }
         },
         "MaxVolumeLimit": {
@@ -8765,16 +8735,16 @@
             "smithy.api#documentation": "<p>The updated maximum volume limit for the room profile.</p>"
           }
         },
-        "Address": {
-          "target": "com.amazonaws.alexaforbusiness#Address",
+        "Locale": {
+          "target": "com.amazonaws.alexaforbusiness#DeviceLocale",
           "traits": {
-            "smithy.api#documentation": "<p>The updated address for the room profile.</p>"
+            "smithy.api#documentation": "<p>The updated locale for the room profile. (This is currently only available to a limited preview audience.)</p>"
           }
         },
-        "PSTNEnabled": {
+        "SetupModeDisabled": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Whether the PSTN setting of the room profile is enabled.</p>"
+            "smithy.api#documentation": "<p>Whether the setup mode of the profile is enabled.</p>"
           }
         },
         "WakeWord": {
@@ -8783,10 +8753,40 @@
             "smithy.api#documentation": "<p>The updated wake word for the room profile.</p>"
           }
         },
-        "SetupModeDisabled": {
+        "TemperatureUnit": {
+          "target": "com.amazonaws.alexaforbusiness#TemperatureUnit",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated temperature unit for the room profile.</p>"
+          }
+        },
+        "ProfileArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the room profile to update. Required.</p>"
+          }
+        },
+        "IsDefault": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Whether the setup mode of the profile is enabled.</p>"
+            "smithy.api#documentation": "<p>Sets the profile as default if selected. If this is missing, no update is done to the\n         default status.</p>"
+          }
+        },
+        "DistanceUnit": {
+          "target": "com.amazonaws.alexaforbusiness#DistanceUnit",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated distance unit for the room profile.</p>"
+          }
+        },
+        "PSTNEnabled": {
+          "target": "com.amazonaws.alexaforbusiness#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the PSTN setting of the room profile is enabled.</p>"
+          }
+        },
+        "Address": {
+          "target": "com.amazonaws.alexaforbusiness#Address",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated address for the room profile.</p>"
           }
         }
       }
@@ -8798,16 +8798,16 @@
     "com.amazonaws.alexaforbusiness#UpdateRequireCheckIn": {
       "type": "structure",
       "members": {
-        "ReleaseAfterMinutes": {
-          "target": "com.amazonaws.alexaforbusiness#Minutes",
-          "traits": {
-            "smithy.api#documentation": "<p>Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. </p>"
-          }
-        },
         "Enabled": {
           "target": "com.amazonaws.alexaforbusiness#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether require check in is enabled or not.</p>"
+          }
+        },
+        "ReleaseAfterMinutes": {
+          "target": "com.amazonaws.alexaforbusiness#Minutes",
+          "traits": {
+            "smithy.api#documentation": "<p>Duration between 5 and 20 minutes to determine when to release the room if it's not checked into. </p>"
           }
         }
       },
@@ -8850,12 +8850,6 @@
             "smithy.api#documentation": "<p>The updated profile ARN for the room.</p>"
           }
         },
-        "RoomArn": {
-          "target": "com.amazonaws.alexaforbusiness#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the room to update. </p>"
-          }
-        },
         "ProviderCalendarId": {
           "target": "com.amazonaws.alexaforbusiness#ProviderCalendarId",
           "traits": {
@@ -8866,6 +8860,12 @@
           "target": "com.amazonaws.alexaforbusiness#RoomName",
           "traits": {
             "smithy.api#documentation": "<p>The updated name for the room.</p>"
+          }
+        },
+        "RoomArn": {
+          "target": "com.amazonaws.alexaforbusiness#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the room to update. </p>"
           }
         }
       }
@@ -8900,10 +8900,10 @@
     "com.amazonaws.alexaforbusiness#UpdateSkillGroupRequest": {
       "type": "structure",
       "members": {
-        "SkillGroupName": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
+        "Description": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The updated name for the skill group.</p>"
+            "smithy.api#documentation": "<p>The updated description for the skill group.</p>"
           }
         },
         "SkillGroupArn": {
@@ -8912,10 +8912,10 @@
             "smithy.api#documentation": "<p>The ARN of the skill group to update. </p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.alexaforbusiness#SkillGroupDescription",
+        "SkillGroupName": {
+          "target": "com.amazonaws.alexaforbusiness#SkillGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The updated description for the skill group.</p>"
+            "smithy.api#documentation": "<p>The updated name for the skill group.</p>"
           }
         }
       }
@@ -8951,10 +8951,10 @@
             "smithy.api#documentation": "<p>The enrollment ARN of a user.</p>"
           }
         },
-        "FirstName": {
-          "target": "com.amazonaws.alexaforbusiness#user_FirstName",
+        "EnrollmentStatus": {
+          "target": "com.amazonaws.alexaforbusiness#EnrollmentStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The first name of a user.</p>"
+            "smithy.api#documentation": "<p>The enrollment status of a user.</p>"
           }
         },
         "LastName": {
@@ -8963,16 +8963,16 @@
             "smithy.api#documentation": "<p>The last name of a user.</p>"
           }
         },
-        "EnrollmentStatus": {
-          "target": "com.amazonaws.alexaforbusiness#EnrollmentStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The enrollment status of a user.</p>"
-          }
-        },
         "UserArn": {
           "target": "com.amazonaws.alexaforbusiness#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a user.</p>"
+          }
+        },
+        "FirstName": {
+          "target": "com.amazonaws.alexaforbusiness#user_FirstName",
+          "traits": {
+            "smithy.api#documentation": "<p>The first name of a user.</p>"
           }
         }
       },

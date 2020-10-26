@@ -53,6 +53,172 @@
         "smithy.api#httpError": 400
       }
     },
+    "com.amazonaws.kafka#BatchAssociateScramSecret": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kafka#BatchAssociateScramSecretRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kafka#BatchAssociateScramSecretResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kafka#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.kafka#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.kafka#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kafka#TooManyRequestsException"
+        },
+        {
+          "target": "com.amazonaws.kafka#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates one or more Scram Secrets with an Amazon MSK cluster.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/v1/clusters/{ClusterArn}/scram-secrets",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.kafka#BatchAssociateScramSecretRequest": {
+      "type": "structure",
+      "members": {
+        "SecretArnList": {
+          "target": "com.amazonaws.kafka#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>List of AWS Secrets Manager secret ARNs.</p>",
+            "smithy.api#jsonName": "secretArnList",
+            "smithy.api#required": {}
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Associates sasl scram secrets to cluster.</p>"
+      }
+    },
+    "com.amazonaws.kafka#BatchAssociateScramSecretResponse": {
+      "type": "structure",
+      "members": {
+        "UnprocessedScramSecrets": {
+          "target": "com.amazonaws.kafka#__listOfUnprocessedScramSecret",
+          "traits": {
+            "smithy.api#documentation": "<p>List of errors when associating secrets to cluster.</p>",
+            "smithy.api#jsonName": "unprocessedScramSecrets"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        }
+      }
+    },
+    "com.amazonaws.kafka#BatchDisassociateScramSecret": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kafka#BatchDisassociateScramSecretRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kafka#BatchDisassociateScramSecretResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kafka#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.kafka#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.kafka#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kafka#TooManyRequestsException"
+        },
+        {
+          "target": "com.amazonaws.kafka#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates one or more Scram Secrets from an Amazon MSK cluster.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/v1/clusters/{ClusterArn}/scram-secrets",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.kafka#BatchDisassociateScramSecretRequest": {
+      "type": "structure",
+      "members": {
+        "SecretArnList": {
+          "target": "com.amazonaws.kafka#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>List of AWS Secrets Manager secret ARNs.</p>",
+            "smithy.api#jsonName": "secretArnList",
+            "smithy.api#required": {}
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates sasl scram secrets to cluster.</p>"
+      }
+    },
+    "com.amazonaws.kafka#BatchDisassociateScramSecretResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        },
+        "UnprocessedScramSecrets": {
+          "target": "com.amazonaws.kafka#__listOfUnprocessedScramSecret",
+          "traits": {
+            "smithy.api#documentation": "<p>List of errors when disassociating secrets to cluster.</p>",
+            "smithy.api#jsonName": "unprocessedScramSecrets"
+          }
+        }
+      }
+    },
     "com.amazonaws.kafka#BrokerAZDistribution": {
       "type": "string",
       "traits": {
@@ -68,19 +234,19 @@
     "com.amazonaws.kafka#BrokerEBSVolumeInfo": {
       "type": "structure",
       "members": {
-        "KafkaBrokerNodeId": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the broker to update.</p>",
-            "smithy.api#jsonName": "kafkaBrokerNodeId",
-            "smithy.api#required": {}
-          }
-        },
         "VolumeSizeGB": {
           "target": "com.amazonaws.kafka#__integer",
           "traits": {
             "smithy.api#documentation": "<p>Size of the EBS volume to update.</p>",
             "smithy.api#jsonName": "volumeSizeGB",
+            "smithy.api#required": {}
+          }
+        },
+        "KafkaBrokerNodeId": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the broker to update.</p>",
+            "smithy.api#jsonName": "kafkaBrokerNodeId",
             "smithy.api#required": {}
           }
         }
@@ -92,6 +258,12 @@
     "com.amazonaws.kafka#BrokerLogs": {
       "type": "structure",
       "members": {
+        "S3": {
+          "target": "com.amazonaws.kafka#S3",
+          "traits": {
+            "smithy.api#jsonName": "s3"
+          }
+        },
         "Firehose": {
           "target": "com.amazonaws.kafka#Firehose",
           "traits": {
@@ -103,32 +275,17 @@
           "traits": {
             "smithy.api#jsonName": "cloudWatchLogs"
           }
-        },
-        "S3": {
-          "target": "com.amazonaws.kafka#S3",
-          "traits": {
-            "smithy.api#jsonName": "s3"
-          }
         }
       }
     },
     "com.amazonaws.kafka#BrokerNodeGroupInfo": {
       "type": "structure",
       "members": {
-        "ClientSubnets": {
+        "SecurityGroups": {
           "target": "com.amazonaws.kafka#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>",
-            "smithy.api#jsonName": "clientSubnets",
-            "smithy.api#required": {}
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.kafka#__stringMin5Max32",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,\nkafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>",
-            "smithy.api#jsonName": "instanceType",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>",
+            "smithy.api#jsonName": "securityGroups"
           }
         },
         "StorageInfo": {
@@ -145,11 +302,20 @@
             "smithy.api#jsonName": "brokerAZDistribution"
           }
         },
-        "SecurityGroups": {
+        "ClientSubnets": {
           "target": "com.amazonaws.kafka#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>",
-            "smithy.api#jsonName": "securityGroups"
+            "smithy.api#documentation": "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>",
+            "smithy.api#jsonName": "clientSubnets",
+            "smithy.api#required": {}
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.kafka#__stringMin5Max32",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,\nkafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>",
+            "smithy.api#jsonName": "instanceType",
+            "smithy.api#required": {}
           }
         }
       },
@@ -160,13 +326,6 @@
     "com.amazonaws.kafka#BrokerNodeInfo": {
       "type": "structure",
       "members": {
-        "CurrentBrokerSoftwareInfo": {
-          "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
-            "smithy.api#jsonName": "currentBrokerSoftwareInfo"
-          }
-        },
         "AttachedENIId": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -174,18 +333,11 @@
             "smithy.api#jsonName": "attachedENIId"
           }
         },
-        "Endpoints": {
-          "target": "com.amazonaws.kafka#__listOf__string",
+        "CurrentBrokerSoftwareInfo": {
+          "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
           "traits": {
-            "smithy.api#documentation": "<p>Endpoints for accessing the broker.</p>",
-            "smithy.api#jsonName": "endpoints"
-          }
-        },
-        "ClientVpcIpAddress": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The virtual private cloud (VPC) of the client.</p>",
-            "smithy.api#jsonName": "clientVpcIpAddress"
+            "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
+            "smithy.api#jsonName": "currentBrokerSoftwareInfo"
           }
         },
         "BrokerId": {
@@ -200,6 +352,20 @@
           "traits": {
             "smithy.api#documentation": "<p>The client subnet to which this broker node belongs.</p>",
             "smithy.api#jsonName": "clientSubnet"
+          }
+        },
+        "ClientVpcIpAddress": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The virtual private cloud (VPC) of the client.</p>",
+            "smithy.api#jsonName": "clientVpcIpAddress"
+          }
+        },
+        "Endpoints": {
+          "target": "com.amazonaws.kafka#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Endpoints for accessing the broker.</p>",
+            "smithy.api#jsonName": "endpoints"
           }
         }
       },
@@ -217,18 +383,18 @@
             "smithy.api#jsonName": "kafkaVersion"
           }
         },
-        "ConfigurationRevision": {
-          "target": "com.amazonaws.kafka#__long",
-          "traits": {
-            "smithy.api#documentation": "<p>The revision of the configuration to use. This field isn't visible in this preview release.</p>",
-            "smithy.api#jsonName": "configurationRevision"
-          }
-        },
         "ConfigurationArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration used for the cluster. This field isn't visible in this preview release.</p>",
             "smithy.api#jsonName": "configurationArn"
+          }
+        },
+        "ConfigurationRevision": {
+          "target": "com.amazonaws.kafka#__long",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision of the configuration to use. This field isn't visible in this preview release.</p>",
+            "smithy.api#jsonName": "configurationRevision"
           }
         }
       },
@@ -244,6 +410,13 @@
           "traits": {
             "smithy.api#documentation": "<p>Details for ClientAuthentication using TLS.</p>",
             "smithy.api#jsonName": "tls"
+          }
+        },
+        "Sasl": {
+          "target": "com.amazonaws.kafka#Sasl",
+          "traits": {
+            "smithy.api#documentation": "<p>Details for ClientAuthentication using SASL.</p>",
+            "smithy.api#jsonName": "sasl"
           }
         }
       },
@@ -292,52 +465,11 @@
     "com.amazonaws.kafka#ClusterInfo": {
       "type": "structure",
       "members": {
-        "LoggingInfo": {
-          "target": "com.amazonaws.kafka#LoggingInfo",
-          "traits": {
-            "smithy.api#jsonName": "loggingInfo"
-          }
-        },
-        "EncryptionInfo": {
-          "target": "com.amazonaws.kafka#EncryptionInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Includes all encryption-related information.</p>",
-            "smithy.api#jsonName": "encryptionInfo"
-          }
-        },
-        "NumberOfBrokerNodes": {
-          "target": "com.amazonaws.kafka#__integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of broker nodes in the cluster.</p>",
-            "smithy.api#jsonName": "numberOfBrokerNodes"
-          }
-        },
-        "CurrentBrokerSoftwareInfo": {
-          "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
-            "smithy.api#jsonName": "currentBrokerSoftwareInfo"
-          }
-        },
-        "ClusterArn": {
+        "ZookeeperConnectStringTls": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
-          }
-        },
-        "ZookeeperConnectString": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>",
-            "smithy.api#jsonName": "zookeeperConnectString"
-          }
-        },
-        "OpenMonitoring": {
-          "target": "com.amazonaws.kafka#OpenMonitoring",
-          "traits": {
-            "smithy.api#documentation": "<p>Settings for open monitoring using Prometheus.</p>",
-            "smithy.api#jsonName": "openMonitoring"
+            "smithy.api#documentation": "<p>The connection string to use to connect to zookeeper cluster on Tls port.</p>",
+            "smithy.api#jsonName": "zookeeperConnectStringTls"
           }
         },
         "ActiveOperationArn": {
@@ -347,13 +479,6 @@
             "smithy.api#jsonName": "activeOperationArn"
           }
         },
-        "EnhancedMonitoring": {
-          "target": "com.amazonaws.kafka#EnhancedMonitoring",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
-            "smithy.api#jsonName": "enhancedMonitoring"
-          }
-        },
         "BrokerNodeGroupInfo": {
           "target": "com.amazonaws.kafka#BrokerNodeGroupInfo",
           "traits": {
@@ -361,11 +486,25 @@
             "smithy.api#jsonName": "brokerNodeGroupInfo"
           }
         },
-        "State": {
-          "target": "com.amazonaws.kafka#ClusterState",
+        "ClusterName": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
-            "smithy.api#jsonName": "state"
+            "smithy.api#documentation": "<p>The name of the cluster.</p>",
+            "smithy.api#jsonName": "clusterName"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.kafka#__mapOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Tags attached to the cluster.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "ClientAuthentication": {
+          "target": "com.amazonaws.kafka#ClientAuthentication",
+          "traits": {
+            "smithy.api#documentation": "<p>Includes all client authentication information.</p>",
+            "smithy.api#jsonName": "clientAuthentication"
           }
         },
         "CurrentVersion": {
@@ -381,25 +520,52 @@
             "smithy.api#jsonName": "stateInfo"
           }
         },
-        "ClientAuthentication": {
-          "target": "com.amazonaws.kafka#ClientAuthentication",
+        "State": {
+          "target": "com.amazonaws.kafka#ClusterState",
           "traits": {
-            "smithy.api#documentation": "<p>Includes all client authentication information.</p>",
-            "smithy.api#jsonName": "clientAuthentication"
+            "smithy.api#documentation": "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
+            "smithy.api#jsonName": "state"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.kafka#__mapOf__string",
+        "NumberOfBrokerNodes": {
+          "target": "com.amazonaws.kafka#__integer",
           "traits": {
-            "smithy.api#documentation": "<p>Tags attached to the cluster.</p>",
-            "smithy.api#jsonName": "tags"
+            "smithy.api#documentation": "<p>The number of broker nodes in the cluster.</p>",
+            "smithy.api#jsonName": "numberOfBrokerNodes"
           }
         },
-        "ClusterName": {
+        "EncryptionInfo": {
+          "target": "com.amazonaws.kafka#EncryptionInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Includes all encryption-related information.</p>",
+            "smithy.api#jsonName": "encryptionInfo"
+          }
+        },
+        "OpenMonitoring": {
+          "target": "com.amazonaws.kafka#OpenMonitoring",
+          "traits": {
+            "smithy.api#documentation": "<p>Settings for open monitoring using Prometheus.</p>",
+            "smithy.api#jsonName": "openMonitoring"
+          }
+        },
+        "LoggingInfo": {
+          "target": "com.amazonaws.kafka#LoggingInfo",
+          "traits": {
+            "smithy.api#jsonName": "loggingInfo"
+          }
+        },
+        "CurrentBrokerSoftwareInfo": {
+          "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
+            "smithy.api#jsonName": "currentBrokerSoftwareInfo"
+          }
+        },
+        "ZookeeperConnectString": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the cluster.</p>",
-            "smithy.api#jsonName": "clusterName"
+            "smithy.api#documentation": "<p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>",
+            "smithy.api#jsonName": "zookeeperConnectString"
           }
         },
         "CreationTime": {
@@ -407,6 +573,20 @@
           "traits": {
             "smithy.api#documentation": "<p>The time when the cluster was created.</p>",
             "smithy.api#jsonName": "creationTime"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        },
+        "EnhancedMonitoring": {
+          "target": "com.amazonaws.kafka#EnhancedMonitoring",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>",
+            "smithy.api#jsonName": "enhancedMonitoring"
           }
         }
       },
@@ -431,6 +611,20 @@
             "smithy.api#jsonName": "clientRequestId"
           }
         },
+        "OperationSteps": {
+          "target": "com.amazonaws.kafka#__listOfClusterOperationStep",
+          "traits": {
+            "smithy.api#documentation": "<p>Steps completed during the operation.</p>",
+            "smithy.api#jsonName": "operationSteps"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the operation finished.</p>",
+            "smithy.api#jsonName": "endTime"
+          }
+        },
         "SourceClusterInfo": {
           "target": "com.amazonaws.kafka#MutableClusterInfo",
           "traits": {
@@ -443,6 +637,27 @@
           "traits": {
             "smithy.api#documentation": "<p>Describes the error if the operation fails.</p>",
             "smithy.api#jsonName": "errorInfo"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the operation was created.</p>",
+            "smithy.api#jsonName": "creationTime"
+          }
+        },
+        "TargetClusterInfo": {
+          "target": "com.amazonaws.kafka#MutableClusterInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about cluster attributes after a cluster is updated.</p>",
+            "smithy.api#jsonName": "targetClusterInfo"
           }
         },
         "OperationType": {
@@ -458,41 +673,6 @@
             "smithy.api#documentation": "<p>State of the cluster operation.</p>",
             "smithy.api#jsonName": "operationState"
           }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the operation was created.</p>",
-            "smithy.api#jsonName": "creationTime"
-          }
-        },
-        "ClusterArn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>ARN of the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
-          }
-        },
-        "EndTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time at which the operation finished.</p>",
-            "smithy.api#jsonName": "endTime"
-          }
-        },
-        "OperationSteps": {
-          "target": "com.amazonaws.kafka#__listOfClusterOperationStep",
-          "traits": {
-            "smithy.api#documentation": "<p>Steps completed during the operation.</p>",
-            "smithy.api#jsonName": "operationSteps"
-          }
-        },
-        "TargetClusterInfo": {
-          "target": "com.amazonaws.kafka#MutableClusterInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about cluster attributes after a cluster is updated.</p>",
-            "smithy.api#jsonName": "targetClusterInfo"
-          }
         }
       },
       "traits": {
@@ -502,18 +682,18 @@
     "com.amazonaws.kafka#ClusterOperationStep": {
       "type": "structure",
       "members": {
-        "StepName": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the step.</p>",
-            "smithy.api#jsonName": "stepName"
-          }
-        },
         "StepInfo": {
           "target": "com.amazonaws.kafka#ClusterOperationStepInfo",
           "traits": {
             "smithy.api#documentation": "<p>Information about the step and its status.</p>",
             "smithy.api#jsonName": "stepInfo"
+          }
+        },
+        "StepName": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the step.</p>",
+            "smithy.api#jsonName": "stepName"
           }
         }
       },
@@ -589,19 +769,19 @@
     "com.amazonaws.kafka#Configuration": {
       "type": "structure",
       "members": {
-        "LatestRevision": {
-          "target": "com.amazonaws.kafka#ConfigurationRevision",
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
-            "smithy.api#jsonName": "latestRevision",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+            "smithy.api#jsonName": "arn",
             "smithy.api#required": {}
           }
         },
-        "Description": {
-          "target": "com.amazonaws.kafka#__string",
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the configuration.</p>",
-            "smithy.api#jsonName": "description",
+            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
+            "smithy.api#jsonName": "creationTime",
             "smithy.api#required": {}
           }
         },
@@ -621,19 +801,27 @@
             "smithy.api#required": {}
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.kafka#__string",
+        "LatestRevision": {
+          "target": "com.amazonaws.kafka#ConfigurationRevision",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
-            "smithy.api#jsonName": "arn",
+            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
+            "smithy.api#jsonName": "latestRevision",
             "smithy.api#required": {}
           }
         },
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
+        "Description": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
-            "smithy.api#jsonName": "creationTime",
+            "smithy.api#documentation": "<p>The description of the configuration.</p>",
+            "smithy.api#jsonName": "description",
+            "smithy.api#required": {}
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.kafka#ConfigurationState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+            "smithy.api#jsonName": "state",
             "smithy.api#required": {}
           }
         }
@@ -645,19 +833,19 @@
     "com.amazonaws.kafka#ConfigurationInfo": {
       "type": "structure",
       "members": {
-        "Revision": {
-          "target": "com.amazonaws.kafka#__long",
-          "traits": {
-            "smithy.api#documentation": "<p>The revision of the configuration to use.</p>",
-            "smithy.api#jsonName": "revision",
-            "smithy.api#required": {}
-          }
-        },
         "Arn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>ARN of the configuration to use.</p>",
             "smithy.api#jsonName": "arn",
+            "smithy.api#required": {}
+          }
+        },
+        "Revision": {
+          "target": "com.amazonaws.kafka#__long",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision of the configuration to use.</p>",
+            "smithy.api#jsonName": "revision",
             "smithy.api#required": {}
           }
         }
@@ -669,11 +857,11 @@
     "com.amazonaws.kafka#ConfigurationRevision": {
       "type": "structure",
       "members": {
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
+        "Revision": {
+          "target": "com.amazonaws.kafka#__long",
           "traits": {
-            "smithy.api#documentation": "<p>The time when the configuration revision was created.</p>",
-            "smithy.api#jsonName": "creationTime",
+            "smithy.api#documentation": "<p>The revision number.</p>",
+            "smithy.api#jsonName": "revision",
             "smithy.api#required": {}
           }
         },
@@ -684,11 +872,11 @@
             "smithy.api#jsonName": "description"
           }
         },
-        "Revision": {
-          "target": "com.amazonaws.kafka#__long",
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
           "traits": {
-            "smithy.api#documentation": "<p>The revision number.</p>",
-            "smithy.api#jsonName": "revision",
+            "smithy.api#documentation": "<p>The time when the configuration revision was created.</p>",
+            "smithy.api#jsonName": "creationTime",
             "smithy.api#required": {}
           }
         }
@@ -697,21 +885,41 @@
         "smithy.api#documentation": "<p>Describes a configuration revision.</p>"
       }
     },
+    "com.amazonaws.kafka#ConfigurationState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The state of a configuration.</p>",
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE",
+            "name": "ACTIVE"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "DELETE_FAILED",
+            "name": "DELETE_FAILED"
+          }
+        ]
+      }
+    },
     "com.amazonaws.kafka#ConflictException": {
       "type": "structure",
       "members": {
-        "InvalidParameter": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
-            "smithy.api#jsonName": "invalidParameter"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The description of the error.</p>",
             "smithy.api#jsonName": "message"
+          }
+        },
+        "InvalidParameter": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+            "smithy.api#jsonName": "invalidParameter"
           }
         }
       },
@@ -764,13 +972,6 @@
     "com.amazonaws.kafka#CreateClusterRequest": {
       "type": "structure",
       "members": {
-        "ClientAuthentication": {
-          "target": "com.amazonaws.kafka#ClientAuthentication",
-          "traits": {
-            "smithy.api#documentation": "<p>Includes all client authentication related information.</p>",
-            "smithy.api#jsonName": "clientAuthentication"
-          }
-        },
         "KafkaVersion": {
           "target": "com.amazonaws.kafka#__stringMin1Max128",
           "traits": {
@@ -779,11 +980,18 @@
             "smithy.api#required": {}
           }
         },
-        "ClusterName": {
-          "target": "com.amazonaws.kafka#__stringMin1Max64",
+        "Tags": {
+          "target": "com.amazonaws.kafka#__mapOf__string",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the cluster.</p>",
-            "smithy.api#jsonName": "clusterName",
+            "smithy.api#documentation": "<p>Create tags when creating the cluster.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "BrokerNodeGroupInfo": {
+          "target": "com.amazonaws.kafka#BrokerNodeGroupInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the broker nodes in the cluster.</p>",
+            "smithy.api#jsonName": "brokerNodeGroupInfo",
             "smithy.api#required": {}
           }
         },
@@ -794,11 +1002,11 @@
             "smithy.api#jsonName": "enhancedMonitoring"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.kafka#__mapOf__string",
+        "OpenMonitoring": {
+          "target": "com.amazonaws.kafka#OpenMonitoringInfo",
           "traits": {
-            "smithy.api#documentation": "<p>Create tags when creating the cluster.</p>",
-            "smithy.api#jsonName": "tags"
+            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
+            "smithy.api#jsonName": "openMonitoring"
           }
         },
         "ConfigurationInfo": {
@@ -806,6 +1014,21 @@
           "traits": {
             "smithy.api#documentation": "<p>Represents the configuration that you want MSK to use for the brokers in a cluster.</p>",
             "smithy.api#jsonName": "configurationInfo"
+          }
+        },
+        "ClusterName": {
+          "target": "com.amazonaws.kafka#__stringMin1Max64",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the cluster.</p>",
+            "smithy.api#jsonName": "clusterName",
+            "smithy.api#required": {}
+          }
+        },
+        "EncryptionInfo": {
+          "target": "com.amazonaws.kafka#EncryptionInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Includes all encryption-related information.</p>",
+            "smithy.api#jsonName": "encryptionInfo"
           }
         },
         "NumberOfBrokerNodes": {
@@ -822,26 +1045,11 @@
             "smithy.api#jsonName": "loggingInfo"
           }
         },
-        "BrokerNodeGroupInfo": {
-          "target": "com.amazonaws.kafka#BrokerNodeGroupInfo",
+        "ClientAuthentication": {
+          "target": "com.amazonaws.kafka#ClientAuthentication",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the broker nodes in the cluster.</p>",
-            "smithy.api#jsonName": "brokerNodeGroupInfo",
-            "smithy.api#required": {}
-          }
-        },
-        "EncryptionInfo": {
-          "target": "com.amazonaws.kafka#EncryptionInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Includes all encryption-related information.</p>",
-            "smithy.api#jsonName": "encryptionInfo"
-          }
-        },
-        "OpenMonitoring": {
-          "target": "com.amazonaws.kafka#OpenMonitoringInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
-            "smithy.api#jsonName": "openMonitoring"
+            "smithy.api#documentation": "<p>Includes all client authentication related information.</p>",
+            "smithy.api#jsonName": "clientAuthentication"
           }
         }
       }
@@ -849,13 +1057,6 @@
     "com.amazonaws.kafka#CreateClusterResponse": {
       "type": "structure",
       "members": {
-        "ClusterName": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the MSK cluster.</p>",
-            "smithy.api#jsonName": "clusterName"
-          }
-        },
         "State": {
           "target": "com.amazonaws.kafka#ClusterState",
           "traits": {
@@ -868,6 +1069,13 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
             "smithy.api#jsonName": "clusterArn"
+          }
+        },
+        "ClusterName": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the MSK cluster.</p>",
+            "smithy.api#jsonName": "clusterName"
           }
         }
       }
@@ -915,6 +1123,13 @@
     "com.amazonaws.kafka#CreateConfigurationRequest": {
       "type": "structure",
       "members": {
+        "Description": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the configuration.</p>",
+            "smithy.api#jsonName": "description"
+          }
+        },
         "ServerProperties": {
           "target": "com.amazonaws.kafka#__blob",
           "traits": {
@@ -930,13 +1145,6 @@
             "smithy.api#jsonName": "kafkaVersions"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the configuration.</p>",
-            "smithy.api#jsonName": "description"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -950,6 +1158,27 @@
     "com.amazonaws.kafka#CreateConfigurationResponse": {
       "type": "structure",
       "members": {
+        "LatestRevision": {
+          "target": "com.amazonaws.kafka#ConfigurationRevision",
+          "traits": {
+            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
+            "smithy.api#jsonName": "latestRevision"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
+            "smithy.api#jsonName": "creationTime"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.kafka#ConfigurationState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+            "smithy.api#jsonName": "state"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -962,20 +1191,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
             "smithy.api#jsonName": "arn"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
-            "smithy.api#jsonName": "creationTime"
-          }
-        },
-        "LatestRevision": {
-          "target": "com.amazonaws.kafka#ConfigurationRevision",
-          "traits": {
-            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
-            "smithy.api#jsonName": "latestRevision"
           }
         }
       }
@@ -1014,6 +1229,13 @@
     "com.amazonaws.kafka#DeleteClusterRequest": {
       "type": "structure",
       "members": {
+        "CurrentVersion": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The current version of the MSK cluster.</p>",
+            "smithy.api#httpQuery": "currentVersion"
+          }
+        },
         "ClusterArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -1021,31 +1243,87 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
-        },
-        "CurrentVersion": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The current version of the MSK cluster.</p>",
-            "smithy.api#httpQuery": "currentVersion"
-          }
         }
       }
     },
     "com.amazonaws.kafka#DeleteClusterResponse": {
       "type": "structure",
       "members": {
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        },
         "State": {
           "target": "com.amazonaws.kafka#ClusterState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
             "smithy.api#jsonName": "state"
           }
+        }
+      }
+    },
+    "com.amazonaws.kafka#DeleteConfiguration": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kafka#DeleteConfigurationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kafka#DeleteConfigurationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kafka#BadRequestException"
         },
-        "ClusterArn": {
+        {
+          "target": "com.amazonaws.kafka#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.kafka#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.kafka#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an MSK Configuration.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/v1/configurations/{Arn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.kafka#DeleteConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "Arn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.kafka#DeleteConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.kafka#ConfigurationState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+            "smithy.api#jsonName": "state"
           }
         }
       }
@@ -1221,32 +1499,11 @@
     "com.amazonaws.kafka#DescribeConfigurationResponse": {
       "type": "structure",
       "members": {
-        "KafkaVersions": {
-          "target": "com.amazonaws.kafka#__listOf__string",
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
           "traits": {
-            "smithy.api#documentation": "<p>The versions of Apache Kafka with which you can use this MSK configuration.</p>",
-            "smithy.api#jsonName": "kafkaVersions"
-          }
-        },
-        "LatestRevision": {
-          "target": "com.amazonaws.kafka#ConfigurationRevision",
-          "traits": {
-            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
-            "smithy.api#jsonName": "latestRevision"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the configuration.</p>",
-            "smithy.api#jsonName": "description"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
-            "smithy.api#jsonName": "arn"
+            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
+            "smithy.api#jsonName": "creationTime"
           }
         },
         "Name": {
@@ -1256,11 +1513,39 @@
             "smithy.api#jsonName": "name"
           }
         },
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
+        "LatestRevision": {
+          "target": "com.amazonaws.kafka#ConfigurationRevision",
           "traits": {
-            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
-            "smithy.api#jsonName": "creationTime"
+            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
+            "smithy.api#jsonName": "latestRevision"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "KafkaVersions": {
+          "target": "com.amazonaws.kafka#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The versions of Apache Kafka with which you can use this MSK configuration.</p>",
+            "smithy.api#jsonName": "kafkaVersions"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.kafka#ConfigurationState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+            "smithy.api#jsonName": "state"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the configuration.</p>",
+            "smithy.api#jsonName": "description"
           }
         }
       }
@@ -1305,18 +1590,18 @@
     "com.amazonaws.kafka#DescribeConfigurationRevisionRequest": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "Revision": {
           "target": "com.amazonaws.kafka#__long",
           "traits": {
             "smithy.api#documentation": "<p>A string that uniquely identifies a revision of an MSK configuration.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1326,18 +1611,11 @@
     "com.amazonaws.kafka#DescribeConfigurationRevisionResponse": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.kafka#__string",
+        "ServerProperties": {
+          "target": "com.amazonaws.kafka#__blob",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
-            "smithy.api#jsonName": "arn"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.kafka#__timestampIso8601",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
-            "smithy.api#jsonName": "creationTime"
+            "smithy.api#documentation": "<p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>",
+            "smithy.api#jsonName": "serverProperties"
           }
         },
         "Description": {
@@ -1354,11 +1632,18 @@
             "smithy.api#jsonName": "revision"
           }
         },
-        "ServerProperties": {
-          "target": "com.amazonaws.kafka#__blob",
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>",
-            "smithy.api#jsonName": "serverProperties"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.kafka#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the configuration was created.</p>",
+            "smithy.api#jsonName": "creationTime"
           }
         }
       }
@@ -1397,18 +1682,18 @@
     "com.amazonaws.kafka#EncryptionInTransit": {
       "type": "structure",
       "members": {
-        "ClientBroker": {
-          "target": "com.amazonaws.kafka#ClientBroker",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates the encryption setting for data in transit between clients and brokers. The following are the possible values.</p>\n            <p>\n               TLS means that client-broker communication is enabled with TLS only.</p>\n            <p>\n               TLS_PLAINTEXT means that client-broker communication is enabled for both TLS-encrypted, as well as plaintext data.</p>\n            <p>\n               PLAINTEXT means that client-broker communication is enabled in plaintext only.</p>\n            <p>The default value is TLS_PLAINTEXT.</p>",
-            "smithy.api#jsonName": "clientBroker"
-          }
-        },
         "InCluster": {
           "target": "com.amazonaws.kafka#__boolean",
           "traits": {
             "smithy.api#documentation": "<p>When set to true, it indicates that data communication among the broker nodes of the cluster is encrypted. When set to false, the communication happens in plaintext.</p>\n            <p>The default value is true.</p>",
             "smithy.api#jsonName": "inCluster"
+          }
+        },
+        "ClientBroker": {
+          "target": "com.amazonaws.kafka#ClientBroker",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates the encryption setting for data in transit between clients and brokers. The following are the possible values.</p>\n            <p>\n               TLS means that client-broker communication is enabled with TLS only.</p>\n            <p>\n               TLS_PLAINTEXT means that client-broker communication is enabled for both TLS-encrypted, as well as plaintext data.</p>\n            <p>\n               PLAINTEXT means that client-broker communication is enabled in plaintext only.</p>\n            <p>The default value is TLS_PLAINTEXT.</p>",
+            "smithy.api#jsonName": "clientBroker"
           }
         }
       },
@@ -1419,18 +1704,18 @@
     "com.amazonaws.kafka#EncryptionInfo": {
       "type": "structure",
       "members": {
-        "EncryptionInTransit": {
-          "target": "com.amazonaws.kafka#EncryptionInTransit",
-          "traits": {
-            "smithy.api#documentation": "<p>The details for encryption in transit.</p>",
-            "smithy.api#jsonName": "encryptionInTransit"
-          }
-        },
         "EncryptionAtRest": {
           "target": "com.amazonaws.kafka#EncryptionAtRest",
           "traits": {
             "smithy.api#documentation": "<p>The data-volume encryption details.</p>",
             "smithy.api#jsonName": "encryptionAtRest"
+          }
+        },
+        "EncryptionInTransit": {
+          "target": "com.amazonaws.kafka#EncryptionInTransit",
+          "traits": {
+            "smithy.api#documentation": "<p>The details for encryption in transit.</p>",
+            "smithy.api#jsonName": "encryptionInTransit"
           }
         }
       },
@@ -1572,11 +1857,11 @@
     "com.amazonaws.kafka#GetBootstrapBrokersResponse": {
       "type": "structure",
       "members": {
-        "BootstrapBrokerStringTls": {
+        "BootstrapBrokerStringSaslScram": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>",
-            "smithy.api#jsonName": "bootstrapBrokerStringTls"
+            "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>",
+            "smithy.api#jsonName": "bootstrapBrokerStringSaslScram"
           }
         },
         "BootstrapBrokerString": {
@@ -1584,6 +1869,13 @@
           "traits": {
             "smithy.api#documentation": "<p>A string containing one or more hostname:port pairs.</p>",
             "smithy.api#jsonName": "bootstrapBrokerString"
+          }
+        },
+        "BootstrapBrokerStringTls": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>",
+            "smithy.api#jsonName": "bootstrapBrokerStringTls"
           }
         }
       }
@@ -1655,18 +1947,18 @@
     "com.amazonaws.kafka#InternalServerErrorException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the error.</p>",
-            "smithy.api#jsonName": "message"
-          }
-        },
         "InvalidParameter": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
             "smithy.api#jsonName": "invalidParameter"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the error.</p>",
+            "smithy.api#jsonName": "message"
           }
         }
       },
@@ -1713,6 +2005,12 @@
       "version": "2018-11-14",
       "operations": [
         {
+          "target": "com.amazonaws.kafka#BatchAssociateScramSecret"
+        },
+        {
+          "target": "com.amazonaws.kafka#BatchDisassociateScramSecret"
+        },
+        {
           "target": "com.amazonaws.kafka#CreateCluster"
         },
         {
@@ -1720,6 +2018,9 @@
         },
         {
           "target": "com.amazonaws.kafka#DeleteCluster"
+        },
+        {
+          "target": "com.amazonaws.kafka#DeleteConfiguration"
         },
         {
           "target": "com.amazonaws.kafka#DescribeCluster"
@@ -1758,6 +2059,9 @@
           "target": "com.amazonaws.kafka#ListNodes"
         },
         {
+          "target": "com.amazonaws.kafka#ListScramSecrets"
+        },
+        {
           "target": "com.amazonaws.kafka#ListTagsForResource"
         },
         {
@@ -1782,6 +2086,9 @@
           "target": "com.amazonaws.kafka#UpdateClusterKafkaVersion"
         },
         {
+          "target": "com.amazonaws.kafka#UpdateConfiguration"
+        },
+        {
           "target": "com.amazonaws.kafka#UpdateMonitoring"
         }
       ],
@@ -1803,16 +2110,16 @@
     "com.amazonaws.kafka#KafkaVersion": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.kafka#KafkaVersionStatus",
-          "traits": {
-            "smithy.api#jsonName": "status"
-          }
-        },
         "Version": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#jsonName": "version"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.kafka#KafkaVersionStatus",
+          "traits": {
+            "smithy.api#jsonName": "status"
           }
         }
       }
@@ -1860,17 +2167,24 @@
           "method": "GET",
           "uri": "/v1/clusters/{ClusterArn}/operations",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "ClusterOperationInfoList",
+          "pageSize": "MaxResults"
         }
       }
     },
     "com.amazonaws.kafka#ListClusterOperationsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
+        "ClusterArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
-            "smithy.api#httpQuery": "nextToken"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "MaxResults": {
@@ -1880,12 +2194,11 @@
             "smithy.api#httpQuery": "maxResults"
           }
         },
-        "ClusterArn": {
+        "NextToken": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+            "smithy.api#httpQuery": "nextToken"
           }
         }
       }
@@ -1893,18 +2206,18 @@
     "com.amazonaws.kafka#ListClusterOperationsResponse": {
       "type": "structure",
       "members": {
-        "ClusterOperationInfoList": {
-          "target": "com.amazonaws.kafka#__listOfClusterOperationInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of cluster operation information objects.</p>",
-            "smithy.api#jsonName": "clusterOperationInfoList"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>",
             "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "ClusterOperationInfoList": {
+          "target": "com.amazonaws.kafka#__listOfClusterOperationInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of cluster operation information objects.</p>",
+            "smithy.api#jsonName": "clusterOperationInfoList"
           }
         }
       }
@@ -1937,6 +2250,12 @@
           "method": "GET",
           "uri": "/v1/clusters",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "ClusterInfoList",
+          "pageSize": "MaxResults"
         }
       }
     },
@@ -1950,18 +2269,18 @@
             "smithy.api#httpQuery": "nextToken"
           }
         },
-        "ClusterNameFilter": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.</p>",
-            "smithy.api#httpQuery": "clusterNameFilter"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.kafka#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
             "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "ClusterNameFilter": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.</p>",
+            "smithy.api#httpQuery": "clusterNameFilter"
           }
         }
       }
@@ -1969,18 +2288,18 @@
     "com.amazonaws.kafka#ListClustersResponse": {
       "type": "structure",
       "members": {
-        "ClusterInfoList": {
-          "target": "com.amazonaws.kafka#__listOfClusterInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information on each of the MSK clusters in the response.</p>",
-            "smithy.api#jsonName": "clusterInfoList"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. \n               To get another batch of clusters, provide this token in your next request.</p>",
             "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "ClusterInfoList": {
+          "target": "com.amazonaws.kafka#__listOfClusterInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information on each of the MSK clusters in the response.</p>",
+            "smithy.api#jsonName": "clusterInfoList"
           }
         }
       }
@@ -2019,12 +2338,26 @@
           "method": "GET",
           "uri": "/v1/configurations/{Arn}/revisions",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Revisions",
+          "pageSize": "MaxResults"
         }
       }
     },
     "com.amazonaws.kafka#ListConfigurationRevisionsRequest": {
       "type": "structure",
       "members": {
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -2038,32 +2371,24 @@
             "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
             "smithy.api#httpQuery": "maxResults"
           }
-        },
-        "Arn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.kafka#ListConfigurationRevisionsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Paginated results marker.</p>",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "Revisions": {
           "target": "com.amazonaws.kafka#__listOfConfigurationRevision",
           "traits": {
             "smithy.api#documentation": "<p>List of ConfigurationRevision objects.</p>",
             "smithy.api#jsonName": "revisions"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Paginated results marker.</p>",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -2099,6 +2424,12 @@
           "method": "GET",
           "uri": "/v1/configurations",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Configurations",
+          "pageSize": "MaxResults"
         }
       }
     },
@@ -2168,6 +2499,12 @@
           "method": "GET",
           "uri": "/v1/kafka-versions",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "KafkaVersions",
+          "pageSize": "MaxResults"
         }
       }
     },
@@ -2235,17 +2572,23 @@
           "method": "GET",
           "uri": "/v1/clusters/{ClusterArn}/nodes",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "NodeInfoList",
+          "pageSize": "MaxResults"
         }
       }
     },
     "com.amazonaws.kafka#ListNodesRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.kafka#__string",
+        "MaxResults": {
+          "target": "com.amazonaws.kafka#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
-            "smithy.api#httpQuery": "nextToken"
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+            "smithy.api#httpQuery": "maxResults"
           }
         },
         "ClusterArn": {
@@ -2256,11 +2599,11 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.kafka#MaxResults",
+        "NextToken": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
-            "smithy.api#httpQuery": "maxResults"
+            "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+            "smithy.api#httpQuery": "nextToken"
           }
         }
       }
@@ -2280,6 +2623,98 @@
           "traits": {
             "smithy.api#documentation": "<p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. \n               To get another batch of nodes, provide this token in your next request.</p>",
             "smithy.api#jsonName": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.kafka#ListScramSecrets": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kafka#ListScramSecretsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kafka#ListScramSecretsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kafka#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.kafka#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.kafka#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kafka#TooManyRequestsException"
+        },
+        {
+          "target": "com.amazonaws.kafka#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a list of the Scram Secrets associated with an Amazon MSK cluster.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/v1/clusters/{ClusterArn}/scram-secrets",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "SecretArnList",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.kafka#ListScramSecretsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The nextToken of the query.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.kafka#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maxResults of the query.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The arn of the cluster.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.kafka#ListScramSecretsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Paginated results marker.</p>",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "SecretArnList": {
+          "target": "com.amazonaws.kafka#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of scram secrets associated with the cluster.</p>",
+            "smithy.api#jsonName": "secretArnList"
           }
         }
       }
@@ -2361,6 +2796,20 @@
     "com.amazonaws.kafka#MutableClusterInfo": {
       "type": "structure",
       "members": {
+        "OpenMonitoring": {
+          "target": "com.amazonaws.kafka#OpenMonitoring",
+          "traits": {
+            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
+            "smithy.api#jsonName": "openMonitoring"
+          }
+        },
+        "ConfigurationInfo": {
+          "target": "com.amazonaws.kafka#ConfigurationInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the changes in the configuration of the brokers.</p>",
+            "smithy.api#jsonName": "configurationInfo"
+          }
+        },
         "LoggingInfo": {
           "target": "com.amazonaws.kafka#LoggingInfo",
           "traits": {
@@ -2374,25 +2823,11 @@
             "smithy.api#jsonName": "enhancedMonitoring"
           }
         },
-        "OpenMonitoring": {
-          "target": "com.amazonaws.kafka#OpenMonitoring",
-          "traits": {
-            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
-            "smithy.api#jsonName": "openMonitoring"
-          }
-        },
         "KafkaVersion": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Kafka version.</p>",
             "smithy.api#jsonName": "kafkaVersion"
-          }
-        },
-        "NumberOfBrokerNodes": {
-          "target": "com.amazonaws.kafka#__integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of broker nodes in the cluster.</p>",
-            "smithy.api#jsonName": "numberOfBrokerNodes"
           }
         },
         "BrokerEBSVolumeInfo": {
@@ -2402,11 +2837,11 @@
             "smithy.api#jsonName": "brokerEBSVolumeInfo"
           }
         },
-        "ConfigurationInfo": {
-          "target": "com.amazonaws.kafka#ConfigurationInfo",
+        "NumberOfBrokerNodes": {
+          "target": "com.amazonaws.kafka#__integer",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the changes in the configuration of the brokers.</p>",
-            "smithy.api#jsonName": "configurationInfo"
+            "smithy.api#documentation": "<p>The number of broker nodes in the cluster.</p>",
+            "smithy.api#jsonName": "numberOfBrokerNodes"
           }
         }
       },
@@ -2456,18 +2891,11 @@
             "smithy.api#jsonName": "nodeType"
           }
         },
-        "AddedToClusterTime": {
-          "target": "com.amazonaws.kafka#__string",
+        "ZookeeperNodeInfo": {
+          "target": "com.amazonaws.kafka#ZookeeperNodeInfo",
           "traits": {
-            "smithy.api#documentation": "<p>The start time.</p>",
-            "smithy.api#jsonName": "addedToClusterTime"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type.</p>",
-            "smithy.api#jsonName": "instanceType"
+            "smithy.api#documentation": "<p>The ZookeeperNodeInfo.</p>",
+            "smithy.api#jsonName": "zookeeperNodeInfo"
           }
         },
         "NodeARN": {
@@ -2477,6 +2905,13 @@
             "smithy.api#jsonName": "nodeARN"
           }
         },
+        "AddedToClusterTime": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time.</p>",
+            "smithy.api#jsonName": "addedToClusterTime"
+          }
+        },
         "BrokerNodeInfo": {
           "target": "com.amazonaws.kafka#BrokerNodeInfo",
           "traits": {
@@ -2484,11 +2919,11 @@
             "smithy.api#jsonName": "brokerNodeInfo"
           }
         },
-        "ZookeeperNodeInfo": {
-          "target": "com.amazonaws.kafka#ZookeeperNodeInfo",
+        "InstanceType": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The ZookeeperNodeInfo.</p>",
-            "smithy.api#jsonName": "zookeeperNodeInfo"
+            "smithy.api#documentation": "<p>The instance type.</p>",
+            "smithy.api#jsonName": "instanceType"
           }
         }
       },
@@ -2511,18 +2946,18 @@
     "com.amazonaws.kafka#NotFoundException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the error.</p>",
-            "smithy.api#jsonName": "message"
-          }
-        },
         "InvalidParameter": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
             "smithy.api#jsonName": "invalidParameter"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the error.</p>",
+            "smithy.api#jsonName": "message"
           }
         }
       },
@@ -2589,18 +3024,18 @@
     "com.amazonaws.kafka#PrometheusInfo": {
       "type": "structure",
       "members": {
-        "NodeExporter": {
-          "target": "com.amazonaws.kafka#NodeExporterInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
-            "smithy.api#jsonName": "nodeExporter"
-          }
-        },
         "JmxExporter": {
           "target": "com.amazonaws.kafka#JmxExporterInfo",
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>",
             "smithy.api#jsonName": "jmxExporter"
+          }
+        },
+        "NodeExporter": {
+          "target": "com.amazonaws.kafka#NodeExporterInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
+            "smithy.api#jsonName": "nodeExporter"
           }
         }
       },
@@ -2654,7 +3089,7 @@
         "BrokerIds": {
           "target": "com.amazonaws.kafka#__listOf__string",
           "traits": {
-            "smithy.api#documentation": "<p>The list of broker IDs to be rebooted.</p>",
+            "smithy.api#documentation": "<p>The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.</p>",
             "smithy.api#jsonName": "brokerIds",
             "smithy.api#required": {}
           }
@@ -2675,18 +3110,18 @@
     "com.amazonaws.kafka#RebootBrokerResponse": {
       "type": "structure",
       "members": {
-        "ClusterArn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
-          }
-        },
         "ClusterOperationArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
             "smithy.api#jsonName": "clusterOperationArn"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
           }
         }
       }
@@ -2694,12 +3129,6 @@
     "com.amazonaws.kafka#S3": {
       "type": "structure",
       "members": {
-        "Prefix": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#jsonName": "prefix"
-          }
-        },
         "Enabled": {
           "target": "com.amazonaws.kafka#__boolean",
           "traits": {
@@ -2712,7 +3141,43 @@
           "traits": {
             "smithy.api#jsonName": "bucket"
           }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#jsonName": "prefix"
+          }
         }
+      }
+    },
+    "com.amazonaws.kafka#Sasl": {
+      "type": "structure",
+      "members": {
+        "Scram": {
+          "target": "com.amazonaws.kafka#Scram",
+          "traits": {
+            "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>",
+            "smithy.api#jsonName": "scram"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details for client authentication using SASL.</p>"
+      }
+    },
+    "com.amazonaws.kafka#Scram": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "target": "com.amazonaws.kafka#__boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>SASL/SCRAM authentication is enabled or not.</p>",
+            "smithy.api#jsonName": "enabled"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>"
       }
     },
     "com.amazonaws.kafka#ServiceUnavailableException": {
@@ -2742,16 +3207,16 @@
     "com.amazonaws.kafka#StateInfo": {
       "type": "structure",
       "members": {
-        "Code": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#jsonName": "code"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#jsonName": "message"
+          }
+        },
+        "Code": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#jsonName": "code"
           }
         }
       }
@@ -2859,18 +3324,18 @@
     "com.amazonaws.kafka#UnauthorizedException": {
       "type": "structure",
       "members": {
-        "InvalidParameter": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
-            "smithy.api#jsonName": "invalidParameter"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The description of the error.</p>",
             "smithy.api#jsonName": "message"
+          }
+        },
+        "InvalidParameter": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameter that caused the error.</p>",
+            "smithy.api#jsonName": "invalidParameter"
           }
         }
       },
@@ -2878,6 +3343,35 @@
         "smithy.api#documentation": "<p>Returns information about an error.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 401
+      }
+    },
+    "com.amazonaws.kafka#UnprocessedScramSecret": {
+      "type": "structure",
+      "members": {
+        "ErrorMessage": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Error message for associate/disassociate failure.</p>",
+            "smithy.api#jsonName": "errorMessage"
+          }
+        },
+        "ErrorCode": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Error code for associate/disassociate failure.</p>",
+            "smithy.api#jsonName": "errorCode"
+          }
+        },
+        "SecretArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS Secrets Manager secret ARN.</p>",
+            "smithy.api#jsonName": "secretArn"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Error info for scram secret associate/disassociate failure.</p>"
       }
     },
     "com.amazonaws.kafka#UntagResource": {
@@ -2971,19 +3465,19 @@
             "smithy.api#required": {}
           }
         },
-        "TargetNumberOfBrokerNodes": {
-          "target": "com.amazonaws.kafka#__integerMin1Max15",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>",
-            "smithy.api#jsonName": "targetNumberOfBrokerNodes",
-            "smithy.api#required": {}
-          }
-        },
         "ClusterArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
             "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TargetNumberOfBrokerNodes": {
+          "target": "com.amazonaws.kafka#__integerMin1Max15",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>",
+            "smithy.api#jsonName": "targetNumberOfBrokerNodes",
             "smithy.api#required": {}
           }
         }
@@ -2992,18 +3486,18 @@
     "com.amazonaws.kafka#UpdateBrokerCountResponse": {
       "type": "structure",
       "members": {
-        "ClusterArn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
-          }
-        },
         "ClusterOperationArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
             "smithy.api#jsonName": "clusterOperationArn"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
           }
         }
       }
@@ -3045,11 +3539,11 @@
     "com.amazonaws.kafka#UpdateBrokerStorageRequest": {
       "type": "structure",
       "members": {
-        "TargetBrokerEBSVolumeInfo": {
-          "target": "com.amazonaws.kafka#__listOfBrokerEBSVolumeInfo",
+        "CurrentVersion": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the target volume size and the ID of the broker to apply the update to.</p>",
-            "smithy.api#jsonName": "targetBrokerEBSVolumeInfo",
+            "smithy.api#documentation": "<p>The version of cluster to update from. A successful operation will then generate a new version.</p>",
+            "smithy.api#jsonName": "currentVersion",
             "smithy.api#required": {}
           }
         },
@@ -3061,11 +3555,11 @@
             "smithy.api#required": {}
           }
         },
-        "CurrentVersion": {
-          "target": "com.amazonaws.kafka#__string",
+        "TargetBrokerEBSVolumeInfo": {
+          "target": "com.amazonaws.kafka#__listOfBrokerEBSVolumeInfo",
           "traits": {
-            "smithy.api#documentation": "<p>The version of cluster to update from. A successful operation will then generate a new version.</p>",
-            "smithy.api#jsonName": "currentVersion",
+            "smithy.api#documentation": "<p>Describes the target volume size and the ID of the broker to apply the update to.</p>",
+            "smithy.api#jsonName": "targetBrokerEBSVolumeInfo",
             "smithy.api#required": {}
           }
         }
@@ -3130,11 +3624,11 @@
     "com.amazonaws.kafka#UpdateClusterConfigurationRequest": {
       "type": "structure",
       "members": {
-        "ClusterArn": {
-          "target": "com.amazonaws.kafka#__string",
+        "ConfigurationInfo": {
+          "target": "com.amazonaws.kafka#ConfigurationInfo",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
-            "smithy.api#httpLabel": {},
+            "smithy.api#documentation": "<p>Represents the configuration that you want MSK to use for the brokers in a cluster.</p>",
+            "smithy.api#jsonName": "configurationInfo",
             "smithy.api#required": {}
           }
         },
@@ -3146,11 +3640,11 @@
             "smithy.api#required": {}
           }
         },
-        "ConfigurationInfo": {
-          "target": "com.amazonaws.kafka#ConfigurationInfo",
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>Represents the configuration that you want MSK to use for the brokers in a cluster.</p>",
-            "smithy.api#jsonName": "configurationInfo",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         }
@@ -3159,18 +3653,18 @@
     "com.amazonaws.kafka#UpdateClusterConfigurationResponse": {
       "type": "structure",
       "members": {
-        "ClusterOperationArn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
-            "smithy.api#jsonName": "clusterOperationArn"
-          }
-        },
         "ClusterArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
             "smithy.api#jsonName": "clusterArn"
+          }
+        },
+        "ClusterOperationArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+            "smithy.api#jsonName": "clusterOperationArn"
           }
         }
       }
@@ -3226,6 +3720,13 @@
             "smithy.api#required": {}
           }
         },
+        "ConfigurationInfo": {
+          "target": "com.amazonaws.kafka#ConfigurationInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The custom configuration that should be applied on the new version of cluster.</p>",
+            "smithy.api#jsonName": "configurationInfo"
+          }
+        },
         "CurrentVersion": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -3241,31 +3742,108 @@
             "smithy.api#jsonName": "targetKafkaVersion",
             "smithy.api#required": {}
           }
-        },
-        "ConfigurationInfo": {
-          "target": "com.amazonaws.kafka#ConfigurationInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The custom configuration that should be applied on the new version of cluster.</p>",
-            "smithy.api#jsonName": "configurationInfo"
-          }
         }
       }
     },
     "com.amazonaws.kafka#UpdateClusterKafkaVersionResponse": {
       "type": "structure",
       "members": {
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+            "smithy.api#jsonName": "clusterArn"
+          }
+        },
         "ClusterOperationArn": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
             "smithy.api#jsonName": "clusterOperationArn"
           }
+        }
+      }
+    },
+    "com.amazonaws.kafka#UpdateConfiguration": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kafka#UpdateConfigurationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kafka#UpdateConfigurationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kafka#BadRequestException"
         },
-        "ClusterArn": {
+        {
+          "target": "com.amazonaws.kafka#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.kafka#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.kafka#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kafka#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kafka#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an MSK configuration.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/v1/configurations/{Arn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.kafka#UpdateConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
-            "smithy.api#jsonName": "clusterArn"
+            "smithy.api#documentation": "<p>The description of the configuration revision.</p>",
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "ServerProperties": {
+          "target": "com.amazonaws.kafka#__blob",
+          "traits": {
+            "smithy.api#documentation": "<p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>",
+            "smithy.api#jsonName": "serverProperties",
+            "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.kafka#UpdateConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+            "smithy.api#jsonName": "arn"
+          }
+        },
+        "LatestRevision": {
+          "target": "com.amazonaws.kafka#ConfigurationRevision",
+          "traits": {
+            "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
+            "smithy.api#jsonName": "latestRevision"
           }
         }
       }
@@ -3307,6 +3885,29 @@
     "com.amazonaws.kafka#UpdateMonitoringRequest": {
       "type": "structure",
       "members": {
+        "OpenMonitoring": {
+          "target": "com.amazonaws.kafka#OpenMonitoringInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
+            "smithy.api#jsonName": "openMonitoring"
+          }
+        },
+        "ClusterArn": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "CurrentVersion": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>",
+            "smithy.api#jsonName": "currentVersion",
+            "smithy.api#required": {}
+          }
+        },
         "EnhancedMonitoring": {
           "target": "com.amazonaws.kafka#EnhancedMonitoring",
           "traits": {
@@ -3318,29 +3919,6 @@
           "target": "com.amazonaws.kafka#LoggingInfo",
           "traits": {
             "smithy.api#jsonName": "loggingInfo"
-          }
-        },
-        "ClusterArn": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "OpenMonitoring": {
-          "target": "com.amazonaws.kafka#OpenMonitoringInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
-            "smithy.api#jsonName": "openMonitoring"
-          }
-        },
-        "CurrentVersion": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>",
-            "smithy.api#jsonName": "currentVersion",
-            "smithy.api#required": {}
           }
         }
       },
@@ -3377,20 +3955,6 @@
             "smithy.api#jsonName": "zookeeperId"
           }
         },
-        "ClientVpcIpAddress": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The virtual private cloud (VPC) IP address of the client.</p>",
-            "smithy.api#jsonName": "clientVpcIpAddress"
-          }
-        },
-        "ZookeeperVersion": {
-          "target": "com.amazonaws.kafka#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of Zookeeper.</p>",
-            "smithy.api#jsonName": "zookeeperVersion"
-          }
-        },
         "AttachedENIId": {
           "target": "com.amazonaws.kafka#__string",
           "traits": {
@@ -3398,11 +3962,25 @@
             "smithy.api#jsonName": "attachedENIId"
           }
         },
+        "ClientVpcIpAddress": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The virtual private cloud (VPC) IP address of the client.</p>",
+            "smithy.api#jsonName": "clientVpcIpAddress"
+          }
+        },
         "Endpoints": {
           "target": "com.amazonaws.kafka#__listOf__string",
           "traits": {
             "smithy.api#documentation": "<p>Endpoints for accessing the ZooKeeper.</p>",
             "smithy.api#jsonName": "endpoints"
+          }
+        },
+        "ZookeeperVersion": {
+          "target": "com.amazonaws.kafka#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of Zookeeper.</p>",
+            "smithy.api#jsonName": "zookeeperVersion"
           }
         }
       },
@@ -3492,6 +4070,12 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.kafka#NodeInfo"
+      }
+    },
+    "com.amazonaws.kafka#__listOfUnprocessedScramSecret": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kafka#UnprocessedScramSecret"
       }
     },
     "com.amazonaws.kafka#__listOf__string": {

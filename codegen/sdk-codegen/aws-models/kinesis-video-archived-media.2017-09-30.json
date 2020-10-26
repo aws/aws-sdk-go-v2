@@ -54,7 +54,7 @@
           "sdkId": "Kinesis Video Archived Media",
           "arnNamespace": "kinesisvideo",
           "cloudFormationName": "KinesisVideoArchivedMedia",
-          "cloudTrailEventSource": "AWSAcuityReader.amazon.com"
+          "cloudTrailEventSource": "kinesisvideoarchivedmedia.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "kinesisvideo"
@@ -117,17 +117,17 @@
     "com.amazonaws.kinesisvideoarchivedmedia#ClipTimestampRange": {
       "type": "structure",
       "members": {
-        "StartTimestamp": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The starting timestamp in the range of timestamps for which to return fragments. </p>\n        <p>This value is inclusive. Fragments that start before the <code>StartTimestamp</code>\n            and continue past it are included in the session. If <code>FragmentSelectorType</code>\n            is <code>SERVER_TIMESTAMP</code>, the <code>StartTimestamp</code> must be later than the\n            stream head. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "EndTimestamp": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The end of the timestamp range for the requested media.</p>\n        <p>This value must be within 3 hours of the specified <code>StartTimestamp</code>, and it\n            must be later than the <code>StartTimestamp</code> value. If\n                <code>FragmentSelectorType</code> for the request is <code>SERVER_TIMESTAMP</code>,\n            this value must be in the past. </p>\n        <p>This value is inclusive. The <code>EndTimestamp</code> is compared to the (starting)\n            timestamp of the fragment. Fragments that start before the <code>EndTimestamp</code>\n            value and continue past it are included in the session. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "StartTimestamp": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The starting timestamp in the range of timestamps for which to return fragments. </p>\n        <p>This value is inclusive. Fragments that start before the <code>StartTimestamp</code>\n            and continue past it are included in the session. If <code>FragmentSelectorType</code>\n            is <code>SERVER_TIMESTAMP</code>, the <code>StartTimestamp</code> must be later than the\n            stream head. </p>",
             "smithy.api#required": {}
           }
         }
@@ -194,16 +194,16 @@
     "com.amazonaws.kinesisvideoarchivedmedia#DASHFragmentSelector": {
       "type": "structure",
       "members": {
-        "TimestampRange": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHTimestampRange",
-          "traits": {
-            "smithy.api#documentation": "<p>The start and end of the timestamp range for the requested media.</p>\n        <p>This value should not be present if <code>PlaybackType</code> is\n            <code>LIVE</code>.</p>"
-          }
-        },
         "FragmentSelectorType": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHFragmentSelectorType",
           "traits": {
             "smithy.api#documentation": "<p>The source of the timestamps for the requested media.</p>\n        <p>When <code>FragmentSelectorType</code> is set to <code>PRODUCER_TIMESTAMP</code> and\n                <a>GetDASHStreamingSessionURLInput$PlaybackMode</a> is\n                <code>ON_DEMAND</code> or <code>LIVE_REPLAY</code>, the first fragment ingested with\n            a producer timestamp within the specified <a>FragmentSelector$TimestampRange</a> is included in the media playlist. In\n            addition, the fragments with producer timestamps within the <code>TimestampRange</code>\n            ingested immediately following the first fragment (up to the <a>GetDASHStreamingSessionURLInput$MaxManifestFragmentResults</a> value) are\n            included. </p>\n        <p>Fragments that have duplicate producer timestamps are deduplicated. This means that if\n            producers are producing a stream of fragments with producer timestamps that are\n            approximately equal to the true clock time, the MPEG-DASH manifest will contain all of\n            the fragments within the requested timestamp range. If some fragments are ingested\n            within the same time range and very different points in time, only the oldest ingested\n            collection of fragments are returned.</p>\n        <p>When <code>FragmentSelectorType</code> is set to <code>PRODUCER_TIMESTAMP</code> and\n                <a>GetDASHStreamingSessionURLInput$PlaybackMode</a> is <code>LIVE</code>,\n            the producer timestamps are used in the MP4 fragments and for deduplication. But the\n            most recently ingested fragments based on server timestamps are included in the\n            MPEG-DASH manifest. This means that even if fragments ingested in the past have producer\n            timestamps with values now, they are not included in the HLS media playlist.</p>\n        <p>The default is <code>SERVER_TIMESTAMP</code>.</p>"
+          }
+        },
+        "TimestampRange": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHTimestampRange",
+          "traits": {
+            "smithy.api#documentation": "<p>The start and end of the timestamp range for the requested media.</p>\n        <p>This value should not be present if <code>PlaybackType</code> is\n            <code>LIVE</code>.</p>"
           }
         }
       },
@@ -290,18 +290,6 @@
             "smithy.api#documentation": "<p>The timestamp from the AWS server corresponding to the fragment.</p>"
           }
         },
-        "FragmentLengthInMilliseconds": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The playback duration or other time value associated with the fragment.</p>"
-          }
-        },
-        "FragmentSizeInBytes": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The total fragment size, including information about the fragment and contained media\n            data.</p>"
-          }
-        },
         "FragmentNumber": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#FragmentNumberString",
           "traits": {
@@ -312,6 +300,18 @@
           "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The timestamp from the producer corresponding to the fragment.</p>"
+          }
+        },
+        "FragmentLengthInMilliseconds": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The playback duration or other time value associated with the fragment.</p>"
+          }
+        },
+        "FragmentSizeInBytes": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The total fragment size, including information about the fragment and contained media\n            data.</p>"
           }
         }
       },
@@ -525,28 +525,22 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH\n            manifest URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
           }
         },
-        "DisplayFragmentTimestamp": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHDisplayFragmentTimestamp",
+        "PlaybackMode": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHPlaybackMode",
           "traits": {
-            "smithy.api#documentation": "<p>Per the MPEG-DASH specification, the wall-clock time of fragments in the manifest file\n            can be derived using attributes in the manifest itself. However, typically, MPEG-DASH\n            compatible media players do not properly handle gaps in the media timeline. Kinesis\n            Video Streams adjusts the media timeline in the manifest file to enable playback of\n            media with discontinuities. Therefore, the wall-clock time derived from the manifest\n            file may be inaccurate. If DisplayFragmentTimestamp is set to <code>ALWAYS</code>, the\n            accurate fragment timestamp is added to each S element in the manifest file with the\n            attribute name “kvs:ts”. A custom MPEG-DASH media player is necessary to leverage this\n            custom attribute.</p>\n        <p>The default value is <code>NEVER</code>. When <a>DASHFragmentSelector</a>\n            is <code>SERVER_TIMESTAMP</code>, the timestamps will be the server start timestamps.\n            Similarly, when <a>DASHFragmentSelector</a> is\n                <code>PRODUCER_TIMESTAMP</code>, the timestamps will be the producer start\n            timestamps. </p>"
-          }
-        },
-        "DASHFragmentSelector": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHFragmentSelector",
-          "traits": {
-            "smithy.api#documentation": "<p>The time range of the requested fragment and the source of the timestamps.</p>\n        <p>This parameter is required if <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>. This parameter is optional if PlaybackMode is<code></code>\n            <code>LIVE</code>. If <code>PlaybackMode</code> is <code>LIVE</code>, the\n                <code>FragmentSelectorType</code> can be set, but the <code>TimestampRange</code>\n            should not be set. If <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>, both <code>FragmentSelectorType</code> and\n                <code>TimestampRange</code> must be set.</p>"
-          }
-        },
-        "StreamName": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the stream for which to retrieve the MPEG-DASH manifest URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
+            "smithy.api#documentation": "<p>Whether to retrieve live, live replay, or archived, on-demand data.</p>\n        <p>Features of the three types of sessions include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE</code>\n                  </b>: For sessions of this type,\n                    the MPEG-DASH manifest is continually updated with the latest fragments as they\n                    become available. We recommend that the media player retrieve a new manifest on\n                    a one-second interval. When this type of session is played in a media player,\n                    the user interface typically displays a \"live\" notification, with no scrubber\n                    control for choosing the position in the playback window to display.</p>\n                <note>\n                    <p>In <code>LIVE</code> mode, the newest available fragments are included in\n                        an MPEG-DASH manifest, even if there is a gap between fragments (that is, if\n                        a fragment is missing). A gap like this might cause a media player to halt\n                        or cause a jump in playback. In this mode, fragments are not added to the\n                        MPEG-DASH manifest if they are older than the newest fragment in the\n                        playlist. If the missing fragment becomes available after a subsequent\n                        fragment is added to the manifest, the older fragment is not added, and the\n                        gap is not filled.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE_REPLAY</code>\n                  </b>: For sessions of\n                    this type, the MPEG-DASH manifest is updated similarly to how it is updated for\n                        <code>LIVE</code> mode except that it starts by including fragments from a\n                    given start time. Instead of fragments being added as they are ingested,\n                    fragments are added as the duration of the next fragment elapses. For example,\n                    if the fragments in the session are two seconds long, then a new fragment is\n                    added to the manifest every two seconds. This mode is useful to be able to start\n                    playback from when an event is detected and continue live streaming media that\n                    has not yet been ingested as of the time of the session creation. This mode is\n                    also useful to stream previously archived media without being limited by the\n                    1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>ON_DEMAND</code>\n                  </b>: For sessions of this\n                    type, the MPEG-DASH manifest contains all the fragments for the session, up to\n                    the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.\n                    The manifest must be retrieved only once for each session. When this type of\n                    session is played in a media player, the user interface typically displays a\n                    scrubber control for choosing the position in the playback window to\n                    display.</p>\n            </li>\n         </ul>\n        <p>In all playback modes, if <code>FragmentSelectorType</code> is\n                <code>PRODUCER_TIMESTAMP</code>, and if there are multiple fragments with the same\n            start timestamp, the fragment that has the larger fragment number (that is, the newer\n            fragment) is included in the MPEG-DASH manifest. The other fragments are not included.\n            Fragments that have different timestamps but have overlapping durations are still\n            included in the MPEG-DASH manifest. This can lead to unexpected behavior in the media\n            player.</p>\n        <p>The default is <code>LIVE</code>.</p>"
           }
         },
         "DisplayFragmentNumber": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHDisplayFragmentNumber",
           "traits": {
             "smithy.api#documentation": "<p>Fragments are identified in the manifest file based on their sequence number in the\n            session. If DisplayFragmentNumber is set to <code>ALWAYS</code>, the Kinesis Video\n            Streams fragment number is added to each S element in the manifest file with the\n            attribute name “kvs:fn”. These fragment numbers can be used for logging or for use with\n            other APIs (e.g. <code>GetMedia</code> and <code>GetMediaForFragmentList</code>). A\n            custom MPEG-DASH media player is necessary to leverage these this custom\n            attribute.</p>\n        <p>The default value is <code>NEVER</code>.</p>"
+          }
+        },
+        "StreamName": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the stream for which to retrieve the MPEG-DASH manifest URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
           }
         },
         "Expires": {
@@ -561,10 +555,16 @@
             "smithy.api#documentation": "<p>The maximum number of fragments that are returned in the MPEG-DASH manifest.</p>\n        <p>When the <code>PlaybackMode</code> is <code>LIVE</code>, the most recent fragments are\n            returned up to this value. When the <code>PlaybackMode</code> is <code>ON_DEMAND</code>,\n            the oldest fragments are returned, up to this maximum number.</p>\n        <p>When there are a higher number of fragments available in a live MPEG-DASH manifest,\n            video players often buffer content before starting playback. Increasing the buffer size\n            increases the playback latency, but it decreases the likelihood that rebuffering will\n            occur during playback. We recommend that a live MPEG-DASH manifest have a minimum of 3\n            fragments and a maximum of 10 fragments.</p>\n        <p>The default is 5 fragments if <code>PlaybackMode</code> is <code>LIVE</code> or\n                <code>LIVE_REPLAY</code>, and 1,000 if <code>PlaybackMode</code> is\n                <code>ON_DEMAND</code>. </p>\n        <p>The maximum value of 1,000 fragments corresponds to more than 16 minutes of video on\n            streams with 1-second fragments, and more than 2 1/2 hours of video on streams with\n            10-second fragments.</p>"
           }
         },
-        "PlaybackMode": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHPlaybackMode",
+        "DisplayFragmentTimestamp": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHDisplayFragmentTimestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Whether to retrieve live, live replay, or archived, on-demand data.</p>\n        <p>Features of the three types of sessions include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE</code>\n                  </b>: For sessions of this type,\n                    the MPEG-DASH manifest is continually updated with the latest fragments as they\n                    become available. We recommend that the media player retrieve a new manifest on\n                    a one-second interval. When this type of session is played in a media player,\n                    the user interface typically displays a \"live\" notification, with no scrubber\n                    control for choosing the position in the playback window to display.</p>\n                <note>\n                    <p>In <code>LIVE</code> mode, the newest available fragments are included in\n                        an MPEG-DASH manifest, even if there is a gap between fragments (that is, if\n                        a fragment is missing). A gap like this might cause a media player to halt\n                        or cause a jump in playback. In this mode, fragments are not added to the\n                        MPEG-DASH manifest if they are older than the newest fragment in the\n                        playlist. If the missing fragment becomes available after a subsequent\n                        fragment is added to the manifest, the older fragment is not added, and the\n                        gap is not filled.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE_REPLAY</code>\n                  </b>: For sessions of\n                    this type, the MPEG-DASH manifest is updated similarly to how it is updated for\n                        <code>LIVE</code> mode except that it starts by including fragments from a\n                    given start time. Instead of fragments being added as they are ingested,\n                    fragments are added as the duration of the next fragment elapses. For example,\n                    if the fragments in the session are two seconds long, then a new fragment is\n                    added to the manifest every two seconds. This mode is useful to be able to start\n                    playback from when an event is detected and continue live streaming media that\n                    has not yet been ingested as of the time of the session creation. This mode is\n                    also useful to stream previously archived media without being limited by the\n                    1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>ON_DEMAND</code>\n                  </b>: For sessions of this\n                    type, the MPEG-DASH manifest contains all the fragments for the session, up to\n                    the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.\n                    The manifest must be retrieved only once for each session. When this type of\n                    session is played in a media player, the user interface typically displays a\n                    scrubber control for choosing the position in the playback window to\n                    display.</p>\n            </li>\n         </ul>\n        <p>In all playback modes, if <code>FragmentSelectorType</code> is\n                <code>PRODUCER_TIMESTAMP</code>, and if there are multiple fragments with the same\n            start timestamp, the fragment that has the larger fragment number (that is, the newer\n            fragment) is included in the MPEG-DASH manifest. The other fragments are not included.\n            Fragments that have different timestamps but have overlapping durations are still\n            included in the MPEG-DASH manifest. This can lead to unexpected behavior in the media\n            player.</p>\n        <p>The default is <code>LIVE</code>.</p>"
+            "smithy.api#documentation": "<p>Per the MPEG-DASH specification, the wall-clock time of fragments in the manifest file\n            can be derived using attributes in the manifest itself. However, typically, MPEG-DASH\n            compatible media players do not properly handle gaps in the media timeline. Kinesis\n            Video Streams adjusts the media timeline in the manifest file to enable playback of\n            media with discontinuities. Therefore, the wall-clock time derived from the manifest\n            file may be inaccurate. If DisplayFragmentTimestamp is set to <code>ALWAYS</code>, the\n            accurate fragment timestamp is added to each S element in the manifest file with the\n            attribute name “kvs:ts”. A custom MPEG-DASH media player is necessary to leverage this\n            custom attribute.</p>\n        <p>The default value is <code>NEVER</code>. When <a>DASHFragmentSelector</a>\n            is <code>SERVER_TIMESTAMP</code>, the timestamps will be the server start timestamps.\n            Similarly, when <a>DASHFragmentSelector</a> is\n                <code>PRODUCER_TIMESTAMP</code>, the timestamps will be the producer start\n            timestamps. </p>"
+          }
+        },
+        "DASHFragmentSelector": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#DASHFragmentSelector",
+          "traits": {
+            "smithy.api#documentation": "<p>The time range of the requested fragment and the source of the timestamps.</p>\n        <p>This parameter is required if <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>. This parameter is optional if PlaybackMode is<code></code>\n            <code>LIVE</code>. If <code>PlaybackMode</code> is <code>LIVE</code>, the\n                <code>FragmentSelectorType</code> can be set, but the <code>TimestampRange</code>\n            should not be set. If <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>, both <code>FragmentSelectorType</code> and\n                <code>TimestampRange</code> must be set.</p>"
           }
         }
       }
@@ -626,6 +626,42 @@
     "com.amazonaws.kinesisvideoarchivedmedia#GetHLSStreamingSessionURLInput": {
       "type": "structure",
       "members": {
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for which to retrieve the HLS master\n            playlist URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
+          }
+        },
+        "PlaybackMode": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSPlaybackMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether to retrieve live, live replay, or archived, on-demand data.</p>\n        <p>Features of the three types of sessions include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE</code>\n                  </b>: For sessions of this type,\n                    the HLS media playlist is continually updated with the latest fragments as they\n                    become available. We recommend that the media player retrieve a new playlist on\n                    a one-second interval. When this type of session is played in a media player,\n                    the user interface typically displays a \"live\" notification, with no scrubber\n                    control for choosing the position in the playback window to display.</p>\n                <note>\n                    <p>In <code>LIVE</code> mode, the newest available fragments are included in\n                        an HLS media playlist, even if there is a gap between fragments (that is, if\n                        a fragment is missing). A gap like this might cause a media player to halt\n                        or cause a jump in playback. In this mode, fragments are not added to the\n                        HLS media playlist if they are older than the newest fragment in the\n                        playlist. If the missing fragment becomes available after a subsequent\n                        fragment is added to the playlist, the older fragment is not added, and the\n                        gap is not filled.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE_REPLAY</code>\n                  </b>: For sessions of\n                    this type, the HLS media playlist is updated similarly to how it is updated for\n                        <code>LIVE</code> mode except that it starts by including fragments from a\n                    given start time. Instead of fragments being added as they are ingested,\n                    fragments are added as the duration of the next fragment elapses. For example,\n                    if the fragments in the session are two seconds long, then a new fragment is\n                    added to the media playlist every two seconds. This mode is useful to be able to\n                    start playback from when an event is detected and continue live streaming media\n                    that has not yet been ingested as of the time of the session creation. This mode\n                    is also useful to stream previously archived media without being limited by the\n                    1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>ON_DEMAND</code>\n                  </b>: For sessions of this\n                    type, the HLS media playlist contains all the fragments for the session, up to\n                    the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.\n                    The playlist must be retrieved only once for each session. When this type of\n                    session is played in a media player, the user interface typically displays a\n                    scrubber control for choosing the position in the playback window to\n                    display.</p>\n            </li>\n         </ul>\n        <p>In all playback modes, if <code>FragmentSelectorType</code> is\n                <code>PRODUCER_TIMESTAMP</code>, and if there are multiple fragments with the same\n            start timestamp, the fragment that has the larger fragment number (that is, the newer\n            fragment) is included in the HLS media playlist. The other fragments are not included.\n            Fragments that have different timestamps but have overlapping durations are still\n            included in the HLS media playlist. This can lead to unexpected behavior in the media\n            player.</p>\n        <p>The default is <code>LIVE</code>.</p>"
+          }
+        },
+        "Expires": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Expires",
+          "traits": {
+            "smithy.api#documentation": "<p>The time in seconds until the requested session expires. This value can be between 300\n            (5 minutes) and 43200 (12 hours).</p>\n        <p>When a session expires, no new calls to <code>GetHLSMasterPlaylist</code>,\n                <code>GetHLSMediaPlaylist</code>, <code>GetMP4InitFragment</code>,\n                <code>GetMP4MediaFragment</code>, or <code>GetTSFragment</code> can be made for that\n            session.</p>\n        <p>The default is 300 (5 minutes).</p>"
+          }
+        },
+        "StreamName": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the stream for which to retrieve the HLS master playlist URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
+          }
+        },
+        "HLSFragmentSelector": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSFragmentSelector",
+          "traits": {
+            "smithy.api#documentation": "<p>The time range of the requested fragment and the source of the timestamps.</p>\n        <p>This parameter is required if <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>. This parameter is optional if PlaybackMode is<code></code>\n            <code>LIVE</code>. If <code>PlaybackMode</code> is <code>LIVE</code>, the\n                <code>FragmentSelectorType</code> can be set, but the <code>TimestampRange</code>\n            should not be set. If <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>, both <code>FragmentSelectorType</code> and\n                <code>TimestampRange</code> must be set.</p>"
+          }
+        },
+        "MaxMediaPlaylistFragmentResults": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#PageLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of fragments that are returned in the HLS media playlists.</p>\n        <p>When the <code>PlaybackMode</code> is <code>LIVE</code>, the most recent fragments are\n            returned up to this value. When the <code>PlaybackMode</code> is <code>ON_DEMAND</code>,\n            the oldest fragments are returned, up to this maximum number.</p>\n        <p>When there are a higher number of fragments available in a live HLS media playlist,\n            video players often buffer content before starting playback. Increasing the buffer size\n            increases the playback latency, but it decreases the likelihood that rebuffering will\n            occur during playback. We recommend that a live HLS media playlist have a minimum of 3\n            fragments and a maximum of 10 fragments.</p>\n        <p>The default is 5 fragments if <code>PlaybackMode</code> is <code>LIVE</code> or\n                <code>LIVE_REPLAY</code>, and 1,000 if <code>PlaybackMode</code> is\n                <code>ON_DEMAND</code>. </p>\n        <p>The maximum value of 1,000 fragments corresponds to more than 16 minutes of video on\n            streams with 1-second fragments, and more than 2 1/2 hours of video on streams with\n            10-second fragments.</p>"
+          }
+        },
         "DiscontinuityMode": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSDiscontinuityMode",
           "traits": {
@@ -642,42 +678,6 @@
           "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSDisplayFragmentTimestamp",
           "traits": {
             "smithy.api#documentation": "<p>Specifies when the fragment start timestamps should be included in the HLS media\n            playlist. Typically, media players report the playhead position as a time relative to\n            the start of the first fragment in the playback session. However, when the start\n            timestamps are included in the HLS media playlist, some media players might report the\n            current playhead as an absolute time based on the fragment timestamps. This can be\n            useful for creating a playback experience that shows viewers the wall-clock time of the\n            media.</p>\n        <p>The default is <code>NEVER</code>. When <a>HLSFragmentSelector</a> is\n                <code>SERVER_TIMESTAMP</code>, the timestamps will be the server start timestamps.\n            Similarly, when <a>HLSFragmentSelector</a> is\n            <code>PRODUCER_TIMESTAMP</code>, the timestamps will be the producer start timestamps.\n        </p>"
-          }
-        },
-        "MaxMediaPlaylistFragmentResults": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#PageLimit",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of fragments that are returned in the HLS media playlists.</p>\n        <p>When the <code>PlaybackMode</code> is <code>LIVE</code>, the most recent fragments are\n            returned up to this value. When the <code>PlaybackMode</code> is <code>ON_DEMAND</code>,\n            the oldest fragments are returned, up to this maximum number.</p>\n        <p>When there are a higher number of fragments available in a live HLS media playlist,\n            video players often buffer content before starting playback. Increasing the buffer size\n            increases the playback latency, but it decreases the likelihood that rebuffering will\n            occur during playback. We recommend that a live HLS media playlist have a minimum of 3\n            fragments and a maximum of 10 fragments.</p>\n        <p>The default is 5 fragments if <code>PlaybackMode</code> is <code>LIVE</code> or\n                <code>LIVE_REPLAY</code>, and 1,000 if <code>PlaybackMode</code> is\n                <code>ON_DEMAND</code>. </p>\n        <p>The maximum value of 1,000 fragments corresponds to more than 16 minutes of video on\n            streams with 1-second fragments, and more than 2 1/2 hours of video on streams with\n            10-second fragments.</p>"
-          }
-        },
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for which to retrieve the HLS master\n            playlist URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
-          }
-        },
-        "StreamName": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the stream for which to retrieve the HLS master playlist URL.</p>\n        <p>You must specify either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>"
-          }
-        },
-        "PlaybackMode": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSPlaybackMode",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether to retrieve live, live replay, or archived, on-demand data.</p>\n        <p>Features of the three types of sessions include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE</code>\n                  </b>: For sessions of this type,\n                    the HLS media playlist is continually updated with the latest fragments as they\n                    become available. We recommend that the media player retrieve a new playlist on\n                    a one-second interval. When this type of session is played in a media player,\n                    the user interface typically displays a \"live\" notification, with no scrubber\n                    control for choosing the position in the playback window to display.</p>\n                <note>\n                    <p>In <code>LIVE</code> mode, the newest available fragments are included in\n                        an HLS media playlist, even if there is a gap between fragments (that is, if\n                        a fragment is missing). A gap like this might cause a media player to halt\n                        or cause a jump in playback. In this mode, fragments are not added to the\n                        HLS media playlist if they are older than the newest fragment in the\n                        playlist. If the missing fragment becomes available after a subsequent\n                        fragment is added to the playlist, the older fragment is not added, and the\n                        gap is not filled.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>LIVE_REPLAY</code>\n                  </b>: For sessions of\n                    this type, the HLS media playlist is updated similarly to how it is updated for\n                        <code>LIVE</code> mode except that it starts by including fragments from a\n                    given start time. Instead of fragments being added as they are ingested,\n                    fragments are added as the duration of the next fragment elapses. For example,\n                    if the fragments in the session are two seconds long, then a new fragment is\n                    added to the media playlist every two seconds. This mode is useful to be able to\n                    start playback from when an event is detected and continue live streaming media\n                    that has not yet been ingested as of the time of the session creation. This mode\n                    is also useful to stream previously archived media without being limited by the\n                    1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>ON_DEMAND</code>\n                  </b>: For sessions of this\n                    type, the HLS media playlist contains all the fragments for the session, up to\n                    the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.\n                    The playlist must be retrieved only once for each session. When this type of\n                    session is played in a media player, the user interface typically displays a\n                    scrubber control for choosing the position in the playback window to\n                    display.</p>\n            </li>\n         </ul>\n        <p>In all playback modes, if <code>FragmentSelectorType</code> is\n                <code>PRODUCER_TIMESTAMP</code>, and if there are multiple fragments with the same\n            start timestamp, the fragment that has the larger fragment number (that is, the newer\n            fragment) is included in the HLS media playlist. The other fragments are not included.\n            Fragments that have different timestamps but have overlapping durations are still\n            included in the HLS media playlist. This can lead to unexpected behavior in the media\n            player.</p>\n        <p>The default is <code>LIVE</code>.</p>"
-          }
-        },
-        "Expires": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Expires",
-          "traits": {
-            "smithy.api#documentation": "<p>The time in seconds until the requested session expires. This value can be between 300\n            (5 minutes) and 43200 (12 hours).</p>\n        <p>When a session expires, no new calls to <code>GetHLSMasterPlaylist</code>,\n                <code>GetHLSMediaPlaylist</code>, <code>GetMP4InitFragment</code>,\n                <code>GetMP4MediaFragment</code>, or <code>GetTSFragment</code> can be made for that\n            session.</p>\n        <p>The default is 300 (5 minutes).</p>"
-          }
-        },
-        "HLSFragmentSelector": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#HLSFragmentSelector",
-          "traits": {
-            "smithy.api#documentation": "<p>The time range of the requested fragment and the source of the timestamps.</p>\n        <p>This parameter is required if <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>. This parameter is optional if PlaybackMode is<code></code>\n            <code>LIVE</code>. If <code>PlaybackMode</code> is <code>LIVE</code>, the\n                <code>FragmentSelectorType</code> can be set, but the <code>TimestampRange</code>\n            should not be set. If <code>PlaybackMode</code> is <code>ON_DEMAND</code> or\n                <code>LIVE_REPLAY</code>, both <code>FragmentSelectorType</code> and\n                <code>TimestampRange</code> must be set.</p>"
           }
         }
       }
@@ -727,17 +727,17 @@
     "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentListInput": {
       "type": "structure",
       "members": {
-        "StreamName": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the stream from which to retrieve fragment media.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Fragments": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#FragmentNumberList",
           "traits": {
             "smithy.api#documentation": "<p>A list of the numbers of fragments for which to retrieve media. You retrieve these\n            values with <a>ListFragments</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "StreamName": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the stream from which to retrieve fragment media.</p>",
             "smithy.api#required": {}
           }
         }
@@ -746,18 +746,18 @@
     "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentListOutput": {
       "type": "structure",
       "members": {
-        "ContentType": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#ContentType",
-          "traits": {
-            "smithy.api#documentation": "<p>The content type of the requested media.</p>",
-            "smithy.api#httpHeader": "Content-Type"
-          }
-        },
         "Payload": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#Payload",
           "traits": {
             "smithy.api#documentation": "<p>The payload that Kinesis Video Streams returns is a sequence of chunks from the\n            specified stream. For information about the chunks, see <a href=\"http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html\">PutMedia</a>. The chunks that\n            Kinesis Video Streams returns in the <code>GetMediaForFragmentList</code> call also\n            include the following additional Matroska (MKV) tags: </p>\n        <ul>\n            <li>\n                <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the\n                    chunk.</p>\n            </li>\n            <li>\n                <p>AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the\n                    fragment.</p>\n            </li>\n            <li>\n                <p>AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp of the\n                    fragment.</p>\n            </li>\n         </ul>\n        <p>The following tags will be included if an exception occurs:</p>\n        <ul>\n            <li>\n                <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the\n                    exception</p>\n            </li>\n            <li>\n                <p>AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the\n                    exception</p>\n            </li>\n            <li>\n                <p>AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the\n                    exception</p>\n            </li>\n         </ul>",
             "smithy.api#httpPayload": {}
+          }
+        },
+        "ContentType": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#ContentType",
+          "traits": {
+            "smithy.api#documentation": "<p>The content type of the requested media.</p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         }
       }
@@ -856,16 +856,16 @@
     "com.amazonaws.kinesisvideoarchivedmedia#HLSTimestampRange": {
       "type": "structure",
       "members": {
-        "StartTimestamp": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The start of the timestamp range for the requested media.</p>\n        <p>If the <code>HLSTimestampRange</code> value is specified, the\n                <code>StartTimestamp</code> value is required.</p>\n        <note>\n            <p>This value is inclusive. Fragments that start before the\n                    <code>StartTimestamp</code> and continue past it are included in the session. If\n                    <code>FragmentSelectorType</code> is <code>SERVER_TIMESTAMP</code>, the\n                    <code>StartTimestamp</code> must be later than the stream head.</p>\n        </note>"
-          }
-        },
         "EndTimestamp": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The end of the timestamp range for the requested media. This value must be within 3\n            hours of the specified <code>StartTimestamp</code>, and it must be later than the\n                <code>StartTimestamp</code> value.</p>\n        <p>If <code>FragmentSelectorType</code> for the request is <code>SERVER_TIMESTAMP</code>,\n            this value must be in the past.</p>\n        <p>The <code>EndTimestamp</code> value is required for <code>ON_DEMAND</code> mode, but\n            optional for <code>LIVE_REPLAY</code> mode. If the <code>EndTimestamp</code> is not set\n            for <code>LIVE_REPLAY</code> mode then the session will continue to include newly\n            ingested fragments until the session expires.</p>\n        <note>\n            <p>This value is inclusive. The <code>EndTimestamp</code> is compared to the\n                (starting) timestamp of the fragment. Fragments that start before the\n                    <code>EndTimestamp</code> value and continue past it are included in the\n                session.</p>\n        </note>"
+          }
+        },
+        "StartTimestamp": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start of the timestamp range for the requested media.</p>\n        <p>If the <code>HLSTimestampRange</code> value is specified, the\n                <code>StartTimestamp</code> value is required.</p>\n        <note>\n            <p>This value is inclusive. Fragments that start before the\n                    <code>StartTimestamp</code> and continue past it are included in the session. If\n                    <code>FragmentSelectorType</code> is <code>SERVER_TIMESTAMP</code>, the\n                    <code>StartTimestamp</code> must be later than the stream head.</p>\n        </note>"
           }
         }
       },
@@ -946,11 +946,10 @@
     "com.amazonaws.kinesisvideoarchivedmedia#ListFragmentsInput": {
       "type": "structure",
       "members": {
-        "StreamName": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
+        "FragmentSelector": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#FragmentSelector",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the stream from which to retrieve a fragment list.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Describes the timestamp range and timestamp origin for the range of fragments to\n            return.</p>"
           }
         },
         "MaxResults": {
@@ -965,10 +964,11 @@
             "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the <a>ListFragmentsOutput$NextToken</a> from a previously truncated\n            response.</p>"
           }
         },
-        "FragmentSelector": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#FragmentSelector",
+        "StreamName": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the timestamp range and timestamp origin for the range of fragments to\n            return.</p>"
+            "smithy.api#documentation": "<p>The name of the stream from which to retrieve a fragment list.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -1097,17 +1097,17 @@
     "com.amazonaws.kinesisvideoarchivedmedia#TimestampRange": {
       "type": "structure",
       "members": {
-        "StartTimestamp": {
-          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The starting timestamp in the range of timestamps for which to return\n            fragments.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "EndTimestamp": {
           "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The ending timestamp in the range of timestamps for which to return fragments.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "StartTimestamp": {
+          "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The starting timestamp in the range of timestamps for which to return\n            fragments.</p>",
             "smithy.api#required": {}
           }
         }

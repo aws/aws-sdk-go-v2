@@ -127,7 +127,7 @@
           "sdkId": "FMS",
           "arnNamespace": "fms",
           "cloudFormationName": "FMS",
-          "cloudTrailEventSource": "v20180101.customerapi.roshi.amazonaws.com"
+          "cloudTrailEventSource": "fms.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "fms"
@@ -202,10 +202,10 @@
     "com.amazonaws.fms#AppsListData": {
       "type": "structure",
       "members": {
-        "PreviousAppsList": {
-          "target": "com.amazonaws.fms#PreviousAppsList",
+        "LastUpdateTime": {
+          "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
-            "smithy.api#documentation": "<p>A map of previous version numbers to their corresponding <code>App</code> object arrays.</p>"
+            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager applications list was last updated.</p>"
           }
         },
         "AppsList": {
@@ -213,6 +213,12 @@
           "traits": {
             "smithy.api#documentation": "<p>An array of applications in the AWS Firewall Manager applications list.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "PreviousAppsList": {
+          "target": "com.amazonaws.fms#PreviousAppsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of previous version numbers to their corresponding <code>App</code> object arrays.</p>"
           }
         },
         "ListUpdateToken": {
@@ -228,22 +234,16 @@
             "smithy.api#required": {}
           }
         },
-        "LastUpdateTime": {
+        "CreateTime": {
           "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
-            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager applications list was last updated.</p>"
+            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager applications list was created.</p>"
           }
         },
         "ListId": {
           "target": "com.amazonaws.fms#ListId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager applications list.</p>"
-          }
-        },
-        "CreateTime": {
-          "target": "com.amazonaws.fms#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager applications list was created.</p>"
           }
         }
       },
@@ -327,16 +327,16 @@
     "com.amazonaws.fms#AwsEc2InstanceViolation": {
       "type": "structure",
       "members": {
-        "AwsEc2NetworkInterfaceViolations": {
-          "target": "com.amazonaws.fms#AwsEc2NetworkInterfaceViolations",
-          "traits": {
-            "smithy.api#documentation": "<p>Violations for network interfaces associated with the EC2 instance.</p>"
-          }
-        },
         "ViolationTarget": {
           "target": "com.amazonaws.fms#ViolationTarget",
           "traits": {
             "smithy.api#documentation": "<p>The resource ID of the EC2 instance.</p>"
+          }
+        },
+        "AwsEc2NetworkInterfaceViolations": {
+          "target": "com.amazonaws.fms#AwsEc2NetworkInterfaceViolations",
+          "traits": {
+            "smithy.api#documentation": "<p>Violations for network interfaces associated with the EC2 instance.</p>"
           }
         }
       },
@@ -373,10 +373,10 @@
     "com.amazonaws.fms#AwsVPCSecurityGroupViolation": {
       "type": "structure",
       "members": {
-        "ViolationTargetDescription": {
-          "target": "com.amazonaws.fms#LengthBoundedString",
+        "PossibleSecurityGroupRemediationActions": {
+          "target": "com.amazonaws.fms#SecurityGroupRemediationActions",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the security group that violates the policy.</p>"
+            "smithy.api#documentation": "<p>Remediation options for the rule specified in the <code>ViolationTarget</code>.</p>"
           }
         },
         "PartialMatches": {
@@ -391,10 +391,10 @@
             "smithy.api#documentation": "<p>The security group rule that is being evaluated.</p>"
           }
         },
-        "PossibleSecurityGroupRemediationActions": {
-          "target": "com.amazonaws.fms#SecurityGroupRemediationActions",
+        "ViolationTargetDescription": {
+          "target": "com.amazonaws.fms#LengthBoundedString",
           "traits": {
-            "smithy.api#documentation": "<p>Remediation options for the rule specified in the <code>ViolationTarget</code>.</p>"
+            "smithy.api#documentation": "<p>A description of the security group that violates the policy.</p>"
           }
         }
       },
@@ -418,12 +418,6 @@
     "com.amazonaws.fms#ComplianceViolator": {
       "type": "structure",
       "members": {
-        "ViolationReason": {
-          "target": "com.amazonaws.fms#ViolationReason",
-          "traits": {
-            "smithy.api#documentation": "<p>The reason that the resource is not protected by the policy.</p>"
-          }
-        },
         "ResourceId": {
           "target": "com.amazonaws.fms#ResourceId",
           "traits": {
@@ -434,6 +428,12 @@
           "target": "com.amazonaws.fms#ResourceType",
           "traits": {
             "smithy.api#documentation": "<p>The resource type. This is in the format shown in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. For example:\n        <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or\n        <code>AWS::CloudFront::Distribution</code>.</p>"
+          }
+        },
+        "ViolationReason": {
+          "target": "com.amazonaws.fms#ViolationReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that the resource is not protected by the policy.</p>"
           }
         }
       },
@@ -676,16 +676,16 @@
     "com.amazonaws.fms#EvaluationResult": {
       "type": "structure",
       "members": {
-        "ComplianceStatus": {
-          "target": "com.amazonaws.fms#PolicyComplianceStatusType",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes an AWS account's compliance with the AWS Firewall Manager policy.</p>"
-          }
-        },
         "ViolatorCount": {
           "target": "com.amazonaws.fms#ResourceCount",
           "traits": {
             "smithy.api#documentation": "<p>The number of resources that are noncompliant with the specified policy. For AWS WAF and\n      Shield Advanced policies, a resource is considered noncompliant if it is not associated with\n      the policy. For security group policies, a resource is considered noncompliant if it doesn't\n      comply with the rules of the policy and remediation is disabled or not possible.</p>"
+          }
+        },
+        "ComplianceStatus": {
+          "target": "com.amazonaws.fms#PolicyComplianceStatusType",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes an AWS account's compliance with the AWS Firewall Manager policy.</p>"
           }
         },
         "EvaluationLimitExceeded": {
@@ -775,17 +775,17 @@
     "com.amazonaws.fms#GetAppsListRequest": {
       "type": "structure",
       "members": {
+        "DefaultList": {
+          "target": "com.amazonaws.fms#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.</p>"
+          }
+        },
         "ListId": {
           "target": "com.amazonaws.fms#ListId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager applications list that you want the details for.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "DefaultList": {
-          "target": "com.amazonaws.fms#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.</p>"
           }
         }
       }
@@ -948,16 +948,16 @@
     "com.amazonaws.fms#GetPolicyResponse": {
       "type": "structure",
       "members": {
-        "Policy": {
-          "target": "com.amazonaws.fms#Policy",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the specified AWS Firewall Manager policy.</p>"
-          }
-        },
         "PolicyArn": {
           "target": "com.amazonaws.fms#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified policy.</p>"
+          }
+        },
+        "Policy": {
+          "target": "com.amazonaws.fms#Policy",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the specified AWS Firewall Manager policy.</p>"
           }
         }
       }
@@ -988,16 +988,11 @@
     "com.amazonaws.fms#GetProtectionStatusRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.fms#PaginationMaxResults",
+        "PolicyId": {
+          "target": "com.amazonaws.fms#PolicyId",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more \n        objects than the number that you specify for <code>MaxResults</code>, the response includes a \n         <code>NextToken</code> value that you can use to get another batch of objects.</p>"
-          }
-        },
-        "EndTime": {
-          "target": "com.amazonaws.fms#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The end of the time period to query for the attacks. This is a <code>timestamp</code> type. The\n         request syntax listing indicates a <code>number</code> type because the default used by AWS Firewall\n         Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is\n         allowed.</p>"
+            "smithy.api#documentation": "<p>The ID of the policy for which you want to get the attack information.</p>",
+            "smithy.api#required": {}
           }
         },
         "MemberAccountId": {
@@ -1006,17 +1001,22 @@
             "smithy.api#documentation": "<p>The AWS account that is in scope of the policy that you want to get the details\n         for.</p>"
           }
         },
-        "PolicyId": {
-          "target": "com.amazonaws.fms#PolicyId",
+        "EndTime": {
+          "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the policy for which you want to get the attack information.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The end of the time period to query for the attacks. This is a <code>timestamp</code> type. The\n         request syntax listing indicates a <code>number</code> type because the default used by AWS Firewall\n         Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is\n         allowed.</p>"
           }
         },
         "StartTime": {
           "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
             "smithy.api#documentation": "<p>The start of the time period to query for the attacks. This is a <code>timestamp</code> type. The\n          request syntax listing indicates a <code>number</code> type because the default used by AWS Firewall\n         Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is\n         allowed.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.fms#PaginationMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more \n        objects than the number that you specify for <code>MaxResults</code>, the response includes a \n         <code>NextToken</code> value that you can use to get another batch of objects.</p>"
           }
         },
         "NextToken": {
@@ -1030,12 +1030,6 @@
     "com.amazonaws.fms#GetProtectionStatusResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fms#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If you have more objects than the number that you specified for <code>MaxResults</code> in the request, \n         the response includes a <code>NextToken</code> value. To list more objects, submit another \n         <code>GetProtectionStatus</code> request, and specify the <code>NextToken</code> value from the response in the \n         <code>NextToken</code> value in the next request.</p>\n         <p>AWS SDKs provide auto-pagination that identify <code>NextToken</code> in a response and\n         make subsequent request calls automatically on your behalf. However, this feature is not\n         supported by <code>GetProtectionStatus</code>. You must submit subsequent requests with\n            <code>NextToken</code> using your own processes. </p>"
-          }
-        },
         "AdminAccountId": {
           "target": "com.amazonaws.fms#AWSAccountId",
           "traits": {
@@ -1046,6 +1040,12 @@
           "target": "com.amazonaws.fms#ProtectionData",
           "traits": {
             "smithy.api#documentation": "<p>Details about the attack, including the following:</p>\n         <ul>\n            <li>\n               <p>Attack type</p>\n            </li>\n            <li>\n               <p>Account ID</p>\n            </li>\n            <li>\n               <p>ARN of the resource attacked</p>\n            </li>\n            <li>\n               <p>Start time of the attack</p>\n            </li>\n            <li>\n               <p>End time of the attack (ongoing attacks will not have an end time)</p>\n            </li>\n         </ul>\n         <p>The details are in JSON format. </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.fms#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If you have more objects than the number that you specified for <code>MaxResults</code> in the request, \n         the response includes a <code>NextToken</code> value. To list more objects, submit another \n         <code>GetProtectionStatus</code> request, and specify the <code>NextToken</code> value from the response in the \n         <code>NextToken</code> value in the next request.</p>\n         <p>AWS SDKs provide auto-pagination that identify <code>NextToken</code> in a response and\n         make subsequent request calls automatically on your behalf. However, this feature is not\n         supported by <code>GetProtectionStatus</code>. You must submit subsequent requests with\n            <code>NextToken</code> using your own processes. </p>"
           }
         },
         "ServiceType": {
@@ -1100,16 +1100,16 @@
     "com.amazonaws.fms#GetProtocolsListResponse": {
       "type": "structure",
       "members": {
-        "ProtocolsList": {
-          "target": "com.amazonaws.fms#ProtocolsListData",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the specified AWS Firewall Manager protocols list.</p>"
-          }
-        },
         "ProtocolsListArn": {
           "target": "com.amazonaws.fms#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified protocols list.</p>"
+          }
+        },
+        "ProtocolsList": {
+          "target": "com.amazonaws.fms#ProtocolsListData",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the specified AWS Firewall Manager protocols list.</p>"
           }
         }
       }
@@ -1140,17 +1140,17 @@
     "com.amazonaws.fms#GetViolationDetailsRequest": {
       "type": "structure",
       "members": {
-        "ResourceId": {
-          "target": "com.amazonaws.fms#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the resource that has violations.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "PolicyId": {
           "target": "com.amazonaws.fms#PolicyId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager policy that you want the details for. This currently only supports security group content audit policies.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceId": {
+          "target": "com.amazonaws.fms#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the resource that has violations.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1298,6 +1298,13 @@
     "com.amazonaws.fms#ListAppsListsRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.fms#PaginationMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of objects that you want AWS Firewall Manager to return for this request. If more\n            objects are available, in the response, AWS Firewall Manager provides a\n           <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> \n         <p>If you don't specify this, AWS Firewall Manager returns all available objects.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.fms#PaginationToken",
           "traits": {
@@ -1308,13 +1315,6 @@
           "target": "com.amazonaws.fms#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Specifies whether the lists to retrieve are default lists owned by AWS Firewall Manager.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.fms#PaginationMaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of objects that you want AWS Firewall Manager to return for this request. If more\n            objects are available, in the response, AWS Firewall Manager provides a\n           <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> \n         <p>If you don't specify this, AWS Firewall Manager returns all available objects.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -1372,16 +1372,16 @@
             "smithy.api#required": {}
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.fms#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more\n        <code>PolicyComplianceStatus</code> objects than the number that you specify for\n        <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the\n      response that allows you to list another group of <code>PolicyComplianceStatus</code> objects.\n      For the second and subsequent <code>ListComplianceStatus</code> requests, specify the value of\n        <code>NextToken</code> from the previous response to get information about another batch of\n        <code>PolicyComplianceStatus</code> objects.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.fms#PaginationMaxResults",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the number of <code>PolicyComplianceStatus</code> objects that you want AWS\n      Firewall Manager to return for this request. If you have more\n        <code>PolicyComplianceStatus</code> objects than the number that you specify for\n        <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can\n      use to get another batch of <code>PolicyComplianceStatus</code> objects.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.fms#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more\n        <code>PolicyComplianceStatus</code> objects than the number that you specify for\n        <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the\n      response that allows you to list another group of <code>PolicyComplianceStatus</code> objects.\n      For the second and subsequent <code>ListComplianceStatus</code> requests, specify the value of\n        <code>NextToken</code> from the previous response to get information about another batch of\n        <code>PolicyComplianceStatus</code> objects.</p>"
           }
         }
       }
@@ -1389,16 +1389,16 @@
     "com.amazonaws.fms#ListComplianceStatusResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fms#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If you have more <code>PolicyComplianceStatus</code> objects than the number that you\n      specified for <code>MaxResults</code> in the request, the response includes a\n        <code>NextToken</code> value. To list more <code>PolicyComplianceStatus</code> objects,\n      submit another <code>ListComplianceStatus</code> request, and specify the\n        <code>NextToken</code> value from the response in the <code>NextToken</code> value in the\n      next request.</p>"
-          }
-        },
         "PolicyComplianceStatusList": {
           "target": "com.amazonaws.fms#PolicyComplianceStatusList",
           "traits": {
             "smithy.api#documentation": "<p>An array of <code>PolicyComplianceStatus</code> objects.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.fms#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If you have more <code>PolicyComplianceStatus</code> objects than the number that you\n      specified for <code>MaxResults</code> in the request, the response includes a\n        <code>NextToken</code> value. To list more <code>PolicyComplianceStatus</code> objects,\n      submit another <code>ListComplianceStatus</code> request, and specify the\n        <code>NextToken</code> value from the response in the <code>NextToken</code> value in the\n      next request.</p>"
           }
         }
       }
@@ -1459,16 +1459,16 @@
     "com.amazonaws.fms#ListMemberAccountsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fms#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If you have more member account IDs than the number that you specified for\n        <code>MaxResults</code> in the request, the response includes a <code>NextToken</code>\n      value. To list more IDs, submit another <code>ListMemberAccounts</code> request, and specify\n      the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the\n      next request.</p>"
-          }
-        },
         "MemberAccounts": {
           "target": "com.amazonaws.fms#MemberAccounts",
           "traits": {
             "smithy.api#documentation": "<p>An array of account IDs.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.fms#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If you have more member account IDs than the number that you specified for\n        <code>MaxResults</code> in the request, the response includes a <code>NextToken</code>\n      value. To list more IDs, submit another <code>ListMemberAccounts</code> request, and specify\n      the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the\n      next request.</p>"
           }
         }
       }
@@ -1508,16 +1508,16 @@
     "com.amazonaws.fms#ListPoliciesRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.fms#PaginationMaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall\n      Manager to return for this request. If you have more <code>PolicySummary</code> objects than\n      the number that you specify for <code>MaxResults</code>, the response includes a\n        <code>NextToken</code> value that you can use to get another batch of\n        <code>PolicySummary</code> objects.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.fms#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more\n        <code>PolicySummary</code> objects than the number that you specify for\n        <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the\n      response that allows you to list another group of <code>PolicySummary</code> objects. For the\n      second and subsequent <code>ListPolicies</code> requests, specify the value of\n        <code>NextToken</code> from the previous response to get information about another batch of\n        <code>PolicySummary</code> objects.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.fms#PaginationMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the number of <code>PolicySummary</code> objects that you want AWS Firewall\n      Manager to return for this request. If you have more <code>PolicySummary</code> objects than\n      the number that you specify for <code>MaxResults</code>, the response includes a\n        <code>NextToken</code> value that you can use to get another batch of\n        <code>PolicySummary</code> objects.</p>"
           }
         }
       }
@@ -1691,16 +1691,16 @@
     "com.amazonaws.fms#PartialMatch": {
       "type": "structure",
       "members": {
-        "TargetViolationReasons": {
-          "target": "com.amazonaws.fms#TargetViolationReasons",
-          "traits": {
-            "smithy.api#documentation": "<p>The violation reason.</p>"
-          }
-        },
         "Reference": {
           "target": "com.amazonaws.fms#ReferenceRule",
           "traits": {
             "smithy.api#documentation": "<p>The reference rule from the master security group of the AWS Firewall Manager policy.</p>"
+          }
+        },
+        "TargetViolationReasons": {
+          "target": "com.amazonaws.fms#TargetViolationReasons",
+          "traits": {
+            "smithy.api#documentation": "<p>The violation reason.</p>"
           }
         }
       },
@@ -1717,10 +1717,11 @@
     "com.amazonaws.fms#Policy": {
       "type": "structure",
       "members": {
-        "PolicyUpdateToken": {
-          "target": "com.amazonaws.fms#PolicyUpdateToken",
+        "ExcludeResourceTags": {
+          "target": "com.amazonaws.fms#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for each update to the policy. When issuing a <code>PutPolicy</code>\n      request, the <code>PolicyUpdateToken</code> in the request must match the\n        <code>PolicyUpdateToken</code> of the current policy version. To get the\n        <code>PolicyUpdateToken</code> of the current policy version, use a <code>GetPolicy</code>\n      request.</p>"
+            "smithy.api#documentation": "<p>If set to <code>True</code>, resources with the tags that are specified in the\n        <code>ResourceTag</code> array are not in scope of the policy. If set to <code>False</code>,\n      and the <code>ResourceTag</code> array is not null, only resources with the specified tags are\n      in scope of the policy.</p>",
+            "smithy.api#required": {}
           }
         },
         "IncludeMap": {
@@ -1729,11 +1730,10 @@
             "smithy.api#documentation": "<p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to include in the policy. \n          Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time.</p>\n              <p>You can specify inclusions or exclusions, but not both. If you specify an <code>IncludeMap</code>, AWS Firewall Manager \n          applies the policy to all accounts specified by the <code>IncludeMap</code>, and \n          does not evaluate any <code>ExcludeMap</code> specifications. If you do not specify an <code>IncludeMap</code>, then Firewall Manager \n            applies the policy to all accounts except for those specified by the <code>ExcludeMap</code>.</p>\n         <p>You can specify account IDs, OUs, or a combination: </p>\n         <ul>\n            <li>\n               <p>Specify account IDs by setting the key to <code>ACCOUNT</code>. For example, the following is a valid map:  \n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify OUs by setting the key to <code>ORG_UNIT</code>. For example, the following is a valid map: \n  <code>{“ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map:\n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n         </ul>"
           }
         },
-        "PolicyName": {
-          "target": "com.amazonaws.fms#ResourceName",
+        "PolicyId": {
+          "target": "com.amazonaws.fms#PolicyId",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the AWS Firewall Manager policy.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager policy.</p>"
           }
         },
         "ResourceTypeList": {
@@ -1742,30 +1742,16 @@
             "smithy.api#documentation": "<p>An array of <code>ResourceType</code>.</p>"
           }
         },
-        "SecurityServicePolicyData": {
-          "target": "com.amazonaws.fms#SecurityServicePolicyData",
-          "traits": {
-            "smithy.api#documentation": "<p>Details about the security service that is being used to protect the resources.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ExcludeResourceTags": {
-          "target": "com.amazonaws.fms#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If set to <code>True</code>, resources with the tags that are specified in the\n        <code>ResourceTag</code> array are not in scope of the policy. If set to <code>False</code>,\n      and the <code>ResourceTag</code> array is not null, only resources with the specified tags are\n      in scope of the policy.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "PolicyId": {
-          "target": "com.amazonaws.fms#PolicyId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager policy.</p>"
-          }
-        },
         "ResourceTags": {
           "target": "com.amazonaws.fms#ResourceTags",
           "traits": {
             "smithy.api#documentation": "<p>An array of <code>ResourceTag</code> objects.</p>"
+          }
+        },
+        "ExcludeMap": {
+          "target": "com.amazonaws.fms#CustomerPolicyScopeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to exclude from the policy. \n          Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time.</p>\n              <p>You can specify inclusions or exclusions, but not both. If you specify an <code>IncludeMap</code>, AWS Firewall Manager \n          applies the policy to all accounts specified by the <code>IncludeMap</code>, and \n          does not evaluate any <code>ExcludeMap</code> specifications. If you do not specify an <code>IncludeMap</code>, then Firewall Manager \n            applies the policy to all accounts except for those specified by the <code>ExcludeMap</code>.</p>\n         <p>You can specify account IDs, OUs, or a combination: </p>\n         <ul>\n            <li>\n               <p>Specify account IDs by setting the key to <code>ACCOUNT</code>. For example, the following is a valid map:  \n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify OUs by setting the key to <code>ORG_UNIT</code>. For example, the following is a valid map: \n  <code>{“ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map:\n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n         </ul>"
           }
         },
         "ResourceType": {
@@ -1775,10 +1761,18 @@
             "smithy.api#required": {}
           }
         },
-        "ExcludeMap": {
-          "target": "com.amazonaws.fms#CustomerPolicyScopeMap",
+        "PolicyName": {
+          "target": "com.amazonaws.fms#ResourceName",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to exclude from the policy. \n          Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time.</p>\n              <p>You can specify inclusions or exclusions, but not both. If you specify an <code>IncludeMap</code>, AWS Firewall Manager \n          applies the policy to all accounts specified by the <code>IncludeMap</code>, and \n          does not evaluate any <code>ExcludeMap</code> specifications. If you do not specify an <code>IncludeMap</code>, then Firewall Manager \n            applies the policy to all accounts except for those specified by the <code>ExcludeMap</code>.</p>\n         <p>You can specify account IDs, OUs, or a combination: </p>\n         <ul>\n            <li>\n               <p>Specify account IDs by setting the key to <code>ACCOUNT</code>. For example, the following is a valid map:  \n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify OUs by setting the key to <code>ORG_UNIT</code>. For example, the following is a valid map: \n  <code>{“ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map:\n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The name of the AWS Firewall Manager policy.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SecurityServicePolicyData": {
+          "target": "com.amazonaws.fms#SecurityServicePolicyData",
+          "traits": {
+            "smithy.api#documentation": "<p>Details about the security service that is being used to protect the resources.</p>",
+            "smithy.api#required": {}
           }
         },
         "RemediationEnabled": {
@@ -1786,6 +1780,12 @@
           "traits": {
             "smithy.api#documentation": "<p>Indicates if the policy should be automatically applied to new resources.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "PolicyUpdateToken": {
+          "target": "com.amazonaws.fms#PolicyUpdateToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for each update to the policy. When issuing a <code>PutPolicy</code>\n      request, the <code>PolicyUpdateToken</code> in the request must match the\n        <code>PolicyUpdateToken</code> of the current policy version. To get the\n        <code>PolicyUpdateToken</code> of the current policy version, use a <code>GetPolicy</code>\n      request.</p>"
           }
         }
       },
@@ -1796,22 +1796,22 @@
     "com.amazonaws.fms#PolicyComplianceDetail": {
       "type": "structure",
       "members": {
+        "PolicyOwner": {
+          "target": "com.amazonaws.fms#AWSAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account that created the AWS Firewall Manager policy.</p>"
+          }
+        },
+        "EvaluationLimitExceeded": {
+          "target": "com.amazonaws.fms#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if over 100 resources are noncompliant with the AWS Firewall Manager\n      policy.</p>"
+          }
+        },
         "MemberAccount": {
           "target": "com.amazonaws.fms#AWSAccountId",
           "traits": {
             "smithy.api#documentation": "<p>The AWS account ID.</p>"
-          }
-        },
-        "Violators": {
-          "target": "com.amazonaws.fms#ComplianceViolators",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of resources that aren't protected by the AWS WAF or Shield Advanced policy or\n      that aren't in compliance with the security group policy.</p>"
-          }
-        },
-        "ExpiredAt": {
-          "target": "com.amazonaws.fms#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>A timestamp that indicates when the returned information should be considered out of\n      date.</p>"
           }
         },
         "PolicyId": {
@@ -1826,16 +1826,16 @@
             "smithy.api#documentation": "<p>Details about problems with dependent services, such as AWS WAF or AWS Config, that are\n      causing a resource to be noncompliant. The details include the name of the dependent service\n      and the error message received that indicates the problem with the service.</p>"
           }
         },
-        "EvaluationLimitExceeded": {
-          "target": "com.amazonaws.fms#Boolean",
+        "ExpiredAt": {
+          "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates if over 100 resources are noncompliant with the AWS Firewall Manager\n      policy.</p>"
+            "smithy.api#documentation": "<p>A timestamp that indicates when the returned information should be considered out of\n      date.</p>"
           }
         },
-        "PolicyOwner": {
-          "target": "com.amazonaws.fms#AWSAccountId",
+        "Violators": {
+          "target": "com.amazonaws.fms#ComplianceViolators",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS account that created the AWS Firewall Manager policy.</p>"
+            "smithy.api#documentation": "<p>An array of resources that aren't protected by the AWS WAF or Shield Advanced policy or\n      that aren't in compliance with the security group policy.</p>"
           }
         }
       },
@@ -1846,28 +1846,16 @@
     "com.amazonaws.fms#PolicyComplianceStatus": {
       "type": "structure",
       "members": {
-        "MemberAccount": {
-          "target": "com.amazonaws.fms#AWSAccountId",
+        "PolicyName": {
+          "target": "com.amazonaws.fms#ResourceName",
           "traits": {
-            "smithy.api#documentation": "<p>The member account ID.</p>"
-          }
-        },
-        "LastUpdated": {
-          "target": "com.amazonaws.fms#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Timestamp of the last update to the <code>EvaluationResult</code> objects.</p>"
+            "smithy.api#documentation": "<p>The name of the AWS Firewall Manager policy.</p>"
           }
         },
         "EvaluationResults": {
           "target": "com.amazonaws.fms#EvaluationResults",
           "traits": {
             "smithy.api#documentation": "<p>An array of <code>EvaluationResult</code> objects.</p>"
-          }
-        },
-        "PolicyName": {
-          "target": "com.amazonaws.fms#ResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the AWS Firewall Manager policy.</p>"
           }
         },
         "IssueInfoMap": {
@@ -1880,6 +1868,18 @@
           "target": "com.amazonaws.fms#PolicyId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager policy.</p>"
+          }
+        },
+        "LastUpdated": {
+          "target": "com.amazonaws.fms#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Timestamp of the last update to the <code>EvaluationResult</code> objects.</p>"
+          }
+        },
+        "MemberAccount": {
+          "target": "com.amazonaws.fms#AWSAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The member account ID.</p>"
           }
         },
         "PolicyOwner": {
@@ -1927,30 +1927,6 @@
     "com.amazonaws.fms#PolicySummary": {
       "type": "structure",
       "members": {
-        "PolicyId": {
-          "target": "com.amazonaws.fms#PolicyId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the specified policy.</p>"
-          }
-        },
-        "RemediationEnabled": {
-          "target": "com.amazonaws.fms#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if the policy should be automatically applied to new resources.</p>"
-          }
-        },
-        "SecurityServiceType": {
-          "target": "com.amazonaws.fms#SecurityServiceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The service that the policy is using to protect the resources. This specifies the type of\n      policy that is created, either an AWS WAF policy, a Shield Advanced policy, or a security\n      group policy.</p>"
-          }
-        },
-        "PolicyArn": {
-          "target": "com.amazonaws.fms#ResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified policy.</p>"
-          }
-        },
         "ResourceType": {
           "target": "com.amazonaws.fms#ResourceType",
           "traits": {
@@ -1961,6 +1937,30 @@
           "target": "com.amazonaws.fms#ResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the specified policy.</p>"
+          }
+        },
+        "PolicyArn": {
+          "target": "com.amazonaws.fms#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified policy.</p>"
+          }
+        },
+        "SecurityServiceType": {
+          "target": "com.amazonaws.fms#SecurityServiceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The service that the policy is using to protect the resources. This specifies the type of\n      policy that is created, either an AWS WAF policy, a Shield Advanced policy, or a security\n      group policy.</p>"
+          }
+        },
+        "PolicyId": {
+          "target": "com.amazonaws.fms#PolicyId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the specified policy.</p>"
+          }
+        },
+        "RemediationEnabled": {
+          "target": "com.amazonaws.fms#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the policy should be automatically applied to new resources.</p>"
           }
         }
       },
@@ -2040,23 +2040,17 @@
             "smithy.api#documentation": "<p>A map of previous version numbers to their corresponding protocol arrays.</p>"
           }
         },
+        "LastUpdateTime": {
+          "target": "com.amazonaws.fms#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager protocols list was last updated.</p>"
+          }
+        },
         "ProtocolsList": {
           "target": "com.amazonaws.fms#ProtocolsList",
           "traits": {
             "smithy.api#documentation": "<p>An array of protocols in the AWS Firewall Manager protocols list.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "ListUpdateToken": {
-          "target": "com.amazonaws.fms#UpdateToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for each update to the list. When you update \n        the list, the update token must match the token of the current version of the application list. \n        You can retrieve the update token by getting the list. </p>"
-          }
-        },
-        "CreateTime": {
-          "target": "com.amazonaws.fms#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager protocols list was created.</p>"
           }
         },
         "ListId": {
@@ -2065,10 +2059,16 @@
             "smithy.api#documentation": "<p>The ID of the AWS Firewall Manager protocols list.</p>"
           }
         },
-        "LastUpdateTime": {
+        "CreateTime": {
           "target": "com.amazonaws.fms#TimeStamp",
           "traits": {
-            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager protocols list was last updated.</p>"
+            "smithy.api#documentation": "<p>The time that the AWS Firewall Manager protocols list was created.</p>"
+          }
+        },
+        "ListUpdateToken": {
+          "target": "com.amazonaws.fms#UpdateToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for each update to the list. When you update \n        the list, the update token must match the token of the current version of the application list. \n        You can retrieve the update token by getting the list. </p>"
           }
         },
         "ListName": {
@@ -2086,10 +2086,10 @@
     "com.amazonaws.fms#ProtocolsListDataSummary": {
       "type": "structure",
       "members": {
-        "ProtocolsList": {
-          "target": "com.amazonaws.fms#ProtocolsList",
+        "ListName": {
+          "target": "com.amazonaws.fms#ResourceName",
           "traits": {
-            "smithy.api#documentation": "<p>An array of protocols in the AWS Firewall Manager protocols list.</p>"
+            "smithy.api#documentation": "<p>The name of the specified protocols list.</p>"
           }
         },
         "ListArn": {
@@ -2098,16 +2098,16 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified protocols list.</p>"
           }
         },
+        "ProtocolsList": {
+          "target": "com.amazonaws.fms#ProtocolsList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of protocols in the AWS Firewall Manager protocols list.</p>"
+          }
+        },
         "ListId": {
           "target": "com.amazonaws.fms#ListId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the specified protocols list.</p>"
-          }
-        },
-        "ListName": {
-          "target": "com.amazonaws.fms#ResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the specified protocols list.</p>"
           }
         }
       },
@@ -2153,17 +2153,17 @@
     "com.amazonaws.fms#PutAppsListRequest": {
       "type": "structure",
       "members": {
+        "TagList": {
+          "target": "com.amazonaws.fms#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags associated with the resource.</p>"
+          }
+        },
         "AppsList": {
           "target": "com.amazonaws.fms#AppsListData",
           "traits": {
             "smithy.api#documentation": "<p>The details of the AWS Firewall Manager applications list to be created.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "TagList": {
-          "target": "com.amazonaws.fms#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags associated with the resource.</p>"
           }
         }
       }
@@ -2277,16 +2277,16 @@
     "com.amazonaws.fms#PutPolicyResponse": {
       "type": "structure",
       "members": {
-        "Policy": {
-          "target": "com.amazonaws.fms#Policy",
-          "traits": {
-            "smithy.api#documentation": "<p>The details of the AWS Firewall Manager policy.</p>"
-          }
-        },
         "PolicyArn": {
           "target": "com.amazonaws.fms#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>"
+          }
+        },
+        "Policy": {
+          "target": "com.amazonaws.fms#Policy",
+          "traits": {
+            "smithy.api#documentation": "<p>The details of the AWS Firewall Manager policy.</p>"
           }
         }
       }
@@ -2341,16 +2341,16 @@
     "com.amazonaws.fms#PutProtocolsListResponse": {
       "type": "structure",
       "members": {
-        "ProtocolsListArn": {
-          "target": "com.amazonaws.fms#ResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protocols list.</p>"
-          }
-        },
         "ProtocolsList": {
           "target": "com.amazonaws.fms#ProtocolsListData",
           "traits": {
             "smithy.api#documentation": "<p>The details of the AWS Firewall Manager protocols list.</p>"
+          }
+        },
+        "ProtocolsListArn": {
+          "target": "com.amazonaws.fms#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protocols list.</p>"
           }
         }
       }
@@ -2543,10 +2543,10 @@
     "com.amazonaws.fms#SecurityGroupRemediationAction": {
       "type": "structure",
       "members": {
-        "RemediationActionType": {
-          "target": "com.amazonaws.fms#RemediationActionType",
+        "RemediationResult": {
+          "target": "com.amazonaws.fms#SecurityGroupRuleDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The remediation action that will be performed.</p>"
+            "smithy.api#documentation": "<p>The final state of the rule specified in the <code>ViolationTarget</code> after it is remediated.</p>"
           }
         },
         "Description": {
@@ -2555,10 +2555,10 @@
             "smithy.api#documentation": "<p>Brief description of the action that will be performed.</p>"
           }
         },
-        "RemediationResult": {
-          "target": "com.amazonaws.fms#SecurityGroupRuleDescription",
+        "RemediationActionType": {
+          "target": "com.amazonaws.fms#RemediationActionType",
           "traits": {
-            "smithy.api#documentation": "<p>The final state of the rule specified in the <code>ViolationTarget</code> after it is remediated.</p>"
+            "smithy.api#documentation": "<p>The remediation action that will be performed.</p>"
           }
         },
         "IsDefaultAction": {
@@ -2581,10 +2581,10 @@
     "com.amazonaws.fms#SecurityGroupRuleDescription": {
       "type": "structure",
       "members": {
-        "FromPort": {
-          "target": "com.amazonaws.fms#IPPortNumber",
+        "PrefixListId": {
+          "target": "com.amazonaws.fms#ResourceId",
           "traits": {
-            "smithy.api#documentation": "<p>The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of <code>-1</code> indicates all ICMP/ICMPv6 types.</p>"
+            "smithy.api#documentation": "<p>The ID of the prefix list for the security group rule.</p>"
           }
         },
         "ToPort": {
@@ -2593,16 +2593,16 @@
             "smithy.api#documentation": "<p>The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes.</p>"
           }
         },
-        "PrefixListId": {
-          "target": "com.amazonaws.fms#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the prefix list for the security group rule.</p>"
-          }
-        },
         "IPV6Range": {
           "target": "com.amazonaws.fms#CIDR",
           "traits": {
             "smithy.api#documentation": "<p>The IPv6 ranges for the security group rule.</p>"
+          }
+        },
+        "FromPort": {
+          "target": "com.amazonaws.fms#IPPortNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of <code>-1</code> indicates all ICMP/ICMPv6 types.</p>"
           }
         },
         "Protocol": {
@@ -2625,17 +2625,17 @@
     "com.amazonaws.fms#SecurityServicePolicyData": {
       "type": "structure",
       "members": {
+        "ManagedServiceData": {
+          "target": "com.amazonaws.fms#ManagedServiceData",
+          "traits": {
+            "smithy.api#documentation": "<p>Details about the service that are specific to the service type, in JSON format. For\n      service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p>\n         <ul>\n            <li>\n               <p>Example: <code>WAFV2</code>\n               </p>\n               <p>\n                  <code>\"ManagedServiceData\": \"{\\\"type\\\":\\\"WAFV2\\\",\\\"defaultAction\\\":{\\\"type\\\":\\\"ALLOW\\\"},\\\"preProcessRuleGroups\\\":[{\\\"managedRuleGroupIdentifier\\\":null,\\\"ruleGroupArn\\\":\\\"rulegrouparn\\\",\\\"overrideAction\\\":{\\\"type\\\":\\\"COUNT\\\"},\\\"excludeRules\\\":[{\\\"name\\\":\\\"EntityName\\\"}],\\\"ruleGroupType\\\":\\\"RuleGroup\\\"}],\\\"postProcessRuleGroups\\\":[{\\\"managedRuleGroupIdentifier\\\":{\\\"managedRuleGroupName\\\":\\\"AWSManagedRulesAdminProtectionRuleSet\\\",\\\"vendorName\\\":\\\"AWS\\\"},\\\"ruleGroupArn\\\":\\\"rulegrouparn\\\",\\\"overrideAction\\\":{\\\"type\\\":\\\"NONE\\\"},\\\"excludeRules\\\":[],\\\"ruleGroupType\\\":\\\"ManagedRuleGroup\\\"}],\\\"overrideCustomerWebACLAssociation\\\":false}\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>WAF Classic</code>\n               </p>\n               <p>\n                  <code>\"ManagedServiceData\": \"{\\\"type\\\": \\\"WAF\\\", \\\"ruleGroups\\\": [{\\\"id\\\":\n            \\\"12345678-1bcd-9012-efga-0987654321ab\\\", \\\"overrideAction\\\" : {\\\"type\\\": \\\"COUNT\\\"}}],\n            \\\"defaultAction\\\": {\\\"type\\\": \\\"BLOCK\\\"}}</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_COMMON</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_COMMON\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_COMMON\\\",\\\"revertManualSecurityGroupChanges\\\":false,\\\"exclusiveResourceSecurityGroupManagement\\\":false, \\\"applyToAllEC2InstanceENIs\\\":false,\\\"securityGroups\\\":[{\\\"id\\\":\\\" sg-000e55995d61a06bd\\\"}]}\"},\"RemediationEnabled\":false,\"ResourceType\":\"AWS::EC2::NetworkInterface\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_CONTENT_AUDIT\\\",\\\"securityGroups\\\":[{\\\"id\\\":\\\"\n            sg-000e55995d61a06bd\n            \\\"}],\\\"securityGroupAction\\\":{\\\"type\\\":\\\"ALLOW\\\"}}\"},\"RemediationEnabled\":false,\"ResourceType\":\"AWS::EC2::NetworkInterface\"}</code>\n               </p>\n               <p>The security group action for content audit can be <code>ALLOW</code> or\n            <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be\n          within the allowed range of the policy's security group rules. For <code>DENY</code>, all\n          in-scope security group rules must not contain a value or a range that matches a rule\n          value or range in the policy security group.</p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_USAGE_AUDIT\\\",\\\"deleteUnusedSecurityGroups\\\":true,\\\"coalesceRedundantSecurityGroups\\\":true}\"},\"RemediationEnabled\":false,\"Resou\n            rceType\":\"AWS::EC2::SecurityGroup\"}</code>\n               </p>\n            </li>\n         </ul>"
+          }
+        },
         "Type": {
           "target": "com.amazonaws.fms#SecurityServiceType",
           "traits": {
             "smithy.api#documentation": "<p>The service that the policy is using to protect the resources. This specifies the type of\n      policy that is created, either an AWS WAF policy, a Shield Advanced policy, or a security\n      group policy. For security group policies, Firewall Manager supports one security group for\n      each common policy and for each content audit policy. This is an adjustable limit that you can\n      increase by contacting AWS Support.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "ManagedServiceData": {
-          "target": "com.amazonaws.fms#ManagedServiceData",
-          "traits": {
-            "smithy.api#documentation": "<p>Details about the service that are specific to the service type, in JSON format. For\n      service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p>\n         <ul>\n            <li>\n               <p>Example: <code>WAFV2</code>\n               </p>\n               <p>\n                  <code>\"ManagedServiceData\": \"{\\\"type\\\":\\\"WAFV2\\\",\\\"defaultAction\\\":{\\\"type\\\":\\\"ALLOW\\\"},\\\"preProcessRuleGroups\\\":[{\\\"managedRuleGroupIdentifier\\\":null,\\\"ruleGroupArn\\\":\\\"rulegrouparn\\\",\\\"overrideAction\\\":{\\\"type\\\":\\\"COUNT\\\"},\\\"excludeRules\\\":[{\\\"name\\\":\\\"EntityName\\\"}],\\\"ruleGroupType\\\":\\\"RuleGroup\\\"}],\\\"postProcessRuleGroups\\\":[{\\\"managedRuleGroupIdentifier\\\":{\\\"managedRuleGroupName\\\":\\\"AWSManagedRulesAdminProtectionRuleSet\\\",\\\"vendorName\\\":\\\"AWS\\\"},\\\"ruleGroupArn\\\":\\\"rulegrouparn\\\",\\\"overrideAction\\\":{\\\"type\\\":\\\"NONE\\\"},\\\"excludeRules\\\":[],\\\"ruleGroupType\\\":\\\"ManagedRuleGroup\\\"}],\\\"overrideCustomerWebACLAssociation\\\":false}\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>WAF Classic</code>\n               </p>\n               <p>\n                  <code>\"ManagedServiceData\": \"{\\\"type\\\": \\\"WAF\\\", \\\"ruleGroups\\\": [{\\\"id\\\":\n            \\\"12345678-1bcd-9012-efga-0987654321ab\\\", \\\"overrideAction\\\" : {\\\"type\\\": \\\"COUNT\\\"}}],\n            \\\"defaultAction\\\": {\\\"type\\\": \\\"BLOCK\\\"}}</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_COMMON</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_COMMON\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_COMMON\\\",\\\"revertManualSecurityGroupChanges\\\":false,\\\"exclusiveResourceSecurityGroupManagement\\\":false, \\\"applyToAllEC2InstanceENIs\\\":false,\\\"securityGroups\\\":[{\\\"id\\\":\\\" sg-000e55995d61a06bd\\\"}]}\"},\"RemediationEnabled\":false,\"ResourceType\":\"AWS::EC2::NetworkInterface\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_CONTENT_AUDIT\\\",\\\"securityGroups\\\":[{\\\"id\\\":\\\"\n            sg-000e55995d61a06bd\n            \\\"}],\\\"securityGroupAction\\\":{\\\"type\\\":\\\"ALLOW\\\"}}\"},\"RemediationEnabled\":false,\"ResourceType\":\"AWS::EC2::NetworkInterface\"}</code>\n               </p>\n               <p>The security group action for content audit can be <code>ALLOW</code> or\n            <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be\n          within the allowed range of the policy's security group rules. For <code>DENY</code>, all\n          in-scope security group rules must not contain a value or a range that matches a rule\n          value or range in the policy security group.</p>\n            </li>\n            <li>\n               <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code>\n               </p>\n               <p>\n                  <code>\"SecurityServicePolicyData\":{\"Type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"ManagedServiceData\":\"{\\\"type\\\":\\\"SECURITY_GROUPS_USAGE_AUDIT\\\",\\\"deleteUnusedSecurityGroups\\\":true,\\\"coalesceRedundantSecurityGroups\\\":true}\"},\"RemediationEnabled\":false,\"Resou\n            rceType\":\"AWS::EC2::SecurityGroup\"}</code>\n               </p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -2840,17 +2840,17 @@
     "com.amazonaws.fms#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.fms#ResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "TagKeys": {
           "target": "com.amazonaws.fms#TagKeyList",
           "traits": {
             "smithy.api#documentation": "<p>The keys of the tags to remove from the resource. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.fms#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. </p>",
             "smithy.api#required": {}
           }
         }
@@ -2873,17 +2873,10 @@
     "com.amazonaws.fms#ViolationDetail": {
       "type": "structure",
       "members": {
-        "ResourceType": {
-          "target": "com.amazonaws.fms#ResourceType",
+        "ResourceDescription": {
+          "target": "com.amazonaws.fms#LengthBoundedString",
           "traits": {
-            "smithy.api#documentation": "<p>The resource type that the violation details were requested for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceTags": {
-          "target": "com.amazonaws.fms#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>ResourceTag</code> objects associated with the resource.</p>"
+            "smithy.api#documentation": "<p>Brief description for the requested resource.</p>"
           }
         },
         "MemberAccount": {
@@ -2900,10 +2893,17 @@
             "smithy.api#required": {}
           }
         },
-        "ResourceDescription": {
-          "target": "com.amazonaws.fms#LengthBoundedString",
+        "ResourceType": {
+          "target": "com.amazonaws.fms#ResourceType",
           "traits": {
-            "smithy.api#documentation": "<p>Brief description for the requested resource.</p>"
+            "smithy.api#documentation": "<p>The resource type that the violation details were requested for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceTags": {
+          "target": "com.amazonaws.fms#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ResourceTag</code> objects associated with the resource.</p>"
           }
         },
         "ResourceId": {

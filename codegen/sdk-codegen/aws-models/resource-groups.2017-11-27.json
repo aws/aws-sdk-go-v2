@@ -90,7 +90,7 @@
           "name": "resource-groups"
         },
         "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<fullname>AWS Resource Groups</fullname>\n\n        <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances,\n            Amazon Relational Database Service databases, and Amazon S3 buckets into groups using\n            criteria that you define as tags. A resource group is a collection of resources that\n            match the resource types specified in a query, and share one or more tags or portions of\n            tags. You can create a group of resources based on their roles in your cloud\n            infrastructure, lifecycle stages, regions, application layers, or virtually any\n            criteria. Resource groups enable you to automate management tasks, such as those in AWS\n            Systems Manager Automation documents, on tag-related resources in AWS Systems Manager.\n            Groups of tagged resources also let you quickly view a custom console in AWS Systems\n            Manager that shows AWS Config compliance and other monitoring data about member\n            resources.</p>\n        <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n        <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">AWS Resource Groups User\n            Guide</a>.</p>\n        <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the\n            following types of operations.</p>\n        <ul>\n            <li>\n                <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n                <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n                <p>Resolving resource group member ARNs so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n                <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n                <p>Searching AWS resources based on a resource query</p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<fullname>AWS Resource Groups</fullname>\n\n        <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service\n            databases, and Amazon S3 buckets into groups using criteria that you define as tags. A\n            resource group is a collection of resources that match the resource types specified in a\n            query, and share one or more tags or portions of tags. You can create a group of\n            resources based on their roles in your cloud infrastructure, lifecycle stages, regions,\n            application layers, or virtually any criteria. Resource Groups enable you to automate management\n            tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in\n            AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in\n            AWS Systems Manager that shows AWS Config compliance and other monitoring data about member\n            resources.</p>\n        <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n        <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">AWS Resource Groups User Guide</a>.</p>\n        <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of\n            operations.</p>\n        <ul>\n            <li>\n                <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n                <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n                <p>Resolving resource group member ARNs so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n                <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n                <p>Searching AWS resources based on a resource query</p>\n            </li>\n         </ul>",
         "smithy.api#title": "AWS Resource Groups"
       }
     },
@@ -144,10 +144,10 @@
     "com.amazonaws.resourcegroups#CreateGroupInput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.resourcegroups#Tags",
+        "ResourceQuery": {
+          "target": "com.amazonaws.resourcegroups#ResourceQuery",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the group. A tag is key-value pair string.</p>"
+            "smithy.api#documentation": "<p>The resource query that determines which AWS resources are members of this\n            group.</p>\n        <note>\n            <p>You can specify either a <code>ResourceQuery</code> or a\n                    <code>Configuration</code>, but not both.</p>\n        </note>"
           }
         },
         "Description": {
@@ -163,10 +163,10 @@
             "smithy.api#required": {}
           }
         },
-        "ResourceQuery": {
-          "target": "com.amazonaws.resourcegroups#ResourceQuery",
+        "Tags": {
+          "target": "com.amazonaws.resourcegroups#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>The resource query that determines which AWS resources are members of this\n            group.</p>\n        <note>\n            <p>You can specify either a <code>ResourceQuery</code> or a\n                    <code>Configuration</code>, but not both.</p>\n        </note>"
+            "smithy.api#documentation": "<p>The tags to add to the group. A tag is key-value pair string.</p>"
           }
         },
         "Configuration": {
@@ -180,10 +180,10 @@
     "com.amazonaws.resourcegroups#CreateGroupOutput": {
       "type": "structure",
       "members": {
-        "Group": {
-          "target": "com.amazonaws.resourcegroups#Group",
+        "ResourceQuery": {
+          "target": "com.amazonaws.resourcegroups#ResourceQuery",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the resource group.</p>"
+            "smithy.api#documentation": "<p>The resource query associated with the group.</p>"
           }
         },
         "Tags": {
@@ -198,10 +198,10 @@
             "smithy.api#documentation": "<p>The service configuration associated with the resource group. AWS Resource Groups\n            supports adding service configurations for the following resource group types:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity\n                    reservation pools. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users\n                        Guide</i>.</p>\n            </li>\n         </ul>"
           }
         },
-        "ResourceQuery": {
-          "target": "com.amazonaws.resourcegroups#ResourceQuery",
+        "Group": {
+          "target": "com.amazonaws.resourcegroups#Group",
           "traits": {
-            "smithy.api#documentation": "<p>The resource query associated with the group.</p>"
+            "smithy.api#documentation": "<p>The description of the resource group.</p>"
           }
         }
       }
@@ -246,6 +246,12 @@
     "com.amazonaws.resourcegroups#DeleteGroupInput": {
       "type": "structure",
       "members": {
+        "Group": {
+          "target": "com.amazonaws.resourcegroups#GroupString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or the ARN of the resource group to delete.</p>"
+          }
+        },
         "GroupName": {
           "target": "com.amazonaws.resourcegroups#GroupName",
           "traits": {
@@ -253,12 +259,6 @@
               "message": "This field is deprecated, use Group instead."
             },
             "smithy.api#documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>"
-          }
-        },
-        "Group": {
-          "target": "com.amazonaws.resourcegroups#GroupString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name or the ARN of the resource group to delete.</p>"
           }
         }
       }
@@ -305,10 +305,10 @@
     "com.amazonaws.resourcegroups#FailedResource": {
       "type": "structure",
       "members": {
-        "ErrorCode": {
-          "target": "com.amazonaws.resourcegroups#ErrorCode",
+        "ResourceArn": {
+          "target": "com.amazonaws.resourcegroups#ResourceArn",
           "traits": {
-            "smithy.api#documentation": "<p>The error code associated with the failure.</p>"
+            "smithy.api#documentation": "<p>The ARN of the resource that failed to be added or removed.</p>"
           }
         },
         "ErrorMessage": {
@@ -317,10 +317,10 @@
             "smithy.api#documentation": "<p>The error message text associated with the failure.</p>"
           }
         },
-        "ResourceArn": {
-          "target": "com.amazonaws.resourcegroups#ResourceArn",
+        "ErrorCode": {
+          "target": "com.amazonaws.resourcegroups#ErrorCode",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource that failed to be added or removed.</p>"
+            "smithy.api#documentation": "<p>The error code associated with the failure.</p>"
           }
         }
       },
@@ -446,6 +446,12 @@
     "com.amazonaws.resourcegroups#GetGroupInput": {
       "type": "structure",
       "members": {
+        "Group": {
+          "target": "com.amazonaws.resourcegroups#GroupString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or the ARN of the resource group to retrieve.</p>"
+          }
+        },
         "GroupName": {
           "target": "com.amazonaws.resourcegroups#GroupName",
           "traits": {
@@ -453,12 +459,6 @@
               "message": "This field is deprecated, use Group instead."
             },
             "smithy.api#documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>"
-          }
-        },
-        "Group": {
-          "target": "com.amazonaws.resourcegroups#GroupString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name or the ARN of the resource group to retrieve.</p>"
           }
         }
       }
@@ -595,16 +595,16 @@
     "com.amazonaws.resourcegroups#GetTagsOutput": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.resourcegroups#GroupArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the tagged resource group.</p>"
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.resourcegroups#Tags",
           "traits": {
             "smithy.api#documentation": "<p>The tags associated with the specified resource group.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.resourcegroups#GroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the tagged resource group.</p>"
           }
         }
       }
@@ -612,11 +612,10 @@
     "com.amazonaws.resourcegroups#Group": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.resourcegroups#GroupName",
+        "Description": {
+          "target": "com.amazonaws.resourcegroups#Description",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the resource group.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The description of the resource group.</p>"
           }
         },
         "GroupArn": {
@@ -626,15 +625,16 @@
             "smithy.api#required": {}
           }
         },
-        "Description": {
-          "target": "com.amazonaws.resourcegroups#Description",
+        "Name": {
+          "target": "com.amazonaws.resourcegroups#GroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the resource group.</p>"
+            "smithy.api#documentation": "<p>The name of the resource group.</p>",
+            "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group by\n            associating either of the following elements with the group:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>ResourceQuery</a> - Use a resource query to specify a set of tag\n                    keys and values. All resources in the same AWS Region and AWS account that have\n                    those keys with the same values are included in the group. You can add a\n                    resource query when you create the\n                    group.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GroupConfiguration</a> - Use a service configuration to\n                    associate the group with an AWS service. The configuration specifies which\n                    resource types can be included in the group.</p>\n            </li>\n         </ul>"
+        "smithy.api#documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group\n            by associating either of the following elements with the group:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>ResourceQuery</a> - Use a resource query to specify a set of tag\n                    keys and values. All resources in the same AWS Region and AWS account that\n                    have those keys with the same values are included in the group. You can add a\n                    resource query when you create the\n                    group.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GroupConfiguration</a> - Use a service configuration to\n                    associate the group with an AWS service. The configuration specifies which\n                    resource types can be included in the group.</p>\n            </li>\n         </ul>"
       }
     },
     "com.amazonaws.resourcegroups#GroupArn": {
@@ -650,16 +650,16 @@
     "com.amazonaws.resourcegroups#GroupConfiguration": {
       "type": "structure",
       "members": {
-        "Status": {
-          "target": "com.amazonaws.resourcegroups#GroupConfigurationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of an attempt to update the group configuration.</p>"
-          }
-        },
         "ProposedConfiguration": {
           "target": "com.amazonaws.resourcegroups#GroupConfigurationList",
           "traits": {
             "smithy.api#documentation": "<p>If present, the new configuration that is in the process of being applied to the\n            group.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.resourcegroups#GroupConfigurationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of an attempt to update the group configuration.</p>"
           }
         },
         "FailureReason": {
@@ -688,7 +688,7 @@
         "Type": {
           "target": "com.amazonaws.resourcegroups#GroupConfigurationType",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the type of group configuration item. Each item must have a unique value for\n                <code>type</code>.</p>\n        <p>You can specify the following string values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS::EC2::CapacityReservationPool</code>\n               </p>\n                <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users\n                        Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AWS::ResourceGroups::Generic</code> - Supports parameters that configure\n                    the behavior of resource groups of any type.</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>Specifies the type of group configuration item. Each item must have a unique value for\n                <code>type</code>.</p>\n        <p>You can specify the following string values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS::EC2::CapacityReservationPool</code>\n               </p>\n                <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2\n                        Users Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AWS::ResourceGroups::Generic</code> - Supports parameters that configure\n                    the behavior of resource groups of any type.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         },
@@ -721,7 +721,7 @@
         "Name": {
           "target": "com.amazonaws.resourcegroups#GroupConfigurationParameterName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the group configuration parameter.</p>\n        <p>You can specify the following string values:</p>\n        <ul>\n            <li>\n                <p>For configuration item type <code>AWS::ResourceGroups::Generic</code>:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <code>allowed-resource-types</code>\n                     </p>\n                        <p>Specifies the types of resources that you can add to this group by\n                            using the <a>GroupResources</a> operation.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For configuration item type\n                    <code>AWS::EC2::CapacityReservationPool</code>:</p>\n                <ul>\n                  <li>\n                        <p>None - This configuration item type doesn't support any\n                            parameters.</p>\n                    </li>\n               </ul>\n                <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users\n                        Guide</i>.</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>The name of the group configuration parameter.</p>\n        <p>You can specify the following string values:</p>\n        <ul>\n            <li>\n                <p>For configuration item type <code>AWS::ResourceGroups::Generic</code>:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <code>allowed-resource-types</code>\n                     </p>\n                        <p>Specifies the types of resources that you can add to this group by\n                            using the <a>GroupResources</a> operation.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For configuration item type\n                    <code>AWS::EC2::CapacityReservationPool</code>:</p>\n                <ul>\n                  <li>\n                        <p>None - This configuration item type doesn't support any\n                            parameters.</p>\n                    </li>\n               </ul>\n                <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2\n                        Users Guide</i>.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         },
@@ -794,17 +794,17 @@
     "com.amazonaws.resourcegroups#GroupFilter": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.resourcegroups#GroupFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Values": {
           "target": "com.amazonaws.resourcegroups#GroupFilterValues",
           "traits": {
             "smithy.api#documentation": "<p>One or more filter values. Allowed filter values vary by group filter name, and are\n            case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.resourcegroups#GroupFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>",
             "smithy.api#required": {}
           }
         }
@@ -859,16 +859,16 @@
     "com.amazonaws.resourcegroups#GroupIdentifier": {
       "type": "structure",
       "members": {
-        "GroupName": {
-          "target": "com.amazonaws.resourcegroups#GroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the resource group.</p>"
-          }
-        },
         "GroupArn": {
           "target": "com.amazonaws.resourcegroups#GroupArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource group.</p>"
+          }
+        },
+        "GroupName": {
+          "target": "com.amazonaws.resourcegroups#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource group.</p>"
           }
         }
       },
@@ -907,17 +907,17 @@
     "com.amazonaws.resourcegroups#GroupQuery": {
       "type": "structure",
       "members": {
-        "GroupName": {
-          "target": "com.amazonaws.resourcegroups#GroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the resource group that is associated with the specified resource\n            query.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceQuery": {
           "target": "com.amazonaws.resourcegroups#ResourceQuery",
           "traits": {
             "smithy.api#documentation": "<p>The resource query that determines which AWS resources are members of the associated\n            resource group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GroupName": {
+          "target": "com.amazonaws.resourcegroups#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource group that is associated with the specified resource\n            query.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1070,10 +1070,28 @@
     "com.amazonaws.resourcegroups#ListGroupResourcesInput": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.resourcegroups#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \nresponse. If you do not include this parameter, it defaults to a value that is specific to the \noperation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \nresponse element is present and has a value (is not null). Include that value as the \n<code>NextToken</code> request parameter in the next call to the operation to get the next part \nof the results. Note that the service might return fewer results than the maximum even when there \nare more results available. You should check <code>NextToken</code> after every operation to \nensure that you receive all of the results.</p>"
+          }
+        },
         "Group": {
           "target": "com.amazonaws.resourcegroups#GroupString",
           "traits": {
             "smithy.api#documentation": "<p>The name or the ARN of the resource group</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.resourcegroups#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n<code>NextToken</code> response in a previous request. A <code>NextToken</code> response \nindicates that more output is available. Set this parameter to the value provided by a previous \ncall's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.resourcegroups#ResourceFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply\n            to a <code>ListGroupResources</code> operation. Filters the results to include only\n            those of the specified resource types.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-type</code> - Filter resources by their type. Specify up to\n                    five resource types in the format <code>AWS::ServiceCode::ResourceType</code>.\n                    For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.\n                </p>\n            </li>\n         </ul>\n        <p>When you specify a <code>resource-type</code> filter for\n                <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource types\n            against the types that are defined in the query associated with the group. For example,\n            if a group contains only S3 buckets because its query specifies only that resource type,\n            but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups\n            does not filter for EC2 instances. In this case, a <code>ListGroupResources</code>\n            request returns a <code>BadRequestException</code> error with a message similar to the\n            following:</p>\n        <p>\n            <code>The resource types specified as filters in the request are not\n            valid.</code>\n         </p>\n        <p>The error includes a list of resource types that failed the validation because they\n            are not part of the query associated with the group. This validation doesn't occur when\n            the group query specifies <code>AWS::AllSupported</code>, because a group based on such\n            a query can contain any of the allowed resource types for the query type (tag-based or\n            AWS CloudFormation stack-based queries).</p>"
           }
         },
         "GroupName": {
@@ -1084,34 +1102,16 @@
             },
             "smithy.api#documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>"
           }
-        },
-        "Filters": {
-          "target": "com.amazonaws.resourcegroups#ResourceFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply\n            to a <code>ListGroupResources</code> operation. Filters the results to include only\n            those of the specified resource types.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>resource-type</code> - Filter resources by their type. Specify up to\n                    five resource types in the format <code>AWS::ServiceCode::ResourceType</code>.\n                    For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.\n                </p>\n            </li>\n         </ul>\n        <p>When you specify a <code>resource-type</code> filter for\n                <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource\n            types against the types that are defined in the query associated with the group. For\n            example, if a group contains only S3 buckets because its query specifies only that\n            resource type, but your <code>resource-type</code> filter includes EC2 instances, AWS\n            Resource Groups does not filter for EC2 instances. In this case, a\n                <code>ListGroupResources</code> request returns a <code>BadRequestException</code>\n            error with a message similar to the following:</p>\n        <p>\n            <code>The resource types specified as filters in the request are not\n            valid.</code>\n         </p>\n        <p>The error includes a list of resource types that failed the validation because they\n            are not part of the query associated with the group. This validation doesn't occur when\n            the group query specifies <code>AWS::AllSupported</code>, because a group based on such\n            a query can contain any of the allowed resource types for the query type (tag-based or\n            AWS CloudFormation stack-based queries).</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.resourcegroups#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value provided by a previous \n    call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.resourcegroups#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value that is specific to the \n    operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \n    response element is present and has a value (is not null). Include that value as the \n    <code>NextToken</code> request parameter in the next call to the operation to get the next part \n    of the results. Note that the service might return fewer results than the maximum even when there \n    are more results available. You should check <code>NextToken</code> after every operation to \n    ensure that you receive all of the results.</p>"
-          }
         }
       }
     },
     "com.amazonaws.resourcegroups#ListGroupResourcesOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.resourcegroups#NextToken",
+        "ResourceIdentifiers": {
+          "target": "com.amazonaws.resourcegroups#ResourceIdentifierList",
           "traits": {
-            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+            "smithy.api#documentation": "<p>The ARNs and resource types of resources that are members of the group that you\n            specified.</p>"
           }
         },
         "QueryErrors": {
@@ -1120,10 +1120,10 @@
             "smithy.api#documentation": "<p>A list of <code>QueryError</code> objects. Each error is an object that contains\n                <code>ErrorCode</code> and <code>Message</code> structures. Possible values for\n                <code>ErrorCode</code> are <code>CLOUDFORMATION_STACK_INACTIVE</code> and\n                <code>CLOUDFORMATION_STACK_NOT_EXISTING</code>.</p>"
           }
         },
-        "ResourceIdentifiers": {
-          "target": "com.amazonaws.resourcegroups#ResourceIdentifierList",
+        "NextToken": {
+          "target": "com.amazonaws.resourcegroups#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The ARNs and resource types of resources that are members of the group that you\n            specified.</p>"
+            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \nincluded in the current response. Use this value in the <code>NextToken</code> request parameter \nin a subsequent call to the operation to get the next part of the output. You should repeat this \nuntil the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
           }
         }
       }
@@ -1170,18 +1170,18 @@
     "com.amazonaws.resourcegroups#ListGroupsInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.resourcegroups#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value provided by a previous \n    call's <code>NextToken</code> response to indicate where the output should continue from.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.resourcegroups#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value that is specific to the \n    operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \n    response element is present and has a value (is not null). Include that value as the \n    <code>NextToken</code> request parameter in the next call to the operation to get the next part \n    of the results. Note that the service might return fewer results than the maximum even when there \n    are more results available. You should check <code>NextToken</code> after every operation to \n    ensure that you receive all of the results.</p>",
+            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \nresponse. If you do not include this parameter, it defaults to a value that is specific to the \noperation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \nresponse element is present and has a value (is not null). Include that value as the \n<code>NextToken</code> request parameter in the next call to the operation to get the next part \nof the results. Note that the service might return fewer results than the maximum even when there \nare more results available. You should check <code>NextToken</code> after every operation to \nensure that you receive all of the results.</p>",
             "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.resourcegroups#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n<code>NextToken</code> response in a previous request. A <code>NextToken</code> response \nindicates that more output is available. Set this parameter to the value provided by a previous \ncall's <code>NextToken</code> response to indicate where the output should continue from.</p>",
+            "smithy.api#httpQuery": "nextToken"
           }
         },
         "Filters": {
@@ -1195,16 +1195,16 @@
     "com.amazonaws.resourcegroups#ListGroupsOutput": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.resourcegroups#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \nincluded in the current response. Use this value in the <code>NextToken</code> request parameter \nin a subsequent call to the operation to get the next part of the output. You should repeat this \nuntil the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+          }
+        },
         "GroupIdentifiers": {
           "target": "com.amazonaws.resourcegroups#GroupIdentifierList",
           "traits": {
             "smithy.api#documentation": "<p>A list of <a>GroupIdentifier</a> objects. Each identifier is an object that\n            contains both the <code>Name</code> and the <code>GroupArn</code>.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.resourcegroups#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
           }
         },
         "Groups": {
@@ -1291,7 +1291,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A two-part error structure that can occur in <code>ListGroupResources</code> or\n                <code>SearchResources</code> operations on CloudFormation stack-based queries. The\n            error occurs if the CloudFormation stack on which the query is based either does not\n            exist, or has a status that renders the stack inactive. A <code>QueryError</code>\n            occurrence does not necessarily mean that AWS Resource Groups could not complete the\n            operation, but the resulting group might have no member resources.</p>"
+        "smithy.api#documentation": "<p>A two-part error structure that can occur in <code>ListGroupResources</code> or\n                <code>SearchResources</code> operations on CloudFormation stack-based queries. The error\n            occurs if the CloudFormation stack on which the query is based either does not exist, or has a\n            status that renders the stack inactive. A <code>QueryError</code> occurrence does not\n            necessarily mean that AWS Resource Groups could not complete the operation, but the resulting\n            group might have no member resources.</p>"
       }
     },
     "com.amazonaws.resourcegroups#QueryErrorCode": {
@@ -1359,17 +1359,17 @@
     "com.amazonaws.resourcegroups#ResourceFilter": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.resourcegroups#ResourceFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Values": {
           "target": "com.amazonaws.resourcegroups#ResourceFilterValues",
           "traits": {
             "smithy.api#documentation": "<p>One or more filter values. Allowed filter values vary by resource filter name, and are\n            case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.resourcegroups#ResourceFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1420,16 +1420,16 @@
     "com.amazonaws.resourcegroups#ResourceIdentifier": {
       "type": "structure",
       "members": {
-        "ResourceType": {
-          "target": "com.amazonaws.resourcegroups#ResourceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource type of a resource, such as <code>AWS::EC2::Instance</code>.</p>"
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.resourcegroups#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of a resource.</p>"
+          }
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.resourcegroups#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type of a resource, such as <code>AWS::EC2::Instance</code>.</p>"
           }
         }
       },
@@ -1446,23 +1446,23 @@
     "com.amazonaws.resourcegroups#ResourceQuery": {
       "type": "structure",
       "members": {
+        "Type": {
+          "target": "com.amazonaws.resourcegroups#QueryType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the query. You can use the following values:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i>Specifies that the\n                        <code>Query</code> contains an ARN for a CloudFormation stack.</p>\n            </li>\n            <li>\n                <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i>Specifies that the\n                        <code>Query</code> parameter contains a JSON string that represents a\n                    collection of simple tag filters for resource types and tags. The JSON string\n                    uses a syntax similar to the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a>\n                  </code> operation, but uses only the <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters\"> ResourceTypeFilters</a>\n                  </code> and <code>\n                     <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters\">TagFilters</a>\n                  </code> fields. If you specify more than one tag key,\n                    only resources that match all tag keys, and at least one value of each specified\n                    tag key, are returned in your query. If you specify more than one value for a\n                    tag key, a resource matches the filter if it has a tag key value that matches\n                        <i>any</i> of the specified values.</p>\n                <p>For example, consider the following sample query for resources that have two\n                    tags, <code>Stage</code> and <code>Version</code>, with two values each:</p>\n                <p>\n                  <code>[{\"Stage\":[\"Test\",\"Deploy\"]},{\"Version\":[\"1\",\"2\"]}]</code>\n               </p>\n                <p>The results of this query could include the following.</p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has the following two tags:\n                                <code>{\"Stage\":\"Deploy\"}</code>, and\n                            <code>{\"Version\":\"2\"}</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>An S3 bucket that has the following two tags:\n                                <code>{\"Stage\":\"Test\"}</code>, and\n                            <code>{\"Version\":\"1\"}</code>\n                     </p>\n                    </li>\n               </ul>\n                <p>The query would not include the following items in the results, however. </p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has only the following tag:\n                                <code>{\"Stage\":\"Deploy\"}</code>.</p>\n                        <p>The instance does not have <b>all</b> of the\n                            tag keys specified in the filter, so it is excluded from the\n                            results.</p>\n                    </li>\n                  <li>\n                        <p>An RDS database that has the following two tags:\n                                <code>{\"Stage\":\"Archived\"}</code> and\n                            <code>{\"Version\":\"4\"}</code>\n                     </p>\n                        <p>The database has all of the tag keys, but none of those keys has an\n                            associated value that matches at least one of the specified values in\n                            the filter.</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
         "Query": {
           "target": "com.amazonaws.resourcegroups#Query",
           "traits": {
             "smithy.api#documentation": "<p>The query that defines a group or a search.</p>",
             "smithy.api#required": {}
           }
-        },
-        "Type": {
-          "target": "com.amazonaws.resourcegroups#QueryType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the query. You can use the following values:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i> A JSON syntax that\n                    lets you specify a CloudFormation stack ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i> A JSON syntax that lets you\n                    specify a collection of simple tag filters for resource types and tags, as\n                    supported by the AWS Tagging API <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters\">\n                     <code>ResourceTypeFilters</code> parameter of the\n                            <code>tagging:GetResources</code>\n                  </a> operation. If you specify more\n                    than one tag key, only resources that match all tag keys, and at least one value\n                    of each specified tag key, are returned in your query. If you specify more than\n                    one value for a tag key, a resource matches the filter if it has a tag key value\n                    that matches <i>any</i> of the specified values.</p>\n                <p>For example, consider the following sample query for resources that have two\n                    tags, <code>Stage</code> and <code>Version</code>, with two values each:</p>\n                <p>\n                  <code>[{\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]},{\"Key\":\"Version\",\"Values\":[\"1\",\"2\"]}]</code>\n               </p>\n                <p>The results of this query could include the following.</p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has the following two tags:\n                                <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>, and\n                                <code>{\"Key\":\"Version\",\"Value\":\"2\"}</code>\n                     </p>\n                    </li>\n                  <li>\n                        <p>An S3 bucket that has the following two tags:\n                                <code>{\"Key\":\"Stage\",\"Value\":\"Test\"}</code>, and\n                                <code>{\"Key\":\"Version\",\"Value\":\"1\"}</code>\n                     </p>\n                    </li>\n               </ul>\n                <p>The query would not include the following items in the results, however. </p>\n                <ul>\n                  <li>\n                        <p>An EC2 instance that has only the following tag:\n                                <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>.</p>\n                        <p>The instance does not have <b>all</b> of the\n                            tag keys specified in the filter, so it is excluded from the\n                            results.</p>\n                    </li>\n                  <li>\n                        <p>An RDS database that has the following two tags:\n                                <code>{\"Key\":\"Stage\",\"Value\":\"Archived\"}</code>, and\n                                <code>{\"Key\":\"Version\",\"Value\":\"4\"}</code>\n                     </p>\n                        <p>The database has all of the tag keys, but none of those keys has an\n                            associated value that matches at least one of the specified values in\n                            the filter.</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The query that is used to define a resource group or a search for resources.</p>"
+        "smithy.api#documentation": "<p>The query that is used to define a resource group or a search for resources. A query\n            specifies both a query type and a query string as a JSON object. See the examples\n            section for example JSON strings.</p>\n        <p>The examples that follow are shown as standard JSON strings. If you include such a\n            string as a parameter to the AWS CLI or an SDK API, you might need to 'escape' the\n            string into a single line. For example, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-quoting-strings.html\">Quoting\n                strings</a> in the <i>AWS CLI User Guide</i>.</p>\n                <p>\n            <b>Example 1</b>\n         </p>\n                <p>The following generic example shows a resource query JSON string that includes\n                    only resources that meet the following criteria:</p>\n                <ul>\n            <li>\n                        <p>The resource type must be either <code>resource_type1</code> or\n                                <code>resource_type2</code>.</p>\n                    </li>\n            <li>\n                        <p>The resource must have a tag <code>Key1</code> with a value of either\n                                <code>ValueA</code> or <code>ValueB</code>.</p>\n                    </li>\n            <li>\n                        <p>The resource must have a tag <code>Key2</code> with a value of either\n                                <code>ValueC</code> or <code>ValueD</code>.</p>\n                    </li>\n         </ul>\n                <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"],\n        \"TagFilters\": [\n            {\n                \"Key\": \"Key1\",\n                \"Values\": [\"ValueA\",\"ValueB\"]\n            },\n            {\n                \"Key\":\"Key2\",\n                \"Values\":[\"ValueC\",\"ValueD\"]\n            }\n        ]\n    }\n}</code>\n         </p>\n        <p>This has the equivalent \"shortcut\" syntax of the following:</p>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"resource_type1\", \"resource_type2\"],\n        \"TagFilters\": [\n            { \"Key1\": [\"ValueA\",\"ValueB\"] },\n            { \"Key2\": [\"ValueC\",\"ValueD\"]\n            }\n        ]\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 2</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes only\n                    Amazon EC2 instances that are tagged <code>Stage</code> with a value of\n                        <code>Test</code>.</p>\n                <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": \"{\n        \"ResourceTypeFilters\": \"AWS::EC2::Instance\",\n        \"TagFilters\": { \"Stage\": \"Test\" }\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 3</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes\n                    resource of any supported type as long as it is tagged <code>Stage</code> with a\n                    value of <code>Prod</code>.</p>\n        <p>\n            <code>{\n    \"Type\": \"TAG_FILTERS_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": \"AWS::AllSupported\",\n        \"TagFilters\": { \"Stage\": \"Prod\" }\n    }\n}</code>\n         </p>\n        <p>\n            <b>Example 4</b>\n         </p>\n        <p>The following example shows a resource query JSON string that includes only\n                    Amazon EC2 instances and Amazon S3 buckets that are part of the specified AWS CloudFormation\n                    stack.</p>\n        <p>\n            <code>{\n    \"Type\": \"CLOUDFORMATION_STACK_1_0\",\n    \"Query\": {\n        \"ResourceTypeFilters\": [ \"AWS::EC2::Instance\", \"AWS::S3::Bucket\" ],\n        \"StackIdentifier\": \"arn:aws:cloudformation:us-west-2:123456789012:stack/AWStestuseraccount/fb0d5000-aba8-00e8-aa9e-50d5cEXAMPLE\"\n    }\n}</code>\n         </p>"
       }
     },
     "com.amazonaws.resourcegroups#ResourceType": {
@@ -1500,7 +1500,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of AWS resource identifiers that matches tne specified query. The query\n            uses the same format as a resource query in a CreateGroup or UpdateGroupQuery\n            operation.</p>",
+        "smithy.api#documentation": "<p>Returns a list of AWS resource identifiers that matches the specified query. The\n            query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery\n            operation.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/resources/search",
@@ -1516,6 +1516,12 @@
     "com.amazonaws.resourcegroups#SearchResourcesInput": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.resourcegroups#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \nresponse. If you do not include this parameter, it defaults to a value that is specific to the \noperation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \nresponse element is present and has a value (is not null). Include that value as the \n<code>NextToken</code> request parameter in the next call to the operation to get the next part \nof the results. Note that the service might return fewer results than the maximum even when there \nare more results available. You should check <code>NextToken</code> after every operation to \nensure that you receive all of the results.</p>"
+          }
+        },
         "ResourceQuery": {
           "target": "com.amazonaws.resourcegroups#ResourceQuery",
           "traits": {
@@ -1523,16 +1529,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.resourcegroups#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value that is specific to the \n    operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \n    response element is present and has a value (is not null). Include that value as the \n    <code>NextToken</code> request parameter in the next call to the operation to get the next part \n    of the results. Note that the service might return fewer results than the maximum even when there \n    are more results available. You should check <code>NextToken</code> after every operation to \n    ensure that you receive all of the results.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.resourcegroups#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value provided by a previous \n    call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
+            "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a\n<code>NextToken</code> response in a previous request. A <code>NextToken</code> response \nindicates that more output is available. Set this parameter to the value provided by a previous \ncall's <code>NextToken</code> response to indicate where the output should continue from.</p>"
           }
         }
       }
@@ -1540,6 +1540,12 @@
     "com.amazonaws.resourcegroups#SearchResourcesOutput": {
       "type": "structure",
       "members": {
+        "ResourceIdentifiers": {
+          "target": "com.amazonaws.resourcegroups#ResourceIdentifierList",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARNs and resource types of resources that are members of the group that you\n            specified.</p>"
+          }
+        },
         "QueryErrors": {
           "target": "com.amazonaws.resourcegroups#QueryErrorList",
           "traits": {
@@ -1549,13 +1555,7 @@
         "NextToken": {
           "target": "com.amazonaws.resourcegroups#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
-          }
-        },
-        "ResourceIdentifiers": {
-          "target": "com.amazonaws.resourcegroups#ResourceIdentifierList",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARNs and resource types of resources that are members of the group that you\n            specified.</p>"
+            "smithy.api#documentation": "<p>If present, indicates that more output is available than is \nincluded in the current response. Use this value in the <code>NextToken</code> request parameter \nin a subsequent call to the operation to get the next part of the output. You should repeat this \nuntil the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
           }
         }
       }
@@ -1735,17 +1735,17 @@
     "com.amazonaws.resourcegroups#UngroupResourcesInput": {
       "type": "structure",
       "members": {
-        "ResourceArns": {
-          "target": "com.amazonaws.resourcegroups#ResourceArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARNs of the resources to be removed from the group.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Group": {
           "target": "com.amazonaws.resourcegroups#GroupString",
           "traits": {
             "smithy.api#documentation": "<p>The name or the ARN of the resource group from which to remove the resources.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArns": {
+          "target": "com.amazonaws.resourcegroups#ResourceArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARNs of the resources to be removed from the group.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1808,18 +1808,18 @@
     "com.amazonaws.resourcegroups#UntagInput": {
       "type": "structure",
       "members": {
-        "Keys": {
-          "target": "com.amazonaws.resourcegroups#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Arn": {
           "target": "com.amazonaws.resourcegroups#GroupArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource group from which to remove tags. The command removed both the\n            specified keys and any values associated with those keys.</p>",
             "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Keys": {
+          "target": "com.amazonaws.resourcegroups#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1828,16 +1828,16 @@
     "com.amazonaws.resourcegroups#UntagOutput": {
       "type": "structure",
       "members": {
-        "Keys": {
-          "target": "com.amazonaws.resourcegroups#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags that were removed.</p>"
-          }
-        },
         "Arn": {
           "target": "com.amazonaws.resourcegroups#GroupArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource group from which tags have been removed.</p>"
+          }
+        },
+        "Keys": {
+          "target": "com.amazonaws.resourcegroups#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags that were removed.</p>"
           }
         }
       }
@@ -1891,16 +1891,16 @@
             "smithy.api#documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.resourcegroups#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The new description that you want to update the resource group with. Descriptions can\n            contain letters, numbers, hyphens, underscores, periods, and spaces.</p>"
-          }
-        },
         "Group": {
           "target": "com.amazonaws.resourcegroups#GroupString",
           "traits": {
             "smithy.api#documentation": "<p>The name or the ARN of the resource group to modify.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.resourcegroups#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The new description that you want to update the resource group with. Descriptions can\n            contain letters, numbers, hyphens, underscores, periods, and spaces.</p>"
           }
         }
       }
@@ -1956,13 +1956,6 @@
     "com.amazonaws.resourcegroups#UpdateGroupQueryInput": {
       "type": "structure",
       "members": {
-        "ResourceQuery": {
-          "target": "com.amazonaws.resourcegroups#ResourceQuery",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource query to determine which AWS resources are members of this resource\n            group.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "GroupName": {
           "target": "com.amazonaws.resourcegroups#GroupName",
           "traits": {
@@ -1970,6 +1963,13 @@
               "message": "This field is deprecated, use Group instead."
             },
             "smithy.api#documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>"
+          }
+        },
+        "ResourceQuery": {
+          "target": "com.amazonaws.resourcegroups#ResourceQuery",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource query to determine which AWS resources are members of this resource\n            group.</p>",
+            "smithy.api#required": {}
           }
         },
         "Group": {

@@ -54,7 +54,7 @@
           "sdkId": "SageMaker A2I Runtime",
           "arnNamespace": "sagemaker",
           "cloudFormationName": "SageMakerA2IRuntime",
-          "cloudTrailEventSource": "runtime.a2i.sagemaker.amazonaws.com"
+          "cloudTrailEventSource": "sagemakera2iruntime.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "sagemaker"
@@ -199,6 +199,13 @@
     "com.amazonaws.sagemakera2iruntime#DescribeHumanLoopResponse": {
       "type": "structure",
       "members": {
+        "HumanLoopName": {
+          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the human loop. The name must be lowercase, unique within the Region in your\n      account, and can have up to 63 characters. Valid characters: a-z, 0-9, and - (hyphen).</p>",
+            "smithy.api#required": {}
+          }
+        },
         "HumanLoopStatus": {
           "target": "com.amazonaws.sagemakera2iruntime#HumanLoopStatus",
           "traits": {
@@ -206,10 +213,17 @@
             "smithy.api#required": {}
           }
         },
-        "FailureCode": {
+        "FlowDefinitionArn": {
+          "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow definition.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FailureReason": {
           "target": "com.amazonaws.sagemakera2iruntime#String",
           "traits": {
-            "smithy.api#documentation": "<p>A failure code that identifies\n      the\n      type of failure.</p>"
+            "smithy.api#documentation": "<p>The reason why a human loop failed. The failure reason is returned when the status of the\n      human loop is <code>Failed</code>.</p>"
           }
         },
         "HumanLoopOutput": {
@@ -232,24 +246,10 @@
             "smithy.api#required": {}
           }
         },
-        "FailureReason": {
+        "FailureCode": {
           "target": "com.amazonaws.sagemakera2iruntime#String",
           "traits": {
-            "smithy.api#documentation": "<p>The reason why a human loop failed. The failure reason is returned when the status of the\n      human loop is <code>Failed</code>.</p>"
-          }
-        },
-        "HumanLoopName": {
-          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the human loop. The name must be lowercase, unique within the Region in your\n      account, and can have up to 63 characters. Valid characters: a-z, 0-9, and - (hyphen).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "FlowDefinitionArn": {
-          "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow definition.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A failure code that identifies\n      the\n      type of failure.</p>"
           }
         }
       }
@@ -374,16 +374,22 @@
     "com.amazonaws.sagemakera2iruntime#HumanLoopSummary": {
       "type": "structure",
       "members": {
-        "HumanLoopName": {
-          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the human loop.</p>"
-          }
-        },
         "FlowDefinitionArn": {
           "target": "com.amazonaws.sagemakera2iruntime#FlowDefinitionArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow definition used to configure the human\n      loop.</p>"
+          }
+        },
+        "FailureReason": {
+          "target": "com.amazonaws.sagemakera2iruntime#FailureReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason why the human loop failed. A failure reason is returned when the status of the\n      human loop is <code>Failed</code>.</p>"
+          }
+        },
+        "HumanLoopName": {
+          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the human loop.</p>"
           }
         },
         "HumanLoopStatus": {
@@ -396,12 +402,6 @@
           "target": "com.amazonaws.sagemakera2iruntime#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When Amazon Augmented AI created the human loop.</p>"
-          }
-        },
-        "FailureReason": {
-          "target": "com.amazonaws.sagemakera2iruntime#FailureReason",
-          "traits": {
-            "smithy.api#documentation": "<p>The reason why the human loop failed. A failure reason is returned when the status of the\n      human loop is <code>Failed</code>.</p>"
           }
         }
       },
@@ -477,6 +477,13 @@
             "smithy.api#httpQuery": "CreationTimeAfter"
           }
         },
+        "NextToken": {
+          "target": "com.amazonaws.sagemakera2iruntime#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to display the next page of results.</p>",
+            "smithy.api#httpQuery": "NextToken"
+          }
+        },
         "CreationTimeBefore": {
           "target": "com.amazonaws.sagemakera2iruntime#Timestamp",
           "traits": {
@@ -490,13 +497,6 @@
             "smithy.api#box": {},
             "smithy.api#documentation": "<p>The total number of items to return. If the total number of available items is more than\n      the value specified in <code>MaxResults</code>, then a <code>NextToken</code> is returned in\n      the output. You can use this token to display the next page of results. </p>",
             "smithy.api#httpQuery": "MaxResults"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.sagemakera2iruntime#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to display the next page of results.</p>",
-            "smithy.api#httpQuery": "NextToken"
           }
         },
         "FlowDefinitionArn": {
@@ -519,17 +519,17 @@
     "com.amazonaws.sagemakera2iruntime#ListHumanLoopsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sagemakera2iruntime#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to display the next page of results.</p>"
-          }
-        },
         "HumanLoopSummaries": {
           "target": "com.amazonaws.sagemakera2iruntime#HumanLoopSummaries",
           "traits": {
             "smithy.api#documentation": "<p>An array of objects that contain information about the human loops.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sagemakera2iruntime#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to display the next page of results.</p>"
           }
         }
       }
@@ -638,13 +638,6 @@
             "smithy.api#required": {}
           }
         },
-        "HumanLoopInput": {
-          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopInput",
-          "traits": {
-            "smithy.api#documentation": "<p>An object that contains information about the human loop.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "HumanLoopName": {
           "target": "com.amazonaws.sagemakera2iruntime#HumanLoopName",
           "traits": {
@@ -656,6 +649,13 @@
           "target": "com.amazonaws.sagemakera2iruntime#HumanLoopDataAttributes",
           "traits": {
             "smithy.api#documentation": "<p>Attributes of the specified data. Use <code>DataAttributes</code> to specify if your data\n      is free of personally identifiable information and/or free of adult content.</p>"
+          }
+        },
+        "HumanLoopInput": {
+          "target": "com.amazonaws.sagemakera2iruntime#HumanLoopInput",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains information about the human loop.</p>",
+            "smithy.api#required": {}
           }
         }
       }

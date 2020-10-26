@@ -35,6 +35,12 @@
       "operations": [
         {
           "target": "com.amazonaws.personalizeevents#PutEvents"
+        },
+        {
+          "target": "com.amazonaws.personalizeevents#PutItems"
+        },
+        {
+          "target": "com.amazonaws.personalizeevents#PutUsers"
         }
       ],
       "traits": {
@@ -42,14 +48,24 @@
           "sdkId": "Personalize Events",
           "arnNamespace": "personalize",
           "cloudFormationName": "PersonalizeEvents",
-          "cloudTrailEventSource": "events.personalize.services.amazonaws.com"
+          "cloudTrailEventSource": "personalizeevents.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "personalize"
         },
         "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p></p>",
+        "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see <a>recording-events</a>.</p>",
         "smithy.api#title": "Amazon Personalize Events"
+      }
+    },
+    "com.amazonaws.personalizeevents#Arn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
       }
     },
     "com.amazonaws.personalizeevents#Date": {
@@ -61,25 +77,48 @@
     "com.amazonaws.personalizeevents#Event": {
       "type": "structure",
       "members": {
+        "eventValue": {
+          "target": "com.amazonaws.personalizeevents#FloatType",
+          "traits": {
+            "smithy.api#documentation": "<p>The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.</p>"
+          }
+        },
         "eventType": {
           "target": "com.amazonaws.personalizeevents#StringType",
           "traits": {
-            "smithy.api#documentation": "<p>The type of event. This property corresponds to the <code>EVENT_TYPE</code>\n      field of the Interactions schema.</p>",
+            "smithy.api#documentation": "<p>The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code>\n      field of your Interactions schema and depends on the types of events you are tracking.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "recommendationId": {
+          "target": "com.amazonaws.personalizeevents#RecommendationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+          }
+        },
+        "itemId": {
+          "target": "com.amazonaws.personalizeevents#ItemId",
+          "traits": {
+            "smithy.api#documentation": "<p>The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.</p>"
           }
         },
         "properties": {
           "target": "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON",
           "traits": {
-            "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, you might send the movie ID and rating, and the number of\n      movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n         <p>\n            <code>{\"itemId\": \"movie1\"}</code>\n         </p>\n         <p>\n            <code>{\"itemId\": \"movie2\", \"eventValue\": \"4.5\"}</code>\n         </p>\n         <p>\n            <code>{\"itemId\": \"movie3\", \"eventValue\": \"3\", \"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. The <code>itemId</code> and <code>eventValue</code> keys correspond to the\n      <code>ITEM_ID</code> and <code>EVENT_VALUE</code> fields.\n      In the above example, the <code>eventType</code> might be 'MovieRating' with\n      <code>eventValue</code> being the rating. The <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>)\n      , you might also send the number of movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n      \n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>"
           }
         },
         "sentAt": {
           "target": "com.amazonaws.personalizeevents#Date",
           "traits": {
-            "smithy.api#documentation": "<p>The timestamp on the client side when the event occurred.</p>",
+            "smithy.api#documentation": "<p>The timestamp (in Unix time) on the client side when the event occurred.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "impression": {
+          "target": "com.amazonaws.personalizeevents#Impression",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of item IDs that represents the sequence of items you have shown the user. For example, <code>[\"itemId1\", \"itemId2\", \"itemId3\"]</code>.</p>"
           }
         },
         "eventId": {
@@ -105,6 +144,24 @@
         }
       }
     },
+    "com.amazonaws.personalizeevents#FloatType": {
+      "type": "float",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.personalizeevents#Impression": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.personalizeevents#ItemId"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 25
+        }
+      }
+    },
     "com.amazonaws.personalizeevents#InvalidInputException": {
       "type": "structure",
       "members": {
@@ -118,6 +175,48 @@
         "smithy.api#httpError": 400
       }
     },
+    "com.amazonaws.personalizeevents#Item": {
+      "type": "structure",
+      "members": {
+        "itemId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID associated with the item.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.personalizeevents#SynthesizedJsonItemProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example,\n    </p>\n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Items\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Items schema.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents item metadata added to an Items dataset using the \n      <code>PutItems</code> API.</p>"
+      }
+    },
+    "com.amazonaws.personalizeevents#ItemId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#ItemList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.personalizeevents#Item"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
     "com.amazonaws.personalizeevents#PutEvents": {
       "type": "operation",
       "input": {
@@ -129,7 +228,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Records user interaction event data.</p>",
+        "smithy.api#documentation": "<p>Records user interaction event data. For more information see <a>event-record-api</a>.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/events",
@@ -140,6 +239,12 @@
     "com.amazonaws.personalizeevents#PutEventsRequest": {
       "type": "structure",
       "members": {
+        "userId": {
+          "target": "com.amazonaws.personalizeevents#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The user associated with the event.</p>"
+          }
+        },
         "eventList": {
           "target": "com.amazonaws.personalizeevents#EventList",
           "traits": {
@@ -147,10 +252,11 @@
             "smithy.api#required": {}
           }
         },
-        "userId": {
-          "target": "com.amazonaws.personalizeevents#UserId",
+        "sessionId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
           "traits": {
-            "smithy.api#documentation": "<p>The user associated with the event.</p>"
+            "smithy.api#documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. \n      Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.</p>",
+            "smithy.api#required": {}
           }
         },
         "trackingId": {
@@ -159,14 +265,111 @@
             "smithy.api#documentation": "<p>The tracking ID for the event.\n      The ID is generated by a call to the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a> API.</p>",
             "smithy.api#required": {}
           }
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#PutItems": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.personalizeevents#PutItemsRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.personalizeevents#InvalidInputException"
         },
-        "sessionId": {
-          "target": "com.amazonaws.personalizeevents#StringType",
+        {
+          "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds one or more items to an Items dataset. For more information see \n      <a>importing-items</a>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/items",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#PutItemsRequest": {
+      "type": "structure",
+      "members": {
+        "datasetArn": {
+          "target": "com.amazonaws.personalizeevents#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The session ID associated with the user's visit.</p>",
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "items": {
+          "target": "com.amazonaws.personalizeevents#ItemList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of item data.</p>",
             "smithy.api#required": {}
           }
         }
+      }
+    },
+    "com.amazonaws.personalizeevents#PutUsers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.personalizeevents#PutUsersRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.personalizeevents#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds one or more users to a Users dataset. For more information see \n      <a>importing-users</a>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/users",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#PutUsersRequest": {
+      "type": "structure",
+      "members": {
+        "datasetArn": {
+          "target": "com.amazonaws.personalizeevents#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "users": {
+          "target": "com.amazonaws.personalizeevents#UserList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of user data.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#RecommendationId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 40
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.personalizeevents#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Could not find the specified resource.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
       }
     },
     "com.amazonaws.personalizeevents#StringType": {
@@ -188,12 +391,65 @@
         "smithy.api#mediaType": "application/json"
       }
     },
+    "com.amazonaws.personalizeevents#SynthesizedJsonItemProperties": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#mediaType": "application/json"
+      }
+    },
+    "com.amazonaws.personalizeevents#SynthesizedJsonUserProperties": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#mediaType": "application/json"
+      }
+    },
+    "com.amazonaws.personalizeevents#User": {
+      "type": "structure",
+      "members": {
+        "properties": {
+          "target": "com.amazonaws.personalizeevents#SynthesizedJsonUserProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example,\n    </p>\n         <p>\n            <code>{\"numberOfVideosWatched\": \"45\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Users\n      schema. In the above example, the <code>numberOfVideosWatched</code> would match the\n      'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID associated with the user.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents user metadata added to a Users dataset using the \n      <code>PutUsers</code> API.</p>"
+      }
+    },
     "com.amazonaws.personalizeevents#UserId": {
       "type": "string",
       "traits": {
         "smithy.api#length": {
           "min": 1,
           "max": 256
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#UserList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.personalizeevents#User"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
         }
       }
     }

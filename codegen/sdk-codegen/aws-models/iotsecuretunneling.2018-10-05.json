@@ -69,20 +69,20 @@
     "com.amazonaws.iotsecuretunneling#CloseTunnelRequest": {
       "type": "structure",
       "members": {
-        "tunnelId": {
-          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the tunnel to close.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "delete": {
           "target": "com.amazonaws.iotsecuretunneling#DeleteFlag",
           "traits": {
             "smithy.api#box": {},
             "smithy.api#documentation": "<p>When set to true, AWS IoT Secure Tunneling deletes the tunnel data\n\t\t\timmediately.</p>",
             "smithy.api#httpQuery": "delete"
+          }
+        },
+        "tunnelId": {
+          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the tunnel to close.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -94,16 +94,16 @@
     "com.amazonaws.iotsecuretunneling#ConnectionState": {
       "type": "structure",
       "members": {
-        "status": {
-          "target": "com.amazonaws.iotsecuretunneling#ConnectionStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The connection status of the tunnel. Valid values are <code>CONNECTED</code> and\n\t\t\t\t<code>DISCONNECTED</code>.</p>"
-          }
-        },
         "lastUpdatedAt": {
           "target": "com.amazonaws.iotsecuretunneling#DateType",
           "traits": {
             "smithy.api#documentation": "<p>The last time the connection status was updated.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotsecuretunneling#ConnectionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The connection status of the tunnel. Valid values are <code>CONNECTED</code> and\n\t\t\t\t<code>DISCONNECTED</code>.</p>"
           }
         }
       },
@@ -240,7 +240,7 @@
           "sdkId": "IoTSecureTunneling",
           "arnNamespace": "iotsecuredtunneling",
           "cloudFormationName": "IoTSecureTunneling",
-          "cloudTrailEventSource": "frontend.envoy.amazonaws.com"
+          "cloudTrailEventSource": "iotsecuretunneling.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "iotsecuredtunneling"
@@ -334,11 +334,11 @@
     "com.amazonaws.iotsecuretunneling#ListTunnelsRequest": {
       "type": "structure",
       "members": {
-        "thingName": {
-          "target": "com.amazonaws.iotsecuretunneling#ThingName",
+        "nextToken": {
+          "target": "com.amazonaws.iotsecuretunneling#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the IoT thing associated with the destination device.</p>",
-            "smithy.api#httpQuery": "thingName"
+            "smithy.api#documentation": "<p>A token to retrieve the next set of results.</p>",
+            "smithy.api#httpQuery": "nextToken"
           }
         },
         "maxResults": {
@@ -349,11 +349,11 @@
             "smithy.api#httpQuery": "maxResults"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.iotsecuretunneling#NextToken",
+        "thingName": {
+          "target": "com.amazonaws.iotsecuretunneling#ThingName",
           "traits": {
-            "smithy.api#documentation": "<p>A token to retrieve the next set of results.</p>",
-            "smithy.api#httpQuery": "nextToken"
+            "smithy.api#documentation": "<p>The name of the IoT thing associated with the destination device.</p>",
+            "smithy.api#httpQuery": "thingName"
           }
         }
       }
@@ -415,10 +415,10 @@
     "com.amazonaws.iotsecuretunneling#OpenTunnelRequest": {
       "type": "structure",
       "members": {
-        "tags": {
-          "target": "com.amazonaws.iotsecuretunneling#TagList",
+        "description": {
+          "target": "com.amazonaws.iotsecuretunneling#Description",
           "traits": {
-            "smithy.api#documentation": "<p>A collection of tag metadata.</p>"
+            "smithy.api#documentation": "<p>A short text description of the tunnel. </p>"
           }
         },
         "timeoutConfig": {
@@ -433,10 +433,10 @@
             "smithy.api#documentation": "<p>The destination configuration for the OpenTunnel request.</p>"
           }
         },
-        "description": {
-          "target": "com.amazonaws.iotsecuretunneling#Description",
+        "tags": {
+          "target": "com.amazonaws.iotsecuretunneling#TagList",
           "traits": {
-            "smithy.api#documentation": "<p>A short text description of the tunnel. </p>"
+            "smithy.api#documentation": "<p>A collection of tag metadata.</p>"
           }
         }
       }
@@ -444,6 +444,18 @@
     "com.amazonaws.iotsecuretunneling#OpenTunnelResponse": {
       "type": "structure",
       "members": {
+        "tunnelId": {
+          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique alpha-numeric tunnel ID.</p>"
+          }
+        },
+        "sourceAccessToken": {
+          "target": "com.amazonaws.iotsecuretunneling#ClientAccessToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The access token the source local proxy uses to connect to AWS IoT Secure\n\t\t\tTunneling.</p>"
+          }
+        },
         "tunnelArn": {
           "target": "com.amazonaws.iotsecuretunneling#TunnelArn",
           "traits": {
@@ -454,18 +466,6 @@
           "target": "com.amazonaws.iotsecuretunneling#ClientAccessToken",
           "traits": {
             "smithy.api#documentation": "<p>The access token the destination local proxy uses to connect to AWS IoT Secure\n\t\t\tTunneling.</p>"
-          }
-        },
-        "sourceAccessToken": {
-          "target": "com.amazonaws.iotsecuretunneling#ClientAccessToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The access token the source local proxy uses to connect to AWS IoT Secure\n\t\t\tTunneling.</p>"
-          }
-        },
-        "tunnelId": {
-          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique alpha-numeric tunnel ID.</p>"
           }
         }
       }
@@ -508,17 +508,17 @@
     "com.amazonaws.iotsecuretunneling#Tag": {
       "type": "structure",
       "members": {
-        "key": {
-          "target": "com.amazonaws.iotsecuretunneling#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>The key of the tag.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "value": {
           "target": "com.amazonaws.iotsecuretunneling#TagValue",
           "traits": {
             "smithy.api#documentation": "<p>The value of the tag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "key": {
+          "target": "com.amazonaws.iotsecuretunneling#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The key of the tag.</p>",
             "smithy.api#required": {}
           }
         }
@@ -586,17 +586,17 @@
     "com.amazonaws.iotsecuretunneling#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "tags": {
-          "target": "com.amazonaws.iotsecuretunneling#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags for the resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "resourceArn": {
           "target": "com.amazonaws.iotsecuretunneling#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotsecuretunneling#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags for the resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -653,16 +653,10 @@
     "com.amazonaws.iotsecuretunneling#Tunnel": {
       "type": "structure",
       "members": {
-        "createdAt": {
-          "target": "com.amazonaws.iotsecuretunneling#DateType",
+        "description": {
+          "target": "com.amazonaws.iotsecuretunneling#Description",
           "traits": {
-            "smithy.api#documentation": "<p>The time when the tunnel was created.</p>"
-          }
-        },
-        "timeoutConfig": {
-          "target": "com.amazonaws.iotsecuretunneling#TimeoutConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Timeout configuration for the tunnel.</p>"
+            "smithy.api#documentation": "<p>A description of the tunnel.</p>"
           }
         },
         "tunnelArn": {
@@ -677,28 +671,16 @@
             "smithy.api#documentation": "<p>The last time the tunnel was updated.</p>"
           }
         },
+        "tags": {
+          "target": "com.amazonaws.iotsecuretunneling#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tag metadata associated with the secure tunnel.</p>"
+          }
+        },
         "sourceConnectionState": {
           "target": "com.amazonaws.iotsecuretunneling#ConnectionState",
           "traits": {
             "smithy.api#documentation": "<p>The connection state of the source application.</p>"
-          }
-        },
-        "tunnelId": {
-          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique alpha-numeric ID that identifies a tunnel.</p>"
-          }
-        },
-        "destinationConnectionState": {
-          "target": "com.amazonaws.iotsecuretunneling#ConnectionState",
-          "traits": {
-            "smithy.api#documentation": "<p>The connection state of the destination application.</p>"
-          }
-        },
-        "description": {
-          "target": "com.amazonaws.iotsecuretunneling#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the tunnel.</p>"
           }
         },
         "status": {
@@ -707,16 +689,34 @@
             "smithy.api#documentation": "<p>The status of a tunnel. Valid values are: Open and Closed.</p>"
           }
         },
+        "destinationConnectionState": {
+          "target": "com.amazonaws.iotsecuretunneling#ConnectionState",
+          "traits": {
+            "smithy.api#documentation": "<p>The connection state of the destination application.</p>"
+          }
+        },
+        "tunnelId": {
+          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique alpha-numeric ID that identifies a tunnel.</p>"
+          }
+        },
+        "timeoutConfig": {
+          "target": "com.amazonaws.iotsecuretunneling#TimeoutConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Timeout configuration for the tunnel.</p>"
+          }
+        },
         "destinationConfig": {
           "target": "com.amazonaws.iotsecuretunneling#DestinationConfig",
           "traits": {
             "smithy.api#documentation": "<p>The destination configuration that specifies the thing name of the destination\n\t\t\tdevice and a service name that the local proxy uses to connect to the destination\n\t\t\tapplication.</p>"
           }
         },
-        "tags": {
-          "target": "com.amazonaws.iotsecuretunneling#TagList",
+        "createdAt": {
+          "target": "com.amazonaws.iotsecuretunneling#DateType",
           "traits": {
-            "smithy.api#documentation": "<p>A list of tag metadata associated with the secure tunnel.</p>"
+            "smithy.api#documentation": "<p>The time when the tunnel was created.</p>"
           }
         }
       },
@@ -757,10 +757,10 @@
     "com.amazonaws.iotsecuretunneling#TunnelSummary": {
       "type": "structure",
       "members": {
-        "lastUpdatedAt": {
-          "target": "com.amazonaws.iotsecuretunneling#DateType",
+        "tunnelId": {
+          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
           "traits": {
-            "smithy.api#documentation": "<p>The time the tunnel was last updated.</p>"
+            "smithy.api#documentation": "<p>The unique alpha-numeric identifier for the tunnel.</p>"
           }
         },
         "status": {
@@ -769,28 +769,28 @@
             "smithy.api#documentation": "<p>The status of a tunnel. Valid values are: Open and Closed.</p>"
           }
         },
-        "tunnelArn": {
-          "target": "com.amazonaws.iotsecuretunneling#TunnelArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name of the tunnel. The tunnel ARN format is\n\t\t\t\t<code>arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id></code>\n         </p>"
-          }
-        },
         "description": {
           "target": "com.amazonaws.iotsecuretunneling#Description",
           "traits": {
             "smithy.api#documentation": "<p>A description of the tunnel.</p>"
           }
         },
+        "tunnelArn": {
+          "target": "com.amazonaws.iotsecuretunneling#TunnelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name of the tunnel. The tunnel ARN format is\n\t\t\t\t<code>arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id></code>\n         </p>"
+          }
+        },
+        "lastUpdatedAt": {
+          "target": "com.amazonaws.iotsecuretunneling#DateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the tunnel was last updated.</p>"
+          }
+        },
         "createdAt": {
           "target": "com.amazonaws.iotsecuretunneling#DateType",
           "traits": {
             "smithy.api#documentation": "<p>The time the tunnel was created.</p>"
-          }
-        },
-        "tunnelId": {
-          "target": "com.amazonaws.iotsecuretunneling#TunnelId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique alpha-numeric identifier for the tunnel.</p>"
           }
         }
       },
@@ -829,17 +829,17 @@
     "com.amazonaws.iotsecuretunneling#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "tagKeys": {
-          "target": "com.amazonaws.iotsecuretunneling#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags to remove.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "resourceArn": {
           "target": "com.amazonaws.iotsecuretunneling#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The resource ARN.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.iotsecuretunneling#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags to remove.</p>",
             "smithy.api#required": {}
           }
         }

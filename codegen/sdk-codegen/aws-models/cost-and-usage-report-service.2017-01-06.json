@@ -51,13 +51,13 @@
           "sdkId": "Cost and Usage Report Service",
           "arnNamespace": "cur",
           "cloudFormationName": "CostandUsageReportService",
-          "cloudTrailEventSource": "awsorigamiservicegateway.amazonaws.com"
+          "cloudTrailEventSource": "costandusagereportservice.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "cur"
         },
         "aws.protocols#awsJson1_1": {},
-        "smithy.api#documentation": "<p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete \n        AWS Cost and Usage report definitions.</p>\n         <p>AWS Cost and Usage reports track the monthly AWS costs and usage \n   associated with your AWS account.\n    \n        The report contains line items for each unique combination of AWS product,\n        usage type, and operation that your AWS account uses. \n        \n        You can configure the AWS Cost and Usage report to show only the data that you want, using the\n        AWS Cost and Usage API.</p>\n\n       \n         <p>Service Endpoint</p>\n         <p>The AWS Cost and Usage Report API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>cur.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete \n        AWS Cost and Usage report definitions.</p>\n         <p>AWS Cost and Usage reports track the monthly AWS costs and usage \n   associated with your AWS account.\n    \n        The report contains line items for each unique combination of AWS product,\n        usage type, and operation that your AWS account uses. \n        \n        You can configure the AWS Cost and Usage report to show only the data that you want, using the\n        AWS Cost and Usage API.</p>\n\n     \n         <p>Service Endpoint</p>\n         <p>The AWS Cost and Usage Report API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>cur.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
         "smithy.api#title": "AWS Cost and Usage Report Service"
       }
     },
@@ -67,24 +67,16 @@
         "smithy.api#documentation": "<p>The region of the S3 bucket that AWS delivers the report into.</p>",
         "smithy.api#enum": [
           {
-            "value": "us-east-1",
-            "name": "US_STANDARD"
+            "value": "af-south-1",
+            "name": "CAPE_TOWN"
           },
           {
-            "value": "us-west-1",
-            "name": "NORTHERN_CALIFORNIA"
+            "value": "ap-east-1",
+            "name": "HONG_KONG"
           },
           {
-            "value": "us-west-2",
-            "name": "OREGON"
-          },
-          {
-            "value": "eu-central-1",
-            "name": "FRANKFURT"
-          },
-          {
-            "value": "eu-west-1",
-            "name": "IRELAND"
+            "value": "ap-south-1",
+            "name": "MUMBAI"
           },
           {
             "value": "ap-southeast-1",
@@ -99,16 +91,72 @@
             "name": "TOKYO"
           },
           {
-            "value": "eu-north-1",
-            "name": "STOCKHOLM"
+            "value": "ap-northeast-2",
+            "name": "SEOUL"
           },
           {
             "value": "ap-northeast-3",
             "name": "OSAKA"
           },
           {
-            "value": "ap-east-1",
-            "name": "HONG_KONG"
+            "value": "ca-central-1",
+            "name": "CANADA_CENTRAL"
+          },
+          {
+            "value": "eu-central-1",
+            "name": "FRANKFURT"
+          },
+          {
+            "value": "eu-west-1",
+            "name": "IRELAND"
+          },
+          {
+            "value": "eu-west-2",
+            "name": "LONDON"
+          },
+          {
+            "value": "eu-west-3",
+            "name": "PARIS"
+          },
+          {
+            "value": "eu-north-1",
+            "name": "STOCKHOLM"
+          },
+          {
+            "value": "eu-south-1",
+            "name": "MILANO"
+          },
+          {
+            "value": "me-south-1",
+            "name": "BAHRAIN"
+          },
+          {
+            "value": "sa-east-1",
+            "name": "SAO_PAULO"
+          },
+          {
+            "value": "us-east-1",
+            "name": "US_STANDARD"
+          },
+          {
+            "value": "us-east-2",
+            "name": "OHIO"
+          },
+          {
+            "value": "us-west-1",
+            "name": "NORTHERN_CALIFORNIA"
+          },
+          {
+            "value": "us-west-2",
+            "name": "OREGON"
+          },
+          {
+            "value": "cn-north-1",
+            "name": "BEIJING"
+          },
+          {
+            "value": "cn-northwest-1",
+            "name": "NINGXIA"
           }
         ]
       }
@@ -186,7 +234,10 @@
       "type": "structure",
       "members": {
         "ReportName": {
-          "target": "com.amazonaws.costandusagereportservice#ReportName"
+          "target": "com.amazonaws.costandusagereportservice#ReportName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>"
+          }
         }
       },
       "traits": {
@@ -249,14 +300,14 @@
     "com.amazonaws.costandusagereportservice#DescribeReportDefinitionsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.costandusagereportservice#GenericString"
-        },
         "ReportDefinitions": {
           "target": "com.amazonaws.costandusagereportservice#ReportDefinitionList",
           "traits": {
             "smithy.api#documentation": "<p>A list of AWS Cost and Usage reports owned by the account.</p>"
           }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.costandusagereportservice#GenericString"
         }
       },
       "traits": {
@@ -284,7 +335,12 @@
     "com.amazonaws.costandusagereportservice#GenericString": {
       "type": "string",
       "traits": {
-        "smithy.api#documentation": "<p>A generic string.</p>"
+        "smithy.api#documentation": "<p>A generic string.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "[A-Za-z0-9_\\.\\-=]*"
       }
     },
     "com.amazonaws.costandusagereportservice#InternalErrorException": {
@@ -414,8 +470,8 @@
             "smithy.api#documentation": "<p>Whether you want Amazon Web Services to overwrite the previous version of each report or \n         to deliver the report in addition to the previous versions.</p>"
           }
         },
-        "TimeUnit": {
-          "target": "com.amazonaws.costandusagereportservice#TimeUnit",
+        "Format": {
+          "target": "com.amazonaws.costandusagereportservice#ReportFormat",
           "traits": {
             "smithy.api#required": {}
           }
@@ -426,20 +482,26 @@
             "smithy.api#required": {}
           }
         },
-        "Compression": {
-          "target": "com.amazonaws.costandusagereportservice#CompressionFormat",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "Format": {
-          "target": "com.amazonaws.costandusagereportservice#ReportFormat",
+        "TimeUnit": {
+          "target": "com.amazonaws.costandusagereportservice#TimeUnit",
           "traits": {
             "smithy.api#required": {}
           }
         },
         "S3Prefix": {
           "target": "com.amazonaws.costandusagereportservice#S3Prefix",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "Compression": {
+          "target": "com.amazonaws.costandusagereportservice#CompressionFormat",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "S3Bucket": {
+          "target": "com.amazonaws.costandusagereportservice#S3Bucket",
           "traits": {
             "smithy.api#required": {}
           }
@@ -457,22 +519,16 @@
             "smithy.api#documentation": "<p>Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to \n      previous months. These charges can include refunds, credits, or support fees.</p>"
           }
         },
-        "S3Bucket": {
-          "target": "com.amazonaws.costandusagereportservice#S3Bucket",
+        "AdditionalArtifacts": {
+          "target": "com.amazonaws.costandusagereportservice#AdditionalArtifactList",
           "traits": {
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A list of manifests that you want Amazon Web Services to create for this report.</p>"
           }
         },
         "S3Region": {
           "target": "com.amazonaws.costandusagereportservice#AWSRegion",
           "traits": {
             "smithy.api#required": {}
-          }
-        },
-        "AdditionalArtifacts": {
-          "target": "com.amazonaws.costandusagereportservice#AdditionalArtifactList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of manifests that you want Amazon Web Services to create for this report.</p>"
           }
         }
       },
@@ -550,7 +606,8 @@
         "smithy.api#length": {
           "min": 0,
           "max": 256
-        }
+        },
+        "smithy.api#pattern": "[A-Za-z0-9_\\.\\-]+"
       }
     },
     "com.amazonaws.costandusagereportservice#S3Prefix": {
@@ -597,6 +654,10 @@
           {
             "value": "DAILY",
             "name": "DAILY"
+          },
+          {
+            "value": "MONTHLY",
+            "name": "MONTHLY"
           }
         ]
       }

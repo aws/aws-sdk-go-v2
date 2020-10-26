@@ -44,10 +44,10 @@
     "com.amazonaws.sso#AccountInfo": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.sso#AccountIdType",
+        "accountName": {
+          "target": "com.amazonaws.sso#AccountNameType",
           "traits": {
-            "smithy.api#documentation": "<p>The identifier of the AWS account that is assigned to the user.</p>"
+            "smithy.api#documentation": "<p>The display name of the AWS account that is assigned to the user.</p>"
           }
         },
         "emailAddress": {
@@ -56,10 +56,10 @@
             "smithy.api#documentation": "<p>The email address of the AWS account that is assigned to the user.</p>"
           }
         },
-        "accountName": {
-          "target": "com.amazonaws.sso#AccountNameType",
+        "accountId": {
+          "target": "com.amazonaws.sso#AccountIdType",
           "traits": {
-            "smithy.api#documentation": "<p>The display name of the AWS account that is assigned to the user.</p>"
+            "smithy.api#documentation": "<p>The identifier of the AWS account that is assigned to the user.</p>"
           }
         }
       },
@@ -127,11 +127,11 @@
     "com.amazonaws.sso#GetRoleCredentialsRequest": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.sso#AccountIdType",
+        "roleName": {
+          "target": "com.amazonaws.sso#RoleNameType",
           "traits": {
-            "smithy.api#documentation": "<p>The identifier for the AWS account that is assigned to the user.</p>",
-            "smithy.api#httpQuery": "account_id",
+            "smithy.api#documentation": "<p>The friendly name of the role that is assigned to the user.</p>",
+            "smithy.api#httpQuery": "role_name",
             "smithy.api#required": {}
           }
         },
@@ -143,11 +143,11 @@
             "smithy.api#required": {}
           }
         },
-        "roleName": {
-          "target": "com.amazonaws.sso#RoleNameType",
+        "accountId": {
+          "target": "com.amazonaws.sso#AccountIdType",
           "traits": {
-            "smithy.api#documentation": "<p>The friendly name of the role that is assigned to the user.</p>",
-            "smithy.api#httpQuery": "role_name",
+            "smithy.api#documentation": "<p>The identifier for the AWS account that is assigned to the user.</p>",
+            "smithy.api#httpQuery": "account_id",
             "smithy.api#required": {}
           }
         }
@@ -218,19 +218,19 @@
     "com.amazonaws.sso#ListAccountRolesRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.sso#NextTokenType",
-          "traits": {
-            "smithy.api#documentation": "<p>The page token from the previous response output when you request subsequent pages.</p>",
-            "smithy.api#httpQuery": "next_token"
-          }
-        },
         "accessToken": {
           "target": "com.amazonaws.sso#AccessTokenType",
           "traits": {
             "smithy.api#documentation": "<p>The token issued by the <code>CreateToken</code> API call. For more information, see\n        <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html\">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>",
             "smithy.api#httpHeader": "x-amz-sso_bearer_token",
             "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.sso#MaxResultType",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of items that clients can request per page.</p>",
+            "smithy.api#httpQuery": "max_result"
           }
         },
         "accountId": {
@@ -241,11 +241,11 @@
             "smithy.api#required": {}
           }
         },
-        "maxResults": {
-          "target": "com.amazonaws.sso#MaxResultType",
+        "nextToken": {
+          "target": "com.amazonaws.sso#NextTokenType",
           "traits": {
-            "smithy.api#documentation": "<p>The number of items that clients can request per page.</p>",
-            "smithy.api#httpQuery": "max_result"
+            "smithy.api#documentation": "<p>The page token from the previous response output when you request subsequent pages.</p>",
+            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -253,16 +253,16 @@
     "com.amazonaws.sso#ListAccountRolesResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.sso#NextTokenType",
-          "traits": {
-            "smithy.api#documentation": "<p>The page token client that is used to retrieve the list of accounts.</p>"
-          }
-        },
         "roleList": {
           "target": "com.amazonaws.sso#RoleListType",
           "traits": {
             "smithy.api#documentation": "<p>A paginated response with the list of roles and the next token if more results are available.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.sso#NextTokenType",
+          "traits": {
+            "smithy.api#documentation": "<p>The page token client that is used to retrieve the list of accounts.</p>"
           }
         }
       }
@@ -418,18 +418,6 @@
     "com.amazonaws.sso#RoleCredentials": {
       "type": "structure",
       "members": {
-        "secretAccessKey": {
-          "target": "com.amazonaws.sso#SecretAccessKeyType",
-          "traits": {
-            "smithy.api#documentation": "<p>The key that is used to sign the request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html\">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the\n        <i>AWS IAM User Guide</i>.</p>"
-          }
-        },
-        "accessKeyId": {
-          "target": "com.amazonaws.sso#AccessKeyType",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier used for the temporary security credentials. For more information, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html\">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the\n        <i>AWS IAM User Guide</i>.</p>"
-          }
-        },
         "expiration": {
           "target": "com.amazonaws.sso#ExpirationTimestampType",
           "traits": {
@@ -441,6 +429,18 @@
           "traits": {
             "smithy.api#documentation": "<p>The token used for temporary credentials. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html\">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the\n        <i>AWS IAM User Guide</i>.</p>"
           }
+        },
+        "accessKeyId": {
+          "target": "com.amazonaws.sso#AccessKeyType",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier used for the temporary security credentials. For more information, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html\">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the\n        <i>AWS IAM User Guide</i>.</p>"
+          }
+        },
+        "secretAccessKey": {
+          "target": "com.amazonaws.sso#SecretAccessKeyType",
+          "traits": {
+            "smithy.api#documentation": "<p>The key that is used to sign the request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html\">Using Temporary Security Credentials to Request Access to AWS Resources</a> in the\n        <i>AWS IAM User Guide</i>.</p>"
+          }
         }
       },
       "traits": {
@@ -450,16 +450,16 @@
     "com.amazonaws.sso#RoleInfo": {
       "type": "structure",
       "members": {
-        "roleName": {
-          "target": "com.amazonaws.sso#RoleNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>The friendly name of the role that is assigned to the user.</p>"
-          }
-        },
         "accountId": {
           "target": "com.amazonaws.sso#AccountIdType",
           "traits": {
             "smithy.api#documentation": "<p>The identifier of the AWS account assigned to the user.</p>"
+          }
+        },
+        "roleName": {
+          "target": "com.amazonaws.sso#RoleNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>The friendly name of the role that is assigned to the user.</p>"
           }
         }
       },
@@ -498,7 +498,7 @@
           "sdkId": "SSO",
           "arnNamespace": "awsssoportal",
           "cloudFormationName": "SSO",
-          "cloudTrailEventSource": "portal.switchboard.amazonaws.com"
+          "cloudTrailEventSource": "sso.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "awsssoportal"

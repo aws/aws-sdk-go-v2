@@ -92,7 +92,7 @@
           "sdkId": "FSx",
           "arnNamespace": "fsx",
           "cloudFormationName": "FSx",
-          "cloudTrailEventSource": "v20180301.api.simba.amazonaws.com"
+          "cloudTrailEventSource": "fsx.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "fsx"
@@ -125,8 +125,11 @@
     "com.amazonaws.fsx#ActiveDirectoryError": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.fsx#ErrorMessage"
+        "Type": {
+          "target": "com.amazonaws.fsx#ActiveDirectoryErrorType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of Active Directory error.</p>"
+          }
         },
         "ActiveDirectoryId": {
           "target": "com.amazonaws.fsx#DirectoryId",
@@ -135,11 +138,8 @@
             "smithy.api#required": {}
           }
         },
-        "Type": {
-          "target": "com.amazonaws.fsx#ActiveDirectoryErrorType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of Active Directory error.</p>"
-          }
+        "Message": {
+          "target": "com.amazonaws.fsx#ErrorMessage"
         }
       },
       "traits": {
@@ -184,6 +184,15 @@
     "com.amazonaws.fsx#AdministrativeAction": {
       "type": "structure",
       "members": {
+        "AdministrativeActionType": {
+          "target": "com.amazonaws.fsx#AdministrativeActionType"
+        },
+        "Status": {
+          "target": "com.amazonaws.fsx#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the status of the administrative action, as follows:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system \n                with the new storage capacity, and is now performing the storage optimization process.\n                For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p>\n            </li>\n         </ul>"
+          }
+        },
         "RequestTime": {
           "target": "com.amazonaws.fsx#RequestTime",
           "traits": {
@@ -204,15 +213,6 @@
         },
         "FailureDetails": {
           "target": "com.amazonaws.fsx#AdministrativeActionFailureDetails"
-        },
-        "AdministrativeActionType": {
-          "target": "com.amazonaws.fsx#AdministrativeActionType"
-        },
-        "Status": {
-          "target": "com.amazonaws.fsx#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the status of the administrative action, as follows:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system \n                with the new storage capacity, and is now performing the storage optimization process.\n                For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p>\n            </li>\n         </ul>"
-          }
         }
       },
       "traits": {
@@ -294,16 +294,64 @@
       "type": "integer",
       "traits": {
         "smithy.api#box": {},
-        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables\n            automatic backups. You can retain automatic backups for a maximum of 35 days. The default is 0.</p>",
+        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables\n            automatic backups. You can retain automatic backups for a maximum of 90 days. The default is 0.</p>",
         "smithy.api#range": {
           "min": 0,
-          "max": 35
+          "max": 90
         }
       }
     },
     "com.amazonaws.fsx#Backup": {
       "type": "structure",
       "members": {
+        "FileSystem": {
+          "target": "com.amazonaws.fsx#FileSystem",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata of the file system associated with the backup. This metadata is persisted\n            even if the file system is deleted.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Lifecycle": {
+          "target": "com.amazonaws.fsx#BackupLifecycle",
+          "traits": {
+            "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - FSx is creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For Lustre file systems only; FSx is transferring the backup to S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The backup was deleted is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceARN": {
+          "target": "com.amazonaws.fsx#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the backup resource.</p>"
+          }
+        },
+        "KmsKeyId": {
+          "target": "com.amazonaws.fsx#KmsKeyId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the \n              backup of the Amazon FSx file system's data at rest. \n              </p>"
+          }
+        },
+        "DirectoryInformation": {
+          "target": "com.amazonaws.fsx#ActiveDirectoryBackupAttributes",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
+          }
+        },
+        "ProgressPercent": {
+          "target": "com.amazonaws.fsx#ProgressPercent"
+        },
+        "FailureDetails": {
+          "target": "com.amazonaws.fsx#BackupFailureDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Details explaining any failures that occur when creating a backup.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.fsx#BackupType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the file system backup.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "CreationTime": {
           "target": "com.amazonaws.fsx#CreationTime",
           "traits": {
@@ -318,58 +366,10 @@
             "smithy.api#required": {}
           }
         },
-        "FailureDetails": {
-          "target": "com.amazonaws.fsx#BackupFailureDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>Details explaining any failures that occur when creating a backup.</p>"
-          }
-        },
-        "ProgressPercent": {
-          "target": "com.amazonaws.fsx#ProgressPercent"
-        },
         "Tags": {
           "target": "com.amazonaws.fsx#Tags",
           "traits": {
             "smithy.api#documentation": "<p>Tags associated with a particular file system.</p>"
-          }
-        },
-        "ResourceARN": {
-          "target": "com.amazonaws.fsx#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the backup resource.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.fsx#BackupType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the file system backup.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "KmsKeyId": {
-          "target": "com.amazonaws.fsx#KmsKeyId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this \n              backup of the Amazon FSx for Windows file system's data at rest. \n              Amazon FSx for Lustre does not support KMS encryption.</p>"
-          }
-        },
-        "DirectoryInformation": {
-          "target": "com.amazonaws.fsx#ActiveDirectoryBackupAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
-          }
-        },
-        "Lifecycle": {
-          "target": "com.amazonaws.fsx#BackupLifecycle",
-          "traits": {
-            "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "FileSystem": {
-          "target": "com.amazonaws.fsx#FileSystem",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata of the file system associated with the backup. This metadata is persisted\n            even if the file system is deleted.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -430,7 +430,7 @@
     "com.amazonaws.fsx#BackupLifecycle": {
       "type": "string",
       "traits": {
-        "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>",
+        "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - FSx is creating the new user-intiated backup</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; FSx is backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The backup was deleted is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
         "smithy.api#enum": [
           {
             "value": "AVAILABLE",
@@ -439,6 +439,10 @@
           {
             "value": "CREATING",
             "name": "CREATING"
+          },
+          {
+            "value": "TRANSFERRING",
+            "name": "TRANSFERRING"
           },
           {
             "value": "DELETED",
@@ -598,6 +602,18 @@
     "com.amazonaws.fsx#CompletionReport": {
       "type": "structure",
       "members": {
+        "Path": {
+          "target": "com.amazonaws.fsx#ArchivePath",
+          "traits": {
+            "smithy.api#documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the location of the report on the file system's linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. \n            The <code>Path</code> you provide must be located within the file system’s ExportPath. \n            An example <code>Path</code> value is \"s3://myBucket/myExportPath/optionalPrefix\". The report provides the following information for each file in the report:\n            FilePath, FileStatus, and ErrorCode. To learn more about a file system's <code>ExportPath</code>, see .\n            </p>"
+          }
+        },
+        "Format": {
+          "target": "com.amazonaws.fsx#ReportFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the format of the <code>CompletionReport</code>. <code>REPORT_CSV_20191124</code> is the only format currently supported.\n            When <code>Format</code> is set to <code>REPORT_CSV_20191124</code>, the <code>CompletionReport</code> is provided in CSV format, and is delivered to\n            <code>{path}/task-{id}/failures.csv</code>. \n        </p>"
+          }
+        },
         "Enabled": {
           "target": "com.amazonaws.fsx#Flag",
           "traits": {
@@ -609,18 +625,6 @@
           "target": "com.amazonaws.fsx#ReportScope",
           "traits": {
             "smithy.api#documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the scope of the <code>CompletionReport</code>; <code>FAILED_FILES_ONLY</code> is the only scope currently supported. \n            When <code>Scope</code> is set to <code>FAILED_FILES_ONLY</code>, the <code>CompletionReport</code> only contains information about files that the data repository task failed to process.</p>"
-          }
-        },
-        "Path": {
-          "target": "com.amazonaws.fsx#ArchivePath",
-          "traits": {
-            "smithy.api#documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the location of the report on the file system's linked S3 data repository. An absolute path that defines where the completion report will be stored in the destination location. \n            The <code>Path</code> you provide must be located within the file system’s ExportPath. \n            An example <code>Path</code> value is \"s3://myBucket/myExportPath/optionalPrefix\". The report provides the following information for each file in the report:\n            FilePath, FileStatus, and ErrorCode. To learn more about a file system's <code>ExportPath</code>, see .\n            </p>"
-          }
-        },
-        "Format": {
-          "target": "com.amazonaws.fsx#ReportFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>Required if <code>Enabled</code> is set to <code>true</code>. Specifies the format of the <code>CompletionReport</code>. <code>REPORT_CSV_20191124</code> is the only format currently supported.\n            When <code>Format</code> is set to <code>REPORT_CSV_20191124</code>, the <code>CompletionReport</code> is provided in CSV format, and is delivered to\n            <code>{path}/task-{id}/failures.csv</code>. \n        </p>"
           }
         }
       },
@@ -660,7 +664,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a backup of an existing Amazon FSx file system.\n            Creating regular backups for your file system is a best practice, enabling you to restore a file system\n            from a backup if an issue arises with the original file system.</p>\n        <p>For Amazon FSx for Lustre file systems, you can create a backup only \n            for file systems with the following configuration:</p>\n        <ul>\n            <li>\n               <p>a Persistent deployment type</p>\n            </li>\n            <li>\n               <p>is <i>not</i> linked to an Amazon S3 data respository.</p>\n            </li>\n         </ul>\n            <p>For more information about backing up Amazon FSx for Lustre file systems, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with FSx for Lustre backups</a>.</p>\n        <p>For more information about backing up Amazon FSx for Lustre file systems, \n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with FSx for Windows backups</a>.</p>\n\n        <p>If a backup with the specified client request token exists, and the parameters\n            match, this operation returns the description of the existing backup. If a backup\n            specified client request token exists, and the parameters don't match, this\n            operation returns <code>IncompatibleParameterError</code>. If a backup with the\n            specified client request token doesn't exist, <code>CreateBackup</code> does the\n            following: </p>\n        <ul>\n            <li>\n                <p>Creates a new Amazon FSx backup with an assigned ID, and an initial\n                    lifecycle state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the backup.</p>\n            </li>\n         </ul>\n\n        <p>By using the idempotent operation, you can retry a <code>CreateBackup</code>\n            operation without the risk of creating an extra backup. This approach can be useful when\n            an initial call fails in a way that makes it unclear whether a backup was created. If\n            you use the same client request token and the initial call created a backup, the\n            operation returns a successful result because all the parameters are the same.</p>\n\n        <p>The <code>CreateBackup</code> operation returns while the backup's\n            lifecycle state is still <code>CREATING</code>. You can check the backup creation\n            status by calling the <a>DescribeBackups</a> operation, which returns the\n            backup state along with other information.</p>",
+        "smithy.api#documentation": "<p>Creates a backup of an existing Amazon FSx file system.\n            Creating regular backups for your file system is a best practice, enabling you to restore a file system\n            from a backup if an issue arises with the original file system.</p>\n        <p>For Amazon FSx for Lustre file systems, you can create a backup only \n            for file systems with the following configuration:</p>\n        <ul>\n            <li>\n               <p>a Persistent deployment type</p>\n            </li>\n            <li>\n               <p>is <i>not</i> linked to a data respository.</p>\n            </li>\n         </ul>\n            <p>For more information about backing up Amazon FSx for Lustre file systems, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with FSx for Lustre backups</a>.</p>\n        <p>For more information about backing up Amazon FSx for Lustre file systems, \n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with FSx for Windows backups</a>.</p>\n\n        <p>If a backup with the specified client request token exists, and the parameters\n            match, this operation returns the description of the existing backup. If a backup\n            specified client request token exists, and the parameters don't match, this\n            operation returns <code>IncompatibleParameterError</code>. If a backup with the\n            specified client request token doesn't exist, <code>CreateBackup</code> does the\n            following: </p>\n        <ul>\n            <li>\n                <p>Creates a new Amazon FSx backup with an assigned ID, and an initial\n                    lifecycle state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the backup.</p>\n            </li>\n         </ul>\n\n        <p>By using the idempotent operation, you can retry a <code>CreateBackup</code>\n            operation without the risk of creating an extra backup. This approach can be useful when\n            an initial call fails in a way that makes it unclear whether a backup was created. If\n            you use the same client request token and the initial call created a backup, the\n            operation returns a successful result because all the parameters are the same.</p>\n\n        <p>The <code>CreateBackup</code> operation returns while the backup's\n            lifecycle state is still <code>CREATING</code>. You can check the backup creation\n            status by calling the <a>DescribeBackups</a> operation, which returns the\n            backup state along with other information.</p>",
         "smithy.api#idempotent": {}
       }
     },
@@ -670,13 +674,13 @@
         "Tags": {
           "target": "com.amazonaws.fsx#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to apply to the backup at backup creation. The key value of the\n            <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and \n            you specify one or more tags using the <code>CreateBackup</code> action, no existing tags on the file system are copied from the file system to the backup.</p>"
+            "smithy.api#documentation": "<p>(Optional) The tags to apply to the backup at backup creation. The key value of the\n            <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and \n            you specify one or more tags using the <code>CreateBackup</code> action, no existing file system tags are copied from the file system to the backup.</p>"
           }
         },
         "ClientRequestToken": {
           "target": "com.amazonaws.fsx#ClientRequestToken",
           "traits": {
-            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+            "smithy.api#documentation": "<p>(Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
             "smithy.api#idempotencyToken": {}
           }
         },
@@ -745,11 +749,27 @@
     "com.amazonaws.fsx#CreateDataRepositoryTaskRequest": {
       "type": "structure",
       "members": {
+        "ClientRequestToken": {
+          "target": "com.amazonaws.fsx#ClientRequestToken",
+          "traits": {
+            "smithy.api#idempotencyToken": {}
+          }
+        },
         "FileSystemId": {
           "target": "com.amazonaws.fsx#FileSystemId",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "Report": {
+          "target": "com.amazonaws.fsx#CompletionReport",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. \n            A CompletionReport provides a detailed  report on the files that Amazon FSx processed that meet the criteria specified by the \n            <code>Scope</code> parameter. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html\">Working with Task Completion Reports</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags"
         },
         "Paths": {
           "target": "com.amazonaws.fsx#DataRepositoryTaskPaths",
@@ -761,22 +781,6 @@
           "target": "com.amazonaws.fsx#DataRepositoryTaskType",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the type of data repository task to create.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags"
-        },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.fsx#ClientRequestToken",
-          "traits": {
-            "smithy.api#idempotencyToken": {}
-          }
-        },
-        "Report": {
-          "target": "com.amazonaws.fsx#CompletionReport",
-          "traits": {
-            "smithy.api#documentation": "<p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. \n            A CompletionReport provides a detailed  report on the files that Amazon FSx processed that meet the criteria specified by the \n            <code>Scope</code> parameter. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html\">Working with Task Completion Reports</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -881,19 +885,6 @@
     "com.amazonaws.fsx#CreateFileSystemFromBackupRequest": {
       "type": "structure",
       "members": {
-        "ClientRequestToken": {
-          "target": "com.amazonaws.fsx#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be applied to the file system at file system creation. The key value of\n            the <code>Name</code> tag appears in the console as the file system\n            name.</p>"
-          }
-        },
         "SubnetIds": {
           "target": "com.amazonaws.fsx#SubnetIds",
           "traits": {
@@ -901,14 +892,14 @@
             "smithy.api#required": {}
           }
         },
-        "LustreConfiguration": {
-          "target": "com.amazonaws.fsx#CreateFileSystemLustreConfiguration"
-        },
         "BackupId": {
           "target": "com.amazonaws.fsx#BackupId",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "LustreConfiguration": {
+          "target": "com.amazonaws.fsx#CreateFileSystemLustreConfiguration"
         },
         "WindowsConfiguration": {
           "target": "com.amazonaws.fsx#CreateFileSystemWindowsConfiguration",
@@ -926,6 +917,19 @@
           "target": "com.amazonaws.fsx#StorageType",
           "traits": {
             "smithy.api#documentation": "<p>Sets the storage type for the Windows file system you're creating from a backup. \n            Valid values are <code>SSD</code> and <code>HDD</code>.</p>\n        <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. \n                Supported on all Windows deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. \n                </p>\n            </li>\n         </ul>\n        <p>\n            Default value is <code>SSD</code>. \n        </p>\n        <note>\n            <p>HDD and SSD storage types have different minimum storage capacity requirements. \n            A restored file system's storage capacity is tied to the file system that was backed up. \n            You can create a file system that uses HDD storage from a backup of a file system that \n            used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. \n        </p>\n         </note>"
+          }
+        },
+        "ClientRequestToken": {
+          "target": "com.amazonaws.fsx#ClientRequestToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be applied to the file system at file system creation. The key value of\n            the <code>Name</code> tag appears in the console as the file system\n            name.</p>"
           }
         }
       },
@@ -950,42 +954,6 @@
     "com.amazonaws.fsx#CreateFileSystemLustreConfiguration": {
       "type": "structure",
       "members": {
-        "DeploymentType": {
-          "target": "com.amazonaws.fsx#LustreDeploymentType",
-          "traits": {
-            "smithy.api#documentation": "<p> \n            Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment \n            types when you need temporary storage and shorter-term processing of data. \n            The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst \n            throughput capacity than <code>SCRATCH_1</code>.</p>\n        \n            <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage \n                and workloads and encryption of data in transit. To learn more about deployment types, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\">\n                    FSx for Lustre Deployment Options</a>.</p>\n            <p>Encryption of data in-transit is automatically \n            enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code>\n            file system from Amazon EC2 instances that <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-                 protection.html\">support this feature</a>.\n            (Default = <code>SCRATCH_1</code>)\n        </p>\n        \n            <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> \n                deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html\">Encrypting Data in Transit</a>.</p>"
-          }
-        },
-        "ImportedFileChunkSize": {
-          "target": "com.amazonaws.fsx#Megabytes",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) For files imported from a data repository, this value determines the stripe\n            count and maximum amount of data per file (in MiB) stored on a single physical disk. The\n            maximum number of disks that a single file can be striped across is limited by the total\n            number of disks that make up the file system.</p>\n        \n        <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500\n            GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
-          }
-        },
-        "CopyTagsToBackups": {
-          "target": "com.amazonaws.fsx#Flag",
-          "traits": {
-            "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the file system should be copied to\n            backups. This value defaults to false. If it's set to true, all tags for the file\n            system are copied to all automatic and user-initiated backups where the user\n            doesn't specify tags. If this value is true, and you specify one or more tags, only\n            the specified tags are copied to backups. If you specify one or more tags when creating a\n            user-initiated backup, no tags are copied from the file system, regardless of this value.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with backups</a>.</p>"
-          }
-        },
-        "DailyAutomaticBackupStartTime": {
-          "target": "com.amazonaws.fsx#DailyTime"
-        },
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
-        },
-        "ExportPath": {
-          "target": "com.amazonaws.fsx#ArchivePath",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is exported. \n            The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide an optional prefix to which\n            new and changed data is to be exported from your Amazon FSx for Lustre file system. If\n            an <code>ExportPath</code> value is not provided, Amazon FSx sets a default export path,\n            <code>s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in\n            UTC format, for example\n            <code>s3://import-bucket/FSxLustre20181105T222312Z</code>.</p>\n\n        <p>The Amazon S3 export bucket must be the same as the import bucket specified by\n            <code>ImportPath</code>. If you only specify a bucket name, such as\n            <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3\n            bucket objects. This mapping means that the input data in S3 is overwritten on export.\n            If you provide a custom prefix in the export path, such as\n            <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file \n            system to that export prefix in the Amazon S3 bucket.</p>"
-          }
-        },
-        "PerUnitStorageThroughput": {
-          "target": "com.amazonaws.fsx#PerUnitStorageThroughput",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write \n            throughput for each 1 tebibyte of storage, in MB/s/TiB. \n            File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput\n            (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput\n            yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you\n            provision.\n        </p>\n        <p>Valid values are 50, 100, 200.</p>"
-          }
-        },
         "ImportPath": {
           "target": "com.amazonaws.fsx#ArchivePath",
           "traits": {
@@ -995,13 +963,55 @@
         "WeeklyMaintenanceStartTime": {
           "target": "com.amazonaws.fsx#WeeklyTime",
           "traits": {
-            "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
+            "smithy.api#documentation": "<p>(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
+          }
+        },
+        "DriveCacheType": {
+          "target": "com.amazonaws.fsx#DriveCacheType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with\n            HDD storage devices. This parameter is required when storage type is HDD. Set to\n            <code>READ</code>, improve the performance for frequently accessed files and allows 20%\n            of the total storage capacity of the file system to be cached. </p>\n        <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
           }
         },
         "AutoImportPolicy": {
           "target": "com.amazonaws.fsx#AutoImportPolicyType",
           "traits": {
-            "smithy.api#documentation": "<p> (Optional) Use this property to configure the AutoImport feature on the \n            file system's linked Amazon S3 data repository. You use\n            AutoImport to update the contents of your FSx for Lustre file system automatically \n            with changes that occur in the linked S3 data repository. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Changes in the linked \n                data repository are not reflected on the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. New files in the linked data repository \n                that do not currently exist in the FSx file system are automatically imported. \n                Updates to existing FSx files are not imported to the FSx file system. Files deleted from \n                the linked data repository are not deleted from the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. New files in the linked S3 \n                data repository that do not currently exist in the FSx file system are automatically imported. \n                Changes to existing FSx files in the linked repository are also automatically imported to the \n                FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.\n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+            "smithy.api#documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        \n        \n        \n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+          }
+        },
+        "CopyTagsToBackups": {
+          "target": "com.amazonaws.fsx#Flag",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) Not available to use with file systems that are linked to a data repository. \n            A boolean flag indicating whether tags for the file system should be copied to\n            backups. The default value is false. If it's set to true, all file system\n            tags are copied to all automatic and user-initiated backups when the user\n            doesn't specify any backup-specific tags. If this value is true, and you specify one or more backup tags, only\n            the specified tags are copied to backups. If you specify one or more tags when creating a\n            user-initiated backup, no tags are copied from the file system, regardless of this value.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with backups</a>.</p>"
+          }
+        },
+        "DeploymentType": {
+          "target": "com.amazonaws.fsx#LustreDeploymentType",
+          "traits": {
+            "smithy.api#documentation": "<p> \n            Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment \n            types when you need temporary storage and shorter-term processing of data. \n            The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst \n            throughput capacity than <code>SCRATCH_1</code>.</p>\n        \n            <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage \n                and workloads and encryption of data in transit. To learn more about deployment types, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\">\n                    FSx for Lustre Deployment Options</a>.</p>\n            <p>Encryption of data in-transit is automatically \n            enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code>\n            file system from Amazon EC2 instances that <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-                 protection.html\">support this feature</a>.\n            (Default = <code>SCRATCH_1</code>)\n        </p>\n            <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> \n                deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html\">Encrypting Data in Transit</a>.</p>"
+          }
+        },
+        "ImportedFileChunkSize": {
+          "target": "com.amazonaws.fsx#Megabytes",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) For files imported from a data repository, this value determines the stripe\n            count and maximum amount of data per file (in MiB) stored on a single physical disk. The\n            maximum number of disks that a single file can be striped across is limited by the total\n            number of disks that make up the file system.</p>\n        \n        <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500\n            GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
+          }
+        },
+        "PerUnitStorageThroughput": {
+          "target": "com.amazonaws.fsx#PerUnitStorageThroughput",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write \n            throughput for each 1 tebibyte of storage, in MB/s/TiB. \n            File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput\n            (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput\n            yields 120 MB/s of ﬁle system throughput. You pay for the amount of throughput that you\n            provision.\n        </p>\n        <p>Valid values for  SSD storage: 50, 100, 200. Valid values for  HDD storage: 12, 40.</p>"
+          }
+        },
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
+        },
+        "DailyAutomaticBackupStartTime": {
+          "target": "com.amazonaws.fsx#DailyTime"
+        },
+        "ExportPath": {
+          "target": "com.amazonaws.fsx#ArchivePath",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is exported. \n            The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide an optional prefix to which\n            new and changed data is to be exported from your Amazon FSx for Lustre file system. If\n            an <code>ExportPath</code> value is not provided, Amazon FSx sets a default export path,\n            <code>s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in\n            UTC format, for example\n            <code>s3://import-bucket/FSxLustre20181105T222312Z</code>.</p>\n\n        <p>The Amazon S3 export bucket must be the same as the import bucket specified by\n            <code>ImportPath</code>. If you only specify a bucket name, such as\n            <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3\n            bucket objects. This mapping means that the input data in S3 is overwritten on export.\n            If you provide a custom prefix in the export path, such as\n            <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file \n            system to that export prefix in the Amazon S3 bucket.</p>"
           }
         }
       },
@@ -1012,11 +1022,8 @@
     "com.amazonaws.fsx#CreateFileSystemRequest": {
       "type": "structure",
       "members": {
-        "WindowsConfiguration": {
-          "target": "com.amazonaws.fsx#CreateFileSystemWindowsConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The Microsoft Windows configuration for the file system being created. \n            </p>"
-          }
+        "KmsKeyId": {
+          "target": "com.amazonaws.fsx#KmsKeyId"
         },
         "SubnetIds": {
           "target": "com.amazonaws.fsx#SubnetIds",
@@ -1025,21 +1032,17 @@
             "smithy.api#required": {}
           }
         },
-        "SecurityGroupIds": {
-          "target": "com.amazonaws.fsx#SecurityGroupIds",
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>A list of IDs specifying the security groups to apply to all network interfaces\n            created for file system access. This list isn't returned in later requests to\n            describe the file system.</p>"
+            "smithy.api#documentation": "<p>The tags to apply to the file system being created. The key value of\n            the <code>Name</code> tag appears in the console as the file system name.</p>"
           }
         },
-        "ClientRequestToken": {
-          "target": "com.amazonaws.fsx#ClientRequestToken",
+        "WindowsConfiguration": {
+          "target": "com.amazonaws.fsx#CreateFileSystemWindowsConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
-            "smithy.api#idempotencyToken": {}
+            "smithy.api#documentation": "<p>The Microsoft Windows configuration for the file system being created. \n            </p>"
           }
-        },
-        "LustreConfiguration": {
-          "target": "com.amazonaws.fsx#CreateFileSystemLustreConfiguration"
         },
         "FileSystemType": {
           "target": "com.amazonaws.fsx#FileSystemType",
@@ -1051,23 +1054,30 @@
         "StorageCapacity": {
           "target": "com.amazonaws.fsx#StorageCapacity",
           "traits": {
-            "smithy.api#documentation": "<p>Sets the storage capacity of the file system that you're creating.</p>      \n        <p>For Lustre file systems:</p>\n        <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, valid values are \n                1.2, 2.4, and increments of 2.4 TiB.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> deployment type, valid values are \n                1.2, 2.4, and increments of 3.6 TiB.</p>\n            </li>\n         </ul>\n        <p>For Windows file systems:</p>\n        <ul>\n            <li>\n               <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p>\n            </li>\n            <li>\n               <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>Sets the storage capacity of the file system that you're creating.</p>      \n        <p>For Lustre file systems:</p>\n        <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are \n                1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for \n                12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> deployment type, valid values are \n                1200 GiB, 2400 GiB, and increments of 3600 GiB.</p>\n            </li>\n         </ul>\n        <p>For Windows file systems:</p>\n        <ul>\n            <li>\n               <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p>\n            </li>\n            <li>\n               <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         },
-        "KmsKeyId": {
-          "target": "com.amazonaws.fsx#KmsKeyId"
+        "SecurityGroupIds": {
+          "target": "com.amazonaws.fsx#SecurityGroupIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of IDs specifying the security groups to apply to all network interfaces\n            created for file system access. This list isn't returned in later requests to\n            describe the file system.</p>"
+          }
         },
         "StorageType": {
           "target": "com.amazonaws.fsx#StorageType",
           "traits": {
-            "smithy.api#documentation": "<p>Sets the storage type for the Amazon FSx for Windows file system you're creating. \n            Valid values are <code>SSD</code> and <code>HDD</code>.</p>\n        <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. \n                SSD is supported on all Windows deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. \n                </p>\n            </li>\n         </ul>\n        <p>\n            Default value is <code>SSD</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\">\n            Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i>.\n        </p>"
+            "smithy.api#documentation": "<p>Sets the storage type for the file system you're creating. \n            Valid values are <code>SSD</code> and <code>HDD</code>.</p>\n        <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. \n                SSD is supported on all Windows and Lustre deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,\n                and on <code>PERSISTENT</code> Lustre file system deployment types. \n                </p>\n            </li>\n         </ul>\n        <p>\n            Default value is <code>SSD</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\">\n            Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options\">Multiple Storage Options</a> \n            in the <i>Amazon FSx for Lustre User Guide</i>.\n        </p>"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags",
+        "LustreConfiguration": {
+          "target": "com.amazonaws.fsx#CreateFileSystemLustreConfiguration"
+        },
+        "ClientRequestToken": {
+          "target": "com.amazonaws.fsx#ClientRequestToken",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to apply to the file system being created. The key value of\n            the <code>Name</code> tag appears in the console as the file system name.</p>"
+            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent creation. This string is automatically filled on your behalf when you use the\n            AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+            "smithy.api#idempotencyToken": {}
           }
         }
       },
@@ -1092,23 +1102,16 @@
     "com.amazonaws.fsx#CreateFileSystemWindowsConfiguration": {
       "type": "structure",
       "members": {
-        "ThroughputCapacity": {
-          "target": "com.amazonaws.fsx#MegabytesPerSecond",
+        "PreferredSubnetId": {
+          "target": "com.amazonaws.fsx#SubnetId",
           "traits": {
-            "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to\n            the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet \n            in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch \n            your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ \n            data transfer costs and minimize latency. </p>"
           }
         },
-        "ActiveDirectoryId": {
-          "target": "com.amazonaws.fsx#DirectoryId",
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
           "traits": {
-            "smithy.api#documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the\n            file system should join when it's created.</p>"
-          }
-        },
-        "CopyTagsToBackups": {
-          "target": "com.amazonaws.fsx#Flag",
-          "traits": {
-            "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the file system should be copied to\n            backups. This value defaults to false. If it's set to true, all tags for the file\n            system are copied to all automatic and user-initiated backups where the user\n            doesn't specify tags. If this value is true, and you specify one or more tags, only\n            the specified tags are copied to backups. If you specify one or more tags when creating a\n            user-initiated backup, no tags are copied from the file system, regardless of this value.</p>"
+            "smithy.api#documentation": "<p>The number of days to retain automatic backups. The default is to retain backups for 7\n            days. Setting this value to 0 disables the creation of automatic backups. The maximum\n            retention period for backups is 90 days.</p>"
           }
         },
         "DailyAutomaticBackupStartTime": {
@@ -1123,16 +1126,10 @@
             "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
           }
         },
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
+        "ActiveDirectoryId": {
+          "target": "com.amazonaws.fsx#DirectoryId",
           "traits": {
-            "smithy.api#documentation": "<p>The number of days to retain automatic backups. The default is to retain backups for 7\n            days. Setting this value to 0 disables the creation of automatic backups. The maximum\n            retention period for backups is 35 days.</p>"
-          }
-        },
-        "PreferredSubnetId": {
-          "target": "com.amazonaws.fsx#SubnetId",
-          "traits": {
-            "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet \n            in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch \n            your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ \n            data transfer costs and minimize latency. </p>"
+            "smithy.api#documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the\n            file system should join when it's created.</p>"
           }
         },
         "SelfManagedActiveDirectoryConfiguration": {
@@ -1142,6 +1139,19 @@
           "target": "com.amazonaws.fsx#WindowsDeploymentType",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the file system deployment type, valid values are the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured \n                    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You \n                    can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones. Also \n                supports HDD storage type</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. \n                    Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p>\n            </li>\n         </ul>\n        <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">\n                Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>"
+          }
+        },
+        "CopyTagsToBackups": {
+          "target": "com.amazonaws.fsx#Flag",
+          "traits": {
+            "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the file system should be copied to\n            backups. This value defaults to false. If it's set to true, all tags for the file\n            system are copied to all automatic and user-initiated backups where the user\n            doesn't specify tags. If this value is true, and you specify one or more tags, only\n            the specified tags are copied to backups. If you specify one or more tags when creating a\n            user-initiated backup, no tags are copied from the file system, regardless of this value.</p>"
+          }
+        },
+        "ThroughputCapacity": {
+          "target": "com.amazonaws.fsx#MegabytesPerSecond",
+          "traits": {
+            "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to\n            the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -1180,25 +1190,10 @@
     "com.amazonaws.fsx#DataRepositoryConfiguration": {
       "type": "structure",
       "members": {
-        "AutoImportPolicy": {
-          "target": "com.amazonaws.fsx#AutoImportPolicyType",
+        "Lifecycle": {
+          "target": "com.amazonaws.fsx#DataRepositoryLifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the file system's linked S3 data repository's <code>AutoImportPolicy</code>. The AutoImportPolicy configures how your FSx\n            for Lustre file system automatically updates its contents \n            with changes that occur in the linked S3 data repository. <code>AutoImportPolicy</code> can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Changes in the linked \n                data repository are not reflected on the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. New files in the linked data repository \n                that do not currently exist in the FSx file system are automatically imported. \n                Updates to existing FSx files are not imported to the FSx file system. Files deleted from \n                the linked data repository are not deleted from the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. New files in the linked S3 \n                data repository that do not currently exist in the FSx file system are automatically imported. \n                Changes to existing FSx files in the linked repository are also automatically imported to the \n                FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.\n            </p>\n                \n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
-          }
-        },
-        "FailureDetails": {
-          "target": "com.amazonaws.fsx#DataRepositoryFailureDetails"
-        },
-        "ImportedFileChunkSize": {
-          "target": "com.amazonaws.fsx#Megabytes",
-          "traits": {
-            "smithy.api#documentation": "<p>For files imported from a data repository, this value determines the stripe count and\n            maximum amount of data per file (in MiB) stored on a single physical disk. The maximum\n            number of disks that a single file can be striped across is limited by the total number\n            of disks that make up the file system.</p>\n\n        <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500\n            GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
-          }
-        },
-        "ExportPath": {
-          "target": "com.amazonaws.fsx#ArchivePath",
-          "traits": {
-            "smithy.api#documentation": "<p>The export path to the Amazon S3 bucket (and prefix) that you are using to store new and\n            changed Lustre file system files in S3.</p>"
+            "smithy.api#documentation": "<p>Describes the state of the file system's S3 durable data repository, if it is configured with an S3 repository. \n        The lifecycle can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The data repository configuration between \n                the FSx file system and the linked S3 data repository is being created. \n                The data repository is unavailable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The data repository is available for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURED</code> - Amazon FSx cannot automatically import updates from the S3 bucket \n                until the data repository configuration is corrected. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository\">Troubleshooting a Misconfigured linked S3 bucket</a>.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The data repository is undergoing a customer initiated update and availability may be impacted.</p>\n            </li>\n         </ul>"
           }
         },
         "ImportPath": {
@@ -1207,10 +1202,25 @@
             "smithy.api#documentation": "<p>The import path to the Amazon S3 bucket (and optional prefix) that you're using\n            as the data repository for your FSx for Lustre file system, for example\n                <code>s3://import-bucket/optional-prefix</code>. If a prefix is specified after the\n            Amazon S3 bucket name, only object keys with that prefix are loaded into the file\n            system.</p>"
           }
         },
-        "Lifecycle": {
-          "target": "com.amazonaws.fsx#DataRepositoryLifecycle",
+        "FailureDetails": {
+          "target": "com.amazonaws.fsx#DataRepositoryFailureDetails"
+        },
+        "ExportPath": {
+          "target": "com.amazonaws.fsx#ArchivePath",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the state of the file system's S3 durable data repository, if it is configured with an S3 repository. \n        The lifecycle can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The data repository configuration between \n                the FSx file system and the linked S3 data repository is being created. \n                The data repository is unavailable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The data repository is available for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURED</code> - Amazon FSx cannot automatically import updates from the S3 bucket \n                until the data repository configuration is corrected. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository\">Troubleshooting a Misconfigured linked S3 bucket</a>.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The data repository is undergoing a customer initiated update and availability may be impacted.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The export path to the Amazon S3 bucket (and prefix) that you are using to store new and\n            changed Lustre file system files in S3.</p>"
+          }
+        },
+        "AutoImportPolicy": {
+          "target": "com.amazonaws.fsx#AutoImportPolicyType",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the file system's linked S3 data repository's <code>AutoImportPolicy</code>. \n            The AutoImportPolicy configures how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+          }
+        },
+        "ImportedFileChunkSize": {
+          "target": "com.amazonaws.fsx#Megabytes",
+          "traits": {
+            "smithy.api#documentation": "<p>For files imported from a data repository, this value determines the stripe count and\n            maximum amount of data per file (in MiB) stored on a single physical disk. The maximum\n            number of disks that a single file can be striped across is limited by the total number\n            of disks that make up the file system.</p>\n\n        <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500\n            GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
           }
         }
       },
@@ -1259,63 +1269,19 @@
     "com.amazonaws.fsx#DataRepositoryTask": {
       "type": "structure",
       "members": {
-        "ResourceARN": {
-          "target": "com.amazonaws.fsx#ResourceARN"
-        },
-        "Type": {
-          "target": "com.amazonaws.fsx#DataRepositoryTaskType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags"
-        },
-        "Report": {
-          "target": "com.amazonaws.fsx#CompletionReport"
-        },
         "FailureDetails": {
           "target": "com.amazonaws.fsx#DataRepositoryTaskFailureDetails",
           "traits": {
             "smithy.api#documentation": "<p>Failure message describing why the task failed, it is populated only when <code>Lifecycle</code> is set to <code>FAILED</code>.</p>"
           }
         },
-        "FileSystemId": {
-          "target": "com.amazonaws.fsx#FileSystemId",
-          "traits": {
-            "smithy.api#required": {}
-          }
+        "Report": {
+          "target": "com.amazonaws.fsx#CompletionReport"
         },
         "Status": {
           "target": "com.amazonaws.fsx#DataRepositoryTaskStatus",
           "traits": {
             "smithy.api#documentation": "<p>Provides the status of the number of files that the task has processed successfully and failed to process.</p>"
-          }
-        },
-        "TaskId": {
-          "target": "com.amazonaws.fsx#TaskId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated, unique 17-digit ID of the data repository task.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "EndTime": {
-          "target": "com.amazonaws.fsx#EndTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that Amazon FSx completed processing the task, populated after the task is complete.</p>"
-          }
-        },
-        "Paths": {
-          "target": "com.amazonaws.fsx#DataRepositoryTaskPaths",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. \n            For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository.</p>\n            <p>(Default) If <code>Paths</code> is not specified, Amazon FSx uses the file system root directory.</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.fsx#CreationTime",
-          "traits": {
-            "smithy.api#required": {}
           }
         },
         "Lifecycle": {
@@ -1329,6 +1295,50 @@
           "target": "com.amazonaws.fsx#StartTime",
           "traits": {
             "smithy.api#documentation": "<p>The time that Amazon FSx began processing the task.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.fsx#EndTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that Amazon FSx completed processing the task, populated after the task is complete.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags"
+        },
+        "ResourceARN": {
+          "target": "com.amazonaws.fsx#ResourceARN"
+        },
+        "Type": {
+          "target": "com.amazonaws.fsx#DataRepositoryTaskType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of data repository task; EXPORT_TO_REPOSITORY is the only type currently supported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Paths": {
+          "target": "com.amazonaws.fsx#DataRepositoryTaskPaths",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. \n            For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository.</p>\n            <p>(Default) If <code>Paths</code> is not specified, Amazon FSx uses the file system root directory.</p>"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.fsx#FileSystemId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "TaskId": {
+          "target": "com.amazonaws.fsx#TaskId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated, unique 17-digit ID of the data repository task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.fsx#CreationTime",
+          "traits": {
+            "smithy.api#required": {}
           }
         }
       },
@@ -1374,16 +1384,16 @@
     "com.amazonaws.fsx#DataRepositoryTaskFilter": {
       "type": "structure",
       "members": {
-        "Values": {
-          "target": "com.amazonaws.fsx#DataRepositoryTaskFilterValues",
-          "traits": {
-            "smithy.api#documentation": "<p>Use Values to include the specific file system IDs and task \n            lifecycle states for the filters you are using.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.fsx#DataRepositoryTaskFilterName",
           "traits": {
             "smithy.api#documentation": "<p>Name of the task property to use in filtering the tasks returned in the response.</p>\n        <ul>\n            <li>\n               <p>Use <code>file-system-id</code> to retrieve data repository tasks for specific file systems.</p>\n            </li>\n            <li>\n               <p>Use <code>task-lifecycle</code> to retrieve data repository tasks with one or more specific lifecycle states, \n                as follows: CANCELED, EXECUTING, FAILED, PENDING, and SUCCEEDED.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.fsx#DataRepositoryTaskFilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>Use Values to include the specific file system IDs and task \n            lifecycle states for the filters you are using.</p>"
           }
         }
       },
@@ -1508,6 +1518,18 @@
     "com.amazonaws.fsx#DataRepositoryTaskStatus": {
       "type": "structure",
       "members": {
+        "TotalCount": {
+          "target": "com.amazonaws.fsx#TotalCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of files that the task will process. While a task is executing, the sum of \n            <code>SucceededCount</code> plus <code>FailedCount</code> may not equal <code>TotalCount</code>. When the task is complete, \n            <code>TotalCount</code> equals the sum of <code>SucceededCount</code> plus <code>FailedCount</code>.</p>"
+          }
+        },
+        "SucceededCount": {
+          "target": "com.amazonaws.fsx#SucceededCount",
+          "traits": {
+            "smithy.api#documentation": "<p>A running total of the number of files that the task has successfully processed.</p>"
+          }
+        },
         "FailedCount": {
           "target": "com.amazonaws.fsx#FailedCount",
           "traits": {
@@ -1518,18 +1540,6 @@
           "target": "com.amazonaws.fsx#LastUpdatedTime",
           "traits": {
             "smithy.api#documentation": "<p>The time at which the task status was last updated.</p>"
-          }
-        },
-        "SucceededCount": {
-          "target": "com.amazonaws.fsx#SucceededCount",
-          "traits": {
-            "smithy.api#documentation": "<p>A running total of the number of files that the task has successfully processed.</p>"
-          }
-        },
-        "TotalCount": {
-          "target": "com.amazonaws.fsx#TotalCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of files that the task will process. While a task is executing, the sum of \n            <code>SucceededCount</code> plus <code>FailedCount</code> may not equal <code>TotalCount</code>. When the task is complete, \n            <code>TotalCount</code> equals the sum of <code>SucceededCount</code> plus <code>FailedCount</code>.</p>"
           }
         }
       },
@@ -1596,18 +1606,18 @@
     "com.amazonaws.fsx#DeleteBackupRequest": {
       "type": "structure",
       "members": {
-        "BackupId": {
-          "target": "com.amazonaws.fsx#BackupId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the backup you want to delete.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClientRequestToken": {
           "target": "com.amazonaws.fsx#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure\n            idempotent deletion. This is automatically filled on your behalf when using the AWS CLI\n            or SDK.</p>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "BackupId": {
+          "target": "com.amazonaws.fsx#BackupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the backup you want to delete.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -1618,16 +1628,16 @@
     "com.amazonaws.fsx#DeleteBackupResponse": {
       "type": "structure",
       "members": {
-        "Lifecycle": {
-          "target": "com.amazonaws.fsx#BackupLifecycle",
-          "traits": {
-            "smithy.api#documentation": "<p>The lifecycle of the backup. Should be <code>DELETED</code>.</p>"
-          }
-        },
         "BackupId": {
           "target": "com.amazonaws.fsx#BackupId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the backup deleted.</p>"
+          }
+        },
+        "Lifecycle": {
+          "target": "com.amazonaws.fsx#BackupLifecycle",
+          "traits": {
+            "smithy.api#documentation": "<p>The lifecycle of the backup. Should be <code>DELETED</code>.</p>"
           }
         }
       },
@@ -1668,16 +1678,16 @@
     "com.amazonaws.fsx#DeleteFileSystemLustreConfiguration": {
       "type": "structure",
       "members": {
-        "SkipFinalBackup": {
-          "target": "com.amazonaws.fsx#Flag",
-          "traits": {
-            "smithy.api#documentation": "<p>Set <code>SkipFinalBackup</code> to false if you want to take a final backup of the file \n            system you are deleting. By default, Amazon FSx will not take a final backup on your behalf when the\n                <code>DeleteFileSystem</code> operation is invoked. (Default = true)</p>"
-          }
-        },
         "FinalBackupTags": {
           "target": "com.amazonaws.fsx#Tags",
           "traits": {
             "smithy.api#documentation": "<p>Use if <code>SkipFinalBackup</code> is set to <code>false</code>, \n            and you want to apply an array of tags to the final backup. If you have set the file system property\n            <code>CopyTagsToBackups</code> to true, and \n            you specify one or more <code>FinalBackupTags</code> when deleting a file system, Amazon FSx will not copy any existing file system tags to the backup.</p>"
+          }
+        },
+        "SkipFinalBackup": {
+          "target": "com.amazonaws.fsx#Flag",
+          "traits": {
+            "smithy.api#documentation": "<p>Set <code>SkipFinalBackup</code> to false if you want to take a final backup of the file \n            system you are deleting. By default, Amazon FSx will not take a final backup on your behalf when the\n                <code>DeleteFileSystem</code> operation is invoked. (Default = true)</p>"
           }
         }
       },
@@ -1688,16 +1698,16 @@
     "com.amazonaws.fsx#DeleteFileSystemLustreResponse": {
       "type": "structure",
       "members": {
-        "FinalBackupId": {
-          "target": "com.amazonaws.fsx#BackupId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the final backup for this file system.</p>"
-          }
-        },
         "FinalBackupTags": {
           "target": "com.amazonaws.fsx#Tags",
           "traits": {
             "smithy.api#documentation": "<p>The set of tags applied to the final backup.</p>"
+          }
+        },
+        "FinalBackupId": {
+          "target": "com.amazonaws.fsx#BackupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the final backup for this file system.</p>"
           }
         }
       },
@@ -1708,6 +1718,9 @@
     "com.amazonaws.fsx#DeleteFileSystemRequest": {
       "type": "structure",
       "members": {
+        "LustreConfiguration": {
+          "target": "com.amazonaws.fsx#DeleteFileSystemLustreConfiguration"
+        },
         "WindowsConfiguration": {
           "target": "com.amazonaws.fsx#DeleteFileSystemWindowsConfiguration"
         },
@@ -1724,9 +1737,6 @@
             "smithy.api#documentation": "<p>The ID of the file system you want to delete.</p>",
             "smithy.api#required": {}
           }
-        },
-        "LustreConfiguration": {
-          "target": "com.amazonaws.fsx#DeleteFileSystemLustreConfiguration"
         }
       },
       "traits": {
@@ -1736,23 +1746,23 @@
     "com.amazonaws.fsx#DeleteFileSystemResponse": {
       "type": "structure",
       "members": {
-        "FileSystemId": {
-          "target": "com.amazonaws.fsx#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the file system being deleted.</p>"
-          }
-        },
         "Lifecycle": {
           "target": "com.amazonaws.fsx#FileSystemLifecycle",
           "traits": {
             "smithy.api#documentation": "<p>The file system lifecycle for the deletion request. Should be\n            <code>DELETING</code>.</p>"
           }
         },
-        "WindowsResponse": {
-          "target": "com.amazonaws.fsx#DeleteFileSystemWindowsResponse"
+        "FileSystemId": {
+          "target": "com.amazonaws.fsx#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the file system being deleted.</p>"
+          }
         },
         "LustreResponse": {
           "target": "com.amazonaws.fsx#DeleteFileSystemLustreResponse"
+        },
+        "WindowsResponse": {
+          "target": "com.amazonaws.fsx#DeleteFileSystemWindowsResponse"
         }
       },
       "traits": {
@@ -1782,16 +1792,16 @@
     "com.amazonaws.fsx#DeleteFileSystemWindowsResponse": {
       "type": "structure",
       "members": {
-        "FinalBackupTags": {
-          "target": "com.amazonaws.fsx#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The set of tags applied to the final backup.</p>"
-          }
-        },
         "FinalBackupId": {
           "target": "com.amazonaws.fsx#BackupId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the final backup for this file system.</p>"
+          }
+        },
+        "FinalBackupTags": {
+          "target": "com.amazonaws.fsx#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The set of tags applied to the final backup.</p>"
           }
         }
       },
@@ -1833,18 +1843,6 @@
     "com.amazonaws.fsx#DescribeBackupsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fsx#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>DescribeBackups</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
-          }
-        },
-        "Filters": {
-          "target": "com.amazonaws.fsx#Filters",
-          "traits": {
-            "smithy.api#documentation": "<p>Filters structure. Supported names are file-system-id and\n            backup-type.</p>"
-          }
-        },
         "BackupIds": {
           "target": "com.amazonaws.fsx#BackupIds",
           "traits": {
@@ -1856,6 +1854,18 @@
           "traits": {
             "smithy.api#documentation": "<p>Maximum number of backups to return in the response (integer). This\n            parameter value must be greater than 0. The number of items that Amazon FSx returns is\n            the minimum of the <code>MaxResults</code> parameter specified in the request and the\n            service's internal maximum number of items per page.</p>"
           }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.fsx#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>DescribeBackups</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.fsx#Filters",
+          "traits": {
+            "smithy.api#documentation": "<p>Filters structure. Supported names are file-system-id and\n            backup-type.</p>"
+          }
         }
       },
       "traits": {
@@ -1865,16 +1875,16 @@
     "com.amazonaws.fsx#DescribeBackupsResponse": {
       "type": "structure",
       "members": {
-        "Backups": {
-          "target": "com.amazonaws.fsx#Backups",
-          "traits": {
-            "smithy.api#documentation": "<p>Any array of backups.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.fsx#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>This is present if there are more backups than returned in the response (String).\n            You can use the <code>NextToken</code> value in the later request to fetch the backups.\n        </p>"
+          }
+        },
+        "Backups": {
+          "target": "com.amazonaws.fsx#Backups",
+          "traits": {
+            "smithy.api#documentation": "<p>Any array of backups.</p>"
           }
         }
       },
@@ -1916,8 +1926,11 @@
     "com.amazonaws.fsx#DescribeDataRepositoryTasksRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fsx#NextToken"
+        "TaskIds": {
+          "target": "com.amazonaws.fsx#TaskIds",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) IDs of the tasks whose descriptions you want to retrieve\n            (String).</p>"
+          }
         },
         "Filters": {
           "target": "com.amazonaws.fsx#DataRepositoryTaskFilters",
@@ -1928,11 +1941,8 @@
         "MaxResults": {
           "target": "com.amazonaws.fsx#MaxResults"
         },
-        "TaskIds": {
-          "target": "com.amazonaws.fsx#TaskIds",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) IDs of the tasks whose descriptions you want to retrieve\n            (String).</p>"
-          }
+        "NextToken": {
+          "target": "com.amazonaws.fsx#NextToken"
         }
       }
     },
@@ -1981,10 +1991,10 @@
     "com.amazonaws.fsx#DescribeFileSystemsRequest": {
       "type": "structure",
       "members": {
-        "FileSystemIds": {
-          "target": "com.amazonaws.fsx#FileSystemIds",
+        "NextToken": {
+          "target": "com.amazonaws.fsx#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>IDs of the file systems whose descriptions you want to retrieve\n            (String).</p>"
+            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>DescribeFileSystems</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
           }
         },
         "MaxResults": {
@@ -1993,10 +2003,10 @@
             "smithy.api#documentation": "<p>Maximum number of file systems to return in the response (integer). This\n            parameter value must be greater than 0. The number of items that Amazon FSx returns is\n            the minimum of the <code>MaxResults</code> parameter specified in the request and the\n            service's internal maximum number of items per page.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.fsx#NextToken",
+        "FileSystemIds": {
+          "target": "com.amazonaws.fsx#FileSystemIds",
           "traits": {
-            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>DescribeFileSystems</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
+            "smithy.api#documentation": "<p>IDs of the file systems whose descriptions you want to retrieve\n            (String).</p>"
           }
         }
       },
@@ -2007,16 +2017,16 @@
     "com.amazonaws.fsx#DescribeFileSystemsResponse": {
       "type": "structure",
       "members": {
-        "FileSystems": {
-          "target": "com.amazonaws.fsx#FileSystems",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of file system descriptions.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.fsx#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>Present if there are more file systems than returned in the response (String). You\n            can use the <code>NextToken</code> value in the later request to fetch the\n            descriptions. </p>"
+          }
+        },
+        "FileSystems": {
+          "target": "com.amazonaws.fsx#FileSystems",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of file system descriptions.</p>"
           }
         }
       },
@@ -2067,6 +2077,21 @@
         }
       }
     },
+    "com.amazonaws.fsx#DriveCacheType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NONE",
+            "name": "NONE"
+          },
+          {
+            "value": "READ",
+            "name": "READ"
+          }
+        ]
+      }
+    },
     "com.amazonaws.fsx#EndTime": {
       "type": "timestamp"
     },
@@ -2089,76 +2114,10 @@
     "com.amazonaws.fsx#FileSystem": {
       "type": "structure",
       "members": {
-        "FailureDetails": {
-          "target": "com.amazonaws.fsx#FileSystemFailureDetails"
-        },
-        "StorageCapacity": {
-          "target": "com.amazonaws.fsx#StorageCapacity",
+        "CreationTime": {
+          "target": "com.amazonaws.fsx#CreationTime",
           "traits": {
-            "smithy.api#documentation": "<p>The storage capacity of the file system in gigabytes (GB).</p>"
-          }
-        },
-        "NetworkInterfaceIds": {
-          "target": "com.amazonaws.fsx#NetworkInterfaceIds",
-          "traits": {
-            "smithy.api#documentation": "<p>The IDs of the elastic network interface from which a specific file system is\n            accessible. The elastic network interface is automatically created in the same VPC that\n            the Amazon FSx file system was created in. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network\n                Interfaces</a> in the <i>Amazon EC2 User Guide.</i>\n         </p>\n\n        <p>For an Amazon FSx for Windows File Server file system, you can have one network\n            interface ID. For an Amazon FSx for Lustre file system, you can have more than\n            one.</p>"
-          }
-        },
-        "FileSystemId": {
-          "target": "com.amazonaws.fsx#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated, unique 17-digit ID of the file system.</p>"
-          }
-        },
-        "SubnetIds": {
-          "target": "com.amazonaws.fsx#SubnetIds",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> \n            file system deployment type, there are two subnet IDs, one for the preferred file server \n            and one for the standby file server. The preferred file server subnet identified in the  \n            <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p>\n        <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of \n            the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems,\n            the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>"
-          }
-        },
-        "AdministrativeActions": {
-          "target": "com.amazonaws.fsx#AdministrativeActions",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of administrative actions for the file system that are in process or waiting to be processed. \n            Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action.\n        </p>"
-          }
-        },
-        "DNSName": {
-          "target": "com.amazonaws.fsx#DNSName",
-          "traits": {
-            "smithy.api#documentation": "<p>The DNS name for the file system.</p>"
-          }
-        },
-        "LustreConfiguration": {
-          "target": "com.amazonaws.fsx#LustreFileSystemConfiguration"
-        },
-        "StorageType": {
-          "target": "com.amazonaws.fsx#StorageType",
-          "traits": {
-            "smithy.api#documentation": "<p>The storage type of the file system. \n            Valid values are <code>SSD</code> and <code>HDD</code>.\n            If set to <code>SSD</code>, the file system uses solid state drive storage. \n            If set to <code>HDD</code>, the file system uses hard disk drive storage.\n        </p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to associate with the file system. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your\n                Amazon EC2 Resources</a> in the <i>Amazon EC2 User\n            Guide</i>.</p>"
-          }
-        },
-        "ResourceARN": {
-          "target": "com.amazonaws.fsx#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the file system resource.</p>"
-          }
-        },
-        "OwnerId": {
-          "target": "com.amazonaws.fsx#AWSAccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account that created the file system. If the file system was created by an AWS\n            Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs\n            is the owner.</p>"
-          }
-        },
-        "FileSystemType": {
-          "target": "com.amazonaws.fsx#FileSystemType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.</p>"
+            "smithy.api#documentation": "<p>The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z),\n            also known as Unix time.</p>"
           }
         },
         "WindowsConfiguration": {
@@ -2167,16 +2126,28 @@
             "smithy.api#documentation": "<p>The configuration for this Microsoft Windows file system.</p>"
           }
         },
-        "VpcId": {
-          "target": "com.amazonaws.fsx#VpcId",
+        "DNSName": {
+          "target": "com.amazonaws.fsx#DNSName",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the primary VPC for the file system.</p>"
+            "smithy.api#documentation": "<p>The DNS name for the file system.</p>"
           }
         },
-        "CreationTime": {
-          "target": "com.amazonaws.fsx#CreationTime",
+        "ResourceARN": {
+          "target": "com.amazonaws.fsx#ResourceARN",
           "traits": {
-            "smithy.api#documentation": "<p>The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z),\n            also known as Unix time.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the file system resource.</p>"
+          }
+        },
+        "FileSystemType": {
+          "target": "com.amazonaws.fsx#FileSystemType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.</p>"
+          }
+        },
+        "SubnetIds": {
+          "target": "com.amazonaws.fsx#SubnetIds",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> \n            file system deployment type, there are two subnet IDs, one for the preferred file server \n            and one for the standby file server. The preferred file server subnet identified in the  \n            <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p>\n        <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of \n            the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems,\n            the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>"
           }
         },
         "KmsKeyId": {
@@ -2189,6 +2160,60 @@
           "target": "com.amazonaws.fsx#FileSystemLifecycle",
           "traits": {
             "smithy.api#documentation": "<p>The lifecycle status of the file system, following are the possible values and what they mean:</p> \n            <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the new file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. \n                    When creating a new file system, Amazon FSx was unable to create the file system.</p>\n            </li>\n            <li>\n                    <p>\n                  <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p>\n                </li>\n         </ul>"
+          }
+        },
+        "NetworkInterfaceIds": {
+          "target": "com.amazonaws.fsx#NetworkInterfaceIds",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the elastic network interface from which a specific file system is\n            accessible. The elastic network interface is automatically created in the same VPC that\n            the Amazon FSx file system was created in. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network\n                Interfaces</a> in the <i>Amazon EC2 User Guide.</i>\n         </p>\n\n        <p>For an Amazon FSx for Windows File Server file system, you can have one network\n            interface ID. For an Amazon FSx for Lustre file system, you can have more than\n            one.</p>"
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.fsx#VpcId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the primary VPC for the file system.</p>"
+          }
+        },
+        "LustreConfiguration": {
+          "target": "com.amazonaws.fsx#LustreFileSystemConfiguration"
+        },
+        "FailureDetails": {
+          "target": "com.amazonaws.fsx#FileSystemFailureDetails"
+        },
+        "StorageType": {
+          "target": "com.amazonaws.fsx#StorageType",
+          "traits": {
+            "smithy.api#documentation": "<p>The storage type of the file system. \n            Valid values are <code>SSD</code> and <code>HDD</code>.\n            If set to <code>SSD</code>, the file system uses solid state drive storage. \n            If set to <code>HDD</code>, the file system uses hard disk drive storage.\n        </p>"
+          }
+        },
+        "OwnerId": {
+          "target": "com.amazonaws.fsx#AWSAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account that created the file system. If the file system was created by an AWS\n            Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs\n            is the owner.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to associate with the file system. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your\n                Amazon EC2 Resources</a> in the <i>Amazon EC2 User\n            Guide</i>.</p>"
+          }
+        },
+        "StorageCapacity": {
+          "target": "com.amazonaws.fsx#StorageCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The storage capacity of the file system in gigabytes (GB).</p>"
+          }
+        },
+        "AdministrativeActions": {
+          "target": "com.amazonaws.fsx#AdministrativeActions",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of administrative actions for the file system that are in process or waiting to be processed. \n            Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action.\n        </p>"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.fsx#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated, unique 17-digit ID of the file system.</p>"
           }
         }
       },
@@ -2349,16 +2374,16 @@
     "com.amazonaws.fsx#Filter": {
       "type": "structure",
       "members": {
-        "Values": {
-          "target": "com.amazonaws.fsx#FilterValues",
-          "traits": {
-            "smithy.api#documentation": "<p>The values of the filter. These are all the values for any of the applied\n            filters.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.fsx#FilterName",
           "traits": {
             "smithy.api#documentation": "<p>The name for this filter.</p>"
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.fsx#FilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>The values of the filter. These are all the values for any of the applied\n            filters.</p>"
           }
         }
       },
@@ -2487,11 +2512,11 @@
     "com.amazonaws.fsx#InvalidNetworkSettings": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.fsx#ErrorMessage"
-        },
         "InvalidSubnetId": {
           "target": "com.amazonaws.fsx#SubnetId"
+        },
+        "Message": {
+          "target": "com.amazonaws.fsx#ErrorMessage"
         },
         "InvalidSecurityGroupId": {
           "target": "com.amazonaws.fsx#SecurityGroupId"
@@ -2570,10 +2595,10 @@
     "com.amazonaws.fsx#ListTagsForResourceRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.fsx#NextToken",
+        "MaxResults": {
+          "target": "com.amazonaws.fsx#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>ListTagsForResource</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
+            "smithy.api#documentation": "<p>Maximum number of tags to return in the response (integer). This\n            parameter value must be greater than 0. The number of items that Amazon FSx returns is\n            the minimum of the <code>MaxResults</code> parameter specified in the request and the\n            service's internal maximum number of items per page.</p>"
           }
         },
         "ResourceARN": {
@@ -2583,10 +2608,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.fsx#MaxResults",
+        "NextToken": {
+          "target": "com.amazonaws.fsx#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum number of tags to return in the response (integer). This\n            parameter value must be greater than 0. The number of items that Amazon FSx returns is\n            the minimum of the <code>MaxResults</code> parameter specified in the request and the\n            service's internal maximum number of items per page.</p>"
+            "smithy.api#documentation": "<p>Opaque pagination token returned from a previous\n                <code>ListTagsForResource</code> operation (String). If a token present, the action\n            continues the list from where the returning call left off.</p>"
           }
         }
       },
@@ -2636,6 +2661,27 @@
     "com.amazonaws.fsx#LustreFileSystemConfiguration": {
       "type": "structure",
       "members": {
+        "CopyTagsToBackups": {
+          "target": "com.amazonaws.fsx#Flag",
+          "traits": {
+            "smithy.api#documentation": "<p>A boolean flag indicating whether tags on the file system should be copied to backups.\n            If it's set to true, all tags on the file system are\n            copied to all automatic backups and any user-initiated backups where the user\n            doesn't specify any tags. If this value is true, and you specify one or more tags,\n            only the specified tags are copied to backups. If you specify one or more tags when \n            creating a user-initiated backup, no tags are copied from the file system, \n            regardless of this value. (Default = false)</p>"
+          }
+        },
+        "DailyAutomaticBackupStartTime": {
+          "target": "com.amazonaws.fsx#DailyTime"
+        },
+        "PerUnitStorageThroughput": {
+          "target": "com.amazonaws.fsx#PerUnitStorageThroughput",
+          "traits": {
+            "smithy.api#documentation": "<p> Per unit storage throughput represents the megabytes per second of read or write\n            throughput per 1 tebibyte of storage provisioned. File system throughput capacity is\n            equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is\n            only valid for <code>PERSISTENT_1</code> deployment types. </p>\n        <p>Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40. </p>"
+          }
+        },
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
+        },
+        "DataRepositoryConfiguration": {
+          "target": "com.amazonaws.fsx#DataRepositoryConfiguration"
+        },
         "MountName": {
           "target": "com.amazonaws.fsx#LustreFileSystemMountName",
           "traits": {
@@ -2648,31 +2694,16 @@
             "smithy.api#documentation": "<p>The deployment type of the FSX for Lustre file system. <i>Scratch deployment type</i> is designed for temporary storage\n            and shorter-term processing of data.</p>\n        <p>\n            <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment \n        types are best suited for when you need temporary storage and shorter-term processing of data. \n        The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst \n        throughput capacity than <code>SCRATCH_1</code>.</p> \n        <p>The <code>PERSISTENT_1</code> deployment type is used for longer-term storage \n            and workloads and encryption of data in transit. To learn more about deployment types, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\">\n                FSx for Lustre Deployment Options</a>. (Default = <code>SCRATCH_1</code>)</p>"
           }
         },
+        "DriveCacheType": {
+          "target": "com.amazonaws.fsx#DriveCacheType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with\n            HDD storage devices. This parameter is required when storage type is HDD. Set to\n            <code>READ</code>, improve the performance for frequently accessed files and allows 20%\n            of the total storage capacity of the file system to be cached.  </p>\n        <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+          }
+        },
         "WeeklyMaintenanceStartTime": {
           "target": "com.amazonaws.fsx#WeeklyTime",
           "traits": {
             "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
-          }
-        },
-        "DailyAutomaticBackupStartTime": {
-          "target": "com.amazonaws.fsx#DailyTime"
-        },
-        "CopyTagsToBackups": {
-          "target": "com.amazonaws.fsx#Flag",
-          "traits": {
-            "smithy.api#documentation": "<p>A boolean flag indicating whether tags on the file system should be copied to backups.\n            If it's set to true, all tags on the file system are\n            copied to all automatic backups and any user-initiated backups where the user\n            doesn't specify any tags. If this value is true, and you specify one or more tags,\n            only the specified tags are copied to backups. If you specify one or more tags when \n            creating a user-initiated backup, no tags are copied from the file system, \n            regardless of this value. (Default = false)</p>"
-          }
-        },
-        "DataRepositoryConfiguration": {
-          "target": "com.amazonaws.fsx#DataRepositoryConfiguration"
-        },
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
-        },
-        "PerUnitStorageThroughput": {
-          "target": "com.amazonaws.fsx#PerUnitStorageThroughput",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            Per unit storage throughput represents the megabytes per second of read or write throughput per \n            1 tebibyte of storage provisioned. \n            File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). \n            This option is only valid for <code>PERSISTENT_1</code> deployment types. Valid values are 50, 100, 200. \n        </p>"
           }
         }
       },
@@ -2812,7 +2843,7 @@
       "traits": {
         "smithy.api#box": {},
         "smithy.api#range": {
-          "min": 50,
+          "min": 12,
           "max": 200
         }
       }
@@ -2886,15 +2917,15 @@
     "com.amazonaws.fsx#ResourceNotFound": {
       "type": "structure",
       "members": {
+        "Message": {
+          "target": "com.amazonaws.fsx#ErrorMessage"
+        },
         "ResourceARN": {
           "target": "com.amazonaws.fsx#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The resource ARN of the resource that can't be found.</p>",
             "smithy.api#required": {}
           }
-        },
-        "Message": {
-          "target": "com.amazonaws.fsx#ErrorMessage"
         }
       },
       "traits": {
@@ -2929,24 +2960,6 @@
     "com.amazonaws.fsx#SelfManagedActiveDirectoryAttributes": {
       "type": "structure",
       "members": {
-        "DomainName": {
-          "target": "com.amazonaws.fsx#ActiveDirectoryFullyQualifiedName",
-          "traits": {
-            "smithy.api#documentation": "<p>The fully qualified domain name of the self-managed AD directory.</p>"
-          }
-        },
-        "OrganizationalUnitDistinguishedName": {
-          "target": "com.amazonaws.fsx#OrganizationalUnitDistinguishedName",
-          "traits": {
-            "smithy.api#documentation": "<p>The fully qualified distinguished name of the organizational unit within the\n            self-managed AD directory to which the Windows File Server instance is joined.</p>"
-          }
-        },
-        "DnsIps": {
-          "target": "com.amazonaws.fsx#DnsIps",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
-          }
-        },
         "FileSystemAdministratorsGroup": {
           "target": "com.amazonaws.fsx#FileSystemAdministratorsGroupName",
           "traits": {
@@ -2958,6 +2971,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that FSx uses to\n            join to your AD domain.</p>"
           }
+        },
+        "OrganizationalUnitDistinguishedName": {
+          "target": "com.amazonaws.fsx#OrganizationalUnitDistinguishedName",
+          "traits": {
+            "smithy.api#documentation": "<p>The fully qualified distinguished name of the organizational unit within the\n            self-managed AD directory to which the Windows File Server instance is joined.</p>"
+          }
+        },
+        "DomainName": {
+          "target": "com.amazonaws.fsx#ActiveDirectoryFullyQualifiedName",
+          "traits": {
+            "smithy.api#documentation": "<p>The fully qualified domain name of the self-managed AD directory.</p>"
+          }
+        },
+        "DnsIps": {
+          "target": "com.amazonaws.fsx#DnsIps",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
+          }
         }
       },
       "traits": {
@@ -2967,17 +2998,10 @@
     "com.amazonaws.fsx#SelfManagedActiveDirectoryConfiguration": {
       "type": "structure",
       "members": {
-        "FileSystemAdministratorsGroup": {
-          "target": "com.amazonaws.fsx#FileSystemAdministratorsGroupName",
+        "OrganizationalUnitDistinguishedName": {
+          "target": "com.amazonaws.fsx#OrganizationalUnitDistinguishedName",
           "traits": {
-            "smithy.api#documentation": "<p>(Optional) The name of the domain group whose members are granted administrative\n            privileges for the file system. Administrative privileges include taking ownership of\n            files and folders, setting audit controls (audit ACLs) on files and folders, and             \n                administering the file system remotely by using the FSx Remote PowerShell.\n            The group that you specify must already exist in your domain. If you don't provide one,\n            your AD domain's Domain Admins group is used.</p>"
-          }
-        },
-        "UserName": {
-          "target": "com.amazonaws.fsx#DirectoryUserName",
-          "traits": {
-            "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>(Optional) The fully qualified distinguished name of the organizational unit within\n            your self-managed AD directory that the Windows File Server instance will join. Amazon\n            FSx only accepts OU as the direct parent of the file system. An example is\n                <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href=\"https://tools.ietf.org/html/rfc2253\">RFC 2253</a>. If none is provided, the\n            FSx file system is created in the default location of your self-managed AD directory. </p>\n        <important>\n            <p>Only Organizational Unit (OU) objects can be the direct parent of the file system\n                that you're creating.</p>\n        </important>"
           }
         },
         "DomainName": {
@@ -3001,10 +3025,17 @@
             "smithy.api#required": {}
           }
         },
-        "OrganizationalUnitDistinguishedName": {
-          "target": "com.amazonaws.fsx#OrganizationalUnitDistinguishedName",
+        "FileSystemAdministratorsGroup": {
+          "target": "com.amazonaws.fsx#FileSystemAdministratorsGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>(Optional) The fully qualified distinguished name of the organizational unit within\n            your self-managed AD directory that the Windows File Server instance will join. Amazon\n            FSx only accepts OU as the direct parent of the file system. An example is\n                <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href=\"https://tools.ietf.org/html/rfc2253\">RFC 2253</a>. If none is provided, the\n            FSx file system is created in the default location of your self-managed AD directory. </p>\n        <important>\n            <p>Only Organizational Unit (OU) objects can be the direct parent of the file system\n                that you're creating.</p>\n        </important>"
+            "smithy.api#documentation": "<p>(Optional) The name of the domain group whose members are granted administrative\n            privileges for the file system. Administrative privileges include taking ownership of\n            files and folders, setting audit controls (audit ACLs) on files and folders, and             \n                administering the file system remotely by using the FSx Remote PowerShell.\n            The group that you specify must already exist in your domain. If you don't provide one,\n            your AD domain's Domain Admins group is used.</p>"
+          }
+        },
+        "UserName": {
+          "target": "com.amazonaws.fsx#DirectoryUserName",
+          "traits": {
+            "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -3015,10 +3046,10 @@
     "com.amazonaws.fsx#SelfManagedActiveDirectoryConfigurationUpdates": {
       "type": "structure",
       "members": {
-        "UserName": {
-          "target": "com.amazonaws.fsx#DirectoryUserName",
+        "DnsIps": {
+          "target": "com.amazonaws.fsx#DnsIps",
           "traits": {
-            "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to\n            your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n            <code>OrganizationalUnitDistinguishedName</code>.</p>"
+            "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
           }
         },
         "Password": {
@@ -3027,10 +3058,10 @@
             "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx will use to join to\n            your AD domain.</p>"
           }
         },
-        "DnsIps": {
-          "target": "com.amazonaws.fsx#DnsIps",
+        "UserName": {
+          "target": "com.amazonaws.fsx#DirectoryUserName",
           "traits": {
-            "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
+            "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to\n            your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n            <code>OrganizationalUnitDistinguishedName</code>.</p>"
           }
         }
       },
@@ -3065,15 +3096,15 @@
     "com.amazonaws.fsx#ServiceLimitExceeded": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.fsx#ErrorMessage"
-        },
         "Limit": {
           "target": "com.amazonaws.fsx#ServiceLimit",
           "traits": {
             "smithy.api#documentation": "<p>Enumeration of the service limit that was exceeded. </p>",
             "smithy.api#required": {}
           }
+        },
+        "Message": {
+          "target": "com.amazonaws.fsx#ErrorMessage"
         }
       },
       "traits": {
@@ -3171,17 +3202,17 @@
     "com.amazonaws.fsx#Tag": {
       "type": "structure",
       "members": {
-        "Key": {
-          "target": "com.amazonaws.fsx#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must\n            be unique for the resource to which they are attached.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Value": {
           "target": "com.amazonaws.fsx#TagValue",
           "traits": {
             "smithy.api#documentation": "<p>A value that specifies the <code>TagValue</code>, the value assigned to the\n            corresponding tag key. Tag values can be null and don't have to be unique in a tag set.\n            For example, you can have a key-value pair in a tag set of <code>finances : April</code>\n            and also of <code>payroll : April</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.fsx#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must\n            be unique for the resource to which they are attached.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3247,17 +3278,17 @@
     "com.amazonaws.fsx#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.fsx#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags for the resource. If a tag with a given key already exists, the\n            value is replaced by the one specified in this parameter.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.fsx#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to\n            tag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.fsx#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags for the resource. If a tag with a given key already exists, the\n            value is replaced by the one specified in this parameter.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3370,17 +3401,17 @@
     "com.amazonaws.fsx#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.fsx#TagKeys",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of keys of tags on the resource to untag. In case the tag key doesn't exist,\n            the call will still succeed to be idempotent.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.fsx#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the Amazon FSx resource to untag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.fsx#TagKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of keys of tags on the resource to untag. In case the tag key doesn't exist,\n            the call will still succeed to be idempotent.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3434,23 +3465,23 @@
     "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
       "type": "structure",
       "members": {
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
+        "AutoImportPolicy": {
+          "target": "com.amazonaws.fsx#AutoImportPolicyType",
+          "traits": {
+            "smithy.api#documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listing up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update the file and directory \n                listing for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+          }
         },
         "DailyAutomaticBackupStartTime": {
           "target": "com.amazonaws.fsx#DailyTime"
         },
-        "AutoImportPolicy": {
-          "target": "com.amazonaws.fsx#AutoImportPolicyType",
-          "traits": {
-            "smithy.api#documentation": "<p> (Optional) Use this property to configure the AutoImport feature on the \n            file system's linked Amazon S3 data repository. You use\n            AutoImport to update the contents of your FSx for Lustre file system automatically \n            with changes that occur in the linked S3 data repository. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Changes in the linked \n                data repository are not reflected on the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. New files in the linked data repository \n                that do not currently exist in the FSx file system are automatically imported. \n                Updates to existing FSx files are not imported to the FSx file system. Files deleted from \n                the linked data repository are not deleted from the FSx file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. New files in the linked S3 \n                data repository that do not currently exist in the FSx file system are automatically imported. \n                Changes to existing FSx files in the linked repository are also automatically imported to the \n                FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.\n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
-          }
-        },
         "WeeklyMaintenanceStartTime": {
           "target": "com.amazonaws.fsx#WeeklyTime",
           "traits": {
-            "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
+            "smithy.api#documentation": "<p>(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
           }
+        },
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
         }
       },
       "traits": {
@@ -3460,6 +3491,22 @@
     "com.amazonaws.fsx#UpdateFileSystemRequest": {
       "type": "structure",
       "members": {
+        "WindowsConfiguration": {
+          "target": "com.amazonaws.fsx#UpdateFileSystemWindowsConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration updates for an Amazon FSx for Windows File Server file system.</p>"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.fsx#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the file system that you are updating.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LustreConfiguration": {
+          "target": "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration"
+        },
         "ClientRequestToken": {
           "target": "com.amazonaws.fsx#ClientRequestToken",
           "traits": {
@@ -3472,22 +3519,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Use this parameter to increase the storage capacity of an Amazon FSx for Windows File Server file system. \n      Specifies the storage capacity target value, GiB, for the file system you're updating. \n      The storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value.\n      In order to increase storage capacity, the file system needs to have at least 16 MB/s of throughput capacity. You cannot \n      make a storage capacity increase request if there is an existing storage capacity increase request in progress. \n       For more information, see \n      <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p>"
           }
-        },
-        "FileSystemId": {
-          "target": "com.amazonaws.fsx#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the file system that you are updating.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "WindowsConfiguration": {
-          "target": "com.amazonaws.fsx#UpdateFileSystemWindowsConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration updates for an Amazon FSx for Windows File Server file system.</p>"
-          }
-        },
-        "LustreConfiguration": {
-          "target": "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration"
         }
       },
       "traits": {
@@ -3511,22 +3542,10 @@
     "com.amazonaws.fsx#UpdateFileSystemWindowsConfiguration": {
       "type": "structure",
       "members": {
-        "ThroughputCapacity": {
-          "target": "com.amazonaws.fsx#MegabytesPerSecond",
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
           "traits": {
-            "smithy.api#documentation": "<p>Sets the target value for a file system's throughput capacity, in MB/s, that you are updating the file system to. Valid values are \n            8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, \n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html\">Managing Throughput Capacity</a>.</p>"
-          }
-        },
-        "SelfManagedActiveDirectoryConfiguration": {
-          "target": "com.amazonaws.fsx#SelfManagedActiveDirectoryConfigurationUpdates",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the\n            self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
-          }
-        },
-        "DailyAutomaticBackupStartTime": {
-          "target": "com.amazonaws.fsx#DailyTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The preferred time to start the daily automatic backup, in the UTC time zone, for example, <code>02:00</code>\n         </p>"
+            "smithy.api#documentation": "<p>The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily\n            backups. You can retain automatic daily backups for a maximum of 90 days. For more information, see\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups\">Working with Automatic Daily Backups</a>.</p>"
           }
         },
         "WeeklyMaintenanceStartTime": {
@@ -3535,10 +3554,22 @@
             "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday and 7 = Sunday.</p>"
           }
         },
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
+        "ThroughputCapacity": {
+          "target": "com.amazonaws.fsx#MegabytesPerSecond",
           "traits": {
-            "smithy.api#documentation": "<p>The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily\n            backups. You can retain automatic daily backups for a maximum of 35 days. For more information, see\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups\">Working with Automatic Daily Backups</a>.</p>"
+            "smithy.api#documentation": "<p>Sets the target value for a file system's throughput capacity, in MB/s, that you are updating the file system to. Valid values are \n            8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, \n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html\">Managing Throughput Capacity</a>.</p>"
+          }
+        },
+        "DailyAutomaticBackupStartTime": {
+          "target": "com.amazonaws.fsx#DailyTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred time to start the daily automatic backup, in the UTC time zone, for example, <code>02:00</code>\n         </p>"
+          }
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "target": "com.amazonaws.fsx#SelfManagedActiveDirectoryConfigurationUpdates",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the\n            self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
           }
         }
       },
@@ -3590,49 +3621,16 @@
     "com.amazonaws.fsx#WindowsFileSystemConfiguration": {
       "type": "structure",
       "members": {
-        "MaintenanceOperationsInProgress": {
-          "target": "com.amazonaws.fsx#FileSystemMaintenanceOperations",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of maintenance operations in progress for this file system.</p>"
-          }
-        },
-        "DeploymentType": {
-          "target": "com.amazonaws.fsx#WindowsDeploymentType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the file system deployment type, valid values are the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ \n                    redundancy to tolerate temporary Availability Zone (AZ) unavailability, and supports SSD and HDD storage.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy, \n                    only supports SSD storage.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_2</code> - Latest generation Single AZ file system. \n                    Specifies a file system that is configured for single AZ redundancy and supports SSD and HDD storage.</p>\n            </li>\n         </ul>\n        <p>For more information, see \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">Single-AZ and Multi-AZ File Systems</a>.</p>"
-          }
-        },
-        "DailyAutomaticBackupStartTime": {
-          "target": "com.amazonaws.fsx#DailyTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The preferred time to take daily automatic backups, in the UTC time zone.</p>"
-          }
-        },
-        "PreferredFileServerIp": {
-          "target": "com.amazonaws.fsx#IpAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p>\n        <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that \n            are not joined to a Microsoft Active Directory. \n            Applicable for all Windows file system deployment types. \n            This IP address is temporarily unavailable \n            when the file system is undergoing maintenance. For Linux and Windows \n            SMB clients that are joined to an Active Directory, use the file system's DNSName instead. For more information\n            on mapping and mounting file shares, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html\">Accessing File Shares</a>.</p>"
-          }
-        },
-        "SelfManagedActiveDirectoryConfiguration": {
-          "target": "com.amazonaws.fsx#SelfManagedActiveDirectoryAttributes"
-        },
         "ActiveDirectoryId": {
           "target": "com.amazonaws.fsx#DirectoryId",
           "traits": {
             "smithy.api#documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when\n            it's created.</p>"
           }
         },
-        "WeeklyMaintenanceStartTime": {
-          "target": "com.amazonaws.fsx#WeeklyTime",
+        "AutomaticBackupRetentionDays": {
+          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
           "traits": {
-            "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
-          }
-        },
-        "ThroughputCapacity": {
-          "target": "com.amazonaws.fsx#MegabytesPerSecond",
-          "traits": {
-            "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per\n            second.</p>"
+            "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables automatic\n            backups. You can retain automatic backups for a maximum of 90 days.</p>"
           }
         },
         "PreferredSubnetId": {
@@ -3641,22 +3639,55 @@
             "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. \n            Must be one of the two subnet IDs specified in <code>SubnetIds</code> property.\n            Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p>\n        <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>.\n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and Durability: Single-AZ and Multi-AZ File Systems</a>\n         </p>"
           }
         },
-        "AutomaticBackupRetentionDays": {
-          "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables automatic\n            backups. You can retain automatic backups for a maximum of 35 days.</p>"
-          }
-        },
         "CopyTagsToBackups": {
           "target": "com.amazonaws.fsx#Flag",
           "traits": {
             "smithy.api#documentation": "<p>A boolean flag indicating whether tags on the file system should be copied to backups.\n            This value defaults to false. If it's set to true, all tags on the file system are\n            copied to all automatic backups and any user-initiated backups where the user\n            doesn't specify any tags. If this value is true, and you specify one or more tags,\n            only the specified tags are copied to backups. If you specify one or more tags when \n            creating a user-initiated backup, no tags are copied from the file system, \n            regardless of this value.</p>"
           }
         },
+        "ThroughputCapacity": {
+          "target": "com.amazonaws.fsx#MegabytesPerSecond",
+          "traits": {
+            "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per\n            second.</p>"
+          }
+        },
         "RemoteAdministrationEndpoint": {
           "target": "com.amazonaws.fsx#DNSName",
           "traits": {
             "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, use this endpoint when performing administrative tasks on the file system using \n            Amazon FSx Remote PowerShell.</p>\n        <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this is the DNS name of the file system.</p>\n        <p>This endpoint is temporarily unavailable when the file system is undergoing maintenance.</p>"
+          }
+        },
+        "DailyAutomaticBackupStartTime": {
+          "target": "com.amazonaws.fsx#DailyTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred time to take daily automatic backups, in the UTC time zone.</p>"
+          }
+        },
+        "MaintenanceOperationsInProgress": {
+          "target": "com.amazonaws.fsx#FileSystemMaintenanceOperations",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of maintenance operations in progress for this file system.</p>"
+          }
+        },
+        "WeeklyMaintenanceStartTime": {
+          "target": "com.amazonaws.fsx#WeeklyTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC\n            time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
+          }
+        },
+        "DeploymentType": {
+          "target": "com.amazonaws.fsx#WindowsDeploymentType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the file system deployment type, valid values are the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>MULTI_AZ_1</code> - Specifies a high availability file system that is configured for Multi-AZ \n                    redundancy to tolerate temporary Availability Zone (AZ) unavailability, and supports SSD and HDD storage.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_1</code> - (Default) Specifies a file system that is configured for single AZ redundancy, \n                    only supports SSD storage.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_2</code> - Latest generation Single AZ file system. \n                    Specifies a file system that is configured for single AZ redundancy and supports SSD and HDD storage.</p>\n            </li>\n         </ul>\n        <p>For more information, see \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">Single-AZ and Multi-AZ File Systems</a>.</p>"
+          }
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "target": "com.amazonaws.fsx#SelfManagedActiveDirectoryAttributes"
+        },
+        "PreferredFileServerIp": {
+          "target": "com.amazonaws.fsx#IpAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, the IP address of the primary, or preferred, file server.</p>\n        <p>Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients that \n            are not joined to a Microsoft Active Directory. \n            Applicable for all Windows file system deployment types. \n            This IP address is temporarily unavailable \n            when the file system is undergoing maintenance. For Linux and Windows \n            SMB clients that are joined to an Active Directory, use the file system's DNSName instead. For more information\n            on mapping and mounting file shares, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html\">Accessing File Shares</a>.</p>"
           }
         }
       },

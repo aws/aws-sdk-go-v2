@@ -79,12 +79,6 @@
     "com.amazonaws.codecommit#ApprovalRule": {
       "type": "structure",
       "members": {
-        "creationDate": {
-          "target": "com.amazonaws.codecommit#CreationDate",
-          "traits": {
-            "smithy.api#documentation": "<p>The date the approval rule was created, in timestamp format.</p>"
-          }
-        },
         "originApprovalRuleTemplate": {
           "target": "com.amazonaws.codecommit#OriginApprovalRuleTemplate",
           "traits": {
@@ -95,6 +89,18 @@
           "target": "com.amazonaws.codecommit#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule.</p>"
+          }
+        },
+        "approvalRuleContent": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleContent",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the approval rule.</p>"
+          }
+        },
+        "approvalRuleId": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the approval rule.</p>"
           }
         },
         "lastModifiedDate": {
@@ -109,22 +115,16 @@
             "smithy.api#documentation": "<p>The name of the approval rule.</p>"
           }
         },
-        "approvalRuleId": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the approval rule.</p>"
-          }
-        },
-        "approvalRuleContent": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleContent",
-          "traits": {
-            "smithy.api#documentation": "<p>The content of the approval rule.</p>"
-          }
-        },
         "ruleContentSha256": {
           "target": "com.amazonaws.codecommit#RuleContentSha256",
           "traits": {
             "smithy.api#documentation": "<p>The SHA-256 hash signature for the content of the approval rule.</p>"
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.codecommit#CreationDate",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the approval rule was created, in timestamp format.</p>"
           }
         }
       },
@@ -262,16 +262,40 @@
     "com.amazonaws.codecommit#ApprovalRuleTemplate": {
       "type": "structure",
       "members": {
-        "approvalRuleTemplateContent": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateContent",
+        "lastModifiedDate": {
+          "target": "com.amazonaws.codecommit#LastModifiedDate",
           "traits": {
-            "smithy.api#documentation": "<p>The content of the approval rule template.</p>"
+            "smithy.api#documentation": "<p>The date the approval rule template was most recently changed, in timestamp format.</p>"
+          }
+        },
+        "approvalRuleTemplateName": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the approval rule template.</p>"
           }
         },
         "approvalRuleTemplateDescription": {
           "target": "com.amazonaws.codecommit#ApprovalRuleTemplateDescription",
           "traits": {
             "smithy.api#documentation": "<p>The description of the approval rule template.</p>"
+          }
+        },
+        "approvalRuleTemplateId": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the approval rule template.</p>"
+          }
+        },
+        "approvalRuleTemplateContent": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateContent",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the approval rule template.</p>"
+          }
+        },
+        "ruleContentSha256": {
+          "target": "com.amazonaws.codecommit#RuleContentSha256",
+          "traits": {
+            "smithy.api#documentation": "<p>The SHA-256 hash signature for the content of the approval rule template.</p>"
           }
         },
         "lastModifiedUser": {
@@ -284,30 +308,6 @@
           "target": "com.amazonaws.codecommit#CreationDate",
           "traits": {
             "smithy.api#documentation": "<p>The date the approval rule template was created, in timestamp format.</p>"
-          }
-        },
-        "ruleContentSha256": {
-          "target": "com.amazonaws.codecommit#RuleContentSha256",
-          "traits": {
-            "smithy.api#documentation": "<p>The SHA-256 hash signature for the content of the approval rule template.</p>"
-          }
-        },
-        "approvalRuleTemplateId": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the approval rule template.</p>"
-          }
-        },
-        "approvalRuleTemplateName": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the approval rule template.</p>"
-          }
-        },
-        "lastModifiedDate": {
-          "target": "com.amazonaws.codecommit#LastModifiedDate",
-          "traits": {
-            "smithy.api#documentation": "<p>The date the approval rule template was most recently changed, in timestamp format.</p>"
           }
         }
       },
@@ -628,16 +628,16 @@
     "com.amazonaws.codecommit#BatchAssociateApprovalRuleTemplateWithRepositoriesError": {
       "type": "structure",
       "members": {
-        "errorMessage": {
-          "target": "com.amazonaws.codecommit#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>An error message that provides details about why the repository name was not found or not valid.</p>"
-          }
-        },
         "errorCode": {
           "target": "com.amazonaws.codecommit#ErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>An error code that specifies whether the repository name was not valid or not found.</p>"
+          }
+        },
+        "errorMessage": {
+          "target": "com.amazonaws.codecommit#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>An error message that provides details about why the repository name was not found or not valid.</p>"
           }
         },
         "repositoryName": {
@@ -660,17 +660,17 @@
     "com.amazonaws.codecommit#BatchAssociateApprovalRuleTemplateWithRepositoriesInput": {
       "type": "structure",
       "members": {
-        "approvalRuleTemplateName": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the template you want to associate with one or more repositories.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "repositoryNames": {
           "target": "com.amazonaws.codecommit#RepositoryNameList",
           "traits": {
             "smithy.api#documentation": "<p>The names of the repositories you want to associate with the template.</p>\n        <note>\n            <p>The length constraint limit is for each string in the array. The array itself can be empty.</p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "approvalRuleTemplateName": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the template you want to associate with one or more repositories.</p>",
             "smithy.api#required": {}
           }
         }
@@ -810,17 +810,28 @@
     "com.amazonaws.codecommit#BatchDescribeMergeConflictsInput": {
       "type": "structure",
       "members": {
-        "destinationCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
+        "maxConflictFiles": {
+          "target": "com.amazonaws.codecommit#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The maximum number of files to include in the output.</p>"
+          }
+        },
+        "conflictResolutionStrategy": {
+          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         },
         "maxMergeHunks": {
           "target": "com.amazonaws.codecommit#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of merge hunks to include in the output.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
         },
         "sourceCommitSpecifier": {
@@ -836,10 +847,11 @@
             "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
+            "smithy.api#documentation": "<p>The name of the repository that contains the merge conflicts you want to review.</p>",
+            "smithy.api#required": {}
           }
         },
         "mergeOption": {
@@ -849,23 +861,11 @@
             "smithy.api#required": {}
           }
         },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
+        "destinationCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the repository that contains the merge conflicts you want to review.</p>",
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
             "smithy.api#required": {}
-          }
-        },
-        "conflictResolutionStrategy": {
-          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
-          }
-        },
-        "maxConflictFiles": {
-          "target": "com.amazonaws.codecommit#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of files to include in the output.</p>"
           }
         },
         "filePaths": {
@@ -879,12 +879,6 @@
     "com.amazonaws.codecommit#BatchDescribeMergeConflictsOutput": {
       "type": "structure",
       "members": {
-        "baseCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the merge base.</p>"
-          }
-        },
         "conflicts": {
           "target": "com.amazonaws.codecommit#Conflicts",
           "traits": {
@@ -899,16 +893,22 @@
             "smithy.api#required": {}
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
+        "baseCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
+            "smithy.api#documentation": "<p>The commit ID of the merge base.</p>"
           }
         },
         "errors": {
           "target": "com.amazonaws.codecommit#BatchDescribeMergeConflictsErrors",
           "traits": {
             "smithy.api#documentation": "<p>A list of any errors returned while describing the merge conflicts for each file.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
           }
         },
         "destinationCommitId": {
@@ -999,17 +999,17 @@
     "com.amazonaws.codecommit#BatchDisassociateApprovalRuleTemplateFromRepositoriesInput": {
       "type": "structure",
       "members": {
-        "repositoryNames": {
-          "target": "com.amazonaws.codecommit#RepositoryNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The repository names that you want to disassociate from the approval rule\n            template.</p>\n        <note>\n            <p>The length constraint limit is for each string in the array. The array itself can be empty.</p>\n         </note>",
-            "smithy.api#required": {}
-          }
-        },
         "approvalRuleTemplateName": {
           "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the template that you want to disassociate from one or more repositories.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "repositoryNames": {
+          "target": "com.amazonaws.codecommit#RepositoryNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The repository names that you want to disassociate from the approval rule\n            template.</p>\n        <note>\n            <p>The length constraint limit is for each string in the array. The array itself can be empty.</p>\n         </note>",
             "smithy.api#required": {}
           }
         }
@@ -1018,17 +1018,17 @@
     "com.amazonaws.codecommit#BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput": {
       "type": "structure",
       "members": {
-        "disassociatedRepositoryNames": {
-          "target": "com.amazonaws.codecommit#RepositoryNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of repository names that have had their association with the template\n            removed.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "errors": {
           "target": "com.amazonaws.codecommit#BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList",
           "traits": {
             "smithy.api#documentation": "<p>A list of any errors that might have occurred while attempting to remove the association between the template and the repositories.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "disassociatedRepositoryNames": {
+          "target": "com.amazonaws.codecommit#RepositoryNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of repository names that have had their association with the template\n            removed.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1113,17 +1113,17 @@
     "com.amazonaws.codecommit#BatchGetCommitsInput": {
       "type": "structure",
       "members": {
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository that contains the commits.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "commitIds": {
           "target": "com.amazonaws.codecommit#CommitIdsInputList",
           "traits": {
             "smithy.api#documentation": "<p>The full commit IDs of the commits to get information about.</p>\n        <note>\n            <p>You must supply the full SHA IDs of each commit. You cannot use shortened SHA\n                IDs.</p>\n        </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository that contains the commits.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1202,16 +1202,16 @@
     "com.amazonaws.codecommit#BatchGetRepositoriesOutput": {
       "type": "structure",
       "members": {
-        "repositoriesNotFound": {
-          "target": "com.amazonaws.codecommit#RepositoryNotFoundList",
-          "traits": {
-            "smithy.api#documentation": "<p>Returns a list of repository names for which information could not be found.</p>"
-          }
-        },
         "repositories": {
           "target": "com.amazonaws.codecommit#RepositoryMetadataList",
           "traits": {
             "smithy.api#documentation": "<p>A list of repositories returned by the batch get repositories operation.</p>"
+          }
+        },
+        "repositoriesNotFound": {
+          "target": "com.amazonaws.codecommit#RepositoryNotFoundList",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns a list of repository names for which information could not be found.</p>"
           }
         }
       },
@@ -1267,6 +1267,12 @@
     "com.amazonaws.codecommit#BlobMetadata": {
       "type": "structure",
       "members": {
+        "mode": {
+          "target": "com.amazonaws.codecommit#Mode",
+          "traits": {
+            "smithy.api#documentation": "<p>The file mode permissions of the blob. File mode permission codes include:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>100644</code> indicates read/write</p>\n            </li>\n            <li>\n               <p>\n                  <code>100755</code> indicates read/write/execute</p>\n            </li>\n            <li>\n               <p>\n                  <code>160000</code> indicates a submodule</p>\n            </li>\n            <li>\n               <p>\n                  <code>120000</code> indicates a symlink</p>\n            </li>\n         </ul>"
+          }
+        },
         "path": {
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
@@ -1277,12 +1283,6 @@
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The full ID of the blob.</p>"
-          }
-        },
-        "mode": {
-          "target": "com.amazonaws.codecommit#Mode",
-          "traits": {
-            "smithy.api#documentation": "<p>The file mode permissions of the blob. File mode permission codes include:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>100644</code> indicates read/write</p>\n            </li>\n            <li>\n               <p>\n                  <code>100755</code> indicates read/write/execute</p>\n            </li>\n            <li>\n               <p>\n                  <code>160000</code> indicates a submodule</p>\n            </li>\n            <li>\n               <p>\n                  <code>120000</code> indicates a symlink</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -1727,10 +1727,16 @@
     "com.amazonaws.codecommit#Comment": {
       "type": "structure",
       "members": {
-        "deleted": {
-          "target": "com.amazonaws.codecommit#IsCommentDeleted",
+        "content": {
+          "target": "com.amazonaws.codecommit#Content",
           "traits": {
-            "smithy.api#documentation": "<p>A Boolean value indicating whether the comment has been deleted.</p>"
+            "smithy.api#documentation": "<p>The content of the comment.</p>"
+          }
+        },
+        "lastModifiedDate": {
+          "target": "com.amazonaws.codecommit#LastModifiedDate",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the comment was most recently modified, in timestamp format.</p>"
           }
         },
         "authorArn": {
@@ -1739,22 +1745,16 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the person who posted the comment.</p>"
           }
         },
-        "content": {
-          "target": "com.amazonaws.codecommit#Content",
-          "traits": {
-            "smithy.api#documentation": "<p>The content of the comment.</p>"
-          }
-        },
         "clientRequestToken": {
           "target": "com.amazonaws.codecommit#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>"
           }
         },
-        "lastModifiedDate": {
-          "target": "com.amazonaws.codecommit#LastModifiedDate",
+        "deleted": {
+          "target": "com.amazonaws.codecommit#IsCommentDeleted",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time the comment was most recently modified, in timestamp format.</p>"
+            "smithy.api#documentation": "<p>A Boolean value indicating whether the comment has been deleted.</p>"
           }
         },
         "reactionCounts": {
@@ -1894,22 +1894,16 @@
     "com.amazonaws.codecommit#CommentsForComparedCommit": {
       "type": "structure",
       "members": {
-        "comments": {
-          "target": "com.amazonaws.codecommit#Comments",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of comment objects. Each comment object contains information about a comment on the comparison\n         between commits.</p>"
-          }
-        },
-        "beforeBlobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full blob ID of the commit used to establish the before of the comparison.</p>"
-          }
-        },
         "beforeCommitId": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
             "smithy.api#documentation": "<p>The full commit ID of the commit used to establish the before of the\n            comparison.</p>"
+          }
+        },
+        "comments": {
+          "target": "com.amazonaws.codecommit#Comments",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of comment objects. Each comment object contains information about a comment on the comparison\n         between commits.</p>"
           }
         },
         "repositoryName": {
@@ -1924,16 +1918,22 @@
             "smithy.api#documentation": "<p>Location information about the comment on the comparison, including the file name,\n            line number, and whether the version of the file where the comment was made is BEFORE or\n            AFTER.</p>"
           }
         },
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full commit ID of the commit used to establish the after of the comparison.</p>"
+          }
+        },
         "afterBlobId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The full blob ID of the commit used to establish the after of the comparison.</p>"
           }
         },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
+        "beforeBlobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the commit used to establish the after of the comparison.</p>"
+            "smithy.api#documentation": "<p>The full blob ID of the commit used to establish the before of the comparison.</p>"
           }
         }
       },
@@ -1950,22 +1950,16 @@
     "com.amazonaws.codecommit#CommentsForPullRequest": {
       "type": "structure",
       "members": {
-        "afterBlobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full blob ID of the file on which you want to comment on the source commit.</p>"
-          }
-        },
         "location": {
           "target": "com.amazonaws.codecommit#Location",
           "traits": {
             "smithy.api#documentation": "<p>Location information about the comment on the pull request, including the file name,\n            line number, and whether the version of the file where the comment was made is BEFORE\n            (destination branch) or AFTER (source branch).</p>"
           }
         },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
+        "afterBlobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the commit that was the tip of the source branch at the time the\n            comment was made. </p>"
+            "smithy.api#documentation": "<p>The full blob ID of the file on which you want to comment on the source commit.</p>"
           }
         },
         "beforeCommitId": {
@@ -1980,16 +1974,22 @@
             "smithy.api#documentation": "<p>The full blob ID of the file on which you want to comment on the destination commit.</p>"
           }
         },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request.</p>"
+            "smithy.api#documentation": "<p>The full commit ID of the commit that was the tip of the source branch at the time the\n            comment was made. </p>"
           }
         },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository that contains the pull request.</p>"
+          }
+        },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request.</p>"
           }
         },
         "comments": {
@@ -2012,34 +2012,10 @@
     "com.amazonaws.codecommit#Commit": {
       "type": "structure",
       "members": {
-        "additionalData": {
-          "target": "com.amazonaws.codecommit#AdditionalData",
-          "traits": {
-            "smithy.api#documentation": "<p>Any other data associated with the specified commit.</p>"
-          }
-        },
-        "parents": {
-          "target": "com.amazonaws.codecommit#ParentList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of parent commits for the specified commit. Each parent commit ID is the full commit ID.</p>"
-          }
-        },
         "commitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The full SHA ID of the specified commit. </p>"
-          }
-        },
-        "author": {
-          "target": "com.amazonaws.codecommit#UserInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the author of the specified commit. Information includes \n            the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured \n            in Git.</p>"
-          }
-        },
-        "message": {
-          "target": "com.amazonaws.codecommit#Message",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit message associated with the specified commit.</p>"
           }
         },
         "committer": {
@@ -2048,10 +2024,34 @@
             "smithy.api#documentation": "<p>Information about the person who committed the specified commit, also known as the committer. Information includes \n        the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured \n        in Git.</p>\n        <p>For more information\n            about the difference between an author and a committer in Git, see <a href=\"http://git-scm.com/book/ch2-3.html\">Viewing the Commit History</a> in Pro Git\n            by Scott Chacon and Ben Straub.</p>"
           }
         },
+        "parents": {
+          "target": "com.amazonaws.codecommit#ParentList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of parent commits for the specified commit. Each parent commit ID is the full commit ID.</p>"
+          }
+        },
+        "additionalData": {
+          "target": "com.amazonaws.codecommit#AdditionalData",
+          "traits": {
+            "smithy.api#documentation": "<p>Any other data associated with the specified commit.</p>"
+          }
+        },
+        "author": {
+          "target": "com.amazonaws.codecommit#UserInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the author of the specified commit. Information includes \n            the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured \n            in Git.</p>"
+          }
+        },
         "treeId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>Tree information for the specified commit.</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.codecommit#Message",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit message associated with the specified commit.</p>"
           }
         }
       },
@@ -2235,10 +2235,34 @@
     "com.amazonaws.codecommit#ConflictMetadata": {
       "type": "structure",
       "members": {
+        "objectTypes": {
+          "target": "com.amazonaws.codecommit#ObjectTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about any object type conflicts in a merge operation.</p>"
+          }
+        },
         "fileModeConflict": {
           "target": "com.amazonaws.codecommit#IsFileModeConflict",
           "traits": {
             "smithy.api#documentation": "<p>A boolean value indicating whether there are conflicts in the file mode of a file.</p>"
+          }
+        },
+        "isBinaryFile": {
+          "target": "com.amazonaws.codecommit#IsBinaryFile",
+          "traits": {
+            "smithy.api#documentation": "<p>A boolean value (true or false) indicating whether the file is binary or textual in the source, destination, and base of the merge.</p>"
+          }
+        },
+        "contentConflict": {
+          "target": "com.amazonaws.codecommit#IsContentConflict",
+          "traits": {
+            "smithy.api#documentation": "<p>A boolean value indicating whether there are conflicts in the content of a file.</p>"
+          }
+        },
+        "fileSizes": {
+          "target": "com.amazonaws.codecommit#FileSizes",
+          "traits": {
+            "smithy.api#documentation": "<p>The file sizes of the file in the source, destination, and base of the merge.</p>"
           }
         },
         "mergeOperations": {
@@ -2253,46 +2277,22 @@
             "smithy.api#documentation": "<p>The file modes of the file in the source, destination, and base of the merge.</p>"
           }
         },
-        "fileSizes": {
-          "target": "com.amazonaws.codecommit#FileSizes",
-          "traits": {
-            "smithy.api#documentation": "<p>The file sizes of the file in the source, destination, and base of the merge.</p>"
-          }
-        },
-        "isBinaryFile": {
-          "target": "com.amazonaws.codecommit#IsBinaryFile",
-          "traits": {
-            "smithy.api#documentation": "<p>A boolean value (true or false) indicating whether the file is binary or textual in the source, destination, and base of the merge.</p>"
-          }
-        },
-        "objectTypes": {
-          "target": "com.amazonaws.codecommit#ObjectTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about any object type conflicts in a merge operation.</p>"
-          }
-        },
-        "contentConflict": {
-          "target": "com.amazonaws.codecommit#IsContentConflict",
-          "traits": {
-            "smithy.api#documentation": "<p>A boolean value indicating whether there are conflicts in the content of a file.</p>"
-          }
-        },
         "filePath": {
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
             "smithy.api#documentation": "<p>The path of the file that contains conflicts.</p>"
           }
         },
-        "numberOfConflicts": {
-          "target": "com.amazonaws.codecommit#NumberOfConflicts",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of conflicts, including both hunk conflicts and metadata conflicts.</p>"
-          }
-        },
         "objectTypeConflict": {
           "target": "com.amazonaws.codecommit#IsObjectTypeConflict",
           "traits": {
             "smithy.api#documentation": "<p>A boolean value (true or false) indicating whether there are conflicts between the branches in the object type of a file, folder, or submodule.</p>"
+          }
+        },
+        "numberOfConflicts": {
+          "target": "com.amazonaws.codecommit#NumberOfConflicts",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of conflicts, including both hunk conflicts and metadata conflicts.</p>"
           }
         }
       },
@@ -2408,17 +2408,17 @@
     "com.amazonaws.codecommit#CreateApprovalRuleTemplateInput": {
       "type": "structure",
       "members": {
+        "approvalRuleTemplateDescription": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the approval rule template. Consider providing a description that\n            explains what this template does and when it might be appropriate to associate it with\n            repositories.</p>"
+          }
+        },
         "approvalRuleTemplateName": {
           "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the approval rule template. Provide descriptive names, because this name\n            is applied to the approval rules created automatically in associated\n            repositories.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "approvalRuleTemplateDescription": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the approval rule template. Consider providing a description that\n            explains what this template does and when it might be appropriate to associate it with\n            repositories.</p>"
           }
         },
         "approvalRuleTemplateContent": {
@@ -2505,17 +2505,17 @@
             "smithy.api#required": {}
           }
         },
-        "branchName": {
-          "target": "com.amazonaws.codecommit#BranchName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the new branch to create.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository in which you want to create the new branch.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "branchName": {
+          "target": "com.amazonaws.codecommit#BranchName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the new branch to create.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2655,22 +2655,22 @@
     "com.amazonaws.codecommit#CreateCommitInput": {
       "type": "structure",
       "members": {
-        "commitMessage": {
-          "target": "com.amazonaws.codecommit#Message",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit message you want to include in the commit. Commit messages are limited to\n            256 KB. If no message is specified, a default message is used.</p>"
-          }
-        },
         "parentCommitId": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the commit that is the parent of the commit you create. Not required if this\n            is an empty repository.</p>"
           }
         },
-        "putFiles": {
-          "target": "com.amazonaws.codecommit#PutFileEntries",
+        "authorName": {
+          "target": "com.amazonaws.codecommit#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The files to add or update in this commit.</p>"
+            "smithy.api#documentation": "<p>The name of the author who created the commit. This information is used as both the\n            author and committer for the commit.</p>"
+          }
+        },
+        "setFileModes": {
+          "target": "com.amazonaws.codecommit#SetFileModeEntries",
+          "traits": {
+            "smithy.api#documentation": "<p>The file modes to update for files in this commit.</p>"
           }
         },
         "branchName": {
@@ -2680,16 +2680,16 @@
             "smithy.api#required": {}
           }
         },
-        "email": {
-          "target": "com.amazonaws.codecommit#Email",
+        "putFiles": {
+          "target": "com.amazonaws.codecommit#PutFileEntries",
           "traits": {
-            "smithy.api#documentation": "<p>The email address of the person who created the commit.</p>"
+            "smithy.api#documentation": "<p>The files to add or update in this commit.</p>"
           }
         },
-        "setFileModes": {
-          "target": "com.amazonaws.codecommit#SetFileModeEntries",
+        "commitMessage": {
+          "target": "com.amazonaws.codecommit#Message",
           "traits": {
-            "smithy.api#documentation": "<p>The file modes to update for files in this commit.</p>"
+            "smithy.api#documentation": "<p>The commit message you want to include in the commit. Commit messages are limited to\n            256 KB. If no message is specified, a default message is used.</p>"
           }
         },
         "repositoryName": {
@@ -2699,16 +2699,10 @@
             "smithy.api#required": {}
           }
         },
-        "authorName": {
-          "target": "com.amazonaws.codecommit#Name",
+        "email": {
+          "target": "com.amazonaws.codecommit#Email",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the author who created the commit. This information is used as both the\n            author and committer for the commit.</p>"
-          }
-        },
-        "deleteFiles": {
-          "target": "com.amazonaws.codecommit#DeleteFileEntries",
-          "traits": {
-            "smithy.api#documentation": "<p>The files to delete in this commit. These files still exist in earlier commits.</p>"
+            "smithy.api#documentation": "<p>The email address of the person who created the commit.</p>"
           }
         },
         "keepEmptyFolders": {
@@ -2716,16 +2710,22 @@
           "traits": {
             "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a ..gitkeep file is created for empty folders.\n            The default is false.</p>"
           }
+        },
+        "deleteFiles": {
+          "target": "com.amazonaws.codecommit#DeleteFileEntries",
+          "traits": {
+            "smithy.api#documentation": "<p>The files to delete in this commit. These files still exist in earlier commits.</p>"
+          }
         }
       }
     },
     "com.amazonaws.codecommit#CreateCommitOutput": {
       "type": "structure",
       "members": {
-        "filesAdded": {
-          "target": "com.amazonaws.codecommit#FilesMetadata",
+        "treeId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>The files added as part of the committed file changes.</p>"
+            "smithy.api#documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains the commited file changes.</p>"
           }
         },
         "filesUpdated": {
@@ -2734,22 +2734,22 @@
             "smithy.api#documentation": "<p>The files updated as part of the commited file changes.</p>"
           }
         },
-        "filesDeleted": {
-          "target": "com.amazonaws.codecommit#FilesMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>The files deleted as part of the committed file changes.</p>"
-          }
-        },
         "commitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The full commit ID of the commit that contains your committed file changes.</p>"
           }
         },
-        "treeId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
+        "filesDeleted": {
+          "target": "com.amazonaws.codecommit#FilesMetadata",
           "traits": {
-            "smithy.api#documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains the commited file changes.</p>"
+            "smithy.api#documentation": "<p>The files deleted as part of the committed file changes.</p>"
+          }
+        },
+        "filesAdded": {
+          "target": "com.amazonaws.codecommit#FilesMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>The files added as part of the committed file changes.</p>"
           }
         }
       }
@@ -2905,17 +2905,17 @@
     "com.amazonaws.codecommit#CreatePullRequestApprovalRuleInput": {
       "type": "structure",
       "members": {
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request for which you want to create the approval rule.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "approvalRuleContent": {
           "target": "com.amazonaws.codecommit#ApprovalRuleContent",
           "traits": {
             "smithy.api#documentation": "<p>The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information\n        about approval pools, see the AWS CodeCommit User Guide.</p>\n        <note>\n            <p>When you create the content of the approval rule, you can specify approvers in an\n                approval pool in one of two ways:</p>\n            <ul>\n               <li>\n                    <p>\n                     <b>CodeCommitApprovers</b>: This option only\n                        requires an AWS account and a resource. It can be used for both IAM users\n                        and federated access users whose name matches the provided resource name.\n                        This is a very powerful option that offers a great deal of flexibility. For\n                        example, if you specify the AWS account <i>123456789012</i>\n                        and <i>Mary_Major</i>, all of the following would be counted\n                        as approvals coming from that user:</p>\n                    <ul>\n                     <li>\n                            <p>An IAM user in the account\n                                    (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p>\n                        </li>\n                     <li>\n                            <p>A federated user identified in IAM as Mary_Major\n                                    (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p>\n                        </li>\n                  </ul>\n                    <p>This option does not recognize an active session of someone assuming the\n                        role of CodeCommitReview with a role session name of\n                            <i>Mary_Major</i>\n                            (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>)\n                        unless you include a wildcard (*Mary_Major).</p>\n                </li>\n               <li>\n                    <p>\n                     <b>Fully qualified ARN</b>: This option allows\n                        you to specify the fully qualified Amazon Resource Name (ARN) of the IAM\n                        user or role. </p>\n                </li>\n            </ul>\n            <p>For more information about IAM ARNs, wildcards, and formats, see\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM\n                Identifiers</a> in the <i>IAM User Guide</i>.</p>\n            \n        </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request for which you want to create the approval rule.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2943,18 +2943,18 @@
     "com.amazonaws.codecommit#CreatePullRequestInput": {
       "type": "structure",
       "members": {
-        "title": {
-          "target": "com.amazonaws.codecommit#Title",
-          "traits": {
-            "smithy.api#documentation": "<p>The title of the pull request. This title is used to identify the pull request to\n            other users in the repository.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "clientRequestToken": {
           "target": "com.amazonaws.codecommit#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>\n        <note>\n            <p>The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an\n                idempotency token is created for you.</p>\n        </note>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "title": {
+          "target": "com.amazonaws.codecommit#Title",
+          "traits": {
+            "smithy.api#documentation": "<p>The title of the pull request. This title is used to identify the pull request to\n            other users in the repository.</p>",
+            "smithy.api#required": {}
           }
         },
         "description": {
@@ -3049,17 +3049,17 @@
             "smithy.api#documentation": "<p>A comment or description about the new repository.</p>\n        <note>\n            <p>The description field for a repository accepts all HTML characters and all valid\n                Unicode characters. Applications that do not HTML-encode the description and display\n                it in a webpage can expose users to potentially malicious code. Make sure that you\n                HTML-encode the description field in any application that uses this API to display\n                the repository description on a webpage.</p>\n         </note>"
           }
         },
+        "tags": {
+          "target": "com.amazonaws.codecommit#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more tag key-value pairs to use when tagging this repository.</p>"
+          }
+        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the new repository to be created.</p>\n        <note>\n            <p>The repository name must be unique across the calling AWS account. Repository names\n                are limited to 100 alphanumeric, dash, and underscore characters, and cannot include\n                certain characters. For more information about the limits on repository names, see\n                    <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html\">Limits</a> in the <i>AWS CodeCommit User Guide</i>. The\n                suffix .git is prohibited.</p>\n         </note>",
             "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.codecommit#TagsMap",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more tag key-value pairs to use when tagging this repository.</p>"
           }
         }
       },
@@ -3206,17 +3206,18 @@
     "com.amazonaws.codecommit#CreateUnreferencedMergeCommitInput": {
       "type": "structure",
       "members": {
+        "sourceCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#required": {}
+          }
+        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository where you want to create the unreferenced merge commit.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "commitMessage": {
-          "target": "com.amazonaws.codecommit#Message",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit message for the unreferenced commit.</p>"
           }
         },
         "mergeOption": {
@@ -3233,16 +3234,16 @@
             "smithy.api#required": {}
           }
         },
-        "email": {
-          "target": "com.amazonaws.codecommit#Email",
-          "traits": {
-            "smithy.api#documentation": "<p>The email address for the person who created the unreferenced commit.</p>"
-          }
-        },
         "conflictResolution": {
           "target": "com.amazonaws.codecommit#ConflictResolution",
           "traits": {
             "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+          }
+        },
+        "commitMessage": {
+          "target": "com.amazonaws.codecommit#Message",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit message for the unreferenced commit.</p>"
           }
         },
         "authorName": {
@@ -3257,17 +3258,16 @@
             "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         },
+        "email": {
+          "target": "com.amazonaws.codecommit#Email",
+          "traits": {
+            "smithy.api#documentation": "<p>The email address for the person who created the unreferenced commit.</p>"
+          }
+        },
         "conflictDetailLevel": {
           "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
           "traits": {
             "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
-          }
-        },
-        "sourceCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
           }
         },
         "keepEmptyFolders": {
@@ -3413,17 +3413,17 @@
     "com.amazonaws.codecommit#DeleteBranchInput": {
       "type": "structure",
       "members": {
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository that contains the branch to be deleted.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "branchName": {
           "target": "com.amazonaws.codecommit#BranchName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the branch to delete.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository that contains the branch to be deleted.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3599,10 +3599,10 @@
     "com.amazonaws.codecommit#DeleteFileInput": {
       "type": "structure",
       "members": {
-        "email": {
-          "target": "com.amazonaws.codecommit#Email",
+        "commitMessage": {
+          "target": "com.amazonaws.codecommit#Message",
           "traits": {
-            "smithy.api#documentation": "<p>The email address for the commit that deletes the file. If no email address is\n            specified, the email address is left blank.</p>"
+            "smithy.api#documentation": "<p>The commit message you want to include as part of deleting the file. Commit messages\n            are limited to 256 KB. If no message is specified, a default message is used.</p>"
           }
         },
         "filePath": {
@@ -3612,17 +3612,17 @@
             "smithy.api#required": {}
           }
         },
+        "email": {
+          "target": "com.amazonaws.codecommit#Email",
+          "traits": {
+            "smithy.api#documentation": "<p>The email address for the commit that deletes the file. If no email address is\n            specified, the email address is left blank.</p>"
+          }
+        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository that contains the file to delete.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "commitMessage": {
-          "target": "com.amazonaws.codecommit#Message",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit message you want to include as part of deleting the file. Commit messages\n            are limited to 256 KB. If no message is specified, a default message is used.</p>"
           }
         },
         "name": {
@@ -3656,13 +3656,6 @@
     "com.amazonaws.codecommit#DeleteFileOutput": {
       "type": "structure",
       "members": {
-        "blobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The blob ID removed from the tree as part of deleting the file.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "commitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
@@ -3674,6 +3667,13 @@
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
             "smithy.api#documentation": "<p>The fully qualified path to the file to be deleted, including the full name and\n            extension of that file.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "blobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The blob ID removed from the tree as part of deleting the file.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3922,10 +3922,10 @@
     "com.amazonaws.codecommit#DescribeMergeConflictsInput": {
       "type": "structure",
       "members": {
-        "mergeOption": {
-          "target": "com.amazonaws.codecommit#MergeOptionTypeEnum",
+        "sourceCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
-            "smithy.api#documentation": "<p>The merge option or strategy you want to use to merge the code.</p>",
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
             "smithy.api#required": {}
           }
         },
@@ -3936,10 +3936,10 @@
             "smithy.api#required": {}
           }
         },
-        "filePath": {
-          "target": "com.amazonaws.codecommit#Path",
+        "mergeOption": {
+          "target": "com.amazonaws.codecommit#MergeOptionTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>The path of the target files used to describe the conflicts. </p>",
+            "smithy.api#documentation": "<p>The merge option or strategy you want to use to merge the code.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3950,16 +3950,10 @@
             "smithy.api#required": {}
           }
         },
-        "conflictDetailLevel": {
-          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
+        "filePath": {
+          "target": "com.amazonaws.codecommit#Path",
           "traits": {
-            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
-          }
-        },
-        "sourceCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#documentation": "<p>The path of the target files used to describe the conflicts. </p>",
             "smithy.api#required": {}
           }
         },
@@ -3969,10 +3963,10 @@
             "smithy.api#documentation": "<p>The maximum number of merge hunks to include in the output.</p>"
           }
         },
-        "conflictResolutionStrategy": {
-          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+        "conflictDetailLevel": {
+          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
+            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
         "nextToken": {
@@ -3980,23 +3974,22 @@
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
+        },
+        "conflictResolutionStrategy": {
+          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
+          }
         }
       }
     },
     "com.amazonaws.codecommit#DescribeMergeConflictsOutput": {
       "type": "structure",
       "members": {
-        "destinationCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
+        "mergeHunks": {
+          "target": "com.amazonaws.codecommit#MergeHunks",
           "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "sourceCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>",
+            "smithy.api#documentation": "<p>A list of merge hunks of the differences between the files or lines.</p>",
             "smithy.api#required": {}
           }
         },
@@ -4019,10 +4012,17 @@
             "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
           }
         },
-        "mergeHunks": {
-          "target": "com.amazonaws.codecommit#MergeHunks",
+        "sourceCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>A list of merge hunks of the differences between the files or lines.</p>",
+            "smithy.api#documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "destinationCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4095,16 +4095,16 @@
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
         },
-        "actorArn": {
-          "target": "com.amazonaws.codecommit#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user whose actions resulted in the event.\n            Examples include updating the pull request with more commits or changing the status of a\n            pull request.</p>"
-          }
-        },
         "pullRequestEventType": {
           "target": "com.amazonaws.codecommit#PullRequestEventType",
           "traits": {
             "smithy.api#documentation": "<p>Optional. The pull request event type about which you want to return information.</p>"
+          }
+        },
+        "actorArn": {
+          "target": "com.amazonaws.codecommit#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user whose actions resulted in the event.\n            Examples include updating the pull request with more commits or changing the status of a\n            pull request.</p>"
           }
         },
         "maxResults": {
@@ -4152,16 +4152,16 @@
     "com.amazonaws.codecommit#Difference": {
       "type": "structure",
       "members": {
-        "changeType": {
-          "target": "com.amazonaws.codecommit#ChangeTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the change type of the difference is an addition (A), deletion (D), or modification (M).</p>"
-          }
-        },
         "beforeBlob": {
           "target": "com.amazonaws.codecommit#BlobMetadata",
           "traits": {
             "smithy.api#documentation": "<p>Information about a <code>beforeBlob</code> data type object, including the ID, \n            the file mode permission code, and the path.</p>"
+          }
+        },
+        "changeType": {
+          "target": "com.amazonaws.codecommit#ChangeTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the change type of the difference is an addition (A), deletion (D), or modification (M).</p>"
           }
         },
         "afterBlob": {
@@ -4243,17 +4243,17 @@
     "com.amazonaws.codecommit#DisassociateApprovalRuleTemplateFromRepositoryInput": {
       "type": "structure",
       "members": {
-        "approvalRuleTemplateName": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the approval rule template to disassociate from a specified repository.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository you want to disassociate from the template.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "approvalRuleTemplateName": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the approval rule template to disassociate from a specified repository.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4424,6 +4424,12 @@
     "com.amazonaws.codecommit#Evaluation": {
       "type": "structure",
       "members": {
+        "approvalRulesSatisfied": {
+          "target": "com.amazonaws.codecommit#ApprovalRulesSatisfiedList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of the approval rules that have had their conditions met.</p>"
+          }
+        },
         "approvalRulesNotSatisfied": {
           "target": "com.amazonaws.codecommit#ApprovalRulesNotSatisfiedList",
           "traits": {
@@ -4434,12 +4440,6 @@
           "target": "com.amazonaws.codecommit#Overridden",
           "traits": {
             "smithy.api#documentation": "<p>Whether the approval rule requirements for the pull request have been overridden and no longer need to be met.</p>"
-          }
-        },
-        "approvalRulesSatisfied": {
-          "target": "com.amazonaws.codecommit#ApprovalRulesSatisfiedList",
-          "traits": {
-            "smithy.api#documentation": "<p>The names of the approval rules that have had their conditions met.</p>"
           }
         },
         "approved": {
@@ -4584,16 +4584,16 @@
     "com.amazonaws.codecommit#FileMetadata": {
       "type": "structure",
       "members": {
-        "blobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The blob ID that contains the file information.</p>"
-          }
-        },
         "absolutePath": {
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
             "smithy.api#documentation": "<p>The full path to the file to be added or updated, including the name of the\n            file.</p>"
+          }
+        },
+        "blobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The blob ID that contains the file information.</p>"
           }
         },
         "fileMode": {
@@ -4644,12 +4644,6 @@
     "com.amazonaws.codecommit#FileModes": {
       "type": "structure",
       "members": {
-        "base": {
-          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The file mode of a file in the base of a merge or pull request.</p>"
-          }
-        },
         "destination": {
           "target": "com.amazonaws.codecommit#FileModeTypeEnum",
           "traits": {
@@ -4660,6 +4654,12 @@
           "target": "com.amazonaws.codecommit#FileModeTypeEnum",
           "traits": {
             "smithy.api#documentation": "<p>The file mode of a file in the source of a merge or pull request.</p>"
+          }
+        },
+        "base": {
+          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>The file mode of a file in the base of a merge or pull request.</p>"
           }
         }
       },
@@ -4715,16 +4715,16 @@
             "smithy.api#documentation": "<p>The size of a file in the destination of a merge or pull request.</p>"
           }
         },
-        "base": {
-          "target": "com.amazonaws.codecommit#FileSize",
-          "traits": {
-            "smithy.api#documentation": "<p>The size of a file in the base of a merge or pull request.</p>"
-          }
-        },
         "source": {
           "target": "com.amazonaws.codecommit#FileSize",
           "traits": {
             "smithy.api#documentation": "<p>The  size of a file in the source of a merge or pull request.</p>"
+          }
+        },
+        "base": {
+          "target": "com.amazonaws.codecommit#FileSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The size of a file in the base of a merge or pull request.</p>"
           }
         }
       },
@@ -4762,16 +4762,16 @@
             "smithy.api#documentation": "<p>The relative path of the specified folder from the folder where the query originated.</p>"
           }
         },
-        "treeId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains the folder.</p>"
-          }
-        },
         "absolutePath": {
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
             "smithy.api#documentation": "<p>The fully qualified path of the folder in the repository.</p>"
+          }
+        },
+        "treeId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains the folder.</p>"
           }
         }
       },
@@ -5150,16 +5150,16 @@
             "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of the user or identity for which you want to get reaction information.</p>"
           }
         },
-        "maxResults": {
-          "target": "com.amazonaws.codecommit#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.  The default is the same as the allowed maximum, 1,000.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the results. </p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.codecommit#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.  The default is the same as the allowed maximum, 1,000.</p>"
           }
         }
       }
@@ -5243,6 +5243,19 @@
     "com.amazonaws.codecommit#GetCommentsForComparedCommitInput": {
       "type": "structure",
       "members": {
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
+          "traits": {
+            "smithy.api#documentation": "<p>To establish the directionality of the comparison, the full commit ID of the after\n            commit.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.codecommit#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results. The\n            default is 100 comments, but you can configure up to 500.</p>"
+          }
+        },
         "beforeCommitId": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
@@ -5253,19 +5266,6 @@
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that when provided in a request, returns the next batch of the results. </p>"
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.codecommit#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results. The\n            default is 100 comments, but you can configure up to 500.</p>"
-          }
-        },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
-          "traits": {
-            "smithy.api#documentation": "<p>To establish the directionality of the comparison, the full commit ID of the after\n            commit.</p>",
-            "smithy.api#required": {}
           }
         },
         "repositoryName": {
@@ -5373,12 +5373,6 @@
             "smithy.api#documentation": "<p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.</p>"
           }
         },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
@@ -5391,17 +5385,23 @@
             "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results. The default is 100 comments.\n            You can return up to 500 comments with a single request.</p>"
           }
         },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.</p>"
           }
         },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository that contains the pull request.</p>"
+          }
+        },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -5577,16 +5577,23 @@
     "com.amazonaws.codecommit#GetDifferencesInput": {
       "type": "structure",
       "members": {
+        "afterCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
         },
-        "beforeCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
+        "MaxResults": {
+          "target": "com.amazonaws.codecommit#Limit",
           "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, the full commit ID). Optional. If not specified, all changes before the\n                <code>afterCommitSpecifier</code> value are shown. If you do not use\n                <code>beforeCommitSpecifier</code> in your request, consider limiting the results\n            with <code>maxResults</code>.</p>"
+            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
           }
         },
         "beforePath": {
@@ -5602,17 +5609,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.codecommit#Limit",
-          "traits": {
-            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
-          }
-        },
-        "afterCommitSpecifier": {
+        "beforeCommitSpecifier": {
           "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, the full commit ID). Optional. If not specified, all changes before the\n                <code>afterCommitSpecifier</code> value are shown. If you do not use\n                <code>beforeCommitSpecifier</code> in your request, consider limiting the results\n            with <code>maxResults</code>.</p>"
           }
         },
         "afterPath": {
@@ -5626,16 +5626,16 @@
     "com.amazonaws.codecommit#GetDifferencesOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
-          }
-        },
         "differences": {
           "target": "com.amazonaws.codecommit#DifferenceList",
           "traits": {
             "smithy.api#documentation": "<p>A data type object that contains information about the differences, including whether\n            the difference is added, modified, or deleted (A, D, M).</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
           }
         }
       }
@@ -5699,13 +5699,6 @@
     "com.amazonaws.codecommit#GetFileInput": {
       "type": "structure",
       "members": {
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository that contains the file.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "commitSpecifier": {
           "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
@@ -5718,12 +5711,26 @@
             "smithy.api#documentation": "<p>The fully qualified path to the file, including the full name and extension of the\n            file. For example, /examples/file.md is the fully qualified path to a file named file.md\n            in a folder named examples.</p>",
             "smithy.api#required": {}
           }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository that contains the file.</p>",
+            "smithy.api#required": {}
+          }
         }
       }
     },
     "com.amazonaws.codecommit#GetFileOutput": {
       "type": "structure",
       "members": {
+        "blobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The blob ID of the object that represents the file content.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "commitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
@@ -5731,10 +5738,10 @@
             "smithy.api#required": {}
           }
         },
-        "blobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
+        "filePath": {
+          "target": "com.amazonaws.codecommit#Path",
           "traits": {
-            "smithy.api#documentation": "<p>The blob ID of the object that represents the file content.</p>",
+            "smithy.api#documentation": "<p>The fully qualified path to the specified file. Returns the name and extension of the\n            file.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5749,13 +5756,6 @@
           "target": "com.amazonaws.codecommit#FileModeTypeEnum",
           "traits": {
             "smithy.api#documentation": "<p>The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.</p>\n        <note>\n            <p>The file mode permissions returned by this API are not the standard file mode\n                permission values, such as 100644, but rather extrapolated values. See the supported\n                return values.</p>\n        </note>",
-            "smithy.api#required": {}
-          }
-        },
-        "filePath": {
-          "target": "com.amazonaws.codecommit#Path",
-          "traits": {
-            "smithy.api#documentation": "<p>The fully qualified path to the specified file. Returns the name and extension of the\n            file.</p>",
             "smithy.api#required": {}
           }
         },
@@ -5831,17 +5831,17 @@
             "smithy.api#required": {}
           }
         },
+        "commitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>A fully qualified reference used to identify a commit that contains the version of the\n            folder's content to return. A fully qualified reference can be a commit ID, branch name,\n            tag, or reference such as HEAD. If no specifier is provided, the folder content is\n            returned as it exists in the HEAD commit.</p>"
+          }
+        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "commitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
-          "traits": {
-            "smithy.api#documentation": "<p>A fully qualified reference used to identify a commit that contains the version of the\n            folder's content to return. A fully qualified reference can be a commit ID, branch name,\n            tag, or reference such as HEAD. If no specifier is provided, the folder content is\n            returned as it exists in the HEAD commit.</p>"
           }
         }
       }
@@ -5868,11 +5868,10 @@
             "smithy.api#documentation": "<p>The list of files in the specified folder, if any.</p>"
           }
         },
-        "commitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
+        "symbolicLinks": {
+          "target": "com.amazonaws.codecommit#SymbolicLinkList",
           "traits": {
-            "smithy.api#documentation": "<p>The full commit ID used as a reference for the returned version of the folder\n            content.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The list of symbolic links to other files and folders in the specified folder, if\n            any.</p>"
           }
         },
         "subModules": {
@@ -5881,16 +5880,17 @@
             "smithy.api#documentation": "<p>The list of submodules in the specified folder, if any.</p>"
           }
         },
-        "symbolicLinks": {
-          "target": "com.amazonaws.codecommit#SymbolicLinkList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of symbolic links to other files and folders in the specified folder, if\n            any.</p>"
-          }
-        },
         "subFolders": {
           "target": "com.amazonaws.codecommit#FolderList",
           "traits": {
             "smithy.api#documentation": "<p>The list of folders that exist under the specified folder, if any.</p>"
+          }
+        },
+        "commitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full commit ID used as a reference for the returned version of the folder\n            content.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -5995,16 +5995,16 @@
             "smithy.api#documentation": "<p>The commit ID for the merge commit created when the source branch was merged into the\n            destination branch. If the fast-forward merge strategy was used, there is no merge\n            commit.</p>"
           }
         },
-        "destinationCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
-          }
-        },
         "baseCommitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The commit ID of the merge base.</p>"
+          }
+        },
+        "destinationCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
           }
         },
         "sourceCommitId": {
@@ -6103,12 +6103,6 @@
     "com.amazonaws.codecommit#GetMergeConflictsInput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
-          }
-        },
         "conflictDetailLevel": {
           "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
           "traits": {
@@ -6120,6 +6114,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
             "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
         },
         "sourceCommitSpecifier": {
@@ -6135,10 +6135,11 @@
             "smithy.api#documentation": "<p>The maximum number of files to include in the output.</p>"
           }
         },
-        "conflictResolutionStrategy": {
-          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
+            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
+            "smithy.api#required": {}
           }
         },
         "mergeOption": {
@@ -6148,11 +6149,10 @@
             "smithy.api#required": {}
           }
         },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
+        "conflictResolutionStrategy": {
+          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         }
       }
@@ -6160,6 +6160,13 @@
     "com.amazonaws.codecommit#GetMergeConflictsOutput": {
       "type": "structure",
       "members": {
+        "conflictMetadataList": {
+          "target": "com.amazonaws.codecommit#ConflictMetadataList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of metadata for any conflicting files. If the specified merge strategy is\n            FAST_FORWARD_MERGE, this list is always empty.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "destinationCommitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
@@ -6167,17 +6174,17 @@
             "smithy.api#required": {}
           }
         },
-        "sourceCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "mergeable": {
           "target": "com.amazonaws.codecommit#IsMergeable",
           "traits": {
             "smithy.api#documentation": "<p>A Boolean value that indicates whether the code is mergeable by the specified merge option.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "sourceCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>",
             "smithy.api#required": {}
           }
         },
@@ -6191,13 +6198,6 @@
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
-          }
-        },
-        "conflictMetadataList": {
-          "target": "com.amazonaws.codecommit#ConflictMetadataList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of metadata for any conflicting files. If the specified merge strategy is\n            FAST_FORWARD_MERGE, this list is always empty.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -6267,6 +6267,13 @@
     "com.amazonaws.codecommit#GetMergeOptionsInput": {
       "type": "structure",
       "members": {
+        "sourceCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#required": {}
+          }
+        },
         "destinationCommitSpecifier": {
           "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
@@ -6287,13 +6294,6 @@
             "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
-        "sourceCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
-          }
-        },
         "conflictResolutionStrategy": {
           "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
           "traits": {
@@ -6305,17 +6305,17 @@
     "com.amazonaws.codecommit#GetMergeOptionsOutput": {
       "type": "structure",
       "members": {
-        "mergeOptions": {
-          "target": "com.amazonaws.codecommit#MergeOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The merge option or strategy used to merge the code.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "baseCommitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The commit ID of the merge base.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "destinationCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>",
             "smithy.api#required": {}
           }
         },
@@ -6326,10 +6326,10 @@
             "smithy.api#required": {}
           }
         },
-        "destinationCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
+        "mergeOptions": {
+          "target": "com.amazonaws.codecommit#MergeOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>",
+            "smithy.api#documentation": "<p>The merge option or strategy used to merge the code.</p>",
             "smithy.api#required": {}
           }
         }
@@ -6518,17 +6518,17 @@
     "com.amazonaws.codecommit#GetPullRequestOverrideStateInput": {
       "type": "structure",
       "members": {
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).</p>",
-            "smithy.api#required": {}
-          }
-        },
         "revisionId": {
           "target": "com.amazonaws.codecommit#RevisionId",
           "traits": {
             "smithy.api#documentation": "<p>The system-generated ID of the revision for the pull request. To retrieve the most\n            recent revision ID, use\n            <a>GetPullRequest</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).</p>",
             "smithy.api#required": {}
           }
         }
@@ -7657,6 +7657,12 @@
     "com.amazonaws.codecommit#IsBinaryFile": {
       "type": "structure",
       "members": {
+        "destination": {
+          "target": "com.amazonaws.codecommit#CapitalBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The binary or non-binary status of a file in the destination of a merge or pull request.</p>"
+          }
+        },
         "base": {
           "target": "com.amazonaws.codecommit#CapitalBoolean",
           "traits": {
@@ -7667,12 +7673,6 @@
           "target": "com.amazonaws.codecommit#CapitalBoolean",
           "traits": {
             "smithy.api#documentation": "<p>The binary or non-binary status of file in the source of a merge or pull request.</p>"
-          }
-        },
-        "destination": {
-          "target": "com.amazonaws.codecommit#CapitalBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The binary or non-binary status of a file in the destination of a merge or pull request.</p>"
           }
         }
       },
@@ -7750,16 +7750,16 @@
     "com.amazonaws.codecommit#ListApprovalRuleTemplatesInput": {
       "type": "structure",
       "members": {
-        "maxResults": {
-          "target": "com.amazonaws.codecommit#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.codecommit#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
           }
         }
       }
@@ -7857,16 +7857,16 @@
     "com.amazonaws.codecommit#ListAssociatedApprovalRuleTemplatesForRepositoryOutput": {
       "type": "structure",
       "members": {
-        "approvalRuleTemplateNames": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The names of all approval rule templates associated with the repository.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that allows the operation to batch the next results of the operation.</p>"
+          }
+        },
+        "approvalRuleTemplateNames": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of all approval rule templates associated with the repository.</p>"
           }
         }
       }
@@ -7941,16 +7941,16 @@
     "com.amazonaws.codecommit#ListBranchesOutput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that returns the batch of the results.</p>"
-          }
-        },
         "branches": {
           "target": "com.amazonaws.codecommit#BranchNameList",
           "traits": {
             "smithy.api#documentation": "<p>The list of branch names.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that returns the batch of the results.</p>"
           }
         }
       },
@@ -8026,6 +8026,12 @@
             "smithy.api#required": {}
           }
         },
+        "maxResults": {
+          "target": "com.amazonaws.codecommit#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
+          }
+        },
         "authorArn": {
           "target": "com.amazonaws.codecommit#Arn",
           "traits": {
@@ -8036,12 +8042,6 @@
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.codecommit#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>A non-zero, non-negative integer used to limit the number of returned results.</p>"
           }
         },
         "pullRequestStatus": {
@@ -8174,16 +8174,16 @@
     "com.amazonaws.codecommit#ListRepositoriesForApprovalRuleTemplateOutput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that allows the operation to batch the next results of the operation.</p>"
-          }
-        },
         "repositoryNames": {
           "target": "com.amazonaws.codecommit#RepositoryNameList",
           "traits": {
             "smithy.api#documentation": "<p>A list of repository names that are associated with the specified approval rule template.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that allows the operation to batch the next results of the operation.</p>"
           }
         }
       }
@@ -8191,16 +8191,16 @@
     "com.amazonaws.codecommit#ListRepositoriesInput": {
       "type": "structure",
       "members": {
-        "sortBy": {
-          "target": "com.amazonaws.codecommit#SortByEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The criteria used to sort the results of a list repositories operation.</p>"
-          }
-        },
         "order": {
           "target": "com.amazonaws.codecommit#OrderEnum",
           "traits": {
             "smithy.api#documentation": "<p>The order in which to sort the results of a list repositories operation.</p>"
+          }
+        },
+        "sortBy": {
+          "target": "com.amazonaws.codecommit#SortByEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>The criteria used to sort the results of a list repositories operation.</p>"
           }
         },
         "nextToken": {
@@ -8217,16 +8217,16 @@
     "com.amazonaws.codecommit#ListRepositoriesOutput": {
       "type": "structure",
       "members": {
-        "repositories": {
-          "target": "com.amazonaws.codecommit#RepositoryNameIdPairList",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists the repositories called by the list repositories operation.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codecommit#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>An enumeration token that allows the operation to batch the results of the operation. \n            Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, \n            another page of 1,000 records is retrieved.</p>"
+          }
+        },
+        "repositories": {
+          "target": "com.amazonaws.codecommit#RepositoryNameIdPairList",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists the repositories called by the list repositories operation.</p>"
           }
         }
       },
@@ -8263,17 +8263,17 @@
     "com.amazonaws.codecommit#ListTagsForResourceInput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codecommit#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
-          }
-        },
         "resourceArn": {
           "target": "com.amazonaws.codecommit#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to get information\n            about tags, if any.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codecommit#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
           }
         }
       }
@@ -8573,6 +8573,13 @@
             "smithy.api#required": {}
           }
         },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "sourceCommitSpecifier": {
           "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
@@ -8585,29 +8592,22 @@
           "traits": {
             "smithy.api#documentation": "<p>The branch where the merge is applied.</p>"
           }
-        },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.codecommit#MergeBranchesByFastForwardOutput": {
       "type": "structure",
       "members": {
-        "commitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
-          }
-        },
         "treeId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
+          }
+        },
+        "commitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
           }
         }
       }
@@ -8746,6 +8746,25 @@
     "com.amazonaws.codecommit#MergeBranchesBySquashInput": {
       "type": "structure",
       "members": {
+        "conflictResolutionStrategy": {
+          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
+          }
+        },
+        "conflictResolution": {
+          "target": "com.amazonaws.codecommit#ConflictResolution",
+          "traits": {
+            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "keepEmptyFolders": {
           "target": "com.amazonaws.codecommit#KeepEmptyFolders",
           "traits": {
@@ -8759,24 +8778,10 @@
             "smithy.api#required": {}
           }
         },
-        "destinationCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
+        "conflictDetailLevel": {
+          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "conflictResolution": {
-          "target": "com.amazonaws.codecommit#ConflictResolution",
-          "traits": {
-            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
         "email": {
@@ -8785,28 +8790,17 @@
             "smithy.api#documentation": "<p>The email address of the person merging the branches. This information is used in the\n            commit information for the merge.</p>"
           }
         },
-        "conflictDetailLevel": {
-          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
-          }
-        },
         "authorName": {
           "target": "com.amazonaws.codecommit#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the author who created the commit. This information is used as both the\n            author and committer for the commit.</p>"
           }
         },
-        "conflictResolutionStrategy": {
-          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+        "destinationCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
-          }
-        },
-        "targetBranch": {
-          "target": "com.amazonaws.codecommit#BranchName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch where the merge is applied. </p>"
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#required": {}
           }
         },
         "commitMessage": {
@@ -8814,22 +8808,28 @@
           "traits": {
             "smithy.api#documentation": "<p>The commit message for the merge.</p>"
           }
+        },
+        "targetBranch": {
+          "target": "com.amazonaws.codecommit#BranchName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch where the merge is applied. </p>"
+          }
         }
       }
     },
     "com.amazonaws.codecommit#MergeBranchesBySquashOutput": {
       "type": "structure",
       "members": {
-        "treeId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
-          }
-        },
         "commitId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
+          }
+        },
+        "treeId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
           }
         }
       }
@@ -8968,24 +8968,10 @@
     "com.amazonaws.codecommit#MergeBranchesByThreeWayInput": {
       "type": "structure",
       "members": {
-        "sourceCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
+        "targetBranch": {
+          "target": "com.amazonaws.codecommit#BranchName",
           "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "conflictResolution": {
-          "target": "com.amazonaws.codecommit#ConflictResolution",
-          "traits": {
-            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+            "smithy.api#documentation": "<p>The branch where the merge is applied. </p>"
           }
         },
         "conflictResolutionStrategy": {
@@ -8994,10 +8980,30 @@
             "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         },
+        "sourceCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#required": {}
+          }
+        },
         "keepEmptyFolders": {
           "target": "com.amazonaws.codecommit#KeepEmptyFolders",
           "traits": {
             "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a .gitkeep file is created for empty folders.\n            The default is false.</p>"
+          }
+        },
+        "conflictResolution": {
+          "target": "com.amazonaws.codecommit#ConflictResolution",
+          "traits": {
+            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository where you want to merge two branches.</p>",
+            "smithy.api#required": {}
           }
         },
         "email": {
@@ -9012,19 +9018,6 @@
             "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
-        "destinationCommitSpecifier": {
-          "target": "com.amazonaws.codecommit#CommitName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "targetBranch": {
-          "target": "com.amazonaws.codecommit#BranchName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch where the merge is applied. </p>"
-          }
-        },
         "authorName": {
           "target": "com.amazonaws.codecommit#Name",
           "traits": {
@@ -9035,6 +9028,13 @@
           "target": "com.amazonaws.codecommit#Message",
           "traits": {
             "smithy.api#documentation": "<p>The commit message to include in the commit information for the merge.</p>"
+          }
+        },
+        "destinationCommitSpecifier": {
+          "target": "com.amazonaws.codecommit#CommitName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit\n            (for example, a branch name or a full commit ID).</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -9071,16 +9071,16 @@
             "smithy.api#documentation": "<p>Information about the merge hunk in the source of a merge or pull request.</p>"
           }
         },
-        "isConflict": {
-          "target": "com.amazonaws.codecommit#IsHunkConflict",
-          "traits": {
-            "smithy.api#documentation": "<p>A Boolean value indicating whether a combination of hunks contains a conflict.\n            Conflicts occur when the same file or the same lines in a file were modified in both the\n            source and destination of a merge or pull request. Valid values include true, false, and\n            null. True when the hunk represents a conflict and one or more files contains a line\n            conflict. File mode conflicts in a merge do not set this to true.</p>"
-          }
-        },
         "destination": {
           "target": "com.amazonaws.codecommit#MergeHunkDetail",
           "traits": {
             "smithy.api#documentation": "<p>Information about the merge hunk in the destination of a merge or pull request.</p>"
+          }
+        },
+        "isConflict": {
+          "target": "com.amazonaws.codecommit#IsHunkConflict",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean value indicating whether a combination of hunks contains a conflict.\n            Conflicts occur when the same file or the same lines in a file were modified in both the\n            source and destination of a merge or pull request. Valid values include true, false, and\n            null. True when the hunk represents a conflict and one or more files contains a line\n            conflict. File mode conflicts in a merge do not set this to true.</p>"
           }
         }
       },
@@ -9091,16 +9091,16 @@
     "com.amazonaws.codecommit#MergeHunkDetail": {
       "type": "structure",
       "members": {
-        "endLine": {
-          "target": "com.amazonaws.codecommit#LineNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The end position of the hunk in the merge result.</p>"
-          }
-        },
         "hunkContent": {
           "target": "com.amazonaws.codecommit#HunkContent",
           "traits": {
             "smithy.api#documentation": "<p>The base-64 encoded content of the hunk merged region that might contain a\n            conflict.</p>"
+          }
+        },
+        "endLine": {
+          "target": "com.amazonaws.codecommit#LineNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The end position of the hunk in the merge result.</p>"
           }
         },
         "startLine": {
@@ -9286,17 +9286,17 @@
     "com.amazonaws.codecommit#MergePullRequestByFastForwardInput": {
       "type": "structure",
       "members": {
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "pullRequestId": {
           "target": "com.amazonaws.codecommit#PullRequestId",
           "traits": {
             "smithy.api#documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
             "smithy.api#required": {}
           }
         },
@@ -9450,22 +9450,22 @@
     "com.amazonaws.codecommit#MergePullRequestBySquashInput": {
       "type": "structure",
       "members": {
-        "sourceCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an \n            exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
-          }
-        },
-        "conflictDetailLevel": {
-          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
-          }
-        },
         "email": {
           "target": "com.amazonaws.codecommit#Email",
           "traits": {
             "smithy.api#documentation": "<p>The email address of the person merging the branches. This information is used in the\n            commit information for the merge.</p>"
+          }
+        },
+        "conflictResolution": {
+          "target": "com.amazonaws.codecommit#ConflictResolution",
+          "traits": {
+            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+          }
+        },
+        "sourceCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an \n            exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
           }
         },
         "authorName": {
@@ -9486,17 +9486,16 @@
             "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         },
-        "conflictResolution": {
-          "target": "com.amazonaws.codecommit#ConflictResolution",
+        "keepEmptyFolders": {
+          "target": "com.amazonaws.codecommit#KeepEmptyFolders",
           "traits": {
-            "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
+            "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a .gitkeep file is created for empty folders.\n            The default is false.</p>"
           }
         },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
+        "conflictDetailLevel": {
+          "target": "com.amazonaws.codecommit#ConflictDetailLevelTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
         "pullRequestId": {
@@ -9506,10 +9505,11 @@
             "smithy.api#required": {}
           }
         },
-        "keepEmptyFolders": {
-          "target": "com.amazonaws.codecommit#KeepEmptyFolders",
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
-            "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a .gitkeep file is created for empty folders.\n            The default is false.</p>"
+            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -9653,10 +9653,10 @@
     "com.amazonaws.codecommit#MergePullRequestByThreeWayInput": {
       "type": "structure",
       "members": {
-        "conflictResolutionStrategy": {
-          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
+        "authorName": {
+          "target": "com.amazonaws.codecommit#Name",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
+            "smithy.api#documentation": "<p>The name of the author who created the commit. This information is used as both the\n            author and committer for the commit.</p>"
           }
         },
         "conflictDetailLevel": {
@@ -9665,10 +9665,10 @@
             "smithy.api#documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used,\n            which returns a not-mergeable result if the same file has differences in both branches.\n            If LINE_LEVEL is specified, a conflict is considered not mergeable if the same file in\n            both branches has differences on the same line.</p>"
           }
         },
-        "keepEmptyFolders": {
-          "target": "com.amazonaws.codecommit#KeepEmptyFolders",
+        "sourceCommitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a .gitkeep file is created for empty folders.\n            The default is false.</p>"
+            "smithy.api#documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an \n            exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
           }
         },
         "email": {
@@ -9677,11 +9677,10 @@
             "smithy.api#documentation": "<p>The email address of the person merging the branches. This information is used in the\n            commit information for the merge.</p>"
           }
         },
-        "repositoryName": {
-          "target": "com.amazonaws.codecommit#RepositoryName",
+        "conflictResolutionStrategy": {
+          "target": "com.amazonaws.codecommit#ConflictResolutionStrategyTypeEnum",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt\n            automatically merging two versions of a file. The default is NONE, which requires any\n            conflicts to be resolved manually before the merge operation is successful.</p>"
           }
         },
         "pullRequestId": {
@@ -9691,22 +9690,23 @@
             "smithy.api#required": {}
           }
         },
+        "repositoryName": {
+          "target": "com.amazonaws.codecommit#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "keepEmptyFolders": {
+          "target": "com.amazonaws.codecommit#KeepEmptyFolders",
+          "traits": {
+            "smithy.api#documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the\n            changes leave the folders empty. If true, a .gitkeep file is created for empty folders.\n            The default is false.</p>"
+          }
+        },
         "conflictResolution": {
           "target": "com.amazonaws.codecommit#ConflictResolution",
           "traits": {
             "smithy.api#documentation": "<p>If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when\n            resolving conflicts during a merge.</p>"
-          }
-        },
-        "sourceCommitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an \n            exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
-          }
-        },
-        "authorName": {
-          "target": "com.amazonaws.codecommit#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the author who created the commit. This information is used as both the\n            author and committer for the commit.</p>"
           }
         },
         "commitMessage": {
@@ -9862,16 +9862,16 @@
     "com.amazonaws.codecommit#ObjectTypes": {
       "type": "structure",
       "members": {
-        "destination": {
-          "target": "com.amazonaws.codecommit#ObjectTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the object in the destination branch.</p>"
-          }
-        },
         "source": {
           "target": "com.amazonaws.codecommit#ObjectTypeEnum",
           "traits": {
             "smithy.api#documentation": "<p>The type of the object in the source branch.</p>"
+          }
+        },
+        "destination": {
+          "target": "com.amazonaws.codecommit#ObjectTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the object in the destination branch.</p>"
           }
         },
         "base": {
@@ -10227,18 +10227,24 @@
     "com.amazonaws.codecommit#PostCommentForComparedCommitInput": {
       "type": "structure",
       "members": {
-        "content": {
-          "target": "com.amazonaws.codecommit#Content",
-          "traits": {
-            "smithy.api#documentation": "<p>The content of the comment you want to make.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "clientRequestToken": {
           "target": "com.amazonaws.codecommit#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "location": {
+          "target": "com.amazonaws.codecommit#Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the comparison where you want to comment.</p>"
+          }
+        },
+        "content": {
+          "target": "com.amazonaws.codecommit#Content",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the comment you want to make.</p>",
+            "smithy.api#required": {}
           }
         },
         "repositoryName": {
@@ -10248,23 +10254,17 @@
             "smithy.api#required": {}
           }
         },
-        "beforeCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
-          "traits": {
-            "smithy.api#documentation": "<p>To establish the directionality of the comparison, the full commit ID of the before\n            commit. Required for commenting on any commit unless that commit is the initial\n            commit.</p>"
-          }
-        },
-        "location": {
-          "target": "com.amazonaws.codecommit#Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The location of the comparison where you want to comment.</p>"
-          }
-        },
         "afterCommitId": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
             "smithy.api#documentation": "<p>To establish the directionality of the comparison, the full commit ID of the after\n            commit.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "beforeCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
+          "traits": {
+            "smithy.api#documentation": "<p>To establish the directionality of the comparison, the full commit ID of the before\n            commit. Required for commenting on any commit unless that commit is the initial\n            commit.</p>"
           }
         }
       }
@@ -10272,16 +10272,22 @@
     "com.amazonaws.codecommit#PostCommentForComparedCommitOutput": {
       "type": "structure",
       "members": {
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
+          "traits": {
+            "smithy.api#documentation": "<p>In the directionality you established, the full commit ID of the after commit.</p>"
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.codecommit#Comment",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the comment you posted.</p>"
+          }
+        },
         "location": {
           "target": "com.amazonaws.codecommit#Location",
           "traits": {
             "smithy.api#documentation": "<p>The location of the comment in the comparison between the two commits.</p>"
-          }
-        },
-        "afterBlobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>In the directionality you established, the blob ID of the after blob.</p>"
           }
         },
         "beforeCommitId": {
@@ -10296,22 +10302,16 @@
             "smithy.api#documentation": "<p>The name of the repository where you posted a comment on the comparison between commits.</p>"
           }
         },
-        "comment": {
-          "target": "com.amazonaws.codecommit#Comment",
-          "traits": {
-            "smithy.api#documentation": "<p>The content of the comment you posted.</p>"
-          }
-        },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
-          "traits": {
-            "smithy.api#documentation": "<p>In the directionality you established, the full commit ID of the after commit.</p>"
-          }
-        },
         "beforeBlobId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>In the directionality you established, the blob ID of the before blob.</p>"
+          }
+        },
+        "afterBlobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>In the directionality you established, the blob ID of the after blob.</p>"
           }
         }
       }
@@ -10422,10 +10422,10 @@
             "smithy.api#required": {}
           }
         },
-        "content": {
-          "target": "com.amazonaws.codecommit#Content",
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
           "traits": {
-            "smithy.api#documentation": "<p>The content of your comment on the change.</p>",
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -10436,17 +10436,11 @@
             "smithy.api#required": {}
           }
         },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
+        "content": {
+          "target": "com.amazonaws.codecommit#Content",
           "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>",
+            "smithy.api#documentation": "<p>The content of your comment on the change.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "location": {
-          "target": "com.amazonaws.codecommit#Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The location of the change where you want to post your comment. If no location is\n            provided, the comment is posted as a general comment on the pull request difference\n            between the before commit ID and the after commit ID.</p>"
           }
         },
         "afterCommitId": {
@@ -10462,6 +10456,12 @@
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>",
             "smithy.api#idempotencyToken": {}
           }
+        },
+        "location": {
+          "target": "com.amazonaws.codecommit#Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the change where you want to post your comment. If no location is\n            provided, the comment is posted as a general comment on the pull request difference\n            between the before commit ID and the after commit ID.</p>"
+          }
         }
       }
     },
@@ -10474,28 +10474,16 @@
             "smithy.api#documentation": "<p>The full commit ID of the commit in the source branch used to create the pull request, \n            or in the case of an updated pull request, the full commit ID of the commit used to update the pull request.</p>"
           }
         },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request. </p>"
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository where you posted a comment on a pull request.</p>"
           }
         },
-        "afterCommitId": {
-          "target": "com.amazonaws.codecommit#CommitId",
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
           "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the commit in the destination branch where the pull request is\n            merged.</p>"
-          }
-        },
-        "beforeBlobId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>In the directionality of the pull request, the blob ID of the before blob.</p>"
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request. </p>"
           }
         },
         "afterBlobId": {
@@ -10504,16 +10492,28 @@
             "smithy.api#documentation": "<p>In the directionality of the pull request, the blob ID of the after blob.</p>"
           }
         },
-        "comment": {
-          "target": "com.amazonaws.codecommit#Comment",
+        "beforeBlobId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
-            "smithy.api#documentation": "<p>The content of the comment you posted.</p>"
+            "smithy.api#documentation": "<p>In the directionality of the pull request, the blob ID of the before blob.</p>"
+          }
+        },
+        "afterCommitId": {
+          "target": "com.amazonaws.codecommit#CommitId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full commit ID of the commit in the destination branch where the pull request is\n            merged.</p>"
           }
         },
         "location": {
           "target": "com.amazonaws.codecommit#Location",
           "traits": {
             "smithy.api#documentation": "<p>The location of the change where you posted your comment.</p>"
+          }
+        },
+        "comment": {
+          "target": "com.amazonaws.codecommit#Comment",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the comment you posted.</p>"
           }
         }
       }
@@ -10560,18 +10560,18 @@
     "com.amazonaws.codecommit#PostCommentReplyInput": {
       "type": "structure",
       "members": {
-        "content": {
-          "target": "com.amazonaws.codecommit#Content",
-          "traits": {
-            "smithy.api#documentation": "<p>The contents of your reply to a comment.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "clientRequestToken": {
           "target": "com.amazonaws.codecommit#ClientRequestToken",
           "traits": {
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "content": {
+          "target": "com.amazonaws.codecommit#Content",
+          "traits": {
+            "smithy.api#documentation": "<p>The contents of your reply to a comment.</p>",
+            "smithy.api#required": {}
           }
         },
         "inReplyTo": {
@@ -10597,6 +10597,36 @@
     "com.amazonaws.codecommit#PullRequest": {
       "type": "structure",
       "members": {
+        "approvalRules": {
+          "target": "com.amazonaws.codecommit#ApprovalRulesList",
+          "traits": {
+            "smithy.api#documentation": "<p>The approval rules applied to the pull request.</p>"
+          }
+        },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request. </p>"
+          }
+        },
+        "lastActivityDate": {
+          "target": "com.amazonaws.codecommit#LastModifiedDate",
+          "traits": {
+            "smithy.api#documentation": "<p>The day and time of the last user or system activity on the pull request, in timestamp format.</p>"
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.codecommit#CreationDate",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the pull request was originally created, in timestamp format.</p>"
+          }
+        },
+        "authorArn": {
+          "target": "com.amazonaws.codecommit#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who created the pull request.</p>"
+          }
+        },
         "description": {
           "target": "com.amazonaws.codecommit#Description",
           "traits": {
@@ -10609,40 +10639,10 @@
             "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request is received with\n            the same parameters and a token is included, the request returns information about the\n            initial request that used that token.</p>"
           }
         },
-        "authorArn": {
-          "target": "com.amazonaws.codecommit#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who created the pull request.</p>"
-          }
-        },
         "pullRequestStatus": {
           "target": "com.amazonaws.codecommit#PullRequestStatusEnum",
           "traits": {
             "smithy.api#documentation": "<p>The status of the pull request. Pull request status can only change from <code>OPEN</code> to <code>CLOSED</code>.</p>"
-          }
-        },
-        "lastActivityDate": {
-          "target": "com.amazonaws.codecommit#LastModifiedDate",
-          "traits": {
-            "smithy.api#documentation": "<p>The day and time of the last user or system activity on the pull request, in timestamp format.</p>"
-          }
-        },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
-          "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request. </p>"
-          }
-        },
-        "creationDate": {
-          "target": "com.amazonaws.codecommit#CreationDate",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the pull request was originally created, in timestamp format.</p>"
-          }
-        },
-        "approvalRules": {
-          "target": "com.amazonaws.codecommit#ApprovalRulesList",
-          "traits": {
-            "smithy.api#documentation": "<p>The approval rules applied to the pull request.</p>"
           }
         },
         "title": {
@@ -10651,16 +10651,16 @@
             "smithy.api#documentation": "<p>The user-defined title of the pull request. This title is displayed in the list of\n            pull requests to other repository users.</p>"
           }
         },
-        "pullRequestTargets": {
-          "target": "com.amazonaws.codecommit#PullRequestTargetList",
-          "traits": {
-            "smithy.api#documentation": "<p>The targets of the pull request, including the source branch and destination branch for the pull request.</p>"
-          }
-        },
         "revisionId": {
           "target": "com.amazonaws.codecommit#RevisionId",
           "traits": {
             "smithy.api#documentation": "<p>The system-generated revision ID for the pull request.</p>"
+          }
+        },
+        "pullRequestTargets": {
+          "target": "com.amazonaws.codecommit#PullRequestTargetList",
+          "traits": {
+            "smithy.api#documentation": "<p>The targets of the pull request, including the source branch and destination branch for the pull request.</p>"
           }
         }
       },
@@ -10763,22 +10763,10 @@
     "com.amazonaws.codecommit#PullRequestEvent": {
       "type": "structure",
       "members": {
-        "pullRequestStatusChangedEventMetadata": {
-          "target": "com.amazonaws.codecommit#PullRequestStatusChangedEventMetadata",
+        "actorArn": {
+          "target": "com.amazonaws.codecommit#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the change in status for the pull request event.</p>"
-          }
-        },
-        "approvalRuleOverriddenEventMetadata": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleOverriddenEventMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about an approval rule override event for a pull request.</p>"
-          }
-        },
-        "pullRequestEventType": {
-          "target": "com.amazonaws.codecommit#PullRequestEventType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the pull request event (for example, a status change event\n            (PULL_REQUEST_STATUS_CHANGED) or update event\n            (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user whose actions resulted in the event.\n            Examples include updating the pull request with more commits or changing the status of a\n            pull request.</p>"
           }
         },
         "pullRequestCreatedEventMetadata": {
@@ -10787,16 +10775,34 @@
             "smithy.api#documentation": "<p>Information about the source and destination branches for the pull request.</p>"
           }
         },
+        "pullRequestId": {
+          "target": "com.amazonaws.codecommit#PullRequestId",
+          "traits": {
+            "smithy.api#documentation": "<p>The system-generated ID of the pull request.</p>"
+          }
+        },
+        "pullRequestStatusChangedEventMetadata": {
+          "target": "com.amazonaws.codecommit#PullRequestStatusChangedEventMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the change in status for the pull request event.</p>"
+          }
+        },
+        "pullRequestEventType": {
+          "target": "com.amazonaws.codecommit#PullRequestEventType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the pull request event (for example, a status change event\n            (PULL_REQUEST_STATUS_CHANGED) or update event\n            (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).</p>"
+          }
+        },
+        "approvalRuleOverriddenEventMetadata": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleOverriddenEventMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about an approval rule override event for a pull request.</p>"
+          }
+        },
         "pullRequestSourceReferenceUpdatedEventMetadata": {
           "target": "com.amazonaws.codecommit#PullRequestSourceReferenceUpdatedEventMetadata",
           "traits": {
             "smithy.api#documentation": "<p>Information about the updated source branch for the pull request event. </p>"
-          }
-        },
-        "approvalStateChangedEventMetadata": {
-          "target": "com.amazonaws.codecommit#ApprovalStateChangedEventMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about an approval state change for a pull request.</p>"
           }
         },
         "approvalRuleEventMetadata": {
@@ -10805,22 +10811,16 @@
             "smithy.api#documentation": "<p>Information about a pull request event.</p>"
           }
         },
-        "pullRequestId": {
-          "target": "com.amazonaws.codecommit#PullRequestId",
+        "approvalStateChangedEventMetadata": {
+          "target": "com.amazonaws.codecommit#ApprovalStateChangedEventMetadata",
           "traits": {
-            "smithy.api#documentation": "<p>The system-generated ID of the pull request.</p>"
+            "smithy.api#documentation": "<p>Information about an approval state change for a pull request.</p>"
           }
         },
         "eventDate": {
           "target": "com.amazonaws.codecommit#EventDate",
           "traits": {
             "smithy.api#documentation": "<p>The day and time of the pull request event, in timestamp format.</p>"
-          }
-        },
-        "actorArn": {
-          "target": "com.amazonaws.codecommit#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user whose actions resulted in the event.\n            Examples include updating the pull request with more commits or changing the status of a\n            pull request.</p>"
           }
         },
         "pullRequestMergedStateChangedEventMetadata": {
@@ -10910,16 +10910,16 @@
     "com.amazonaws.codecommit#PullRequestMergedStateChangedEventMetadata": {
       "type": "structure",
       "members": {
-        "destinationReference": {
-          "target": "com.amazonaws.codecommit#ReferenceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the branch that the pull request is merged into.</p>"
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository where the pull request was created.</p>"
+          }
+        },
+        "destinationReference": {
+          "target": "com.amazonaws.codecommit#ReferenceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the branch that the pull request is merged into.</p>"
           }
         },
         "mergeMetadata": {
@@ -10936,10 +10936,10 @@
     "com.amazonaws.codecommit#PullRequestSourceReferenceUpdatedEventMetadata": {
       "type": "structure",
       "members": {
-        "beforeCommitId": {
+        "mergeBase": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
-            "smithy.api#documentation": "<p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was updated.</p>"
+            "smithy.api#documentation": "<p>The commit ID of the most recent commit that the source branch and the destination branch have in common.</p>"
           }
         },
         "afterCommitId": {
@@ -10948,10 +10948,10 @@
             "smithy.api#documentation": "<p>The full commit ID of the commit in the source branch that was the tip of the branch at the time the pull request was updated.</p>"
           }
         },
-        "mergeBase": {
+        "beforeCommitId": {
           "target": "com.amazonaws.codecommit#CommitId",
           "traits": {
-            "smithy.api#documentation": "<p>The commit ID of the most recent commit that the source branch and the destination branch have in common.</p>"
+            "smithy.api#documentation": "<p>The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was updated.</p>"
           }
         },
         "repositoryName": {
@@ -11012,16 +11012,22 @@
     "com.amazonaws.codecommit#PullRequestTarget": {
       "type": "structure",
       "members": {
+        "mergeMetadata": {
+          "target": "com.amazonaws.codecommit#MergeMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns metadata about the state of the merge, including whether the merge has been made.</p>"
+          }
+        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository that contains the pull request source and destination branches.</p>"
           }
         },
-        "destinationReference": {
+        "sourceReference": {
           "target": "com.amazonaws.codecommit#ReferenceName",
           "traits": {
-            "smithy.api#documentation": "<p>The branch of the repository where the pull request changes are merged. Also known as\n            the destination branch. </p>"
+            "smithy.api#documentation": "<p>The branch of the repository that contains the changes for the pull request. Also known as the source branch.</p>"
           }
         },
         "destinationCommit": {
@@ -11036,16 +11042,10 @@
             "smithy.api#documentation": "<p>The full commit ID of the tip of the source branch used to create the pull request. If\n            the pull request branch is updated by a push while the pull request is open, the commit\n            ID changes to reflect the new tip of the branch.</p>"
           }
         },
-        "sourceReference": {
+        "destinationReference": {
           "target": "com.amazonaws.codecommit#ReferenceName",
           "traits": {
-            "smithy.api#documentation": "<p>The branch of the repository that contains the changes for the pull request. Also known as the source branch.</p>"
-          }
-        },
-        "mergeMetadata": {
-          "target": "com.amazonaws.codecommit#MergeMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Returns metadata about the state of the merge, including whether the merge has been made.</p>"
+            "smithy.api#documentation": "<p>The branch of the repository where the pull request changes are merged. Also known as\n            the destination branch. </p>"
           }
         },
         "mergeBase": {
@@ -11235,17 +11235,17 @@
             "smithy.api#documentation": "<p>The name and full path of the file that contains the changes you want to make as part of the commit, \n        if you are not providing the file content directly.</p>"
           }
         },
-        "fileMode": {
-          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
-          "traits": {
-            "smithy.api#documentation": "<p>The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.</p>"
-          }
-        },
         "filePath": {
           "target": "com.amazonaws.codecommit#Path",
           "traits": {
             "smithy.api#documentation": "<p>The full path to the file in the repository, including the name of the file.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "fileMode": {
+          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.</p>"
           }
         },
         "fileContent": {
@@ -11283,11 +11283,10 @@
             "smithy.api#documentation": "<p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, \n            no commit ID is required. If this is not an empty repository, a commit ID is required. </p>\n        <p>The commit ID must match the ID of the head commit at the time of the operation.\n            Otherwise, an error occurs, and the file is not added or updated.</p>"
           }
         },
-        "branchName": {
-          "target": "com.amazonaws.codecommit#BranchName",
+        "name": {
+          "target": "com.amazonaws.codecommit#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the branch where you want to add or update the file. If this is an empty\n            repository, this branch is created.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The name of the person adding or updating the file. Although it is optional, a name\n            makes the commit history for your repository more useful.</p>"
           }
         },
         "fileContent": {
@@ -11297,22 +11296,10 @@
             "smithy.api#required": {}
           }
         },
-        "fileMode": {
-          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
+        "branchName": {
+          "target": "com.amazonaws.codecommit#BranchName",
           "traits": {
-            "smithy.api#documentation": "<p>The file mode permissions of the blob. Valid file mode permissions are listed\n            here.</p>"
-          }
-        },
-        "email": {
-          "target": "com.amazonaws.codecommit#Email",
-          "traits": {
-            "smithy.api#documentation": "<p>An email address for the person adding or updating the file.</p>"
-          }
-        },
-        "filePath": {
-          "target": "com.amazonaws.codecommit#Path",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the file you want to add or update, including the relative path to the file in the repository.</p>\n        <note>\n            <p>If the path does not currently exist in the repository, the path is created as part of adding\n                the file.</p>\n         </note>",
+            "smithy.api#documentation": "<p>The name of the branch where you want to add or update the file. If this is an empty\n            repository, this branch is created.</p>",
             "smithy.api#required": {}
           }
         },
@@ -11323,16 +11310,29 @@
             "smithy.api#required": {}
           }
         },
-        "name": {
-          "target": "com.amazonaws.codecommit#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the person adding or updating the file. Although it is optional, a name\n            makes the commit history for your repository more useful.</p>"
-          }
-        },
         "commitMessage": {
           "target": "com.amazonaws.codecommit#Message",
           "traits": {
             "smithy.api#documentation": "<p>A message about why this file was added or updated. Although it is optional, a message\n            makes the commit history for your repository more useful.</p>"
+          }
+        },
+        "filePath": {
+          "target": "com.amazonaws.codecommit#Path",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the file you want to add or update, including the relative path to the file in the repository.</p>\n        <note>\n            <p>If the path does not currently exist in the repository, the path is created as part of adding\n                the file.</p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "email": {
+          "target": "com.amazonaws.codecommit#Email",
+          "traits": {
+            "smithy.api#documentation": "<p>An email address for the person adding or updating the file.</p>"
+          }
+        },
+        "fileMode": {
+          "target": "com.amazonaws.codecommit#FileModeTypeEnum",
+          "traits": {
+            "smithy.api#documentation": "<p>The file mode permissions of the blob. Valid file mode permissions are listed\n            here.</p>"
           }
         }
       }
@@ -11340,6 +11340,13 @@
     "com.amazonaws.codecommit#PutFileOutput": {
       "type": "structure",
       "members": {
+        "commitId": {
+          "target": "com.amazonaws.codecommit#ObjectId",
+          "traits": {
+            "smithy.api#documentation": "<p>The full SHA ID of the commit that contains this file change.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "blobId": {
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
@@ -11351,13 +11358,6 @@
           "target": "com.amazonaws.codecommit#ObjectId",
           "traits": {
             "smithy.api#documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains this file change.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "commitId": {
-          "target": "com.amazonaws.codecommit#ObjectId",
-          "traits": {
-            "smithy.api#documentation": "<p>The full SHA ID of the commit that contains this file change.</p>",
             "smithy.api#required": {}
           }
         }
@@ -11792,10 +11792,10 @@
     "com.amazonaws.codecommit#RepositoryMetadata": {
       "type": "structure",
       "members": {
-        "cloneUrlHttp": {
-          "target": "com.amazonaws.codecommit#CloneUrlHttp",
+        "repositoryId": {
+          "target": "com.amazonaws.codecommit#RepositoryId",
           "traits": {
-            "smithy.api#documentation": "<p>The URL to use for cloning the repository over HTTPS.</p>"
+            "smithy.api#documentation": "<p>The ID of the repository.</p>"
           }
         },
         "repositoryDescription": {
@@ -11804,10 +11804,10 @@
             "smithy.api#documentation": "<p>A comment or description about the repository.</p>"
           }
         },
-        "repositoryId": {
-          "target": "com.amazonaws.codecommit#RepositoryId",
+        "cloneUrlHttp": {
+          "target": "com.amazonaws.codecommit#CloneUrlHttp",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the repository.</p>"
+            "smithy.api#documentation": "<p>The URL to use for cloning the repository over HTTPS.</p>"
           }
         },
         "lastModifiedDate": {
@@ -11816,22 +11816,22 @@
             "smithy.api#documentation": "<p>The date and time the repository was last modified, in timestamp format.</p>"
           }
         },
+        "defaultBranch": {
+          "target": "com.amazonaws.codecommit#BranchName",
+          "traits": {
+            "smithy.api#documentation": "<p>The repository's default branch name.</p>"
+          }
+        },
         "cloneUrlSsh": {
           "target": "com.amazonaws.codecommit#CloneUrlSsh",
           "traits": {
             "smithy.api#documentation": "<p>The URL to use for cloning the repository over SSH.</p>"
           }
         },
-        "accountId": {
-          "target": "com.amazonaws.codecommit#AccountId",
+        "Arn": {
+          "target": "com.amazonaws.codecommit#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the AWS account associated with the repository.</p>"
-          }
-        },
-        "defaultBranch": {
-          "target": "com.amazonaws.codecommit#BranchName",
-          "traits": {
-            "smithy.api#documentation": "<p>The repository's default branch name.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the repository.</p>"
           }
         },
         "repositoryName": {
@@ -11846,10 +11846,10 @@
             "smithy.api#documentation": "<p>The date and time the repository was created, in timestamp format.</p>"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.codecommit#Arn",
+        "accountId": {
+          "target": "com.amazonaws.codecommit#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the repository.</p>"
+            "smithy.api#documentation": "<p>The ID of the AWS account associated with the repository.</p>"
           }
         }
       },
@@ -11891,16 +11891,16 @@
     "com.amazonaws.codecommit#RepositoryNameIdPair": {
       "type": "structure",
       "members": {
-        "repositoryId": {
-          "target": "com.amazonaws.codecommit#RepositoryId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID associated with the repository.</p>"
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name associated with the repository.</p>"
+          }
+        },
+        "repositoryId": {
+          "target": "com.amazonaws.codecommit#RepositoryId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID associated with the repository.</p>"
           }
         }
       },
@@ -11974,16 +11974,17 @@
     "com.amazonaws.codecommit#RepositoryTrigger": {
       "type": "structure",
       "members": {
-        "customData": {
-          "target": "com.amazonaws.codecommit#RepositoryTriggerCustomData",
-          "traits": {
-            "smithy.api#documentation": "<p>Any custom data associated with the trigger to be included in the information sent to\n            the target of the trigger.</p>"
-          }
-        },
         "destinationArn": {
           "target": "com.amazonaws.codecommit#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource that is the target for a trigger (for example, the ARN of a\n            topic in Amazon SNS).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.codecommit#RepositoryTriggerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the trigger.</p>",
             "smithy.api#required": {}
           }
         },
@@ -11993,11 +11994,10 @@
             "smithy.api#documentation": "<p>The branches to be included in the trigger configuration. If you specify an empty\n            array, the trigger applies to all branches.</p>\n        <note>\n            <p>Although no content is required in the array, you must include the array itself.</p>\n        </note>"
           }
         },
-        "name": {
-          "target": "com.amazonaws.codecommit#RepositoryTriggerName",
+        "customData": {
+          "target": "com.amazonaws.codecommit#RepositoryTriggerCustomData",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the trigger.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Any custom data associated with the trigger to be included in the information sent to\n            the target of the trigger.</p>"
           }
         },
         "events": {
@@ -12567,17 +12567,17 @@
     "com.amazonaws.codecommit#Target": {
       "type": "structure",
       "members": {
-        "sourceReference": {
-          "target": "com.amazonaws.codecommit#ReferenceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The branch of the repository that contains the changes for the pull request. Also known as the source branch.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "repositoryName": {
           "target": "com.amazonaws.codecommit#RepositoryName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the repository that contains the pull request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "sourceReference": {
+          "target": "com.amazonaws.codecommit#ReferenceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The branch of the repository that contains the changes for the pull request. Also known as the source branch.</p>",
             "smithy.api#required": {}
           }
         },
@@ -12908,17 +12908,17 @@
     "com.amazonaws.codecommit#UpdateApprovalRuleTemplateContentInput": {
       "type": "structure",
       "members": {
-        "newRuleContent": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateContent",
-          "traits": {
-            "smithy.api#documentation": "<p>The content that replaces the existing content of the rule. Content statements must be\n            complete. You cannot provide only the changes.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "approvalRuleTemplateName": {
           "target": "com.amazonaws.codecommit#ApprovalRuleTemplateName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the approval rule template where you want to update the content of the rule. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "newRuleContent": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleTemplateContent",
+          "traits": {
+            "smithy.api#documentation": "<p>The content that replaces the existing content of the rule. Content statements must be\n            complete. You cannot provide only the changes.</p>",
             "smithy.api#required": {}
           }
         },
@@ -13093,17 +13093,17 @@
     "com.amazonaws.codecommit#UpdateCommentInput": {
       "type": "structure",
       "members": {
-        "content": {
-          "target": "com.amazonaws.codecommit#Content",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated content to replace the existing content of the comment.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "commentId": {
           "target": "com.amazonaws.codecommit#CommentId",
           "traits": {
             "smithy.api#documentation": "<p>The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a> \n            or <a>GetCommentsForPullRequest</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "content": {
+          "target": "com.amazonaws.codecommit#Content",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated content to replace the existing content of the comment.</p>",
             "smithy.api#required": {}
           }
         }
@@ -13251,17 +13251,17 @@
     "com.amazonaws.codecommit#UpdatePullRequestApprovalRuleContentInput": {
       "type": "structure",
       "members": {
-        "newRuleContent": {
-          "target": "com.amazonaws.codecommit#ApprovalRuleContent",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated content for the approval rule.</p>\n        <note>\n            <p>When you update the content of the approval rule, you can specify approvers in an\n                approval pool in one of two ways:</p>\n            <ul>\n               <li>\n                    <p>\n                     <b>CodeCommitApprovers</b>: This option only\n                        requires an AWS account and a resource. It can be used for both IAM users\n                        and federated access users whose name matches the provided resource name.\n                        This is a very powerful option that offers a great deal of flexibility. For\n                        example, if you specify the AWS account <i>123456789012</i>\n                        and <i>Mary_Major</i>, all of the following are counted as\n                        approvals coming from that user:</p>\n                    <ul>\n                     <li>\n                            <p>An IAM user in the account\n                                (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p>\n                        </li>\n                     <li>\n                            <p>A federated user identified in IAM as Mary_Major\n                                (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p>\n                        </li>\n                  </ul>\n                    <p>This option does not recognize an active session of someone assuming the\n                        role of CodeCommitReview with a role session name of\n                            <i>Mary_Major</i>\n                            (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>)\n                        unless you include a wildcard (*Mary_Major).</p>\n                </li>\n               <li>\n                    <p>\n                     <b>Fully qualified ARN</b>: This option allows\n                        you to specify the fully qualified Amazon Resource Name (ARN) of the IAM\n                        user or role. </p>\n                </li>\n            </ul>\n            <p>For more information about IAM ARNs, wildcards, and formats, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM\n                    Identifiers</a> in the <i>IAM User Guide</i>.</p>\n            \n        </note>",
-            "smithy.api#required": {}
-          }
-        },
         "approvalRuleName": {
           "target": "com.amazonaws.codecommit#ApprovalRuleName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the approval rule you want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "newRuleContent": {
+          "target": "com.amazonaws.codecommit#ApprovalRuleContent",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated content for the approval rule.</p>\n        <note>\n            <p>When you update the content of the approval rule, you can specify approvers in an\n                approval pool in one of two ways:</p>\n            <ul>\n               <li>\n                    <p>\n                     <b>CodeCommitApprovers</b>: This option only\n                        requires an AWS account and a resource. It can be used for both IAM users\n                        and federated access users whose name matches the provided resource name.\n                        This is a very powerful option that offers a great deal of flexibility. For\n                        example, if you specify the AWS account <i>123456789012</i>\n                        and <i>Mary_Major</i>, all of the following are counted as\n                        approvals coming from that user:</p>\n                    <ul>\n                     <li>\n                            <p>An IAM user in the account\n                                (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p>\n                        </li>\n                     <li>\n                            <p>A federated user identified in IAM as Mary_Major\n                                (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p>\n                        </li>\n                  </ul>\n                    <p>This option does not recognize an active session of someone assuming the\n                        role of CodeCommitReview with a role session name of\n                            <i>Mary_Major</i>\n                            (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>)\n                        unless you include a wildcard (*Mary_Major).</p>\n                </li>\n               <li>\n                    <p>\n                     <b>Fully qualified ARN</b>: This option allows\n                        you to specify the fully qualified Amazon Resource Name (ARN) of the IAM\n                        user or role. </p>\n                </li>\n            </ul>\n            <p>For more information about IAM ARNs, wildcards, and formats, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM\n                    Identifiers</a> in the <i>IAM User Guide</i>.</p>\n            \n        </note>",
             "smithy.api#required": {}
           }
         },
@@ -13691,16 +13691,16 @@
             "smithy.api#documentation": "<p>The name of the user who made the specified commit.</p>"
           }
         },
-        "date": {
-          "target": "com.amazonaws.codecommit#Date",
-          "traits": {
-            "smithy.api#documentation": "<p>The date when the specified commit was commited, in timestamp format with GMT offset.</p>"
-          }
-        },
         "email": {
           "target": "com.amazonaws.codecommit#Email",
           "traits": {
             "smithy.api#documentation": "<p>The email address associated with the user who made the commit, if any.</p>"
+          }
+        },
+        "date": {
+          "target": "com.amazonaws.codecommit#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the specified commit was commited, in timestamp format with GMT offset.</p>"
           }
         }
       },

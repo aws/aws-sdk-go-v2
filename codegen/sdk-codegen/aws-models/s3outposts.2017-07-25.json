@@ -1,0 +1,498 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.s3outposts#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.s3outposts#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Access was denied for this action.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.s3outposts#CidrBlock": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#ConflictException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.s3outposts#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a conflict with this action, and it could not be completed.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.s3outposts#CreateEndpoint": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.s3outposts#CreateEndpointRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.s3outposts#CreateEndpointResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.s3outposts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>S3 on Outposts access points simplify managing data access at scale for shared datasets \n            in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform \n            actions within your virtual private cloud (VPC). </p>\n        <p>This action creates an endpoint and associates it with the specified Outpost. </p>\n        <p></p>\n        <p>Related actions include:</p>\n        <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/S3Outposts/CreateEndpoint",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#CreateEndpointRequest": {
+      "type": "structure",
+      "members": {
+        "OutpostId": {
+          "target": "com.amazonaws.s3outposts#OutpostId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS Outpost. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SecurityGroupId": {
+          "target": "com.amazonaws.s3outposts#SecurityGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the security group to use with the endpoint.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SubnetId": {
+          "target": "com.amazonaws.s3outposts#SubnetId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the subnet in the selected VPC.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#CreateEndpointResult": {
+      "type": "structure",
+      "members": {
+        "EndpointArn": {
+          "target": "com.amazonaws.s3outposts#EndpointArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#CreationTime": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.s3outposts#DeleteEndpoint": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.s3outposts#DeleteEndpointRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.s3outposts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>S3 on Outposts access points simplify managing data access at scale for shared datasets \n            in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform \n            actions within your virtual private cloud (VPC). </p>\n        <p>This action deletes an endpoint.\n            </p>\n        <p></p>\n        <p>Related actions include:</p>\n        <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/S3Outposts/DeleteEndpoint",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#DeleteEndpointRequest": {
+      "type": "structure",
+      "members": {
+        "EndpointId": {
+          "target": "com.amazonaws.s3outposts#EndpointId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the end point.</p>",
+            "smithy.api#httpQuery": "endpointId",
+            "smithy.api#required": {}
+          }
+        },
+        "OutpostId": {
+          "target": "com.amazonaws.s3outposts#OutpostId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS Outpost. </p>",
+            "smithy.api#httpQuery": "outpostId",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#Endpoint": {
+      "type": "structure",
+      "members": {
+        "OutpostsId": {
+          "target": "com.amazonaws.s3outposts#OutpostId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS Outpost.</p>"
+          }
+        },
+        "NetworkInterfaces": {
+          "target": "com.amazonaws.s3outposts#NetworkInterfaces",
+          "traits": {
+            "smithy.api#documentation": "<p>The network interface of the endpoint.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.s3outposts#EndpointStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the endpoint.</p>"
+          }
+        },
+        "CidrBlock": {
+          "target": "com.amazonaws.s3outposts#CidrBlock",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC CIDR committed by this endpoint.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.s3outposts#CreationTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the endpoint was created.</p>"
+          }
+        },
+        "EndpointArn": {
+          "target": "com.amazonaws.s3outposts#EndpointArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>S3 on Outposts access points simplify managing data access at scale for shared datasets \n            in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform \n            actions within your virtual private cloud (VPC). </p>"
+      }
+    },
+    "com.amazonaws.s3outposts#EndpointArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 5,
+          "max": 500
+        },
+        "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3-outposts:[a-z\\-0-9]*:[0-9]{12}:outpost/(op-[a-f0-9]{17}|ec2)/endpoint/[a-zA-Z0-9]{19}$"
+      }
+    },
+    "com.amazonaws.s3outposts#EndpointId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 5,
+          "max": 500
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9]{19}$"
+      }
+    },
+    "com.amazonaws.s3outposts#EndpointStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PENDING",
+            "name": "PENDING"
+          },
+          {
+            "value": "AVAILABLE",
+            "name": "AVAILABLE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.s3outposts#Endpoints": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.s3outposts#Endpoint"
+      }
+    },
+    "com.amazonaws.s3outposts#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.s3outposts#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.s3outposts#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was an exception with the internal server.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.s3outposts#ListEndpoints": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.s3outposts#ListEndpointsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.s3outposts#ListEndpointsResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.s3outposts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>S3 on Outposts access points simplify managing data access at scale for shared datasets \n            in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform \n            actions within your virtual private cloud (VPC). </p>\n        <p>This action lists endpoints associated with the Outpost.\n            </p>\n        <p></p>\n        <p>Related actions include:</p>\n        <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/S3Outposts/ListEndpoints",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Endpoints",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#ListEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.s3outposts#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The max number of endpoints that can be returned on the request.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.s3outposts#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The next endpoint requested in the list.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#ListEndpointsResult": {
+      "type": "structure",
+      "members": {
+        "Endpoints": {
+          "target": "com.amazonaws.s3outposts#Endpoints",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns an array of endpoints associated with AWS Outpost.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.s3outposts#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The next endpoint returned in the list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#NetworkInterface": {
+      "type": "structure",
+      "members": {
+        "NetworkInterfaceId": {
+          "target": "com.amazonaws.s3outposts#NetworkInterfaceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the network interface.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container for the network interface.</p>"
+      }
+    },
+    "com.amazonaws.s3outposts#NetworkInterfaceId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.s3outposts#NetworkInterfaces": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.s3outposts#NetworkInterface"
+      }
+    },
+    "com.amazonaws.s3outposts#NextToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$"
+      }
+    },
+    "com.amazonaws.s3outposts#OutpostId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$"
+      }
+    },
+    "com.amazonaws.s3outposts#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.s3outposts#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The requested resource was not found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.s3outposts#S3Outposts": {
+      "type": "service",
+      "version": "2017-07-25",
+      "operations": [
+        {
+          "target": "com.amazonaws.s3outposts#CreateEndpoint"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#DeleteEndpoint"
+        },
+        {
+          "target": "com.amazonaws.s3outposts#ListEndpoints"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "S3Outposts",
+          "arnNamespace": "s3-outposts",
+          "cloudFormationName": "S3Outposts",
+          "cloudTrailEventSource": "model.s3outposts.northstar.seaport.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "s3-outposts"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>Amazon S3 on Outposts provides access to S3 on Outposts operations.</p>",
+        "smithy.api#title": "Amazon S3 on Outposts"
+      }
+    },
+    "com.amazonaws.s3outposts#SecurityGroupId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^sg-([0-9a-f]{8}|[0-9a-f]{17})$"
+      }
+    },
+    "com.amazonaws.s3outposts#SubnetId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"
+      }
+    },
+    "com.amazonaws.s3outposts#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.s3outposts#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was an exception validating this data.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    }
+  }
+}

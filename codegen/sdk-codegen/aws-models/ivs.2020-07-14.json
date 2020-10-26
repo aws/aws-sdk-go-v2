@@ -64,10 +64,16 @@
           "target": "com.amazonaws.ivs#DeleteChannel"
         },
         {
+          "target": "com.amazonaws.ivs#DeletePlaybackKeyPair"
+        },
+        {
           "target": "com.amazonaws.ivs#DeleteStreamKey"
         },
         {
           "target": "com.amazonaws.ivs#GetChannel"
+        },
+        {
+          "target": "com.amazonaws.ivs#GetPlaybackKeyPair"
         },
         {
           "target": "com.amazonaws.ivs#GetStream"
@@ -76,7 +82,13 @@
           "target": "com.amazonaws.ivs#GetStreamKey"
         },
         {
+          "target": "com.amazonaws.ivs#ImportPlaybackKeyPair"
+        },
+        {
           "target": "com.amazonaws.ivs#ListChannels"
+        },
+        {
+          "target": "com.amazonaws.ivs#ListPlaybackKeyPairs"
         },
         {
           "target": "com.amazonaws.ivs#ListStreamKeys"
@@ -114,17 +126,17 @@
           "name": "ivs"
         },
         "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n\n         <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP\n      API and an <a href=\"http://aws.amazon.com/sns\">AWS SNS</a> event stream for responses. JSON\n      is used for both requests and responses, including errors.</p>\n\n         <p>The API is an AWS regional service, currently in these regions: us-west-2, us-east-1, and\n      eu-west-1.</p>\n         <p>\n            <i>\n               <b>All API request parameters and URLs are case sensitive.\n        </b>\n            </i>\n         </p>\n\n         <p>For a summary of notable documentation changes in each release, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html\"> Document\n      History</a>.</p>\n    \n         <p>\n            <b>Service Endpoints</b>\n         </p>\n         <p>The following are the Amazon IVS service endpoints (all HTTPS): </p>\n         <p>Region name: US West (Oregon)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-west-2.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: US East (Virginia)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-east-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: EU West (Dublin)</p>\n         <ul>\n            <li>\n               <p>Region: <code>eu-west-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.eu-west-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Allowed Header Values</b>\n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept:</b>\n                  </code> application/json</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept-Encoding:</b>\n                  </code> gzip, deflate</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Content-Type:</b>\n                  </code>application/json</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/GSIVS.html\"> Getting Started with Amazon\n        IVS</a>):</p>\n\n         <ul>\n            <li>\n               <p>Channel — Stores configuration data related to your live stream. You first create a\n          channel and then use the channel’s stream key to start your live stream. See the <a>Channel</a> endpoints for more information. </p>\n            </li>\n            <li>\n               <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is\n          then used to authorize streaming. See the <a>StreamKey</a> endpoints for more\n          information. <i>\n                     <b>Treat the stream key like a secret, since it\n              allows anyone to stream to the channel.</b>\n                  </i>\n               </p>\n            </li>\n         </ul>\n\n\n\n         <p>\n            <b>Tagging</b>\n         </p>\n\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n        Resources</a> for more information, including restrictions that apply to tags.</p>\n\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">\n        Access Tags</a>). </p>\n\n         <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following\n      resources support tagging: Channels and Stream Keys.</p>\n\n         <p>\n            <b>API Endpoints</b>\n         </p>\n\n         <p>\n            <a>Channel</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChannel</a> — Creates a new channel and an associated stream\n          key to start streaming.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetChannel</a> — Gets the channel configuration for the specified\n          channel ARN (Amazon Resource Name).</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListChannels</a> — Gets summary information about all channels in\n          your account, in the AWS region where the API request is processed. This list can be\n          filtered to match a specified string.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateChannel</a> — Updates a channel's configuration. This does\n          not affect an ongoing stream of this channel. You must stop and restart the stream for the\n          changes to take effect.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteChannel</a> — Deletes the specified channel.</p>\n            </li>\n         </ul>\n\n         <p>\n            <a>StreamKey</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStreamKey</a> — Creates a stream key, used to initiate a\n          stream, for the specified channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamKey</a> — Gets stream key information for the specified\n          ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamKeys</a> — Gets summary information about stream keys\n          for the specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStreamKey</a> — Deletes the stream key for the specified\n          ARN, so it can no longer be used to stream.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <a>Stream</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetStream</a> — Gets information about the active (live) stream on\n          a specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreams</a> — Gets summary information about live streams in\n          your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopStream</a> — Disconnects the incoming RTMPS stream for the specified channel.  Can be used in conjunction\n          with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutMetadata</a> — Inserts metadata into an RTMPS stream for the specified\n          channel. A maximum of 5 requests per second per channel is allowed, each with a maximum\n          1KB payload.</p>\n            </li>\n         </ul>\n\n    \n\n         <p>\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> AWS\n      Tags</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n\n         <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP\n      API and an <a href=\"http://aws.amazon.com/sns\">AWS SNS</a> event stream for responses. JSON\n      is used for both requests and responses, including errors.</p>\n\n         <p>The API is an AWS regional service, currently in these regions: us-west-2, us-east-1, and\n      eu-west-1.</p>\n         <p>\n            <i>\n               <b>All API request parameters and URLs are case sensitive.\n        </b>\n            </i>\n         </p>\n\n         <p>For a summary of notable documentation changes in each release, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html\"> Document\n      History</a>.</p>\n    \n         <p>\n            <b>Service Endpoints</b>\n         </p>\n         <p>The following are the Amazon IVS service endpoints (all HTTPS): </p>\n         <p>Region name: US West (Oregon)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-west-2.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: US East (Virginia)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-east-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: EU West (Dublin)</p>\n         <ul>\n            <li>\n               <p>Region: <code>eu-west-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.eu-west-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Allowed Header Values</b>\n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept:</b>\n                  </code> application/json</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept-Encoding:</b>\n                  </code> gzip, deflate</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Content-Type:</b>\n                  </code>application/json</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/GSIVS.html\"> Getting Started with Amazon\n        IVS</a>):</p>\n\n         <ul>\n            <li>\n               <p>Channel — Stores configuration data related to your live stream. You first create a\n          channel and then use the channel’s stream key to start your live stream. See the Channel endpoints for more information. </p>\n            </li>\n            <li>\n               <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is\n          then used to authorize streaming. See the StreamKey endpoints for more\n          information. <i>\n                     <b>Treat the stream key like a secret, since it\n              allows anyone to stream to the channel.</b>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>Playback key pair — Video playback may be restricted using playback-authorization tokens, \n          which use public-key encryption. \n          A playback key pair is the public-private pair of keys used to sign and validate the playback-authorization token. \n          See the PlaybackKeyPair endpoints for more information.</p>\n            </li>\n         </ul>\n\n\n\n         <p>\n            <b>Tagging</b>\n         </p>\n\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n        Resources</a> for more information, including restrictions that apply to tags.</p>\n\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">\n        Access Tags</a>). </p>\n\n         <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following\n      resources support tagging: Channels, Stream Keys, and Playback Key Pairs.</p>\n\n         <p>\n            <b>Channel Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChannel</a> — Creates a new channel and an associated stream\n          key to start streaming.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetChannel</a> — Gets the channel configuration for the specified\n          channel ARN (Amazon Resource Name).</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListChannels</a> — Gets summary information about all channels in\n          your account, in the AWS region where the API request is processed. This list can be\n          filtered to match a specified string.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateChannel</a> — Updates a channel's configuration. This does\n          not affect an ongoing stream of this channel. You must stop and restart the stream for the\n          changes to take effect.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteChannel</a> — Deletes the specified channel.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>StreamKey Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStreamKey</a> — Creates a stream key, used to initiate a\n          stream, for the specified channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamKey</a> — Gets stream key information for the specified\n          ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamKeys</a> — Gets summary information about stream keys\n          for the specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStreamKey</a> — Deletes the stream key for the specified\n          ARN, so it can no longer be used to stream.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Stream Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetStream</a> — Gets information about the active (live) stream on\n          a specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreams</a> — Gets summary information about live streams in\n          your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopStream</a> — Disconnects the incoming RTMPS stream for the specified channel.  Can be used in conjunction\n          with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutMetadata</a> — Inserts metadata into an RTMPS stream for the specified\n          channel. A maximum of 5 requests per second per channel is allowed, each with a maximum\n          1KB payload.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>PlaybackKeyPair Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new\n          key pair and returns its <code>arn</code> and <code>fingerprint</code>. The\n          <code>privateKey</code> can then be used to generate viewer authorization\n          tokens, to grant viewers access to authorized channels.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPlaybackKeyPair</a> — Gets a specified playback\n          authorization key pair and returns the <code>arn</code> and\n          <code>fingerprint</code>. The <code>privateKey</code> held by the caller can\n          be used to generate viewer authorization tokens, to grant viewers access to\n          authorized channels.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPlaybackKeyPairs</a> — Gets summary information about\n          playback key pairs.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization\n          key pair. This invalidates future viewer tokens generated using the key pair’s\n          <code>privateKey</code>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>AWS Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p>\n            </li>\n         </ul>",
         "smithy.api#title": "Amazon Interactive Video Service"
       }
     },
     "com.amazonaws.ivs#BatchError": {
       "type": "structure",
       "members": {
-        "code": {
-          "target": "com.amazonaws.ivs#errorCode",
+        "message": {
+          "target": "com.amazonaws.ivs#errorMessage",
           "traits": {
-            "smithy.api#documentation": "<p>Error code.</p>"
+            "smithy.api#documentation": "<p>Error message, determined by the application.</p>"
           }
         },
         "arn": {
@@ -133,10 +145,10 @@
             "smithy.api#documentation": "<p>Channel ARN.</p>"
           }
         },
-        "message": {
-          "target": "com.amazonaws.ivs#errorMessage",
+        "code": {
+          "target": "com.amazonaws.ivs#errorCode",
           "traits": {
-            "smithy.api#documentation": "<p>Error message, determined by the application.</p>"
+            "smithy.api#documentation": "<p>Error code.</p>"
           }
         }
       },
@@ -182,14 +194,14 @@
     "com.amazonaws.ivs#BatchGetChannelResponse": {
       "type": "structure",
       "members": {
+        "channels": {
+          "target": "com.amazonaws.ivs#Channels"
+        },
         "errors": {
           "target": "com.amazonaws.ivs#BatchErrors",
           "traits": {
             "smithy.api#documentation": "<p>Each error object is related to a specific ARN in the request.</p>"
           }
-        },
-        "channels": {
-          "target": "com.amazonaws.ivs#Channels"
         }
       }
     },
@@ -233,25 +245,28 @@
         }
       }
     },
+    "com.amazonaws.ivs#Boolean": {
+      "type": "boolean"
+    },
     "com.amazonaws.ivs#Channel": {
       "type": "structure",
       "members": {
-        "playbackUrl": {
-          "target": "com.amazonaws.ivs#PlaybackURL",
-          "traits": {
-            "smithy.api#documentation": "<p>Channel playback URL.</p>"
-          }
-        },
         "type": {
           "target": "com.amazonaws.ivs#ChannelType",
           "traits": {
             "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
           }
         },
-        "ingestEndpoint": {
-          "target": "com.amazonaws.ivs#IngestEndpoint",
+        "playbackUrl": {
+          "target": "com.amazonaws.ivs#PlaybackURL",
           "traits": {
-            "smithy.api#documentation": "<p>Channel ingest endpoint, part of the definition of an ingest server, used when you set up\n      streaming software.</p>"
+            "smithy.api#documentation": "<p>Channel playback URL.</p>"
+          }
+        },
+        "authorized": {
+          "target": "com.amazonaws.ivs#IsAuthorized",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the channel is authorized.</p>"
           }
         },
         "arn": {
@@ -260,10 +275,16 @@
             "smithy.api#documentation": "<p>Channel ARN.</p>"
           }
         },
-        "tags": {
-          "target": "com.amazonaws.ivs#Tags",
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
           "traits": {
-            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        },
+        "ingestEndpoint": {
+          "target": "com.amazonaws.ivs#IngestEndpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ingest endpoint, part of the definition of an ingest server, used when you set up\n      streaming software.</p>"
           }
         },
         "name": {
@@ -272,10 +293,10 @@
             "smithy.api#documentation": "<p>Channel name.</p>"
           }
         },
-        "latencyMode": {
-          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
           }
         }
       },
@@ -354,16 +375,16 @@
     "com.amazonaws.ivs#ChannelSummary": {
       "type": "structure",
       "members": {
-        "arn": {
-          "target": "com.amazonaws.ivs#ChannelArn",
-          "traits": {
-            "smithy.api#documentation": "<p>Channel ARN.</p>"
-          }
-        },
         "latencyMode": {
           "target": "com.amazonaws.ivs#ChannelLatencyMode",
           "traits": {
             "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        },
+        "authorized": {
+          "target": "com.amazonaws.ivs#IsAuthorized",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the channel is authorized.</p>"
           }
         },
         "tags": {
@@ -376,6 +397,12 @@
           "target": "com.amazonaws.ivs#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>Channel name.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN.</p>"
           }
         }
       },
@@ -453,16 +480,16 @@
     "com.amazonaws.ivs#CreateChannelRequest": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.ivs#ChannelName",
+        "authorized": {
+          "target": "com.amazonaws.ivs#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Channel name.</p>"
+            "smithy.api#documentation": "<p>Whether the channel is authorized. Default: <code>false</code>.</p>"
           }
         },
-        "tags": {
-          "target": "com.amazonaws.ivs#Tags",
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
           "traits": {
-            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
           }
         },
         "type": {
@@ -471,10 +498,16 @@
             "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
           }
         },
-        "latencyMode": {
-          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel name.</p>"
           }
         }
       }
@@ -527,17 +560,17 @@
     "com.amazonaws.ivs#CreateStreamKeyRequest": {
       "type": "structure",
       "members": {
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
+          }
+        },
         "channelArn": {
           "target": "com.amazonaws.ivs#ChannelArn",
           "traits": {
             "smithy.api#documentation": "<p>ARN of the channel for which to create the stream key.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.ivs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
           }
         }
       }
@@ -595,6 +628,53 @@
           }
         }
       }
+    },
+    "com.amazonaws.ivs#DeletePlaybackKeyPair": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#DeletePlaybackKeyPairRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#DeletePlaybackKeyPairResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a specified authorization key pair. This invalidates future viewer tokens\n      generated using the key pair’s <code>privateKey</code>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/DeletePlaybackKeyPair",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeletePlaybackKeyPairRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the key pair to be deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeletePlaybackKeyPairResponse": {
+      "type": "structure",
+      "members": {}
     },
     "com.amazonaws.ivs#DeleteStreamKey": {
       "type": "operation",
@@ -681,6 +761,54 @@
       "members": {
         "channel": {
           "target": "com.amazonaws.ivs#Channel"
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetPlaybackKeyPair": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#GetPlaybackKeyPairRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#GetPlaybackKeyPairResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets a specified playback authorization key pair and returns the <code>arn</code> and\n        <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to\n      generate viewer authorization tokens, to grant viewers access to authorized channels.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/GetPlaybackKeyPair",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetPlaybackKeyPairRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the key pair to be returned.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetPlaybackKeyPairResponse": {
+      "type": "structure",
+      "members": {
+        "keyPair": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPair"
         }
       }
     },
@@ -783,6 +911,72 @@
         }
       }
     },
+    "com.amazonaws.ivs#ImportPlaybackKeyPair": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ImportPlaybackKeyPairRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ImportPlaybackKeyPairResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Imports the public portion of a new key pair and returns its <code>arn</code> and\n        <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer\n      authorization tokens, to grant viewers access to authorized channels.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/ImportPlaybackKeyPair",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#ImportPlaybackKeyPairRequest": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Any tags provided with the request are added to the playback key pair tags.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairName",
+          "traits": {
+            "smithy.api#documentation": "<p>An arbitrary string (a nickname) assigned to a playback key pair that helps the customer\n      identify that resource. The value does not need to be unique.</p>"
+          }
+        },
+        "publicKeyMaterial": {
+          "target": "com.amazonaws.ivs#PlaybackPublicKeyMaterial",
+          "traits": {
+            "smithy.api#documentation": "<p>The public portion of a customer-generated key pair.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ImportPlaybackKeyPairResponse": {
+      "type": "structure",
+      "members": {
+        "keyPair": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPair"
+        }
+      }
+    },
     "com.amazonaws.ivs#IngestEndpoint": {
       "type": "string"
     },
@@ -800,6 +994,9 @@
         "smithy.api#error": "server",
         "smithy.api#httpError": 500
       }
+    },
+    "com.amazonaws.ivs#IsAuthorized": {
+      "type": "boolean"
     },
     "com.amazonaws.ivs#ListChannels": {
       "type": "operation",
@@ -834,6 +1031,12 @@
     "com.amazonaws.ivs#ListChannelsRequest": {
       "type": "structure",
       "members": {
+        "filterByName": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Filters the channel list to match the specified name.</p>"
+          }
+        },
         "maxResults": {
           "target": "com.amazonaws.ivs#MaxChannelResults",
           "traits": {
@@ -844,12 +1047,6 @@
           "target": "com.amazonaws.ivs#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
-          }
-        },
-        "filterByName": {
-          "target": "com.amazonaws.ivs#ChannelName",
-          "traits": {
-            "smithy.api#documentation": "<p>Filters the channel list to match the specified name.</p>"
           }
         }
       }
@@ -868,6 +1065,71 @@
           "target": "com.amazonaws.ivs#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListPlaybackKeyPairs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ListPlaybackKeyPairsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ListPlaybackKeyPairsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets summary information about playback key pairs.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/ListPlaybackKeyPairs",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListPlaybackKeyPairsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxPlaybackKeyPairResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The first key pair to retrieve. This is used for pagination; see the\n        <code>nextToken</code> response field.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of key pairs to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListPlaybackKeyPairsResponse": {
+      "type": "structure",
+      "members": {
+        "keyPairs": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of key pairs.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more key pairs than <code>maxResults</code>, use <code>nextToken</code> in\n      the request to get the next set.</p>"
           }
         }
       }
@@ -915,16 +1177,16 @@
             "smithy.api#required": {}
           }
         },
-        "maxResults": {
-          "target": "com.amazonaws.ivs#MaxStreamKeyResults",
-          "traits": {
-            "smithy.api#documentation": "<p>Maximum number of streamKeys to return.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.ivs#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>The first stream key to retrieve. This is used for pagination; see the\n        <code>nextToken</code> response field.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxStreamKeyResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of streamKeys to return.</p>"
           }
         }
       }
@@ -1045,10 +1307,12 @@
     "com.amazonaws.ivs#ListTagsForResourceRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.ivs#String",
+        "resourceArn": {
+          "target": "com.amazonaws.ivs#ResourceArn",
           "traits": {
-            "smithy.api#documentation": "<p>The first tag to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
+            "smithy.api#documentation": "<p>The ARN of the resource to be retrieved.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "maxResults": {
@@ -1057,12 +1321,10 @@
             "smithy.api#documentation": "<p>Maximum number of tags to return.</p>"
           }
         },
-        "resourceArn": {
-          "target": "com.amazonaws.ivs#ResourceArn",
+        "nextToken": {
+          "target": "com.amazonaws.ivs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource to be retrieved.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The first tag to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
           }
         }
       }
@@ -1070,21 +1332,30 @@
     "com.amazonaws.ivs#ListTagsForResourceResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.ivs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
-          }
-        },
         "tags": {
           "target": "com.amazonaws.ivs#Tags",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
+          }
         }
       }
     },
     "com.amazonaws.ivs#MaxChannelResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#MaxPlaybackKeyPairResults": {
       "type": "integer",
       "traits": {
         "smithy.api#range": {
@@ -1144,6 +1415,96 @@
         "smithy.api#httpError": 403
       }
     },
+    "com.amazonaws.ivs#PlaybackKeyPair": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-pair ARN.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairName",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-pair name.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
+          }
+        },
+        "fingerprint": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairFingerprint",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-pair identifier.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A key pair used to sign and validate a playback authorization token.</p>"
+      }
+    },
+    "com.amazonaws.ivs#PlaybackKeyPairArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:playback-key/[a-zA-Z0-9-]+$"
+      }
+    },
+    "com.amazonaws.ivs#PlaybackKeyPairFingerprint": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#PlaybackKeyPairList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#PlaybackKeyPairSummary"
+      }
+    },
+    "com.amazonaws.ivs#PlaybackKeyPairName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+      }
+    },
+    "com.amazonaws.ivs#PlaybackKeyPairSummary": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairName",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-pair name.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#PlaybackKeyPairArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-pair ARN.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>\n         </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary information about a playback key pair.</p>"
+      }
+    },
+    "com.amazonaws.ivs#PlaybackPublicKeyMaterial": {
+      "type": "string"
+    },
     "com.amazonaws.ivs#PlaybackURL": {
       "type": "string"
     },
@@ -1181,17 +1542,17 @@
     "com.amazonaws.ivs#PutMetadataRequest": {
       "type": "structure",
       "members": {
-        "metadata": {
-          "target": "com.amazonaws.ivs#StreamMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "channelArn": {
           "target": "com.amazonaws.ivs#ChannelArn",
           "traits": {
             "smithy.api#documentation": "<p>ARN of the channel into which metadata is inserted. This channel must have an active\n      stream.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metadata": {
+          "target": "com.amazonaws.ivs#StreamMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1290,16 +1651,22 @@
     "com.amazonaws.ivs#Stream": {
       "type": "structure",
       "members": {
-        "startTime": {
-          "target": "com.amazonaws.ivs#StreamStartTime",
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
           "traits": {
-            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
+            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
           }
         },
         "playbackUrl": {
           "target": "com.amazonaws.ivs#PlaybackURL",
           "traits": {
             "smithy.api#documentation": "<p>URL of the video master manifest, required by the video player to play the HLS\n      stream.</p>"
+          }
+        },
+        "health": {
+          "target": "com.amazonaws.ivs#StreamHealth",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s health.</p>"
           }
         },
         "state": {
@@ -1314,16 +1681,10 @@
             "smithy.api#documentation": "<p>Number of current viewers of the stream.</p>"
           }
         },
-        "channelArn": {
-          "target": "com.amazonaws.ivs#ChannelArn",
+        "startTime": {
+          "target": "com.amazonaws.ivs#StreamStartTime",
           "traits": {
-            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
-          }
-        },
-        "health": {
-          "target": "com.amazonaws.ivs#StreamHealth",
-          "traits": {
-            "smithy.api#documentation": "<p>The stream’s health.</p>"
+            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
           }
         }
       },
@@ -1359,6 +1720,12 @@
             "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
           }
         },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
+          }
+        },
         "arn": {
           "target": "com.amazonaws.ivs#StreamKeyArn",
           "traits": {
@@ -1369,12 +1736,6 @@
           "target": "com.amazonaws.ivs#StreamKeyValue",
           "traits": {
             "smithy.api#documentation": "<p>Stream-key value.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.ivs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>\n         </p>"
           }
         }
       },
@@ -1422,7 +1783,7 @@
         "tags": {
           "target": "com.amazonaws.ivs#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>\n         </p>"
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
           }
         },
         "arn": {
@@ -1475,22 +1836,16 @@
     "com.amazonaws.ivs#StreamSummary": {
       "type": "structure",
       "members": {
-        "state": {
-          "target": "com.amazonaws.ivs#StreamState",
-          "traits": {
-            "smithy.api#documentation": "<p>The stream’s state.</p>"
-          }
-        },
-        "health": {
-          "target": "com.amazonaws.ivs#StreamHealth",
-          "traits": {
-            "smithy.api#documentation": "<p>The stream’s health.</p>"
-          }
-        },
         "channelArn": {
           "target": "com.amazonaws.ivs#ChannelArn",
           "traits": {
             "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.ivs#StreamStartTime",
+          "traits": {
+            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
           }
         },
         "viewerCount": {
@@ -1499,10 +1854,16 @@
             "smithy.api#documentation": "<p>Number of current viewers of the stream.</p>"
           }
         },
-        "startTime": {
-          "target": "com.amazonaws.ivs#StreamStartTime",
+        "health": {
+          "target": "com.amazonaws.ivs#StreamHealth",
           "traits": {
-            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
+            "smithy.api#documentation": "<p>The stream’s health.</p>"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.ivs#StreamState",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s state.</p>"
           }
         }
       },
@@ -1583,18 +1944,18 @@
     "com.amazonaws.ivs#TagResourceRequest": {
       "type": "structure",
       "members": {
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of tags to be added or updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "resourceArn": {
           "target": "com.amazonaws.ivs#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>ARN of the resource for which tags are to be added or updated.</p>",
             "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.ivs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>Array of tags to be added or updated.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1739,11 +2100,10 @@
             "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
           }
         },
-        "arn": {
-          "target": "com.amazonaws.ivs#ChannelArn",
+        "authorized": {
+          "target": "com.amazonaws.ivs#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>ARN of the channel to be updated.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Whether the channel is authorized. Default: <code>false</code>.</p>"
           }
         },
         "name": {
@@ -1756,6 +2116,13 @@
           "target": "com.amazonaws.ivs#ChannelType",
           "traits": {
             "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel to be updated.</p>",
+            "smithy.api#required": {}
           }
         }
       }

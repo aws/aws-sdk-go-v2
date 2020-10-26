@@ -224,17 +224,17 @@
             "smithy.api#documentation": "(Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems.\n        For example, if given the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\", the output file\n        \"outputfile\" would be published to \"s3://mybucket/myprefix/mydatasets/outputfile\".\n        If the prefix directory structure does not exist, it will be created.\n        If no prefix is provided, the data set will be published to the S3 bucket root."
           }
         },
-        "destinationS3BucketName": {
-          "target": "com.amazonaws.marketplacecommerceanalytics#DestinationS3BucketName",
-          "traits": {
-            "smithy.api#documentation": "The name (friendly name, not ARN) of the destination S3 bucket.",
-            "smithy.api#required": {}
-          }
-        },
         "dataSetType": {
           "target": "com.amazonaws.marketplacecommerceanalytics#DataSetType",
           "traits": {
             "smithy.api#documentation": "<p>The desired data set type.</p>\n        <p>\n            <ul>\n                <li>\n                    <strong>customer_subscriber_hourly_monthly_subscriptions</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>customer_subscriber_annual_subscriptions</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_usage_by_instance_type</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_fees</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_free_trial_conversions</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_new_instances</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_new_product_subscribers</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>daily_business_canceled_product_subscribers</strong>\n                    <p>From 2017-09-15 to present: Available daily by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>monthly_revenue_billing_and_revenue_data</strong>\n                    <p>From 2017-09-15 to present: Available monthly on the 15th day of the month by 24:00 UTC. Data includes metered transactions (e.g. hourly) from one month prior.</p>\n                </li>\n                <li>\n                    <strong>monthly_revenue_annual_subscriptions</strong>\n                    <p>From 2017-09-15 to present: Available monthly on the 15th day of the month by 24:00 UTC. Data includes up-front software charges (e.g. annual) from one month prior.</p>\n                </li>\n                <li>\n                    <strong>monthly_revenue_field_demonstration_usage</strong>\n                    <p>From 2018-03-15 to present: Available monthly on the 15th day of the month by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>monthly_revenue_flexible_payment_schedule</strong>\n                    <p>From 2018-11-15 to present: Available monthly on the 15th day of the month by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_product</strong>\n                    <p>From 2017-09-15 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_instance_hours</strong>\n                    <p>From 2017-09-15 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_customer_geo</strong>\n                    <p>From 2017-09-15 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_age_of_uncollected_funds</strong>\n                    <p>From 2017-09-15 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_age_of_disbursed_funds</strong>\n                    <p>From 2017-09-15 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_age_of_past_due_funds</strong>\n                    <p>From 2018-04-07 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>disbursed_amount_by_uncollected_funds_breakdown</strong>\n                    <p>From 2019-10-04 to present: Available every 30 days by 24:00 UTC.</p>\n                </li>\n                <li>\n                    <strong>sales_compensation_billed_revenue</strong>\n                    <p>From 2017-09-15 to present: Available monthly on the 15th day of the month by 24:00 UTC. Data includes metered transactions (e.g. hourly) from one month prior, and up-front software charges (e.g. annual) from one month prior.</p>\n                </li>\n                <li>\n                    <strong>us_sales_and_use_tax_records</strong>\n                    <p>From 2017-09-15 to present: Available monthly on the 15th day of the month by 24:00 UTC.</p>\n                </li>\n            </ul>\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "destinationS3BucketName": {
+          "target": "com.amazonaws.marketplacecommerceanalytics#DestinationS3BucketName",
+          "traits": {
+            "smithy.api#documentation": "The name (friendly name, not ARN) of the destination S3 bucket.",
             "smithy.api#required": {}
           }
         },
@@ -280,7 +280,7 @@
           "sdkId": "Marketplace Commerce Analytics",
           "arnNamespace": "marketplacecommerceanalytics",
           "cloudFormationName": "MarketplaceCommerceAnalytics",
-          "cloudTrailEventSource": "v20150701.businessintelligenceservice.marketplace.aws.amazon.com"
+          "cloudTrailEventSource": "marketplacecommerceanalytics.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "marketplacecommerceanalytics"
@@ -359,6 +359,13 @@
     "com.amazonaws.marketplacecommerceanalytics#StartSupportDataExportRequest": {
       "type": "structure",
       "members": {
+        "snsTopicArn": {
+          "target": "com.amazonaws.marketplacecommerceanalytics#SnsTopicArn",
+          "traits": {
+            "smithy.api#documentation": "Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an\n        error has occurred.",
+            "smithy.api#required": {}
+          }
+        },
         "fromDate": {
           "target": "com.amazonaws.marketplacecommerceanalytics#FromDate",
           "traits": {
@@ -366,11 +373,10 @@
             "smithy.api#required": {}
           }
         },
-        "snsTopicArn": {
-          "target": "com.amazonaws.marketplacecommerceanalytics#SnsTopicArn",
+        "destinationS3Prefix": {
+          "target": "com.amazonaws.marketplacecommerceanalytics#DestinationS3Prefix",
           "traits": {
-            "smithy.api#documentation": "Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an\n        error has occurred.",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "(Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems.\n        For example, if given the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\", the output file\n        \"outputfile\" would be published to \"s3://mybucket/myprefix/mydatasets/outputfile\".\n        If the prefix directory structure does not exist, it will be created.\n        If no prefix is provided, the data set will be published to the S3 bucket root."
           }
         },
         "dataSetType": {
@@ -386,23 +392,17 @@
             "smithy.api#documentation": "(Optional) Key-value pairs which will be returned, unmodified, in the\n        Amazon SNS notification message and the data set metadata file."
           }
         },
-        "destinationS3Prefix": {
-          "target": "com.amazonaws.marketplacecommerceanalytics#DestinationS3Prefix",
+        "roleNameArn": {
+          "target": "com.amazonaws.marketplacecommerceanalytics#RoleNameArn",
           "traits": {
-            "smithy.api#documentation": "(Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems.\n        For example, if given the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\", the output file\n        \"outputfile\" would be published to \"s3://mybucket/myprefix/mydatasets/outputfile\".\n        If the prefix directory structure does not exist, it will be created.\n        If no prefix is provided, the data set will be published to the S3 bucket root."
+            "smithy.api#documentation": "The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided\n        AWS services.",
+            "smithy.api#required": {}
           }
         },
         "destinationS3BucketName": {
           "target": "com.amazonaws.marketplacecommerceanalytics#DestinationS3BucketName",
           "traits": {
             "smithy.api#documentation": "The name (friendly name, not ARN) of the destination S3 bucket.",
-            "smithy.api#required": {}
-          }
-        },
-        "roleNameArn": {
-          "target": "com.amazonaws.marketplacecommerceanalytics#RoleNameArn",
-          "traits": {
-            "smithy.api#documentation": "The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided\n        AWS services.",
             "smithy.api#required": {}
           }
         }

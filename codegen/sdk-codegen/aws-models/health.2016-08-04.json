@@ -78,41 +78,41 @@
           "sdkId": "Health",
           "arnNamespace": "health",
           "cloudFormationName": "Health",
-          "cloudTrailEventSource": "v20160804.silvermineunifiedapi.amazonaws.com"
+          "cloudTrailEventSource": "health.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "health"
         },
         "aws.protocols#awsJson1_1": {},
-        "smithy.api#documentation": "<fullname>AWS Health</fullname>\n      \n         <p>The AWS Health API provides programmatic access to the AWS Health information\n         that is presented in the <a href=\"https://phd.aws.amazon.com/phd/home#/\">AWS Personal Health Dashboard</a>. You can get information about events that affect your AWS\n         resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeEvents</a>: Summary information about events.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeEventDetails</a>: Detailed information about one or more\n               events.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeAffectedEntities</a>: Information about AWS resources\n               that are affected by one or more events.</p>\n            </li>\n         </ul>\n         <p>In addition, these operations provide information about event types and summary\n         counts of events or affected entities:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeEventTypes</a>: Information about the kinds of events\n               that AWS Health tracks.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeEventAggregates</a>: A count of the number of events that\n               meet specified criteria.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeEntityAggregates</a>: A count of the number of affected\n               entities that meet specified criteria.</p>\n            </li>\n         </ul>\n\n      \n         <p>AWS Health integrates with AWS Organizations to provide a centralized view of AWS Health\n         events across all accounts in your organization.</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeEventsForOrganization</a>: Summary information about\n               events across the organization.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeAffectedAccountsForOrganization</a>: List of accounts in\n               your organization impacted by an event.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeEventDetailsForOrganization</a>: Detailed information\n               about events in your organization.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeAffectedEntitiesForOrganization</a>: Information about\n               AWS resources in your organization that are affected by events.</p>\n            </li>\n         </ul>\n         <p>You can use the following operations to enable or disable AWS Health from working\n         with AWS Organizations.</p>\n         <ul>\n            <li>\n               <p>\n                  <a>EnableHealthServiceAccessForOrganization</a>: Enables AWS Health\n               to work with AWS Organizations.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisableHealthServiceAccessForOrganization</a>: Disables\n               AWS Health from working with AWS Organizations.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeHealthServiceStatusForOrganization</a>: Status\n               information about enabling or disabling AWS Health from working with\n               AWS Organizations.</p>\n            </li>\n         </ul>\n      \n\n         <p>The Health API requires a Business or Enterprise support plan from <a href=\"http://aws.amazon.com/premiumsupport/\">AWS Support</a>. Calling the Health API\n         from an account that does not have a Business or Enterprise support plan causes a\n            <code>SubscriptionRequiredException</code>.</p>\n         <p>For authentication of requests, AWS Health uses the <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing\n            Process</a>.</p>\n         <p>See the <a href=\"https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html\">AWS Health User Guide</a> for information about how to use the API.</p>\n         <p>\n            <b>Service Endpoint</b>\n         </p>\n         <p>The HTTP endpoint for the AWS Health API is:</p>\n         <ul>\n            <li>\n               <p>https://health.us-east-1.amazonaws.com </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<fullname>AWS Health</fullname>\n      \n         <p>The AWS Health API provides programmatic access to the AWS Health information that\n         appears in the <a href=\"https://phd.aws.amazon.com/phd/home#/\">AWS Personal Health Dashboard</a>. You\n         can use the API operations to get information about AWS Health events that affect your\n         AWS services and resources.</p>\n         <note>\n            <p>You must have a Business or Enterprise support plan from <a href=\"http://aws.amazon.com/premiumsupport/\">AWS Support</a> to use the AWS Health API. If you call the\n            AWS Health API from an AWS account that doesn't have a Business or Enterprise support\n            plan, you receive a <code>SubscriptionRequiredException</code> error.</p>\n         </note>\n         <p>AWS Health has a single endpoint: health.us-east-1.amazonaws.com (HTTPS). Use this\n         endpoint to call the AWS Health API operations.</p>\n         <p>For authentication of requests, AWS Health uses the <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing\n            Process</a>.</p>\n         <p>If your AWS account is part of AWS Organizations, you can use the AWS Health organizational\n         view feature. This feature provides a centralized view of AWS Health events across all\n         accounts in your organization. You can aggregate AWS Health events in real time to\n         identify accounts in your organization that are affected by an operational event or get\n         notified of security vulnerabilities. Use the organizational view API operations to enable\n         this feature and return event information. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html\">Aggregating\n            AWS Health events</a> in the <i>AWS Health User Guide</i>.</p>\n         <note>\n            <p>When you use the AWS Health API operations to return AWS Health events, see the\n            following recommendations:</p>\n            <ul>\n               <li>\n                  <p>Use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a> parameter to specify whether to return AWS Health\n                  events that are public or account-specific.</p>\n               </li>\n               <li>\n                  <p>Use pagination to view all events from the response. For example, if you call\n                  the <code>DescribeEventsForOrganization</code> operation to get all events in your\n                  organization, you might receive several page results. Specify the\n                     <code>nextToken</code> in the next request to return more results.</p>\n               </li>\n            </ul>\n         </note>",
         "smithy.api#title": "AWS Health APIs and Notifications"
       }
     },
     "com.amazonaws.health#AffectedEntity": {
       "type": "structure",
       "members": {
-        "awsAccountId": {
-          "target": "com.amazonaws.health#accountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The 12-digit AWS account number that contains the affected entity.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.health#tagSet",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>"
-          }
-        },
         "entityUrl": {
           "target": "com.amazonaws.health#entityUrl",
           "traits": {
             "smithy.api#documentation": "<p>The URL of the affected entity.</p>"
           }
         },
+        "entityValue": {
+          "target": "com.amazonaws.health#entityValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the affected entity.</p>"
+          }
+        },
         "entityArn": {
           "target": "com.amazonaws.health#entityArn",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the entity. Format: <code>arn:aws:health:<i>entity-region</i>:<i>aws-account</i>:entity/<i>entity-id</i>\n            </code>. Example: <code>arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K</code>\n         </p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.health#tagSet",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
           }
         },
         "eventArn": {
@@ -127,16 +127,16 @@
             "smithy.api#documentation": "<p>The most recent status of the entity affected by the event. The possible values are\n            <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.</p>"
           }
         },
+        "awsAccountId": {
+          "target": "com.amazonaws.health#accountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 12-digit AWS account number that contains the affected entity.</p>"
+          }
+        },
         "lastUpdatedTime": {
           "target": "com.amazonaws.health#timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The most recent time that the entity was updated.</p>"
-          }
-        },
-        "entityValue": {
-          "target": "com.amazonaws.health#entityValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the affected entity.</p>"
           }
         }
       },
@@ -152,28 +152,28 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>\n            <a>EnableHealthServiceAccessForOrganization</a> is already in progress. Wait\n         for the action to complete before trying again. To get the current status, use the <a>DescribeHealthServiceStatusForOrganization</a> operation.</p>",
+        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html\">EnableHealthServiceAccessForOrganization</a> is already in progress. Wait\n         for the action to complete before trying again. To get the current status, use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html\">DescribeHealthServiceStatusForOrganization</a> operation.</p>",
         "smithy.api#error": "client"
       }
     },
     "com.amazonaws.health#DateTimeRange": {
       "type": "structure",
       "members": {
-        "to": {
-          "target": "com.amazonaws.health#timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The ending date and time of a time range.</p>"
-          }
-        },
         "from": {
           "target": "com.amazonaws.health#timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The starting date and time of a time range.</p>"
           }
+        },
+        "to": {
+          "target": "com.amazonaws.health#timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The ending date and time of a time range.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A range of dates and times that is used by the <a>EventFilter</a> and\n            <a>EntityFilter</a> objects. If <code>from</code> is set and <code>to</code>\n         is set: match items where the timestamp (<code>startTime</code>, <code>endTime</code>, or\n            <code>lastUpdatedTime</code>) is between <code>from</code> and <code>to</code>\n         inclusive. If <code>from</code> is set and <code>to</code> is not set: match items where\n         the timestamp value is equal to or after <code>from</code>. If <code>from</code> is not set\n         and <code>to</code> is set: match items where the timestamp value is equal to or before\n            <code>to</code>.</p>"
+        "smithy.api#documentation": "<p>A range of dates and times that is used by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html\">EventFilter</a> and \n         <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html\">EntityFilter</a> objects. If <code>from</code> is set and <code>to</code> is\n         set: match items where the timestamp (<code>startTime</code>, <code>endTime</code>, or\n            <code>lastUpdatedTime</code>) is between <code>from</code> and <code>to</code>\n         inclusive. If <code>from</code> is set and <code>to</code> is not set: match items where\n         the timestamp value is equal to or after <code>from</code>. If <code>from</code> is not set\n         and <code>to</code> is set: match items where the timestamp value is equal to or before\n            <code>to</code>.</p>"
       }
     },
     "com.amazonaws.health#DescribeAffectedAccountsForOrganization": {
@@ -190,24 +190,30 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of accounts in the organization from AWS Organizations that are affected by the\n         provided event.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a>EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns a list of accounts in the organization from AWS Organizations that are affected by the\n         provided event. For more information about the different types of AWS Health events, see\n         <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a>. </p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html\">EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account.</p>\n      \n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "affectedAccounts",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeAffectedAccountsForOrganizationRequest": {
       "type": "structure",
       "members": {
+        "maxResults": {
+          "target": "com.amazonaws.health#maxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+          }
+        },
         "eventArn": {
           "target": "com.amazonaws.health#eventArn",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>",
             "smithy.api#required": {}
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.health#maxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
           }
         },
         "nextToken": {
@@ -228,7 +234,10 @@
           }
         },
         "eventScopeCode": {
-          "target": "com.amazonaws.health#eventScopeCode"
+          "target": "com.amazonaws.health#eventScopeCode",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected AWS accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have AWS accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"
+          }
         },
         "affectedAccounts": {
           "target": "com.amazonaws.health#affectedAccountsList",
@@ -255,8 +264,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of entities that have been affected by the specified events, based on\n         the specified filter criteria. Entities can refer to individual customer resources, groups\n         of customer resources, or any other construct, depending on the AWS service. Events that\n         have impact beyond that of the affected entities, or where the extent of impact is unknown,\n         include at least one entity indicating this.</p>\n         <p>At least one event ARN is required. Results are sorted by the\n            <code>lastUpdatedTime</code> of the entity, starting with the most recent.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns a list of entities that have been affected by the specified events, based on the\n         specified filter criteria. Entities can refer to individual customer resources, groups of\n         customer resources, or any other construct, depending on the AWS service. Events that have\n         impact beyond that of the affected entities, or where the extent of impact is unknown,\n         include at least one entity indicating this.</p>\n         <p>At least one event ARN is required. Results are sorted by the\n            <code>lastUpdatedTime</code> of the entity, starting with the most recent.</p>\n      \n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "entities",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeAffectedEntitiesForOrganization": {
@@ -276,8 +291,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of entities that have been affected by one or more events for one or more\n         accounts in your organization in AWS Organizations, based on the filter criteria. Entities can refer\n         to individual customer resources, groups of customer resources, or any other construct,\n         depending on the AWS service.</p>\n         <p>At least one event ARN and account ID are required. Results are sorted by the\n            <code>lastUpdatedTime</code> of the entity, starting with the most recent.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a>EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account. </p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns a list of entities that have been affected by one or more events for one or more\n         accounts in your organization in AWS Organizations, based on the filter criteria. Entities can refer\n         to individual customer resources, groups of customer resources, or any other construct,\n         depending on the AWS service.</p>\n         <p>At least one event Amazon Resource Name (ARN) and account ID are required. Results are\n         sorted by the <code>lastUpdatedTime</code> of the entity, starting with the most\n         recent.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html\">EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "entities",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeAffectedEntitiesForOrganizationFailedSet": {
@@ -289,17 +310,17 @@
     "com.amazonaws.health#DescribeAffectedEntitiesForOrganizationRequest": {
       "type": "structure",
       "members": {
-        "locale": {
-          "target": "com.amazonaws.health#locale",
-          "traits": {
-            "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
-          }
-        },
         "organizationEntityFilters": {
           "target": "com.amazonaws.health#OrganizationEntityFiltersList",
           "traits": {
             "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code> and the\n            <code>eventArn</code>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "locale": {
+          "target": "com.amazonaws.health#locale",
+          "traits": {
+            "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
           }
         },
         "nextToken": {
@@ -328,7 +349,7 @@
         "entities": {
           "target": "com.amazonaws.health#EntityList",
           "traits": {
-            "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code> and its\n            <code>entityArn</code>, <code>entityValue</code> and its <code>entityArn</code>,\n            <code>lastUpdatedTime</code>, <code>statusCode</code>, and <code>tags</code>.</p>"
+            "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code> and its\n            <code>entityArn</code>, <code>entityValue</code> and its <code>entityArn</code>,\n            <code>lastUpdatedTime</code>, and <code>statusCode</code>.</p>"
           }
         },
         "failedSet": {
@@ -348,6 +369,13 @@
             "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
           }
         },
+        "filter": {
+          "target": "com.amazonaws.health#EntityFilter",
+          "traits": {
+            "smithy.api#documentation": "<p>Values to narrow the results returned. At least one event ARN is required.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "maxResults": {
           "target": "com.amazonaws.health#maxResults",
           "traits": {
@@ -359,29 +387,22 @@
           "traits": {
             "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
           }
-        },
-        "filter": {
-          "target": "com.amazonaws.health#EntityFilter",
-          "traits": {
-            "smithy.api#documentation": "<p>Values to narrow the results returned. At least one event ARN is required.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.health#DescribeAffectedEntitiesResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.health#nextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
-          }
-        },
         "entities": {
           "target": "com.amazonaws.health#EntityList",
           "traits": {
             "smithy.api#documentation": "<p>The entities that match the filter criteria.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.health#nextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
           }
         }
       }
@@ -395,7 +416,7 @@
         "target": "com.amazonaws.health#DescribeEntityAggregatesResponse"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Returns the number of entities that are affected by each of the specified events. If\n         no events are specified, the counts of all affected entities are returned.</p>",
+        "smithy.api#documentation": "<p>Returns the number of entities that are affected by each of the specified events. If no\n         events are specified, the counts of all affected entities are returned.</p>",
         "smithy.api#idempotent": {}
       }
     },
@@ -435,8 +456,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns the number of events of each event type (issue, scheduled change, and account\n         notification). If no filter is specified, the counts of all events in each category are\n         returned.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns the number of events of each event type (issue, scheduled change, and account\n         notification). If no filter is specified, the counts of all events in each category are\n         returned.</p>\n      \n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "eventAggregates",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeEventAggregatesRequest": {
@@ -481,7 +508,7 @@
         "eventAggregates": {
           "target": "com.amazonaws.health#EventAggregateList",
           "traits": {
-            "smithy.api#documentation": "<p>The number of events in each category that meet the optional filter\n         criteria.</p>"
+            "smithy.api#documentation": "<p>The number of events in each category that meet the optional filter criteria.</p>"
           }
         }
       }
@@ -500,7 +527,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns detailed information about one or more specified events. Information includes\n         standard event data (region, service, and so on, as returned by <a>DescribeEvents</a>), a detailed event description, and possible additional\n         metadata that depends upon the nature of the event. Affected entities are not included; to\n         retrieve those, use the <a>DescribeAffectedEntities</a> operation.</p>\n         <p>If a specified event cannot be retrieved, an error message is returned for that\n         event.</p>",
+        "smithy.api#documentation": "<p>Returns detailed information about one or more specified events. Information includes\n         standard event data (Region, service, and so on, as returned by <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a>), a\n         detailed event description, and possible additional metadata that depends upon the nature\n         of the event. Affected entities are not included. To retrieve those, use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html\">DescribeAffectedEntities</a> operation.</p>\n         <p>If a specified event cannot be retrieved, an error message is returned for that\n         event.</p>",
         "smithy.api#idempotent": {}
       }
     },
@@ -524,7 +551,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns detailed information about one or more specified events for one or more accounts\n         in your organization. Information includes standard event data (Region, service, and so on,\n         as returned by <a>DescribeEventsForOrganization</a>, a detailed event\n         description, and possible additional metadata that depends upon the nature of the event.\n         Affected entities are not included; to retrieve those, use the <a>DescribeAffectedEntitiesForOrganization</a> operation.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a>EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account.</p>",
+        "smithy.api#documentation": "<p>Returns detailed information about one or more specified events for one or more accounts\n         in your organization. Information includes standard event data (Region, service, and so on,\n         as returned by <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html\">DescribeEventsForOrganization</a>), a detailed event description, and possible\n         additional metadata that depends upon the nature of the event. Affected entities are not\n         included; to retrieve those, use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operation.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html\">EnableHealthServiceAccessForOrganization</a>\n         operation from your organization's master account.</p>\n         <p>When you call the <code>DescribeEventDetailsForOrganization</code> operation, you\n         specify the <code>organizationEventDetailFilters</code> object in the request. Depending on\n         the AWS Health event type, note the following differences:</p>\n         <ul>\n            <li>\n               <p>If the event is public, the <code>awsAccountId</code> parameter must be empty. If\n               you specify an account ID for a public event, then an error message is returned.\n               That's because the event might apply to all AWS accounts and isn't specific to an\n               account in your organization.</p>\n            </li>\n            <li>\n               <p>If the event is specific to an account, then you must specify the\n                  <code>awsAccountId</code> parameter in the request. If you don't specify an\n               account ID, an error message returns because the event is specific to an AWS\n               account in your organization. </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a>.</p>",
         "smithy.api#idempotent": {}
       }
     },
@@ -633,8 +660,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns the event types that meet the specified filter criteria. If no filter\n         criteria are specified, all event types are returned, in no particular order.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns the event types that meet the specified filter criteria. If no filter criteria\n         are specified, all event types are returned, in no particular order.</p>\n      \n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "eventTypes",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeEventTypesRequest": {
@@ -646,10 +679,10 @@
             "smithy.api#documentation": "<p>Values to narrow the results returned.</p>"
           }
         },
-        "locale": {
-          "target": "com.amazonaws.health#locale",
+        "maxResults": {
+          "target": "com.amazonaws.health#maxResults",
           "traits": {
-            "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
+            "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
           }
         },
         "nextToken": {
@@ -658,10 +691,10 @@
             "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
           }
         },
-        "maxResults": {
-          "target": "com.amazonaws.health#maxResults",
+        "locale": {
+          "target": "com.amazonaws.health#locale",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+            "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
           }
         }
       }
@@ -700,8 +733,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns information about events that meet the specified filter criteria. Events are\n         returned in a summary form and do not include the detailed description, any additional\n         metadata that depends on the event type, or any affected resources. To retrieve that\n         information, use the <a>DescribeEventDetails</a> and <a>DescribeAffectedEntities</a> operations.</p>\n         <p>If no filter criteria are specified, all events are returned. Results are sorted by\n            <code>lastModifiedTime</code>, starting with the most recent.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p> Returns information about events that meet the specified filter criteria. Events are\n         returned in a summary form and do not include the detailed description, any additional\n         metadata that depends on the event type, or any affected resources. To retrieve that\n         information, use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html\">DescribeEventDetails</a> and <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html\">DescribeAffectedEntities</a> operations.</p>\n         <p>If no filter criteria are specified, all events are returned. Results are sorted by\n            <code>lastModifiedTime</code>, starting with the most recent event.</p>\n         <note>\n            <ul>\n               <li> \n                  <p>When you call the <code>DescribeEvents</code> operation and specify an entity for the\n               <code>entityValues</code> parameter, AWS Health might return public events that\n               aren't specific to that resource. For example, if you call <code>DescribeEvents</code>\n               and specify an ID for an Amazon Elastic Compute Cloud (Amazon EC2) instance, AWS Health might return events\n               that aren't specific to that resource or service. To get events that are specific to a\n               service, use the <code>services</code> parameter in the <code>filter</code> object. For\n               more information, see <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a>.</p>\n               </li>\n               <li>\n                  <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n               </li>\n            </ul>\n        \n         \n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "events",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeEventsForOrganization": {
@@ -721,8 +760,14 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns information about events across your organization in AWS Organizations, meeting the\n         specified filter criteria. Events are returned in a summary form and do not include the\n         accounts impacted, detailed description, any additional metadata that depends on the event\n         type, or any affected resources. To retrieve that information, use the <a>DescribeAffectedAccountsForOrganization</a>, <a>DescribeEventDetailsForOrganization</a>, and <a>DescribeAffectedEntitiesForOrganization</a> operations.</p>\n         <p>If no filter criteria are specified, all events across your organization are returned.\n         Results are sorted by <code>lastModifiedTime</code>, starting with the most recent.</p>\n         <p>Before you can call this operation, you must first enable Health to work with AWS\n         Organizations. To do this, call the <a>EnableHealthServiceAccessForOrganization</a> operation from your organization's\n         master account.</p>",
-        "smithy.api#idempotent": {}
+        "smithy.api#documentation": "<p>Returns information about events across your organization in AWS Organizations. You can use\n            the<code>filters</code> parameter to specify the events that you want to return. Events\n         are returned in a summary form and don't include the affected accounts, detailed\n         description, any additional metadata that depends on the event type, or any affected\n         resources. To retrieve that information, use the following operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html\">DescribeAffectedAccountsForOrganization</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a>\n               </p>\n            </li>\n         </ul>\n         <p>If you don't specify a <code>filter</code>, the\n            <code>DescribeEventsForOrganizations</code> returns all events across your organization.\n         Results are sorted by <code>lastModifiedTime</code>, starting with the most recent event. </p>\n         <p>For more information about the different types of AWS Health events, see <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a>.</p>\n         <p>Before you can call this operation, you must first enable AWS Health to work with\n         AWS Organizations. To do this, call the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html\">EnableHealthServiceAccessForOrganization</a> operation from your organization's\n         master AWS account.</p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the next request to return more results.</p>\n         </note>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "events",
+          "pageSize": "maxResults"
+        }
       }
     },
     "com.amazonaws.health#DescribeEventsForOrganizationRequest": {
@@ -757,16 +802,16 @@
     "com.amazonaws.health#DescribeEventsForOrganizationResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.health#nextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
-          }
-        },
         "events": {
           "target": "com.amazonaws.health#OrganizationEventList",
           "traits": {
             "smithy.api#documentation": "<p>The events that match the specified filter criteria.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.health#nextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
           }
         }
       }
@@ -780,6 +825,12 @@
             "smithy.api#documentation": "<p>If the results of a search are large, only a portion of the\nresults are returned, and a <code>nextToken</code> pagination token is returned in the response. To\nretrieve the next batch of results, reissue the search request and include the returned token.\nWhen all results have been returned, the response does not contain a pagination token value.</p>"
           }
         },
+        "filter": {
+          "target": "com.amazonaws.health#EventFilter",
+          "traits": {
+            "smithy.api#documentation": "<p>Values to narrow the results returned.</p>"
+          }
+        },
         "maxResults": {
           "target": "com.amazonaws.health#maxResults",
           "traits": {
@@ -790,12 +841,6 @@
           "target": "com.amazonaws.health#locale",
           "traits": {
             "smithy.api#documentation": "<p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>"
-          }
-        },
-        "filter": {
-          "target": "com.amazonaws.health#EventFilter",
-          "traits": {
-            "smithy.api#documentation": "<p>Values to narrow the results returned.</p>"
           }
         }
       }
@@ -846,7 +891,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Calling this operation disables Health from working with AWS Organizations. This does not remove\n         the Service Linked Role (SLR) from the the master account in your organization. Use the\n         IAM console, API, or AWS CLI to remove the SLR if desired. To call this operation, you\n         must sign in as an IAM user, assume an IAM role, or sign in as the root user (not\n         recommended) in the organization's master account.</p>",
+        "smithy.api#documentation": "<p>Disables AWS Health from working with AWS Organizations. To call this operation, you must sign\n         in as an AWS Identity and Access Management (IAM) user, assume an IAM role, or sign in as the root user (not\n         recommended) in the organization's master AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html\">Aggregating\n            AWS Health events</a> in the\n            <i>AWS Health User Guide</i>.</p>\n         <p>This operation doesn't remove the service-linked role (SLR) from the AWS master\n         account in your organization. You must use the IAM console, API, or AWS Command Line Interface (AWS CLI) to\n         remove the SLR. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role\">Deleting a Service-Linked Role</a> in the\n         <i>IAM User Guide</i>.</p>\n         <note>\n            <p>You can also disable the organizational feature by using the Organizations <a href=\"https://docs.aws.amazon.com/organizations/latest/APIReference/API_DisableAWSServiceAccess.html\">DisableAWSServiceAccess</a> API operation. After you call this operation,\n            AWS Health stops aggregating events for all other AWS accounts in your organization.\n            If you call the AWS Health API operations for organizational view, AWS Health returns\n            an error. AWS Health continues to aggregate health events for your AWS\n            account.</p>\n         </note>",
         "smithy.api#idempotent": {}
       }
     },
@@ -858,7 +903,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Calling this operation enables AWS Health to work with AWS Organizations. This applies a Service\n         Linked Role (SLR) to the master account in the organization. To learn more about the steps\n         in this process, visit enabling service access for AWS Health in AWS Organizations. To call this\n         operation, you must sign in as an IAM user, assume an IAM role, or sign in as the root\n         user (not recommended) in the organization's master account.</p>",
+        "smithy.api#documentation": "<p>Calling this operation enables AWS Health to work with AWS Organizations. This applies a\n         service-linked role (SLR) to the master account in the organization. To call this\n         operation, you must sign in as an IAM user, assume an IAM role, or sign in as the root\n         user (not recommended) in the organization's master account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html\">Aggregating AWS Health events</a> in the <i>AWS Health User\n            Guide</i>.</p>",
         "smithy.api#idempotent": {}
       }
     },
@@ -868,7 +913,7 @@
         "count": {
           "target": "com.amazonaws.health#count",
           "traits": {
-            "smithy.api#documentation": "<p>The number entities that match the criteria for the specified events.</p>"
+            "smithy.api#documentation": "<p>The number of entities that match the criteria for the specified events.</p>"
           }
         },
         "eventArn": {
@@ -879,7 +924,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The number of entities that are affected by one or more events. Returned by the <a>DescribeEntityAggregates</a> operation.</p>"
+        "smithy.api#documentation": "<p>The number of entities that are affected by one or more events. Returned by the \n         <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html\">DescribeEntityAggregates</a> operation.</p>"
       }
     },
     "com.amazonaws.health#EntityAggregateList": {
@@ -891,16 +936,22 @@
     "com.amazonaws.health#EntityFilter": {
       "type": "structure",
       "members": {
-        "tags": {
-          "target": "com.amazonaws.health#tagFilter",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>"
-          }
-        },
         "statusCodes": {
           "target": "com.amazonaws.health#entityStatusCodeList",
           "traits": {
             "smithy.api#documentation": "<p>A list of entity status codes (<code>IMPAIRED</code>, <code>UNIMPAIRED</code>, or\n            <code>UNKNOWN</code>).</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.health#tagFilter",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
+          }
+        },
+        "entityValues": {
+          "target": "com.amazonaws.health#entityValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of IDs for affected entities.</p>"
           }
         },
         "entityArns": {
@@ -915,12 +966,6 @@
             "smithy.api#documentation": "<p>A list of the most recent dates and times that the entity was updated.</p>"
           }
         },
-        "entityValues": {
-          "target": "com.amazonaws.health#entityValueList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of IDs for affected entities.</p>"
-          }
-        },
         "eventArns": {
           "target": "com.amazonaws.health#eventArnList",
           "traits": {
@@ -930,7 +975,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The values to use to filter results from the <a>DescribeAffectedEntities</a> operation.</p>"
+        "smithy.api#documentation": "<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html\">EntityFilter</a>\n         operation.</p>"
       }
     },
     "com.amazonaws.health#EntityList": {
@@ -942,12 +987,6 @@
     "com.amazonaws.health#Event": {
       "type": "structure",
       "members": {
-        "endTime": {
-          "target": "com.amazonaws.health#timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the event ended.</p>"
-          }
-        },
         "service": {
           "target": "com.amazonaws.health#service",
           "traits": {
@@ -960,22 +999,34 @@
             "smithy.api#documentation": "<p>The category of the event. Possible values are <code>issue</code>,\n            <code>scheduledChange</code>, and <code>accountNotification</code>.</p>"
           }
         },
-        "lastUpdatedTime": {
-          "target": "com.amazonaws.health#timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The most recent date and time that the event was updated.</p>"
-          }
-        },
         "region": {
           "target": "com.amazonaws.health#region",
           "traits": {
             "smithy.api#documentation": "<p>The AWS region name of the event.</p>"
           }
         },
-        "availabilityZone": {
-          "target": "com.amazonaws.health#availabilityZone",
+        "endTime": {
+          "target": "com.amazonaws.health#timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS Availability Zone of the event. For example, us-east-1a.</p>"
+            "smithy.api#documentation": "<p>The date and time that the event ended.</p>"
+          }
+        },
+        "lastUpdatedTime": {
+          "target": "com.amazonaws.health#timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The most recent date and time that the event was updated.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.health#timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the event began.</p>"
+          }
+        },
+        "eventScopeCode": {
+          "target": "com.amazonaws.health#eventScopeCode",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected AWS accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have AWS accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"
           }
         },
         "arn": {
@@ -990,45 +1041,42 @@
             "smithy.api#documentation": "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"
           }
         },
+        "availabilityZone": {
+          "target": "com.amazonaws.health#availabilityZone",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Availability Zone of the event. For example, us-east-1a.</p>"
+          }
+        },
         "eventTypeCode": {
           "target": "com.amazonaws.health#eventTypeCode",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>\n            </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"
           }
-        },
-        "startTime": {
-          "target": "com.amazonaws.health#timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the event began.</p>"
-          }
-        },
-        "eventScopeCode": {
-          "target": "com.amazonaws.health#eventScopeCode"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Summary information about an AWS Health event.</p>"
+        "smithy.api#documentation": "<p>Summary information about an AWS Health event.</p>\n         <p>AWS Health events can be public or account-specific:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Public events</i> might be service events that are not specific\n               to an AWS account. For example, if there is an issue with an AWS Region, AWS Health\n               provides information about the event, even if you don't use services or resources in\n               that Region.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Account-specific</i> events are specific to either your AWS\n               account or an account in your organization. For example, if there's an issue with\n               Amazon Elastic Compute Cloud in a Region that you use, AWS Health provides information about the event\n               and the affected resources in the account.</p>\n            </li>\n         </ul>\n         <p>You can determine if an event is public or account-specific by using the\n            <code>eventScopeCode</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a>.</p>"
       }
     },
     "com.amazonaws.health#EventAccountFilter": {
       "type": "structure",
       "members": {
+        "awsAccountId": {
+          "target": "com.amazonaws.health#accountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
+          }
+        },
         "eventArn": {
           "target": "com.amazonaws.health#eventArn",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>",
             "smithy.api#required": {}
           }
-        },
-        "awsAccountId": {
-          "target": "com.amazonaws.health#accountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
-          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The values used to filter results from the <a>DescribeEventDetailsForOrganization</a> and <a>DescribeAffectedEntitiesForOrganization</a> operations.</p>"
+        "smithy.api#documentation": "<p>The values used to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> and \n         <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operations.</p>"
       }
     },
     "com.amazonaws.health#EventAggregate": {
@@ -1048,7 +1096,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The number of events of each issue type. Returned by the <a>DescribeEventAggregates</a> operation.</p>"
+        "smithy.api#documentation": "<p>The number of events of each issue type. Returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html\">DescribeEventAggregates</a> operation.</p>"
       }
     },
     "com.amazonaws.health#EventAggregateList": {
@@ -1080,7 +1128,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The detailed description of the event. Included in the information returned by the\n            <a>DescribeEventDetails</a> operation.</p>"
+        "smithy.api#documentation": "<p>The detailed description of the event. Included in the information returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html\">DescribeEventDetails</a> operation.</p>"
       }
     },
     "com.amazonaws.health#EventDescription2": {
@@ -1089,12 +1137,6 @@
     "com.amazonaws.health#EventDetails": {
       "type": "structure",
       "members": {
-        "eventDescription": {
-          "target": "com.amazonaws.health#EventDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The most recent description of the event.</p>"
-          }
-        },
         "event": {
           "target": "com.amazonaws.health#Event",
           "traits": {
@@ -1106,10 +1148,16 @@
           "traits": {
             "smithy.api#documentation": "<p>Additional metadata about the event.</p>"
           }
+        },
+        "eventDescription": {
+          "target": "com.amazonaws.health#EventDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The most recent description of the event.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Detailed information about an event. A combination of an <a>Event</a>\n         object, an <a>EventDescription</a> object, and additional metadata about the\n         event. Returned by the <a>DescribeEventDetails</a> operation.</p>"
+        "smithy.api#documentation": "<p>Detailed information about an event. A combination of an <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a> object,\n         an <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html\">EventDescription</a> object, and additional metadata about the event.\n         Returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html\">DescribeEventDetails</a> operation.</p>"
       }
     },
     "com.amazonaws.health#EventDetailsErrorItem": {
@@ -1121,21 +1169,21 @@
             "smithy.api#documentation": "<p>A message that describes the error.</p>"
           }
         },
-        "eventArn": {
-          "target": "com.amazonaws.health#eventArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"
-          }
-        },
         "errorName": {
           "target": "com.amazonaws.health#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the error.</p>"
           }
+        },
+        "eventArn": {
+          "target": "com.amazonaws.health#eventArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Error information returned when a <a>DescribeEventDetails</a> operation\n         cannot find a specified event.</p>"
+        "smithy.api#documentation": "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html\">DescribeEventDetails</a> operation\n         cannot find a specified event.</p>"
       }
     },
     "com.amazonaws.health#EventFilter": {
@@ -1147,16 +1195,10 @@
             "smithy.api#documentation": "<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>\n         </p>"
           }
         },
-        "endTimes": {
-          "target": "com.amazonaws.health#dateTimeRangeList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of dates and times that the event ended.</p>"
-          }
-        },
         "entityValues": {
           "target": "com.amazonaws.health#entityValueList",
           "traits": {
-            "smithy.api#documentation": "<p>A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or\n         EBS volumes (<code>vol-426ab23e</code>).</p>"
+            "smithy.api#documentation": "<p>A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or EBS\n         volumes (<code>vol-426ab23e</code>).</p>"
           }
         },
         "startTimes": {
@@ -1165,10 +1207,34 @@
             "smithy.api#documentation": "<p>A list of dates and times that the event began.</p>"
           }
         },
-        "services": {
-          "target": "com.amazonaws.health#serviceList",
+        "entityArns": {
+          "target": "com.amazonaws.health#entityArnList",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+            "smithy.api#documentation": "<p>A list of entity ARNs (unique identifiers).</p>"
+          }
+        },
+        "lastUpdatedTimes": {
+          "target": "com.amazonaws.health#dateTimeRangeList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of dates and times that the event was last updated.</p>"
+          }
+        },
+        "eventTypeCategories": {
+          "target": "com.amazonaws.health#eventTypeCategoryList2",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,\n         or <code>accountNotification</code>).</p>"
+          }
+        },
+        "endTimes": {
+          "target": "com.amazonaws.health#dateTimeRangeList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of dates and times that the event ended.</p>"
+          }
+        },
+        "eventArns": {
+          "target": "com.amazonaws.health#eventArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"
           }
         },
         "eventStatusCodes": {
@@ -1186,7 +1252,7 @@
         "tags": {
           "target": "com.amazonaws.health#tagFilter",
           "traits": {
-            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>"
+            "smithy.api#documentation": "<p>A map of entity tags attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
           }
         },
         "availabilityZones": {
@@ -1195,33 +1261,15 @@
             "smithy.api#documentation": "<p>A list of AWS availability zones.</p>"
           }
         },
-        "lastUpdatedTimes": {
-          "target": "com.amazonaws.health#dateTimeRangeList",
+        "services": {
+          "target": "com.amazonaws.health#serviceList",
           "traits": {
-            "smithy.api#documentation": "<p>A list of dates and times that the event was last updated.</p>"
-          }
-        },
-        "eventArns": {
-          "target": "com.amazonaws.health#eventArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"
-          }
-        },
-        "entityArns": {
-          "target": "com.amazonaws.health#entityArnList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of entity ARNs (unique identifiers).</p>"
-          }
-        },
-        "eventTypeCategories": {
-          "target": "com.amazonaws.health#eventTypeCategoryList2",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>,\n         <code>scheduledChange</code>, or <code>accountNotification</code>).</p>"
+            "smithy.api#documentation": "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The values to use to filter results from the <a>DescribeEvents</a> and\n            <a>DescribeEventAggregates</a> operations.</p>"
+        "smithy.api#documentation": "<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a> and \n         <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html\">DescribeEventAggregates</a> operations.</p>"
       }
     },
     "com.amazonaws.health#EventList": {
@@ -1233,16 +1281,16 @@
     "com.amazonaws.health#EventType": {
       "type": "structure",
       "members": {
+        "category": {
+          "target": "com.amazonaws.health#eventTypeCategory",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,\n         or <code>accountNotification</code>).</p>"
+          }
+        },
         "code": {
           "target": "com.amazonaws.health#eventTypeCode",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>\n            </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"
-          }
-        },
-        "category": {
-          "target": "com.amazonaws.health#eventTypeCategory",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>,\n         <code>scheduledChange</code>, or <code>accountNotification</code>).</p>"
           }
         },
         "service": {
@@ -1253,7 +1301,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Metadata about a type of event that is reported by AWS Health. Data consists of\n         the category (for example, <code>issue</code>), the service (for example,\n         <code>EC2</code>), and the event type code (for example,\n            <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).</p>"
+        "smithy.api#documentation": "<p>Metadata about a type of event that is reported by AWS Health. Data consists of the\n         category (for example, <code>issue</code>), the service (for example, <code>EC2</code>),\n         and the event type code (for example,\n         <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).</p>"
       }
     },
     "com.amazonaws.health#EventType2": {
@@ -1296,13 +1344,7 @@
         "eventTypeCategories": {
           "target": "com.amazonaws.health#EventTypeCategoryList",
           "traits": {
-            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>,\n         <code>scheduledChange</code>, or <code>accountNotification</code>).</p>"
-          }
-        },
-        "eventTypeCodes": {
-          "target": "com.amazonaws.health#EventTypeCodeList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of event type codes.</p>"
+            "smithy.api#documentation": "<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,\n         or <code>accountNotification</code>).</p>"
           }
         },
         "services": {
@@ -1310,10 +1352,16 @@
           "traits": {
             "smithy.api#documentation": "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
           }
+        },
+        "eventTypeCodes": {
+          "target": "com.amazonaws.health#EventTypeCodeList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event type codes.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The values to use to filter results from the <a>DescribeEventTypes</a>\n         operation.</p>"
+        "smithy.api#documentation": "<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html\">DescribeEventTypes</a>\n         operation.</p>"
       }
     },
     "com.amazonaws.health#EventTypeList": {
@@ -1337,6 +1385,18 @@
     "com.amazonaws.health#OrganizationAffectedEntitiesErrorItem": {
       "type": "structure",
       "members": {
+        "awsAccountId": {
+          "target": "com.amazonaws.health#accountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
+          }
+        },
+        "errorName": {
+          "target": "com.amazonaws.health#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the error.</p>"
+          }
+        },
         "errorMessage": {
           "target": "com.amazonaws.health#string",
           "traits": {
@@ -1348,22 +1408,10 @@
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>"
           }
-        },
-        "errorName": {
-          "target": "com.amazonaws.health#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the error.</p>"
-          }
-        },
-        "awsAccountId": {
-          "target": "com.amazonaws.health#accountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
-          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Error information returned when a <a>DescribeAffectedEntitiesForOrganization</a> operation cannot find or process a\n         specific entity.</p>"
+        "smithy.api#documentation": "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operation cannot find or process a\n         specific entity.</p>"
       }
     },
     "com.amazonaws.health#OrganizationEntityFiltersList": {
@@ -1381,20 +1429,29 @@
     "com.amazonaws.health#OrganizationEvent": {
       "type": "structure",
       "members": {
-        "eventTypeCategory": {
-          "target": "com.amazonaws.health#eventTypeCategory",
-          "traits": {
-            "smithy.api#documentation": "<p>The category of the event type.</p>"
-          }
-        },
         "service": {
           "target": "com.amazonaws.health#service",
           "traits": {
             "smithy.api#documentation": "<p>The AWS service that is affected by the event. For example, EC2, RDS.</p>"
           }
         },
-        "eventScopeCode": {
-          "target": "com.amazonaws.health#eventScopeCode"
+        "statusCode": {
+          "target": "com.amazonaws.health#eventStatusCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"
+          }
+        },
+        "eventTypeCode": {
+          "target": "com.amazonaws.health#eventTypeCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the event type. The format is\n            <code>AWS_SERVICE_DESCRIPTION</code>. For example,\n            <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"
+          }
+        },
+        "eventTypeCategory": {
+          "target": "com.amazonaws.health#eventTypeCategory",
+          "traits": {
+            "smithy.api#documentation": "<p>The category of the event type.</p>"
+          }
         },
         "startTime": {
           "target": "com.amazonaws.health#timestamp",
@@ -1402,10 +1459,10 @@
             "smithy.api#documentation": "<p>The date and time that the event began.</p>"
           }
         },
-        "eventTypeCode": {
-          "target": "com.amazonaws.health#eventTypeCode",
+        "lastUpdatedTime": {
+          "target": "com.amazonaws.health#timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the event type. The format is\n            <code>AWS_SERVICE_DESCRIPTION</code>. For example,\n            <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>"
+            "smithy.api#documentation": "<p>The most recent date and time that the event was updated.</p>"
           }
         },
         "arn": {
@@ -1420,16 +1477,10 @@
             "smithy.api#documentation": "<p>The AWS Region name of the event.</p>"
           }
         },
-        "statusCode": {
-          "target": "com.amazonaws.health#eventStatusCode",
+        "eventScopeCode": {
+          "target": "com.amazonaws.health#eventScopeCode",
           "traits": {
-            "smithy.api#documentation": "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"
-          }
-        },
-        "lastUpdatedTime": {
-          "target": "com.amazonaws.health#timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The most recent date and time that the event was updated.</p>"
+            "smithy.api#documentation": "<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected AWS accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have AWS accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"
           }
         },
         "endTime": {
@@ -1440,7 +1491,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Summary information about an event, returned by the <a>DescribeEventsForOrganization</a> operation.</p>"
+        "smithy.api#documentation": "<p>Summary information about an event, returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html\">DescribeEventsForOrganization</a> operation.</p>"
       }
     },
     "com.amazonaws.health#OrganizationEventDetailFiltersList": {
@@ -1458,27 +1509,27 @@
     "com.amazonaws.health#OrganizationEventDetails": {
       "type": "structure",
       "members": {
-        "awsAccountId": {
-          "target": "com.amazonaws.health#accountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
-          }
-        },
         "eventMetadata": {
           "target": "com.amazonaws.health#eventMetadata",
           "traits": {
             "smithy.api#documentation": "<p>Additional metadata about the event.</p>"
           }
         },
+        "eventDescription": {
+          "target": "com.amazonaws.health#EventDescription"
+        },
         "event": {
           "target": "com.amazonaws.health#Event"
         },
-        "eventDescription": {
-          "target": "com.amazonaws.health#EventDescription"
+        "awsAccountId": {
+          "target": "com.amazonaws.health#accountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 12-digit AWS account numbers that contains the affected entities.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Detailed information about an event. A combination of an <a>Event</a> object,\n         an <a>EventDescription</a> object, and additional metadata about the event.\n         Returned by the <a>DescribeEventDetailsForOrganization</a> operation.</p>"
+        "smithy.api#documentation": "<p>Detailed information about an event. A combination of an <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html\">Event</a> object,\n         an <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html\">EventDescription</a> object, and additional metadata about the event.\n         Returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> operation.</p>"
       }
     },
     "com.amazonaws.health#OrganizationEventDetailsErrorItem": {
@@ -1499,7 +1550,7 @@
         "awsAccountId": {
           "target": "com.amazonaws.health#accountId",
           "traits": {
-            "smithy.api#documentation": "<p>Error information returned when a <a>DescribeEventDetailsForOrganization</a>\n         operation cannot find a specified event.</p>"
+            "smithy.api#documentation": "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a>\n         operation cannot find a specified event.</p>"
           }
         },
         "errorName": {
@@ -1510,14 +1561,17 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Error information returned when a <a>DescribeEventDetailsForOrganization</a>\n         operation cannot find a specified event.</p>"
+        "smithy.api#documentation": "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a>\n         operation cannot find a specified event.</p>"
       }
     },
     "com.amazonaws.health#OrganizationEventFilter": {
       "type": "structure",
       "members": {
-        "endTime": {
-          "target": "com.amazonaws.health#DateTimeRange"
+        "regions": {
+          "target": "com.amazonaws.health#regionList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of AWS Regions.</p>"
+          }
         },
         "awsAccountIds": {
           "target": "com.amazonaws.health#awsAccountIdsList",
@@ -1531,11 +1585,8 @@
             "smithy.api#documentation": "<p>A list of event status codes.</p>"
           }
         },
-        "services": {
-          "target": "com.amazonaws.health#serviceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
-          }
+        "endTime": {
+          "target": "com.amazonaws.health#DateTimeRange"
         },
         "eventTypeCodes": {
           "target": "com.amazonaws.health#eventTypeList2",
@@ -1543,7 +1594,13 @@
             "smithy.api#documentation": "<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>\n         </p>"
           }
         },
-        "startTime": {
+        "eventTypeCategories": {
+          "target": "com.amazonaws.health#eventTypeCategoryList2",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event type category codes (issue, scheduledChange, or accountNotification).</p>"
+          }
+        },
+        "lastUpdatedTime": {
           "target": "com.amazonaws.health#DateTimeRange"
         },
         "entityValues": {
@@ -1552,30 +1609,24 @@
             "smithy.api#documentation": "<p>A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS volumes (vol-426ab23e).</p>"
           }
         },
-        "eventTypeCategories": {
-          "target": "com.amazonaws.health#eventTypeCategoryList2",
+        "services": {
+          "target": "com.amazonaws.health#serviceList",
           "traits": {
-            "smithy.api#documentation": "<p>REPLACEME</p>"
+            "smithy.api#documentation": "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
           }
         },
-        "regions": {
-          "target": "com.amazonaws.health#regionList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of AWS Regions.</p>"
-          }
+        "startTime": {
+          "target": "com.amazonaws.health#DateTimeRange"
         },
         "entityArns": {
           "target": "com.amazonaws.health#entityArnList",
           "traits": {
-            "smithy.api#documentation": "<p>REPLACEME</p>"
+            "smithy.api#documentation": "<p>A list of entity ARNs (unique identifiers).</p>"
           }
-        },
-        "lastUpdatedTime": {
-          "target": "com.amazonaws.health#DateTimeRange"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The values to filter results from the <a>DescribeEventsForOrganization</a>\n         operation.</p>"
+        "smithy.api#documentation": "<p>The values to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html\">DescribeEventsForOrganization</a>\n         operation.</p>"
       }
     },
     "com.amazonaws.health#OrganizationEventList": {

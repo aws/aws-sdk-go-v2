@@ -45,7 +45,7 @@
           "sdkId": "Kinesis Video Signaling",
           "arnNamespace": "kinesisvideo",
           "cloudFormationName": "KinesisVideoSignaling",
-          "cloudTrailEventSource": "signaling.kinesisvideo.amazonaws.com"
+          "cloudTrailEventSource": "kinesisvideosignaling.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "kinesisvideo"
@@ -130,10 +130,10 @@
     "com.amazonaws.kinesisvideosignaling#GetIceServerConfigRequest": {
       "type": "structure",
       "members": {
-        "Service": {
-          "target": "com.amazonaws.kinesisvideosignaling#Service",
+        "Username": {
+          "target": "com.amazonaws.kinesisvideosignaling#Username",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the desired service. Currently, <code>TURN</code> is the only valid\n            value.</p>"
+            "smithy.api#documentation": "<p>An optional user ID to be associated with the credentials.</p>"
           }
         },
         "ClientId": {
@@ -142,10 +142,10 @@
             "smithy.api#documentation": "<p>Unique identifier for the viewer. Must be unique within the signaling channel.</p>"
           }
         },
-        "Username": {
-          "target": "com.amazonaws.kinesisvideosignaling#Username",
+        "Service": {
+          "target": "com.amazonaws.kinesisvideosignaling#Service",
           "traits": {
-            "smithy.api#documentation": "<p>An optional user ID to be associated with the credentials.</p>"
+            "smithy.api#documentation": "<p>Specifies the desired service. Currently, <code>TURN</code> is the only valid\n            value.</p>"
           }
         },
         "ChannelARN": {
@@ -177,12 +177,6 @@
             "smithy.api#documentation": "<p>The period of time, in seconds, during which the username and password are\n            valid.</p>"
           }
         },
-        "Uris": {
-          "target": "com.amazonaws.kinesisvideosignaling#Uris",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of URIs, in the form specified in the <a href=\"https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03\">I-D.petithuguenin-behave-turn-uris</a> spec. These URIs provide the different\n            addresses and/or protocols that can be used to reach the TURN server.</p>"
-          }
-        },
         "Password": {
           "target": "com.amazonaws.kinesisvideosignaling#Password",
           "traits": {
@@ -193,6 +187,12 @@
           "target": "com.amazonaws.kinesisvideosignaling#Username",
           "traits": {
             "smithy.api#documentation": "<p>A username to login to the ICE server.</p>"
+          }
+        },
+        "Uris": {
+          "target": "com.amazonaws.kinesisvideosignaling#Uris",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of URIs, in the form specified in the <a href=\"https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03\">I-D.petithuguenin-behave-turn-uris</a> spec. These URIs provide the different\n            addresses and/or protocols that can be used to reach the TURN server.</p>"
           }
         }
       },

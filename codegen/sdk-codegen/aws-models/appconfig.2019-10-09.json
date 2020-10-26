@@ -138,7 +138,7 @@
           "sdkId": "AppConfig",
           "arnNamespace": "appconfig",
           "cloudFormationName": "AppConfig",
-          "cloudTrailEventSource": "blue.services.amazonaws.com"
+          "cloudTrailEventSource": "appconfig.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "appconfig"
@@ -157,16 +157,16 @@
             "smithy.api#documentation": "<p>The application name.</p>"
           }
         },
-        "Id": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
             "smithy.api#documentation": "<p>The description of the application.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The application ID.</p>"
           }
         }
       }
@@ -180,16 +180,16 @@
     "com.amazonaws.appconfig#Applications": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
-          }
-        },
         "Items": {
           "target": "com.amazonaws.appconfig#ApplicationList",
           "traits": {
             "smithy.api#documentation": "<p>The elements from this collection.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
           }
         }
       }
@@ -237,18 +237,18 @@
     "com.amazonaws.appconfig#Configuration": {
       "type": "structure",
       "members": {
-        "Content": {
-          "target": "com.amazonaws.appconfig#Blob",
-          "traits": {
-            "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
-            "smithy.api#httpPayload": {}
-          }
-        },
         "ContentType": {
           "target": "com.amazonaws.appconfig#String",
           "traits": {
             "smithy.api#documentation": "<p>A standard MIME type describing the format of the configuration content. For more\n         information, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
             "smithy.api#httpHeader": "Content-Type"
+          }
+        },
+        "Content": {
+          "target": "com.amazonaws.appconfig#Blob",
+          "traits": {
+            "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
+            "smithy.api#httpPayload": {}
           }
         },
         "ConfigurationVersion": {
@@ -269,16 +269,10 @@
             "smithy.api#documentation": "<p>The application ID.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.appconfig#Name",
+        "LocationUri": {
+          "target": "com.amazonaws.appconfig#Uri",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
-          }
-        },
-        "Validators": {
-          "target": "com.amazonaws.appconfig#ValidatorList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
+            "smithy.api#documentation": "<p>The URI location of the configuration.</p>"
           }
         },
         "RetrievalRoleArn": {
@@ -287,10 +281,16 @@
             "smithy.api#documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified\n         LocationUri.</p>"
           }
         },
-        "LocationUri": {
-          "target": "com.amazonaws.appconfig#Uri",
+        "Name": {
+          "target": "com.amazonaws.appconfig#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The URI location of the configuration.</p>"
+            "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration profile description.</p>"
           }
         },
         "Id": {
@@ -299,10 +299,10 @@
             "smithy.api#documentation": "<p>The configuration profile ID.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "Validators": {
+          "target": "com.amazonaws.appconfig#ValidatorList",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration profile description.</p>"
+            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
           }
         }
       }
@@ -310,28 +310,28 @@
     "com.amazonaws.appconfig#ConfigurationProfileSummary": {
       "type": "structure",
       "members": {
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>"
-          }
-        },
         "ValidatorTypes": {
           "target": "com.amazonaws.appconfig#ValidatorTypeList",
           "traits": {
             "smithy.api#documentation": "<p>The types of validators in the configuration profile.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.appconfig#Name",
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
+            "smithy.api#documentation": "<p>The application ID.</p>"
           }
         },
         "LocationUri": {
           "target": "com.amazonaws.appconfig#Uri",
           "traits": {
             "smithy.api#documentation": "<p>The URI location of the configuration.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.appconfig#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
           }
         },
         "Id": {
@@ -354,16 +354,16 @@
     "com.amazonaws.appconfig#ConfigurationProfiles": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
-          }
-        },
         "Items": {
           "target": "com.amazonaws.appconfig#ConfigurationProfileSummaryList",
           "traits": {
             "smithy.api#documentation": "<p>The elements from this collection.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
           }
         }
       }
@@ -416,16 +416,16 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.appconfig#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata to assign to the application. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
             "smithy.api#documentation": "<p>A description of the application.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.appconfig#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata to assign to the application. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
           }
         }
       }
@@ -467,12 +467,6 @@
             "smithy.api#documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified\n         LocationUri.</p>"
           }
         },
-        "Validators": {
-          "target": "com.amazonaws.appconfig#ValidatorList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
@@ -494,17 +488,23 @@
             "smithy.api#documentation": "<p>Metadata to assign to the configuration profile. Tags help organize and categorize your\n         AppConfig resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
           }
         },
+        "LocationUri": {
+          "target": "com.amazonaws.appconfig#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM\n         Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the\n         document name in the format <code>ssm-document://<Document_name></code> or the Amazon\n         Resource Name (ARN). For a parameter, specify either the parameter name in the format\n            <code>ssm-parameter://<Parameter_name></code> or the ARN. For an Amazon S3 object,\n         specify the URI in the following format: <code>s3://<bucket>/<objectKey>\n         </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
             "smithy.api#documentation": "<p>A description of the configuration profile.</p>"
           }
         },
-        "LocationUri": {
-          "target": "com.amazonaws.appconfig#Uri",
+        "Validators": {
+          "target": "com.amazonaws.appconfig#ValidatorList",
           "traits": {
-            "smithy.api#documentation": "<p>A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM\n         Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the\n         document name in the format <code>ssm-document://<Document_name></code> or the Amazon\n         Resource Name (ARN). For a parameter, specify either the parameter name in the format\n            <code>ssm-parameter://<Parameter_name></code> or the ARN. For an Amazon S3 object,\n         specify the URI in the following format: <code>s3://<bucket>/<objectKey>\n         </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
           }
         }
       }
@@ -551,17 +551,17 @@
             "smithy.api#documentation": "<p>The amount of time AppConfig monitors for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.appconfig#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata to assign to the deployment strategy. Tags help organize and categorize your\n         AppConfig resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
             "smithy.api#documentation": "<p>A name for the deployment strategy.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the deployment strategy.</p>"
           }
         },
         "ReplicateTo": {
@@ -571,12 +571,10 @@
             "smithy.api#required": {}
           }
         },
-        "DeploymentDurationInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+        "Tags": {
+          "target": "com.amazonaws.appconfig#TagMap",
           "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>Total amount of time for a deployment to last.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Metadata to assign to the deployment strategy. Tags help organize and categorize your\n         AppConfig resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
           }
         },
         "GrowthType": {
@@ -585,10 +583,12 @@
             "smithy.api#documentation": "<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the\n         following growth types:</p>\n         <p>\n            <b>Linear</b>: For this type, AppConfig processes the\n         deployment by dividing the total number of targets by the value specified for <code>Step\n            percentage</code>. For example, a linear deployment that uses a <code>Step\n            percentage</code> of 10 deploys the configuration to 10 percent of the hosts. After\n         those deployments are complete, the system deploys the configuration to the next 10\n         percent. This continues until 100% of the targets have successfully received the\n         configuration.</p>\n\n         <p>\n            <b>Exponential</b>: For this type, AppConfig processes the\n         deployment exponentially using the following formula: <code>G*(2^N)</code>. In this\n         formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is\n         the number of steps until the configuration is deployed to all targets. For example, if you\n         specify a growth factor of 2, then the system rolls out the configuration as\n         follows:</p>\n         <p>\n            <code>2*(2^0)</code>\n         </p>\n         <p>\n            <code>2*(2^1)</code>\n         </p>\n         <p>\n            <code>2*(2^2)</code>\n         </p>\n         <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the\n         targets, 8% of the targets, and continues until the configuration has been deployed to all\n         targets.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "DeploymentDurationInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the deployment strategy.</p>"
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>Total amount of time for a deployment to last.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -624,10 +624,12 @@
     "com.amazonaws.appconfig#CreateEnvironmentRequest": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.appconfig#TagMap",
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>Metadata to assign to the environment. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
+            "smithy.api#documentation": "<p>The application ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "Monitors": {
@@ -642,18 +644,16 @@
             "smithy.api#documentation": "<p>A description of the environment.</p>"
           }
         },
+        "Tags": {
+          "target": "com.amazonaws.appconfig#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata to assign to the environment. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
             "smithy.api#documentation": "<p>A name for the environment.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
-            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         }
@@ -699,20 +699,28 @@
     "com.amazonaws.appconfig#CreateHostedConfigurationVersionRequest": {
       "type": "structure",
       "members": {
-        "LatestVersionNumber": {
-          "target": "com.amazonaws.appconfig#Integer",
-          "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>An optional locking token used to prevent race conditions from overwriting configuration\n         updates when creating a new version. To ensure your data is not overwritten when creating\n         multiple hosted configuration versions in rapid succession, specify the version of the\n         latest hosted configuration version.</p>",
-            "smithy.api#httpHeader": "Latest-Version-Number"
-          }
-        },
         "Content": {
           "target": "com.amazonaws.appconfig#Blob",
           "traits": {
             "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
             "smithy.api#httpPayload": {},
             "smithy.api#required": {}
+          }
+        },
+        "ConfigurationProfileId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration profile ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LatestVersionNumber": {
+          "target": "com.amazonaws.appconfig#Integer",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>An optional locking token used to prevent race conditions from overwriting configuration\n         updates when creating a new version. To ensure your data is not overwritten when creating\n         multiple hosted configuration versions in rapid succession, specify the version of the\n         latest hosted configuration version.</p>",
+            "smithy.api#httpHeader": "Latest-Version-Number"
           }
         },
         "Description": {
@@ -727,14 +735,6 @@
           "traits": {
             "smithy.api#documentation": "<p>A standard MIME type describing the format of the configuration content. For more\n         information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
             "smithy.api#httpHeader": "Content-Type",
-            "smithy.api#required": {}
-          }
-        },
-        "ConfigurationProfileId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration profile ID.</p>",
-            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         },
@@ -904,18 +904,18 @@
     "com.amazonaws.appconfig#DeleteEnvironmentRequest": {
       "type": "structure",
       "members": {
-        "EnvironmentId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the environment you want to delete.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
             "smithy.api#documentation": "<p>The application ID that includes the environment you want to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "EnvironmentId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the environment you want to delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -950,10 +950,10 @@
     "com.amazonaws.appconfig#DeleteHostedConfigurationVersionRequest": {
       "type": "structure",
       "members": {
-        "ApplicationId": {
+        "ConfigurationProfileId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
+            "smithy.api#documentation": "<p>The configuration profile ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -966,10 +966,10 @@
             "smithy.api#required": {}
           }
         },
-        "ConfigurationProfileId": {
+        "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration profile ID.</p>",
+            "smithy.api#documentation": "<p>The application ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -979,28 +979,16 @@
     "com.amazonaws.appconfig#Deployment": {
       "type": "structure",
       "members": {
-        "DeploymentStrategyId": {
+        "StartedAt": {
+          "target": "com.amazonaws.appconfig#Iso8601DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the deployment started.</p>"
+          }
+        },
+        "ConfigurationProfileId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the deployment strategy that was deployed.</p>"
-          }
-        },
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the application that was deployed.</p>"
-          }
-        },
-        "ConfigurationLocationUri": {
-          "target": "com.amazonaws.appconfig#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the source location of the configuration.</p>"
-          }
-        },
-        "GrowthType": {
-          "target": "com.amazonaws.appconfig#GrowthType",
-          "traits": {
-            "smithy.api#documentation": "<p>The algorithm used to define how percentage grew over time.</p>"
+            "smithy.api#documentation": "<p>The ID of the configuration profile that was deployed.</p>"
           }
         },
         "PercentageComplete": {
@@ -1015,10 +1003,28 @@
             "smithy.api#documentation": "<p>The state of the deployment.</p>"
           }
         },
-        "EventLog": {
-          "target": "com.amazonaws.appconfig#DeploymentEvents",
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
           "traits": {
-            "smithy.api#documentation": "<p>A list containing all events related to a deployment. The most recent events are\n         displayed first.</p>"
+            "smithy.api#documentation": "<p>The description of the deployment.</p>"
+          }
+        },
+        "GrowthType": {
+          "target": "com.amazonaws.appconfig#GrowthType",
+          "traits": {
+            "smithy.api#documentation": "<p>The algorithm used to define how percentage grew over time.</p>"
+          }
+        },
+        "ConfigurationLocationUri": {
+          "target": "com.amazonaws.appconfig#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the source location of the configuration.</p>"
+          }
+        },
+        "DeploymentStrategyId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the deployment strategy that was deployed.</p>"
           }
         },
         "ConfigurationVersion": {
@@ -1027,52 +1033,22 @@
             "smithy.api#documentation": "<p>The configuration version that was deployed.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "EventLog": {
+          "target": "com.amazonaws.appconfig#DeploymentEvents",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the deployment.</p>"
+            "smithy.api#documentation": "<p>A list containing all events related to a deployment. The most recent events are\n         displayed first.</p>"
           }
         },
-        "ConfigurationProfileId": {
+        "EnvironmentId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the configuration profile that was deployed.</p>"
+            "smithy.api#documentation": "<p>The ID of the environment that was deployed.</p>"
           }
         },
-        "DeploymentDurationInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>Total amount of time the deployment lasted.</p>"
-          }
-        },
-        "FinalBakeTimeInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time AppConfig monitored for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
-          }
-        },
-        "StartedAt": {
-          "target": "com.amazonaws.appconfig#Iso8601DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the deployment started.</p>"
-          }
-        },
-        "DeploymentNumber": {
-          "target": "com.amazonaws.appconfig#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The sequence number of the deployment.</p>"
-          }
-        },
-        "GrowthFactor": {
-          "target": "com.amazonaws.appconfig#Percentage",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
-          }
-        },
-        "CompletedAt": {
-          "target": "com.amazonaws.appconfig#Iso8601DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the deployment completed. </p>"
+            "smithy.api#documentation": "<p>The ID of the application that was deployed.</p>"
           }
         },
         "ConfigurationName": {
@@ -1081,10 +1057,34 @@
             "smithy.api#documentation": "<p>The name of the configuration.</p>"
           }
         },
-        "EnvironmentId": {
-          "target": "com.amazonaws.appconfig#Id",
+        "DeploymentNumber": {
+          "target": "com.amazonaws.appconfig#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the environment that was deployed.</p>"
+            "smithy.api#documentation": "<p>The sequence number of the deployment.</p>"
+          }
+        },
+        "FinalBakeTimeInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time AppConfig monitored for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
+          }
+        },
+        "CompletedAt": {
+          "target": "com.amazonaws.appconfig#Iso8601DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the deployment completed. </p>"
+          }
+        },
+        "GrowthFactor": {
+          "target": "com.amazonaws.appconfig#Percentage",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
+          }
+        },
+        "DeploymentDurationInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+          "traits": {
+            "smithy.api#documentation": "<p>Total amount of time the deployment lasted.</p>"
           }
         }
       }
@@ -1092,28 +1092,28 @@
     "com.amazonaws.appconfig#DeploymentEvent": {
       "type": "structure",
       "members": {
-        "OccurredAt": {
-          "target": "com.amazonaws.appconfig#Iso8601DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the event occurred.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
             "smithy.api#documentation": "<p>A description of the deployment event. Descriptions include, but are not limited to, the\n         user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts\n         that received the deployment, or in the case of an internal error, a recommendation to\n         attempt a new deployment.</p>"
           }
         },
-        "TriggeredBy": {
-          "target": "com.amazonaws.appconfig#TriggeredBy",
-          "traits": {
-            "smithy.api#documentation": "<p>The entity that triggered the deployment event. Events can be triggered by a user, AWS\n         AppConfig, an Amazon CloudWatch alarm, or an internal error.</p>"
-          }
-        },
         "EventType": {
           "target": "com.amazonaws.appconfig#DeploymentEventType",
           "traits": {
             "smithy.api#documentation": "<p>The type of deployment event. Deployment event types include the start, stop, or\n         completion of a deployment; a percentage update; the start or stop of a bake period; the\n         start or completion of a rollback.</p>"
+          }
+        },
+        "OccurredAt": {
+          "target": "com.amazonaws.appconfig#Iso8601DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the event occurred.</p>"
+          }
+        },
+        "TriggeredBy": {
+          "target": "com.amazonaws.appconfig#TriggeredBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity that triggered the deployment event. Events can be triggered by a user, AWS\n         AppConfig, an Amazon CloudWatch alarm, or an internal error.</p>"
           }
         }
       },
@@ -1215,18 +1215,6 @@
     "com.amazonaws.appconfig#DeploymentStrategy": {
       "type": "structure",
       "members": {
-        "GrowthType": {
-          "target": "com.amazonaws.appconfig#GrowthType",
-          "traits": {
-            "smithy.api#documentation": "<p>The algorithm used to define how percentage grew over time.</p>"
-          }
-        },
-        "DeploymentDurationInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
-          "traits": {
-            "smithy.api#documentation": "<p>Total amount of time the deployment lasted.</p>"
-          }
-        },
         "ReplicateTo": {
           "target": "com.amazonaws.appconfig#ReplicateTo",
           "traits": {
@@ -1245,22 +1233,34 @@
             "smithy.api#documentation": "<p>The description of the deployment strategy.</p>"
           }
         },
-        "FinalBakeTimeInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time AppConfig monitored for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the deployment strategy.</p>"
           }
         },
+        "FinalBakeTimeInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time AppConfig monitored for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
+          }
+        },
+        "DeploymentDurationInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+          "traits": {
+            "smithy.api#documentation": "<p>Total amount of time the deployment lasted.</p>"
+          }
+        },
         "GrowthFactor": {
           "target": "com.amazonaws.appconfig#Percentage",
           "traits": {
             "smithy.api#documentation": "<p>The percentage of targets that received a deployed configuration during each\n         interval.</p>"
+          }
+        },
+        "GrowthType": {
+          "target": "com.amazonaws.appconfig#GrowthType",
+          "traits": {
+            "smithy.api#documentation": "<p>The algorithm used to define how percentage grew over time.</p>"
           }
         }
       }
@@ -1280,16 +1280,10 @@
     "com.amazonaws.appconfig#DeploymentSummary": {
       "type": "structure",
       "members": {
-        "FinalBakeTimeInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+        "ConfigurationVersion": {
+          "target": "com.amazonaws.appconfig#Version",
           "traits": {
-            "smithy.api#documentation": "<p>The amount of time AppConfig monitors for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
-          }
-        },
-        "GrowthFactor": {
-          "target": "com.amazonaws.appconfig#Percentage",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
+            "smithy.api#documentation": "<p>The version of the configuration.</p>"
           }
         },
         "DeploymentNumber": {
@@ -1298,10 +1292,46 @@
             "smithy.api#documentation": "<p>The sequence number of the deployment.</p>"
           }
         },
+        "State": {
+          "target": "com.amazonaws.appconfig#DeploymentState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the deployment.</p>"
+          }
+        },
+        "FinalBakeTimeInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time AppConfig monitors for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
+          }
+        },
+        "PercentageComplete": {
+          "target": "com.amazonaws.appconfig#Percentage",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of targets for which the deployment is available.</p>"
+          }
+        },
+        "ConfigurationName": {
+          "target": "com.amazonaws.appconfig#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the configuration.</p>"
+          }
+        },
+        "StartedAt": {
+          "target": "com.amazonaws.appconfig#Iso8601DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>Time the deployment started.</p>"
+          }
+        },
         "CompletedAt": {
           "target": "com.amazonaws.appconfig#Iso8601DateTime",
           "traits": {
             "smithy.api#documentation": "<p>Time the deployment completed.</p>"
+          }
+        },
+        "GrowthFactor": {
+          "target": "com.amazonaws.appconfig#Percentage",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
           }
         },
         "DeploymentDurationInMinutes": {
@@ -1315,36 +1345,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The algorithm used to define how percentage grows over time.</p>"
           }
-        },
-        "PercentageComplete": {
-          "target": "com.amazonaws.appconfig#Percentage",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of targets for which the deployment is available.</p>"
-          }
-        },
-        "StartedAt": {
-          "target": "com.amazonaws.appconfig#Iso8601DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>Time the deployment started.</p>"
-          }
-        },
-        "ConfigurationName": {
-          "target": "com.amazonaws.appconfig#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the configuration.</p>"
-          }
-        },
-        "ConfigurationVersion": {
-          "target": "com.amazonaws.appconfig#Version",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the configuration.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.appconfig#DeploymentState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the deployment.</p>"
-          }
         }
       },
       "traits": {
@@ -1354,16 +1354,16 @@
     "com.amazonaws.appconfig#Deployments": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
-          }
-        },
         "Items": {
           "target": "com.amazonaws.appconfig#DeploymentList",
           "traits": {
             "smithy.api#documentation": "<p>The elements from this collection.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
           }
         }
       }
@@ -1392,6 +1392,18 @@
             "smithy.api#documentation": "<p>The application ID.</p>"
           }
         },
+        "Monitors": {
+          "target": "com.amazonaws.appconfig#MonitorList",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon CloudWatch alarms monitored during the deployment.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The environment ID.</p>"
+          }
+        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
@@ -1402,18 +1414,6 @@
           "target": "com.amazonaws.appconfig#EnvironmentState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the environment. An environment can be in one of the following states:\n            <code>READY_FOR_DEPLOYMENT</code>, <code>DEPLOYING</code>, <code>ROLLING_BACK</code>, or\n            <code>ROLLED_BACK</code>\n         </p>"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The environment ID.</p>"
-          }
-        },
-        "Monitors": {
-          "target": "com.amazonaws.appconfig#MonitorList",
-          "traits": {
-            "smithy.api#documentation": "<p>Amazon CloudWatch alarms monitored during the deployment.</p>"
           }
         }
       }
@@ -1450,16 +1450,16 @@
     "com.amazonaws.appconfig#Environments": {
       "type": "structure",
       "members": {
-        "Items": {
-          "target": "com.amazonaws.appconfig#EnvironmentList",
-          "traits": {
-            "smithy.api#documentation": "<p>The elements from this collection.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.appconfig#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
+          }
+        },
+        "Items": {
+          "target": "com.amazonaws.appconfig#EnvironmentList",
+          "traits": {
+            "smithy.api#documentation": "<p>The elements from this collection.</p>"
           }
         }
       }
@@ -1567,18 +1567,18 @@
     "com.amazonaws.appconfig#GetConfigurationProfileRequest": {
       "type": "structure",
       "members": {
-        "ConfigurationProfileId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the configuration profile you want to get.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the application that includes the configuration profile you want to\n         get.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ConfigurationProfileId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the configuration profile you want to get.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1596,12 +1596,11 @@
             "smithy.api#required": {}
           }
         },
-        "Configuration": {
-          "target": "com.amazonaws.appconfig#StringWithLengthBetween1And64",
+        "ClientConfigurationVersion": {
+          "target": "com.amazonaws.appconfig#Version",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration to get. Specify either the configuration name or the configuration\n         ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The configuration version returned in the most recent <code>GetConfiguration</code>\n         response.</p>\n         <important>\n            <p>AWS AppConfig uses the value of the <code>ClientConfigurationVersion</code> parameter\n            to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to\n               <code>GetConfiguration</code>, your clients receive the current configuration. You\n            are charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend that you include the\n               <code>ClientConfigurationVersion</code> value with every call to\n               <code>GetConfiguration</code>. This value must be saved on your client. Subsequent\n            calls to <code>GetConfiguration</code> must pass this value by using the\n               <code>ClientConfigurationVersion</code> parameter. </p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html\">Retrieving the Configuration</a> in the\n         <i>AWS AppConfig User Guide</i>.</p>",
+            "smithy.api#httpQuery": "client_configuration_version"
           }
         },
         "ClientId": {
@@ -1620,11 +1619,12 @@
             "smithy.api#required": {}
           }
         },
-        "ClientConfigurationVersion": {
-          "target": "com.amazonaws.appconfig#Version",
+        "Configuration": {
+          "target": "com.amazonaws.appconfig#StringWithLengthBetween1And64",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration version returned in the most recent <code>GetConfiguration</code>\n         response.</p>\n         <important>\n            <p>AWS AppConfig uses the value of the <code>ClientConfigurationVersion</code> parameter\n            to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to\n               <code>GetConfiguration</code>, your clients receive the current configuration. You\n            are charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend that you include the\n               <code>ClientConfigurationVersion</code> value with every call to\n               <code>GetConfiguration</code>. This value must be saved on your client. Subsequent\n            calls to <code>GetConfiguration</code> must pass this value by using the\n               <code>ClientConfigurationVersion</code> parameter. </p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html\">Retrieving the Configuration</a> in the\n         <i>AWS AppConfig User Guide</i>.</p>",
-            "smithy.api#httpQuery": "client_configuration_version"
+            "smithy.api#documentation": "<p>The configuration to get. Specify either the configuration name or the configuration\n         ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -1816,18 +1816,18 @@
             "smithy.api#required": {}
           }
         },
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "VersionNumber": {
           "target": "com.amazonaws.appconfig#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The version.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The application ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1861,13 +1861,6 @@
     "com.amazonaws.appconfig#HostedConfigurationVersion": {
       "type": "structure",
       "members": {
-        "ContentType": {
-          "target": "com.amazonaws.appconfig#StringWithLengthBetween1And255",
-          "traits": {
-            "smithy.api#documentation": "<p>A standard MIME type describing the format of the configuration content. For more\n         information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
-            "smithy.api#httpHeader": "Content-Type"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.appconfig#Description",
           "traits": {
@@ -1882,11 +1875,18 @@
             "smithy.api#httpHeader": "Configuration-Profile-Id"
           }
         },
-        "VersionNumber": {
-          "target": "com.amazonaws.appconfig#Integer",
+        "Content": {
+          "target": "com.amazonaws.appconfig#Blob",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration version.</p>",
-            "smithy.api#httpHeader": "Version-Number"
+            "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
+            "smithy.api#httpPayload": {}
+          }
+        },
+        "ContentType": {
+          "target": "com.amazonaws.appconfig#StringWithLengthBetween1And255",
+          "traits": {
+            "smithy.api#documentation": "<p>A standard MIME type describing the format of the configuration content. For more\n         information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         },
         "ApplicationId": {
@@ -1896,11 +1896,11 @@
             "smithy.api#httpHeader": "Application-Id"
           }
         },
-        "Content": {
-          "target": "com.amazonaws.appconfig#Blob",
+        "VersionNumber": {
+          "target": "com.amazonaws.appconfig#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
-            "smithy.api#httpPayload": {}
+            "smithy.api#documentation": "<p>The configuration version.</p>",
+            "smithy.api#httpHeader": "Version-Number"
           }
         }
       }
@@ -1908,16 +1908,10 @@
     "com.amazonaws.appconfig#HostedConfigurationVersionSummary": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the configuration.</p>"
-          }
-        },
-        "ApplicationId": {
+        "ConfigurationProfileId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>"
+            "smithy.api#documentation": "<p>The configuration profile ID.</p>"
           }
         },
         "VersionNumber": {
@@ -1926,16 +1920,22 @@
             "smithy.api#documentation": "<p>The configuration version.</p>"
           }
         },
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The application ID.</p>"
+          }
+        },
         "ContentType": {
           "target": "com.amazonaws.appconfig#StringWithLengthBetween1And255",
           "traits": {
             "smithy.api#documentation": "<p>A standard MIME type describing the format of the configuration content. For more\n         information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>"
           }
         },
-        "ConfigurationProfileId": {
-          "target": "com.amazonaws.appconfig#Id",
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration profile ID.</p>"
+            "smithy.api#documentation": "<p>A description of the configuration.</p>"
           }
         }
       },
@@ -1952,16 +1952,16 @@
     "com.amazonaws.appconfig#HostedConfigurationVersions": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
-          }
-        },
         "Items": {
           "target": "com.amazonaws.appconfig#HostedConfigurationVersionSummaryList",
           "traits": {
             "smithy.api#documentation": "<p>The elements from this collection.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
           }
         }
       }
@@ -2027,19 +2027,19 @@
     "com.amazonaws.appconfig#ListApplicationsRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+            "smithy.api#httpQuery": "next_token"
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.appconfig#MaxResults",
           "traits": {
             "smithy.api#box": {},
             "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
             "smithy.api#httpQuery": "max_results"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
-            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -2088,19 +2088,19 @@
             "smithy.api#httpQuery": "max_results"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
-            "smithy.api#httpQuery": "next_token"
-          }
-        },
         "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
             "smithy.api#documentation": "<p>The application ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -2138,19 +2138,19 @@
     "com.amazonaws.appconfig#ListDeploymentStrategiesRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
-            "smithy.api#httpQuery": "next_token"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.appconfig#MaxResults",
           "traits": {
             "smithy.api#box": {},
             "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
             "smithy.api#httpQuery": "max_results"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -2199,13 +2199,6 @@
             "smithy.api#httpQuery": "max_results"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
-            "smithy.api#httpQuery": "next_token"
-          }
-        },
         "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
@@ -2220,6 +2213,13 @@
             "smithy.api#documentation": "<p>The environment ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -2268,19 +2268,19 @@
             "smithy.api#required": {}
           }
         },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+            "smithy.api#httpQuery": "next_token"
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.appconfig#MaxResults",
           "traits": {
             "smithy.api#box": {},
             "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
             "smithy.api#httpQuery": "max_results"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
-            "smithy.api#httpQuery": "next_token"
           }
         }
       }
@@ -2321,13 +2321,6 @@
     "com.amazonaws.appconfig#ListHostedConfigurationVersionsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appconfig#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results. </p>",
-            "smithy.api#httpQuery": "next_token"
-          }
-        },
         "ApplicationId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
@@ -2336,20 +2329,27 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.appconfig#MaxResults",
-          "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
-            "smithy.api#httpQuery": "max_results"
-          }
-        },
         "ConfigurationProfileId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
             "smithy.api#documentation": "<p>The configuration profile ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appconfig#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results. </p>",
+            "smithy.api#httpQuery": "next_token"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.appconfig#MaxResults",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
+            "smithy.api#httpQuery": "max_results"
           }
         }
       }
@@ -2416,16 +2416,16 @@
     "com.amazonaws.appconfig#Monitor": {
       "type": "structure",
       "members": {
-        "AlarmArn": {
-          "target": "com.amazonaws.appconfig#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>ARN of the Amazon CloudWatch alarm.</p>"
-          }
-        },
         "AlarmRoleArn": {
           "target": "com.amazonaws.appconfig#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.</p>"
+          }
+        },
+        "AlarmArn": {
+          "target": "com.amazonaws.appconfig#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the Amazon CloudWatch alarm.</p>"
           }
         }
       },
@@ -2466,17 +2466,17 @@
     "com.amazonaws.appconfig#PayloadTooLargeException": {
       "type": "structure",
       "members": {
-        "Limit": {
-          "target": "com.amazonaws.appconfig#Float"
+        "Message": {
+          "target": "com.amazonaws.appconfig#String"
         },
         "Size": {
           "target": "com.amazonaws.appconfig#Float"
         },
-        "Message": {
-          "target": "com.amazonaws.appconfig#String"
-        },
         "Measure": {
           "target": "com.amazonaws.appconfig#BytesMeasure"
+        },
+        "Limit": {
+          "target": "com.amazonaws.appconfig#Float"
         }
       },
       "traits": {
@@ -2601,13 +2601,6 @@
             "smithy.api#required": {}
           }
         },
-        "ConfigurationVersion": {
-          "target": "com.amazonaws.appconfig#Version",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration version to deploy.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DeploymentStrategyId": {
           "target": "com.amazonaws.appconfig#DeploymentStrategyId",
           "traits": {
@@ -2622,10 +2615,17 @@
             "smithy.api#required": {}
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "Tags": {
+          "target": "com.amazonaws.appconfig#TagMap",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the deployment.</p>"
+            "smithy.api#documentation": "<p>Metadata to assign to the deployment. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
+          }
+        },
+        "ConfigurationVersion": {
+          "target": "com.amazonaws.appconfig#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration version to deploy.</p>",
+            "smithy.api#required": {}
           }
         },
         "EnvironmentId": {
@@ -2636,10 +2636,10 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.appconfig#TagMap",
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
           "traits": {
-            "smithy.api#documentation": "<p>Metadata to assign to the deployment. Tags help organize and categorize your AppConfig\n         resources. Each tag consists of a key and an optional value, both of which you\n         define.</p>"
+            "smithy.api#documentation": "<p>A description of the deployment.</p>"
           }
         }
       }
@@ -2874,19 +2874,19 @@
     "com.amazonaws.appconfig#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.appconfig#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag keys to delete.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.appconfig#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource for which to remove tags.</p>",
             "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.appconfig#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys to delete.</p>",
+            "smithy.api#httpQuery": "tagKeys",
             "smithy.api#required": {}
           }
         }
@@ -2976,24 +2976,28 @@
     "com.amazonaws.appconfig#UpdateConfigurationProfileRequest": {
       "type": "structure",
       "members": {
+        "Validators": {
+          "target": "com.amazonaws.appconfig#ValidatorList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
           }
         },
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the configuration profile.</p>"
+          }
+        },
         "RetrievalRoleArn": {
           "target": "com.amazonaws.appconfig#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified\n         LocationUri.</p>"
-          }
-        },
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
           }
         },
         "ConfigurationProfileId": {
@@ -3004,16 +3008,12 @@
             "smithy.api#required": {}
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the configuration profile.</p>"
-          }
-        },
-        "Validators": {
-          "target": "com.amazonaws.appconfig#ValidatorList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of methods for validating the configuration.</p>"
+            "smithy.api#documentation": "<p>The application ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -3049,16 +3049,18 @@
     "com.amazonaws.appconfig#UpdateDeploymentStrategyRequest": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.appconfig#Description",
+        "FinalBakeTimeInMinutes": {
+          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the deployment strategy.</p>"
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The amount of time AppConfig monitors for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
           }
         },
-        "GrowthType": {
-          "target": "com.amazonaws.appconfig#GrowthType",
+        "GrowthFactor": {
+          "target": "com.amazonaws.appconfig#GrowthFactor",
           "traits": {
-            "smithy.api#documentation": "<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the\n         following growth types:</p>\n         <p>\n            <b>Linear</b>: For this type, AppConfig processes the\n         deployment by increments of the growth factor evenly distributed over the deployment time.\n         For example, a linear deployment that uses a growth factor of 20 initially makes the\n         configuration available to 20 percent of the targets. After 1/5th of the deployment time\n         has passed, the system updates the percentage to 40 percent. This continues until 100% of\n         the targets are set to receive the deployed configuration.</p>\n\n         <p>\n            <b>Exponential</b>: For this type, AppConfig processes the\n         deployment exponentially using the following formula: <code>G*(2^N)</code>. In this\n         formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is\n         the number of steps until the configuration is deployed to all targets. For example, if you\n         specify a growth factor of 2, then the system rolls out the configuration as\n         follows:</p>\n         <p>\n            <code>2*(2^0)</code>\n         </p>\n         <p>\n            <code>2*(2^1)</code>\n         </p>\n         <p>\n            <code>2*(2^2)</code>\n         </p>\n         <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the\n         targets, 8% of the targets, and continues until the configuration has been deployed to all\n         targets.</p>"
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
           }
         },
         "DeploymentDurationInMinutes": {
@@ -3076,18 +3078,16 @@
             "smithy.api#required": {}
           }
         },
-        "FinalBakeTimeInMinutes": {
-          "target": "com.amazonaws.appconfig#MinutesBetween0And24Hours",
+        "GrowthType": {
+          "target": "com.amazonaws.appconfig#GrowthType",
           "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The amount of time AppConfig monitors for alarms before considering the deployment to be\n         complete and no longer eligible for automatic roll back.</p>"
+            "smithy.api#documentation": "<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the\n         following growth types:</p>\n         <p>\n            <b>Linear</b>: For this type, AppConfig processes the\n         deployment by increments of the growth factor evenly distributed over the deployment time.\n         For example, a linear deployment that uses a growth factor of 20 initially makes the\n         configuration available to 20 percent of the targets. After 1/5th of the deployment time\n         has passed, the system updates the percentage to 40 percent. This continues until 100% of\n         the targets are set to receive the deployed configuration.</p>\n\n         <p>\n            <b>Exponential</b>: For this type, AppConfig processes the\n         deployment exponentially using the following formula: <code>G*(2^N)</code>. In this\n         formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is\n         the number of steps until the configuration is deployed to all targets. For example, if you\n         specify a growth factor of 2, then the system rolls out the configuration as\n         follows:</p>\n         <p>\n            <code>2*(2^0)</code>\n         </p>\n         <p>\n            <code>2*(2^1)</code>\n         </p>\n         <p>\n            <code>2*(2^2)</code>\n         </p>\n         <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the\n         targets, 8% of the targets, and continues until the configuration has been deployed to all\n         targets.</p>"
           }
         },
-        "GrowthFactor": {
-          "target": "com.amazonaws.appconfig#GrowthFactor",
+        "Description": {
+          "target": "com.amazonaws.appconfig#Description",
           "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The percentage of targets to receive a deployed configuration during each\n         interval.</p>"
+            "smithy.api#documentation": "<p>A description of the deployment strategy.</p>"
           }
         }
       }
@@ -3135,6 +3135,14 @@
             "smithy.api#documentation": "<p>Amazon CloudWatch alarms to monitor during the deployment process.</p>"
           }
         },
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The application ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "EnvironmentId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
@@ -3147,14 +3155,6 @@
           "target": "com.amazonaws.appconfig#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the environment.</p>"
-          }
-        },
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
           }
         }
       }
@@ -3196,14 +3196,6 @@
     "com.amazonaws.appconfig#ValidateConfigurationRequest": {
       "type": "structure",
       "members": {
-        "ApplicationId": {
-          "target": "com.amazonaws.appconfig#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The application ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "ConfigurationProfileId": {
           "target": "com.amazonaws.appconfig#Id",
           "traits": {
@@ -3217,6 +3209,14 @@
           "traits": {
             "smithy.api#documentation": "<p>The version of the configuration to validate.</p>",
             "smithy.api#httpQuery": "configuration_version",
+            "smithy.api#required": {}
+          }
+        },
+        "ApplicationId": {
+          "target": "com.amazonaws.appconfig#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The application ID.</p>",
+            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         }

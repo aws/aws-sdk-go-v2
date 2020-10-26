@@ -91,7 +91,7 @@
           "sdkId": "CodeStar connections",
           "arnNamespace": "codestar-connections",
           "cloudFormationName": "CodeStarconnections",
-          "cloudTrailEventSource": "connections.codestar.amazonaws.com"
+          "cloudTrailEventSource": "codestarconnections.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "codestar-connections"
@@ -108,6 +108,12 @@
           "target": "com.amazonaws.codestarconnections#ConnectionArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection\n      reference when the connection is shared between AWS services.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>"
+          }
+        },
+        "ConnectionName": {
+          "target": "com.amazonaws.codestarconnections#ConnectionName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the connection. Connection names must be unique in an AWS user account.</p>"
           }
         },
         "HostArn": {
@@ -132,12 +138,6 @@
           "target": "com.amazonaws.codestarconnections#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The identifier of the external provider where your third-party code repository is configured.\n      For Bitbucket, this is the account ID of the owner of the Bitbucket repository.</p>"
-          }
-        },
-        "ConnectionName": {
-          "target": "com.amazonaws.codestarconnections#ConnectionName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the connection. Connection names must be unique in an AWS user account.</p>"
           }
         }
       },
@@ -215,16 +215,10 @@
     "com.amazonaws.codestarconnections#CreateConnectionInput": {
       "type": "structure",
       "members": {
-        "HostArn": {
-          "target": "com.amazonaws.codestarconnections#HostArn",
+        "Tags": {
+          "target": "com.amazonaws.codestarconnections#TagList",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host associated with the connection to be created.</p>"
-          }
-        },
-        "ProviderType": {
-          "target": "com.amazonaws.codestarconnections#ProviderType",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the external provider where your third-party code repository is configured.\n      The valid provider type is Bitbucket.</p>"
+            "smithy.api#documentation": "<p>The key-value pair to use when tagging the resource.</p>"
           }
         },
         "ConnectionName": {
@@ -234,10 +228,16 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.codestarconnections#TagList",
+        "ProviderType": {
+          "target": "com.amazonaws.codestarconnections#ProviderType",
           "traits": {
-            "smithy.api#documentation": "<p>The key-value pair to use when tagging the resource.</p>"
+            "smithy.api#documentation": "<p>The name of the external provider where your third-party code repository is configured.\n      The valid provider type is Bitbucket.</p>"
+          }
+        },
+        "HostArn": {
+          "target": "com.amazonaws.codestarconnections#HostArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host associated with the connection to be created.</p>"
           }
         }
       }
@@ -245,17 +245,17 @@
     "com.amazonaws.codestarconnections#CreateConnectionOutput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.codestarconnections#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the tags applied to the resource.</p>"
-          }
-        },
         "ConnectionArn": {
           "target": "com.amazonaws.codestarconnections#ConnectionArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the\n      connection reference when the connection is shared between AWS services.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>",
             "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.codestarconnections#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the tags applied to the resource.</p>"
           }
         }
       }
@@ -287,6 +287,13 @@
             "smithy.api#required": {}
           }
         },
+        "Name": {
+          "target": "com.amazonaws.codestarconnections#HostName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the host to be created. The name must be unique in the calling AWS\n      account.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "VpcConfiguration": {
           "target": "com.amazonaws.codestarconnections#VpcConfiguration",
           "traits": {
@@ -297,13 +304,6 @@
           "target": "com.amazonaws.codestarconnections#Url",
           "traits": {
             "smithy.api#documentation": "<p>The endpoint of the infrastructure to be represented by the host after it is\n      created.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.codestarconnections#HostName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the host to be created. The name must be unique in the calling AWS\n      account.</p>",
             "smithy.api#required": {}
           }
         }
@@ -479,10 +479,10 @@
             "smithy.api#documentation": "<p>The provider type of the requested host, such as GitHub Enterprise Server.</p>"
           }
         },
-        "VpcConfiguration": {
-          "target": "com.amazonaws.codestarconnections#VpcConfiguration",
+        "Name": {
+          "target": "com.amazonaws.codestarconnections#HostName",
           "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration of the requested host.</p>"
+            "smithy.api#documentation": "<p>The name of the requested host.</p>"
           }
         },
         "ProviderEndpoint": {
@@ -491,16 +491,16 @@
             "smithy.api#documentation": "<p>The endpoint of the infrastructure represented by the requested host.</p>"
           }
         },
+        "VpcConfiguration": {
+          "target": "com.amazonaws.codestarconnections#VpcConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC configuration of the requested host.</p>"
+          }
+        },
         "Status": {
           "target": "com.amazonaws.codestarconnections#HostStatus",
           "traits": {
             "smithy.api#documentation": "<p>The status of the requested host.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.codestarconnections#HostName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the requested host.</p>"
           }
         }
       }
@@ -508,36 +508,6 @@
     "com.amazonaws.codestarconnections#Host": {
       "type": "structure",
       "members": {
-        "VpcConfiguration": {
-          "target": "com.amazonaws.codestarconnections#VpcConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration provisioned for the host.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.codestarconnections#HostName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the host.</p>"
-          }
-        },
-        "ProviderEndpoint": {
-          "target": "com.amazonaws.codestarconnections#Url",
-          "traits": {
-            "smithy.api#documentation": "<p>The endpoint of the infrastructure where your provider type is installed.</p>"
-          }
-        },
-        "HostArn": {
-          "target": "com.amazonaws.codestarconnections#HostArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host.</p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.codestarconnections#HostStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.</p>"
-          }
-        },
         "StatusMessage": {
           "target": "com.amazonaws.codestarconnections#HostStatusMessage",
           "traits": {
@@ -548,6 +518,36 @@
           "target": "com.amazonaws.codestarconnections#ProviderType",
           "traits": {
             "smithy.api#documentation": "<p>The name of the installed provider to be associated with your connection. The host\n      resource represents the infrastructure where your provider type is installed. The valid\n      provider type is GitHub Enterprise Server.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.codestarconnections#HostName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the host.</p>"
+          }
+        },
+        "HostArn": {
+          "target": "com.amazonaws.codestarconnections#HostArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host.</p>"
+          }
+        },
+        "VpcConfiguration": {
+          "target": "com.amazonaws.codestarconnections#VpcConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC configuration provisioned for the host.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.codestarconnections#HostStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.</p>"
+          }
+        },
+        "ProviderEndpoint": {
+          "target": "com.amazonaws.codestarconnections#Url",
+          "traits": {
+            "smithy.api#documentation": "<p>The endpoint of the infrastructure where your provider type is installed.</p>"
           }
         }
       },
@@ -619,16 +619,16 @@
     "com.amazonaws.codestarconnections#ListConnectionsInput": {
       "type": "structure",
       "members": {
-        "HostArnFilter": {
-          "target": "com.amazonaws.codestarconnections#HostArn",
-          "traits": {
-            "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified host.</p>"
-          }
-        },
         "ProviderTypeFilter": {
           "target": "com.amazonaws.codestarconnections#ProviderType",
           "traits": {
             "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified provider, such as\n      Bitbucket.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.codestarconnections#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n      results, make another call with the returned <code>nextToken</code> value.</p>"
           }
         },
         "NextToken": {
@@ -637,10 +637,10 @@
             "smithy.api#documentation": "<p>The token that was returned from the previous <code>ListConnections</code> call, which\n      can be used to return the next set of connections in the list.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.codestarconnections#MaxResults",
+        "HostArnFilter": {
+          "target": "com.amazonaws.codestarconnections#HostArn",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n      results, make another call with the returned <code>nextToken</code> value.</p>"
+            "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified host.</p>"
           }
         }
       }
@@ -648,16 +648,16 @@
     "com.amazonaws.codestarconnections#ListConnectionsOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.codestarconnections#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token that can be used in the next <code>ListConnections</code> call. To view all\n      items in the list, continue to call this operation with each subsequent token until no more\n      <code>nextToken</code> values are returned.</p>"
-          }
-        },
         "Connections": {
           "target": "com.amazonaws.codestarconnections#ConnectionList",
           "traits": {
             "smithy.api#documentation": "<p>A list of connections and the details for each connection, such as status, owner, and\n      provider type.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.codestarconnections#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token that can be used in the next <code>ListConnections</code> call. To view all\n      items in the list, continue to call this operation with each subsequent token until no more\n      <code>nextToken</code> values are returned.</p>"
           }
         }
       }
@@ -682,16 +682,16 @@
     "com.amazonaws.codestarconnections#ListHostsInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.codestarconnections#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token that was returned from the previous <code>ListHosts</code> call, which can be\n      used to return the next set of hosts in the list.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.codestarconnections#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n      results, make another call with the returned <code>nextToken</code> value.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.codestarconnections#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that was returned from the previous <code>ListHosts</code> call, which can be\n      used to return the next set of hosts in the list.</p>"
           }
         }
       }
@@ -699,16 +699,16 @@
     "com.amazonaws.codestarconnections#ListHostsOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.codestarconnections#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A token that can be used in the next <code>ListHosts</code> call. To view all items in the\n      list, continue to call this operation with each subsequent token until no more\n      <code>nextToken</code> values are returned.</p>"
-          }
-        },
         "Hosts": {
           "target": "com.amazonaws.codestarconnections#HostList",
           "traits": {
             "smithy.api#documentation": "<p>A list of hosts and the details for each host, such as status, endpoint, and provider\n      type.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.codestarconnections#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token that can be used in the next <code>ListHosts</code> call. To view all items in the\n      list, continue to call this operation with each subsequent token until no more\n      <code>nextToken</code> values are returned.</p>"
           }
         }
       }
@@ -778,6 +778,10 @@
           {
             "value": "Bitbucket",
             "name": "BITBUCKET"
+          },
+          {
+            "value": "GitHub",
+            "name": "GITHUB"
           },
           {
             "value": "GitHubEnterpriseServer",
@@ -984,17 +988,17 @@
     "com.amazonaws.codestarconnections#UntagResourceInput": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.codestarconnections#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of keys for the tags to be removed from the resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.codestarconnections#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.codestarconnections#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of keys for the tags to be removed from the resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1016,6 +1020,19 @@
     "com.amazonaws.codestarconnections#VpcConfiguration": {
       "type": "structure",
       "members": {
+        "TlsCertificate": {
+          "target": "com.amazonaws.codestarconnections#TlsCertificate",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.</p>"
+          }
+        },
+        "SubnetIds": {
+          "target": "com.amazonaws.codestarconnections#SubnetIds",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the subnet or subnets associated with the Amazon VPC connected to the\n      infrastructure where your provider type is installed.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "SecurityGroupIds": {
           "target": "com.amazonaws.codestarconnections#SecurityGroupIds",
           "traits": {
@@ -1028,19 +1045,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The ID of the Amazon VPC connected to the infrastructure where your provider type is\n      installed.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "SubnetIds": {
-          "target": "com.amazonaws.codestarconnections#SubnetIds",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the subnet or subnets associated with the Amazon VPC connected to the\n      infrastructure where your provider type is installed.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TlsCertificate": {
-          "target": "com.amazonaws.codestarconnections#TlsCertificate",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.</p>"
           }
         }
       },

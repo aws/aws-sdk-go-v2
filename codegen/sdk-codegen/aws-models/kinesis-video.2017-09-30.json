@@ -106,22 +106,16 @@
     "com.amazonaws.kinesisvideo#ChannelInfo": {
       "type": "structure",
       "members": {
-        "ChannelStatus": {
-          "target": "com.amazonaws.kinesisvideo#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>Current status of the signaling channel.</p>"
-          }
-        },
-        "ChannelARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signaling channel.</p>"
-          }
-        },
         "Version": {
           "target": "com.amazonaws.kinesisvideo#Version",
           "traits": {
             "smithy.api#documentation": "<p>The current version of the signaling channel.</p>"
+          }
+        },
+        "ChannelType": {
+          "target": "com.amazonaws.kinesisvideo#ChannelType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the signaling channel.</p>"
           }
         },
         "CreationTime": {
@@ -142,10 +136,16 @@
             "smithy.api#documentation": "<p>A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel\n            type.</p>"
           }
         },
-        "ChannelType": {
-          "target": "com.amazonaws.kinesisvideo#ChannelType",
+        "ChannelARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
-            "smithy.api#documentation": "<p>The type of the signaling channel.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signaling channel.</p>"
+          }
+        },
+        "ChannelStatus": {
+          "target": "com.amazonaws.kinesisvideo#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>Current status of the signaling channel.</p>"
           }
         }
       },
@@ -172,16 +172,16 @@
     "com.amazonaws.kinesisvideo#ChannelNameCondition": {
       "type": "structure",
       "members": {
-        "ComparisonValue": {
-          "target": "com.amazonaws.kinesisvideo#ChannelName",
-          "traits": {
-            "smithy.api#documentation": "<p>A value to compare.</p>"
-          }
-        },
         "ComparisonOperator": {
           "target": "com.amazonaws.kinesisvideo#ComparisonOperator",
           "traits": {
             "smithy.api#documentation": "<p>A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code>\n            operator, which finds signaling channels whose names begin with a given prefix.</p>"
+          }
+        },
+        "ComparisonValue": {
+          "target": "com.amazonaws.kinesisvideo#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>A value to compare.</p>"
           }
         }
       },
@@ -294,17 +294,17 @@
     "com.amazonaws.kinesisvideo#CreateSignalingChannelInput": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.kinesisvideo#TagOnCreateList",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to associate with this channel.</p>"
+          }
+        },
         "ChannelName": {
           "target": "com.amazonaws.kinesisvideo#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>A name for the signaling channel that you are creating. It must be unique for each AWS\n            account and AWS Region.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.kinesisvideo#TagOnCreateList",
-          "traits": {
-            "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to associate with this channel.</p>"
           }
         },
         "SingleMasterConfiguration": {
@@ -375,6 +375,24 @@
     "com.amazonaws.kinesisvideo#CreateStreamInput": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.kinesisvideo#ResourceTags",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>"
+          }
+        },
+        "DeviceName": {
+          "target": "com.amazonaws.kinesisvideo#DeviceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the device that is writing to the stream. </p>\n        <note>\n            <p>In the current implementation, Kinesis Video Streams does not use this\n                name.</p>\n        </note>"
+          }
+        },
+        "DataRetentionInHours": {
+          "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video\n            Streams retains the data in a data store that is associated with the stream.</p>\n        <p>The default value is 0, indicating that the stream does not persist data.</p>\n        <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
+          }
+        },
         "MediaType": {
           "target": "com.amazonaws.kinesisvideo#MediaType",
           "traits": {
@@ -392,24 +410,6 @@
           "target": "com.amazonaws.kinesisvideo#KmsKeyId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n        <p>If no key ID is specified, the default, Kinesis Video-managed key\n                (<code>aws/kinesisvideo</code>) is used.</p>\n        <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
-          }
-        },
-        "DataRetentionInHours": {
-          "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video\n            Streams retains the data in a data store that is associated with the stream.</p>\n        <p>The default value is 0, indicating that the stream does not persist data.</p>\n        <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
-          }
-        },
-        "DeviceName": {
-          "target": "com.amazonaws.kinesisvideo#DeviceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the device that is writing to the stream. </p>\n        <note>\n            <p>In the current implementation, Kinesis Video Streams does not use this\n                name.</p>\n        </note>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.kinesisvideo#ResourceTags",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>"
           }
         }
       }
@@ -486,17 +486,17 @@
     "com.amazonaws.kinesisvideo#DeleteSignalingChannelInput": {
       "type": "structure",
       "members": {
+        "CurrentVersion": {
+          "target": "com.amazonaws.kinesisvideo#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The current version of the signaling channel that you want to delete. You can obtain\n            the current version by invoking the <code>DescribeSignalingChannel</code> or\n                <code>ListSignalingChannels</code> API operations.</p>"
+          }
+        },
         "ChannelARN": {
           "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signaling channel that you want to\n            delete.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "CurrentVersion": {
-          "target": "com.amazonaws.kinesisvideo#Version",
-          "traits": {
-            "smithy.api#documentation": "<p>The current version of the signaling channel that you want to delete. You can obtain\n            the current version by invoking the <code>DescribeSignalingChannel</code> or\n                <code>ListSignalingChannels</code> API operations.</p>"
           }
         }
       }
@@ -598,16 +598,16 @@
     "com.amazonaws.kinesisvideo#DescribeSignalingChannelInput": {
       "type": "structure",
       "members": {
-        "ChannelARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the signaling channel that you want to describe.</p>"
-          }
-        },
         "ChannelName": {
           "target": "com.amazonaws.kinesisvideo#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the signaling channel that you want to describe.</p>"
+          }
+        },
+        "ChannelARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the signaling channel that you want to describe.</p>"
           }
         }
       }
@@ -742,10 +742,11 @@
     "com.amazonaws.kinesisvideo#GetDataEndpointInput": {
       "type": "structure",
       "members": {
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+        "APIName": {
+          "target": "com.amazonaws.kinesisvideo#APIName",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for.\n            You must specify either this parameter or a <code>StreamName</code> in the request.\n        </p>"
+            "smithy.api#documentation": "<p>The name of the API action for which to get an endpoint.</p>",
+            "smithy.api#required": {}
           }
         },
         "StreamName": {
@@ -754,11 +755,10 @@
             "smithy.api#documentation": "<p>The name of the stream that you want to get the endpoint for. You must specify\n            either this parameter or a <code>StreamARN</code> in the request.</p>"
           }
         },
-        "APIName": {
-          "target": "com.amazonaws.kinesisvideo#APIName",
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the API action for which to get an endpoint.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for.\n            You must specify either this parameter or a <code>StreamName</code> in the request.\n        </p>"
           }
         }
       }
@@ -811,17 +811,17 @@
     "com.amazonaws.kinesisvideo#GetSignalingChannelEndpointInput": {
       "type": "structure",
       "members": {
-        "SingleMasterChannelEndpointConfiguration": {
-          "target": "com.amazonaws.kinesisvideo#SingleMasterChannelEndpointConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code>\n            channel type.</p>"
-          }
-        },
         "ChannelARN": {
           "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signalling channel for which you want to get an\n            endpoint.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "SingleMasterChannelEndpointConfiguration": {
+          "target": "com.amazonaws.kinesisvideo#SingleMasterChannelEndpointConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code>\n            channel type.</p>"
           }
         }
       }
@@ -943,7 +943,7 @@
           "sdkId": "Kinesis Video",
           "arnNamespace": "kinesisvideo",
           "cloudFormationName": "KinesisVideo",
-          "cloudTrailEventSource": "v20170930.video.kinesis.amazon.com"
+          "cloudTrailEventSource": "kinesisvideo.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "kinesisvideo"
@@ -1015,10 +1015,10 @@
     "com.amazonaws.kinesisvideo#ListSignalingChannelsInput": {
       "type": "structure",
       "members": {
-        "ChannelNameCondition": {
-          "target": "com.amazonaws.kinesisvideo#ChannelNameCondition",
+        "MaxResults": {
+          "target": "com.amazonaws.kinesisvideo#ListStreamsInputLimit",
           "traits": {
-            "smithy.api#documentation": "<p>Optional: Returns only the channels that satisfy a specific condition.</p>"
+            "smithy.api#documentation": "<p>The maximum number of channels to return in the response. The default is 500.</p>"
           }
         },
         "NextToken": {
@@ -1027,10 +1027,10 @@
             "smithy.api#documentation": "<p>If you specify this parameter, when the result of a <code>ListSignalingChannels</code>\n            operation is truncated, the call returns the <code>NextToken</code> in the response. To\n            get another batch of channels, provide this token in your next request.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.kinesisvideo#ListStreamsInputLimit",
+        "ChannelNameCondition": {
+          "target": "com.amazonaws.kinesisvideo#ChannelNameCondition",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of channels to return in the response. The default is 500.</p>"
+            "smithy.api#documentation": "<p>Optional: Returns only the channels that satisfy a specific condition.</p>"
           }
         }
       }
@@ -1086,12 +1086,6 @@
     "com.amazonaws.kinesisvideo#ListStreamsInput": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.kinesisvideo#ListStreamsInputLimit",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of streams to return in the response. The default is\n            10,000.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.kinesisvideo#NextToken",
           "traits": {
@@ -1102,6 +1096,12 @@
           "target": "com.amazonaws.kinesisvideo#StreamNameCondition",
           "traits": {
             "smithy.api#documentation": "<p>Optional: Returns only streams that satisfy a specific condition. Currently, you\n            can specify only the prefix of a stream name as a condition. </p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.kinesisvideo#ListStreamsInputLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of streams to return in the response. The default is\n            10,000.</p>"
           }
         }
       }
@@ -1119,16 +1119,16 @@
     "com.amazonaws.kinesisvideo#ListStreamsOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.kinesisvideo#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the response is truncated, the call returns this element with a token. To get\n            the next batch of streams, use this token in your next request. </p>"
-          }
-        },
         "StreamInfoList": {
           "target": "com.amazonaws.kinesisvideo#StreamInfoList",
           "traits": {
             "smithy.api#documentation": "<p>An array of <code>StreamInfo</code> objects.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.kinesisvideo#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the response is truncated, the call returns this element with a token. To get\n            the next batch of streams, use this token in your next request. </p>"
           }
         }
       }
@@ -1185,16 +1185,16 @@
     "com.amazonaws.kinesisvideo#ListTagsForResourceOutput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.kinesisvideo#ResourceTags",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of tag keys and values associated with the specified signaling channel.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.kinesisvideo#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>If you specify this parameter and the result of a <code>ListTagsForResource</code>\n            call is truncated, the response includes a token that you can use in the next request to\n            fetch the next set of tags. </p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.kinesisvideo#ResourceTags",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of tag keys and values associated with the specified signaling channel.</p>"
           }
         }
       }
@@ -1236,10 +1236,10 @@
     "com.amazonaws.kinesisvideo#ListTagsForStreamInput": {
       "type": "structure",
       "members": {
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+        "NextToken": {
+          "target": "com.amazonaws.kinesisvideo#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream that you want to list tags\n            for.</p>"
+            "smithy.api#documentation": "<p>If you specify this parameter and the result of a <code>ListTagsForStream</code>\n            call is truncated, the response includes a token that you can use in the next request to\n            fetch the next batch of tags.</p>"
           }
         },
         "StreamName": {
@@ -1248,10 +1248,10 @@
             "smithy.api#documentation": "<p>The name of the stream that you want to list tags for.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.kinesisvideo#NextToken",
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
-            "smithy.api#documentation": "<p>If you specify this parameter and the result of a <code>ListTagsForStream</code>\n            call is truncated, the response includes a token that you can use in the next request to\n            fetch the next batch of tags.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream that you want to list tags\n            for.</p>"
           }
         }
       }
@@ -1399,16 +1399,16 @@
     "com.amazonaws.kinesisvideo#SingleMasterChannelEndpointConfiguration": {
       "type": "structure",
       "members": {
-        "Protocols": {
-          "target": "com.amazonaws.kinesisvideo#ListOfProtocols",
-          "traits": {
-            "smithy.api#documentation": "<p>This property is used to determine the nature of communication over this\n                <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this\n            API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns\n            an <code>HTTPS</code> endpoint.</p>"
-          }
-        },
         "Role": {
           "target": "com.amazonaws.kinesisvideo#ChannelRole",
           "traits": {
             "smithy.api#documentation": "<p>This property is used to determine messaging permissions in this\n                <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified,\n            this API returns an endpoint that a client can use to receive offers from and send\n            answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is\n            specified, this API returns an endpoint that a client can use only to send offers to\n            another <code>MASTER</code> client on this signaling channel. </p>"
+          }
+        },
+        "Protocols": {
+          "target": "com.amazonaws.kinesisvideo#ListOfProtocols",
+          "traits": {
+            "smithy.api#documentation": "<p>This property is used to determine the nature of communication over this\n                <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this\n            API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns\n            an <code>HTTPS</code> endpoint.</p>"
           }
         }
       },
@@ -1456,10 +1456,22 @@
     "com.amazonaws.kinesisvideo#StreamInfo": {
       "type": "structure",
       "members": {
-        "MediaType": {
-          "target": "com.amazonaws.kinesisvideo#MediaType",
+        "DeviceName": {
+          "target": "com.amazonaws.kinesisvideo#DeviceName",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>MediaType</code> of the stream. </p>"
+            "smithy.api#documentation": "<p>The name of the device that is associated with the stream.</p>"
+          }
+        },
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
+          }
+        },
+        "DataRetentionInHours": {
+          "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
+          "traits": {
+            "smithy.api#documentation": "<p>How long the stream retains data, in hours.</p>"
           }
         },
         "CreationTime": {
@@ -1486,28 +1498,16 @@
             "smithy.api#documentation": "<p>The version of the stream.</p>"
           }
         },
+        "MediaType": {
+          "target": "com.amazonaws.kinesisvideo#MediaType",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>MediaType</code> of the stream. </p>"
+          }
+        },
         "Status": {
           "target": "com.amazonaws.kinesisvideo#Status",
           "traits": {
             "smithy.api#documentation": "<p>The status of the stream.</p>"
-          }
-        },
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
-          }
-        },
-        "DeviceName": {
-          "target": "com.amazonaws.kinesisvideo#DeviceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the device that is associated with the stream.</p>"
-          }
-        },
-        "DataRetentionInHours": {
-          "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
-          "traits": {
-            "smithy.api#documentation": "<p>How long the stream retains data, in hours.</p>"
           }
         }
       },
@@ -1554,17 +1554,17 @@
     "com.amazonaws.kinesisvideo#Tag": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.kinesisvideo#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the tag that is associated with the specified signaling channel.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.kinesisvideo#TagKey",
           "traits": {
             "smithy.api#documentation": "<p>The key of the tag that is associated with the specified signaling channel.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.kinesisvideo#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the tag that is associated with the specified signaling channel.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1716,10 +1716,11 @@
     "com.amazonaws.kinesisvideo#TagStreamInput": {
       "type": "structure",
       "members": {
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+        "Tags": {
+          "target": "com.amazonaws.kinesisvideo#ResourceTags",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags\n            to.</p>"
+            "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>",
+            "smithy.api#required": {}
           }
         },
         "StreamName": {
@@ -1728,11 +1729,10 @@
             "smithy.api#documentation": "<p>The name of the stream that you want to add the tag or tags to.</p>"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.kinesisvideo#ResourceTags",
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
-            "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags\n            to.</p>"
           }
         }
       }
@@ -1801,17 +1801,17 @@
     "com.amazonaws.kinesisvideo#UntagResourceInput": {
       "type": "structure",
       "members": {
-        "TagKeyList": {
-          "target": "com.amazonaws.kinesisvideo#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the keys of the tags that you want to remove.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the signaling channel from which you want to remove\n            tags.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeyList": {
+          "target": "com.amazonaws.kinesisvideo#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the keys of the tags that you want to remove.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1858,6 +1858,12 @@
     "com.amazonaws.kinesisvideo#UntagStreamInput": {
       "type": "structure",
       "members": {
+        "StreamName": {
+          "target": "com.amazonaws.kinesisvideo#StreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the stream that you want to remove tags from.</p>"
+          }
+        },
         "StreamARN": {
           "target": "com.amazonaws.kinesisvideo#ResourceARN",
           "traits": {
@@ -1869,12 +1875,6 @@
           "traits": {
             "smithy.api#documentation": "<p>A list of the keys of the tags that you want to remove.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "StreamName": {
-          "target": "com.amazonaws.kinesisvideo#StreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the stream that you want to remove tags from.</p>"
           }
         }
       }
@@ -1923,6 +1923,19 @@
     "com.amazonaws.kinesisvideo#UpdateDataRetentionInput": {
       "type": "structure",
       "members": {
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream whose retention period you want to\n            change.</p>"
+          }
+        },
+        "Operation": {
+          "target": "com.amazonaws.kinesisvideo#UpdateDataRetentionOperation",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether you want to increase or decrease the retention period.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "StreamName": {
           "target": "com.amazonaws.kinesisvideo#StreamName",
           "traits": {
@@ -1941,19 +1954,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The retention period, in hours. The value you specify replaces the current value.\n            The maximum value for this parameter is 87600 (ten years).</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Operation": {
-          "target": "com.amazonaws.kinesisvideo#UpdateDataRetentionOperation",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether you want to increase or decrease the retention period.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream whose retention period you want to\n            change.</p>"
           }
         }
       }
@@ -2017,10 +2017,11 @@
     "com.amazonaws.kinesisvideo#UpdateSignalingChannelInput": {
       "type": "structure",
       "members": {
-        "SingleMasterConfiguration": {
-          "target": "com.amazonaws.kinesisvideo#SingleMasterConfiguration",
+        "CurrentVersion": {
+          "target": "com.amazonaws.kinesisvideo#Version",
           "traits": {
-            "smithy.api#documentation": "<p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of\n            the signaling channel that you want to update. </p>"
+            "smithy.api#documentation": "<p>The current version of the signaling channel that you want to update.</p>",
+            "smithy.api#required": {}
           }
         },
         "ChannelARN": {
@@ -2030,11 +2031,10 @@
             "smithy.api#required": {}
           }
         },
-        "CurrentVersion": {
-          "target": "com.amazonaws.kinesisvideo#Version",
+        "SingleMasterConfiguration": {
+          "target": "com.amazonaws.kinesisvideo#SingleMasterConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The current version of the signaling channel that you want to update.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of\n            the signaling channel that you want to update. </p>"
           }
         }
       }
@@ -2083,12 +2083,6 @@
     "com.amazonaws.kinesisvideo#UpdateStreamInput": {
       "type": "structure",
       "members": {
-        "StreamARN": {
-          "target": "com.amazonaws.kinesisvideo#ResourceARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the stream whose metadata you want to update.</p>"
-          }
-        },
         "CurrentVersion": {
           "target": "com.amazonaws.kinesisvideo#Version",
           "traits": {
@@ -2112,6 +2106,12 @@
           "target": "com.amazonaws.kinesisvideo#StreamName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the stream whose metadata you want to update.</p>\n        <p>The stream name is an identifier for the stream, and must be unique for each\n            account and region.</p>"
+          }
+        },
+        "StreamARN": {
+          "target": "com.amazonaws.kinesisvideo#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the stream whose metadata you want to update.</p>"
           }
         }
       }

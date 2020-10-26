@@ -114,7 +114,7 @@
           "sdkId": "Application Discovery Service",
           "arnNamespace": "discovery",
           "cloudFormationName": "ApplicationDiscoveryService",
-          "cloudTrailEventSource": "V2015_11_01.awsposeidon.amazonaws.com"
+          "cloudTrailEventSource": "applicationdiscoveryservice.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "discovery"
@@ -189,6 +189,18 @@
             "smithy.api#documentation": "<p>The agent or connector ID.</p>"
           }
         },
+        "agentType": {
+          "target": "com.amazonaws.applicationdiscoveryservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Type of agent.</p>"
+          }
+        },
+        "registeredTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Agent's first registration timestamp in UTC.</p>"
+          }
+        },
         "connectorId": {
           "target": "com.amazonaws.applicationdiscoveryservice#String",
           "traits": {
@@ -201,34 +213,22 @@
             "smithy.api#documentation": "<p>Status of the collection process for an agent or connector.</p>"
           }
         },
-        "agentNetworkInfoList": {
-          "target": "com.amazonaws.applicationdiscoveryservice#AgentNetworkInfoList",
-          "traits": {
-            "smithy.api#documentation": "<p>Network details about the host where the agent or connector resides.</p>"
-          }
-        },
         "health": {
           "target": "com.amazonaws.applicationdiscoveryservice#AgentStatus",
           "traits": {
             "smithy.api#documentation": "<p>The health of the agent or connector.</p>"
           }
         },
-        "registeredTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Agent's first registration timestamp in UTC.</p>"
-          }
-        },
-        "agentType": {
-          "target": "com.amazonaws.applicationdiscoveryservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Type of agent.</p>"
-          }
-        },
         "version": {
           "target": "com.amazonaws.applicationdiscoveryservice#String",
           "traits": {
             "smithy.api#documentation": "<p>The agent or connector version.</p>"
+          }
+        },
+        "agentNetworkInfoList": {
+          "target": "com.amazonaws.applicationdiscoveryservice#AgentNetworkInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p>Network details about the host where the agent or connector resides.</p>"
           }
         }
       },
@@ -550,28 +550,28 @@
             "smithy.api#documentation": "<p>The configuration ID for the item to tag. You can specify a list of keys and\n      values.</p>"
           }
         },
-        "value": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>A value on which to filter. For example <i>key = serverType</i> and\n        <i>value = web server</i>.</p>"
-          }
-        },
         "configurationType": {
           "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationItemType",
           "traits": {
             "smithy.api#documentation": "<p>A type of IT asset to tag.</p>"
           }
         },
-        "key": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TagKey",
+        "value": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TagValue",
           "traits": {
-            "smithy.api#documentation": "<p>A type of tag on which to filter. For example,\n      <i>serverType</i>.</p>"
+            "smithy.api#documentation": "<p>A value on which to filter. For example <i>key = serverType</i> and\n        <i>value = web server</i>.</p>"
           }
         },
         "timeOfCreation": {
           "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
           "traits": {
             "smithy.api#documentation": "<p>The time the configuration tag was created in Coordinated Universal Time\n      (UTC).</p>"
+          }
+        },
+        "key": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>A type of tag on which to filter. For example,\n      <i>serverType</i>.</p>"
           }
         }
       },
@@ -616,22 +616,10 @@
     "com.amazonaws.applicationdiscoveryservice#ContinuousExportDescription": {
       "type": "structure",
       "members": {
-        "dataSource": {
-          "target": "com.amazonaws.applicationdiscoveryservice#DataSource",
+        "schemaStorageConfig": {
+          "target": "com.amazonaws.applicationdiscoveryservice#SchemaStorageConfig",
           "traits": {
-            "smithy.api#documentation": "<p>The type of data collector used to gather this data (currently only offered for\n      AGENT).</p>"
-          }
-        },
-        "startTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp representing when the continuous export was started.</p>"
-          }
-        },
-        "stopTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp that represents when this continuous export was stopped.</p>"
+            "smithy.api#documentation": "<p>An object which describes how the data is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>databaseName</code> - the name of the Glue database used to store the\n          schema.</p>\n            </li>\n         </ul>"
           }
         },
         "statusDetail": {
@@ -640,16 +628,16 @@
             "smithy.api#documentation": "<p>Contains information about any errors that have occurred. This data type can have the\n      following values:</p>\n\n         <ul>\n            <li>\n               <p>ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon\n          Athena. Contact your AWS administrator for help. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html\">Setting Up AWS Application Discovery Service</a> in the Application Discovery\n          Service User Guide.</p>\n            </li>\n            <li>\n               <p>DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data\n          Firehose delivery streams. Reduce the number of streams or request a limit increase and\n          try again. For more information, see <a href=\"http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html\">Kinesis Data Streams Limits</a> in the Amazon Kinesis Data Streams Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because\n          your IAM User is missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data\n          Exploration in Amazon Athena and try again. For more information, see <a href=\"http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy\">Step 3: Provide Application Discovery Service Access to Non-Administrator Users by\n            Attaching Policies</a> in the Application Discovery Service User Guide.</p>\n            </li>\n            <li>\n               <p>FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state\n          because your IAM User is missing one or more of the Kinesis data delivery\n          streams.</p>\n            </li>\n            <li>\n               <p>INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an\n          internal failure. Try again later. If this problem persists, contact AWS\n          Support.</p>\n            </li>\n            <li>\n               <p>S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the\n          number of Amazon S3 buckets or request a limit increase and try again. For more\n          information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html\">Bucket\n            Restrictions and Limitations</a> in the Amazon Simple Storage Service Developer\n          Guide.</p>\n            </li>\n            <li>\n               <p>S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service. You\n          must sign up before you can use Amazon S3. You can sign up at the following URL: <a href=\"https://aws.amazon.com/s3\">https://aws.amazon.com/s3</a>.</p>\n            </li>\n         </ul>"
           }
         },
+        "dataSource": {
+          "target": "com.amazonaws.applicationdiscoveryservice#DataSource",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of data collector used to gather this data (currently only offered for\n      AGENT).</p>"
+          }
+        },
         "s3Bucket": {
           "target": "com.amazonaws.applicationdiscoveryservice#S3Bucket",
           "traits": {
             "smithy.api#documentation": "<p>The name of the s3 bucket where the export data parquet files are stored.</p>"
-          }
-        },
-        "schemaStorageConfig": {
-          "target": "com.amazonaws.applicationdiscoveryservice#SchemaStorageConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>An object which describes how the data is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>databaseName</code> - the name of the Glue database used to store the\n          schema.</p>\n            </li>\n         </ul>"
           }
         },
         "status": {
@@ -662,6 +650,18 @@
           "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationsExportId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID assigned to this export.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp representing when the continuous export was started.</p>"
+          }
+        },
+        "stopTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp that represents when this continuous export was stopped.</p>"
           }
         }
       },
@@ -832,6 +832,13 @@
     "com.amazonaws.applicationdiscoveryservice#CustomerAgentInfo": {
       "type": "structure",
       "members": {
+        "shutdownAgents": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of discovery agents with status SHUTDOWN.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "totalAgents": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
@@ -860,13 +867,6 @@
             "smithy.api#required": {}
           }
         },
-        "unknownAgents": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>Number of unknown discovery agents.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "unhealthyAgents": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
@@ -874,10 +874,10 @@
             "smithy.api#required": {}
           }
         },
-        "shutdownAgents": {
+        "unknownAgents": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>Number of discovery agents with status SHUTDOWN.</p>",
+            "smithy.api#documentation": "<p>Number of unknown discovery agents.</p>",
             "smithy.api#required": {}
           }
         }
@@ -896,13 +896,6 @@
             "smithy.api#required": {}
           }
         },
-        "healthyConnectors": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>Number of healthy discovery connectors.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "totalConnectors": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
@@ -914,6 +907,13 @@
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
             "smithy.api#documentation": "<p>Number of discovery connectors with status SHUTDOWN,</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "healthyConnectors": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of healthy discovery connectors.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1257,16 +1257,16 @@
     "com.amazonaws.applicationdiscoveryservice#DescribeContinuousExportsRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token from the previous call to <code>DescribeExportTasks</code>.</p>"
-          }
-        },
         "exportIds": {
           "target": "com.amazonaws.applicationdiscoveryservice#ContinuousExportIds",
           "traits": {
             "smithy.api#documentation": "<p>The unique IDs assigned to the exports.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token from the previous call to <code>DescribeExportTasks</code>.</p>"
           }
         },
         "maxResults": {
@@ -1280,16 +1280,16 @@
     "com.amazonaws.applicationdiscoveryservice#DescribeContinuousExportsResponse": {
       "type": "structure",
       "members": {
-        "descriptions": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ContinuousExportDescriptions",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of continuous export descriptions.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The token from the previous call to <code>DescribeExportTasks</code>.</p>"
+          }
+        },
+        "descriptions": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ContinuousExportDescriptions",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of continuous export descriptions.</p>"
           }
         }
       }
@@ -1336,16 +1336,16 @@
             "smithy.api#documentation": "<p>A list of continuous export IDs to search for.</p>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token from the previous call to describe-export-tasks.</p>"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
             "smithy.api#documentation": "<p>A number between 1 and 100 specifying the maximum number of continuous export\n      descriptions returned.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token from the previous call to describe-export-tasks.</p>"
           }
         }
       }
@@ -1405,16 +1405,16 @@
             "smithy.api#documentation": "<p>One or more filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AgentId</code> - ID of the agent whose collected data will be\n          exported</p>\n            </li>\n         </ul>"
           }
         },
-        "exportIds": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ExportIds",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more unique identifiers used to query the status of an export request.</p>"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of volume results returned by <code>DescribeExportTasks</code> in\n      paginated output. When this parameter is used, <code>DescribeExportTasks</code> only returns\n        <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n      response element.</p>"
+          }
+        },
+        "exportIds": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ExportIds",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more unique identifiers used to query the status of an export request.</p>"
           }
         },
         "nextToken": {
@@ -1428,16 +1428,16 @@
     "com.amazonaws.applicationdiscoveryservice#DescribeExportTasksResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n        <code>DescribeExportTasks</code> request. When the results of a\n        <code>DescribeExportTasks</code> request exceed <code>maxResults</code>, this value can be\n      used to retrieve the next page of results. This value is null when there are no more results\n      to return.</p>"
-          }
-        },
         "exportsInfo": {
           "target": "com.amazonaws.applicationdiscoveryservice#ExportsInfo",
           "traits": {
             "smithy.api#documentation": "<p>Contains one or more sets of export request details. When the status of a request is\n        <code>SUCCEEDED</code>, the response includes a URL for an Amazon S3 bucket where you can\n      view the data in a CSV file.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n        <code>DescribeExportTasks</code> request. When the results of a\n        <code>DescribeExportTasks</code> request exceed <code>maxResults</code>, this value can be\n      used to retrieve the next page of results. This value is null when there are no more results\n      to return.</p>"
           }
         }
       }
@@ -1495,16 +1495,16 @@
     "com.amazonaws.applicationdiscoveryservice#DescribeImportTasksRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token to request a specific page of results.</p>"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.applicationdiscoveryservice#DescribeImportTasksMaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results that you want this request to return, up to 100.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to request a specific page of results.</p>"
           }
         },
         "filters": {
@@ -1518,16 +1518,16 @@
     "com.amazonaws.applicationdiscoveryservice#DescribeImportTasksResponse": {
       "type": "structure",
       "members": {
-        "tasks": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskList",
-          "traits": {
-            "smithy.api#documentation": "<p>A returned array of import tasks that match any applied filters, up to the specified\n      number of maximum results.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
+          }
+        },
+        "tasks": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskList",
+          "traits": {
+            "smithy.api#documentation": "<p>A returned array of import tasks that match any applied filters, up to the specified\n      number of maximum results.</p>"
           }
         }
       }
@@ -1768,23 +1768,17 @@
             "smithy.api#documentation": "<p>A URL for an Amazon S3 bucket where you can review the exported data. The URL is\n      displayed only if the export succeeded.</p>"
           }
         },
-        "requestedEndTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+        "statusMessage": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ExportStatusMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>endTime</code> used in the <code>StartExportTask</code> request. If no\n        <code>endTime</code> was requested, this result does not appear in\n      <code>ExportInfo</code>.</p>"
+            "smithy.api#documentation": "<p>A status message provided for API callers.</p>",
+            "smithy.api#required": {}
           }
         },
         "exportId": {
           "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationsExportId",
           "traits": {
             "smithy.api#documentation": "<p>A unique identifier used to query an export.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "statusMessage": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ExportStatusMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>A status message provided for API callers.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1795,10 +1789,22 @@
             "smithy.api#required": {}
           }
         },
+        "requestedEndTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>endTime</code> used in the <code>StartExportTask</code> request. If no\n        <code>endTime</code> was requested, this result does not appear in\n      <code>ExportInfo</code>.</p>"
+          }
+        },
         "requestedStartTime": {
           "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
           "traits": {
             "smithy.api#documentation": "<p>The value of <code>startTime</code> parameter in the <code>StartExportTask</code>\n      request. If no <code>startTime</code> was requested, this result does not appear in\n        <code>ExportInfo</code>.</p>"
+          }
+        },
+        "isTruncated": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If true, the export of agent information exceeded the size limit for a single export\n      and the exported data is incomplete for the requested time range. To address this, select a\n      smaller time range for the export by using <code>startDate</code> and\n      <code>endDate</code>.</p>"
           }
         },
         "exportStatus": {
@@ -1806,12 +1812,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The status of the data export job.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "isTruncated": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If true, the export of agent information exceeded the size limit for a single export\n      and the exported data is incomplete for the requested time range. To address this, select a\n      smaller time range for the export by using <code>startDate</code> and\n      <code>endDate</code>.</p>"
           }
         }
       },
@@ -1860,17 +1860,17 @@
             "smithy.api#required": {}
           }
         },
-        "condition": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Condition",
-          "traits": {
-            "smithy.api#documentation": "<p>A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS,\n      CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as\n      though concatenated by <i>AND</i>. If you specify multiple values for a\n      particular filter, the system differentiates the values using <i>OR</i>. Calling\n      either <i>DescribeConfigurations</i> or <i>ListConfigurations</i>\n      returns attributes of matching configuration items.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "values": {
           "target": "com.amazonaws.applicationdiscoveryservice#FilterValues",
           "traits": {
             "smithy.api#documentation": "<p>A string value on which to filter. For example, if you choose the\n        <code>destinationServer.osVersion</code> filter name, you could specify <code>Ubuntu</code>\n      for the value.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "condition": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Condition",
+          "traits": {
+            "smithy.api#documentation": "<p>A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS,\n      CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as\n      though concatenated by <i>AND</i>. If you specify multiple values for a\n      particular filter, the system differentiates the values using <i>OR</i>. Calling\n      either <i>DescribeConfigurations</i> or <i>ListConfigurations</i>\n      returns attributes of matching configuration items.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1936,6 +1936,12 @@
     "com.amazonaws.applicationdiscoveryservice#GetDiscoverySummaryResponse": {
       "type": "structure",
       "members": {
+        "servers": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of servers discovered.</p>"
+          }
+        },
         "serversMappedtoTags": {
           "target": "com.amazonaws.applicationdiscoveryservice#Long",
           "traits": {
@@ -1948,18 +1954,6 @@
             "smithy.api#documentation": "<p>The number of servers mapped to applications.</p>"
           }
         },
-        "servers": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of servers discovered.</p>"
-          }
-        },
-        "applications": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of applications discovered.</p>"
-          }
-        },
         "connectorSummary": {
           "target": "com.amazonaws.applicationdiscoveryservice#CustomerConnectorInfo",
           "traits": {
@@ -1970,6 +1964,12 @@
           "target": "com.amazonaws.applicationdiscoveryservice#CustomerAgentInfo",
           "traits": {
             "smithy.api#documentation": "<p>Details about discovered agents, including agent status and health.</p>"
+          }
+        },
+        "applications": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of applications discovered.</p>"
           }
         }
       }
@@ -2041,54 +2041,6 @@
     "com.amazonaws.applicationdiscoveryservice#ImportTask": {
       "type": "structure",
       "members": {
-        "importDeletedTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the import task request was deleted, presented in the Unix time stamp\n      format.</p>"
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskName",
-          "traits": {
-            "smithy.api#documentation": "<p>A descriptive name for an import task. You can use this name to filter future requests\n      related to this import task, such as identifying applications and servers that were included\n      in this import task. We recommend that you use a meaningful name for each import task.</p>"
-          }
-        },
-        "serverImportFailure": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of server records in the import file that failed to be imported.</p>"
-          }
-        },
-        "serverImportSuccess": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of server records in the import file that were successfully\n      imported.</p>"
-          }
-        },
-        "clientRequestToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique token used to prevent the same import request from occurring more than once. If\n      you didn't provide a token, a token was automatically generated when the import task request\n      was sent.</p>"
-          }
-        },
-        "importRequestTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the import task request was made, presented in the Unix time stamp\n      format.</p>"
-          }
-        },
-        "applicationImportSuccess": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The total number of application records in the import file that were successfully\n      imported.</p>"
-          }
-        },
-        "importUrl": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ImportURL",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL for your import file that you've uploaded to Amazon S3.</p>"
-          }
-        },
         "status": {
           "target": "com.amazonaws.applicationdiscoveryservice#ImportStatus",
           "traits": {
@@ -2101,16 +2053,64 @@
             "smithy.api#documentation": "<p>The time that the import task request finished, presented in the Unix time stamp\n      format.</p>"
           }
         },
-        "errorsAndFailedEntriesZip": {
-          "target": "com.amazonaws.applicationdiscoveryservice#S3PresignedUrl",
+        "applicationImportSuccess": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>A link to a compressed archive folder (in the ZIP format) that contains an error log and a\n      file of failed records. You can use these two files to quickly identify records that failed,\n      why they failed, and correct those records. Afterward, you can upload the corrected file to\n      your Amazon S3 bucket and create another import task request.</p>\n\n         <p>This field also includes authorization information so you can confirm the authenticity of\n      the compressed archive before you download it.</p>\n\n         <p>If some records failed to be imported we recommend that you correct the records in the\n      failed entries file and then imports that failed entries file. This prevents you from having\n      to correct and update the larger original file and attempt importing it again.</p>"
+            "smithy.api#documentation": "<p>The total number of application records in the import file that were successfully\n      imported.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A descriptive name for an import task. You can use this name to filter future requests\n      related to this import task, such as identifying applications and servers that were included\n      in this import task. We recommend that you use a meaningful name for each import task.</p>"
+          }
+        },
+        "importUrl": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ImportURL",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL for your import file that you've uploaded to Amazon S3.</p>"
+          }
+        },
+        "importDeletedTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the import task request was deleted, presented in the Unix time stamp\n      format.</p>"
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ClientRequestToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique token used to prevent the same import request from occurring more than once. If\n      you didn't provide a token, a token was automatically generated when the import task request\n      was sent.</p>"
+          }
+        },
+        "serverImportSuccess": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of server records in the import file that were successfully\n      imported.</p>"
+          }
+        },
+        "importRequestTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the import task request was made, presented in the Unix time stamp\n      format.</p>"
           }
         },
         "applicationImportFailure": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The total number of application records in the import file that failed to be\n      imported.</p>"
+          }
+        },
+        "serverImportFailure": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of server records in the import file that failed to be imported.</p>"
+          }
+        },
+        "errorsAndFailedEntriesZip": {
+          "target": "com.amazonaws.applicationdiscoveryservice#S3PresignedUrl",
+          "traits": {
+            "smithy.api#documentation": "<p>A link to a compressed archive folder (in the ZIP format) that contains an error log and a\n      file of failed records. You can use these two files to quickly identify records that failed,\n      why they failed, and correct those records. Afterward, you can upload the corrected file to\n      your Amazon S3 bucket and create another import task request.</p>\n\n         <p>This field also includes authorization information so you can confirm the authenticity of\n      the compressed archive before you download it.</p>\n\n         <p>If some records failed to be imported we recommend that you correct the records in the\n      failed entries file and then imports that failed entries file. This prevents you from having\n      to correct and update the larger original file and attempt importing it again.</p>"
           }
         },
         "importTaskId": {
@@ -2127,16 +2127,16 @@
     "com.amazonaws.applicationdiscoveryservice#ImportTaskFilter": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name, status, or import task ID for a specific import task.</p>"
-          }
-        },
         "values": {
           "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskFilterValueList",
           "traits": {
             "smithy.api#documentation": "<p>An array of strings that you can provide to match against a specific name, status, or\n      import task ID to filter the results for your import task queries.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name, status, or import task ID for a specific import task.</p>"
           }
         }
       },
@@ -2275,6 +2275,12 @@
     "com.amazonaws.applicationdiscoveryservice#ListConfigurationsRequest": {
       "type": "structure",
       "members": {
+        "nextToken": {
+          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if a previous call to\n      ListConfigurations returned 100 items, but you set\n        <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results\n      along with a token. Use that token in this query to get the next set of 10.</p>"
+          }
+        },
         "maxResults": {
           "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
@@ -2285,12 +2291,6 @@
           "target": "com.amazonaws.applicationdiscoveryservice#OrderByList",
           "traits": {
             "smithy.api#documentation": "<p>Certain filter criteria return output that can be sorted in ascending or descending\n      order. For a list of output characteristics for each filter, see <a href=\"https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations\">Using the ListConfigurations Action</a> in the <i>AWS Application Discovery\n        Service User Guide</i>.</p>"
-          }
-        },
-        "nextToken": {
-          "target": "com.amazonaws.applicationdiscoveryservice#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Token to retrieve the next set of results. For example, if a previous call to\n      ListConfigurations returned 100 items, but you set\n        <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results\n      along with a token. Use that token in this query to get the next set of 10.</p>"
           }
         },
         "configurationType": {
@@ -2357,22 +2357,16 @@
     "com.amazonaws.applicationdiscoveryservice#ListServerNeighborsRequest": {
       "type": "structure",
       "members": {
-        "maxResults": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>Maximum number of results to return in a single page of output.</p>"
-          }
-        },
         "neighborConfigurationIds": {
           "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationIdList",
           "traits": {
             "smithy.api#documentation": "<p>List of configuration IDs to test for one-hop-away.</p>"
           }
         },
-        "portInformationNeeded": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
+        "maxResults": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>Flag to indicate if port and protocol information is needed as part of the\n      response.</p>"
+            "smithy.api#documentation": "<p>Maximum number of results to return in a single page of output.</p>"
           }
         },
         "nextToken": {
@@ -2386,6 +2380,12 @@
           "traits": {
             "smithy.api#documentation": "<p>Configuration ID of the server for which neighbors are being listed.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "portInformationNeeded": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Flag to indicate if port and protocol information is needed as part of the\n      response.</p>"
           }
         }
       }
@@ -2423,24 +2423,10 @@
     "com.amazonaws.applicationdiscoveryservice#NeighborConnectionDetail": {
       "type": "structure",
       "members": {
-        "connectionsCount": {
-          "target": "com.amazonaws.applicationdiscoveryservice#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of open network connections with the neighboring server.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "destinationServerId": {
           "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the server that accepted the network connection.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "sourceServerId": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the server that opened the network connection.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2450,10 +2436,24 @@
             "smithy.api#documentation": "<p>The network protocol used for the connection.</p>"
           }
         },
+        "sourceServerId": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ConfigurationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the server that opened the network connection.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "destinationPort": {
           "target": "com.amazonaws.applicationdiscoveryservice#BoxedInteger",
           "traits": {
             "smithy.api#documentation": "<p>The destination network port for the connection.</p>"
+          }
+        },
+        "connectionsCount": {
+          "target": "com.amazonaws.applicationdiscoveryservice#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of open network connections with the neighboring server.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -2615,12 +2615,6 @@
             "smithy.api#documentation": "<p>The name of the s3 bucket where the export data parquet files are stored.</p>"
           }
         },
-        "schemaStorageConfig": {
-          "target": "com.amazonaws.applicationdiscoveryservice#SchemaStorageConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>A dictionary which describes how the data is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>databaseName</code> - the name of the Glue database used to store the\n          schema.</p>\n            </li>\n         </ul>"
-          }
-        },
         "dataSource": {
           "target": "com.amazonaws.applicationdiscoveryservice#DataSource",
           "traits": {
@@ -2631,6 +2625,12 @@
           "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
           "traits": {
             "smithy.api#documentation": "<p>The timestamp representing when the continuous export was started.</p>"
+          }
+        },
+        "schemaStorageConfig": {
+          "target": "com.amazonaws.applicationdiscoveryservice#SchemaStorageConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>A dictionary which describes how the data is stored.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>databaseName</code> - the name of the Glue database used to store the\n          schema.</p>\n            </li>\n         </ul>"
           }
         },
         "exportId": {
@@ -2728,12 +2728,6 @@
     "com.amazonaws.applicationdiscoveryservice#StartExportTaskRequest": {
       "type": "structure",
       "members": {
-        "startTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The start timestamp for exported data from the single Application Discovery Agent\n      selected in the filters. If no value is specified, data is exported starting from the first\n      data collected by the agent.</p>"
-          }
-        },
         "endTime": {
           "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
           "traits": {
@@ -2750,6 +2744,12 @@
           "target": "com.amazonaws.applicationdiscoveryservice#ExportDataFormats",
           "traits": {
             "smithy.api#documentation": "<p>The file format for the returned export data. Default value is <code>CSV</code>.\n        <b>Note:</b>\n            <i>The</i>\n            <code>GRAPHML</code>\n            <i>option has been deprecated.</i>\n         </p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start timestamp for exported data from the single Application Discovery Agent\n      selected in the filters. If no value is specified, data is exported starting from the first\n      data collected by the agent.</p>"
           }
         }
       }
@@ -2800,6 +2800,13 @@
     "com.amazonaws.applicationdiscoveryservice#StartImportTaskRequest": {
       "type": "structure",
       "members": {
+        "name": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A descriptive name for this request. You can use this name to filter future requests\n      related to this import task, such as identifying applications and servers that were included\n      in this import task. We recommend that you use a meaningful name for each import task.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "importUrl": {
           "target": "com.amazonaws.applicationdiscoveryservice#ImportURL",
           "traits": {
@@ -2812,13 +2819,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Optional. A unique token that you can provide to prevent the same import request from\n      occurring more than once. If you don't provide a token, a token is automatically\n      generated.</p>\n\n         <p>Sending more than one <code>StartImportTask</code> request with the same client request\n      token will return information about the original import task with that client request\n      token.</p>",
             "smithy.api#idempotencyToken": {}
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ImportTaskName",
-          "traits": {
-            "smithy.api#documentation": "<p>A descriptive name for this request. You can use this name to filter future requests\n      related to this import task, such as identifying applications and servers that were included\n      in this import task. We recommend that you use a meaningful name for each import task.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -2887,16 +2887,16 @@
     "com.amazonaws.applicationdiscoveryservice#StopContinuousExportResponse": {
       "type": "structure",
       "members": {
-        "startTime": {
-          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Timestamp that represents when this continuous export started collecting\n      data.</p>"
-          }
-        },
         "stopTime": {
           "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
           "traits": {
             "smithy.api#documentation": "<p>Timestamp that represents when this continuous export was stopped.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.applicationdiscoveryservice#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Timestamp that represents when this continuous export started collecting\n      data.</p>"
           }
         }
       }
@@ -2990,17 +2990,17 @@
     "com.amazonaws.applicationdiscoveryservice#TagFilter": {
       "type": "structure",
       "members": {
-        "values": {
-          "target": "com.amazonaws.applicationdiscoveryservice#FilterValues",
-          "traits": {
-            "smithy.api#documentation": "<p>Values for the tag filter.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "name": {
           "target": "com.amazonaws.applicationdiscoveryservice#FilterName",
           "traits": {
             "smithy.api#documentation": "<p>A name of the tag filter.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "values": {
+          "target": "com.amazonaws.applicationdiscoveryservice#FilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>Values for the tag filter.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3077,6 +3077,13 @@
     "com.amazonaws.applicationdiscoveryservice#UpdateApplicationRequest": {
       "type": "structure",
       "members": {
+        "configurationId": {
+          "target": "com.amazonaws.applicationdiscoveryservice#ApplicationId",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration ID of the application to be updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "name": {
           "target": "com.amazonaws.applicationdiscoveryservice#String",
           "traits": {
@@ -3087,13 +3094,6 @@
           "target": "com.amazonaws.applicationdiscoveryservice#String",
           "traits": {
             "smithy.api#documentation": "<p>New description of the application to be updated.</p>"
-          }
-        },
-        "configurationId": {
-          "target": "com.amazonaws.applicationdiscoveryservice#ApplicationId",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration ID of the application to be updated.</p>",
-            "smithy.api#required": {}
           }
         }
       }

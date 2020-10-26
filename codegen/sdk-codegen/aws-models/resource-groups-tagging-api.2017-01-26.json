@@ -42,16 +42,16 @@
     "com.amazonaws.resourcegroupstaggingapi#ComplianceDetails": {
       "type": "structure",
       "members": {
-        "KeysWithNoncompliantValues": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>These are keys defined in the effective policy that are on the resource with either\n            incorrect case treatment or noncompliant values. </p>"
-          }
-        },
         "ComplianceStatus": {
           "target": "com.amazonaws.resourcegroupstaggingapi#ComplianceStatus",
           "traits": {
             "smithy.api#documentation": "<p>Whether a resource is compliant with the effective tag policy.</p>"
+          }
+        },
+        "KeysWithNoncompliantValues": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>These are keys defined in the effective policy that are on the resource with either\n            incorrect case treatment or noncompliant values. </p>"
           }
         },
         "NoncompliantKeys": {
@@ -128,28 +128,28 @@
     "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationOutput": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>Details of the common errors that all operations return.</p>"
-          }
-        },
         "StartDate": {
           "target": "com.amazonaws.resourcegroupstaggingapi#StartDate",
           "traits": {
             "smithy.api#documentation": "<p>The date and time that the report was started. </p>"
           }
         },
-        "S3Location": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#S3Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the report was stored on creation.</p>"
-          }
-        },
         "Status": {
           "target": "com.amazonaws.resourcegroupstaggingapi#Status",
           "traits": {
             "smithy.api#documentation": "<p>Reports the status of the operation.</p>\n        <p>The operation status can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>RUNNING</code> - Report creation is in progress.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCEEDED</code> - Report creation is complete. You can open the report\n                    from the Amazon S3 bucket that you specified when you ran\n                        <code>StartReportCreation</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> - Report creation timed out or the Amazon S3 bucket is not\n                    accessible. </p>\n            </li>\n            <li>\n                <p>\n                  <code>NO REPORT</code> - No report was generated in the last 90 days.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Details of the common errors that all operations return.</p>"
+          }
+        },
+        "S3Location": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#S3Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the report was stored on creation.</p>"
           }
         }
       }
@@ -257,28 +257,34 @@
     "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryInput": {
       "type": "structure",
       "members": {
-        "TargetIdFilters": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TargetIdFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>The target identifiers (usually, specific account IDs) to limit the output by. If you\n            use this parameter, the count of returned noncompliant resources includes only resources\n            with the specified target IDs.</p>"
-          }
-        },
         "TagKeyFilters": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyFilterList",
           "traits": {
             "smithy.api#documentation": "<p>A list of tag keys to limit the output by. If you use this parameter, the count of\n            returned noncompliant resources includes only resources that have the specified tag\n            keys.</p>"
           }
         },
-        "RegionFilters": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#RegionFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of Regions to limit the output by. If you use this parameter, the count of\n            returned noncompliant resources includes only resources in the specified Regions.</p>"
-          }
-        },
         "ResourceTypeFilters": {
           "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
           "traits": {
             "smithy.api#documentation": "<p>The constraints on the resources that you want returned. The format of each resource\n            type is <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>AWS General\n                Reference</i> for the following:</p>\n        <ul>\n            <li>\n                <p>For a list of service name strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a>.</p>\n            </li>\n            <li>\n                <p>For resource type strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example ARNs</a>.</p>\n            </li>\n            <li>\n                <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                        Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n            </li>\n         </ul>\n        <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. </p>"
+          }
+        },
+        "TargetIdFilters": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TargetIdFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The target identifiers (usually, specific account IDs) to limit the output by. If you\n            use this parameter, the count of returned noncompliant resources includes only resources\n            with the specified target IDs.</p>"
+          }
+        },
+        "GroupBy": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#GroupBy",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of attributes to group the counts of noncompliant resources by. If supplied,\n            the counts are sorted by those attributes.</p>"
+          }
+        },
+        "RegionFilters": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#RegionFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of Regions to limit the output by. If you use this parameter, the count of\n            returned noncompliant resources includes only resources in the specified Regions.</p>"
           }
         },
         "PaginationToken": {
@@ -291,12 +297,6 @@
           "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultsGetComplianceSummary",
           "traits": {
             "smithy.api#documentation": "<p>A limit that restricts the number of results that are returned per page.</p>"
-          }
-        },
-        "GroupBy": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#GroupBy",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of attributes to group the counts of noncompliant resources by. If supplied,\n            the counts are sorted by those attributes.</p>"
           }
         }
       }
@@ -359,22 +359,16 @@
             "smithy.api#documentation": "<p>AWS recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>\n        <p>A limit that restricts the number of tags (key and value pairs) returned by\n            GetResources in paginated output. A resource with no tags is counted as having one tag\n            (one key and value pair).</p>\n        <p>\n            <code>GetResources</code> does not split a resource and its associated tags across\n            pages. If the specified <code>TagsPerPage</code> would cause such a break, a\n                <code>PaginationToken</code> is returned in place of the affected resource and its\n            tags. Use that token in another request to get the remaining data. For example, if you\n            specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources\n            with 10 tags each (meaning that each resource has 10 key and value pairs), the output\n            will consist of three pages. The first page displays the first 10 resources, each with\n            its 10 tags. The second page displays the next 10 resources, each with its 10 tags. The\n            third page displays the remaining 2 resources, each with its 10 tags.</p>\n        <p>You can set <code>TagsPerPage</code> to a minimum of 100 items and the maximum of 500\n            items.</p>"
           }
         },
-        "ResourcesPerPage": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#ResourcesPerPage",
-          "traits": {
-            "smithy.api#documentation": "<p>A limit that restricts the number of resources returned by GetResources in paginated\n            output. You can set ResourcesPerPage to a minimum of 1 item and the maximum of 100\n            items. </p>"
-          }
-        },
-        "PaginationToken": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
-          }
-        },
         "TagFilters": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagFilterList",
           "traits": {
             "smithy.api#documentation": "<p>A list of TagFilters (keys and values). Each TagFilter specified must contain a key\n            with values as optional. A request can include up to 50 keys, and each key can include\n            up to 20 values. </p>\n        <p>Note the following when deciding how to use TagFilters:</p>\n        <ul>\n            <li>\n                <p>If you <i>do</i> specify a TagFilter, the response returns only\n                    those resources that are currently associated with the specified tag. </p>\n            </li>\n            <li>\n                <p>If you <i>don't</i> specify a TagFilter, the response includes\n                    all resources that were ever associated with tags. Resources that currently\n                    don't have associated tags are shown with an empty tag set, like this:\n                        <code>\"Tags\": []</code>.</p>\n            </li>\n            <li>\n                <p>If you specify more than one filter in a single request, the response returns\n                    only those resources that satisfy all specified filters.</p>\n            </li>\n            <li>\n                <p>If you specify a filter that contains more than one value for a key, the\n                    response returns resources that match any of the specified values for that\n                    key.</p>\n            </li>\n            <li>\n                <p>If you don't specify any values for a key, the response returns resources that\n                    are tagged with that key irrespective of the value.</p>\n                <p>For example, for filters: filter1 = {key1, {value1}}, filter2 = {key2,\n                    {value2,value3,value4}} , filter3 = {key3}:</p>\n                <ul>\n                  <li>\n                        <p>GetResources( {filter1} ) returns resources tagged with\n                            key1=value1</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter2} ) returns resources tagged with key2=value2 or\n                            key2=value3 or key2=value4</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter3} ) returns resources tagged with any tag\n                            containing key3 as its tag key, irrespective of its value</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter1,filter2,filter3} ) returns resources tagged\n                            with ( key1=value1) and ( key2=value2 or key2=value3 or key2=value4) and\n                            (key3, irrespective of the value)</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+          }
+        },
+        "IncludeComplianceDetails": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#IncludeComplianceDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to include details regarding the compliance with the effective tag\n            policy. Set this to <code>true</code> to determine whether resources are compliant with\n            the tag policy and to get details.</p>"
           }
         },
         "ExcludeCompliantResources": {
@@ -383,16 +377,22 @@
             "smithy.api#documentation": "<p>Specifies whether to exclude resources that are compliant with the tag policy. Set\n            this to <code>true</code> if you are interested in retrieving information on\n            noncompliant resources only.</p>\n        <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter\n            is also set to <code>true</code>.</p>"
           }
         },
+        "ResourcesPerPage": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#ResourcesPerPage",
+          "traits": {
+            "smithy.api#documentation": "<p>A limit that restricts the number of resources returned by GetResources in paginated\n            output. You can set ResourcesPerPage to a minimum of 1 item and the maximum of 100\n            items. </p>"
+          }
+        },
         "ResourceTypeFilters": {
           "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
           "traits": {
             "smithy.api#documentation": "<p>The constraints on the resources that you want returned. The format of each resource\n            type is <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>AWS General\n                Reference</i> for the following:</p>\n        <ul>\n            <li>\n                <p>For a list of service name strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a>.</p>\n            </li>\n            <li>\n                <p>For resource type strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example ARNs</a>.</p>\n            </li>\n            <li>\n                <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                        Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n            </li>\n         </ul>\n        <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. </p>"
           }
         },
-        "IncludeComplianceDetails": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#IncludeComplianceDetails",
+        "PaginationToken": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether to include details regarding the compliance with the effective tag\n            policy. Set this to <code>true</code> to determine whether resources are compliant with\n            the tag policy and to get details.</p>"
+            "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
           }
         }
       }
@@ -448,30 +448,30 @@
     "com.amazonaws.resourcegroupstaggingapi#GetTagKeysInput": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
-        },
         "PaginationToken": {
           "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
           }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
         }
       }
     },
     "com.amazonaws.resourcegroupstaggingapi#GetTagKeysOutput": {
       "type": "structure",
       "members": {
-        "PaginationToken": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
-          }
-        },
         "TagKeys": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
           "traits": {
             "smithy.api#documentation": "<p>A list of all tag keys in the AWS account.</p>"
+          }
+        },
+        "PaginationToken": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
           }
         }
       }
@@ -510,11 +510,8 @@
     "com.amazonaws.resourcegroupstaggingapi#GetTagValuesInput": {
       "type": "structure",
       "members": {
-        "PaginationToken": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
-          }
+        "MaxResults": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
         },
         "Key": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
@@ -523,24 +520,27 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
+        "PaginationToken": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
+          }
         }
       }
     },
     "com.amazonaws.resourcegroupstaggingapi#GetTagValuesOutput": {
       "type": "structure",
       "members": {
-        "PaginationToken": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
-          }
-        },
         "TagValues": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagValuesOutputList",
           "traits": {
             "smithy.api#documentation": "<p>A list of all tag values for the specified key in the AWS account.</p>"
+          }
+        },
+        "PaginationToken": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
           }
         }
       }
@@ -732,7 +732,7 @@
           "name": "tagging"
         },
         "aws.protocols#awsJson1_1": {},
-        "smithy.api#documentation": "<fullname>Resource Groups Tagging API</fullname>\n\n        <p>This guide describes the API operations for the resource groups tagging.</p>\n        <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a\n            value, both of which you define. For example, if you have two Amazon EC2 instances, you might\n            assign both a tag key of \"Stack.\" But the value of \"Stack\" might be \"Testing\" for one\n            and \"Production\" for the other.</p>\n        <p>Tagging can help you organize your resources and enables you to simplify resource\n            management, access management and cost allocation. </p>\n        <p>You can use the resource groups tagging API operations to complete the following\n            tasks:</p>\n\n        <ul>\n            <li>\n                <p>Tag and untag supported resources located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>Use tag-based filters to search for resources located in the specified Region\n                    for the AWS account.</p>\n            </li>\n            <li>\n                <p>List all existing tag keys in the specified Region for the AWS\n                    account.</p>\n            </li>\n            <li>\n                <p>List all existing values for the specified key in the specified Region for the\n                    AWS account.</p>\n            </li>\n         </ul>\n\n        <p>To use resource groups tagging API operations, you must add the following permissions\n            to your IAM policy:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:TagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:UntagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagKeys</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagValues</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>You'll also need permissions to access the resources of individual services so that\n            you can tag and untag those resources.</p>\n        <p>For more information on IAM policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html\">Managing IAM\n                Policies</a> in the <i>IAM User Guide</i>.</p>\n        <p>You can use the Resource Groups Tagging API to tag resources for the following AWS\n            services.</p>\n\n        <ul>\n            <li>\n                <p>Alexa for Business (a4b)</p>\n            </li>\n            <li>\n                <p>API Gateway</p>\n            </li>\n            <li>\n                <p>Amazon AppStream</p>\n            </li>\n            <li>\n                <p>AWS AppSync</p>\n            </li>\n            <li>\n                <p>AWS App Mesh</p>\n            </li>\n            <li>\n                <p>Amazon Athena</p>\n            </li>\n            <li>\n                <p>Amazon Aurora</p>\n            </li>\n            <li>\n                <p>AWS Backup</p>\n            </li>\n            <li>\n                <p>AWS Certificate Manager</p>\n            </li>\n            <li>\n                <p>AWS Certificate Manager Private CA</p>\n            </li>\n            <li>\n                <p>Amazon Cloud Directory</p>\n            </li>\n            <li>\n                <p>AWS CloudFormation</p>\n            </li>\n            <li>\n                <p>Amazon CloudFront</p>\n            </li>\n            <li>\n                <p>AWS CloudHSM</p>\n            </li>\n            <li>\n                <p>AWS CloudTrail</p>\n            </li>\n            <li>\n                <p>Amazon CloudWatch (alarms only)</p>\n            </li>\n            <li>\n                <p>Amazon CloudWatch Events</p>\n            </li>\n            <li>\n                <p>Amazon CloudWatch Logs</p>\n            </li>\n            <li>\n                <p>AWS CodeBuild</p>\n            </li>\n            <li>\n                <p>AWS CodeCommit</p>\n            </li>\n            <li>\n                <p>AWS CodePipeline</p>\n            </li>\n            <li>\n                <p>AWS CodeStar</p>\n            </li>\n            <li>\n                <p>Amazon Cognito Identity</p>\n            </li>\n            <li>\n                <p>Amazon Cognito User Pools</p>\n            </li>\n            <li>\n                <p>Amazon Comprehend</p>\n            </li>\n            <li>\n                <p>AWS Config</p>\n            </li>\n            <li>\n                <p>AWS Data Exchange</p>\n            </li>\n            <li>\n                <p>AWS Data Pipeline</p>\n            </li>\n            <li>\n                <p>AWS Database Migration Service</p>\n            </li>\n            <li>\n                <p>AWS DataSync</p>\n            </li>\n            <li>\n                <p>AWS Device Farm</p>\n            </li>\n            <li>\n                <p>AWS Direct Connect</p>\n            </li>\n            <li>\n                <p>AWS Directory Service</p>\n            </li>\n            <li>\n                <p>Amazon DynamoDB</p>\n            </li>\n            <li>\n                <p>Amazon EBS</p>\n            </li>\n            <li>\n                <p>Amazon EC2</p>\n            </li>\n            <li>\n                <p>Amazon ECR</p>\n            </li>\n            <li>\n                <p>Amazon ECS</p>\n            </li>\n            <li>\n                <p>Amazon EKS</p>\n            </li>\n            <li>\n                <p>AWS Elastic Beanstalk</p>\n            </li>\n            <li>\n                <p>Amazon Elastic File System</p>\n            </li>\n            <li>\n                <p>Elastic Load Balancing</p>\n            </li>\n            <li>\n                <p>Amazon ElastiCache</p>\n            </li>\n            <li>\n                <p>Amazon Elasticsearch Service</p>\n            </li>\n            <li>\n                <p>AWS Elemental MediaLive</p>\n            </li>\n            <li>\n                <p>AWS Elemental MediaPackage</p>\n            </li>\n            <li>\n                <p>AWS Elemental MediaTailor</p>\n            </li>\n            <li>\n                <p>Amazon EMR</p>\n            </li>\n            <li>\n                <p>Amazon FSx</p>\n            </li>\n            <li>\n                <p>Amazon S3 Glacier</p>\n            </li>\n            <li>\n                <p>AWS Glue</p>\n            </li>\n            <li>\n                <p>Amazon GuardDuty</p>\n            </li>\n            <li>\n                <p>Amazon Inspector</p>\n            </li>\n            <li>\n                <p>AWS IoT Analytics</p>\n            </li>\n            <li>\n                <p>AWS IoT Core</p>\n            </li>\n            <li>\n                <p>AWS IoT Device Defender</p>\n            </li>\n            <li>\n                <p>AWS IoT Device Management</p>\n            </li>\n            <li>\n                <p>AWS IoT Events</p>\n            </li>\n            <li>\n                <p>AWS IoT Greengrass</p>\n            </li>\n            <li>\n                <p>AWS IoT 1-Click</p>\n            </li>\n            <li>\n                <p>AWS IoT Things Graph</p>\n            </li>\n            <li>\n                <p>AWS Key Management Service</p>\n            </li>\n            <li>\n                <p>Amazon Kinesis</p>\n            </li>\n            <li>\n                <p>Amazon Kinesis Data Analytics</p>\n            </li>\n            <li>\n                <p>Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n                <p>AWS Lambda</p>\n            </li>\n            <li>\n                <p>AWS License Manager</p>\n            </li>\n            <li>\n                <p>Amazon Machine Learning</p>\n            </li>\n            <li>\n                <p>Amazon MQ</p>\n            </li>\n            <li>\n                <p>Amazon MSK</p>\n            </li>\n            <li>\n                <p>Amazon Neptune</p>\n            </li>\n            <li>\n                <p>AWS OpsWorks</p>\n            </li>\n            <li>\n                <p>AWS Organizations</p>\n            </li>\n            <li>\n                <p>Amazon Quantum Ledger Database (QLDB)</p>\n            </li>\n            <li>\n                <p>Amazon RDS</p>\n            </li>\n            <li>\n                <p>Amazon Redshift</p>\n            </li>\n            <li>\n                <p>AWS Resource Access Manager</p>\n            </li>\n            <li>\n                <p>AWS Resource Groups</p>\n            </li>\n            <li>\n                <p>AWS RoboMaker</p>\n            </li>\n            <li>\n                <p>Amazon Route 53</p>\n            </li>\n            <li>\n                <p>Amazon Route 53 Resolver</p>\n            </li>\n            <li>\n                <p>Amazon S3 (buckets only)</p>\n            </li>\n            <li>\n                <p>Amazon SageMaker</p>\n            </li>\n            <li>\n                <p>AWS Secrets Manager</p>\n            </li>\n            <li>\n                <p>AWS Security Hub</p>\n            </li>\n            <li>\n                <p>AWS Service Catalog</p>\n            </li>\n            <li>\n                <p>Amazon Simple Email Service (SES)</p>\n            </li>\n            <li>\n                <p>Amazon Simple Notification Service (SNS)</p>\n            </li>\n            <li>\n                <p>Amazon Simple Queue Service (SQS)</p>\n            </li>\n            <li>\n                <p>Amazon Simple Workflow Service</p>\n            </li>\n            <li>\n                <p>AWS Step Functions</p>\n            </li>\n            <li>\n                <p>AWS Storage Gateway</p>\n            </li>\n            <li>\n                <p>AWS Systems Manager</p>\n            </li>\n            <li>\n                <p>AWS Transfer for SFTP</p>\n            </li>\n            <li>\n                <p>AWS WAF Regional</p>\n            </li>\n            <li>\n                <p>Amazon VPC</p>\n            </li>\n            <li>\n                <p>Amazon WorkSpaces</p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<fullname>Resource Groups Tagging API</fullname>\n        <p>This guide describes the API operations for the resource groups tagging.</p>\n        <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a\n            value, both of which you define. For example, if you have two Amazon EC2 instances, you might\n            assign both a tag key of \"Stack.\" But the value of \"Stack\" might be \"Testing\" for one\n            and \"Production\" for the other.</p>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>\n        <p>Tagging can help you organize your resources and enables you to simplify resource\n            management, access management and cost allocation. </p>\n        <p>You can use the resource groups tagging API operations to complete the following\n            tasks:</p>\n        <ul>\n            <li>\n                <p>Tag and untag supported resources located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>Use tag-based filters to search for resources located in the specified Region\n                    for the AWS account.</p>\n            </li>\n            <li>\n                <p>List all existing tag keys in the specified Region for the AWS\n                    account.</p>\n            </li>\n            <li>\n                <p>List all existing values for the specified key in the specified Region for the\n                    AWS account.</p>\n            </li>\n         </ul>\n        <p>To use resource groups tagging API operations, you must add the following permissions\n            to your IAM policy:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:TagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:UntagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagKeys</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagValues</code>\n               </p>\n            </li>\n         </ul>\n        <p>You'll also need permissions to access the resources of individual services so that\n            you can tag and untag those resources.</p>\n        <p>For more information on IAM policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html\">Managing IAM\n                Policies</a> in the <i>IAM User Guide</i>.</p>\n        <p>\n            <i>\n               <b>Services that support the Resource Groups Tagging\n                    API</b>\n            </i>\n         </p>\n        <p>You can use the Resource Groups Tagging API to tag resources for the following AWS\n            services.</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/a4b\">Alexa for Business (a4b)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/apigateway\">API Gateway</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/appstream2\">Amazon AppStream</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/appsync\">AWS AppSync</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/app-mesh\">AWS App Mesh</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/athena\">Amazon Athena</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide\">Amazon\n                        Aurora</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-backup\">AWS Backup</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/acm\">AWS Certificate Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/acm\">AWS Certificate Manager Private\n                        CA</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/clouddirectory\">Amazon Cloud\n                        Directory</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloud-map\">AWS Cloud Map</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudformation\">AWS\n                    CloudFormation</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudfront\">Amazon CloudFront</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudhsm\">AWS CloudHSM</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudtrail\">AWS CloudTrail</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch\">Amazon CloudWatch (alarms\n                        only)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch/?id=docs_gateway#amazon-cloudwatch-events\">Amazon CloudWatch\n                        Events</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch/?id=docs_gateway#amazon-cloudwatch-logs\">Amazon CloudWatch\n                        Logs</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch\">Amazon Cloudwatch\n                        Synthetics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codebuild\">AWS CodeBuild</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codecommit\">AWS CodeCommit</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codeguru/latest/profiler-ug/\">AWS CodeGuru\n                        Profiler</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codepipeline\">AWS\n                    CodePipeline</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codestar\">AWS CodeStar</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/\">AWS CodeStar Connections</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cognito\">Amazon Cognito\n                    Identity</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cognito\">Amazon Cognito User\n                    Pools</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/comprehend\">Amazon Comprehend</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/config\">AWS Config</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://aws.amazon.com/connect/resources/?whats-new-cards#Documentation\">Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/data-exchange\">AWS Data\n                    Exchange</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/data-pipeline\">AWS Data\n                    Pipeline</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/dms\">AWS Database Migration\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync\">AWS DataSync</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/devicefarm\">AWS Device Farm</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/directconnect\">AWS Direct\n                    Connect</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/directory-service\">AWS Directory\n                        Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/dynamodb\">Amazon DynamoDB</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ebs\">Amazon EBS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ec2\">Amazon EC2</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/imagebuilder\">EC2 Image\n                    Builder</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ecr\">Amazon ECR</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ecs\">Amazon ECS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/eks\">Amazon EKS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elastic-beanstalk\">AWS Elastic\n                        Beanstalk</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/efs\">Amazon Elastic File\n                    System</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing\">Elastic Load\n                        Balancing</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elastic-inference\">Amazon Elastic\n                        Inference</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticache\">Amazon\n                    ElastiCache</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticsearch-service\">Amazon Elasticsearch\n                        Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/medialive\">AWS Elemental\n                    MediaLive</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediapackage\">AWS Elemental\n                        MediaPackage</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediapackage\">AWS Elemental MediaPackage\n                        VoD</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediatailor\">AWS Elemental\n                        MediaTailor</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/emr\">Amazon EMR</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge\">Amazon EventBridge\n                        Schema</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/firewall-manager\">AWS Firewall\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/forecast\">Amazon Forecast</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/frauddetector\">Amazon Fraud\n                    Detector</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/fsx\">Amazon FSx</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/s3/?id=docs_gateway#amazon-s3-glacier\">Amazon\n                        S3 Glacier</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/global-accelerator\">AWS Global\n                        Accelerator</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ground-station\">AWS Ground\n                    Station</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/glue\">AWS Glue</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/guardduty\">Amazon GuardDuty</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/inspector\">Amazon Inspector</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ivs\">Amazon Interactive Video Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iotanalytics\">AWS IoT\n                    Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot\">AWS IoT Core</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-device-defender\">AWS IoT Device\n                        Defender</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-device-management\">AWS IoT Device\n                        Management</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents\">AWS IoT Events</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/greengrass\">AWS IoT\n                    Greengrass</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-1-click\">AWS IoT 1-Click</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-sitewise\">AWS IoT\n                    Sitewise</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/thingsgraph\">AWS IoT Things\n                    Graph</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kendra\">Amazon Kendra</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kms\">AWS Key Management\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis\">Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis/?id=docs_gateway#amazon-kinesis-data-analytics\">Amazon Kinesis\n                        Data Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis/?id=docs_gateway#amazon-kinesis-data-firehose\">Amazon Kinesis\n                        Data Firehose</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda\">AWS Lambda</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lex\">Amazon Lex</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/license-manager\">AWS License\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lightsail\">Amazon Lightsail</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/macie\">Amazon Macie</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/machine-learning\">Amazon Machine\n                        Learning</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/amazon-mq\">Amazon MQ</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/msk\">Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/msk\">Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune\">Amazon Neptune</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/what-is-network-manager.html\">AWS Network Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/opsworks\">AWS OpsWorks</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/opsworks\">AWS OpsWorks CM</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations\">AWS\n                    Organizations</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/pinpoint\">Amazon Pinpoint</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/qldb\">Amazon Quantum Ledger Database\n                        (QLDB)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/rds\">Amazon RDS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/redshift\">Amazon Redshift</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ram\">AWS Resource Access\n                    Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ARG\">AWS Resource Groups</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/robomaker\">AWS RoboMaker</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/route53\">Amazon Route 53</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/route53\">Amazon Route 53\n                    Resolver</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/s3\">Amazon S3 (buckets only)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker\">Amazon SageMaker</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/savingsplans\">Savings Plans</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/secretsmanager\">AWS Secrets\n                    Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/securityhub\">AWS Security\n                    Hub</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/servicecatalog\">AWS Service\n                    Catalog</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ses\">Amazon Simple Email Service\n                        (SES)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sns\">Amazon Simple Notification Service\n                        (SNS)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sqs\">Amazon Simple Queue Service\n                        (SQS)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/swf\">Amazon Simple Workflow\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions\">AWS Step\n                    Functions</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway\">AWS Storage\n                    Gateway</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager\">AWS Systems\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/transfer\">AWS Transfer for\n                    SFTP</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/vpc\">Amazon VPC</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/waf\">AWS WAF</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/waf\">AWS WAF Regional</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/worklink\">Amazon WorkLink</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/workspaces\">Amazon WorkSpaces</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#title": "AWS Resource Groups Tagging API"
       }
     },
@@ -787,7 +787,7 @@
           "min": 3,
           "max": 63
         },
-        "smithy.api#pattern": "[\\s\\S]*"
+        "smithy.api#pattern": "[a-z0-9.-]*"
       }
     },
     "com.amazonaws.resourcegroupstaggingapi#S3Location": {
@@ -850,10 +850,10 @@
     "com.amazonaws.resourcegroupstaggingapi#Summary": {
       "type": "structure",
       "members": {
-        "LastUpdated": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#LastUpdated",
+        "TargetId": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TargetId",
           "traits": {
-            "smithy.api#documentation": "<p>The timestamp that shows when this summary was generated in this Region. </p>"
+            "smithy.api#documentation": "<p>The account identifier or the root identifier of the organization. If you don't know\n            the root ID, you can call the AWS Organizations <a href=\"http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html\">ListRoots</a> API.</p>"
           }
         },
         "ResourceType": {
@@ -862,28 +862,28 @@
             "smithy.api#documentation": "<p>The AWS resource type.</p>"
           }
         },
-        "Region": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#Region",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS Region that the summary applies to.</p>"
-          }
-        },
         "TargetIdType": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TargetIdType",
           "traits": {
             "smithy.api#documentation": "<p>Whether the target is an account, an OU, or the organization root.</p>"
           }
         },
-        "TargetId": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TargetId",
-          "traits": {
-            "smithy.api#documentation": "<p>The account identifier or the root identifier of the organization. If you don't know\n            the root ID, you can call the AWS Organizations <a href=\"http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html\">ListRoots</a> API.</p>"
-          }
-        },
         "NonCompliantResources": {
           "target": "com.amazonaws.resourcegroupstaggingapi#NonCompliantResources",
           "traits": {
             "smithy.api#documentation": "<p>The count of noncompliant resources.</p>"
+          }
+        },
+        "LastUpdated": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#LastUpdated",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp that shows when this summary was generated in this Region. </p>"
+          }
+        },
+        "Region": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#Region",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Region that the summary applies to.</p>"
           }
         }
       },
@@ -900,17 +900,17 @@
     "com.amazonaws.resourcegroupstaggingapi#Tag": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Key": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
           "traits": {
             "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>",
             "smithy.api#required": {}
           }
         }
@@ -922,16 +922,16 @@
     "com.amazonaws.resourcegroupstaggingapi#TagFilter": {
       "type": "structure",
       "members": {
-        "Key": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
-          }
-        },
         "Values": {
           "target": "com.amazonaws.resourcegroupstaggingapi#TagValueList",
           "traits": {
             "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
           }
         }
       },
@@ -1032,7 +1032,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Applies one or more tags to the specified resources. Note the following:</p>\n        <ul>\n            <li>\n                <p>Not all resources can have tags. For a list of services that support tagging,\n                    see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n            <li>\n                <p>Each resource can have up to 50 tags. For other limits, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage\n                        Conventions</a> in the <i>AWS General\n                    Reference.</i>\n               </p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>To add tags to a resource, you need the necessary permissions for the service\n                    that the resource belongs to as well as permissions for adding tags. For more\n                    information, see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n         </ul>"
+        "smithy.api#documentation": "<p>Applies one or more tags to the specified resources. Note the following:</p>\n        <ul>\n            <li>\n                <p>Not all resources can have tags. For a list of services that support tagging,\n                    see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n            <li>\n                <p>Each resource can have up to 50 tags. For other limits, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage\n                        Conventions</a> in the <i>AWS General\n                    Reference.</i>\n               </p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>To add tags to a resource, you need the necessary permissions for the service\n                    that the resource belongs to as well as permissions for adding tags. For more\n                    information, see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n         </ul>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>"
       }
     },
     "com.amazonaws.resourcegroupstaggingapi#TagResourcesInput": {
@@ -1106,7 +1106,7 @@
           "min": 6,
           "max": 68
         },
-        "smithy.api#pattern": "[\\s\\S]*"
+        "smithy.api#pattern": "[a-zA-Z0-9-]*"
       }
     },
     "com.amazonaws.resourcegroupstaggingapi#TargetIdFilterList": {
@@ -1178,17 +1178,17 @@
     "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyListForUntag",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the tag keys that you want to remove from the specified resources.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARNList": {
           "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNList",
           "traits": {
             "smithy.api#documentation": "<p>A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. For more\n            information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\n                Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General\n                Reference</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyListForUntag",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the tag keys that you want to remove from the specified resources.</p>",
             "smithy.api#required": {}
           }
         }

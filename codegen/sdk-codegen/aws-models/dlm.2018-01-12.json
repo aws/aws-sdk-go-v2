@@ -65,7 +65,10 @@
       "type": "boolean"
     },
     "com.amazonaws.dlm#CopyTagsNullable": {
-      "type": "boolean"
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
     },
     "com.amazonaws.dlm#Count": {
       "type": "integer",
@@ -96,7 +99,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.</p>",
+        "smithy.api#documentation": "<p>Creates a policy to manage the lifecycle of the specified AWS resources. You can\n\t\t\tcreate up to 100 lifecycle policies.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/policies",
@@ -110,22 +113,14 @@
         "ExecutionRoleArn": {
           "target": "com.amazonaws.dlm#ExecutionRoleArn",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.</p>",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by\n\t\t\tthe lifecycle policy.</p>",
             "smithy.api#required": {}
           }
         },
-        "Description": {
-          "target": "com.amazonaws.dlm#PolicyDescription",
+        "Tags": {
+          "target": "com.amazonaws.dlm#TagMap",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.dlm#SettablePolicyStateValues",
-          "traits": {
-            "smithy.api#documentation": "<p>The desired activation state of the lifecycle policy after creation.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The tags to apply to the lifecycle policy during creation.</p>"
           }
         },
         "PolicyDetails": {
@@ -135,10 +130,18 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.dlm#TagMap",
+        "Description": {
+          "target": "com.amazonaws.dlm#PolicyDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to apply to the lifecycle policy during creation.</p>"
+            "smithy.api#documentation": "<p>A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are\n\t\t\tsupported.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.dlm#SettablePolicyStateValues",
+          "traits": {
+            "smithy.api#documentation": "<p>The desired activation state of the lifecycle policy after creation.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -160,13 +163,13 @@
         "Times": {
           "target": "com.amazonaws.dlm#TimesList",
           "traits": {
-            "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.</p>"
+            "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p>\n\t\t       <p>The operation occurs within a one-hour window following the specified time. If you do\n\t\t\tnot specify a time, Amazon DLM selects a time within the next 24 hours.</p>"
           }
         },
         "CronExpression": {
           "target": "com.amazonaws.dlm#CronExpression",
           "traits": {
-            "smithy.api#documentation": "<p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron expressions</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1\n\t\t\tyear. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron\n\t\t\t\texpressions</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
           }
         },
         "IntervalUnit": {
@@ -178,12 +181,12 @@
         "Interval": {
           "target": "com.amazonaws.dlm#Interval",
           "traits": {
-            "smithy.api#documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.</p>"
+            "smithy.api#documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and\n\t\t\t24.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>"
+        "smithy.api#documentation": "<p>Specifies when to create snapshots of EBS volumes.</p>\n\t\t       <p>You must specify either a Cron expression or an interval, interval unit, and start\n\t\t\ttime. You cannot specify both.</p>"
       }
     },
     "com.amazonaws.dlm#CronExpression": {
@@ -208,7 +211,7 @@
         "Interval": {
           "target": "com.amazonaws.dlm#Interval",
           "traits": {
-            "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
+            "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
           }
         }
       },
@@ -222,14 +225,8 @@
         "Encrypted": {
           "target": "com.amazonaws.dlm#Encrypted",
           "traits": {
-            "smithy.api#documentation": "<p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.</p>",
+            "smithy.api#documentation": "<p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled,\n\t\t\tenable encryption using this parameter. Copies of encrypted snapshots are encrypted,\n\t\t\teven if this parameter is false or if encryption by default is not enabled.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "RetainRule": {
-          "target": "com.amazonaws.dlm#CrossRegionCopyRetainRule",
-          "traits": {
-            "smithy.api#documentation": "<p>The retention rule.</p>"
           }
         },
         "TargetRegion": {
@@ -237,6 +234,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The target Region.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "RetainRule": {
+          "target": "com.amazonaws.dlm#CrossRegionCopyRetainRule",
+          "traits": {
+            "smithy.api#documentation": "<p>The retention rule.</p>"
           }
         },
         "CopyTags": {
@@ -248,7 +251,7 @@
         "CmkArn": {
           "target": "com.amazonaws.dlm#CmkArn",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS\n\t\t\tencryption. If this parameter is not specified, your AWS managed CMK for EBS is\n\t\t\tused.</p>"
           }
         }
       },
@@ -266,50 +269,6 @@
           "min": 0,
           "max": 3
         }
-      }
-    },
-    "com.amazonaws.dlm#DLM": {
-      "type": "service",
-      "version": "2018-01-12",
-      "operations": [
-        {
-          "target": "com.amazonaws.dlm#CreateLifecyclePolicy"
-        },
-        {
-          "target": "com.amazonaws.dlm#DeleteLifecyclePolicy"
-        },
-        {
-          "target": "com.amazonaws.dlm#GetLifecyclePolicies"
-        },
-        {
-          "target": "com.amazonaws.dlm#GetLifecyclePolicy"
-        },
-        {
-          "target": "com.amazonaws.dlm#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.dlm#TagResource"
-        },
-        {
-          "target": "com.amazonaws.dlm#UntagResource"
-        },
-        {
-          "target": "com.amazonaws.dlm#UpdateLifecyclePolicy"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "DLM",
-          "arnNamespace": "dlm",
-          "cloudFormationName": "DLM",
-          "cloudTrailEventSource": "dlm.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "dlm"
-        },
-        "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>",
-        "smithy.api#title": "Amazon Data Lifecycle Manager"
       }
     },
     "com.amazonaws.dlm#DeleteLifecyclePolicy": {
@@ -332,7 +291,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the policy specified.</p>",
+        "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the\n\t\t\tpolicy specified.</p>",
         "smithy.api#http": {
           "method": "DELETE",
           "uri": "/policies/{PolicyId}",
@@ -358,7 +317,10 @@
       "members": {}
     },
     "com.amazonaws.dlm#Encrypted": {
-      "type": "boolean"
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
     },
     "com.amazonaws.dlm#ErrorCode": {
       "type": "string"
@@ -367,7 +329,10 @@
       "type": "string"
     },
     "com.amazonaws.dlm#ExcludeBootVolume": {
-      "type": "boolean"
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
     },
     "com.amazonaws.dlm#ExecutionRoleArn": {
       "type": "string",
@@ -397,7 +362,7 @@
         "Interval": {
           "target": "com.amazonaws.dlm#Interval",
           "traits": {
-            "smithy.api#documentation": "<p>The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
+            "smithy.api#documentation": "<p>The amount of time to enable fast snapshot restore. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
           }
         },
         "AvailabilityZones": {
@@ -409,7 +374,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot restore based on either a count or a time interval.</p>"
+        "smithy.api#documentation": "<p>Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot\n\t\t\trestore based on either a count or a time interval.</p>"
       }
     },
     "com.amazonaws.dlm#GetLifecyclePolicies": {
@@ -435,7 +400,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p> <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>",
+        "smithy.api#documentation": "<p>Gets summary information about all or the specified data lifecycle policies.</p>\n\t\t       <p>To get complete information about a policy, use <a>GetLifecyclePolicy</a>.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/policies",
@@ -453,11 +418,11 @@
             "smithy.api#httpQuery": "resourceTypes"
           }
         },
-        "TargetTags": {
-          "target": "com.amazonaws.dlm#TargetTagsFilterList",
+        "TagsToAdd": {
+          "target": "com.amazonaws.dlm#TagsToAddFilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The target tag for a policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p>",
-            "smithy.api#httpQuery": "targetTags"
+            "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>\n\t\t       <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>",
+            "smithy.api#httpQuery": "tagsToAdd"
           }
         },
         "PolicyIds": {
@@ -467,11 +432,11 @@
             "smithy.api#httpQuery": "policyIds"
           }
         },
-        "TagsToAdd": {
-          "target": "com.amazonaws.dlm#TagsToAddFilterList",
+        "TargetTags": {
+          "target": "com.amazonaws.dlm#TargetTagsFilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p> <p>Tags are strings in the format <code>key=value</code>.</p> <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>",
-            "smithy.api#httpQuery": "tagsToAdd"
+            "smithy.api#documentation": "<p>The target tag for a policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>",
+            "smithy.api#httpQuery": "targetTags"
           }
         },
         "State": {
@@ -609,9 +574,6 @@
             "smithy.api#documentation": "<p>The request included parameters that cannot be provided together.</p>"
           }
         },
-        "Code": {
-          "target": "com.amazonaws.dlm#ErrorCode"
-        },
         "RequiredParameters": {
           "target": "com.amazonaws.dlm#ParameterList",
           "traits": {
@@ -620,10 +582,13 @@
         },
         "Message": {
           "target": "com.amazonaws.dlm#ErrorMessage"
+        },
+        "Code": {
+          "target": "com.amazonaws.dlm#ErrorCode"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Bad request. The request is missing required parameters or has invalid parameters.</p>",
+        "smithy.api#documentation": "<p>Bad request. The request is missing required parameters or has invalid\n\t\t\tparameters.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
@@ -637,16 +602,10 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>"
           }
         },
-        "PolicyId": {
-          "target": "com.amazonaws.dlm#PolicyId",
+        "Description": {
+          "target": "com.amazonaws.dlm#PolicyDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The identifier of the lifecycle policy.</p>"
-          }
-        },
-        "DateModified": {
-          "target": "com.amazonaws.dlm#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The local date and time when the lifecycle policy was last modified.</p>"
+            "smithy.api#documentation": "<p>The description of the lifecycle policy.</p>"
           }
         },
         "StatusMessage": {
@@ -655,28 +614,22 @@
             "smithy.api#documentation": "<p>The description of the status.</p>"
           }
         },
+        "DateModified": {
+          "target": "com.amazonaws.dlm#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The local date and time when the lifecycle policy was last modified.</p>"
+          }
+        },
+        "PolicyId": {
+          "target": "com.amazonaws.dlm#PolicyId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the lifecycle policy.</p>"
+          }
+        },
         "Tags": {
           "target": "com.amazonaws.dlm#TagMap",
           "traits": {
             "smithy.api#documentation": "<p>The tags.</p>"
-          }
-        },
-        "ExecutionRoleArn": {
-          "target": "com.amazonaws.dlm#ExecutionRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.dlm#GettablePolicyStateValues",
-          "traits": {
-            "smithy.api#documentation": "<p>The activation state of the lifecycle policy.</p>"
-          }
-        },
-        "DateCreated": {
-          "target": "com.amazonaws.dlm#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The local date and time when the lifecycle policy was created.</p>"
           }
         },
         "PolicyDetails": {
@@ -685,10 +638,22 @@
             "smithy.api#documentation": "<p>The configuration of the lifecycle policy</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.dlm#PolicyDescription",
+        "State": {
+          "target": "com.amazonaws.dlm#GettablePolicyStateValues",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the lifecycle policy.</p>"
+            "smithy.api#documentation": "<p>The activation state of the lifecycle policy.</p>"
+          }
+        },
+        "ExecutionRoleArn": {
+          "target": "com.amazonaws.dlm#ExecutionRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by\n\t\t\tthe lifecycle policy.</p>"
+          }
+        },
+        "DateCreated": {
+          "target": "com.amazonaws.dlm#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The local date and time when the lifecycle policy was created.</p>"
           }
         }
       },
@@ -699,12 +664,6 @@
     "com.amazonaws.dlm#LifecyclePolicySummary": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.dlm#PolicyDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the lifecycle policy.</p>"
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.dlm#TagMap",
           "traits": {
@@ -721,6 +680,12 @@
           "target": "com.amazonaws.dlm#GettablePolicyStateValues",
           "traits": {
             "smithy.api#documentation": "<p>The activation state of the lifecycle policy.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.dlm#PolicyDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the lifecycle policy.</p>"
           }
         }
       },
@@ -737,6 +702,9 @@
     "com.amazonaws.dlm#LimitExceededException": {
       "type": "structure",
       "members": {
+        "Message": {
+          "target": "com.amazonaws.dlm#ErrorMessage"
+        },
         "Code": {
           "target": "com.amazonaws.dlm#ErrorCode"
         },
@@ -745,9 +713,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Value is the type of resource for which a limit was exceeded.</p>"
           }
-        },
-        "Message": {
-          "target": "com.amazonaws.dlm#ErrorMessage"
         }
       },
       "traits": {
@@ -823,12 +788,12 @@
         "ExcludeBootVolume": {
           "target": "com.amazonaws.dlm#ExcludeBootVolume",
           "traits": {
-            "smithy.api#documentation": "<p>[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html\">CreateSnapshots</a>. The default is false.</p>"
+            "smithy.api#documentation": "<p>[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the\n\t\t\troot volume from snapshots created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html\">CreateSnapshots</a>.\n\t\t\tThe default is false.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Specifies optional parameters to add to a policy. The set of valid parameters depends on the combination of policy type and resource type.</p>"
+        "smithy.api#documentation": "<p>Specifies optional parameters to add to a policy. The set of valid parameters depends\n\t\t\ton the combination of policy type and resource type.</p>"
       }
     },
     "com.amazonaws.dlm#PolicyArn": {
@@ -863,19 +828,19 @@
         "ResourceTypes": {
           "target": "com.amazonaws.dlm#ResourceTypeValuesList",
           "traits": {
-            "smithy.api#documentation": "<p>The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.</p>"
+            "smithy.api#documentation": "<p>The resource type. Use VOLUME to create snapshots of individual volumes or use\n\t\t\tINSTANCE to create multi-volume snapshots from the volumes for an instance.</p>"
           }
         },
         "PolicyType": {
           "target": "com.amazonaws.dlm#PolicyTypeValues",
           "traits": {
-            "smithy.api#documentation": "<p>The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.</p>"
+            "smithy.api#documentation": "<p>The valid target resource types and actions a policy can manage. The default is\n\t\t\tEBS_SNAPSHOT_MANAGEMENT.</p>"
           }
         },
         "Schedules": {
           "target": "com.amazonaws.dlm#ScheduleList",
           "traits": {
-            "smithy.api#documentation": "<p>The schedule of policy-defined actions.</p>"
+            "smithy.api#documentation": "<p>The schedules of policy-defined actions. A policy can have up to four schedules - one\n\t\t\tmandatory schedule and up to three optional schedules.</p>"
           }
         },
         "TargetTags": {
@@ -919,23 +884,23 @@
     "com.amazonaws.dlm#ResourceNotFoundException": {
       "type": "structure",
       "members": {
-        "Code": {
-          "target": "com.amazonaws.dlm#ErrorCode"
-        },
         "ResourceIds": {
           "target": "com.amazonaws.dlm#PolicyIdList",
           "traits": {
             "smithy.api#documentation": "<p>Value is a list of resource IDs that were not found.</p>"
           }
         },
-        "Message": {
-          "target": "com.amazonaws.dlm#ErrorMessage"
-        },
         "ResourceType": {
           "target": "com.amazonaws.dlm#String",
           "traits": {
             "smithy.api#documentation": "<p>Value is the type of resource that was not found.</p>"
           }
+        },
+        "Code": {
+          "target": "com.amazonaws.dlm#ErrorCode"
+        },
+        "Message": {
+          "target": "com.amazonaws.dlm#ErrorMessage"
         }
       },
       "traits": {
@@ -980,21 +945,21 @@
             "smithy.api#documentation": "<p>The unit of time for time-based retention.</p>"
           }
         },
+        "Interval": {
+          "target": "com.amazonaws.dlm#Interval",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
+          }
+        },
         "Count": {
           "target": "com.amazonaws.dlm#Count",
           "traits": {
             "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000.</p>"
           }
-        },
-        "Interval": {
-          "target": "com.amazonaws.dlm#Interval",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
-          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Specifies the retention rule for a lifecycle policy. You can retain snapshots based on either a count or a time interval.</p>"
+        "smithy.api#documentation": "<p>Specifies the retention rule for a lifecycle policy. You can retain snapshots based on\n\t\t\teither a count or a time interval.</p>"
       }
     },
     "com.amazonaws.dlm#RetentionIntervalUnitValues": {
@@ -1032,19 +997,7 @@
         "CopyTags": {
           "target": "com.amazonaws.dlm#CopyTags",
           "traits": {
-            "smithy.api#documentation": "<p>Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.dlm#ScheduleName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the schedule.</p>"
-          }
-        },
-        "FastRestoreRule": {
-          "target": "com.amazonaws.dlm#FastRestoreRule",
-          "traits": {
-            "smithy.api#documentation": "<p>The rule for enabling fast snapshot restore.</p>"
+            "smithy.api#documentation": "<p>Copy all user-defined tags on a source volume to snapshots of the volume created by\n\t\t\tthis policy.</p>"
           }
         },
         "RetainRule": {
@@ -1053,22 +1006,34 @@
             "smithy.api#documentation": "<p>The retention rule.</p>"
           }
         },
-        "TagsToAdd": {
-          "target": "com.amazonaws.dlm#TagsToAddList",
+        "FastRestoreRule": {
+          "target": "com.amazonaws.dlm#FastRestoreRule",
           "traits": {
-            "smithy.api#documentation": "<p>The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.</p>"
+            "smithy.api#documentation": "<p>The rule for enabling fast snapshot restore.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.dlm#ScheduleName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the schedule.</p>"
           }
         },
         "VariableTags": {
           "target": "com.amazonaws.dlm#VariableTagsList",
           "traits": {
-            "smithy.api#documentation": "<p>A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.</p>"
+            "smithy.api#documentation": "<p>A collection of key/value pairs with values determined dynamically when the policy is\n\t\t\texecuted. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two\n\t\t\tfollowing formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable\n\t\t\ttags are only valid for EBS Snapshot Management – Instance policies.</p>"
           }
         },
         "CreateRule": {
           "target": "com.amazonaws.dlm#CreateRule",
           "traits": {
             "smithy.api#documentation": "<p>The creation rule.</p>"
+          }
+        },
+        "TagsToAdd": {
+          "target": "com.amazonaws.dlm#TagsToAddList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to policy-created resources. These user-defined tags are in addition\n\t\t\tto the AWS-added lifecycle tags.</p>"
           }
         }
       },
@@ -1084,7 +1049,7 @@
       "traits": {
         "smithy.api#length": {
           "min": 1,
-          "max": 1
+          "max": 4
         }
       }
     },
@@ -1345,10 +1310,7 @@
       }
     },
     "com.amazonaws.dlm#Timestamp": {
-      "type": "timestamp",
-      "traits": {
-        "smithy.api#timestampFormat": "date-time"
-      }
+      "type": "timestamp"
     },
     "com.amazonaws.dlm#UntagResource": {
       "type": "operation",
@@ -1381,19 +1343,19 @@
     "com.amazonaws.dlm#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.dlm#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag keys.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.dlm#PolicyArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
             "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.dlm#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys.</p>",
+            "smithy.api#httpQuery": "tagKeys",
             "smithy.api#required": {}
           }
         }
@@ -1437,6 +1399,12 @@
     "com.amazonaws.dlm#UpdateLifecyclePolicyRequest": {
       "type": "structure",
       "members": {
+        "Description": {
+          "target": "com.amazonaws.dlm#PolicyDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the lifecycle policy.</p>"
+          }
+        },
         "PolicyId": {
           "target": "com.amazonaws.dlm#PolicyId",
           "traits": {
@@ -1454,19 +1422,13 @@
         "PolicyDetails": {
           "target": "com.amazonaws.dlm#PolicyDetails",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration of the lifecycle policy. You cannot update the policy type or the resource type.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.dlm#PolicyDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the lifecycle policy.</p>"
+            "smithy.api#documentation": "<p>The configuration of the lifecycle policy. You cannot update the policy type or the\n\t\t\tresource type.</p>"
           }
         },
         "ExecutionRoleArn": {
           "target": "com.amazonaws.dlm#ExecutionRoleArn",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by\n\t\t\tthe lifecycle policy.</p>"
           }
         }
       }
@@ -1485,6 +1447,50 @@
           "min": 0,
           "max": 45
         }
+      }
+    },
+    "com.amazonaws.dlm#dlm_20180112": {
+      "type": "service",
+      "version": "2018-01-12",
+      "operations": [
+        {
+          "target": "com.amazonaws.dlm#CreateLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.dlm#DeleteLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.dlm#GetLifecyclePolicies"
+        },
+        {
+          "target": "com.amazonaws.dlm#GetLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.dlm#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.dlm#TagResource"
+        },
+        {
+          "target": "com.amazonaws.dlm#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.dlm#UpdateLifecyclePolicy"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "DLM",
+          "arnNamespace": "dlm",
+          "cloudFormationName": "DLM",
+          "cloudTrailEventSource": "dlm.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "dlm"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS\n\t\t\t\tSnapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+        "smithy.api#title": "Amazon Data Lifecycle Manager"
       }
     }
   }

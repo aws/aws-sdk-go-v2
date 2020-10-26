@@ -117,7 +117,7 @@
           "sdkId": "CloudSearch",
           "arnNamespace": "cloudsearch",
           "cloudFormationName": "CloudSearch",
-          "cloudTrailEventSource": "config2013.cloudsearch.a9.com"
+          "cloudTrailEventSource": "cloudsearch.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "cloudsearch"
@@ -184,22 +184,10 @@
     "com.amazonaws.cloudsearch#AnalysisOptions": {
       "type": "structure",
       "members": {
-        "StemmingDictionary": {
+        "Stopwords": {
           "target": "com.amazonaws.cloudsearch#String",
           "traits": {
-            "smithy.api#documentation": "<p>A JSON object that contains a collection of string:value pairs that each map a term to its stem. For example, <code>{\"term1\": \"stem1\", \"term2\": \"stem2\", \"term3\": \"stem3\"}</code>. The stemming dictionary is applied in addition to any algorithmic stemming. This enables you to override the results of the algorithmic stemming to correct specific cases of overstemming or understemming. The maximum size of a stemming dictionary is 500 KB.</p>"
-          }
-        },
-        "AlgorithmicStemming": {
-          "target": "com.amazonaws.cloudsearch#AlgorithmicStemming",
-          "traits": {
-            "smithy.api#documentation": "<p>The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings\" target=\"_blank\">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> </p>"
-          }
-        },
-        "Synonyms": {
-          "target": "com.amazonaws.cloudsearch#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A JSON object that defines synonym groups and aliases. A synonym group is an array of arrays, where each sub-array is a group of terms where each term in the group is considered a synonym of every other term in the group. The aliases value is an object that contains a collection of string:value pairs where the string specifies a term and the array of values specifies each of the aliases for that term. An alias is considered a synonym of the specified term, but the term is not considered a synonym of the alias. For more information about specifying synonyms, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms\">Synonyms</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>A  JSON array of terms to ignore during indexing and searching. For example, <code>[\"a\", \"an\", \"the\", \"of\"]</code>. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. </p>"
           }
         },
         "JapaneseTokenizationDictionary": {
@@ -208,10 +196,22 @@
             "smithy.api#documentation": "<p>A JSON array that contains a collection of terms, tokens, readings and part of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary enables you to override the default tokenization for selected terms. This is only valid for Japanese language fields.</p>"
           }
         },
-        "Stopwords": {
+        "Synonyms": {
           "target": "com.amazonaws.cloudsearch#String",
           "traits": {
-            "smithy.api#documentation": "<p>A  JSON array of terms to ignore during indexing and searching. For example, <code>[\"a\", \"an\", \"the\", \"of\"]</code>. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. </p>"
+            "smithy.api#documentation": "<p>A JSON object that defines synonym groups and aliases. A synonym group is an array of arrays, where each sub-array is a group of terms where each term in the group is considered a synonym of every other term in the group. The aliases value is an object that contains a collection of string:value pairs where the string specifies a term and the array of values specifies each of the aliases for that term. An alias is considered a synonym of the specified term, but the term is not considered a synonym of the alias. For more information about specifying synonyms, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms\">Synonyms</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
+          }
+        },
+        "AlgorithmicStemming": {
+          "target": "com.amazonaws.cloudsearch#AlgorithmicStemming",
+          "traits": {
+            "smithy.api#documentation": "<p>The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings\" target=\"_blank\">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> </p>"
+          }
+        },
+        "StemmingDictionary": {
+          "target": "com.amazonaws.cloudsearch#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A JSON object that contains a collection of string:value pairs that each map a term to its stem. For example, <code>{\"term1\": \"stem1\", \"term2\": \"stem2\", \"term3\": \"stem3\"}</code>. The stemming dictionary is applied in addition to any algorithmic stemming. This enables you to override the results of the algorithmic stemming to correct specific cases of overstemming or understemming. The maximum size of a stemming dictionary is 500 KB.</p>"
           }
         }
       },
@@ -387,16 +387,16 @@
     "com.amazonaws.cloudsearch#AvailabilityOptionsStatus": {
       "type": "structure",
       "members": {
+        "Status": {
+          "target": "com.amazonaws.cloudsearch#OptionStatus",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
         "Options": {
           "target": "com.amazonaws.cloudsearch#MultiAZ",
           "traits": {
             "smithy.api#documentation": "<p>The availability options configured for the domain.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.cloudsearch#OptionStatus",
-          "traits": {
             "smithy.api#required": {}
           }
         }
@@ -538,16 +538,16 @@
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         },
-        "SourceFields": {
-          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
-          }
-        },
         "SearchEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
+          }
+        },
+        "SourceFields": {
+          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
           }
         },
         "FacetEnabled": {
@@ -564,22 +564,13 @@
     "com.amazonaws.cloudsearch#DateOptions": {
       "type": "structure",
       "members": {
-        "FacetEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
-          }
+        "SourceField": {
+          "target": "com.amazonaws.cloudsearch#FieldName"
         },
         "SearchEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
-          }
-        },
-        "DefaultValue": {
-          "target": "com.amazonaws.cloudsearch#FieldValue",
-          "traits": {
-            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
           }
         },
         "SortEnabled": {
@@ -588,14 +579,23 @@
             "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
           }
         },
+        "FacetEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
+          }
+        },
+        "DefaultValue": {
+          "target": "com.amazonaws.cloudsearch#FieldValue",
+          "traits": {
+            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
+          }
+        },
         "ReturnEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
-        },
-        "SourceField": {
-          "target": "com.amazonaws.cloudsearch#FieldName"
         }
       },
       "traits": {
@@ -634,14 +634,14 @@
     "com.amazonaws.cloudsearch#DefineAnalysisSchemeRequest": {
       "type": "structure",
       "members": {
-        "AnalysisScheme": {
-          "target": "com.amazonaws.cloudsearch#AnalysisScheme",
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
           "traits": {
             "smithy.api#required": {}
           }
         },
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
+        "AnalysisScheme": {
+          "target": "com.amazonaws.cloudsearch#AnalysisScheme",
           "traits": {
             "smithy.api#required": {}
           }
@@ -760,16 +760,16 @@
     "com.amazonaws.cloudsearch#DefineIndexFieldRequest": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
         "IndexField": {
           "target": "com.amazonaws.cloudsearch#IndexField",
           "traits": {
             "smithy.api#documentation": "<p>The index field and field options you want to configure. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
-          "traits": {
             "smithy.api#required": {}
           }
         }
@@ -1054,16 +1054,16 @@
     "com.amazonaws.cloudsearch#DeleteIndexFieldRequest": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
         "IndexFieldName": {
           "target": "com.amazonaws.cloudsearch#DynamicFieldName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the index field your want to remove from the domain's indexing options.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
-          "traits": {
             "smithy.api#required": {}
           }
         }
@@ -1249,17 +1249,17 @@
     "com.amazonaws.cloudsearch#DescribeAvailabilityOptionsRequest": {
       "type": "structure",
       "members": {
-        "Deployed": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
-          }
-        },
         "DomainName": {
           "target": "com.amazonaws.cloudsearch#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain you want to describe.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "Deployed": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
           }
         }
       },
@@ -1419,6 +1419,13 @@
     "com.amazonaws.cloudsearch#DescribeExpressionsRequest": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the domain you want to describe.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "ExpressionNames": {
           "target": "com.amazonaws.cloudsearch#StandardNameList",
           "traits": {
@@ -1429,13 +1436,6 @@
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the domain you want to describe.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -1490,17 +1490,17 @@
             "smithy.api#documentation": "<p>A list of the index fields you want to describe. If not specified, information is returned for all configured index fields.</p>"
           }
         },
+        "Deployed": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
+          }
+        },
         "DomainName": {
           "target": "com.amazonaws.cloudsearch#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain you want to describe.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Deployed": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether to display the deployed configuration (<code>true</code>) or include any pending changes (<code>false</code>). Defaults to <code>false</code>.</p>"
           }
         }
       },
@@ -1701,11 +1701,11 @@
     "com.amazonaws.cloudsearch#DisabledOperationException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.cloudsearch#ErrorMessage"
-        },
         "Code": {
           "target": "com.amazonaws.cloudsearch#ErrorCode"
+        },
+        "Message": {
+          "target": "com.amazonaws.cloudsearch#ErrorMessage"
         }
       },
       "traits": {
@@ -1724,16 +1724,16 @@
             "smithy.api#required": {}
           }
         },
-        "FuzzyMatching": {
-          "target": "com.amazonaws.cloudsearch#SuggesterFuzzyMatching",
-          "traits": {
-            "smithy.api#documentation": "<p>The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. </p>"
-          }
-        },
         "SortExpression": {
           "target": "com.amazonaws.cloudsearch#String",
           "traits": {
             "smithy.api#documentation": "<p>An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest\n        integer, with a floor of 0 and a ceiling of 2^31-1. A document's relevance score is not computed\n        for suggestions, so sort expressions cannot reference the <code>_score</code> value.\n        To sort suggestions using a numeric field or existing expression, simply specify\n        the name of the field or expression. If no expression is configured for the suggester, the\n        suggestions are sorted with the closest matches listed first.</p>"
+          }
+        },
+        "FuzzyMatching": {
+          "target": "com.amazonaws.cloudsearch#SuggesterFuzzyMatching",
+          "traits": {
+            "smithy.api#documentation": "<p>The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. </p>"
           }
         }
       },
@@ -1828,50 +1828,10 @@
     "com.amazonaws.cloudsearch#DomainStatus": {
       "type": "structure",
       "members": {
-        "RequiresIndexDocuments": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
+        "SearchPartitionCount": {
+          "target": "com.amazonaws.cloudsearch#PartitionCount",
           "traits": {
-            "smithy.api#documentation": "<p>True if <a>IndexDocuments</a> needs to be called to activate the current domain configuration.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "SearchInstanceType": {
-          "target": "com.amazonaws.cloudsearch#SearchInstanceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type that is being used to process search requests.</p>"
-          }
-        },
-        "Processing": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>True if processing is being done to activate the current domain configuration.</p>"
-          }
-        },
-        "Deleted": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
-          }
-        },
-        "ARN": {
-          "target": "com.amazonaws.cloudsearch#ARN"
-        },
-        "SearchInstanceCount": {
-          "target": "com.amazonaws.cloudsearch#InstanceCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of search instances that are available to process search requests.</p>"
-          }
-        },
-        "Created": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>True if the search domain is created. It can take several minutes to initialize a domain when <a>CreateDomain</a> is called. Newly created search domains are returned from <a>DescribeDomains</a> with a false value for Created until domain creation is complete.</p>"
-          }
-        },
-        "DomainId": {
-          "target": "com.amazonaws.cloudsearch#DomainId",
-          "traits": {
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The number of partitions across which the search index is spread.</p>"
           }
         },
         "SearchService": {
@@ -1880,13 +1840,38 @@
             "smithy.api#documentation": "<p>The service endpoint for requesting search results from a search domain.</p>"
           }
         },
+        "DomainId": {
+          "target": "com.amazonaws.cloudsearch#DomainId",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
         "Limits": {
           "target": "com.amazonaws.cloudsearch#Limits"
         },
-        "SearchPartitionCount": {
-          "target": "com.amazonaws.cloudsearch#PartitionCount",
+        "RequiresIndexDocuments": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>The number of partitions across which the search index is spread.</p>"
+            "smithy.api#documentation": "<p>True if <a>IndexDocuments</a> needs to be called to activate the current domain configuration.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Deleted": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>True if the search domain has been deleted.  The system must clean up resources dedicated to the search domain when <a>DeleteDomain</a> is called.  Newly deleted search domains are returned from <a>DescribeDomains</a> with a true value for IsDeleted for several minutes until resource cleanup is complete.</p>"
+          }
+        },
+        "SearchInstanceCount": {
+          "target": "com.amazonaws.cloudsearch#InstanceCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of search instances that are available to process search requests.</p>"
+          }
+        },
+        "Processing": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>True if processing is being done to activate the current domain configuration.</p>"
           }
         },
         "DocService": {
@@ -1895,10 +1880,25 @@
             "smithy.api#documentation": "<p>The service endpoint for updating documents in a search domain.</p>"
           }
         },
+        "ARN": {
+          "target": "com.amazonaws.cloudsearch#ARN"
+        },
+        "Created": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>True if the search domain is created. It can take several minutes to initialize a domain when <a>CreateDomain</a> is called. Newly created search domains are returned from <a>DescribeDomains</a> with a false value for Created until domain creation is complete.</p>"
+          }
+        },
         "DomainName": {
           "target": "com.amazonaws.cloudsearch#DomainName",
           "traits": {
             "smithy.api#required": {}
+          }
+        },
+        "SearchInstanceType": {
+          "target": "com.amazonaws.cloudsearch#SearchInstanceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance type that is being used to process search requests.</p>"
           }
         }
       },
@@ -1930,12 +1930,6 @@
             "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
           }
         },
-        "SourceFields": {
-          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
-          }
-        },
         "SearchEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
@@ -1952,6 +1946,12 @@
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
+          }
+        },
+        "SourceFields": {
+          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
           }
         }
       },
@@ -1974,28 +1974,28 @@
             "smithy.api#documentation": "<p>The name of the source field to map to the field. </p>"
           }
         },
-        "SortEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
-          }
-        },
-        "FacetEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
-          }
-        },
         "ReturnEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         },
+        "SortEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
+          }
+        },
         "DefaultValue": {
           "target": "com.amazonaws.cloudsearch#Double",
           "traits": {
             "smithy.api#documentation": "<p>A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.</p>"
+          }
+        },
+        "FacetEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
           }
         }
       },
@@ -2181,20 +2181,32 @@
     "com.amazonaws.cloudsearch#IndexField": {
       "type": "structure",
       "members": {
+        "IndexFieldType": {
+          "target": "com.amazonaws.cloudsearch#IndexFieldType",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "IntOptions": {
+          "target": "com.amazonaws.cloudsearch#IntOptions"
+        },
+        "IntArrayOptions": {
+          "target": "com.amazonaws.cloudsearch#IntArrayOptions"
+        },
+        "TextOptions": {
+          "target": "com.amazonaws.cloudsearch#TextOptions"
+        },
+        "TextArrayOptions": {
+          "target": "com.amazonaws.cloudsearch#TextArrayOptions"
+        },
+        "DateOptions": {
+          "target": "com.amazonaws.cloudsearch#DateOptions"
+        },
         "DoubleOptions": {
           "target": "com.amazonaws.cloudsearch#DoubleOptions"
         },
-        "DoubleArrayOptions": {
-          "target": "com.amazonaws.cloudsearch#DoubleArrayOptions"
-        },
         "LatLonOptions": {
           "target": "com.amazonaws.cloudsearch#LatLonOptions"
-        },
-        "LiteralOptions": {
-          "target": "com.amazonaws.cloudsearch#LiteralOptions"
-        },
-        "DateArrayOptions": {
-          "target": "com.amazonaws.cloudsearch#DateArrayOptions"
         },
         "IndexFieldName": {
           "target": "com.amazonaws.cloudsearch#DynamicFieldName",
@@ -2203,26 +2215,14 @@
             "smithy.api#required": {}
           }
         },
-        "DateOptions": {
-          "target": "com.amazonaws.cloudsearch#DateOptions"
+        "DoubleArrayOptions": {
+          "target": "com.amazonaws.cloudsearch#DoubleArrayOptions"
         },
-        "IntOptions": {
-          "target": "com.amazonaws.cloudsearch#IntOptions"
+        "LiteralOptions": {
+          "target": "com.amazonaws.cloudsearch#LiteralOptions"
         },
-        "TextOptions": {
-          "target": "com.amazonaws.cloudsearch#TextOptions"
-        },
-        "IntArrayOptions": {
-          "target": "com.amazonaws.cloudsearch#IntArrayOptions"
-        },
-        "TextArrayOptions": {
-          "target": "com.amazonaws.cloudsearch#TextArrayOptions"
-        },
-        "IndexFieldType": {
-          "target": "com.amazonaws.cloudsearch#IndexFieldType",
-          "traits": {
-            "smithy.api#required": {}
-          }
+        "DateArrayOptions": {
+          "target": "com.amazonaws.cloudsearch#DateArrayOptions"
         },
         "LiteralArrayOptions": {
           "target": "com.amazonaws.cloudsearch#LiteralArrayOptions"
@@ -2319,6 +2319,12 @@
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
           }
         },
+        "SourceFields": {
+          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
+          }
+        },
         "FacetEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
@@ -2329,12 +2335,6 @@
           "target": "com.amazonaws.cloudsearch#Long",
           "traits": {
             "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
-          }
-        },
-        "SourceFields": {
-          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
           }
         },
         "ReturnEnabled": {
@@ -2357,6 +2357,12 @@
             "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
           }
         },
+        "SourceField": {
+          "target": "com.amazonaws.cloudsearch#FieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the source field to map to the field. </p>"
+          }
+        },
         "FacetEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
@@ -2369,22 +2375,16 @@
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
           }
         },
-        "DefaultValue": {
-          "target": "com.amazonaws.cloudsearch#Long",
-          "traits": {
-            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document."
-          }
-        },
         "ReturnEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         },
-        "SourceField": {
-          "target": "com.amazonaws.cloudsearch#FieldName",
+        "DefaultValue": {
+          "target": "com.amazonaws.cloudsearch#Long",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the source field to map to the field. </p>"
+            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document."
           }
         }
       },
@@ -2427,18 +2427,6 @@
     "com.amazonaws.cloudsearch#LatLonOptions": {
       "type": "structure",
       "members": {
-        "SortEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
-          }
-        },
-        "DefaultValue": {
-          "target": "com.amazonaws.cloudsearch#FieldValue",
-          "traits": {
-            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
-          }
-        },
         "ReturnEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
@@ -2451,6 +2439,12 @@
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
           }
         },
+        "DefaultValue": {
+          "target": "com.amazonaws.cloudsearch#FieldValue",
+          "traits": {
+            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
+          }
+        },
         "SourceField": {
           "target": "com.amazonaws.cloudsearch#FieldName"
         },
@@ -2458,6 +2452,12 @@
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
+          }
+        },
+        "SortEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
           }
         }
       },
@@ -2468,11 +2468,11 @@
     "com.amazonaws.cloudsearch#LimitExceededException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.cloudsearch#ErrorMessage"
-        },
         "Code": {
           "target": "com.amazonaws.cloudsearch#ErrorCode"
+        },
+        "Message": {
+          "target": "com.amazonaws.cloudsearch#ErrorMessage"
         }
       },
       "traits": {
@@ -2484,14 +2484,14 @@
     "com.amazonaws.cloudsearch#Limits": {
       "type": "structure",
       "members": {
-        "MaximumReplicationCount": {
-          "target": "com.amazonaws.cloudsearch#MaximumReplicationCount",
+        "MaximumPartitionCount": {
+          "target": "com.amazonaws.cloudsearch#MaximumPartitionCount",
           "traits": {
             "smithy.api#required": {}
           }
         },
-        "MaximumPartitionCount": {
-          "target": "com.amazonaws.cloudsearch#MaximumPartitionCount",
+        "MaximumReplicationCount": {
+          "target": "com.amazonaws.cloudsearch#MaximumReplicationCount",
           "traits": {
             "smithy.api#required": {}
           }
@@ -2535,6 +2535,12 @@
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
           }
         },
+        "SourceFields": {
+          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
+          }
+        },
         "FacetEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
@@ -2551,12 +2557,6 @@
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
-          }
-        },
-        "SourceFields": {
-          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
           }
         }
       },
@@ -2579,25 +2579,25 @@
             "smithy.api#documentation": "<p>Whether facet information can be returned for the field.</p>"
           }
         },
+        "SourceField": {
+          "target": "com.amazonaws.cloudsearch#FieldName"
+        },
         "SearchEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field are searchable.</p>"
           }
         },
-        "SourceField": {
-          "target": "com.amazonaws.cloudsearch#FieldName"
+        "ReturnEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
+          }
         },
         "DefaultValue": {
           "target": "com.amazonaws.cloudsearch#FieldValue",
           "traits": {
             "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
-          }
-        },
-        "ReturnEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         }
       },
@@ -2653,23 +2653,24 @@
     "com.amazonaws.cloudsearch#OptionStatus": {
       "type": "structure",
       "members": {
-        "CreationDate": {
+        "UpdateDate": {
           "target": "com.amazonaws.cloudsearch#UpdateTimestamp",
           "traits": {
-            "smithy.api#documentation": "<p>A timestamp for when this option was created.</p>",
+            "smithy.api#documentation": "<p>A timestamp for when this option was last updated.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "UpdateVersion": {
-          "target": "com.amazonaws.cloudsearch#UIntValue",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique integer that indicates when this option was last updated.</p>"
           }
         },
         "PendingDeletion": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Indicates that the option will be deleted once processing is complete.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.cloudsearch#UpdateTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A timestamp for when this option was created.</p>",
+            "smithy.api#required": {}
           }
         },
         "State": {
@@ -2679,11 +2680,10 @@
             "smithy.api#required": {}
           }
         },
-        "UpdateDate": {
-          "target": "com.amazonaws.cloudsearch#UpdateTimestamp",
+        "UpdateVersion": {
+          "target": "com.amazonaws.cloudsearch#UIntValue",
           "traits": {
-            "smithy.api#documentation": "<p>A timestamp for when this option was last updated.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A unique integer that indicates when this option was last updated.</p>"
           }
         }
       },
@@ -2763,16 +2763,16 @@
             "smithy.api#documentation": "<p>The number of replicas you want to preconfigure for each index partition.</p>"
           }
         },
-        "DesiredPartitionCount": {
-          "target": "com.amazonaws.cloudsearch#UIntValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of partitions you want to preconfigure for your domain. Only valid when\n    you select <code>m2.2xlarge</code> as the desired instance type.</p>"
-          }
-        },
         "DesiredInstanceType": {
           "target": "com.amazonaws.cloudsearch#PartitionInstanceType",
           "traits": {
             "smithy.api#documentation": "<p>The instance type that you want to preconfigure for your domain. For example, <code>search.m1.small</code>.</p>"
+          }
+        },
+        "DesiredPartitionCount": {
+          "target": "com.amazonaws.cloudsearch#UIntValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of partitions you want to preconfigure for your domain. Only valid when\n    you select <code>m2.2xlarge</code> as the desired instance type.</p>"
           }
         }
       },
@@ -2846,14 +2846,14 @@
     "com.amazonaws.cloudsearch#Suggester": {
       "type": "structure",
       "members": {
-        "SuggesterName": {
-          "target": "com.amazonaws.cloudsearch#StandardName",
+        "DocumentSuggesterOptions": {
+          "target": "com.amazonaws.cloudsearch#DocumentSuggesterOptions",
           "traits": {
             "smithy.api#required": {}
           }
         },
-        "DocumentSuggesterOptions": {
-          "target": "com.amazonaws.cloudsearch#DocumentSuggesterOptions",
+        "SuggesterName": {
+          "target": "com.amazonaws.cloudsearch#StandardName",
           "traits": {
             "smithy.api#required": {}
           }
@@ -2927,22 +2927,16 @@
     "com.amazonaws.cloudsearch#TextArrayOptions": {
       "type": "structure",
       "members": {
-        "ReturnEnabled": {
-          "target": "com.amazonaws.cloudsearch#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
-          }
-        },
         "DefaultValue": {
           "target": "com.amazonaws.cloudsearch#FieldValue",
           "traits": {
             "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
           }
         },
-        "SourceFields": {
-          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+        "ReturnEnabled": {
+          "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
+            "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         },
         "HighlightEnabled": {
@@ -2956,6 +2950,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of an analysis scheme for a  <code>text-array</code> field.</p>"
           }
+        },
+        "SourceFields": {
+          "target": "com.amazonaws.cloudsearch#FieldNameCommaList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of source fields to map to the field. </p>"
+          }
         }
       },
       "traits": {
@@ -2965,23 +2965,26 @@
     "com.amazonaws.cloudsearch#TextOptions": {
       "type": "structure",
       "members": {
+        "DefaultValue": {
+          "target": "com.amazonaws.cloudsearch#FieldValue",
+          "traits": {
+            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
+          }
+        },
         "ReturnEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether the contents of the field can be returned in the search results.</p>"
           }
         },
-        "SortEnabled": {
+        "HighlightEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
+            "smithy.api#documentation": "<p>Whether highlights can be returned for the field.</p>"
           }
         },
-        "DefaultValue": {
-          "target": "com.amazonaws.cloudsearch#FieldValue",
-          "traits": {
-            "smithy.api#documentation": "A value to use for the field if the field isn't specified for a document."
-          }
+        "SourceField": {
+          "target": "com.amazonaws.cloudsearch#FieldName"
         },
         "AnalysisScheme": {
           "target": "com.amazonaws.cloudsearch#Word",
@@ -2989,13 +2992,10 @@
             "smithy.api#documentation": "<p>The name of an analysis scheme for a  <code>text</code> field.</p>"
           }
         },
-        "SourceField": {
-          "target": "com.amazonaws.cloudsearch#FieldName"
-        },
-        "HighlightEnabled": {
+        "SortEnabled": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Whether highlights can be returned for the field.</p>"
+            "smithy.api#documentation": "<p>Whether the field can be used to sort the search results.</p>"
           }
         }
       },
@@ -3049,16 +3049,16 @@
     "com.amazonaws.cloudsearch#UpdateAvailabilityOptionsRequest": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
         "MultiAZ": {
           "target": "com.amazonaws.cloudsearch#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to <code>false</code>. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
-          "traits": {
             "smithy.api#required": {}
           }
         }
@@ -3119,17 +3119,17 @@
     "com.amazonaws.cloudsearch#UpdateDomainEndpointOptionsRequest": {
       "type": "structure",
       "members": {
-        "DomainEndpointOptions": {
-          "target": "com.amazonaws.cloudsearch#DomainEndpointOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether to require that all requests to the domain arrive over HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility with older clients, the default is Policy-Min-TLS-1-0-2019-07. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "DomainName": {
           "target": "com.amazonaws.cloudsearch#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>A string that represents the name of a domain.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DomainEndpointOptions": {
+          "target": "com.amazonaws.cloudsearch#DomainEndpointOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether to require that all requests to the domain arrive over HTTPS. We recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility with older clients, the default is Policy-Min-TLS-1-0-2019-07. </p>",
             "smithy.api#required": {}
           }
         }
@@ -3247,16 +3247,16 @@
     "com.amazonaws.cloudsearch#UpdateServiceAccessPoliciesRequest": {
       "type": "structure",
       "members": {
-        "DomainName": {
-          "target": "com.amazonaws.cloudsearch#DomainName",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
         "AccessPolicies": {
           "target": "com.amazonaws.cloudsearch#PolicyDocument",
           "traits": {
             "smithy.api#documentation": "<p>The access rules you want to configure. These rules replace any existing rules. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DomainName": {
+          "target": "com.amazonaws.cloudsearch#DomainName",
+          "traits": {
             "smithy.api#required": {}
           }
         }

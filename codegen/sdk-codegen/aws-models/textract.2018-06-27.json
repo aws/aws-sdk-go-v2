@@ -40,7 +40,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>You aren't authorized to perform the action.</p>",
+        "smithy.api#documentation": "<p>You aren't authorized to perform the action. Use the Amazon Resource Name (ARN) \n            of an authorized user or IAM role to perform the operation.</p>",
         "smithy.api#error": "client"
       }
     },
@@ -116,6 +116,12 @@
     "com.amazonaws.textract#AnalyzeDocumentResponse": {
       "type": "structure",
       "members": {
+        "AnalyzeDocumentModelVersion": {
+          "target": "com.amazonaws.textract#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the model used to analyze the document.</p>"
+          }
+        },
         "Blocks": {
           "target": "com.amazonaws.textract#BlockList",
           "traits": {
@@ -126,12 +132,6 @@
           "target": "com.amazonaws.textract#HumanLoopActivationOutput",
           "traits": {
             "smithy.api#documentation": "<p>Shows the results of the human in the loop evaluation.</p>"
-          }
-        },
-        "AnalyzeDocumentModelVersion": {
-          "target": "com.amazonaws.textract#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the model used to analyze the document.</p>"
           }
         },
         "DocumentMetadata": {
@@ -153,17 +153,17 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Amazon Textract isn't able to read the document.</p>",
+        "smithy.api#documentation": "<p>Amazon Textract isn't able to read the document. For more information on the document\n         limits in Amazon Textract, see <a>limits</a>.</p>",
         "smithy.api#error": "client"
       }
     },
     "com.amazonaws.textract#Block": {
       "type": "structure",
       "members": {
-        "Text": {
-          "target": "com.amazonaws.textract#String",
+        "EntityTypes": {
+          "target": "com.amazonaws.textract#EntityTypes",
           "traits": {
-            "smithy.api#documentation": "<p>The word or line of text that's recognized by Amazon Textract. </p>"
+            "smithy.api#documentation": "<p>The type of entity. The following can be returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>KEY</i> - An identifier for a field on the document.</p>\n            </li>\n            <li>\n               <p>\n                  <i>VALUE</i> - The field text.</p>\n            </li>\n         </ul>\n         <p>\n            <code>EntityTypes</code> isn't returned by <code>DetectDocumentText</code> and\n            <code>GetDocumentTextDetection</code>.</p>"
           }
         },
         "RowIndex": {
@@ -172,52 +172,10 @@
             "smithy.api#documentation": "<p>The row in which a table cell is located. The first row position is 1.\n            <code>RowIndex</code> isn't returned by <code>DetectDocumentText</code> and\n            <code>GetDocumentTextDetection</code>.</p>"
           }
         },
-        "Confidence": {
-          "target": "com.amazonaws.textract#Percent",
+        "Text": {
+          "target": "com.amazonaws.textract#String",
           "traits": {
-            "smithy.api#documentation": "<p>The confidence score that Amazon Textract has in the accuracy of the recognized text and\n         the accuracy of the geometry points around the recognized text.</p>"
-          }
-        },
-        "EntityTypes": {
-          "target": "com.amazonaws.textract#EntityTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of entity. The following can be returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>KEY</i> - An identifier for a field on the document.</p>\n            </li>\n            <li>\n               <p>\n                  <i>VALUE</i> - The field text.</p>\n            </li>\n         </ul>\n         <p>\n            <code>EntityTypes</code> isn't returned by <code>DetectDocumentText</code> and\n            <code>GetDocumentTextDetection</code>.</p>"
-          }
-        },
-        "ColumnIndex": {
-          "target": "com.amazonaws.textract#UInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The column in which a table cell appears. The first column position is 1.\n            <code>ColumnIndex</code> isn't returned by <code>DetectDocumentText</code> and\n            <code>GetDocumentTextDetection</code>.</p>"
-          }
-        },
-        "SelectionStatus": {
-          "target": "com.amazonaws.textract#SelectionStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The selection status of a selection element, such as an option button or check box. </p>"
-          }
-        },
-        "Relationships": {
-          "target": "com.amazonaws.textract#RelationshipList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of child blocks of the current block. For example, a LINE object has child blocks\n         for each WORD block that's part of the line of text. There aren't Relationship objects in\n         the list for relationships that don't exist, such as when the current block has no child\n         blocks. The list size can be the following:</p>\n         <ul>\n            <li>\n               <p>0 - The block has no child blocks.</p>\n            </li>\n            <li>\n               <p>1 - The block has child blocks.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "ColumnSpan": {
-          "target": "com.amazonaws.textract#UInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of columns that a table cell spans. Currently this value is always 1, even\n         if the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>. </p>"
-          }
-        },
-        "Geometry": {
-          "target": "com.amazonaws.textract#Geometry",
-          "traits": {
-            "smithy.api#documentation": "<p>The location of the recognized text on the image. It includes an axis-aligned, coarse\n         bounding box that surrounds the text, and a finer-grain polygon for more accurate spatial\n         information. </p>"
-          }
-        },
-        "Page": {
-          "target": "com.amazonaws.textract#UInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by asynchronous\n         operations. Page values greater than 1 are only returned for multipage documents that are\n         in PDF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is\n         considered to be a single-page document. The value of <code>Page</code> is always 1.\n         Synchronous operations don't return <code>Page</code> because every input document is\n         considered to be a single-page document.</p>"
+            "smithy.api#documentation": "<p>The word or line of text that's recognized by Amazon Textract. </p>"
           }
         },
         "RowSpan": {
@@ -236,6 +194,48 @@
           "target": "com.amazonaws.textract#NonEmptyString",
           "traits": {
             "smithy.api#documentation": "<p>The identifier for the recognized text. The identifier is only unique for a single\n         operation. </p>"
+          }
+        },
+        "Geometry": {
+          "target": "com.amazonaws.textract#Geometry",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the recognized text on the image. It includes an axis-aligned, coarse\n         bounding box that surrounds the text, and a finer-grain polygon for more accurate spatial\n         information. </p>"
+          }
+        },
+        "SelectionStatus": {
+          "target": "com.amazonaws.textract#SelectionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The selection status of a selection element, such as an option button or check box. </p>"
+          }
+        },
+        "ColumnSpan": {
+          "target": "com.amazonaws.textract#UInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of columns that a table cell spans. Currently this value is always 1, even\n         if the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>. </p>"
+          }
+        },
+        "Relationships": {
+          "target": "com.amazonaws.textract#RelationshipList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of child blocks of the current block. For example, a LINE object has child blocks\n         for each WORD block that's part of the line of text. There aren't Relationship objects in\n         the list for relationships that don't exist, such as when the current block has no child\n         blocks. The list size can be the following:</p>\n         <ul>\n            <li>\n               <p>0 - The block has no child blocks.</p>\n            </li>\n            <li>\n               <p>1 - The block has child blocks.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Page": {
+          "target": "com.amazonaws.textract#UInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by asynchronous\n         operations. Page values greater than 1 are only returned for multipage documents that are\n         in PDF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is\n         considered to be a single-page document. The value of <code>Page</code> is always 1.\n         Synchronous operations don't return <code>Page</code> because every input document is\n         considered to be a single-page document.</p>"
+          }
+        },
+        "Confidence": {
+          "target": "com.amazonaws.textract#Percent",
+          "traits": {
+            "smithy.api#documentation": "<p>The confidence score that Amazon Textract has in the accuracy of the recognized text and\n         the accuracy of the geometry points around the recognized text.</p>"
+          }
+        },
+        "ColumnIndex": {
+          "target": "com.amazonaws.textract#UInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The column in which a table cell appears. The first column position is 1.\n            <code>ColumnIndex</code> isn't returned by <code>DetectDocumentText</code> and\n            <code>GetDocumentTextDetection</code>.</p>"
           }
         }
       },
@@ -299,16 +299,16 @@
             "smithy.api#documentation": "<p>The left coordinate of the bounding box as a ratio of overall document page\n         width.</p>"
           }
         },
-        "Width": {
-          "target": "com.amazonaws.textract#Float",
-          "traits": {
-            "smithy.api#documentation": "<p>The width of the bounding box as a ratio of the overall document page\n         width.</p>"
-          }
-        },
         "Height": {
           "target": "com.amazonaws.textract#Float",
           "traits": {
             "smithy.api#documentation": "<p>The height of the bounding box as a ratio of the overall document page\n         height.</p>"
+          }
+        },
+        "Width": {
+          "target": "com.amazonaws.textract#Float",
+          "traits": {
+            "smithy.api#documentation": "<p>The width of the bounding box as a ratio of the overall document page\n         width.</p>"
           }
         }
       },
@@ -409,16 +409,16 @@
     "com.amazonaws.textract#DetectDocumentTextResponse": {
       "type": "structure",
       "members": {
-        "DetectDocumentTextModelVersion": {
-          "target": "com.amazonaws.textract#String",
-          "traits": {
-            "smithy.api#documentation": "<p></p>"
-          }
-        },
         "DocumentMetadata": {
           "target": "com.amazonaws.textract#DocumentMetadata",
           "traits": {
             "smithy.api#documentation": "<p>Metadata about the document. It contains the number of pages that are detected in the\n         document.</p>"
+          }
+        },
+        "DetectDocumentTextModelVersion": {
+          "target": "com.amazonaws.textract#String",
+          "traits": {
+            "smithy.api#documentation": "<p></p>"
           }
         },
         "Blocks": {
@@ -480,10 +480,10 @@
     "com.amazonaws.textract#DocumentTooLargeException": {
       "type": "structure",
       "members": {
-        "Code": {
+        "Message": {
           "target": "com.amazonaws.textract#String"
         },
-        "Message": {
+        "Code": {
           "target": "com.amazonaws.textract#String"
         }
       },
@@ -552,16 +552,16 @@
     "com.amazonaws.textract#Geometry": {
       "type": "structure",
       "members": {
-        "Polygon": {
-          "target": "com.amazonaws.textract#Polygon",
-          "traits": {
-            "smithy.api#documentation": "<p>Within the bounding box, a fine-grained polygon around the recognized item.</p>"
-          }
-        },
         "BoundingBox": {
           "target": "com.amazonaws.textract#BoundingBox",
           "traits": {
             "smithy.api#documentation": "<p>An axis-aligned coarse representation of the location of the recognized item on the\n         document page.</p>"
+          }
+        },
+        "Polygon": {
+          "target": "com.amazonaws.textract#Polygon",
+          "traits": {
+            "smithy.api#documentation": "<p>Within the bounding box, a fine-grained polygon around the recognized item.</p>"
           }
         }
       },
@@ -591,6 +591,9 @@
           "target": "com.amazonaws.textract#InvalidParameterException"
         },
         {
+          "target": "com.amazonaws.textract#InvalidS3ObjectException"
+        },
+        {
           "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
         },
         {
@@ -604,11 +607,10 @@
     "com.amazonaws.textract#GetDocumentAnalysisRequest": {
       "type": "structure",
       "members": {
-        "JobId": {
-          "target": "com.amazonaws.textract#JobId",
+        "NextToken": {
+          "target": "com.amazonaws.textract#PaginationToken",
           "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the text-detection job. The <code>JobId</code> is returned from\n         <code>StartDocumentAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination\n         token in the response. You can use this pagination token to retrieve the next set of blocks.</p>"
           }
         },
         "MaxResults": {
@@ -617,10 +619,11 @@
             "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value that you\n         can specify is 1,000. If you specify a value greater than 1,000, a maximum of 1,000 results\n         is returned. The default value is 1,000.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.textract#PaginationToken",
+        "JobId": {
+          "target": "com.amazonaws.textract#JobId",
           "traits": {
-            "smithy.api#documentation": "<p>If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination\n         token in the response. You can use this pagination token to retrieve the next set of blocks.</p>"
+            "smithy.api#documentation": "<p>A unique identifier for the text-detection job. The <code>JobId</code> is returned from\n         <code>StartDocumentAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -655,7 +658,7 @@
         "StatusMessage": {
           "target": "com.amazonaws.textract#StatusMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The current status of an asynchronous document-analysis operation.</p>"
+            "smithy.api#documentation": "<p>Returns if the detection job could not be completed. Contains explanation for what error occured.</p>"
           }
         },
         "NextToken": {
@@ -692,6 +695,9 @@
         },
         {
           "target": "com.amazonaws.textract#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.textract#InvalidS3ObjectException"
         },
         {
           "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
@@ -731,28 +737,28 @@
     "com.amazonaws.textract#GetDocumentTextDetectionResponse": {
       "type": "structure",
       "members": {
-        "Warnings": {
-          "target": "com.amazonaws.textract#Warnings",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of warnings that occurred during the text-detection operation for the\n         document.</p>"
-          }
-        },
         "DetectDocumentTextModelVersion": {
           "target": "com.amazonaws.textract#String",
           "traits": {
             "smithy.api#documentation": "<p></p>"
           }
         },
+        "DocumentMetadata": {
+          "target": "com.amazonaws.textract#DocumentMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a document that Amazon Textract processed. <code>DocumentMetadata</code> is\n         returned in every page of paginated responses from an Amazon Textract video operation.</p>"
+          }
+        },
+        "Warnings": {
+          "target": "com.amazonaws.textract#Warnings",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of warnings that occurred during the text-detection operation for the\n         document.</p>"
+          }
+        },
         "StatusMessage": {
           "target": "com.amazonaws.textract#StatusMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The current status of an asynchronous text-detection operation for the document. </p>"
-          }
-        },
-        "JobStatus": {
-          "target": "com.amazonaws.textract#JobStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of the text detection job.</p>"
+            "smithy.api#documentation": "<p>Returns if the detection job could not be completed. Contains explanation for what error occured. </p>"
           }
         },
         "NextToken": {
@@ -761,16 +767,16 @@
             "smithy.api#documentation": "<p>If the response is truncated, Amazon Textract returns this token. You can use this token in\n         the subsequent request to retrieve the next set of text-detection results.</p>"
           }
         },
+        "JobStatus": {
+          "target": "com.amazonaws.textract#JobStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the text detection job.</p>"
+          }
+        },
         "Blocks": {
           "target": "com.amazonaws.textract#BlockList",
           "traits": {
             "smithy.api#documentation": "<p>The results of the text-detection operation.</p>"
-          }
-        },
-        "DocumentMetadata": {
-          "target": "com.amazonaws.textract#DocumentMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about a document that Amazon Textract processed. <code>DocumentMetadata</code> is\n         returned in every page of paginated responses from an Amazon Textract video operation.</p>"
           }
         }
       }
@@ -883,16 +889,25 @@
           "target": "com.amazonaws.textract#String"
         },
         "ResourceType": {
-          "target": "com.amazonaws.textract#String"
+          "target": "com.amazonaws.textract#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type.</p>"
+          }
         },
         "Message": {
           "target": "com.amazonaws.textract#String"
         },
-        "QuotaCode": {
-          "target": "com.amazonaws.textract#String"
-        },
         "ServiceCode": {
-          "target": "com.amazonaws.textract#String"
+          "target": "com.amazonaws.textract#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service code.</p>"
+          }
+        },
+        "QuotaCode": {
+          "target": "com.amazonaws.textract#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The quota code.</p>"
+          }
         }
       },
       "traits": {
@@ -979,15 +994,15 @@
     "com.amazonaws.textract#InvalidS3ObjectException": {
       "type": "structure",
       "members": {
-        "Code": {
+        "Message": {
           "target": "com.amazonaws.textract#String"
         },
-        "Message": {
+        "Code": {
           "target": "com.amazonaws.textract#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Amazon Textract is unable to access the S3 object that's specified in the request.</p>",
+        "smithy.api#documentation": "<p>Amazon Textract is unable to access the S3 object that's specified in the request.\n         for more information, <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Configure Access to Amazon S3</a>\n         For troubleshooting information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html\">Troubleshooting Amazon S3</a>\n         </p>",
         "smithy.api#error": "client"
       }
     },
@@ -1086,6 +1101,27 @@
         "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of\n         an asynchronous document operation, such as <a>StartDocumentTextDetection</a>. </p>"
       }
     },
+    "com.amazonaws.textract#OutputConfig": {
+      "type": "structure",
+      "members": {
+        "S3Bucket": {
+          "target": "com.amazonaws.textract#S3Bucket",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bucket your output will go to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "S3Prefix": {
+          "target": "com.amazonaws.textract#S3ObjectName",
+          "traits": {
+            "smithy.api#documentation": "<p>The prefix of the object key that the output will be saved to. When \n         not enabled, the prefix will be “textract_output\".</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. \n         Used to set the name of the bucket, and the prefix on the output \n         file.</p>"
+      }
+    },
     "com.amazonaws.textract#Pages": {
       "type": "list",
       "member": {
@@ -1115,16 +1151,16 @@
     "com.amazonaws.textract#Point": {
       "type": "structure",
       "members": {
-        "X": {
-          "target": "com.amazonaws.textract#Float",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the X coordinate for a point on a <code>Polygon</code>.</p>"
-          }
-        },
         "Y": {
           "target": "com.amazonaws.textract#Float",
           "traits": {
             "smithy.api#documentation": "<p>The value of the Y coordinate for a point on a <code>Polygon</code>.</p>"
+          }
+        },
+        "X": {
+          "target": "com.amazonaws.textract#Float",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the X coordinate for a point on a <code>Polygon</code>.</p>"
           }
         }
       },
@@ -1159,7 +1195,7 @@
         "Type": {
           "target": "com.amazonaws.textract#RelationshipType",
           "traits": {
-            "smithy.api#documentation": "<p>The type of relationship that the blocks in the IDs array have with the current block.\n         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type \n         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. \n         A relationship of type CHILD is a list of IDs that identify WORD blocks.</p>"
+            "smithy.api#documentation": "<p>The type of relationship that the blocks in the IDs array have with the current block.\n         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type \n         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. \n         A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines\n         Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.</p>"
           }
         },
         "Ids": {
@@ -1190,6 +1226,10 @@
           {
             "value": "CHILD",
             "name": "CHILD"
+          },
+          {
+            "value": "COMPLEX_FEATURES",
+            "name": "COMPLEX_FEATURES"
           }
         ]
       }
@@ -1335,12 +1375,6 @@
     "com.amazonaws.textract#StartDocumentAnalysisRequest": {
       "type": "structure",
       "members": {
-        "ClientRequestToken": {
-          "target": "com.amazonaws.textract#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The idempotent token that you use to identify the start request. If you use the same\n         token with multiple <code>StartDocumentAnalysis</code> requests, the same\n            <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same\n         job from being accidentally started more than once. For more information, see\n         <a href=\"https://docs.aws.amazon.com/textract/latest/dg/api-async.html\">Calling Amazon Textract Asynchronous Operations</a>.</p>"
-          }
-        },
         "NotificationChannel": {
           "target": "com.amazonaws.textract#NotificationChannel",
           "traits": {
@@ -1354,10 +1388,10 @@
             "smithy.api#required": {}
           }
         },
-        "JobTag": {
-          "target": "com.amazonaws.textract#JobTag",
+        "ClientRequestToken": {
+          "target": "com.amazonaws.textract#ClientRequestToken",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier that you specify that's included in the completion notification published\n         to the Amazon SNS topic. For example, you can use <code>JobTag</code> to identify the type of\n         document that the completion notification corresponds to (such as a tax form or a\n         receipt).</p>"
+            "smithy.api#documentation": "<p>The idempotent token that you use to identify the start request. If you use the same\n         token with multiple <code>StartDocumentAnalysis</code> requests, the same\n            <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same\n         job from being accidentally started more than once. For more information, see\n         <a href=\"https://docs.aws.amazon.com/textract/latest/dg/api-async.html\">Calling Amazon Textract Asynchronous Operations</a>.</p>"
           }
         },
         "FeatureTypes": {
@@ -1365,6 +1399,18 @@
           "traits": {
             "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected\n         form data. To perform both types of analysis, add TABLES\n         and FORMS to <code>FeatureTypes</code>. All lines and words detected in the document are\n         included in the response (including text that isn't related to the value of\n            <code>FeatureTypes</code>). </p>",
             "smithy.api#required": {}
+          }
+        },
+        "OutputConfig": {
+          "target": "com.amazonaws.textract#OutputConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save\n         the results internally to be accessed by the GetDocumentAnalysis operation.</p>"
+          }
+        },
+        "JobTag": {
+          "target": "com.amazonaws.textract#JobTag",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that you specify that's included in the completion notification published\n         to the Amazon SNS topic. For example, you can use <code>JobTag</code> to identify the type of\n         document that the completion notification corresponds to (such as a tax form or a\n         receipt).</p>"
           }
         }
       }
@@ -1430,13 +1476,6 @@
     "com.amazonaws.textract#StartDocumentTextDetectionRequest": {
       "type": "structure",
       "members": {
-        "DocumentLocation": {
-          "target": "com.amazonaws.textract#DocumentLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>The location of the document to be processed.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "JobTag": {
           "target": "com.amazonaws.textract#JobTag",
           "traits": {
@@ -1449,10 +1488,23 @@
             "smithy.api#documentation": "<p>The idempotent token that's used to identify the start request. If you use the same\n         token with multiple <code>StartDocumentTextDetection</code> requests, the same\n            <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same\n         job from being accidentally started more than once. For more information, see\n         <a href=\"https://docs.aws.amazon.com/textract/latest/dg/api-async.html\">Calling Amazon Textract Asynchronous Operations</a>.</p>"
           }
         },
+        "OutputConfig": {
+          "target": "com.amazonaws.textract#OutputConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Sets if the output will go to a customer defined bucket. By default Amazon Textract will\n         save the results internally to be accessed with the GetDocumentTextDetection operation.</p>"
+          }
+        },
         "NotificationChannel": {
           "target": "com.amazonaws.textract#NotificationChannel",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the\n         operation to. </p>"
+          }
+        },
+        "DocumentLocation": {
+          "target": "com.amazonaws.textract#DocumentLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of the document to be processed.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -1525,10 +1577,10 @@
     "com.amazonaws.textract#ThrottlingException": {
       "type": "structure",
       "members": {
-        "Code": {
+        "Message": {
           "target": "com.amazonaws.textract#String"
         },
-        "Message": {
+        "Code": {
           "target": "com.amazonaws.textract#String"
         }
       },
@@ -1564,16 +1616,16 @@
     "com.amazonaws.textract#Warning": {
       "type": "structure",
       "members": {
-        "ErrorCode": {
-          "target": "com.amazonaws.textract#ErrorCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The error code for the warning.</p>"
-          }
-        },
         "Pages": {
           "target": "com.amazonaws.textract#Pages",
           "traits": {
             "smithy.api#documentation": "<p>A list of the pages that the warning applies to.</p>"
+          }
+        },
+        "ErrorCode": {
+          "target": "com.amazonaws.textract#ErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code for the warning.</p>"
           }
         }
       },

@@ -403,17 +403,17 @@
     "com.amazonaws.kms#CreateAliasRequest": {
       "type": "structure",
       "members": {
-        "AliasName": {
-          "target": "com.amazonaws.kms#AliasNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the alias name. This value must begin with <code>alias/</code> followed by a\n      name, such as <code>alias/ExampleAlias</code>. The alias name cannot begin with\n        <code>alias/aws/</code>. The <code>alias/aws/</code> prefix is reserved for AWS managed\n      CMKs.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "TargetKeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>Identifies the CMK to which the alias refers. Specify the key ID or the Amazon Resource\n      Name (ARN) of the CMK. You cannot specify another alias. For help finding the key ID and ARN,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn\">Finding the Key ID and\n        ARN</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AliasName": {
+          "target": "com.amazonaws.kms#AliasNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the alias name. This value must begin with <code>alias/</code> followed by a\n      name, such as <code>alias/ExampleAlias</code>. The alias name cannot begin with\n        <code>alias/aws/</code>. The <code>alias/aws/</code> prefix is reserved for AWS managed\n      CMKs.</p>",
             "smithy.api#required": {}
           }
         }
@@ -457,13 +457,6 @@
     "com.amazonaws.kms#CreateCustomKeyStoreRequest": {
       "type": "structure",
       "members": {
-        "CloudHsmClusterId": {
-          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the AWS CloudHSM cluster for the custom key store. Enter the cluster ID of any active\n      AWS CloudHSM cluster that is not already associated with a custom key store. To find the cluster ID,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "CustomKeyStoreName": {
           "target": "com.amazonaws.kms#CustomKeyStoreNameType",
           "traits": {
@@ -471,17 +464,24 @@
             "smithy.api#required": {}
           }
         },
-        "TrustAnchorCertificate": {
-          "target": "com.amazonaws.kms#TrustAnchorCertificateType",
-          "traits": {
-            "smithy.api#documentation": "<p>Enter the content of the trust anchor certificate for the cluster. This is the content of\n      the <code>customerCA.crt</code> file that you created when you <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html\">initialized the cluster</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "KeyStorePassword": {
           "target": "com.amazonaws.kms#KeyStorePasswordType",
           "traits": {
             "smithy.api#documentation": "<p>Enter the password of the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser\">\n               <code>kmsuser</code> crypto user\n        (CU) account</a> in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as this\n      user to manage key material on your behalf.</p>\n         <p>The password must be a string of 7 to 32 characters. Its value is case sensitive.</p>\n         <p>This parameter tells AWS KMS the <code>kmsuser</code> account password; it does not change\n      the password in the AWS CloudHSM cluster.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CloudHsmClusterId": {
+          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the AWS CloudHSM cluster for the custom key store. Enter the cluster ID of any active\n      AWS CloudHSM cluster that is not already associated with a custom key store. To find the cluster ID,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TrustAnchorCertificate": {
+          "target": "com.amazonaws.kms#TrustAnchorCertificateType",
+          "traits": {
+            "smithy.api#documentation": "<p>Enter the content of the trust anchor certificate for the cluster. This is the content of\n      the <code>customerCA.crt</code> file that you created when you <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html\">initialized the cluster</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -539,10 +539,11 @@
     "com.amazonaws.kms#CreateGrantRequest": {
       "type": "structure",
       "members": {
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The unique identifier for the customer master key (CMK) that the grant applies to.</p>\n    \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a\ndifferent AWS account, you must use the key ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
           }
         },
         "Operations": {
@@ -552,6 +553,12 @@
             "smithy.api#required": {}
           }
         },
+        "RetiringPrincipal": {
+          "target": "com.amazonaws.kms#PrincipalIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal that is given permission to retire the grant by using <a>RetireGrant</a> operation.</p>\n         <p>To specify the principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an AWS\n      principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and\n      assumed role users. For examples of the ARN syntax to use for specifying a principal, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM)</a> in the Example ARNs section of the\n        <i>AWS General Reference</i>.</p>"
+          }
+        },
         "GranteePrincipal": {
           "target": "com.amazonaws.kms#PrincipalIdType",
           "traits": {
@@ -559,10 +566,10 @@
             "smithy.api#required": {}
           }
         },
-        "RetiringPrincipal": {
-          "target": "com.amazonaws.kms#PrincipalIdType",
+        "Constraints": {
+          "target": "com.amazonaws.kms#GrantConstraints",
           "traits": {
-            "smithy.api#documentation": "<p>The principal that is given permission to retire the grant by using <a>RetireGrant</a> operation.</p>\n         <p>To specify the principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an AWS\n      principal. Valid AWS principals include AWS accounts (root), IAM users, federated users, and\n      assumed role users. For examples of the ARN syntax to use for specifying a principal, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM)</a> in the Example ARNs section of the\n        <i>AWS General Reference</i>.</p>"
+            "smithy.api#documentation": "<p>Allows a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operation</a> only when the encryption context matches or includes the encryption\n      context specified in this structure. For more information about encryption context, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>\n               <i>AWS Key Management Service Developer Guide</i>\n            </i>.</p>"
           }
         },
         "Name": {
@@ -571,17 +578,10 @@
             "smithy.api#documentation": "<p>A friendly name for identifying the grant. Use this value to prevent the unintended\n      creation of duplicate grants when retrying this request.</p>\n         <p>When this value is absent, all <code>CreateGrant</code> requests result in a new grant\n      with a unique <code>GrantId</code> even if all the supplied parameters are identical. This can\n      result in unintended duplicates when you retry the <code>CreateGrant</code> request.</p>\n         <p>When this value is present, you can retry a <code>CreateGrant</code> request with\n      identical parameters; if the grant already exists, the original <code>GrantId</code> is\n      returned without creating a new grant. Note that the returned grant token is unique with every\n        <code>CreateGrant</code> request, even when a duplicate <code>GrantId</code> is returned.\n      All grant tokens obtained in this way can be used interchangeably.</p>"
           }
         },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
           "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the customer master key (CMK) that the grant applies to.</p>\n    \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a\ndifferent AWS account, you must use the key ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Constraints": {
-          "target": "com.amazonaws.kms#GrantConstraints",
-          "traits": {
-            "smithy.api#documentation": "<p>Allows a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operation</a> only when the encryption context matches or includes the encryption\n      context specified in this structure. For more information about encryption context, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>\n               <i>AWS Key Management Service Developer Guide</i>\n            </i>.</p>"
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         }
       }
@@ -650,22 +650,16 @@
     "com.amazonaws.kms#CreateKeyRequest": {
       "type": "structure",
       "members": {
+        "KeyUsage": {
+          "target": "com.amazonaws.kms#KeyUsageType",
+          "traits": {
+            "smithy.api#documentation": "<p>Determines the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> for which you can use the CMK. The default value\n      is <code>ENCRYPT_DECRYPT</code>. This parameter is required only for asymmetric CMKs. You\n      can't change the <code>KeyUsage</code> value after the CMK is created.</p>\n         <p>Select only one valid value.</p>\n         <ul>\n            <li>\n               <p>For symmetric CMKs, omit the parameter or specify <code>ENCRYPT_DECRYPT</code>.</p>\n            </li>\n            <li>\n               <p>For asymmetric CMKs with RSA key material, specify <code>ENCRYPT_DECRYPT</code> or\n            <code>SIGN_VERIFY</code>.</p>\n            </li>\n            <li>\n               <p>For asymmetric CMKs with ECC key material, specify <code>SIGN_VERIFY</code>.</p>\n            </li>\n         </ul>"
+          }
+        },
         "Origin": {
           "target": "com.amazonaws.kms#OriginType",
           "traits": {
             "smithy.api#documentation": "<p>The source of the key material for the CMK. You cannot change the origin after you create\n      the CMK. The default is <code>AWS_KMS</code>, which means AWS KMS creates the key\n      material.</p>\n         <p>When the parameter value is <code>EXTERNAL</code>, AWS KMS creates a CMK without key\n      material so that you can import key material from your existing key management infrastructure.\n      For more information about importing key material into AWS KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">Importing Key Material</a> in the\n      <i>AWS Key Management Service Developer Guide</i>. This value is valid only for symmetric CMKs.</p>\n         <p>When the parameter value is <code>AWS_CLOUDHSM</code>, AWS KMS creates the CMK in an AWS KMS\n      <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a> and creates its key material in the associated AWS CloudHSM cluster. You must also\n      use the <code>CustomKeyStoreId</code> parameter to identify the custom key store. This value\n      is valid only for symmetric CMKs.</p>"
-          }
-        },
-        "Policy": {
-          "target": "com.amazonaws.kms#PolicyType",
-          "traits": {
-            "smithy.api#documentation": "<p>The key policy to attach to the CMK.</p>\n         <p>If you provide a key policy, it must meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>If you don't set <code>BypassPolicyLockoutSafetyCheck</code> to true, the key policy\n          must allow the principal that is making the <code>CreateKey</code> request to make a\n          subsequent <a>PutKeyPolicy</a> request on the CMK. This reduces the risk that\n          the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section of the <i>\n                     <i>AWS Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>Each statement in the key policy must contain one or more principals. The principals\n          in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal\n          (for example, an IAM user or role), you might need to enforce a delay before including the\n          new principal in a key policy because the new principal might not be immediately visible\n          to AWS KMS. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>AWS\n            Identity and Access Management User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If you do not provide a key policy, AWS KMS attaches a default key policy to the CMK. For\n      more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default Key Policy</a> in the\n      <i>AWS Key Management Service Developer Guide</i>.</p>\n         <p>The key policy size quota is 32 kilobytes (32768 bytes).</p>"
-          }
-        },
-        "CustomerMasterKeySpec": {
-          "target": "com.amazonaws.kms#CustomerMasterKeySpec",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the type of CMK to create. The default value, <code>SYMMETRIC_DEFAULT</code>,\n      creates a CMK with a 256-bit symmetric key for encryption and decryption. For help choosing a\n      key spec for your CMK, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html\">How to Choose Your CMK\n        Configuration</a> in the <i>AWS Key Management Service Developer\n          Guide</i>.</p>\n         <p>The <code>CustomerMasterKeySpec</code> determines whether the CMK contains a symmetric key\n      or an asymmetric key pair. It also determines the encryption algorithms or signing algorithms\n      that the CMK supports. You can't change the <code>CustomerMasterKeySpec</code> after the CMK\n      is created. To further restrict the algorithms that can be used with the CMK, use a condition\n      key in its key policy or IAM policy. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm\">kms:EncryptionAlgorithm</a> or <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm\">kms:Signing Algorithm</a> in the <i>AWS Key Management Service Developer\n        Guide</i>.</p>\n         <important>\n            <p>\n               <a href=\"http://aws.amazon.com/kms/features/#AWS_Service_Integration\">AWS services that\n        are integrated with AWS KMS</a> use symmetric CMKs to protect your data. These\n        services do not support asymmetric CMKs. For help determining whether a CMK is symmetric or\n        asymmetric, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html\">Identifying Symmetric and Asymmetric\n          CMKs</a> in the <i>AWS Key Management Service Developer\n            Guide</i>.</p>\n         </important>\n         <p>AWS KMS supports the following key specs for CMKs:</p>\n         <ul>\n            <li>\n               <p>Symmetric key (default)</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>SYMMETRIC_DEFAULT</code> (AES-256-GCM)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Asymmetric RSA key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RSA_2048</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RSA_3072</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RSA_4096</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Asymmetric NIST-recommended elliptic curve key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P256</code> (secp256r1)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P384</code> (secp384r1)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P521</code> (secp521r1)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Other asymmetric elliptic curve key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ECC_SECG_P256K1</code> (secp256k1), commonly used for\n              cryptocurrencies.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
           }
         },
         "Description": {
@@ -674,16 +668,16 @@
             "smithy.api#documentation": "<p>A description of the CMK.</p>\n         <p>Use a description that helps you decide whether the CMK is appropriate for a task.</p>"
           }
         },
+        "Tags": {
+          "target": "com.amazonaws.kms#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. Both the tag key and the\n      tag value are required, but the tag value can be an empty (null) string.</p>\n         <p>When you add tags to an AWS resource, AWS generates a cost allocation\n              report with usage and costs aggregated by tags. For information about adding, changing, deleting and listing tags for CMKs,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p> \n         <p>Use this parameter to tag the CMK when it is created. To add tags to an\n      existing CMK, use the <a>TagResource</a> operation.</p>"
+          }
+        },
         "BypassPolicyLockoutSafetyCheck": {
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A flag to indicate whether to bypass the key policy lockout safety check.</p>\n         <important>\n            <p>Setting this value to true increases the risk that the CMK becomes unmanageable. Do not\n        set this value to true indiscriminately.</p>\n            <p>For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>\n                  <i>AWS Key Management Service Developer Guide</i>\n               </i>.</p>\n         </important>\n         <p>Use this parameter only when you include a policy in the request and you intend to prevent\n      the principal that is making the request from making a subsequent <a>PutKeyPolicy</a> request on the CMK.</p>\n         <p>The default value is false.</p>"
-          }
-        },
-        "KeyUsage": {
-          "target": "com.amazonaws.kms#KeyUsageType",
-          "traits": {
-            "smithy.api#documentation": "<p>Determines the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> for which you can use the CMK. The default value\n      is <code>ENCRYPT_DECRYPT</code>. This parameter is required only for asymmetric CMKs. You\n      can't change the <code>KeyUsage</code> value after the CMK is created.</p>\n         <p>Select only one valid value.</p>\n         <ul>\n            <li>\n               <p>For symmetric CMKs, omit the parameter or specify <code>ENCRYPT_DECRYPT</code>.</p>\n            </li>\n            <li>\n               <p>For asymmetric CMKs with RSA key material, specify <code>ENCRYPT_DECRYPT</code> or\n            <code>SIGN_VERIFY</code>.</p>\n            </li>\n            <li>\n               <p>For asymmetric CMKs with ECC key material, specify <code>SIGN_VERIFY</code>.</p>\n            </li>\n         </ul>"
           }
         },
         "CustomKeyStoreId": {
@@ -692,10 +686,16 @@
             "smithy.api#documentation": "<p>Creates the CMK in the specified <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a> and the key material in its associated\n      AWS CloudHSM cluster. To create a CMK in a custom key store, you must also specify the\n        <code>Origin</code> parameter with a value of <code>AWS_CLOUDHSM</code>. The AWS CloudHSM cluster\n      that is associated with the custom key store must have at least two active HSMs, each in a\n      different Availability Zone in the Region.</p>\n         <p>This parameter is valid only for symmetric CMKs. You cannot create an asymmetric CMK in a\n      custom key store.</p>\n         <p>To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>\n         <p>The response includes the custom key store ID and the ID of the AWS CloudHSM cluster.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">Custom Key Store feature</a> feature in AWS KMS, which\ncombines the convenience and extensive integration of AWS KMS with the isolation and control of a\nsingle-tenant key store.</p>"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.kms#TagList",
+        "CustomerMasterKeySpec": {
+          "target": "com.amazonaws.kms#CustomerMasterKeySpec",
           "traits": {
-            "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. Both the tag key and the\n      tag value are required, but the tag value can be an empty (null) string.</p>\n         <p>When you add tags to an AWS resource, AWS generates a cost allocation\n              report with usage and costs aggregated by tags. For information about adding, changing, deleting and listing tags for CMKs,\n              see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging Keys</a>.</p> \n         <p>Use this parameter to tag the CMK when it is created. To add tags to an\n      existing CMK, use the <a>TagResource</a> operation.</p>"
+            "smithy.api#documentation": "<p>Specifies the type of CMK to create. The default value, <code>SYMMETRIC_DEFAULT</code>,\n      creates a CMK with a 256-bit symmetric key for encryption and decryption. For help choosing a\n      key spec for your CMK, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html\">How to Choose Your CMK\n        Configuration</a> in the <i>AWS Key Management Service Developer\n          Guide</i>.</p>\n         <p>The <code>CustomerMasterKeySpec</code> determines whether the CMK contains a symmetric key\n      or an asymmetric key pair. It also determines the encryption algorithms or signing algorithms\n      that the CMK supports. You can't change the <code>CustomerMasterKeySpec</code> after the CMK\n      is created. To further restrict the algorithms that can be used with the CMK, use a condition\n      key in its key policy or IAM policy. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm\">kms:EncryptionAlgorithm</a> or <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm\">kms:Signing Algorithm</a> in the <i>AWS Key Management Service Developer\n        Guide</i>.</p>\n         <important>\n            <p>\n               <a href=\"http://aws.amazon.com/kms/features/#AWS_Service_Integration\">AWS services that\n        are integrated with AWS KMS</a> use symmetric CMKs to protect your data. These\n        services do not support asymmetric CMKs. For help determining whether a CMK is symmetric or\n        asymmetric, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html\">Identifying Symmetric and Asymmetric\n          CMKs</a> in the <i>AWS Key Management Service Developer\n            Guide</i>.</p>\n         </important>\n         <p>AWS KMS supports the following key specs for CMKs:</p>\n         <ul>\n            <li>\n               <p>Symmetric key (default)</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>SYMMETRIC_DEFAULT</code> (AES-256-GCM)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Asymmetric RSA key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RSA_2048</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RSA_3072</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RSA_4096</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Asymmetric NIST-recommended elliptic curve key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P256</code> (secp256r1)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P384</code> (secp384r1)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ECC_NIST_P521</code> (secp521r1)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Other asymmetric elliptic curve key pairs</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ECC_SECG_P256K1</code> (secp256k1), commonly used for\n              cryptocurrencies.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+          }
+        },
+        "Policy": {
+          "target": "com.amazonaws.kms#PolicyType",
+          "traits": {
+            "smithy.api#documentation": "<p>The key policy to attach to the CMK.</p>\n         <p>If you provide a key policy, it must meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>If you don't set <code>BypassPolicyLockoutSafetyCheck</code> to true, the key policy\n          must allow the principal that is making the <code>CreateKey</code> request to make a\n          subsequent <a>PutKeyPolicy</a> request on the CMK. This reduces the risk that\n          the CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section of the <i>\n                     <i>AWS Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>Each statement in the key policy must contain one or more principals. The principals\n          in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal\n          (for example, an IAM user or role), you might need to enforce a delay before including the\n          new principal in a key policy because the new principal might not be immediately visible\n          to AWS KMS. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>AWS\n            Identity and Access Management User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If you do not provide a key policy, AWS KMS attaches a default key policy to the CMK. For\n      more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default Key Policy</a> in the\n      <i>AWS Key Management Service Developer Guide</i>.</p>\n         <p>The key policy size quota is 32 kilobytes (32768 bytes).</p>"
           }
         }
       }
@@ -790,34 +790,10 @@
     "com.amazonaws.kms#CustomKeyStoresListEntry": {
       "type": "structure",
       "members": {
-        "CreationDate": {
-          "target": "com.amazonaws.kms#DateType",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time when the custom key store was created.</p>"
-          }
-        },
-        "CustomKeyStoreName": {
-          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>The user-specified friendly name for the custom key store.</p>"
-          }
-        },
         "ConnectionErrorCode": {
           "target": "com.amazonaws.kms#ConnectionErrorCodeType",
           "traits": {
             "smithy.api#documentation": "<p>Describes the connection error. This field appears in the response only when the <code>ConnectionState</code> is <code>FAILED</code>. For help resolving these errors, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed\">How to Fix a Connection Failure</a> in <i>AWS Key Management Service Developer Guide</i>.</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLUSTER_NOT_FOUND</code> - AWS KMS cannot find the AWS CloudHSM cluster with the\n          specified cluster ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CLOUDHSM_HSMS</code> - The associated AWS CloudHSM cluster does not\n          contain any active HSMs. To connect a custom key store to its AWS CloudHSM cluster, the cluster\n          must contain at least one active HSM.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code> - AWS KMS could not complete the request due to an internal\n          error. Retry the request. For <code>ConnectCustomKeyStore</code> requests, disconnect the\n          custom key store before trying to connect again.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_CREDENTIALS</code> - AWS KMS does not have the correct password for the\n            <code>kmsuser</code> crypto user in the AWS CloudHSM cluster. Before you can connect your\n          custom key store to its AWS CloudHSM cluster, you must change the <code>kmsuser</code> account\n          password and update the key store password value for the custom key store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERRORS</code> - Network errors are preventing AWS KMS from connecting to\n          the custom key store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBNET_NOT_FOUND</code> - A subnet in the AWS CloudHSM cluster\n          configuration was deleted. If AWS KMS cannot find all of the subnets in the cluster configuration, attempts to connect the custom key store to the AWS CloudHSM cluster fail. To fix this error, create a cluster from a recent backup and associate it with your custom key store. (This process creates a new cluster configuration with a VPC and private subnets.) For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed\">How to Fix a Connection Failure</a> in the\n          <i>AWS Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_LOCKED_OUT</code> - The <code>kmsuser</code> CU account is locked out of\n          the associated AWS CloudHSM cluster due to too many failed password attempts. Before you can\n          connect your custom key store to its AWS CloudHSM cluster, you must change the\n            <code>kmsuser</code> account password and update the key store password value for the custom key\n          store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_LOGGED_IN</code> - The <code>kmsuser</code> CU account is logged into the\n          the associated AWS CloudHSM cluster. This prevents AWS KMS from rotating the <code>kmsuser</code> account password and logging into the cluster. Before you can\n          connect your custom key store to its AWS CloudHSM cluster, you must log the <code>kmsuser</code> CU out of the cluster. If you changed the <code>kmsuser</code> password to log into the cluster, you must also and update the key store password value for the custom key\n          store. For help, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2\">How to Log Out and Reconnect</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_NOT_FOUND</code> - AWS KMS cannot find a <code>kmsuser</code> CU account in the associated AWS CloudHSM cluster. Before you can\n          connect your custom key store to its AWS CloudHSM cluster, you must create a <code>kmsuser</code> CU account in the cluster, and then update the key store password value for the custom key\n          store.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "CustomKeyStoreId": {
-          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the custom key store.</p>"
-          }
-        },
-        "TrustAnchorCertificate": {
-          "target": "com.amazonaws.kms#TrustAnchorCertificateType",
-          "traits": {
-            "smithy.api#documentation": "<p>The trust anchor certificate of the associated AWS CloudHSM cluster. When you <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr\">initialize the\n        cluster</a>, you create this certificate and save it in the <code>customerCA.crt</code>\n      file.</p>"
           }
         },
         "ConnectionState": {
@@ -826,10 +802,34 @@
             "smithy.api#documentation": "<p>Indicates whether the custom key store is connected to its AWS CloudHSM cluster.</p>\n         <p>You can create and use CMKs in your custom key stores only when its connection state is\n        <code>CONNECTED</code>.</p>\n         <p>The value is <code>DISCONNECTED</code> if the key store has never been connected or you\n      use the <a>DisconnectCustomKeyStore</a> operation to disconnect it. If the value is\n        <code>CONNECTED</code> but you are having trouble using the custom key store, make sure that\n      its associated AWS CloudHSM cluster is active and contains at least one active HSM.</p>\n         <p>A value of <code>FAILED</code> indicates that an attempt to connect was unsuccessful. The <code>ConnectionErrorCode</code> field in the response indicates the cause of the failure. For\n      help resolving a connection failure, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html\">Troubleshooting a Custom Key Store</a> in the\n      <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
+        "TrustAnchorCertificate": {
+          "target": "com.amazonaws.kms#TrustAnchorCertificateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The trust anchor certificate of the associated AWS CloudHSM cluster. When you <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr\">initialize the\n        cluster</a>, you create this certificate and save it in the <code>customerCA.crt</code>\n      file.</p>"
+          }
+        },
+        "CustomKeyStoreName": {
+          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>The user-specified friendly name for the custom key store.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.kms#DateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the custom key store was created.</p>"
+          }
+        },
         "CloudHsmClusterId": {
           "target": "com.amazonaws.kms#CloudHsmClusterIdType",
           "traits": {
             "smithy.api#documentation": "<p>A unique identifier for the AWS CloudHSM cluster that is associated with the custom key\n      store.</p>"
+          }
+        },
+        "CustomKeyStoreId": {
+          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the custom key store.</p>"
           }
         }
       },
@@ -976,16 +976,16 @@
     "com.amazonaws.kms#DecryptRequest": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the customer master key (CMK) that AWS KMS will use to decrypt the ciphertext.\n      Enter a key ID of the CMK that was used to encrypt the ciphertext.</p>\n         <p>If you specify a <code>KeyId</code> value, the <code>Decrypt</code> operation succeeds\n      only if the specified CMK was used to encrypt the ciphertext.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric CMK.\n      Otherwise, AWS KMS uses the metadata that it adds to the ciphertext blob to determine which\n      CMK was used to encrypt the ciphertext. However, you can use this parameter to ensure that a\n      particular CMK (of any kind) is used to decrypt the ciphertext.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>"
-          }
-        },
         "EncryptionAlgorithm": {
           "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the encryption algorithm that will be used to decrypt the ciphertext. Specify\n      the same algorithm that was used to encrypt the data. If you specify a different algorithm,\n      the <code>Decrypt</code> operation fails.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric CMK.\n      The default value, <code>SYMMETRIC_DEFAULT</code>, represents the only supported algorithm\n      that is valid for symmetric CMKs.</p>"
+          }
+        },
+        "EncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the encryption context to use when decrypting the data.\n      An encryption context is valid only for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> with a symmetric CMK. The standard asymmetric encryption algorithms that AWS KMS uses do not support an encryption context.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
         "GrantTokens": {
@@ -1001,10 +1001,10 @@
             "smithy.api#required": {}
           }
         },
-        "EncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption context to use when decrypting the data.\n      An encryption context is valid only for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> with a symmetric CMK. The standard asymmetric encryption algorithms that AWS KMS uses do not support an encryption context.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>Specifies the customer master key (CMK) that AWS KMS will use to decrypt the ciphertext.\n      Enter a key ID of the CMK that was used to encrypt the ciphertext.</p>\n         <p>If you specify a <code>KeyId</code> value, the <code>Decrypt</code> operation succeeds\n      only if the specified CMK was used to encrypt the ciphertext.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric CMK.\n      Otherwise, AWS KMS uses the metadata that it adds to the ciphertext blob to determine which\n      CMK was used to encrypt the ciphertext. However, you can use this parameter to ensure that a\n      particular CMK (of any kind) is used to decrypt the ciphertext.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>"
           }
         }
       }
@@ -1012,16 +1012,16 @@
     "com.amazonaws.kms#DecryptResponse": {
       "type": "structure",
       "members": {
-        "EncryptionAlgorithm": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithm that was used to decrypt the ciphertext.</p>"
-          }
-        },
         "Plaintext": {
           "target": "com.amazonaws.kms#PlaintextType",
           "traits": {
             "smithy.api#documentation": "<p>Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
+          }
+        },
+        "EncryptionAlgorithm": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption algorithm that was used to decrypt the ciphertext.</p>"
           }
         },
         "KeyId": {
@@ -1186,10 +1186,10 @@
     "com.amazonaws.kms#DescribeCustomKeyStoresRequest": {
       "type": "structure",
       "members": {
-        "CustomKeyStoreName": {
-          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
+        "Limit": {
+          "target": "com.amazonaws.kms#LimitType",
           "traits": {
-            "smithy.api#documentation": "<p>Gets only information about the specified custom key store. Enter the friendly name of the\n      custom key store.</p>\n         <p>By default, this operation gets information about all custom key stores in the account and\n      region. To limit the output to a particular custom key store, you can use either the\n        <code>CustomKeyStoreId</code> or <code>CustomKeyStoreName</code> parameter, but not\n      both.</p>"
+            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>"
           }
         },
         "Marker": {
@@ -1198,10 +1198,10 @@
             "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
           }
         },
-        "Limit": {
-          "target": "com.amazonaws.kms#LimitType",
+        "CustomKeyStoreName": {
+          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
           "traits": {
-            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>"
+            "smithy.api#documentation": "<p>Gets only information about the specified custom key store. Enter the friendly name of the\n      custom key store.</p>\n         <p>By default, this operation gets information about all custom key stores in the account and\n      region. To limit the output to a particular custom key store, you can use either the\n        <code>CustomKeyStoreId</code> or <code>CustomKeyStoreName</code> parameter, but not\n      both.</p>"
           }
         },
         "CustomKeyStoreId": {
@@ -1264,17 +1264,17 @@
     "com.amazonaws.kms#DescribeKeyRequest": {
       "type": "structure",
       "members": {
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>Describes the specified customer master key (CMK). </p>\n         <p>If you specify a predefined AWS alias (an AWS alias with no key ID), KMS associates the\n      alias with an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">AWS\n        managed CMK</a> and returns its <code>KeyId</code> and <code>Arn</code> in the\n      response.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         }
       }
@@ -1559,23 +1559,11 @@
     "com.amazonaws.kms#EncryptRequest": {
       "type": "structure",
       "members": {
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
+        "Plaintext": {
+          "target": "com.amazonaws.kms#PlaintextType",
           "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the customer master key (CMK).</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
+            "smithy.api#documentation": "<p>Data to be encrypted.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "EncryptionAlgorithm": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption algorithm that AWS KMS will use to encrypt the plaintext message.\n      The algorithm must be compatible with the CMK that you specify.</p>\n         <p>This parameter is required only for asymmetric CMKs. The default value,\n        <code>SYMMETRIC_DEFAULT</code>, is the algorithm used for symmetric CMKs. If you are using\n      an asymmetric CMK, we recommend RSAES_OAEP_SHA_256.</p>"
           }
         },
         "EncryptionContext": {
@@ -1584,10 +1572,22 @@
             "smithy.api#documentation": "<p>Specifies the encryption context that will be used to encrypt the data.\n      An encryption context is valid only for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> with a symmetric CMK. The standard asymmetric encryption algorithms that AWS KMS uses do not support an encryption context. </p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
-        "Plaintext": {
-          "target": "com.amazonaws.kms#PlaintextType",
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
           "traits": {
-            "smithy.api#documentation": "<p>Data to be encrypted.</p>",
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "EncryptionAlgorithm": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the encryption algorithm that AWS KMS will use to encrypt the plaintext message.\n      The algorithm must be compatible with the CMK that you specify.</p>\n         <p>This parameter is required only for asymmetric CMKs. The default value,\n        <code>SYMMETRIC_DEFAULT</code>, is the algorithm used for symmetric CMKs. If you are using\n      an asymmetric CMK, we recommend RSAES_OAEP_SHA_256.</p>"
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the customer master key (CMK).</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1596,10 +1596,10 @@
     "com.amazonaws.kms#EncryptResponse": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
+        "EncryptionAlgorithm": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK that was used to encrypt the plaintext.</p>"
+            "smithy.api#documentation": "<p>The encryption algorithm that was used to encrypt the plaintext.</p>"
           }
         },
         "CiphertextBlob": {
@@ -1608,10 +1608,10 @@
             "smithy.api#documentation": "<p>The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
           }
         },
-        "EncryptionAlgorithm": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithm that was used to encrypt the plaintext.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK that was used to encrypt the plaintext.</p>"
           }
         }
       }
@@ -1769,23 +1769,16 @@
     "com.amazonaws.kms#GenerateDataKeyPairRequest": {
       "type": "structure",
       "members": {
-        "EncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
         "GrantTokens": {
           "target": "com.amazonaws.kms#GrantTokenList",
           "traits": {
             "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
+        "EncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the symmetric CMK that encrypts the private key in the data key pair. You cannot\n      specify an asymmetric CMK or a CMK in a custom key store. To get the type and origin of your\n      CMK, use the <a>DescribeKey</a> operation.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
         "KeyPairSpec": {
@@ -1794,22 +1787,23 @@
             "smithy.api#documentation": "<p>Determines the type of data key pair that is generated. </p>\n         <p>The AWS KMS rule that restricts the use of asymmetric RSA CMKs to encrypt and decrypt or to sign and verify (but not both), and the rule that permits you to use ECC CMKs only to sign and verify, are not effective outside of AWS KMS.</p>",
             "smithy.api#required": {}
           }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the symmetric CMK that encrypts the private key in the data key pair. You cannot\n      specify an asymmetric CMK or a CMK in a custom key store. To get the type and origin of your\n      CMK, use the <a>DescribeKey</a> operation.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
+            "smithy.api#required": {}
+          }
         }
       }
     },
     "com.amazonaws.kms#GenerateDataKeyPairResponse": {
       "type": "structure",
       "members": {
-        "PrivateKeyCiphertextBlob": {
-          "target": "com.amazonaws.kms#CiphertextType",
+        "PublicKey": {
+          "target": "com.amazonaws.kms#PublicKeyType",
           "traits": {
-            "smithy.api#documentation": "<p>The encrypted copy of the private key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
-          }
-        },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK that encrypted the private key.</p>"
+            "smithy.api#documentation": "<p>The public key (in plaintext).</p>"
           }
         },
         "KeyPairSpec": {
@@ -1824,10 +1818,16 @@
             "smithy.api#documentation": "<p>The plaintext copy of the private key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
           }
         },
-        "PublicKey": {
-          "target": "com.amazonaws.kms#PublicKeyType",
+        "PrivateKeyCiphertextBlob": {
+          "target": "com.amazonaws.kms#CiphertextType",
           "traits": {
-            "smithy.api#documentation": "<p>The public key (in plaintext).</p>"
+            "smithy.api#documentation": "<p>The encrypted copy of the private key. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK that encrypted the private key.</p>"
           }
         }
       }
@@ -1876,13 +1876,6 @@
     "com.amazonaws.kms#GenerateDataKeyPairWithoutPlaintextRequest": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the CMK that encrypts the private key in the data key pair. You must specify a\n      symmetric CMK. You cannot use an asymmetric CMK or a CMK in a custom key store. To get the\n      type and origin of your CMK, use the <a>DescribeKey</a> operation. </p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "KeyPairSpec": {
           "target": "com.amazonaws.kms#DataKeyPairSpec",
           "traits": {
@@ -1890,16 +1883,23 @@
             "smithy.api#required": {}
           }
         },
-        "EncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>Specifies the CMK that encrypts the private key in the data key pair. You must specify a\n      symmetric CMK. You cannot use an asymmetric CMK or a CMK in a custom key store. To get the\n      type and origin of your CMK, use the <a>DescribeKey</a> operation. </p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
+            "smithy.api#required": {}
           }
         },
         "GrantTokens": {
           "target": "com.amazonaws.kms#GrantTokenList",
           "traits": {
             "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "EncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the private key in the\n      data key pair.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         }
       }
@@ -1942,10 +1942,10 @@
             "smithy.api#documentation": "<p>Specifies the length of the data key in bytes. For example, use the value 64 to generate a\n      512-bit data key (64 bytes is 512 bits). For 128-bit (16-byte) and 256-bit (32-byte) data\n      keys, use the <code>KeySpec</code> parameter.</p>\n         <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code>\n      parameter (but not both) in every <code>GenerateDataKey</code> request.</p>"
           }
         },
-        "EncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
         "KeyId": {
@@ -1955,16 +1955,16 @@
             "smithy.api#required": {}
           }
         },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
         "KeySpec": {
           "target": "com.amazonaws.kms#DataKeySpec",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the length of the data key. Use <code>AES_128</code> to generate a 128-bit\n      symmetric key, or <code>AES_256</code> to generate a 256-bit symmetric key.</p>\n         <p>You must specify either the <code>KeySpec</code> or the <code>NumberOfBytes</code>\n      parameter (but not both) in every <code>GenerateDataKey</code> request.</p>"
+          }
+        },
+        "EncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         }
       }
@@ -2033,17 +2033,17 @@
     "com.amazonaws.kms#GenerateDataKeyWithoutPlaintextRequest": {
       "type": "structure",
       "members": {
-        "EncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>The identifier of the symmetric customer master key (CMK) that encrypts the data\n      key.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NumberOfBytes": {
+          "target": "com.amazonaws.kms#NumberOfBytesType",
+          "traits": {
+            "smithy.api#documentation": "<p>The length of the data key in bytes. For example, use the value 64 to generate a 512-bit\n      data key (64 bytes is 512 bits). For common key lengths (128-bit and 256-bit symmetric keys),\n      we recommend that you use the <code>KeySpec</code> field instead of this one.</p>"
           }
         },
         "GrantTokens": {
@@ -2058,10 +2058,10 @@
             "smithy.api#documentation": "<p>The length of the data key. Use <code>AES_128</code> to generate a 128-bit symmetric key,\n      or <code>AES_256</code> to generate a 256-bit symmetric key.</p>"
           }
         },
-        "NumberOfBytes": {
-          "target": "com.amazonaws.kms#NumberOfBytesType",
+        "EncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
           "traits": {
-            "smithy.api#documentation": "<p>The length of the data key in bytes. For example, use the value 64 to generate a 512-bit\n      data key (64 bytes is 512 bits). For common key lengths (128-bit and 256-bit symmetric keys),\n      we recommend that you use the <code>KeySpec</code> field instead of this one.</p>"
+            "smithy.api#documentation": "<p>Specifies the encryption context that will be used when encrypting the data key.</p>\n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         }
       }
@@ -2169,17 +2169,17 @@
     "com.amazonaws.kms#GetKeyPolicyRequest": {
       "type": "structure",
       "members": {
-        "PolicyName": {
-          "target": "com.amazonaws.kms#PolicyNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the name of the key policy. The only valid name is <code>default</code>. To get\n      the names of key policies, use <a>ListKeyPolicies</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>A unique identifier for the customer master key (CMK).</p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PolicyName": {
+          "target": "com.amazonaws.kms#PolicyNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the name of the key policy. The only valid name is <code>default</code>. To get\n      the names of key policies, use <a>ListKeyPolicies</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2312,12 +2312,6 @@
     "com.amazonaws.kms#GetParametersForImportResponse": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK to use in a subsequent <a>ImportKeyMaterial</a>\n      request. This is the same CMK specified in the <code>GetParametersForImport</code>\n      request.</p>"
-          }
-        },
         "ImportToken": {
           "target": "com.amazonaws.kms#CiphertextType",
           "traits": {
@@ -2334,6 +2328,12 @@
           "target": "com.amazonaws.kms#DateType",
           "traits": {
             "smithy.api#documentation": "<p>The time at which the import token and public key are no longer valid. After this time,\n      you cannot use them to make an <a>ImportKeyMaterial</a> request and you must send\n      another <code>GetParametersForImport</code> request to get new ones.</p>"
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the CMK to use in a subsequent <a>ImportKeyMaterial</a>\n      request. This is the same CMK specified in the <code>GetParametersForImport</code>\n      request.</p>"
           }
         }
       }
@@ -2403,22 +2403,22 @@
     "com.amazonaws.kms#GetPublicKeyResponse": {
       "type": "structure",
       "members": {
-        "KeyUsage": {
-          "target": "com.amazonaws.kms#KeyUsageType",
+        "EncryptionAlgorithms": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpecList",
           "traits": {
-            "smithy.api#documentation": "<p>The permitted use of the public key. Valid values are <code>ENCRYPT_DECRYPT</code> or\n        <code>SIGN_VERIFY</code>. </p>\n         <p>This information is critical. If a public key with <code>SIGN_VERIFY</code> key usage\n      encrypts data outside of AWS KMS, the ciphertext cannot be decrypted. </p>"
-          }
-        },
-        "PublicKey": {
-          "target": "com.amazonaws.kms#PublicKeyType",
-          "traits": {
-            "smithy.api#documentation": "<p>The exported public key. </p>\n         <p>The value is a DER-encoded X.509 public key, also known as\n        <code>SubjectPublicKeyInfo</code> (SPKI), as defined in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>\n         <p></p>"
+            "smithy.api#documentation": "<p>The encryption algorithms that AWS KMS supports for this key. </p>\n         <p>This information is critical. If a public key encrypts data outside of AWS KMS by using an\n      unsupported encryption algorithm, the ciphertext cannot be decrypted. </p>\n         <p>This field appears in the response only when the <code>KeyUsage</code> of the public key\n      is <code>ENCRYPT_DECRYPT</code>.</p>"
           }
         },
         "CustomerMasterKeySpec": {
           "target": "com.amazonaws.kms#CustomerMasterKeySpec",
           "traits": {
             "smithy.api#documentation": "<p>The type of the of the public key that was downloaded.</p>"
+          }
+        },
+        "PublicKey": {
+          "target": "com.amazonaws.kms#PublicKeyType",
+          "traits": {
+            "smithy.api#documentation": "<p>The exported public key. </p>\n         <p>The value is a DER-encoded X.509 public key, also known as\n        <code>SubjectPublicKeyInfo</code> (SPKI), as defined in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>\n         <p></p>"
           }
         },
         "SigningAlgorithms": {
@@ -2433,10 +2433,10 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric CMK from which the public key was downloaded.</p>"
           }
         },
-        "EncryptionAlgorithms": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpecList",
+        "KeyUsage": {
+          "target": "com.amazonaws.kms#KeyUsageType",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithms that AWS KMS supports for this key. </p>\n         <p>This information is critical. If a public key encrypts data outside of AWS KMS by using an\n      unsupported encryption algorithm, the ciphertext cannot be decrypted. </p>\n         <p>This field appears in the response only when the <code>KeyUsage</code> of the public key\n      is <code>ENCRYPT_DECRYPT</code>.</p>"
+            "smithy.api#documentation": "<p>The permitted use of the public key. Valid values are <code>ENCRYPT_DECRYPT</code> or\n        <code>SIGN_VERIFY</code>. </p>\n         <p>This information is critical. If a public key with <code>SIGN_VERIFY</code> key usage\n      encrypts data outside of AWS KMS, the ciphertext cannot be decrypted. </p>"
           }
         }
       }
@@ -2479,36 +2479,6 @@
     "com.amazonaws.kms#GrantListEntry": {
       "type": "structure",
       "members": {
-        "IssuingAccount": {
-          "target": "com.amazonaws.kms#PrincipalIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account under which the grant was issued.</p>"
-          }
-        },
-        "GranteePrincipal": {
-          "target": "com.amazonaws.kms#PrincipalIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The identity that gets the permissions in the grant.</p>\n         <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the\n        user or role designated as the grantee principal in the grant. However, when the grantee\n        principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains\n        the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n          principal</a>, which might represent several different grantee principals.</p>"
-          }
-        },
-        "Operations": {
-          "target": "com.amazonaws.kms#GrantOperationList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of operations permitted by the grant.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.kms#GrantNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.</p>"
-          }
-        },
-        "RetiringPrincipal": {
-          "target": "com.amazonaws.kms#PrincipalIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The principal that can retire the grant.</p>"
-          }
-        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
@@ -2521,16 +2491,46 @@
             "smithy.api#documentation": "<p>The unique identifier for the grant.</p>"
           }
         },
-        "Constraints": {
-          "target": "com.amazonaws.kms#GrantConstraints",
+        "Operations": {
+          "target": "com.amazonaws.kms#GrantOperationList",
           "traits": {
-            "smithy.api#documentation": "<p>A list of key-value pairs that must be present in the encryption context of certain\n      subsequent operations that the grant allows.</p>"
+            "smithy.api#documentation": "<p>The list of operations permitted by the grant.</p>"
+          }
+        },
+        "IssuingAccount": {
+          "target": "com.amazonaws.kms#PrincipalIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account under which the grant was issued.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.kms#GrantNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.</p>"
+          }
+        },
+        "GranteePrincipal": {
+          "target": "com.amazonaws.kms#PrincipalIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The identity that gets the permissions in the grant.</p>\n         <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the\n        user or role designated as the grantee principal in the grant. However, when the grantee\n        principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains\n        the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n          principal</a>, which might represent several different grantee principals.</p>"
           }
         },
         "CreationDate": {
           "target": "com.amazonaws.kms#DateType",
           "traits": {
             "smithy.api#documentation": "<p>The date and time when the grant was created.</p>"
+          }
+        },
+        "RetiringPrincipal": {
+          "target": "com.amazonaws.kms#PrincipalIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal that can retire the grant.</p>"
+          }
+        },
+        "Constraints": {
+          "target": "com.amazonaws.kms#GrantConstraints",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of key-value pairs that must be present in the encryption context of certain\n      subsequent operations that the grant allows.</p>"
           }
         }
       },
@@ -2685,6 +2685,12 @@
     "com.amazonaws.kms#ImportKeyMaterialRequest": {
       "type": "structure",
       "members": {
+        "ValidTo": {
+          "target": "com.amazonaws.kms#DateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the imported key material expires. When the key material expires, AWS KMS\n      deletes the key material and the CMK becomes unusable. You must omit this parameter when the\n        <code>ExpirationModel</code> parameter is set to <code>KEY_MATERIAL_DOES_NOT_EXPIRE</code>.\n      Otherwise it is required.</p>"
+          }
+        },
         "ImportToken": {
           "target": "com.amazonaws.kms#CiphertextType",
           "traits": {
@@ -2710,12 +2716,6 @@
           "target": "com.amazonaws.kms#ExpirationModelType",
           "traits": {
             "smithy.api#documentation": "<p>Specifies whether the key material expires. The default is\n        <code>KEY_MATERIAL_EXPIRES</code>, in which case you must include the <code>ValidTo</code>\n      parameter. When this parameter is set to <code>KEY_MATERIAL_DOES_NOT_EXPIRE</code>, you must\n      omit the <code>ValidTo</code> parameter.</p>"
-          }
-        },
-        "ValidTo": {
-          "target": "com.amazonaws.kms#DateType",
-          "traits": {
-            "smithy.api#documentation": "<p>The time at which the imported key material expires. When the key material expires, AWS KMS\n      deletes the key material and the CMK becomes unusable. You must omit this parameter when the\n        <code>ExpirationModel</code> parameter is set to <code>KEY_MATERIAL_DOES_NOT_EXPIRE</code>.\n      Otherwise it is required.</p>"
           }
         }
       }
@@ -2959,10 +2959,22 @@
     "com.amazonaws.kms#KeyMetadata": {
       "type": "structure",
       "members": {
-        "ExpirationModel": {
-          "target": "com.amazonaws.kms#ExpirationModelType",
+        "KeyState": {
+          "target": "com.amazonaws.kms#KeyState",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the CMK's key material expires. This value is present only when\n        <code>Origin</code> is <code>EXTERNAL</code>, otherwise this value is omitted.</p>"
+            "smithy.api#documentation": "<p>The current status of the CMK.</p>\n         <p>For more information about how key state affects the use of a CMK, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key state: Effect on your CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "DeletionDate": {
+          "target": "com.amazonaws.kms#DateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time after which AWS KMS deletes the CMK. This value is present only when\n        <code>KeyState</code> is <code>PendingDeletion</code>.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.kms#DateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the CMK was created.</p>"
           }
         },
         "KeyId": {
@@ -2972,52 +2984,10 @@
             "smithy.api#required": {}
           }
         },
-        "CreationDate": {
-          "target": "com.amazonaws.kms#DateType",
+        "Origin": {
+          "target": "com.amazonaws.kms#OriginType",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time when the CMK was created.</p>"
-          }
-        },
-        "CloudHsmClusterId": {
-          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster ID of the AWS CloudHSM cluster that contains the key material for the CMK. When you\n      create a CMK in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>, AWS KMS creates the key material for the CMK in the\n      associated AWS CloudHSM cluster. This value is present only when the CMK is created in a custom key\n      store.</p>"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.kms#ArnType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CMK. For examples, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">AWS Key Management Service\n        (AWS KMS)</a> in the Example ARNs section of the <i>AWS General\n        Reference</i>.</p>"
-          }
-        },
-        "KeyManager": {
-          "target": "com.amazonaws.kms#KeyManagerType",
-          "traits": {
-            "smithy.api#documentation": "<p>The manager of the CMK. CMKs in your AWS account are either customer managed or AWS\n      managed. For more information about the difference, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys</a> in the\n      <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "KeyState": {
-          "target": "com.amazonaws.kms#KeyState",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of the CMK.</p>\n         <p>For more information about how key state affects the use of a CMK, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key state: Effect on your CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "KeyUsage": {
-          "target": "com.amazonaws.kms#KeyUsageType",
-          "traits": {
-            "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> for which you can use the CMK.</p>"
-          }
-        },
-        "CustomKeyStoreId": {
-          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a> that contains the CMK. This value is present\n      only when the CMK is created in a custom key store.</p>"
-          }
-        },
-        "AWSAccountId": {
-          "target": "com.amazonaws.kms#AWSAccountIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The twelve-digit account ID of the AWS account that owns the CMK.</p>"
+            "smithy.api#documentation": "<p>The source of the CMK's key material. When this value is <code>AWS_KMS</code>, AWS KMS\n      created the key material. When this value is <code>EXTERNAL</code>, the key material was\n      imported from your existing key management infrastructure or the CMK lacks key material. When\n      this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS CloudHSM cluster\n      associated with a custom key store.</p>"
           }
         },
         "Description": {
@@ -3026,22 +2996,10 @@
             "smithy.api#documentation": "<p>The description of the CMK.</p>"
           }
         },
-        "EncryptionAlgorithms": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpecList",
+        "AWSAccountId": {
+          "target": "com.amazonaws.kms#AWSAccountIdType",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithms that the CMK supports. You cannot use the CMK with other\n      encryption algorithms within AWS KMS.</p>\n         <p>This field appears only when the <code>KeyUsage</code> of the CMK is\n        <code>ENCRYPT_DECRYPT</code>.</p>"
-          }
-        },
-        "ValidTo": {
-          "target": "com.amazonaws.kms#DateType",
-          "traits": {
-            "smithy.api#documentation": "<p>The time at which the imported key material expires. When the key material expires, AWS KMS\n      deletes the key material and the CMK becomes unusable. This value is present only for CMKs\n      whose <code>Origin</code> is <code>EXTERNAL</code> and whose <code>ExpirationModel</code> is\n        <code>KEY_MATERIAL_EXPIRES</code>, otherwise this value is omitted.</p>"
-          }
-        },
-        "Enabled": {
-          "target": "com.amazonaws.kms#BooleanType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the CMK is enabled. When <code>KeyState</code> is <code>Enabled</code>\n      this value is true, otherwise it is false.</p>"
+            "smithy.api#documentation": "<p>The twelve-digit account ID of the AWS account that owns the CMK.</p>"
           }
         },
         "SigningAlgorithms": {
@@ -3056,16 +3014,58 @@
             "smithy.api#documentation": "<p>Describes the type of key material in the CMK.</p>"
           }
         },
-        "Origin": {
-          "target": "com.amazonaws.kms#OriginType",
-          "traits": {
-            "smithy.api#documentation": "<p>The source of the CMK's key material. When this value is <code>AWS_KMS</code>, AWS KMS\n      created the key material. When this value is <code>EXTERNAL</code>, the key material was\n      imported from your existing key management infrastructure or the CMK lacks key material. When\n      this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS CloudHSM cluster\n      associated with a custom key store.</p>"
-          }
-        },
-        "DeletionDate": {
+        "ValidTo": {
           "target": "com.amazonaws.kms#DateType",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time after which AWS KMS deletes the CMK. This value is present only when\n        <code>KeyState</code> is <code>PendingDeletion</code>.</p>"
+            "smithy.api#documentation": "<p>The time at which the imported key material expires. When the key material expires, AWS KMS\n      deletes the key material and the CMK becomes unusable. This value is present only for CMKs\n      whose <code>Origin</code> is <code>EXTERNAL</code> and whose <code>ExpirationModel</code> is\n        <code>KEY_MATERIAL_EXPIRES</code>, otherwise this value is omitted.</p>"
+          }
+        },
+        "CloudHsmClusterId": {
+          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster ID of the AWS CloudHSM cluster that contains the key material for the CMK. When you\n      create a CMK in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>, AWS KMS creates the key material for the CMK in the\n      associated AWS CloudHSM cluster. This value is present only when the CMK is created in a custom key\n      store.</p>"
+          }
+        },
+        "KeyUsage": {
+          "target": "com.amazonaws.kms#KeyUsageType",
+          "traits": {
+            "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic operations</a> for which you can use the CMK.</p>"
+          }
+        },
+        "EncryptionAlgorithms": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpecList",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption algorithms that the CMK supports. You cannot use the CMK with other\n      encryption algorithms within AWS KMS.</p>\n         <p>This field appears only when the <code>KeyUsage</code> of the CMK is\n        <code>ENCRYPT_DECRYPT</code>.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.kms#ArnType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CMK. For examples, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">AWS Key Management Service\n        (AWS KMS)</a> in the Example ARNs section of the <i>AWS General\n        Reference</i>.</p>"
+          }
+        },
+        "ExpirationModel": {
+          "target": "com.amazonaws.kms#ExpirationModelType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the CMK's key material expires. This value is present only when\n        <code>Origin</code> is <code>EXTERNAL</code>, otherwise this value is omitted.</p>"
+          }
+        },
+        "KeyManager": {
+          "target": "com.amazonaws.kms#KeyManagerType",
+          "traits": {
+            "smithy.api#documentation": "<p>The manager of the CMK. CMKs in your AWS account are either customer managed or AWS\n      managed. For more information about the difference, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys</a> in the\n      <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "Enabled": {
+          "target": "com.amazonaws.kms#BooleanType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the CMK is enabled. When <code>KeyState</code> is <code>Enabled</code>\n      this value is true, otherwise it is false.</p>"
+          }
+        },
+        "CustomKeyStoreId": {
+          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a> that contains the CMK. This value is present\n      only when the CMK is created in a custom key store.</p>"
           }
         }
       },
@@ -3199,12 +3199,6 @@
     "com.amazonaws.kms#ListAliasesRequest": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists only aliases that refer to the specified CMK. The value of this parameter can be the\n      ID or Amazon Resource Name (ARN) of a CMK in the caller's account and region. You cannot use\n      an alias name or alias ARN in this value.</p>\n         <p>This parameter is optional. If you omit it, <code>ListAliases</code> returns all aliases\n      in the account and region.</p>"
-          }
-        },
         "Marker": {
           "target": "com.amazonaws.kms#MarkerType",
           "traits": {
@@ -3216,18 +3210,18 @@
           "traits": {
             "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1\n    and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
           }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists only aliases that refer to the specified CMK. The value of this parameter can be the\n      ID or Amazon Resource Name (ARN) of a CMK in the caller's account and region. You cannot use\n      an alias name or alias ARN in this value.</p>\n         <p>This parameter is optional. If you omit it, <code>ListAliases</code> returns all aliases\n      in the account and region.</p>"
+          }
         }
       }
     },
     "com.amazonaws.kms#ListAliasesResponse": {
       "type": "structure",
       "members": {
-        "NextMarker": {
-          "target": "com.amazonaws.kms#MarkerType",
-          "traits": {
-            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
-          }
-        },
         "Aliases": {
           "target": "com.amazonaws.kms#AliasList",
           "traits": {
@@ -3238,6 +3232,12 @@
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+          }
+        },
+        "NextMarker": {
+          "target": "com.amazonaws.kms#MarkerType",
+          "traits": {
+            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
           }
         }
       }
@@ -3307,16 +3307,16 @@
     "com.amazonaws.kms#ListGrantsResponse": {
       "type": "structure",
       "members": {
-        "Grants": {
-          "target": "com.amazonaws.kms#GrantList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grants.</p>"
-          }
-        },
         "NextMarker": {
           "target": "com.amazonaws.kms#MarkerType",
           "traits": {
             "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
+          }
+        },
+        "Grants": {
+          "target": "com.amazonaws.kms#GrantList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grants.</p>"
           }
         },
         "Truncated": {
@@ -3365,10 +3365,10 @@
     "com.amazonaws.kms#ListKeyPoliciesRequest": {
       "type": "structure",
       "members": {
-        "Limit": {
-          "target": "com.amazonaws.kms#LimitType",
+        "Marker": {
+          "target": "com.amazonaws.kms#MarkerType",
           "traits": {
-            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between\n    1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>\n         <p>Only one policy can be attached to a key.</p>"
+            "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
           }
         },
         "KeyId": {
@@ -3378,10 +3378,10 @@
             "smithy.api#required": {}
           }
         },
-        "Marker": {
-          "target": "com.amazonaws.kms#MarkerType",
+        "Limit": {
+          "target": "com.amazonaws.kms#LimitType",
           "traits": {
-            "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
+            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between\n    1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>\n         <p>Only one policy can be attached to a key.</p>"
           }
         }
       }
@@ -3389,6 +3389,12 @@
     "com.amazonaws.kms#ListKeyPoliciesResponse": {
       "type": "structure",
       "members": {
+        "NextMarker": {
+          "target": "com.amazonaws.kms#MarkerType",
+          "traits": {
+            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
+          }
+        },
         "PolicyNames": {
           "target": "com.amazonaws.kms#PolicyNameList",
           "traits": {
@@ -3399,12 +3405,6 @@
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
-          }
-        },
-        "NextMarker": {
-          "target": "com.amazonaws.kms#MarkerType",
-          "traits": {
-            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
           }
         }
       }
@@ -3458,16 +3458,16 @@
     "com.amazonaws.kms#ListKeysResponse": {
       "type": "structure",
       "members": {
-        "NextMarker": {
-          "target": "com.amazonaws.kms#MarkerType",
-          "traits": {
-            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
-          }
-        },
         "Truncated": {
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+          }
+        },
+        "NextMarker": {
+          "target": "com.amazonaws.kms#MarkerType",
+          "traits": {
+            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
           }
         },
         "Keys": {
@@ -3507,6 +3507,12 @@
     "com.amazonaws.kms#ListResourceTagsRequest": {
       "type": "structure",
       "members": {
+        "Marker": {
+          "target": "com.amazonaws.kms#MarkerType",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>\n         <p>Do not attempt to construct this value. Use only the value of <code>NextMarker</code> from\n      the truncated response you just received.</p>"
+          }
+        },
         "Limit": {
           "target": "com.amazonaws.kms#LimitType",
           "traits": {
@@ -3519,28 +3525,22 @@
             "smithy.api#documentation": "<p>A unique identifier for the customer master key (CMK).</p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
             "smithy.api#required": {}
           }
-        },
-        "Marker": {
-          "target": "com.amazonaws.kms#MarkerType",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>\n         <p>Do not attempt to construct this value. Use only the value of <code>NextMarker</code> from\n      the truncated response you just received.</p>"
-          }
         }
       }
     },
     "com.amazonaws.kms#ListResourceTagsResponse": {
       "type": "structure",
       "members": {
-        "NextMarker": {
-          "target": "com.amazonaws.kms#MarkerType",
-          "traits": {
-            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>\n         <p>Do not assume or infer any information from this value.</p>"
-          }
-        },
         "Truncated": {
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+          }
+        },
+        "NextMarker": {
+          "target": "com.amazonaws.kms#MarkerType",
+          "traits": {
+            "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>\n         <p>Do not assume or infer any information from this value.</p>"
           }
         },
         "Tags": {
@@ -3583,16 +3583,16 @@
     "com.amazonaws.kms#ListRetirableGrantsRequest": {
       "type": "structure",
       "members": {
-        "Limit": {
-          "target": "com.amazonaws.kms#LimitType",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1\n    and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
-          }
-        },
         "Marker": {
           "target": "com.amazonaws.kms#MarkerType",
           "traits": {
             "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
+          }
+        },
+        "Limit": {
+          "target": "com.amazonaws.kms#LimitType",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, AWS KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1\n    and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
           }
         },
         "RetiringPrincipal": {
@@ -3800,17 +3800,17 @@
             "smithy.api#documentation": "<p>A flag to indicate whether to bypass the key policy lockout safety check.</p>\n         <important>\n            <p>Setting this value to true increases the risk that the CMK becomes unmanageable. Do not\n        set this value to true indiscriminately.</p>\n            <p>For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section in the <i>AWS Key Management Service Developer Guide</i>.</p>\n         </important>\n         <p>Use this parameter only when you intend to prevent the principal that is making the\n      request from making a subsequent <code>PutKeyPolicy</code> request on the CMK.</p>\n         <p>The default value is false.</p>"
           }
         },
-        "Policy": {
-          "target": "com.amazonaws.kms#PolicyType",
-          "traits": {
-            "smithy.api#documentation": "<p>The key policy to attach to the CMK.</p>\n         <p>The key policy must meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>If you don't set <code>BypassPolicyLockoutSafetyCheck</code> to true, the key policy\n          must allow the principal that is making the <code>PutKeyPolicy</code> request to make a\n          subsequent <code>PutKeyPolicy</code> request on the CMK. This reduces the risk that the\n          CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section of the <i>AWS Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Each statement in the key policy must contain one or more principals. The principals\n          in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal\n          (for example, an IAM user or role), you might need to enforce a delay before including the\n          new principal in a key policy because the new principal might not be immediately visible\n          to AWS KMS. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>AWS\n            Identity and Access Management User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The key policy cannot exceed 32 kilobytes (32768 bytes). For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html\">Resource Quotas</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "PolicyName": {
           "target": "com.amazonaws.kms#PolicyNameType",
           "traits": {
             "smithy.api#documentation": "<p>The name of the key policy. The only valid value is <code>default</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Policy": {
+          "target": "com.amazonaws.kms#PolicyType",
+          "traits": {
+            "smithy.api#documentation": "<p>The key policy to attach to the CMK.</p>\n         <p>The key policy must meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>If you don't set <code>BypassPolicyLockoutSafetyCheck</code> to true, the key policy\n          must allow the principal that is making the <code>PutKeyPolicy</code> request to make a\n          subsequent <code>PutKeyPolicy</code> request on the CMK. This reduces the risk that the\n          CMK becomes unmanageable. For more information, refer to the scenario in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam\">Default Key Policy</a> section of the <i>AWS Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Each statement in the key policy must contain one or more principals. The principals\n          in the key policy must exist and be visible to AWS KMS. When you create a new AWS principal\n          (for example, an IAM user or role), you might need to enforce a delay before including the\n          new principal in a key policy because the new principal might not be immediately visible\n          to AWS KMS. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency\">Changes that I make are not always immediately visible</a> in the <i>AWS\n            Identity and Access Management User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The key policy cannot exceed 32 kilobytes (32768 bytes). For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html\">Resource Quotas</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3863,29 +3863,24 @@
     "com.amazonaws.kms#ReEncryptRequest": {
       "type": "structure",
       "members": {
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "DestinationKeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the CMK that is used to reencrypt the data. Specify a symmetric or\n      asymmetric CMK with a <code>KeyUsage</code> value of <code>ENCRYPT_DECRYPT</code>. To find the\n        <code>KeyUsage</code> value of a CMK, use the <a>DescribeKey</a>\n      operation.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "CiphertextBlob": {
           "target": "com.amazonaws.kms#CiphertextType",
           "traits": {
             "smithy.api#documentation": "<p>Ciphertext of the data to reencrypt.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "DestinationEncryptionContext": {
-          "target": "com.amazonaws.kms#EncryptionContextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies that encryption context to use when the reencrypting the data.</p>\n         <p>A destination encryption context is valid only when the destination CMK is a symmetric\n      CMK. The standard ciphertext format for asymmetric CMKs does not include fields for\n      metadata.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "SourceKeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the CMK that is used to decrypt the ciphertext before it\n      reencrypts it using the destination CMK.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric CMK.\n      Otherwise, AWS KMS uses the metadata that it adds to the ciphertext blob to determine which\n      CMK was used to encrypt the ciphertext. However, you can use this parameter to ensure that a\n      particular CMK (of any kind) is used to decrypt the ciphertext before it is\n      reencrypted.</p>\n         <p>If you specify a <code>KeyId</code> value, the decrypt part of the <code>ReEncrypt</code>\n      operation succeeds only if the specified CMK was used to encrypt the ciphertext.</p>\n    \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>"
-          }
-        },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
           }
         },
         "DestinationEncryptionAlgorithm": {
@@ -3906,11 +3901,16 @@
             "smithy.api#documentation": "<p>Specifies the encryption algorithm that AWS KMS will use to decrypt the ciphertext before it\n      is reencrypted. The default value, <code>SYMMETRIC_DEFAULT</code>, represents the algorithm\n      used for symmetric CMKs.</p>\n         <p>Specify the same algorithm that was used to encrypt the ciphertext. If you specify a\n      different algorithm, the decrypt attempt fails.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric\n      CMK.</p>"
           }
         },
-        "DestinationKeyId": {
+        "DestinationEncryptionContext": {
+          "target": "com.amazonaws.kms#EncryptionContextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies that encryption context to use when the reencrypting the data.</p>\n         <p>A destination encryption context is valid only when the destination CMK is a symmetric\n      CMK. The standard ciphertext format for asymmetric CMKs does not include fields for\n      metadata.</p> \n         <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represents additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is optional when encrypting with a symmetric CMK, but it is highly recommended.</p>\n         <p>For more information, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "SourceKeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the CMK that is used to reencrypt the data. Specify a symmetric or\n      asymmetric CMK with a <code>KeyUsage</code> value of <code>ENCRYPT_DECRYPT</code>. To find the\n        <code>KeyUsage</code> value of a CMK, use the <a>DescribeKey</a>\n      operation.</p> \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A unique identifier for the CMK that is used to decrypt the ciphertext before it\n      reencrypts it using the destination CMK.</p>\n         <p>This parameter is required only when the ciphertext was encrypted under an asymmetric CMK.\n      Otherwise, AWS KMS uses the metadata that it adds to the ciphertext blob to determine which\n      CMK was used to encrypt the ciphertext. However, you can use this parameter to ensure that a\n      particular CMK (of any kind) is used to decrypt the ciphertext before it is\n      reencrypted.</p>\n         <p>If you specify a <code>KeyId</code> value, the decrypt part of the <code>ReEncrypt</code>\n      operation succeeds only if the specified CMK was used to encrypt the ciphertext.</p>\n    \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>"
           }
         }
       }
@@ -3918,6 +3918,12 @@
     "com.amazonaws.kms#ReEncryptResponse": {
       "type": "structure",
       "members": {
+        "DestinationEncryptionAlgorithm": {
+          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption algorithm that was used to reencrypt the data.</p>"
+          }
+        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
@@ -3930,22 +3936,16 @@
             "smithy.api#documentation": "<p>Unique identifier of the CMK used to originally encrypt the data.</p>"
           }
         },
-        "CiphertextBlob": {
-          "target": "com.amazonaws.kms#CiphertextType",
-          "traits": {
-            "smithy.api#documentation": "<p>The reencrypted data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
-          }
-        },
-        "DestinationEncryptionAlgorithm": {
-          "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The encryption algorithm that was used to reencrypt the data.</p>"
-          }
-        },
         "SourceEncryptionAlgorithm": {
           "target": "com.amazonaws.kms#EncryptionAlgorithmSpec",
           "traits": {
             "smithy.api#documentation": "<p>The encryption algorithm that was used to decrypt the ciphertext before it was\n      reencrypted.</p>"
+          }
+        },
+        "CiphertextBlob": {
+          "target": "com.amazonaws.kms#CiphertextType",
+          "traits": {
+            "smithy.api#documentation": "<p>The reencrypted data. When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
           }
         }
       }
@@ -3985,6 +3985,12 @@
     "com.amazonaws.kms#RetireGrantRequest": {
       "type": "structure",
       "members": {
+        "GrantId": {
+          "target": "com.amazonaws.kms#GrantIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique identifier of the grant to retire. The grant ID is returned in the response to a\n        <code>CreateGrant</code> operation.</p>\n         <ul>\n            <li>\n               <p>Grant ID Example -\n          0123456789012345678901234567890123456789012345678901234567890123</p>\n            </li>\n         </ul>"
+          }
+        },
         "GrantToken": {
           "target": "com.amazonaws.kms#GrantTokenType",
           "traits": {
@@ -3995,12 +4001,6 @@
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CMK associated with the grant. </p>\n         <p>For example: <code>arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n         </p>"
-          }
-        },
-        "GrantId": {
-          "target": "com.amazonaws.kms#GrantIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Unique identifier of the grant to retire. The grant ID is returned in the response to a\n        <code>CreateGrant</code> operation.</p>\n         <ul>\n            <li>\n               <p>Grant ID Example -\n          0123456789012345678901234567890123456789012345678901234567890123</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -4085,17 +4085,17 @@
     "com.amazonaws.kms#ScheduleKeyDeletionRequest": {
       "type": "structure",
       "members": {
+        "PendingWindowInDays": {
+          "target": "com.amazonaws.kms#PendingWindowInDaysType",
+          "traits": {
+            "smithy.api#documentation": "<p>The waiting period, specified in number of days. After the waiting period ends, AWS KMS\n      deletes the customer master key (CMK).</p>\n         <p>This value is optional. If you include a value, it must be between 7 and 30, inclusive. If\n      you do not include a value, it defaults to 30.</p>"
+          }
+        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier of the customer master key (CMK) to delete.</p>\n    \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "PendingWindowInDays": {
-          "target": "com.amazonaws.kms#PendingWindowInDaysType",
-          "traits": {
-            "smithy.api#documentation": "<p>The waiting period, specified in number of days. After the waiting period ends, AWS KMS\n      deletes the customer master key (CMK).</p>\n         <p>This value is optional. If you include a value, it must be between 7 and 30, inclusive. If\n      you do not include a value, it defaults to 30.</p>"
           }
         }
       }
@@ -4158,6 +4158,25 @@
     "com.amazonaws.kms#SignRequest": {
       "type": "structure",
       "members": {
+        "Message": {
+          "target": "com.amazonaws.kms#PlaintextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the message or message digest to sign. Messages can be 0-4096 bytes. To sign a\n      larger message, provide the message digest.</p>\n         <p>If you provide a message, AWS KMS generates a hash digest of the message and then signs\n      it.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MessageType": {
+          "target": "com.amazonaws.kms#MessageType",
+          "traits": {
+            "smithy.api#documentation": "<p>Tells AWS KMS whether the value of the <code>Message</code> parameter is a message or\n      message digest. The default value, RAW, indicates a message. To indicate a message digest,\n      enter <code>DIGEST</code>.</p>"
+          }
+        },
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
@@ -4171,35 +4190,16 @@
             "smithy.api#documentation": "<p>Specifies the signing algorithm to use when signing the message. </p>\n         <p>Choose an algorithm that is compatible with the type and size of the specified asymmetric\n      CMK.</p>",
             "smithy.api#required": {}
           }
-        },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "MessageType": {
-          "target": "com.amazonaws.kms#MessageType",
-          "traits": {
-            "smithy.api#documentation": "<p>Tells AWS KMS whether the value of the <code>Message</code> parameter is a message or\n      message digest. The default value, RAW, indicates a message. To indicate a message digest,\n      enter <code>DIGEST</code>.</p>"
-          }
-        },
-        "Message": {
-          "target": "com.amazonaws.kms#PlaintextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the message or message digest to sign. Messages can be 0-4096 bytes. To sign a\n      larger message, provide the message digest.</p>\n         <p>If you provide a message, AWS KMS generates a hash digest of the message and then signs\n      it.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.kms#SignResponse": {
       "type": "structure",
       "members": {
-        "SigningAlgorithm": {
-          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
-            "smithy.api#documentation": "<p>The signing algorithm that was used to sign the message.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric CMK that was used to sign the\n      message.</p>"
           }
         },
         "Signature": {
@@ -4208,10 +4208,10 @@
             "smithy.api#documentation": "<p>The cryptographic signature that was generated for the message. </p>\n         <ul>\n            <li>\n               <p>When used with the supported RSA signing algorithms, the encoding of this value is\n          defined by <a href=\"https://tools.ietf.org/html/rfc8017\">PKCS #1 in RFC\n          8017</a>.</p>\n            </li>\n            <li>\n               <p>When used with the <code>ECDSA_SHA_256</code>, <code>ECDSA_SHA_384</code>, or\n            <code>ECDSA_SHA_512</code> signing algorithms, this value is a DER-encoded object as\n          defined by ANS X9.62–2005 and <a href=\"https://tools.ietf.org/html/rfc3279#section-2.2.3\">RFC 3279 Section 2.2.3</a>.\n          This is the most commonly used signature format and is appropriate for most uses.\n          </p>\n            </li>\n         </ul>\n         <p>When you use the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.</p>"
           }
         },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
+        "SigningAlgorithm": {
+          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric CMK that was used to sign the\n      message.</p>"
+            "smithy.api#documentation": "<p>The signing algorithm that was used to sign the message.</p>"
           }
         }
       }
@@ -4353,17 +4353,17 @@
     "com.amazonaws.kms#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the CMK you are tagging.</p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.kms#TagList",
           "traits": {
             "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the CMK you are tagging.</p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4526,7 +4526,7 @@
           "sdkId": "KMS",
           "arnNamespace": "kms",
           "cloudFormationName": "KMS",
-          "cloudTrailEventSource": "trent.amazon.com"
+          "cloudTrailEventSource": "kms.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "kms"
@@ -4590,17 +4590,17 @@
     "com.amazonaws.kms#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the CMK from which you are removing tags.</p>\n    \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "TagKeys": {
           "target": "com.amazonaws.kms#TagKeyList",
           "traits": {
             "smithy.api#documentation": "<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the CMK from which you are removing tags.</p>\n    \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4635,17 +4635,17 @@
     "com.amazonaws.kms#UpdateAliasRequest": {
       "type": "structure",
       "members": {
-        "TargetKeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the CMK to associate with the alias. When the update operation completes, the\n      alias will point to this CMK. </p>\n         <p>The CMK must be in the same AWS account and Region as the alias. Also, the new target CMK\n      must be the same type as the current target CMK (both symmetric or both asymmetric) and they\n      must have the same key usage. </p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>\n         <p>To verify that the alias\n      is mapped to the correct CMK, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "AliasName": {
           "target": "com.amazonaws.kms#AliasNameType",
           "traits": {
             "smithy.api#documentation": "<p>Identifies the alias that is changing its CMK. This value must begin with\n        <code>alias/</code> followed by the alias name, such as <code>alias/ExampleAlias</code>. You\n      cannot use UpdateAlias to change the alias name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TargetKeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the CMK to associate with the alias. When the update operation completes, the\n      alias will point to this CMK. </p>\n         <p>The CMK must be in the same AWS account and Region as the alias. Also, the new target CMK\n      must be the same type as the current target CMK (both symmetric or both asymmetric) and they\n      must have the same key usage. </p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>\n         <p>To verify that the alias\n      is mapped to the correct CMK, use <a>ListAliases</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4692,10 +4692,10 @@
     "com.amazonaws.kms#UpdateCustomKeyStoreRequest": {
       "type": "structure",
       "members": {
-        "CloudHsmClusterId": {
-          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
+        "KeyStorePassword": {
+          "target": "com.amazonaws.kms#KeyStorePasswordType",
           "traits": {
-            "smithy.api#documentation": "<p>Associates the custom key store with a related AWS CloudHSM cluster. </p>\n         <p>Enter the cluster ID of the cluster that you used to create the custom key store or a\n      cluster that shares a backup history and has the same cluster certificate as the original\n      cluster. You cannot use this parameter to associate a custom key store with an unrelated\n      cluster. In addition, the replacement cluster must <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore\">fulfill the requirements</a> for\n      a cluster associated with a custom key store. To view the cluster certificate of a cluster,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>"
+            "smithy.api#documentation": "<p>Enter the current password of the <code>kmsuser</code> crypto user (CU) in the AWS CloudHSM\n      cluster that is associated with the custom key store.</p>\n         <p>This parameter tells AWS KMS the current password of the <code>kmsuser</code> crypto user\n      (CU). It does not set or change the password of any users in the AWS CloudHSM cluster.</p>"
           }
         },
         "CustomKeyStoreId": {
@@ -4711,10 +4711,10 @@
             "smithy.api#documentation": "<p>Changes the friendly name of the custom key store to the value that you specify. The\n      custom key store name must be unique in the AWS account.</p>"
           }
         },
-        "KeyStorePassword": {
-          "target": "com.amazonaws.kms#KeyStorePasswordType",
+        "CloudHsmClusterId": {
+          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
           "traits": {
-            "smithy.api#documentation": "<p>Enter the current password of the <code>kmsuser</code> crypto user (CU) in the AWS CloudHSM\n      cluster that is associated with the custom key store.</p>\n         <p>This parameter tells AWS KMS the current password of the <code>kmsuser</code> crypto user\n      (CU). It does not set or change the password of any users in the AWS CloudHSM cluster.</p>"
+            "smithy.api#documentation": "<p>Associates the custom key store with a related AWS CloudHSM cluster. </p>\n         <p>Enter the cluster ID of the cluster that you used to create the custom key store or a\n      cluster that shares a backup history and has the same cluster certificate as the original\n      cluster. You cannot use this parameter to associate a custom key store with an unrelated\n      cluster. In addition, the replacement cluster must <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore\">fulfill the requirements</a> for\n      a cluster associated with a custom key store. To view the cluster certificate of a cluster,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>"
           }
         }
       }
@@ -4752,17 +4752,17 @@
     "com.amazonaws.kms#UpdateKeyDescriptionRequest": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.kms#DescriptionType",
-          "traits": {
-            "smithy.api#documentation": "<p>New description for the CMK.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "KeyId": {
           "target": "com.amazonaws.kms#KeyIdType",
           "traits": {
             "smithy.api#documentation": "<p>A unique identifier for the customer master key (CMK).</p> \n         <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.kms#DescriptionType",
+          "traits": {
+            "smithy.api#documentation": "<p>New description for the CMK.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4812,17 +4812,16 @@
     "com.amazonaws.kms#VerifyRequest": {
       "type": "structure",
       "members": {
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+          }
+        },
         "MessageType": {
           "target": "com.amazonaws.kms#MessageType",
           "traits": {
             "smithy.api#documentation": "<p>Tells AWS KMS whether the value of the <code>Message</code> parameter is a message or\n      message digest. The default value, RAW, indicates a message. To indicate a message digest,\n      enter <code>DIGEST</code>.</p>\n         <important>\n            <p>Use the <code>DIGEST</code> value only when the value of the <code>Message</code>\n        parameter is a message digest. If you use the <code>DIGEST</code> value with a raw message,\n        the security of the verification operation can be compromised.</p>\n         </important>"
-          }
-        },
-        "Message": {
-          "target": "com.amazonaws.kms#PlaintextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the message that was signed. You can submit a raw message of up to 4096 bytes,\n      or a hash digest of the message. If you submit a digest, use the <code>MessageType</code>\n      parameter with a value of <code>DIGEST</code>.</p>\n         <p>If the message specified here is different from the message that was signed, the signature\n      verification fails. A message and its hash digest are considered to be the same\n      message.</p>",
-            "smithy.api#required": {}
           }
         },
         "SigningAlgorithm": {
@@ -4832,10 +4831,18 @@
             "smithy.api#required": {}
           }
         },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
+        "Signature": {
+          "target": "com.amazonaws.kms#CiphertextType",
           "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token\">Grant Tokens</a> in the\n    <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The signature that the <code>Sign</code> operation generated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.kms#PlaintextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the message that was signed. You can submit a raw message of up to 4096 bytes,\n      or a hash digest of the message. If you submit a digest, use the <code>MessageType</code>\n      parameter with a value of <code>DIGEST</code>.</p>\n         <p>If the message specified here is different from the message that was signed, the signature\n      verification fails. A message and its hash digest are considered to be the same\n      message.</p>",
+            "smithy.api#required": {}
           }
         },
         "KeyId": {
@@ -4844,25 +4851,12 @@
             "smithy.api#documentation": "<p>Identifies the asymmetric CMK that will be used to verify the signature. This must be the\n      same CMK that was used to generate the signature. If you specify a different CMK, the\n      signature verification fails.</p>\n    \n         <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a CMK in a different AWS account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
             "smithy.api#required": {}
           }
-        },
-        "Signature": {
-          "target": "com.amazonaws.kms#CiphertextType",
-          "traits": {
-            "smithy.api#documentation": "<p>The signature that the <code>Sign</code> operation generated.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.kms#VerifyResponse": {
       "type": "structure",
       "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric CMK that was used to verify the signature.</p>"
-          }
-        },
         "SigningAlgorithm": {
           "target": "com.amazonaws.kms#SigningAlgorithmSpec",
           "traits": {
@@ -4873,6 +4867,12 @@
           "target": "com.amazonaws.kms#BooleanType",
           "traits": {
             "smithy.api#documentation": "<p>A Boolean value that indicates whether the signature was verified. A value of\n        <code>True</code> indicates that the <code>Signature</code> was produced by signing the\n        <code>Message</code> with the specified <code>KeyID</code> and\n        <code>SigningAlgorithm.</code> If the signature is not verified, the <code>Verify</code>\n      operation fails with a <code>KMSInvalidSignatureException</code> exception. </p>"
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric CMK that was used to verify the signature.</p>"
           }
         }
       }

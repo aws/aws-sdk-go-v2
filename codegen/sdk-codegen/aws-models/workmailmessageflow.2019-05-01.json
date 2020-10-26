@@ -90,7 +90,7 @@
           "sdkId": "WorkMailMessageFlow",
           "arnNamespace": "workmailmessageflow",
           "cloudFormationName": "WorkMailMessageFlow",
-          "cloudTrailEventSource": "service.workmailmessageflow.amazonaws.com"
+          "cloudTrailEventSource": "workmailmessageflow.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "workmailmessageflow"

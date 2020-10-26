@@ -38,11 +38,11 @@
     "com.amazonaws.macie#AccessDeniedException": {
       "type": "structure",
       "members": {
-        "resourceType": {
-          "target": "com.amazonaws.macie#ResourceType"
-        },
         "message": {
           "target": "com.amazonaws.macie#ExceptionMessage"
+        },
+        "resourceType": {
+          "target": "com.amazonaws.macie#ResourceType"
         }
       },
       "traits": {
@@ -297,16 +297,16 @@
             "smithy.api#documentation": "<p>The status code of a failed item.</p>"
           }
         },
-        "failedItem": {
-          "target": "com.amazonaws.macie#S3Resource",
-          "traits": {
-            "smithy.api#documentation": "<p>The failed S3 resources.</p>"
-          }
-        },
         "errorMessage": {
           "target": "com.amazonaws.macie#ExceptionMessage",
           "traits": {
             "smithy.api#documentation": "<p>The error message of a failed item.</p>"
+          }
+        },
+        "failedItem": {
+          "target": "com.amazonaws.macie#S3Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>The failed S3 resources.</p>"
           }
         }
       },
@@ -351,11 +351,11 @@
         "fieldName": {
           "target": "com.amazonaws.macie#FieldName"
         },
-        "message": {
-          "target": "com.amazonaws.macie#ExceptionMessage"
-        },
         "errorCode": {
           "target": "com.amazonaws.macie#ErrorCode"
+        },
+        "message": {
+          "target": "com.amazonaws.macie#ExceptionMessage"
         }
       },
       "traits": {
@@ -366,14 +366,14 @@
     "com.amazonaws.macie#LimitExceededException": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.macie#ExceptionMessage"
-        },
         "errorCode": {
           "target": "com.amazonaws.macie#ErrorCode"
         },
         "resourceType": {
           "target": "com.amazonaws.macie#ResourceType"
+        },
+        "message": {
+          "target": "com.amazonaws.macie#ExceptionMessage"
         }
       },
       "traits": {
@@ -409,16 +409,16 @@
     "com.amazonaws.macie#ListMemberAccountsRequest": {
       "type": "structure",
       "members": {
-        "maxResults": {
-          "target": "com.amazonaws.macie#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 250. </p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.macie#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>Use this parameter when paginating results. Set the value of this parameter to null on\n      your first call to the ListMemberAccounts action. Subsequent calls to the action fill\n      nextToken in the request with the value of nextToken from the previous response to continue\n      listing data. </p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.macie#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 250. </p>"
           }
         }
       }
@@ -477,16 +477,16 @@
             "smithy.api#documentation": "<p>The Amazon Macie Classic member account ID whose associated S3 resources you want to\n      list. </p>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.macie#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter when paginating results. Set its value to null on your first call to\n      the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with\n      the value of nextToken from the previous response to continue listing data. </p>"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.macie#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>Use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 250. </p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.macie#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter when paginating results. Set its value to null on your first call to\n      the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with\n      the value of nextToken from the previous response to continue listing data. </p>"
           }
         }
       }
@@ -539,7 +539,7 @@
           "sdkId": "Macie",
           "arnNamespace": "macie",
           "cloudFormationName": "Macie",
-          "cloudTrailEventSource": "service.macie.amazonaws.com"
+          "cloudTrailEventSource": "macie.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "macie"
@@ -635,17 +635,17 @@
     "com.amazonaws.macie#S3Resource": {
       "type": "structure",
       "members": {
-        "prefix": {
-          "target": "com.amazonaws.macie#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The prefix of the S3 bucket. </p>"
-          }
-        },
         "bucketName": {
           "target": "com.amazonaws.macie#BucketName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "prefix": {
+          "target": "com.amazonaws.macie#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The prefix of the S3 bucket. </p>"
           }
         }
       },
@@ -662,17 +662,17 @@
             "smithy.api#documentation": "<p>The prefix of the S3 bucket that you want to associate with Amazon Macie\n      Classic.</p>"
           }
         },
-        "classificationType": {
-          "target": "com.amazonaws.macie#ClassificationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The classification type that you want to specify for the resource associated with\n      Amazon Macie Classic. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "bucketName": {
           "target": "com.amazonaws.macie#BucketName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the S3 bucket that you want to associate with Amazon Macie\n      Classic.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "classificationType": {
+          "target": "com.amazonaws.macie#ClassificationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The classification type that you want to specify for the resource associated with\n      Amazon Macie Classic. </p>",
             "smithy.api#required": {}
           }
         }
@@ -684,11 +684,10 @@
     "com.amazonaws.macie#S3ResourceClassificationUpdate": {
       "type": "structure",
       "members": {
-        "classificationTypeUpdate": {
-          "target": "com.amazonaws.macie#ClassificationTypeUpdate",
+        "prefix": {
+          "target": "com.amazonaws.macie#Prefix",
           "traits": {
-            "smithy.api#documentation": "<p>The classification type that you want to update for the resource associated with Amazon\n      Macie Classic. </p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The prefix of the S3 bucket whose classification types you want to update.</p>"
           }
         },
         "bucketName": {
@@ -698,10 +697,11 @@
             "smithy.api#required": {}
           }
         },
-        "prefix": {
-          "target": "com.amazonaws.macie#Prefix",
+        "classificationTypeUpdate": {
+          "target": "com.amazonaws.macie#ClassificationTypeUpdate",
           "traits": {
-            "smithy.api#documentation": "<p>The prefix of the S3 bucket whose classification types you want to update.</p>"
+            "smithy.api#documentation": "<p>The classification type that you want to update for the resource associated with Amazon\n      Macie Classic. </p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -753,17 +753,17 @@
     "com.amazonaws.macie#UpdateS3ResourcesRequest": {
       "type": "structure",
       "members": {
+        "memberAccountId": {
+          "target": "com.amazonaws.macie#AWSAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS ID of the Amazon Macie Classic member account whose S3 resources'\n      classification types you want to update. </p>"
+          }
+        },
         "s3ResourcesUpdate": {
           "target": "com.amazonaws.macie#S3ResourcesClassificationUpdate",
           "traits": {
             "smithy.api#documentation": "<p>The S3 resources whose classification types you want to update.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "memberAccountId": {
-          "target": "com.amazonaws.macie#AWSAccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS ID of the Amazon Macie Classic member account whose S3 resources'\n      classification types you want to update. </p>"
           }
         }
       }

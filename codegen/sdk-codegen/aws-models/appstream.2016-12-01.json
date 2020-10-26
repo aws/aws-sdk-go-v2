@@ -32,17 +32,17 @@
     "com.amazonaws.appstream#AccessEndpoint": {
       "type": "structure",
       "members": {
+        "VpceId": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (ID) of the VPC in which the interface endpoint is used.</p>"
+          }
+        },
         "EndpointType": {
           "target": "com.amazonaws.appstream#AccessEndpointType",
           "traits": {
             "smithy.api#documentation": "<p>The type of interface endpoint.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "VpceId": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the VPC in which the interface endpoint is used.</p>"
           }
         }
       },
@@ -122,10 +122,16 @@
     "com.amazonaws.appstream#Application": {
       "type": "structure",
       "members": {
-        "LaunchParameters": {
+        "Name": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The arguments that are passed to the application at launch.</p>"
+            "smithy.api#documentation": "<p>The name of the application.</p>"
+          }
+        },
+        "Metadata": {
+          "target": "com.amazonaws.appstream#Metadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Additional attributes that describe the application.</p>"
           }
         },
         "DisplayName": {
@@ -134,22 +140,10 @@
             "smithy.api#documentation": "<p>The application name to display.</p>"
           }
         },
-        "Name": {
+        "LaunchParameters": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the application.</p>"
-          }
-        },
-        "LaunchPath": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The path to the application executable in the instance.</p>"
-          }
-        },
-        "Metadata": {
-          "target": "com.amazonaws.appstream#Metadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Additional attributes that describe the application.</p>"
+            "smithy.api#documentation": "<p>The arguments that are passed to the application at launch.</p>"
           }
         },
         "Enabled": {
@@ -162,6 +156,12 @@
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The URL for the application icon. This URL might be time-limited.</p>"
+          }
+        },
+        "LaunchPath": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The path to the application executable in the instance.</p>"
           }
         }
       },
@@ -193,16 +193,16 @@
     "com.amazonaws.appstream#ApplicationSettingsResponse": {
       "type": "structure",
       "members": {
-        "SettingsGroup": {
-          "target": "com.amazonaws.appstream#SettingsGroup",
-          "traits": {
-            "smithy.api#documentation": "<p>The path prefix for the S3 bucket where users’ persistent application settings are stored.</p>"
-          }
-        },
         "S3BucketName": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. \n        </p>"
+          }
+        },
+        "SettingsGroup": {
+          "target": "com.amazonaws.appstream#SettingsGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>The path prefix for the S3 bucket where users’ persistent application settings are stored.</p>"
           }
         },
         "Enabled": {
@@ -234,7 +234,7 @@
     "com.amazonaws.appstream#Arn": {
       "type": "string",
       "traits": {
-        "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+        "smithy.api#pattern": "^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.\\\\-]{0,1023}$"
       }
     },
     "com.amazonaws.appstream#ArnList": {
@@ -345,6 +345,9 @@
       },
       "errors": [
         {
+          "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+        },
+        {
           "target": "com.amazonaws.appstream#OperationNotPermittedException"
         }
       ],
@@ -383,6 +386,14 @@
       "output": {
         "target": "com.amazonaws.appstream#BatchDisassociateUserStackResult"
       },
+      "errors": [
+        {
+          "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+        },
+        {
+          "target": "com.amazonaws.appstream#OperationNotPermittedException"
+        }
+      ],
       "traits": {
         "smithy.api#documentation": "<p>Disassociates the specified users from the specified stacks.</p>"
       }
@@ -437,10 +448,11 @@
     "com.amazonaws.appstream#ComputeCapacityStatus": {
       "type": "structure",
       "members": {
-        "InUse": {
+        "Desired": {
           "target": "com.amazonaws.appstream#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The number of instances in use for streaming.</p>"
+            "smithy.api#documentation": "<p>The desired number of streaming instances.</p>",
+            "smithy.api#required": {}
           }
         },
         "Available": {
@@ -449,11 +461,10 @@
             "smithy.api#documentation": "<p>The number of currently available instances that can be used to stream\n            sessions.</p>"
           }
         },
-        "Desired": {
+        "InUse": {
           "target": "com.amazonaws.appstream#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The desired number of streaming instances.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The number of instances in use for streaming.</p>"
           }
         },
         "Running": {
@@ -515,17 +526,11 @@
     "com.amazonaws.appstream#CopyImageRequest": {
       "type": "structure",
       "members": {
-        "SourceImageName": {
-          "target": "com.amazonaws.appstream#Name",
+        "DestinationRegion": {
+          "target": "com.amazonaws.appstream#RegionName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the image to copy.</p>",
+            "smithy.api#documentation": "<p>The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "DestinationImageDescription": {
-          "target": "com.amazonaws.appstream#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description that the image will have when it is copied to the destination.</p>"
           }
         },
         "DestinationImageName": {
@@ -535,10 +540,16 @@
             "smithy.api#required": {}
           }
         },
-        "DestinationRegion": {
-          "target": "com.amazonaws.appstream#RegionName",
+        "DestinationImageDescription": {
+          "target": "com.amazonaws.appstream#Description",
           "traits": {
-            "smithy.api#documentation": "<p>The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.</p>",
+            "smithy.api#documentation": "<p>The description that the image will have when it is copied to the destination.</p>"
+          }
+        },
+        "SourceImageName": {
+          "target": "com.amazonaws.appstream#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the image to copy.</p>",
             "smithy.api#required": {}
           }
         }
@@ -568,10 +579,19 @@
           "target": "com.amazonaws.appstream#InvalidAccountStatusException"
         },
         {
+          "target": "com.amazonaws.appstream#InvalidRoleException"
+        },
+        {
           "target": "com.amazonaws.appstream#LimitExceededException"
         },
         {
+          "target": "com.amazonaws.appstream#OperationNotPermittedException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.appstream#ResourceNotFoundException"
         }
       ],
       "traits": {
@@ -581,6 +601,12 @@
     "com.amazonaws.appstream#CreateDirectoryConfigRequest": {
       "type": "structure",
       "members": {
+        "ServiceAccountCredentials": {
+          "target": "com.amazonaws.appstream#ServiceAccountCredentials",
+          "traits": {
+            "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
+          }
+        },
         "DirectoryName": {
           "target": "com.amazonaws.appstream#DirectoryName",
           "traits": {
@@ -592,13 +618,6 @@
           "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedNamesList",
           "traits": {
             "smithy.api#documentation": "<p>The distinguished names of the organizational units for computer accounts.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ServiceAccountCredentials": {
-          "target": "com.amazonaws.appstream#ServiceAccountCredentials",
-          "traits": {
-            "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>",
             "smithy.api#required": {}
           }
         }
@@ -646,6 +665,9 @@
           "target": "com.amazonaws.appstream#OperationNotPermittedException"
         },
         {
+          "target": "com.amazonaws.appstream#RequestLimitExceededException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
         },
         {
@@ -662,16 +684,59 @@
     "com.amazonaws.appstream#CreateFleetRequest": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.appstream#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the fleet.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "IamRoleArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "StreamView": {
+          "target": "com.amazonaws.appstream#StreamView",
+          "traits": {
+            "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
+          }
+        },
         "EnableDefaultInternetAccess": {
           "target": "com.amazonaws.appstream#BooleanObject",
           "traits": {
             "smithy.api#documentation": "<p>Enables or disables default internet access for the fleet.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appstream#Description",
+        "IdleDisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
+            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            they try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected.</p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
+          }
+        },
+        "DomainJoinInfo": {
+          "target": "com.amazonaws.appstream#DomainJoinInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#DisplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The fleet name to display.</p>"
+          }
+        },
+        "DisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p>\n        <p>Specify a value between 60 and 360000.</p>"
+          }
+        },
+        "FleetType": {
+          "target": "com.amazonaws.appstream#FleetType",
+          "traits": {
+            "smithy.api#documentation": "<p>The fleet type.</p>\n        <dl>\n            <dt>ALWAYS_ON</dt>\n            <dd>\n                    <p>Provides users with instant-on access to their apps.\n                        You are charged for all running instances in your fleet, even if no users are streaming apps.</p>\n                </dd>\n            <dt>ON_DEMAND</dt>\n            <dd>\n                    <p>Provide users with access to applications after they connect, which takes one to two minutes.\n                        You are charged for instance streaming when users are connected and a\n                        small hourly fee for instances that are not streaming apps.</p>\n                </dd>\n         </dl>"
           }
         },
         "ComputeCapacity": {
@@ -681,41 +746,35 @@
             "smithy.api#required": {}
           }
         },
+        "ImageName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
+          }
+        },
         "VpcConfig": {
           "target": "com.amazonaws.appstream#VpcConfig",
           "traits": {
             "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
           }
         },
-        "FleetType": {
-          "target": "com.amazonaws.appstream#FleetType",
+        "Description": {
+          "target": "com.amazonaws.appstream#Description",
           "traits": {
-            "smithy.api#documentation": "<p>The fleet type.</p>\n        <dl>\n            <dt>ALWAYS_ON</dt>\n            <dd>\n                    <p>Provides users with instant-on access to their apps.\n                        You are charged for all running instances in your fleet, even if no users are streaming apps.</p>\n                </dd>\n            <dt>ON_DEMAND</dt>\n            <dd>\n                    <p>Provide users with access to applications after they connect, which takes one to two minutes.\n                        You are charged for instance streaming when users are connected and a\n                        small hourly fee for instances that are not streaming apps.</p>\n                </dd>\n         </dl>"
+            "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
-        "DisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
+        "InstanceType": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p>\n        <p>Specify a value between 60 and 360000.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.appstream#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique name for the fleet.</p>",
+            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         },
-        "DomainJoinInfo": {
-          "target": "com.amazonaws.appstream#DomainJoinInfo",
+        "Tags": {
+          "target": "com.amazonaws.appstream#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
-          }
-        },
-        "ImageName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
+            "smithy.api#documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        \n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        \n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n     \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
           }
         },
         "MaxUserDurationInSeconds": {
@@ -724,41 +783,10 @@
             "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p>\n        <p>Specify a value between 600 and 360000.</p>"
           }
         },
-        "IdleDisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            they try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected.</p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.appstream#DisplayName",
-          "traits": {
-            "smithy.api#documentation": "<p>The fleet name to display.</p>"
-          }
-        },
-        "IamRoleArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
         "ImageArn": {
           "target": "com.amazonaws.appstream#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the public, private, or shared image to use.</p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.appstream#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        \n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        \n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n     \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
           }
         }
       }
@@ -805,6 +833,9 @@
           "target": "com.amazonaws.appstream#OperationNotPermittedException"
         },
         {
+          "target": "com.amazonaws.appstream#RequestLimitExceededException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
         },
         {
@@ -821,53 +852,10 @@
     "com.amazonaws.appstream#CreateImageBuilderRequest": {
       "type": "structure",
       "members": {
-        "EnableDefaultInternetAccess": {
-          "target": "com.amazonaws.appstream#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Enables or disables default internet access for the image builder.</p>"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>   \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
-        "VpcConfig": {
-          "target": "com.amazonaws.appstream#VpcConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration for the image builder. You can specify only one subnet.</p>"
-          }
-        },
-        "IamRoleArn": {
+        "ImageArn": {
           "target": "com.amazonaws.appstream#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.appstream#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.appstream#DisplayName",
-          "traits": {
-            "smithy.api#documentation": "<p>The image builder name to display.</p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.appstream#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        \n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n        \n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        \n        <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
-        "ImageName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the image used to create the image builder.</p>"
+            "smithy.api#documentation": "<p>The ARN of the public, private, or shared image to use.</p>"
           }
         },
         "AccessEndpoints": {
@@ -876,10 +864,53 @@
             "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
           }
         },
-        "ImageArn": {
+        "Tags": {
+          "target": "com.amazonaws.appstream#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        \n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n        \n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        \n        <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "IamRoleArn": {
           "target": "com.amazonaws.appstream#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the public, private, or shared image to use.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "ImageName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the image used to create the image builder.</p>"
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>   \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appstream#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description to display.</p>"
+          }
+        },
+        "VpcConfig": {
+          "target": "com.amazonaws.appstream#VpcConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC configuration for the image builder. You can specify only one subnet.</p>"
+          }
+        },
+        "EnableDefaultInternetAccess": {
+          "target": "com.amazonaws.appstream#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables default internet access for the image builder.</p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#DisplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The image builder name to display.</p>"
           }
         },
         "AppstreamAgentVersion": {
@@ -937,17 +968,17 @@
     "com.amazonaws.appstream#CreateImageBuilderStreamingURLRequest": {
       "type": "structure",
       "members": {
+        "Validity": {
+          "target": "com.amazonaws.appstream#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the streaming URL will be valid, in seconds. \n            Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the image builder.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Validity": {
-          "target": "com.amazonaws.appstream#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the streaming URL will be valid, in seconds. \n            Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>"
           }
         }
       }
@@ -1007,49 +1038,6 @@
     "com.amazonaws.appstream#CreateStackRequest": {
       "type": "structure",
       "members": {
-        "RedirectURL": {
-          "target": "com.amazonaws.appstream#RedirectURL",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL that users are redirected to after their streaming session ends.</p>"
-          }
-        },
-        "UserSettings": {
-          "target": "com.amazonaws.appstream#UserSettingList",
-          "traits": {
-            "smithy.api#documentation": "<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. </p>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.appstream#DisplayName",
-          "traits": {
-            "smithy.api#documentation": "<p>The stack name to display.</p>"
-          }
-        },
-        "AccessEndpoints": {
-          "target": "com.amazonaws.appstream#AccessEndpointList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
-          }
-        },
-        "EmbedHostDomains": {
-          "target": "com.amazonaws.appstream#EmbedHostDomains",
-          "traits": {
-            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.appstream#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the stack.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "FeedbackURL": {
-          "target": "com.amazonaws.appstream#FeedbackURL",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
-          }
-        },
         "StorageConnectors": {
           "target": "com.amazonaws.appstream#StorageConnectorList",
           "traits": {
@@ -1066,6 +1054,49 @@
           "target": "com.amazonaws.appstream#Tags",
           "traits": {
             "smithy.api#documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        \n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        \n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n        \n        <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#DisplayName",
+          "traits": {
+            "smithy.api#documentation": "<p>The stack name to display.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.appstream#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the stack.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AccessEndpoints": {
+          "target": "com.amazonaws.appstream#AccessEndpointList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
+          }
+        },
+        "RedirectURL": {
+          "target": "com.amazonaws.appstream#RedirectURL",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL that users are redirected to after their streaming session ends.</p>"
+          }
+        },
+        "FeedbackURL": {
+          "target": "com.amazonaws.appstream#FeedbackURL",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
+          }
+        },
+        "UserSettings": {
+          "target": "com.amazonaws.appstream#UserSettingList",
+          "traits": {
+            "smithy.api#documentation": "<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. </p>"
+          }
+        },
+        "EmbedHostDomains": {
+          "target": "com.amazonaws.appstream#EmbedHostDomains",
+          "traits": {
+            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
           }
         },
         "Description": {
@@ -1116,29 +1147,10 @@
     "com.amazonaws.appstream#CreateStreamingURLRequest": {
       "type": "structure",
       "members": {
-        "FleetName": {
+        "StackName": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Validity": {
-          "target": "com.amazonaws.appstream#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the streaming URL will be valid, in seconds.\n            Specify a value between 1 and 604800 seconds. The default is 60 seconds.</p>"
-          }
-        },
-        "SessionContext": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
-        "UserId": {
-          "target": "com.amazonaws.appstream#StreamingUrlUserId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the user.</p>",
+            "smithy.api#documentation": "<p>The name of the stack.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1148,10 +1160,29 @@
             "smithy.api#documentation": "<p>The name of the application to launch after the session starts. This is the name that you specified\n            as <b>Name</b> in the Image Assistant.</p>"
           }
         },
-        "StackName": {
+        "SessionContext": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the stack.</p>",
+            "smithy.api#documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "Validity": {
+          "target": "com.amazonaws.appstream#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the streaming URL will be valid, in seconds.\n            Specify a value between 1 and 604800 seconds. The default is 60 seconds.</p>"
+          }
+        },
+        "UserId": {
+          "target": "com.amazonaws.appstream#StreamingUrlUserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the user.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FleetName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the fleet.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1160,16 +1191,16 @@
     "com.amazonaws.appstream#CreateStreamingURLResult": {
       "type": "structure",
       "members": {
-        "StreamingURL": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL to start the AppStream 2.0 streaming session.</p>"
-          }
-        },
         "Expires": {
           "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
+          }
+        },
+        "StreamingURL": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL to start the AppStream 2.0 streaming session.</p>"
           }
         }
       }
@@ -1204,16 +1235,16 @@
     "com.amazonaws.appstream#CreateUsageReportSubscriptionResult": {
       "type": "structure",
       "members": {
-        "Schedule": {
-          "target": "com.amazonaws.appstream#UsageReportSchedule",
-          "traits": {
-            "smithy.api#documentation": "<p>The schedule for generating usage reports.</p>"
-          }
-        },
         "S3BucketName": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon S3 bucket where generated reports are stored.</p> \n            \n            <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script\n            configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is\n            unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0\n            uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, \n            when you enable usage reports, AppStream 2.0 creates a new S3 bucket.</p>"
+          }
+        },
+        "Schedule": {
+          "target": "com.amazonaws.appstream#UsageReportSchedule",
+          "traits": {
+            "smithy.api#documentation": "<p>The schedule for generating usage reports.</p>"
           }
         }
       }
@@ -1250,17 +1281,10 @@
     "com.amazonaws.appstream#CreateUserRequest": {
       "type": "structure",
       "members": {
-        "FirstName": {
+        "LastName": {
           "target": "com.amazonaws.appstream#UserAttributeValue",
           "traits": {
-            "smithy.api#documentation": "<p>The first name, or given name, of the user.</p>"
-          }
-        },
-        "UserName": {
-          "target": "com.amazonaws.appstream#Username",
-          "traits": {
-            "smithy.api#documentation": "<p>The email address of the user.</p>\n        \n        <note>\n            <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays.</p>\n         </note>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The last name, or surname, of the user.</p>"
           }
         },
         "AuthenticationType": {
@@ -1270,16 +1294,23 @@
             "smithy.api#required": {}
           }
         },
-        "LastName": {
-          "target": "com.amazonaws.appstream#UserAttributeValue",
+        "UserName": {
+          "target": "com.amazonaws.appstream#Username",
           "traits": {
-            "smithy.api#documentation": "<p>The last name, or surname, of the user.</p>"
+            "smithy.api#documentation": "<p>The email address of the user.</p>\n        \n        <note>\n            <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays.</p>\n         </note>",
+            "smithy.api#required": {}
           }
         },
         "MessageAction": {
           "target": "com.amazonaws.appstream#MessageAction",
           "traits": {
             "smithy.api#documentation": "<p>The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent. </p>\n        \n        <note>\n            <p>The temporary password in the welcome email is valid for only 7 days. If users don’t set their passwords within 7 days, you must send them a new welcome email.</p>\n         </note>"
+          }
+        },
+        "FirstName": {
+          "target": "com.amazonaws.appstream#UserAttributeValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The first name, or given name, of the user.</p>"
           }
         }
       }
@@ -1458,17 +1489,17 @@
     "com.amazonaws.appstream#DeleteImagePermissionsRequest": {
       "type": "structure",
       "members": {
-        "SharedAccountId": {
-          "target": "com.amazonaws.appstream#AwsAccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The 12-digit identifier of the AWS account for which to delete image permissions.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appstream#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the private image.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SharedAccountId": {
+          "target": "com.amazonaws.appstream#AwsAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 12-digit identifier of the AWS account for which to delete image permissions.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1634,16 +1665,16 @@
             "smithy.api#documentation": "<p>The directory names.</p>"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.appstream#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
         }
       }
@@ -1685,16 +1716,16 @@
     "com.amazonaws.appstream#DescribeFleetsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
-          }
-        },
         "Names": {
           "target": "com.amazonaws.appstream#StringList",
           "traits": {
             "smithy.api#documentation": "<p>The names of the fleets to describe.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
         }
       }
@@ -1702,16 +1733,16 @@
     "com.amazonaws.appstream#DescribeFleetsResult": {
       "type": "structure",
       "members": {
-        "Fleets": {
-          "target": "com.amazonaws.appstream#FleetList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the fleets.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          }
+        },
+        "Fleets": {
+          "target": "com.amazonaws.appstream#FleetList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the fleets.</p>"
           }
         }
       }
@@ -1798,6 +1829,12 @@
     "com.amazonaws.appstream#DescribeImagePermissionsRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.appstream#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.appstream#Name",
           "traits": {
@@ -1811,12 +1848,6 @@
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.appstream#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
-          }
-        },
         "SharedAwsAccountIds": {
           "target": "com.amazonaws.appstream#AwsAccountIdList",
           "traits": {
@@ -1828,6 +1859,12 @@
     "com.amazonaws.appstream#DescribeImagePermissionsResult": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          }
+        },
         "SharedImagePermissionsList": {
           "target": "com.amazonaws.appstream#SharedImagePermissionsList",
           "traits": {
@@ -1838,12 +1875,6 @@
           "target": "com.amazonaws.appstream#Name",
           "traits": {
             "smithy.api#documentation": "<p>The name of the private image.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
           }
         }
       }
@@ -1886,10 +1917,10 @@
     "com.amazonaws.appstream#DescribeImagesRequest": {
       "type": "structure",
       "members": {
-        "Arns": {
-          "target": "com.amazonaws.appstream#ArnList",
+        "Names": {
+          "target": "com.amazonaws.appstream#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>The ARNs of the public, private, and shared images to describe.</p>"
+            "smithy.api#documentation": "<p>The names of the public or private images to describe.</p>"
           }
         },
         "Type": {
@@ -1898,10 +1929,10 @@
             "smithy.api#documentation": "<p>The type of image (public, private, or shared) to describe. </p>"
           }
         },
-        "Names": {
-          "target": "com.amazonaws.appstream#StringList",
+        "Arns": {
+          "target": "com.amazonaws.appstream#ArnList",
           "traits": {
-            "smithy.api#documentation": "<p>The names of the public or private images to describe.</p>"
+            "smithy.api#documentation": "<p>The ARNs of the public, private, and shared images to describe.</p>"
           }
         },
         "MaxResults": {
@@ -1921,16 +1952,16 @@
     "com.amazonaws.appstream#DescribeImagesResult": {
       "type": "structure",
       "members": {
-        "Images": {
-          "target": "com.amazonaws.appstream#ImageList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the images.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          }
+        },
+        "Images": {
+          "target": "com.amazonaws.appstream#ImageList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the images.</p>"
           }
         }
       }
@@ -1955,17 +1986,16 @@
     "com.amazonaws.appstream#DescribeSessionsRequest": {
       "type": "structure",
       "members": {
+        "UserId": {
+          "target": "com.amazonaws.appstream#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The user identifier (ID). If you specify a user ID, you must also specify the authentication type.</p>"
+          }
+        },
         "AuthenticationType": {
           "target": "com.amazonaws.appstream#AuthenticationType",
           "traits": {
             "smithy.api#documentation": "<p>The authentication method. Specify <code>API</code> for a user\n            authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. \n            The default is to authenticate users using a streaming URL.</p>"
-          }
-        },
-        "FleetName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the fleet. This value is case-sensitive.</p>",
-            "smithy.api#required": {}
           }
         },
         "StackName": {
@@ -1975,10 +2005,11 @@
             "smithy.api#required": {}
           }
         },
-        "UserId": {
-          "target": "com.amazonaws.appstream#UserId",
+        "FleetName": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The user identifier.</p>"
+            "smithy.api#documentation": "<p>The name of the fleet. This value is case-sensitive.</p>",
+            "smithy.api#required": {}
           }
         },
         "NextToken": {
@@ -2032,16 +2063,16 @@
     "com.amazonaws.appstream#DescribeStacksRequest": {
       "type": "structure",
       "members": {
-        "Names": {
-          "target": "com.amazonaws.appstream#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The names of the stacks to describe.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+          }
+        },
+        "Names": {
+          "target": "com.amazonaws.appstream#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of the stacks to describe.</p>"
           }
         }
       }
@@ -2086,16 +2117,16 @@
     "com.amazonaws.appstream#DescribeUsageReportSubscriptionsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.appstream#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
         }
       }
@@ -2128,6 +2159,9 @@
       "errors": [
         {
           "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+        },
+        {
+          "target": "com.amazonaws.appstream#OperationNotPermittedException"
         }
       ],
       "traits": {
@@ -2137,22 +2171,22 @@
     "com.amazonaws.appstream#DescribeUserStackAssociationsRequest": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.appstream#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
         },
-        "UserName": {
-          "target": "com.amazonaws.appstream#Username",
+        "AuthenticationType": {
+          "target": "com.amazonaws.appstream#AuthenticationType",
           "traits": {
-            "smithy.api#documentation": "<p>The email address of the user who is associated with the stack.</p>\n        \n        <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.appstream#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+            "smithy.api#documentation": "<p>The authentication type for the user who is associated with the stack. You must specify USERPOOL.</p>"
           }
         },
         "StackName": {
@@ -2161,10 +2195,10 @@
             "smithy.api#documentation": "<p>The name of the stack that is associated with the user.</p>"
           }
         },
-        "AuthenticationType": {
-          "target": "com.amazonaws.appstream#AuthenticationType",
+        "UserName": {
+          "target": "com.amazonaws.appstream#Username",
           "traits": {
-            "smithy.api#documentation": "<p>The authentication type for the user who is associated with the stack. You must specify USERPOOL.</p>"
+            "smithy.api#documentation": "<p>The email address of the user who is associated with the stack.</p>\n        \n        <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>"
           }
         }
       }
@@ -2209,6 +2243,13 @@
     "com.amazonaws.appstream#DescribeUsersRequest": {
       "type": "structure",
       "members": {
+        "AuthenticationType": {
+          "target": "com.amazonaws.appstream#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication type for the users in the user pool to describe. You must specify USERPOOL.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.appstream#Integer",
           "traits": {
@@ -2220,29 +2261,22 @@
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
           }
-        },
-        "AuthenticationType": {
-          "target": "com.amazonaws.appstream#AuthenticationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The authentication type for the users in the user pool to describe. You must specify USERPOOL.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
     "com.amazonaws.appstream#DescribeUsersResult": {
       "type": "structure",
       "members": {
-        "Users": {
-          "target": "com.amazonaws.appstream#UserList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about users in the user pool.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          }
+        },
+        "Users": {
+          "target": "com.amazonaws.appstream#UserList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about users in the user pool.</p>"
           }
         }
       }
@@ -2259,12 +2293,6 @@
     "com.amazonaws.appstream#DirectoryConfig": {
       "type": "structure",
       "members": {
-        "ServiceAccountCredentials": {
-          "target": "com.amazonaws.appstream#ServiceAccountCredentials",
-          "traits": {
-            "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
-          }
-        },
         "DirectoryName": {
           "target": "com.amazonaws.appstream#DirectoryName",
           "traits": {
@@ -2276,6 +2304,12 @@
           "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The time the directory configuration was created.</p>"
+          }
+        },
+        "ServiceAccountCredentials": {
+          "target": "com.amazonaws.appstream#ServiceAccountCredentials",
+          "traits": {
+            "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
           }
         },
         "OrganizationalUnitDistinguishedNames": {
@@ -2324,17 +2358,17 @@
     "com.amazonaws.appstream#DisableUserRequest": {
       "type": "structure",
       "members": {
-        "AuthenticationType": {
-          "target": "com.amazonaws.appstream#AuthenticationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "UserName": {
           "target": "com.amazonaws.appstream#Username",
           "traits": {
             "smithy.api#documentation": "<p>The email address of the user.</p>\n        \n        <note>\n            <p>Users' email addresses are case-sensitive.</p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "AuthenticationType": {
+          "target": "com.amazonaws.appstream#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication type for the user. You must specify USERPOOL.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2357,6 +2391,9 @@
           "target": "com.amazonaws.appstream#ConcurrentModificationException"
         },
         {
+          "target": "com.amazonaws.appstream#OperationNotPermittedException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceInUseException"
         },
         {
@@ -2370,17 +2407,17 @@
     "com.amazonaws.appstream#DisassociateFleetRequest": {
       "type": "structure",
       "members": {
-        "FleetName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "StackName": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the stack.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FleetName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the fleet.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2412,16 +2449,16 @@
     "com.amazonaws.appstream#DomainJoinInfo": {
       "type": "structure",
       "members": {
-        "DirectoryName": {
-          "target": "com.amazonaws.appstream#DirectoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The fully qualified name of the directory (for example, corp.example.com).</p>"
-          }
-        },
         "OrganizationalUnitDistinguishedName": {
           "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedName",
           "traits": {
             "smithy.api#documentation": "<p>The distinguished name of the organizational unit for computer accounts.</p>"
+          }
+        },
+        "DirectoryName": {
+          "target": "com.amazonaws.appstream#DirectoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The fully qualified name of the directory (for example, corp.example.com).</p>"
           }
         }
       },
@@ -2437,7 +2474,7 @@
       "traits": {
         "smithy.api#length": {
           "min": 0,
-          "max": 10
+          "max": 50
         }
       }
     },
@@ -2553,104 +2590,16 @@
     "com.amazonaws.appstream#Fleet": {
       "type": "structure",
       "members": {
-        "DisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.</p>\n        <p>Specify a value between 60 and 360000.</p>"
-          }
-        },
-        "MaxUserDurationInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. </p>\n        <p>Specify a value between 600 and 360000.</p>"
-          }
-        },
-        "FleetErrors": {
-          "target": "com.amazonaws.appstream#FleetErrors",
-          "traits": {
-            "smithy.api#documentation": "<p>The fleet errors.</p>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The fleet name to display.</p>"
-          }
-        },
-        "VpcConfig": {
-          "target": "com.amazonaws.appstream#VpcConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
-        "Arn": {
-          "target": "com.amazonaws.appstream#Arn",
+        "VpcConfig": {
+          "target": "com.amazonaws.appstream#VpcConfig",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ImageName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
-          }
-        },
-        "FleetType": {
-          "target": "com.amazonaws.appstream#FleetType",
-          "traits": {
-            "smithy.api#documentation": "<p>The fleet type.</p>\n        <dl>\n            <dt>ALWAYS_ON</dt>\n            <dd>\n                    <p>Provides users with instant-on access to their apps.\n                        You are charged for all running instances in your fleet, even if no users are streaming apps.</p>\n                </dd>\n            <dt>ON_DEMAND</dt>\n            <dd>\n                    <p>Provide users with access to applications after they connect, which takes one to two minutes.\n                        You are charged for instance streaming when users are connected and a\n                        small hourly fee for instances that are not streaming apps.</p>\n                </dd>\n         </dl>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.appstream#FleetState",
-          "traits": {
-            "smithy.api#documentation": "<p>The current state for the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "IamRoleArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
-        "ComputeCapacityStatus": {
-          "target": "com.amazonaws.appstream#ComputeCapacityStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The capacity status for the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ImageArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN for the public, private, or shared image.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the fleet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainJoinInfo": {
-          "target": "com.amazonaws.appstream#DomainJoinInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
-          }
-        },
-        "IdleDisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            users try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected.</p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        \n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
+            "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
           }
         },
         "CreatedTime": {
@@ -2662,14 +2611,108 @@
         "InstanceType": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the fleet.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.</p>\n        <p>Specify a value between 60 and 360000.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.appstream#FleetState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state for the fleet.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FleetType": {
+          "target": "com.amazonaws.appstream#FleetType",
+          "traits": {
+            "smithy.api#documentation": "<p>The fleet type.</p>\n        <dl>\n            <dt>ALWAYS_ON</dt>\n            <dd>\n                    <p>Provides users with instant-on access to their apps.\n                        You are charged for all running instances in your fleet, even if no users are streaming apps.</p>\n                </dd>\n            <dt>ON_DEMAND</dt>\n            <dd>\n                    <p>Provide users with access to applications after they connect, which takes one to two minutes.\n                        You are charged for instance streaming when users are connected and a\n                        small hourly fee for instances that are not streaming apps.</p>\n                </dd>\n         </dl>"
+          }
+        },
+        "ComputeCapacityStatus": {
+          "target": "com.amazonaws.appstream#ComputeCapacityStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The capacity status for the fleet.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FleetErrors": {
+          "target": "com.amazonaws.appstream#FleetErrors",
+          "traits": {
+            "smithy.api#documentation": "<p>The fleet errors.</p>"
+          }
+        },
+        "IamRoleArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "StreamView": {
+          "target": "com.amazonaws.appstream#StreamView",
+          "traits": {
+            "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
+          }
+        },
+        "MaxUserDurationInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. </p>\n        <p>Specify a value between 600 and 360000.</p>"
+          }
+        },
+        "DomainJoinInfo": {
+          "target": "com.amazonaws.appstream#DomainJoinInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the fleet.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ImageName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
+          }
+        },
+        "ImageArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN for the public, private, or shared image.</p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The fleet name to display.</p>"
           }
         },
         "EnableDefaultInternetAccess": {
           "target": "com.amazonaws.appstream#BooleanObject",
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether default internet access is enabled for the fleet.</p>"
+          }
+        },
+        "IdleDisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            users try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected.</p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        \n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
           }
         }
       },
@@ -2713,16 +2756,16 @@
     "com.amazonaws.appstream#FleetError": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message.</p>"
-          }
-        },
         "ErrorCode": {
           "target": "com.amazonaws.appstream#FleetErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message.</p>"
           }
         }
       },
@@ -2905,22 +2948,34 @@
     "com.amazonaws.appstream#Image": {
       "type": "structure",
       "members": {
-        "ImagePermissions": {
-          "target": "com.amazonaws.appstream#ImagePermissions",
+        "AppstreamAgentVersion": {
+          "target": "com.amazonaws.appstream#AppstreamAgentVersion",
           "traits": {
-            "smithy.api#documentation": "<p>The permissions to provide to the destination AWS account for the specified image.</p>"
+            "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent to use for instances that are launched from this image. </p>"
           }
         },
-        "Visibility": {
-          "target": "com.amazonaws.appstream#VisibilityType",
+        "Platform": {
+          "target": "com.amazonaws.appstream#PlatformType",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the image is public or private.</p>"
+            "smithy.api#documentation": "<p>The operating system platform of the image.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the image.</p>"
           }
         },
         "StateChangeReason": {
           "target": "com.amazonaws.appstream#ImageStateChangeReason",
           "traits": {
             "smithy.api#documentation": "<p>The reason why the last state change occurred.</p>"
+          }
+        },
+        "ImagePermissions": {
+          "target": "com.amazonaws.appstream#ImagePermissions",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions to provide to the destination AWS account for the specified image.</p>"
           }
         },
         "DisplayName": {
@@ -2935,47 +2990,23 @@
             "smithy.api#documentation": "<p>The ARN of the image from which this image was created.</p>"
           }
         },
-        "CreatedTime": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the image was created.</p>"
-          }
-        },
-        "Description": {
+        "Name": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
+            "smithy.api#documentation": "<p>The name of the image.</p>",
+            "smithy.api#required": {}
           }
         },
-        "Platform": {
-          "target": "com.amazonaws.appstream#PlatformType",
+        "PublicBaseImageReleasedDate": {
+          "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The operating system platform of the image.</p>"
+            "smithy.api#documentation": "<p>The release date of the public base image. \n            For private images, this date is the release date of the base image from which the image was created.</p>"
           }
         },
         "Applications": {
           "target": "com.amazonaws.appstream#Applications",
           "traits": {
             "smithy.api#documentation": "<p>The applications associated with the image.</p>"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the image.</p>"
-          }
-        },
-        "AppstreamAgentVersion": {
-          "target": "com.amazonaws.appstream#AppstreamAgentVersion",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent to use for instances that are launched from this image. </p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the image.</p>",
-            "smithy.api#required": {}
           }
         },
         "ImageBuilderName": {
@@ -2990,16 +3021,28 @@
             "smithy.api#documentation": "<p>The image starts in the <code>PENDING</code> state. If image creation succeeds, the\n            state is <code>AVAILABLE</code>. If image creation fails, the state is <code>FAILED</code>.</p>"
           }
         },
+        "Visibility": {
+          "target": "com.amazonaws.appstream#VisibilityType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the image is public or private.</p>"
+          }
+        },
+        "CreatedTime": {
+          "target": "com.amazonaws.appstream#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the image was created.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The description to display.</p>"
+          }
+        },
         "ImageBuilderSupported": {
           "target": "com.amazonaws.appstream#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether an image builder can be launched from this image.</p>"
-          }
-        },
-        "PublicBaseImageReleasedDate": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The release date of the public base image. \n            For private images, this date is the release date of the base image from which the image was created.</p>"
           }
         }
       },
@@ -3010,53 +3053,17 @@
     "com.amazonaws.appstream#ImageBuilder": {
       "type": "structure",
       "members": {
-        "Arn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN for the image builder.</p>"
-          }
-        },
-        "VpcConfig": {
-          "target": "com.amazonaws.appstream#VpcConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration of the image builder.</p>"
-          }
-        },
-        "ImageBuilderErrors": {
-          "target": "com.amazonaws.appstream#ResourceErrors",
-          "traits": {
-            "smithy.api#documentation": "<p>The image builder errors.</p>"
-          }
-        },
-        "EnableDefaultInternetAccess": {
-          "target": "com.amazonaws.appstream#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Enables or disables default internet access for the image builder.</p>"
-          }
-        },
-        "DisplayName": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The image builder name to display.</p>"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>   \n            <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>"
-          }
-        },
-        "DomainJoinInfo": {
-          "target": "com.amazonaws.appstream#DomainJoinInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the image builder.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "ImageArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the image from which this builder was created.</p>"
           }
         },
         "Platform": {
@@ -3071,13 +3078,52 @@
             "smithy.api#documentation": "<p>The time stamp when the image builder was created.</p>"
           }
         },
-        "NetworkAccessConfiguration": {
-          "target": "com.amazonaws.appstream#NetworkAccessConfiguration"
+        "AccessEndpoints": {
+          "target": "com.amazonaws.appstream#AccessEndpointList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
+          }
+        },
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The image builder name to display.</p>"
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>   \n            <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>"
+          }
+        },
+        "VpcConfig": {
+          "target": "com.amazonaws.appstream#VpcConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC configuration of the image builder.</p>"
+          }
+        },
+        "IamRoleArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
         },
         "StateChangeReason": {
           "target": "com.amazonaws.appstream#ImageBuilderStateChangeReason",
           "traits": {
             "smithy.api#documentation": "<p>The reason why the last state change occurred.</p>"
+          }
+        },
+        "DomainJoinInfo": {
+          "target": "com.amazonaws.appstream#DomainJoinInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>"
+          }
+        },
+        "EnableDefaultInternetAccess": {
+          "target": "com.amazonaws.appstream#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables default internet access for the image builder.</p>"
           }
         },
         "AppstreamAgentVersion": {
@@ -3086,16 +3132,16 @@
             "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent that is currently being used by the image builder. </p>"
           }
         },
-        "ImageArn": {
-          "target": "com.amazonaws.appstream#Arn",
+        "Description": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the image from which this builder was created.</p>"
+            "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
-        "AccessEndpoints": {
-          "target": "com.amazonaws.appstream#AccessEndpointList",
+        "Arn": {
+          "target": "com.amazonaws.appstream#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
+            "smithy.api#documentation": "<p>The ARN for the image builder.</p>"
           }
         },
         "State": {
@@ -3104,17 +3150,14 @@
             "smithy.api#documentation": "<p>The state of the image builder.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appstream#String",
+        "ImageBuilderErrors": {
+          "target": "com.amazonaws.appstream#ResourceErrors",
           "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
+            "smithy.api#documentation": "<p>The image builder errors.</p>"
           }
         },
-        "IamRoleArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
+        "NetworkAccessConfiguration": {
+          "target": "com.amazonaws.appstream#NetworkAccessConfiguration"
         }
       },
       "traits": {
@@ -3173,16 +3216,16 @@
     "com.amazonaws.appstream#ImageBuilderStateChangeReason": {
       "type": "structure",
       "members": {
-        "Code": {
-          "target": "com.amazonaws.appstream#ImageBuilderStateChangeReasonCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The state change reason code.</p>"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The state change reason message.</p>"
+          }
+        },
+        "Code": {
+          "target": "com.amazonaws.appstream#ImageBuilderStateChangeReasonCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The state change reason code.</p>"
           }
         }
       },
@@ -3788,7 +3831,7 @@
           "sdkId": "AppStream",
           "arnNamespace": "appstream",
           "cloudFormationName": "AppStream",
-          "cloudTrailEventSource": "photon.amazonaws.com"
+          "cloudTrailEventSource": "appstream.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "appstream"
@@ -3832,6 +3875,19 @@
         }
       }
     },
+    "com.amazonaws.appstream#RequestLimitExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.appstream#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>AppStream 2.0 can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
     "com.amazonaws.appstream#ResourceAlreadyExistsException": {
       "type": "structure",
       "members": {
@@ -3848,10 +3904,10 @@
     "com.amazonaws.appstream#ResourceError": {
       "type": "structure",
       "members": {
-        "ErrorTimestamp": {
-          "target": "com.amazonaws.appstream#Timestamp",
+        "ErrorCode": {
+          "target": "com.amazonaws.appstream#FleetErrorCode",
           "traits": {
-            "smithy.api#documentation": "<p>The time the error occurred.</p>"
+            "smithy.api#documentation": "<p>The error code.</p>"
           }
         },
         "ErrorMessage": {
@@ -3860,10 +3916,10 @@
             "smithy.api#documentation": "<p>The error message.</p>"
           }
         },
-        "ErrorCode": {
-          "target": "com.amazonaws.appstream#FleetErrorCode",
+        "ErrorTimestamp": {
+          "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The error code.</p>"
+            "smithy.api#documentation": "<p>The time the error occurred.</p>"
           }
         }
       },
@@ -3882,7 +3938,8 @@
       "traits": {
         "smithy.api#documentation": "<p>The ARN of the resource.</p>",
         "smithy.api#length": {
-          "min": 1
+          "min": 1,
+          "max": 2048
         }
       }
     },
@@ -3963,29 +4020,17 @@
     "com.amazonaws.appstream#Session": {
       "type": "structure",
       "members": {
-        "State": {
-          "target": "com.amazonaws.appstream#SessionState",
-          "traits": {
-            "smithy.api#documentation": "<p>The current state of the streaming session.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "StartTime": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when a streaming instance is dedicated for the user.</p>"
-          }
-        },
-        "MaxExpirationTime": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the streaming session is set to expire. This time is based on the <code>MaxUserDurationinSeconds</code> value, which determines the maximum length of time that a streaming session can run. A streaming session might end earlier than the time specified in <code>SessionMaxExpirationTime</code>, when the <code>DisconnectTimeOutInSeconds</code> elapses or the user chooses to end his or her session. If the <code>DisconnectTimeOutInSeconds</code> elapses, or the user chooses to end his or her session, the streaming instance is terminated and the streaming session ends.</p>"
-          }
-        },
         "NetworkAccessConfiguration": {
           "target": "com.amazonaws.appstream#NetworkAccessConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>The network details for the streaming session.</p>"
+          }
+        },
+        "UserId": {
+          "target": "com.amazonaws.appstream#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the user for whom the session was created.</p>",
+            "smithy.api#required": {}
           }
         },
         "Id": {
@@ -3995,22 +4040,35 @@
             "smithy.api#required": {}
           }
         },
+        "State": {
+          "target": "com.amazonaws.appstream#SessionState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the streaming session.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxExpirationTime": {
+          "target": "com.amazonaws.appstream#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the streaming session is set to expire. This time is based on the <code>MaxUserDurationinSeconds</code> value, which determines the maximum length of time that a streaming session can run. A streaming session might end earlier than the time specified in <code>SessionMaxExpirationTime</code>, when the <code>DisconnectTimeOutInSeconds</code> elapses or the user chooses to end his or her session. If the <code>DisconnectTimeOutInSeconds</code> elapses, or the user chooses to end his or her session, the streaming instance is terminated and the streaming session ends.</p>"
+          }
+        },
         "ConnectionState": {
           "target": "com.amazonaws.appstream#SessionConnectionState",
           "traits": {
             "smithy.api#documentation": "<p>Specifies whether a user is connected to the streaming session.</p>"
           }
         },
-        "AuthenticationType": {
-          "target": "com.amazonaws.appstream#AuthenticationType",
+        "StartTime": {
+          "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The authentication method. The user is authenticated using a streaming URL\n            (<code>API</code>) or SAML 2.0 federation (<code>SAML</code>).</p>"
+            "smithy.api#documentation": "<p>The time when a streaming instance is dedicated for the user.</p>"
           }
         },
-        "UserId": {
-          "target": "com.amazonaws.appstream#UserId",
+        "FleetName": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The identifier of the user for whom the session was created.</p>",
+            "smithy.api#documentation": "<p>The name of the fleet for the streaming session.</p>",
             "smithy.api#required": {}
           }
         },
@@ -4021,11 +4079,10 @@
             "smithy.api#required": {}
           }
         },
-        "FleetName": {
-          "target": "com.amazonaws.appstream#String",
+        "AuthenticationType": {
+          "target": "com.amazonaws.appstream#AuthenticationType",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the fleet for the streaming session.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The authentication method. The user is authenticated using a streaming URL\n            (<code>API</code>) or SAML 2.0 federation (<code>SAML</code>).</p>"
           }
         }
       },
@@ -4117,29 +4174,11 @@
     "com.amazonaws.appstream#Stack": {
       "type": "structure",
       "members": {
-        "StorageConnectors": {
-          "target": "com.amazonaws.appstream#StorageConnectorList",
-          "traits": {
-            "smithy.api#documentation": "<p>The storage connectors to enable.</p>"
-          }
-        },
-        "CreatedTime": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the stack was created.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the stack.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the stack.</p>"
           }
         },
         "FeedbackURL": {
@@ -4148,10 +4187,10 @@
             "smithy.api#documentation": "<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.appstream#String",
+        "EmbedHostDomains": {
+          "target": "com.amazonaws.appstream#EmbedHostDomains",
           "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
+            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
           }
         },
         "UserSettings": {
@@ -4172,16 +4211,10 @@
             "smithy.api#documentation": "<p>The persistent application settings for users of the stack.</p>"
           }
         },
-        "EmbedHostDomains": {
-          "target": "com.amazonaws.appstream#EmbedHostDomains",
+        "DisplayName": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
-          }
-        },
-        "RedirectURL": {
-          "target": "com.amazonaws.appstream#RedirectURL",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL that users are redirected to after their streaming session ends.</p>"
+            "smithy.api#documentation": "<p>The stack name to display.</p>"
           }
         },
         "AccessEndpoints": {
@@ -4190,10 +4223,34 @@
             "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. </p>"
           }
         },
-        "DisplayName": {
+        "CreatedTime": {
+          "target": "com.amazonaws.appstream#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the stack was created.</p>"
+          }
+        },
+        "Description": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>The stack name to display.</p>"
+            "smithy.api#documentation": "<p>The description to display.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the stack.</p>"
+          }
+        },
+        "RedirectURL": {
+          "target": "com.amazonaws.appstream#RedirectURL",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL that users are redirected to after their streaming session ends.</p>"
+          }
+        },
+        "StorageConnectors": {
+          "target": "com.amazonaws.appstream#StorageConnectorList",
+          "traits": {
+            "smithy.api#documentation": "<p>The storage connectors to enable.</p>"
           }
         }
       },
@@ -4261,16 +4318,16 @@
     "com.amazonaws.appstream#StackError": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message.</p>"
-          }
-        },
         "ErrorCode": {
           "target": "com.amazonaws.appstream#StackErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message.</p>"
           }
         }
       },
@@ -4334,6 +4391,9 @@
         },
         {
           "target": "com.amazonaws.appstream#OperationNotPermittedException"
+        },
+        {
+          "target": "com.amazonaws.appstream#RequestLimitExceededException"
         },
         {
           "target": "com.amazonaws.appstream#ResourceNotAvailableException"
@@ -4505,6 +4565,13 @@
     "com.amazonaws.appstream#StorageConnector": {
       "type": "structure",
       "members": {
+        "ConnectorType": {
+          "target": "com.amazonaws.appstream#StorageConnectorType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of storage connector.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Domains": {
           "target": "com.amazonaws.appstream#DomainList",
           "traits": {
@@ -4515,13 +4582,6 @@
           "target": "com.amazonaws.appstream#ResourceIdentifier",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the storage connector.</p>"
-          }
-        },
-        "ConnectorType": {
-          "target": "com.amazonaws.appstream#StorageConnectorType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of storage connector.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -4554,6 +4614,21 @@
           {
             "value": "ONE_DRIVE",
             "name": "ONE_DRIVE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appstream#StreamView": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "APP",
+            "name": "APP"
+          },
+          {
+            "value": "DESKTOP",
+            "name": "DESKTOP"
           }
         ]
       }
@@ -4707,17 +4782,17 @@
     "com.amazonaws.appstream#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "TagKeys": {
           "target": "com.amazonaws.appstream#TagKeyList",
           "traits": {
             "smithy.api#documentation": "<p>The tag keys for the tags to disassociate.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4740,6 +4815,12 @@
           "target": "com.amazonaws.appstream#ConcurrentModificationException"
         },
         {
+          "target": "com.amazonaws.appstream#InvalidRoleException"
+        },
+        {
+          "target": "com.amazonaws.appstream#OperationNotPermittedException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceInUseException"
         },
         {
@@ -4753,16 +4834,16 @@
     "com.amazonaws.appstream#UpdateDirectoryConfigRequest": {
       "type": "structure",
       "members": {
-        "OrganizationalUnitDistinguishedNames": {
-          "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedNamesList",
-          "traits": {
-            "smithy.api#documentation": "<p>The distinguished names of the organizational units for computer accounts.</p>"
-          }
-        },
         "ServiceAccountCredentials": {
           "target": "com.amazonaws.appstream#ServiceAccountCredentials",
           "traits": {
             "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
+          }
+        },
+        "OrganizationalUnitDistinguishedNames": {
+          "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedNamesList",
+          "traits": {
+            "smithy.api#documentation": "<p>The distinguished names of the organizational units for computer accounts.</p>"
           }
         },
         "DirectoryName": {
@@ -4816,6 +4897,9 @@
           "target": "com.amazonaws.appstream#OperationNotPermittedException"
         },
         {
+          "target": "com.amazonaws.appstream#RequestLimitExceededException"
+        },
+        {
           "target": "com.amazonaws.appstream#ResourceInUseException"
         },
         {
@@ -4832,10 +4916,59 @@
     "com.amazonaws.appstream#UpdateFleetRequest": {
       "type": "structure",
       "members": {
-        "ImageArn": {
+        "IdleDisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            users try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected. </p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        \n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
+          }
+        },
+        "IamRoleArn": {
           "target": "com.amazonaws.appstream#Arn",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the public, private, or shared image to use.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+          }
+        },
+        "DeleteVpcConfig": {
+          "target": "com.amazonaws.appstream#Boolean",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>Deletes the VPC association for the specified fleet.</p>"
+          }
+        },
+        "DisconnectTimeoutInSeconds": {
+          "target": "com.amazonaws.appstream#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p>\n        <p>Specify a value between 60 and 360000.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name for the fleet.</p>"
+          }
+        },
+        "DomainJoinInfo": {
+          "target": "com.amazonaws.appstream#DomainJoinInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+          }
+        },
+        "ComputeCapacity": {
+          "target": "com.amazonaws.appstream#ComputeCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The desired capacity for the fleet.</p>"
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.appstream#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appstream#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
         "EnableDefaultInternetAccess": {
@@ -4850,34 +4983,10 @@
             "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
           }
         },
-        "IamRoleArn": {
-          "target": "com.amazonaws.appstream#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
-          }
-        },
         "AttributesToDelete": {
           "target": "com.amazonaws.appstream#FleetAttributes",
           "traits": {
             "smithy.api#documentation": "<p>The fleet attributes to delete.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.appstream#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
-          }
-        },
-        "DomainJoinInfo": {
-          "target": "com.amazonaws.appstream#DomainJoinInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique name for the fleet.</p>"
           }
         },
         "MaxUserDurationInSeconds": {
@@ -4886,47 +4995,28 @@
             "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p>\n        <p>Specify a value between 600 and 360000.</p>"
           }
         },
-        "DisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p>\n        <p>Specify a value between 60 and 360000.</p>"
-          }
-        },
-        "DeleteVpcConfig": {
-          "target": "com.amazonaws.appstream#Boolean",
-          "traits": {
-            "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Deletes the VPC association for the specified fleet.</p>"
-          }
-        },
         "ImageName": {
           "target": "com.amazonaws.appstream#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
           }
         },
-        "ComputeCapacity": {
-          "target": "com.amazonaws.appstream#ComputeCapacity",
-          "traits": {
-            "smithy.api#documentation": "<p>The desired capacity for the fleet.</p>"
-          }
-        },
-        "IdleDisconnectTimeoutInSeconds": {
-          "target": "com.amazonaws.appstream#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected\n            from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time\n            interval begins. Users are notified before they are disconnected due to inactivity. If\n            users try to reconnect to the streaming session before the time interval specified in\n            <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their\n            previous session. Users are considered idle when they stop providing keyboard or mouse\n            input during their streaming session. File uploads and downloads, audio in, audio out,\n            and pixels changing do not qualify as user activity. If users continue to be idle after\n            the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are\n            disconnected. </p>\n        <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p>\n        \n        <note>\n            <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>\n         </note>"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.appstream#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>"
-          }
-        },
         "DisplayName": {
           "target": "com.amazonaws.appstream#DisplayName",
           "traits": {
             "smithy.api#documentation": "<p>The fleet name to display.</p>"
+          }
+        },
+        "ImageArn": {
+          "target": "com.amazonaws.appstream#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the public, private, or shared image to use.</p>"
+          }
+        },
+        "StreamView": {
+          "target": "com.amazonaws.appstream#StreamView",
+          "traits": {
+            "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
           }
         }
       }
@@ -5039,40 +5129,10 @@
     "com.amazonaws.appstream#UpdateStackRequest": {
       "type": "structure",
       "members": {
-        "UserSettings": {
-          "target": "com.amazonaws.appstream#UserSettingList",
-          "traits": {
-            "smithy.api#documentation": "<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.</p>"
-          }
-        },
-        "ApplicationSettings": {
-          "target": "com.amazonaws.appstream#ApplicationSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>"
-          }
-        },
         "AccessEndpoints": {
           "target": "com.amazonaws.appstream#AccessEndpointList",
           "traits": {
             "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
-          }
-        },
-        "EmbedHostDomains": {
-          "target": "com.amazonaws.appstream#EmbedHostDomains",
-          "traits": {
-            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
-          }
-        },
-        "AttributesToDelete": {
-          "target": "com.amazonaws.appstream#StackAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>The stack attributes to delete.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.appstream#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
         "DisplayName": {
@@ -5081,10 +5141,16 @@
             "smithy.api#documentation": "<p>The stack name to display.</p>"
           }
         },
-        "StorageConnectors": {
-          "target": "com.amazonaws.appstream#StorageConnectorList",
+        "ApplicationSettings": {
+          "target": "com.amazonaws.appstream#ApplicationSettings",
           "traits": {
-            "smithy.api#documentation": "<p>The storage connectors to enable.</p>"
+            "smithy.api#documentation": "<p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.appstream#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description to display.</p>"
           }
         },
         "FeedbackURL": {
@@ -5093,11 +5159,10 @@
             "smithy.api#documentation": "<p>The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
           }
         },
-        "DeleteStorageConnectors": {
-          "target": "com.amazonaws.appstream#Boolean",
+        "AttributesToDelete": {
+          "target": "com.amazonaws.appstream#StackAttributes",
           "traits": {
-            "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Deletes the storage connectors currently enabled for the stack.</p>"
+            "smithy.api#documentation": "<p>The stack attributes to delete.</p>"
           }
         },
         "Name": {
@@ -5107,10 +5172,35 @@
             "smithy.api#required": {}
           }
         },
+        "EmbedHostDomains": {
+          "target": "com.amazonaws.appstream#EmbedHostDomains",
+          "traits": {
+            "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
+          }
+        },
+        "StorageConnectors": {
+          "target": "com.amazonaws.appstream#StorageConnectorList",
+          "traits": {
+            "smithy.api#documentation": "<p>The storage connectors to enable.</p>"
+          }
+        },
+        "UserSettings": {
+          "target": "com.amazonaws.appstream#UserSettingList",
+          "traits": {
+            "smithy.api#documentation": "<p>The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.</p>"
+          }
+        },
         "RedirectURL": {
           "target": "com.amazonaws.appstream#RedirectURL",
           "traits": {
             "smithy.api#documentation": "<p>The URL that users are redirected to after their streaming session ends.</p>"
+          }
+        },
+        "DeleteStorageConnectors": {
+          "target": "com.amazonaws.appstream#Boolean",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>Deletes the storage connectors currently enabled for the stack.</p>"
           }
         }
       }
@@ -5159,12 +5249,6 @@
     "com.amazonaws.appstream#UsageReportSubscription": {
       "type": "structure",
       "members": {
-        "LastGeneratedReportDate": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the last usage report was generated.</p>"
-          }
-        },
         "Schedule": {
           "target": "com.amazonaws.appstream#UsageReportSchedule",
           "traits": {
@@ -5175,6 +5259,12 @@
           "target": "com.amazonaws.appstream#LastReportGenerationExecutionErrors",
           "traits": {
             "smithy.api#documentation": "<p>The errors that were returned if usage reports couldn't be generated.</p>"
+          }
+        },
+        "LastGeneratedReportDate": {
+          "target": "com.amazonaws.appstream#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the last usage report was generated.</p>"
           }
         },
         "S3BucketName": {
@@ -5197,17 +5287,10 @@
     "com.amazonaws.appstream#User": {
       "type": "structure",
       "members": {
-        "Enabled": {
-          "target": "com.amazonaws.appstream#Boolean",
+        "CreatedTime": {
+          "target": "com.amazonaws.appstream#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the user in the user pool is enabled.</p>"
-          }
-        },
-        "AuthenticationType": {
-          "target": "com.amazonaws.appstream#AuthenticationType",
-          "traits": {
-            "smithy.api#documentation": "<p>The authentication type for the user.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The date and time the user was created in the user pool.</p>"
           }
         },
         "UserName": {
@@ -5222,10 +5305,11 @@
             "smithy.api#documentation": "<p>The status of the user in the user pool. The status can be one of the following:</p>\n        <ul>\n            <li>\n               <p>UNCONFIRMED – The user is created but not confirmed.</p>\n            </li>\n            <li>\n               <p>CONFIRMED – The user is confirmed.</p>\n            </li>\n            <li>\n               <p>ARCHIVED – The user is no longer active.</p>\n            </li>\n            <li>\n               <p>COMPROMISED – The user is disabled because of a potential security threat.</p>\n            </li>\n            <li>\n               <p>UNKNOWN – The user status is not known.</p>\n            </li>\n         </ul>"
           }
         },
-        "FirstName": {
-          "target": "com.amazonaws.appstream#UserAttributeValue",
+        "AuthenticationType": {
+          "target": "com.amazonaws.appstream#AuthenticationType",
           "traits": {
-            "smithy.api#documentation": "<p>The first name, or given name, of the user.</p>"
+            "smithy.api#documentation": "<p>The authentication type for the user.</p>",
+            "smithy.api#required": {}
           }
         },
         "Arn": {
@@ -5234,16 +5318,22 @@
             "smithy.api#documentation": "<p>The ARN of the user.</p>"
           }
         },
-        "CreatedTime": {
-          "target": "com.amazonaws.appstream#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the user was created in the user pool.</p>"
-          }
-        },
         "LastName": {
           "target": "com.amazonaws.appstream#UserAttributeValue",
           "traits": {
             "smithy.api#documentation": "<p>The last name, or surname, of the user.</p>"
+          }
+        },
+        "FirstName": {
+          "target": "com.amazonaws.appstream#UserAttributeValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The first name, or given name, of the user.</p>"
+          }
+        },
+        "Enabled": {
+          "target": "com.amazonaws.appstream#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the user in the user pool is enabled.</p>"
           }
         }
       },
@@ -5267,7 +5357,7 @@
       "traits": {
         "smithy.api#length": {
           "min": 2,
-          "max": 32
+          "max": 128
         }
       }
     },
@@ -5313,11 +5403,10 @@
     "com.amazonaws.appstream#UserStackAssociation": {
       "type": "structure",
       "members": {
-        "StackName": {
-          "target": "com.amazonaws.appstream#String",
+        "SendEmailNotification": {
+          "target": "com.amazonaws.appstream#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the stack that is associated with the user.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>"
           }
         },
         "AuthenticationType": {
@@ -5327,10 +5416,11 @@
             "smithy.api#required": {}
           }
         },
-        "SendEmailNotification": {
-          "target": "com.amazonaws.appstream#Boolean",
+        "StackName": {
+          "target": "com.amazonaws.appstream#String",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>"
+            "smithy.api#documentation": "<p>The name of the stack that is associated with the user.</p>",
+            "smithy.api#required": {}
           }
         },
         "UserName": {
@@ -5348,16 +5438,16 @@
     "com.amazonaws.appstream#UserStackAssociationError": {
       "type": "structure",
       "members": {
-        "UserStackAssociation": {
-          "target": "com.amazonaws.appstream#UserStackAssociation",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the user and associated stack.</p>"
-          }
-        },
         "ErrorCode": {
           "target": "com.amazonaws.appstream#UserStackAssociationErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code for the error that is returned when a user can’t be associated with or disassociated from a stack.</p>"
+          }
+        },
+        "UserStackAssociation": {
+          "target": "com.amazonaws.appstream#UserStackAssociation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the user and associated stack.</p>"
           }
         },
         "ErrorMessage": {
@@ -5382,6 +5472,10 @@
           {
             "value": "USER_NAME_NOT_FOUND",
             "name": "USER_NAME_NOT_FOUND"
+          },
+          {
+            "value": "DIRECTORY_NOT_FOUND",
+            "name": "DIRECTORY_NOT_FOUND"
           },
           {
             "value": "INTERNAL_ERROR",
@@ -5441,16 +5535,16 @@
     "com.amazonaws.appstream#VpcConfig": {
       "type": "structure",
       "members": {
-        "SecurityGroupIds": {
-          "target": "com.amazonaws.appstream#SecurityGroupIdList",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifiers of the security groups for the fleet or image builder.</p>"
-          }
-        },
         "SubnetIds": {
           "target": "com.amazonaws.appstream#SubnetIdList",
           "traits": {
             "smithy.api#documentation": "<p>The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or more subnets. Image builder instances use one subnet.</p>"
+          }
+        },
+        "SecurityGroupIds": {
+          "target": "com.amazonaws.appstream#SecurityGroupIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifiers of the security groups for the fleet or image builder.</p>"
           }
         }
       },

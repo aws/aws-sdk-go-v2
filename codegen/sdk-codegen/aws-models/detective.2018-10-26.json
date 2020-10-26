@@ -72,17 +72,17 @@
     "com.amazonaws.detective#Account": {
       "type": "structure",
       "members": {
-        "EmailAddress": {
-          "target": "com.amazonaws.detective#EmailAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account root user email address for the AWS account.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "AccountId": {
           "target": "com.amazonaws.detective#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The account identifier of the AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EmailAddress": {
+          "target": "com.amazonaws.detective#EmailAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account root user email address for the AWS account.</p>",
             "smithy.api#required": {}
           }
         }
@@ -264,10 +264,11 @@
     "com.amazonaws.detective#CreateMembersRequest": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.detective#EmailMessage",
+        "Accounts": {
+          "target": "com.amazonaws.detective#AccountList",
           "traits": {
-            "smithy.api#documentation": "<p>Customized message text to include in the invitation email message to the invited member\n         accounts.</p>"
+            "smithy.api#documentation": "<p>The list of AWS accounts to invite to become member accounts in the behavior graph.\n         For each invited account, the account list contains the account identifier and the AWS\n         account root user email address.</p>",
+            "smithy.api#required": {}
           }
         },
         "GraphArn": {
@@ -277,11 +278,10 @@
             "smithy.api#required": {}
           }
         },
-        "Accounts": {
-          "target": "com.amazonaws.detective#AccountList",
+        "Message": {
+          "target": "com.amazonaws.detective#EmailMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The list of AWS accounts to invite to become member accounts in the behavior graph.\n         For each invited account, the account list contains the account identifier and the AWS\n         account root user email address.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Customized message text to include in the invitation email message to the invited member\n         accounts.</p>"
           }
         }
       }
@@ -374,17 +374,17 @@
     "com.amazonaws.detective#DeleteMembersRequest": {
       "type": "structure",
       "members": {
-        "GraphArn": {
-          "target": "com.amazonaws.detective#GraphArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the behavior graph to delete members from.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "AccountIds": {
           "target": "com.amazonaws.detective#AccountIdList",
           "traits": {
             "smithy.api#documentation": "<p>The list of AWS account identifiers for the member accounts to delete from the\n         behavior graph.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GraphArn": {
+          "target": "com.amazonaws.detective#GraphArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the behavior graph to delete members from.</p>",
             "smithy.api#required": {}
           }
         }
@@ -611,16 +611,16 @@
     "com.amazonaws.detective#ListGraphsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.detective#MemberResultsLimit",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of graphs to return at a time. The total must be less than the\n         overall limit on the number of results to return, which is currently 200.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.detective#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>For requests to get the next page of results, the pagination token that was returned\n         with the previous set of results. The initial request does not include a pagination\n         token.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.detective#MemberResultsLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of graphs to return at a time. The total must be less than the\n         overall limit on the number of results to return, which is currently 200.</p>"
           }
         }
       }
@@ -675,16 +675,16 @@
     "com.amazonaws.detective#ListInvitationsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.detective#PaginationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>For requests to retrieve the next page of results, the pagination token that was\n         returned with the previous page of results.  The initial request does not include a\n         pagination token.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.detective#MemberResultsLimit",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of behavior graph invitations to return in the response. The total\n         must be less than the overall limit on the number of results to return, which is currently\n         200.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.detective#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>For requests to retrieve the next page of results, the pagination token that was\n         returned with the previous page of results.  The initial request does not include a\n         pagination token.</p>"
           }
         }
       }
@@ -692,16 +692,16 @@
     "com.amazonaws.detective#ListInvitationsResponse": {
       "type": "structure",
       "members": {
-        "Invitations": {
-          "target": "com.amazonaws.detective#MemberDetailList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of behavior graphs for which the member account has open or accepted\n         invitations.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.detective#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>If there are more behavior graphs remaining in the results, then this is the pagination\n         token to use to request the next page of behavior graphs.</p>"
+          }
+        },
+        "Invitations": {
+          "target": "com.amazonaws.detective#MemberDetailList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of behavior graphs for which the member account has open or accepted\n         invitations.</p>"
           }
         }
       }
@@ -742,10 +742,10 @@
     "com.amazonaws.detective#ListMembersRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.detective#PaginationToken",
+        "MaxResults": {
+          "target": "com.amazonaws.detective#MemberResultsLimit",
           "traits": {
-            "smithy.api#documentation": "<p>For requests to retrieve the next page of member account results, the pagination token\n         that was returned with the previous page of results. The initial request does not include a\n         pagination token.</p>"
+            "smithy.api#documentation": "<p>The maximum number of member accounts to include in the response. The total must be less\n         than the overall limit on the number of results to return, which is currently 200.</p>"
           }
         },
         "GraphArn": {
@@ -755,10 +755,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.detective#MemberResultsLimit",
+        "NextToken": {
+          "target": "com.amazonaws.detective#PaginationToken",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of member accounts to include in the response. The total must be less\n         than the overall limit on the number of results to return, which is currently 200.</p>"
+            "smithy.api#documentation": "<p>For requests to retrieve the next page of member account results, the pagination token\n         that was returned with the previous page of results. The initial request does not include a\n         pagination token.</p>"
           }
         }
       }
@@ -783,34 +783,10 @@
     "com.amazonaws.detective#MemberDetail": {
       "type": "structure",
       "members": {
-        "UpdatedTime": {
-          "target": "com.amazonaws.detective#Timestamp",
+        "Status": {
+          "target": "com.amazonaws.detective#MemberStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time that the member account was last updated. The value is in milliseconds\n         since the epoch.</p>"
-          }
-        },
-        "GraphArn": {
-          "target": "com.amazonaws.detective#GraphArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the behavior graph that the member account was invited to.</p>"
-          }
-        },
-        "InvitedTime": {
-          "target": "com.amazonaws.detective#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that Detective sent the invitation to the member account. The value is in\n         milliseconds since the epoch.</p>"
-          }
-        },
-        "DisabledReason": {
-          "target": "com.amazonaws.detective#MemberDisabledReason",
-          "traits": {
-            "smithy.api#documentation": "<p>For member accounts with a status of <code>ACCEPTED_BUT_DISABLED</code>, the reason that\n         the member account is not enabled.</p>\n         <p>The reason can have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME_TOO_HIGH</code> - Indicates that adding the member account would\n               cause the data volume for the behavior graph to be too high.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_UNKNOWN</code> - Indicates that Detective is unable to verify the data\n               volume for the member account. This is usually because the member account is not\n               enrolled in Amazon GuardDuty. </p>\n            </li>\n         </ul>"
-          }
-        },
-        "EmailAddress": {
-          "target": "com.amazonaws.detective#EmailAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account root user email address for the member account.</p>"
+            "smithy.api#documentation": "<p>The current membership status of the member account. The status can have one of the\n         following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVITED</code> - Indicates that the member was sent an invitation but has\n               not yet responded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the\n               account identifier and email address provided for the member account match. If they\n               do match, then Detective sends the invitation. If the email address and account\n               identifier don't match, then the member cannot be added to the behavior graph.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERIFICATION_FAILED</code> - Indicates that the account and email address\n               provided for the member account do not match, and Detective did not send an invitation to\n               the account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> - Indicates that the member account accepted the invitation\n               to contribute to the behavior graph.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCEPTED_BUT_DISABLED</code> - Indicates that the member account accepted\n               the invitation but is prevented from contributing data to the behavior graph.\n                  <code>DisabledReason</code> provides the reason why the member account is not\n               enabled.</p>\n            </li>\n         </ul>\n         <p>Member accounts that declined an invitation or that were removed from the behavior graph\n         are not included.</p>"
           }
         },
         "AccountId": {
@@ -819,10 +795,22 @@
             "smithy.api#documentation": "<p>The AWS account identifier for the member account.</p>"
           }
         },
-        "PercentOfGraphUtilization": {
-          "target": "com.amazonaws.detective#Percentage",
+        "PercentOfGraphUtilizationUpdatedTime": {
+          "target": "com.amazonaws.detective#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0\n         indicates 0 percent, and 100 indicates 100 percent.</p>\n         <p>Note that this is not the percentage of the behavior graph data volume.</p>\n         <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data\n         volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then\n            <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed\n         data volume. </p>"
+            "smithy.api#documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>"
+          }
+        },
+        "GraphArn": {
+          "target": "com.amazonaws.detective#GraphArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the behavior graph that the member account was invited to.</p>"
+          }
+        },
+        "DisabledReason": {
+          "target": "com.amazonaws.detective#MemberDisabledReason",
+          "traits": {
+            "smithy.api#documentation": "<p>For member accounts with a status of <code>ACCEPTED_BUT_DISABLED</code>, the reason that\n         the member account is not enabled.</p>\n         <p>The reason can have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME_TOO_HIGH</code> - Indicates that adding the member account would\n               cause the data volume for the behavior graph to be too high.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_UNKNOWN</code> - Indicates that Detective is unable to verify the data\n               volume for the member account. This is usually because the member account is not\n               enrolled in Amazon GuardDuty. </p>\n            </li>\n         </ul>"
           }
         },
         "MasterId": {
@@ -831,16 +819,28 @@
             "smithy.api#documentation": "<p>The AWS account identifier of the master account for the behavior graph.</p>"
           }
         },
-        "PercentOfGraphUtilizationUpdatedTime": {
+        "InvitedTime": {
           "target": "com.amazonaws.detective#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>"
+            "smithy.api#documentation": "<p>The date and time that Detective sent the invitation to the member account. The value is in\n         milliseconds since the epoch.</p>"
           }
         },
-        "Status": {
-          "target": "com.amazonaws.detective#MemberStatus",
+        "UpdatedTime": {
+          "target": "com.amazonaws.detective#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The current membership status of the member account. The status can have one of the\n         following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVITED</code> - Indicates that the member was sent an invitation but has\n               not yet responded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERIFICATION_IN_PROGRESS</code> - Indicates that Detective is verifying that the\n               account identifier and email address provided for the member account match. If they\n               do match, then Detective sends the invitation. If the email address and account\n               identifier don't match, then the member cannot be added to the behavior graph.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERIFICATION_FAILED</code> - Indicates that the account and email address\n               provided for the member account do not match, and Detective did not send an invitation to\n               the account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> - Indicates that the member account accepted the invitation\n               to contribute to the behavior graph.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCEPTED_BUT_DISABLED</code> - Indicates that the member account accepted\n               the invitation but is prevented from contributing data to the behavior graph.\n                  <code>DisabledReason</code> provides the reason why the member account is not\n               enabled.</p>\n            </li>\n         </ul>\n         <p>Member accounts that declined an invitation or that were removed from the behavior graph\n         are not included.</p>"
+            "smithy.api#documentation": "<p>The date and time that the member account was last updated. The value is in milliseconds\n         since the epoch.</p>"
+          }
+        },
+        "EmailAddress": {
+          "target": "com.amazonaws.detective#EmailAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account root user email address for the member account.</p>"
+          }
+        },
+        "PercentOfGraphUtilization": {
+          "target": "com.amazonaws.detective#Percentage",
+          "traits": {
+            "smithy.api#documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0\n         indicates 0 percent, and 100 indicates 100 percent.</p>\n         <p>Note that this is not the percentage of the behavior graph data volume.</p>\n         <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data\n         volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then\n            <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed\n         data volume. </p>"
           }
         }
       },
@@ -1021,17 +1021,17 @@
     "com.amazonaws.detective#StartMonitoringMemberRequest": {
       "type": "structure",
       "members": {
-        "GraphArn": {
-          "target": "com.amazonaws.detective#GraphArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "AccountId": {
           "target": "com.amazonaws.detective#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The account ID of the member account to try to enable.</p>\n         <p>The account must be an invited member account with a status of\n         <code>ACCEPTED_BUT_DISABLED</code>. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GraphArn": {
+          "target": "com.amazonaws.detective#GraphArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1043,16 +1043,16 @@
     "com.amazonaws.detective#UnprocessedAccount": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.detective#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS account identifier of the member account that was not processed.</p>"
-          }
-        },
         "Reason": {
           "target": "com.amazonaws.detective#UnprocessedReason",
           "traits": {
             "smithy.api#documentation": "<p>The reason that the member account request could not be processed.</p>"
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.detective#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account identifier of the member account that was not processed.</p>"
           }
         }
       },

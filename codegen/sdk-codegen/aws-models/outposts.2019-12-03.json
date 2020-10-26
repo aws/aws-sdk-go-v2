@@ -111,23 +111,23 @@
     "com.amazonaws.outposts#CreateOutpostInput": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.outposts#OutpostName"
+        "AvailabilityZoneId": {
+          "target": "com.amazonaws.outposts#AvailabilityZoneId"
         },
         "AvailabilityZone": {
           "target": "com.amazonaws.outposts#AvailabilityZone"
         },
-        "AvailabilityZoneId": {
-          "target": "com.amazonaws.outposts#AvailabilityZoneId"
+        "Name": {
+          "target": "com.amazonaws.outposts#OutpostName"
+        },
+        "Description": {
+          "target": "com.amazonaws.outposts#OutpostDescription"
         },
         "SiteId": {
           "target": "com.amazonaws.outposts#SiteId",
           "traits": {
             "smithy.api#required": {}
           }
-        },
-        "Description": {
-          "target": "com.amazonaws.outposts#OutpostDescription"
         }
       }
     },
@@ -320,17 +320,17 @@
     "com.amazonaws.outposts#GetOutpostInstanceTypesInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.outposts#Token",
-          "traits": {
-            "smithy.api#httpQuery": "NextToken"
-          }
-        },
         "OutpostId": {
           "target": "com.amazonaws.outposts#OutpostId",
           "traits": {
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.outposts#Token",
+          "traits": {
+            "smithy.api#httpQuery": "NextToken"
           }
         },
         "MaxResults": {
@@ -344,17 +344,17 @@
     "com.amazonaws.outposts#GetOutpostInstanceTypesOutput": {
       "type": "structure",
       "members": {
-        "OutpostArn": {
-          "target": "com.amazonaws.outposts#OutpostArn"
-        },
-        "OutpostId": {
-          "target": "com.amazonaws.outposts#OutpostId"
+        "NextToken": {
+          "target": "com.amazonaws.outposts#Token"
         },
         "InstanceTypes": {
           "target": "com.amazonaws.outposts#InstanceTypeListDefinition"
         },
-        "NextToken": {
-          "target": "com.amazonaws.outposts#Token"
+        "OutpostId": {
+          "target": "com.amazonaws.outposts#OutpostId"
+        },
+        "OutpostArn": {
+          "target": "com.amazonaws.outposts#OutpostArn"
         }
       }
     },
@@ -447,16 +447,16 @@
     "com.amazonaws.outposts#ListOutpostsInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.outposts#Token",
-          "traits": {
-            "smithy.api#httpQuery": "NextToken"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.outposts#MaxResults1000",
           "traits": {
             "smithy.api#httpQuery": "MaxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.outposts#Token",
+          "traits": {
+            "smithy.api#httpQuery": "NextToken"
           }
         }
       }
@@ -525,11 +525,11 @@
     "com.amazonaws.outposts#ListSitesOutput": {
       "type": "structure",
       "members": {
-        "Sites": {
-          "target": "com.amazonaws.outposts#siteListDefinition"
-        },
         "NextToken": {
           "target": "com.amazonaws.outposts#Token"
+        },
+        "Sites": {
+          "target": "com.amazonaws.outposts#siteListDefinition"
         }
       }
     },
@@ -560,17 +560,17 @@
     "com.amazonaws.outposts#Outpost": {
       "type": "structure",
       "members": {
-        "AvailabilityZoneId": {
-          "target": "com.amazonaws.outposts#AvailabilityZoneId"
+        "OutpostArn": {
+          "target": "com.amazonaws.outposts#OutpostArn"
         },
         "AvailabilityZone": {
           "target": "com.amazonaws.outposts#AvailabilityZone"
         },
+        "AvailabilityZoneId": {
+          "target": "com.amazonaws.outposts#AvailabilityZoneId"
+        },
         "LifeCycleStatus": {
           "target": "com.amazonaws.outposts#LifeCycleStatus"
-        },
-        "OutpostArn": {
-          "target": "com.amazonaws.outposts#OutpostArn"
         },
         "Name": {
           "target": "com.amazonaws.outposts#OutpostName"
@@ -578,14 +578,14 @@
         "SiteId": {
           "target": "com.amazonaws.outposts#SiteId"
         },
-        "OutpostId": {
-          "target": "com.amazonaws.outposts#OutpostId"
+        "Description": {
+          "target": "com.amazonaws.outposts#OutpostDescription"
         },
         "OwnerId": {
           "target": "com.amazonaws.outposts#OwnerId"
         },
-        "Description": {
-          "target": "com.amazonaws.outposts#OutpostDescription"
+        "OutpostId": {
+          "target": "com.amazonaws.outposts#OutpostId"
         }
       },
       "traits": {
@@ -667,7 +667,7 @@
           "sdkId": "Outposts",
           "arnNamespace": "outposts",
           "cloudFormationName": "Outposts",
-          "cloudTrailEventSource": "model.service.olaf.outposts.amazonaws.com"
+          "cloudTrailEventSource": "outposts.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "outposts"
@@ -704,17 +704,17 @@
     "com.amazonaws.outposts#Site": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.outposts#AccountId"
-        },
         "Name": {
           "target": "com.amazonaws.outposts#SiteName"
+        },
+        "Description": {
+          "target": "com.amazonaws.outposts#SiteDescription"
         },
         "SiteId": {
           "target": "com.amazonaws.outposts#SiteId"
         },
-        "Description": {
-          "target": "com.amazonaws.outposts#SiteDescription"
+        "AccountId": {
+          "target": "com.amazonaws.outposts#AccountId"
         }
       },
       "traits": {

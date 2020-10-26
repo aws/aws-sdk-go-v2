@@ -68,18 +68,18 @@
             "smithy.api#required": {}
           }
         },
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "uploadId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The upload ID of the multipart upload to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -200,12 +200,6 @@
     "com.amazonaws.glacier#AddTagsToVaultInput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.glacier#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the vault. Each tag is composed of a key and a value. The value\n         can be an empty string.</p>"
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -221,6 +215,12 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
+        },
+        "Tags": {
+          "target": "com.amazonaws.glacier#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the vault. Each tag is composed of a key and a value. The value\n         can be an empty string.</p>"
+          }
         }
       },
       "traits": {
@@ -230,6 +230,13 @@
     "com.amazonaws.glacier#ArchiveCreationOutput": {
       "type": "structure",
       "members": {
+        "location": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The relative URI path of the newly added archive resource.</p>",
+            "smithy.api#httpHeader": "Location"
+          }
+        },
         "checksum": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -243,13 +250,6 @@
             "smithy.api#documentation": "<p>The ID of the archive. This value is also included as part of the location.</p>",
             "smithy.api#httpHeader": "x-amz-archive-id"
           }
-        },
-        "location": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The relative URI path of the newly added archive resource.</p>",
-            "smithy.api#httpHeader": "Location"
-          }
         }
       },
       "traits": {
@@ -259,6 +259,18 @@
     "com.amazonaws.glacier#CSVInput": {
       "type": "structure",
       "members": {
+        "RecordDelimiter": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>A value used to separate individual records from each other.</p>"
+          }
+        },
+        "Comments": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>A single character used to indicate that a row should be ignored when the character is\n            present at the start of that row.</p>"
+          }
+        },
         "FileHeaderInfo": {
           "target": "com.amazonaws.glacier#FileHeaderInfo",
           "traits": {
@@ -271,12 +283,6 @@
             "smithy.api#documentation": "<p>A value used to separate individual fields from each other within a record.</p>"
           }
         },
-        "Comments": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>A single character used to indicate that a row should be ignored when the character is\n            present at the start of that row.</p>"
-          }
-        },
         "QuoteEscapeCharacter": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -287,12 +293,6 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>A value used as an escape character where the field delimiter is part of the\n            value.</p>"
-          }
-        },
-        "RecordDelimiter": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>A value used to separate individual records from each other.</p>"
           }
         }
       },
@@ -303,6 +303,12 @@
     "com.amazonaws.glacier#CSVOutput": {
       "type": "structure",
       "members": {
+        "QuoteEscapeCharacter": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>A single character used for escaping the quotation-mark character inside an already\n            escaped value.</p>"
+          }
+        },
         "RecordDelimiter": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -313,12 +319,6 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>A value used as an escape character where the field delimiter is part of the\n            value.</p>"
-          }
-        },
-        "QuoteEscapeCharacter": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>A single character used for escaping the quotation-mark character inside an already\n            escaped value.</p>"
           }
         },
         "FieldDelimiter": {
@@ -407,14 +407,6 @@
     "com.amazonaws.glacier#CompleteMultipartUploadInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "uploadId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -436,6 +428,14 @@
           "traits": {
             "smithy.api#documentation": "<p>The total size, in bytes, of the entire archive. This value should be the sum of all\n         the sizes of the individual parts that you uploaded.</p>",
             "smithy.api#httpHeader": "x-amz-archive-size"
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "checksum": {
@@ -481,14 +481,6 @@
     "com.amazonaws.glacier#CompleteVaultLockInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "lockId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -501,6 +493,14 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS\n         account ID associated with the credentials used to sign the request. You can either specify\n         an AWS account ID or optionally a single '<code>-</code>' (hyphen), in which case Amazon\n         Glacier uses the AWS account ID associated with the credentials used to sign the request.\n         If you specify your account ID, do not include any hyphens ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -544,18 +544,18 @@
     "com.amazonaws.glacier#CreateVaultInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS\n         account ID associated with the credentials used to sign the request. You can either specify\n         an AWS account ID or optionally a single '<code>-</code>' (hyphen), in which case Amazon S3\n         Glacier uses the AWS account ID associated with the credentials used to sign the request.\n         If you specify your account ID, do not include any hyphens ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS\n         account ID associated with the credentials used to sign the request. You can either specify\n         an AWS account ID or optionally a single '<code>-</code>' (hyphen), in which case Amazon S3\n         Glacier uses the AWS account ID associated with the credentials used to sign the request.\n         If you specify your account ID, do not include any hyphens ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -597,16 +597,16 @@
     "com.amazonaws.glacier#DataRetrievalRule": {
       "type": "structure",
       "members": {
-        "BytesPerHour": {
-          "target": "com.amazonaws.glacier#NullableLong",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of bytes that can be retrieved in an hour.</p>\n         <p>This field is required only if the value of the Strategy field is\n            <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is\n         not set to <code>BytesPerHour</code> and you set this field.</p>"
-          }
-        },
         "Strategy": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The type of data retrieval policy to set.</p>\n         <p>Valid values: BytesPerHour|FreeTier|None</p>"
+          }
+        },
+        "BytesPerHour": {
+          "target": "com.amazonaws.glacier#NullableLong",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of bytes that can be retrieved in an hour.</p>\n         <p>This field is required only if the value of the Strategy field is\n            <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is\n         not set to <code>BytesPerHour</code> and you set this field.</p>"
           }
         }
       },
@@ -654,10 +654,10 @@
     "com.amazonaws.glacier#DeleteArchiveInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
+        "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -670,10 +670,10 @@
             "smithy.api#required": {}
           }
         },
-        "accountId": {
+        "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -742,18 +742,18 @@
     "com.amazonaws.glacier#DeleteVaultAccessPolicyInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -766,18 +766,18 @@
     "com.amazonaws.glacier#DeleteVaultInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -818,18 +818,18 @@
     "com.amazonaws.glacier#DeleteVaultNotificationsInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -873,6 +873,14 @@
     "com.amazonaws.glacier#DescribeJobInput": {
       "type": "structure",
       "members": {
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "jobId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -885,14 +893,6 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -960,24 +960,6 @@
     "com.amazonaws.glacier#DescribeVaultOutput": {
       "type": "structure",
       "members": {
-        "SizeInBytes": {
-          "target": "com.amazonaws.glacier#long",
-          "traits": {
-            "smithy.api#documentation": "<p>Total size, in bytes, of the archives in the vault as of the last inventory date.\n         This field will return null if an inventory has not yet run on the vault, for example if\n         you just created the vault.</p>"
-          }
-        },
-        "LastInventoryDate": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the last\n         vault inventory.  This value should be a string in the ISO 8601 date format, for example\n            <code>2012-03-20T17:03:43.221Z</code>.</p>"
-          }
-        },
-        "VaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>"
-          }
-        },
         "VaultARN": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -995,6 +977,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The Universal Coordinated Time (UTC) date when the vault was created. This value\n         should be a string in the ISO 8601 date format, for example\n            <code>2012-03-20T17:03:43.221Z</code>.</p>"
           }
+        },
+        "VaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>"
+          }
+        },
+        "LastInventoryDate": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the last\n         vault inventory.  This value should be a string in the ISO 8601 date format, for example\n            <code>2012-03-20T17:03:43.221Z</code>.</p>"
+          }
+        },
+        "SizeInBytes": {
+          "target": "com.amazonaws.glacier#long",
+          "traits": {
+            "smithy.api#documentation": "<p>Total size, in bytes, of the archives in the vault as of the last inventory date.\n         This field will return null if an inventory has not yet run on the vault, for example if\n         you just created the vault.</p>"
+          }
         }
       },
       "traits": {
@@ -1004,16 +1004,16 @@
     "com.amazonaws.glacier#Encryption": {
       "type": "structure",
       "members": {
-        "KMSContext": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional. If the encryption type is <code>aws:kms</code>, you can use this value to\n            specify the encryption context for the job results.</p>"
-          }
-        },
         "EncryptionType": {
           "target": "com.amazonaws.glacier#EncryptionType",
           "traits": {
             "smithy.api#documentation": "<p>The server-side encryption algorithm used when storing job results in Amazon S3, for\n            example <code>AES256</code> or <code>aws:kms</code>.</p>"
+          }
+        },
+        "KMSContext": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional. If the encryption type is <code>aws:kms</code>, you can use this value to\n            specify the encryption context for the job results.</p>"
           }
         },
         "KMSKeyId": {
@@ -1164,10 +1164,17 @@
     "com.amazonaws.glacier#GetJobOutputInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
+        "range": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#documentation": "<p>The range of bytes to retrieve from the output. For example, if you want to download\n         the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation\n         downloads the entire output.</p>\n      \n         <p>If the job output is large, then you can use a range to\n         retrieve a portion of the output. This allows you to download the entire output in smaller\n         chunks of bytes. For example, suppose you have 1 GB of job output you want to download and\n         you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job\n         Output requests. You use the following process to download the job output:</p>\n     \n         <ol>\n            <li>\n               <p>Download a 128 MB chunk of output by specifying the appropriate byte range.\n                  Verify that all 128 MB of data was received.</p>\n            </li>\n            <li>\n               <p>Along with the data, the response includes a SHA256 tree hash of the payload.\n                  You compute the checksum of the payload on the client and compare it with the\n                  checksum you received in the response to ensure you received all the expected\n                  data.</p>\n            </li>\n            <li>\n               <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time\n                  specifying the appropriate byte range.</p>\n            </li>\n            <li>\n               <p>After downloading all the parts of the job output, you have a list of eight\n                  checksum values. Compute the tree hash of these values to find the checksum of the\n                  entire output. Using the <a>DescribeJob</a> API, obtain job information of\n                  the job that provided you the output. The response includes the checksum of the\n                  entire archive stored in Amazon S3 Glacier. You compare this value with the checksum you\n                  computed to ensure you have downloaded the entire archive content with no\n                  errors.</p>\n               <p></p>\n            </li>\n         </ol>",
+            "smithy.api#httpHeader": "Range"
+          }
+        },
+        "jobId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The job ID whose data is downloaded.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1180,19 +1187,12 @@
             "smithy.api#required": {}
           }
         },
-        "jobId": {
+        "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The job ID whose data is downloaded.</p>",
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
-          }
-        },
-        "range": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The range of bytes to retrieve from the output. For example, if you want to download\n         the first 1,048,576 bytes, specify the range as <code>bytes=0-1048575</code>. By default, this operation\n         downloads the entire output.</p>\n      \n         <p>If the job output is large, then you can use a range to\n         retrieve a portion of the output. This allows you to download the entire output in smaller\n         chunks of bytes. For example, suppose you have 1 GB of job output you want to download and\n         you decide to download 128 MB chunks of data at a time, which is a total of eight Get Job\n         Output requests. You use the following process to download the job output:</p>\n     \n         <ol>\n            <li>\n               <p>Download a 128 MB chunk of output by specifying the appropriate byte range.\n                  Verify that all 128 MB of data was received.</p>\n            </li>\n            <li>\n               <p>Along with the data, the response includes a SHA256 tree hash of the payload.\n                  You compute the checksum of the payload on the client and compare it with the\n                  checksum you received in the response to ensure you received all the expected\n                  data.</p>\n            </li>\n            <li>\n               <p>Repeat steps 1 and 2 for all the eight 128 MB chunks of output data, each time\n                  specifying the appropriate byte range.</p>\n            </li>\n            <li>\n               <p>After downloading all the parts of the job output, you have a list of eight\n                  checksum values. Compute the tree hash of these values to find the checksum of the\n                  entire output. Using the <a>DescribeJob</a> API, obtain job information of\n                  the job that provided you the output. The response includes the checksum of the\n                  entire archive stored in Amazon S3 Glacier. You compare this value with the checksum you\n                  computed to ensure you have downloaded the entire archive content with no\n                  errors.</p>\n               <p></p>\n            </li>\n         </ol>",
-            "smithy.api#httpHeader": "Range"
           }
         }
       },
@@ -1203,20 +1203,6 @@
     "com.amazonaws.glacier#GetJobOutputOutput": {
       "type": "structure",
       "members": {
-        "acceptRanges": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates the range units accepted. For more information, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html\">RFC2616</a>. </p>",
-            "smithy.api#httpHeader": "Accept-Ranges"
-          }
-        },
-        "contentType": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Content-Type depends on whether the job output is an archive or a vault\n         inventory. For archive data, the Content-Type is application/octet-stream. For vault\n         inventory, if you requested CSV format when you initiated the job, the Content-Type is\n         text/csv. Otherwise, by default, vault inventory is returned as JSON, and the Content-Type\n         is application/json.</p>",
-            "smithy.api#httpHeader": "Content-Type"
-          }
-        },
         "contentRange": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -1229,6 +1215,27 @@
           "traits": {
             "smithy.api#documentation": "<p>The description of an archive.</p>",
             "smithy.api#httpHeader": "x-amz-archive-description"
+          }
+        },
+        "acceptRanges": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates the range units accepted. For more information, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html\">RFC2616</a>. </p>",
+            "smithy.api#httpHeader": "Accept-Ranges"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.glacier#httpstatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The HTTP response code for a job output request. The value depends on whether a range\n         was specified in the request.</p>",
+            "smithy.api#httpResponseCode": {}
+          }
+        },
+        "contentType": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Content-Type depends on whether the job output is an archive or a vault\n         inventory. For archive data, the Content-Type is application/octet-stream. For vault\n         inventory, if you requested CSV format when you initiated the job, the Content-Type is\n         text/csv. Otherwise, by default, vault inventory is returned as JSON, and the Content-Type\n         is application/json.</p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         },
         "body": {
@@ -1284,18 +1291,18 @@
     "com.amazonaws.glacier#GetVaultAccessPolicyInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1354,18 +1361,18 @@
     "com.amazonaws.glacier#GetVaultLockInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1378,10 +1385,10 @@
     "com.amazonaws.glacier#GetVaultLockOutput": {
       "type": "structure",
       "members": {
-        "State": {
+        "CreationDate": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The state of the vault lock. <code>InProgress</code> or\n         <code>Locked</code>.</p>"
+            "smithy.api#documentation": "<p>The UTC date and time at which the vault lock was put into the\n            <code>InProgress</code> state.</p>"
           }
         },
         "Policy": {
@@ -1396,10 +1403,10 @@
             "smithy.api#documentation": "<p>The UTC date and time at which the lock ID expires. This value can be\n            <code>null</code> if the vault lock is in a <code>Locked</code> state.</p>"
           }
         },
-        "CreationDate": {
+        "State": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The UTC date and time at which the vault lock was put into the\n            <code>InProgress</code> state.</p>"
+            "smithy.api#documentation": "<p>The state of the vault lock. <code>InProgress</code> or\n         <code>Locked</code>.</p>"
           }
         }
       },
@@ -1441,18 +1448,18 @@
     "com.amazonaws.glacier#GetVaultNotificationsInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1586,7 +1593,7 @@
           "sdkId": "Glacier",
           "arnNamespace": "glacier",
           "cloudFormationName": "Glacier",
-          "cloudTrailEventSource": "gaws.glacier.amazonaws.com"
+          "cloudTrailEventSource": "glacier.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "glacier"
@@ -1602,28 +1609,28 @@
     "com.amazonaws.glacier#GlacierJobDescription": {
       "type": "structure",
       "members": {
-        "JobId": {
-          "target": "com.amazonaws.glacier#string",
+        "ArchiveSizeInBytes": {
+          "target": "com.amazonaws.glacier#Size",
           "traits": {
-            "smithy.api#documentation": "<p>An opaque string that identifies an Amazon S3 Glacier job.</p>"
+            "smithy.api#documentation": "<p>For an archive retrieval job, this value is the size in bytes of the archive being\n            requested for download. For an inventory retrieval or select job, this value is\n            null.</p>"
           }
         },
-        "StatusCode": {
-          "target": "com.amazonaws.glacier#StatusCode",
+        "InventorySizeInBytes": {
+          "target": "com.amazonaws.glacier#Size",
           "traits": {
-            "smithy.api#documentation": "<p>The status code can be <code>InProgress</code>, <code>Succeeded</code>, or\n                <code>Failed</code>, and indicates the status of the job.</p>"
+            "smithy.api#documentation": "<p>For an inventory retrieval job, this value is the size in bytes of the inventory\n            requested for download. For an archive retrieval or select job, this value is\n            null.</p>"
           }
         },
-        "JobOutputPath": {
-          "target": "com.amazonaws.glacier#string",
+        "Action": {
+          "target": "com.amazonaws.glacier#ActionCode",
           "traits": {
-            "smithy.api#documentation": "<p>Contains the job output location.</p>"
+            "smithy.api#documentation": "<p>The job type. This value is either <code>ArchiveRetrieval</code>,\n                <code>InventoryRetrieval</code>, or\n            <code>Select</code>. </p>"
           }
         },
-        "JobDescription": {
+        "CreationDate": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The job description provided when initiating the job.</p>"
+            "smithy.api#documentation": "<p>The UTC date when the job was created. This value is a string representation of ISO\n            8601 date format, for example <code>\"2012-03-20T17:03:43.221Z\"</code>.</p>"
           }
         },
         "ArchiveSHA256TreeHash": {
@@ -1632,28 +1639,16 @@
             "smithy.api#documentation": "<p>The SHA256 tree hash of the entire archive for an archive retrieval. For inventory\n            retrieval or select jobs, this field is null.</p>"
           }
         },
-        "RetrievalByteRange": {
+        "JobId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The retrieved byte range for archive retrieval jobs in the form\n                <i>StartByteValue</i>-<i>EndByteValue</i>. If no range\n            was specified in the archive retrieval, then the whole archive is retrieved. In this\n            case, <i>StartByteValue</i> equals 0 and <i>EndByteValue</i>\n            equals the size of the archive minus 1. For inventory retrieval or select jobs, this\n            field is null. </p>"
+            "smithy.api#documentation": "<p>An opaque string that identifies an Amazon S3 Glacier job.</p>"
           }
         },
         "ArchiveId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The archive ID requested for a select job or archive retrieval. Otherwise, this\n            field is null.</p>"
-          }
-        },
-        "Completed": {
-          "target": "com.amazonaws.glacier#boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The job status. When a job is completed, you get the job's output using Get Job\n            Output (GET output).</p>"
-          }
-        },
-        "ArchiveSizeInBytes": {
-          "target": "com.amazonaws.glacier#Size",
-          "traits": {
-            "smithy.api#documentation": "<p>For an archive retrieval job, this value is the size in bytes of the archive being\n            requested for download. For an inventory retrieval or select job, this value is\n            null.</p>"
           }
         },
         "SelectParameters": {
@@ -1668,16 +1663,22 @@
             "smithy.api#documentation": "<p>The UTC time that the job request completed. While the job is in progress, the\n            value is null.</p>"
           }
         },
-        "CreationDate": {
+        "RetrievalByteRange": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The UTC date when the job was created. This value is a string representation of ISO\n            8601 date format, for example <code>\"2012-03-20T17:03:43.221Z\"</code>.</p>"
+            "smithy.api#documentation": "<p>The retrieved byte range for archive retrieval jobs in the form\n                <i>StartByteValue</i>-<i>EndByteValue</i>. If no range\n            was specified in the archive retrieval, then the whole archive is retrieved. In this\n            case, <i>StartByteValue</i> equals 0 and <i>EndByteValue</i>\n            equals the size of the archive minus 1. For inventory retrieval or select jobs, this\n            field is null. </p>"
           }
         },
-        "StatusMessage": {
+        "Completed": {
+          "target": "com.amazonaws.glacier#boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The job status. When a job is completed, you get the job's output using Get Job\n            Output (GET output).</p>"
+          }
+        },
+        "JobDescription": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>A friendly message that describes the job status.</p>"
+            "smithy.api#documentation": "<p>The job description provided when initiating the job.</p>"
           }
         },
         "VaultARN": {
@@ -1686,34 +1687,28 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vault from which an archive retrieval was\n            requested.</p>"
           }
         },
-        "Action": {
-          "target": "com.amazonaws.glacier#ActionCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The job type. This value is either <code>ArchiveRetrieval</code>,\n                <code>InventoryRetrieval</code>, or\n            <code>Select</code>. </p>"
-          }
-        },
         "Tier": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The tier to use for a select or an archive retrieval. Valid values are\n                <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>.\n                <code>Standard</code> is the default.</p>"
           }
         },
-        "InventorySizeInBytes": {
-          "target": "com.amazonaws.glacier#Size",
+        "StatusCode": {
+          "target": "com.amazonaws.glacier#StatusCode",
           "traits": {
-            "smithy.api#documentation": "<p>For an inventory retrieval job, this value is the size in bytes of the inventory\n            requested for download. For an archive retrieval or select job, this value is\n            null.</p>"
+            "smithy.api#documentation": "<p>The status code can be <code>InProgress</code>, <code>Succeeded</code>, or\n                <code>Failed</code>, and indicates the status of the job.</p>"
           }
         },
-        "InventoryRetrievalParameters": {
-          "target": "com.amazonaws.glacier#InventoryRetrievalJobDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>Parameters used for range inventory retrieval.</p>"
-          }
-        },
-        "SHA256TreeHash": {
+        "JobOutputPath": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>For an archive retrieval job, this value is the checksum of the archive. Otherwise,\n            this value is null.</p>\n        <p>The SHA256 tree hash value for the requested range of an archive. If the <b>InitiateJob</b> request for an archive specified a tree-hash\n            aligned range, then this field returns a value.</p>\n        <p>If the whole archive is retrieved, this value is the same as the\n            ArchiveSHA256TreeHash value.</p>\n        <p>This field is null for the following:</p>\n        <ul>\n            <li>\n                <p>Archive retrieval jobs that specify a range that is not tree-hash\n                    aligned</p>\n            </li>\n         </ul>\n        <ul>\n            <li>\n                <p>Archival jobs that specify a range that is equal to the whole archive, when\n                    the job status is <code>InProgress</code>\n               </p>\n            </li>\n         </ul>\n        <ul>\n            <li>\n                <p>Inventory jobs</p>\n            </li>\n            <li>\n                <p>Select jobs</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Contains the job output location.</p>"
+          }
+        },
+        "StatusMessage": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>A friendly message that describes the job status.</p>"
           }
         },
         "OutputLocation": {
@@ -1726,6 +1721,18 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>An Amazon SNS topic that receives notification.</p>"
+          }
+        },
+        "SHA256TreeHash": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>For an archive retrieval job, this value is the checksum of the archive. Otherwise,\n            this value is null.</p>\n        <p>The SHA256 tree hash value for the requested range of an archive. If the <b>InitiateJob</b> request for an archive specified a tree-hash\n            aligned range, then this field returns a value.</p>\n        <p>If the whole archive is retrieved, this value is the same as the\n            ArchiveSHA256TreeHash value.</p>\n        <p>This field is null for the following:</p>\n        <ul>\n            <li>\n                <p>Archive retrieval jobs that specify a range that is not tree-hash\n                    aligned</p>\n            </li>\n         </ul>\n        <ul>\n            <li>\n                <p>Archival jobs that specify a range that is equal to the whole archive, when\n                    the job status is <code>InProgress</code>\n               </p>\n            </li>\n         </ul>\n        <ul>\n            <li>\n                <p>Inventory jobs</p>\n            </li>\n            <li>\n                <p>Select jobs</p>\n            </li>\n         </ul>"
+          }
+        },
+        "InventoryRetrievalParameters": {
+          "target": "com.amazonaws.glacier#InventoryRetrievalJobDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Parameters used for range inventory retrieval.</p>"
           }
         }
       },
@@ -1756,10 +1763,11 @@
     "com.amazonaws.glacier#Grantee": {
       "type": "structure",
       "members": {
-        "ID": {
-          "target": "com.amazonaws.glacier#string",
+        "Type": {
+          "target": "com.amazonaws.glacier#Type",
           "traits": {
-            "smithy.api#documentation": "<p>The canonical user ID of the grantee.</p>"
+            "smithy.api#documentation": "<p>Type of grantee</p>",
+            "smithy.api#required": {}
           }
         },
         "DisplayName": {
@@ -1768,11 +1776,10 @@
             "smithy.api#documentation": "<p>Screen name of the grantee.</p>"
           }
         },
-        "Type": {
-          "target": "com.amazonaws.glacier#Type",
+        "ID": {
+          "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>Type of grantee</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The canonical user ID of the grantee.</p>"
           }
         },
         "URI": {
@@ -1832,12 +1839,11 @@
     "com.amazonaws.glacier#InitiateJobInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
+        "jobParameters": {
+          "target": "com.amazonaws.glacier#JobParameters",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Provides options for specifying job information.</p>",
+            "smithy.api#httpPayload": {}
           }
         },
         "accountId": {
@@ -1848,11 +1854,12 @@
             "smithy.api#required": {}
           }
         },
-        "jobParameters": {
-          "target": "com.amazonaws.glacier#JobParameters",
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>Provides options for specifying job information.</p>",
-            "smithy.api#httpPayload": {}
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       },
@@ -1863,18 +1870,18 @@
     "com.amazonaws.glacier#InitiateJobOutput": {
       "type": "structure",
       "members": {
-        "location": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The relative URI path of the job.</p>",
-            "smithy.api#httpHeader": "Location"
-          }
-        },
         "jobId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the job.</p>",
             "smithy.api#httpHeader": "x-amz-job-id"
+          }
+        },
+        "location": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The relative URI path of the job.</p>",
+            "smithy.api#httpHeader": "Location"
           }
         },
         "jobOutputPath": {
@@ -1923,21 +1930,6 @@
     "com.amazonaws.glacier#InitiateMultipartUploadInput": {
       "type": "structure",
       "members": {
-        "partSize": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The size of each part except the last, in bytes. The last part can be smaller than\n         this part size.</p>",
-            "smithy.api#httpHeader": "x-amz-part-size"
-          }
-        },
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "archiveDescription": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -1952,6 +1944,21 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
+        },
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "partSize": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The size of each part except the last, in bytes. The last part can be smaller than\n         this part size.</p>",
+            "smithy.api#httpHeader": "x-amz-part-size"
+          }
         }
       },
       "traits": {
@@ -1961,18 +1968,18 @@
     "com.amazonaws.glacier#InitiateMultipartUploadOutput": {
       "type": "structure",
       "members": {
-        "location": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The relative URI path of the multipart upload ID Amazon S3 Glacier created.</p>",
-            "smithy.api#httpHeader": "Location"
-          }
-        },
         "uploadId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the multipart upload. This value is also included as part of the\n         location.</p>",
             "smithy.api#httpHeader": "x-amz-multipart-upload-id"
+          }
+        },
+        "location": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The relative URI path of the multipart upload ID Amazon S3 Glacier created.</p>",
+            "smithy.api#httpHeader": "Location"
           }
         }
       },
@@ -2014,14 +2021,6 @@
     "com.amazonaws.glacier#InitiateVaultLockInput": {
       "type": "structure",
       "members": {
-        "vaultName": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "policy": {
           "target": "com.amazonaws.glacier#VaultLockPolicy",
           "traits": {
@@ -2033,6 +2032,14 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS\n         account ID associated with the credentials used to sign the request. You can either specify\n         an AWS account ID or optionally a single '<code>-</code>' (hyphen), in which case Amazon\n         Glacier uses the AWS account ID associated with the credentials used to sign the request.\n         If you specify your account ID, do not include any hyphens ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "vaultName": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -2093,16 +2100,16 @@
     "com.amazonaws.glacier#InvalidParameterValueException": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Returned if a parameter of the request is incorrectly specified.</p>"
-          }
-        },
         "type": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>Client</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Returned if a parameter of the request is incorrectly specified.</p>"
           }
         },
         "code": {
@@ -2121,18 +2128,6 @@
     "com.amazonaws.glacier#InventoryRetrievalJobDescription": {
       "type": "structure",
       "members": {
-        "Format": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault\n            inventory. Valid values are <code>CSV</code> and <code>JSON</code>.</p>"
-          }
-        },
-        "Limit": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of inventory items returned per vault inventory retrieval\n            request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. </p>"
-          }
-        },
         "Marker": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -2150,6 +2145,18 @@
           "traits": {
             "smithy.api#documentation": "<p>The end of the date range in UTC for vault inventory retrieval that includes\n            archives created before this date. This value should be a string in the ISO 8601 date\n            format, for example <code>2013-03-20T17:03:43Z</code>.</p>"
           }
+        },
+        "Limit": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of inventory items returned per vault inventory retrieval\n            request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. </p>"
+          }
+        },
+        "Format": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault\n            inventory. Valid values are <code>CSV</code> and <code>JSON</code>.</p>"
+          }
         }
       },
       "traits": {
@@ -2159,6 +2166,18 @@
     "com.amazonaws.glacier#InventoryRetrievalJobInput": {
       "type": "structure",
       "members": {
+        "Marker": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the vault inventory\n         retrieval results. You use the marker in a new <b>InitiateJob</b>\n         request to obtain additional inventory items. If there are no more inventory items, this\n         value is <code>null</code>.</p>"
+          }
+        },
+        "Limit": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the maximum number of inventory items returned per vault inventory\n         retrieval request. Valid values are greater than or equal to 1.</p>"
+          }
+        },
         "EndDate": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -2169,18 +2188,6 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The start of the date range in UTC for vault inventory retrieval that includes\n         archives created on or after this date. This value should be a string in the ISO 8601 date\n         format, for example <code>2013-03-20T17:03:43Z</code>.</p>"
-          }
-        },
-        "Limit": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the maximum number of inventory items returned per vault inventory\n         retrieval request. Valid values are greater than or equal to 1.</p>"
-          }
-        },
-        "Marker": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the vault inventory\n         retrieval results. You use the marker in a new <b>InitiateJob</b>\n         request to obtain additional inventory items. If there are no more inventory items, this\n         value is <code>null</code>.</p>"
           }
         }
       },
@@ -2197,10 +2204,22 @@
     "com.amazonaws.glacier#JobParameters": {
       "type": "structure",
       "members": {
-        "RetrievalByteRange": {
+        "Tier": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The byte range to retrieve for an archive retrieval. in the form\n            \"<i>StartByteValue</i>-<i>EndByteValue</i>\" If not\n         specified, the whole archive is retrieved. If specified, the byte range must be megabyte\n         (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible\n         by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the\n         end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange\n         is not megabyte aligned, this operation returns a 400 response. </p>\n         <p>An error occurs if you specify this field for an inventory retrieval job\n         request.</p>"
+            "smithy.api#documentation": "<p>The tier to use for a select or an archive retrieval job. Valid values are\n            <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>.\n            <code>Standard</code> is the default.</p>"
+          }
+        },
+        "SNSTopic": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is\n         completed and the output is ready for you to download. The specified topic publishes the\n         notification to its subscribers. The SNS topic must exist.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional description for the job. The description must be less than or equal to\n         1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically,\n         ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.</p>"
           }
         },
         "InventoryRetrievalParameters": {
@@ -2215,34 +2234,10 @@
             "smithy.api#documentation": "<p>When initiating a job to retrieve a vault inventory, you can optionally add this\n         parameter to your request to specify the output format. If you are initiating an inventory\n         job and do not specify a Format field, JSON is the default format. Valid values are \"CSV\"\n         and \"JSON\".</p>"
           }
         },
-        "Description": {
+        "RetrievalByteRange": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The optional description for the job. The description must be less than or equal to\n         1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically,\n         ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.</p>"
-          }
-        },
-        "Tier": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The tier to use for a select or an archive retrieval job. Valid values are\n            <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>.\n            <code>Standard</code> is the default.</p>"
-          }
-        },
-        "OutputLocation": {
-          "target": "com.amazonaws.glacier#OutputLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information about the location where the select job results are stored.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The job type. You can initiate a job to perform a select query on an archive, \n         retrieve an archive, or get an inventory of a vault. \n         Valid values are \"select\", \"archive-retrieval\" and \"inventory-retrieval\".</p>"
-          }
-        },
-        "SelectParameters": {
-          "target": "com.amazonaws.glacier#SelectParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains the parameters that define a job.</p>"
+            "smithy.api#documentation": "<p>The byte range to retrieve for an archive retrieval. in the form\n            \"<i>StartByteValue</i>-<i>EndByteValue</i>\" If not\n         specified, the whole archive is retrieved. If specified, the byte range must be megabyte\n         (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible\n         by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the\n         end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange\n         is not megabyte aligned, this operation returns a 400 response. </p>\n         <p>An error occurs if you specify this field for an inventory retrieval job\n         request.</p>"
           }
         },
         "ArchiveId": {
@@ -2251,10 +2246,22 @@
             "smithy.api#documentation": "<p>The ID of the archive that you want to retrieve. This field is required only if\n            <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code>. \n         An error occurs if you specify this\n         request parameter for an inventory retrieval job request. </p>"
           }
         },
-        "SNSTopic": {
+        "OutputLocation": {
+          "target": "com.amazonaws.glacier#OutputLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains information about the location where the select job results are stored.</p>"
+          }
+        },
+        "SelectParameters": {
+          "target": "com.amazonaws.glacier#SelectParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains the parameters that define a job.</p>"
+          }
+        },
+        "Type": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is\n         completed and the output is ready for you to download. The specified topic publishes the\n         notification to its subscribers. The SNS topic must exist.</p>"
+            "smithy.api#documentation": "<p>The job type. You can initiate a job to perform a select query on an archive, \n         retrieve an archive, or get an inventory of a vault. \n         Valid values are \"select\", \"archive-retrieval\" and \"inventory-retrieval\".</p>"
           }
         }
       },
@@ -2265,12 +2272,6 @@
     "com.amazonaws.glacier#LimitExceededException": {
       "type": "structure",
       "members": {
-        "type": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Client</p>"
-          }
-        },
         "code": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -2281,6 +2282,12 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>Returned if the request results in a vault limit or tags limit being exceeded.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Client</p>"
           }
         }
       },
@@ -2324,11 +2331,12 @@
     "com.amazonaws.glacier#ListJobsInput": {
       "type": "structure",
       "members": {
-        "completed": {
+        "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The state of the jobs to return. You can specify <code>true</code> or\n            <code>false</code>.</p>",
-            "smithy.api#httpQuery": "completed"
+            "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "accountId": {
@@ -2346,12 +2354,11 @@
             "smithy.api#httpQuery": "marker"
           }
         },
-        "vaultName": {
+        "completed": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the vault.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The state of the jobs to return. You can specify <code>true</code> or\n            <code>false</code>.</p>",
+            "smithy.api#httpQuery": "completed"
           }
         },
         "statuscode": {
@@ -2427,12 +2434,11 @@
     "com.amazonaws.glacier#ListMultipartUploadsInput": {
       "type": "structure",
       "members": {
-        "accountId": {
+        "limit": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies the maximum number of uploads returned in the response body. If this value\n         is not specified, the List Uploads operation returns up to 50 uploads.</p>",
+            "smithy.api#httpQuery": "limit"
           }
         },
         "vaultName": {
@@ -2443,11 +2449,12 @@
             "smithy.api#required": {}
           }
         },
-        "limit": {
+        "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the maximum number of uploads returned in the response body. If this value\n         is not specified, the List Uploads operation returns up to 50 uploads.</p>",
-            "smithy.api#httpQuery": "limit"
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "marker": {
@@ -2465,16 +2472,16 @@
     "com.amazonaws.glacier#ListMultipartUploadsOutput": {
       "type": "structure",
       "members": {
-        "Marker": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the results. You use\n         the marker in a new List Multipart Uploads request to obtain more uploads in the list. If\n         there are no more uploads, this value is <code>null</code>.</p>"
-          }
-        },
         "UploadsList": {
           "target": "com.amazonaws.glacier#UploadsList",
           "traits": {
             "smithy.api#documentation": "<p>A list of in-progress multipart uploads.</p>"
+          }
+        },
+        "Marker": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the results. You use\n         the marker in a new List Multipart Uploads request to obtain more uploads in the list. If\n         there are no more uploads, this value is <code>null</code>.</p>"
           }
         }
       },
@@ -2516,21 +2523,6 @@
     "com.amazonaws.glacier#ListPartsInput": {
       "type": "structure",
       "members": {
-        "marker": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>An opaque string used for pagination. This value specifies the part at which the\n         listing of parts should begin. Get the marker value from the response of a previous List\n         Parts response. You need only include the marker if you are continuing the pagination of\n         results started in a previous List Parts request.</p>",
-            "smithy.api#httpQuery": "marker"
-          }
-        },
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "uploadId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -2553,6 +2545,21 @@
             "smithy.api#documentation": "<p>The maximum number of parts to be returned. The default limit is 50. The number of\n         parts returned might be fewer than the specified limit, but the number of returned parts\n         never exceeds the limit.</p>",
             "smithy.api#httpQuery": "limit"
           }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "marker": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>An opaque string used for pagination. This value specifies the part at which the\n         listing of parts should begin. Get the marker value from the response of a previous List\n         Parts response. You need only include the marker if you are continuing the pagination of\n         results started in a previous List Parts request.</p>",
+            "smithy.api#httpQuery": "marker"
+          }
         }
       },
       "traits": {
@@ -2562,10 +2569,28 @@
     "com.amazonaws.glacier#ListPartsOutput": {
       "type": "structure",
       "members": {
+        "CreationDate": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The UTC time at which the multipart upload was initiated.</p>"
+          }
+        },
         "VaultARN": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vault to which the multipart upload was\n         initiated.</p>"
+          }
+        },
+        "Marker": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the results. You use\n         the marker in a new List Parts request to obtain more jobs in the list. If there are no\n         more parts, this value is <code>null</code>.</p>"
+          }
+        },
+        "Parts": {
+          "target": "com.amazonaws.glacier#PartList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the part sizes of the multipart upload. Each object in the array contains a\n         <code>RangeBytes</code> and <code>sha256-tree-hash</code> name/value\n         pair.</p>"
           }
         },
         "ArchiveDescription": {
@@ -2580,28 +2605,10 @@
             "smithy.api#documentation": "<p>The ID of the upload to which the parts are associated.</p>"
           }
         },
-        "Marker": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>An opaque string that represents where to continue pagination of the results. You use\n         the marker in a new List Parts request to obtain more jobs in the list. If there are no\n         more parts, this value is <code>null</code>.</p>"
-          }
-        },
-        "CreationDate": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The UTC time at which the multipart upload was initiated.</p>"
-          }
-        },
         "PartSizeInBytes": {
           "target": "com.amazonaws.glacier#long",
           "traits": {
             "smithy.api#documentation": "<p>The part size in bytes. This is the same value that you specified in the Initiate\n         Multipart Upload request.</p>"
-          }
-        },
-        "Parts": {
-          "target": "com.amazonaws.glacier#PartList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the part sizes of the multipart upload. Each object in the array contains a\n         <code>RangeBytes</code> and <code>sha256-tree-hash</code> name/value\n         pair.</p>"
           }
         }
       },
@@ -2695,18 +2702,18 @@
     "com.amazonaws.glacier#ListTagsForVaultInput": {
       "type": "structure",
       "members": {
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the vault.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -2814,16 +2821,16 @@
     "com.amazonaws.glacier#MissingParameterValueException": {
       "type": "structure",
       "members": {
-        "code": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>400 Bad Request</p>"
-          }
-        },
         "type": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>Client.</p>"
+          }
+        },
+        "code": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>400 Bad Request</p>"
           }
         },
         "message": {
@@ -2935,16 +2942,16 @@
     "com.amazonaws.glacier#PolicyEnforcedException": {
       "type": "structure",
       "members": {
-        "type": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Client</p>"
-          }
-        },
         "message": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>InitiateJob request denied by current data retrieval policy.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Client</p>"
           }
         },
         "code": {
@@ -2963,12 +2970,6 @@
     "com.amazonaws.glacier#ProvisionedCapacityDescription": {
       "type": "structure",
       "members": {
-        "ExpirationDate": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).</p>"
-          }
-        },
         "StartDate": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -2979,6 +2980,12 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The ID that identifies the provisioned capacity unit.</p>"
+          }
+        },
+        "ExpirationDate": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).</p>"
           }
         }
       },
@@ -3094,6 +3101,14 @@
     "com.amazonaws.glacier#RemoveTagsFromVaultInput": {
       "type": "structure",
       "members": {
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "vaultName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -3107,14 +3122,6 @@
           "traits": {
             "smithy.api#documentation": "<p>A list of tag keys. Each corresponding tag is removed from the vault.</p>"
           }
-        },
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
         }
       },
       "traits": {
@@ -3124,10 +3131,10 @@
     "com.amazonaws.glacier#RequestTimeoutException": {
       "type": "structure",
       "members": {
-        "type": {
+        "message": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>Client</p>"
+            "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the\n         upload.</p>"
           }
         },
         "code": {
@@ -3136,10 +3143,10 @@
             "smithy.api#documentation": "<p>408 Request Timeout</p>"
           }
         },
-        "message": {
+        "type": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the\n         upload.</p>"
+            "smithy.api#documentation": "<p>Client</p>"
           }
         }
       },
@@ -3158,16 +3165,16 @@
             "smithy.api#documentation": "<p>404 Not Found</p>"
           }
         },
-        "type": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Client</p>"
-          }
-        },
         "message": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't\n         exist.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Client</p>"
           }
         }
       },
@@ -3180,6 +3187,30 @@
     "com.amazonaws.glacier#S3Location": {
       "type": "structure",
       "members": {
+        "Prefix": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The prefix that is prepended to the results for this request.</p>"
+          }
+        },
+        "Tagging": {
+          "target": "com.amazonaws.glacier#hashmap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag-set that is applied to the job results.</p>"
+          }
+        },
+        "Encryption": {
+          "target": "com.amazonaws.glacier#Encryption",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains information about the encryption used to store the job results in Amazon S3.</p>"
+          }
+        },
+        "UserMetadata": {
+          "target": "com.amazonaws.glacier#hashmap",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of metadata to store with the job results in Amazon S3.</p>"
+          }
+        },
         "CannedACL": {
           "target": "com.amazonaws.glacier#CannedACL",
           "traits": {
@@ -3198,34 +3229,10 @@
             "smithy.api#documentation": "<p>A list of grants that control access to the staged results.</p>"
           }
         },
-        "UserMetadata": {
-          "target": "com.amazonaws.glacier#hashmap",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of metadata to store with the job results in Amazon S3.</p>"
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The prefix that is prepended to the results for this request.</p>"
-          }
-        },
         "BucketName": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the job results are stored.</p>"
-          }
-        },
-        "Encryption": {
-          "target": "com.amazonaws.glacier#Encryption",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information about the encryption used to store the job results in Amazon S3.</p>"
-          }
-        },
-        "Tagging": {
-          "target": "com.amazonaws.glacier#hashmap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag-set that is applied to the job results.</p>"
           }
         }
       },
@@ -3236,18 +3243,6 @@
     "com.amazonaws.glacier#SelectParameters": {
       "type": "structure",
       "members": {
-        "ExpressionType": {
-          "target": "com.amazonaws.glacier#ExpressionType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the provided expression, for example <code>SQL</code>.</p>"
-          }
-        },
-        "InputSerialization": {
-          "target": "com.amazonaws.glacier#InputSerialization",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the serialization format of the object.</p>"
-          }
-        },
         "Expression": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
@@ -3259,6 +3254,18 @@
           "traits": {
             "smithy.api#documentation": "<p>Describes how the results of the select job are serialized.</p>"
           }
+        },
+        "InputSerialization": {
+          "target": "com.amazonaws.glacier#InputSerialization",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the serialization format of the object.</p>"
+          }
+        },
+        "ExpressionType": {
+          "target": "com.amazonaws.glacier#ExpressionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the provided expression, for example <code>SQL</code>.</p>"
+          }
         }
       },
       "traits": {
@@ -3268,16 +3275,16 @@
     "com.amazonaws.glacier#ServiceUnavailableException": {
       "type": "structure",
       "members": {
-        "code": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>500 Internal Server Error</p>"
-          }
-        },
         "type": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>Server</p>"
+          }
+        },
+        "code": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>500 Internal Server Error</p>"
           }
         },
         "message": {
@@ -3321,18 +3328,18 @@
     "com.amazonaws.glacier#SetDataRetrievalPolicyInput": {
       "type": "structure",
       "members": {
-        "Policy": {
-          "target": "com.amazonaws.glacier#DataRetrievalPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The data retrieval policy in JSON format.</p>"
-          }
-        },
         "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID. This value must match the AWS\n         account ID associated with the credentials used to sign the request. You can either specify\n         an AWS account ID or optionally a single '<code>-</code>' (hyphen), in which case Amazon\n         Glacier uses the AWS account ID associated with the credentials used to sign the request.\n         If you specify your account ID, do not include any hyphens ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "Policy": {
+          "target": "com.amazonaws.glacier#DataRetrievalPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The data retrieval policy in JSON format.</p>"
           }
         }
       },
@@ -3371,19 +3378,19 @@
     "com.amazonaws.glacier#SetVaultAccessPolicyInput": {
       "type": "structure",
       "members": {
-        "policy": {
-          "target": "com.amazonaws.glacier#VaultAccessPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The vault access policy as a JSON string.</p>",
-            "smithy.api#httpPayload": {}
-          }
-        },
         "accountId": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "policy": {
+          "target": "com.amazonaws.glacier#VaultAccessPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The vault access policy as a JSON string.</p>",
+            "smithy.api#httpPayload": {}
           }
         },
         "vaultName": {
@@ -3585,11 +3592,11 @@
     "com.amazonaws.glacier#UploadArchiveInput": {
       "type": "structure",
       "members": {
-        "body": {
-          "target": "com.amazonaws.glacier#Stream",
+        "checksum": {
+          "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The data to upload.</p>",
-            "smithy.api#httpPayload": {}
+            "smithy.api#documentation": "<p>The SHA256 tree hash of the data being uploaded.</p>",
+            "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
           }
         },
         "vaultName": {
@@ -3600,11 +3607,18 @@
             "smithy.api#required": {}
           }
         },
-        "checksum": {
+        "archiveDescription": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The SHA256 tree hash of the data being uploaded.</p>",
-            "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
+            "smithy.api#documentation": "<p>The optional description of the archive you are uploading.</p>",
+            "smithy.api#httpHeader": "x-amz-archive-description"
+          }
+        },
+        "body": {
+          "target": "com.amazonaws.glacier#Stream",
+          "traits": {
+            "smithy.api#documentation": "<p>The data to upload.</p>",
+            "smithy.api#httpPayload": {}
           }
         },
         "accountId": {
@@ -3613,13 +3627,6 @@
             "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
-          }
-        },
-        "archiveDescription": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The optional description of the archive you are uploading.</p>",
-            "smithy.api#httpHeader": "x-amz-archive-description"
           }
         }
       },
@@ -3630,10 +3637,10 @@
     "com.amazonaws.glacier#UploadListElement": {
       "type": "structure",
       "members": {
-        "PartSizeInBytes": {
-          "target": "com.amazonaws.glacier#long",
+        "VaultARN": {
+          "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The part size, in bytes, specified in the Initiate Multipart Upload request. This is\n         the size of all the parts in the upload except the last part, which may be smaller than\n         this size.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vault that contains the archive.</p>"
           }
         },
         "MultipartUploadId": {
@@ -3642,22 +3649,22 @@
             "smithy.api#documentation": "<p>The ID of a multipart upload.</p>"
           }
         },
-        "VaultARN": {
+        "CreationDate": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vault that contains the archive.</p>"
+            "smithy.api#documentation": "<p>The UTC time at which the multipart upload was initiated.</p>"
+          }
+        },
+        "PartSizeInBytes": {
+          "target": "com.amazonaws.glacier#long",
+          "traits": {
+            "smithy.api#documentation": "<p>The part size, in bytes, specified in the Initiate Multipart Upload request. This is\n         the size of all the parts in the upload except the last part, which may be smaller than\n         this size.</p>"
           }
         },
         "ArchiveDescription": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The description of the archive that was specified in the Initiate Multipart Upload\n         request.</p>"
-          }
-        },
-        "CreationDate": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The UTC time at which the multipart upload was initiated.</p>"
           }
         }
       },
@@ -3702,11 +3709,33 @@
     "com.amazonaws.glacier#UploadMultipartPartInput": {
       "type": "structure",
       "members": {
+        "accountId": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "checksum": {
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The SHA256 tree hash of the data being uploaded.</p>",
             "smithy.api#httpHeader": "x-amz-sha256-tree-hash"
+          }
+        },
+        "range": {
+          "target": "com.amazonaws.glacier#string",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the range of bytes in the assembled archive that will be uploaded in this\n         part. Amazon S3 Glacier uses this information to assemble the archive in the proper sequence.\n         The format of this header follows RFC 2616. An example header is Content-Range:bytes\n         0-4194303/*.</p>",
+            "smithy.api#httpHeader": "Content-Range"
+          }
+        },
+        "body": {
+          "target": "com.amazonaws.glacier#Stream",
+          "traits": {
+            "smithy.api#documentation": "<p>The data to upload.</p>",
+            "smithy.api#httpPayload": {}
           }
         },
         "vaultName": {
@@ -3721,28 +3750,6 @@
           "target": "com.amazonaws.glacier#string",
           "traits": {
             "smithy.api#documentation": "<p>The upload ID of the multipart upload.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "body": {
-          "target": "com.amazonaws.glacier#Stream",
-          "traits": {
-            "smithy.api#documentation": "<p>The data to upload.</p>",
-            "smithy.api#httpPayload": {}
-          }
-        },
-        "range": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the range of bytes in the assembled archive that will be uploaded in this\n         part. Amazon S3 Glacier uses this information to assemble the archive in the proper sequence.\n         The format of this header follows RFC 2616. An example header is Content-Range:bytes\n         0-4194303/*.</p>",
-            "smithy.api#httpHeader": "Content-Range"
-          }
-        },
-        "accountId": {
-          "target": "com.amazonaws.glacier#string",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>AccountId</code> value is the AWS account ID of the account that owns the\n         vault. You can either specify an AWS account ID or optionally a single '<code>-</code>'\n         (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the\n         credentials used to sign the request. If you use an account ID, do not include any hyphens\n         ('-') in the ID. </p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -3838,6 +3845,9 @@
       "value": {
         "target": "com.amazonaws.glacier#string"
       }
+    },
+    "com.amazonaws.glacier#httpstatus": {
+      "type": "integer"
     },
     "com.amazonaws.glacier#long": {
       "type": "long"

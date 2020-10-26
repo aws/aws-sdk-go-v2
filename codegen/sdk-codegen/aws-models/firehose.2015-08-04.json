@@ -87,10 +87,10 @@
     "com.amazonaws.firehose#CloudWatchLoggingOptions": {
       "type": "structure",
       "members": {
-        "LogStreamName": {
-          "target": "com.amazonaws.firehose#LogStreamName",
+        "LogGroupName": {
+          "target": "com.amazonaws.firehose#LogGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The CloudWatch log stream name for logging. This value is required if CloudWatch\n         logging is enabled.</p>"
+            "smithy.api#documentation": "<p>The CloudWatch group name for logging. This value is required if CloudWatch logging\n         is enabled.</p>"
           }
         },
         "Enabled": {
@@ -99,10 +99,10 @@
             "smithy.api#documentation": "<p>Enables or disables CloudWatch logging.</p>"
           }
         },
-        "LogGroupName": {
-          "target": "com.amazonaws.firehose#LogGroupName",
+        "LogStreamName": {
+          "target": "com.amazonaws.firehose#LogStreamName",
           "traits": {
-            "smithy.api#documentation": "<p>The CloudWatch group name for logging. This value is required if CloudWatch logging\n         is enabled.</p>"
+            "smithy.api#documentation": "<p>The CloudWatch log stream name for logging. This value is required if CloudWatch\n         logging is enabled.</p>"
           }
         }
       },
@@ -189,17 +189,17 @@
     "com.amazonaws.firehose#CopyCommand": {
       "type": "structure",
       "members": {
+        "CopyOptions": {
+          "target": "com.amazonaws.firehose#CopyOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional parameters to use with the Amazon Redshift <code>COPY</code> command. For\n         more information, see the \"Optional Parameters\" section of <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">Amazon Redshift COPY command</a>. Some possible\n         examples that would apply to Kinesis Data Firehose are as follows:</p>\n         <p>\n            <code>delimiter '\\t' lzop;</code> - fields are delimited with \"\\t\" (TAB character) and\n         compressed using lzop.</p>\n         <p>\n            <code>delimiter '|'</code> - fields are delimited with \"|\" (this is the default\n         delimiter).</p>\n         <p>\n            <code>delimiter '|' escape</code> - the delimiter should be escaped.</p>\n         <p>\n            <code>fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6'</code> -\n         fields are fixed width in the source, with each width specified after every column in the\n         table.</p>\n         <p>\n            <code>JSON 's3://mybucket/jsonpaths.txt'</code> - data is in JSON format, and the path\n         specified is the format of the data.</p>\n         <p>For more examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html\">Amazon Redshift COPY command\n            examples</a>.</p>"
+          }
+        },
         "DataTableName": {
           "target": "com.amazonaws.firehose#DataTableName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the target table. The table must already exist in the database.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "CopyOptions": {
-          "target": "com.amazonaws.firehose#CopyOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional parameters to use with the Amazon Redshift <code>COPY</code> command. For\n         more information, see the \"Optional Parameters\" section of <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">Amazon Redshift COPY command</a>. Some possible\n         examples that would apply to Kinesis Data Firehose are as follows:</p>\n         <p>\n            <code>delimiter '\\t' lzop;</code> - fields are delimited with \"\\t\" (TAB character) and\n         compressed using lzop.</p>\n         <p>\n            <code>delimiter '|'</code> - fields are delimited with \"|\" (this is the default\n         delimiter).</p>\n         <p>\n            <code>delimiter '|' escape</code> - the delimiter should be escaped.</p>\n         <p>\n            <code>fixedwidth 'venueid:3,venuename:25,venuecity:12,venuestate:2,venueseats:6'</code> -\n         fields are fixed width in the source, with each width specified after every column in the\n         table.</p>\n         <p>\n            <code>JSON 's3://mybucket/jsonpaths.txt'</code> - data is in JSON format, and the path\n         specified is the format of the data.</p>\n         <p>For more examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html\">Amazon Redshift COPY command\n            examples</a>.</p>"
           }
         },
         "DataTableColumns": {
@@ -252,12 +252,6 @@
     "com.amazonaws.firehose#CreateDeliveryStreamInput": {
       "type": "structure",
       "members": {
-        "RedshiftDestinationConfiguration": {
-          "target": "com.amazonaws.firehose#RedshiftDestinationConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination in Amazon Redshift. You can specify only one destination.</p>"
-          }
-        },
         "S3DestinationConfiguration": {
           "target": "com.amazonaws.firehose#S3DestinationConfiguration",
           "traits": {
@@ -265,16 +259,10 @@
             "smithy.api#documentation": "<p>[Deprecated]\n         The destination in Amazon S3. You can specify only one destination.</p>"
           }
         },
-        "DeliveryStreamType": {
-          "target": "com.amazonaws.firehose#DeliveryStreamType",
+        "DeliveryStreamEncryptionConfigurationInput": {
+          "target": "com.amazonaws.firehose#DeliveryStreamEncryptionConfigurationInput",
           "traits": {
-            "smithy.api#documentation": "<p>The delivery stream type. This parameter can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "SplunkDestinationConfiguration": {
-          "target": "com.amazonaws.firehose#SplunkDestinationConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination in Splunk. You can specify only one destination.</p>"
+            "smithy.api#documentation": "<p>Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for\n         Server-Side Encryption (SSE).</p>"
           }
         },
         "DeliveryStreamName": {
@@ -290,22 +278,22 @@
             "smithy.api#documentation": "<p>When a Kinesis data stream is used as the source for the delivery stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis data stream Amazon\n         Resource Name (ARN) and the role ARN for the source stream.</p>"
           }
         },
-        "ElasticsearchDestinationConfiguration": {
-          "target": "com.amazonaws.firehose#ElasticsearchDestinationConfiguration",
+        "ExtendedS3DestinationConfiguration": {
+          "target": "com.amazonaws.firehose#ExtendedS3DestinationConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The destination in Amazon ES. You can specify only one destination.</p>"
+            "smithy.api#documentation": "<p>The destination in Amazon S3. You can specify only one destination.</p>"
           }
         },
-        "DeliveryStreamEncryptionConfigurationInput": {
-          "target": "com.amazonaws.firehose#DeliveryStreamEncryptionConfigurationInput",
+        "SplunkDestinationConfiguration": {
+          "target": "com.amazonaws.firehose#SplunkDestinationConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for\n         Server-Side Encryption (SSE).</p>"
+            "smithy.api#documentation": "<p>The destination in Splunk. You can specify only one destination.</p>"
           }
         },
-        "HttpEndpointDestinationConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointDestinationConfiguration",
+        "DeliveryStreamType": {
+          "target": "com.amazonaws.firehose#DeliveryStreamType",
           "traits": {
-            "smithy.api#documentation": "<p>Enables configuring Kinesis Firehose to deliver data to any HTTP endpoint destination.\n         You can specify only one destination.</p>"
+            "smithy.api#documentation": "<p>The delivery stream type. This parameter can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>"
           }
         },
         "Tags": {
@@ -314,10 +302,22 @@
             "smithy.api#documentation": "<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can\n         define and assign to AWS resources. Tags are metadata. For example, you can add friendly\n         names and descriptions or other types of information that can help you distinguish the\n         delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the AWS Billing and Cost Management User\n         Guide.</p>\n\n         <p>You can specify up to 50 tags when creating a delivery stream.</p>"
           }
         },
-        "ExtendedS3DestinationConfiguration": {
-          "target": "com.amazonaws.firehose#ExtendedS3DestinationConfiguration",
+        "HttpEndpointDestinationConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointDestinationConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The destination in Amazon S3. You can specify only one destination.</p>"
+            "smithy.api#documentation": "<p>Enables configuring Kinesis Firehose to deliver data to any HTTP endpoint destination.\n         You can specify only one destination.</p>"
+          }
+        },
+        "RedshiftDestinationConfiguration": {
+          "target": "com.amazonaws.firehose#RedshiftDestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination in Amazon Redshift. You can specify only one destination.</p>"
+          }
+        },
+        "ElasticsearchDestinationConfiguration": {
+          "target": "com.amazonaws.firehose#ElasticsearchDestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination in Amazon ES. You can specify only one destination.</p>"
           }
         }
       }
@@ -345,28 +345,28 @@
     "com.amazonaws.firehose#DataFormatConversionConfiguration": {
       "type": "structure",
       "members": {
-        "OutputFormatConfiguration": {
-          "target": "com.amazonaws.firehose#OutputFormatConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the\n         format of your data to the Parquet or ORC format. This parameter is required if\n            <code>Enabled</code> is set to true.</p>"
-          }
-        },
         "Enabled": {
           "target": "com.amazonaws.firehose#BooleanObject",
           "traits": {
             "smithy.api#documentation": "<p>Defaults to <code>true</code>. Set it to <code>false</code> if you want to disable\n         format conversion while preserving the configuration details.</p>"
           }
         },
-        "InputFormatConfiguration": {
-          "target": "com.amazonaws.firehose#InputFormatConfiguration",
+        "OutputFormatConfiguration": {
+          "target": "com.amazonaws.firehose#OutputFormatConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the\n         format of your data from JSON. This parameter is required if <code>Enabled</code> is set to\n         true.</p>"
+            "smithy.api#documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the\n         format of your data to the Parquet or ORC format. This parameter is required if\n            <code>Enabled</code> is set to true.</p>"
           }
         },
         "SchemaConfiguration": {
           "target": "com.amazonaws.firehose#SchemaConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the AWS Glue Data Catalog table that contains the column information. This\n         parameter is required if <code>Enabled</code> is set to true.</p>"
+          }
+        },
+        "InputFormatConfiguration": {
+          "target": "com.amazonaws.firehose#InputFormatConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the\n         format of your data from JSON. This parameter is required if <code>Enabled</code> is set to\n         true.</p>"
           }
         }
       },
@@ -452,67 +452,6 @@
     "com.amazonaws.firehose#DeliveryStreamDescription": {
       "type": "structure",
       "members": {
-        "DeliveryStreamName": {
-          "target": "com.amazonaws.firehose#DeliveryStreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Destinations": {
-          "target": "com.amazonaws.firehose#DestinationDescriptionList",
-          "traits": {
-            "smithy.api#documentation": "<p>The destinations.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DeliveryStreamARN": {
-          "target": "com.amazonaws.firehose#DeliveryStreamARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DeliveryStreamType": {
-          "target": "com.amazonaws.firehose#DeliveryStreamType",
-          "traits": {
-            "smithy.api#documentation": "<p>The delivery stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
-        "VersionId": {
-          "target": "com.amazonaws.firehose#DeliveryStreamVersionId",
-          "traits": {
-            "smithy.api#documentation": "<p>Each time the destination is updated for a delivery stream, the version ID is\n         changed, and the current version ID is required when updating the destination. This is so\n         that the service knows it is applying the changes to the correct version of the delivery\n         stream.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DeliveryStreamStatus": {
-          "target": "com.amazonaws.firehose#DeliveryStreamStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the delivery stream. If the status of a delivery stream is\n            <code>CREATING_FAILED</code>, this status doesn't change, and you can't invoke\n            <code>CreateDeliveryStream</code> again on it. However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "CreateTimestamp": {
-          "target": "com.amazonaws.firehose#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the delivery stream was created.</p>"
-          }
-        },
-        "HasMoreDestinations": {
-          "target": "com.amazonaws.firehose#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether there are more destinations available to list.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "FailureDescription": {
-          "target": "com.amazonaws.firehose#FailureDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides details in case one of the following operations fails due to an error related\n         to KMS: <a>CreateDeliveryStream</a>, <a>DeleteDeliveryStream</a>,\n            <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>"
-          }
-        },
         "DeliveryStreamEncryptionConfiguration": {
           "target": "com.amazonaws.firehose#DeliveryStreamEncryptionConfiguration",
           "traits": {
@@ -525,10 +464,71 @@
             "smithy.api#documentation": "<p>The date and time that the delivery stream was last updated.</p>"
           }
         },
+        "HasMoreDestinations": {
+          "target": "com.amazonaws.firehose#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether there are more destinations available to list.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DeliveryStreamStatus": {
+          "target": "com.amazonaws.firehose#DeliveryStreamStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the delivery stream. If the status of a delivery stream is\n            <code>CREATING_FAILED</code>, this status doesn't change, and you can't invoke\n            <code>CreateDeliveryStream</code> again on it. However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "FailureDescription": {
+          "target": "com.amazonaws.firehose#FailureDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides details in case one of the following operations fails due to an error related\n         to KMS: <a>CreateDeliveryStream</a>, <a>DeleteDeliveryStream</a>,\n            <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>"
+          }
+        },
+        "DeliveryStreamARN": {
+          "target": "com.amazonaws.firehose#DeliveryStreamARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DeliveryStreamName": {
+          "target": "com.amazonaws.firehose#DeliveryStreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VersionId": {
+          "target": "com.amazonaws.firehose#DeliveryStreamVersionId",
+          "traits": {
+            "smithy.api#documentation": "<p>Each time the destination is updated for a delivery stream, the version ID is\n         changed, and the current version ID is required when updating the destination. This is so\n         that the service knows it is applying the changes to the correct version of the delivery\n         stream.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DeliveryStreamType": {
+          "target": "com.amazonaws.firehose#DeliveryStreamType",
+          "traits": {
+            "smithy.api#documentation": "<p>The delivery stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
         "Source": {
           "target": "com.amazonaws.firehose#SourceDescription",
           "traits": {
             "smithy.api#documentation": "<p>If the <code>DeliveryStreamType</code> parameter is\n            <code>KinesisStreamAsSource</code>, a <a>SourceDescription</a> object\n         describing the source Kinesis data stream.</p>"
+          }
+        },
+        "Destinations": {
+          "target": "com.amazonaws.firehose#DestinationDescriptionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The destinations.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CreateTimestamp": {
+          "target": "com.amazonaws.firehose#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the delivery stream was created.</p>"
           }
         }
       },
@@ -539,28 +539,28 @@
     "com.amazonaws.firehose#DeliveryStreamEncryptionConfiguration": {
       "type": "structure",
       "members": {
-        "FailureDescription": {
-          "target": "com.amazonaws.firehose#FailureDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides details in case one of the following operations fails due to an error related\n         to KMS: <a>CreateDeliveryStream</a>, <a>DeleteDeliveryStream</a>,\n            <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>"
-          }
-        },
         "KeyARN": {
           "target": "com.amazonaws.firehose#AWSKMSKeyARN",
           "traits": {
             "smithy.api#documentation": "<p>If <code>KeyType</code> is <code>CUSTOMER_MANAGED_CMK</code>, this field contains the\n         ARN of the customer managed CMK. If <code>KeyType</code> is <code>AWS_OWNED_CMK</code>,\n            <code>DeliveryStreamEncryptionConfiguration</code> doesn't contain a value for\n            <code>KeyARN</code>.</p>"
           }
         },
-        "KeyType": {
-          "target": "com.amazonaws.firehose#KeyType",
+        "FailureDescription": {
+          "target": "com.amazonaws.firehose#FailureDescription",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates the type of customer master key (CMK) that is used for encryption. The default\n         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>.</p>"
+            "smithy.api#documentation": "<p>Provides details in case one of the following operations fails due to an error related\n         to KMS: <a>CreateDeliveryStream</a>, <a>DeleteDeliveryStream</a>,\n            <a>StartDeliveryStreamEncryption</a>, <a>StopDeliveryStreamEncryption</a>.</p>"
           }
         },
         "Status": {
           "target": "com.amazonaws.firehose#DeliveryStreamEncryptionStatus",
           "traits": {
             "smithy.api#documentation": "<p>This is the server-side encryption (SSE) status for the delivery stream. For a full\n         description of the different values of this status, see <a>StartDeliveryStreamEncryption</a> and <a>StopDeliveryStreamEncryption</a>. If this status is <code>ENABLING_FAILED</code>\n         or <code>DISABLING_FAILED</code>, it is the status of the most recent attempt to enable or\n         disable SSE, respectively.</p>"
+          }
+        },
+        "KeyType": {
+          "target": "com.amazonaws.firehose#KeyType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates the type of customer master key (CMK) that is used for encryption. The default\n         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>.</p>"
           }
         }
       },
@@ -571,17 +571,17 @@
     "com.amazonaws.firehose#DeliveryStreamEncryptionConfigurationInput": {
       "type": "structure",
       "members": {
+        "KeyARN": {
+          "target": "com.amazonaws.firehose#AWSKMSKeyARN",
+          "traits": {
+            "smithy.api#documentation": "<p>If you set <code>KeyType</code> to <code>CUSTOMER_MANAGED_CMK</code>, you must specify\n         the Amazon Resource Name (ARN) of the CMK. If you set <code>KeyType</code> to\n            <code>AWS_OWNED_CMK</code>, Kinesis Data Firehose uses a service-account CMK.</p>"
+          }
+        },
         "KeyType": {
           "target": "com.amazonaws.firehose#KeyType",
           "traits": {
             "smithy.api#documentation": "<p>Indicates the type of customer master key (CMK) to use for encryption. The default\n         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with\n            <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the\n         Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to\n         use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose\n         manages that grant. </p>\n         <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a\n         delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose\n         schedules the grant it had on the old CMK for retirement.</p>\n         <p>You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If\n         a <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a>\n         operation exceeds this limit, Kinesis Data Firehose throws a\n            <code>LimitExceededException</code>. </p>\n         <important>\n            <p>To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't\n            support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About Symmetric and Asymmetric CMKs</a> in the AWS Key Management Service\n            developer guide.</p>\n         </important>",
             "smithy.api#required": {}
-          }
-        },
-        "KeyARN": {
-          "target": "com.amazonaws.firehose#AWSKMSKeyARN",
-          "traits": {
-            "smithy.api#documentation": "<p>If you set <code>KeyType</code> to <code>CUSTOMER_MANAGED_CMK</code>, you must specify\n         the Amazon Resource Name (ARN) of the CMK. If you set <code>KeyType</code> to\n            <code>AWS_OWNED_CMK</code>, Kinesis Data Firehose uses a service-account CMK.</p>"
           }
         }
       },
@@ -779,17 +779,17 @@
             "smithy.api#documentation": "<p>The limit on the number of destinations to return. You can have one destination per\n         delivery stream.</p>"
           }
         },
-        "ExclusiveStartDestinationId": {
-          "target": "com.amazonaws.firehose#DestinationId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the destination to start returning the destination information. Kinesis\n         Data Firehose supports one destination per delivery stream.</p>"
-          }
-        },
         "DeliveryStreamName": {
           "target": "com.amazonaws.firehose#DeliveryStreamName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "ExclusiveStartDestinationId": {
+          "target": "com.amazonaws.firehose#DestinationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the destination to start returning the destination information. Kinesis\n         Data Firehose supports one destination per delivery stream.</p>"
           }
         }
       }
@@ -819,16 +819,16 @@
     "com.amazonaws.firehose#Deserializer": {
       "type": "structure",
       "members": {
-        "HiveJsonSerDe": {
-          "target": "com.amazonaws.firehose#HiveJsonSerDe",
-          "traits": {
-            "smithy.api#documentation": "<p>The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for deserializing\n         data, which means converting it from the JSON format in preparation for serializing it to\n         the Parquet or ORC format. This is one of two deserializers you can choose, depending on\n         which one offers the functionality you need. The other option is the OpenX SerDe.</p>"
-          }
-        },
         "OpenXJsonSerDe": {
           "target": "com.amazonaws.firehose#OpenXJsonSerDe",
           "traits": {
             "smithy.api#documentation": "<p>The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data, which means\n         converting it from the JSON format in preparation for serializing it to the Parquet or ORC\n         format. This is one of two deserializers you can choose, depending on which one offers the\n         functionality you need. The other option is the native Hive / HCatalog JsonSerDe.</p>"
+          }
+        },
+        "HiveJsonSerDe": {
+          "target": "com.amazonaws.firehose#HiveJsonSerDe",
+          "traits": {
+            "smithy.api#documentation": "<p>The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for deserializing\n         data, which means converting it from the JSON format in preparation for serializing it to\n         the Parquet or ORC format. This is one of two deserializers you can choose, depending on\n         which one offers the functionality you need. The other option is the OpenX SerDe.</p>"
           }
         }
       },
@@ -839,31 +839,6 @@
     "com.amazonaws.firehose#DestinationDescription": {
       "type": "structure",
       "members": {
-        "RedshiftDestinationDescription": {
-          "target": "com.amazonaws.firehose#RedshiftDestinationDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination in Amazon Redshift.</p>"
-          }
-        },
-        "DestinationId": {
-          "target": "com.amazonaws.firehose#DestinationId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the destination.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "HttpEndpointDestinationDescription": {
-          "target": "com.amazonaws.firehose#HttpEndpointDestinationDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the specified HTTP endpoint destination.</p>"
-          }
-        },
-        "ElasticsearchDestinationDescription": {
-          "target": "com.amazonaws.firehose#ElasticsearchDestinationDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination in Amazon ES.</p>"
-          }
-        },
         "SplunkDestinationDescription": {
           "target": "com.amazonaws.firehose#SplunkDestinationDescription",
           "traits": {
@@ -874,6 +849,31 @@
           "target": "com.amazonaws.firehose#S3DestinationDescription",
           "traits": {
             "smithy.api#documentation": "<p>[Deprecated] The destination in Amazon S3.</p>"
+          }
+        },
+        "DestinationId": {
+          "target": "com.amazonaws.firehose#DestinationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the destination.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ElasticsearchDestinationDescription": {
+          "target": "com.amazonaws.firehose#ElasticsearchDestinationDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination in Amazon ES.</p>"
+          }
+        },
+        "HttpEndpointDestinationDescription": {
+          "target": "com.amazonaws.firehose#HttpEndpointDestinationDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the specified HTTP endpoint destination.</p>"
+          }
+        },
+        "RedshiftDestinationDescription": {
+          "target": "com.amazonaws.firehose#RedshiftDestinationDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination in Amazon Redshift.</p>"
           }
         },
         "ExtendedS3DestinationDescription": {
@@ -906,16 +906,16 @@
     "com.amazonaws.firehose#ElasticsearchBufferingHints": {
       "type": "structure",
       "members": {
-        "SizeInMBs": {
-          "target": "com.amazonaws.firehose#ElasticsearchBufferingSizeInMBs",
-          "traits": {
-            "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
-          }
-        },
         "IntervalInSeconds": {
           "target": "com.amazonaws.firehose#ElasticsearchBufferingIntervalInSeconds",
           "traits": {
             "smithy.api#documentation": "<p>Buffer incoming data for the specified period of time, in seconds, before delivering\n         it to the destination. The default value is 300 (5 minutes).</p>"
+          }
+        },
+        "SizeInMBs": {
+          "target": "com.amazonaws.firehose#ElasticsearchBufferingSizeInMBs",
+          "traits": {
+            "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
           }
         }
       },
@@ -956,17 +956,10 @@
     "com.amazonaws.firehose#ElasticsearchDestinationConfiguration": {
       "type": "structure",
       "members": {
-        "IndexName": {
-          "target": "com.amazonaws.firehose#ElasticsearchIndexName",
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The Elasticsearch index name.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ClusterEndpoint": {
-          "target": "com.amazonaws.firehose#ElasticsearchClusterEndpoint",
-          "traits": {
-            "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Specify either this\n            <code>ClusterEndpoint</code> or the <code>DomainARN</code> field.</p>"
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
           }
         },
         "S3Configuration": {
@@ -976,40 +969,16 @@
             "smithy.api#required": {}
           }
         },
-        "BufferingHints": {
-          "target": "com.amazonaws.firehose#ElasticsearchBufferingHints",
-          "traits": {
-            "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for\n            <code>ElasticsearchBufferingHints</code> are used.</p>"
-          }
-        },
         "VpcConfiguration": {
           "target": "com.amazonaws.firehose#VpcConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
           }
         },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#ElasticsearchRetryOptions",
+        "IndexName": {
+          "target": "com.amazonaws.firehose#ElasticsearchIndexName",
           "traits": {
-            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon ES. The default value is 300 (5 minutes).</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "TypeName": {
-          "target": "com.amazonaws.firehose#ElasticsearchTypeName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during run time.</p>\n\n         <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>"
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#documentation": "<p>The Elasticsearch index name.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1019,22 +988,53 @@
             "smithy.api#documentation": "<p>The Elasticsearch index rotation period. Index rotation appends a timestamp to the\n            <code>IndexName</code> to facilitate the expiration of old data. For more information,\n         see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the\n            Amazon ES Destination</a>. The default value is <code>OneDay</code>.</p>"
           }
         },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#ElasticsearchRetryOptions",
           "traits": {
-            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>elasticsearch-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>elasticsearch-failed/</code> appended to\n         the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon ES Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the delivery stream. </p>"
+            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon ES. The default value is 300 (5 minutes).</p>"
+          }
+        },
+        "BufferingHints": {
+          "target": "com.amazonaws.firehose#ElasticsearchBufferingHints",
+          "traits": {
+            "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for\n            <code>ElasticsearchBufferingHints</code> are used.</p>"
+          }
+        },
+        "ClusterEndpoint": {
+          "target": "com.amazonaws.firehose#ElasticsearchClusterEndpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Specify either this\n            <code>ClusterEndpoint</code> or the <code>DomainARN</code> field.</p>"
+          }
+        },
+        "TypeName": {
+          "target": "com.amazonaws.firehose#ElasticsearchTypeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during run time.</p>\n\n         <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>"
           }
         },
         "DomainARN": {
           "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>,\n         and <code>DescribeElasticsearchDomainConfig</code> after assuming the role specified in\n            <b>RoleARN</b>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>elasticsearch-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>elasticsearch-failed/</code> appended to\n         the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon ES Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the delivery stream. </p>"
           }
         }
       },
@@ -1045,10 +1045,10 @@
     "com.amazonaws.firehose#ElasticsearchDestinationDescription": {
       "type": "structure",
       "members": {
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+        "IndexRotationPeriod": {
+          "target": "com.amazonaws.firehose#ElasticsearchIndexRotationPeriod",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options.</p>"
+            "smithy.api#documentation": "<p>The Elasticsearch index rotation period</p>"
           }
         },
         "IndexName": {
@@ -1057,10 +1057,10 @@
             "smithy.api#documentation": "<p>The Elasticsearch index name.</p>"
           }
         },
-        "VpcConfigurationDescription": {
-          "target": "com.amazonaws.firehose#VpcConfigurationDescription",
+        "DomainARN": {
+          "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
           "traits": {
-            "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+            "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n\n         <p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon ES.</p>"
           }
         },
         "ProcessingConfiguration": {
@@ -1069,22 +1069,10 @@
             "smithy.api#documentation": "<p>The data processing configuration.</p>"
           }
         },
-        "BufferingHints": {
-          "target": "com.amazonaws.firehose#ElasticsearchBufferingHints",
+        "VpcConfigurationDescription": {
+          "target": "com.amazonaws.firehose#VpcConfigurationDescription",
           "traits": {
-            "smithy.api#documentation": "<p>The buffering options.</p>"
-          }
-        },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
-          }
-        },
-        "IndexRotationPeriod": {
-          "target": "com.amazonaws.firehose#ElasticsearchIndexRotationPeriod",
-          "traits": {
-            "smithy.api#documentation": "<p>The Elasticsearch index rotation period</p>"
+            "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
           }
         },
         "ClusterEndpoint": {
@@ -1105,10 +1093,16 @@
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
           }
         },
-        "DomainARN": {
-          "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n\n         <p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon ES.</p>"
+            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
+          }
+        },
+        "BufferingHints": {
+          "target": "com.amazonaws.firehose#ElasticsearchBufferingHints",
+          "traits": {
+            "smithy.api#documentation": "<p>The buffering options.</p>"
           }
         },
         "RetryOptions": {
@@ -1122,6 +1116,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon S3 destination.</p>"
           }
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options.</p>"
+          }
         }
       },
       "traits": {
@@ -1131,34 +1131,16 @@
     "com.amazonaws.firehose#ElasticsearchDestinationUpdate": {
       "type": "structure",
       "members": {
+        "IndexName": {
+          "target": "com.amazonaws.firehose#ElasticsearchIndexName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Elasticsearch index name.</p>"
+          }
+        },
         "TypeName": {
           "target": "com.amazonaws.firehose#ElasticsearchTypeName",
           "traits": {
             "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during runtime.</p>\n\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,\n         Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your delivery stream with a new index name, provide an empty\n         string for <code>TypeName</code>. </p>"
-          }
-        },
-        "ClusterEndpoint": {
-          "target": "com.amazonaws.firehose#ElasticsearchClusterEndpoint",
-          "traits": {
-            "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Specify either this\n            <code>ClusterEndpoint</code> or the <code>DomainARN</code> field.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
-          }
-        },
-        "DomainARN": {
-          "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>,\n         and <code>DescribeElasticsearchDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
           }
         },
         "ProcessingConfiguration": {
@@ -1167,10 +1149,28 @@
             "smithy.api#documentation": "<p>The data processing configuration.</p>"
           }
         },
-        "S3Update": {
-          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 destination.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          }
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
+        "DomainARN": {
+          "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>,\n         and <code>DescribeElasticsearchDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+          }
+        },
+        "ClusterEndpoint": {
+          "target": "com.amazonaws.firehose#ElasticsearchClusterEndpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Specify either this\n            <code>ClusterEndpoint</code> or the <code>DomainARN</code> field.</p>"
           }
         },
         "RetryOptions": {
@@ -1179,10 +1179,10 @@
             "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon ES. The default value is 300 (5 minutes).</p>"
           }
         },
-        "IndexName": {
-          "target": "com.amazonaws.firehose#ElasticsearchIndexName",
+        "S3Update": {
+          "target": "com.amazonaws.firehose#S3DestinationUpdate",
           "traits": {
-            "smithy.api#documentation": "<p>The Elasticsearch index name.</p>"
+            "smithy.api#documentation": "<p>The Amazon S3 destination.</p>"
           }
         },
         "BufferingHints": {
@@ -1330,10 +1330,52 @@
     "com.amazonaws.firehose#ExtendedS3DestinationConfiguration": {
       "type": "structure",
       "members": {
-        "S3BackupConfiguration": {
-          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration for backup in Amazon S3.</p>"
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n         UNCOMPRESSED.</p>"
+          }
+        },
+        "DataFormatConversionConfiguration": {
+          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
+          }
+        },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+          }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#S3BackupMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         delivery stream to disable it. </p>"
+          }
+        },
+        "EncryptionConfiguration": {
+          "target": "com.amazonaws.firehose#EncryptionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption configuration. If no value is specified, the default is no\n         encryption.</p>"
+          }
+        },
+        "BufferingHints": {
+          "target": "com.amazonaws.firehose#BufferingHints",
+          "traits": {
+            "smithy.api#documentation": "<p>The buffering option.</p>"
           }
         },
         "RoleARN": {
@@ -1343,59 +1385,17 @@
             "smithy.api#required": {}
           }
         },
-        "EncryptionConfiguration": {
-          "target": "com.amazonaws.firehose#EncryptionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The encryption configuration. If no value is specified, the default is no\n         encryption.</p>"
-          }
-        },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#S3BackupMode",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         delivery stream to disable it. </p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "DataFormatConversionConfiguration": {
-          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
-          }
-        },
-        "BufferingHints": {
-          "target": "com.amazonaws.firehose#BufferingHints",
-          "traits": {
-            "smithy.api#documentation": "<p>The buffering option.</p>"
-          }
-        },
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n         UNCOMPRESSED.</p>"
-          }
-        },
         "BucketARN": {
           "target": "com.amazonaws.firehose#BucketARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "S3BackupConfiguration": {
+          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration for backup in Amazon S3.</p>"
           }
         },
         "ErrorOutputPrefix": {
@@ -1412,6 +1412,56 @@
     "com.amazonaws.firehose#ExtendedS3DestinationDescription": {
       "type": "structure",
       "members": {
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+          }
+        },
+        "DataFormatConversionConfiguration": {
+          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
+          }
+        },
+        "ErrorOutputPrefix": {
+          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "BucketARN": {
+          "target": "com.amazonaws.firehose#BucketARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#S3BackupMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
+          }
+        },
         "BufferingHints": {
           "target": "com.amazonaws.firehose#BufferingHints",
           "traits": {
@@ -1426,12 +1476,6 @@
             "smithy.api#required": {}
           }
         },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#S3BackupMode",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
-          }
-        },
         "RoleARN": {
           "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
@@ -1439,54 +1483,10 @@
             "smithy.api#required": {}
           }
         },
-        "ErrorOutputPrefix": {
-          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
-        },
-        "BucketARN": {
-          "target": "com.amazonaws.firehose#BucketARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
-          }
-        },
         "S3BackupDescription": {
           "target": "com.amazonaws.firehose#S3DestinationDescription",
           "traits": {
             "smithy.api#documentation": "<p>The configuration for backup in Amazon S3.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "DataFormatConversionConfiguration": {
-          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
           }
         }
       },
@@ -1497,52 +1497,10 @@
     "com.amazonaws.firehose#ExtendedS3DestinationUpdate": {
       "type": "structure",
       "members": {
-        "EncryptionConfiguration": {
-          "target": "com.amazonaws.firehose#EncryptionConfiguration",
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption configuration. If no value is specified, the default is no\n         encryption.</p>"
-          }
-        },
-        "BufferingHints": {
-          "target": "com.amazonaws.firehose#BufferingHints",
-          "traits": {
-            "smithy.api#documentation": "<p>The buffering option.</p>"
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
-          }
-        },
-        "S3BackupUpdate": {
-          "target": "com.amazonaws.firehose#S3DestinationUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 destination for backup.</p>"
-          }
-        },
-        "BucketARN": {
-          "target": "com.amazonaws.firehose#BucketARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
-          }
-        },
-        "ErrorOutputPrefix": {
-          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
-        },
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>. </p>"
-          }
-        },
-        "DataFormatConversionConfiguration": {
-          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
         "ProcessingConfiguration": {
@@ -1551,22 +1509,64 @@
             "smithy.api#documentation": "<p>The data processing configuration.</p>"
           }
         },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
+        "DataFormatConversionConfiguration": {
+          "target": "com.amazonaws.firehose#DataFormatConversionConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+            "smithy.api#documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to\n         the Parquet or ORC format before writing it to Amazon S3.</p>"
           }
         },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+        "BucketARN": {
+          "target": "com.amazonaws.firehose#BucketARN",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          }
+        },
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>. </p>"
+          }
+        },
+        "BufferingHints": {
+          "target": "com.amazonaws.firehose#BufferingHints",
+          "traits": {
+            "smithy.api#documentation": "<p>The buffering option.</p>"
+          }
+        },
+        "ErrorOutputPrefix": {
+          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
           }
         },
         "S3BackupMode": {
           "target": "com.amazonaws.firehose#S3BackupMode",
           "traits": {
             "smithy.api#documentation": "<p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the delivery stream to disable it. </p>"
+          }
+        },
+        "S3BackupUpdate": {
+          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 destination for backup.</p>"
+          }
+        },
+        "EncryptionConfiguration": {
+          "target": "com.amazonaws.firehose#EncryptionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption configuration. If no value is specified, the default is no\n         encryption.</p>"
+          }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
           }
         }
       },
@@ -1577,17 +1577,17 @@
     "com.amazonaws.firehose#FailureDescription": {
       "type": "structure",
       "members": {
-        "Type": {
-          "target": "com.amazonaws.firehose#DeliveryStreamFailureType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of error that caused the failure.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Details": {
           "target": "com.amazonaws.firehose#NonEmptyString",
           "traits": {
             "smithy.api#documentation": "<p>A message providing details about the error that caused the failure.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.firehose#DeliveryStreamFailureType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of error that caused the failure.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1642,7 +1642,7 @@
           "sdkId": "Firehose",
           "arnNamespace": "firehose",
           "cloudFormationName": "KinesisFirehose",
-          "cloudTrailEventSource": "v20150804.firehose.amazonaws.com"
+          "cloudTrailEventSource": "firehose.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "firehose"
@@ -1822,12 +1822,6 @@
     "com.amazonaws.firehose#HttpEndpointConfiguration": {
       "type": "structure",
       "members": {
-        "AccessKey": {
-          "target": "com.amazonaws.firehose#HttpEndpointAccessKey",
-          "traits": {
-            "smithy.api#documentation": "<p>The access key required for Kinesis Firehose to authenticate with the HTTP endpoint\n         selected as the destination.</p>"
-          }
-        },
         "Url": {
           "target": "com.amazonaws.firehose#HttpEndpointUrl",
           "traits": {
@@ -1840,6 +1834,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of the HTTP endpoint selected as the destination.</p>"
           }
+        },
+        "AccessKey": {
+          "target": "com.amazonaws.firehose#HttpEndpointAccessKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The access key required for Kinesis Firehose to authenticate with the HTTP endpoint\n         selected as the destination.</p>"
+          }
         }
       },
       "traits": {
@@ -1849,16 +1849,16 @@
     "com.amazonaws.firehose#HttpEndpointDescription": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.firehose#HttpEndpointName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the HTTP endpoint selected as the destination.</p>"
-          }
-        },
         "Url": {
           "target": "com.amazonaws.firehose#HttpEndpointUrl",
           "traits": {
             "smithy.api#documentation": "<p>The URL of the HTTP endpoint selected as the destination.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.firehose#HttpEndpointName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the HTTP endpoint selected as the destination.</p>"
           }
         }
       },
@@ -1869,28 +1869,6 @@
     "com.amazonaws.firehose#HttpEndpointDestinationConfiguration": {
       "type": "structure",
       "members": {
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration"
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
-          }
-        },
-        "EndpointConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration of the HTTP endpoint selected as the destination.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RequestConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration of the requeste sent to the HTTP endpoint specified as the\n         destination.</p>"
-          }
-        },
         "S3BackupMode": {
           "target": "com.amazonaws.firehose#HttpEndpointS3BackupMode",
           "traits": {
@@ -1906,10 +1884,32 @@
             "smithy.api#documentation": "<p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery\n         stream needs.</p>"
           }
         },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration"
+        },
         "S3Configuration": {
           "target": "com.amazonaws.firehose#S3DestinationConfiguration",
           "traits": {
             "smithy.api#required": {}
+          }
+        },
+        "RequestConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration of the requeste sent to the HTTP endpoint specified as the\n         destination.</p>"
+          }
+        },
+        "EndpointConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration of the HTTP endpoint selected as the destination.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
           }
         },
         "BufferingHints": {
@@ -1926,21 +1926,6 @@
     "com.amazonaws.firehose#HttpEndpointDestinationDescription": {
       "type": "structure",
       "members": {
-        "S3DestinationDescription": {
-          "target": "com.amazonaws.firehose#S3DestinationDescription"
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration"
-        },
         "RoleARN": {
           "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
@@ -1959,16 +1944,31 @@
             "smithy.api#documentation": "<p>Describes buffering options that can be applied to the data before it is delivered to\n         the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it\n         might choose to use more optimal values. The <code>SizeInMBs</code> and\n            <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for\n         one of them, you must also provide a value for the other. </p>"
           }
         },
-        "RequestConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration of request sent to the HTTP endpoint specified as the\n         destination.</p>"
+            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
           }
+        },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration"
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+        },
+        "S3DestinationDescription": {
+          "target": "com.amazonaws.firehose#S3DestinationDescription"
         },
         "EndpointConfiguration": {
           "target": "com.amazonaws.firehose#HttpEndpointDescription",
           "traits": {
             "smithy.api#documentation": "<p>The configuration of the specified HTTP endpoint destination.</p>"
+          }
+        },
+        "RequestConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration of request sent to the HTTP endpoint specified as the\n         destination.</p>"
           }
         }
       },
@@ -1979,25 +1979,10 @@
     "com.amazonaws.firehose#HttpEndpointDestinationUpdate": {
       "type": "structure",
       "members": {
-        "EndpointConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointConfiguration",
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#HttpEndpointS3BackupMode",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the configuration of the HTTP endpoint destination.</p>"
-          }
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration"
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery\n         stream needs.</p>"
+            "smithy.api#documentation": "<p>Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to\n         the HTTP endpoint destination. You can back up all documents (<code>AllData</code>) or only\n         the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint\n         destination (<code>FailedDataOnly</code>).</p>"
           }
         },
         "BufferingHints": {
@@ -2006,19 +1991,34 @@
             "smithy.api#documentation": "<p>Describes buffering options that can be applied to the data before it is delivered to\n         the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it\n         might choose to use more optimal values. The <code>SizeInMBs</code> and\n            <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for\n         one of them, you must also provide a value for the other. </p>"
           }
         },
-        "RequestConfiguration": {
-          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration of the request sent to the HTTP endpoint specified as the\n         destination.</p>"
+            "smithy.api#documentation": "<p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery\n         stream needs.</p>"
           }
+        },
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#HttpEndpointRetryOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to\n         the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of\n         receipt from the specified HTTP endpoint destination.</p>"
+          }
+        },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration"
         },
         "CloudWatchLoggingOptions": {
           "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
         },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#HttpEndpointS3BackupMode",
+        "EndpointConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to\n         the HTTP endpoint destination. You can back up all documents (<code>AllData</code>) or only\n         the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint\n         destination (<code>FailedDataOnly</code>).</p>"
+            "smithy.api#documentation": "<p>Describes the configuration of the HTTP endpoint destination.</p>"
+          }
+        },
+        "RequestConfiguration": {
+          "target": "com.amazonaws.firehose#HttpEndpointRequestConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration of the request sent to the HTTP endpoint specified as the\n         destination.</p>"
           }
         },
         "S3Update": {
@@ -2149,11 +2149,11 @@
     "com.amazonaws.firehose#InvalidKMSResourceException": {
       "type": "structure",
       "members": {
-        "code": {
-          "target": "com.amazonaws.firehose#ErrorCode"
-        },
         "message": {
           "target": "com.amazonaws.firehose#ErrorMessage"
+        },
+        "code": {
+          "target": "com.amazonaws.firehose#ErrorCode"
         }
       },
       "traits": {
@@ -2204,17 +2204,17 @@
     "com.amazonaws.firehose#KinesisStreamSourceConfiguration": {
       "type": "structure",
       "members": {
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the role that provides access to the source Kinesis data stream. For more\n         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM) ARN Format</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "KinesisStreamARN": {
           "target": "com.amazonaws.firehose#KinesisStreamARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the source Kinesis data stream. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Kinesis Data Streams ARN Format</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the role that provides access to the source Kinesis data stream. For more\n         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM) ARN Format</a>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2226,16 +2226,16 @@
     "com.amazonaws.firehose#KinesisStreamSourceDescription": {
       "type": "structure",
       "members": {
-        "DeliveryStartTimestamp": {
-          "target": "com.amazonaws.firehose#DeliveryStartTimestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting\n         with this timestamp.</p>"
-          }
-        },
         "KinesisStreamARN": {
           "target": "com.amazonaws.firehose#KinesisStreamARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source Kinesis data stream. For more\n         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Kinesis Data Streams ARN Format</a>.</p>"
+          }
+        },
+        "DeliveryStartTimestamp": {
+          "target": "com.amazonaws.firehose#DeliveryStartTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting\n         with this timestamp.</p>"
           }
         },
         "RoleARN": {
@@ -2279,16 +2279,16 @@
     "com.amazonaws.firehose#ListDeliveryStreamsInput": {
       "type": "structure",
       "members": {
-        "ExclusiveStartDeliveryStreamName": {
-          "target": "com.amazonaws.firehose#DeliveryStreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of delivery streams returned by this call to\n            <code>ListDeliveryStreams</code> will start with the delivery stream whose name comes\n         alphabetically immediately after the name you specify in\n            <code>ExclusiveStartDeliveryStreamName</code>.</p>"
-          }
-        },
         "DeliveryStreamType": {
           "target": "com.amazonaws.firehose#DeliveryStreamType",
           "traits": {
             "smithy.api#documentation": "<p>The delivery stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>\n         <p>This parameter is optional. If this parameter is omitted, delivery streams of all\n         types are returned.</p>"
+          }
+        },
+        "ExclusiveStartDeliveryStreamName": {
+          "target": "com.amazonaws.firehose#DeliveryStreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of delivery streams returned by this call to\n            <code>ListDeliveryStreams</code> will start with the delivery stream whose name comes\n         alphabetically immediately after the name you specify in\n            <code>ExclusiveStartDeliveryStreamName</code>.</p>"
           }
         },
         "Limit": {
@@ -2312,17 +2312,17 @@
     "com.amazonaws.firehose#ListDeliveryStreamsOutput": {
       "type": "structure",
       "members": {
-        "HasMoreDeliveryStreams": {
-          "target": "com.amazonaws.firehose#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether there are more delivery streams available to list.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DeliveryStreamNames": {
           "target": "com.amazonaws.firehose#DeliveryStreamNameList",
           "traits": {
             "smithy.api#documentation": "<p>The names of the delivery streams.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "HasMoreDeliveryStreams": {
+          "target": "com.amazonaws.firehose#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether there are more delivery streams available to list.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2400,17 +2400,17 @@
     "com.amazonaws.firehose#ListTagsForDeliveryStreamOutput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.firehose#ListTagsForDeliveryStreamOutputTagList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags associated with <code>DeliveryStreamName</code>, starting with the\n         first tag after <code>ExclusiveStartTagKey</code> and up to the specified\n            <code>Limit</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "HasMoreTags": {
           "target": "com.amazonaws.firehose#BooleanObject",
           "traits": {
             "smithy.api#documentation": "<p>If this is <code>true</code> in the response, more tags are available. To list the\n         remaining tags, set <code>ExclusiveStartTagKey</code> to the key of the last tag returned\n         and call <code>ListTagsForDeliveryStream</code> again.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.firehose#ListTagsForDeliveryStreamOutputTagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags associated with <code>DeliveryStreamName</code>, starting with the\n         first tag after <code>ExclusiveStartTagKey</code> and up to the specified\n            <code>Limit</code>.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2490,10 +2490,10 @@
     "com.amazonaws.firehose#OpenXJsonSerDe": {
       "type": "structure",
       "members": {
-        "ColumnToJsonKeyMappings": {
-          "target": "com.amazonaws.firehose#ColumnToJsonKeyMappings",
+        "ConvertDotsInJsonKeysToUnderscores": {
+          "target": "com.amazonaws.firehose#BooleanObject",
           "traits": {
-            "smithy.api#documentation": "<p>Maps column names to JSON keys that aren't identical to the column names. This is\n         useful when the JSON contains keys that are Hive keywords. For example,\n            <code>timestamp</code> is a Hive keyword. If you have a JSON key named\n            <code>timestamp</code>, set this parameter to <code>{\"ts\": \"timestamp\"}</code> to map\n         this key to a column named <code>ts</code>.</p>"
+            "smithy.api#documentation": "<p>When set to <code>true</code>, specifies that the names of the keys include dots and\n         that you want Kinesis Data Firehose to replace them with underscores. This is useful\n         because Apache Hive does not allow dots in column names. For example, if the JSON contains\n         a key whose name is \"a.b\", you can define the column name to be \"a_b\" when using this\n         option.</p>\n         <p>The default is <code>false</code>.</p>"
           }
         },
         "CaseInsensitive": {
@@ -2502,10 +2502,10 @@
             "smithy.api#documentation": "<p>When set to <code>true</code>, which is the default, Kinesis Data Firehose converts\n         JSON keys to lowercase before deserializing them.</p>"
           }
         },
-        "ConvertDotsInJsonKeysToUnderscores": {
-          "target": "com.amazonaws.firehose#BooleanObject",
+        "ColumnToJsonKeyMappings": {
+          "target": "com.amazonaws.firehose#ColumnToJsonKeyMappings",
           "traits": {
-            "smithy.api#documentation": "<p>When set to <code>true</code>, specifies that the names of the keys include dots and\n         that you want Kinesis Data Firehose to replace them with underscores. This is useful\n         because Apache Hive does not allow dots in column names. For example, if the JSON contains\n         a key whose name is \"a.b\", you can define the column name to be \"a_b\" when using this\n         option.</p>\n         <p>The default is <code>false</code>.</p>"
+            "smithy.api#documentation": "<p>Maps column names to JSON keys that aren't identical to the column names. This is\n         useful when the JSON contains keys that are Hive keywords. For example,\n            <code>timestamp</code> is a Hive keyword. If you have a JSON key named\n            <code>timestamp</code>, set this parameter to <code>{\"ts\": \"timestamp\"}</code> to map\n         this key to a column named <code>ts</code>.</p>"
           }
         }
       },
@@ -2559,30 +2559,6 @@
     "com.amazonaws.firehose#OrcSerDe": {
       "type": "structure",
       "members": {
-        "BloomFilterColumns": {
-          "target": "com.amazonaws.firehose#ListOfNonEmptyStringsWithoutWhitespace",
-          "traits": {
-            "smithy.api#documentation": "<p>The column names for which you want Kinesis Data Firehose to create bloom filters. The\n         default is <code>null</code>.</p>"
-          }
-        },
-        "PaddingTolerance": {
-          "target": "com.amazonaws.firehose#Proportion",
-          "traits": {
-            "smithy.api#documentation": "<p>A number between 0 and 1 that defines the tolerance for block padding as a decimal\n         fraction of stripe size. The default value is 0.05, which means 5 percent of stripe\n         size.</p>\n         <p>For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block\n         padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB\n         block. In such a case, if the available size within the block is more than 3.2 MiB, a new,\n         smaller stripe is inserted to fit within that space. This ensures that no stripe crosses\n         block boundaries and causes remote reads within a node-local task.</p>\n         <p>Kinesis Data Firehose ignores this parameter when <a>OrcSerDe$EnablePadding</a> is <code>false</code>.</p>"
-          }
-        },
-        "DictionaryKeyThreshold": {
-          "target": "com.amazonaws.firehose#Proportion",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the fraction of the total number of non-null rows. To turn off dictionary\n         encoding, set this fraction to a number that is less than the number of distinct keys in a\n         dictionary. To always use dictionary encoding, set this threshold to 1.</p>"
-          }
-        },
-        "BlockSizeBytes": {
-          "target": "com.amazonaws.firehose#BlockSizeBytes",
-          "traits": {
-            "smithy.api#documentation": "<p>The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to\n         copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the\n         minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.</p>"
-          }
-        },
         "RowIndexStride": {
           "target": "com.amazonaws.firehose#OrcRowIndexStride",
           "traits": {
@@ -2601,22 +2577,46 @@
             "smithy.api#documentation": "<p>The version of the file to write. The possible values are <code>V0_11</code> and\n            <code>V0_12</code>. The default is <code>V0_12</code>.</p>"
           }
         },
+        "BlockSizeBytes": {
+          "target": "com.amazonaws.firehose#BlockSizeBytes",
+          "traits": {
+            "smithy.api#documentation": "<p>The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to\n         copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the\n         minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.</p>"
+          }
+        },
         "Compression": {
           "target": "com.amazonaws.firehose#OrcCompression",
           "traits": {
             "smithy.api#documentation": "<p>The compression code to use over data blocks. The default is <code>SNAPPY</code>.</p>"
           }
         },
-        "BloomFilterFalsePositiveProbability": {
+        "DictionaryKeyThreshold": {
           "target": "com.amazonaws.firehose#Proportion",
           "traits": {
-            "smithy.api#documentation": "<p>The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the\n         Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.</p>"
+            "smithy.api#documentation": "<p>Represents the fraction of the total number of non-null rows. To turn off dictionary\n         encoding, set this fraction to a number that is less than the number of distinct keys in a\n         dictionary. To always use dictionary encoding, set this threshold to 1.</p>"
+          }
+        },
+        "PaddingTolerance": {
+          "target": "com.amazonaws.firehose#Proportion",
+          "traits": {
+            "smithy.api#documentation": "<p>A number between 0 and 1 that defines the tolerance for block padding as a decimal\n         fraction of stripe size. The default value is 0.05, which means 5 percent of stripe\n         size.</p>\n         <p>For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block\n         padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB\n         block. In such a case, if the available size within the block is more than 3.2 MiB, a new,\n         smaller stripe is inserted to fit within that space. This ensures that no stripe crosses\n         block boundaries and causes remote reads within a node-local task.</p>\n         <p>Kinesis Data Firehose ignores this parameter when <a>OrcSerDe$EnablePadding</a> is <code>false</code>.</p>"
+          }
+        },
+        "BloomFilterColumns": {
+          "target": "com.amazonaws.firehose#ListOfNonEmptyStringsWithoutWhitespace",
+          "traits": {
+            "smithy.api#documentation": "<p>The column names for which you want Kinesis Data Firehose to create bloom filters. The\n         default is <code>null</code>.</p>"
           }
         },
         "EnablePadding": {
           "target": "com.amazonaws.firehose#BooleanObject",
           "traits": {
             "smithy.api#documentation": "<p>Set this to <code>true</code> to indicate that you want stripes to be padded to the HDFS\n         block boundaries. This is useful if you intend to copy the data from Amazon S3 to HDFS\n         before querying. The default is <code>false</code>.</p>"
+          }
+        },
+        "BloomFilterFalsePositiveProbability": {
+          "target": "com.amazonaws.firehose#Proportion",
+          "traits": {
+            "smithy.api#documentation": "<p>The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the\n         Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.</p>"
           }
         }
       },
@@ -2678,16 +2678,10 @@
     "com.amazonaws.firehose#ParquetSerDe": {
       "type": "structure",
       "members": {
-        "Compression": {
-          "target": "com.amazonaws.firehose#ParquetCompression",
+        "WriterVersion": {
+          "target": "com.amazonaws.firehose#ParquetWriterVersion",
           "traits": {
-            "smithy.api#documentation": "<p>The compression code to use over data blocks. The possible values are\n            <code>UNCOMPRESSED</code>, <code>SNAPPY</code>, and <code>GZIP</code>, with the default\n         being <code>SNAPPY</code>. Use <code>SNAPPY</code> for higher decompression speed. Use\n            <code>GZIP</code> if the compression ratio is more important than speed.</p>"
-          }
-        },
-        "BlockSizeBytes": {
-          "target": "com.amazonaws.firehose#BlockSizeBytes",
-          "traits": {
-            "smithy.api#documentation": "<p>The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to\n         copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the\n         minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.</p>"
+            "smithy.api#documentation": "<p>Indicates the version of row format to output. The possible values are <code>V1</code>\n         and <code>V2</code>. The default is <code>V1</code>.</p>"
           }
         },
         "PageSizeBytes": {
@@ -2696,10 +2690,16 @@
             "smithy.api#documentation": "<p>The Parquet page size. Column chunks are divided into pages. A page is conceptually an\n         indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and\n         the default is 1 MiB.</p>"
           }
         },
-        "WriterVersion": {
-          "target": "com.amazonaws.firehose#ParquetWriterVersion",
+        "BlockSizeBytes": {
+          "target": "com.amazonaws.firehose#BlockSizeBytes",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates the version of row format to output. The possible values are <code>V1</code>\n         and <code>V2</code>. The default is <code>V1</code>.</p>"
+            "smithy.api#documentation": "<p>The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to\n         copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the\n         minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.</p>"
+          }
+        },
+        "MaxPaddingBytes": {
+          "target": "com.amazonaws.firehose#NonNegativeIntegerObject",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum amount of padding to apply. This is useful if you intend to copy the data\n         from Amazon S3 to HDFS before querying. The default is 0.</p>"
           }
         },
         "EnableDictionaryCompression": {
@@ -2708,10 +2708,10 @@
             "smithy.api#documentation": "<p>Indicates whether to enable dictionary compression.</p>"
           }
         },
-        "MaxPaddingBytes": {
-          "target": "com.amazonaws.firehose#NonNegativeIntegerObject",
+        "Compression": {
+          "target": "com.amazonaws.firehose#ParquetCompression",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum amount of padding to apply. This is useful if you intend to copy the data\n         from Amazon S3 to HDFS before querying. The default is 0.</p>"
+            "smithy.api#documentation": "<p>The compression code to use over data blocks. The possible values are\n            <code>UNCOMPRESSED</code>, <code>SNAPPY</code>, and <code>GZIP</code>, with the default\n         being <code>SNAPPY</code>. Use <code>SNAPPY</code> for higher decompression speed. Use\n            <code>GZIP</code> if the compression ratio is more important than speed.</p>"
           }
         }
       },
@@ -2758,16 +2758,16 @@
     "com.amazonaws.firehose#ProcessingConfiguration": {
       "type": "structure",
       "members": {
-        "Enabled": {
-          "target": "com.amazonaws.firehose#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Enables or disables data processing.</p>"
-          }
-        },
         "Processors": {
           "target": "com.amazonaws.firehose#ProcessorList",
           "traits": {
             "smithy.api#documentation": "<p>The data processors.</p>"
+          }
+        },
+        "Enabled": {
+          "target": "com.amazonaws.firehose#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables or disables data processing.</p>"
           }
         }
       },
@@ -2942,17 +2942,17 @@
     "com.amazonaws.firehose#PutRecordBatchInput": {
       "type": "structure",
       "members": {
-        "Records": {
-          "target": "com.amazonaws.firehose#PutRecordBatchRequestEntryList",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more records.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DeliveryStreamName": {
           "target": "com.amazonaws.firehose#DeliveryStreamName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Records": {
+          "target": "com.amazonaws.firehose#PutRecordBatchRequestEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more records.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2961,17 +2961,17 @@
     "com.amazonaws.firehose#PutRecordBatchOutput": {
       "type": "structure",
       "members": {
-        "Encrypted": {
-          "target": "com.amazonaws.firehose#BooleanObject",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether server-side encryption (SSE) was enabled during this operation.</p>"
-          }
-        },
         "FailedPutCount": {
           "target": "com.amazonaws.firehose#NonNegativeIntegerObject",
           "traits": {
             "smithy.api#documentation": "<p>The number of records that might have failed processing. This number might be greater\n         than 0 even if the <a>PutRecordBatch</a> call succeeds. Check\n            <code>FailedPutCount</code> to determine whether there are records that you need to\n         resend.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "Encrypted": {
+          "target": "com.amazonaws.firehose#BooleanObject",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether server-side encryption (SSE) was enabled during this operation.</p>"
           }
         },
         "RequestResponses": {
@@ -2998,12 +2998,6 @@
     "com.amazonaws.firehose#PutRecordBatchResponseEntry": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.firehose#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message for an individual record result.</p>"
-          }
-        },
         "RecordId": {
           "target": "com.amazonaws.firehose#PutResponseRecordId",
           "traits": {
@@ -3014,6 +3008,12 @@
           "target": "com.amazonaws.firehose#ErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>The error code for an individual record result.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.firehose#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message for an individual record result.</p>"
           }
         }
       },
@@ -3096,37 +3096,17 @@
     "com.amazonaws.firehose#RedshiftDestinationConfiguration": {
       "type": "structure",
       "members": {
-        "S3Configuration": {
-          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#RedshiftRetryOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration for the intermediate Amazon S3 location from which Amazon Redshift\n         obtains data. Restrictions are described in the topic for <a>CreateDeliveryStream</a>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         in <code>RedshiftDestinationConfiguration.S3Configuration</code> because the Amazon\n         Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these\n         compression formats.</p>",
+            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon Redshift. Default value is 3600 (60 minutes).</p>"
+          }
+        },
+        "CopyCommand": {
+          "target": "com.amazonaws.firehose#CopyCommand",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>COPY</code> command.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Username": {
-          "target": "com.amazonaws.firehose#Username",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the user.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "S3BackupConfiguration": {
-          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration for backup in Amazon S3.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
           }
         },
         "ClusterJDBCURL": {
@@ -3143,29 +3123,49 @@
             "smithy.api#required": {}
           }
         },
+        "Username": {
+          "target": "com.amazonaws.firehose#Username",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the user.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "S3BackupMode": {
           "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         delivery stream to disable it. </p>"
           }
         },
+        "S3Configuration": {
+          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration for the intermediate Amazon S3 location from which Amazon Redshift\n         obtains data. Restrictions are described in the topic for <a>CreateDeliveryStream</a>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         in <code>RedshiftDestinationConfiguration.S3Configuration</code> because the Amazon\n         Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't support these\n         compression formats.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "S3BackupConfiguration": {
+          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration for backup in Amazon S3.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
         "ProcessingConfiguration": {
           "target": "com.amazonaws.firehose#ProcessingConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>The data processing configuration.</p>"
-          }
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#RedshiftRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon Redshift. Default value is 3600 (60 minutes).</p>"
-          }
-        },
-        "CopyCommand": {
-          "target": "com.amazonaws.firehose#CopyCommand",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>COPY</code> command.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -3176,16 +3176,22 @@
     "com.amazonaws.firehose#RedshiftDestinationDescription": {
       "type": "structure",
       "members": {
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+          }
+        },
+        "Username": {
+          "target": "com.amazonaws.firehose#Username",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the user.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3209,29 +3215,23 @@
             "smithy.api#required": {}
           }
         },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
           "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "Username": {
-          "target": "com.amazonaws.firehose#Username",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the user.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The Amazon S3 backup mode.</p>"
           }
         },
         "ClusterJDBCURL": {
           "target": "com.amazonaws.firehose#ClusterJDBCURL",
           "traits": {
             "smithy.api#documentation": "<p>The database connection string.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3249,28 +3249,10 @@
     "com.amazonaws.firehose#RedshiftDestinationUpdate": {
       "type": "structure",
       "members": {
-        "S3BackupUpdate": {
-          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 destination for backup.</p>"
-          }
-        },
-        "CopyCommand": {
-          "target": "com.amazonaws.firehose#CopyCommand",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>COPY</code> command.</p>"
-          }
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#RedshiftRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon Redshift. Default value is 3600 (60 minutes).</p>"
-          }
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
         "Username": {
@@ -3279,10 +3261,46 @@
             "smithy.api#documentation": "<p>The name of the user.</p>"
           }
         },
+        "CopyCommand": {
+          "target": "com.amazonaws.firehose#CopyCommand",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>COPY</code> command.</p>"
+          }
+        },
+        "S3BackupUpdate": {
+          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 destination for backup.</p>"
+          }
+        },
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#RedshiftRetryOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to\n         Amazon Redshift. Default value is 3600 (60 minutes).</p>"
+          }
+        },
+        "ClusterJDBCURL": {
+          "target": "com.amazonaws.firehose#ClusterJDBCURL",
+          "traits": {
+            "smithy.api#documentation": "<p>The database connection string.</p>"
+          }
+        },
         "S3Update": {
           "target": "com.amazonaws.firehose#S3DestinationUpdate",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon S3 destination.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         in <code>RedshiftDestinationUpdate.S3Update</code> because the Amazon Redshift\n            <code>COPY</code> operation that reads from the S3 bucket doesn't support these\n         compression formats.</p>"
+          }
+        },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+          }
+        },
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
+          "traits": {
+            "smithy.api#documentation": "<p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the delivery stream to disable it. </p>"
           }
         },
         "Password": {
@@ -3295,24 +3313,6 @@
           "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "ClusterJDBCURL": {
-          "target": "com.amazonaws.firehose#ClusterJDBCURL",
-          "traits": {
-            "smithy.api#documentation": "<p>The database connection string.</p>"
-          }
-        },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
-          "traits": {
-            "smithy.api#documentation": "<p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the delivery stream to disable it. </p>"
           }
         }
       },
@@ -3413,18 +3413,6 @@
     "com.amazonaws.firehose#S3DestinationConfiguration": {
       "type": "structure",
       "members": {
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         for Amazon Redshift destinations because they are not supported by the Amazon Redshift\n            <code>COPY</code> operation that reads from the S3 bucket.</p>"
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
-        },
         "BufferingHints": {
           "target": "com.amazonaws.firehose#BufferingHints",
           "traits": {
@@ -3437,17 +3425,10 @@
             "smithy.api#documentation": "<p>The encryption configuration. If no value is specified, the default is no\n         encryption.</p>"
           }
         },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ErrorOutputPrefix": {
-          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
           }
         },
         "CloudWatchLoggingOptions": {
@@ -3462,6 +3443,25 @@
             "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
             "smithy.api#required": {}
           }
+        },
+        "ErrorOutputPrefix": {
+          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         for Amazon Redshift destinations because they are not supported by the Amazon Redshift\n            <code>COPY</code> operation that reads from the S3 bucket.</p>"
+          }
         }
       },
       "traits": {
@@ -3471,6 +3471,26 @@
     "com.amazonaws.firehose#S3DestinationDescription": {
       "type": "structure",
       "members": {
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "CloudWatchLoggingOptions": {
           "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
@@ -3488,26 +3508,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
           }
         },
         "BufferingHints": {
@@ -3532,6 +3532,36 @@
     "com.amazonaws.firehose#S3DestinationUpdate": {
       "type": "structure",
       "members": {
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
+        "ErrorOutputPrefix": {
+          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
+        "BucketARN": {
+          "target": "com.amazonaws.firehose#BucketARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          }
+        },
+        "CompressionFormat": {
+          "target": "com.amazonaws.firehose#CompressionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         for Amazon Redshift destinations because they are not supported by the Amazon Redshift\n            <code>COPY</code> operation that reads from the S3 bucket.</p>"
+          }
+        },
+        "Prefix": {
+          "target": "com.amazonaws.firehose#Prefix",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
+          }
+        },
         "EncryptionConfiguration": {
           "target": "com.amazonaws.firehose#EncryptionConfiguration",
           "traits": {
@@ -3549,36 +3579,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
           }
-        },
-        "BucketARN": {
-          "target": "com.amazonaws.firehose#BucketARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
-          }
-        },
-        "ErrorOutputPrefix": {
-          "target": "com.amazonaws.firehose#ErrorOutputPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing\n         them to S3. This prefix appears immediately following the bucket name. For information\n         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
-        },
-        "CompressionFormat": {
-          "target": "com.amazonaws.firehose#CompressionFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The compression format. If no value is specified, the default is\n            <code>UNCOMPRESSED</code>.</p>\n         <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be specified\n         for Amazon Redshift destinations because they are not supported by the Amazon Redshift\n            <code>COPY</code> operation that reads from the S3 bucket.</p>"
-          }
-        },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "Prefix": {
-          "target": "com.amazonaws.firehose#Prefix",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3\n         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes\n            for Amazon S3 Objects</a>.</p>"
-          }
         }
       },
       "traits": {
@@ -3594,16 +3594,16 @@
             "smithy.api#documentation": "<p>Specifies the name of the AWS Glue database that contains the schema for the output\n         data.</p>"
           }
         },
+        "CatalogId": {
+          "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is\n         used by default.</p>"
+          }
+        },
         "RoleARN": {
           "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
           "traits": {
             "smithy.api#documentation": "<p>The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in\n         the same account you use for Kinesis Data Firehose. Cross-account roles aren't\n         allowed.</p>"
-          }
-        },
-        "TableName": {
-          "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the AWS Glue table that contains the column information that constitutes your\n         data schema.</p>"
           }
         },
         "Region": {
@@ -3612,10 +3612,10 @@
             "smithy.api#documentation": "<p>If you don't specify an AWS Region, the default is the current Region.</p>"
           }
         },
-        "CatalogId": {
+        "TableName": {
           "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is\n         used by default.</p>"
+            "smithy.api#documentation": "<p>Specifies the AWS Glue table that contains the column information that constitutes your\n         data schema.</p>"
           }
         },
         "VersionId": {
@@ -3704,29 +3704,23 @@
     "com.amazonaws.firehose#SplunkDestinationConfiguration": {
       "type": "structure",
       "members": {
-        "HECAcknowledgmentTimeoutInSeconds": {
-          "target": "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds",
+        "S3Configuration": {
+          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from\n         Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose\n         either tries to send the data again or considers it an error, based on your retry\n         settings.</p>"
-          }
-        },
-        "HECToken": {
-          "target": "com.amazonaws.firehose#HECToken",
-          "traits": {
-            "smithy.api#documentation": "<p>This is a GUID that you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>",
+            "smithy.api#documentation": "<p>The configuration for the backup Amazon S3 location.</p>",
             "smithy.api#required": {}
           }
         },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#SplunkRetryOptions",
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#SplunkS3BackupMode",
           "traits": {
-            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk,\n         or if it doesn't receive an acknowledgment of receipt from Splunk.</p>"
+            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When set to\n            <code>FailedEventsOnly</code>, Kinesis Data Firehose writes any data that could not be\n         indexed to the configured Amazon S3 destination. When set to <code>AllEvents</code>,\n         Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed\n         documents to Amazon S3. The default value is <code>FailedEventsOnly</code>.</p>\n         <p>You can update this backup mode from <code>FailedEventsOnly</code> to\n            <code>AllEvents</code>. You can't update it from <code>AllEvents</code> to\n            <code>FailedEventsOnly</code>.</p>"
           }
         },
-        "HECEndpointType": {
-          "target": "com.amazonaws.firehose#HECEndpointType",
+        "HECEndpoint": {
+          "target": "com.amazonaws.firehose#HECEndpoint",
           "traits": {
-            "smithy.api#documentation": "<p>This type can be either \"Raw\" or \"Event.\"</p>",
+            "smithy.api#documentation": "<p>The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your\n         data.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3736,29 +3730,35 @@
             "smithy.api#documentation": "<p>The data processing configuration.</p>"
           }
         },
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#SplunkS3BackupMode",
-          "traits": {
-            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When set to\n            <code>FailedEventsOnly</code>, Kinesis Data Firehose writes any data that could not be\n         indexed to the configured Amazon S3 destination. When set to <code>AllEvents</code>,\n         Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed\n         documents to Amazon S3. The default value is <code>FailedEventsOnly</code>.</p>\n         <p>You can update this backup mode from <code>FailedEventsOnly</code> to\n            <code>AllEvents</code>. You can't update it from <code>AllEvents</code> to\n            <code>FailedEventsOnly</code>.</p>"
-          }
-        },
         "CloudWatchLoggingOptions": {
           "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
-        "S3Configuration": {
-          "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#SplunkRetryOptions",
           "traits": {
-            "smithy.api#documentation": "<p>The configuration for the backup Amazon S3 location.</p>",
+            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk,\n         or if it doesn't receive an acknowledgment of receipt from Splunk.</p>"
+          }
+        },
+        "HECToken": {
+          "target": "com.amazonaws.firehose#HECToken",
+          "traits": {
+            "smithy.api#documentation": "<p>This is a GUID that you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>",
             "smithy.api#required": {}
           }
         },
-        "HECEndpoint": {
-          "target": "com.amazonaws.firehose#HECEndpoint",
+        "HECAcknowledgmentTimeoutInSeconds": {
+          "target": "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds",
           "traits": {
-            "smithy.api#documentation": "<p>The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your\n         data.</p>",
+            "smithy.api#documentation": "<p>The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from\n         Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose\n         either tries to send the data again or considers it an error, based on your retry\n         settings.</p>"
+          }
+        },
+        "HECEndpointType": {
+          "target": "com.amazonaws.firehose#HECEndpointType",
+          "traits": {
+            "smithy.api#documentation": "<p>This type can be either \"Raw\" or \"Event.\"</p>",
             "smithy.api#required": {}
           }
         }
@@ -3770,34 +3770,16 @@
     "com.amazonaws.firehose#SplunkDestinationDescription": {
       "type": "structure",
       "members": {
-        "S3BackupMode": {
-          "target": "com.amazonaws.firehose#SplunkS3BackupMode",
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
           "traits": {
-            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When set to\n            <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not\n         be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>,\n         Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed\n         documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. </p>"
-          }
-        },
-        "HECToken": {
-          "target": "com.amazonaws.firehose#HECToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A GUID you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>"
-          }
-        },
-        "RetryOptions": {
-          "target": "com.amazonaws.firehose#SplunkRetryOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk\n         or if it doesn't receive an acknowledgment of receipt from Splunk.</p>"
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
           }
         },
         "HECEndpointType": {
           "target": "com.amazonaws.firehose#HECEndpointType",
           "traits": {
             "smithy.api#documentation": "<p>This type can be either \"Raw\" or \"Event.\"</p>"
-          }
-        },
-        "HECAcknowledgmentTimeoutInSeconds": {
-          "target": "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from\n         Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose\n         either tries to send the data again or considers it an error, based on your retry\n         settings.</p>"
           }
         },
         "ProcessingConfiguration": {
@@ -3812,10 +3794,28 @@
             "smithy.api#documentation": "<p>The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your\n         data.</p>"
           }
         },
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+        "HECAcknowledgmentTimeoutInSeconds": {
+          "target": "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+            "smithy.api#documentation": "<p>The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from\n         Splunk after it sends it data. At the end of the timeout period, Kinesis Data Firehose\n         either tries to send the data again or considers it an error, based on your retry\n         settings.</p>"
+          }
+        },
+        "HECToken": {
+          "target": "com.amazonaws.firehose#HECToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A GUID you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>"
+          }
+        },
+        "RetryOptions": {
+          "target": "com.amazonaws.firehose#SplunkRetryOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to Splunk\n         or if it doesn't receive an acknowledgment of receipt from Splunk.</p>"
+          }
+        },
+        "S3BackupMode": {
+          "target": "com.amazonaws.firehose#SplunkS3BackupMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When set to\n            <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not\n         be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>,\n         Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed\n         documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. </p>"
           }
         },
         "S3DestinationDescription": {
@@ -3832,28 +3832,16 @@
     "com.amazonaws.firehose#SplunkDestinationUpdate": {
       "type": "structure",
       "members": {
-        "CloudWatchLoggingOptions": {
-          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
-          }
-        },
-        "HECEndpoint": {
-          "target": "com.amazonaws.firehose#HECEndpoint",
-          "traits": {
-            "smithy.api#documentation": "<p>The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your\n         data.</p>"
-          }
-        },
-        "ProcessingConfiguration": {
-          "target": "com.amazonaws.firehose#ProcessingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The data processing configuration.</p>"
-          }
-        },
         "HECEndpointType": {
           "target": "com.amazonaws.firehose#HECEndpointType",
           "traits": {
             "smithy.api#documentation": "<p>This type can be either \"Raw\" or \"Event.\"</p>"
+          }
+        },
+        "S3Update": {
+          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>Your update to the configuration of the backup Amazon S3 location.</p>"
           }
         },
         "RetryOptions": {
@@ -3868,16 +3856,28 @@
             "smithy.api#documentation": "<p>The amount of time that Kinesis Data Firehose waits to receive an acknowledgment from\n         Splunk after it sends data. At the end of the timeout period, Kinesis Data Firehose either\n         tries to send the data again or considers it an error, based on your retry\n         settings.</p>"
           }
         },
+        "ProcessingConfiguration": {
+          "target": "com.amazonaws.firehose#ProcessingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The data processing configuration.</p>"
+          }
+        },
+        "HECEndpoint": {
+          "target": "com.amazonaws.firehose#HECEndpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your\n         data.</p>"
+          }
+        },
+        "CloudWatchLoggingOptions": {
+          "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+          }
+        },
         "HECToken": {
           "target": "com.amazonaws.firehose#HECToken",
           "traits": {
             "smithy.api#documentation": "<p>A GUID that you obtain from your Splunk cluster when you create a new HEC\n         endpoint.</p>"
-          }
-        },
-        "S3Update": {
-          "target": "com.amazonaws.firehose#S3DestinationUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>Your update to the configuration of the backup Amazon S3 location.</p>"
           }
         },
         "S3BackupMode": {
@@ -4083,17 +4083,17 @@
     "com.amazonaws.firehose#TagDeliveryStreamInput": {
       "type": "structure",
       "members": {
-        "DeliveryStreamName": {
-          "target": "com.amazonaws.firehose#DeliveryStreamName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the delivery stream to which you want to add the tags.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.firehose#TagDeliveryStreamInputTagList",
           "traits": {
             "smithy.api#documentation": "<p>A set of key-value pairs to use to create the tags.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DeliveryStreamName": {
+          "target": "com.amazonaws.firehose#DeliveryStreamName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the delivery stream to which you want to add the tags.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4179,17 +4179,17 @@
     "com.amazonaws.firehose#UntagDeliveryStreamInput": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.firehose#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tag keys. Each corresponding tag is removed from the delivery\n         stream.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "DeliveryStreamName": {
           "target": "com.amazonaws.firehose#DeliveryStreamName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.firehose#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tag keys. Each corresponding tag is removed from the delivery\n         stream.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4228,6 +4228,20 @@
     "com.amazonaws.firehose#UpdateDestinationInput": {
       "type": "structure",
       "members": {
+        "DestinationId": {
+          "target": "com.amazonaws.firehose#DestinationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the destination.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "S3DestinationUpdate": {
+          "target": "com.amazonaws.firehose#S3DestinationUpdate",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>[Deprecated] Describes an update for a destination in Amazon S3.</p>"
+          }
+        },
         "HttpEndpointDestinationUpdate": {
           "target": "com.amazonaws.firehose#HttpEndpointDestinationUpdate",
           "traits": {
@@ -4239,25 +4253,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "ElasticsearchDestinationUpdate": {
-          "target": "com.amazonaws.firehose#ElasticsearchDestinationUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes an update for a destination in Amazon ES.</p>"
-          }
-        },
-        "ExtendedS3DestinationUpdate": {
-          "target": "com.amazonaws.firehose#ExtendedS3DestinationUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes an update for a destination in Amazon S3.</p>"
-          }
-        },
-        "S3DestinationUpdate": {
-          "target": "com.amazonaws.firehose#S3DestinationUpdate",
-          "traits": {
-            "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>[Deprecated] Describes an update for a destination in Amazon S3.</p>"
           }
         },
         "RedshiftDestinationUpdate": {
@@ -4273,17 +4268,22 @@
             "smithy.api#required": {}
           }
         },
+        "ExtendedS3DestinationUpdate": {
+          "target": "com.amazonaws.firehose#ExtendedS3DestinationUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes an update for a destination in Amazon S3.</p>"
+          }
+        },
+        "ElasticsearchDestinationUpdate": {
+          "target": "com.amazonaws.firehose#ElasticsearchDestinationUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes an update for a destination in Amazon ES.</p>"
+          }
+        },
         "SplunkDestinationUpdate": {
           "target": "com.amazonaws.firehose#SplunkDestinationUpdate",
           "traits": {
             "smithy.api#documentation": "<p>Describes an update for a destination in Splunk.</p>"
-          }
-        },
-        "DestinationId": {
-          "target": "com.amazonaws.firehose#DestinationId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the destination.</p>",
-            "smithy.api#required": {}
           }
         }
       }
@@ -4335,10 +4335,10 @@
     "com.amazonaws.firehose#VpcConfigurationDescription": {
       "type": "structure",
       "members": {
-        "SubnetIds": {
-          "target": "com.amazonaws.firehose#SubnetIdList",
+        "RoleARN": {
+          "target": "com.amazonaws.firehose#RoleARN",
           "traits": {
-            "smithy.api#documentation": "<p>The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC of the\n         Amazon ES destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Kinesis Data Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Kinesis Data Firehose can create up to\n         three ENIs for this delivery stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>",
+            "smithy.api#documentation": "<p>The ARN of the IAM role that the delivery stream uses to create endpoints in the\n         destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can\n         specify a new role. In either case, make sure that the role trusts the Kinesis Data\n         Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you revoke these permissions after you create the delivery stream, Kinesis Data\n         Firehose can't scale out by creating more ENIs when necessary. You might therefore see a\n         degradation in performance.</p>",
             "smithy.api#required": {}
           }
         },
@@ -4349,10 +4349,10 @@
             "smithy.api#required": {}
           }
         },
-        "RoleARN": {
-          "target": "com.amazonaws.firehose#RoleARN",
+        "SubnetIds": {
+          "target": "com.amazonaws.firehose#SubnetIdList",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM role that the delivery stream uses to create endpoints in the\n         destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can\n         specify a new role. In either case, make sure that the role trusts the Kinesis Data\n         Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you revoke these permissions after you create the delivery stream, Kinesis Data\n         Firehose can't scale out by creating more ENIs when necessary. You might therefore see a\n         degradation in performance.</p>",
+            "smithy.api#documentation": "<p>The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC of the\n         Amazon ES destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Kinesis Data Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Kinesis Data Firehose can create up to\n         three ENIs for this delivery stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>",
             "smithy.api#required": {}
           }
         },

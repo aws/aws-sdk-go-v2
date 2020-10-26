@@ -57,15 +57,6 @@
     "com.amazonaws.guardduty#AcceptInvitationRequest": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
         "InvitationId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
@@ -81,6 +72,15 @@
             "smithy.api#jsonName": "masterId",
             "smithy.api#required": {}
           }
+        },
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
         }
       }
     },
@@ -91,18 +91,18 @@
     "com.amazonaws.guardduty#AccessControlList": {
       "type": "structure",
       "members": {
-        "AllowsPublicReadAccess": {
-          "target": "com.amazonaws.guardduty#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that indicates whether public read access for the bucket is enabled through an\n      Access Control List (ACL).</p>",
-            "smithy.api#jsonName": "allowsPublicReadAccess"
-          }
-        },
         "AllowsPublicWriteAccess": {
           "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>A value that indicates whether public write access for the bucket is enabled through an\n      Access Control List (ACL).</p>",
             "smithy.api#jsonName": "allowsPublicWriteAccess"
+          }
+        },
+        "AllowsPublicReadAccess": {
+          "target": "com.amazonaws.guardduty#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that indicates whether public read access for the bucket is enabled through an\n      Access Control List (ACL).</p>",
+            "smithy.api#jsonName": "allowsPublicReadAccess"
           }
         }
       },
@@ -113,18 +113,18 @@
     "com.amazonaws.guardduty#AccessKeyDetails": {
       "type": "structure",
       "members": {
-        "UserName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the user.</p>",
-            "smithy.api#jsonName": "userName"
-          }
-        },
         "UserType": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The type of the user.</p>",
             "smithy.api#jsonName": "userType"
+          }
+        },
+        "UserName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the user.</p>",
+            "smithy.api#jsonName": "userName"
           }
         },
         "PrincipalId": {
@@ -221,6 +221,20 @@
     "com.amazonaws.guardduty#Action": {
       "type": "structure",
       "members": {
+        "ActionType": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GuardDuty finding activity type.</p>",
+            "smithy.api#jsonName": "actionType"
+          }
+        },
+        "PortProbeAction": {
+          "target": "com.amazonaws.guardduty#PortProbeAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the PORT_PROBE action described in this finding.</p>",
+            "smithy.api#jsonName": "portProbeAction"
+          }
+        },
         "AwsApiCallAction": {
           "target": "com.amazonaws.guardduty#AwsApiCallAction",
           "traits": {
@@ -233,20 +247,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Information about the NETWORK_CONNECTION action described in this finding.</p>",
             "smithy.api#jsonName": "networkConnectionAction"
-          }
-        },
-        "PortProbeAction": {
-          "target": "com.amazonaws.guardduty#PortProbeAction",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the PORT_PROBE action described in this finding.</p>",
-            "smithy.api#jsonName": "portProbeAction"
-          }
-        },
-        "ActionType": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The GuardDuty finding activity type.</p>",
-            "smithy.api#jsonName": "actionType"
           }
         },
         "DnsRequestAction": {
@@ -342,20 +342,20 @@
     "com.amazonaws.guardduty#ArchiveFindingsRequest": {
       "type": "structure",
       "members": {
+        "FindingIds": {
+          "target": "com.amazonaws.guardduty#FindingIds",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the findings that you want to archive.</p>",
+            "smithy.api#jsonName": "findingIds",
+            "smithy.api#required": {}
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      archive.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
-        "FindingIds": {
-          "target": "com.amazonaws.guardduty#FindingIds",
-          "traits": {
-            "smithy.api#documentation": "<p>The IDs of the findings that you want to archive.</p>",
-            "smithy.api#jsonName": "findingIds",
             "smithy.api#required": {}
           }
         }
@@ -368,11 +368,11 @@
     "com.amazonaws.guardduty#AwsApiCallAction": {
       "type": "structure",
       "members": {
-        "RemoteIpDetails": {
-          "target": "com.amazonaws.guardduty#RemoteIpDetails",
+        "Api": {
+          "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The remote IP information of the connection.</p>",
-            "smithy.api#jsonName": "remoteIpDetails"
+            "smithy.api#documentation": "<p>The AWS API name.</p>",
+            "smithy.api#jsonName": "api"
           }
         },
         "ServiceName": {
@@ -382,18 +382,18 @@
             "smithy.api#jsonName": "serviceName"
           }
         },
+        "ErrorCode": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failed AWS API action.</p>",
+            "smithy.api#jsonName": "errorCode"
+          }
+        },
         "CallerType": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The AWS API caller type.</p>",
             "smithy.api#jsonName": "callerType"
-          }
-        },
-        "Api": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS API name.</p>",
-            "smithy.api#jsonName": "api"
           }
         },
         "DomainDetails": {
@@ -402,27 +402,34 @@
             "smithy.api#documentation": "<p>The domain information for the AWS API call.</p>",
             "smithy.api#jsonName": "domainDetails"
           }
+        },
+        "RemoteIpDetails": {
+          "target": "com.amazonaws.guardduty#RemoteIpDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>The remote IP information of the connection that initiated the AWS API call.</p>",
+            "smithy.api#jsonName": "remoteIpDetails"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains information about the API operation.</p>"
+        "smithy.api#documentation": "<p>Contains information about the API action.</p>"
       }
     },
     "com.amazonaws.guardduty#BadRequestException": {
       "type": "structure",
       "members": {
-        "Type": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error type.</p>",
-            "smithy.api#jsonName": "__type"
-          }
-        },
         "Message": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The error message.</p>",
             "smithy.api#jsonName": "message"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error type.</p>",
+            "smithy.api#jsonName": "__type"
           }
         }
       },
@@ -435,6 +442,13 @@
     "com.amazonaws.guardduty#BlockPublicAccess": {
       "type": "structure",
       "members": {
+        "IgnorePublicAcls": {
+          "target": "com.amazonaws.guardduty#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.</p>",
+            "smithy.api#jsonName": "ignorePublicAcls"
+          }
+        },
         "BlockPublicPolicy": {
           "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
@@ -455,13 +469,6 @@
             "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>BlockPublicAcls</code>.</p>",
             "smithy.api#jsonName": "blockPublicAcls"
           }
-        },
-        "IgnorePublicAcls": {
-          "target": "com.amazonaws.guardduty#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.</p>",
-            "smithy.api#jsonName": "ignorePublicAcls"
-          }
         }
       },
       "traits": {
@@ -474,6 +481,13 @@
     "com.amazonaws.guardduty#BucketLevelPermissions": {
       "type": "structure",
       "members": {
+        "BlockPublicAccess": {
+          "target": "com.amazonaws.guardduty#BlockPublicAccess",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains information on which account level S3 Block Public Access settings are applied to\n      the S3 bucket.</p>",
+            "smithy.api#jsonName": "blockPublicAccess"
+          }
+        },
         "AccessControlList": {
           "target": "com.amazonaws.guardduty#AccessControlList",
           "traits": {
@@ -486,13 +500,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Contains information on the bucket policies for the S3 bucket.</p>",
             "smithy.api#jsonName": "bucketPolicy"
-          }
-        },
-        "BlockPublicAccess": {
-          "target": "com.amazonaws.guardduty#BlockPublicAccess",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information on which account level S3 Block Public Access settings are applied to\n      the S3 bucket.</p>",
-            "smithy.api#jsonName": "blockPublicAccess"
           }
         }
       },
@@ -565,20 +572,35 @@
     "com.amazonaws.guardduty#Condition": {
       "type": "structure",
       "members": {
-        "Gte": {
+        "Lte": {
           "target": "com.amazonaws.guardduty#Integer",
           "traits": {
             "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Represents a <i>greater than or equal</i> condition to be applied to a\n      single field when querying for findings.</p>",
-            "smithy.api#jsonName": "gte"
+            "smithy.api#documentation": "<p>Represents a <i>less than or equal</i> condition to be applied to a single\n      field when querying for findings.</p>",
+            "smithy.api#jsonName": "lte"
           }
         },
-        "Lt": {
+        "Eq": {
+          "target": "com.amazonaws.guardduty#Eq",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>Represents the <i>equal</i> condition to be applied to a single field when\n      querying for findings.</p>",
+            "smithy.api#jsonName": "eq"
+          }
+        },
+        "Gt": {
           "target": "com.amazonaws.guardduty#Integer",
           "traits": {
             "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for findings.</p>",
+            "smithy.api#jsonName": "gt"
+          }
+        },
+        "LessThan": {
+          "target": "com.amazonaws.guardduty#Long",
+          "traits": {
             "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for findings.</p>",
-            "smithy.api#jsonName": "lt"
+            "smithy.api#jsonName": "lessThan"
           }
         },
         "GreaterThanOrEqual": {
@@ -586,6 +608,20 @@
           "traits": {
             "smithy.api#documentation": "<p>Represents a <i>greater than or equal</i> condition to be applied to a\n      single field when querying for findings.</p>",
             "smithy.api#jsonName": "greaterThanOrEqual"
+          }
+        },
+        "NotEquals": {
+          "target": "com.amazonaws.guardduty#NotEquals",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents a <i>not equal</i>\n            <b></b> condition to be applied\n      to a single field when querying for findings.</p>",
+            "smithy.api#jsonName": "notEquals"
+          }
+        },
+        "Equals": {
+          "target": "com.amazonaws.guardduty#Equals",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents an <i>equal</i>\n            <b></b> condition to be applied to\n      a single field when querying for findings.</p>",
+            "smithy.api#jsonName": "equals"
           }
         },
         "Neq": {
@@ -603,42 +639,12 @@
             "smithy.api#jsonName": "lessThanOrEqual"
           }
         },
-        "Eq": {
-          "target": "com.amazonaws.guardduty#Eq",
-          "traits": {
-            "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Represents the <i>equal</i> condition to be applied to a single field when\n      querying for findings.</p>",
-            "smithy.api#jsonName": "eq"
-          }
-        },
-        "Equals": {
-          "target": "com.amazonaws.guardduty#Equals",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents an <i>equal</i>\n            <b></b> condition to be applied to\n      a single field when querying for findings.</p>",
-            "smithy.api#jsonName": "equals"
-          }
-        },
-        "Gt": {
+        "Lt": {
           "target": "com.amazonaws.guardduty#Integer",
           "traits": {
             "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for findings.</p>",
-            "smithy.api#jsonName": "gt"
-          }
-        },
-        "NotEquals": {
-          "target": "com.amazonaws.guardduty#NotEquals",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents a <i>not equal</i>\n            <b></b> condition to be applied\n      to a single field when querying for findings.</p>",
-            "smithy.api#jsonName": "notEquals"
-          }
-        },
-        "Lte": {
-          "target": "com.amazonaws.guardduty#Integer",
-          "traits": {
-            "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Represents a <i>less than or equal</i> condition to be applied to a single\n      field when querying for findings.</p>",
-            "smithy.api#jsonName": "lte"
+            "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for findings.</p>",
+            "smithy.api#jsonName": "lt"
           }
         },
         "GreaterThan": {
@@ -648,11 +654,12 @@
             "smithy.api#jsonName": "greaterThan"
           }
         },
-        "LessThan": {
-          "target": "com.amazonaws.guardduty#Long",
+        "Gte": {
+          "target": "com.amazonaws.guardduty#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for findings.</p>",
-            "smithy.api#jsonName": "lessThan"
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p>Represents a <i>greater than or equal</i> condition to be applied to a\n      single field when querying for findings.</p>",
+            "smithy.api#jsonName": "gte"
           }
         }
       },
@@ -719,11 +726,11 @@
     "com.amazonaws.guardduty#CreateDetectorRequest": {
       "type": "structure",
       "members": {
-        "DataSources": {
-          "target": "com.amazonaws.guardduty#DataSourceConfigurations",
+        "FindingPublishingFrequency": {
+          "target": "com.amazonaws.guardduty#FindingPublishingFrequency",
           "traits": {
-            "smithy.api#documentation": "<p>An object that describes which data sources will be enabled for the detector.</p>",
-            "smithy.api#jsonName": "dataSources"
+            "smithy.api#documentation": "<p>An enum value that specifies how frequently updated findings are exported.</p>",
+            "smithy.api#jsonName": "findingPublishingFrequency"
           }
         },
         "ClientToken": {
@@ -741,11 +748,11 @@
             "smithy.api#jsonName": "tags"
           }
         },
-        "FindingPublishingFrequency": {
-          "target": "com.amazonaws.guardduty#FindingPublishingFrequency",
+        "DataSources": {
+          "target": "com.amazonaws.guardduty#DataSourceConfigurations",
           "traits": {
-            "smithy.api#documentation": "<p>An enum value that specifies how frequently updated findings are exported.</p>",
-            "smithy.api#jsonName": "findingPublishingFrequency"
+            "smithy.api#documentation": "<p>An object that describes which data sources will be enabled for the detector.</p>",
+            "smithy.api#jsonName": "dataSources"
           }
         },
         "Enable": {
@@ -798,6 +805,35 @@
     "com.amazonaws.guardduty#CreateFilterRequest": {
       "type": "structure",
       "members": {
+        "Action": {
+          "target": "com.amazonaws.guardduty#FilterAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the action that is to be applied to the findings that match the filter.</p>",
+            "smithy.api#jsonName": "action"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.guardduty#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be added to a new filter resource.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.guardduty#FilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the filter.</p>",
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.guardduty#FilterDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the filter.</p>",
+            "smithy.api#jsonName": "description"
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
@@ -821,35 +857,6 @@
             "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>\n         <p>You can only use the following attributes to query findings:</p>\n         <ul>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.outpostArn</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to TRUE, only archived findings are listed. When it's set\n          to FALSE, only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ\n          depending on whether the value contains milliseconds.</p>\n            </li>\n         </ul>",
             "smithy.api#jsonName": "findingCriteria",
             "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.guardduty#FilterDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the filter.</p>",
-            "smithy.api#jsonName": "description"
-          }
-        },
-        "Action": {
-          "target": "com.amazonaws.guardduty#FilterAction",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the action that is to be applied to the findings that match the filter.</p>",
-            "smithy.api#jsonName": "action"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.guardduty#FilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the filter.</p>",
-            "smithy.api#jsonName": "name",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be added to a new filter resource.</p>",
-            "smithy.api#jsonName": "tags"
           }
         },
         "Rank": {
@@ -902,19 +909,12 @@
     "com.amazonaws.guardduty#CreateIPSetRequest": {
       "type": "structure",
       "members": {
-        "Format": {
-          "target": "com.amazonaws.guardduty#IpSetFormat",
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
-            "smithy.api#documentation": "<p>The format of the file that contains the IPSet.</p>",
-            "smithy.api#jsonName": "format",
-            "smithy.api#required": {}
-          }
-        },
-        "Activate": {
-          "target": "com.amazonaws.guardduty#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A Boolean value that indicates whether GuardDuty is to start using the uploaded\n      IPSet.</p>",
-            "smithy.api#jsonName": "activate",
+            "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account that you want to create an IPSet\n      for.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
         },
@@ -926,13 +926,12 @@
             "smithy.api#required": {}
           }
         },
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
+        "ClientToken": {
+          "target": "com.amazonaws.guardduty#ClientToken",
           "traits": {
-            "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account that you want to create an IPSet\n      for.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#jsonName": "clientToken"
           }
         },
         "Name": {
@@ -943,12 +942,20 @@
             "smithy.api#required": {}
           }
         },
-        "ClientToken": {
-          "target": "com.amazonaws.guardduty#ClientToken",
+        "Activate": {
+          "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#jsonName": "clientToken"
+            "smithy.api#documentation": "<p>A Boolean value that indicates whether GuardDuty is to start using the uploaded\n      IPSet.</p>",
+            "smithy.api#jsonName": "activate",
+            "smithy.api#required": {}
+          }
+        },
+        "Format": {
+          "target": "com.amazonaws.guardduty#IpSetFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the file that contains the IPSet.</p>",
+            "smithy.api#jsonName": "format",
+            "smithy.api#required": {}
           }
         },
         "Tags": {
@@ -1001,20 +1008,20 @@
     "com.amazonaws.guardduty#CreateMembersRequest": {
       "type": "structure",
       "members": {
-        "AccountDetails": {
-          "target": "com.amazonaws.guardduty#AccountDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of account ID and email address pairs of the accounts that you want to associate\n      with the master GuardDuty account.</p>",
-            "smithy.api#jsonName": "accountDetails",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account that you want to associate member\n      accounts with.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
+        },
+        "AccountDetails": {
+          "target": "com.amazonaws.guardduty#AccountDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of account ID and email address pairs of the accounts that you want to associate\n      with the master GuardDuty account.</p>",
+            "smithy.api#jsonName": "accountDetails",
             "smithy.api#required": {}
           }
         }
@@ -1061,11 +1068,27 @@
     "com.amazonaws.guardduty#CreatePublishingDestinationRequest": {
       "type": "structure",
       "members": {
+        "ClientToken": {
+          "target": "com.amazonaws.guardduty#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The idempotency token for the request.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#jsonName": "clientToken"
+          }
+        },
         "DestinationType": {
           "target": "com.amazonaws.guardduty#DestinationType",
           "traits": {
             "smithy.api#documentation": "<p>The type of resource for the publishing destination. Currently only Amazon S3 buckets are\n      supported.</p>",
             "smithy.api#jsonName": "destinationType",
+            "smithy.api#required": {}
+          }
+        },
+        "DestinationProperties": {
+          "target": "com.amazonaws.guardduty#DestinationProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>The properties of the publishing destination, including the ARNs for the destination and\n      the KMS key used for encryption.</p>",
+            "smithy.api#jsonName": "destinationProperties",
             "smithy.api#required": {}
           }
         },
@@ -1075,22 +1098,6 @@
             "smithy.api#documentation": "<p>The ID of the GuardDuty detector associated with the publishing destination.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
-        "ClientToken": {
-          "target": "com.amazonaws.guardduty#ClientToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The idempotency token for the request.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#jsonName": "clientToken"
-          }
-        },
-        "DestinationProperties": {
-          "target": "com.amazonaws.guardduty#DestinationProperties",
-          "traits": {
-            "smithy.api#documentation": "<p>The properties of the publishing destination, including the ARNs for the destination and\n      the KMS key used for encryption.</p>",
-            "smithy.api#jsonName": "destinationProperties",
             "smithy.api#required": {}
           }
         }
@@ -1187,42 +1194,11 @@
     "com.amazonaws.guardduty#CreateThreatIntelSetRequest": {
       "type": "structure",
       "members": {
-        "ClientToken": {
-          "target": "com.amazonaws.guardduty#ClientToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#jsonName": "clientToken"
-          }
-        },
-        "Location": {
-          "target": "com.amazonaws.guardduty#Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
-            "smithy.api#jsonName": "location",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be added to a new threat list resource.</p>",
-            "smithy.api#jsonName": "tags"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.guardduty#Name",
           "traits": {
             "smithy.api#documentation": "<p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by\n      activity that involves IP addresses included in this ThreatIntelSet.</p>",
             "smithy.api#jsonName": "name",
-            "smithy.api#required": {}
-          }
-        },
-        "Format": {
-          "target": "com.amazonaws.guardduty#ThreatIntelSetFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of the file that contains the ThreatIntelSet.</p>",
-            "smithy.api#jsonName": "format",
             "smithy.api#required": {}
           }
         },
@@ -1240,6 +1216,37 @@
           "traits": {
             "smithy.api#documentation": "<p>A Boolean value that indicates whether GuardDuty is to start using the uploaded\n      ThreatIntelSet.</p>",
             "smithy.api#jsonName": "activate",
+            "smithy.api#required": {}
+          }
+        },
+        "ClientToken": {
+          "target": "com.amazonaws.guardduty#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#jsonName": "clientToken"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.guardduty#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be added to a new threat list resource.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "Location": {
+          "target": "com.amazonaws.guardduty#Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+            "smithy.api#jsonName": "location",
+            "smithy.api#required": {}
+          }
+        },
+        "Format": {
+          "target": "com.amazonaws.guardduty#ThreatIntelSetFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the file that contains the ThreatIntelSet.</p>",
+            "smithy.api#jsonName": "format",
             "smithy.api#required": {}
           }
         }
@@ -1324,6 +1331,22 @@
     "com.amazonaws.guardduty#DataSourceConfigurationsResult": {
       "type": "structure",
       "members": {
+        "S3Logs": {
+          "target": "com.amazonaws.guardduty#S3LogsConfigurationResult",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains information on the status of S3 Data event logs as a data\n      source.</p>",
+            "smithy.api#jsonName": "s3Logs",
+            "smithy.api#required": {}
+          }
+        },
+        "FlowLogs": {
+          "target": "com.amazonaws.guardduty#FlowLogsConfigurationResult",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains information on the status of VPC flow logs as a data\n      source.</p>",
+            "smithy.api#jsonName": "flowLogs",
+            "smithy.api#required": {}
+          }
+        },
         "CloudTrail": {
           "target": "com.amazonaws.guardduty#CloudTrailConfigurationResult",
           "traits": {
@@ -1337,22 +1360,6 @@
           "traits": {
             "smithy.api#documentation": "<p>An object that contains information on the status of DNS logs as a data source.</p>",
             "smithy.api#jsonName": "dnsLogs",
-            "smithy.api#required": {}
-          }
-        },
-        "FlowLogs": {
-          "target": "com.amazonaws.guardduty#FlowLogsConfigurationResult",
-          "traits": {
-            "smithy.api#documentation": "<p>An object that contains information on the status of VPC flow logs as a data\n      source.</p>",
-            "smithy.api#jsonName": "flowLogs",
-            "smithy.api#required": {}
-          }
-        },
-        "S3Logs": {
-          "target": "com.amazonaws.guardduty#S3LogsConfigurationResult",
-          "traits": {
-            "smithy.api#documentation": "<p>An object that contains information on the status of S3 Data event logs as a data\n      source.</p>",
-            "smithy.api#jsonName": "s3Logs",
             "smithy.api#required": {}
           }
         }
@@ -1440,23 +1447,23 @@
     "com.amazonaws.guardduty#DefaultServerSideEncryption": {
       "type": "structure",
       "members": {
-        "KmsMasterKeyArn": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket\n        <code>EncryptionType</code> is <code>aws:kms</code>.</p>",
-            "smithy.api#jsonName": "kmsMasterKeyArn"
-          }
-        },
         "EncryptionType": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The type of encryption used for objects within the S3 bucket.</p>",
             "smithy.api#jsonName": "encryptionType"
           }
+        },
+        "KmsMasterKeyArn": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket\n        <code>EncryptionType</code> is <code>aws:kms</code>.</p>",
+            "smithy.api#jsonName": "kmsMasterKeyArn"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See\n        <a href=\"https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html\">S3\n        Server-Side Encryption</a> for more information.</p>"
+        "smithy.api#documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See\n      <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">S3\n        Server-Side Encryption</a> for more information.</p>"
       }
     },
     "com.amazonaws.guardduty#DeleteDetector": {
@@ -1530,21 +1537,21 @@
     "com.amazonaws.guardduty#DeleteFilterRequest": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique ID of the detector that the filter is associated with.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
         "FilterName": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the filter that you want to delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "filterName",
+            "smithy.api#required": {}
+          }
+        },
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID of the detector that the filter is associated with.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
         }
@@ -1685,20 +1692,20 @@
     "com.amazonaws.guardduty#DeleteMembersRequest": {
       "type": "structure",
       "members": {
+        "AccountIds": {
+          "target": "com.amazonaws.guardduty#AccountIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts that you want to delete.</p>",
+            "smithy.api#jsonName": "accountIds",
+            "smithy.api#required": {}
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
-        "AccountIds": {
-          "target": "com.amazonaws.guardduty#AccountIds",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts that you want to delete.</p>",
-            "smithy.api#jsonName": "accountIds",
             "smithy.api#required": {}
           }
         }
@@ -1797,21 +1804,21 @@
     "com.amazonaws.guardduty#DeleteThreatIntelSetRequest": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique ID of the detector that the threatIntelSet is associated with.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
         "ThreatIntelSetId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the threatIntelSet that you want to delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "threatIntelSetId",
+            "smithy.api#required": {}
+          }
+        },
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID of the detector that the threatIntelSet is associated with.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
         }
@@ -1863,11 +1870,11 @@
     "com.amazonaws.guardduty#DescribeOrganizationConfigurationResponse": {
       "type": "structure",
       "members": {
-        "AutoEnable": {
+        "MemberAccountLimitReached": {
           "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether GuardDuty is automatically enabled for accounts added to the\n      organization.</p>",
-            "smithy.api#jsonName": "autoEnable",
+            "smithy.api#documentation": "<p>Indicates whether the maximum number of allowed member accounts are already associated\n      with the delegated administrator master account.</p>",
+            "smithy.api#jsonName": "memberAccountLimitReached",
             "smithy.api#required": {}
           }
         },
@@ -1878,11 +1885,11 @@
             "smithy.api#jsonName": "dataSources"
           }
         },
-        "MemberAccountLimitReached": {
+        "AutoEnable": {
           "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the maximum number of allowed member accounts are already associated\n      with the delegated administrator master account.</p>",
-            "smithy.api#jsonName": "memberAccountLimitReached",
+            "smithy.api#documentation": "<p>Indicates whether GuardDuty is automatically enabled for accounts added to the\n      organization.</p>",
+            "smithy.api#jsonName": "autoEnable",
             "smithy.api#required": {}
           }
         }
@@ -1916,15 +1923,6 @@
     "com.amazonaws.guardduty#DescribePublishingDestinationRequest": {
       "type": "structure",
       "members": {
-        "DestinationId": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the publishing destination to retrieve.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "destinationId",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
@@ -1933,25 +1931,26 @@
             "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
+        },
+        "DestinationId": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the publishing destination to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "destinationId",
+            "smithy.api#required": {}
+          }
         }
       }
     },
     "com.amazonaws.guardduty#DescribePublishingDestinationResponse": {
       "type": "structure",
       "members": {
-        "DestinationId": {
-          "target": "com.amazonaws.guardduty#String",
+        "DestinationProperties": {
+          "target": "com.amazonaws.guardduty#DestinationProperties",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the publishing destination.</p>",
-            "smithy.api#jsonName": "destinationId",
-            "smithy.api#required": {}
-          }
-        },
-        "PublishingFailureStartTimestamp": {
-          "target": "com.amazonaws.guardduty#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The time, in epoch millisecond format, at which GuardDuty was first unable to publish\n      findings to the destination.</p>",
-            "smithy.api#jsonName": "publishingFailureStartTimestamp",
+            "smithy.api#documentation": "<p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code>\n      and <code>KmsKeyArn</code> of the publishing destination.</p>",
+            "smithy.api#jsonName": "destinationProperties",
             "smithy.api#required": {}
           }
         },
@@ -1963,11 +1962,11 @@
             "smithy.api#required": {}
           }
         },
-        "DestinationProperties": {
-          "target": "com.amazonaws.guardduty#DestinationProperties",
+        "PublishingFailureStartTimestamp": {
+          "target": "com.amazonaws.guardduty#Long",
           "traits": {
-            "smithy.api#documentation": "<p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code>\n      and <code>KmsKeyArn</code> of the publishing destination.</p>",
-            "smithy.api#jsonName": "destinationProperties",
+            "smithy.api#documentation": "<p>The time, in epoch millisecond format, at which GuardDuty was first unable to publish\n      findings to the destination.</p>",
+            "smithy.api#jsonName": "publishingFailureStartTimestamp",
             "smithy.api#required": {}
           }
         },
@@ -1978,12 +1977,28 @@
             "smithy.api#jsonName": "destinationType",
             "smithy.api#required": {}
           }
+        },
+        "DestinationId": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the publishing destination.</p>",
+            "smithy.api#jsonName": "destinationId",
+            "smithy.api#required": {}
+          }
         }
       }
     },
     "com.amazonaws.guardduty#Destination": {
       "type": "structure",
       "members": {
+        "DestinationId": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID of the publishing destination.</p>",
+            "smithy.api#jsonName": "destinationId",
+            "smithy.api#required": {}
+          }
+        },
         "Status": {
           "target": "com.amazonaws.guardduty#PublishingStatus",
           "traits": {
@@ -1999,14 +2014,6 @@
             "smithy.api#jsonName": "destinationType",
             "smithy.api#required": {}
           }
-        },
-        "DestinationId": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique ID of the publishing destination.</p>",
-            "smithy.api#jsonName": "destinationId",
-            "smithy.api#required": {}
-          }
         }
       },
       "traits": {
@@ -2016,18 +2023,18 @@
     "com.amazonaws.guardduty#DestinationProperties": {
       "type": "structure",
       "members": {
-        "DestinationArn": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource to publish to.</p>",
-            "smithy.api#jsonName": "destinationArn"
-          }
-        },
         "KmsKeyArn": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the KMS key to use for encryption.</p>",
             "smithy.api#jsonName": "kmsKeyArn"
+          }
+        },
+        "DestinationArn": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to publish to.</p>",
+            "smithy.api#jsonName": "destinationArn"
           }
         }
       },
@@ -2209,20 +2216,20 @@
     "com.amazonaws.guardduty#DisassociateMembersRequest": {
       "type": "structure",
       "members": {
-        "AccountIds": {
-          "target": "com.amazonaws.guardduty#AccountIds",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts that you want to disassociate from\n      the master account.</p>",
-            "smithy.api#jsonName": "accountIds",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      disassociate from the master account.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
+        },
+        "AccountIds": {
+          "target": "com.amazonaws.guardduty#AccountIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts that you want to disassociate from\n      the master account.</p>",
+            "smithy.api#jsonName": "accountIds",
             "smithy.api#required": {}
           }
         }
@@ -2428,25 +2435,11 @@
     "com.amazonaws.guardduty#Finding": {
       "type": "structure",
       "members": {
-        "Type": {
-          "target": "com.amazonaws.guardduty#FindingType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of finding.</p>",
-            "smithy.api#jsonName": "type",
-            "smithy.api#required": {}
-          }
-        },
-        "Service": {
-          "target": "com.amazonaws.guardduty#Service",
-          "traits": {
-            "smithy.api#jsonName": "service"
-          }
-        },
-        "AccountId": {
+        "UpdatedAt": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the account in which the finding was generated.</p>",
-            "smithy.api#jsonName": "accountId",
+            "smithy.api#documentation": "<p>The time and date when the finding was last updated.</p>",
+            "smithy.api#jsonName": "updatedAt",
             "smithy.api#required": {}
           }
         },
@@ -2457,12 +2450,73 @@
             "smithy.api#jsonName": "confidence"
           }
         },
-        "SchemaVersion": {
+        "Resource": {
+          "target": "com.amazonaws.guardduty#Resource",
+          "traits": {
+            "smithy.api#jsonName": "resource",
+            "smithy.api#required": {}
+          }
+        },
+        "Region": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The version of the schema used for the finding.</p>",
-            "smithy.api#jsonName": "schemaVersion",
+            "smithy.api#documentation": "<p>The Region where the finding was generated.</p>",
+            "smithy.api#jsonName": "region",
             "smithy.api#required": {}
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.guardduty#FindingType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of finding.</p>",
+            "smithy.api#jsonName": "type",
+            "smithy.api#required": {}
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the finding.</p>",
+            "smithy.api#jsonName": "arn",
+            "smithy.api#required": {}
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the account in which the finding was generated.</p>",
+            "smithy.api#jsonName": "accountId",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the finding.</p>",
+            "smithy.api#jsonName": "description"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the finding.</p>",
+            "smithy.api#jsonName": "id",
+            "smithy.api#required": {}
+          }
+        },
+        "CreatedAt": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The time and date when the finding was created.</p>",
+            "smithy.api#jsonName": "createdAt",
+            "smithy.api#required": {}
+          }
+        },
+        "Partition": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The partition associated with the finding.</p>",
+            "smithy.api#jsonName": "partition"
           }
         },
         "Severity": {
@@ -2480,65 +2534,18 @@
             "smithy.api#jsonName": "title"
           }
         },
-        "Region": {
+        "SchemaVersion": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Region where the finding was generated.</p>",
-            "smithy.api#jsonName": "region",
+            "smithy.api#documentation": "<p>The version of the schema used for the finding.</p>",
+            "smithy.api#jsonName": "schemaVersion",
             "smithy.api#required": {}
           }
         },
-        "UpdatedAt": {
-          "target": "com.amazonaws.guardduty#String",
+        "Service": {
+          "target": "com.amazonaws.guardduty#Service",
           "traits": {
-            "smithy.api#documentation": "<p>The time and date when the finding was last updated.</p>",
-            "smithy.api#jsonName": "updatedAt",
-            "smithy.api#required": {}
-          }
-        },
-        "Resource": {
-          "target": "com.amazonaws.guardduty#Resource",
-          "traits": {
-            "smithy.api#jsonName": "resource",
-            "smithy.api#required": {}
-          }
-        },
-        "Partition": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The partition associated with the finding.</p>",
-            "smithy.api#jsonName": "partition"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the finding.</p>",
-            "smithy.api#jsonName": "arn",
-            "smithy.api#required": {}
-          }
-        },
-        "CreatedAt": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The time and date when the finding was created.</p>",
-            "smithy.api#jsonName": "createdAt",
-            "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the finding.</p>",
-            "smithy.api#jsonName": "description"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the finding.</p>",
-            "smithy.api#jsonName": "id",
-            "smithy.api#required": {}
+            "smithy.api#jsonName": "service"
           }
         }
       },
@@ -2752,18 +2759,12 @@
     "com.amazonaws.guardduty#GetDetectorResponse": {
       "type": "structure",
       "members": {
-        "UpdatedAt": {
-          "target": "com.amazonaws.guardduty#String",
+        "Status": {
+          "target": "com.amazonaws.guardduty#DetectorStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The last-updated timestamp for the detector.</p>",
-            "smithy.api#jsonName": "updatedAt"
-          }
-        },
-        "CreatedAt": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp of when the detector was created.</p>",
-            "smithy.api#jsonName": "createdAt"
+            "smithy.api#documentation": "<p>The detector status.</p>",
+            "smithy.api#jsonName": "status",
+            "smithy.api#required": {}
           }
         },
         "Tags": {
@@ -2773,11 +2774,32 @@
             "smithy.api#jsonName": "tags"
           }
         },
+        "CreatedAt": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp of when the detector was created.</p>",
+            "smithy.api#jsonName": "createdAt"
+          }
+        },
         "DataSources": {
           "target": "com.amazonaws.guardduty#DataSourceConfigurationsResult",
           "traits": {
             "smithy.api#documentation": "<p>An object that describes which data sources are enabled for the detector.</p>",
             "smithy.api#jsonName": "dataSources"
+          }
+        },
+        "UpdatedAt": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The last-updated timestamp for the detector.</p>",
+            "smithy.api#jsonName": "updatedAt"
+          }
+        },
+        "FindingPublishingFrequency": {
+          "target": "com.amazonaws.guardduty#FindingPublishingFrequency",
+          "traits": {
+            "smithy.api#documentation": "<p>The publishing frequency of the finding.</p>",
+            "smithy.api#jsonName": "findingPublishingFrequency"
           }
         },
         "ServiceRole": {
@@ -2786,21 +2808,6 @@
             "smithy.api#documentation": "<p>The GuardDuty service role.</p>",
             "smithy.api#jsonName": "serviceRole",
             "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.guardduty#DetectorStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The detector status.</p>",
-            "smithy.api#jsonName": "status",
-            "smithy.api#required": {}
-          }
-        },
-        "FindingPublishingFrequency": {
-          "target": "com.amazonaws.guardduty#FindingPublishingFrequency",
-          "traits": {
-            "smithy.api#documentation": "<p>The publishing frequency of the finding.</p>",
-            "smithy.api#jsonName": "findingPublishingFrequency"
           }
         }
       }
@@ -2833,21 +2840,21 @@
     "com.amazonaws.guardduty#GetFilterRequest": {
       "type": "structure",
       "members": {
-        "FilterName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the filter you want to get.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "filterName",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the detector that the filter is associated with.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
+        },
+        "FilterName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the filter you want to get.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "filterName",
             "smithy.api#required": {}
           }
         }
@@ -2864,6 +2871,14 @@
             "smithy.api#required": {}
           }
         },
+        "Name": {
+          "target": "com.amazonaws.guardduty#FilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the filter.</p>",
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
         "Description": {
           "target": "com.amazonaws.guardduty#FilterDescription",
           "traits": {
@@ -2876,14 +2891,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Specifies the action that is to be applied to the findings that match the filter.</p>",
             "smithy.api#jsonName": "action",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.guardduty#FilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the filter.</p>",
-            "smithy.api#jsonName": "name",
             "smithy.api#required": {}
           }
         },
@@ -2931,19 +2938,19 @@
     "com.amazonaws.guardduty#GetFindingsRequest": {
       "type": "structure",
       "members": {
-        "SortCriteria": {
-          "target": "com.amazonaws.guardduty#SortCriteria",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the criteria used for sorting findings.</p>",
-            "smithy.api#jsonName": "sortCriteria"
-          }
-        },
         "FindingIds": {
           "target": "com.amazonaws.guardduty#FindingIds",
           "traits": {
             "smithy.api#documentation": "<p>The IDs of the findings that you want to retrieve.</p>",
             "smithy.api#jsonName": "findingIds",
             "smithy.api#required": {}
+          }
+        },
+        "SortCriteria": {
+          "target": "com.amazonaws.guardduty#SortCriteria",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents the criteria used for sorting findings.</p>",
+            "smithy.api#jsonName": "sortCriteria"
           }
         },
         "DetectorId": {
@@ -2998,20 +3005,20 @@
     "com.amazonaws.guardduty#GetFindingsStatisticsRequest": {
       "type": "structure",
       "members": {
+        "FindingStatisticTypes": {
+          "target": "com.amazonaws.guardduty#FindingStatisticTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>The types of finding statistics to retrieve.</p>",
+            "smithy.api#jsonName": "findingStatisticTypes",
+            "smithy.api#required": {}
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings' statistics you\n      want to retrieve.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
-        "FindingStatisticTypes": {
-          "target": "com.amazonaws.guardduty#FindingStatisticTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>The types of finding statistics to retrieve.</p>",
-            "smithy.api#jsonName": "findingStatisticTypes",
             "smithy.api#required": {}
           }
         },
@@ -3088,19 +3095,11 @@
     "com.amazonaws.guardduty#GetIPSetResponse": {
       "type": "structure",
       "members": {
-        "Location": {
-          "target": "com.amazonaws.guardduty#Location",
+        "Format": {
+          "target": "com.amazonaws.guardduty#IpSetFormat",
           "traits": {
-            "smithy.api#documentation": "<p>The URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
-            "smithy.api#jsonName": "location",
-            "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.guardduty#IpSetStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of IPSet file that was uploaded.</p>",
-            "smithy.api#jsonName": "status",
+            "smithy.api#documentation": "<p>The format of the file that contains the IPSet.</p>",
+            "smithy.api#jsonName": "format",
             "smithy.api#required": {}
           }
         },
@@ -3111,6 +3110,14 @@
             "smithy.api#jsonName": "tags"
           }
         },
+        "Status": {
+          "target": "com.amazonaws.guardduty#IpSetStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of IPSet file that was uploaded.</p>",
+            "smithy.api#jsonName": "status",
+            "smithy.api#required": {}
+          }
+        },
         "Name": {
           "target": "com.amazonaws.guardduty#Name",
           "traits": {
@@ -3119,11 +3126,11 @@
             "smithy.api#required": {}
           }
         },
-        "Format": {
-          "target": "com.amazonaws.guardduty#IpSetFormat",
+        "Location": {
+          "target": "com.amazonaws.guardduty#Location",
           "traits": {
-            "smithy.api#documentation": "<p>The format of the file that contains the IPSet.</p>",
-            "smithy.api#jsonName": "format",
+            "smithy.api#documentation": "<p>The URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+            "smithy.api#jsonName": "location",
             "smithy.api#required": {}
           }
         }
@@ -3272,19 +3279,19 @@
     "com.amazonaws.guardduty#GetMemberDetectorsResponse": {
       "type": "structure",
       "members": {
-        "UnprocessedAccounts": {
-          "target": "com.amazonaws.guardduty#UnprocessedAccounts",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of member account IDs that were unable to be processed along with an explanation\n      for why they were not processed.</p>",
-            "smithy.api#jsonName": "unprocessedAccounts",
-            "smithy.api#required": {}
-          }
-        },
         "MemberDataSourceConfigurations": {
           "target": "com.amazonaws.guardduty#MemberDataSourceConfigurations",
           "traits": {
             "smithy.api#documentation": "<p>An object that describes which data sources are enabled for a member account.</p>",
             "smithy.api#jsonName": "members",
+            "smithy.api#required": {}
+          }
+        },
+        "UnprocessedAccounts": {
+          "target": "com.amazonaws.guardduty#UnprocessedAccounts",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of member account IDs that were unable to be processed along with an explanation\n      for why they were not processed.</p>",
+            "smithy.api#jsonName": "unprocessedAccounts",
             "smithy.api#required": {}
           }
         }
@@ -3340,19 +3347,19 @@
     "com.amazonaws.guardduty#GetMembersResponse": {
       "type": "structure",
       "members": {
-        "Members": {
-          "target": "com.amazonaws.guardduty#Members",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of members.</p>",
-            "smithy.api#jsonName": "members",
-            "smithy.api#required": {}
-          }
-        },
         "UnprocessedAccounts": {
           "target": "com.amazonaws.guardduty#UnprocessedAccounts",
           "traits": {
             "smithy.api#documentation": "<p>A list of objects that contain the unprocessed account and a result string that explains\n      why it was unprocessed.</p>",
             "smithy.api#jsonName": "unprocessedAccounts",
+            "smithy.api#required": {}
+          }
+        },
+        "Members": {
+          "target": "com.amazonaws.guardduty#Members",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of members.</p>",
+            "smithy.api#jsonName": "members",
             "smithy.api#required": {}
           }
         }
@@ -3409,12 +3416,11 @@
     "com.amazonaws.guardduty#GetThreatIntelSetResponse": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.guardduty#Name",
+        "Tags": {
+          "target": "com.amazonaws.guardduty#TagMap",
           "traits": {
-            "smithy.api#documentation": "<p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by\n      activity that involves IP addresses included in this ThreatIntelSet.</p>",
-            "smithy.api#jsonName": "name",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The tags of the threat list resource.</p>",
+            "smithy.api#jsonName": "tags"
           }
         },
         "Format": {
@@ -3422,14 +3428,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The format of the threatIntelSet.</p>",
             "smithy.api#jsonName": "format",
-            "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.guardduty#ThreatIntelSetStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of threatIntelSet file uploaded.</p>",
-            "smithy.api#jsonName": "status",
             "smithy.api#required": {}
           }
         },
@@ -3441,11 +3439,20 @@
             "smithy.api#required": {}
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#TagMap",
+        "Name": {
+          "target": "com.amazonaws.guardduty#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The tags of the threat list resource.</p>",
-            "smithy.api#jsonName": "tags"
+            "smithy.api#documentation": "<p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by\n      activity that involves IP addresses included in this ThreatIntelSet.</p>",
+            "smithy.api#jsonName": "name",
+            "smithy.api#required": {}
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.guardduty#ThreatIntelSetStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of threatIntelSet file uploaded.</p>",
+            "smithy.api#jsonName": "status",
+            "smithy.api#required": {}
           }
         }
       }
@@ -3483,20 +3490,19 @@
     "com.amazonaws.guardduty#GetUsageStatisticsRequest": {
       "type": "structure",
       "members": {
-        "UsageCriteria": {
-          "target": "com.amazonaws.guardduty#UsageCriteria",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the criteria used for querying usage.</p>",
-            "smithy.api#jsonName": "usageCriteria",
-            "smithy.api#required": {}
-          }
-        },
         "UsageStatisticType": {
           "target": "com.amazonaws.guardduty#UsageStatisticType",
           "traits": {
             "smithy.api#documentation": "<p>The type of usage statistics to retrieve.</p>",
             "smithy.api#jsonName": "usageStatisticsType",
             "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.guardduty#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+            "smithy.api#jsonName": "maxResults"
           }
         },
         "DetectorId": {
@@ -3508,18 +3514,12 @@
             "smithy.api#required": {}
           }
         },
-        "Unit": {
-          "target": "com.amazonaws.guardduty#String",
+        "UsageCriteria": {
+          "target": "com.amazonaws.guardduty#UsageCriteria",
           "traits": {
-            "smithy.api#documentation": "<p>The currency unit you would like to view your usage statistics in. Current valid values\n      are USD.</p>",
-            "smithy.api#jsonName": "unit"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.guardduty#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
-            "smithy.api#jsonName": "maxResults"
+            "smithy.api#documentation": "<p>Represents the criteria used for querying usage.</p>",
+            "smithy.api#jsonName": "usageCriteria",
+            "smithy.api#required": {}
           }
         },
         "NextToken": {
@@ -3528,24 +3528,31 @@
             "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request to a list action. For subsequent calls, use the\n      NextToken value returned from the previous request to continue listing results after the first\n      page.</p>",
             "smithy.api#jsonName": "nextToken"
           }
+        },
+        "Unit": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The currency unit you would like to view your usage statistics in. Current valid values\n      are USD.</p>",
+            "smithy.api#jsonName": "unit"
+          }
         }
       }
     },
     "com.amazonaws.guardduty#GetUsageStatisticsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "UsageStatistics": {
           "target": "com.amazonaws.guardduty#UsageStatistics",
           "traits": {
             "smithy.api#documentation": "<p>The usage statistics object. If a UsageStatisticType was provided, the objects\n      representing other types will be null.</p>",
             "smithy.api#jsonName": "usageStatistics"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -3775,53 +3782,11 @@
     "com.amazonaws.guardduty#InstanceDetails": {
       "type": "structure",
       "members": {
-        "ProductCodes": {
-          "target": "com.amazonaws.guardduty#ProductCodes",
-          "traits": {
-            "smithy.api#documentation": "<p>The product code of the EC2 instance.</p>",
-            "smithy.api#jsonName": "productCodes"
-          }
-        },
-        "ImageDescription": {
+        "InstanceId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The image description of the EC2 instance.</p>",
-            "smithy.api#jsonName": "imageDescription"
-          }
-        },
-        "IamInstanceProfile": {
-          "target": "com.amazonaws.guardduty#IamInstanceProfile",
-          "traits": {
-            "smithy.api#documentation": "<p>The profile information of the EC2 instance.</p>",
-            "smithy.api#jsonName": "iamInstanceProfile"
-          }
-        },
-        "OutpostArn": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts\n      instances.</p>",
-            "smithy.api#jsonName": "outpostArn"
-          }
-        },
-        "AvailabilityZone": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Availability Zone of the EC2 instance.</p>",
-            "smithy.api#jsonName": "availabilityZone"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags of the EC2 instance.</p>",
-            "smithy.api#jsonName": "tags"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the EC2 instance.</p>",
-            "smithy.api#jsonName": "instanceType"
+            "smithy.api#documentation": "<p>The ID of the EC2 instance.</p>",
+            "smithy.api#jsonName": "instanceId"
           }
         },
         "Platform": {
@@ -3831,11 +3796,32 @@
             "smithy.api#jsonName": "platform"
           }
         },
+        "InstanceType": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the EC2 instance.</p>",
+            "smithy.api#jsonName": "instanceType"
+          }
+        },
         "LaunchTime": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The launch time of the EC2 instance.</p>",
             "smithy.api#jsonName": "launchTime"
+          }
+        },
+        "AvailabilityZone": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Availability Zone of the EC2 instance.</p>",
+            "smithy.api#jsonName": "availabilityZone"
+          }
+        },
+        "ProductCodes": {
+          "target": "com.amazonaws.guardduty#ProductCodes",
+          "traits": {
+            "smithy.api#documentation": "<p>The product code of the EC2 instance.</p>",
+            "smithy.api#jsonName": "productCodes"
           }
         },
         "InstanceState": {
@@ -3845,13 +3831,6 @@
             "smithy.api#jsonName": "instanceState"
           }
         },
-        "ImageId": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The image ID of the EC2 instance.</p>",
-            "smithy.api#jsonName": "imageId"
-          }
-        },
         "NetworkInterfaces": {
           "target": "com.amazonaws.guardduty#NetworkInterfaces",
           "traits": {
@@ -3859,11 +3838,39 @@
             "smithy.api#jsonName": "networkInterfaces"
           }
         },
-        "InstanceId": {
+        "OutpostArn": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the EC2 instance.</p>",
-            "smithy.api#jsonName": "instanceId"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts\n      instances.</p>",
+            "smithy.api#jsonName": "outpostArn"
+          }
+        },
+        "ImageId": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The image ID of the EC2 instance.</p>",
+            "smithy.api#jsonName": "imageId"
+          }
+        },
+        "IamInstanceProfile": {
+          "target": "com.amazonaws.guardduty#IamInstanceProfile",
+          "traits": {
+            "smithy.api#documentation": "<p>The profile information of the EC2 instance.</p>",
+            "smithy.api#jsonName": "iamInstanceProfile"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.guardduty#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags of the EC2 instance.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "ImageDescription": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The image description of the EC2 instance.</p>",
+            "smithy.api#jsonName": "imageDescription"
           }
         }
       },
@@ -3901,18 +3908,18 @@
     "com.amazonaws.guardduty#Invitation": {
       "type": "structure",
       "members": {
+        "RelationshipStatus": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the relationship between the inviter and invitee accounts.</p>",
+            "smithy.api#jsonName": "relationshipStatus"
+          }
+        },
         "InvitedAt": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The timestamp when the invitation was sent.</p>",
             "smithy.api#jsonName": "invitedAt"
-          }
-        },
-        "AccountId": {
-          "target": "com.amazonaws.guardduty#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the account that the invitation was sent from.</p>",
-            "smithy.api#jsonName": "accountId"
           }
         },
         "InvitationId": {
@@ -3922,11 +3929,11 @@
             "smithy.api#jsonName": "invitationId"
           }
         },
-        "RelationshipStatus": {
-          "target": "com.amazonaws.guardduty#String",
+        "AccountId": {
+          "target": "com.amazonaws.guardduty#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the relationship between the inviter and invitee accounts.</p>",
-            "smithy.api#jsonName": "relationshipStatus"
+            "smithy.api#documentation": "<p>The ID of the account that the invitation was sent from.</p>",
+            "smithy.api#jsonName": "accountId"
           }
         }
       },
@@ -3974,11 +3981,12 @@
     "com.amazonaws.guardduty#InviteMembersRequest": {
       "type": "structure",
       "members": {
-        "DisableEmailNotification": {
-          "target": "com.amazonaws.guardduty#Boolean",
+        "AccountIds": {
+          "target": "com.amazonaws.guardduty#AccountIds",
           "traits": {
-            "smithy.api#documentation": "<p>A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.</p>",
-            "smithy.api#jsonName": "disableEmailNotification"
+            "smithy.api#documentation": "<p>A list of account IDs of the accounts that you want to invite to GuardDuty as\n      members.</p>",
+            "smithy.api#jsonName": "accountIds",
+            "smithy.api#required": {}
           }
         },
         "Message": {
@@ -3988,12 +3996,11 @@
             "smithy.api#jsonName": "message"
           }
         },
-        "AccountIds": {
-          "target": "com.amazonaws.guardduty#AccountIds",
+        "DisableEmailNotification": {
+          "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>A list of account IDs of the accounts that you want to invite to GuardDuty as\n      members.</p>",
-            "smithy.api#jsonName": "accountIds",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.</p>",
+            "smithy.api#jsonName": "disableEmailNotification"
           }
         },
         "DetectorId": {
@@ -4166,19 +4173,19 @@
     "com.amazonaws.guardduty#ListDetectorsResponse": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
         "DetectorIds": {
           "target": "com.amazonaws.guardduty#DetectorIds",
           "traits": {
             "smithy.api#documentation": "<p>A list of detector IDs.</p>",
             "smithy.api#jsonName": "detectorIds",
             "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
-            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4246,19 +4253,19 @@
     "com.amazonaws.guardduty#ListFiltersResponse": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
         "FilterNames": {
           "target": "com.amazonaws.guardduty#FilterNames",
           "traits": {
             "smithy.api#documentation": "<p>A list of filter names.</p>",
             "smithy.api#jsonName": "filterNames",
             "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
-            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4296,6 +4303,20 @@
     "com.amazonaws.guardduty#ListFindingsRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "SortCriteria": {
+          "target": "com.amazonaws.guardduty#SortCriteria",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents the criteria used for sorting findings.</p>",
+            "smithy.api#jsonName": "sortCriteria"
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
@@ -4312,25 +4333,11 @@
             "smithy.api#jsonName": "maxResults"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "FindingCriteria": {
           "target": "com.amazonaws.guardduty#FindingCriteria",
           "traits": {
             "smithy.api#documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p>\n         <ul>\n            <li>\n               <p>JSON field name</p>\n            </li>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to 'true', only archived findings are listed. When it's set\n          to 'false', only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>\n            </li>\n         </ul>",
             "smithy.api#jsonName": "findingCriteria"
-          }
-        },
-        "SortCriteria": {
-          "target": "com.amazonaws.guardduty#SortCriteria",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the criteria used for sorting findings.</p>",
-            "smithy.api#jsonName": "sortCriteria"
           }
         }
       }
@@ -4397,20 +4404,20 @@
             "smithy.api#required": {}
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
-            "smithy.api#httpQuery": "nextToken",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.guardduty#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
             "smithy.api#httpQuery": "maxResults",
             "smithy.api#jsonName": "maxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4538,6 +4545,22 @@
     "com.amazonaws.guardduty#ListMembersRequest": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
+        "OnlyAssociated": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to only return associated members or to return all members (including\n      members who haven't been invited yet or have been disassociated).</p>",
+            "smithy.api#httpQuery": "onlyAssociated",
+            "smithy.api#jsonName": "onlyAssociated"
+          }
+        },
         "MaxResults": {
           "target": "com.amazonaws.guardduty#MaxResults",
           "traits": {
@@ -4554,40 +4577,24 @@
             "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
-            "smithy.api#httpQuery": "nextToken",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
-        "OnlyAssociated": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether to only return associated members or to return all members (including\n      members who haven't been invited yet or have been disassociated).</p>",
-            "smithy.api#httpQuery": "onlyAssociated",
-            "smithy.api#jsonName": "onlyAssociated"
-          }
         }
       }
     },
     "com.amazonaws.guardduty#ListMembersResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "Members": {
           "target": "com.amazonaws.guardduty#Members",
           "traits": {
             "smithy.api#documentation": "<p>A list of members.</p>",
             "smithy.api#jsonName": "members"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4625,14 +4632,6 @@
     "com.amazonaws.guardduty#ListOrganizationAdminAccountsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.guardduty#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
-            "smithy.api#httpQuery": "maxResults",
-            "smithy.api#jsonName": "maxResults"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
@@ -4640,24 +4639,32 @@
             "smithy.api#httpQuery": "nextToken",
             "smithy.api#jsonName": "nextToken"
           }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.guardduty#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+            "smithy.api#httpQuery": "maxResults",
+            "smithy.api#jsonName": "maxResults"
+          }
         }
       }
     },
     "com.amazonaws.guardduty#ListOrganizationAdminAccountsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
-            "smithy.api#jsonName": "nextToken"
-          }
-        },
         "AdminAccounts": {
           "target": "com.amazonaws.guardduty#AdminAccounts",
           "traits": {
             "smithy.api#documentation": "<p>An AdminAccounts object that includes a list of accounts configured as GuardDuty delegated\n      administrators.</p>",
             "smithy.api#jsonName": "adminAccounts"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4695,13 +4702,12 @@
     "com.amazonaws.guardduty#ListPublishingDestinationsRequest": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the detector to retrieve publishing destinations for.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request to a list action. For subsequent calls, use the\n        <code>NextToken</code> value returned from the previous request to continue listing results\n      after the first page.</p>",
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#jsonName": "nextToken"
           }
         },
         "MaxResults": {
@@ -4712,12 +4718,13 @@
             "smithy.api#jsonName": "maxResults"
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
-            "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request to a list action. For subsequent calls, use the\n        <code>NextToken</code> value returned from the previous request to continue listing results\n      after the first page.</p>",
-            "smithy.api#httpQuery": "nextToken",
-            "smithy.api#jsonName": "nextToken"
+            "smithy.api#documentation": "<p>The ID of the detector to retrieve publishing destinations for.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
           }
         }
       }
@@ -4725,19 +4732,19 @@
     "com.amazonaws.guardduty#ListPublishingDestinationsResponse": {
       "type": "structure",
       "members": {
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request to a list action. For subsequent calls, use the\n        <code>NextToken</code> value returned from the previous request to continue listing results\n      after the first page.</p>",
+            "smithy.api#jsonName": "nextToken"
+          }
+        },
         "Destinations": {
           "target": "com.amazonaws.guardduty#Destinations",
           "traits": {
             "smithy.api#documentation": "<p>A <code>Destinations</code> object that includes information about each publishing\n      destination returned.</p>",
             "smithy.api#jsonName": "destinations",
             "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request to a list action. For subsequent calls, use the\n        <code>NextToken</code> value returned from the previous request to continue listing results\n      after the first page.</p>",
-            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4826,12 +4833,12 @@
     "com.amazonaws.guardduty#ListThreatIntelSetsRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.guardduty#String",
+        "MaxResults": {
+          "target": "com.amazonaws.guardduty#MaxResults",
           "traits": {
-            "smithy.api#documentation": "<p>You can use this parameter to paginate results in the response. Set the value of this\n      parameter to null on your first call to the list action. For subsequent calls to the action,\n      fill nextToken in the request with the value of NextToken from the previous response to\n      continue listing data.</p>",
-            "smithy.api#httpQuery": "nextToken",
-            "smithy.api#jsonName": "nextToken"
+            "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
+            "smithy.api#httpQuery": "maxResults",
+            "smithy.api#jsonName": "maxResults"
           }
         },
         "DetectorId": {
@@ -4843,12 +4850,12 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.guardduty#MaxResults",
+        "NextToken": {
+          "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
-            "smithy.api#httpQuery": "maxResults",
-            "smithy.api#jsonName": "maxResults"
+            "smithy.api#documentation": "<p>You can use this parameter to paginate results in the response. Set the value of this\n      parameter to null on your first call to the list action. For subsequent calls to the action,\n      fill nextToken in the request with the value of NextToken from the previous response to\n      continue listing data.</p>",
+            "smithy.api#httpQuery": "nextToken",
+            "smithy.api#jsonName": "nextToken"
           }
         }
       }
@@ -4925,18 +4932,11 @@
     "com.amazonaws.guardduty#Master": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.guardduty#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the account used as the master account.</p>",
-            "smithy.api#jsonName": "accountId"
-          }
-        },
-        "InvitedAt": {
+        "InvitationId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The timestamp when the invitation was sent.</p>",
-            "smithy.api#jsonName": "invitedAt"
+            "smithy.api#documentation": "<p>The value used to validate the master account to the member account.</p>",
+            "smithy.api#jsonName": "invitationId"
           }
         },
         "RelationshipStatus": {
@@ -4946,11 +4946,18 @@
             "smithy.api#jsonName": "relationshipStatus"
           }
         },
-        "InvitationId": {
+        "InvitedAt": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The value used to validate the master account to the member account.</p>",
-            "smithy.api#jsonName": "invitationId"
+            "smithy.api#documentation": "<p>The timestamp when the invitation was sent.</p>",
+            "smithy.api#jsonName": "invitedAt"
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.guardduty#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the account used as the master account.</p>",
+            "smithy.api#jsonName": "accountId"
           }
         }
       },
@@ -4970,11 +4977,11 @@
     "com.amazonaws.guardduty#Member": {
       "type": "structure",
       "members": {
-        "RelationshipStatus": {
+        "UpdatedAt": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the relationship between the member and the master.</p>",
-            "smithy.api#jsonName": "relationshipStatus",
+            "smithy.api#documentation": "<p>The last-updated timestamp of the member.</p>",
+            "smithy.api#jsonName": "updatedAt",
             "smithy.api#required": {}
           }
         },
@@ -4994,11 +5001,11 @@
             "smithy.api#required": {}
           }
         },
-        "UpdatedAt": {
-          "target": "com.amazonaws.guardduty#String",
+        "Email": {
+          "target": "com.amazonaws.guardduty#Email",
           "traits": {
-            "smithy.api#documentation": "<p>The last-updated timestamp of the member.</p>",
-            "smithy.api#jsonName": "updatedAt",
+            "smithy.api#documentation": "<p>The email address of the member account.</p>",
+            "smithy.api#jsonName": "email",
             "smithy.api#required": {}
           }
         },
@@ -5009,19 +5016,19 @@
             "smithy.api#jsonName": "detectorId"
           }
         },
+        "RelationshipStatus": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the relationship between the member and the master.</p>",
+            "smithy.api#jsonName": "relationshipStatus",
+            "smithy.api#required": {}
+          }
+        },
         "InvitedAt": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The timestamp when the invitation was sent.</p>",
             "smithy.api#jsonName": "invitedAt"
-          }
-        },
-        "Email": {
-          "target": "com.amazonaws.guardduty#Email",
-          "traits": {
-            "smithy.api#documentation": "<p>The email address of the member account.</p>",
-            "smithy.api#jsonName": "email",
-            "smithy.api#required": {}
           }
         }
       },
@@ -5032,19 +5039,19 @@
     "com.amazonaws.guardduty#MemberDataSourceConfiguration": {
       "type": "structure",
       "members": {
-        "DataSources": {
-          "target": "com.amazonaws.guardduty#DataSourceConfigurationsResult",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information on the status of data sources for the account.</p>",
-            "smithy.api#jsonName": "dataSources",
-            "smithy.api#required": {}
-          }
-        },
         "AccountId": {
           "target": "com.amazonaws.guardduty#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The account ID for the member account.</p>",
             "smithy.api#jsonName": "accountId",
+            "smithy.api#required": {}
+          }
+        },
+        "DataSources": {
+          "target": "com.amazonaws.guardduty#DataSourceConfigurationsResult",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains information on the status of data sources for the account.</p>",
+            "smithy.api#jsonName": "dataSources",
             "smithy.api#required": {}
           }
         }
@@ -5095,20 +5102,6 @@
     "com.amazonaws.guardduty#NetworkConnectionAction": {
       "type": "structure",
       "members": {
-        "Blocked": {
-          "target": "com.amazonaws.guardduty#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether EC2 blocked the network connection to your instance.</p>",
-            "smithy.api#jsonName": "blocked"
-          }
-        },
-        "LocalIpDetails": {
-          "target": "com.amazonaws.guardduty#LocalIpDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>The local IP information of the connection.</p>",
-            "smithy.api#jsonName": "localIpDetails"
-          }
-        },
         "Protocol": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
@@ -5123,13 +5116,6 @@
             "smithy.api#jsonName": "connectionDirection"
           }
         },
-        "LocalPortDetails": {
-          "target": "com.amazonaws.guardduty#LocalPortDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>The local port information of the connection.</p>",
-            "smithy.api#jsonName": "localPortDetails"
-          }
-        },
         "RemotePortDetails": {
           "target": "com.amazonaws.guardduty#RemotePortDetails",
           "traits": {
@@ -5137,11 +5123,32 @@
             "smithy.api#jsonName": "remotePortDetails"
           }
         },
+        "Blocked": {
+          "target": "com.amazonaws.guardduty#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether EC2 blocked the network connection to your instance.</p>",
+            "smithy.api#jsonName": "blocked"
+          }
+        },
         "RemoteIpDetails": {
           "target": "com.amazonaws.guardduty#RemoteIpDetails",
           "traits": {
             "smithy.api#documentation": "<p>The remote IP information of the connection.</p>",
             "smithy.api#jsonName": "remoteIpDetails"
+          }
+        },
+        "LocalIpDetails": {
+          "target": "com.amazonaws.guardduty#LocalIpDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>The local IP information of the connection.</p>",
+            "smithy.api#jsonName": "localIpDetails"
+          }
+        },
+        "LocalPortDetails": {
+          "target": "com.amazonaws.guardduty#LocalPortDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>The local port information of the connection.</p>",
+            "smithy.api#jsonName": "localPortDetails"
           }
         }
       },
@@ -5152,11 +5159,39 @@
     "com.amazonaws.guardduty#NetworkInterface": {
       "type": "structure",
       "members": {
-        "SubnetId": {
+        "PrivateIpAddresses": {
+          "target": "com.amazonaws.guardduty#PrivateIpAddresses",
+          "traits": {
+            "smithy.api#documentation": "<p>Other private IP address information of the EC2 instance.</p>",
+            "smithy.api#jsonName": "privateIpAddresses"
+          }
+        },
+        "NetworkInterfaceId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The subnet ID of the EC2 instance.</p>",
-            "smithy.api#jsonName": "subnetId"
+            "smithy.api#documentation": "<p>The ID of the network interface.</p>",
+            "smithy.api#jsonName": "networkInterfaceId"
+          }
+        },
+        "PublicIp": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The public IP address of the EC2 instance.</p>",
+            "smithy.api#jsonName": "publicIp"
+          }
+        },
+        "PrivateIpAddress": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The private IP address of the EC2 instance.</p>",
+            "smithy.api#jsonName": "privateIpAddress"
+          }
+        },
+        "PrivateDnsName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The private DNS name of the EC2 instance.</p>",
+            "smithy.api#jsonName": "privateDnsName"
           }
         },
         "PublicDnsName": {
@@ -5173,18 +5208,18 @@
             "smithy.api#jsonName": "vpcId"
           }
         },
-        "PrivateIpAddress": {
-          "target": "com.amazonaws.guardduty#String",
+        "SecurityGroups": {
+          "target": "com.amazonaws.guardduty#SecurityGroups",
           "traits": {
-            "smithy.api#documentation": "<p>The private IP address of the EC2 instance.</p>",
-            "smithy.api#jsonName": "privateIpAddress"
+            "smithy.api#documentation": "<p>The security groups associated with the EC2 instance.</p>",
+            "smithy.api#jsonName": "securityGroups"
           }
         },
-        "NetworkInterfaceId": {
+        "SubnetId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the network interface.</p>",
-            "smithy.api#jsonName": "networkInterfaceId"
+            "smithy.api#documentation": "<p>The subnet ID of the EC2 instance.</p>",
+            "smithy.api#jsonName": "subnetId"
           }
         },
         "Ipv6Addresses": {
@@ -5192,34 +5227,6 @@
           "traits": {
             "smithy.api#documentation": "<p>A list of IPv6 addresses for the EC2 instance.</p>",
             "smithy.api#jsonName": "ipv6Addresses"
-          }
-        },
-        "PrivateDnsName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The private DNS name of the EC2 instance.</p>",
-            "smithy.api#jsonName": "privateDnsName"
-          }
-        },
-        "PublicIp": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The public IP address of the EC2 instance.</p>",
-            "smithy.api#jsonName": "publicIp"
-          }
-        },
-        "PrivateIpAddresses": {
-          "target": "com.amazonaws.guardduty#PrivateIpAddresses",
-          "traits": {
-            "smithy.api#documentation": "<p>Other private IP address information of the EC2 instance.</p>",
-            "smithy.api#jsonName": "privateIpAddresses"
-          }
-        },
-        "SecurityGroups": {
-          "target": "com.amazonaws.guardduty#SecurityGroups",
-          "traits": {
-            "smithy.api#documentation": "<p>The security groups associated with the EC2 instance.</p>",
-            "smithy.api#jsonName": "securityGroups"
           }
         }
       },
@@ -5257,11 +5264,11 @@
     "com.amazonaws.guardduty#Organization": {
       "type": "structure",
       "members": {
-        "Org": {
+        "AsnOrg": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the internet provider.</p>",
-            "smithy.api#jsonName": "org"
+            "smithy.api#documentation": "<p>The organization that registered this ASN.</p>",
+            "smithy.api#jsonName": "asnOrg"
           }
         },
         "Isp": {
@@ -5271,11 +5278,11 @@
             "smithy.api#jsonName": "isp"
           }
         },
-        "AsnOrg": {
+        "Org": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The organization that registered this ASN.</p>",
-            "smithy.api#jsonName": "asnOrg"
+            "smithy.api#documentation": "<p>The name of the internet provider.</p>",
+            "smithy.api#jsonName": "org"
           }
         },
         "Asn": {
@@ -5415,18 +5422,18 @@
     "com.amazonaws.guardduty#PortProbeDetail": {
       "type": "structure",
       "members": {
-        "LocalPortDetails": {
-          "target": "com.amazonaws.guardduty#LocalPortDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>The local port information of the connection.</p>",
-            "smithy.api#jsonName": "localPortDetails"
-          }
-        },
         "LocalIpDetails": {
           "target": "com.amazonaws.guardduty#LocalIpDetails",
           "traits": {
             "smithy.api#documentation": "<p>The local IP information of the connection.</p>",
             "smithy.api#jsonName": "localIpDetails"
+          }
+        },
+        "LocalPortDetails": {
+          "target": "com.amazonaws.guardduty#LocalPortDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>The local port information of the connection.</p>",
+            "smithy.api#jsonName": "localPortDetails"
           }
         },
         "RemoteIpDetails": {
@@ -5450,18 +5457,18 @@
     "com.amazonaws.guardduty#PrivateIpAddressDetails": {
       "type": "structure",
       "members": {
-        "PrivateDnsName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The private DNS name of the EC2 instance.</p>",
-            "smithy.api#jsonName": "privateDnsName"
-          }
-        },
         "PrivateIpAddress": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The private IP address of the EC2 instance.</p>",
             "smithy.api#jsonName": "privateIpAddress"
+          }
+        },
+        "PrivateDnsName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The private DNS name of the EC2 instance.</p>",
+            "smithy.api#jsonName": "privateDnsName"
           }
         }
       },
@@ -5506,18 +5513,18 @@
     "com.amazonaws.guardduty#PublicAccess": {
       "type": "structure",
       "members": {
-        "PermissionConfiguration": {
-          "target": "com.amazonaws.guardduty#PermissionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information about how permissions are configured for the S3 bucket.</p>",
-            "smithy.api#jsonName": "permissionConfiguration"
-          }
-        },
         "EffectivePermission": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>Describes the effective permission on this bucket after factoring all attached\n      policies.</p>",
             "smithy.api#jsonName": "effectivePermission"
+          }
+        },
+        "PermissionConfiguration": {
+          "target": "com.amazonaws.guardduty#PermissionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains information about how permissions are configured for the S3 bucket.</p>",
+            "smithy.api#jsonName": "permissionConfiguration"
           }
         }
       },
@@ -5555,11 +5562,11 @@
     "com.amazonaws.guardduty#RemoteIpDetails": {
       "type": "structure",
       "members": {
-        "GeoLocation": {
-          "target": "com.amazonaws.guardduty#GeoLocation",
+        "Organization": {
+          "target": "com.amazonaws.guardduty#Organization",
           "traits": {
-            "smithy.api#documentation": "<p>The location information of the remote IP address.</p>",
-            "smithy.api#jsonName": "geoLocation"
+            "smithy.api#documentation": "<p>The ISP organization information of the remote IP address.</p>",
+            "smithy.api#jsonName": "organization"
           }
         },
         "IpAddressV4": {
@@ -5569,18 +5576,18 @@
             "smithy.api#jsonName": "ipAddressV4"
           }
         },
-        "Organization": {
-          "target": "com.amazonaws.guardduty#Organization",
-          "traits": {
-            "smithy.api#documentation": "<p>The ISP organization information of the remote IP address.</p>",
-            "smithy.api#jsonName": "organization"
-          }
-        },
         "Country": {
           "target": "com.amazonaws.guardduty#Country",
           "traits": {
             "smithy.api#documentation": "<p>The country code of the remote IP address.</p>",
             "smithy.api#jsonName": "country"
+          }
+        },
+        "GeoLocation": {
+          "target": "com.amazonaws.guardduty#GeoLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>The location information of the remote IP address.</p>",
+            "smithy.api#jsonName": "geoLocation"
           }
         },
         "City": {
@@ -5598,18 +5605,18 @@
     "com.amazonaws.guardduty#RemotePortDetails": {
       "type": "structure",
       "members": {
-        "PortName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The port name of the remote connection.</p>",
-            "smithy.api#jsonName": "portName"
-          }
-        },
         "Port": {
           "target": "com.amazonaws.guardduty#Integer",
           "traits": {
             "smithy.api#documentation": "<p>The port number of the remote connection.</p>",
             "smithy.api#jsonName": "port"
+          }
+        },
+        "PortName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The port name of the remote connection.</p>",
+            "smithy.api#jsonName": "portName"
           }
         }
       },
@@ -5620,11 +5627,11 @@
     "com.amazonaws.guardduty#Resource": {
       "type": "structure",
       "members": {
-        "ResourceType": {
-          "target": "com.amazonaws.guardduty#String",
+        "InstanceDetails": {
+          "target": "com.amazonaws.guardduty#InstanceDetails",
           "traits": {
-            "smithy.api#documentation": "<p>The type of AWS resource.</p>",
-            "smithy.api#jsonName": "resourceType"
+            "smithy.api#documentation": "<p>The information about the EC2 instance associated with the activity that prompted\n      GuardDuty to generate a finding.</p>",
+            "smithy.api#jsonName": "instanceDetails"
           }
         },
         "S3BucketDetails": {
@@ -5641,11 +5648,11 @@
             "smithy.api#jsonName": "accessKeyDetails"
           }
         },
-        "InstanceDetails": {
-          "target": "com.amazonaws.guardduty#InstanceDetails",
+        "ResourceType": {
+          "target": "com.amazonaws.guardduty#String",
           "traits": {
-            "smithy.api#documentation": "<p>The information about the EC2 instance associated with the activity that prompted\n      GuardDuty to generate a finding.</p>",
-            "smithy.api#jsonName": "instanceDetails"
+            "smithy.api#documentation": "<p>The type of AWS resource.</p>",
+            "smithy.api#jsonName": "resourceType"
           }
         }
       },
@@ -5662,6 +5669,27 @@
     "com.amazonaws.guardduty#S3BucketDetail": {
       "type": "structure",
       "members": {
+        "Type": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes whether the bucket is a source or destination bucket.</p>",
+            "smithy.api#jsonName": "type"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.guardduty#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>All tags attached to the S3 bucket</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
+            "smithy.api#jsonName": "name"
+          }
+        },
         "Arn": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
@@ -5676,11 +5704,11 @@
             "smithy.api#jsonName": "createdAt"
           }
         },
-        "PublicAccess": {
-          "target": "com.amazonaws.guardduty#PublicAccess",
+        "DefaultServerSideEncryption": {
+          "target": "com.amazonaws.guardduty#DefaultServerSideEncryption",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>",
-            "smithy.api#jsonName": "publicAccess"
+            "smithy.api#documentation": "<p>Describes the server side encryption method used in the S3 bucket.</p>",
+            "smithy.api#jsonName": "defaultServerSideEncryption"
           }
         },
         "Owner": {
@@ -5690,32 +5718,11 @@
             "smithy.api#jsonName": "owner"
           }
         },
-        "DefaultServerSideEncryption": {
-          "target": "com.amazonaws.guardduty#DefaultServerSideEncryption",
+        "PublicAccess": {
+          "target": "com.amazonaws.guardduty#PublicAccess",
           "traits": {
-            "smithy.api#documentation": "<p>Describes the server side encryption method used in the S3 bucket.</p>",
-            "smithy.api#jsonName": "defaultServerSideEncryption"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
-            "smithy.api#jsonName": "name"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes whether the bucket is a source or destination bucket.</p>",
-            "smithy.api#jsonName": "type"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>All tags attached to the S3 bucket</p>",
-            "smithy.api#jsonName": "tags"
+            "smithy.api#documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>",
+            "smithy.api#jsonName": "publicAccess"
           }
         }
       },
@@ -5792,32 +5799,11 @@
     "com.amazonaws.guardduty#Service": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
+        "Action": {
+          "target": "com.amazonaws.guardduty#Action",
           "traits": {
-            "smithy.api#documentation": "<p>The detector ID for the GuardDuty service.</p>",
-            "smithy.api#jsonName": "detectorId"
-          }
-        },
-        "ServiceName": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the AWS service (GuardDuty) that generated a finding.</p>",
-            "smithy.api#jsonName": "serviceName"
-          }
-        },
-        "Count": {
-          "target": "com.amazonaws.guardduty#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The total count of the occurrences of this finding type.</p>",
-            "smithy.api#jsonName": "count"
-          }
-        },
-        "Evidence": {
-          "target": "com.amazonaws.guardduty#Evidence",
-          "traits": {
-            "smithy.api#documentation": "<p>An evidence object associated with the service.</p>",
-            "smithy.api#jsonName": "evidence"
+            "smithy.api#documentation": "<p>Information about the activity that is described in a finding.</p>",
+            "smithy.api#jsonName": "action"
           }
         },
         "EventLastSeen": {
@@ -5825,6 +5811,13 @@
           "traits": {
             "smithy.api#documentation": "<p>The last-seen timestamp of the activity that prompted GuardDuty to generate this\n      finding.</p>",
             "smithy.api#jsonName": "eventLastSeen"
+          }
+        },
+        "EventFirstSeen": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The first-seen timestamp of the activity that prompted GuardDuty to generate this\n      finding.</p>",
+            "smithy.api#jsonName": "eventFirstSeen"
           }
         },
         "ResourceRole": {
@@ -5841,11 +5834,32 @@
             "smithy.api#jsonName": "userFeedback"
           }
         },
-        "Action": {
-          "target": "com.amazonaws.guardduty#Action",
+        "Evidence": {
+          "target": "com.amazonaws.guardduty#Evidence",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the activity that is described in a finding.</p>",
-            "smithy.api#jsonName": "action"
+            "smithy.api#documentation": "<p>An evidence object associated with the service.</p>",
+            "smithy.api#jsonName": "evidence"
+          }
+        },
+        "Count": {
+          "target": "com.amazonaws.guardduty#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The total count of the occurrences of this finding type.</p>",
+            "smithy.api#jsonName": "count"
+          }
+        },
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
+          "traits": {
+            "smithy.api#documentation": "<p>The detector ID for the GuardDuty service.</p>",
+            "smithy.api#jsonName": "detectorId"
+          }
+        },
+        "ServiceName": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the AWS service (GuardDuty) that generated a finding.</p>",
+            "smithy.api#jsonName": "serviceName"
           }
         },
         "Archived": {
@@ -5853,13 +5867,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether this finding is archived.</p>",
             "smithy.api#jsonName": "archived"
-          }
-        },
-        "EventFirstSeen": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The first-seen timestamp of the activity that prompted GuardDuty to generate this\n      finding.</p>",
-            "smithy.api#jsonName": "eventFirstSeen"
           }
         }
       },
@@ -5917,20 +5924,20 @@
     "com.amazonaws.guardduty#StartMonitoringMembersRequest": {
       "type": "structure",
       "members": {
-        "AccountIds": {
-          "target": "com.amazonaws.guardduty#AccountIds",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts to start monitoring.</p>",
-            "smithy.api#jsonName": "accountIds",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty master account associated with the member\n      accounts to monitor.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
+        },
+        "AccountIds": {
+          "target": "com.amazonaws.guardduty#AccountIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of account IDs of the GuardDuty member accounts to start monitoring.</p>",
+            "smithy.api#jsonName": "accountIds",
             "smithy.api#required": {}
           }
         }
@@ -6015,18 +6022,18 @@
     "com.amazonaws.guardduty#Tag": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The EC2 instance tag value.</p>",
-            "smithy.api#jsonName": "value"
-          }
-        },
         "Key": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The EC2 instance tag key.</p>",
             "smithy.api#jsonName": "key"
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The EC2 instance tag value.</p>",
+            "smithy.api#jsonName": "value"
           }
         }
       },
@@ -6099,20 +6106,20 @@
     "com.amazonaws.guardduty#TagResourceRequest": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.guardduty#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be added to a resource.</p>",
+            "smithy.api#jsonName": "tags",
+            "smithy.api#required": {}
+          }
+        },
         "ResourceArn": {
           "target": "com.amazonaws.guardduty#GuardDutyArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag to.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "resourceArn",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.guardduty#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be added to a resource.</p>",
-            "smithy.api#jsonName": "tags",
             "smithy.api#required": {}
           }
         }
@@ -6336,19 +6343,19 @@
     "com.amazonaws.guardduty#UnprocessedAccount": {
       "type": "structure",
       "members": {
-        "Result": {
-          "target": "com.amazonaws.guardduty#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A reason why the account hasn't been processed.</p>",
-            "smithy.api#jsonName": "result",
-            "smithy.api#required": {}
-          }
-        },
         "AccountId": {
           "target": "com.amazonaws.guardduty#AccountId",
           "traits": {
             "smithy.api#documentation": "<p>The AWS account ID.</p>",
             "smithy.api#jsonName": "accountId",
+            "smithy.api#required": {}
+          }
+        },
+        "Result": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A reason why the account hasn't been processed.</p>",
+            "smithy.api#jsonName": "result",
             "smithy.api#required": {}
           }
         }
@@ -6397,21 +6404,21 @@
     "com.amazonaws.guardduty#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.guardduty#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag keys to remove from the resource.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#jsonName": "tagKeys",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.guardduty#GuardDutyArn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource to remove tags from.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "resourceArn",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.guardduty#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys to remove from the resource.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#jsonName": "tagKeys",
             "smithy.api#required": {}
           }
         }
@@ -6449,11 +6456,11 @@
     "com.amazonaws.guardduty#UpdateDetectorRequest": {
       "type": "structure",
       "members": {
-        "DataSources": {
-          "target": "com.amazonaws.guardduty#DataSourceConfigurations",
+        "Enable": {
+          "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>An object that describes which data sources will be updated.</p>",
-            "smithy.api#jsonName": "dataSources"
+            "smithy.api#documentation": "<p>Specifies whether the detector is enabled or not enabled.</p>",
+            "smithy.api#jsonName": "enable"
           }
         },
         "DetectorId": {
@@ -6465,11 +6472,11 @@
             "smithy.api#required": {}
           }
         },
-        "Enable": {
-          "target": "com.amazonaws.guardduty#Boolean",
+        "DataSources": {
+          "target": "com.amazonaws.guardduty#DataSourceConfigurations",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the detector is enabled or not enabled.</p>",
-            "smithy.api#jsonName": "enable"
+            "smithy.api#documentation": "<p>An object that describes which data sources will be updated.</p>",
+            "smithy.api#jsonName": "dataSources"
           }
         },
         "FindingPublishingFrequency": {
@@ -6513,18 +6520,11 @@
     "com.amazonaws.guardduty#UpdateFilterRequest": {
       "type": "structure",
       "members": {
-        "FindingCriteria": {
-          "target": "com.amazonaws.guardduty#FindingCriteria",
+        "Description": {
+          "target": "com.amazonaws.guardduty#FilterDescription",
           "traits": {
-            "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>",
-            "smithy.api#jsonName": "findingCriteria"
-          }
-        },
-        "Rank": {
-          "target": "com.amazonaws.guardduty#FilterRank",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the position of the filter in the list of current filters. Also specifies the\n      order in which this filter is applied to the findings.</p>",
-            "smithy.api#jsonName": "rank"
+            "smithy.api#documentation": "<p>The description of the filter.</p>",
+            "smithy.api#jsonName": "description"
           }
         },
         "DetectorId": {
@@ -6543,11 +6543,18 @@
             "smithy.api#jsonName": "action"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.guardduty#FilterDescription",
+        "FindingCriteria": {
+          "target": "com.amazonaws.guardduty#FindingCriteria",
           "traits": {
-            "smithy.api#documentation": "<p>The description of the filter.</p>",
-            "smithy.api#jsonName": "description"
+            "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>",
+            "smithy.api#jsonName": "findingCriteria"
+          }
+        },
+        "Rank": {
+          "target": "com.amazonaws.guardduty#FilterRank",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the position of the filter in the list of current filters. Also specifies the\n      order in which this filter is applied to the findings.</p>",
+            "smithy.api#jsonName": "rank"
           }
         },
         "FilterName": {
@@ -6602,20 +6609,19 @@
     "com.amazonaws.guardduty#UpdateFindingsFeedbackRequest": {
       "type": "structure",
       "members": {
+        "Comments": {
+          "target": "com.amazonaws.guardduty#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Additional feedback about the GuardDuty findings.</p>",
+            "smithy.api#jsonName": "comments"
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the detector associated with the findings to update feedback for.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
-          }
-        },
-        "FindingIds": {
-          "target": "com.amazonaws.guardduty#FindingIds",
-          "traits": {
-            "smithy.api#documentation": "<p>The IDs of the findings that you want to mark as useful or not useful.</p>",
-            "smithy.api#jsonName": "findingIds",
             "smithy.api#required": {}
           }
         },
@@ -6627,11 +6633,12 @@
             "smithy.api#required": {}
           }
         },
-        "Comments": {
-          "target": "com.amazonaws.guardduty#String",
+        "FindingIds": {
+          "target": "com.amazonaws.guardduty#FindingIds",
           "traits": {
-            "smithy.api#documentation": "<p>Additional feedback about the GuardDuty findings.</p>",
-            "smithy.api#jsonName": "comments"
+            "smithy.api#documentation": "<p>The IDs of the findings that you want to mark as useful or not useful.</p>",
+            "smithy.api#jsonName": "findingIds",
+            "smithy.api#required": {}
           }
         }
       }
@@ -6668,11 +6675,11 @@
     "com.amazonaws.guardduty#UpdateIPSetRequest": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.guardduty#Name",
+        "Activate": {
+          "target": "com.amazonaws.guardduty#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>The unique ID that specifies the IPSet that you want to update.</p>",
-            "smithy.api#jsonName": "name"
+            "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the IPSet is active or not.</p>",
+            "smithy.api#jsonName": "activate"
           }
         },
         "IpSetId": {
@@ -6684,11 +6691,18 @@
             "smithy.api#required": {}
           }
         },
-        "Activate": {
-          "target": "com.amazonaws.guardduty#Boolean",
+        "Location": {
+          "target": "com.amazonaws.guardduty#Location",
           "traits": {
-            "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the IPSet is active or not.</p>",
-            "smithy.api#jsonName": "activate"
+            "smithy.api#documentation": "<p>The updated URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+            "smithy.api#jsonName": "location"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.guardduty#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID that specifies the IPSet that you want to update.</p>",
+            "smithy.api#jsonName": "name"
           }
         },
         "DetectorId": {
@@ -6698,13 +6712,6 @@
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
-          }
-        },
-        "Location": {
-          "target": "com.amazonaws.guardduty#Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
-            "smithy.api#jsonName": "location"
           }
         }
       }
@@ -6741,14 +6748,6 @@
     "com.amazonaws.guardduty#UpdateMemberDetectorsRequest": {
       "type": "structure",
       "members": {
-        "AccountIds": {
-          "target": "com.amazonaws.guardduty#AccountIds",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of member account IDs to be updated.</p>",
-            "smithy.api#jsonName": "accountIds",
-            "smithy.api#required": {}
-          }
-        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
@@ -6763,6 +6762,14 @@
           "traits": {
             "smithy.api#documentation": "<p>An object describes which data sources will be updated.</p>",
             "smithy.api#jsonName": "dataSources"
+          }
+        },
+        "AccountIds": {
+          "target": "com.amazonaws.guardduty#AccountIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of member account IDs to be updated.</p>",
+            "smithy.api#jsonName": "accountIds",
+            "smithy.api#required": {}
           }
         }
       }
@@ -6808,13 +6815,11 @@
     "com.amazonaws.guardduty#UpdateOrganizationConfigurationRequest": {
       "type": "structure",
       "members": {
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
+        "DataSources": {
+          "target": "com.amazonaws.guardduty#OrganizationDataSourceConfigurations",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the detector to update the delegated administrator for.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>An object describes which data sources will be updated.</p>",
+            "smithy.api#jsonName": "dataSources"
           }
         },
         "AutoEnable": {
@@ -6825,11 +6830,13 @@
             "smithy.api#required": {}
           }
         },
-        "DataSources": {
-          "target": "com.amazonaws.guardduty#OrganizationDataSourceConfigurations",
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
-            "smithy.api#documentation": "<p>An object describes which data sources will be updated.</p>",
-            "smithy.api#jsonName": "dataSources"
+            "smithy.api#documentation": "<p>The ID of the detector to update the delegated administrator for.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
           }
         }
       }
@@ -6866,6 +6873,15 @@
     "com.amazonaws.guardduty#UpdatePublishingDestinationRequest": {
       "type": "structure",
       "members": {
+        "DetectorId": {
+          "target": "com.amazonaws.guardduty#DetectorId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the detector associated with the publishing destinations to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#jsonName": "detectorId",
+            "smithy.api#required": {}
+          }
+        },
         "DestinationProperties": {
           "target": "com.amazonaws.guardduty#DestinationProperties",
           "traits": {
@@ -6879,15 +6895,6 @@
             "smithy.api#documentation": "<p>The ID of the publishing destination to update.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "destinationId",
-            "smithy.api#required": {}
-          }
-        },
-        "DetectorId": {
-          "target": "com.amazonaws.guardduty#DetectorId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the detector associated with the publishing destinations to update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
           }
         }
@@ -6925,13 +6932,6 @@
     "com.amazonaws.guardduty#UpdateThreatIntelSetRequest": {
       "type": "structure",
       "members": {
-        "Activate": {
-          "target": "com.amazonaws.guardduty#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the ThreateIntelSet is active or\n      not.</p>",
-            "smithy.api#jsonName": "activate"
-          }
-        },
         "ThreatIntelSetId": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
@@ -6948,6 +6948,20 @@
             "smithy.api#jsonName": "name"
           }
         },
+        "Location": {
+          "target": "com.amazonaws.guardduty#Location",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated URI of the file that contains the ThreateIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+            "smithy.api#jsonName": "location"
+          }
+        },
+        "Activate": {
+          "target": "com.amazonaws.guardduty#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the ThreateIntelSet is active or\n      not.</p>",
+            "smithy.api#jsonName": "activate"
+          }
+        },
         "DetectorId": {
           "target": "com.amazonaws.guardduty#DetectorId",
           "traits": {
@@ -6955,13 +6969,6 @@
             "smithy.api#httpLabel": {},
             "smithy.api#jsonName": "detectorId",
             "smithy.api#required": {}
-          }
-        },
-        "Location": {
-          "target": "com.amazonaws.guardduty#Location",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated URI of the file that contains the ThreateIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
-            "smithy.api#jsonName": "location"
           }
         }
       }
@@ -6973,18 +6980,18 @@
     "com.amazonaws.guardduty#UsageAccountResult": {
       "type": "structure",
       "members": {
-        "AccountId": {
-          "target": "com.amazonaws.guardduty#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The Account ID that generated usage.</p>",
-            "smithy.api#jsonName": "accountId"
-          }
-        },
         "Total": {
           "target": "com.amazonaws.guardduty#Total",
           "traits": {
             "smithy.api#documentation": "<p>Represents the total of usage for the Account ID.</p>",
             "smithy.api#jsonName": "total"
+          }
+        },
+        "AccountId": {
+          "target": "com.amazonaws.guardduty#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The Account ID that generated usage.</p>",
+            "smithy.api#jsonName": "accountId"
           }
         }
       },
@@ -7001,12 +7008,11 @@
     "com.amazonaws.guardduty#UsageCriteria": {
       "type": "structure",
       "members": {
-        "DataSources": {
-          "target": "com.amazonaws.guardduty#DataSourceList",
+        "Resources": {
+          "target": "com.amazonaws.guardduty#ResourceList",
           "traits": {
-            "smithy.api#documentation": "<p>The data sources to aggregate usage statistics from.</p>",
-            "smithy.api#jsonName": "dataSources",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The resources to aggregate usage statistics from. Only accepts exact resource\n      names.</p>",
+            "smithy.api#jsonName": "resources"
           }
         },
         "AccountIds": {
@@ -7016,11 +7022,12 @@
             "smithy.api#jsonName": "accountIds"
           }
         },
-        "Resources": {
-          "target": "com.amazonaws.guardduty#ResourceList",
+        "DataSources": {
+          "target": "com.amazonaws.guardduty#DataSourceList",
           "traits": {
-            "smithy.api#documentation": "<p>The resources to aggregate usage statistics from. Only accepts exact resource\n      names.</p>",
-            "smithy.api#jsonName": "resources"
+            "smithy.api#documentation": "<p>The data sources to aggregate usage statistics from.</p>",
+            "smithy.api#jsonName": "dataSources",
+            "smithy.api#required": {}
           }
         }
       },
@@ -7059,18 +7066,18 @@
     "com.amazonaws.guardduty#UsageResourceResult": {
       "type": "structure",
       "members": {
-        "Total": {
-          "target": "com.amazonaws.guardduty#Total",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the sum total of usage for the specified resource type.</p>",
-            "smithy.api#jsonName": "total"
-          }
-        },
         "Resource": {
           "target": "com.amazonaws.guardduty#String",
           "traits": {
             "smithy.api#documentation": "<p>The AWS resource that generated usage.</p>",
             "smithy.api#jsonName": "resource"
+          }
+        },
+        "Total": {
+          "target": "com.amazonaws.guardduty#Total",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents the sum total of usage for the specified resource type.</p>",
+            "smithy.api#jsonName": "total"
           }
         }
       },
@@ -7110,20 +7117,6 @@
     "com.amazonaws.guardduty#UsageStatistics": {
       "type": "structure",
       "members": {
-        "TopResources": {
-          "target": "com.amazonaws.guardduty#UsageResourceResultList",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists the top 50 resources that have generated the most GuardDuty usage, in order from\n      most to least expensive.</p>",
-            "smithy.api#jsonName": "topResources"
-          }
-        },
-        "SumByDataSource": {
-          "target": "com.amazonaws.guardduty#UsageDataSourceResultList",
-          "traits": {
-            "smithy.api#documentation": "<p>The usage statistic sum organized by on data source.</p>",
-            "smithy.api#jsonName": "sumByDataSource"
-          }
-        },
         "SumByResource": {
           "target": "com.amazonaws.guardduty#UsageResourceResultList",
           "traits": {
@@ -7131,11 +7124,25 @@
             "smithy.api#jsonName": "sumByResource"
           }
         },
+        "TopResources": {
+          "target": "com.amazonaws.guardduty#UsageResourceResultList",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists the top 50 resources that have generated the most GuardDuty usage, in order from\n      most to least expensive.</p>",
+            "smithy.api#jsonName": "topResources"
+          }
+        },
         "SumByAccount": {
           "target": "com.amazonaws.guardduty#UsageAccountResultList",
           "traits": {
             "smithy.api#documentation": "<p>The usage statistic sum organized by account ID.</p>",
             "smithy.api#jsonName": "sumByAccount"
+          }
+        },
+        "SumByDataSource": {
+          "target": "com.amazonaws.guardduty#UsageDataSourceResultList",
+          "traits": {
+            "smithy.api#documentation": "<p>The usage statistic sum organized by on data source.</p>",
+            "smithy.api#jsonName": "sumByDataSource"
           }
         }
       },

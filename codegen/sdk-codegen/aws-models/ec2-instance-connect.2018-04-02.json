@@ -42,7 +42,7 @@
           "sdkId": "EC2 Instance Connect",
           "arnNamespace": "ec2-instance-connect",
           "cloudFormationName": "EC2InstanceConnect",
-          "cloudTrailEventSource": "sshaccessproxyservice.aws.amazon.com"
+          "cloudTrailEventSource": "ec2instanceconnect.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "ec2-instance-connect"
@@ -165,10 +165,10 @@
     "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyRequest": {
       "type": "structure",
       "members": {
-        "AvailabilityZone": {
-          "target": "com.amazonaws.ec2instanceconnect#AvailabilityZone",
+        "SSHPublicKey": {
+          "target": "com.amazonaws.ec2instanceconnect#SSHPublicKey",
           "traits": {
-            "smithy.api#documentation": "<p>The availability zone the EC2 instance was launched in.</p>",
+            "smithy.api#documentation": "<p>The public key to be published to the instance.  To use it after publication you must have the matching private key.</p>",
             "smithy.api#required": {}
           }
         },
@@ -179,10 +179,10 @@
             "smithy.api#required": {}
           }
         },
-        "SSHPublicKey": {
-          "target": "com.amazonaws.ec2instanceconnect#SSHPublicKey",
+        "AvailabilityZone": {
+          "target": "com.amazonaws.ec2instanceconnect#AvailabilityZone",
           "traits": {
-            "smithy.api#documentation": "<p>The public key to be published to the instance.  To use it after publication you must have the matching private key.</p>",
+            "smithy.api#documentation": "<p>The availability zone the EC2 instance was launched in.</p>",
             "smithy.api#required": {}
           }
         },

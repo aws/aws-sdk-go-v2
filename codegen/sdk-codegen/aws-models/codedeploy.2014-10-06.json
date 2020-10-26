@@ -86,9 +86,7 @@
     "com.amazonaws.codedeploy#AdditionalDeploymentStatusInfo": {
       "type": "string",
       "traits": {
-        "smithy.api#deprecated": {
-          "message": "AdditionalDeploymentStatusInfo is deprecated, use DeploymentStatusMessageList instead."
-        }
+        "smithy.api#deprecated": {}
       }
     },
     "com.amazonaws.codedeploy#Alarm": {
@@ -108,12 +106,6 @@
     "com.amazonaws.codedeploy#AlarmConfiguration": {
       "type": "structure",
       "members": {
-        "ignorePollAlarmFailure": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether a deployment should continue if information about the current state\n            of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>true</code>: The deployment proceeds even if alarm status information\n                    can't be retrieved from Amazon CloudWatch.</p>\n            </li>\n            <li>\n                <p>\n                  <code>false</code>: The deployment stops if alarm status information can't be\n                    retrieved from Amazon CloudWatch.</p>\n            </li>\n         </ul>"
-          }
-        },
         "enabled": {
           "target": "com.amazonaws.codedeploy#Boolean",
           "traits": {
@@ -124,6 +116,12 @@
           "target": "com.amazonaws.codedeploy#AlarmList",
           "traits": {
             "smithy.api#documentation": "<p>A list of alarms configured for the deployment group. A maximum of 10 alarms can be\n            added to a deployment group.</p>"
+          }
+        },
+        "ignorePollAlarmFailure": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether a deployment should continue if information about the current state\n            of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>true</code>: The deployment proceeds even if alarm status information\n                    can't be retrieved from Amazon CloudWatch.</p>\n            </li>\n            <li>\n                <p>\n                  <code>false</code>: The deployment stops if alarm status information can't be\n                    retrieved from Amazon CloudWatch.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -211,16 +209,10 @@
     "com.amazonaws.codedeploy#ApplicationInfo": {
       "type": "structure",
       "members": {
-        "createTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
+        "gitHubAccountName": {
+          "target": "com.amazonaws.codedeploy#GitHubAccountTokenName",
           "traits": {
-            "smithy.api#documentation": "<p>The time at which the application was created.</p>"
-          }
-        },
-        "linkedToGitHub": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>True if the user has authenticated with GitHub for the specified application.\n            Otherwise, false.</p>"
+            "smithy.api#documentation": "<p>The name for a connection to a GitHub account.</p>"
           }
         },
         "computePlatform": {
@@ -229,10 +221,10 @@
             "smithy.api#documentation": "<p>The destination platform type for deployment of the application (<code>Lambda</code>\n            or <code>Server</code>).</p>"
           }
         },
-        "gitHubAccountName": {
-          "target": "com.amazonaws.codedeploy#GitHubAccountTokenName",
+        "createTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The name for a connection to a GitHub account.</p>"
+            "smithy.api#documentation": "<p>The time at which the application was created.</p>"
           }
         },
         "applicationName": {
@@ -245,6 +237,12 @@
           "target": "com.amazonaws.codedeploy#ApplicationId",
           "traits": {
             "smithy.api#documentation": "<p>The application ID.</p>"
+          }
+        },
+        "linkedToGitHub": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>True if the user has authenticated with GitHub for the specified application.\n            Otherwise, false.</p>"
           }
         }
       },
@@ -349,16 +347,16 @@
     "com.amazonaws.codedeploy#AutoRollbackConfiguration": {
       "type": "structure",
       "members": {
-        "events": {
-          "target": "com.amazonaws.codedeploy#AutoRollbackEventsList",
-          "traits": {
-            "smithy.api#documentation": "<p>The event type or types that trigger a rollback.</p>"
-          }
-        },
         "enabled": {
           "target": "com.amazonaws.codedeploy#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Indicates whether a defined automatic rollback configuration is currently\n            enabled.</p>"
+          }
+        },
+        "events": {
+          "target": "com.amazonaws.codedeploy#AutoRollbackEventsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The event type or types that trigger a rollback.</p>"
           }
         }
       },
@@ -394,16 +392,16 @@
     "com.amazonaws.codedeploy#AutoScalingGroup": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.codedeploy#AutoScalingGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Auto Scaling group name.</p>"
-          }
-        },
         "hook": {
           "target": "com.amazonaws.codedeploy#AutoScalingGroupHook",
           "traits": {
             "smithy.api#documentation": "<p>An Auto Scaling lifecycle event hook name.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.codedeploy#AutoScalingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Auto Scaling group name.</p>"
           }
         }
       },
@@ -464,17 +462,17 @@
     "com.amazonaws.codedeploy#BatchGetApplicationRevisionsInput": {
       "type": "structure",
       "members": {
-        "revisions": {
-          "target": "com.amazonaws.codedeploy#RevisionLocationList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of <code>RevisionLocation</code> objects that specify information to get about the application revisions, including type and\n            location. The maximum number of <code>RevisionLocation</code> objects you can specify is 25.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application about which to get revision\n            information.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "revisions": {
+          "target": "com.amazonaws.codedeploy#RevisionLocationList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>RevisionLocation</code> objects that specify information to get about the application revisions, including type and\n            location. The maximum number of <code>RevisionLocation</code> objects you can specify is 25.</p>",
             "smithy.api#required": {}
           }
         }
@@ -492,16 +490,16 @@
             "smithy.api#documentation": "<p>Information about errors that might have occurred during the API call.</p>"
           }
         },
-        "revisions": {
-          "target": "com.amazonaws.codedeploy#RevisionInfoList",
-          "traits": {
-            "smithy.api#documentation": "<p>Additional information about the revisions, including the type and location.</p>"
-          }
-        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the application that corresponds to the revisions.</p>"
+          }
+        },
+        "revisions": {
+          "target": "com.amazonaws.codedeploy#RevisionInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p>Additional information about the revisions, including the type and location.</p>"
           }
         }
       },
@@ -602,17 +600,17 @@
     "com.amazonaws.codedeploy#BatchGetDeploymentGroupsInput": {
       "type": "structure",
       "members": {
-        "deploymentGroupNames": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupsList",
-          "traits": {
-            "smithy.api#documentation": "<p>The names of the deployment groups.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the applicable IAM user or\n            AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deploymentGroupNames": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of the deployment groups.</p>",
             "smithy.api#required": {}
           }
         }
@@ -682,17 +680,17 @@
     "com.amazonaws.codedeploy#BatchGetDeploymentInstancesInput": {
       "type": "structure",
       "members": {
-        "instanceIds": {
-          "target": "com.amazonaws.codedeploy#InstancesList",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "instanceIds": {
+          "target": "com.amazonaws.codedeploy#InstancesList",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.</p>",
             "smithy.api#required": {}
           }
         }
@@ -912,16 +910,16 @@
     "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration": {
       "type": "structure",
       "members": {
-        "deploymentReadyOption": {
-          "target": "com.amazonaws.codedeploy#DeploymentReadyOption",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the action to take when newly provisioned instances are ready to\n            receive traffic in a blue/green deployment.</p>"
-          }
-        },
         "greenFleetProvisioningOption": {
           "target": "com.amazonaws.codedeploy#GreenFleetProvisioningOption",
           "traits": {
             "smithy.api#documentation": "<p>Information about how instances are provisioned for a replacement environment in a\n            blue/green deployment.</p>"
+          }
+        },
+        "deploymentReadyOption": {
+          "target": "com.amazonaws.codedeploy#DeploymentReadyOption",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the action to take when newly provisioned instances are ready to\n            receive traffic in a blue/green deployment.</p>"
           }
         },
         "terminateBlueInstancesOnDeploymentSuccess": {
@@ -938,16 +936,16 @@
     "com.amazonaws.codedeploy#BlueInstanceTerminationOption": {
       "type": "structure",
       "members": {
-        "terminationWaitTimeInMinutes": {
-          "target": "com.amazonaws.codedeploy#Duration",
-          "traits": {
-            "smithy.api#documentation": "<p>For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before\n            terminating instances from the original environment.</p>\n        \n        <p>\n            For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, \n            CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set. \n        </p>\n        \n        <p>\n            The maximum setting is 2880 minutes (2 days).\n        </p>"
-          }
-        },
         "action": {
           "target": "com.amazonaws.codedeploy#InstanceAction",
           "traits": {
             "smithy.api#documentation": "<p>The action to take on instances in the original environment after a successful\n            blue/green deployment.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TERMINATE</code>: Instances are terminated after a specified wait\n                    time.</p>\n            </li>\n            <li>\n                <p>\n                  <code>KEEP_ALIVE</code>: Instances are left running after they are\n                    deregistered from the load balancer and removed from the deployment\n                    group.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "terminationWaitTimeInMinutes": {
+          "target": "com.amazonaws.codedeploy#Duration",
+          "traits": {
+            "smithy.api#documentation": "<p>For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before\n            terminating instances from the original environment.</p>\n        \n        <p>\n            For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, \n            CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set. \n        </p>\n        \n        <p>\n            The maximum setting is 2880 minutes (2 days).\n        </p>"
           }
         }
       },
@@ -1006,22 +1004,10 @@
     "com.amazonaws.codedeploy#CloudFormationTarget": {
       "type": "structure",
       "members": {
-        "targetVersionWeight": {
-          "target": "com.amazonaws.codedeploy#TrafficWeight",
+        "lifecycleEvents": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventList",
           "traits": {
-            "smithy.api#documentation": "<p>The percentage of production traffic that the target version of an AWS CloudFormation\n            blue/green deployment receives.</p>"
-          }
-        },
-        "targetId": {
-          "target": "com.amazonaws.codedeploy#TargetId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type\n                of <code>CloudFormationTarget</code>. </p>"
-          }
-        },
-        "resourceType": {
-          "target": "com.amazonaws.codedeploy#CloudFormationResourceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource type for the AWS CloudFormation blue/green deployment.</p>"
+            "smithy.api#documentation": "<p> The lifecycle events of the AWS CloudFormation blue/green deployment to this target\n            application. </p>"
           }
         },
         "status": {
@@ -1030,16 +1016,28 @@
             "smithy.api#documentation": "<p> The status of an AWS CloudFormation blue/green deployment's target application. </p>"
           }
         },
-        "lifecycleEvents": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventList",
+        "resourceType": {
+          "target": "com.amazonaws.codedeploy#CloudFormationResourceType",
           "traits": {
-            "smithy.api#documentation": "<p> The lifecycle events of the AWS CloudFormation blue/green deployment to this target\n            application. </p>"
+            "smithy.api#documentation": "<p>The resource type for the AWS CloudFormation blue/green deployment.</p>"
+          }
+        },
+        "targetId": {
+          "target": "com.amazonaws.codedeploy#TargetId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type\n                of <code>CloudFormationTarget</code>. </p>"
           }
         },
         "lastUpdatedAt": {
           "target": "com.amazonaws.codedeploy#Time",
           "traits": {
             "smithy.api#documentation": "<p> The date and time when the target application was updated by an AWS CloudFormation\n            blue/green deployment. </p>"
+          }
+        },
+        "targetVersionWeight": {
+          "target": "com.amazonaws.codedeploy#TrafficWeight",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of production traffic that the target version of an AWS CloudFormation\n            blue/green deployment receives.</p>"
           }
         },
         "deploymentId": {
@@ -1277,16 +1275,16 @@
     "com.amazonaws.codedeploy#ContinueDeploymentInput": {
       "type": "structure",
       "members": {
-        "deploymentId": {
-          "target": "com.amazonaws.codedeploy#DeploymentId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a blue/green deployment for which you want to start rerouting\n            traffic to the replacement environment. </p>"
-          }
-        },
         "deploymentWaitType": {
           "target": "com.amazonaws.codedeploy#DeploymentWaitType",
           "traits": {
             "smithy.api#documentation": "<p> The status of the deployment's waiting period. <code>READY_WAIT</code> indicates that\n            the deployment is ready to start shifting traffic. <code>TERMINATION_WAIT</code>\n            indicates that the traffic is shifted, but the original target is not terminated. </p>"
+          }
+        },
+        "deploymentId": {
+          "target": "com.amazonaws.codedeploy#DeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a blue/green deployment for which you want to start rerouting\n            traffic to the replacement environment. </p>"
           }
         }
       }
@@ -1488,6 +1486,18 @@
     "com.amazonaws.codedeploy#CreateDeploymentConfigInput": {
       "type": "structure",
       "members": {
+        "computePlatform": {
+          "target": "com.amazonaws.codedeploy#ComputePlatform",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+          }
+        },
+        "trafficRoutingConfig": {
+          "target": "com.amazonaws.codedeploy#TrafficRoutingConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed.</p>"
+          }
+        },
         "deploymentConfigName": {
           "target": "com.amazonaws.codedeploy#DeploymentConfigName",
           "traits": {
@@ -1499,18 +1509,6 @@
           "target": "com.amazonaws.codedeploy#MinimumHealthyHosts",
           "traits": {
             "smithy.api#documentation": "<p>The minimum number of healthy instances that should be available at any time during\n            the deployment. There are two parameters expected in the input: type and value.</p>\n        <p>The type parameter takes either of the following values:</p>\n        <ul>\n            <li>\n                <p>HOST_COUNT: The value parameter represents the minimum number of healthy\n                    instances as an absolute value.</p>\n            </li>\n            <li>\n                <p>FLEET_PERCENT: The value parameter represents the minimum number of healthy\n                    instances as a percentage of the total number of instances in the deployment. If\n                    you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy\n                    converts the percentage to the equivalent number of instances and rounds up\n                    fractional instances.</p>\n            </li>\n         </ul>\n        <p>The value parameter takes an integer.</p>\n        <p>For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT\n            and a value of 95.</p>"
-          }
-        },
-        "trafficRoutingConfig": {
-          "target": "com.amazonaws.codedeploy#TrafficRoutingConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed.</p>"
-          }
-        },
-        "computePlatform": {
-          "target": "com.amazonaws.codedeploy#ComputePlatform",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
           }
         }
       },
@@ -1648,52 +1646,10 @@
     "com.amazonaws.codedeploy#CreateDeploymentGroupInput": {
       "type": "structure",
       "members": {
-        "onPremisesInstanceTagFilters": {
-          "target": "com.amazonaws.codedeploy#TagFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>The on-premises instance tags on which to filter. The deployment group includes\n            on-premises instances with any of the specified tags. Cannot be used in the same call as\n                <code>OnPremisesTagSet</code>.</p>"
-          }
-        },
-        "deploymentStyle": {
-          "target": "com.amazonaws.codedeploy#DeploymentStyle",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the type of deployment, in-place or blue/green, that you want to run\n            and whether to route deployment traffic behind a load balancer.</p>"
-          }
-        },
-        "blueGreenDeploymentConfiguration": {
-          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
-          }
-        },
-        "onPremisesTagSet": {
-          "target": "com.amazonaws.codedeploy#OnPremisesTagSet",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about groups of tags applied to on-premises instances. The deployment\n            group includes only on-premises instances identified by all of the tag groups. Cannot be\n            used in the same call as <code>onPremisesInstanceTagFilters</code>.</p>"
-          }
-        },
-        "autoScalingGroups": {
-          "target": "com.amazonaws.codedeploy#AutoScalingGroupNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of associated Amazon EC2 Auto Scaling groups.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.codedeploy#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag \n            consists of a key and an optional value, both of which you define.\n        </p>"
-          }
-        },
         "alarmConfiguration": {
           "target": "com.amazonaws.codedeploy#AlarmConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>Information to add about Amazon CloudWatch alarms when the deployment group is\n            created.</p>"
-          }
-        },
-        "ec2TagFilters": {
-          "target": "com.amazonaws.codedeploy#EC2TagFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances\n            with any of the specified tags. Cannot be used in the same call as ec2TagSet.</p>"
           }
         },
         "loadBalancerInfo": {
@@ -1702,42 +1658,10 @@
             "smithy.api#documentation": "<p>Information about the load balancer used in a deployment.</p>"
           }
         },
-        "deploymentConfigName": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
+        "ec2TagFilters": {
+          "target": "com.amazonaws.codedeploy#EC2TagFilterList",
           "traits": {
-            "smithy.api#documentation": "<p>If specified, the deployment configuration name can be either one of the predefined\n            configurations provided with AWS CodeDeploy or a custom deployment configuration that\n            you create by calling the create deployment configuration operation.</p>\n        <p>\n            <code>CodeDeployDefault.OneAtATime</code> is the default deployment configuration. It\n            is used if a configuration isn't specified for the deployment or deployment\n            group.</p>\n        <p>For more information about the predefined deployment configurations in AWS CodeDeploy,\n            see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html\">Working with\n                Deployment Configurations in CodeDeploy</a> in the <i>AWS CodeDeploy User\n                Guide</i>.</p>"
-          }
-        },
-        "deploymentGroupName": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a new deployment group for the specified application.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "triggerConfigurations": {
-          "target": "com.amazonaws.codedeploy#TriggerConfigList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about triggers to create when the deployment group is created. For\n            examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html\">Create a Trigger for an\n                AWS CodeDeploy Event</a> in the <i>AWS CodeDeploy User\n            Guide</i>.</p>"
-          }
-        },
-        "ecsServices": {
-          "target": "com.amazonaws.codedeploy#ECSServiceList",
-          "traits": {
-            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
-          }
-        },
-        "autoRollbackConfiguration": {
-          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration information for an automatic rollback that is added when a deployment\n            group is created.</p>"
-          }
-        },
-        "serviceRoleArn": {
-          "target": "com.amazonaws.codedeploy#Role",
-          "traits": {
-            "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that allows AWS CodeDeploy to act on the\n            user's behalf when interacting with AWS services.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances\n            with any of the specified tags. Cannot be used in the same call as ec2TagSet.</p>"
           }
         },
         "applicationName": {
@@ -1747,10 +1671,84 @@
             "smithy.api#required": {}
           }
         },
+        "blueGreenDeploymentConfiguration": {
+          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
+          }
+        },
+        "deploymentStyle": {
+          "target": "com.amazonaws.codedeploy#DeploymentStyle",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the type of deployment, in-place or blue/green, that you want to run\n            and whether to route deployment traffic behind a load balancer.</p>"
+          }
+        },
+        "deploymentGroupName": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a new deployment group for the specified application.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "serviceRoleArn": {
+          "target": "com.amazonaws.codedeploy#Role",
+          "traits": {
+            "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that allows AWS CodeDeploy to act on the\n            user's behalf when interacting with AWS services.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "triggerConfigurations": {
+          "target": "com.amazonaws.codedeploy#TriggerConfigList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about triggers to create when the deployment group is created. For\n            examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html\">Create a Trigger for an\n                AWS CodeDeploy Event</a> in the <i>AWS CodeDeploy User\n            Guide</i>.</p>"
+          }
+        },
+        "deploymentConfigName": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
+          "traits": {
+            "smithy.api#documentation": "<p>If specified, the deployment configuration name can be either one of the predefined\n            configurations provided with AWS CodeDeploy or a custom deployment configuration that\n            you create by calling the create deployment configuration operation.</p>\n        <p>\n            <code>CodeDeployDefault.OneAtATime</code> is the default deployment configuration. It\n            is used if a configuration isn't specified for the deployment or deployment\n            group.</p>\n        <p>For more information about the predefined deployment configurations in AWS CodeDeploy,\n            see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html\">Working with\n                Deployment Configurations in CodeDeploy</a> in the <i>AWS CodeDeploy User\n                Guide</i>.</p>"
+          }
+        },
         "ec2TagSet": {
           "target": "com.amazonaws.codedeploy#EC2TagSet",
           "traits": {
             "smithy.api#documentation": "<p>Information about groups of tags applied to EC2 instances. The deployment group\n            includes only EC2 instances identified by all the tag groups. Cannot be used in the same\n            call as <code>ec2TagFilters</code>.</p>"
+          }
+        },
+        "autoScalingGroups": {
+          "target": "com.amazonaws.codedeploy#AutoScalingGroupNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of associated Amazon EC2 Auto Scaling groups.</p>"
+          }
+        },
+        "ecsServices": {
+          "target": "com.amazonaws.codedeploy#ECSServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+          }
+        },
+        "onPremisesTagSet": {
+          "target": "com.amazonaws.codedeploy#OnPremisesTagSet",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about groups of tags applied to on-premises instances. The deployment\n            group includes only on-premises instances identified by all of the tag groups. Cannot be\n            used in the same call as <code>onPremisesInstanceTagFilters</code>.</p>"
+          }
+        },
+        "onPremisesInstanceTagFilters": {
+          "target": "com.amazonaws.codedeploy#TagFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The on-premises instance tags on which to filter. The deployment group includes\n            on-premises instances with any of the specified tags. Cannot be used in the same call as\n                <code>OnPremisesTagSet</code>.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.codedeploy#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag \n            consists of a key and an optional value, both of which you define.\n        </p>"
+          }
+        },
+        "autoRollbackConfiguration": {
+          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration information for an automatic rollback that is added when a deployment\n            group is created.</p>"
           }
         }
       },
@@ -1775,40 +1773,10 @@
     "com.amazonaws.codedeploy#CreateDeploymentInput": {
       "type": "structure",
       "members": {
-        "deploymentConfigName": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a deployment configuration associated with the IAM user or AWS\n            account.</p>\n        <p>If not specified, the value configured in the deployment group is used as the default.\n            If the deployment group does not have a deployment configuration associated with it,\n                <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
-          }
-        },
-        "description": {
-          "target": "com.amazonaws.codedeploy#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>A comment about the deployment.</p>"
-          }
-        },
-        "fileExistsBehavior": {
-          "target": "com.amazonaws.codedeploy#FileExistsBehavior",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about how AWS CodeDeploy handles files that already exist in a deployment\n            target location but weren't part of the previous successful deployment.</p>\n        <p>The <code>fileExistsBehavior</code> parameter takes any of the following\n            values:</p>\n        <ul>\n            <li>\n                <p>DISALLOW: The deployment fails. This is also the default behavior if no option\n                    is specified.</p>\n            </li>\n            <li>\n                <p>OVERWRITE: The version of the file from the application revision currently\n                    being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n                <p>RETAIN: The version of the file already on the instance is kept and used as\n                    part of the new deployment.</p>\n            </li>\n         </ul>"
-          }
-        },
         "targetInstances": {
           "target": "com.amazonaws.codedeploy#TargetInstances",
           "traits": {
             "smithy.api#documentation": "<p> Information about the instances that belong to the replacement environment in a\n            blue/green deployment. </p>"
-          }
-        },
-        "ignoreApplicationStopFailures": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with\n                <code>DownloadBundle</code>. If <code>BeforeBlockTraffic</code> fails, the\n            deployment continues with <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code>\n            fails, the deployment continues with <code>ApplicationStop</code>. </p>\n        \n        <p>\n            If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. \n            If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, \n            then a deployment to the next instance is attempted.\n        </p>\n        \n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n        \n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
-          }
-        },
-        "updateOutdatedInstancesOnly": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p> Indicates whether to deploy to all instances or only to instances that are not\n            running the latest application revision. </p>"
           }
         },
         "deploymentGroupName": {
@@ -1817,11 +1785,40 @@
             "smithy.api#documentation": "<p>The name of the deployment group.</p>"
           }
         },
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
+        "fileExistsBehavior": {
+          "target": "com.amazonaws.codedeploy#FileExistsBehavior",
           "traits": {
-            "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Information about how AWS CodeDeploy handles files that already exist in a deployment\n            target location but weren't part of the previous successful deployment.</p>\n        <p>The <code>fileExistsBehavior</code> parameter takes any of the following\n            values:</p>\n        <ul>\n            <li>\n                <p>DISALLOW: The deployment fails. This is also the default behavior if no option\n                    is specified.</p>\n            </li>\n            <li>\n                <p>OVERWRITE: The version of the file from the application revision currently\n                    being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n                <p>RETAIN: The version of the file already on the instance is kept and used as\n                    part of the new deployment.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "deploymentConfigName": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a deployment configuration associated with the IAM user or AWS\n            account.</p>\n        <p>If not specified, the value configured in the deployment group is used as the default.\n            If the deployment group does not have a deployment configuration associated with it,\n                <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
+          }
+        },
+        "updateOutdatedInstancesOnly": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p> Indicates whether to deploy to all instances or only to instances that are not\n            running the latest application revision. </p>"
+          }
+        },
+        "ignoreApplicationStopFailures": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with\n                <code>DownloadBundle</code>. If <code>BeforeBlockTraffic</code> fails, the\n            deployment continues with <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code>\n            fails, the deployment continues with <code>ApplicationStop</code>. </p>\n        \n        <p>\n            If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. \n            If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, \n            then a deployment to the next instance is attempted.\n        </p>\n        \n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n        \n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
+          }
+        },
+        "autoRollbackConfiguration": {
+          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration information for an automatic rollback that is added when a deployment is\n            created.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.codedeploy#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>A comment about the deployment.</p>"
           }
         },
         "revision": {
@@ -1830,10 +1827,11 @@
             "smithy.api#documentation": "<p> The type and location of the revision to deploy. </p>"
           }
         },
-        "autoRollbackConfiguration": {
-          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
-            "smithy.api#documentation": "<p>Configuration information for an automatic rollback that is added when a deployment is\n            created.</p>"
+            "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -1960,17 +1958,17 @@
     "com.amazonaws.codedeploy#DeleteDeploymentGroupInput": {
       "type": "structure",
       "members": {
-        "deploymentGroupName": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a deployment group for the specified application.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deploymentGroupName": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a deployment group for the specified application.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2143,16 +2141,10 @@
     "com.amazonaws.codedeploy#DeploymentConfigInfo": {
       "type": "structure",
       "members": {
-        "computePlatform": {
-          "target": "com.amazonaws.codedeploy#ComputePlatform",
+        "deploymentConfigName": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
           "traits": {
-            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
-          }
-        },
-        "createTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time at which the deployment configuration was created.</p>"
+            "smithy.api#documentation": "<p>The deployment configuration name.</p>"
           }
         },
         "minimumHealthyHosts": {
@@ -2167,16 +2159,22 @@
             "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed. Used for \n        deployments with a Lambda or ECS compute platform only.</p>"
           }
         },
-        "deploymentConfigName": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
-          "traits": {
-            "smithy.api#documentation": "<p>The deployment configuration name.</p>"
-          }
-        },
         "deploymentConfigId": {
           "target": "com.amazonaws.codedeploy#DeploymentConfigId",
           "traits": {
             "smithy.api#documentation": "<p>The deployment configuration ID.</p>"
+          }
+        },
+        "computePlatform": {
+          "target": "com.amazonaws.codedeploy#ComputePlatform",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+          }
+        },
+        "createTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the deployment configuration was created.</p>"
           }
         }
       },
@@ -2311,58 +2309,10 @@
     "com.amazonaws.codedeploy#DeploymentGroupInfo": {
       "type": "structure",
       "members": {
-        "onPremisesInstanceTagFilters": {
-          "target": "com.amazonaws.codedeploy#TagFilterList",
+        "deploymentGroupId": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupId",
           "traits": {
-            "smithy.api#documentation": "<p>The on-premises instance tags on which to filter. The deployment group includes\n            on-premises instances with any of the specified tags.</p>"
-          }
-        },
-        "deploymentStyle": {
-          "target": "com.amazonaws.codedeploy#DeploymentStyle",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
-          }
-        },
-        "ec2TagSet": {
-          "target": "com.amazonaws.codedeploy#EC2TagSet",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about groups of tags applied to an EC2 instance. The deployment group\n            includes only EC2 instances identified by all of the tag groups. Cannot be used in the\n            same call as ec2TagFilters.</p>"
-          }
-        },
-        "triggerConfigurations": {
-          "target": "com.amazonaws.codedeploy#TriggerConfigList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about triggers associated with the deployment group.</p>"
-          }
-        },
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
-          "traits": {
-            "smithy.api#documentation": "<p>The application name.</p>"
-          }
-        },
-        "serviceRoleArn": {
-          "target": "com.amazonaws.codedeploy#Role",
-          "traits": {
-            "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. \n            For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html\">Create a Service Role for AWS CodeDeploy</a> in \n            the <i>AWS CodeDeploy User Guide</i>.</p>"
-          }
-        },
-        "ecsServices": {
-          "target": "com.amazonaws.codedeploy#ECSServiceList",
-          "traits": {
-            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
-          }
-        },
-        "autoRollbackConfiguration": {
-          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the automatic rollback configuration associated with the deployment\n            group.</p>"
-          }
-        },
-        "blueGreenDeploymentConfiguration": {
-          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
+            "smithy.api#documentation": "<p>The deployment group ID.</p>"
           }
         },
         "deploymentConfigName": {
@@ -2371,28 +2321,22 @@
             "smithy.api#documentation": "<p>The deployment configuration name.</p>"
           }
         },
-        "targetRevision": {
-          "target": "com.amazonaws.codedeploy#RevisionLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the deployment group's target revision, including type and\n            location.</p>"
-          }
-        },
-        "alarmConfiguration": {
-          "target": "com.amazonaws.codedeploy#AlarmConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of alarms associated with the deployment group.</p>"
-          }
-        },
         "loadBalancerInfo": {
           "target": "com.amazonaws.codedeploy#LoadBalancerInfo",
           "traits": {
             "smithy.api#documentation": "<p>Information about the load balancer to use in a deployment.</p>"
           }
         },
-        "deploymentGroupId": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupId",
+        "ec2TagSet": {
+          "target": "com.amazonaws.codedeploy#EC2TagSet",
           "traits": {
-            "smithy.api#documentation": "<p>The deployment group ID.</p>"
+            "smithy.api#documentation": "<p>Information about groups of tags applied to an EC2 instance. The deployment group\n            includes only EC2 instances identified by all of the tag groups. Cannot be used in the\n            same call as ec2TagFilters.</p>"
+          }
+        },
+        "deploymentStyle": {
+          "target": "com.amazonaws.codedeploy#DeploymentStyle",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
           }
         },
         "computePlatform": {
@@ -2401,28 +2345,10 @@
             "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
           }
         },
-        "autoScalingGroups": {
-          "target": "com.amazonaws.codedeploy#AutoScalingGroupList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of associated Auto Scaling groups.</p>"
-          }
-        },
-        "lastSuccessfulDeployment": {
-          "target": "com.amazonaws.codedeploy#LastDeploymentInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the most recent successful deployment to the deployment\n            group.</p>"
-          }
-        },
         "deploymentGroupName": {
           "target": "com.amazonaws.codedeploy#DeploymentGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The deployment group name.</p>"
-          }
-        },
-        "onPremisesTagSet": {
-          "target": "com.amazonaws.codedeploy#OnPremisesTagSet",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about groups of tags applied to an on-premises instance. The deployment\n            group includes only on-premises instances identified by all the tag groups. Cannot be\n            used in the same call as onPremisesInstanceTagFilters.</p>"
           }
         },
         "ec2TagFilters": {
@@ -2431,10 +2357,82 @@
             "smithy.api#documentation": "<p>The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances\n            with any of the specified tags.</p>"
           }
         },
+        "alarmConfiguration": {
+          "target": "com.amazonaws.codedeploy#AlarmConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of alarms associated with the deployment group.</p>"
+          }
+        },
+        "autoRollbackConfiguration": {
+          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the automatic rollback configuration associated with the deployment\n            group.</p>"
+          }
+        },
         "lastAttemptedDeployment": {
           "target": "com.amazonaws.codedeploy#LastDeploymentInfo",
           "traits": {
             "smithy.api#documentation": "<p>Information about the most recent attempted deployment to the deployment group.</p>"
+          }
+        },
+        "autoScalingGroups": {
+          "target": "com.amazonaws.codedeploy#AutoScalingGroupList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of associated Auto Scaling groups.</p>"
+          }
+        },
+        "onPremisesTagSet": {
+          "target": "com.amazonaws.codedeploy#OnPremisesTagSet",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about groups of tags applied to an on-premises instance. The deployment\n            group includes only on-premises instances identified by all the tag groups. Cannot be\n            used in the same call as onPremisesInstanceTagFilters.</p>"
+          }
+        },
+        "triggerConfigurations": {
+          "target": "com.amazonaws.codedeploy#TriggerConfigList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about triggers associated with the deployment group.</p>"
+          }
+        },
+        "lastSuccessfulDeployment": {
+          "target": "com.amazonaws.codedeploy#LastDeploymentInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the most recent successful deployment to the deployment\n            group.</p>"
+          }
+        },
+        "targetRevision": {
+          "target": "com.amazonaws.codedeploy#RevisionLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the deployment group's target revision, including type and\n            location.</p>"
+          }
+        },
+        "serviceRoleArn": {
+          "target": "com.amazonaws.codedeploy#Role",
+          "traits": {
+            "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. \n            For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html\">Create a Service Role for AWS CodeDeploy</a> in \n            the <i>AWS CodeDeploy User Guide</i>.</p>"
+          }
+        },
+        "blueGreenDeploymentConfiguration": {
+          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
+          }
+        },
+        "ecsServices": {
+          "target": "com.amazonaws.codedeploy#ECSServiceList",
+          "traits": {
+            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+          }
+        },
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
+          "traits": {
+            "smithy.api#documentation": "<p>The application name.</p>"
+          }
+        },
+        "onPremisesInstanceTagFilters": {
+          "target": "com.amazonaws.codedeploy#TagFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The on-premises instance tags on which to filter. The deployment group includes\n            on-premises instances with any of the specified tags.</p>"
           }
         }
       },
@@ -2514,28 +2512,40 @@
     "com.amazonaws.codedeploy#DeploymentInfo": {
       "type": "structure",
       "members": {
-        "errorInformation": {
-          "target": "com.amazonaws.codedeploy#ErrorInformation",
+        "deploymentConfigName": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
           "traits": {
-            "smithy.api#documentation": "<p>Information about any error associated with this deployment.</p>"
+            "smithy.api#documentation": "<p> The deployment configuration name. </p>"
           }
         },
-        "blueGreenDeploymentConfiguration": {
-          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
+        "deploymentOverview": {
+          "target": "com.amazonaws.codedeploy#DeploymentOverview",
           "traits": {
-            "smithy.api#documentation": "<p>Information about blue/green deployment options for this deployment.</p>"
+            "smithy.api#documentation": "<p>A summary of the deployment status of the instances in the deployment.</p>"
           }
         },
-        "deploymentStatusMessages": {
-          "target": "com.amazonaws.codedeploy#DeploymentStatusMessageList",
+        "deploymentGroupName": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>Messages that contain information about the status of a deployment.</p>"
+            "smithy.api#documentation": "<p> The deployment group name. </p>"
           }
         },
-        "autoRollbackConfiguration": {
-          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+        "description": {
+          "target": "com.amazonaws.codedeploy#Description",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the automatic rollback configuration associated with the\n            deployment.</p>"
+            "smithy.api#documentation": "<p>A comment about the deployment.</p>"
+          }
+        },
+        "instanceTerminationWaitTimeStarted": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the wait period set for the termination of instances in the original\n            environment has started. Status is 'false' if the KEEP_ALIVE option is specified.\n            Otherwise, 'true' as soon as the termination wait period starts.</p>"
+          }
+        },
+        "rollbackInfo": {
+          "target": "com.amazonaws.codedeploy#RollbackInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a deployment rollback.</p>"
           }
         },
         "createTime": {
@@ -2544,10 +2554,34 @@
             "smithy.api#documentation": "<p>A timestamp that indicates when the deployment was created.</p>"
           }
         },
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
+        "fileExistsBehavior": {
+          "target": "com.amazonaws.codedeploy#FileExistsBehavior",
           "traits": {
-            "smithy.api#documentation": "<p>The application name.</p>"
+            "smithy.api#documentation": "<p>Information about how AWS CodeDeploy handles files that already exist in a deployment\n            target location but weren't part of the previous successful deployment.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DISALLOW</code>: The deployment fails. This is also the default behavior\n                    if no option is specified.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OVERWRITE</code>: The version of the file from the application revision\n                    currently being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RETAIN</code>: The version of the file already on the instance is kept\n                    and used as part of the new deployment.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "blueGreenDeploymentConfiguration": {
+          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about blue/green deployment options for this deployment.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.codedeploy#DeploymentStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the deployment as a whole.</p>"
+          }
+        },
+        "autoRollbackConfiguration": {
+          "target": "com.amazonaws.codedeploy#AutoRollbackConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the automatic rollback configuration associated with the\n            deployment.</p>"
+          }
+        },
+        "deploymentStatusMessages": {
+          "target": "com.amazonaws.codedeploy#DeploymentStatusMessageList",
+          "traits": {
+            "smithy.api#documentation": "<p>Messages that contain information about the status of a deployment.</p>"
           }
         },
         "additionalDeploymentStatusInfo": {
@@ -2562,88 +2596,10 @@
             "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with DownloadBundle. If\n                <code>BeforeBlockTraffic</code> fails, the deployment continues with\n                <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code> fails, the deployment\n            continues with <code>ApplicationStop</code>. </p>\n        \n        <p>\n            If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. \n            If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, \n            then a deployment to the next instance is attempted.\n        </p>\n        \n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n        \n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
           }
         },
-        "deploymentGroupName": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p> The deployment group name. </p>"
-          }
-        },
-        "fileExistsBehavior": {
-          "target": "com.amazonaws.codedeploy#FileExistsBehavior",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about how AWS CodeDeploy handles files that already exist in a deployment\n            target location but weren't part of the previous successful deployment.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DISALLOW</code>: The deployment fails. This is also the default behavior\n                    if no option is specified.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OVERWRITE</code>: The version of the file from the application revision\n                    currently being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RETAIN</code>: The version of the file already on the instance is kept\n                    and used as part of the new deployment.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "deploymentId": {
-          "target": "com.amazonaws.codedeploy#DeploymentId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
-          }
-        },
-        "instanceTerminationWaitTimeStarted": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the wait period set for the termination of instances in the original\n            environment has started. Status is 'false' if the KEEP_ALIVE option is specified.\n            Otherwise, 'true' as soon as the termination wait period starts.</p>"
-          }
-        },
-        "revision": {
-          "target": "com.amazonaws.codedeploy#RevisionLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the location of stored application artifacts and the service from\n            which to retrieve them.</p>"
-          }
-        },
-        "updateOutdatedInstancesOnly": {
-          "target": "com.amazonaws.codedeploy#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether only instances that are not running the latest application revision\n            are to be deployed to.</p>"
-          }
-        },
-        "rollbackInfo": {
-          "target": "com.amazonaws.codedeploy#RollbackInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about a deployment rollback.</p>"
-          }
-        },
-        "deploymentStyle": {
-          "target": "com.amazonaws.codedeploy#DeploymentStyle",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
-          }
-        },
-        "startTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>A timestamp that indicates when the deployment was deployed to the deployment\n            group.</p>\n        <p>In some cases, the reported value of the start time might be later than the complete\n            time. This is due to differences in the clock settings of backend servers that\n            participate in the deployment process.</p>"
-          }
-        },
-        "targetInstances": {
-          "target": "com.amazonaws.codedeploy#TargetInstances",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the instances that belong to the replacement environment in a\n            blue/green deployment.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.codedeploy#DeploymentStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current state of the deployment as a whole.</p>"
-          }
-        },
         "previousRevision": {
           "target": "com.amazonaws.codedeploy#RevisionLocation",
           "traits": {
             "smithy.api#documentation": "<p>Information about the application revision that was deployed to the deployment group\n            before the most recent successful deployment.</p>"
-          }
-        },
-        "deploymentOverview": {
-          "target": "com.amazonaws.codedeploy#DeploymentOverview",
-          "traits": {
-            "smithy.api#documentation": "<p>A summary of the deployment status of the instances in the deployment.</p>"
-          }
-        },
-        "computePlatform": {
-          "target": "com.amazonaws.codedeploy#ComputePlatform",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
           }
         },
         "creator": {
@@ -2652,16 +2608,40 @@
             "smithy.api#documentation": "<p>The means by which the deployment was created:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>user</code>: A user created the deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>autoscaling</code>: Amazon EC2 Auto Scaling created the\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>codeDeployRollback</code>: A rollback process created the\n                    deployment.</p>\n            </li>\n         </ul>"
           }
         },
-        "deploymentConfigName": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
-          "traits": {
-            "smithy.api#documentation": "<p> The deployment configuration name. </p>"
-          }
-        },
         "loadBalancerInfo": {
           "target": "com.amazonaws.codedeploy#LoadBalancerInfo",
           "traits": {
             "smithy.api#documentation": "<p>Information about the load balancer used in the deployment.</p>"
+          }
+        },
+        "revision": {
+          "target": "com.amazonaws.codedeploy#RevisionLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the location of stored application artifacts and the service from\n            which to retrieve them.</p>"
+          }
+        },
+        "deploymentId": {
+          "target": "com.amazonaws.codedeploy#DeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+          }
+        },
+        "updateOutdatedInstancesOnly": {
+          "target": "com.amazonaws.codedeploy#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether only instances that are not running the latest application revision\n            are to be deployed to.</p>"
+          }
+        },
+        "computePlatform": {
+          "target": "com.amazonaws.codedeploy#ComputePlatform",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+          }
+        },
+        "errorInformation": {
+          "target": "com.amazonaws.codedeploy#ErrorInformation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about any error associated with this deployment.</p>"
           }
         },
         "externalId": {
@@ -2676,10 +2656,28 @@
             "smithy.api#documentation": "<p>A timestamp that indicates when the deployment was complete.</p>"
           }
         },
-        "description": {
-          "target": "com.amazonaws.codedeploy#Description",
+        "deploymentStyle": {
+          "target": "com.amazonaws.codedeploy#DeploymentStyle",
           "traits": {
-            "smithy.api#documentation": "<p>A comment about the deployment.</p>"
+            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
+          }
+        },
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
+          "traits": {
+            "smithy.api#documentation": "<p>The application name.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A timestamp that indicates when the deployment was deployed to the deployment\n            group.</p>\n        <p>In some cases, the reported value of the start time might be later than the complete\n            time. This is due to differences in the clock settings of backend servers that\n            participate in the deployment process.</p>"
+          }
+        },
+        "targetInstances": {
+          "target": "com.amazonaws.codedeploy#TargetInstances",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the instances that belong to the replacement environment in a\n            blue/green deployment.</p>"
           }
         }
       },
@@ -2756,28 +2754,28 @@
             "smithy.api#documentation": "<p>The number of instances in the deployment to which revisions have been successfully\n            deployed.</p>"
           }
         },
-        "Pending": {
-          "target": "com.amazonaws.codedeploy#InstanceCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of instances in the deployment in a pending state.</p>"
-          }
-        },
         "Ready": {
           "target": "com.amazonaws.codedeploy#InstanceCount",
           "traits": {
             "smithy.api#documentation": "<p>The number of instances in a replacement environment ready to receive traffic in a\n            blue/green deployment.</p>"
           }
         },
-        "Skipped": {
-          "target": "com.amazonaws.codedeploy#InstanceCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of instances in the deployment in a skipped state.</p>"
-          }
-        },
         "Failed": {
           "target": "com.amazonaws.codedeploy#InstanceCount",
           "traits": {
             "smithy.api#documentation": "<p>The number of instances in the deployment in a failed state.</p>"
+          }
+        },
+        "Pending": {
+          "target": "com.amazonaws.codedeploy#InstanceCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of instances in the deployment in a pending state.</p>"
+          }
+        },
+        "Skipped": {
+          "target": "com.amazonaws.codedeploy#InstanceCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of instances in the deployment in a skipped state.</p>"
           }
         },
         "InProgress": {
@@ -2809,16 +2807,16 @@
     "com.amazonaws.codedeploy#DeploymentReadyOption": {
       "type": "structure",
       "members": {
-        "actionOnTimeout": {
-          "target": "com.amazonaws.codedeploy#DeploymentReadyAction",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about when to reroute traffic from an original environment to a\n            replacement environment in a blue/green deployment.</p>\n        <ul>\n            <li>\n                <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately\n                    after the new application revision is installed on the instances in the\n                    replacement environment.</p>\n            </li>\n            <li>\n                <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless\n                    traffic rerouting is started using <a>ContinueDeployment</a>. If\n                    traffic rerouting is not started before the end of the specified wait period,\n                    the deployment status is changed to Stopped.</p>\n            </li>\n         </ul>"
-          }
-        },
         "waitTimeInMinutes": {
           "target": "com.amazonaws.codedeploy#Duration",
           "traits": {
             "smithy.api#documentation": "<p>The number of minutes to wait before the status of a blue/green deployment is changed\n            to Stopped if rerouting is not started manually. Applies only to the\n                <code>STOP_DEPLOYMENT</code> option for <code>actionOnTimeout</code>.</p>"
+          }
+        },
+        "actionOnTimeout": {
+          "target": "com.amazonaws.codedeploy#DeploymentReadyAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about when to reroute traffic from an original environment to a\n            replacement environment in a blue/green deployment.</p>\n        <ul>\n            <li>\n                <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately\n                    after the new application revision is installed on the instances in the\n                    replacement environment.</p>\n            </li>\n            <li>\n                <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless\n                    traffic rerouting is started using <a>ContinueDeployment</a>. If\n                    traffic rerouting is not started before the end of the specified wait period,\n                    the deployment status is changed to Stopped.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -2900,20 +2898,17 @@
     "com.amazonaws.codedeploy#DeploymentTarget": {
       "type": "structure",
       "members": {
-        "instanceTarget": {
-          "target": "com.amazonaws.codedeploy#InstanceTarget",
-          "traits": {
-            "smithy.api#documentation": "<p> Information about the target for a deployment that uses the EC2/On-premises compute\n            platform. </p>"
-          }
-        },
         "deploymentTargetType": {
           "target": "com.amazonaws.codedeploy#DeploymentTargetType",
           "traits": {
             "smithy.api#documentation": "<p>The deployment type that is specific to the deployment's compute platform or deployments initiated by a CloudFormation stack update.</p>"
           }
         },
-        "cloudFormationTarget": {
-          "target": "com.amazonaws.codedeploy#CloudFormationTarget"
+        "ecsTarget": {
+          "target": "com.amazonaws.codedeploy#ECSTarget",
+          "traits": {
+            "smithy.api#documentation": "<p> Information about the target for a deployment that uses the Amazon ECS compute\n            platform. </p>"
+          }
         },
         "lambdaTarget": {
           "target": "com.amazonaws.codedeploy#LambdaTarget",
@@ -2921,10 +2916,13 @@
             "smithy.api#documentation": "<p> Information about the target for a deployment that uses the AWS Lambda compute\n            platform. </p>"
           }
         },
-        "ecsTarget": {
-          "target": "com.amazonaws.codedeploy#ECSTarget",
+        "cloudFormationTarget": {
+          "target": "com.amazonaws.codedeploy#CloudFormationTarget"
+        },
+        "instanceTarget": {
+          "target": "com.amazonaws.codedeploy#InstanceTarget",
           "traits": {
-            "smithy.api#documentation": "<p> Information about the target for a deployment that uses the Amazon ECS compute\n            platform. </p>"
+            "smithy.api#documentation": "<p> Information about the target for a deployment that uses the EC2/On-premises compute\n            platform. </p>"
           }
         }
       },
@@ -3101,18 +3099,6 @@
     "com.amazonaws.codedeploy#Diagnostics": {
       "type": "structure",
       "members": {
-        "logTail": {
-          "target": "com.amazonaws.codedeploy#LogTail",
-          "traits": {
-            "smithy.api#documentation": "<p>The last portion of the diagnostic log.</p>\n        <p>If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.</p>"
-          }
-        },
-        "scriptName": {
-          "target": "com.amazonaws.codedeploy#ScriptName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the script.</p>"
-          }
-        },
         "errorCode": {
           "target": "com.amazonaws.codedeploy#LifecycleErrorCode",
           "traits": {
@@ -3123,6 +3109,18 @@
           "target": "com.amazonaws.codedeploy#LifecycleMessage",
           "traits": {
             "smithy.api#documentation": "<p>The message associated with the error.</p>"
+          }
+        },
+        "logTail": {
+          "target": "com.amazonaws.codedeploy#LogTail",
+          "traits": {
+            "smithy.api#documentation": "<p>The last portion of the diagnostic log.</p>\n        <p>If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.</p>"
+          }
+        },
+        "scriptName": {
+          "target": "com.amazonaws.codedeploy#ScriptName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the script.</p>"
           }
         }
       },
@@ -3142,16 +3140,16 @@
             "smithy.api#documentation": "<p>The tag filter type:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>KEY_ONLY</code>: Key only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VALUE_ONLY</code>: Value only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>KEY_AND_VALUE</code>: Key and value.</p>\n            </li>\n         </ul>"
           }
         },
-        "Key": {
-          "target": "com.amazonaws.codedeploy#Key",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag filter key.</p>"
-          }
-        },
         "Value": {
           "target": "com.amazonaws.codedeploy#Value",
           "traits": {
             "smithy.api#documentation": "<p>The tag filter value.</p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.codedeploy#Key",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag filter key.</p>"
           }
         }
       },
@@ -3210,16 +3208,16 @@
     "com.amazonaws.codedeploy#ECSService": {
       "type": "structure",
       "members": {
-        "serviceName": {
-          "target": "com.amazonaws.codedeploy#ECSServiceName",
-          "traits": {
-            "smithy.api#documentation": "<p> The name of the target Amazon ECS service. </p>"
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.codedeploy#ECSClusterName",
           "traits": {
             "smithy.api#documentation": "<p> The name of the cluster that the Amazon ECS service is associated with. </p>"
+          }
+        },
+        "serviceName": {
+          "target": "com.amazonaws.codedeploy#ECSServiceName",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the target Amazon ECS service. </p>"
           }
         }
       },
@@ -3254,16 +3252,16 @@
     "com.amazonaws.codedeploy#ECSTarget": {
       "type": "structure",
       "members": {
+        "lifecycleEvents": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventList",
+          "traits": {
+            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target Amazon ECS application. </p>"
+          }
+        },
         "status": {
           "target": "com.amazonaws.codedeploy#TargetStatus",
           "traits": {
             "smithy.api#documentation": "<p> The status an Amazon ECS deployment's target ECS application. </p>"
-          }
-        },
-        "taskSetsInfo": {
-          "target": "com.amazonaws.codedeploy#ECSTaskSetList",
-          "traits": {
-            "smithy.api#documentation": "<p> The <code>ECSTaskSet</code> objects associated with the ECS target. </p>"
           }
         },
         "targetId": {
@@ -3272,10 +3270,10 @@
             "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type of <code>ecsTarget</code>.\n        </p>"
           }
         },
-        "targetArn": {
-          "target": "com.amazonaws.codedeploy#TargetArn",
+        "taskSetsInfo": {
+          "target": "com.amazonaws.codedeploy#ECSTaskSetList",
           "traits": {
-            "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the target. </p>"
+            "smithy.api#documentation": "<p> The <code>ECSTaskSet</code> objects associated with the ECS target. </p>"
           }
         },
         "lastUpdatedAt": {
@@ -3284,16 +3282,16 @@
             "smithy.api#documentation": "<p> The date and time when the target Amazon ECS application was updated by a deployment.\n        </p>"
           }
         },
+        "targetArn": {
+          "target": "com.amazonaws.codedeploy#TargetArn",
+          "traits": {
+            "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the target. </p>"
+          }
+        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
-          }
-        },
-        "lifecycleEvents": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventList",
-          "traits": {
-            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target Amazon ECS application. </p>"
           }
         }
       },
@@ -3304,6 +3302,30 @@
     "com.amazonaws.codedeploy#ECSTaskSet": {
       "type": "structure",
       "members": {
+        "trafficWeight": {
+          "target": "com.amazonaws.codedeploy#TrafficWeight",
+          "traits": {
+            "smithy.api#documentation": "<p> The percentage of traffic served by this task set. </p>"
+          }
+        },
+        "taskSetLabel": {
+          "target": "com.amazonaws.codedeploy#TargetLabel",
+          "traits": {
+            "smithy.api#documentation": "<p> A label that identifies whether the ECS task set is an original target\n            (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
+          }
+        },
+        "targetGroup": {
+          "target": "com.amazonaws.codedeploy#TargetGroupInfo",
+          "traits": {
+            "smithy.api#documentation": "<p> The target group associated with the task set. The target group is used by AWS\n            CodeDeploy to manage traffic to a task set. </p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.codedeploy#ECSTaskSetStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> The status of the task set. There are three valid task set statuses: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>PRIMARY</code>: Indicates the task set is serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ACTIVE</code>: Indicates the task set is not serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>DRAINING</code>: Indicates the tasks in the task set are being stopped and\n                    their corresponding targets are being deregistered from their target group. </p>\n            </li>\n         </ul>"
+          }
+        },
         "identifer": {
           "target": "com.amazonaws.codedeploy#ECSTaskSetIdentifier",
           "traits": {
@@ -3316,40 +3338,16 @@
             "smithy.api#documentation": "<p> The number of tasks in the task set that are in the <code>RUNNING</code> status\n            during an Amazon ECS deployment. A task in the <code>RUNNING</code> state is running and\n            ready for use. </p>"
           }
         },
-        "status": {
-          "target": "com.amazonaws.codedeploy#ECSTaskSetStatus",
+        "pendingCount": {
+          "target": "com.amazonaws.codedeploy#ECSTaskSetCount",
           "traits": {
-            "smithy.api#documentation": "<p> The status of the task set. There are three valid task set statuses: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>PRIMARY</code>: Indicates the task set is serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ACTIVE</code>: Indicates the task set is not serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>DRAINING</code>: Indicates the tasks in the task set are being stopped and\n                    their corresponding targets are being deregistered from their target group. </p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p> The number of tasks in the task set that are in the <code>PENDING</code> status\n            during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing\n            to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code>\n            status when it launches for the first time, or when it is restarted after being in the\n            <code>STOPPED</code> state. </p>"
           }
         },
         "desiredCount": {
           "target": "com.amazonaws.codedeploy#ECSTaskSetCount",
           "traits": {
             "smithy.api#documentation": "<p> The number of tasks in a task set. During a deployment that uses the Amazon ECS\n            compute type, CodeDeploy instructs Amazon ECS to create a new task set and uses this\n            value to determine how many tasks to create. After the updated task set is created,\n            CodeDeploy shifts traffic to the new task set. </p>"
-          }
-        },
-        "trafficWeight": {
-          "target": "com.amazonaws.codedeploy#TrafficWeight",
-          "traits": {
-            "smithy.api#documentation": "<p> The percentage of traffic served by this task set. </p>"
-          }
-        },
-        "targetGroup": {
-          "target": "com.amazonaws.codedeploy#TargetGroupInfo",
-          "traits": {
-            "smithy.api#documentation": "<p> The target group associated with the task set. The target group is used by AWS\n            CodeDeploy to manage traffic to a task set. </p>"
-          }
-        },
-        "taskSetLabel": {
-          "target": "com.amazonaws.codedeploy#TargetLabel",
-          "traits": {
-            "smithy.api#documentation": "<p> A label that identifies whether the ECS task set is an original target\n            (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
-          }
-        },
-        "pendingCount": {
-          "target": "com.amazonaws.codedeploy#ECSTaskSetCount",
-          "traits": {
-            "smithy.api#documentation": "<p> The number of tasks in the task set that are in the <code>PENDING</code> status\n            during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing\n            to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code>\n            status when it launches for the first time, or when it is restarted after being in the\n            <code>STOPPED</code> state. </p>"
           }
         }
       },
@@ -3598,24 +3596,6 @@
     "com.amazonaws.codedeploy#GenericRevisionInfo": {
       "type": "structure",
       "members": {
-        "lastUsedTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the revision was last used by AWS CodeDeploy.</p>"
-          }
-        },
-        "description": {
-          "target": "com.amazonaws.codedeploy#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>A comment about the revision.</p>"
-          }
-        },
-        "deploymentGroups": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupsList",
-          "traits": {
-            "smithy.api#documentation": "<p>The deployment groups for which this is the current target revision.</p>"
-          }
-        },
         "registerTime": {
           "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
@@ -3626,6 +3606,24 @@
           "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the revision was first used by AWS CodeDeploy.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.codedeploy#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>A comment about the revision.</p>"
+          }
+        },
+        "lastUsedTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the revision was last used by AWS CodeDeploy.</p>"
+          }
+        },
+        "deploymentGroups": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupsList",
+          "traits": {
+            "smithy.api#documentation": "<p>The deployment groups for which this is the current target revision.</p>"
           }
         }
       },
@@ -3720,17 +3718,17 @@
     "com.amazonaws.codedeploy#GetApplicationRevisionInput": {
       "type": "structure",
       "members": {
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the application that corresponds to the revision.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "revision": {
           "target": "com.amazonaws.codedeploy#RevisionLocation",
           "traits": {
             "smithy.api#documentation": "<p>Information about the application revision to get, including type and location.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the application that corresponds to the revision.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3742,10 +3740,10 @@
     "com.amazonaws.codedeploy#GetApplicationRevisionOutput": {
       "type": "structure",
       "members": {
-        "revisionInfo": {
-          "target": "com.amazonaws.codedeploy#GenericRevisionInfo",
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
-            "smithy.api#documentation": "<p>General information about the revision.</p>"
+            "smithy.api#documentation": "<p>The name of the application that corresponds to the revision.</p>"
           }
         },
         "revision": {
@@ -3754,10 +3752,10 @@
             "smithy.api#documentation": "<p>Additional information about the revision, including type and location.</p>"
           }
         },
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
+        "revisionInfo": {
+          "target": "com.amazonaws.codedeploy#GenericRevisionInfo",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the application that corresponds to the revision.</p>"
+            "smithy.api#documentation": "<p>General information about the revision.</p>"
           }
         }
       },
@@ -3970,17 +3968,17 @@
     "com.amazonaws.codedeploy#GetDeploymentInstanceInput": {
       "type": "structure",
       "members": {
-        "instanceId": {
-          "target": "com.amazonaws.codedeploy#InstanceId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of an instance in the deployment group. </p>",
-            "smithy.api#required": {}
-          }
-        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "instanceId": {
+          "target": "com.amazonaws.codedeploy#InstanceId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of an instance in the deployment group. </p>",
             "smithy.api#required": {}
           }
         }
@@ -4058,16 +4056,16 @@
     "com.amazonaws.codedeploy#GetDeploymentTargetInput": {
       "type": "structure",
       "members": {
-        "targetId": {
-          "target": "com.amazonaws.codedeploy#TargetId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment target. </p>"
-          }
-        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+          }
+        },
+        "targetId": {
+          "target": "com.amazonaws.codedeploy#TargetId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a deployment target. </p>"
           }
         }
       }
@@ -4352,10 +4350,22 @@
     "com.amazonaws.codedeploy#InstanceInfo": {
       "type": "structure",
       "members": {
-        "iamSessionArn": {
-          "target": "com.amazonaws.codedeploy#IamSessionArn",
+        "instanceName": {
+          "target": "com.amazonaws.codedeploy#InstanceName",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM session associated with the on-premises instance.</p>"
+            "smithy.api#documentation": "<p>The name of the on-premises instance.</p>"
+          }
+        },
+        "deregisterTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>If the on-premises instance was deregistered, the time at which the on-premises\n            instance was deregistered.</p>"
+          }
+        },
+        "iamUserArn": {
+          "target": "com.amazonaws.codedeploy#IamUserArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IAM user ARN associated with the on-premises instance.</p>"
           }
         },
         "instanceArn": {
@@ -4370,28 +4380,16 @@
             "smithy.api#documentation": "<p>The tags currently associated with the on-premises instance.</p>"
           }
         },
-        "iamUserArn": {
-          "target": "com.amazonaws.codedeploy#IamUserArn",
+        "iamSessionArn": {
+          "target": "com.amazonaws.codedeploy#IamSessionArn",
           "traits": {
-            "smithy.api#documentation": "<p>The IAM user ARN associated with the on-premises instance.</p>"
-          }
-        },
-        "deregisterTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>If the on-premises instance was deregistered, the time at which the on-premises\n            instance was deregistered.</p>"
+            "smithy.api#documentation": "<p>The ARN of the IAM session associated with the on-premises instance.</p>"
           }
         },
         "registerTime": {
           "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The time at which the on-premises instance was registered.</p>"
-          }
-        },
-        "instanceName": {
-          "target": "com.amazonaws.codedeploy#InstanceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the on-premises instance.</p>"
           }
         }
       },
@@ -4521,10 +4519,28 @@
     "com.amazonaws.codedeploy#InstanceSummary": {
       "type": "structure",
       "members": {
+        "status": {
+          "target": "com.amazonaws.codedeploy#InstanceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The deployment status for this instance:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Pending</code>: The deployment is pending for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>In Progress</code>: The deployment is in progress for this\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: The deployment has succeeded for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: The deployment has failed for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Skipped</code>: The deployment has been skipped for this\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Unknown</code>: The deployment status is unknown for this\n                    instance.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "lifecycleEvents": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of lifecycle events for this instance.</p>"
+          }
+        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+          }
+        },
+        "instanceType": {
+          "target": "com.amazonaws.codedeploy#InstanceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about which environment an instance belongs to in a blue/green\n            deployment.</p>\n        <ul>\n            <li>\n                <p>BLUE: The instance is part of the original environment.</p>\n            </li>\n            <li>\n                <p>GREEN: The instance is part of the replacement environment.</p>\n            </li>\n         </ul>"
           }
         },
         "instanceId": {
@@ -4537,24 +4553,6 @@
           "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>A timestamp that indicates when the instance information was last updated.</p>"
-          }
-        },
-        "instanceType": {
-          "target": "com.amazonaws.codedeploy#InstanceType",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about which environment an instance belongs to in a blue/green\n            deployment.</p>\n        <ul>\n            <li>\n                <p>BLUE: The instance is part of the original environment.</p>\n            </li>\n            <li>\n                <p>GREEN: The instance is part of the replacement environment.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "lifecycleEvents": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of lifecycle events for this instance.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.codedeploy#InstanceStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The deployment status for this instance:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Pending</code>: The deployment is pending for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>In Progress</code>: The deployment is in progress for this\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: The deployment has succeeded for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: The deployment has failed for this instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Skipped</code>: The deployment has been skipped for this\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Unknown</code>: The deployment status is unknown for this\n                    instance.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -4574,22 +4572,10 @@
     "com.amazonaws.codedeploy#InstanceTarget": {
       "type": "structure",
       "members": {
-        "instanceLabel": {
-          "target": "com.amazonaws.codedeploy#TargetLabel",
+        "targetArn": {
+          "target": "com.amazonaws.codedeploy#TargetArn",
           "traits": {
-            "smithy.api#documentation": "<p> A label that identifies whether the instance is an original target\n            (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
-          }
-        },
-        "lifecycleEvents": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventList",
-          "traits": {
-            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target instance. </p>"
-          }
-        },
-        "lastUpdatedAt": {
-          "target": "com.amazonaws.codedeploy#Time",
-          "traits": {
-            "smithy.api#documentation": "<p> The date and time when the target instance was updated by a deployment. </p>"
+            "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the target. </p>"
           }
         },
         "deploymentId": {
@@ -4598,22 +4584,34 @@
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
           }
         },
+        "lastUpdatedAt": {
+          "target": "com.amazonaws.codedeploy#Time",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time when the target instance was updated by a deployment. </p>"
+          }
+        },
+        "lifecycleEvents": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventList",
+          "traits": {
+            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target instance. </p>"
+          }
+        },
         "targetId": {
           "target": "com.amazonaws.codedeploy#TargetId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type of <code>instanceTarget</code>.\n        </p>"
           }
         },
-        "targetArn": {
-          "target": "com.amazonaws.codedeploy#TargetArn",
-          "traits": {
-            "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the target. </p>"
-          }
-        },
         "status": {
           "target": "com.amazonaws.codedeploy#TargetStatus",
           "traits": {
             "smithy.api#documentation": "<p> The status an EC2/On-premises deployment's target instance. </p>"
+          }
+        },
+        "instanceLabel": {
+          "target": "com.amazonaws.codedeploy#TargetLabel",
+          "traits": {
+            "smithy.api#documentation": "<p> A label that identifies whether the instance is an original target\n            (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
           }
         }
       },
@@ -5467,22 +5465,16 @@
     "com.amazonaws.codedeploy#LambdaFunctionInfo": {
       "type": "structure",
       "members": {
-        "currentVersion": {
-          "target": "com.amazonaws.codedeploy#Version",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            The version of a Lambda function that production traffic points to.\n        </p>"
-          }
-        },
         "targetVersion": {
           "target": "com.amazonaws.codedeploy#Version",
           "traits": {
             "smithy.api#documentation": "<p>\n            The version of a Lambda function that production traffic points to after the Lambda function is deployed.\n        </p>"
           }
         },
-        "functionName": {
-          "target": "com.amazonaws.codedeploy#LambdaFunctionName",
+        "currentVersion": {
+          "target": "com.amazonaws.codedeploy#Version",
           "traits": {
-            "smithy.api#documentation": "<p>\n            The name of a Lambda function.\n        </p>"
+            "smithy.api#documentation": "<p>\n            The version of a Lambda function that production traffic points to.\n        </p>"
           }
         },
         "functionAlias": {
@@ -5496,6 +5488,12 @@
           "traits": {
             "smithy.api#documentation": "<p>\n            The percentage of production traffic that the target version of a Lambda function receives.\n        </p>"
           }
+        },
+        "functionName": {
+          "target": "com.amazonaws.codedeploy#LambdaFunctionName",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The name of a Lambda function.\n        </p>"
+          }
         }
       },
       "traits": {
@@ -5508,16 +5506,16 @@
     "com.amazonaws.codedeploy#LambdaTarget": {
       "type": "structure",
       "members": {
+        "lifecycleEvents": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventList",
+          "traits": {
+            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target Lambda function. </p>"
+          }
+        },
         "status": {
           "target": "com.amazonaws.codedeploy#TargetStatus",
           "traits": {
             "smithy.api#documentation": "<p> The status an AWS Lambda deployment's target Lambda function. </p>"
-          }
-        },
-        "lambdaFunctionInfo": {
-          "target": "com.amazonaws.codedeploy#LambdaFunctionInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            A <code>LambdaFunctionInfo</code> object that describes a target Lambda function.\n        </p>"
           }
         },
         "targetArn": {
@@ -5526,16 +5524,10 @@
             "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the target. </p>"
           }
         },
-        "deploymentId": {
-          "target": "com.amazonaws.codedeploy#DeploymentId",
+        "targetId": {
+          "target": "com.amazonaws.codedeploy#TargetId",
           "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
-          }
-        },
-        "lifecycleEvents": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventList",
-          "traits": {
-            "smithy.api#documentation": "<p> The lifecycle events of the deployment to this target Lambda function. </p>"
+            "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type of <code>lambdaTarget</code>.\n        </p>"
           }
         },
         "lastUpdatedAt": {
@@ -5544,10 +5536,16 @@
             "smithy.api#documentation": "<p> The date and time when the target Lambda function was updated by a deployment.\n        </p>"
           }
         },
-        "targetId": {
-          "target": "com.amazonaws.codedeploy#TargetId",
+        "lambdaFunctionInfo": {
+          "target": "com.amazonaws.codedeploy#LambdaFunctionInfo",
           "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment target that has a type of <code>lambdaTarget</code>.\n        </p>"
+            "smithy.api#documentation": "<p>\n            A <code>LambdaFunctionInfo</code> object that describes a target Lambda function.\n        </p>"
+          }
+        },
+        "deploymentId": {
+          "target": "com.amazonaws.codedeploy#DeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
           }
         }
       },
@@ -5558,10 +5556,10 @@
     "com.amazonaws.codedeploy#LastDeploymentInfo": {
       "type": "structure",
       "members": {
-        "createTime": {
+        "endTime": {
           "target": "com.amazonaws.codedeploy#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>A timestamp that indicates when the most recent deployment to the deployment group\n            started.</p>"
+            "smithy.api#documentation": "<p>A timestamp that indicates when the most recent deployment to the deployment group was\n            complete.</p>"
           }
         },
         "deploymentId": {
@@ -5570,16 +5568,16 @@
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
           }
         },
+        "createTime": {
+          "target": "com.amazonaws.codedeploy#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A timestamp that indicates when the most recent deployment to the deployment group\n            started.</p>"
+          }
+        },
         "status": {
           "target": "com.amazonaws.codedeploy#DeploymentStatus",
           "traits": {
             "smithy.api#documentation": "<p>The status of the most recent deployment.</p>"
-          }
-        },
-        "endTime": {
-          "target": "com.amazonaws.codedeploy#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>A timestamp that indicates when the most recent deployment to the deployment group was\n            complete.</p>"
           }
         }
       },
@@ -5627,16 +5625,16 @@
             "smithy.api#documentation": "<p>A timestamp that indicates when the deployment lifecycle event started.</p>"
           }
         },
-        "status": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The deployment lifecycle event status:</p>\n        <ul>\n            <li>\n                <p>Pending: The deployment lifecycle event is pending.</p>\n            </li>\n            <li>\n                <p>InProgress: The deployment lifecycle event is in progress.</p>\n            </li>\n            <li>\n                <p>Succeeded: The deployment lifecycle event ran successfully.</p>\n            </li>\n            <li>\n                <p>Failed: The deployment lifecycle event has failed.</p>\n            </li>\n            <li>\n                <p>Skipped: The deployment lifecycle event has been skipped.</p>\n            </li>\n            <li>\n                <p>Unknown: The deployment lifecycle event is unknown.</p>\n            </li>\n         </ul>"
-          }
-        },
         "lifecycleEventName": {
           "target": "com.amazonaws.codedeploy#LifecycleEventName",
           "traits": {
             "smithy.api#documentation": "<p>The deployment lifecycle event name, such as <code>ApplicationStop</code>,\n                <code>BeforeInstall</code>, <code>AfterInstall</code>,\n            <code>ApplicationStart</code>, or <code>ValidateService</code>.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The deployment lifecycle event status:</p>\n        <ul>\n            <li>\n                <p>Pending: The deployment lifecycle event is pending.</p>\n            </li>\n            <li>\n                <p>InProgress: The deployment lifecycle event is in progress.</p>\n            </li>\n            <li>\n                <p>Succeeded: The deployment lifecycle event ran successfully.</p>\n            </li>\n            <li>\n                <p>Failed: The deployment lifecycle event has failed.</p>\n            </li>\n            <li>\n                <p>Skipped: The deployment lifecycle event has been skipped.</p>\n            </li>\n            <li>\n                <p>Unknown: The deployment lifecycle event is unknown.</p>\n            </li>\n         </ul>"
           }
         },
         "endTime": {
@@ -5784,10 +5782,10 @@
     "com.amazonaws.codedeploy#ListApplicationRevisionsInput": {
       "type": "structure",
       "members": {
-        "s3Bucket": {
-          "target": "com.amazonaws.codedeploy#S3Bucket",
+        "sortBy": {
+          "target": "com.amazonaws.codedeploy#ApplicationRevisionSortBy",
           "traits": {
-            "smithy.api#documentation": "<p> An Amazon S3 bucket name to limit the search for revisions. </p>\n        <p> If set to null, all of the user's buckets are searched. </p>"
+            "smithy.api#documentation": "<p>The column name to use to sort the list results:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>registerTime</code>: Sort by the time the revisions were registered with\n                    AWS CodeDeploy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>firstUsedTime</code>: Sort by the time the revisions were first used in\n                    a deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>lastUsedTime</code>: Sort by the time the revisions were last used in a\n                    deployment.</p>\n            </li>\n         </ul>\n        <p> If not specified or set to null, the results are returned in an arbitrary order. </p>"
           }
         },
         "applicationName": {
@@ -5797,16 +5795,16 @@
             "smithy.api#required": {}
           }
         },
-        "s3KeyPrefix": {
-          "target": "com.amazonaws.codedeploy#S3Key",
+        "s3Bucket": {
+          "target": "com.amazonaws.codedeploy#S3Bucket",
           "traits": {
-            "smithy.api#documentation": "<p> A key prefix for the set of Amazon S3 objects to limit the search for revisions.\n        </p>"
+            "smithy.api#documentation": "<p> An Amazon S3 bucket name to limit the search for revisions. </p>\n        <p> If set to null, all of the user's buckets are searched. </p>"
           }
         },
-        "sortBy": {
-          "target": "com.amazonaws.codedeploy#ApplicationRevisionSortBy",
+        "nextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>The column name to use to sort the list results:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>registerTime</code>: Sort by the time the revisions were registered with\n                    AWS CodeDeploy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>firstUsedTime</code>: Sort by the time the revisions were first used in\n                    a deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>lastUsedTime</code>: Sort by the time the revisions were last used in a\n                    deployment.</p>\n            </li>\n         </ul>\n        <p> If not specified or set to null, the results are returned in an arbitrary order. </p>"
+            "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListApplicationRevisions</code> call.\n            It can be used to return the next set of applications in the list.</p>"
           }
         },
         "deployed": {
@@ -5815,10 +5813,10 @@
             "smithy.api#documentation": "<p> Whether to list revisions based on whether the revision is the target revision of a\n            deployment group: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>include</code>: List revisions that are target revisions of a deployment\n                    group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>exclude</code>: Do not list revisions that are target revisions of a\n                    deployment group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ignore</code>: List all revisions.</p>\n            </li>\n         </ul>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
+        "s3KeyPrefix": {
+          "target": "com.amazonaws.codedeploy#S3Key",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListApplicationRevisions</code> call.\n            It can be used to return the next set of applications in the list.</p>"
+            "smithy.api#documentation": "<p> A key prefix for the set of Amazon S3 objects to limit the search for revisions.\n        </p>"
           }
         },
         "sortOrder": {
@@ -5947,16 +5945,16 @@
     "com.amazonaws.codedeploy#ListDeploymentConfigsOutput": {
       "type": "structure",
       "members": {
-        "deploymentConfigsList": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigsList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of deployment configurations, including built-in configurations such as\n                <code>CodeDeployDefault.OneAtATime</code>.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.codedeploy#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list deployment configurations call to return the next set of\n            deployment configurations in the list.</p>"
+          }
+        },
+        "deploymentConfigsList": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of deployment configurations, including built-in configurations such as\n                <code>CodeDeployDefault.OneAtATime</code>.</p>"
           }
         }
       },
@@ -6025,16 +6023,16 @@
             "smithy.api#documentation": "<p>The application name.</p>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list deployment groups call to return the next set of deployment\n            groups in the list.</p>"
-          }
-        },
         "deploymentGroups": {
           "target": "com.amazonaws.codedeploy#DeploymentGroupsList",
           "traits": {
             "smithy.api#documentation": "<p>A list of deployment group names.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list deployment groups call to return the next set of deployment\n            groups in the list.</p>"
           }
         }
       },
@@ -6097,6 +6095,18 @@
     "com.amazonaws.codedeploy#ListDeploymentInstancesInput": {
       "type": "structure",
       "members": {
+        "instanceTypeFilter": {
+          "target": "com.amazonaws.codedeploy#InstanceTypeList",
+          "traits": {
+            "smithy.api#documentation": "<p>The set of instances in a blue/green deployment, either those in the original\n            environment (\"BLUE\") or those in the replacement environment (\"GREEN\"), for which you\n            want to view instance information.</p>"
+          }
+        },
+        "instanceStatusFilter": {
+          "target": "com.amazonaws.codedeploy#InstanceStatusList",
+          "traits": {
+            "smithy.api#documentation": "<p>A subset of instances to list by status:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Pending</code>: Include those instances with pending deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>InProgress</code>: Include those instances where deployments are still\n                    in progress.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: Include those instances with successful\n                    deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: Include those instances with failed deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Skipped</code>: Include those instances with skipped deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Unknown</code>: Include those instances with deployments in an unknown\n                    state.</p>\n            </li>\n         </ul>"
+          }
+        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
@@ -6109,18 +6119,6 @@
           "traits": {
             "smithy.api#documentation": "<p>An identifier returned from the previous list deployment instances call. It can be\n            used to return the next set of deployment instances in the list.</p>"
           }
-        },
-        "instanceTypeFilter": {
-          "target": "com.amazonaws.codedeploy#InstanceTypeList",
-          "traits": {
-            "smithy.api#documentation": "<p>The set of instances in a blue/green deployment, either those in the original\n            environment (\"BLUE\") or those in the replacement environment (\"GREEN\"), for which you\n            want to view instance information.</p>"
-          }
-        },
-        "instanceStatusFilter": {
-          "target": "com.amazonaws.codedeploy#InstanceStatusList",
-          "traits": {
-            "smithy.api#documentation": "<p>A subset of instances to list by status:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Pending</code>: Include those instances with pending deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>InProgress</code>: Include those instances where deployments are still\n                    in progress.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: Include those instances with successful\n                    deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: Include those instances with failed deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Skipped</code>: Include those instances with skipped deployments.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Unknown</code>: Include those instances with deployments in an unknown\n                    state.</p>\n            </li>\n         </ul>"
-          }
         }
       },
       "traits": {
@@ -6130,16 +6128,16 @@
     "com.amazonaws.codedeploy#ListDeploymentInstancesOutput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list deployment instances call to return the next set of\n            deployment instances in the list.</p>"
-          }
-        },
         "instancesList": {
           "target": "com.amazonaws.codedeploy#InstancesList",
           "traits": {
             "smithy.api#documentation": "<p>A list of instance IDs.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list deployment instances call to return the next set of\n            deployment instances in the list.</p>"
           }
         }
       },
@@ -6188,6 +6186,12 @@
     "com.amazonaws.codedeploy#ListDeploymentTargetsInput": {
       "type": "structure",
       "members": {
+        "deploymentId": {
+          "target": "com.amazonaws.codedeploy#DeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+          }
+        },
         "targetFilters": {
           "target": "com.amazonaws.codedeploy#TargetFilters",
           "traits": {
@@ -6198,12 +6202,6 @@
           "target": "com.amazonaws.codedeploy#NextToken",
           "traits": {
             "smithy.api#documentation": "<p> A token identifier returned from the previous <code>ListDeploymentTargets</code>\n            call. It can be used to return the next set of deployment targets in the list. </p>"
-          }
-        },
-        "deploymentId": {
-          "target": "com.amazonaws.codedeploy#DeploymentId",
-          "traits": {
-            "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
           }
         }
       }
@@ -6280,10 +6278,10 @@
     "com.amazonaws.codedeploy#ListDeploymentsInput": {
       "type": "structure",
       "members": {
-        "createTimeRange": {
-          "target": "com.amazonaws.codedeploy#TimeRange",
+        "nextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
           "traits": {
-            "smithy.api#documentation": "<p>A time range (start and end) for returning a subset of the list of deployments.</p>"
+            "smithy.api#documentation": "<p>An identifier returned from the previous list deployments call. It can be used to\n            return the next set of deployments in the list.</p>"
           }
         },
         "externalId": {
@@ -6292,28 +6290,28 @@
             "smithy.api#documentation": "<p>The unique ID of an external resource for returning deployments linked to the external resource.</p>"
           }
         },
+        "createTimeRange": {
+          "target": "com.amazonaws.codedeploy#TimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>A time range (start and end) for returning a subset of the list of deployments.</p>"
+          }
+        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>\n        <note>\n            <p>If <code>applicationName</code> is specified, then <code>deploymentGroupName</code> must \n                be specified. If it is not specified, then <code>deploymentGroupName</code> must not \n                be specified.\n            </p>\n        </note>"
           }
         },
-        "nextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
+        "includeOnlyStatuses": {
+          "target": "com.amazonaws.codedeploy#DeploymentStatusList",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier returned from the previous list deployments call. It can be used to\n            return the next set of deployments in the list.</p>"
+            "smithy.api#documentation": "<p>A subset of deployments to list by status:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Created</code>: Include created deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Queued</code>: Include queued deployments in the resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>In Progress</code>: Include in-progress deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: Include successful deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: Include failed deployments in the resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Stopped</code>: Include stopped deployments in the resulting\n                    list.</p>\n            </li>\n         </ul>"
           }
         },
         "deploymentGroupName": {
           "target": "com.amazonaws.codedeploy#DeploymentGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The name of a deployment group for the specified application.</p>\n        <note>\n            <p>If <code>deploymentGroupName</code> is specified, then <code>applicationName</code> must \n                be specified. If it is not specified, then <code>applicationName</code> must not \n                be specified.\n            </p>\n        </note>"
-          }
-        },
-        "includeOnlyStatuses": {
-          "target": "com.amazonaws.codedeploy#DeploymentStatusList",
-          "traits": {
-            "smithy.api#documentation": "<p>A subset of deployments to list by status:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Created</code>: Include created deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Queued</code>: Include queued deployments in the resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>In Progress</code>: Include in-progress deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Succeeded</code>: Include successful deployments in the resulting\n                    list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Failed</code>: Include failed deployments in the resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Stopped</code>: Include stopped deployments in the resulting\n                    list.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -6424,10 +6422,10 @@
     "com.amazonaws.codedeploy#ListOnPremisesInstancesInput": {
       "type": "structure",
       "members": {
-        "tagFilters": {
-          "target": "com.amazonaws.codedeploy#TagFilterList",
+        "registrationStatus": {
+          "target": "com.amazonaws.codedeploy#RegistrationStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The on-premises instance tags that are used to restrict the  on-premises instance\n            names returned.</p>"
+            "smithy.api#documentation": "<p>The registration status of the on-premises instances:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Deregistered</code>: Include deregistered on-premises instances in the\n                    resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Registered</code>: Include registered on-premises instances in the\n                    resulting list.</p>\n            </li>\n         </ul>"
           }
         },
         "nextToken": {
@@ -6436,10 +6434,10 @@
             "smithy.api#documentation": "<p>An identifier returned from the previous list on-premises instances call. It can be\n            used to return the next set of on-premises instances in the list.</p>"
           }
         },
-        "registrationStatus": {
-          "target": "com.amazonaws.codedeploy#RegistrationStatus",
+        "tagFilters": {
+          "target": "com.amazonaws.codedeploy#TagFilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The registration status of the on-premises instances:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Deregistered</code>: Include deregistered on-premises instances in the\n                    resulting list.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Registered</code>: Include registered on-premises instances in the\n                    resulting list.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The on-premises instance tags that are used to restrict the  on-premises instance\n            names returned.</p>"
           }
         }
       },
@@ -6450,16 +6448,16 @@
     "com.amazonaws.codedeploy#ListOnPremisesInstancesOutput": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list on-premises instances call to return the next set of\n            on-premises instances in the list.</p>"
-          }
-        },
         "instanceNames": {
           "target": "com.amazonaws.codedeploy#InstanceNameList",
           "traits": {
             "smithy.api#documentation": "<p>The list of matching on-premises instance names.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can\n            be used in a subsequent list on-premises instances call to return the next set of\n            on-premises instances in the list.</p>"
           }
         }
       },
@@ -6512,17 +6510,17 @@
     "com.amazonaws.codedeploy#ListTagsForResourceInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.codedeploy#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListTagsForResource</code> call.\n                It can be used to return the next set of applications in the list.</p>"
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.codedeploy#Arn",
           "traits": {
             "smithy.api#documentation": "<p>\n            The ARN of a CodeDeploy resource. <code>ListTagsForResource</code> returns all the tags associated with the \n            resource that is identified by the <code>ResourceArn</code>.\n        </p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.codedeploy#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListTagsForResource</code> call.\n                It can be used to return the next set of applications in the list.</p>"
           }
         }
       }
@@ -6556,16 +6554,16 @@
     "com.amazonaws.codedeploy#LoadBalancerInfo": {
       "type": "structure",
       "members": {
-        "targetGroupPairInfoList": {
-          "target": "com.amazonaws.codedeploy#TargetGroupPairInfoList",
-          "traits": {
-            "smithy.api#documentation": "<p> The target group pair information. This is an array of\n            <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>"
-          }
-        },
         "targetGroupInfoList": {
           "target": "com.amazonaws.codedeploy#TargetGroupInfoList",
           "traits": {
             "smithy.api#documentation": "<p>An array that contains information about the target group to use for load balancing in\n            a deployment. In Elastic Load Balancing, target groups are used with Application Load\n            Balancers.</p>\n        <note>\n            <p> Adding more than one target group to the array is not supported. </p>\n        </note>"
+          }
+        },
+        "targetGroupPairInfoList": {
+          "target": "com.amazonaws.codedeploy#TargetGroupPairInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p> The target group pair information. This is an array of\n            <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>"
           }
         },
         "elbInfoList": {
@@ -6727,16 +6725,16 @@
             "smithy.api#documentation": "<p> The unique ID of a deployment. Pass this ID to a Lambda function that validates a\n            deployment lifecycle event. </p>"
           }
         },
-        "status": {
-          "target": "com.amazonaws.codedeploy#LifecycleEventStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event\n                (<code>Succeeded</code> or <code>Failed</code>).</p>"
-          }
-        },
         "lifecycleEventHookExecutionId": {
           "target": "com.amazonaws.codedeploy#LifecycleEventHookExecutionId",
           "traits": {
             "smithy.api#documentation": "<p> The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is\n            specified in the <code>hooks</code> section of the AppSpec file. </p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.codedeploy#LifecycleEventStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event\n                (<code>Succeeded</code> or <code>Failed</code>).</p>"
           }
         }
       }
@@ -6820,17 +6818,17 @@
             "smithy.api#required": {}
           }
         },
+        "description": {
+          "target": "com.amazonaws.codedeploy#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>A comment about the revision.</p>"
+          }
+        },
         "applicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "description": {
-          "target": "com.amazonaws.codedeploy#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>A comment about the revision.</p>"
           }
         }
       },
@@ -7026,16 +7024,16 @@
     "com.amazonaws.codedeploy#RevisionInfo": {
       "type": "structure",
       "members": {
-        "revisionLocation": {
-          "target": "com.amazonaws.codedeploy#RevisionLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the location and type of an application revision.</p>"
-          }
-        },
         "genericRevisionInfo": {
           "target": "com.amazonaws.codedeploy#GenericRevisionInfo",
           "traits": {
             "smithy.api#documentation": "<p>Information about an application revision, including usage details and associated\n            deployment groups.</p>"
+          }
+        },
+        "revisionLocation": {
+          "target": "com.amazonaws.codedeploy#RevisionLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the location and type of an application revision.</p>"
           }
         }
       },
@@ -7052,10 +7050,10 @@
     "com.amazonaws.codedeploy#RevisionLocation": {
       "type": "structure",
       "members": {
-        "gitHubLocation": {
-          "target": "com.amazonaws.codedeploy#GitHubLocation",
+        "appSpecContent": {
+          "target": "com.amazonaws.codedeploy#AppSpecContent",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the location of application artifacts stored in GitHub.</p>"
+            "smithy.api#documentation": "<p> The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The\n            content is formatted as JSON or YAML and stored as a RawString. </p>"
           }
         },
         "revisionType": {
@@ -7064,22 +7062,22 @@
             "smithy.api#documentation": "<p>The type of application revision:</p>\n        <ul>\n            <li>\n                <p>S3: An application revision stored in Amazon S3.</p>\n            </li>\n            <li>\n                <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>AppSpecContent: An <code>AppSpecContent</code> object that contains the contents of an AppSpec file for \n                    an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML \n                    stored as a RawString.</p>\n            </li>\n         </ul>"
           }
         },
-        "appSpecContent": {
-          "target": "com.amazonaws.codedeploy#AppSpecContent",
+        "s3Location": {
+          "target": "com.amazonaws.codedeploy#S3Location",
           "traits": {
-            "smithy.api#documentation": "<p> The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The\n            content is formatted as JSON or YAML and stored as a RawString. </p>"
+            "smithy.api#documentation": "<p>Information about the location of a revision stored in Amazon S3. </p>"
+          }
+        },
+        "gitHubLocation": {
+          "target": "com.amazonaws.codedeploy#GitHubLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the location of application artifacts stored in GitHub.</p>"
           }
         },
         "string": {
           "target": "com.amazonaws.codedeploy#RawString",
           "traits": {
             "smithy.api#documentation": "<p>Information about the location of an AWS Lambda deployment revision stored as a\n            RawString.</p>"
-          }
-        },
-        "s3Location": {
-          "target": "com.amazonaws.codedeploy#S3Location",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the location of a revision stored in Amazon S3. </p>"
           }
         }
       },
@@ -7152,16 +7150,16 @@
     "com.amazonaws.codedeploy#RollbackInfo": {
       "type": "structure",
       "members": {
-        "rollbackTriggeringDeploymentId": {
-          "target": "com.amazonaws.codedeploy#DeploymentId",
-          "traits": {
-            "smithy.api#documentation": "<p>The deployment ID of the deployment that was underway and triggered a rollback\n            deployment because it failed or was stopped.</p>"
-          }
-        },
         "rollbackDeploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the deployment rollback.</p>"
+          }
+        },
+        "rollbackTriggeringDeploymentId": {
+          "target": "com.amazonaws.codedeploy#DeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p>The deployment ID of the deployment that was underway and triggered a rollback\n            deployment because it failed or was stopped.</p>"
           }
         },
         "rollbackMessage": {
@@ -7196,6 +7194,12 @@
             "smithy.api#documentation": "<p>The file type of the application revision. Must be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>tar</code>: A tar archive file.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tgz</code>: A compressed tar archive file.</p>\n            </li>\n            <li>\n                <p>\n                  <code>zip</code>: A zip archive file.</p>\n            </li>\n         </ul>"
           }
         },
+        "version": {
+          "target": "com.amazonaws.codedeploy#VersionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A specific version of the Amazon S3 object that represents the bundled artifacts for\n            the application revision.</p>\n        <p>If the version is not specified, the system uses the most recent version by\n            default.</p>"
+          }
+        },
         "eTag": {
           "target": "com.amazonaws.codedeploy#ETag",
           "traits": {
@@ -7206,12 +7210,6 @@
           "target": "com.amazonaws.codedeploy#S3Key",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon S3 object that represents the bundled artifacts for the\n            application revision.</p>"
-          }
-        },
-        "version": {
-          "target": "com.amazonaws.codedeploy#VersionId",
-          "traits": {
-            "smithy.api#documentation": "<p>A specific version of the Amazon S3 object that represents the bundled artifacts for\n            the application revision.</p>\n        <p>If the version is not specified, the system uses the most recent version by\n            default.</p>"
           }
         }
       },
@@ -7315,17 +7313,17 @@
     "com.amazonaws.codedeploy#StopDeploymentInput": {
       "type": "structure",
       "members": {
+        "autoRollbackEnabled": {
+          "target": "com.amazonaws.codedeploy#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p> Indicates, when a deployment is stopped, whether instances that have been updated\n            should be rolled back to the previous version of the application revision. </p>"
+          }
+        },
         "deploymentId": {
           "target": "com.amazonaws.codedeploy#DeploymentId",
           "traits": {
             "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
             "smithy.api#required": {}
-          }
-        },
-        "autoRollbackEnabled": {
-          "target": "com.amazonaws.codedeploy#NullableBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p> Indicates, when a deployment is stopped, whether instances that have been updated\n            should be rolled back to the previous version of the application revision. </p>"
           }
         }
       },
@@ -7371,16 +7369,16 @@
     "com.amazonaws.codedeploy#Tag": {
       "type": "structure",
       "members": {
-        "Key": {
-          "target": "com.amazonaws.codedeploy#Key",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag's key.</p>"
-          }
-        },
         "Value": {
           "target": "com.amazonaws.codedeploy#Value",
           "traits": {
             "smithy.api#documentation": "<p>The tag's value.</p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.codedeploy#Key",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag's key.</p>"
           }
         }
       },
@@ -7391,12 +7389,6 @@
     "com.amazonaws.codedeploy#TagFilter": {
       "type": "structure",
       "members": {
-        "Type": {
-          "target": "com.amazonaws.codedeploy#TagFilterType",
-          "traits": {
-            "smithy.api#documentation": "<p>The on-premises instance tag filter type:</p>\n        <ul>\n            <li>\n                <p>KEY_ONLY: Key only.</p>\n            </li>\n            <li>\n                <p>VALUE_ONLY: Value only.</p>\n            </li>\n            <li>\n                <p>KEY_AND_VALUE: Key and value.</p>\n            </li>\n         </ul>"
-          }
-        },
         "Key": {
           "target": "com.amazonaws.codedeploy#Key",
           "traits": {
@@ -7407,6 +7399,12 @@
           "target": "com.amazonaws.codedeploy#Value",
           "traits": {
             "smithy.api#documentation": "<p>The on-premises instance tag filter value.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.codedeploy#TagFilterType",
+          "traits": {
+            "smithy.api#documentation": "<p>The on-premises instance tag filter type:</p>\n        <ul>\n            <li>\n                <p>KEY_ONLY: Key only.</p>\n            </li>\n            <li>\n                <p>VALUE_ONLY: Value only.</p>\n            </li>\n            <li>\n                <p>KEY_AND_VALUE: Key and value.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -7522,17 +7520,17 @@
     "com.amazonaws.codedeploy#TagResourceInput": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.codedeploy#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            A list of tags that <code>TagResource</code> associates with a resource. The resource is identified by the <code>ResourceArn</code> input parameter.\n        </p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.codedeploy#Arn",
           "traits": {
             "smithy.api#documentation": "<p>\n            The ARN of a resource, such as a CodeDeploy application or deployment group.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.codedeploy#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A list of tags that <code>TagResource</code> associates with a resource. The resource is identified by the <code>ResourceArn</code> input parameter.\n        </p>",
             "smithy.api#required": {}
           }
         }
@@ -7610,6 +7608,12 @@
     "com.amazonaws.codedeploy#TargetGroupPairInfo": {
       "type": "structure",
       "members": {
+        "targetGroups": {
+          "target": "com.amazonaws.codedeploy#TargetGroupInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p> One pair of target groups. One is associated with the original task set. The second\n            is associated with the task set that serves traffic after the deployment is complete. </p>"
+          }
+        },
         "testTrafficRoute": {
           "target": "com.amazonaws.codedeploy#TrafficRoute",
           "traits": {
@@ -7620,12 +7624,6 @@
           "target": "com.amazonaws.codedeploy#TrafficRoute",
           "traits": {
             "smithy.api#documentation": "<p> The path used by a load balancer to route production traffic when an Amazon ECS\n            deployment is complete. </p>"
-          }
-        },
-        "targetGroups": {
-          "target": "com.amazonaws.codedeploy#TargetGroupInfoList",
-          "traits": {
-            "smithy.api#documentation": "<p> One pair of target groups. One is associated with the original task set. The second\n            is associated with the task set that serves traffic after the deployment is complete. </p>"
           }
         }
       },
@@ -7765,16 +7763,16 @@
     "com.amazonaws.codedeploy#TimeBasedLinear": {
       "type": "structure",
       "members": {
-        "linearPercentage": {
-          "target": "com.amazonaws.codedeploy#Percentage",
-          "traits": {
-            "smithy.api#documentation": "<p>The percentage of traffic that is shifted at the start of each increment of a\n                <code>TimeBasedLinear</code> deployment.</p>"
-          }
-        },
         "linearInterval": {
           "target": "com.amazonaws.codedeploy#WaitTimeInMins",
           "traits": {
             "smithy.api#documentation": "<p>The number of minutes between each incremental traffic shift of a\n                <code>TimeBasedLinear</code> deployment.</p>"
+          }
+        },
+        "linearPercentage": {
+          "target": "com.amazonaws.codedeploy#Percentage",
+          "traits": {
+            "smithy.api#documentation": "<p>The percentage of traffic that is shifted at the start of each increment of a\n                <code>TimeBasedLinear</code> deployment.</p>"
           }
         }
       },
@@ -7822,12 +7820,6 @@
     "com.amazonaws.codedeploy#TrafficRoutingConfig": {
       "type": "structure",
       "members": {
-        "type": {
-          "target": "com.amazonaws.codedeploy#TrafficRoutingType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of traffic shifting (<code>TimeBasedCanary</code> or\n                <code>TimeBasedLinear</code>) used by a deployment configuration.</p>"
-          }
-        },
         "timeBasedLinear": {
           "target": "com.amazonaws.codedeploy#TimeBasedLinear",
           "traits": {
@@ -7838,6 +7830,12 @@
           "target": "com.amazonaws.codedeploy#TimeBasedCanary",
           "traits": {
             "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task set to another\n            in two increments. The original and target Lambda function versions or ECS task sets are specified in the\n            deployment's AppSpec file.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.codedeploy#TrafficRoutingType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of traffic shifting (<code>TimeBasedCanary</code> or\n                <code>TimeBasedLinear</code>) used by a deployment configuration.</p>"
           }
         }
       },
@@ -7870,12 +7868,6 @@
     "com.amazonaws.codedeploy#TriggerConfig": {
       "type": "structure",
       "members": {
-        "triggerName": {
-          "target": "com.amazonaws.codedeploy#TriggerName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the notification trigger.</p>"
-          }
-        },
         "triggerTargetArn": {
           "target": "com.amazonaws.codedeploy#TriggerTargetArn",
           "traits": {
@@ -7886,6 +7878,12 @@
           "target": "com.amazonaws.codedeploy#TriggerEventTypeList",
           "traits": {
             "smithy.api#documentation": "<p>The event type or types for which notifications are triggered.</p>"
+          }
+        },
+        "triggerName": {
+          "target": "com.amazonaws.codedeploy#TriggerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the notification trigger.</p>"
           }
         }
       },
@@ -8075,16 +8073,16 @@
     "com.amazonaws.codedeploy#UpdateApplicationInput": {
       "type": "structure",
       "members": {
-        "applicationName": {
-          "target": "com.amazonaws.codedeploy#ApplicationName",
-          "traits": {
-            "smithy.api#documentation": "<p>The current name of the application you want to change.</p>"
-          }
-        },
         "newApplicationName": {
           "target": "com.amazonaws.codedeploy#ApplicationName",
           "traits": {
             "smithy.api#documentation": "<p>The new name to give the application.</p>"
+          }
+        },
+        "applicationName": {
+          "target": "com.amazonaws.codedeploy#ApplicationName",
+          "traits": {
+            "smithy.api#documentation": "<p>The current name of the application you want to change.</p>"
           }
         }
       },
@@ -8202,10 +8200,23 @@
     "com.amazonaws.codedeploy#UpdateDeploymentGroupInput": {
       "type": "structure",
       "members": {
-        "deploymentStyle": {
-          "target": "com.amazonaws.codedeploy#DeploymentStyle",
+        "currentDeploymentGroupName": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
+            "smithy.api#documentation": "<p>The current name of the deployment group.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deploymentConfigName": {
+          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
+          "traits": {
+            "smithy.api#documentation": "<p>The replacement deployment configuration name to use, if you want to change it.</p>"
+          }
+        },
+        "ec2TagFilters": {
+          "target": "com.amazonaws.codedeploy#EC2TagFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The replacement set of Amazon EC2 tags on which to filter, if you want to change them.\n            To keep the existing tags, enter their names. To remove tags, do not enter any tag\n            names.</p>"
           }
         },
         "applicationName": {
@@ -8215,34 +8226,10 @@
             "smithy.api#required": {}
           }
         },
-        "blueGreenDeploymentConfiguration": {
-          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
-          }
-        },
-        "onPremisesInstanceTagFilters": {
-          "target": "com.amazonaws.codedeploy#TagFilterList",
-          "traits": {
-            "smithy.api#documentation": "<p>The replacement set of on-premises instance tags on which to filter, if you want to\n            change them. To keep the existing tags, enter their names. To remove tags, do not enter\n            any tag names.</p>"
-          }
-        },
         "alarmConfiguration": {
           "target": "com.amazonaws.codedeploy#AlarmConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>Information to add or change about Amazon CloudWatch alarms when the deployment group\n            is updated.</p>"
-          }
-        },
-        "loadBalancerInfo": {
-          "target": "com.amazonaws.codedeploy#LoadBalancerInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the load balancer used in a deployment.</p>"
-          }
-        },
-        "autoScalingGroups": {
-          "target": "com.amazonaws.codedeploy#AutoScalingGroupNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment group, if\n            you want to change them. To keep the Auto Scaling groups, enter their names. To remove\n            Auto Scaling groups, do not enter any Auto Scaling group names.</p>"
           }
         },
         "serviceRoleArn": {
@@ -8251,16 +8238,10 @@
             "smithy.api#documentation": "<p>A replacement ARN for the service role, if you want to change it.</p>"
           }
         },
-        "ec2TagFilters": {
-          "target": "com.amazonaws.codedeploy#EC2TagFilterList",
+        "newDeploymentGroupName": {
+          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The replacement set of Amazon EC2 tags on which to filter, if you want to change them.\n            To keep the existing tags, enter their names. To remove tags, do not enter any tag\n            names.</p>"
-          }
-        },
-        "ecsServices": {
-          "target": "com.amazonaws.codedeploy#ECSServiceList",
-          "traits": {
-            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+            "smithy.api#documentation": "<p>The new name of the deployment group, if you want to change it.</p>"
           }
         },
         "onPremisesTagSet": {
@@ -8269,11 +8250,22 @@
             "smithy.api#documentation": "<p>Information about an on-premises instance tag set. The deployment group includes only\n            on-premises instances identified by all the tag groups.</p>"
           }
         },
-        "currentDeploymentGroupName": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
+        "triggerConfigurations": {
+          "target": "com.amazonaws.codedeploy#TriggerConfigList",
           "traits": {
-            "smithy.api#documentation": "<p>The current name of the deployment group.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Information about triggers to change when the deployment group is updated. For\n            examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html\">Edit a Trigger in a\n                CodeDeploy Deployment Group</a> in the <i>AWS CodeDeploy User\n                Guide</i>.</p>"
+          }
+        },
+        "ec2TagSet": {
+          "target": "com.amazonaws.codedeploy#EC2TagSet",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about groups of tags applied to on-premises instances. The deployment\n            group includes only EC2 instances identified by all the tag groups.</p>"
+          }
+        },
+        "deploymentStyle": {
+          "target": "com.amazonaws.codedeploy#DeploymentStyle",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
           }
         },
         "autoRollbackConfiguration": {
@@ -8282,28 +8274,34 @@
             "smithy.api#documentation": "<p>Information for an automatic rollback configuration that is added or changed when a\n            deployment group is updated.</p>"
           }
         },
-        "triggerConfigurations": {
-          "target": "com.amazonaws.codedeploy#TriggerConfigList",
+        "autoScalingGroups": {
+          "target": "com.amazonaws.codedeploy#AutoScalingGroupNameList",
           "traits": {
-            "smithy.api#documentation": "<p>Information about triggers to change when the deployment group is updated. For\n            examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html\">Edit a Trigger in a\n                CodeDeploy Deployment Group</a> in the <i>AWS CodeDeploy User\n                Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment group, if\n            you want to change them. To keep the Auto Scaling groups, enter their names. To remove\n            Auto Scaling groups, do not enter any Auto Scaling group names.</p>"
           }
         },
-        "deploymentConfigName": {
-          "target": "com.amazonaws.codedeploy#DeploymentConfigName",
+        "onPremisesInstanceTagFilters": {
+          "target": "com.amazonaws.codedeploy#TagFilterList",
           "traits": {
-            "smithy.api#documentation": "<p>The replacement deployment configuration name to use, if you want to change it.</p>"
+            "smithy.api#documentation": "<p>The replacement set of on-premises instance tags on which to filter, if you want to\n            change them. To keep the existing tags, enter their names. To remove tags, do not enter\n            any tag names.</p>"
           }
         },
-        "newDeploymentGroupName": {
-          "target": "com.amazonaws.codedeploy#DeploymentGroupName",
+        "ecsServices": {
+          "target": "com.amazonaws.codedeploy#ECSServiceList",
           "traits": {
-            "smithy.api#documentation": "<p>The new name of the deployment group, if you want to change it.</p>"
+            "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
           }
         },
-        "ec2TagSet": {
-          "target": "com.amazonaws.codedeploy#EC2TagSet",
+        "blueGreenDeploymentConfiguration": {
+          "target": "com.amazonaws.codedeploy#BlueGreenDeploymentConfiguration",
           "traits": {
-            "smithy.api#documentation": "<p>Information about groups of tags applied to on-premises instances. The deployment\n            group includes only EC2 instances identified by all the tag groups.</p>"
+            "smithy.api#documentation": "<p>Information about blue/green deployment options for a deployment group.</p>"
+          }
+        },
+        "loadBalancerInfo": {
+          "target": "com.amazonaws.codedeploy#LoadBalancerInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the load balancer used in a deployment.</p>"
           }
         }
       },

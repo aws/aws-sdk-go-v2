@@ -38,6 +38,9 @@
           },
           {
             "value": "AL2_x86_64_GPU"
+          },
+          {
+            "value": "AL2_ARM_64"
           }
         ]
       }
@@ -115,7 +118,7 @@
           "sdkId": "EKS",
           "arnNamespace": "eks",
           "cloudFormationName": "EKS",
-          "cloudTrailEventSource": "fe.wesley.amazonaws.com"
+          "cloudTrailEventSource": "eks.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "eks"
@@ -199,19 +202,19 @@
     "com.amazonaws.eks#ClientException": {
       "type": "structure",
       "members": {
-        "clusterName": {
+        "nodegroupName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
           }
         },
         "message": {
           "target": "com.amazonaws.eks#String"
         },
-        "nodegroupName": {
+        "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
           }
         }
       },
@@ -224,52 +227,10 @@
     "com.amazonaws.eks#Cluster": {
       "type": "structure",
       "members": {
-        "clientRequestToken": {
+        "endpoint": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>"
-          }
-        },
-        "identity": {
-          "target": "com.amazonaws.eks#Identity",
-          "traits": {
-            "smithy.api#documentation": "<p>The identity provider information for the cluster.</p>"
-          }
-        },
-        "platformVersion": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The platform version of your Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html\">Platform\n                Versions</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
-          }
-        },
-        "roleArn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to AWS API operations on your behalf.</p>"
-          }
-        },
-        "createdAt": {
-          "target": "com.amazonaws.eks#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the cluster was created.</p>"
-          }
-        },
-        "logging": {
-          "target": "com.amazonaws.eks#Logging",
-          "traits": {
-            "smithy.api#documentation": "<p>The logging configuration for your cluster.</p>"
-          }
-        },
-        "arn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the cluster.</p>"
+            "smithy.api#documentation": "<p>The endpoint for your Kubernetes API server.</p>"
           }
         },
         "resourcesVpcConfig": {
@@ -278,16 +239,10 @@
             "smithy.api#documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have\n            specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC\n                Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the\n            <i>Amazon EKS User Guide</i>.</p>"
           }
         },
-        "endpoint": {
-          "target": "com.amazonaws.eks#String",
+        "createdAt": {
+          "target": "com.amazonaws.eks#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The endpoint for your Kubernetes API server.</p>"
-          }
-        },
-        "certificateAuthority": {
-          "target": "com.amazonaws.eks#Certificate",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>certificate-authority-data</code> for your cluster.</p>"
+            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the cluster was created.</p>"
           }
         },
         "status": {
@@ -296,16 +251,70 @@
             "smithy.api#documentation": "<p>The current status of the cluster.</p>"
           }
         },
+        "kubernetesNetworkConfig": {
+          "target": "com.amazonaws.eks#KubernetesNetworkConfigResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>Network configuration settings for your cluster.</p>"
+          }
+        },
+        "certificateAuthority": {
+          "target": "com.amazonaws.eks#Certificate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>certificate-authority-data</code> for your cluster.</p>"
+          }
+        },
+        "logging": {
+          "target": "com.amazonaws.eks#Logging",
+          "traits": {
+            "smithy.api#documentation": "<p>The logging configuration for your cluster.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the cluster.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+          }
+        },
+        "identity": {
+          "target": "com.amazonaws.eks#Identity",
+          "traits": {
+            "smithy.api#documentation": "<p>The identity provider information for the cluster.</p>"
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to AWS API operations on your behalf.</p>"
+          }
+        },
+        "encryptionConfig": {
+          "target": "com.amazonaws.eks#EncryptionConfigList",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption configuration for the cluster.</p>"
+          }
+        },
         "tags": {
           "target": "com.amazonaws.eks#TagMap",
           "traits": {
             "smithy.api#documentation": "<p>The metadata that you apply to the cluster to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Cluster tags do not propagate to any other resources associated with the\n            cluster. </p>"
           }
         },
-        "encryptionConfig": {
-          "target": "com.amazonaws.eks#EncryptionConfigList",
+        "platformVersion": {
+          "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption configuration for the\n   cluster.</p>"
+            "smithy.api#documentation": "<p>The platform version of your Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html\">Platform\n                Versions</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>"
           }
         },
         "version": {
@@ -394,17 +403,23 @@
     "com.amazonaws.eks#CreateClusterRequest": {
       "type": "structure",
       "members": {
+        "encryptionConfig": {
+          "target": "com.amazonaws.eks#EncryptionConfigList",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption configuration for the cluster.</p>"
+          }
+        },
+        "resourcesVpcConfig": {
+          "target": "com.amazonaws.eks#VpcConfigRequest",
+          "traits": {
+            "smithy.api#documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have\n            specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC\n                Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the\n            <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five\n            security groups, but we recommend that you use a dedicated security group for your\n            cluster control plane.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "logging": {
           "target": "com.amazonaws.eks#Logging",
           "traits": {
             "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n            CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n        </note>"
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.eks#ClusterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique name to give to your cluster.</p>",
-            "smithy.api#required": {}
           }
         },
         "clientRequestToken": {
@@ -414,16 +429,17 @@
             "smithy.api#idempotencyToken": {}
           }
         },
-        "encryptionConfig": {
-          "target": "com.amazonaws.eks#EncryptionConfigList",
+        "roleArn": {
+          "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The encryption configuration for the\n   cluster.</p>"
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to AWS API operations on your behalf. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS\n                Service IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
+            "smithy.api#required": {}
           }
         },
-        "tags": {
-          "target": "com.amazonaws.eks#TagMap",
+        "kubernetesNetworkConfig": {
+          "target": "com.amazonaws.eks#KubernetesNetworkConfigRequest",
           "traits": {
-            "smithy.api#documentation": "<p>The metadata to apply to the cluster to assist with categorization and organization.\n            Each tag consists of a key and an optional value, both of which you define.</p>"
+            "smithy.api#documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
           }
         },
         "version": {
@@ -432,17 +448,16 @@
             "smithy.api#documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here,\n            the latest version available in Amazon EKS is used.</p>"
           }
         },
-        "roleArn": {
-          "target": "com.amazonaws.eks#String",
+        "tags": {
+          "target": "com.amazonaws.eks#TagMap",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to\n            other AWS API operations on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS Service\n                IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The metadata to apply to the cluster to assist with categorization and organization.\n            Each tag consists of a key and an optional value, both of which you define.</p>"
           }
         },
-        "resourcesVpcConfig": {
-          "target": "com.amazonaws.eks#VpcConfigRequest",
+        "name": {
+          "target": "com.amazonaws.eks#ClusterName",
           "traits": {
-            "smithy.api#documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have\n            specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC\n                Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the\n            <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five\n            security groups, but we recommend that you use a dedicated security group for your\n            cluster control plane.</p>",
+            "smithy.api#documentation": "<p>The unique name to give to your cluster.</p>",
             "smithy.api#required": {}
           }
         }
@@ -499,10 +514,11 @@
     "com.amazonaws.eks#CreateFargateProfileRequest": {
       "type": "structure",
       "members": {
-        "subnets": {
-          "target": "com.amazonaws.eks#StringList",
+        "fargateProfileName": {
+          "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The IDs of subnets to launch your pods into. At this time, pods running on Fargate are\n            not assigned public IP addresses, so only private subnets (with no direct route to an\n            Internet Gateway) are accepted for this parameter.</p>"
+            "smithy.api#documentation": "<p>The name of the Fargate profile.</p>",
+            "smithy.api#required": {}
           }
         },
         "selectors": {
@@ -511,24 +527,16 @@
             "smithy.api#documentation": "<p>The selectors to match for pods to use this Fargate profile. Each selector must have an\n            associated namespace. Optionally, you can also specify labels for a namespace. You may\n            specify up to five selectors in a Fargate profile.</p>"
           }
         },
+        "subnets": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of subnets to launch your pods into. At this time, pods running on Fargate are\n            not assigned public IP addresses, so only private subnets (with no direct route to an\n            Internet Gateway) are accepted for this parameter.</p>"
+          }
+        },
         "tags": {
           "target": "com.amazonaws.eks#TagMap",
           "traits": {
             "smithy.api#documentation": "<p>The metadata to apply to the Fargate profile to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Fargate profile tags do not propagate to any other resources associated with the\n            Fargate profile, such as the pods that are scheduled with it.</p>"
-          }
-        },
-        "podExecutionRoleArn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in\n            the Fargate profile. The pod execution role allows Fargate infrastructure to register with\n            your cluster as a node, and it provides read access to Amazon ECR image repositories. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "fargateProfileName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Fargate profile.</p>",
-            "smithy.api#required": {}
           }
         },
         "clusterName": {
@@ -544,6 +552,13 @@
           "traits": {
             "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
             "smithy.api#idempotencyToken": {}
+          }
+        },
+        "podExecutionRoleArn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in\n            the Fargate profile. The pod execution role allows Fargate infrastructure to register with\n            your cluster as a node, and it provides read access to Amazon ECR image repositories. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -591,7 +606,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates a managed worker node group for an Amazon EKS cluster. You can only create a node\n            group for your cluster that is equal to the current Kubernetes version for the cluster.\n            All node groups are created with the latest AMI release version for the respective minor\n            Kubernetes version of the cluster.</p>\n        <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the\n            Amazon EKS-optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>",
+        "smithy.api#documentation": "<p>Creates a managed worker node group for an Amazon EKS cluster. You can only create a node\n            group for your cluster that is equal to the current Kubernetes version for the cluster.\n            All node groups are created with the latest AMI release version for the respective minor\n            Kubernetes version of the cluster, unless you deploy a custom AMI using a launch\n            template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n        <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the\n            Amazon EKS-optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/clusters/{clusterName}/node-groups",
@@ -602,10 +617,53 @@
     "com.amazonaws.eks#CreateNodegroupRequest": {
       "type": "structure",
       "members": {
+        "tags": {
+          "target": "com.amazonaws.eks#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata to apply to the node group to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Node group tags do not propagate to any other resources associated with the node\n            group, such as the Amazon EC2 instances or subnets.</p>"
+          }
+        },
+        "version": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes\n            version of the cluster is used, and this is the only accepted specified value.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
+        "remoteAccess": {
+          "target": "com.amazonaws.eks#RemoteAccessConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>,\n            then don't specify  <code>remoteAccess</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
+        "launchTemplate": {
+          "target": "com.amazonaws.eks#LaunchTemplateSpecification",
+          "traits": {
+            "smithy.api#documentation": "<p>An object representing a node group's launch template specification. If specified,\n            then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or\n                <code>remoteAccess</code> and make sure that the launch template meets the\n            requirements in <code>launchTemplateSpecification</code>.</p>"
+          }
+        },
+        "releaseVersion": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AMI version of the Amazon EKS-optimized AMI to use with your node group. By default,\n            the latest available AMI version for the node group's current Kubernetes version is\n            used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions</a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
+        "nodeRole": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker\n            node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes\n            receive permissions for these API calls through an IAM instance profile and associated\n            policies. Before you can launch worker nodes and register them into a cluster, you must\n            create an IAM role for those worker nodes to use when they are launched. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS Worker Node IAM Role</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. If you specify <code>launchTemplate</code>, then don't specify \n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a> in your launch template, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "instanceTypes": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance type to use for your node group. You can specify a single instance type\n            for a node group. The default value for <code>instanceTypes</code> is\n                <code>t3.medium</code>. If you choose a GPU instance type, be sure to specify\n                <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter.\n            If you specify <code>launchTemplate</code>, then don't specify  <code>instanceTypes</code>, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
         "subnets": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group.\n            These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with\n            a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the\n            name of your cluster.</p>",
+            "smithy.api#documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group.\n            These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with\n            a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the\n            name of your cluster. If you specify <code>launchTemplate</code>, then don't specify  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a> in your launch template, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
             "smithy.api#required": {}
           }
         },
@@ -619,45 +677,7 @@
         "amiType": {
           "target": "com.amazonaws.eks#AMITypes",
           "traits": {
-            "smithy.api#documentation": "<p>The AMI type for your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with\n            GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which\n            uses the Amazon EKS-optimized Linux AMI.</p>"
-          }
-        },
-        "nodeRole": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker node\n                <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes\n            receive permissions for these API calls through an IAM instance profile and associated\n            policies. Before you can launch worker nodes and register them into a cluster, you must\n            create an IAM role for those worker nodes to use when they are launched. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS Worker Node IAM Role</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "instanceTypes": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance type to use for your node group. Currently, you can specify a single\n            instance type for a node group. The default value for this parameter is\n                <code>t3.medium</code>. If you choose a GPU instance type, be sure to specify the\n                <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter.</p>"
-          }
-        },
-        "releaseVersion": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The AMI version of the Amazon EKS-optimized AMI to use with your node group. By default,\n            the latest available AMI version for the node group's current Kubernetes version is\n            used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions</a> in the <i>Amazon EKS User Guide</i>.</p>"
-          }
-        },
-        "remoteAccess": {
-          "target": "com.amazonaws.eks#RemoteAccessConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The remote access (SSH) configuration to use with your node group.</p>"
-          }
-        },
-        "scalingConfig": {
-          "target": "com.amazonaws.eks#NodegroupScalingConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The scaling configuration details for the Auto Scaling group that is created for your\n            node group.</p>"
-          }
-        },
-        "clientRequestToken": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
-            "smithy.api#idempotencyToken": {}
+            "smithy.api#documentation": "<p>The AMI type for your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the\n                <code>AL2_x86_64</code> AMI type. Arm instances should use the\n                <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify <code>amiType</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
           }
         },
         "clusterName": {
@@ -668,28 +688,29 @@
             "smithy.api#required": {}
           }
         },
-        "diskSize": {
-          "target": "com.amazonaws.eks#BoxedInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB.</p>"
-          }
-        },
-        "version": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes\n            version of the cluster is used, and this is the only accepted specified value.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.eks#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata to apply to the node group to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Node group tags do not propagate to any other resources associated with the node\n            group, such as the Amazon EC2 instances or subnets.</p>"
-          }
-        },
         "labels": {
           "target": "com.amazonaws.eks#labelsMap",
           "traits": {
             "smithy.api#documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group when they are\n            created.</p>"
+          }
+        },
+        "diskSize": {
+          "target": "com.amazonaws.eks#BoxedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB. If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "scalingConfig": {
+          "target": "com.amazonaws.eks#NodegroupScalingConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The scaling configuration details for the Auto Scaling group that is created for your\n            node group.</p>"
           }
         }
       }
@@ -797,18 +818,18 @@
     "com.amazonaws.eks#DeleteFargateProfileRequest": {
       "type": "structure",
       "members": {
-        "fargateProfileName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Fargate profile to delete.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster associated with the Fargate profile to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "fargateProfileName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Fargate profile to delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -866,18 +887,18 @@
     "com.amazonaws.eks#DeleteNodegroupRequest": {
       "type": "structure",
       "members": {
-        "nodegroupName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the node group to delete.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that is associated with your node group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nodegroupName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the node group to delete.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1050,18 +1071,18 @@
     "com.amazonaws.eks#DescribeNodegroupRequest": {
       "type": "structure",
       "members": {
-        "nodegroupName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the node group to describe.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster associated with the node group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nodegroupName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the node group to describe.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -1113,6 +1134,14 @@
     "com.amazonaws.eks#DescribeUpdateRequest": {
       "type": "structure",
       "members": {
+        "name": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster associated with the update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "updateId": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -1126,14 +1155,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS node group associated with the update.</p>",
             "smithy.api#httpQuery": "nodegroupName"
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster associated with the update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
           }
         }
       }
@@ -1152,21 +1173,21 @@
     "com.amazonaws.eks#EncryptionConfig": {
       "type": "structure",
       "members": {
-        "provider": {
-          "target": "com.amazonaws.eks#Provider",
-          "traits": {
-            "smithy.api#documentation": "<p>AWS Key Management Service (AWS KMS) customer master key\n   (CMK). Either the ARN or the alias can be used.</p>"
-          }
-        },
         "resources": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the resources to be encrypted.\n   The only supported value is \"secrets\".</p>"
+            "smithy.api#documentation": "<p>Specifies the resources to be encrypted. The only supported value is \"secrets\".</p>"
+          }
+        },
+        "provider": {
+          "target": "com.amazonaws.eks#Provider",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be\n            used.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The encryption configuration for the\n   cluster.</p>"
+        "smithy.api#documentation": "<p>The encryption configuration for the cluster.</p>"
       }
     },
     "com.amazonaws.eks#EncryptionConfigList": {
@@ -1228,6 +1249,10 @@
           {
             "value": "InsufficientFreeAddresses",
             "name": "INSUFFICIENT_FREE_ADDRESSES"
+          },
+          {
+            "value": "ClusterUnreachable",
+            "name": "CLUSTER_UNREACHABLE"
           }
         ]
       }
@@ -1241,16 +1266,16 @@
             "smithy.api#documentation": "<p>An optional field that contains the resource IDs associated with the error.</p>"
           }
         },
-        "errorMessage": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A more complete description of the error.</p>"
-          }
-        },
         "errorCode": {
           "target": "com.amazonaws.eks#ErrorCode",
           "traits": {
             "smithy.api#documentation": "<p>A brief description of the error. </p>\n        <ul>\n            <li>\n                <p>\n                  <b>SubnetNotFound</b>: We couldn't find one of the\n                    subnets associated with the cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>SecurityGroupNotFound</b>: We couldn't find one\n                    of the security groups associated with the cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>EniLimitReached</b>: You have reached the elastic\n                    network interface limit for your account.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IpNotAvailable</b>: A subnet associated with the\n                    cluster doesn't have any free IP addresses.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: You don't have permissions to\n                    perform the specified operation.</p>\n            </li>\n            <li>\n                <p>\n                  <b>OperationNotPermitted</b>: The service role\n                    associated with the cluster doesn't have the required access permissions for\n                    Amazon EKS.</p>\n            </li>\n            <li>\n                <p>\n                  <b>VpcIdNotFound</b>: We couldn't find the VPC\n                    associated with the cluster.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "errorMessage": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A more complete description of the error.</p>"
           }
         }
       },
@@ -1267,6 +1292,48 @@
     "com.amazonaws.eks#FargateProfile": {
       "type": "structure",
       "members": {
+        "createdAt": {
+          "target": "com.amazonaws.eks#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the Fargate profile was created.</p>"
+          }
+        },
+        "fargateProfileName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Fargate profile.</p>"
+          }
+        },
+        "selectors": {
+          "target": "com.amazonaws.eks#FargateProfileSelectors",
+          "traits": {
+            "smithy.api#documentation": "<p>The selectors to match for pods to use this Fargate profile.</p>"
+          }
+        },
+        "clusterName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that the Fargate profile belongs to.</p>"
+          }
+        },
+        "podExecutionRoleArn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in\n            the Fargate profile. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod\n                Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.eks#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata applied to the Fargate profile to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Fargate profile tags do not propagate to any other resources associated with the\n            Fargate profile, such as the pods that are scheduled with it.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.eks#FargateProfileStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the Fargate profile.</p>"
+          }
+        },
         "fargateProfileArn": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -1277,48 +1344,6 @@
           "target": "com.amazonaws.eks#StringList",
           "traits": {
             "smithy.api#documentation": "<p>The IDs of subnets to launch pods into.</p>"
-          }
-        },
-        "fargateProfileName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Fargate profile.</p>"
-          }
-        },
-        "createdAt": {
-          "target": "com.amazonaws.eks#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the Fargate profile was created.</p>"
-          }
-        },
-        "clusterName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that the Fargate profile belongs to.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.eks#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata applied to the Fargate profile to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Fargate profile tags do not propagate to any other resources associated with the\n            Fargate profile, such as the pods that are scheduled with it.</p>"
-          }
-        },
-        "podExecutionRoleArn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in\n            the Fargate profile. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod\n                Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.eks#FargateProfileStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of the Fargate profile.</p>"
-          }
-        },
-        "selectors": {
-          "target": "com.amazonaws.eks#FargateProfileSelectors",
-          "traits": {
-            "smithy.api#documentation": "<p>The selectors to match for pods to use this Fargate profile.</p>"
           }
         }
       },
@@ -1338,16 +1363,16 @@
     "com.amazonaws.eks#FargateProfileSelector": {
       "type": "structure",
       "members": {
-        "namespace": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Kubernetes namespace that the selector should match.</p>"
-          }
-        },
         "labels": {
           "target": "com.amazonaws.eks#FargateProfileLabel",
           "traits": {
             "smithy.api#documentation": "<p>The Kubernetes labels that the selector should match. A pod must contain all of the\n            labels that are specified in the selector for it to be considered a match.</p>"
+          }
+        },
+        "namespace": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Kubernetes namespace that the selector should match.</p>"
           }
         }
       },
@@ -1410,11 +1435,8 @@
     "com.amazonaws.eks#InvalidParameterException": {
       "type": "structure",
       "members": {
-        "nodegroupName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
-          }
+        "message": {
+          "target": "com.amazonaws.eks#String"
         },
         "fargateProfileName": {
           "target": "com.amazonaws.eks#String",
@@ -1422,8 +1444,11 @@
             "smithy.api#documentation": "<p>The Fargate profile associated with the exception.</p>"
           }
         },
-        "message": {
-          "target": "com.amazonaws.eks#String"
+        "nodegroupName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
+          }
         },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
@@ -1441,19 +1466,19 @@
     "com.amazonaws.eks#InvalidRequestException": {
       "type": "structure",
       "members": {
-        "clusterName": {
+        "nodegroupName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
           }
         },
         "message": {
           "target": "com.amazonaws.eks#String"
         },
-        "nodegroupName": {
+        "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
           }
         }
       },
@@ -1466,10 +1491,10 @@
     "com.amazonaws.eks#Issue": {
       "type": "structure",
       "members": {
-        "code": {
-          "target": "com.amazonaws.eks#NodegroupIssueCode",
+        "resourceIds": {
+          "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM role\n                    with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">worker node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your AWS account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is unable to communicate with your cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The AWS resources that are afflicted by this issue.</p>"
           }
         },
         "message": {
@@ -1478,10 +1503,10 @@
             "smithy.api#documentation": "<p>The error message associated with the issue.</p>"
           }
         },
-        "resourceIds": {
-          "target": "com.amazonaws.eks#StringList",
+        "code": {
+          "target": "com.amazonaws.eks#NodegroupIssueCode",
           "traits": {
-            "smithy.api#documentation": "<p>The AWS resources that are afflicted by this issue.</p>"
+            "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                    Amazon EC2 subnets specified for a node group do not automatically assign public IP\n                    addresses to instances launched into it. If you want your instances to be\n                    assigned a public IP address, then you need to enable the <code>auto-assign\n                        public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the Amazon\n                    VPC User Guide.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM role\n                    with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">worker node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your AWS account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is unable to communicate with your cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -1493,6 +1518,60 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.eks#Issue"
+      }
+    },
+    "com.amazonaws.eks#KubernetesNetworkConfigRequest": {
+      "type": "structure",
+      "members": {
+        "serviceIpv4Cidr": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks\n              that are peered or connected to your VPC. The block must meet the following requirements:</p>\n            <ul>\n            <li>\n               <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p>\n            </li>\n            <li>\n               <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.</p>\n            </li>\n            <li>\n               <p>Between /24 and /12.</p>\n            </li>\n         </ul>\n        <important>\n            <p>You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created.</p>\n         </important>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+      }
+    },
+    "com.amazonaws.eks#KubernetesNetworkConfigResponse": {
+      "type": "structure",
+      "members": {
+        "serviceIpv4Cidr": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The CIDR block that Kubernetes service IP addresses are assigned from. If you didn't specify a CIDR block, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it\n              cannot be changed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+      }
+    },
+    "com.amazonaws.eks#LaunchTemplateSpecification": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the launch template to use. If no version is specified, then the\n            template's default version is used.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the launch template.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the launch template.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object representing a node group launch template specification. The launch template\n            cannot include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">\n               <code>RequestSpotInstances</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\">\n               <code>HibernationOptions</code>\n            </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\">\n               <code>TerminateInstances</code>\n            </a>, or the node group  deployment or update\n            will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\">\n               <code>CreateLaunchTemplate</code>\n            </a> in the Amazon EC2 API Reference.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>\n        <p>Specify either <code>name</code> or <code>id</code>, but not both.</p>"
       }
     },
     "com.amazonaws.eks#ListClusters": {
@@ -1626,18 +1705,18 @@
             "smithy.api#required": {}
           }
         },
-        "maxResults": {
-          "target": "com.amazonaws.eks#FargateProfilesRequestMaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of Fargate profile results returned by\n                <code>ListFargateProfiles</code> in paginated output. When you use this parameter,\n                <code>ListFargateProfiles</code> returns only <code>maxResults</code> results in a\n            single page along with a <code>nextToken</code> response element. You can see the\n            remaining results of the initial request by sending another\n                <code>ListFargateProfiles</code> request with the returned <code>nextToken</code>\n            value. This value can be between 1 and 100. If you don't\n            use this parameter, <code>ListFargateProfiles</code> returns up to 100\n            results and a <code>nextToken</code> value if applicable.</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListFargateProfiles</code> request where <code>maxResults</code> was used and\n            the results exceeded the value of that parameter. Pagination continues from the end of\n            the previous results that returned the <code>nextToken</code> value.</p>",
             "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.eks#FargateProfilesRequestMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of Fargate profile results returned by\n                <code>ListFargateProfiles</code> in paginated output. When you use this parameter,\n                <code>ListFargateProfiles</code> returns only <code>maxResults</code> results in a\n            single page along with a <code>nextToken</code> response element. You can see the\n            remaining results of the initial request by sending another\n                <code>ListFargateProfiles</code> request with the returned <code>nextToken</code>\n            value. This value can be between 1 and 100. If you don't\n            use this parameter, <code>ListFargateProfiles</code> returns up to 100\n            results and a <code>nextToken</code> value if applicable.</p>",
+            "smithy.api#httpQuery": "maxResults"
           }
         }
       }
@@ -1645,16 +1724,16 @@
     "com.amazonaws.eks#ListFargateProfilesResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListFargateProfiles</code> request. When the results of a\n                <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use\n            this value to retrieve the next page of results. This value is <code>null</code> when\n            there are no more results to return.</p>"
-          }
-        },
         "fargateProfileNames": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
             "smithy.api#documentation": "<p>A list of all of the Fargate profiles associated with the specified cluster.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListFargateProfiles</code> request. When the results of a\n                <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use\n            this value to retrieve the next page of results. This value is <code>null</code> when\n            there are no more results to return.</p>"
           }
         }
       }
@@ -1685,7 +1764,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Lists the Amazon EKS managed node groups associated with the specified cluster in your AWS\n            account in the specified Region. Self-managed node groups are not listed.</p>",
+        "smithy.api#documentation": "<p>Lists the Amazon EKS managed node groups associated with the specified cluster in your\n            AWS account in the specified Region. Self-managed node groups are not listed.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/clusters/{clusterName}/node-groups",
@@ -1702,6 +1781,13 @@
     "com.amazonaws.eks#ListNodegroupsRequest": {
       "type": "structure",
       "members": {
+        "maxResults": {
+          "target": "com.amazonaws.eks#ListNodegroupsRequestMaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of node group results returned by <code>ListNodegroups</code> in\n            paginated output. When you use this parameter, <code>ListNodegroups</code> returns only\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. You can see the remaining results of the initial request by sending\n            another <code>ListNodegroups</code> request with the returned <code>nextToken</code>\n            value. This value can be between 1 and 100. If you don't\n            use this parameter, <code>ListNodegroups</code> returns up to 100\n            results and a <code>nextToken</code> value if applicable.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
         "nextToken": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -1715,13 +1801,6 @@
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that you would like to list node groups in.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
-          }
-        },
-        "maxResults": {
-          "target": "com.amazonaws.eks#ListNodegroupsRequestMaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of node group results returned by <code>ListNodegroups</code> in\n            paginated output. When you use this parameter, <code>ListNodegroups</code> returns only\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. You can see the remaining results of the initial request by sending\n            another <code>ListNodegroups</code> request with the returned <code>nextToken</code>\n            value. This value can be between 1 and 100. If you don't\n            use this parameter, <code>ListNodegroups</code> returns up to 100\n            results and a <code>nextToken</code> value if applicable.</p>",
-            "smithy.api#httpQuery": "maxResults"
           }
         }
       }
@@ -1739,16 +1818,16 @@
     "com.amazonaws.eks#ListNodegroupsResponse": {
       "type": "structure",
       "members": {
-        "nodegroups": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of all of the node groups associated with the specified cluster.</p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListNodegroups</code>\n            request. When the results of a <code>ListNodegroups</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+          }
+        },
+        "nodegroups": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of all of the node groups associated with the specified cluster.</p>"
           }
         }
       }
@@ -1842,6 +1921,14 @@
     "com.amazonaws.eks#ListUpdatesRequest": {
       "type": "structure",
       "members": {
+        "name": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster to list updates for.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "nextToken": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -1862,14 +1949,6 @@
             "smithy.api#documentation": "<p>The name of the Amazon EKS managed node group to list updates for.</p>",
             "smithy.api#httpQuery": "nodegroupName"
           }
-        },
-        "name": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster to list updates for.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
         }
       }
     },
@@ -1886,16 +1965,16 @@
     "com.amazonaws.eks#ListUpdatesResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListUpdates</code>\n            request. When the results of a <code>ListUpdates</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
-          }
-        },
         "updateIds": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
             "smithy.api#documentation": "<p>A list of all the updates for the specified cluster and Region.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListUpdates</code>\n            request. When the results of a <code>ListUpdates</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
           }
         }
       }
@@ -1976,28 +2055,16 @@
     "com.amazonaws.eks#Nodegroup": {
       "type": "structure",
       "members": {
-        "resources": {
-          "target": "com.amazonaws.eks#NodegroupResources",
-          "traits": {
-            "smithy.api#documentation": "<p>The resources associated with the node group, such as Auto Scaling groups and security\n            groups for remote access.</p>"
-          }
-        },
-        "releaseVersion": {
+        "nodegroupName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The AMI version of the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions </a> in the <i>Amazon EKS User Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The name associated with an Amazon EKS managed node group.</p>"
           }
         },
-        "diskSize": {
-          "target": "com.amazonaws.eks#BoxedInteger",
+        "amiType": {
+          "target": "com.amazonaws.eks#AMITypes",
           "traits": {
-            "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB.</p>"
-          }
-        },
-        "remoteAccess": {
-          "target": "com.amazonaws.eks#RemoteAccessConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>The remote access (SSH) configuration that is associated with the node group.</p>"
+            "smithy.api#documentation": "<p>If the node group was deployed using a launch template with a custom AMI, then this is\n                <code>CUSTOM</code>. For node groups that weren't deployed using a launch template,\n            this is the AMI type that was specified in the node group configuration.</p>"
           }
         },
         "labels": {
@@ -2006,10 +2073,40 @@
             "smithy.api#documentation": "<p>The Kubernetes labels applied to the nodes in the node group.</p>\n        <note>\n            <p>Only labels that are applied with the Amazon EKS API are shown here. There may be other\n                Kubernetes labels applied to the nodes in this group.</p>\n        </note>"
           }
         },
+        "subnets": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The subnets that were specified for the Auto Scaling group that is associated with\n            your node group.</p>"
+          }
+        },
+        "health": {
+          "target": "com.amazonaws.eks#NodegroupHealth",
+          "traits": {
+            "smithy.api#documentation": "<p>The health status of the node group. If there are issues with your node group's\n            health, they are listed here.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.eks#NodegroupStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the managed node group.</p>"
+          }
+        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the cluster that the managed node group resides in.</p>"
+          }
+        },
+        "nodegroupArn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the managed node group.</p>"
+          }
+        },
+        "remoteAccess": {
+          "target": "com.amazonaws.eks#RemoteAccessConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>If the node group wasn't deployed with a launch template, then this is the remote\n            access configuration that is associated with the node group. If the node group was\n            deployed with a launch template, then this is\n            <code>null</code>.</p>"
           }
         },
         "modifiedAt": {
@@ -2024,22 +2121,22 @@
             "smithy.api#documentation": "<p>The scaling configuration details for the Auto Scaling group that is associated with\n            your node group.</p>"
           }
         },
-        "nodeRole": {
-          "target": "com.amazonaws.eks#String",
+        "resources": {
+          "target": "com.amazonaws.eks#NodegroupResources",
           "traits": {
-            "smithy.api#documentation": "<p>The IAM role associated with your node group. The Amazon EKS worker node\n                <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes\n            receive permissions for these API calls through an IAM instance profile and associated\n            policies. Before you can launch worker nodes and register them into a cluster, you must\n            create an IAM role for those worker nodes to use when they are launched. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS Worker Node IAM Role</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+            "smithy.api#documentation": "<p>The resources associated with the node group, such as Auto Scaling groups and security\n            groups for remote access.</p>"
           }
         },
-        "status": {
-          "target": "com.amazonaws.eks#NodegroupStatus",
+        "launchTemplate": {
+          "target": "com.amazonaws.eks#LaunchTemplateSpecification",
           "traits": {
-            "smithy.api#documentation": "<p>The current status of the managed node group.</p>"
+            "smithy.api#documentation": "<p>If a launch template was used to create the node group, then this is the launch\n            template that was used.</p>"
           }
         },
-        "health": {
-          "target": "com.amazonaws.eks#NodegroupHealth",
+        "instanceTypes": {
+          "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>The health status of the node group. If there are issues with your node group's\n            health, they are listed here.</p>"
+            "smithy.api#documentation": "<p>If the node group wasn't deployed with a launch template, then this is the instance\n            type that is associated with the node group. If the node group was deployed with a\n            launch template, then this is <code>null</code>.</p>"
           }
         },
         "tags": {
@@ -2054,40 +2151,28 @@
             "smithy.api#documentation": "<p>The Kubernetes version of the managed node group.</p>"
           }
         },
-        "nodegroupArn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the managed node group.</p>"
-          }
-        },
-        "amiType": {
-          "target": "com.amazonaws.eks#AMITypes",
-          "traits": {
-            "smithy.api#documentation": "<p>The AMI type associated with your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with\n            GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which\n            uses the Amazon EKS-optimized Linux AMI.</p>"
-          }
-        },
-        "subnets": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The subnets allowed for the Auto Scaling group that is associated with your node\n            group. These subnets must have the following tag:\n                <code>kubernetes.io/cluster/CLUSTER_NAME</code>, where <code>CLUSTER_NAME</code> is\n            replaced with the name of your cluster.</p>"
-          }
-        },
-        "nodegroupName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name associated with an Amazon EKS managed node group.</p>"
-          }
-        },
         "createdAt": {
           "target": "com.amazonaws.eks#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the managed node group was\n            created.</p>"
           }
         },
-        "instanceTypes": {
-          "target": "com.amazonaws.eks#StringList",
+        "nodeRole": {
+          "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The instance types associated with your node group.</p>"
+            "smithy.api#documentation": "<p>The IAM role associated with your node group. The Amazon EKS worker node\n                <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Worker nodes\n            receive permissions for these API calls through an IAM instance profile and associated\n            policies.</p>"
+          }
+        },
+        "diskSize": {
+          "target": "com.amazonaws.eks#BoxedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>If the node group wasn't deployed with a launch template, then this is the disk size\n            in the node group configuration. If the node group was deployed with a launch template,\n            then this is <code>null</code>.</p>"
+          }
+        },
+        "releaseVersion": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If the node group was deployed using a launch template with a custom AMI, then this is\n            the AMI ID that was specified in the launch template. For node groups that weren't\n            deployed using a launch template, this is the version of the Amazon EKS-optimized AMI that\n            the node group was deployed with.</p>"
           }
         }
       },
@@ -2180,6 +2265,10 @@
           {
             "value": "InternalFailure",
             "name": "INTERNAL_FAILURE"
+          },
+          {
+            "value": "ClusterUnreachable",
+            "name": "CLUSTER_UNREACHABLE"
           }
         ]
       }
@@ -2187,16 +2276,16 @@
     "com.amazonaws.eks#NodegroupResources": {
       "type": "structure",
       "members": {
-        "autoScalingGroups": {
-          "target": "com.amazonaws.eks#AutoScalingGroupList",
-          "traits": {
-            "smithy.api#documentation": "<p>The Auto Scaling groups associated with the node group.</p>"
-          }
-        },
         "remoteAccessSecurityGroup": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The remote access security group associated with the node group. This security group\n            controls SSH access to the worker nodes.</p>"
+          }
+        },
+        "autoScalingGroups": {
+          "target": "com.amazonaws.eks#AutoScalingGroupList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Auto Scaling groups associated with the node group.</p>"
           }
         }
       },
@@ -2213,21 +2302,21 @@
             "smithy.api#documentation": "<p>The maximum number of worker nodes that the managed node group can scale out to.\n            Managed node groups can support up to 100 nodes by default.</p>"
           }
         },
-        "desiredSize": {
-          "target": "com.amazonaws.eks#Capacity",
-          "traits": {
-            "smithy.api#documentation": "<p>The current number of worker nodes that the managed node group should maintain.</p>"
-          }
-        },
         "minSize": {
           "target": "com.amazonaws.eks#Capacity",
           "traits": {
             "smithy.api#documentation": "<p>The minimum number of worker nodes that the managed node group can scale in to. This\n            number must be greater than zero.</p>"
           }
+        },
+        "desiredSize": {
+          "target": "com.amazonaws.eks#Capacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The current number of worker nodes that the managed node group should maintain.</p>"
+          }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group\n            that is associated with your node group.</p>"
+        "smithy.api#documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group\n            that is associated with your node group. If you specify a value for any property, then\n            you must specify values for all of the properties.</p>"
       }
     },
     "com.amazonaws.eks#NodegroupStatus": {
@@ -2291,27 +2380,27 @@
         "keyArn": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as\n   the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more\n   information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing Users in Other Accounts to Use\n    a CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+            "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric,\n            created in the same region as the cluster, and if the CMK was created in a different\n            account, the user must have access to the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing\n                Users in Other Accounts to Use a CMK</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) customer\n   master key (CMK) used to encrypt the secrets.</p>"
+        "smithy.api#documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the\n            secrets.</p>"
       }
     },
     "com.amazonaws.eks#RemoteAccessConfig": {
       "type": "structure",
       "members": {
-        "sourceSecurityGroups": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The security groups that are allowed SSH access (port 22) to the worker nodes. If you\n            specify an Amazon EC2 SSH key but do not specify a source security group when you create a\n            managed node group, then port 22 on the worker nodes is opened to the internet\n            (0.0.0.0/0). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security\n                Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
-          }
-        },
         "ec2SshKey": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the worker nodes in\n            the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key\n                Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
+          }
+        },
+        "sourceSecurityGroups": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The security groups that are allowed SSH access (port 22) to the worker nodes. If you\n            specify an Amazon EC2 SSH key but do not specify a source security group when you create a\n            managed node group, then port 22 on the worker nodes is opened to the internet\n            (0.0.0.0/0). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security\n                Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
           }
         }
       },
@@ -2347,6 +2436,12 @@
     "com.amazonaws.eks#ResourceLimitExceededException": {
       "type": "structure",
       "members": {
+        "clusterName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+          }
+        },
         "nodegroupName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -2355,12 +2450,6 @@
         },
         "message": {
           "target": "com.amazonaws.eks#String"
-        },
-        "clusterName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
-          }
         }
       },
       "traits": {
@@ -2372,13 +2461,10 @@
     "com.amazonaws.eks#ResourceNotFoundException": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.eks#String"
-        },
-        "fargateProfileName": {
+        "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Fargate profile associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
           }
         },
         "nodegroupName": {
@@ -2387,10 +2473,13 @@
             "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
           }
         },
-        "clusterName": {
+        "message": {
+          "target": "com.amazonaws.eks#String"
+        },
+        "fargateProfileName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
+            "smithy.api#documentation": "<p>The Fargate profile associated with the exception.</p>"
           }
         }
       },
@@ -2403,12 +2492,6 @@
     "com.amazonaws.eks#ServerException": {
       "type": "structure",
       "members": {
-        "clusterName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
-          }
-        },
         "message": {
           "target": "com.amazonaws.eks#String"
         },
@@ -2416,6 +2499,12 @@
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon EKS managed node group associated with the exception.</p>"
+          }
+        },
+        "clusterName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon EKS cluster associated with the exception.</p>"
           }
         }
       },
@@ -2547,6 +2636,12 @@
     "com.amazonaws.eks#UnsupportedAvailabilityZoneException": {
       "type": "structure",
       "members": {
+        "validZones": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The supported Availability Zones for your account. Choose subnets in these\n            Availability Zones for your cluster.</p>"
+          }
+        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
@@ -2561,12 +2656,6 @@
         },
         "message": {
           "target": "com.amazonaws.eks#String"
-        },
-        "validZones": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The supported Availability Zones for your account. Choose subnets in these\n            Availability Zones for your cluster.</p>"
-          }
         }
       },
       "traits": {
@@ -2603,19 +2692,19 @@
     "com.amazonaws.eks#UntagResourceRequest": {
       "type": "structure",
       "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported\n            resources are Amazon EKS clusters and managed node groups.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "tagKeys": {
           "target": "com.amazonaws.eks#TagKeyList",
           "traits": {
             "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
             "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported\n            resources are Amazon EKS clusters and managed node groups.</p>",
+            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         }
@@ -2628,6 +2717,30 @@
     "com.amazonaws.eks#Update": {
       "type": "structure",
       "members": {
+        "status": {
+          "target": "com.amazonaws.eks#UpdateStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the update.</p>"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.eks#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the update was created.</p>"
+          }
+        },
+        "errors": {
+          "target": "com.amazonaws.eks#ErrorDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Any errors associated with a <code>Failed</code> update.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.eks#UpdateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the update.</p>"
+          }
+        },
         "params": {
           "target": "com.amazonaws.eks#UpdateParams",
           "traits": {
@@ -2638,30 +2751,6 @@
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>A UUID that is used to track the update.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.eks#UpdateStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of the update.</p>"
-          }
-        },
-        "type": {
-          "target": "com.amazonaws.eks#UpdateType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the update.</p>"
-          }
-        },
-        "errors": {
-          "target": "com.amazonaws.eks#ErrorDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>Any errors associated with a <code>Failed</code> update.</p>"
-          }
-        },
-        "createdAt": {
-          "target": "com.amazonaws.eks#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the update was created.</p>"
           }
         }
       },
@@ -2709,16 +2798,6 @@
     "com.amazonaws.eks#UpdateClusterConfigRequest": {
       "type": "structure",
       "members": {
-        "resourcesVpcConfig": {
-          "target": "com.amazonaws.eks#VpcConfigRequest"
-        },
-        "clientRequestToken": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
         "logging": {
           "target": "com.amazonaws.eks#Logging",
           "traits": {
@@ -2731,6 +2810,16 @@
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster to update.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "resourcesVpcConfig": {
+          "target": "com.amazonaws.eks#VpcConfigRequest"
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+            "smithy.api#idempotencyToken": {}
           }
         }
       }
@@ -2783,12 +2872,11 @@
     "com.amazonaws.eks#UpdateClusterVersionRequest": {
       "type": "structure",
       "members": {
-        "name": {
+        "clientRequestToken": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster to update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+            "smithy.api#idempotencyToken": {}
           }
         },
         "version": {
@@ -2798,11 +2886,12 @@
             "smithy.api#required": {}
           }
         },
-        "clientRequestToken": {
+        "name": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
-            "smithy.api#idempotencyToken": {}
+            "smithy.api#documentation": "<p>The name of the Amazon EKS cluster to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -2821,16 +2910,16 @@
     "com.amazonaws.eks#UpdateLabelsPayload": {
       "type": "structure",
       "members": {
-        "removeLabels": {
-          "target": "com.amazonaws.eks#labelsKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>Kubernetes labels to be removed.</p>"
-          }
-        },
         "addOrUpdateLabels": {
           "target": "com.amazonaws.eks#labelsMap",
           "traits": {
             "smithy.api#documentation": "<p>Kubernetes labels to be added or updated.</p>"
+          }
+        },
+        "removeLabels": {
+          "target": "com.amazonaws.eks#labelsKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Kubernetes labels to be removed.</p>"
           }
         }
       },
@@ -2878,13 +2967,6 @@
     "com.amazonaws.eks#UpdateNodegroupConfigRequest": {
       "type": "structure",
       "members": {
-        "clientRequestToken": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
         "scalingConfig": {
           "target": "com.amazonaws.eks#NodegroupScalingConfig",
           "traits": {
@@ -2899,18 +2981,25 @@
             "smithy.api#required": {}
           }
         },
-        "labels": {
-          "target": "com.amazonaws.eks#UpdateLabelsPayload",
-          "traits": {
-            "smithy.api#documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group after the\n            update.</p>"
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that the managed node group resides in.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "labels": {
+          "target": "com.amazonaws.eks#UpdateLabelsPayload",
+          "traits": {
+            "smithy.api#documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group after the\n            update.</p>"
           }
         }
       }
@@ -2952,7 +3041,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node group.</p>\n        <p>You can update to the latest available AMI version of a node group's current\n            Kubernetes version by not specifying a Kubernetes version in the request. You can update\n            to the latest AMI version of your cluster's current Kubernetes version by specifying\n            your cluster's Kubernetes version in the request. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>You cannot roll back a node group to an earlier Kubernetes version or AMI\n            version.</p>\n        <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes gracefully\n            and will fail if it is unable to do so. You can <code>force</code> the update if Amazon EKS\n            is unable to drain the nodes as a result of a pod disruption budget issue.</p>",
+        "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node group.</p>\n        <p>You can update a node group using a launch template only if the node group was\n            originally deployed with a launch template. If you need to update a custom AMI in a node\n            group that was deployed with a launch template, then update your custom AMI, specify the\n            new ID in a new version of the launch template, and then update the node group to the\n            new version of the launch template.</p>\n        <p>If you update without a launch template, then you can update to the latest available\n            AMI version of a node group's current Kubernetes version by not specifying a Kubernetes\n            version in the request. You can update to the latest AMI version of your cluster's\n            current Kubernetes version by specifying your cluster's Kubernetes version in the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>You cannot roll back a node group to an earlier Kubernetes version or AMI\n            version.</p>\n        <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes gracefully\n            and will fail if it is unable to do so. You can <code>force</code> the update if Amazon EKS\n            is unable to drain the nodes as a result of a pod disruption budget issue.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/clusters/{clusterName}/node-groups/{nodegroupName}/update-version",
@@ -2963,16 +3052,36 @@
     "com.amazonaws.eks#UpdateNodegroupVersionRequest": {
       "type": "structure",
       "members": {
-        "releaseVersion": {
+        "version": {
           "target": "com.amazonaws.eks#String",
           "traits": {
-            "smithy.api#documentation": "<p>The AMI version of the Amazon EKS-optimized AMI to use for the update. By default, the\n            latest available AMI version for the node group's Kubernetes version is used. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions </a> in the\n            <i>Amazon EKS User Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes\n            version of the node group does not change. You can specify the Kubernetes version of the\n            cluster to update the node group to the latest AMI version of the cluster's Kubernetes\n            version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>version</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
           }
         },
         "force": {
           "target": "com.amazonaws.eks#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Force the update if the existing node group's pods are unable to be drained due to a\n            pod disruption budget issue. If an update fails because pods could not be drained, you\n            can force the update after it fails to terminate the old node whether or not any pods\n            are running on the node.</p>"
+          }
+        },
+        "releaseVersion": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AMI version of the Amazon EKS-optimized AMI to use for the update. By default, the\n            latest available AMI version for the node group's Kubernetes version is used. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS-Optimized Linux AMI Versions </a> in the\n            <i>Amazon EKS User Guide</i>. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>releaseVersion</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          }
+        },
+        "launchTemplate": {
+          "target": "com.amazonaws.eks#LaunchTemplateSpecification",
+          "traits": {
+            "smithy.api#documentation": "<p>An object representing a node group's launch template specification. You can only\n            update a node group using a launch template if the node group was originally deployed\n            with a launch template.</p>"
+          }
+        },
+        "nodegroupName": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the managed node group to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "clientRequestToken": {
@@ -2982,24 +3091,10 @@
             "smithy.api#idempotencyToken": {}
           }
         },
-        "version": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes\n            version of the node group does not change. You can specify the Kubernetes version of the\n            cluster to update the node group to the latest AMI version of the cluster's Kubernetes\n            version.</p>"
-          }
-        },
         "clusterName": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that is associated with the managed node group to\n            update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "nodegroupName": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the managed node group to update.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -3017,16 +3112,16 @@
     "com.amazonaws.eks#UpdateParam": {
       "type": "structure",
       "members": {
-        "type": {
-          "target": "com.amazonaws.eks#UpdateParamType",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys associated with an update request.</p>"
-          }
-        },
         "value": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The value of the keys submitted as part of an update request.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.eks#UpdateParamType",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys associated with an update request.</p>"
           }
         }
       },
@@ -3144,10 +3239,10 @@
     "com.amazonaws.eks#VpcConfigRequest": {
       "type": "structure",
       "members": {
-        "publicAccessCidrs": {
+        "securityGroupIds": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled\n            private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then\n            ensure that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+            "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use to allow communication between your worker nodes and the\n            Kubernetes control plane. If you don't specify a security group, the default security\n            group for your VPC is used.</p>"
           }
         },
         "endpointPrivateAccess": {
@@ -3156,22 +3251,22 @@
             "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's\n            Kubernetes API server endpoint. If you enable private access, Kubernetes API requests\n            from within your cluster's VPC use the private VPC endpoint. The default value for this\n            parameter is <code>false</code>, which disables private access for your Kubernetes API\n            server. If you disable private access and you have worker nodes or AWS Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the worker nodes or Fargate pods. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS\n                Cluster Endpoint Access Control</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
           }
         },
-        "securityGroupIds": {
+        "endpointPublicAccess": {
+          "target": "com.amazonaws.eks#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's\n            Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes\n            API server can only receive requests from within the cluster VPC. The default value for\n            this parameter is <code>true</code>, which enables public access for your Kubernetes API\n            server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+          }
+        },
+        "publicAccessCidrs": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
-            "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use to allow communication between your worker nodes and the\n            Kubernetes control plane. If you don't specify a security group, the default security\n            group for your VPC is used.</p>"
+            "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled\n            private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then\n            ensure that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
           }
         },
         "subnetIds": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
             "smithy.api#documentation": "<p>Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic\n            network interfaces in these subnets to allow communication between your worker nodes and\n            the Kubernetes control plane.</p>"
-          }
-        },
-        "endpointPublicAccess": {
-          "target": "com.amazonaws.eks#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's\n            Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes\n            API server can only receive requests from within the cluster VPC. The default value for\n            this parameter is <code>true</code>, which enables public access for your Kubernetes API\n            server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
           }
         }
       },
@@ -3182,22 +3277,16 @@
     "com.amazonaws.eks#VpcConfigResponse": {
       "type": "structure",
       "members": {
-        "endpointPrivateAccess": {
-          "target": "com.amazonaws.eks#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If\n            the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate\n            from within your cluster's VPC use the private VPC endpoint instead of traversing the\n            internet. If this value is disabled and you have worker nodes or AWS Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the worker nodes or Fargate pods. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS\n                Cluster Endpoint Access Control</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
-          }
-        },
-        "securityGroupIds": {
-          "target": "com.amazonaws.eks#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The security groups associated with the cross-account elastic network interfaces that\n            are used to allow communication between your worker nodes and the Kubernetes control\n            plane.</p>"
-          }
-        },
         "vpcId": {
           "target": "com.amazonaws.eks#String",
           "traits": {
             "smithy.api#documentation": "<p>The VPC associated with your cluster.</p>"
+          }
+        },
+        "clusterSecurityGroupId": {
+          "target": "com.amazonaws.eks#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster security group that was created by Amazon EKS for the cluster. Managed node\n            groups use this security group for control-plane-to-data-plane communication.</p>"
           }
         },
         "publicAccessCidrs": {
@@ -3212,16 +3301,22 @@
             "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If\n            the Amazon EKS public API server endpoint is disabled, your cluster's Kubernetes API server\n            can only receive requests that originate from within the cluster VPC.</p>"
           }
         },
-        "clusterSecurityGroupId": {
-          "target": "com.amazonaws.eks#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster security group that was created by Amazon EKS for the cluster. Managed node\n            groups use this security group for control-plane-to-data-plane communication.</p>"
-          }
-        },
         "subnetIds": {
           "target": "com.amazonaws.eks#StringList",
           "traits": {
             "smithy.api#documentation": "<p>The subnets associated with your cluster.</p>"
+          }
+        },
+        "securityGroupIds": {
+          "target": "com.amazonaws.eks#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The security groups associated with the cross-account elastic network interfaces that\n            are used to allow communication between your worker nodes and the Kubernetes control\n            plane.</p>"
+          }
+        },
+        "endpointPrivateAccess": {
+          "target": "com.amazonaws.eks#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If\n            the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate\n            from within your cluster's VPC use the private VPC endpoint instead of traversing the\n            internet. If this value is disabled and you have worker nodes or AWS Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the worker nodes or Fargate pods. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS\n                Cluster Endpoint Access Control</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
           }
         }
       },

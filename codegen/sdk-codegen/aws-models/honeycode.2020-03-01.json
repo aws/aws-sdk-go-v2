@@ -232,16 +232,16 @@
     "com.amazonaws.honeycode#GetScreenDataRequest": {
       "type": "structure",
       "members": {
-        "variables": {
-          "target": "com.amazonaws.honeycode#VariableValueMap",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            Variables are optional and are needed only if the screen requires them to render correctly. Variables are\n            specified as a map where the key is the name of the variable as defined on the screen. The value is an\n            object which currently has only one property, rawValue, which holds the value of the variable to be passed\n            to the screen.\n        </p>"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.honeycode#PaginationToken",
           "traits": {
             "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
+          }
+        },
+        "variables": {
+          "target": "com.amazonaws.honeycode#VariableValueMap",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Variables are optional and are needed only if the screen requires them to render correctly. Variables are\n            specified as a map where the key is the name of the variable as defined on the screen. The value is an\n            object which currently has only one property, rawValue, which holds the value of the variable to be passed\n            to the screen.\n        </p>"
           }
         },
         "appId": {
@@ -360,10 +360,30 @@
     "com.amazonaws.honeycode#InvokeScreenAutomationRequest": {
       "type": "structure",
       "members": {
-        "screenAutomationId": {
+        "workbookId": {
           "target": "com.amazonaws.honeycode#ResourceId",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the automation action to be performed.</p>",
+            "smithy.api#documentation": "<p>The ID of the workbook that contains the screen automation.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "rowId": {
+          "target": "com.amazonaws.honeycode#RowId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The row ID for the automation if the automation is defined inside a block with source or list.\n        </p>"
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.honeycode#ClientRequestToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The request token for performing the automation action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will return the\n            response of the previous call rather than performing the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+          }
+        },
+        "screenId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the screen that contains the screen automation.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -376,16 +396,10 @@
             "smithy.api#required": {}
           }
         },
-        "clientRequestToken": {
-          "target": "com.amazonaws.honeycode#ClientRequestToken",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            The request token for performing the automation action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will return the\n            response of the previous call rather than performing the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
-          }
-        },
-        "workbookId": {
+        "screenAutomationId": {
           "target": "com.amazonaws.honeycode#ResourceId",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the workbook that contains the screen automation.</p>",
+            "smithy.api#documentation": "<p>The ID of the automation action to be performed.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -394,20 +408,6 @@
           "target": "com.amazonaws.honeycode#VariableValueMap",
           "traits": {
             "smithy.api#documentation": "<p>\n            Variables are optional and are needed only if the screen requires them to render correctly. Variables are\n            specified as a map where the key is the name of the variable as defined on the screen. The value is an\n            object which currently has only one property, rawValue, which holds the value of the variable to be passed\n            to the screen.\n        </p>"
-          }
-        },
-        "rowId": {
-          "target": "com.amazonaws.honeycode#RowId",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            The row ID for the automation if the automation is defined inside a block with source or list.\n        </p>"
-          }
-        },
-        "screenId": {
-          "target": "com.amazonaws.honeycode#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the screen that contains the screen automation.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
           }
         }
       }
@@ -520,17 +520,17 @@
     "com.amazonaws.honeycode#ResultSet": {
       "type": "structure",
       "members": {
-        "headers": {
-          "target": "com.amazonaws.honeycode#ResultHeader",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            List of headers for all the data cells in the block. The header identifies the name and default format of\n            the data cell. Data cells appear in the same order in all rows as defined in the header. The names and\n            formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank\n            value is used.\n        </p>\n        <p>\n            For example, a task list that displays the task name, due date and assigned person might have headers\n            [ { \"name\": \"Task Name\"}, {\"name\": \"Due Date\", \"format\": \"DATE\"}, {\"name\": \"Assigned\", \"format\": \"CONTACT\"} ].\n            Every row in the result will have the task name as the first item, due date as the second item and assigned\n            person as the third item. If a particular task does not have a due date, that row will still have a blank\n            value in the second element and the assigned person will still be in the third element.\n        </p>",
-            "smithy.api#required": {}
-          }
-        },
         "rows": {
           "target": "com.amazonaws.honeycode#ResultRows",
           "traits": {
             "smithy.api#documentation": "<p>\n            List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data\n            cells will be present in the same order as they are defined in the header.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "headers": {
+          "target": "com.amazonaws.honeycode#ResultHeader",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            List of headers for all the data cells in the block. The header identifies the name and default format of\n            the data cell. Data cells appear in the same order in all rows as defined in the header. The names and\n            formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank\n            value is used.\n        </p>\n        <p>\n            For example, a task list that displays the task name, due date and assigned person might have headers\n            [ { \"name\": \"Task Name\"}, {\"name\": \"Due Date\", \"format\": \"DATE\"}, {\"name\": \"Assigned\", \"format\": \"CONTACT\"} ].\n            Every row in the result will have the task name as the first item, due date as the second item and assigned\n            person as the third item. If a particular task does not have a due date, that row will still have a blank\n            value in the second element and the assigned person will still be in the third element.\n        </p>",
             "smithy.api#required": {}
           }
         }
@@ -583,7 +583,7 @@
           "sdkId": "Honeycode",
           "arnNamespace": "honeycode",
           "cloudFormationName": "Honeycode",
-          "cloudTrailEventSource": "model.honeycode.services.amazonaws.com"
+          "cloudTrailEventSource": "honeycode.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "honeycode"

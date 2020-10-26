@@ -60,40 +60,16 @@
     "com.amazonaws.efs#AccessPointDescription": {
       "type": "structure",
       "members": {
-        "AccessPointArn": {
-          "target": "com.amazonaws.efs#AccessPointArn",
+        "ClientToken": {
+          "target": "com.amazonaws.efs#ClientToken",
           "traits": {
-            "smithy.api#documentation": "<p>The  unique Amazon Resource Name (ARN) associated with the access point.</p>"
+            "smithy.api#documentation": "<p>The opaque string specified in the request to ensure idempotent creation.</p>"
           }
         },
-        "OwnerId": {
-          "target": "com.amazonaws.efs#AwsAccountId",
+        "PosixUser": {
+          "target": "com.amazonaws.efs#PosixUser",
           "traits": {
-            "smithy.api#documentation": "<p>Identified the AWS account that owns the access point resource.</p>"
-          }
-        },
-        "AccessPointId": {
-          "target": "com.amazonaws.efs#AccessPointId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the access point, assigned by Amazon EFS.</p>"
-          }
-        },
-        "LifeCycleState": {
-          "target": "com.amazonaws.efs#LifeCycleState",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the lifecycle phase of the access point.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.efs#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the access point. This is the value of the <code>Name</code> tag.</p>"
-          }
-        },
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the EFS file system that the access point applies to.</p>"
+            "smithy.api#documentation": "<p>The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point that is used for all file operations by\n      NFS clients using the access point.</p>"
           }
         },
         "Tags": {
@@ -108,16 +84,40 @@
             "smithy.api#documentation": "<p>The directory on the Amazon EFS file system that the access point exposes as the root directory to NFS clients using the access point.</p>"
           }
         },
-        "ClientToken": {
-          "target": "com.amazonaws.efs#ClientToken",
+        "Name": {
+          "target": "com.amazonaws.efs#Name",
           "traits": {
-            "smithy.api#documentation": "<p>The opaque string specified in the request to ensure idempotent creation.</p>"
+            "smithy.api#documentation": "<p>The name of the access point. This is the value of the <code>Name</code> tag.</p>"
           }
         },
-        "PosixUser": {
-          "target": "com.amazonaws.efs#PosixUser",
+        "OwnerId": {
+          "target": "com.amazonaws.efs#AwsAccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point that is used for all file operations by\n      NFS clients using the access point.</p>"
+            "smithy.api#documentation": "<p>Identified the AWS account that owns the access point resource.</p>"
+          }
+        },
+        "AccessPointArn": {
+          "target": "com.amazonaws.efs#AccessPointArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The  unique Amazon Resource Name (ARN) associated with the access point.</p>"
+          }
+        },
+        "AccessPointId": {
+          "target": "com.amazonaws.efs#AccessPointId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the access point, assigned by Amazon EFS.</p>"
+          }
+        },
+        "LifeCycleState": {
+          "target": "com.amazonaws.efs#LifeCycleState",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the lifecycle phase of the access point.</p>"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the EFS file system that the access point applies to.</p>"
           }
         }
       },
@@ -285,12 +285,6 @@
     "com.amazonaws.efs#CreateAccessPointRequest": {
       "type": "structure",
       "members": {
-        "RootDirectory": {
-          "target": "com.amazonaws.efs#RootDirectory",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point exposes as\n      the root directory of your file system to NFS clients using the access point. \n      The clients using the access point can only access the root directory and below. \n      If the <code>RootDirectory</code> > <code>Path</code> specified does not exist, \n      EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. \n      When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code> is optional.</p>"
-          }
-        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
@@ -298,12 +292,16 @@
             "smithy.api#required": {}
           }
         },
-        "ClientToken": {
-          "target": "com.amazonaws.efs#ClientToken",
+        "Tags": {
+          "target": "com.amazonaws.efs#Tags",
           "traits": {
-            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent\n      creation.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Creates tags associated with the access point. Each tag is a key-value pair.</p>"
+          }
+        },
+        "RootDirectory": {
+          "target": "com.amazonaws.efs#RootDirectory",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point exposes as\n      the root directory of your file system to NFS clients using the access point. \n      The clients using the access point can only access the root directory and below. \n      If the <code>RootDirectory</code> > <code>Path</code> specified does not exist, \n      EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. \n      When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code> is optional.</p>"
           }
         },
         "PosixUser": {
@@ -312,10 +310,12 @@
             "smithy.api#documentation": "<p>The operating system user and\n      group applied to all file system requests made using the access point.</p>"
           }
         },
-        "Tags": {
-          "target": "com.amazonaws.efs#Tags",
+        "ClientToken": {
+          "target": "com.amazonaws.efs#ClientToken",
           "traits": {
-            "smithy.api#documentation": "<p>Creates tags associated with the access point. Each tag is a key-value pair.</p>"
+            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent\n      creation.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -360,10 +360,36 @@
     "com.amazonaws.efs#CreateFileSystemRequest": {
       "type": "structure",
       "members": {
+        "Encrypted": {
+          "target": "com.amazonaws.efs#Encrypted",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean value that, if true, creates an encrypted file system. When creating an\n      encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS\n      KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for\n      Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system.\n    </p>"
+          }
+        },
+        "KmsKeyId": {
+          "target": "com.amazonaws.efs#KmsKeyId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This\n      parameter is only required if you want to use a nondefault CMK. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p>\n         </important>"
+          }
+        },
         "ProvisionedThroughputInMibps": {
           "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
           "traits": {
             "smithy.api#documentation": "<p>The throughput, measured in MiB/s, that you want to provision for a file system that\n      you're creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. \n      You can get this limit increased by contacting AWS Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS Limits That You Can Increase</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
+          }
+        },
+        "PerformanceMode": {
+          "target": "com.amazonaws.efs#PerformanceMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The performance mode of the file system. We recommend <code>generalPurpose</code>\n      performance mode for most file systems. File systems using the <code>maxIO</code> performance\n      mode can scale to higher levels of aggregate throughput and operations per second with a\n      tradeoff of slightly higher latencies for most file operations. The performance mode\n      can't be changed after the file system has been created.</p>"
+          }
+        },
+        "CreationToken": {
+          "target": "com.amazonaws.efs#CreationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent\n      creation.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
           }
         },
         "Tags": {
@@ -376,32 +402,6 @@
           "target": "com.amazonaws.efs#ThroughputMode",
           "traits": {
             "smithy.api#documentation": "<p>The throughput mode for the file system to be created. There are two throughput modes to\n      choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file\n      system's throughput in Provisioned Throughput mode or change between the throughput modes\n      as long as it’s been more than 24 hours since the last decrease or throughput mode\n      change. For more, \n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput\">Specifying Throughput with Provisioned Mode</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
-          }
-        },
-        "PerformanceMode": {
-          "target": "com.amazonaws.efs#PerformanceMode",
-          "traits": {
-            "smithy.api#documentation": "<p>The performance mode of the file system. We recommend <code>generalPurpose</code>\n      performance mode for most file systems. File systems using the <code>maxIO</code> performance\n      mode can scale to higher levels of aggregate throughput and operations per second with a\n      tradeoff of slightly higher latencies for most file operations. The performance mode\n      can't be changed after the file system has been created.</p>"
-          }
-        },
-        "Encrypted": {
-          "target": "com.amazonaws.efs#Encrypted",
-          "traits": {
-            "smithy.api#documentation": "<p>A Boolean value that, if true, creates an encrypted file system. When creating an\n      encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS\n      KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for\n      Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system.\n    </p>"
-          }
-        },
-        "CreationToken": {
-          "target": "com.amazonaws.efs#CreationToken",
-          "traits": {
-            "smithy.api#documentation": "<p>A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent\n      creation.</p>",
-            "smithy.api#idempotencyToken": {},
-            "smithy.api#required": {}
-          }
-        },
-        "KmsKeyId": {
-          "target": "com.amazonaws.efs#KmsKeyId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This\n      parameter is only required if you want to use a nondefault CMK. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p>\n         </important>"
           }
         }
       }
@@ -471,10 +471,11 @@
             "smithy.api#required": {}
           }
         },
-        "IpAddress": {
-          "target": "com.amazonaws.efs#IpAddress",
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
-            "smithy.api#documentation": "<p>Valid IPv4 address within the address range of the specified subnet.</p>"
+            "smithy.api#documentation": "<p>The ID of the file system for which to create the mount target.</p>",
+            "smithy.api#required": {}
           }
         },
         "SecurityGroups": {
@@ -483,11 +484,10 @@
             "smithy.api#documentation": "<p>Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be\n      for the same VPC as subnet specified.</p>"
           }
         },
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
+        "IpAddress": {
+          "target": "com.amazonaws.efs#IpAddress",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the file system for which to create the mount target.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Valid IPv4 address within the address range of the specified subnet.</p>"
           }
         }
       },
@@ -526,18 +526,18 @@
     "com.amazonaws.efs#CreateTagsRequest": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.efs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value\n      pair. </p>",
+            "smithy.api#required": {}
+          }
+        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the file system whose tags you want to modify (String). This operation modifies\n      the tags only, not the file system.</p>",
             "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.efs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value\n      pair. </p>",
             "smithy.api#required": {}
           }
         }
@@ -858,20 +858,6 @@
     "com.amazonaws.efs#DescribeAccessPointsRequest": {
       "type": "structure",
       "members": {
-        "MaxResults": {
-          "target": "com.amazonaws.efs#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) When retrieving all access points for a file system,\n      you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  \n      The default value is 100. </p>",
-            "smithy.api#httpQuery": "MaxResults"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.efs#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <code>NextToken</code> is present if the response is paginated. You can use <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>",
-            "smithy.api#httpQuery": "NextToken"
-          }
-        },
         "AccessPointId": {
           "target": "com.amazonaws.efs#AccessPointId",
           "traits": {
@@ -885,22 +871,36 @@
             "smithy.api#documentation": "<p>(Optional) If you provide a <code>FileSystemId</code>, EFS returns all access points for that file system; mutually exclusive with <code>AccessPointId</code>.</p>",
             "smithy.api#httpQuery": "FileSystemId"
           }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.efs#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) When retrieving all access points for a file system,\n      you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  \n      The default value is 100. </p>",
+            "smithy.api#httpQuery": "MaxResults"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.efs#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <code>NextToken</code> is present if the response is paginated. You can use <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>",
+            "smithy.api#httpQuery": "NextToken"
+          }
         }
       }
     },
     "com.amazonaws.efs#DescribeAccessPointsResponse": {
       "type": "structure",
       "members": {
-        "AccessPoints": {
-          "target": "com.amazonaws.efs#AccessPointDescriptions",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of access point descriptions.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.efs#Token",
           "traits": {
             "smithy.api#documentation": "<p>Present if there are more access points than returned in the response. \n      You can use the NextMarker in the subsequent request to fetch the additional descriptions.</p>"
+          }
+        },
+        "AccessPoints": {
+          "target": "com.amazonaws.efs#AccessPointDescriptions",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of access point descriptions.</p>"
           }
         }
       }
@@ -1043,18 +1043,18 @@
             "smithy.api#httpQuery": "Marker"
           }
         },
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) ID of the file system whose description you want to retrieve\n      (String).</p>",
-            "smithy.api#httpQuery": "FileSystemId"
-          }
-        },
         "MaxItems": {
           "target": "com.amazonaws.efs#MaxItems",
           "traits": {
             "smithy.api#documentation": "<p>(Optional) Specifies the maximum number of file systems to return in the response\n      (integer). This number is automatically set to 100. The response is paginated at 100 per page if you have more than 100 file systems.\n      </p>",
             "smithy.api#httpQuery": "MaxItems"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) ID of the file system whose description you want to retrieve\n      (String).</p>",
+            "smithy.api#httpQuery": "FileSystemId"
           }
         }
       },
@@ -1229,20 +1229,6 @@
             "smithy.api#httpQuery": "MountTargetId"
           }
         },
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) ID of the file system whose mount targets you want to list (String). It must\n      be included in your request if an <code>AccessPointId</code> or <code>MountTargetId</code> is not included. Accepts either a file system ID or ARN as input.</p>",
-            "smithy.api#httpQuery": "FileSystemId"
-          }
-        },
-        "MaxItems": {
-          "target": "com.amazonaws.efs#MaxItems",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) Maximum number of mount targets to return in the response. Currently, this\n      number is automatically set to\n      10, and other values are ignored. The response is paginated at 100 per page if you have more than 100 mount targets.</p>",
-            "smithy.api#httpQuery": "MaxItems"
-          }
-        },
         "AccessPointId": {
           "target": "com.amazonaws.efs#AccessPointId",
           "traits": {
@@ -1256,6 +1242,20 @@
             "smithy.api#documentation": "<p>(Optional) Opaque pagination token returned from a previous\n        <code>DescribeMountTargets</code> operation (String). If present, it specifies to continue\n      the list from where the previous returning call left off.</p>",
             "smithy.api#httpQuery": "Marker"
           }
+        },
+        "MaxItems": {
+          "target": "com.amazonaws.efs#MaxItems",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) Maximum number of mount targets to return in the response. Currently, this\n      number is automatically set to\n      10, and other values are ignored. The response is paginated at 100 per page if you have more than 100 mount targets.</p>",
+            "smithy.api#httpQuery": "MaxItems"
+          }
+        },
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) ID of the file system whose mount targets you want to list (String). It must\n      be included in your request if an <code>AccessPointId</code> or <code>MountTargetId</code> is not included. Accepts either a file system ID or ARN as input.</p>",
+            "smithy.api#httpQuery": "FileSystemId"
+          }
         }
       },
       "traits": {
@@ -1265,6 +1265,12 @@
     "com.amazonaws.efs#DescribeMountTargetsResponse": {
       "type": "structure",
       "members": {
+        "NextMarker": {
+          "target": "com.amazonaws.efs#Marker",
+          "traits": {
+            "smithy.api#documentation": "<p>If a value is present, there are more mount targets to return. In a subsequent request,\n      you can provide <code>Marker</code> in your request with this value to retrieve the next set\n      of mount targets.</p>"
+          }
+        },
         "MountTargets": {
           "target": "com.amazonaws.efs#MountTargetDescriptions",
           "traits": {
@@ -1275,12 +1281,6 @@
           "target": "com.amazonaws.efs#Marker",
           "traits": {
             "smithy.api#documentation": "<p>If the request included the <code>Marker</code>, the response returns that value in\n      this field.</p>"
-          }
-        },
-        "NextMarker": {
-          "target": "com.amazonaws.efs#Marker",
-          "traits": {
-            "smithy.api#documentation": "<p>If a value is present, there are more mount targets to return. In a subsequent request,\n      you can provide <code>Marker</code> in your request with this value to retrieve the next set\n      of mount targets.</p>"
           }
         }
       },
@@ -1334,19 +1334,19 @@
             "smithy.api#httpQuery": "MaxItems"
           }
         },
-        "Marker": {
-          "target": "com.amazonaws.efs#Marker",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) An opaque pagination token returned from a previous\n        <code>DescribeTags</code> operation (String). If present, it specifies to continue the list\n      from where the previous call left off.</p>",
-            "smithy.api#httpQuery": "Marker"
-          }
-        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the file system whose tag set you want to retrieve.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "Marker": {
+          "target": "com.amazonaws.efs#Marker",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) An opaque pagination token returned from a previous\n        <code>DescribeTags</code> operation (String). If present, it specifies to continue the list\n      from where the previous call left off.</p>",
+            "smithy.api#httpQuery": "Marker"
           }
         }
       },
@@ -1357,6 +1357,13 @@
     "com.amazonaws.efs#DescribeTagsResponse": {
       "type": "structure",
       "members": {
+        "Tags": {
+          "target": "com.amazonaws.efs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns tags associated with the file system as an array of <code>Tag</code> objects.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
         "NextMarker": {
           "target": "com.amazonaws.efs#Marker",
           "traits": {
@@ -1367,13 +1374,6 @@
           "target": "com.amazonaws.efs#Marker",
           "traits": {
             "smithy.api#documentation": "<p>If the request included a <code>Marker</code>, the response returns that value in this\n      field.</p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.efs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>Returns tags associated with the file system as an array of <code>Tag</code> objects.\n    </p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -1401,8 +1401,11 @@
     "com.amazonaws.efs#FileSystemAlreadyExists": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
+        "ErrorCode": {
+          "target": "com.amazonaws.efs#ErrorCode",
+          "traits": {
+            "smithy.api#required": {}
+          }
         },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
@@ -1410,11 +1413,8 @@
             "smithy.api#required": {}
           }
         },
-        "ErrorCode": {
-          "target": "com.amazonaws.efs#ErrorCode",
-          "traits": {
-            "smithy.api#required": {}
-          }
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -1436,17 +1436,17 @@
             "smithy.api#required": {}
           }
         },
-        "CreationTime": {
-          "target": "com.amazonaws.efs#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time that the file system was created, in seconds (since\n      1970-01-01T00:00:00Z).</p>",
-            "smithy.api#required": {}
-          }
-        },
         "OwnerId": {
           "target": "com.amazonaws.efs#AwsAccountId",
           "traits": {
             "smithy.api#documentation": "<p>The AWS account that created the file system. If the file system was created by an IAM\n      user, the parent account to which the user belongs is the owner.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.efs#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time that the file system was created, in seconds (since\n      1970-01-01T00:00:00Z).</p>",
             "smithy.api#required": {}
           }
         },
@@ -1471,11 +1471,30 @@
             "smithy.api#required": {}
           }
         },
+        "ThroughputMode": {
+          "target": "com.amazonaws.efs#ThroughputMode",
+          "traits": {
+            "smithy.api#documentation": "<p>The throughput mode for a file system. There are two throughput modes to choose from for\n      your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system's\n      throughput in Provisioned Throughput mode or change between the throughput modes as long as\n      it’s been more than 24 hours since the last decrease or throughput mode change.\n    </p>"
+          }
+        },
         "CreationToken": {
           "target": "com.amazonaws.efs#CreationToken",
           "traits": {
             "smithy.api#documentation": "<p>The opaque string specified in the request.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "LifeCycleState": {
+          "target": "com.amazonaws.efs#LifeCycleState",
+          "traits": {
+            "smithy.api#documentation": "<p>The lifecycle phase of the file system.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.efs#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>You can add tags to a file system, including a <code>Name</code> tag. For more\n      information, see <a>CreateFileSystem</a>. If the file system has a <code>Name</code> tag, Amazon EFS returns\n      the value in this field. </p>"
           }
         },
         "Encrypted": {
@@ -1490,30 +1509,11 @@
             "smithy.api#documentation": "<p>The throughput, measured in MiB/s, that you want to provision for a file system. Valid values are 1-1024. \n      Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The limit\n      on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For\n      more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS Limits That You Can Increase</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
           }
         },
-        "LifeCycleState": {
-          "target": "com.amazonaws.efs#LifeCycleState",
-          "traits": {
-            "smithy.api#documentation": "<p>The lifecycle phase of the file system.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the file system, assigned by Amazon EFS.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.efs#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>You can add tags to a file system, including a <code>Name</code> tag. For more\n      information, see <a>CreateFileSystem</a>. If the file system has a <code>Name</code> tag, Amazon EFS returns\n      the value in this field. </p>"
-          }
-        },
-        "ThroughputMode": {
-          "target": "com.amazonaws.efs#ThroughputMode",
-          "traits": {
-            "smithy.api#documentation": "<p>The throughput mode for a file system. There are two throughput modes to choose from for\n      your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system's\n      throughput in Provisioned Throughput mode or change between the throughput modes as long as\n      it’s been more than 24 hours since the last decrease or throughput mode change.\n    </p>"
           }
         },
         "FileSystemArn": {
@@ -1552,14 +1552,14 @@
     "com.amazonaws.efs#FileSystemInUse": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
-        },
         "ErrorCode": {
           "target": "com.amazonaws.efs#ErrorCode",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -1648,16 +1648,16 @@
             "smithy.api#documentation": "<p>The latest known metered size (in bytes) of data stored in the Infrequent Access\n      storage class.</p>"
           }
         },
-        "ValueInStandard": {
-          "target": "com.amazonaws.efs#FileSystemNullableSizeValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The latest known metered size (in bytes) of data stored in the Standard storage\n      class.</p>"
-          }
-        },
         "Timestamp": {
           "target": "com.amazonaws.efs#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The time at which the size of data, returned in the <code>Value</code> field, was\n      determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.</p>"
+          }
+        },
+        "ValueInStandard": {
+          "target": "com.amazonaws.efs#FileSystemNullableSizeValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The latest known metered size (in bytes) of data stored in the Standard storage\n      class.</p>"
           }
         }
       },
@@ -1724,14 +1724,14 @@
     "com.amazonaws.efs#InsufficientThroughputCapacity": {
       "type": "structure",
       "members": {
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
+        },
         "ErrorCode": {
           "target": "com.amazonaws.efs#ErrorCode",
           "traits": {
             "smithy.api#required": {}
           }
-        },
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -1743,14 +1743,14 @@
     "com.amazonaws.efs#InternalServerError": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
-        },
         "ErrorCode": {
           "target": "com.amazonaws.efs#ErrorCode",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -1762,11 +1762,11 @@
     "com.amazonaws.efs#InvalidPolicyException": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
-        },
         "ErrorCode": {
           "target": "com.amazonaws.efs#ErrorCode"
+        },
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -1938,16 +1938,16 @@
     "com.amazonaws.efs#ListTagsForResourceResponse": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.efs#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of the tags for the specified EFS resource.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.efs#Token",
           "traits": {
             "smithy.api#documentation": "<p>\n            <code>NextToken</code> is present if the response payload is paginated. You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.efs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of the tags for the specified EFS resource.</p>"
           }
         }
       }
@@ -2037,7 +2037,7 @@
           "sdkId": "EFS",
           "arnNamespace": "elasticfilesystem",
           "cloudFormationName": "EFS",
-          "cloudTrailEventSource": "v20150201.api.magnolio.amazon.com"
+          "cloudTrailEventSource": "efs.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "elasticfilesystem"
@@ -2112,18 +2112,18 @@
     "com.amazonaws.efs#ModifyMountTargetSecurityGroupsRequest": {
       "type": "structure",
       "members": {
-        "SecurityGroups": {
-          "target": "com.amazonaws.efs#SecurityGroups",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of up to five VPC security group IDs.</p>"
-          }
-        },
         "MountTargetId": {
           "target": "com.amazonaws.efs#MountTargetId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the mount target whose security groups you want to modify.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
+          }
+        },
+        "SecurityGroups": {
+          "target": "com.amazonaws.efs#SecurityGroups",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of up to five VPC security group IDs.</p>"
           }
         }
       },
@@ -2161,10 +2161,11 @@
     "com.amazonaws.efs#MountTargetDescription": {
       "type": "structure",
       "members": {
-        "IpAddress": {
-          "target": "com.amazonaws.efs#IpAddress",
+        "SubnetId": {
+          "target": "com.amazonaws.efs#SubnetId",
           "traits": {
-            "smithy.api#documentation": "<p>Address at which the file system can be mounted by using the mount target.</p>"
+            "smithy.api#documentation": "<p>The ID of the mount target's subnet.</p>",
+            "smithy.api#required": {}
           }
         },
         "OwnerId": {
@@ -2173,43 +2174,22 @@
             "smithy.api#documentation": "<p>AWS account ID that owns the resource.</p>"
           }
         },
-        "LifeCycleState": {
-          "target": "com.amazonaws.efs#LifeCycleState",
+        "IpAddress": {
+          "target": "com.amazonaws.efs#IpAddress",
           "traits": {
-            "smithy.api#documentation": "<p>Lifecycle state of the mount target.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Address at which the file system can be mounted by using the mount target.</p>"
+          }
+        },
+        "VpcId": {
+          "target": "com.amazonaws.efs#VpcId",
+          "traits": {
+            "smithy.api#documentation": "<p>The Virtual Private Cloud (VPC) ID that the mount target is configured in.</p>"
           }
         },
         "AvailabilityZoneId": {
           "target": "com.amazonaws.efs#AvailabilityZoneId",
           "traits": {
             "smithy.api#documentation": "<p>The unique and consistent identifier of the Availability Zone (AZ) that the mount target resides in. \n      For example, <code>use1-az1</code> is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.</p>"
-          }
-        },
-        "AvailabilityZoneName": {
-          "target": "com.amazonaws.efs#AvailabilityZoneName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Availability Zone (AZ) that the mount target resides in. AZs are \n      independently mapped to names for each AWS account. For example, the Availability Zone \n      <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.</p>"
-          }
-        },
-        "SubnetId": {
-          "target": "com.amazonaws.efs#SubnetId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the mount target's subnet.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "MountTargetId": {
-          "target": "com.amazonaws.efs#MountTargetId",
-          "traits": {
-            "smithy.api#documentation": "<p>System-assigned mount target ID.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "NetworkInterfaceId": {
-          "target": "com.amazonaws.efs#NetworkInterfaceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the network interface that Amazon EFS created when it created the mount\n      target.</p>"
           }
         },
         "FileSystemId": {
@@ -2219,10 +2199,30 @@
             "smithy.api#required": {}
           }
         },
-        "VpcId": {
-          "target": "com.amazonaws.efs#VpcId",
+        "LifeCycleState": {
+          "target": "com.amazonaws.efs#LifeCycleState",
           "traits": {
-            "smithy.api#documentation": "<p>The Virtual Private Cloud (VPC) ID that the mount target is configured in.</p>"
+            "smithy.api#documentation": "<p>Lifecycle state of the mount target.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NetworkInterfaceId": {
+          "target": "com.amazonaws.efs#NetworkInterfaceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the network interface that Amazon EFS created when it created the mount\n      target.</p>"
+          }
+        },
+        "MountTargetId": {
+          "target": "com.amazonaws.efs#MountTargetId",
+          "traits": {
+            "smithy.api#documentation": "<p>System-assigned mount target ID.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AvailabilityZoneName": {
+          "target": "com.amazonaws.efs#AvailabilityZoneName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Availability Zone (AZ) that the mount target resides in. AZs are \n      independently mapped to names for each AWS account. For example, the Availability Zone \n      <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.</p>"
           }
         }
       },
@@ -2249,14 +2249,14 @@
     "com.amazonaws.efs#MountTargetNotFound": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.efs#ErrorMessage"
-        },
         "ErrorCode": {
           "target": "com.amazonaws.efs#ErrorCode",
           "traits": {
             "smithy.api#required": {}
           }
+        },
+        "Message": {
+          "target": "com.amazonaws.efs#ErrorMessage"
         }
       },
       "traits": {
@@ -2365,11 +2365,11 @@
     "com.amazonaws.efs#PolicyNotFound": {
       "type": "structure",
       "members": {
-        "ErrorCode": {
-          "target": "com.amazonaws.efs#ErrorCode"
-        },
         "Message": {
           "target": "com.amazonaws.efs#ErrorMessage"
+        },
+        "ErrorCode": {
+          "target": "com.amazonaws.efs#ErrorCode"
         }
       },
       "traits": {
@@ -2381,11 +2381,10 @@
     "com.amazonaws.efs#PosixUser": {
       "type": "structure",
       "members": {
-        "Gid": {
-          "target": "com.amazonaws.efs#Gid",
+        "SecondaryGids": {
+          "target": "com.amazonaws.efs#SecondaryGids",
           "traits": {
-            "smithy.api#documentation": "<p>The POSIX group ID used for all file system operations using this access point.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Secondary POSIX group IDs used for all file system operations using this access point.</p>"
           }
         },
         "Uid": {
@@ -2395,10 +2394,11 @@
             "smithy.api#required": {}
           }
         },
-        "SecondaryGids": {
-          "target": "com.amazonaws.efs#SecondaryGids",
+        "Gid": {
+          "target": "com.amazonaws.efs#Gid",
           "traits": {
-            "smithy.api#documentation": "<p>Secondary POSIX group IDs used for all file system operations using this access point.</p>"
+            "smithy.api#documentation": "<p>The POSIX group ID used for all file system operations using this access point.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -2452,18 +2452,18 @@
     "com.amazonaws.efs#PutBackupPolicyRequest": {
       "type": "structure",
       "members": {
-        "BackupPolicy": {
-          "target": "com.amazonaws.efs#BackupPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The backup policy included in the <code>PutBackupPolicy</code> request.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
             "smithy.api#documentation": "<p>Specifies which EFS file system to update the backup policy for.</p>",
             "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "BackupPolicy": {
+          "target": "com.amazonaws.efs#BackupPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The backup policy included in the <code>PutBackupPolicy</code> request.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2503,11 +2503,10 @@
     "com.amazonaws.efs#PutFileSystemPolicyRequest": {
       "type": "structure",
       "members": {
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
+        "Policy": {
+          "target": "com.amazonaws.efs#Policy",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the EFS file system that you want to create or update the <code>FileSystemPolicy</code> for.</p>",
-            "smithy.api#httpLabel": {},
+            "smithy.api#documentation": "<p>The <code>FileSystemPolicy</code> that you're creating. Accepts a JSON formatted policy definition. \n      To find out more about the elements that make up a file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies\">EFS Resource-based Policies</a>.\n    </p>",
             "smithy.api#required": {}
           }
         },
@@ -2517,10 +2516,11 @@
             "smithy.api#documentation": "<p>(Optional) A flag to indicate whether to bypass the <code>FileSystemPolicy</code> lockout safety check. The policy lockout safety check \n      determines whether the policy in the request will prevent the principal making the request will be locked out from making future <code>PutFileSystemPolicy</code> requests on the file system.\n      Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent \n      the principal that is making the request from making a subsequent <code>PutFileSystemPolicy</code> request on the file system. \n      The default value is False.\n    </p>"
           }
         },
-        "Policy": {
-          "target": "com.amazonaws.efs#Policy",
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>FileSystemPolicy</code> that you're creating. Accepts a JSON formatted policy definition. \n      To find out more about the elements that make up a file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies\">EFS Resource-based Policies</a>.\n    </p>",
+            "smithy.api#documentation": "<p>The ID of the EFS file system that you want to create or update the <code>FileSystemPolicy</code> for.</p>",
+            "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
         }
@@ -2560,18 +2560,18 @@
     "com.amazonaws.efs#PutLifecycleConfigurationRequest": {
       "type": "structure",
       "members": {
+        "LifecyclePolicies": {
+          "target": "com.amazonaws.efs#LifecyclePolicies",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>LifecyclePolicy</code> objects that define the file system's\n        <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object\n      tells lifecycle management when to transition files from the Standard storage class to the\n      Infrequent Access storage class.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "FileSystemId": {
           "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the file system for which you are creating the\n        <code>LifecycleConfiguration</code> object (String).</p>",
             "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "LifecyclePolicies": {
-          "target": "com.amazonaws.efs#LifecyclePolicies",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of <code>LifecyclePolicy</code> objects that define the file system's\n        <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object\n      tells lifecycle management when to transition files from the Standard storage class to the\n      Infrequent Access storage class.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3039,10 +3039,12 @@
     "com.amazonaws.efs#UpdateFileSystemRequest": {
       "type": "structure",
       "members": {
-        "ThroughputMode": {
-          "target": "com.amazonaws.efs#ThroughputMode",
+        "FileSystemId": {
+          "target": "com.amazonaws.efs#FileSystemId",
           "traits": {
-            "smithy.api#documentation": "<p>(Optional) The throughput mode that you want your file system to use. If you're not\n      updating your throughput mode, you don't need to provide this value in your\n      request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>"
+            "smithy.api#documentation": "<p>The ID of the file system that you want to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "ProvisionedThroughputInMibps": {
@@ -3051,12 +3053,10 @@
             "smithy.api#documentation": "<p>(Optional) The amount of throughput, in MiB/s, that you want to provision for your file\n      system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. \n      If you're not updating the amount of provisioned throughput for your file system, you\n      don't need to provide this value in your request. </p>"
           }
         },
-        "FileSystemId": {
-          "target": "com.amazonaws.efs#FileSystemId",
+        "ThroughputMode": {
+          "target": "com.amazonaws.efs#ThroughputMode",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the file system that you want to update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>(Optional) The throughput mode that you want your file system to use. If you're not\n      updating your throughput mode, you don't need to provide this value in your\n      request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>"
           }
         }
       }

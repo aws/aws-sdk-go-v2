@@ -45,7 +45,7 @@
           "sdkId": "Personalize Runtime",
           "arnNamespace": "personalize",
           "cloudFormationName": "PersonalizeRuntime",
-          "cloudTrailEventSource": "runtime.personalize.services.amazonaws.com"
+          "cloudTrailEventSource": "personalizeruntime.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "personalize"
@@ -132,10 +132,29 @@
     "com.amazonaws.personalizeruntime#GetPersonalizedRankingRequest": {
       "type": "structure",
       "members": {
+        "filterArn": {
+          "target": "com.amazonaws.personalizeruntime#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.</p>"
+          }
+        },
+        "context": {
+          "target": "com.amazonaws.personalizeruntime#Context",
+          "traits": {
+            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+          }
+        },
         "campaignArn": {
           "target": "com.amazonaws.personalizeruntime#Arn",
           "traits": {
             "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for generating the personalized\n      ranking.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "inputList": {
+          "target": "com.amazonaws.personalizeruntime#InputList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset,\n      the item is appended to the end of the reranked list. The maximum is 500.</p>",
             "smithy.api#required": {}
           }
         },
@@ -144,19 +163,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The user for which you want the campaign to provide a personalized ranking.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "inputList": {
-          "target": "com.amazonaws.personalizeruntime#InputList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of items (itemId's) to rank. If an item was not included in the training dataset,\n      the item is appended to the end of the reranked list. The maximum is 500.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "context": {
-          "target": "com.amazonaws.personalizeruntime#Context",
-          "traits": {
-            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
           }
         }
       }
@@ -168,6 +174,12 @@
           "target": "com.amazonaws.personalizeruntime#ItemList",
           "traits": {
             "smithy.api#documentation": "<p>A list of items in order of most likely interest to the user. The maximum is 500.</p>"
+          }
+        },
+        "recommendationId": {
+          "target": "com.amazonaws.personalizeruntime#RecommendationID",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
           }
         }
       }
@@ -201,12 +213,6 @@
     "com.amazonaws.personalizeruntime#GetRecommendationsRequest": {
       "type": "structure",
       "members": {
-        "context": {
-          "target": "com.amazonaws.personalizeruntime#Context",
-          "traits": {
-            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
-          }
-        },
         "userId": {
           "target": "com.amazonaws.personalizeruntime#UserID",
           "traits": {
@@ -220,16 +226,10 @@
             "smithy.api#required": {}
           }
         },
-        "filterArn": {
-          "target": "com.amazonaws.personalizeruntime#Arn",
+        "context": {
+          "target": "com.amazonaws.personalizeruntime#Context",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      Using Filters with Amazon Personalize.</p>"
-          }
-        },
-        "itemId": {
-          "target": "com.amazonaws.personalizeruntime#ItemID",
-          "traits": {
-            "smithy.api#documentation": "<p>The item ID to provide recommendations for.</p>\n         <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>"
+            "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
           }
         },
         "numResults": {
@@ -237,12 +237,30 @@
           "traits": {
             "smithy.api#documentation": "<p>The number of results to return. The default is 25. The maximum is 500.</p>"
           }
+        },
+        "filterArn": {
+          "target": "com.amazonaws.personalizeruntime#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filters.html\">Using Filters with Amazon Personalize</a>.</p>\n         <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>"
+          }
+        },
+        "itemId": {
+          "target": "com.amazonaws.personalizeruntime#ItemID",
+          "traits": {
+            "smithy.api#documentation": "<p>The item ID to provide recommendations for.</p>\n         <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>"
+          }
         }
       }
     },
     "com.amazonaws.personalizeruntime#GetRecommendationsResponse": {
       "type": "structure",
       "members": {
+        "recommendationId": {
+          "target": "com.amazonaws.personalizeruntime#RecommendationID",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+          }
+        },
         "itemList": {
           "target": "com.amazonaws.personalizeruntime#ItemList",
           "traits": {
@@ -312,6 +330,9 @@
       "traits": {
         "smithy.api#documentation": "<p>An object that identifies an item.</p>\n         <p>The  and  APIs return a list of\n      <code>PredictedItem</code>s.</p>"
       }
+    },
+    "com.amazonaws.personalizeruntime#RecommendationID": {
+      "type": "string"
     },
     "com.amazonaws.personalizeruntime#ResourceNotFoundException": {
       "type": "structure",

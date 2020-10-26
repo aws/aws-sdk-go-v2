@@ -42,7 +42,7 @@
           "sdkId": "forecastquery",
           "arnNamespace": "forecast",
           "cloudFormationName": "Forecastquery",
-          "cloudTrailEventSource": "queryservice.seer.amazonaws.com"
+          "cloudTrailEventSource": "forecastquery.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "forecast"
@@ -84,16 +84,16 @@
     "com.amazonaws.forecastquery#DataPoint": {
       "type": "structure",
       "members": {
-        "Value": {
-          "target": "com.amazonaws.forecastquery#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The forecast value.</p>"
-          }
-        },
         "Timestamp": {
           "target": "com.amazonaws.forecastquery#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The timestamp of the specific forecast.</p>"
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.forecastquery#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The forecast value.</p>"
           }
         }
       },
@@ -102,7 +102,10 @@
       }
     },
     "com.amazonaws.forecastquery#DateTime": {
-      "type": "string"
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}[Tt]\\d{2}:\\d{2}[a-zA-Z0-9\\:\\+\\-\\[\\]\\.\\/]*$"
+      }
     },
     "com.amazonaws.forecastquery#Double": {
       "type": "double",
@@ -231,26 +234,6 @@
     "com.amazonaws.forecastquery#QueryForecastRequest": {
       "type": "structure",
       "members": {
-        "Filters": {
-          "target": "com.amazonaws.forecastquery#Filters",
-          "traits": {
-            "smithy.api#documentation": "<p>The filtering criteria to apply when retrieving the forecast. For example, to get the\n      forecast for <code>client_21</code> in the electricity usage dataset, specify the\n      following:</p>\n         <p>\n            <code>{\"item_id\" : \"client_21\"}</code>\n         </p>\n      \n      \n         <p>To get the full forecast, use the <a href=\"https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html\">CreateForecastExportJob</a> operation.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.forecastquery#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
-          }
-        },
-        "ForecastArn": {
-          "target": "com.amazonaws.forecastquery#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast to query.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "StartDate": {
           "target": "com.amazonaws.forecastquery#DateTime",
           "traits": {
@@ -261,6 +244,26 @@
           "target": "com.amazonaws.forecastquery#DateTime",
           "traits": {
             "smithy.api#documentation": "<p>The end date for the forecast. Specify the date using this format: yyyy-MM-dd'T'HH:mm:ss\n      (ISO 8601 format). For example, 2015-01-01T20:00:00. </p>"
+          }
+        },
+        "ForecastArn": {
+          "target": "com.amazonaws.forecastquery#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast to query.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.forecastquery#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+          }
+        },
+        "Filters": {
+          "target": "com.amazonaws.forecastquery#Filters",
+          "traits": {
+            "smithy.api#documentation": "<p>The filtering criteria to apply when retrieving the forecast. For example, to get the\n      forecast for <code>client_21</code> in the electricity usage dataset, specify the\n      following:</p>\n         <p>\n            <code>{\"item_id\" : \"client_21\"}</code>\n         </p>\n      \n      \n         <p>To get the full forecast, use the <a href=\"https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html\">CreateForecastExportJob</a> operation.</p>",
+            "smithy.api#required": {}
           }
         }
       }

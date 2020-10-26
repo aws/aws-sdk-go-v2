@@ -209,7 +209,7 @@
           "sdkId": "SNS",
           "arnNamespace": "sns",
           "cloudFormationName": "SNS",
-          "cloudTrailEventSource": "onlines.cloudcast.amazon.com"
+          "cloudTrailEventSource": "sns.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "sns"
@@ -348,17 +348,17 @@
             "smithy.api#required": {}
           }
         },
-        "AuthenticateOnUnsubscribe": {
-          "target": "com.amazonaws.sns#authenticateOnUnsubscribe",
-          "traits": {
-            "smithy.api#documentation": "<p>Disallows unauthenticated unsubscribes of the subscription. If the value of this\n            parameter is <code>true</code> and the request has an AWS signature, then only the topic\n            owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action\n            requires AWS authentication. </p>"
-          }
-        },
         "TopicArn": {
           "target": "com.amazonaws.sns#topicARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the topic for which you wish to confirm a subscription.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "AuthenticateOnUnsubscribe": {
+          "target": "com.amazonaws.sns#authenticateOnUnsubscribe",
+          "traits": {
+            "smithy.api#documentation": "<p>Disallows unauthenticated unsubscribes of the subscription. If the value of this\n            parameter is <code>true</code> and the request has an AWS signature, then only the topic\n            owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action\n            requires AWS authentication. </p>"
           }
         }
       },
@@ -420,10 +420,10 @@
     "com.amazonaws.sns#CreatePlatformApplicationInput": {
       "type": "structure",
       "members": {
-        "Attributes": {
-          "target": "com.amazonaws.sns#MapStringToString",
+        "Name": {
+          "target": "com.amazonaws.sns#String",
           "traits": {
-            "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html\">SetPlatformApplicationAttributes</a>\n        </p>",
+            "smithy.api#documentation": "<p>Application names must be made up of only uppercase and lowercase ASCII letters,\n            numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters\n            long.</p>",
             "smithy.api#required": {}
           }
         },
@@ -434,10 +434,10 @@
             "smithy.api#required": {}
           }
         },
-        "Name": {
-          "target": "com.amazonaws.sns#String",
+        "Attributes": {
+          "target": "com.amazonaws.sns#MapStringToString",
           "traits": {
-            "smithy.api#documentation": "<p>Application names must be made up of only uppercase and lowercase ASCII letters,\n            numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters\n            long.</p>",
+            "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html\">SetPlatformApplicationAttributes</a>\n        </p>",
             "smithy.api#required": {}
           }
         }
@@ -495,13 +495,6 @@
             "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html\">SetEndpointAttributes</a>.</p>"
           }
         },
-        "PlatformApplicationArn": {
-          "target": "com.amazonaws.sns#String",
-          "traits": {
-            "smithy.api#documentation": "<p>PlatformApplicationArn returned from CreatePlatformApplication is used to create a an\n            endpoint.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "CustomUserData": {
           "target": "com.amazonaws.sns#String",
           "traits": {
@@ -512,6 +505,13 @@
           "target": "com.amazonaws.sns#String",
           "traits": {
             "smithy.api#documentation": "<p>Unique identifier created by the notification service for an app on a device. The\n            specific name for Token will vary, depending on which notification service is being\n            used. For example, when using APNS as the notification service, you need the device\n            token. Alternatively, when using GCM (Firebase Cloud Messaging) or ADM, the device token\n            equivalent is called the registration ID.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PlatformApplicationArn": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>PlatformApplicationArn returned from CreatePlatformApplication is used to create a an\n            endpoint.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1311,16 +1311,16 @@
     "com.amazonaws.sns#ListPhoneNumbersOptedOutResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.sns#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A <code>NextToken</code> string is returned when you call the\n                <code>ListPhoneNumbersOptedOut</code> action if additional records are available\n            after the first page of results.</p>"
-          }
-        },
         "phoneNumbers": {
           "target": "com.amazonaws.sns#PhoneNumberList",
           "traits": {
             "smithy.api#documentation": "<p>A list of phone numbers that are opted out of receiving SMS messages. The list is\n            paginated, and each page can contain up to 100 phone numbers.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>NextToken</code> string is returned when you call the\n                <code>ListPhoneNumbersOptedOut</code> action if additional records are available\n            after the first page of results.</p>"
           }
         }
       },
@@ -1373,16 +1373,16 @@
     "com.amazonaws.sns#ListPlatformApplicationsResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sns#String",
-          "traits": {
-            "smithy.api#documentation": "<p>NextToken string is returned when calling ListPlatformApplications action if\n            additional records are available after the first page results.</p>"
-          }
-        },
         "PlatformApplications": {
           "target": "com.amazonaws.sns#ListOfPlatformApplications",
           "traits": {
             "smithy.api#documentation": "<p>Platform applications returned when calling ListPlatformApplications action.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>NextToken string is returned when calling ListPlatformApplications action if\n            additional records are available after the first page results.</p>"
           }
         }
       },
@@ -1458,17 +1458,17 @@
     "com.amazonaws.sns#ListSubscriptionsByTopicInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sns#nextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Token returned by the previous <code>ListSubscriptionsByTopic</code> request.</p>"
-          }
-        },
         "TopicArn": {
           "target": "com.amazonaws.sns#topicARN",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the topic for which you wish to find subscriptions.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sns#nextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Token returned by the previous <code>ListSubscriptionsByTopic</code> request.</p>"
           }
         }
       },
@@ -1479,16 +1479,16 @@
     "com.amazonaws.sns#ListSubscriptionsByTopicResponse": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sns#nextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>Token to pass along to the next <code>ListSubscriptionsByTopic</code> request. This\n            element is returned if there are more subscriptions to retrieve.</p>"
-          }
-        },
         "Subscriptions": {
           "target": "com.amazonaws.sns#SubscriptionsList",
           "traits": {
             "smithy.api#documentation": "<p>A list of subscriptions.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sns#nextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Token to pass along to the next <code>ListSubscriptionsByTopic</code> request. This\n            element is returned if there are more subscriptions to retrieve.</p>"
           }
         }
       },
@@ -1765,16 +1765,16 @@
     "com.amazonaws.sns#PlatformApplication": {
       "type": "structure",
       "members": {
-        "Attributes": {
-          "target": "com.amazonaws.sns#MapStringToString",
-          "traits": {
-            "smithy.api#documentation": "<p>Attributes for platform application object.</p>"
-          }
-        },
         "PlatformApplicationArn": {
           "target": "com.amazonaws.sns#String",
           "traits": {
             "smithy.api#documentation": "<p>PlatformApplicationArn for platform application object.</p>"
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.sns#MapStringToString",
+          "traits": {
+            "smithy.api#documentation": "<p>Attributes for platform application object.</p>"
           }
         }
       },
@@ -1857,6 +1857,12 @@
     "com.amazonaws.sns#PublishInput": {
       "type": "structure",
       "members": {
+        "TopicArn": {
+          "target": "com.amazonaws.sns#topicARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The topic you want to publish to.</p>\n        <p>If you don't specify a value for the <code>TopicArn</code> parameter, you must specify\n            a value for the <code>PhoneNumber</code> or <code>TargetArn</code> parameters.</p>"
+          }
+        },
         "Message": {
           "target": "com.amazonaws.sns#message",
           "traits": {
@@ -1864,10 +1870,28 @@
             "smithy.api#required": {}
           }
         },
-        "Subject": {
-          "target": "com.amazonaws.sns#subject",
+        "MessageDeduplicationId": {
+          "target": "com.amazonaws.sns#String",
           "traits": {
-            "smithy.api#documentation": "<p>Optional parameter to be used as the \"Subject\" line when the message is delivered to\n            email endpoints. This field will also be included, if present, in the standard JSON\n            messages delivered to other endpoints.</p>\n        <p>Constraints: Subjects must be ASCII text that begins with a letter, number, or\n            punctuation mark; must not include line breaks or control characters; and must be less\n            than 100 characters long.</p>"
+            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. \n            The <code>MessageDeduplicationId</code> can contain up to 128 alphanumeric characters (a-z, A-Z, 0-9) \n            and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n        <p>Every message must have a unique <code>MessageDeduplicationId</code>, which is a token used for deduplication of sent messages. \n            If a message with a particular <code>MessageDeduplicationId</code> is sent successfully, any message sent with the same <code>MessageDeduplicationId</code> \n            during the 5-minute deduplication interval is treated as a duplicate. </p>\n        <p>If the topic has <code>ContentBasedDeduplication</code> set, the system generates a <code>MessageDeduplicationId</code> based on the contents of the \n            message. Your <code>MessageDeduplicationId</code> overrides the generated one.</p>"
+          }
+        },
+        "MessageStructure": {
+          "target": "com.amazonaws.sns#messageStructure",
+          "traits": {
+            "smithy.api#documentation": "<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different\n            message for each protocol. For example, using one publish action, you can send a short\n            message to your SMS subscribers and a longer message to your email subscribers. If you\n            set <code>MessageStructure</code> to <code>json</code>, the value of the\n                <code>Message</code> parameter must: </p>\n        <ul>\n            <li>\n                <p>be a syntactically valid JSON object; and</p>\n            </li>\n            <li>\n                <p>contain at least a top-level JSON key of \"default\" with a value that is a\n                    string.</p>\n            </li>\n         </ul>\n        <p>You can define other top-level keys that define the message you want to send to a\n            specific transport protocol (e.g., \"http\").</p>\n        <p>Valid value: <code>json</code>\n        </p>"
+          }
+        },
+        "MessageGroupId": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. The <code>MessageGroupId</code> can contain up to \n            128 alphanumeric characters (a-z, A-Z, 0-9) and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n        <p>The <code>MessageGroupId</code> is a tag that specifies that a message belongs to a specific message group. Messages that belong to the \n            same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order).\n            Every message must include a <code>MessageGroupId</code>.</p>"
+          }
+        },
+        "PhoneNumber": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number to which you want to deliver an SMS message. Use E.164 format.</p>\n        <p>If you don't specify a value for the <code>PhoneNumber</code> parameter, you must\n            specify a value for the <code>TargetArn</code> or <code>TopicArn</code>\n            parameters.</p>"
           }
         },
         "TargetArn": {
@@ -1882,22 +1906,10 @@
             "smithy.api#documentation": "<p>Message attributes for Publish action.</p>"
           }
         },
-        "PhoneNumber": {
-          "target": "com.amazonaws.sns#String",
+        "Subject": {
+          "target": "com.amazonaws.sns#subject",
           "traits": {
-            "smithy.api#documentation": "<p>The phone number to which you want to deliver an SMS message. Use E.164 format.</p>\n        <p>If you don't specify a value for the <code>PhoneNumber</code> parameter, you must\n            specify a value for the <code>TargetArn</code> or <code>TopicArn</code>\n            parameters.</p>"
-          }
-        },
-        "MessageStructure": {
-          "target": "com.amazonaws.sns#messageStructure",
-          "traits": {
-            "smithy.api#documentation": "<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different\n            message for each protocol. For example, using one publish action, you can send a short\n            message to your SMS subscribers and a longer message to your email subscribers. If you\n            set <code>MessageStructure</code> to <code>json</code>, the value of the\n                <code>Message</code> parameter must: </p>\n        <ul>\n            <li>\n                <p>be a syntactically valid JSON object; and</p>\n            </li>\n            <li>\n                <p>contain at least a top-level JSON key of \"default\" with a value that is a\n                    string.</p>\n            </li>\n         </ul>\n        <p>You can define other top-level keys that define the message you want to send to a\n            specific transport protocol (e.g., \"http\").</p>\n        <p>Valid value: <code>json</code>\n        </p>"
-          }
-        },
-        "TopicArn": {
-          "target": "com.amazonaws.sns#topicARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The topic you want to publish to.</p>\n        <p>If you don't specify a value for the <code>TopicArn</code> parameter, you must specify\n            a value for the <code>PhoneNumber</code> or <code>TargetArn</code> parameters.</p>"
+            "smithy.api#documentation": "<p>Optional parameter to be used as the \"Subject\" line when the message is delivered to\n            email endpoints. This field will also be included, if present, in the standard JSON\n            messages delivered to other endpoints.</p>\n        <p>Constraints: Subjects must be ASCII text that begins with a letter, number, or\n            punctuation mark; must not include line breaks or control characters; and must be less\n            than 100 characters long.</p>"
           }
         }
       },
@@ -1908,6 +1920,12 @@
     "com.amazonaws.sns#PublishResponse": {
       "type": "structure",
       "members": {
+        "SequenceNumber": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This response element applies only to FIFO (first-in-first-out) topics. </p>\n        <p>The sequence number is a large, non-consecutive number that Amazon SNS assigns to each message. \n            The length of <code>SequenceNumber</code> is 128 bits. <code>SequenceNumber</code> continues to increase for each <code>MessageGroupId</code>.</p>"
+          }
+        },
         "MessageId": {
           "target": "com.amazonaws.sns#messageId",
           "traits": {
@@ -1945,17 +1963,17 @@
     "com.amazonaws.sns#RemovePermissionInput": {
       "type": "structure",
       "members": {
-        "TopicArn": {
-          "target": "com.amazonaws.sns#topicARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the topic whose access control policy you wish to modify.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Label": {
           "target": "com.amazonaws.sns#label",
           "traits": {
             "smithy.api#documentation": "<p>The unique label of the statement you want to remove.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TopicArn": {
+          "target": "com.amazonaws.sns#topicARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the topic whose access control policy you wish to modify.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2048,17 +2066,17 @@
     "com.amazonaws.sns#SetPlatformApplicationAttributesInput": {
       "type": "structure",
       "members": {
-        "PlatformApplicationArn": {
-          "target": "com.amazonaws.sns#String",
-          "traits": {
-            "smithy.api#documentation": "<p>PlatformApplicationArn for SetPlatformApplicationAttributes action.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Attributes": {
           "target": "com.amazonaws.sns#MapStringToString",
           "traits": {
             "smithy.api#documentation": "<p>A map of the platform application attributes. Attributes in this map include the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>PlatformCredential</code> – The credential received from the\n                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,\n                        <code>PlatformCredential</code> is <code>private key</code>. For\n                        <code>GCM</code> (Firebase Cloud Messaging), <code>PlatformCredential</code>\n                    is <code>API key</code>. For <code>ADM</code>, <code>PlatformCredential</code>\n                    is <code>client secret</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>PlatformPrincipal</code> – The principal received from the\n                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,\n                        <code>PlatformPrincipal</code> is <code>SSL certificate</code>. For\n                        <code>GCM</code> (Firebase Cloud Messaging), there is no\n                        <code>PlatformPrincipal</code>. For <code>ADM</code>,\n                        <code>PlatformPrincipal</code> is <code>client id</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointCreated</code> – Topic ARN to which\n                        <code>EndpointCreated</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointDeleted</code> – Topic ARN to which\n                        <code>EndpointDeleted</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointUpdated</code> – Topic ARN to which\n                        <code>EndpointUpdate</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventDeliveryFailure</code> – Topic ARN to which\n                        <code>DeliveryFailure</code> event notifications are sent upon Direct\n                    Publish delivery failure (permanent) to one of the application's\n                    endpoints.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)\n                    of successfully delivered messages.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "PlatformApplicationArn": {
+          "target": "com.amazonaws.sns#String",
+          "traits": {
+            "smithy.api#documentation": "<p>PlatformApplicationArn for SetPlatformApplicationAttributes action.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2144,11 +2162,10 @@
     "com.amazonaws.sns#SetSubscriptionAttributesInput": {
       "type": "structure",
       "members": {
-        "SubscriptionArn": {
-          "target": "com.amazonaws.sns#subscriptionARN",
+        "AttributeValue": {
+          "target": "com.amazonaws.sns#attributeValue",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the subscription to modify.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The new value for the attribute in JSON format.</p>"
           }
         },
         "AttributeName": {
@@ -2158,10 +2175,11 @@
             "smithy.api#required": {}
           }
         },
-        "AttributeValue": {
-          "target": "com.amazonaws.sns#attributeValue",
+        "SubscriptionArn": {
+          "target": "com.amazonaws.sns#subscriptionARN",
           "traits": {
-            "smithy.api#documentation": "<p>The new value for the attribute in JSON format.</p>"
+            "smithy.api#documentation": "<p>The ARN of the subscription to modify.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -2198,13 +2216,6 @@
     "com.amazonaws.sns#SetTopicAttributesInput": {
       "type": "structure",
       "members": {
-        "TopicArn": {
-          "target": "com.amazonaws.sns#topicARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the topic to modify.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "AttributeValue": {
           "target": "com.amazonaws.sns#attributeValue",
           "traits": {
@@ -2215,6 +2226,13 @@
           "target": "com.amazonaws.sns#attributeName",
           "traits": {
             "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n        <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>SetTopicAttributes</code> action uses:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DisplayName</code> – The display name to use for a topic with SMS\n                    subscriptions.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Policy</code> – The policy that defines who can access your\n                    topic. By default, only the topic owner can publish or subscribe to the\n                    topic.</p>\n            </li>\n         </ul>\n        \n        <p>The following attribute applies only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html\">server-side-encryption</a>:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK)\n                    for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key\n                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>AWS Key Management Service API\n                        Reference</i>. </p>\n            </li>\n         </ul>\n        \n        \n        <p>The following attribute applies only to FIFO topics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>ContentBasedDeduplication</code> –  Enables content-based deduplication. Amazon SNS uses a SHA-256 hash to\n                    generate the <code>MessageDeduplicationId</code> using the body of the message (but not the\n                    attributes of the message). </p>\n            </li>\n            <li>\n                <p>\n                    When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent\n                    within the deduplication interval are treated as duplicates and only one copy of the message is\n                    delivered.\n                </p>\n            </li>\n            <li>\n                <p>\n                    If the queue has <code>ContentBasedDeduplication</code> set, your <code>MessageDeduplicationId</code>\n                    overrides the generated one.\n                </p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "TopicArn": {
+          "target": "com.amazonaws.sns#topicARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the topic to modify.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2277,11 +2295,16 @@
     "com.amazonaws.sns#SubscribeInput": {
       "type": "structure",
       "members": {
-        "TopicArn": {
-          "target": "com.amazonaws.sns#topicARN",
+        "Endpoint": {
+          "target": "com.amazonaws.sns#Endpoint2",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the topic you want to subscribe to.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The endpoint that you want to receive notifications. Endpoints vary by\n            protocol:</p>\n        <ul>\n            <li>\n                <p>For the <code>http</code> protocol, the (public) endpoint is a URL beginning\n                    with <code>http://</code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>https</code> protocol, the (public) endpoint is a URL beginning\n                    with <code>https://</code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>email</code> protocol, the endpoint is an email address</p>\n            </li>\n            <li>\n                <p>For the <code>email-json</code> protocol, the endpoint is an email\n                    address</p>\n            </li>\n            <li>\n                <p>For the <code>sms</code> protocol, the endpoint is a phone number of an\n                    SMS-enabled device</p>\n            </li>\n            <li>\n                <p>For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS\n                    queue</p>\n            </li>\n            <li>\n                <p>For the <code>application</code> protocol, the endpoint is the EndpointArn of\n                    a mobile app and device.</p>\n            </li>\n            <li>\n                <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an Amazon Lambda\n                    function.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.sns#SubscriptionAttributesMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n        <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>SetTopicAttributes</code> action uses:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FilterPolicy</code> – The simple JSON object that lets your\n                    subscriber receive only a subset of messages, rather than receiving every\n                    message published to the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RawMessageDelivery</code> – When set to <code>true</code>,\n                    enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the\n                    need for the endpoints to process JSON formatting, which is otherwise created\n                    for Amazon SNS metadata.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n         </ul>"
           }
         },
         "Protocol": {
@@ -2291,22 +2314,17 @@
             "smithy.api#required": {}
           }
         },
-        "Endpoint": {
-          "target": "com.amazonaws.sns#Endpoint2",
+        "TopicArn": {
+          "target": "com.amazonaws.sns#topicARN",
           "traits": {
-            "smithy.api#documentation": "<p>The endpoint that you want to receive notifications. Endpoints vary by\n            protocol:</p>\n        <ul>\n            <li>\n                <p>For the <code>http</code> protocol, the (public) endpoint is a URL beginning\n                    with <code>http://</code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>https</code> protocol, the (public) endpoint is a URL beginning\n                    with <code>https://</code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>email</code> protocol, the endpoint is an email address</p>\n            </li>\n            <li>\n                <p>For the <code>email-json</code> protocol, the endpoint is an email\n                    address</p>\n            </li>\n            <li>\n                <p>For the <code>sms</code> protocol, the endpoint is a phone number of an\n                    SMS-enabled device</p>\n            </li>\n            <li>\n                <p>For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS\n                    queue</p>\n            </li>\n            <li>\n                <p>For the <code>application</code> protocol, the endpoint is the EndpointArn of\n                    a mobile app and device.</p>\n            </li>\n            <li>\n                <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an Amazon Lambda\n                    function.</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The ARN of the topic you want to subscribe to.</p>",
+            "smithy.api#required": {}
           }
         },
         "ReturnSubscriptionArn": {
           "target": "com.amazonaws.sns#boolean",
           "traits": {
             "smithy.api#documentation": "<p>Sets whether the response from the <code>Subscribe</code> request includes the\n            subscription ARN, even if the subscription is not yet confirmed.</p>\n        <ul>\n            <li>\n                <p>If you set this parameter to <code>true</code>, the response includes the ARN in all cases, even\n          if the subscription is not yet confirmed. In addition to the ARN for confirmed subscriptions, the response\n          also includes the <code>pending subscription</code> ARN value for subscriptions that aren't yet confirmed. A\n          subscription becomes confirmed when the subscriber calls the <code>ConfirmSubscription</code> action with a\n          confirmation token.</p>\n            </li>\n         </ul>\n        <p></p>\n        <p>The default value is <code>false</code>.</p>"
-          }
-        },
-        "Attributes": {
-          "target": "com.amazonaws.sns#SubscriptionAttributesMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A map of attributes with their corresponding values.</p>\n        <p>The following lists the names, descriptions, and values of the special request\n            parameters that the <code>SetTopicAttributes</code> action uses:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries\n                    failed deliveries to HTTP/S endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FilterPolicy</code> – The simple JSON object that lets your\n                    subscriber receive only a subset of messages, rather than receiving every\n                    message published to the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RawMessageDelivery</code> – When set to <code>true</code>,\n                    enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the\n                    need for the endpoints to process JSON formatting, which is otherwise created\n                    for Amazon SNS metadata.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n         </ul>"
           }
         }
       },
@@ -2331,12 +2349,6 @@
     "com.amazonaws.sns#Subscription": {
       "type": "structure",
       "members": {
-        "Protocol": {
-          "target": "com.amazonaws.sns#protocol",
-          "traits": {
-            "smithy.api#documentation": "<p>The subscription's protocol.</p>"
-          }
-        },
         "Owner": {
           "target": "com.amazonaws.sns#account",
           "traits": {
@@ -2349,16 +2361,22 @@
             "smithy.api#documentation": "<p>The subscription's ARN.</p>"
           }
         },
+        "TopicArn": {
+          "target": "com.amazonaws.sns#topicARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the subscription's topic.</p>"
+          }
+        },
         "Endpoint": {
           "target": "com.amazonaws.sns#Endpoint2",
           "traits": {
             "smithy.api#documentation": "<p>The subscription's endpoint (format depends on the protocol).</p>"
           }
         },
-        "TopicArn": {
-          "target": "com.amazonaws.sns#topicARN",
+        "Protocol": {
+          "target": "com.amazonaws.sns#protocol",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the subscription's topic.</p>"
+            "smithy.api#documentation": "<p>The subscription's protocol.</p>"
           }
         }
       },
@@ -2501,17 +2519,17 @@
     "com.amazonaws.sns#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "Tags": {
-          "target": "com.amazonaws.sns#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to be added to the specified topic. A tag consists of a required key\n            and an optional value.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceArn": {
           "target": "com.amazonaws.sns#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the topic to which to add tags.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.sns#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to be added to the specified topic. A tag consists of a required key\n            and an optional value.</p>",
             "smithy.api#required": {}
           }
         }

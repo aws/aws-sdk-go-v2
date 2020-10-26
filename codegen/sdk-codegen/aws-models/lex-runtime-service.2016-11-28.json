@@ -54,7 +54,7 @@
           "sdkId": "Lex Runtime Service",
           "arnNamespace": "lex",
           "cloudFormationName": "LexRuntimeService",
-          "cloudTrailEventSource": "runtimeservice.deepsense.amazonaws.com"
+          "cloudTrailEventSource": "lexruntimeservice.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "lex"
@@ -105,20 +105,30 @@
     "com.amazonaws.lexruntimeservice#BotName": {
       "type": "string"
     },
+    "com.amazonaws.lexruntimeservice#BotVersion": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "[0-9]+|\\$LATEST"
+      }
+    },
     "com.amazonaws.lexruntimeservice#Button": {
       "type": "structure",
       "members": {
-        "value": {
-          "target": "com.amazonaws.lexruntimeservice#ButtonValueStringWithLength",
-          "traits": {
-            "smithy.api#documentation": "<p>The value sent to Amazon Lex when a user chooses the button. For example, consider button\n      text \"NYC.\" When the user chooses the button, the value sent can be \"New York City.\"</p>",
-            "smithy.api#required": {}
-          }
-        },
         "text": {
           "target": "com.amazonaws.lexruntimeservice#ButtonTextStringWithLength",
           "traits": {
             "smithy.api#documentation": "<p>Text that is visible to the user on the button.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.lexruntimeservice#ButtonValueStringWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The value sent to Amazon Lex when a user chooses the button. For example, consider button\n      text \"NYC.\" When the user chooses the button, the value sent can be \"New York City.\"</p>",
             "smithy.api#required": {}
           }
         }
@@ -225,6 +235,14 @@
     "com.amazonaws.lexruntimeservice#DeleteSessionRequest": {
       "type": "structure",
       "members": {
+        "botAlias": {
+          "target": "com.amazonaws.lexruntimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "userId": {
           "target": "com.amazonaws.lexruntimeservice#UserId",
           "traits": {
@@ -240,14 +258,6 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
-        },
-        "botAlias": {
-          "target": "com.amazonaws.lexruntimeservice#BotAlias",
-          "traits": {
-            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
         }
       }
     },
@@ -260,12 +270,6 @@
             "smithy.api#documentation": "<p>The alias in use for the bot associated with the session data.</p>"
           }
         },
-        "sessionId": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the session.</p>"
-          }
-        },
         "userId": {
           "target": "com.amazonaws.lexruntimeservice#UserId",
           "traits": {
@@ -276,6 +280,12 @@
           "target": "com.amazonaws.lexruntimeservice#BotName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the bot associated with the session data.</p>"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the session.</p>"
           }
         }
       }
@@ -296,16 +306,34 @@
     "com.amazonaws.lexruntimeservice#DialogAction": {
       "type": "structure",
       "members": {
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
+          }
+        },
+        "messageFormat": {
+          "target": "com.amazonaws.lexruntimeservice#MessageFormatType",
+          "traits": {
+            "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html\">Message\n            Groups</a>. </p>\n            </li>\n         </ul>"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.lexruntimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the intent.</p>"
+          }
+        },
         "slotToElicit": {
           "target": "com.amazonaws.lexruntimeservice#String",
           "traits": {
             "smithy.api#documentation": "<p>The name of the slot that should be elicited from the user.</p>"
           }
         },
-        "message": {
-          "target": "com.amazonaws.lexruntimeservice#Text",
+        "fulfillmentState": {
+          "target": "com.amazonaws.lexruntimeservice#FulfillmentState",
           "traits": {
-            "smithy.api#documentation": "<p>The message that should be shown to the user. If you don't specify a message, Amazon Lex will\n      use the message configured for the intent.</p>"
+            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
           }
         },
         "type": {
@@ -315,28 +343,10 @@
             "smithy.api#required": {}
           }
         },
-        "fulfillmentState": {
-          "target": "com.amazonaws.lexruntimeservice#FulfillmentState",
+        "message": {
+          "target": "com.amazonaws.lexruntimeservice#Text",
           "traits": {
-            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "slots": {
-          "target": "com.amazonaws.lexruntimeservice#StringMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
-          }
-        },
-        "intentName": {
-          "target": "com.amazonaws.lexruntimeservice#IntentName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the intent.</p>"
-          }
-        },
-        "messageFormat": {
-          "target": "com.amazonaws.lexruntimeservice#MessageFormatType",
-          "traits": {
-            "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html\">Message\n            Groups</a>. </p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>The message that should be shown to the user. If you don't specify a message, Amazon Lex will\n      use the message configured for the intent.</p>"
           }
         }
       },
@@ -402,6 +412,9 @@
         ]
       }
     },
+    "com.amazonaws.lexruntimeservice#Double": {
+      "type": "double"
+    },
     "com.amazonaws.lexruntimeservice#ErrorMessage": {
       "type": "string"
     },
@@ -427,10 +440,10 @@
     "com.amazonaws.lexruntimeservice#GenericAttachment": {
       "type": "structure",
       "members": {
-        "title": {
+        "subTitle": {
           "target": "com.amazonaws.lexruntimeservice#StringWithLength",
           "traits": {
-            "smithy.api#documentation": "<p>The title of the option.</p>"
+            "smithy.api#documentation": "<p>The subtitle shown below the title.</p>"
           }
         },
         "attachmentLinkUrl": {
@@ -439,22 +452,22 @@
             "smithy.api#documentation": "<p>The URL of an attachment to the response card.</p>"
           }
         },
-        "imageUrl": {
-          "target": "com.amazonaws.lexruntimeservice#StringUrlWithLength",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of an image that is displayed to the user.</p>"
-          }
-        },
         "buttons": {
           "target": "com.amazonaws.lexruntimeservice#listOfButtons",
           "traits": {
             "smithy.api#documentation": "<p>The list of options to show to the user.</p>"
           }
         },
-        "subTitle": {
+        "title": {
           "target": "com.amazonaws.lexruntimeservice#StringWithLength",
           "traits": {
-            "smithy.api#documentation": "<p>The subtitle shown below the title.</p>"
+            "smithy.api#documentation": "<p>The title of the option.</p>"
+          }
+        },
+        "imageUrl": {
+          "target": "com.amazonaws.lexruntimeservice#StringUrlWithLength",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of an image that is displayed to the user.</p>"
           }
         }
       },
@@ -496,21 +509,6 @@
     "com.amazonaws.lexruntimeservice#GetSessionRequest": {
       "type": "structure",
       "members": {
-        "botName": {
-          "target": "com.amazonaws.lexruntimeservice#BotName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "checkpointLabelFilter": {
-          "target": "com.amazonaws.lexruntimeservice#IntentSummaryCheckpointLabel",
-          "traits": {
-            "smithy.api#documentation": "<p>A string used to filter the intents returned in the <code>recentIntentSummaryView</code>\n      structure. </p>\n         <p>When you specify a filter, only intents with their <code>checkpointLabel</code> field set\n      to that string are returned.</p>",
-            "smithy.api#httpQuery": "checkpointLabelFilter"
-          }
-        },
         "botAlias": {
           "target": "com.amazonaws.lexruntimeservice#BotAlias",
           "traits": {
@@ -526,6 +524,21 @@
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
+        },
+        "botName": {
+          "target": "com.amazonaws.lexruntimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "checkpointLabelFilter": {
+          "target": "com.amazonaws.lexruntimeservice#IntentSummaryCheckpointLabel",
+          "traits": {
+            "smithy.api#documentation": "<p>A string used to filter the intents returned in the <code>recentIntentSummaryView</code>\n      structure. </p>\n         <p>When you specify a filter, only intents with their <code>checkpointLabel</code> field set\n      to that string are returned.</p>",
+            "smithy.api#httpQuery": "checkpointLabelFilter"
+          }
         }
       }
     },
@@ -538,16 +551,16 @@
             "smithy.api#documentation": "<p>Describes the current state of the bot.</p>"
           }
         },
-        "sessionId": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
-          }
-        },
         "recentIntentSummaryView": {
           "target": "com.amazonaws.lexruntimeservice#IntentSummaryList",
           "traits": {
             "smithy.api#documentation": "<p>An array of information about the intents used in the session. The array can contain a\n      maximum of three summaries. If more than three intents are used in the session, the\n        <code>recentIntentSummaryView</code> operation contains information about the last three\n      intents used.</p>\n         <p>If you set the <code>checkpointLabelFilter</code> parameter in the request, the array\n      contains only the intents with the specified label.</p>"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
           }
         },
         "sessionAttributes": {
@@ -561,41 +574,42 @@
     "com.amazonaws.lexruntimeservice#HttpContentType": {
       "type": "string"
     },
+    "com.amazonaws.lexruntimeservice#IntentConfidence": {
+      "type": "structure",
+      "members": {
+        "score": {
+          "target": "com.amazonaws.lexruntimeservice#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent.\n      Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides a score that indicates the confidence that Amazon Lex has that an intent is the one\n      that satisfies the user's intent.</p>"
+      }
+    },
+    "com.amazonaws.lexruntimeservice#IntentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lexruntimeservice#PredictedIntent"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 4
+        }
+      }
+    },
     "com.amazonaws.lexruntimeservice#IntentName": {
       "type": "string"
     },
     "com.amazonaws.lexruntimeservice#IntentSummary": {
       "type": "structure",
       "members": {
-        "fulfillmentState": {
-          "target": "com.amazonaws.lexruntimeservice#FulfillmentState",
-          "traits": {
-            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "dialogActionType": {
-          "target": "com.amazonaws.lexruntimeservice#DialogActionType",
-          "traits": {
-            "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the user. The possible\n      values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the user if the intent is\n          complete and ready to be fulfilled. This is a yes/no question such as \"Place the\n          order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that the there will not be a response from the user.\n          For example, the statement \"Your order has been placed\" does not require a\n          response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to determine the intent that the user\n          wants to fulfill.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot value from the\n          user.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
         "checkpointLabel": {
           "target": "com.amazonaws.lexruntimeservice#IntentSummaryCheckpointLabel",
           "traits": {
             "smithy.api#documentation": "<p>A user-defined label that identifies a particular intent. You can use this label to return\n      to a previous intent. </p>\n         <p>Use the <code>checkpointLabelFilter</code> parameter of the <code>GetSessionRequest</code>\n      operation to filter the intents returned by the operation to those with only the specified\n      label.</p>"
-          }
-        },
-        "slotToElicit": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The next slot to elicit from the user. If there is not slot to elicit, the field is\n      blank.</p>"
-          }
-        },
-        "slots": {
-          "target": "com.amazonaws.lexruntimeservice#StringMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
           }
         },
         "confirmationStatus": {
@@ -608,6 +622,31 @@
           "target": "com.amazonaws.lexruntimeservice#IntentName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the intent.</p>"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of the slots that have been gathered and their values. </p>"
+          }
+        },
+        "fulfillmentState": {
+          "target": "com.amazonaws.lexruntimeservice#FulfillmentState",
+          "traits": {
+            "smithy.api#documentation": "<p>The fulfillment state of the intent. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> - The Lambda function associated with the intent failed to fulfill\n          the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - The intent has fulfilled by the Lambda function associated\n          with the intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - All of the information necessary for the intent is\n          present and the intent ready to be fulfilled by the client application.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The next slot to elicit from the user. If there is not slot to elicit, the field is\n      blank.</p>"
+          }
+        },
+        "dialogActionType": {
+          "target": "com.amazonaws.lexruntimeservice#DialogActionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the user. The possible\n      values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the user if the intent is\n          complete and ready to be fulfilled. This is a yes/no question such as \"Place the\n          order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that the there will not be a response from the user.\n          For example, the statement \"Your order has been placed\" does not require a\n          response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to determine the intent that the user\n          wants to fulfill.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot value from the\n          user.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -788,6 +827,29 @@
     "com.amazonaws.lexruntimeservice#PostContentRequest": {
       "type": "structure",
       "members": {
+        "requestAttributes": {
+          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonAttributesString",
+          "traits": {
+            "smithy.api#documentation": "<p>You pass this value as the <code>x-amz-lex-request-attributes</code> HTTP header.</p>\n         <p>Request-specific information passed between Amazon Lex and a client application. The value must\n      be a JSON serialized and base64 encoded map with string keys and values. The total size of the\n        <code>requestAttributes</code> and <code>sessionAttributes</code> headers is limited to 12\n      KB.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-request-attributes"
+          }
+        },
+        "botAlias": {
+          "target": "com.amazonaws.lexruntimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>Alias of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.lexruntimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "inputStream": {
           "target": "com.amazonaws.lexruntimeservice#BlobStream",
           "traits": {
@@ -803,18 +865,12 @@
             "smithy.api#httpHeader": "x-amz-lex-session-attributes"
           }
         },
-        "requestAttributes": {
-          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonAttributesString",
+        "userId": {
+          "target": "com.amazonaws.lexruntimeservice#UserId",
           "traits": {
-            "smithy.api#documentation": "<p>You pass this value as the <code>x-amz-lex-request-attributes</code> HTTP header.</p>\n         <p>Request-specific information passed between Amazon Lex and a client application. The value must\n      be a JSON serialized and base64 encoded map with string keys and values. The total size of the\n        <code>requestAttributes</code> and <code>sessionAttributes</code> headers is limited to 12\n      KB.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-request-attributes"
-          }
-        },
-        "accept": {
-          "target": "com.amazonaws.lexruntimeservice#Accept",
-          "traits": {
-            "smithy.api#documentation": "<p> You pass this value as the <code>Accept</code> HTTP header. </p>\n         <p> The message Amazon Lex returns in the response can be either text or speech based on the\n        <code>Accept</code> HTTP header value in the request. </p>\n         <ul>\n            <li>\n               <p> If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response. </p>\n            </li>\n            <li>\n               <p> If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech (using the configuration you specified in the\n            <code>Accept</code> header). For example, if you specify <code>audio/mpeg</code> as the\n          value, Amazon Lex returns speech in the MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code>\n          in 16-bit, little endian format.\n          </p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>audio/mpeg</p>\n                  </li>\n                  <li>\n                     <p>audio/ogg</p>\n                  </li>\n                  <li>\n                     <p>audio/pcm</p>\n                  </li>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n                  <li>\n                     <p>audio/* (defaults to mpeg)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
-            "smithy.api#httpHeader": "Accept"
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. At runtime, each request must contain the <code>userID</code> field.</p>\n         <p>To decide the user ID to use for your application, consider the following factors.</p>\n         <ul>\n            <li>\n               <p>The <code>userID</code> field must not contain any personally identifiable information\n          of the user, for example, name, personal identification numbers, or other end user\n          personal information.</p>\n            </li>\n            <li>\n               <p>If you want a user to start a conversation on one device and continue on another\n          device, use a user-specific identifier.</p>\n            </li>\n            <li>\n               <p>If you want the same user to be able to have two independent conversations on two\n          different devices, choose a device-specific identifier.</p>\n            </li>\n            <li>\n               <p>A user can't have two independent conversations with two different versions of the\n          same bot. For example, a user can't have a conversation with the PROD and BETA versions of\n          the same bot. If you anticipate that a user will need to have conversation with two\n          different versions, for example, while testing, include the bot alias in the user ID to\n          separate the two conversations.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "contentType": {
@@ -825,28 +881,11 @@
             "smithy.api#required": {}
           }
         },
-        "userId": {
-          "target": "com.amazonaws.lexruntimeservice#UserId",
+        "accept": {
+          "target": "com.amazonaws.lexruntimeservice#Accept",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. At runtime, each request must contain the <code>userID</code> field.</p>\n         <p>To decide the user ID to use for your application, consider the following factors.</p>\n         <ul>\n            <li>\n               <p>The <code>userID</code> field must not contain any personally identifiable information\n          of the user, for example, name, personal identification numbers, or other end user\n          personal information.</p>\n            </li>\n            <li>\n               <p>If you want a user to start a conversation on one device and continue on another\n          device, use a user-specific identifier.</p>\n            </li>\n            <li>\n               <p>If you want the same user to be able to have two independent conversations on two\n          different devices, choose a device-specific identifier.</p>\n            </li>\n            <li>\n               <p>A user can't have two independent conversations with two different versions of the\n          same bot. For example, a user can't have a conversation with the PROD and BETA versions of\n          the same bot. If you anticipate that a user will need to have conversation with two\n          different versions, for example, while testing, include the bot alias in the user ID to\n          separate the two conversations.</p>\n            </li>\n         </ul>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "botName": {
-          "target": "com.amazonaws.lexruntimeservice#BotName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the Amazon Lex bot.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "botAlias": {
-          "target": "com.amazonaws.lexruntimeservice#BotAlias",
-          "traits": {
-            "smithy.api#documentation": "<p>Alias of the Amazon Lex bot.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p> You pass this value as the <code>Accept</code> HTTP header. </p>\n         <p> The message Amazon Lex returns in the response can be either text or speech based on the\n        <code>Accept</code> HTTP header value in the request. </p>\n         <ul>\n            <li>\n               <p> If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response. </p>\n            </li>\n            <li>\n               <p> If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech (using the configuration you specified in the\n            <code>Accept</code> header). For example, if you specify <code>audio/mpeg</code> as the\n          value, Amazon Lex returns speech in the MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code>\n          in 16-bit, little endian format.\n          </p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>audio/mpeg</p>\n                  </li>\n                  <li>\n                     <p>audio/ogg</p>\n                  </li>\n                  <li>\n                     <p>audio/pcm</p>\n                  </li>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n                  <li>\n                     <p>audio/* (defaults to mpeg)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "Accept"
           }
         }
       }
@@ -854,46 +893,11 @@
     "com.amazonaws.lexruntimeservice#PostContentResponse": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.lexruntimeservice#Text",
-          "traits": {
-            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides\n      on the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-message"
-          }
-        },
-        "slots": {
+        "alternativeIntents": {
           "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonString",
           "traits": {
-            "smithy.api#documentation": "<p>Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input\n      during the conversation. The field is base-64 encoded.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-slots"
-          }
-        },
-        "audioStream": {
-          "target": "com.amazonaws.lexruntimeservice#BlobStream",
-          "traits": {
-            "smithy.api#documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration\n      and context. For example, if Amazon Lex did not understand the user intent, it sends the\n        <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation\n      before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another\n      example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message\n      to convey to the user. Then Amazon Lex sends that message in the response. </p>",
-            "smithy.api#httpPayload": {}
-          }
-        },
-        "dialogState": {
-          "target": "com.amazonaws.lexruntimeservice#DialogState",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the current state of the user interaction. Amazon Lex returns one of the following\n      values as <code>dialogState</code>. The client can optionally use this information to\n      customize the user interface. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit the user's intent. Consider the\n          following examples: </p>\n               <p> For example, a user might utter an intent (\"I want to order a pizza\"). If Amazon Lex\n          cannot infer the user intent from this utterance, it will return this dialog state.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response. </p>\n               <p>For example, Amazon Lex wants user confirmation before fulfilling an intent. Instead of a\n          simple \"yes\" or \"no\" response, a user might respond with additional information. For\n          example, \"yes, but make it a thick crust pizza\" or \"no, I want to order a drink.\" Amazon Lex\n          can process such additional information (in these examples, update the crust type slot or\n          change the intent from OrderPizza to OrderDrink). </p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting the value of a slot for the current intent. </p>\n               <p> For example, suppose that in the response Amazon Lex sends this message: \"What size pizza\n          would you like?\". A user might reply with the slot value (e.g., \"medium\"). The user might\n          also provide additional information in the response (e.g., \"medium thick crust pizza\").\n          Amazon Lex can process such additional information appropriately. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function has successfully fulfilled the\n          intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the request.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user failed. </p>\n               <p> This can happen for various reasons, including that the user does not provide an\n          appropriate response to prompts from the service (you can configure how many times Amazon Lex\n          can prompt a user for specific information), or if the Lambda function fails to fulfill the\n          intent. </p>\n            </li>\n         </ul>",
-            "smithy.api#httpHeader": "x-amz-lex-dialog-state"
-          }
-        },
-        "intentName": {
-          "target": "com.amazonaws.lexruntimeservice#IntentName",
-          "traits": {
-            "smithy.api#documentation": "<p>Current user intent that Amazon Lex is aware of.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-intent-name"
-          }
-        },
-        "inputTranscript": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The text used to process the request.</p>\n         <p>If the input was an audio stream, the <code>inputTranscript</code> field contains the text\n      extracted from the audio stream. This is the text that is actually processed to recognize\n      intents and slot values. You can use this information to determine if Amazon Lex is correctly\n      processing the audio that you send.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-input-transcript"
+            "smithy.api#documentation": "<p>One to four alternative intents that may be applicable to the user's intent.</p>\n         <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent\n      matches the user's intent. The intents are sorted by the confidence score.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-alternative-intents"
           }
         },
         "messageFormat": {
@@ -910,11 +914,53 @@
             "smithy.api#httpHeader": "Content-Type"
           }
         },
-        "sessionId": {
+        "audioStream": {
+          "target": "com.amazonaws.lexruntimeservice#BlobStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration\n      and context. For example, if Amazon Lex did not understand the user intent, it sends the\n        <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation\n      before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another\n      example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message\n      to convey to the user. Then Amazon Lex sends that message in the response. </p>",
+            "smithy.api#httpPayload": {}
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.lexruntimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> in its response, Amazon Lex decides\n      on the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-message"
+          }
+        },
+        "botVersion": {
+          "target": "com.amazonaws.lexruntimeservice#BotVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the bot that responded to the conversation. You can use this information to\n      help determine if one version of a bot is performing better than another version.</p>\n         <p>If you have enabled the new natural language understanding (NLU) model, you can use this\n      to determine if the improvement is due to changes to the bot or changes to the NLU.</p>\n         <p>For more information about enabling the new NLU, see the <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements\">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-bot-version"
+          }
+        },
+        "sentimentResponse": {
           "target": "com.amazonaws.lexruntimeservice#String",
           "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the session.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-session-id"
+            "smithy.api#documentation": "<p>The sentiment expressed in an utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-sentiment"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input\n      during the conversation. The field is base-64 encoded.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-slots"
+          }
+        },
+        "inputTranscript": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The text used to process the request.</p>\n         <p>If the input was an audio stream, the <code>inputTranscript</code> field contains the text\n      extracted from the audio stream. This is the text that is actually processed to recognize\n      intents and slot values. You can use this information to determine if Amazon Lex is correctly\n      processing the audio that you send.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-input-transcript"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p> If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>",
+            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
           }
         },
         "sessionAttributes": {
@@ -924,18 +970,32 @@
             "smithy.api#httpHeader": "x-amz-lex-session-attributes"
           }
         },
-        "sentimentResponse": {
+        "sessionId": {
           "target": "com.amazonaws.lexruntimeservice#String",
           "traits": {
-            "smithy.api#documentation": "<p>The sentiment expressed in and utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-sentiment"
+            "smithy.api#documentation": "<p>The unique identifier for the session.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-id"
           }
         },
-        "slotToElicit": {
-          "target": "com.amazonaws.lexruntimeservice#String",
+        "dialogState": {
+          "target": "com.amazonaws.lexruntimeservice#DialogState",
           "traits": {
-            "smithy.api#documentation": "<p> If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>",
-            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
+            "smithy.api#documentation": "<p>Identifies the current state of the user interaction. Amazon Lex returns one of the following\n      values as <code>dialogState</code>. The client can optionally use this information to\n      customize the user interface. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit the user's intent. Consider the\n          following examples: </p>\n               <p> For example, a user might utter an intent (\"I want to order a pizza\"). If Amazon Lex\n          cannot infer the user intent from this utterance, it will return this dialog state.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response. </p>\n               <p>For example, Amazon Lex wants user confirmation before fulfilling an intent. Instead of a\n          simple \"yes\" or \"no\" response, a user might respond with additional information. For\n          example, \"yes, but make it a thick crust pizza\" or \"no, I want to order a drink.\" Amazon Lex\n          can process such additional information (in these examples, update the crust type slot or\n          change the intent from OrderPizza to OrderDrink). </p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting the value of a slot for the current intent. </p>\n               <p> For example, suppose that in the response Amazon Lex sends this message: \"What size pizza\n          would you like?\". A user might reply with the slot value (e.g., \"medium\"). The user might\n          also provide additional information in the response (e.g., \"medium thick crust pizza\").\n          Amazon Lex can process such additional information appropriately. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function has successfully fulfilled the\n          intent. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the request.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user failed. </p>\n               <p> This can happen for various reasons, including that the user does not provide an\n          appropriate response to prompts from the service (you can configure how many times Amazon Lex\n          can prompt a user for specific information), or if the Lambda function fails to fulfill the\n          intent. </p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-dialog-state"
+          }
+        },
+        "intentName": {
+          "target": "com.amazonaws.lexruntimeservice#IntentName",
+          "traits": {
+            "smithy.api#documentation": "<p>Current user intent that Amazon Lex is aware of.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-intent-name"
+          }
+        },
+        "nluIntentConfidence": {
+          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one\n      that matches the user's intent. The score is between 0.0 and 1.0.</p>\n         <p>The score is a relative score, not an absolute score. The score may change based on\n      improvements to the Amazon Lex NLU.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-nlu-intent-confidence"
           }
         }
       }
@@ -994,19 +1054,10 @@
             "smithy.api#required": {}
           }
         },
-        "inputText": {
-          "target": "com.amazonaws.lexruntimeservice#Text",
+        "requestAttributes": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
           "traits": {
-            "smithy.api#documentation": "<p>The text that the user entered (Amazon Lex interprets this text).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "botName": {
-          "target": "com.amazonaws.lexruntimeservice#BotName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Amazon Lex bot.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Request-specific information passed between Amazon Lex and a client application.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>"
           }
         },
         "botAlias": {
@@ -1017,16 +1068,25 @@
             "smithy.api#required": {}
           }
         },
+        "inputText": {
+          "target": "com.amazonaws.lexruntimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The text that the user entered (Amazon Lex interprets this text).</p>",
+            "smithy.api#required": {}
+          }
+        },
         "sessionAttributes": {
           "target": "com.amazonaws.lexruntimeservice#StringMap",
           "traits": {
             "smithy.api#documentation": "<p>Application-specific information passed between Amazon Lex and a client application.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs\">Setting Session\n        Attributes</a>.</p>"
           }
         },
-        "requestAttributes": {
-          "target": "com.amazonaws.lexruntimeservice#StringMap",
+        "botName": {
+          "target": "com.amazonaws.lexruntimeservice#BotName",
           "traits": {
-            "smithy.api#documentation": "<p>Request-specific information passed between Amazon Lex and a client application.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don't create any\n      request attributes with the prefix <code>x-amz-lex:</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs\">Setting Request\n        Attributes</a>.</p>"
+            "smithy.api#documentation": "<p>The name of the Amazon Lex bot.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -1034,52 +1094,28 @@
     "com.amazonaws.lexruntimeservice#PostTextResponse": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.lexruntimeservice#Text",
-          "traits": {
-            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on\n      the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>"
-          }
-        },
-        "slots": {
-          "target": "com.amazonaws.lexruntimeservice#StringMap",
-          "traits": {
-            "smithy.api#documentation": "<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>"
-          }
-        },
-        "responseCard": {
-          "target": "com.amazonaws.lexruntimeservice#ResponseCard",
-          "traits": {
-            "smithy.api#documentation": "<p>Represents the options that the user has to respond to the current prompt. Response Card\n      can come from the bot configuration (in the Amazon Lex console, choose the settings button next\n      to a slot) or from a code hook (Lambda function). </p>"
-          }
-        },
-        "sentimentResponse": {
-          "target": "com.amazonaws.lexruntimeservice#SentimentResponse",
-          "traits": {
-            "smithy.api#documentation": "<p>The sentiment expressed in and utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>"
-          }
-        },
-        "slotToElicit": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>"
-          }
-        },
         "messageFormat": {
           "target": "com.amazonaws.lexruntimeservice#MessageFormatType",
           "traits": {
             "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format defined by the Lambda\n          function.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>"
           }
         },
-        "sessionId": {
-          "target": "com.amazonaws.lexruntimeservice#String",
+        "intentName": {
+          "target": "com.amazonaws.lexruntimeservice#IntentName",
           "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
+            "smithy.api#documentation": "<p>The current user intent that Amazon Lex is aware of.</p>"
           }
         },
-        "sessionAttributes": {
-          "target": "com.amazonaws.lexruntimeservice#StringMap",
+        "alternativeIntents": {
+          "target": "com.amazonaws.lexruntimeservice#IntentList",
           "traits": {
-            "smithy.api#documentation": "<p>A map of key-value pairs representing the session-specific context information.</p>"
+            "smithy.api#documentation": "<p>One to four alternative intents that may be applicable to the user's intent.</p>\n         <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent\n      matches the user's intent. The intents are sorted by the confidence score.</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.lexruntimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The message to convey to the user. The message can come from the bot's configuration or\n      from a Lambda function.</p>\n         <p>If the intent is not configured with a Lambda function, or if the Lambda function returned\n        <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on\n      the next course of action and selects an appropriate message from the bot's configuration\n      based on the current interaction context. For example, if Amazon Lex isn't able to understand user\n      input, it uses a clarification prompt message.</p>\n         <p>When you create an intent you can assign messages to groups. When messages are assigned to\n      groups Amazon Lex returns one message from each group in the response. The message field is an\n      escaped JSON string containing the messages. For more information about the structure of the\n      JSON string returned, see <a>msg-prompts-formats</a>.</p>\n         <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its\n      response.</p>"
           }
         },
         "dialogState": {
@@ -1088,12 +1124,80 @@
             "smithy.api#documentation": "<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following\n      values as <code>dialogState</code>. The client can optionally use this information to\n      customize the user interface. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - Amazon Lex wants to elicit user intent. </p>\n               <p>For example, a user might utter an intent (\"I want to order a pizza\"). If Amazon Lex cannot\n          infer the user intent from this utterance, it will return this dialogState.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - Amazon Lex is expecting a \"yes\" or \"no\" response. </p>\n               <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p>\n               <p>Instead of a simple \"yes\" or \"no,\" a user might respond with additional information.\n          For example, \"yes, but make it thick crust pizza\" or \"no, I want to order a drink\".\n          Amazon Lex can process such additional information (in these examples, update the crust\n          type slot value, or change intent from OrderPizza to OrderDrink).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - Amazon Lex is expecting a slot value for the current intent. </p>\n               <p>For example, suppose that in the response Amazon Lex sends this message: \"What size pizza\n          would you like?\". A user might reply with the slot value (e.g., \"medium\"). The user might\n          also provide additional information in the response (e.g., \"medium thick crust pizza\").\n          Amazon Lex can process such additional information appropriately. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> - Conveys that the Lambda function configured for the intent has\n          successfully fulfilled the intent. </p>\n\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the intent.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Conveys that the conversation with the user failed. </p>\n               <p> This can happen for various reasons including that the user did not provide an\n          appropriate response to prompts from the service (you can configure how many times Amazon Lex\n          can prompt a user for specific information), or the Lambda function failed to fulfill the\n          intent. </p>\n            </li>\n         </ul>"
           }
         },
+        "sessionId": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>"
+          }
+        },
+        "botVersion": {
+          "target": "com.amazonaws.lexruntimeservice#BotVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the bot that responded to the conversation. You can use this information to\n      help determine if one version of a bot is performing better than another version.</p>\n         <p>If you have enabled the new natural language understanding (NLU) model, you can use this\n      to determine if the improvement is due to changes to the bot or changes to the NLU.</p>\n         <p>For more information about enabling the new NLU, see the <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements\">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>"
+          }
+        },
+        "sentimentResponse": {
+          "target": "com.amazonaws.lexruntimeservice#SentimentResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>The sentiment expressed in and utterance.</p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis,\n      this field contains the result of the analysis.</p>"
+          }
+        },
+        "responseCard": {
+          "target": "com.amazonaws.lexruntimeservice#ResponseCard",
+          "traits": {
+            "smithy.api#documentation": "<p>Represents the options that the user has to respond to the current prompt. Response Card\n      can come from the bot configuration (in the Amazon Lex console, choose the settings button next\n      to a slot) or from a code hook (Lambda function). </p>"
+          }
+        },
+        "sessionAttributes": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of key-value pairs representing the session-specific context information.</p>"
+          }
+        },
+        "nluIntentConfidence": {
+          "target": "com.amazonaws.lexruntimeservice#IntentConfidence",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one\n      that matches the user's intent. The score is between 0.0 and 1.0. For more information, see\n        <a href=\"https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html\">Confidence\n        Scores</a>.</p>\n         <p>The score is a relative score, not an absolute score. The score may change based on\n      improvements to the Amazon Lex natural language understanding (NLU) model.</p>"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the\n      slot for which Amazon Lex is eliciting a value. </p>"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>,\n      the default is <code>ORIGINAL_VALUE</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lexruntimeservice#PredictedIntent": {
+      "type": "structure",
+      "members": {
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#StringMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The slot and slot values associated with the predicted intent.</p>"
+          }
+        },
+        "nluIntentConfidence": {
+          "target": "com.amazonaws.lexruntimeservice#IntentConfidence",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates how confident Amazon Lex is that an intent satisfies the user's intent.</p>"
+          }
+        },
         "intentName": {
           "target": "com.amazonaws.lexruntimeservice#IntentName",
           "traits": {
-            "smithy.api#documentation": "<p>The current user intent that Amazon Lex is aware of.</p>"
+            "smithy.api#documentation": "<p>The name of the intent that Amazon Lex suggests satisfies the user's intent.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An intent that Amazon Lex suggests satisfies the user's intent. Includes the name of the\n      intent, the confidence that Amazon Lex has that the user's intent is satisfied, and the slots\n      defined for the intent.</p>"
       }
     },
     "com.amazonaws.lexruntimeservice#PutSession": {
@@ -1142,28 +1246,11 @@
     "com.amazonaws.lexruntimeservice#PutSessionRequest": {
       "type": "structure",
       "members": {
-        "userId": {
-          "target": "com.amazonaws.lexruntimeservice#UserId",
+        "accept": {
+          "target": "com.amazonaws.lexruntimeservice#Accept",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "botName": {
-          "target": "com.amazonaws.lexruntimeservice#BotName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "botAlias": {
-          "target": "com.amazonaws.lexruntimeservice#BotAlias",
-          "traits": {
-            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or speech based\n      depending on the value of this field.</p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response.</p>\n            </li>\n            <li>\n               <p>If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech in the configuration that you specify. For\n          example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex returns speech in the\n          MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech is returned as\n            <code>audio/pcm</code> in 16-bit, little endian format.</p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>audio/mpeg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/ogg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/pcm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/*</code> (defaults to mpeg)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>text/plain; charset=utf-8</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "Accept"
           }
         },
         "dialogAction": {
@@ -1178,17 +1265,34 @@
             "smithy.api#documentation": "<p>A summary of the recent intents for the bot. You can use the intent summary view to set a\n      checkpoint label on an intent and modify attributes of intents. You can also use it to remove\n      or add intent summary objects to the list.</p>\n         <p>An intent that you modify or add to the list must make sense for the bot. For example, the\n      intent name must be valid for the bot. You must provide valid values for:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>intentName</code>\n               </p>\n            </li>\n            <li>\n               <p>slot names</p>\n            </li>\n            <li>\n               <p>\n                  <code>slotToElict</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you send the <code>recentIntentSummaryView</code> parameter in a\n        <code>PutSession</code> request, the contents of the new summary view replaces the old\n      summary view. For example, if a <code>GetSession</code> request returns three intents in the\n      summary view and you call <code>PutSession</code> with one intent in the summary view, the\n      next call to <code>GetSession</code> will only return one intent.</p>"
           }
         },
-        "accept": {
-          "target": "com.amazonaws.lexruntimeservice#Accept",
-          "traits": {
-            "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or speech based\n      depending on the value of this field.</p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the\n          response.</p>\n            </li>\n            <li>\n               <p>If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response.\n          Amazon Lex uses Amazon Polly to generate the speech in the configuration that you specify. For\n          example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex returns speech in the\n          MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech is returned as\n            <code>audio/pcm</code> in 16-bit, little endian format.</p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>audio/mpeg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/ogg</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/pcm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/*</code> (defaults to mpeg)</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>text/plain; charset=utf-8</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
-            "smithy.api#httpHeader": "Accept"
-          }
-        },
         "sessionAttributes": {
           "target": "com.amazonaws.lexruntimeservice#StringMap",
           "traits": {
             "smithy.api#documentation": "<p>Map of key/value pairs representing the session-specific context information. It contains\n      application information passed between Amazon Lex and a client application.</p>"
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.lexruntimeservice#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the client application user. Amazon Lex uses this to identify a user's conversation\n      with your bot. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "botAlias": {
+          "target": "com.amazonaws.lexruntimeservice#BotAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The alias in use for the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "botName": {
+          "target": "com.amazonaws.lexruntimeservice#BotName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the bot that contains the session data.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -1196,18 +1300,11 @@
     "com.amazonaws.lexruntimeservice#PutSessionResponse": {
       "type": "structure",
       "members": {
-        "slots": {
-          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonString",
+        "contentType": {
+          "target": "com.amazonaws.lexruntimeservice#HttpContentType",
           "traits": {
-            "smithy.api#documentation": "<p>Map of zero or more intent slots Amazon Lex detected from the user input during the\n      conversation.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>\n      the default is <code>ORIGINAL_VALUE</code>. </p>",
-            "smithy.api#httpHeader": "x-amz-lex-slots"
-          }
-        },
-        "messageFormat": {
-          "target": "com.amazonaws.lexruntimeservice#MessageFormatType",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>",
-            "smithy.api#httpHeader": "x-amz-lex-message-format"
+            "smithy.api#documentation": "<p>Content type as specified in the <code>Accept</code> HTTP header in the request.</p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         },
         "intentName": {
@@ -1217,11 +1314,11 @@
             "smithy.api#httpHeader": "x-amz-lex-intent-name"
           }
         },
-        "sessionId": {
-          "target": "com.amazonaws.lexruntimeservice#String",
+        "messageFormat": {
+          "target": "com.amazonaws.lexruntimeservice#MessageFormatType",
           "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the session.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-session-id"
+            "smithy.api#documentation": "<p>The format of the response message. One of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> - The message contains plain UTF-8 text.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> - The message is a custom format for the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> - The message contains text formatted for voice output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Composite</code> - The message contains an escaped JSON object containing one or\n          more messages from the groups that messages were assigned to when the intent was\n          created.</p>\n            </li>\n         </ul>",
+            "smithy.api#httpHeader": "x-amz-lex-message-format"
           }
         },
         "sessionAttributes": {
@@ -1229,6 +1326,34 @@
           "traits": {
             "smithy.api#documentation": "<p>Map of key/value pairs representing session-specific context information.</p>",
             "smithy.api#httpHeader": "x-amz-lex-session-attributes"
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the session.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-session-id"
+          }
+        },
+        "slotToElicit": {
+          "target": "com.amazonaws.lexruntimeservice#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If the <code>dialogState</code> is <code>ElicitSlot</code>, returns the name of the slot\n      for which Amazon Lex is eliciting a value.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
+          }
+        },
+        "slots": {
+          "target": "com.amazonaws.lexruntimeservice#SynthesizedJsonString",
+          "traits": {
+            "smithy.api#documentation": "<p>Map of zero or more intent slots Amazon Lex detected from the user input during the\n      conversation.</p>\n         <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it\n      returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type\n      was created or updated. If <code>valueSelectionStrategy</code> is set to\n        <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value\n      is similar to the slot values. If <code>valueSelectionStrategy</code> is set to\n        <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if\n      there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>\n      the default is <code>ORIGINAL_VALUE</code>. </p>",
+            "smithy.api#httpHeader": "x-amz-lex-slots"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.lexruntimeservice#Text",
+          "traits": {
+            "smithy.api#documentation": "<p>The next message that should be presented to the user.</p>",
+            "smithy.api#httpHeader": "x-amz-lex-message"
           }
         },
         "dialogState": {
@@ -1243,27 +1368,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The audio version of the message to convey to the user.</p>",
             "smithy.api#httpPayload": {}
-          }
-        },
-        "message": {
-          "target": "com.amazonaws.lexruntimeservice#Text",
-          "traits": {
-            "smithy.api#documentation": "<p>The next message that should be presented to the user.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-message"
-          }
-        },
-        "contentType": {
-          "target": "com.amazonaws.lexruntimeservice#HttpContentType",
-          "traits": {
-            "smithy.api#documentation": "<p>Content type as specified in the <code>Accept</code> HTTP header in the request.</p>",
-            "smithy.api#httpHeader": "Content-Type"
-          }
-        },
-        "slotToElicit": {
-          "target": "com.amazonaws.lexruntimeservice#String",
-          "traits": {
-            "smithy.api#documentation": "<p>If the <code>dialogState</code> is <code>ElicitSlot</code>, returns the name of the slot\n      for which Amazon Lex is eliciting a value.</p>",
-            "smithy.api#httpHeader": "x-amz-lex-slot-to-elicit"
           }
         }
       }
@@ -1284,6 +1388,12 @@
     "com.amazonaws.lexruntimeservice#ResponseCard": {
       "type": "structure",
       "members": {
+        "contentType": {
+          "target": "com.amazonaws.lexruntimeservice#ContentType",
+          "traits": {
+            "smithy.api#documentation": "<p>The content type of the response.</p>"
+          }
+        },
         "version": {
           "target": "com.amazonaws.lexruntimeservice#String",
           "traits": {
@@ -1294,12 +1404,6 @@
           "target": "com.amazonaws.lexruntimeservice#genericAttachmentList",
           "traits": {
             "smithy.api#documentation": "<p>An array of attachment objects representing options.</p>"
-          }
-        },
-        "contentType": {
-          "target": "com.amazonaws.lexruntimeservice#ContentType",
-          "traits": {
-            "smithy.api#documentation": "<p>The content type of the response.</p>"
           }
         }
       },
@@ -1313,16 +1417,16 @@
     "com.amazonaws.lexruntimeservice#SentimentResponse": {
       "type": "structure",
       "members": {
-        "sentimentScore": {
-          "target": "com.amazonaws.lexruntimeservice#SentimentScore",
-          "traits": {
-            "smithy.api#documentation": "<p>The likelihood that the sentiment was correctly inferred.</p>"
-          }
-        },
         "sentimentLabel": {
           "target": "com.amazonaws.lexruntimeservice#SentimentLabel",
           "traits": {
             "smithy.api#documentation": "<p>The inferred sentiment that Amazon Comprehend has the highest confidence in.</p>"
+          }
+        },
+        "sentimentScore": {
+          "target": "com.amazonaws.lexruntimeservice#SentimentScore",
+          "traits": {
+            "smithy.api#documentation": "<p>The likelihood that the sentiment was correctly inferred.</p>"
           }
         }
       },

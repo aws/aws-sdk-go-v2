@@ -58,10 +58,26 @@
     "com.amazonaws.sqs#AddPermissionRequest": {
       "type": "structure",
       "members": {
+        "Actions": {
+          "target": "com.amazonaws.sqs#ActionNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The action the client wants to allow for the specified principal. Valid values: the name of any action or <code>*</code>.</p>\n         <p>For more information about these actions, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html\">Overview of Managing Access Permissions to Your Amazon Simple Queue Service Resource</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <p>Specifying <code>SendMessage</code>, <code>DeleteMessage</code>, or <code>ChangeMessageVisibility</code> for <code>ActionName.n</code> also grants permissions for the corresponding batch versions of those actions: <code>SendMessageBatch</code>,\n        <code>DeleteMessageBatch</code>, and <code>ChangeMessageVisibilityBatch</code>.</p>",
+            "smithy.api#required": {},
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "ActionName"
+          }
+        },
         "Label": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>The unique identification of the permission you're setting (for example, <code>AliceSendMessage</code>). Maximum 80 characters. Allowed characters include alphanumeric characters, hyphens (<code>-</code>), and underscores (<code>_</code>).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue to which permissions are added.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
             "smithy.api#required": {}
           }
         },
@@ -72,22 +88,6 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "AWSAccountId"
-          }
-        },
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue to which permissions are added.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Actions": {
-          "target": "com.amazonaws.sqs#ActionNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The action the client wants to allow for the specified principal. Valid values: the name of any action or <code>*</code>.</p>\n         <p>For more information about these actions, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html\">Overview of Managing Access Permissions to Your Amazon Simple Queue Service Resource</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <p>Specifying <code>SendMessage</code>, <code>DeleteMessage</code>, or <code>ChangeMessageVisibility</code> for <code>ActionName.n</code> also grants permissions for the corresponding batch versions of those actions: <code>SendMessageBatch</code>,\n        <code>DeleteMessageBatch</code>, and <code>ChangeMessageVisibilityBatch</code>.</p>",
-            "smithy.api#required": {},
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "ActionName"
           }
         }
       },
@@ -171,7 +171,7 @@
           "name": "sqs"
         },
         "aws.protocols#awsQuery": {},
-        "smithy.api#documentation": "<p>Welcome to the <i>Amazon Simple Queue Service API Reference</i>.</p>\n        <p>Amazon Simple Queue Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.</p>\n        <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">AWS SDKs</a> to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:</p>\n        <ul>\n            <li>\n                <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n                <p>Retry requests</p>\n            </li>\n            <li>\n                <p>Handle error responses</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Additional Information</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/sqs/\">Amazon SQS Product Page</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Simple Queue Service Developer Guide</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html\">Making API Requests</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Amazon SQS Dead-Letter Queues</a>\n                     </p> \n                  </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html\">Amazon SQS in the <i>AWS CLI Command Reference</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region\">Regions and Endpoints</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Welcome to the <i>Amazon Simple Queue Service API Reference</i>.</p>\n        <p>Amazon Simple Queue Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.</p>\n        <p>For information on the permissions you need to use this API, see\n            <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html\">Identity and\n            access management</a> in the <i>Amazon Simple Queue Service Developer Guide.</i>\n         </p>  \n        <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">AWS SDKs</a> to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:</p>\n        <ul>\n            <li>\n                <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n                <p>Retry requests</p>\n            </li>\n            <li>\n                <p>Handle error responses</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Additional Information</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/sqs/\">Amazon SQS Product Page</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Simple Queue Service Developer Guide</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html\">Making API Requests</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Amazon SQS Dead-Letter Queues</a>\n                     </p> \n                  </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html\">Amazon SQS in the <i>AWS CLI Command Reference</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region\">Regions and Endpoints</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
         "smithy.api#title": "Amazon Simple Queue Service",
         "smithy.api#xmlNamespace": {
           "uri": "http://queue.amazonaws.com/doc/2012-11-05/"
@@ -205,13 +205,6 @@
     "com.amazonaws.sqs#BatchResultErrorEntry": {
       "type": "structure",
       "members": {
-        "SenderFault": {
-          "target": "com.amazonaws.sqs#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the error happened due to the caller of the batch API action.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Code": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
@@ -219,17 +212,24 @@
             "smithy.api#required": {}
           }
         },
-        "Message": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A message explaining why the action failed on this entry.</p>"
-          }
-        },
         "Id": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>The <code>Id</code> of an entry in a batch request.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "SenderFault": {
+          "target": "com.amazonaws.sqs#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the error happened due to the caller of the batch API action.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message explaining why the action failed on this entry.</p>"
           }
         }
       },
@@ -310,6 +310,13 @@
     "com.amazonaws.sqs#ChangeMessageVisibilityBatchRequest": {
       "type": "structure",
       "members": {
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue whose messages' visibility is changed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Entries": {
           "target": "com.amazonaws.sqs#ChangeMessageVisibilityBatchRequestEntryList",
           "traits": {
@@ -317,13 +324,6 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "ChangeMessageVisibilityBatchRequestEntry"
-          }
-        },
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue whose messages' visibility is changed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -334,13 +334,6 @@
     "com.amazonaws.sqs#ChangeMessageVisibilityBatchRequestEntry": {
       "type": "structure",
       "members": {
-        "ReceiptHandle": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A receipt handle.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "VisibilityTimeout": {
           "target": "com.amazonaws.sqs#Integer",
           "traits": {
@@ -351,6 +344,13 @@
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>An identifier for this particular receipt handle used to communicate the result.</p>\n         <note>\n            <p>The <code>Id</code>s of a batch request need to be unique within a request.</p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_).</p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "ReceiptHandle": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A receipt handle.</p>",
             "smithy.api#required": {}
           }
         }
@@ -415,24 +415,24 @@
     "com.amazonaws.sqs#ChangeMessageVisibilityRequest": {
       "type": "structure",
       "members": {
-        "ReceiptHandle": {
+        "QueueUrl": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The receipt handle associated with the message whose visibility timeout is changed. This parameter is returned by the <code>\n               <a>ReceiveMessage</a>\n            </code> action.</p>",
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue whose message's visibility is changed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
             "smithy.api#required": {}
           }
         },
         "VisibilityTimeout": {
           "target": "com.amazonaws.sqs#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The new value for the message's visibility timeout (in seconds). Values values: <code>0</code> to <code>43200</code>. Maximum: 12 hours.</p>",
+            "smithy.api#documentation": "<p>The new value for the message's visibility timeout (in seconds). Values range: <code>0</code> to <code>43200</code>. Maximum: 12 hours.</p>",
             "smithy.api#required": {}
           }
         },
-        "QueueUrl": {
+        "ReceiptHandle": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue whose message's visibility is changed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
+            "smithy.api#documentation": "<p>The receipt handle associated with the message whose visibility timeout is changed. This parameter is returned by the <code>\n               <a>ReceiveMessage</a>\n            </code> action.</p>",
             "smithy.api#required": {}
           }
         }
@@ -549,6 +549,13 @@
     "com.amazonaws.sqs#DeleteMessageBatchRequest": {
       "type": "structure",
       "members": {
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which messages are deleted.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Entries": {
           "target": "com.amazonaws.sqs#DeleteMessageBatchRequestEntryList",
           "traits": {
@@ -556,13 +563,6 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "DeleteMessageBatchRequestEntry"
-          }
-        },
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which messages are deleted.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -573,17 +573,17 @@
     "com.amazonaws.sqs#DeleteMessageBatchRequestEntry": {
       "type": "structure",
       "members": {
-        "Id": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An identifier for this particular receipt handle. This is used to communicate the result.</p>\n         <note>\n            <p>The <code>Id</code>s of a batch request need to be unique within a request.</p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_).</p>\n         </note>",
-            "smithy.api#required": {}
-          }
-        },
         "ReceiptHandle": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>A receipt handle.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier for this particular receipt handle. This is used to communicate the result.</p>\n         <note>\n            <p>The <code>Id</code>s of a batch request need to be unique within a request.</p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_).</p>\n         </note>",
             "smithy.api#required": {}
           }
         }
@@ -601,15 +601,6 @@
     "com.amazonaws.sqs#DeleteMessageBatchResult": {
       "type": "structure",
       "members": {
-        "Failed": {
-          "target": "com.amazonaws.sqs#BatchResultErrorEntryList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of <code>\n               <a>BatchResultErrorEntry</a>\n            </code> items.</p>",
-            "smithy.api#required": {},
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "BatchResultErrorEntry"
-          }
-        },
         "Successful": {
           "target": "com.amazonaws.sqs#DeleteMessageBatchResultEntryList",
           "traits": {
@@ -617,6 +608,15 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "DeleteMessageBatchResultEntry"
+          }
+        },
+        "Failed": {
+          "target": "com.amazonaws.sqs#BatchResultErrorEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of <code>\n               <a>BatchResultErrorEntry</a>\n            </code> items.</p>",
+            "smithy.api#required": {},
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "BatchResultErrorEntry"
           }
         }
       },
@@ -858,7 +858,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of your queues that have the <code>RedrivePolicy</code> queue attribute configured with a dead-letter queue.</p>\n    \n      \n         <p>For more information about using dead-letter queues, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Using Amazon SQS Dead-Letter Queues</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+        "smithy.api#documentation": "<p>Returns a list of your queues that have the <code>RedrivePolicy</code> queue attribute configured with a dead-letter queue.</p>   \n         <p> The <code>ListDeadLetterSourceQueues</code> methods supports\n          pagination. Set parameter <code>MaxResults</code> in the request to specify the maximum number of\n          results to be returned in the response. If you do not set <code>MaxResults</code>,\n          the response includes a maximum of 1,000 results. If you set <code>MaxResults</code> and there are additional results to\n          display, the response includes a value for <code>NextToken</code>. Use\n          <code>NextToken</code> as a parameter in your next request to\n          <code>ListDeadLetterSourceQueues</code> to receive the next page of results.   </p> \n      \n         <p>For more information about using dead-letter queues, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Using Amazon SQS Dead-Letter Queues</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
         "smithy.api#paginated": {
           "inputToken": "NextToken",
           "outputToken": "NextToken",
@@ -877,16 +877,16 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.sqs#BoxedInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>Maximum number of results to include in the response.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.sqs#Token",
           "traits": {
             "smithy.api#documentation": "<p>Pagination token to request the next set of results.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.sqs#BoxedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of results to include in the response. Value range is 1 to 1000. \n          You must set <code>MaxResults</code> to receive a value for <code>NextToken</code> in the response.</p>"
           }
         }
       },
@@ -897,12 +897,6 @@
     "com.amazonaws.sqs#ListDeadLetterSourceQueuesResult": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sqs#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>Pagination token to include in the next request.</p>"
-          }
-        },
         "queueUrls": {
           "target": "com.amazonaws.sqs#QueueUrlList",
           "traits": {
@@ -910,6 +904,12 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "QueueUrl"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sqs#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token to include in the next request. Token value is <code>null</code> if there are no additional\n          results to request, or if you did not set <code>MaxResults</code> in the request.</p>"
           }
         }
       },
@@ -963,28 +963,34 @@
         "target": "com.amazonaws.sqs#ListQueuesResult"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Returns a list of your queues. The maximum number of queues that can be returned is 1,000. If you specify a value for the optional \n          <code>QueueNamePrefix</code> parameter, only queues with a name that begins with the specified value are returned.</p>\n         <note>\n            <p>Cross-account permissions don't apply to this action. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name\">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         </note>"
+        "smithy.api#documentation": "<p>Returns a list of your queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional \n          <code>QueueNamePrefix</code> parameter, only queues with a name that begins with the specified value are returned.</p>\n         <p> The <code>listQueues</code> methods supports\n          pagination. Set parameter <code>MaxResults</code> in the request to specify the maximum number of\n          results to be returned in the response. If you do not set <code>MaxResults</code>,\n          the response includes a maximum of 1,000 results. If you set <code>MaxResults</code> and there are additional results to\n          display, the response includes a value for <code>NextToken</code>. Use\n          <code>NextToken</code> as a parameter in your next request to\n          <code>listQueues</code> to receive the next page of results.  </p>\n         <note>\n            <p>Cross-account permissions don't apply to this action. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name\">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         </note>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "QueueUrls",
+          "pageSize": "MaxResults"
+        }
       }
     },
     "com.amazonaws.sqs#ListQueuesRequest": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.sqs#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>Pagination token to request the next set of results.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.sqs#BoxedInteger",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum number of results to include in the response.</p>"
+            "smithy.api#documentation": "<p>Maximum number of results to include in the response. Value range is 1 to 1000. \n          You must set <code>MaxResults</code> to receive a value for <code>NextToken</code> in the response.</p>"
           }
         },
         "QueueNamePrefix": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>A string to use for filtering the list results. Only those queues whose name begins with the specified string are returned.</p>\n         <p>Queue URLs and names are case-sensitive.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.sqs#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token to request the next set of results.</p>"
           }
         }
       },
@@ -998,7 +1004,7 @@
         "NextToken": {
           "target": "com.amazonaws.sqs#Token",
           "traits": {
-            "smithy.api#documentation": "<p>Pagination token to include in the next request.</p>"
+            "smithy.api#documentation": "<p>Pagination token to include in the next request. Token value is <code>null</code> if there are no additional\n        results to request, or if you did not set <code>MaxResults</code> in the request.</p>"
           }
         },
         "QueueUrls": {
@@ -1017,12 +1023,10 @@
     "com.amazonaws.sqs#Message": {
       "type": "structure",
       "members": {
-        "MessageAttributes": {
-          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+        "MD5OfBody": {
+          "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "MessageAttribute"
+            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message body string.</p>"
           }
         },
         "MD5OfMessageAttributes": {
@@ -1051,16 +1055,18 @@
             "smithy.api#documentation": "<p>A unique identifier for the message. A <code>MessageId</code>is considered unique across all AWS accounts for an extended period of time.</p>"
           }
         },
-        "MD5OfBody": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message body string.</p>"
-          }
-        },
         "Body": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>The message's contents (not URL-encoded).</p>"
+          }
+        },
+        "MessageAttributes": {
+          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "MessageAttribute"
           }
         }
       },
@@ -1080,18 +1086,6 @@
     "com.amazonaws.sqs#MessageAttributeValue": {
       "type": "structure",
       "members": {
-        "StringValue": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Strings are Unicode with UTF-8 binary encoding. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable Characters</a>.</p>"
-          }
-        },
-        "BinaryValue": {
-          "target": "com.amazonaws.sqs#Binary",
-          "traits": {
-            "smithy.api#documentation": "<p>Binary type attributes can store any binary data, such as compressed data, encrypted data, or images.</p>"
-          }
-        },
         "BinaryListValues": {
           "target": "com.amazonaws.sqs#BinaryList",
           "traits": {
@@ -1111,8 +1105,20 @@
         "DataType": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "BinaryValue": {
+          "target": "com.amazonaws.sqs#Binary",
+          "traits": {
+            "smithy.api#documentation": "<p>Binary type attributes can store any binary data, such as compressed data, encrypted data, or images.</p>"
+          }
+        },
+        "StringValue": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Strings are Unicode with UTF-8 binary encoding. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable Characters</a>.</p>"
           }
         }
       },
@@ -1224,6 +1230,19 @@
     "com.amazonaws.sqs#MessageSystemAttributeValue": {
       "type": "structure",
       "members": {
+        "DataType": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "StringValue": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Strings are Unicode with UTF-8 binary encoding. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable Characters</a>.</p>"
+          }
+        },
         "BinaryListValues": {
           "target": "com.amazonaws.sqs#BinaryList",
           "traits": {
@@ -1240,23 +1259,10 @@
             "smithy.api#xmlName": "StringListValue"
           }
         },
-        "DataType": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "BinaryValue": {
           "target": "com.amazonaws.sqs#Binary",
           "traits": {
             "smithy.api#documentation": "<p>Binary type attributes can store any binary data, such as compressed data, encrypted data, or images.</p>"
-          }
-        },
-        "StringValue": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Strings are Unicode with UTF-8 binary encoding. For a list of code values, see <a href=\"http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable Characters</a>.</p>"
           }
         }
       },
@@ -1451,41 +1457,6 @@
     "com.amazonaws.sqs#ReceiveMessageRequest": {
       "type": "structure",
       "members": {
-        "MessageAttributeNames": {
-          "target": "com.amazonaws.sqs#MessageAttributeNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the message attribute, where <i>N</i> is the index.</p>\n         <ul>\n            <li>\n               <p>The name can contain alphanumeric characters and the underscore (<code>_</code>), hyphen (<code>-</code>), and period (<code>.</code>).</p>\n            </li>\n            <li>\n               <p>The name is case-sensitive and must be unique among all attribute names for the message.</p>\n            </li>\n            <li>\n               <p>The name must not start with AWS-reserved prefixes such as <code>AWS.</code> or <code>Amazon.</code> (or any casing variants).</p>\n            </li>\n            <li>\n               <p>The name must not start or end with a period (<code>.</code>), and it should not have periods in succession (<code>..</code>).</p>\n            </li>\n            <li>\n               <p>The name can be up to 256 characters long.</p>\n            </li>\n         </ul>\n          \n         <p>When using <code>ReceiveMessage</code>, you can send a list of attribute names to receive, or you can return all of the attributes by specifying <code>All</code> or <code>.*</code> in your request. \n          You can also use all message attributes starting with a prefix, for example <code>bar.*</code>.</p>",
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "MessageAttributeName"
-          }
-        },
-        "WaitTimeSeconds": {
-          "target": "com.amazonaws.sqs#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than <code>WaitTimeSeconds</code>.\n          If no messages are available and the wait time expires, the call returns successfully with an empty list of messages.</p>\n         <important>\n            <p>To avoid HTTP errors, ensure that the HTTP response timeout for <code>ReceiveMessage</code>\n                requests is longer than the <code>WaitTimeSeconds</code> parameter. For example,\n                with the Java SDK, you can set HTTP transport settings using the <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html\"> NettyNioAsyncHttpClient</a> for asynchronous clients, or the <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html\"> ApacheHttpClient</a> for synchronous clients. </p>\n         </important>"
-          }
-        },
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which messages are received.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AttributeNames": {
-          "target": "com.amazonaws.sqs#AttributeNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of attributes that need to be returned along with each message. These attributes\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>All</code> – Returns all values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateFirstReceiveTimestamp</code> – Returns the time the message was first received from the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateReceiveCount</code> – Returns the number of times a message has been received across all queues but not deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWSTraceHeader</code> – Returns the AWS X-Ray trace header string.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>SenderId</code>\n               </p>\n               <ul>\n                  <li>\n                       <p>For an IAM user, returns the IAM user ID, for example <code>ABCDEFGHI1JKLMNOPQ23R</code>.</p>\n                   </li>\n                  <li>\n                       <p>For an IAM role, returns the IAM role ID, for example <code>ABCDE1F2GH3I4JK5LMNOP:i-a123b456</code>.</p>\n                   </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>SentTimestamp</code> – Returns the time the message was sent to the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageDeduplicationId</code> – Returns the value provided by the\n                    producer that calls the <code>\n                     <a>SendMessage</a>\n                  </code>\n                    action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageGroupId</code> – Returns the value provided by the producer that\n                    calls the <code>\n                     <a>SendMessage</a>\n                  </code> action. Messages with the\n                    same <code>MessageGroupId</code> are returned in sequence.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SequenceNumber</code> – Returns the value provided by Amazon SQS.</p>\n            </li>\n         </ul>",
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "AttributeName"
-          }
-        },
-        "MaxNumberOfMessages": {
-          "target": "com.amazonaws.sqs#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of messages to return. Amazon SQS never returns more messages than this value (however, fewer messages might be returned). Valid values: 1 to 10. Default: 1.</p>"
-          }
-        },
         "VisibilityTimeout": {
           "target": "com.amazonaws.sqs#Integer",
           "traits": {
@@ -1496,6 +1467,41 @@
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The token used for deduplication of <code>ReceiveMessage</code> calls. If a networking issue occurs after a <code>ReceiveMessage</code> action, and instead of a response you receive a generic error, \n          it is possible to retry the same action with an identical <code>ReceiveRequestAttemptId</code> to retrieve the same set of messages, even if their visibility timeout has not yet expired.</p>\n         <ul>\n            <li>\n               <p>You can use <code>ReceiveRequestAttemptId</code> only for 5 minutes after a <code>ReceiveMessage</code> action.</p>\n            </li>\n            <li>\n               <p>When you set <code>FifoQueue</code>, a caller of the <code>ReceiveMessage</code> action can provide a <code>ReceiveRequestAttemptId</code> explicitly.</p>\n            </li>\n            <li>\n               <p>If a caller of the <code>ReceiveMessage</code> action doesn't provide a <code>ReceiveRequestAttemptId</code>, Amazon SQS generates a <code>ReceiveRequestAttemptId</code>.</p>\n            </li>\n            <li>\n               <p>It is possible to retry the <code>ReceiveMessage</code> action with the same <code>ReceiveRequestAttemptId</code> if none of the messages have been modified (deleted or had their visibility changes).</p>\n            </li>\n            <li>\n               <p>During a visibility timeout, subsequent calls with the same <code>ReceiveRequestAttemptId</code> return the same messages and receipt handles. If a retry occurs within the deduplication interval, \n              it resets the visibility timeout. For more information, see\n              <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html\">Visibility Timeout</a>\n              in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n              <important>\n                  <p>If a caller of the <code>ReceiveMessage</code> action still processes\n                        messages when the visibility timeout expires and messages become visible,\n                        another worker consuming from the same queue can receive the same messages\n                        and therefore process duplicates. Also, if a consumer whose message\n                        processing time is longer than the visibility timeout tries to delete the\n                        processed messages, the action fails with an error.</p>\n                  <p>To mitigate this effect, ensure that your application observes a safe threshold before the visibility timeout expires and extend the visibility timeout as necessary.</p>\n              </important>\n            </li>\n            <li>\n               <p>While messages with a particular <code>MessageGroupId</code> are invisible, no more messages belonging to the same <code>MessageGroupId</code> are returned until the visibility timeout expires. You can still receive\n              messages with another <code>MessageGroupId</code> as long as it is also visible.</p>\n            </li>\n            <li>\n               <p>If a caller of <code>ReceiveMessage</code> can't track the <code>ReceiveRequestAttemptId</code>, no retries work until the original visibility timeout expires. As a result, delays might occur but\n              the messages in the queue remain in a strict order.</p>\n            </li>\n         </ul>\n         <p>The maximum length of <code>ReceiveRequestAttemptId</code> is 128 characters. <code>ReceiveRequestAttemptId</code> can contain alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) and \n          punctuation (<code>!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~</code>).</p>\n         <p>For best practices of using <code>ReceiveRequestAttemptId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html\">Using the ReceiveRequestAttemptId Request Parameter</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>"
+          }
+        },
+        "MaxNumberOfMessages": {
+          "target": "com.amazonaws.sqs#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of messages to return. Amazon SQS never returns more messages than this value (however, fewer messages might be returned). Valid values: 1 to 10. Default: 1.</p>"
+          }
+        },
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which messages are received.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WaitTimeSeconds": {
+          "target": "com.amazonaws.sqs#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than <code>WaitTimeSeconds</code>.\n          If no messages are available and the wait time expires, the call returns successfully with an empty list of messages.</p>\n         <important>\n            <p>To avoid HTTP errors, ensure that the HTTP response timeout for <code>ReceiveMessage</code>\n                requests is longer than the <code>WaitTimeSeconds</code> parameter. For example,\n                with the Java SDK, you can set HTTP transport settings using the <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html\"> NettyNioAsyncHttpClient</a> for asynchronous clients, or the <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html\"> ApacheHttpClient</a> for synchronous clients. </p>\n         </important>"
+          }
+        },
+        "AttributeNames": {
+          "target": "com.amazonaws.sqs#AttributeNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of attributes that need to be returned along with each message. These attributes\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>All</code> – Returns all values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateFirstReceiveTimestamp</code> – Returns the time the message was first received from the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateReceiveCount</code> – Returns the number of times a message has been received across all queues but not deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWSTraceHeader</code> – Returns the AWS X-Ray trace header string.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>SenderId</code>\n               </p>\n               <ul>\n                  <li>\n                       <p>For an IAM user, returns the IAM user ID, for example <code>ABCDEFGHI1JKLMNOPQ23R</code>.</p>\n                   </li>\n                  <li>\n                       <p>For an IAM role, returns the IAM role ID, for example <code>ABCDE1F2GH3I4JK5LMNOP:i-a123b456</code>.</p>\n                   </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>SentTimestamp</code> – Returns the time the message was sent to the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageDeduplicationId</code> – Returns the value provided by the\n                    producer that calls the <code>\n                     <a>SendMessage</a>\n                  </code>\n                    action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageGroupId</code> – Returns the value provided by the producer that\n                    calls the <code>\n                     <a>SendMessage</a>\n                  </code> action. Messages with the\n                    same <code>MessageGroupId</code> are returned in sequence.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SequenceNumber</code> – Returns the value provided by Amazon SQS.</p>\n            </li>\n         </ul>",
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "AttributeName"
+          }
+        },
+        "MessageAttributeNames": {
+          "target": "com.amazonaws.sqs#MessageAttributeNameList",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the message attribute, where <i>N</i> is the index.</p>\n         <ul>\n            <li>\n               <p>The name can contain alphanumeric characters and the underscore (<code>_</code>), hyphen (<code>-</code>), and period (<code>.</code>).</p>\n            </li>\n            <li>\n               <p>The name is case-sensitive and must be unique among all attribute names for the message.</p>\n            </li>\n            <li>\n               <p>The name must not start with AWS-reserved prefixes such as <code>AWS.</code> or <code>Amazon.</code> (or any casing variants).</p>\n            </li>\n            <li>\n               <p>The name must not start or end with a period (<code>.</code>), and it should not have periods in succession (<code>..</code>).</p>\n            </li>\n            <li>\n               <p>The name can be up to 256 characters long.</p>\n            </li>\n         </ul>\n          \n         <p>When using <code>ReceiveMessage</code>, you can send a list of attribute names to receive, or you can return all of the attributes by specifying <code>All</code> or <code>.*</code> in your request. \n          You can also use all message attributes starting with a prefix, for example <code>bar.*</code>.</p>",
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "MessageAttributeName"
           }
         }
       },
@@ -1531,17 +1537,17 @@
     "com.amazonaws.sqs#RemovePermissionRequest": {
       "type": "structure",
       "members": {
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which permissions are removed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Label": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>The identification of the permission to remove. This is the label added using the <code>\n               <a>AddPermission</a>\n            </code> action.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the Amazon SQS queue from which permissions are removed.</p>\n         <p>Queue URLs and names are case-sensitive.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1629,10 +1635,10 @@
     "com.amazonaws.sqs#SendMessageBatchRequestEntry": {
       "type": "structure",
       "members": {
-        "MessageBody": {
+        "Id": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The body of the message.</p>",
+            "smithy.api#documentation": "<p>An identifier for a message in this batch used to communicate the result.</p>\n         <note>\n            <p>The <code>Id</code>s of a batch request need to be unique within a request.</p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_).</p>\n         </note>",
             "smithy.api#required": {}
           }
         },
@@ -1642,19 +1648,10 @@
             "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The token used for deduplication of messages within a 5-minute minimum deduplication interval. If a message with a particular \n          <code>MessageDeduplicationId</code> is sent successfully, subsequent messages with the same <code>MessageDeduplicationId</code> are \n          accepted successfully but aren't delivered. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing\">\n          Exactly-Once Processing</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n              <p>Every message must have a unique <code>MessageDeduplicationId</code>,</p>\n              <ul>\n                  <li>\n                      <p>You may provide a <code>MessageDeduplicationId</code> explicitly.</p>\n                  </li>\n                  <li>\n                      <p>If you aren't able to provide a <code>MessageDeduplicationId</code> and you enable <code>ContentBasedDeduplication</code> for your queue, \n                          Amazon SQS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).\n                      </p>\n                  </li>\n                  <li>\n                      <p>If you don't provide a <code>MessageDeduplicationId</code> and the queue doesn't have <code>ContentBasedDeduplication</code> set,\n                          the action fails with an error.</p>\n                  </li>\n                  <li>\n                      <p>If the queue has <code>ContentBasedDeduplication</code> set, your <code>MessageDeduplicationId</code> overrides the generated one.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n              <p>When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent within the deduplication interval are treated as duplicates \n                  and only one copy of the message is delivered.</p>\n            </li>\n            <li>\n              <p>If you send one message with <code>ContentBasedDeduplication</code> enabled and then another message with a <code>MessageDeduplicationId</code> that is the same \n                  as the one generated for the first <code>MessageDeduplicationId</code>, the two messages are treated as duplicates and only one copy of the message is delivered.\n              </p>\n            </li>\n         </ul> \n         <note>\n            <p>The <code>MessageDeduplicationId</code> is available to the consumer of the\n                message (this can be useful for troubleshooting delivery issues).</p>\n            <p>If a message is sent successfully but the acknowledgement is lost and the message is resent with the same \n              <code>MessageDeduplicationId</code> after the deduplication interval, Amazon SQS can't detect duplicate messages.</p>\n            <p>Amazon SQS continues to keep track of the message deduplication ID even after the message is received and deleted.</p>\n         </note>\n         <p>The length of <code>MessageDeduplicationId</code> is 128 characters. <code>MessageDeduplicationId</code> can contain alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) and \n          punctuation (<code>!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~</code>).</p>\n         <p>For best practices of using <code>MessageDeduplicationId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the MessageDeduplicationId Property</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>"
           }
         },
-        "MessageAttributes": {
-          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+        "DelaySeconds": {
+          "target": "com.amazonaws.sqs#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "MessageAttribute"
-          }
-        },
-        "Id": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An identifier for a message in this batch used to communicate the result.</p>\n         <note>\n            <p>The <code>Id</code>s of a batch request need to be unique within a request.</p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_).</p>\n         </note>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The length of time, in seconds, for which a specific message is delayed. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive <code>DelaySeconds</code> value become available for processing after the delay period is finished.\n          If you don't specify a value, the default value for the queue is applied.\n      </p>      \n         <note>\n            <p>When you set <code>FifoQueue</code>, you can't set <code>DelaySeconds</code> per message. You can set this parameter only on a queue level.</p>\n         </note>"
           }
         },
         "MessageGroupId": {
@@ -1671,10 +1668,19 @@
             "smithy.api#xmlName": "MessageSystemAttribute"
           }
         },
-        "DelaySeconds": {
-          "target": "com.amazonaws.sqs#Integer",
+        "MessageBody": {
+          "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The length of time, in seconds, for which a specific message is delayed. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive <code>DelaySeconds</code> value become available for processing after the delay period is finished.\n          If you don't specify a value, the default value for the queue is applied.\n      </p>      \n         <note>\n            <p>When you set <code>FifoQueue</code>, you can't set <code>DelaySeconds</code> per message. You can set this parameter only on a queue level.</p>\n         </note>"
+            "smithy.api#documentation": "<p>The body of the message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MessageAttributes": {
+          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "MessageAttribute"
           }
         }
       },
@@ -1717,23 +1723,23 @@
     "com.amazonaws.sqs#SendMessageBatchResultEntry": {
       "type": "structure",
       "members": {
-        "Id": {
+        "MessageId": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier for the message in this batch.</p>",
+            "smithy.api#documentation": "<p>An identifier for the message.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "MD5OfMessageSystemAttributes": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message system attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see <a href=\"https://www.ietf.org/rfc/rfc1321.txt\">RFC1321</a>.</p>"
           }
         },
         "MD5OfMessageAttributes": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see <a href=\"https://www.ietf.org/rfc/rfc1321.txt\">RFC1321</a>.</p>"
+          }
+        },
+        "MD5OfMessageSystemAttributes": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message system attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see <a href=\"https://www.ietf.org/rfc/rfc1321.txt\">RFC1321</a>.</p>"
           }
         },
         "MD5OfMessageBody": {
@@ -1743,17 +1749,17 @@
             "smithy.api#required": {}
           }
         },
+        "Id": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier for the message in this batch.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "SequenceNumber": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The large, non-consecutive number that Amazon SQS assigns to each message.</p>\n         <p>The length of <code>SequenceNumber</code> is 128 bits. As <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>"
-          }
-        },
-        "MessageId": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An identifier for the message.</p>",
-            "smithy.api#required": {}
           }
         }
       },
@@ -1770,30 +1776,12 @@
     "com.amazonaws.sqs#SendMessageRequest": {
       "type": "structure",
       "members": {
-        "MessageAttributes": {
-          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+        "MessageSystemAttributes": {
+          "target": "com.amazonaws.sqs#MessageBodySystemAttributeMap",
           "traits": {
-            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#documentation": "<p>The message system attribute to send. Each message system attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Currently, the only supported message system attribute is <code>AWSTraceHeader</code>.\n                    Its type must be <code>String</code> and its value must be a correctly formatted\n                    AWS X-Ray trace header string.</p>\n              </li>\n               <li>\n                  <p>The size of a message system attribute doesn't count towards the total size of a message.</p>\n              </li>\n            </ul>\n         </important>",
             "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "MessageAttribute"
-          }
-        },
-        "MessageGroupId": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The tag that specifies that a message belongs to a specific message group. Messages\n            that belong to the same message group are processed in a FIFO manner (however,\n            messages in different message groups might be processed out of order). To interleave\n            multiple ordered streams within a single queue, use <code>MessageGroupId</code> values\n            (for example, session data for multiple users). In this scenario, multiple consumers can\n            process the queue, but the session data of each user is processed in a FIFO\n            fashion.</p>\n         <ul>\n            <li>\n               <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don't provide a <code>MessageGroupId</code>, the action fails.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReceiveMessage</code> might return messages with multiple <code>MessageGroupId</code> values. For each <code>MessageGroupId</code>, the messages are sorted by time sent. The caller can't \n              specify a <code>MessageGroupId</code>.</p>\n            </li>\n         </ul>\n         <p>The length of <code>MessageGroupId</code> is 128 characters. Valid values: alphanumeric characters and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n         <p>For best practices of using <code>MessageGroupId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html\">Using the MessageGroupId Property</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <important>\n            <p>\n               <code>MessageGroupId</code> is required for FIFO queues. You can't use it for Standard queues.</p>\n         </important>"
-          }
-        },
-        "MessageDeduplicationId": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The token used for deduplication of sent messages. If a message with a particular <code>MessageDeduplicationId</code> is sent successfully, any messages sent with the same <code>MessageDeduplicationId</code> \n          are accepted successfully but aren't delivered during the 5-minute deduplication interval. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing\">\n          Exactly-Once Processing</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n              <p>Every message must have a unique <code>MessageDeduplicationId</code>,</p>\n              <ul>\n                  <li>\n                      <p>You may provide a <code>MessageDeduplicationId</code> explicitly.</p>\n                  </li>\n                  <li>\n                      <p>If you aren't able to provide a <code>MessageDeduplicationId</code> and you enable <code>ContentBasedDeduplication</code> for your queue, \n                          Amazon SQS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).\n                      </p>\n                  </li>\n                  <li>\n                      <p>If you don't provide a <code>MessageDeduplicationId</code> and the queue doesn't have <code>ContentBasedDeduplication</code> set,\n                          the action fails with an error.</p>\n                  </li>\n                  <li>\n                      <p>If the queue has <code>ContentBasedDeduplication</code> set, your <code>MessageDeduplicationId</code> overrides the generated one.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n              <p>When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent within the deduplication interval are treated as duplicates \n                  and only one copy of the message is delivered.</p>\n            </li>\n            <li>\n              <p>If you send one message with <code>ContentBasedDeduplication</code> enabled and then another message with a <code>MessageDeduplicationId</code> that is the same \n                  as the one generated for the first <code>MessageDeduplicationId</code>, the two messages are treated as duplicates and only one copy of the message is delivered.\n              </p>\n            </li>\n         </ul> \n         <note>\n            <p>The <code>MessageDeduplicationId</code> is available to the consumer of the\n                message (this can be useful for troubleshooting delivery issues).</p>\n            <p>If a message is sent successfully but the acknowledgement is lost and the message is resent with the same \n              <code>MessageDeduplicationId</code> after the deduplication interval, Amazon SQS can't detect duplicate messages.</p>\n            <p>Amazon SQS continues to keep track of the message deduplication ID even after the message is received and deleted.</p>\n         </note>\n         <p>The maximum length of <code>MessageDeduplicationId</code> is 128 characters. <code>MessageDeduplicationId</code> can contain alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) and \n          punctuation (<code>!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~</code>).</p>\n         <p>For best practices of using <code>MessageDeduplicationId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the MessageDeduplicationId Property</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>"
-          }
-        },
-        "DelaySeconds": {
-          "target": "com.amazonaws.sqs#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>\n          The length of time, in seconds, for which to delay a specific message. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive <code>DelaySeconds</code> value become available for processing after the delay period is finished.\n          If you don't specify a value, the default value for the queue applies.\n    </p>\n         <note>\n            <p>When you set <code>FifoQueue</code>, you can't set <code>DelaySeconds</code> per message. You can set this parameter only on a queue level.</p>\n         </note>"
+            "smithy.api#xmlName": "MessageSystemAttribute"
           }
         },
         "QueueUrl": {
@@ -1803,19 +1791,37 @@
             "smithy.api#required": {}
           }
         },
-        "MessageSystemAttributes": {
-          "target": "com.amazonaws.sqs#MessageBodySystemAttributeMap",
+        "DelaySeconds": {
+          "target": "com.amazonaws.sqs#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>The message system attribute to send. Each message system attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Currently, the only supported message system attribute is <code>AWSTraceHeader</code>.\n                    Its type must be <code>String</code> and its value must be a correctly formatted\n                    AWS X-Ray trace header string.</p>\n              </li>\n               <li>\n                  <p>The size of a message system attribute doesn't count towards the total size of a message.</p>\n              </li>\n            </ul>\n         </important>",
-            "smithy.api#xmlFlattened": {},
-            "smithy.api#xmlName": "MessageSystemAttribute"
+            "smithy.api#documentation": "<p>\n          The length of time, in seconds, for which to delay a specific message. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive <code>DelaySeconds</code> value become available for processing after the delay period is finished.\n          If you don't specify a value, the default value for the queue applies.\n    </p>\n         <note>\n            <p>When you set <code>FifoQueue</code>, you can't set <code>DelaySeconds</code> per message. You can set this parameter only on a queue level.</p>\n         </note>"
           }
         },
         "MessageBody": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
-            "smithy.api#documentation": "<p>The message to send. The maximum string size is 256 KB.</p>\n         <important>\n           <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p>\n           <p>\n               <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code>\n            </p>\n\t           <p>Any characters not included in this list will be rejected. For more information, see the <a href=\"http://www.w3.org/TR/REC-xml/#charsets\">W3C specification for characters</a>.</p>\n         </important>",
+            "smithy.api#documentation": "<p>The message to send. The minimum size is one character. The maximum size is 256 KB.</p>\n         <important>\n           <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p>\n           <p>\n               <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code>\n            </p>\n\t           <p>Any characters not included in this list will be rejected. For more information, see the <a href=\"http://www.w3.org/TR/REC-xml/#charsets\">W3C specification for characters</a>.</p>\n         </important>",
             "smithy.api#required": {}
+          }
+        },
+        "MessageAttributes": {
+          "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+            "smithy.api#xmlFlattened": {},
+            "smithy.api#xmlName": "MessageAttribute"
+          }
+        },
+        "MessageDeduplicationId": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The token used for deduplication of sent messages. If a message with a particular <code>MessageDeduplicationId</code> is sent successfully, any messages sent with the same <code>MessageDeduplicationId</code> \n          are accepted successfully but aren't delivered during the 5-minute deduplication interval. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing\">\n          Exactly-Once Processing</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n              <p>Every message must have a unique <code>MessageDeduplicationId</code>,</p>\n              <ul>\n                  <li>\n                      <p>You may provide a <code>MessageDeduplicationId</code> explicitly.</p>\n                  </li>\n                  <li>\n                      <p>If you aren't able to provide a <code>MessageDeduplicationId</code> and you enable <code>ContentBasedDeduplication</code> for your queue, \n                          Amazon SQS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).\n                      </p>\n                  </li>\n                  <li>\n                      <p>If you don't provide a <code>MessageDeduplicationId</code> and the queue doesn't have <code>ContentBasedDeduplication</code> set,\n                          the action fails with an error.</p>\n                  </li>\n                  <li>\n                      <p>If the queue has <code>ContentBasedDeduplication</code> set, your <code>MessageDeduplicationId</code> overrides the generated one.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n              <p>When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent within the deduplication interval are treated as duplicates \n                  and only one copy of the message is delivered.</p>\n            </li>\n            <li>\n              <p>If you send one message with <code>ContentBasedDeduplication</code> enabled and then another message with a <code>MessageDeduplicationId</code> that is the same \n                  as the one generated for the first <code>MessageDeduplicationId</code>, the two messages are treated as duplicates and only one copy of the message is delivered.\n              </p>\n            </li>\n         </ul> \n         <note>\n            <p>The <code>MessageDeduplicationId</code> is available to the consumer of the\n                message (this can be useful for troubleshooting delivery issues).</p>\n            <p>If a message is sent successfully but the acknowledgement is lost and the message is resent with the same \n              <code>MessageDeduplicationId</code> after the deduplication interval, Amazon SQS can't detect duplicate messages.</p>\n            <p>Amazon SQS continues to keep track of the message deduplication ID even after the message is received and deleted.</p>\n         </note>\n         <p>The maximum length of <code>MessageDeduplicationId</code> is 128 characters. <code>MessageDeduplicationId</code> can contain alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) and \n          punctuation (<code>!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~</code>).</p>\n         <p>For best practices of using <code>MessageDeduplicationId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the MessageDeduplicationId Property</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>"
+          }
+        },
+        "MessageGroupId": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The tag that specifies that a message belongs to a specific message group. Messages\n            that belong to the same message group are processed in a FIFO manner (however,\n            messages in different message groups might be processed out of order). To interleave\n            multiple ordered streams within a single queue, use <code>MessageGroupId</code> values\n            (for example, session data for multiple users). In this scenario, multiple consumers can\n            process the queue, but the session data of each user is processed in a FIFO\n            fashion.</p>\n         <ul>\n            <li>\n               <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don't provide a <code>MessageGroupId</code>, the action fails.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReceiveMessage</code> might return messages with multiple <code>MessageGroupId</code> values. For each <code>MessageGroupId</code>, the messages are sorted by time sent. The caller can't \n              specify a <code>MessageGroupId</code>.</p>\n            </li>\n         </ul>\n         <p>The length of <code>MessageGroupId</code> is 128 characters. Valid values: alphanumeric characters and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n         <p>For best practices of using <code>MessageGroupId</code>, see\n          <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html\">Using the MessageGroupId Property</a>\n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         <important>\n            <p>\n               <code>MessageGroupId</code> is required for FIFO queues. You can't use it for Standard queues.</p>\n         </important>"
           }
         }
       },
@@ -1826,24 +1832,6 @@
     "com.amazonaws.sqs#SendMessageResult": {
       "type": "structure",
       "members": {
-        "MD5OfMessageSystemAttributes": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message system attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest.</p>"
-          }
-        },
-        "SequenceNumber": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The large, non-consecutive number that Amazon SQS assigns to each message.</p>\n         <p>The length of <code>SequenceNumber</code> is 128 bits. <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>"
-          }
-        },
-        "MD5OfMessageAttributes": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see <a href=\"https://www.ietf.org/rfc/rfc1321.txt\">RFC1321</a>.</p>"
-          }
-        },
         "MD5OfMessageBody": {
           "target": "com.amazonaws.sqs#String",
           "traits": {
@@ -1854,6 +1842,24 @@
           "target": "com.amazonaws.sqs#String",
           "traits": {
             "smithy.api#documentation": "<p>An attribute containing the <code>MessageId</code> of the message sent to the queue. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html\">Queue and Message Identifiers</a>\n            in the <i>Amazon Simple Queue Service Developer Guide</i>.\n    </p>"
+          }
+        },
+        "MD5OfMessageAttributes": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest. For information about MD5, see <a href=\"https://www.ietf.org/rfc/rfc1321.txt\">RFC1321</a>.</p>"
+          }
+        },
+        "MD5OfMessageSystemAttributes": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An MD5 digest of the non-URL-encoded message system attribute string. You can use this attribute to verify that Amazon SQS received the message correctly. Amazon SQS URL-decodes the message before creating the MD5 digest.</p>"
+          }
+        },
+        "SequenceNumber": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) queues.</p>\n         <p>The large, non-consecutive number that Amazon SQS assigns to each message.</p>\n         <p>The length of <code>SequenceNumber</code> is 128 bits. <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>"
           }
         }
       },
@@ -2001,13 +2007,6 @@
     "com.amazonaws.sqs#UntagQueueRequest": {
       "type": "structure",
       "members": {
-        "QueueUrl": {
-          "target": "com.amazonaws.sqs#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL of the queue.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "TagKeys": {
           "target": "com.amazonaws.sqs#TagKeyList",
           "traits": {
@@ -2015,6 +2014,13 @@
             "smithy.api#required": {},
             "smithy.api#xmlFlattened": {},
             "smithy.api#xmlName": "TagKey"
+          }
+        },
+        "QueueUrl": {
+          "target": "com.amazonaws.sqs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of the queue.</p>",
+            "smithy.api#required": {}
           }
         }
       }

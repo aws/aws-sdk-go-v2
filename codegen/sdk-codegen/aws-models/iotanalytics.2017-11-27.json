@@ -173,13 +173,6 @@
     "com.amazonaws.iotanalytics#AddAttributesActivity": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the 'addAttributes' activity.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "attributes": {
           "target": "com.amazonaws.iotanalytics#AttributeNameMapping",
           "traits": {
@@ -191,6 +184,13 @@
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
             "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'addAttributes' activity.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -303,17 +303,17 @@
     "com.amazonaws.iotanalytics#BatchPutMessageRequest": {
       "type": "structure",
       "members": {
-        "messages": {
-          "target": "com.amazonaws.iotanalytics#Messages",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of messages to be sent. Each message has format:\n          '{ \"messageId\": \"string\", \"payload\": \"string\"}'.</p>\n         <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p>\n        <ul>\n            <li>\n               <p>Must contain only alphanumeric characters and undescores (_); no other special \n              characters are allowed.</p>\n            </li>\n            <li>\n               <p>Must begin with an alphabetic character or single underscore (_).</p>\n            </li>\n            <li>\n               <p>Cannot contain hyphens (-).</p>\n            </li>\n            <li>\n               <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\".\n            </p>\n            </li>\n            <li>\n               <p>Cannot be greater than 255 characters.</p>\n            </li>\n            <li>\n               <p>Are case-insensitive. (Fields named \"foo\" and \"FOO\" in the same payload are \n              considered duplicates.)</p>\n            </li>\n         </ul>\n         <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29},\n {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads.  </p>",
-            "smithy.api#required": {}
-          }
-        },
         "channelName": {
           "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the channel where the messages are sent.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "messages": {
+          "target": "com.amazonaws.iotanalytics#Messages",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of messages to be sent. Each message has format:\n          '{ \"messageId\": \"string\", \"payload\": \"string\"}'.</p>\n         <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p>\n        <ul>\n            <li>\n               <p>Must contain only alphanumeric characters and undescores (_); no other special \n              characters are allowed.</p>\n            </li>\n            <li>\n               <p>Must begin with an alphabetic character or single underscore (_).</p>\n            </li>\n            <li>\n               <p>Cannot contain hyphens (-).</p>\n            </li>\n            <li>\n               <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\".\n            </p>\n            </li>\n            <li>\n               <p>Cannot be greater than 255 characters.</p>\n            </li>\n            <li>\n               <p>Are case-insensitive. (Fields named \"foo\" and \"FOO\" in the same payload are \n              considered duplicates.)</p>\n            </li>\n         </ul>\n         <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29},\n {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads.  </p>",
             "smithy.api#required": {}
           }
         }
@@ -412,10 +412,10 @@
     "com.amazonaws.iotanalytics#Channel": {
       "type": "structure",
       "members": {
-        "lastUpdateTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
+        "arn": {
+          "target": "com.amazonaws.iotanalytics#ChannelArn",
           "traits": {
-            "smithy.api#documentation": "<p>When the channel was last updated.</p>"
+            "smithy.api#documentation": "<p>The ARN of the channel.</p>"
           }
         },
         "storage": {
@@ -424,28 +424,28 @@
             "smithy.api#documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation\n        of the channel.</p>"
           }
         },
+        "lastUpdateTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the channel was last updated.</p>"
+          }
+        },
         "name": {
           "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the channel.</p>"
           }
         },
-        "arn": {
-          "target": "com.amazonaws.iotanalytics#ChannelArn",
+        "retentionPeriod": {
+          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+            "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel.</p>"
           }
         },
         "status": {
           "target": "com.amazonaws.iotanalytics#ChannelStatus",
           "traits": {
             "smithy.api#documentation": "<p>The status of the channel.</p>"
-          }
-        },
-        "retentionPeriod": {
-          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
-          "traits": {
-            "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel.</p>"
           }
         },
         "creationTime": {
@@ -462,13 +462,6 @@
     "com.amazonaws.iotanalytics#ChannelActivity": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the 'channel' activity.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "channelName": {
           "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
@@ -480,6 +473,13 @@
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
             "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'channel' activity.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -582,12 +582,6 @@
     "com.amazonaws.iotanalytics#ChannelSummary": {
       "type": "structure",
       "members": {
-        "status": {
-          "target": "com.amazonaws.iotanalytics#ChannelStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the channel.</p>"
-          }
-        },
         "creationTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
@@ -604,6 +598,12 @@
           "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the channel.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotanalytics#ChannelStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the channel.</p>"
           }
         },
         "lastUpdateTime": {
@@ -635,13 +635,6 @@
     "com.amazonaws.iotanalytics#ContainerDatasetAction": {
       "type": "structure",
       "members": {
-        "executionRoleArn": {
-          "target": "com.amazonaws.iotanalytics#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the role which gives permission to the system to access needed resources in order\n          to run the \"containerAction\". This includes, at minimum, permission to retrieve the data set\n          contents which are the input to the containerized application.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "variables": {
           "target": "com.amazonaws.iotanalytics#Variables",
           "traits": {
@@ -659,6 +652,13 @@
           "target": "com.amazonaws.iotanalytics#Image",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the Docker container stored in your account. The Docker container contains an\n          application and needed support libraries and is used to generate data set contents.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "executionRoleArn": {
+          "target": "com.amazonaws.iotanalytics#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the role which gives permission to the system to access needed resources in order\n          to run the \"containerAction\". This includes, at minimum, permission to retrieve the data set\n          contents which are the input to the containerized application.</p>",
             "smithy.api#required": {}
           }
         }
@@ -707,12 +707,6 @@
     "com.amazonaws.iotanalytics#CreateChannelRequest": {
       "type": "structure",
       "members": {
-        "channelStorage": {
-          "target": "com.amazonaws.iotanalytics#ChannelStorage",
-          "traits": {
-            "smithy.api#documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation\n        of the channel.</p>"
-          }
-        },
         "retentionPeriod": {
           "target": "com.amazonaws.iotanalytics#RetentionPeriod",
           "traits": {
@@ -731,22 +725,28 @@
             "smithy.api#documentation": "<p>The name of the channel.</p>",
             "smithy.api#required": {}
           }
+        },
+        "channelStorage": {
+          "target": "com.amazonaws.iotanalytics#ChannelStorage",
+          "traits": {
+            "smithy.api#documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation\n        of the channel.</p>"
+          }
         }
       }
     },
     "com.amazonaws.iotanalytics#CreateChannelResponse": {
       "type": "structure",
       "members": {
-        "retentionPeriod": {
-          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
-          "traits": {
-            "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel.</p>"
-          }
-        },
         "channelArn": {
           "target": "com.amazonaws.iotanalytics#ChannelArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+          }
+        },
+        "retentionPeriod": {
+          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
+          "traits": {
+            "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel.</p>"
           }
         },
         "channelName": {
@@ -855,10 +855,22 @@
     "com.amazonaws.iotanalytics#CreateDatasetRequest": {
       "type": "structure",
       "members": {
+        "tags": {
+          "target": "com.amazonaws.iotanalytics#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata which can be used to manage the data set.</p>"
+          }
+        },
         "versioningConfiguration": {
           "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>[Optional] How many versions of data set contents are kept. If not specified or set to null, only the \n        latest version plus the latest succeeded version (if they are different) are kept for \n        the time period specified by the \"retentionPeriod\" parameter. (For more information, see\n        https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)</p>"
+          }
+        },
+        "contentDeliveryRules": {
+          "target": "com.amazonaws.iotanalytics#DatasetContentDeliveryRules",
+          "traits": {
+            "smithy.api#documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
           }
         },
         "actions": {
@@ -868,12 +880,6 @@
             "smithy.api#required": {}
           }
         },
-        "contentDeliveryRules": {
-          "target": "com.amazonaws.iotanalytics#DatasetContentDeliveryRules",
-          "traits": {
-            "smithy.api#documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
-          }
-        },
         "datasetName": {
           "target": "com.amazonaws.iotanalytics#DatasetName",
           "traits": {
@@ -881,22 +887,16 @@
             "smithy.api#required": {}
           }
         },
-        "triggers": {
-          "target": "com.amazonaws.iotanalytics#DatasetTriggers",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified \n          time interval or when another data set's contents are created. The list of triggers can \n          be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.iotanalytics#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata which can be used to manage the data set.</p>"
-          }
-        },
         "retentionPeriod": {
           "target": "com.amazonaws.iotanalytics#RetentionPeriod",
           "traits": {
             "smithy.api#documentation": "<p>[Optional] How long, in days, versions of data set contents are kept for the data set. If \n          not specified or set to null, versions of data set contents are retained for at most 90 days. \n          The number of versions of data set contents retained is determined by the \n          <code>versioningConfiguration</code> parameter.  (For more information, see \n          https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)</p>"
+          }
+        },
+        "triggers": {
+          "target": "com.amazonaws.iotanalytics#DatasetTriggers",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified \n          time interval or when another data set's contents are created. The list of triggers can \n          be empty or contain up to five <b>DataSetTrigger</b> objects.</p>"
           }
         }
       }
@@ -904,16 +904,16 @@
     "com.amazonaws.iotanalytics#CreateDatasetResponse": {
       "type": "structure",
       "members": {
-        "retentionPeriod": {
-          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
-          "traits": {
-            "smithy.api#documentation": "<p>How long, in days, data set contents are kept for the data set.</p>"
-          }
-        },
         "datasetName": {
           "target": "com.amazonaws.iotanalytics#DatasetName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the data set.</p>"
+          }
+        },
+        "retentionPeriod": {
+          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
+          "traits": {
+            "smithy.api#documentation": "<p>How long, in days, data set contents are kept for the data set.</p>"
           }
         },
         "datasetArn": {
@@ -994,16 +994,16 @@
     "com.amazonaws.iotanalytics#CreateDatastoreResponse": {
       "type": "structure",
       "members": {
-        "datastoreArn": {
-          "target": "com.amazonaws.iotanalytics#DatastoreArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the data store.</p>"
-          }
-        },
         "retentionPeriod": {
           "target": "com.amazonaws.iotanalytics#RetentionPeriod",
           "traits": {
             "smithy.api#documentation": "<p>How long, in days, message data is kept for the data store.</p>"
+          }
+        },
+        "datastoreArn": {
+          "target": "com.amazonaws.iotanalytics#DatastoreArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the data store.</p>"
           }
         },
         "datastoreName": {
@@ -1054,12 +1054,6 @@
     "com.amazonaws.iotanalytics#CreatePipelineRequest": {
       "type": "structure",
       "members": {
-        "tags": {
-          "target": "com.amazonaws.iotanalytics#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata which can be used to manage the pipeline.</p>"
-          }
-        },
         "pipelineActivities": {
           "target": "com.amazonaws.iotanalytics#PipelineActivities",
           "traits": {
@@ -1073,22 +1067,28 @@
             "smithy.api#documentation": "<p>The name of the pipeline.</p>",
             "smithy.api#required": {}
           }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotanalytics#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata which can be used to manage the pipeline.</p>"
+          }
         }
       }
     },
     "com.amazonaws.iotanalytics#CreatePipelineResponse": {
       "type": "structure",
       "members": {
-        "pipelineName": {
-          "target": "com.amazonaws.iotanalytics#PipelineName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the pipeline.</p>"
-          }
-        },
         "pipelineArn": {
           "target": "com.amazonaws.iotanalytics#PipelineArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the pipeline.</p>"
+          }
+        },
+        "pipelineName": {
+          "target": "com.amazonaws.iotanalytics#PipelineName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the pipeline.</p>"
           }
         }
       }
@@ -1103,17 +1103,17 @@
             "smithy.api#required": {}
           }
         },
-        "keyPrefix": {
-          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the channel data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in \n        a bucket has exactly one key). The prefix must end with a '/'.</p>"
-          }
-        },
         "roleArn": {
           "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "keyPrefix": {
+          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the channel data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in \n        a bucket has exactly one key). The prefix must end with a '/'.</p>"
           }
         }
       },
@@ -1124,12 +1124,6 @@
     "com.amazonaws.iotanalytics#CustomerManagedChannelS3StorageSummary": {
       "type": "structure",
       "members": {
-        "roleArn": {
-          "target": "com.amazonaws.iotanalytics#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon \n        S3 resources.</p>"
-          }
-        },
         "keyPrefix": {
           "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
           "traits": {
@@ -1141,6 +1135,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of the Amazon S3 bucket in which channel data is stored.</p>"
           }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.iotanalytics#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon \n        S3 resources.</p>"
+          }
         }
       },
       "traits": {
@@ -1150,17 +1150,17 @@
     "com.amazonaws.iotanalytics#CustomerManagedDatastoreS3Storage": {
       "type": "structure",
       "members": {
+        "keyPrefix": {
+          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a \n        bucket has exactly one key). The prefix must end with a '/'.</p>"
+          }
+        },
         "roleArn": {
           "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "keyPrefix": {
-          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a \n        bucket has exactly one key). The prefix must end with a '/'.</p>"
           }
         },
         "bucket": {
@@ -1184,16 +1184,16 @@
             "smithy.api#documentation": "<p>The name of the Amazon S3 bucket in which data store data is stored.</p>"
           }
         },
-        "keyPrefix": {
-          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
-          "traits": {
-            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a \n        bucket has exactly one key). The prefix must end with a '/'.</p>"
-          }
-        },
         "roleArn": {
           "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
+          }
+        },
+        "keyPrefix": {
+          "target": "com.amazonaws.iotanalytics#S3KeyPrefix",
+          "traits": {
+            "smithy.api#documentation": "<p>[Optional] The prefix used to create the keys of the data store data objects. Each object in \n        an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a \n        bucket has exactly one key). The prefix must end with a '/'.</p>"
           }
         }
       },
@@ -1204,12 +1204,6 @@
     "com.amazonaws.iotanalytics#Dataset": {
       "type": "structure",
       "members": {
-        "versioningConfiguration": {
-          "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>[Optional] How many versions of data set contents are kept. If not specified or set to null, only the \n        latest version plus the latest succeeded version (if they are different) are kept for \n        the time period specified by the \"retentionPeriod\" parameter. (For more information, see\n        https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)</p>"
-          }
-        },
         "status": {
           "target": "com.amazonaws.iotanalytics#DatasetStatus",
           "traits": {
@@ -1222,10 +1216,16 @@
             "smithy.api#documentation": "<p>The \"DatasetTrigger\" objects\n     that specify when the data set is automatically updated.</p>"
           }
         },
-        "retentionPeriod": {
-          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
+        "lastUpdateTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>[Optional] How long, in days, message data is kept for the data set.</p>"
+            "smithy.api#documentation": "<p>The last time the data set was updated.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.iotanalytics#DatasetArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the data set.</p>"
           }
         },
         "name": {
@@ -1240,22 +1240,22 @@
             "smithy.api#documentation": "<p>The \"DatasetAction\" objects that automatically create the data set contents.</p>"
           }
         },
-        "arn": {
-          "target": "com.amazonaws.iotanalytics#DatasetArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the data set.</p>"
-          }
-        },
-        "lastUpdateTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The last time the data set was updated.</p>"
-          }
-        },
         "contentDeliveryRules": {
           "target": "com.amazonaws.iotanalytics#DatasetContentDeliveryRules",
           "traits": {
             "smithy.api#documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
+          }
+        },
+        "retentionPeriod": {
+          "target": "com.amazonaws.iotanalytics#RetentionPeriod",
+          "traits": {
+            "smithy.api#documentation": "<p>[Optional] How long, in days, message data is kept for the data set.</p>"
+          }
+        },
+        "versioningConfiguration": {
+          "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>[Optional] How many versions of data set contents are kept. If not specified or set to null, only the \n        latest version plus the latest succeeded version (if they are different) are kept for \n        the time period specified by the \"retentionPeriod\" parameter. (For more information, see\n        https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)</p>"
           }
         },
         "creationTime": {
@@ -1272,16 +1272,16 @@
     "com.amazonaws.iotanalytics#DatasetAction": {
       "type": "structure",
       "members": {
-        "containerAction": {
-          "target": "com.amazonaws.iotanalytics#ContainerDatasetAction",
-          "traits": {
-            "smithy.api#documentation": "<p>Information which allows the system to run a containerized application in order to create\n          the data set contents. The application must be in a Docker container along with any needed\n          support libraries.</p>"
-          }
-        },
         "queryAction": {
           "target": "com.amazonaws.iotanalytics#SqlQueryDatasetAction",
           "traits": {
             "smithy.api#documentation": "<p>An \"SqlQueryDatasetAction\" object that uses an SQL query to automatically create data set contents.</p>"
+          }
+        },
+        "containerAction": {
+          "target": "com.amazonaws.iotanalytics#ContainerDatasetAction",
+          "traits": {
+            "smithy.api#documentation": "<p>Information which allows the system to run a containerized application in order to create\n          the data set contents. The application must be in a Docker container along with any needed\n          support libraries.</p>"
           }
         },
         "actionName": {
@@ -1370,16 +1370,16 @@
     "com.amazonaws.iotanalytics#DatasetContentDeliveryDestination": {
       "type": "structure",
       "members": {
-        "s3DestinationConfiguration": {
-          "target": "com.amazonaws.iotanalytics#S3DestinationConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration information for delivery of data set contents to Amazon S3.</p>"
-          }
-        },
         "iotEventsDestinationConfiguration": {
           "target": "com.amazonaws.iotanalytics#IotEventsDestinationConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>Configuration information for delivery of data set contents to AWS IoT Events.</p>"
+          }
+        },
+        "s3DestinationConfiguration": {
+          "target": "com.amazonaws.iotanalytics#S3DestinationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration information for delivery of data set contents to Amazon S3.</p>"
           }
         }
       },
@@ -1468,24 +1468,6 @@
     "com.amazonaws.iotanalytics#DatasetContentSummary": {
       "type": "structure",
       "members": {
-        "status": {
-          "target": "com.amazonaws.iotanalytics#DatasetContentStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the data set contents.</p>"
-          }
-        },
-        "version": {
-          "target": "com.amazonaws.iotanalytics#DatasetContentVersion",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the data set contents.</p>"
-          }
-        },
-        "completionTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the dataset content status was updated to SUCCEEDED or FAILED.</p>"
-          }
-        },
         "scheduleTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
@@ -1496,6 +1478,24 @@
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The actual time the creation of the data set contents was started.</p>"
+          }
+        },
+        "version": {
+          "target": "com.amazonaws.iotanalytics#DatasetContentVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the data set contents.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotanalytics#DatasetContentStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the data set contents.</p>"
+          }
+        },
+        "completionTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the dataset content status was updated to SUCCEEDED or FAILED.</p>"
           }
         }
       },
@@ -1536,16 +1536,16 @@
     "com.amazonaws.iotanalytics#DatasetEntry": {
       "type": "structure",
       "members": {
-        "entryName": {
-          "target": "com.amazonaws.iotanalytics#EntryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the data set item.</p>"
-          }
-        },
         "dataURI": {
           "target": "com.amazonaws.iotanalytics#PresignedURI",
           "traits": {
             "smithy.api#documentation": "<p>The pre-signed URI of the data set item.</p>"
+          }
+        },
+        "entryName": {
+          "target": "com.amazonaws.iotanalytics#EntryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data set item.</p>"
           }
         }
       },
@@ -1591,22 +1591,22 @@
     "com.amazonaws.iotanalytics#DatasetSummary": {
       "type": "structure",
       "members": {
-        "creationTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the data set was created.</p>"
-          }
-        },
         "status": {
           "target": "com.amazonaws.iotanalytics#DatasetStatus",
           "traits": {
             "smithy.api#documentation": "<p>The status of the data set.</p>"
           }
         },
-        "triggers": {
-          "target": "com.amazonaws.iotanalytics#DatasetTriggers",
+        "creationTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set content to be populated at a specified time\n       interval or when another data set is populated. The list of triggers can be empty or contain up\n       to five DataSetTrigger objects</p>"
+            "smithy.api#documentation": "<p>The time the data set was created.</p>"
+          }
+        },
+        "datasetName": {
+          "target": "com.amazonaws.iotanalytics#DatasetName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data set.</p>"
           }
         },
         "lastUpdateTime": {
@@ -1615,10 +1615,10 @@
             "smithy.api#documentation": "<p>The last time the data set was updated.</p>"
           }
         },
-        "datasetName": {
-          "target": "com.amazonaws.iotanalytics#DatasetName",
+        "triggers": {
+          "target": "com.amazonaws.iotanalytics#DatasetTriggers",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the data set.</p>"
+            "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set content to be populated at a specified time\n       interval or when another data set is populated. The list of triggers can be empty or contain up\n       to five DataSetTrigger objects</p>"
           }
         },
         "actions": {
@@ -1635,16 +1635,16 @@
     "com.amazonaws.iotanalytics#DatasetTrigger": {
       "type": "structure",
       "members": {
-        "schedule": {
-          "target": "com.amazonaws.iotanalytics#Schedule",
-          "traits": {
-            "smithy.api#documentation": "<p>The \"Schedule\" when the trigger is initiated.</p>"
-          }
-        },
         "dataset": {
           "target": "com.amazonaws.iotanalytics#TriggeringDataset",
           "traits": {
             "smithy.api#documentation": "<p>The data set whose content creation triggers the creation of this data set's contents.</p>"
+          }
+        },
+        "schedule": {
+          "target": "com.amazonaws.iotanalytics#Schedule",
+          "traits": {
+            "smithy.api#documentation": "<p>The \"Schedule\" when the trigger is initiated.</p>"
           }
         }
       },
@@ -1667,10 +1667,22 @@
     "com.amazonaws.iotanalytics#Datastore": {
       "type": "structure",
       "members": {
+        "arn": {
+          "target": "com.amazonaws.iotanalytics#DatastoreArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the data store.</p>"
+          }
+        },
         "storage": {
           "target": "com.amazonaws.iotanalytics#DatastoreStorage",
           "traits": {
             "smithy.api#documentation": "<p>Where data store data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after the data\n        store is created.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotanalytics#DatastoreStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of a data store:</p>\n         <dl>\n            <dt>CREATING</dt>\n            <dd>\n               <p>The data store is being created.</p>\n            </dd>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The data store has been created and can be used.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The data store is being deleted.</p>\n            </dd>\n         </dl>"
           }
         },
         "creationTime": {
@@ -1679,34 +1691,22 @@
             "smithy.api#documentation": "<p>When the data store was created.</p>"
           }
         },
-        "name": {
-          "target": "com.amazonaws.iotanalytics#DatastoreName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the data store.</p>"
-          }
-        },
-        "arn": {
-          "target": "com.amazonaws.iotanalytics#DatastoreArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the data store.</p>"
-          }
-        },
         "lastUpdateTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The last time the data store was updated.</p>"
           }
         },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#DatastoreName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data store.</p>"
+          }
+        },
         "retentionPeriod": {
           "target": "com.amazonaws.iotanalytics#RetentionPeriod",
           "traits": {
             "smithy.api#documentation": "<p>How long, in days, message data is kept for the data store. When \"customerManagedS3\" storage \n        is selected, this parameter is ignored.</p>"
-          }
-        },
-        "status": {
-          "target": "com.amazonaws.iotanalytics#DatastoreStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of a data store:</p>\n         <dl>\n            <dt>CREATING</dt>\n            <dd>\n               <p>The data store is being created.</p>\n            </dd>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The data store has been created and can be used.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The data store is being deleted.</p>\n            </dd>\n         </dl>"
           }
         }
       },
@@ -1717,17 +1717,17 @@
     "com.amazonaws.iotanalytics#DatastoreActivity": {
       "type": "structure",
       "members": {
-        "datastoreName": {
-          "target": "com.amazonaws.iotanalytics#DatastoreName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the data store where processed messages are stored.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "name": {
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the 'datastore' activity.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "datastoreName": {
+          "target": "com.amazonaws.iotanalytics#DatastoreName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data store where processed messages are stored.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1785,16 +1785,16 @@
     "com.amazonaws.iotanalytics#DatastoreStorage": {
       "type": "structure",
       "members": {
-        "customerManagedS3": {
-          "target": "com.amazonaws.iotanalytics#CustomerManagedDatastoreS3Storage",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer managed storage is \n        selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed \n        S3 storage cannot be changed after creation of the data store.</p>"
-          }
-        },
         "serviceManagedS3": {
           "target": "com.amazonaws.iotanalytics#ServiceManagedDatastoreS3Storage",
           "traits": {
             "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.\n        The choice of service-managed or customer-managed S3 storage cannot be changed after creation\n        of the data store.</p>"
+          }
+        },
+        "customerManagedS3": {
+          "target": "com.amazonaws.iotanalytics#CustomerManagedDatastoreS3Storage",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer managed storage is \n        selected, the \"retentionPeriod\" parameter is ignored. The choice of service-managed or customer-managed \n        S3 storage cannot be changed after creation of the data store.</p>"
           }
         }
       },
@@ -1805,16 +1805,16 @@
     "com.amazonaws.iotanalytics#DatastoreStorageSummary": {
       "type": "structure",
       "members": {
-        "customerManagedS3": {
-          "target": "com.amazonaws.iotanalytics#CustomerManagedDatastoreS3StorageSummary",
-          "traits": {
-            "smithy.api#documentation": "<p>Used to store data store data in an S3 bucket that you manage.</p>"
-          }
-        },
         "serviceManagedS3": {
           "target": "com.amazonaws.iotanalytics#ServiceManagedDatastoreS3StorageSummary",
           "traits": {
             "smithy.api#documentation": "<p>Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.</p>"
+          }
+        },
+        "customerManagedS3": {
+          "target": "com.amazonaws.iotanalytics#CustomerManagedDatastoreS3StorageSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to store data store data in an S3 bucket that you manage.</p>"
           }
         }
       },
@@ -1831,12 +1831,6 @@
     "com.amazonaws.iotanalytics#DatastoreSummary": {
       "type": "structure",
       "members": {
-        "datastoreStorage": {
-          "target": "com.amazonaws.iotanalytics#DatastoreStorageSummary",
-          "traits": {
-            "smithy.api#documentation": "<p>Where data store data is stored.</p>"
-          }
-        },
         "creationTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
@@ -1847,6 +1841,12 @@
           "target": "com.amazonaws.iotanalytics#DatastoreStatus",
           "traits": {
             "smithy.api#documentation": "<p>The status of the data store.</p>"
+          }
+        },
+        "datastoreStorage": {
+          "target": "com.amazonaws.iotanalytics#DatastoreStorageSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>Where data store data is stored.</p>"
           }
         },
         "lastUpdateTime": {
@@ -2425,13 +2425,6 @@
     "com.amazonaws.iotanalytics#DeviceRegistryEnrichActivity": {
       "type": "structure",
       "members": {
-        "attribute": {
-          "target": "com.amazonaws.iotanalytics#AttributeName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the attribute that is added to the message.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "roleArn": {
           "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
@@ -2439,10 +2432,10 @@
             "smithy.api#required": {}
           }
         },
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
+        "attribute": {
+          "target": "com.amazonaws.iotanalytics#AttributeName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the 'deviceRegistryEnrich' activity.</p>",
+            "smithy.api#documentation": "<p>The name of the attribute that is added to the message.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2450,6 +2443,13 @@
           "target": "com.amazonaws.iotanalytics#AttributeName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the IoT device whose registry information is added to the message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'deviceRegistryEnrich' activity.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2467,13 +2467,6 @@
     "com.amazonaws.iotanalytics#DeviceShadowEnrichActivity": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the 'deviceShadowEnrich' activity.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "thingName": {
           "target": "com.amazonaws.iotanalytics#AttributeName",
           "traits": {
@@ -2499,6 +2492,13 @@
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
             "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'deviceShadowEnrich' activity.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -2738,17 +2738,17 @@
     "com.amazonaws.iotanalytics#IotEventsDestinationConfiguration": {
       "type": "structure",
       "members": {
-        "roleArn": {
-          "target": "com.amazonaws.iotanalytics#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents\n        to an AWS IoT Events input.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "inputName": {
           "target": "com.amazonaws.iotanalytics#IotEventsInputName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the AWS IoT Events input to which data set contents are delivered.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.iotanalytics#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents\n        to an AWS IoT Events input.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2770,12 +2770,6 @@
     "com.amazonaws.iotanalytics#LambdaActivity": {
       "type": "structure",
       "members": {
-        "next": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
-          }
-        },
         "batchSize": {
           "target": "com.amazonaws.iotanalytics#ActivityBatchSize",
           "traits": {
@@ -2783,17 +2777,23 @@
             "smithy.api#required": {}
           }
         },
-        "name": {
+        "next": {
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the 'lambda' activity.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
           }
         },
         "lambdaName": {
           "target": "com.amazonaws.iotanalytics#LambdaName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Lambda function that is run on the message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'lambda' activity.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2864,18 +2864,18 @@
     "com.amazonaws.iotanalytics#ListChannelsRequest": {
       "type": "structure",
       "members": {
-        "maxResults": {
-          "target": "com.amazonaws.iotanalytics#MaxResults",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>\n         <p>The default value is 100.</p>",
-            "smithy.api#httpQuery": "maxResults"
-          }
-        },
         "nextToken": {
           "target": "com.amazonaws.iotanalytics#NextToken",
           "traits": {
             "smithy.api#documentation": "<p>The token for the next set of results.</p>",
             "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotanalytics#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>\n         <p>The default value is 100.</p>",
+            "smithy.api#httpQuery": "maxResults"
           }
         }
       }
@@ -2939,13 +2939,6 @@
     "com.amazonaws.iotanalytics#ListDatasetContentsRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.iotanalytics#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of results.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        },
         "datasetName": {
           "target": "com.amazonaws.iotanalytics#DatasetName",
           "traits": {
@@ -2954,18 +2947,25 @@
             "smithy.api#required": {}
           }
         },
-        "scheduledOnOrAfter": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or \n       after the given time. See the field <code>triggers.schedule</code> in the CreateDataset \n       request. (timestamp)</p>",
-            "smithy.api#httpQuery": "scheduledOnOrAfter"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.iotanalytics#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
             "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotanalytics#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "scheduledOnOrAfter": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or \n       after the given time. See the field <code>triggers.schedule</code> in the CreateDataset \n       request. (timestamp)</p>",
+            "smithy.api#httpQuery": "scheduledOnOrAfter"
           }
         },
         "scheduledBefore": {
@@ -3033,18 +3033,18 @@
     "com.amazonaws.iotanalytics#ListDatasetsRequest": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.iotanalytics#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of results.</p>",
-            "smithy.api#httpQuery": "nextToken"
-          }
-        },
         "maxResults": {
           "target": "com.amazonaws.iotanalytics#MaxResults",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>\n         <p>The default value is 100.</p>",
             "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotanalytics#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+            "smithy.api#httpQuery": "nextToken"
           }
         }
       }
@@ -3196,16 +3196,16 @@
     "com.amazonaws.iotanalytics#ListPipelinesResponse": {
       "type": "structure",
       "members": {
-        "nextToken": {
-          "target": "com.amazonaws.iotanalytics#NextToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
-          }
-        },
         "pipelineSummaries": {
           "target": "com.amazonaws.iotanalytics#PipelineSummaries",
           "traits": {
             "smithy.api#documentation": "<p>A list of \"PipelineSummary\" objects.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotanalytics#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
           }
         }
       }
@@ -3291,10 +3291,10 @@
     "com.amazonaws.iotanalytics#LoggingOptions": {
       "type": "structure",
       "members": {
-        "level": {
-          "target": "com.amazonaws.iotanalytics#LoggingLevel",
+        "roleArn": {
+          "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
-            "smithy.api#documentation": "<p>The logging level.  Currently, only \"ERROR\" is supported.</p>",
+            "smithy.api#documentation": "<p>The ARN of the role that grants permission to AWS IoT Analytics to\n          perform logging.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3305,10 +3305,10 @@
             "smithy.api#required": {}
           }
         },
-        "roleArn": {
-          "target": "com.amazonaws.iotanalytics#RoleArn",
+        "level": {
+          "target": "com.amazonaws.iotanalytics#LoggingLevel",
           "traits": {
-            "smithy.api#documentation": "<p>The ARN of the role that grants permission to AWS IoT Analytics to\n          perform logging.</p>",
+            "smithy.api#documentation": "<p>The logging level.  Currently, only \"ERROR\" is supported.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3320,17 +3320,17 @@
     "com.amazonaws.iotanalytics#MathActivity": {
       "type": "structure",
       "members": {
-        "attribute": {
-          "target": "com.amazonaws.iotanalytics#AttributeName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the attribute that contains the result of the math operation.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "math": {
           "target": "com.amazonaws.iotanalytics#MathExpression",
           "traits": {
             "smithy.api#documentation": "<p>An expression that uses one or more existing attributes and must return an integer value.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "attribute": {
+          "target": "com.amazonaws.iotanalytics#AttributeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute that contains the result of the math operation.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3394,17 +3394,17 @@
     "com.amazonaws.iotanalytics#Message": {
       "type": "structure",
       "members": {
-        "messageId": {
-          "target": "com.amazonaws.iotanalytics#MessageId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID you wish to assign to the message. Each \"messageId\" must be unique \n          within each batch sent.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "payload": {
           "target": "com.amazonaws.iotanalytics#MessagePayload",
           "traits": {
             "smithy.api#documentation": "<p>The payload of the message. This may be a JSON string or a Base64-encoded string \n          representing binary data (in which case you must decode it by means of a pipeline activity).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "messageId": {
+          "target": "com.amazonaws.iotanalytics#MessageId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID you wish to assign to the message. Each \"messageId\" must be unique \n          within each batch sent.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3476,6 +3476,12 @@
     "com.amazonaws.iotanalytics#Pipeline": {
       "type": "structure",
       "members": {
+        "name": {
+          "target": "com.amazonaws.iotanalytics#PipelineName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the pipeline.</p>"
+          }
+        },
         "creationTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
@@ -3492,12 +3498,6 @@
           "target": "com.amazonaws.iotanalytics#PipelineArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the pipeline.</p>"
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.iotanalytics#PipelineName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the pipeline.</p>"
           }
         },
         "lastUpdateTime": {
@@ -3532,16 +3532,10 @@
     "com.amazonaws.iotanalytics#PipelineActivity": {
       "type": "structure",
       "members": {
-        "deviceShadowEnrich": {
-          "target": "com.amazonaws.iotanalytics#DeviceShadowEnrichActivity",
+        "lambda": {
+          "target": "com.amazonaws.iotanalytics#LambdaActivity",
           "traits": {
-            "smithy.api#documentation": "<p>Adds information from the AWS IoT Device Shadows service to a message.</p>"
-          }
-        },
-        "filter": {
-          "target": "com.amazonaws.iotanalytics#FilterActivity",
-          "traits": {
-            "smithy.api#documentation": "<p>Filters a message based on its attributes.</p>"
+            "smithy.api#documentation": "<p>Runs a Lambda function to modify the message.</p>"
           }
         },
         "math": {
@@ -3550,34 +3544,10 @@
             "smithy.api#documentation": "<p>Computes an arithmetic expression using the message's attributes and adds\n       it to the message.</p>"
           }
         },
-        "removeAttributes": {
-          "target": "com.amazonaws.iotanalytics#RemoveAttributesActivity",
+        "filter": {
+          "target": "com.amazonaws.iotanalytics#FilterActivity",
           "traits": {
-            "smithy.api#documentation": "<p>Removes attributes from a message.</p>"
-          }
-        },
-        "lambda": {
-          "target": "com.amazonaws.iotanalytics#LambdaActivity",
-          "traits": {
-            "smithy.api#documentation": "<p>Runs a Lambda function to modify the message.</p>"
-          }
-        },
-        "channel": {
-          "target": "com.amazonaws.iotanalytics#ChannelActivity",
-          "traits": {
-            "smithy.api#documentation": "<p>Determines the source of the messages to be processed.</p>"
-          }
-        },
-        "addAttributes": {
-          "target": "com.amazonaws.iotanalytics#AddAttributesActivity",
-          "traits": {
-            "smithy.api#documentation": "<p>Adds other attributes based on existing attributes in the message.</p>"
-          }
-        },
-        "datastore": {
-          "target": "com.amazonaws.iotanalytics#DatastoreActivity",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies where to store the processed message data.</p>"
+            "smithy.api#documentation": "<p>Filters a message based on its attributes.</p>"
           }
         },
         "selectAttributes": {
@@ -3586,10 +3556,40 @@
             "smithy.api#documentation": "<p>Creates a new message using only the specified attributes from the original message.\n     </p>"
           }
         },
+        "channel": {
+          "target": "com.amazonaws.iotanalytics#ChannelActivity",
+          "traits": {
+            "smithy.api#documentation": "<p>Determines the source of the messages to be processed.</p>"
+          }
+        },
+        "removeAttributes": {
+          "target": "com.amazonaws.iotanalytics#RemoveAttributesActivity",
+          "traits": {
+            "smithy.api#documentation": "<p>Removes attributes from a message.</p>"
+          }
+        },
+        "deviceShadowEnrich": {
+          "target": "com.amazonaws.iotanalytics#DeviceShadowEnrichActivity",
+          "traits": {
+            "smithy.api#documentation": "<p>Adds information from the AWS IoT Device Shadows service to a message.</p>"
+          }
+        },
         "deviceRegistryEnrich": {
           "target": "com.amazonaws.iotanalytics#DeviceRegistryEnrichActivity",
           "traits": {
             "smithy.api#documentation": "<p>Adds data from the AWS IoT device registry to your message.</p>"
+          }
+        },
+        "datastore": {
+          "target": "com.amazonaws.iotanalytics#DatastoreActivity",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies where to store the processed message data.</p>"
+          }
+        },
+        "addAttributes": {
+          "target": "com.amazonaws.iotanalytics#AddAttributesActivity",
+          "traits": {
+            "smithy.api#documentation": "<p>Adds other attributes based on existing attributes in the message.</p>"
           }
         }
       },
@@ -3619,16 +3619,16 @@
     "com.amazonaws.iotanalytics#PipelineSummary": {
       "type": "structure",
       "members": {
-        "creationTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>When the pipeline was created.</p>"
-          }
-        },
         "lastUpdateTime": {
           "target": "com.amazonaws.iotanalytics#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>When the pipeline was last updated.</p>"
+          }
+        },
+        "creationTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>When the pipeline was created.</p>"
           }
         },
         "reprocessingSummaries": {
@@ -3723,6 +3723,13 @@
     "com.amazonaws.iotanalytics#RemoveAttributesActivity": {
       "type": "structure",
       "members": {
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'removeAttributes' activity.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "next": {
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
@@ -3733,13 +3740,6 @@
           "target": "com.amazonaws.iotanalytics#AttributeNames",
           "traits": {
             "smithy.api#documentation": "<p>A list of 1-50 attributes to remove from the message.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the 'removeAttributes' activity.</p>",
             "smithy.api#required": {}
           }
         }
@@ -3783,6 +3783,12 @@
     "com.amazonaws.iotanalytics#ReprocessingSummary": {
       "type": "structure",
       "members": {
+        "creationTime": {
+          "target": "com.amazonaws.iotanalytics#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the pipeline reprocessing was created.</p>"
+          }
+        },
         "status": {
           "target": "com.amazonaws.iotanalytics#ReprocessingStatus",
           "traits": {
@@ -3794,12 +3800,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The 'reprocessingId' returned by \"StartPipelineReprocessing\".</p>"
           }
-        },
-        "creationTime": {
-          "target": "com.amazonaws.iotanalytics#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time the pipeline reprocessing was created.</p>"
-          }
         }
       },
       "traits": {
@@ -3809,14 +3809,14 @@
     "com.amazonaws.iotanalytics#ResourceAlreadyExistsException": {
       "type": "structure",
       "members": {
-        "message": {
-          "target": "com.amazonaws.iotanalytics#ErrorMessage"
-        },
         "resourceId": {
           "target": "com.amazonaws.iotanalytics#resourceId",
           "traits": {
             "smithy.api#documentation": "<p>The ID of the resource.</p>"
           }
+        },
+        "message": {
+          "target": "com.amazonaws.iotanalytics#ErrorMessage"
         },
         "resourceArn": {
           "target": "com.amazonaws.iotanalytics#ResourceArn2",
@@ -3846,17 +3846,17 @@
     "com.amazonaws.iotanalytics#ResourceConfiguration": {
       "type": "structure",
       "members": {
-        "volumeSizeInGB": {
-          "target": "com.amazonaws.iotanalytics#VolumeSizeInGB",
-          "traits": {
-            "smithy.api#documentation": "<p>The size (in GB) of the persistent storage available to the resource instance used to\n          execute the \"containerAction\" (min: 1, max: 50).</p>",
-            "smithy.api#required": {}
-          }
-        },
         "computeType": {
           "target": "com.amazonaws.iotanalytics#ComputeType",
           "traits": {
             "smithy.api#documentation": "<p>The type of the compute resource used to execute the \"containerAction\". Possible values \n          are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "volumeSizeInGB": {
+          "target": "com.amazonaws.iotanalytics#VolumeSizeInGB",
+          "traits": {
+            "smithy.api#documentation": "<p>The size (in GB) of the persistent storage available to the resource instance used to\n          execute the \"containerAction\" (min: 1, max: 50).</p>",
             "smithy.api#required": {}
           }
         }
@@ -3986,17 +3986,17 @@
     "com.amazonaws.iotanalytics#S3DestinationConfiguration": {
       "type": "structure",
       "members": {
-        "glueConfiguration": {
-          "target": "com.amazonaws.iotanalytics#GlueConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration information for coordination with the AWS Glue ETL (extract, transform and \n        load) service.</p>"
-          }
-        },
         "roleArn": {
           "target": "com.amazonaws.iotanalytics#RoleArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3\n        and AWS Glue resources.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "glueConfiguration": {
+          "target": "com.amazonaws.iotanalytics#GlueConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration information for coordination with the AWS Glue ETL (extract, transform and \n        load) service.</p>"
           }
         },
         "key": {
@@ -4065,11 +4065,12 @@
     "com.amazonaws.iotanalytics#SampleChannelDataRequest": {
       "type": "structure",
       "members": {
-        "endTime": {
-          "target": "com.amazonaws.iotanalytics#EndTime",
+        "channelName": {
+          "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
-            "smithy.api#documentation": "<p>The end of the time window from which sample messages are retrieved.</p>",
-            "smithy.api#httpQuery": "endTime"
+            "smithy.api#documentation": "<p>The name of the channel whose message samples are retrieved.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         },
         "startTime": {
@@ -4079,19 +4080,18 @@
             "smithy.api#httpQuery": "startTime"
           }
         },
-        "channelName": {
-          "target": "com.amazonaws.iotanalytics#ChannelName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the channel whose message samples are retrieved.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
         "maxMessages": {
           "target": "com.amazonaws.iotanalytics#MaxMessages",
           "traits": {
             "smithy.api#documentation": "<p>The number of sample messages to be retrieved. The limit is 10, the default\n          is also 10.</p>",
             "smithy.api#httpQuery": "maxMessages"
+          }
+        },
+        "endTime": {
+          "target": "com.amazonaws.iotanalytics#EndTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The end of the time window from which sample messages are retrieved.</p>",
+            "smithy.api#httpQuery": "endTime"
           }
         }
       }
@@ -4127,13 +4127,6 @@
     "com.amazonaws.iotanalytics#SelectAttributesActivity": {
       "type": "structure",
       "members": {
-        "name": {
-          "target": "com.amazonaws.iotanalytics#ActivityName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the 'selectAttributes' activity.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "attributes": {
           "target": "com.amazonaws.iotanalytics#AttributeNames",
           "traits": {
@@ -4145,6 +4138,13 @@
           "target": "com.amazonaws.iotanalytics#ActivityName",
           "traits": {
             "smithy.api#documentation": "<p>The next activity in the pipeline.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#ActivityName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the 'selectAttributes' activity.</p>",
+            "smithy.api#required": {}
           }
         }
       },
@@ -4263,10 +4263,10 @@
     "com.amazonaws.iotanalytics#StartPipelineReprocessingRequest": {
       "type": "structure",
       "members": {
-        "endTime": {
-          "target": "com.amazonaws.iotanalytics#EndTime",
+        "startTime": {
+          "target": "com.amazonaws.iotanalytics#StartTime",
           "traits": {
-            "smithy.api#documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p>"
+            "smithy.api#documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p>"
           }
         },
         "pipelineName": {
@@ -4277,10 +4277,10 @@
             "smithy.api#required": {}
           }
         },
-        "startTime": {
-          "target": "com.amazonaws.iotanalytics#StartTime",
+        "endTime": {
+          "target": "com.amazonaws.iotanalytics#EndTime",
           "traits": {
-            "smithy.api#documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p>"
+            "smithy.api#documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p>"
           }
         }
       }
@@ -4403,18 +4403,18 @@
     "com.amazonaws.iotanalytics#TagResourceRequest": {
       "type": "structure",
       "members": {
-        "tags": {
-          "target": "com.amazonaws.iotanalytics#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The new or modified tags for the resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "resourceArn": {
           "target": "com.amazonaws.iotanalytics#ResourceArn",
           "traits": {
             "smithy.api#documentation": "<p>The ARN of the resource whose tags you want to modify.</p>",
             "smithy.api#httpQuery": "resourceArn",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotanalytics#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The new or modified tags for the resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -4569,12 +4569,10 @@
     "com.amazonaws.iotanalytics#UpdateChannelRequest": {
       "type": "structure",
       "members": {
-        "channelName": {
-          "target": "com.amazonaws.iotanalytics#ChannelName",
+        "channelStorage": {
+          "target": "com.amazonaws.iotanalytics#ChannelStorage",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the channel to be updated.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation\n        of the channel.</p>"
           }
         },
         "retentionPeriod": {
@@ -4583,10 +4581,12 @@
             "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel. The retention period cannot be updated\n        if the channel's S3 storage is customer-managed.</p>"
           }
         },
-        "channelStorage": {
-          "target": "com.amazonaws.iotanalytics#ChannelStorage",
+        "channelName": {
+          "target": "com.amazonaws.iotanalytics#ChannelName",
           "traits": {
-            "smithy.api#documentation": "<p>Where channel data is stored. You may choose one of \"serviceManagedS3\" or \"customerManagedS3\" \n        storage. If not specified, the default is \"serviceManagedS3\". This cannot be changed after creation\n        of the channel.</p>"
+            "smithy.api#documentation": "<p>The name of the channel to be updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
           }
         }
       }
@@ -4633,6 +4633,13 @@
             "smithy.api#required": {}
           }
         },
+        "actions": {
+          "target": "com.amazonaws.iotanalytics#DatasetActions",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of \"DatasetAction\" objects.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "versioningConfiguration": {
           "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
           "traits": {
@@ -4643,13 +4650,6 @@
           "target": "com.amazonaws.iotanalytics#DatasetContentDeliveryRules",
           "traits": {
             "smithy.api#documentation": "<p>When data set contents are created they are delivered to destinations specified here.</p>"
-          }
-        },
-        "actions": {
-          "target": "com.amazonaws.iotanalytics#DatasetActions",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of \"DatasetAction\" objects.</p>",
-            "smithy.api#required": {}
           }
         },
         "retentionPeriod": {
@@ -4759,18 +4759,18 @@
     "com.amazonaws.iotanalytics#UpdatePipelineRequest": {
       "type": "structure",
       "members": {
+        "pipelineActivities": {
+          "target": "com.amazonaws.iotanalytics#PipelineActivities",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of \"PipelineActivity\" objects. Activities perform transformations on your messages, \n          such as removing, renaming or adding message attributes; filtering messages based on attribute \n          values; invoking your Lambda functions on messages for advanced processing; or performing \n          mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <b>PipelineActivity</b> objects and must \n          contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the \n          list must contain only one activity, for example:</p>\n         <p>\n            <code>pipelineActivities = [\n  {\n    \"channel\": { ... }\n  },\n  {\n    \"lambda\": { ... }\n  },\n  ...      \n]</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
         "pipelineName": {
           "target": "com.amazonaws.iotanalytics#PipelineName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the pipeline to update.</p>",
             "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "pipelineActivities": {
-          "target": "com.amazonaws.iotanalytics#PipelineActivities",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of \"PipelineActivity\" objects. Activities perform transformations on your messages, \n          such as removing, renaming or adding message attributes; filtering messages based on attribute \n          values; invoking your Lambda functions on messages for advanced processing; or performing \n          mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <b>PipelineActivity</b> objects and must \n          contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the \n          list must contain only one activity, for example:</p>\n         <p>\n            <code>pipelineActivities = [\n  {\n    \"channel\": { ... }\n  },\n  {\n    \"lambda\": { ... }\n  },\n  ...      \n]</code>\n         </p>",
             "smithy.api#required": {}
           }
         }
@@ -4779,12 +4779,6 @@
     "com.amazonaws.iotanalytics#Variable": {
       "type": "structure",
       "members": {
-        "stringValue": {
-          "target": "com.amazonaws.iotanalytics#StringValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the variable as a string.</p>"
-          }
-        },
         "outputFileUriValue": {
           "target": "com.amazonaws.iotanalytics#OutputFileUriValue",
           "traits": {
@@ -4798,17 +4792,23 @@
             "smithy.api#documentation": "<p>The value of the variable as a double (numeric).</p>"
           }
         },
+        "name": {
+          "target": "com.amazonaws.iotanalytics#VariableName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the variable.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "datasetContentVersionValue": {
           "target": "com.amazonaws.iotanalytics#DatasetContentVersionValue",
           "traits": {
             "smithy.api#documentation": "<p>The value of the variable as a structure that specifies a data set content version.</p>"
           }
         },
-        "name": {
-          "target": "com.amazonaws.iotanalytics#VariableName",
+        "stringValue": {
+          "target": "com.amazonaws.iotanalytics#StringValue",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the variable.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The value of the variable as a string.</p>"
           }
         }
       },
@@ -4840,16 +4840,16 @@
     "com.amazonaws.iotanalytics#VersioningConfiguration": {
       "type": "structure",
       "members": {
-        "maxVersions": {
-          "target": "com.amazonaws.iotanalytics#MaxVersions",
-          "traits": {
-            "smithy.api#documentation": "<p>How many versions of data set contents will be kept. The \"unlimited\" parameter must be false.</p>"
-          }
-        },
         "unlimited": {
           "target": "com.amazonaws.iotanalytics#UnlimitedVersioning",
           "traits": {
             "smithy.api#documentation": "<p>If true, unlimited versions of data set contents will be kept.</p>"
+          }
+        },
+        "maxVersions": {
+          "target": "com.amazonaws.iotanalytics#MaxVersions",
+          "traits": {
+            "smithy.api#documentation": "<p>How many versions of data set contents will be kept. The \"unlimited\" parameter must be false.</p>"
           }
         }
       },

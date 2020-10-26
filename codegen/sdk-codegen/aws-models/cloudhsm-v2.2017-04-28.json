@@ -32,12 +32,6 @@
     "com.amazonaws.cloudhsmv2#Backup": {
       "type": "structure",
       "members": {
-        "SourceRegion": {
-          "target": "com.amazonaws.cloudhsmv2#Region",
-          "traits": {
-            "smithy.api#documentation": "<p>The AWS Region that contains the source backup from which the new backup was\n      copied.</p>"
-          }
-        },
         "BackupId": {
           "target": "com.amazonaws.cloudhsmv2#BackupId",
           "traits": {
@@ -51,34 +45,10 @@
             "smithy.api#documentation": "<p>The date and time when the backup was copied from a source backup.</p>"
           }
         },
-        "DeleteTimestamp": {
-          "target": "com.amazonaws.cloudhsmv2#Timestamp",
+        "SourceRegion": {
+          "target": "com.amazonaws.cloudhsmv2#Region",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time when the backup will be permanently deleted.</p>"
-          }
-        },
-        "ClusterId": {
-          "target": "com.amazonaws.cloudhsmv2#ClusterId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the cluster that was backed up.</p>"
-          }
-        },
-        "SourceBackup": {
-          "target": "com.amazonaws.cloudhsmv2#BackupId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the source backup from which the new backup was\n      copied.</p>"
-          }
-        },
-        "CreateTimestamp": {
-          "target": "com.amazonaws.cloudhsmv2#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time when the backup was created.</p>"
-          }
-        },
-        "TagList": {
-          "target": "com.amazonaws.cloudhsmv2#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of tags for the backup.</p>"
+            "smithy.api#documentation": "<p>The AWS Region that contains the source backup from which the new backup was\n      copied.</p>"
           }
         },
         "SourceCluster": {
@@ -87,10 +57,40 @@
             "smithy.api#documentation": "<p>The identifier (ID) of the cluster containing the source backup from which the new\n      backup was copied.</p>"
           }
         },
+        "CreateTimestamp": {
+          "target": "com.amazonaws.cloudhsmv2#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the backup was created.</p>"
+          }
+        },
+        "SourceBackup": {
+          "target": "com.amazonaws.cloudhsmv2#BackupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (ID) of the source backup from which the new backup was\n      copied.</p>"
+          }
+        },
         "BackupState": {
           "target": "com.amazonaws.cloudhsmv2#BackupState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the backup.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.cloudhsmv2#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (ID) of the cluster that was backed up.</p>"
+          }
+        },
+        "DeleteTimestamp": {
+          "target": "com.amazonaws.cloudhsmv2#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the backup will be permanently deleted.</p>"
+          }
+        },
+        "TagList": {
+          "target": "com.amazonaws.cloudhsmv2#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tags for the backup.</p>"
           }
         }
       },
@@ -193,7 +193,7 @@
           "sdkId": "CloudHSM V2",
           "arnNamespace": "cloudhsm",
           "cloudFormationName": "CloudHSMV2",
-          "cloudTrailEventSource": "service.api.baldr.amazonaws.com"
+          "cloudTrailEventSource": "cloudhsmv2.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "cloudhsm"
@@ -222,28 +222,28 @@
     "com.amazonaws.cloudhsmv2#Certificates": {
       "type": "structure",
       "members": {
-        "ClusterCsr": {
-          "target": "com.amazonaws.cloudhsmv2#Cert",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster's certificate signing request (CSR). The CSR exists only when the cluster's\n      state is <code>UNINITIALIZED</code>.</p>"
-          }
-        },
         "HsmCertificate": {
           "target": "com.amazonaws.cloudhsmv2#Cert",
           "traits": {
             "smithy.api#documentation": "<p>The HSM certificate issued (signed) by the HSM hardware.</p>"
           }
         },
-        "ManufacturerHardwareCertificate": {
+        "ClusterCsr": {
           "target": "com.amazonaws.cloudhsmv2#Cert",
           "traits": {
-            "smithy.api#documentation": "<p>The HSM hardware certificate issued (signed) by the hardware manufacturer.</p>"
+            "smithy.api#documentation": "<p>The cluster's certificate signing request (CSR). The CSR exists only when the cluster's\n      state is <code>UNINITIALIZED</code>.</p>"
           }
         },
         "ClusterCertificate": {
           "target": "com.amazonaws.cloudhsmv2#Cert",
           "traits": {
             "smithy.api#documentation": "<p>The cluster certificate issued (signed) by the issuing certificate authority (CA) of\n      the cluster's owner.</p>"
+          }
+        },
+        "ManufacturerHardwareCertificate": {
+          "target": "com.amazonaws.cloudhsmv2#Cert",
+          "traits": {
+            "smithy.api#documentation": "<p>The HSM hardware certificate issued (signed) by the hardware manufacturer.</p>"
           }
         },
         "AwsHardwareCertificate": {
@@ -332,40 +332,28 @@
     "com.amazonaws.cloudhsmv2#Cluster": {
       "type": "structure",
       "members": {
-        "Certificates": {
-          "target": "com.amazonaws.cloudhsmv2#Certificates",
+        "HsmType": {
+          "target": "com.amazonaws.cloudhsmv2#HsmType",
           "traits": {
-            "smithy.api#documentation": "<p>Contains one or more certificates or a certificate signing request (CSR).</p>"
-          }
-        },
-        "BackupPolicy": {
-          "target": "com.amazonaws.cloudhsmv2#BackupPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster's backup policy.</p>"
-          }
-        },
-        "ClusterId": {
-          "target": "com.amazonaws.cloudhsmv2#ClusterId",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster's identifier (ID).</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.cloudhsmv2#ClusterState",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster's state.</p>"
-          }
-        },
-        "Hsms": {
-          "target": "com.amazonaws.cloudhsmv2#Hsms",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains information about the HSMs in the cluster.</p>"
+            "smithy.api#documentation": "<p>The type of HSM that the cluster contains.</p>"
           }
         },
         "VpcId": {
           "target": "com.amazonaws.cloudhsmv2#VpcId",
           "traits": {
             "smithy.api#documentation": "<p>The identifier (ID) of the virtual private cloud (VPC) that contains the\n      cluster.</p>"
+          }
+        },
+        "PreCoPassword": {
+          "target": "com.amazonaws.cloudhsmv2#PreCoPassword",
+          "traits": {
+            "smithy.api#documentation": "<p>The default password for the cluster's Pre-Crypto Officer (PRECO) user.</p>"
+          }
+        },
+        "TagList": {
+          "target": "com.amazonaws.cloudhsmv2#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tags for the cluster.</p>"
           }
         },
         "SourceBackupId": {
@@ -380,16 +368,28 @@
             "smithy.api#documentation": "<p>The identifier (ID) of the cluster's security group.</p>"
           }
         },
-        "TagList": {
-          "target": "com.amazonaws.cloudhsmv2#TagList",
+        "Hsms": {
+          "target": "com.amazonaws.cloudhsmv2#Hsms",
           "traits": {
-            "smithy.api#documentation": "<p>The list of tags for the cluster.</p>"
+            "smithy.api#documentation": "<p>Contains information about the HSMs in the cluster.</p>"
           }
         },
-        "PreCoPassword": {
-          "target": "com.amazonaws.cloudhsmv2#PreCoPassword",
+        "Certificates": {
+          "target": "com.amazonaws.cloudhsmv2#Certificates",
           "traits": {
-            "smithy.api#documentation": "<p>The default password for the cluster's Pre-Crypto Officer (PRECO) user.</p>"
+            "smithy.api#documentation": "<p>Contains one or more certificates or a certificate signing request (CSR).</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.cloudhsmv2#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster's identifier (ID).</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.cloudhsmv2#ClusterState",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster's state.</p>"
           }
         },
         "SubnetMapping": {
@@ -398,22 +398,22 @@
             "smithy.api#documentation": "<p>A map from availability zone to the cluster’s subnet in that availability zone.</p>"
           }
         },
-        "StateMessage": {
-          "target": "com.amazonaws.cloudhsmv2#StateMessage",
+        "BackupPolicy": {
+          "target": "com.amazonaws.cloudhsmv2#BackupPolicy",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the cluster's state.</p>"
-          }
-        },
-        "HsmType": {
-          "target": "com.amazonaws.cloudhsmv2#HsmType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of HSM that the cluster contains.</p>"
+            "smithy.api#documentation": "<p>The cluster's backup policy.</p>"
           }
         },
         "CreateTimestamp": {
           "target": "com.amazonaws.cloudhsmv2#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The date and time when the cluster was created.</p>"
+          }
+        },
+        "StateMessage": {
+          "target": "com.amazonaws.cloudhsmv2#StateMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the cluster's state.</p>"
           }
         }
       },
@@ -511,10 +511,11 @@
     "com.amazonaws.cloudhsmv2#CopyBackupToRegionRequest": {
       "type": "structure",
       "members": {
-        "TagList": {
-          "target": "com.amazonaws.cloudhsmv2#TagList",
+        "BackupId": {
+          "target": "com.amazonaws.cloudhsmv2#BackupId",
           "traits": {
-            "smithy.api#documentation": "<p>Tags to apply to the destination backup during creation. If you specify tags, only these tags will be applied to the destination backup. If you do not specify tags, the service copies tags from the source backup to the destination backup.</p>"
+            "smithy.api#documentation": "<p>The ID of the backup that will be copied to the destination region. </p>",
+            "smithy.api#required": {}
           }
         },
         "DestinationRegion": {
@@ -524,11 +525,10 @@
             "smithy.api#required": {}
           }
         },
-        "BackupId": {
-          "target": "com.amazonaws.cloudhsmv2#BackupId",
+        "TagList": {
+          "target": "com.amazonaws.cloudhsmv2#TagList",
           "traits": {
-            "smithy.api#documentation": "<p>The ID of the backup that will be copied to the destination region. </p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Tags to apply to the destination backup during creation. If you specify tags, only these tags will be applied to the destination backup. If you do not specify tags, the service copies tags from the source backup to the destination backup.</p>"
           }
         }
       }
@@ -579,29 +579,29 @@
     "com.amazonaws.cloudhsmv2#CreateClusterRequest": {
       "type": "structure",
       "members": {
-        "SourceBackupId": {
-          "target": "com.amazonaws.cloudhsmv2#BackupId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the cluster backup to restore. Use this value to restore the\n      cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.</p>"
-          }
-        },
         "TagList": {
           "target": "com.amazonaws.cloudhsmv2#TagList",
           "traits": {
             "smithy.api#documentation": "<p>Tags to apply to the CloudHSM cluster during creation.</p>"
           }
         },
-        "SubnetIds": {
-          "target": "com.amazonaws.cloudhsmv2#SubnetIds",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must\n      specify at least one subnet. If you specify multiple subnets, they must meet the following\n      criteria:</p>\n         <ul>\n            <li>\n               <p>All subnets must be in the same virtual private cloud (VPC).</p>\n            </li>\n            <li>\n               <p>You can specify only one subnet per Availability Zone.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
         "HsmType": {
           "target": "com.amazonaws.cloudhsmv2#HsmType",
           "traits": {
             "smithy.api#documentation": "<p>The type of HSM to use in the cluster. Currently the only allowed value is\n      <code>hsm1.medium</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SourceBackupId": {
+          "target": "com.amazonaws.cloudhsmv2#BackupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (ID) of the cluster backup to restore. Use this value to restore the\n      cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.</p>"
+          }
+        },
+        "SubnetIds": {
+          "target": "com.amazonaws.cloudhsmv2#SubnetIds",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must\n      specify at least one subnet. If you specify multiple subnets, they must meet the following\n      criteria:</p>\n         <ul>\n            <li>\n               <p>All subnets must be in the same virtual private cloud (VPC).</p>\n            </li>\n            <li>\n               <p>You can specify only one subnet per Availability Zone.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         }
@@ -650,11 +650,10 @@
     "com.amazonaws.cloudhsmv2#CreateHsmRequest": {
       "type": "structure",
       "members": {
-        "AvailabilityZone": {
-          "target": "com.amazonaws.cloudhsmv2#ExternalAz",
+        "IpAddress": {
+          "target": "com.amazonaws.cloudhsmv2#IpAddress",
           "traits": {
-            "smithy.api#documentation": "<p>The Availability Zone where you are creating the HSM. To find the cluster's\n      Availability Zones, use <a>DescribeClusters</a>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The HSM's IP address. If you specify an IP address, use an available address from the\n      subnet that maps to the Availability Zone where you are creating the HSM. If you don't specify\n      an IP address, one is chosen for you from that subnet.</p>"
           }
         },
         "ClusterId": {
@@ -664,10 +663,11 @@
             "smithy.api#required": {}
           }
         },
-        "IpAddress": {
-          "target": "com.amazonaws.cloudhsmv2#IpAddress",
+        "AvailabilityZone": {
+          "target": "com.amazonaws.cloudhsmv2#ExternalAz",
           "traits": {
-            "smithy.api#documentation": "<p>The HSM's IP address. If you specify an IP address, use an available address from the\n      subnet that maps to the Availability Zone where you are creating the HSM. If you don't specify\n      an IP address, one is chosen for you from that subnet.</p>"
+            "smithy.api#documentation": "<p>The Availability Zone where you are creating the HSM. To find the cluster's\n      Availability Zones, use <a>DescribeClusters</a>.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -822,16 +822,17 @@
     "com.amazonaws.cloudhsmv2#DeleteHsmRequest": {
       "type": "structure",
       "members": {
+        "ClusterId": {
+          "target": "com.amazonaws.cloudhsmv2#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier (ID) of the cluster that contains the HSM that you are\n      deleting.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "EniIp": {
           "target": "com.amazonaws.cloudhsmv2#IpAddress",
           "traits": {
             "smithy.api#documentation": "<p>The IP address of the elastic network interface (ENI) of the HSM that you are\n      deleting.</p>"
-          }
-        },
-        "EniId": {
-          "target": "com.amazonaws.cloudhsmv2#EniId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the elastic network interface (ENI) of the HSM that you are\n      deleting.</p>"
           }
         },
         "HsmId": {
@@ -840,11 +841,10 @@
             "smithy.api#documentation": "<p>The identifier (ID) of the HSM that you are deleting.</p>"
           }
         },
-        "ClusterId": {
-          "target": "com.amazonaws.cloudhsmv2#ClusterId",
+        "EniId": {
+          "target": "com.amazonaws.cloudhsmv2#EniId",
           "traits": {
-            "smithy.api#documentation": "<p>The identifier (ID) of the cluster that contains the HSM that you are\n      deleting.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The identifier (ID) of the elastic network interface (ENI) of the HSM that you are\n      deleting.</p>"
           }
         }
       }
@@ -980,10 +980,10 @@
     "com.amazonaws.cloudhsmv2#DescribeClustersRequest": {
       "type": "structure",
       "members": {
-        "Filters": {
-          "target": "com.amazonaws.cloudhsmv2#Filters",
+        "MaxResults": {
+          "target": "com.amazonaws.cloudhsmv2#MaxSize",
           "traits": {
-            "smithy.api#documentation": "<p>One or more filters to limit the items returned in the response.</p>\n         <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify\n      clusters by their cluster identifier (ID).</p>\n         <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual\n      private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p>\n         <p>Use the <code>states</code> filter to return only clusters that match the specified\n      state.</p>"
+            "smithy.api#documentation": "<p>The maximum number of clusters to return in the response. When there are more clusters\n      than the number you specify, the response contains a <code>NextToken</code> value.</p>"
           }
         },
         "NextToken": {
@@ -992,10 +992,10 @@
             "smithy.api#documentation": "<p>The <code>NextToken</code> value that you received in the previous response. Use this\n      value to get more clusters.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.cloudhsmv2#MaxSize",
+        "Filters": {
+          "target": "com.amazonaws.cloudhsmv2#Filters",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of clusters to return in the response. When there are more clusters\n      than the number you specify, the response contains a <code>NextToken</code> value.</p>"
+            "smithy.api#documentation": "<p>One or more filters to limit the items returned in the response.</p>\n         <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify\n      clusters by their cluster identifier (ID).</p>\n         <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual\n      private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p>\n         <p>Use the <code>states</code> filter to return only clusters that match the specified\n      state.</p>"
           }
         }
       }
@@ -1026,16 +1026,16 @@
             "smithy.api#documentation": "<p>The identifier (ID) of the cluster containing the source backup from which the new backup was copied.</p>"
           }
         },
-        "CreateTimestamp": {
-          "target": "com.amazonaws.cloudhsmv2#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time when both the source backup was created.</p>"
-          }
-        },
         "SourceBackup": {
           "target": "com.amazonaws.cloudhsmv2#BackupId",
           "traits": {
             "smithy.api#documentation": "<p>The identifier (ID) of the source backup from which the new backup was copied.</p>"
+          }
+        },
+        "CreateTimestamp": {
+          "target": "com.amazonaws.cloudhsmv2#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when both the source backup was created.</p>"
           }
         },
         "SourceRegion": {
@@ -1088,23 +1088,11 @@
     "com.amazonaws.cloudhsmv2#Hsm": {
       "type": "structure",
       "members": {
-        "SubnetId": {
-          "target": "com.amazonaws.cloudhsmv2#SubnetId",
-          "traits": {
-            "smithy.api#documentation": "<p>The subnet that contains the HSM's elastic network interface (ENI).</p>"
-          }
-        },
         "HsmId": {
           "target": "com.amazonaws.cloudhsmv2#HsmId",
           "traits": {
             "smithy.api#documentation": "<p>The HSM's identifier (ID).</p>",
             "smithy.api#required": {}
-          }
-        },
-        "StateMessage": {
-          "target": "com.amazonaws.cloudhsmv2#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the HSM's state.</p>"
           }
         },
         "EniId": {
@@ -1113,10 +1101,22 @@
             "smithy.api#documentation": "<p>The identifier (ID) of the HSM's elastic network interface (ENI).</p>"
           }
         },
+        "SubnetId": {
+          "target": "com.amazonaws.cloudhsmv2#SubnetId",
+          "traits": {
+            "smithy.api#documentation": "<p>The subnet that contains the HSM's elastic network interface (ENI).</p>"
+          }
+        },
         "State": {
           "target": "com.amazonaws.cloudhsmv2#HsmState",
           "traits": {
             "smithy.api#documentation": "<p>The HSM's state.</p>"
+          }
+        },
+        "AvailabilityZone": {
+          "target": "com.amazonaws.cloudhsmv2#ExternalAz",
+          "traits": {
+            "smithy.api#documentation": "<p>The Availability Zone that contains the HSM.</p>"
           }
         },
         "EniIp": {
@@ -1125,10 +1125,10 @@
             "smithy.api#documentation": "<p>The IP address of the HSM's elastic network interface (ENI).</p>"
           }
         },
-        "AvailabilityZone": {
-          "target": "com.amazonaws.cloudhsmv2#ExternalAz",
+        "StateMessage": {
+          "target": "com.amazonaws.cloudhsmv2#String",
           "traits": {
-            "smithy.api#documentation": "<p>The Availability Zone that contains the HSM.</p>"
+            "smithy.api#documentation": "<p>A description of the HSM's state.</p>"
           }
         },
         "ClusterId": {
@@ -1219,13 +1219,6 @@
     "com.amazonaws.cloudhsmv2#InitializeClusterRequest": {
       "type": "structure",
       "members": {
-        "SignedCert": {
-          "target": "com.amazonaws.cloudhsmv2#Cert",
-          "traits": {
-            "smithy.api#documentation": "<p>The cluster certificate issued (signed) by your issuing certificate authority (CA). The\n      certificate must be in PEM format and can contain a maximum of 5000 characters.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ClusterId": {
           "target": "com.amazonaws.cloudhsmv2#ClusterId",
           "traits": {
@@ -1237,6 +1230,13 @@
           "target": "com.amazonaws.cloudhsmv2#Cert",
           "traits": {
             "smithy.api#documentation": "<p>The issuing certificate of the issuing certificate authority (CA) that issued (signed)\n      the cluster certificate. You must use a self-signed certificate. The certificate used to sign the HSM CSR must be directly available, and thus must be the\n      root certificate. The certificate must be in PEM format and can contain a\n      maximum of 5000 characters.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SignedCert": {
+          "target": "com.amazonaws.cloudhsmv2#Cert",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster certificate issued (signed) by your issuing certificate authority (CA). The\n      certificate must be in PEM format and can contain a maximum of 5000 characters.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1311,17 +1311,17 @@
             "smithy.api#documentation": "<p>The <code>NextToken</code> value that you received in the previous response. Use this\n      value to get more tags.</p>"
           }
         },
+        "MaxResults": {
+          "target": "com.amazonaws.cloudhsmv2#MaxSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of tags to return in the response. When there are more tags than the\n      number you specify, the response contains a <code>NextToken</code> value.</p>"
+          }
+        },
         "ResourceId": {
           "target": "com.amazonaws.cloudhsmv2#ResourceId",
           "traits": {
             "smithy.api#documentation": "<p>The cluster identifier (ID) for the cluster whose tags you are getting. To find the\n      cluster ID, use <a>DescribeClusters</a>.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.cloudhsmv2#MaxSize",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of tags to return in the response. When there are more tags than the\n      number you specify, the response contains a <code>NextToken</code> value.</p>"
           }
         }
       }

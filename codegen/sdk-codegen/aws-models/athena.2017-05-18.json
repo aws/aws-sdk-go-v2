@@ -123,7 +123,7 @@
           "sdkId": "Athena",
           "arnNamespace": "athena",
           "cloudFormationName": "Athena",
-          "cloudTrailEventSource": "webservice.athena.amazonaws.com"
+          "cloudTrailEventSource": "athena.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "athena"
@@ -226,16 +226,16 @@
     "com.amazonaws.athena#BatchGetQueryExecutionOutput": {
       "type": "structure",
       "members": {
-        "UnprocessedQueryExecutionIds": {
-          "target": "com.amazonaws.athena#UnprocessedQueryExecutionIdList",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the query executions that failed to run.</p>"
-          }
-        },
         "QueryExecutions": {
           "target": "com.amazonaws.athena#QueryExecutionList",
           "traits": {
             "smithy.api#documentation": "<p>Information about a query execution.</p>"
+          }
+        },
+        "UnprocessedQueryExecutionIds": {
+          "target": "com.amazonaws.athena#UnprocessedQueryExecutionIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the query executions that failed to run.</p>"
           }
         }
       }
@@ -271,16 +271,16 @@
     "com.amazonaws.athena#Column": {
       "type": "structure",
       "members": {
-        "Comment": {
-          "target": "com.amazonaws.athena#CommentString",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional information about the column.</p>"
-          }
-        },
         "Type": {
           "target": "com.amazonaws.athena#TypeString",
           "traits": {
             "smithy.api#documentation": "<p>The data type of the column.</p>"
+          }
+        },
+        "Comment": {
+          "target": "com.amazonaws.athena#CommentString",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional information about the column.</p>"
           }
         },
         "Name": {
@@ -298,10 +298,10 @@
     "com.amazonaws.athena#ColumnInfo": {
       "type": "structure",
       "members": {
-        "Scale": {
-          "target": "com.amazonaws.athena#Integer",
+        "Nullable": {
+          "target": "com.amazonaws.athena#ColumnNullable",
           "traits": {
-            "smithy.api#documentation": "<p>For <code>DECIMAL</code> data types, specifies the total number of digits in the\n            fractional part of the value. Defaults to 0.</p>"
+            "smithy.api#documentation": "<p>Indicates the column's nullable status.</p>"
           }
         },
         "TableName": {
@@ -310,23 +310,10 @@
             "smithy.api#documentation": "<p>The table name for the query results.</p>"
           }
         },
-        "CaseSensitive": {
-          "target": "com.amazonaws.athena#Boolean",
+        "Precision": {
+          "target": "com.amazonaws.athena#Integer",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates whether values in the column are case-sensitive.</p>"
-          }
-        },
-        "CatalogName": {
-          "target": "com.amazonaws.athena#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The catalog to which the query results belong.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.athena#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the column.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>For <code>DECIMAL</code> data types, specifies the total number of digits, up to 38.\n            For performance reasons, we recommend up to 18 digits.</p>"
           }
         },
         "Type": {
@@ -336,10 +323,10 @@
             "smithy.api#required": {}
           }
         },
-        "Nullable": {
-          "target": "com.amazonaws.athena#ColumnNullable",
+        "CatalogName": {
+          "target": "com.amazonaws.athena#String",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates the column's nullable status.</p>"
+            "smithy.api#documentation": "<p>The catalog to which the query results belong.</p>"
           }
         },
         "Label": {
@@ -348,16 +335,29 @@
             "smithy.api#documentation": "<p>A column label.</p>"
           }
         },
-        "Precision": {
-          "target": "com.amazonaws.athena#Integer",
+        "Name": {
+          "target": "com.amazonaws.athena#String",
           "traits": {
-            "smithy.api#documentation": "<p>For <code>DECIMAL</code> data types, specifies the total number of digits, up to 38.\n            For performance reasons, we recommend up to 18 digits.</p>"
+            "smithy.api#documentation": "<p>The name of the column.</p>",
+            "smithy.api#required": {}
           }
         },
         "SchemaName": {
           "target": "com.amazonaws.athena#String",
           "traits": {
             "smithy.api#documentation": "<p>The schema name (database name) to which the query results belong.</p>"
+          }
+        },
+        "Scale": {
+          "target": "com.amazonaws.athena#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>For <code>DECIMAL</code> data types, specifies the total number of digits in the\n            fractional part of the value. Defaults to 0.</p>"
+          }
+        },
+        "CaseSensitive": {
+          "target": "com.amazonaws.athena#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether values in the column are case-sensitive.</p>"
           }
         }
       },
@@ -429,6 +429,18 @@
     "com.amazonaws.athena#CreateDataCatalogInput": {
       "type": "structure",
       "members": {
+        "Description": {
+          "target": "com.amazonaws.athena#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the data catalog to be created.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.athena#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of comma separated tags to add to the data catalog that is created.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
@@ -447,18 +459,6 @@
           "target": "com.amazonaws.athena#ParametersMap",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for creating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.athena#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of comma separated tags to add to the data catalog that is created.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.athena#DescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the data catalog to be created.</p>"
           }
         }
       }
@@ -491,10 +491,25 @@
     "com.amazonaws.athena#CreateNamedQueryInput": {
       "type": "structure",
       "members": {
-        "WorkGroup": {
-          "target": "com.amazonaws.athena#WorkGroupName",
+        "Name": {
+          "target": "com.amazonaws.athena#NameString",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the workgroup in which the named query is being created.</p>"
+            "smithy.api#documentation": "<p>The query name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Database": {
+          "target": "com.amazonaws.athena#DatabaseString",
+          "traits": {
+            "smithy.api#documentation": "<p>The database to which the query belongs.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QueryString": {
+          "target": "com.amazonaws.athena#QueryString",
+          "traits": {
+            "smithy.api#documentation": "<p>The contents of the query with all query statements.</p>",
+            "smithy.api#required": {}
           }
         },
         "Description": {
@@ -510,25 +525,10 @@
             "smithy.api#idempotencyToken": {}
           }
         },
-        "QueryString": {
-          "target": "com.amazonaws.athena#QueryString",
+        "WorkGroup": {
+          "target": "com.amazonaws.athena#WorkGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The contents of the query with all query statements.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Database": {
-          "target": "com.amazonaws.athena#DatabaseString",
-          "traits": {
-            "smithy.api#documentation": "<p>The database to which the query belongs.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.athena#NameString",
-          "traits": {
-            "smithy.api#documentation": "<p>The query name.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The name of the workgroup in which the named query is being created.</p>"
           }
         }
       }
@@ -567,16 +567,17 @@
     "com.amazonaws.athena#CreateWorkGroupInput": {
       "type": "structure",
       "members": {
+        "Name": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The workgroup name.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Tags": {
           "target": "com.amazonaws.athena#TagList",
           "traits": {
             "smithy.api#documentation": "<p>A list of comma separated tags to add to the workgroup that is created.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.athena#WorkGroupDescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>The workgroup description.</p>"
           }
         },
         "Configuration": {
@@ -585,11 +586,10 @@
             "smithy.api#documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3 where\n            query results are stored, the encryption configuration, if any, used for encrypting\n            query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the\n            limit for the amount of bytes scanned (cutoff) per query, if it is specified, and\n            whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the\n            WorkGroupConfiguration override client-side settings. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
           }
         },
-        "Name": {
-          "target": "com.amazonaws.athena#WorkGroupName",
+        "Description": {
+          "target": "com.amazonaws.athena#WorkGroupDescriptionString",
           "traits": {
-            "smithy.api#documentation": "<p>The workgroup name.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The workgroup description.</p>"
           }
         }
       }
@@ -601,19 +601,6 @@
     "com.amazonaws.athena#DataCatalog": {
       "type": "structure",
       "members": {
-        "Description": {
-          "target": "com.amazonaws.athena#DescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional description of the data catalog.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.athena#CatalogNameString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the data catalog. The catalog name must be unique for the AWS account and\n            can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Type": {
           "target": "com.amazonaws.athena#DataCatalogType",
           "traits": {
@@ -626,6 +613,19 @@
           "traits": {
             "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for the data catalog. This is a\n            mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
           }
+        },
+        "Description": {
+          "target": "com.amazonaws.athena#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional description of the data catalog.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.athena#CatalogNameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data catalog. The catalog name must be unique for the AWS account and\n            can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>",
+            "smithy.api#required": {}
+          }
         }
       },
       "traits": {
@@ -635,16 +635,16 @@
     "com.amazonaws.athena#DataCatalogSummary": {
       "type": "structure",
       "members": {
-        "CatalogName": {
-          "target": "com.amazonaws.athena#CatalogNameString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the data catalog.</p>"
-          }
-        },
         "Type": {
           "target": "com.amazonaws.athena#DataCatalogType",
           "traits": {
             "smithy.api#documentation": "<p>The data catalog type.</p>"
+          }
+        },
+        "CatalogName": {
+          "target": "com.amazonaws.athena#CatalogNameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data catalog.</p>"
           }
         }
       },
@@ -680,12 +680,6 @@
     "com.amazonaws.athena#Database": {
       "type": "structure",
       "members": {
-        "Parameters": {
-          "target": "com.amazonaws.athena#ParametersMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A set of custom key/value pairs.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.athena#NameString",
           "traits": {
@@ -697,6 +691,12 @@
           "target": "com.amazonaws.athena#DescriptionString",
           "traits": {
             "smithy.api#documentation": "<p>An optional description of the database.</p>"
+          }
+        },
+        "Parameters": {
+          "target": "com.amazonaws.athena#ParametersMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of custom key/value pairs.</p>"
           }
         }
       },
@@ -834,17 +834,17 @@
     "com.amazonaws.athena#DeleteWorkGroupInput": {
       "type": "structure",
       "members": {
-        "RecursiveDeleteOption": {
-          "target": "com.amazonaws.athena#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any\n            named queries.</p>"
-          }
-        },
         "WorkGroup": {
           "target": "com.amazonaws.athena#WorkGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The unique name of the workgroup to delete.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "RecursiveDeleteOption": {
+          "target": "com.amazonaws.athena#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any\n            named queries.</p>"
           }
         }
       }
@@ -993,17 +993,17 @@
     "com.amazonaws.athena#GetDatabaseInput": {
       "type": "structure",
       "members": {
-        "DatabaseName": {
-          "target": "com.amazonaws.athena#NameString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the database to return.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "CatalogName": {
           "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
             "smithy.api#documentation": "<p>The name of the data catalog that contains the database to return.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DatabaseName": {
+          "target": "com.amazonaws.athena#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database to return.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1134,10 +1134,10 @@
     "com.amazonaws.athena#GetQueryResultsInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
+        "MaxResults": {
+          "target": "com.amazonaws.athena#MaxQueryResults",
           "traits": {
-            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+            "smithy.api#documentation": "<p>The maximum number of results (rows) to return in this request.</p>"
           }
         },
         "QueryExecutionId": {
@@ -1147,10 +1147,10 @@
             "smithy.api#required": {}
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.athena#MaxQueryResults",
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
           "traits": {
-            "smithy.api#documentation": "<p>The maximum number of results (rows) to return in this request.</p>"
+            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
           }
         }
       }
@@ -1158,12 +1158,6 @@
     "com.amazonaws.athena#GetQueryResultsOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
-          }
-        },
         "ResultSet": {
           "target": "com.amazonaws.athena#ResultSet",
           "traits": {
@@ -1174,6 +1168,12 @@
           "target": "com.amazonaws.athena#Long",
           "traits": {
             "smithy.api#documentation": "<p>The number of rows inserted with a CREATE TABLE AS SELECT statement. </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
           }
         }
       }
@@ -1204,6 +1204,13 @@
     "com.amazonaws.athena#GetTableMetadataInput": {
       "type": "structure",
       "members": {
+        "DatabaseName": {
+          "target": "com.amazonaws.athena#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database that contains the table metadata to return.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "CatalogName": {
           "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
@@ -1215,13 +1222,6 @@
           "target": "com.amazonaws.athena#NameString",
           "traits": {
             "smithy.api#documentation": "<p>The name of the table for which metadata is returned.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DatabaseName": {
-          "target": "com.amazonaws.athena#NameString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the database that contains the table metadata to return.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1422,11 +1422,10 @@
     "com.amazonaws.athena#ListDatabasesInput": {
       "type": "structure",
       "members": {
-        "CatalogName": {
-          "target": "com.amazonaws.athena#CatalogNameString",
+        "MaxResults": {
+          "target": "com.amazonaws.athena#MaxDatabasesCount",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the data catalog that contains the databases to return.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
           }
         },
         "NextToken": {
@@ -1435,10 +1434,11 @@
             "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
           }
         },
-        "MaxResults": {
-          "target": "com.amazonaws.athena#MaxDatabasesCount",
+        "CatalogName": {
+          "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+            "smithy.api#documentation": "<p>The name of the data catalog that contains the databases to return.</p>",
+            "smithy.api#required": {}
           }
         }
       }
@@ -1446,16 +1446,16 @@
     "com.amazonaws.athena#ListDatabasesOutput": {
       "type": "structure",
       "members": {
-        "DatabaseList": {
-          "target": "com.amazonaws.athena#DatabaseList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of databases from a data catalog.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.athena#Token",
           "traits": {
             "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the NextToken\n            from the response object of the previous page call.</p>"
+          }
+        },
+        "DatabaseList": {
+          "target": "com.amazonaws.athena#DatabaseList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of databases from a data catalog.</p>"
           }
         }
       }
@@ -1488,6 +1488,12 @@
     "com.amazonaws.athena#ListNamedQueriesInput": {
       "type": "structure",
       "members": {
+        "WorkGroup": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the workgroup from which the named queries are being returned. If a\n            workgroup is not specified, the saved queries for the primary workgroup are\n            returned.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.athena#Token",
           "traits": {
@@ -1499,28 +1505,22 @@
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of queries to return in this request.</p>"
           }
-        },
-        "WorkGroup": {
-          "target": "com.amazonaws.athena#WorkGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the workgroup from which the named queries are being returned. If a\n            workgroup is not specified, the saved queries for the primary workgroup are\n            returned.</p>"
-          }
         }
       }
     },
     "com.amazonaws.athena#ListNamedQueriesOutput": {
       "type": "structure",
       "members": {
-        "NamedQueryIds": {
-          "target": "com.amazonaws.athena#NamedQueryIdList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of unique query IDs.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.athena#Token",
           "traits": {
             "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+          }
+        },
+        "NamedQueryIds": {
+          "target": "com.amazonaws.athena#NamedQueryIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of unique query IDs.</p>"
           }
         }
       }
@@ -1553,6 +1553,12 @@
     "com.amazonaws.athena#ListQueryExecutionsInput": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.athena#MaxQueryExecutionsCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of query executions to return in this request.</p>"
+          }
+        },
         "NextToken": {
           "target": "com.amazonaws.athena#Token",
           "traits": {
@@ -1564,28 +1570,22 @@
           "traits": {
             "smithy.api#documentation": "<p>The name of the workgroup from which queries are being returned. If a workgroup is not\n            specified, a list of available query execution IDs for the queries in the primary\n            workgroup is returned.</p>"
           }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.athena#MaxQueryExecutionsCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of query executions to return in this request.</p>"
-          }
         }
       }
     },
     "com.amazonaws.athena#ListQueryExecutionsOutput": {
       "type": "structure",
       "members": {
-        "QueryExecutionIds": {
-          "target": "com.amazonaws.athena#QueryExecutionIdList",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique IDs of each query execution as an array of strings.</p>"
-          }
-        },
         "NextToken": {
           "target": "com.amazonaws.athena#Token",
           "traits": {
             "smithy.api#documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
+          }
+        },
+        "QueryExecutionIds": {
+          "target": "com.amazonaws.athena#QueryExecutionIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique IDs of each query execution as an array of strings.</p>"
           }
         }
       }
@@ -1622,6 +1622,12 @@
     "com.amazonaws.athena#ListTableMetadataInput": {
       "type": "structure",
       "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.athena#MaxTableMetadataCount",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+          }
+        },
         "DatabaseName": {
           "target": "com.amazonaws.athena#NameString",
           "traits": {
@@ -1629,22 +1635,16 @@
             "smithy.api#required": {}
           }
         },
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the NextToken\n            from the response object of the previous page call.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.athena#MaxTableMetadataCount",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
-          }
-        },
         "Expression": {
           "target": "com.amazonaws.athena#ExpressionString",
           "traits": {
             "smithy.api#documentation": "<p>A regex filter that pattern-matches table names. If no expression is supplied,\n            metadata for all tables are listed.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the NextToken\n            from the response object of the previous page call.</p>"
           }
         },
         "CatalogName": {
@@ -1659,16 +1659,16 @@
     "com.amazonaws.athena#ListTableMetadataOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the NextToken\n            from the response object of the previous page call.</p>"
-          }
-        },
         "TableMetadataList": {
           "target": "com.amazonaws.athena#TableMetadataList",
           "traits": {
             "smithy.api#documentation": "<p>A list of table metadata.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the NextToken\n            from the response object of the previous page call.</p>"
           }
         }
       }
@@ -1711,17 +1711,17 @@
             "smithy.api#documentation": "<p>The maximum number of results to be returned per request that lists the tags for the\n            resource.</p>"
           }
         },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results for\n            this request, where the request lists the tags for the resource with the specified\n            ARN.</p>"
+          }
+        },
         "ResourceARN": {
           "target": "com.amazonaws.athena#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>Lists the tags for the resource with the specified ARN.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results for\n            this request, where the request lists the tags for the resource with the specified\n            ARN.</p>"
           }
         }
       }
@@ -1729,16 +1729,16 @@
     "com.amazonaws.athena#ListTagsForResourceOutput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
-          }
-        },
         "Tags": {
           "target": "com.amazonaws.athena#TagList",
           "traits": {
             "smithy.api#documentation": "<p>The list of tags associated with the specified resource.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
           }
         }
       }
@@ -1771,16 +1771,16 @@
     "com.amazonaws.athena#ListWorkGroupsInput": {
       "type": "structure",
       "members": {
-        "NextToken": {
-          "target": "com.amazonaws.athena#Token",
-          "traits": {
-            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
-          }
-        },
         "MaxResults": {
           "target": "com.amazonaws.athena#MaxWorkGroupsCount",
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of workgroups to return in this request.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.athena#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
           }
         }
       }
@@ -1911,6 +1911,25 @@
     "com.amazonaws.athena#NamedQuery": {
       "type": "structure",
       "members": {
+        "Description": {
+          "target": "com.amazonaws.athena#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>The query description.</p>"
+          }
+        },
+        "WorkGroup": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the workgroup that contains the named query.</p>"
+          }
+        },
+        "Database": {
+          "target": "com.amazonaws.athena#DatabaseString",
+          "traits": {
+            "smithy.api#documentation": "<p>The database to which the query belongs.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Name": {
           "target": "com.amazonaws.athena#NameString",
           "traits": {
@@ -1929,25 +1948,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The SQL query statements that comprise the query.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.athena#DescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>The query description.</p>"
-          }
-        },
-        "Database": {
-          "target": "com.amazonaws.athena#DatabaseString",
-          "traits": {
-            "smithy.api#documentation": "<p>The database to which the query belongs.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "WorkGroup": {
-          "target": "com.amazonaws.athena#WorkGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the workgroup that contains the named query.</p>"
           }
         }
       },
@@ -1997,6 +1997,24 @@
     "com.amazonaws.athena#QueryExecution": {
       "type": "structure",
       "members": {
+        "StatementType": {
+          "target": "com.amazonaws.athena#StatementType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or\n                <code>DESCRIBE <table></code>.</p>"
+          }
+        },
+        "Query": {
+          "target": "com.amazonaws.athena#QueryString",
+          "traits": {
+            "smithy.api#documentation": "<p>The SQL query statements which the query execution ran.</p>"
+          }
+        },
+        "WorkGroup": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the workgroup in which the query ran.</p>"
+          }
+        },
         "Statistics": {
           "target": "com.amazonaws.athena#QueryExecutionStatistics",
           "traits": {
@@ -2009,22 +2027,10 @@
             "smithy.api#documentation": "<p>The database in which the query execution occurred.</p>"
           }
         },
-        "Query": {
-          "target": "com.amazonaws.athena#QueryString",
-          "traits": {
-            "smithy.api#documentation": "<p>The SQL query statements which the query execution ran.</p>"
-          }
-        },
         "Status": {
           "target": "com.amazonaws.athena#QueryExecutionStatus",
           "traits": {
             "smithy.api#documentation": "<p>The completion date, current state, submission time, and state change reason (if\n            applicable) for the query execution.</p>"
-          }
-        },
-        "WorkGroup": {
-          "target": "com.amazonaws.athena#WorkGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the workgroup in which the query ran.</p>"
           }
         },
         "ResultConfiguration": {
@@ -2038,12 +2044,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The unique identifier for each query execution.</p>"
           }
-        },
-        "StatementType": {
-          "target": "com.amazonaws.athena#StatementType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of query statement that was run. <code>DDL</code> indicates DDL query\n            statements. <code>DML</code> indicates DML (Data Manipulation Language) query\n            statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates\n            query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or\n                <code>DESCRIBE <table></code>.</p>"
-          }
         }
       },
       "traits": {
@@ -2053,16 +2053,16 @@
     "com.amazonaws.athena#QueryExecutionContext": {
       "type": "structure",
       "members": {
-        "Database": {
-          "target": "com.amazonaws.athena#DatabaseString",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the database used in the query execution.</p>"
-          }
-        },
         "Catalog": {
           "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
             "smithy.api#documentation": "<p>The name of the data catalog used in the query execution.</p>"
+          }
+        },
+        "Database": {
+          "target": "com.amazonaws.athena#DatabaseString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database used in the query execution.</p>"
           }
         }
       },
@@ -2121,22 +2121,10 @@
     "com.amazonaws.athena#QueryExecutionStatistics": {
       "type": "structure",
       "members": {
-        "DataManifestLocation": {
-          "target": "com.amazonaws.athena#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The location and file name of a data manifest file. The manifest file is saved to the\n            Athena query results location in Amazon S3. The manifest file tracks files that the\n            query wrote to Amazon S3. If the query fails, the manifest file also tracks files that\n            the query intended to write. The manifest is useful for identifying orphaned files\n            resulting from a failed query. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with Query Results, Output Files, and\n                Query History</a> in the <i>Amazon Athena User Guide</i>.</p>"
-          }
-        },
-        "QueryQueueTimeInMillis": {
+        "EngineExecutionTimeInMillis": {
           "target": "com.amazonaws.athena#Long",
           "traits": {
-            "smithy.api#documentation": "<p>The number of milliseconds that the query was in your query queue waiting for\n            resources. Note that if transient errors occur, Athena might automatically add the query\n            back to the queue.</p>"
-          }
-        },
-        "ServiceProcessingTimeInMillis": {
-          "target": "com.amazonaws.athena#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of milliseconds that Athena took to finalize and publish the query results\n            after the query engine finished running the query.</p>"
+            "smithy.api#documentation": "<p>The number of milliseconds that the query took to execute.</p>"
           }
         },
         "TotalExecutionTimeInMillis": {
@@ -2145,10 +2133,16 @@
             "smithy.api#documentation": "<p>The number of milliseconds that Athena took to run the query.</p>"
           }
         },
-        "QueryPlanningTimeInMillis": {
+        "QueryQueueTimeInMillis": {
           "target": "com.amazonaws.athena#Long",
           "traits": {
-            "smithy.api#documentation": "<p>The number of milliseconds that Athena took to plan the query processing flow. This\n            includes the time spent retrieving table partitions from the data source. Note that\n            because the query engine performs the query planning, query planning time is a subset of\n            engine processing time.</p>"
+            "smithy.api#documentation": "<p>The number of milliseconds that the query was in your query queue waiting for\n            resources. Note that if transient errors occur, Athena might automatically add the query\n            back to the queue.</p>"
+          }
+        },
+        "DataManifestLocation": {
+          "target": "com.amazonaws.athena#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The location and file name of a data manifest file. The manifest file is saved to the\n            Athena query results location in Amazon S3. The manifest file tracks files that the\n            query wrote to Amazon S3. If the query fails, the manifest file also tracks files that\n            the query intended to write. The manifest is useful for identifying orphaned files\n            resulting from a failed query. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with Query Results, Output Files, and\n                Query History</a> in the <i>Amazon Athena User Guide</i>.</p>"
           }
         },
         "DataScannedInBytes": {
@@ -2157,10 +2151,16 @@
             "smithy.api#documentation": "<p>The number of bytes in the data that was queried.</p>"
           }
         },
-        "EngineExecutionTimeInMillis": {
+        "QueryPlanningTimeInMillis": {
           "target": "com.amazonaws.athena#Long",
           "traits": {
-            "smithy.api#documentation": "<p>The number of milliseconds that the query took to execute.</p>"
+            "smithy.api#documentation": "<p>The number of milliseconds that Athena took to plan the query processing flow. This\n            includes the time spent retrieving table partitions from the data source. Note that\n            because the query engine performs the query planning, query planning time is a subset of\n            engine processing time.</p>"
+          }
+        },
+        "ServiceProcessingTimeInMillis": {
+          "target": "com.amazonaws.athena#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of milliseconds that Athena took to finalize and publish the query results\n            after the query engine finished running the query.</p>"
           }
         }
       },
@@ -2171,18 +2171,6 @@
     "com.amazonaws.athena#QueryExecutionStatus": {
       "type": "structure",
       "members": {
-        "State": {
-          "target": "com.amazonaws.athena#QueryExecutionState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of query execution. <code>QUEUED</code> indicates that the query has been\n            submitted to the service, and Athena will execute the query as soon as resources are\n            available. <code>RUNNING</code> indicates that the query is in execution phase.\n                <code>SUCCEEDED</code> indicates that the query completed without errors.\n                <code>FAILED</code> indicates that the query experienced an error and did not\n            complete processing. <code>CANCELLED</code> indicates that a user input interrupted\n            query execution.</p>\n        <note>\n            <p>Athena automatically retries your queries in cases of certain transient errors. As\n                a result, you may see the query state transition from <code>RUNNING</code> or\n                    <code>FAILED</code> to <code>QUEUED</code>. </p>\n        </note>"
-          }
-        },
-        "CompletionDateTime": {
-          "target": "com.amazonaws.athena#Date",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the query completed.</p>"
-          }
-        },
         "SubmissionDateTime": {
           "target": "com.amazonaws.athena#Date",
           "traits": {
@@ -2193,6 +2181,18 @@
           "target": "com.amazonaws.athena#String",
           "traits": {
             "smithy.api#documentation": "<p>Further detail about the status of the query.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.athena#QueryExecutionState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of query execution. <code>QUEUED</code> indicates that the query has been\n            submitted to the service, and Athena will execute the query as soon as resources are\n            available. <code>RUNNING</code> indicates that the query is in execution phase.\n                <code>SUCCEEDED</code> indicates that the query completed without errors.\n                <code>FAILED</code> indicates that the query experienced an error and did not\n            complete processing. <code>CANCELLED</code> indicates that a user input interrupted\n            query execution.</p>\n        <note>\n            <p>Athena automatically retries your queries in cases of certain transient errors. As\n                a result, you may see the query state transition from <code>RUNNING</code> or\n                    <code>FAILED</code> to <code>QUEUED</code>. </p>\n        </note>"
+          }
+        },
+        "CompletionDateTime": {
+          "target": "com.amazonaws.athena#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the query completed.</p>"
           }
         }
       },
@@ -2212,11 +2212,11 @@
     "com.amazonaws.athena#ResourceNotFoundException": {
       "type": "structure",
       "members": {
-        "ResourceName": {
-          "target": "com.amazonaws.athena#AmazonResourceName"
-        },
         "Message": {
           "target": "com.amazonaws.athena#ErrorMessage"
+        },
+        "ResourceName": {
+          "target": "com.amazonaws.athena#AmazonResourceName"
         }
       },
       "traits": {
@@ -2227,16 +2227,16 @@
     "com.amazonaws.athena#ResultConfiguration": {
       "type": "structure",
       "members": {
-        "EncryptionConfiguration": {
-          "target": "com.amazonaws.athena#EncryptionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for\n            example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information. This is a\n            client-side setting. If workgroup settings override client-side settings, then the query\n            uses the encryption configuration that is specified for the workgroup, and also uses the\n            location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
-          }
-        },
         "OutputLocation": {
           "target": "com.amazonaws.athena#String",
           "traits": {
             "smithy.api#documentation": "<p>The location in Amazon S3 where your query results are stored, such as\n                <code>s3://path/to/query/bucket/</code>. To run the query, you must specify the\n            query results location using one of the ways: either for individual queries using either\n            this setting (client-side), or in the workgroup, using <a>WorkGroupConfiguration</a>. If none of them is set, Athena issues an error\n            that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a>. If\n            workgroup settings override client-side settings, then the query uses the settings\n            specified for the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+          }
+        },
+        "EncryptionConfiguration": {
+          "target": "com.amazonaws.athena#EncryptionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for\n            example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information. This is a\n            client-side setting. If workgroup settings override client-side settings, then the query\n            uses the encryption configuration that is specified for the workgroup, and also uses the\n            location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
           }
         }
       },
@@ -2247,18 +2247,6 @@
     "com.amazonaws.athena#ResultConfigurationUpdates": {
       "type": "structure",
       "members": {
-        "EncryptionConfiguration": {
-          "target": "com.amazonaws.athena#EncryptionConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>The encryption configuration for the query results.</p>"
-          }
-        },
-        "RemoveOutputLocation": {
-          "target": "com.amazonaws.athena#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the OutputLocation in\n            ResultConfigurationUpdates (the client-side setting), the OutputLocation in the\n            workgroup's ResultConfiguration will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
-          }
-        },
         "RemoveEncryptionConfiguration": {
           "target": "com.amazonaws.athena#BoxedBoolean",
           "traits": {
@@ -2270,6 +2258,18 @@
           "traits": {
             "smithy.api#documentation": "<p>The location in Amazon S3 where your query results are stored, such as\n                <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a> If\n            workgroup settings override client-side settings, then the query uses the location for\n            the query results and the encryption configuration that are specified for the workgroup.\n            The \"workgroup settings override\" is specified in EnforceWorkGroupConfiguration\n            (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
           }
+        },
+        "RemoveOutputLocation": {
+          "target": "com.amazonaws.athena#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the OutputLocation in\n            ResultConfigurationUpdates (the client-side setting), the OutputLocation in the\n            workgroup's ResultConfiguration will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+          }
+        },
+        "EncryptionConfiguration": {
+          "target": "com.amazonaws.athena#EncryptionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption configuration for the query results.</p>"
+          }
         }
       },
       "traits": {
@@ -2279,16 +2279,16 @@
     "com.amazonaws.athena#ResultSet": {
       "type": "structure",
       "members": {
-        "ResultSetMetadata": {
-          "target": "com.amazonaws.athena#ResultSetMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata that describes the column structure and data types of a table of query\n            results.</p>"
-          }
-        },
         "Rows": {
           "target": "com.amazonaws.athena#RowList",
           "traits": {
             "smithy.api#documentation": "<p>The rows in the table.</p>"
+          }
+        },
+        "ResultSetMetadata": {
+          "target": "com.amazonaws.athena#ResultSetMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata that describes the column structure and data types of a table of query\n            results.</p>"
           }
         }
       },
@@ -2357,18 +2357,6 @@
     "com.amazonaws.athena#StartQueryExecutionInput": {
       "type": "structure",
       "members": {
-        "QueryExecutionContext": {
-          "target": "com.amazonaws.athena#QueryExecutionContext",
-          "traits": {
-            "smithy.api#documentation": "<p>The database within which the query executes.</p>"
-          }
-        },
-        "ResultConfiguration": {
-          "target": "com.amazonaws.athena#ResultConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies information about where and how to save the results of the query execution.\n            If the query runs in a workgroup, then workgroup's settings may override query settings.\n            This affects the query results location. The workgroup settings override is specified in\n            EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
-          }
-        },
         "QueryString": {
           "target": "com.amazonaws.athena#QueryString",
           "traits": {
@@ -2387,6 +2375,18 @@
           "target": "com.amazonaws.athena#WorkGroupName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the workgroup in which the query is being started.</p>"
+          }
+        },
+        "QueryExecutionContext": {
+          "target": "com.amazonaws.athena#QueryExecutionContext",
+          "traits": {
+            "smithy.api#documentation": "<p>The database within which the query executes.</p>"
+          }
+        },
+        "ResultConfiguration": {
+          "target": "com.amazonaws.athena#ResultConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies information about where and how to save the results of the query execution.\n            If the query runs in a workgroup, then workgroup's settings may override query settings.\n            This affects the query results location. The workgroup settings override is specified in\n            EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
           }
         }
       }
@@ -2465,36 +2465,6 @@
     "com.amazonaws.athena#TableMetadata": {
       "type": "structure",
       "members": {
-        "TableType": {
-          "target": "com.amazonaws.athena#TableTypeString",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of table. In Athena, only <code>EXTERNAL_TABLE</code> is supported.</p>"
-          }
-        },
-        "PartitionKeys": {
-          "target": "com.amazonaws.athena#ColumnList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the partition keys in the table.</p>"
-          }
-        },
-        "Parameters": {
-          "target": "com.amazonaws.athena#ParametersMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A set of custom key/value pairs for table properties.</p>"
-          }
-        },
-        "LastAccessTime": {
-          "target": "com.amazonaws.athena#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The last time the table was accessed.</p>"
-          }
-        },
-        "Columns": {
-          "target": "com.amazonaws.athena#ColumnList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the columns in the table.</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.athena#NameString",
           "traits": {
@@ -2506,6 +2476,36 @@
           "target": "com.amazonaws.athena#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The time that the table was created.</p>"
+          }
+        },
+        "LastAccessTime": {
+          "target": "com.amazonaws.athena#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The last time the table was accessed.</p>"
+          }
+        },
+        "PartitionKeys": {
+          "target": "com.amazonaws.athena#ColumnList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the partition keys in the table.</p>"
+          }
+        },
+        "Columns": {
+          "target": "com.amazonaws.athena#ColumnList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the columns in the table.</p>"
+          }
+        },
+        "Parameters": {
+          "target": "com.amazonaws.athena#ParametersMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of custom key/value pairs for table properties.</p>"
+          }
+        },
+        "TableType": {
+          "target": "com.amazonaws.athena#TableTypeString",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of table. In Athena, only <code>EXTERNAL_TABLE</code> is supported.</p>"
           }
         }
       },
@@ -2651,11 +2651,11 @@
     "com.amazonaws.athena#TooManyRequestsException": {
       "type": "structure",
       "members": {
-        "Reason": {
-          "target": "com.amazonaws.athena#ThrottleReason"
-        },
         "Message": {
           "target": "com.amazonaws.athena#ErrorMessage"
+        },
+        "Reason": {
+          "target": "com.amazonaws.athena#ThrottleReason"
         }
       },
       "traits": {
@@ -2676,10 +2676,10 @@
     "com.amazonaws.athena#UnprocessedNamedQueryId": {
       "type": "structure",
       "members": {
-        "ErrorMessage": {
-          "target": "com.amazonaws.athena#ErrorMessage",
+        "NamedQueryId": {
+          "target": "com.amazonaws.athena#NamedQueryId",
           "traits": {
-            "smithy.api#documentation": "<p>The error message returned when the processing request for the named query failed, if\n            applicable.</p>"
+            "smithy.api#documentation": "<p>The unique identifier of the named query.</p>"
           }
         },
         "ErrorCode": {
@@ -2688,10 +2688,10 @@
             "smithy.api#documentation": "<p>The error code returned when the processing request for the named query failed, if\n            applicable.</p>"
           }
         },
-        "NamedQueryId": {
-          "target": "com.amazonaws.athena#NamedQueryId",
+        "ErrorMessage": {
+          "target": "com.amazonaws.athena#ErrorMessage",
           "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the named query.</p>"
+            "smithy.api#documentation": "<p>The error message returned when the processing request for the named query failed, if\n            applicable.</p>"
           }
         }
       },
@@ -2708,16 +2708,16 @@
     "com.amazonaws.athena#UnprocessedQueryExecutionId": {
       "type": "structure",
       "members": {
-        "ErrorCode": {
-          "target": "com.amazonaws.athena#ErrorCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The error code returned when the query execution failed to process, if\n            applicable.</p>"
-          }
-        },
         "ErrorMessage": {
           "target": "com.amazonaws.athena#ErrorMessage",
           "traits": {
             "smithy.api#documentation": "<p>The error message returned when the query execution failed to process, if\n            applicable.</p>"
+          }
+        },
+        "ErrorCode": {
+          "target": "com.amazonaws.athena#ErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code returned when the query execution failed to process, if\n            applicable.</p>"
           }
         },
         "QueryExecutionId": {
@@ -2763,17 +2763,17 @@
     "com.amazonaws.athena#UntagResourceInput": {
       "type": "structure",
       "members": {
-        "TagKeys": {
-          "target": "com.amazonaws.athena#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>A comma-separated list of one or more tag keys whose tags are to be removed from the\n            specified resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "ResourceARN": {
           "target": "com.amazonaws.athena#AmazonResourceName",
           "traits": {
             "smithy.api#documentation": "<p>Specifies the ARN of the resource from which tags are to be removed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.athena#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A comma-separated list of one or more tag keys whose tags are to be removed from the\n            specified resource.</p>",
             "smithy.api#required": {}
           }
         }
@@ -2806,6 +2806,12 @@
     "com.amazonaws.athena#UpdateDataCatalogInput": {
       "type": "structure",
       "members": {
+        "Description": {
+          "target": "com.amazonaws.athena#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>New or modified text that describes the data catalog.</p>"
+          }
+        },
         "Type": {
           "target": "com.amazonaws.athena#DataCatalogType",
           "traits": {
@@ -2813,23 +2819,17 @@
             "smithy.api#required": {}
           }
         },
+        "Parameters": {
+          "target": "com.amazonaws.athena#ParametersMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for updating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.athena#CatalogNameString",
           "traits": {
             "smithy.api#documentation": "<p>The name of the data catalog to update. The catalog name must be unique for the AWS\n            account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen\n            characters.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.athena#DescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>New or modified text that describes the data catalog.</p>"
-          }
-        },
-        "Parameters": {
-          "target": "com.amazonaws.athena#ParametersMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for updating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -2867,6 +2867,13 @@
             "smithy.api#documentation": "<p>The workgroup state that will be updated for the given workgroup.</p>"
           }
         },
+        "WorkGroup": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The specified workgroup that will be updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
         "Description": {
           "target": "com.amazonaws.athena#WorkGroupDescriptionString",
           "traits": {
@@ -2878,13 +2885,6 @@
           "traits": {
             "smithy.api#documentation": "<p>The workgroup configuration that will be updated for the given workgroup.</p>"
           }
-        },
-        "WorkGroup": {
-          "target": "com.amazonaws.athena#WorkGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The specified workgroup that will be updated.</p>",
-            "smithy.api#required": {}
-          }
         }
       }
     },
@@ -2895,11 +2895,10 @@
     "com.amazonaws.athena#WorkGroup": {
       "type": "structure",
       "members": {
-        "Name": {
-          "target": "com.amazonaws.athena#WorkGroupName",
+        "Description": {
+          "target": "com.amazonaws.athena#WorkGroupDescriptionString",
           "traits": {
-            "smithy.api#documentation": "<p>The workgroup name.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>The workgroup description.</p>"
           }
         },
         "CreationTime": {
@@ -2908,10 +2907,11 @@
             "smithy.api#documentation": "<p>The date and time the workgroup was created.</p>"
           }
         },
-        "State": {
-          "target": "com.amazonaws.athena#WorkGroupState",
+        "Name": {
+          "target": "com.amazonaws.athena#WorkGroupName",
           "traits": {
-            "smithy.api#documentation": "<p>The state of the workgroup: ENABLED or DISABLED.</p>"
+            "smithy.api#documentation": "<p>The workgroup name.</p>",
+            "smithy.api#required": {}
           }
         },
         "Configuration": {
@@ -2920,10 +2920,10 @@
             "smithy.api#documentation": "<p>The configuration of the workgroup, which includes the location in Amazon S3 where\n            query results are stored, the encryption configuration, if any, used for query results;\n            whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup\n            settings override client-side settings; and the data usage limits for the amount of data\n            scanned per query or per workgroup. The workgroup settings override is specified in\n            EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
           }
         },
-        "Description": {
-          "target": "com.amazonaws.athena#WorkGroupDescriptionString",
+        "State": {
+          "target": "com.amazonaws.athena#WorkGroupState",
           "traits": {
-            "smithy.api#documentation": "<p>The workgroup description.</p>"
+            "smithy.api#documentation": "<p>The state of the workgroup: ENABLED or DISABLED.</p>"
           }
         }
       },
@@ -2934,24 +2934,6 @@
     "com.amazonaws.athena#WorkGroupConfiguration": {
       "type": "structure",
       "members": {
-        "BytesScannedCutoffPerQuery": {
-          "target": "com.amazonaws.athena#BytesScannedCutoffValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The upper data usage limit (cutoff) for the amount of bytes a single query in a\n            workgroup is allowed to scan.</p>"
-          }
-        },
-        "RequesterPaysEnabled": {
-          "target": "com.amazonaws.athena#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to reference\n            Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup\n            members cannot query data from Requester Pays buckets, and queries that retrieve data\n            from Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
-          }
-        },
-        "PublishCloudWatchMetricsEnabled": {
-          "target": "com.amazonaws.athena#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.</p>"
-          }
-        },
         "EnforceWorkGroupConfiguration": {
           "target": "com.amazonaws.athena#BoxedBoolean",
           "traits": {
@@ -2963,6 +2945,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3 where\n            query results are stored and the encryption option, if any, used for query results. To\n            run the query, you must specify the query results location using one of the ways: either\n            in the workgroup using this setting, or for individual queries (client-side), using\n                <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena\n            issues an error that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query\n            Results</a>.</p>"
           }
+        },
+        "PublishCloudWatchMetricsEnabled": {
+          "target": "com.amazonaws.athena#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.</p>"
+          }
+        },
+        "BytesScannedCutoffPerQuery": {
+          "target": "com.amazonaws.athena#BytesScannedCutoffValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The upper data usage limit (cutoff) for the amount of bytes a single query in a\n            workgroup is allowed to scan.</p>"
+          }
+        },
+        "RequesterPaysEnabled": {
+          "target": "com.amazonaws.athena#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to reference\n            Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup\n            members cannot query data from Requester Pays buckets, and queries that retrieve data\n            from Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+          }
         }
       },
       "traits": {
@@ -2972,6 +2972,18 @@
     "com.amazonaws.athena#WorkGroupConfigurationUpdates": {
       "type": "structure",
       "members": {
+        "BytesScannedCutoffPerQuery": {
+          "target": "com.amazonaws.athena#BytesScannedCutoffValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The upper limit (cutoff) for the amount of bytes a single query in a workgroup is\n            allowed to scan.</p>"
+          }
+        },
+        "RequesterPaysEnabled": {
+          "target": "com.amazonaws.athena#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon\n            S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members\n            cannot query data from Requester Pays buckets, and queries that retrieve data from\n            Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+          }
+        },
         "PublishCloudWatchMetricsEnabled": {
           "target": "com.amazonaws.athena#BoxedBoolean",
           "traits": {
@@ -2982,18 +2994,6 @@
           "target": "com.amazonaws.athena#ResultConfigurationUpdates",
           "traits": {
             "smithy.api#documentation": "<p>The result configuration information about the queries in this workgroup that will be\n            updated. Includes the updated results location and an updated option for encrypting\n            query results.</p>"
-          }
-        },
-        "RequesterPaysEnabled": {
-          "target": "com.amazonaws.athena#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon\n            S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members\n            cannot query data from Requester Pays buckets, and queries that retrieve data from\n            Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
-          }
-        },
-        "BytesScannedCutoffPerQuery": {
-          "target": "com.amazonaws.athena#BytesScannedCutoffValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The upper limit (cutoff) for the amount of bytes a single query in a workgroup is\n            allowed to scan.</p>"
           }
         },
         "EnforceWorkGroupConfiguration": {
@@ -3046,18 +3046,6 @@
     "com.amazonaws.athena#WorkGroupSummary": {
       "type": "structure",
       "members": {
-        "CreationTime": {
-          "target": "com.amazonaws.athena#Date",
-          "traits": {
-            "smithy.api#documentation": "<p>The workgroup creation date and time.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.athena#WorkGroupName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the workgroup.</p>"
-          }
-        },
         "Description": {
           "target": "com.amazonaws.athena#WorkGroupDescriptionString",
           "traits": {
@@ -3068,6 +3056,18 @@
           "target": "com.amazonaws.athena#WorkGroupState",
           "traits": {
             "smithy.api#documentation": "<p>The state of the workgroup.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.athena#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The workgroup creation date and time.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.athena#WorkGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the workgroup.</p>"
           }
         }
       },

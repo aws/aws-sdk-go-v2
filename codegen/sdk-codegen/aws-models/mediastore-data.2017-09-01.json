@@ -254,11 +254,11 @@
     "com.amazonaws.mediastoredata#GetObjectResponse": {
       "type": "structure",
       "members": {
-        "ContentType": {
-          "target": "com.amazonaws.mediastoredata#ContentType",
+        "CacheControl": {
+          "target": "com.amazonaws.mediastoredata#StringPrimitive",
           "traits": {
-            "smithy.api#documentation": "<p>The content type of the object.</p>",
-            "smithy.api#httpHeader": "Content-Type"
+            "smithy.api#documentation": "<p>An optional <code>CacheControl</code> header that allows the caller to control the\n         object's cache behavior. Headers can be passed in as specified in the HTTP spec at <a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>\n         <p>Headers with a custom user-defined value are also accepted.</p>",
+            "smithy.api#httpHeader": "Cache-Control"
           }
         },
         "ContentLength": {
@@ -268,11 +268,11 @@
             "smithy.api#httpHeader": "Content-Length"
           }
         },
-        "CacheControl": {
-          "target": "com.amazonaws.mediastoredata#StringPrimitive",
+        "ContentType": {
+          "target": "com.amazonaws.mediastoredata#ContentType",
           "traits": {
-            "smithy.api#documentation": "<p>An optional <code>CacheControl</code> header that allows the caller to control the\n         object's cache behavior. Headers can be passed in as specified in the HTTP spec at <a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>\n         <p>Headers with a custom user-defined value are also accepted.</p>",
-            "smithy.api#httpHeader": "Cache-Control"
+            "smithy.api#documentation": "<p>The content type of the object.</p>",
+            "smithy.api#httpHeader": "Content-Type"
           }
         },
         "ContentRange": {
@@ -282,6 +282,13 @@
             "smithy.api#httpHeader": "Content-Range"
           }
         },
+        "LastModified": {
+          "target": "com.amazonaws.mediastoredata#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the object was last modified.</p>",
+            "smithy.api#httpHeader": "Last-Modified"
+          }
+        },
         "ETag": {
           "target": "com.amazonaws.mediastoredata#ETag",
           "traits": {
@@ -289,11 +296,12 @@
             "smithy.api#httpHeader": "ETag"
           }
         },
-        "LastModified": {
-          "target": "com.amazonaws.mediastoredata#TimeStamp",
+        "StatusCode": {
+          "target": "com.amazonaws.mediastoredata#statusCode",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time that the object was last modified.</p>",
-            "smithy.api#httpHeader": "Last-Modified"
+            "smithy.api#documentation": "<p>The HTML status code of the request. Status codes ranging from 200 to 299 indicate\n         success. All other status codes indicate the type of error that occurred.</p>",
+            "smithy.api#httpResponseCode": {},
+            "smithy.api#required": {}
           }
         },
         "Body": {
@@ -320,6 +328,12 @@
     "com.amazonaws.mediastoredata#Item": {
       "type": "structure",
       "members": {
+        "ETag": {
+          "target": "com.amazonaws.mediastoredata#ETag",
+          "traits": {
+            "smithy.api#documentation": "<p>The ETag that represents a unique instance of the item.</p>"
+          }
+        },
         "Name": {
           "target": "com.amazonaws.mediastoredata#ItemName",
           "traits": {
@@ -336,12 +350,6 @@
           "target": "com.amazonaws.mediastoredata#NonNegativeLong",
           "traits": {
             "smithy.api#documentation": "<p>The length of the item in bytes.</p>"
-          }
-        },
-        "ETag": {
-          "target": "com.amazonaws.mediastoredata#ETag",
-          "traits": {
-            "smithy.api#documentation": "<p>The ETag that represents a unique instance of the item.</p>"
           }
         },
         "ContentType": {
@@ -501,7 +509,7 @@
           "sdkId": "MediaStore Data",
           "arnNamespace": "mediastore",
           "cloudFormationName": "MediaStoreData",
-          "cloudTrailEventSource": "object.mediastore.amazonaws.com"
+          "cloudTrailEventSource": "mediastoredata.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "mediastore"
@@ -585,18 +593,19 @@
     "com.amazonaws.mediastoredata#PutObjectRequest": {
       "type": "structure",
       "members": {
+        "Path": {
+          "target": "com.amazonaws.mediastoredata#PathNaming",
+          "traits": {
+            "smithy.api#documentation": "<p>The path (including the file name) where the object is stored in the container.\n         Format: <folder name>/<folder name>/<file name></p>\n         <p>For example, to upload the file <code>mlaw.avi</code> to the folder path\n            <code>premium\\canada</code> in the container <code>movies</code>, enter the path\n            <code>premium/canada/mlaw.avi</code>.</p>\n         <p>Do not include the container name in this path.</p>\n         <p>If the path includes any folders that don't exist yet, the service creates them. For\n         example, suppose you have an existing <code>premium/usa</code> subfolder. If you specify\n            <code>premium/canada</code>, the service creates a <code>canada</code> subfolder in the\n            <code>premium</code> folder. You then have two subfolders, <code>usa</code> and\n            <code>canada</code>, in the <code>premium</code> folder. </p>\n         <p>There is no correlation between the path to the source and the path (folders) in the\n         container in AWS Elemental MediaStore.</p>\n         <p>For more information about folders and how they exist in a container, see the <a href=\"http://docs.aws.amazon.com/mediastore/latest/ug/\">AWS Elemental MediaStore User\n            Guide</a>.</p>\n         <p>The file name is the name that is assigned to the file that you upload. The file can\n         have the same name inside and outside of AWS Elemental MediaStore, or it can have the same\n         name. The file name can include or omit an extension. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
         "StorageClass": {
           "target": "com.amazonaws.mediastoredata#StorageClass",
           "traits": {
             "smithy.api#documentation": "<p>Indicates the storage class of a <code>Put</code> request. Defaults to\n         high-performance temporal storage class, and objects are persisted into durable storage\n         shortly after being received.</p>",
             "smithy.api#httpHeader": "x-amz-storage-class"
-          }
-        },
-        "CacheControl": {
-          "target": "com.amazonaws.mediastoredata#StringPrimitive",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional <code>CacheControl</code> header that allows the caller to control the\n         object's cache behavior. Headers can be passed in as specified in the HTTP at <a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>\n         <p>Headers with a custom user-defined value are also accepted.</p>",
-            "smithy.api#httpHeader": "Cache-Control"
           }
         },
         "ContentType": {
@@ -606,12 +615,11 @@
             "smithy.api#httpHeader": "Content-Type"
           }
         },
-        "Path": {
-          "target": "com.amazonaws.mediastoredata#PathNaming",
+        "CacheControl": {
+          "target": "com.amazonaws.mediastoredata#StringPrimitive",
           "traits": {
-            "smithy.api#documentation": "<p>The path (including the file name) where the object is stored in the container.\n         Format: <folder name>/<folder name>/<file name></p>\n         <p>For example, to upload the file <code>mlaw.avi</code> to the folder path\n            <code>premium\\canada</code> in the container <code>movies</code>, enter the path\n            <code>premium/canada/mlaw.avi</code>.</p>\n         <p>Do not include the container name in this path.</p>\n         <p>If the path includes any folders that don't exist yet, the service creates them. For\n         example, suppose you have an existing <code>premium/usa</code> subfolder. If you specify\n            <code>premium/canada</code>, the service creates a <code>canada</code> subfolder in the\n            <code>premium</code> folder. You then have two subfolders, <code>usa</code> and\n            <code>canada</code>, in the <code>premium</code> folder. </p>\n         <p>There is no correlation between the path to the source and the path (folders) in the\n         container in AWS Elemental MediaStore.</p>\n         <p>For more information about folders and how they exist in a container, see the <a href=\"http://docs.aws.amazon.com/mediastore/latest/ug/\">AWS Elemental MediaStore User\n            Guide</a>.</p>\n         <p>The file name is the name that is assigned to the file that you upload. The file can\n         have the same name inside and outside of AWS Elemental MediaStore, or it can have the same\n         name. The file name can include or omit an extension. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>An optional <code>CacheControl</code> header that allows the caller to control the\n         object's cache behavior. Headers can be passed in as specified in the HTTP at <a href=\"https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>.</p>\n         <p>Headers with a custom user-defined value are also accepted.</p>",
+            "smithy.api#httpHeader": "Cache-Control"
           }
         },
         "Body": {
@@ -627,10 +635,10 @@
     "com.amazonaws.mediastoredata#PutObjectResponse": {
       "type": "structure",
       "members": {
-        "ETag": {
-          "target": "com.amazonaws.mediastoredata#ETag",
+        "StorageClass": {
+          "target": "com.amazonaws.mediastoredata#StorageClass",
           "traits": {
-            "smithy.api#documentation": "<p>Unique identifier of the object in the container.</p>"
+            "smithy.api#documentation": "<p>The storage class where the object was persisted. The class should be\n         “Temporal”.</p>"
           }
         },
         "ContentSHA256": {
@@ -639,10 +647,10 @@
             "smithy.api#documentation": "<p>The SHA256 digest of the object that is persisted.</p>"
           }
         },
-        "StorageClass": {
-          "target": "com.amazonaws.mediastoredata#StorageClass",
+        "ETag": {
+          "target": "com.amazonaws.mediastoredata#ETag",
           "traits": {
-            "smithy.api#documentation": "<p>The storage class where the object was persisted. The class should be\n         “Temporal”.</p>"
+            "smithy.api#documentation": "<p>Unique identifier of the object in the container.</p>"
           }
         }
       }
@@ -696,6 +704,9 @@
     },
     "com.amazonaws.mediastoredata#TimeStamp": {
       "type": "timestamp"
+    },
+    "com.amazonaws.mediastoredata#statusCode": {
+      "type": "integer"
     }
   }
 }

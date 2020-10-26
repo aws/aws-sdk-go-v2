@@ -51,7 +51,7 @@
           "sdkId": "Marketplace Metering",
           "arnNamespace": "aws-marketplace",
           "cloudFormationName": "MarketplaceMetering",
-          "cloudTrailEventSource": "metering.marketplace.amazonaws.com"
+          "cloudTrailEventSource": "marketplacemetering.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "aws-marketplace"
@@ -461,17 +461,17 @@
     "com.amazonaws.marketplacemetering#RegisterUsageRequest": {
       "type": "structure",
       "members": {
+        "Nonce": {
+          "target": "com.amazonaws.marketplacemetering#Nonce",
+          "traits": {
+            "smithy.api#documentation": "<p>(Optional) To scope down the registration to a specific running software instance\n            and guard against replay attacks.</p>"
+          }
+        },
         "ProductCode": {
           "target": "com.amazonaws.marketplacemetering#ProductCode",
           "traits": {
             "smithy.api#documentation": "<p>Product code is used to uniquely identify a product in AWS Marketplace. The product\n            code should be the same as the one used during the publishing of a new\n            product.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "Nonce": {
-          "target": "com.amazonaws.marketplacemetering#Nonce",
-          "traits": {
-            "smithy.api#documentation": "<p>(Optional) To scope down the registration to a specific running software instance\n            and guard against replay attacks.</p>"
           }
         },
         "PublicKeyVersion": {
@@ -547,16 +547,16 @@
     "com.amazonaws.marketplacemetering#ResolveCustomerResult": {
       "type": "structure",
       "members": {
-        "ProductCode": {
-          "target": "com.amazonaws.marketplacemetering#ProductCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The product code is returned to confirm that the buyer is registering for your\n            product. Subsequent BatchMeterUsage calls should be made using this product\n            code.</p>"
-          }
-        },
         "CustomerIdentifier": {
           "target": "com.amazonaws.marketplacemetering#CustomerIdentifier",
           "traits": {
             "smithy.api#documentation": "<p>The CustomerIdentifier is used to identify an individual customer in your\n            application. Calls to BatchMeterUsage require CustomerIdentifiers for each\n            UsageRecord.</p>"
+          }
+        },
+        "ProductCode": {
+          "target": "com.amazonaws.marketplacemetering#ProductCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The product code is returned to confirm that the buyer is registering for your\n            product. Subsequent BatchMeterUsage calls should be made using this product\n            code.</p>"
           }
         }
       },
@@ -616,13 +616,6 @@
     "com.amazonaws.marketplacemetering#UsageRecord": {
       "type": "structure",
       "members": {
-        "Timestamp": {
-          "target": "com.amazonaws.marketplacemetering#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Timestamp, in UTC, for which the usage is being reported.</p>\n        <p>Your application can meter usage for up to one hour in the past. Make sure the\n            timestamp value is not before the start of the software usage.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Quantity": {
           "target": "com.amazonaws.marketplacemetering#UsageQuantity",
           "traits": {
@@ -633,6 +626,13 @@
           "target": "com.amazonaws.marketplacemetering#UsageDimension",
           "traits": {
             "smithy.api#documentation": "<p>During the process of registering a product on AWS Marketplace, up to eight\n            dimensions are specified. These represent different units of value in your\n            application.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Timestamp": {
+          "target": "com.amazonaws.marketplacemetering#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Timestamp, in UTC, for which the usage is being reported.</p>\n        <p>Your application can meter usage for up to one hour in the past. Make sure the\n            timestamp value is not before the start of the software usage.</p>",
             "smithy.api#required": {}
           }
         },
@@ -663,10 +663,10 @@
     "com.amazonaws.marketplacemetering#UsageRecordResult": {
       "type": "structure",
       "members": {
-        "MeteringRecordId": {
-          "target": "com.amazonaws.marketplacemetering#String",
+        "UsageRecord": {
+          "target": "com.amazonaws.marketplacemetering#UsageRecord",
           "traits": {
-            "smithy.api#documentation": "<p>The MeteringRecordId is a unique identifier for this metering event.</p>"
+            "smithy.api#documentation": "<p>The UsageRecord that was part of the BatchMeterUsage request.</p>"
           }
         },
         "Status": {
@@ -675,10 +675,10 @@
             "smithy.api#documentation": "<p>The UsageRecordResult Status indicates the status of an individual UsageRecord\n            processed by BatchMeterUsage.</p>\n        <ul>\n            <li>\n                <p>\n                    <i>Success</i>- The UsageRecord was accepted and honored by\n                    BatchMeterUsage.</p>\n            </li>\n            <li>\n                <p>\n                    <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is\n                    not subscribed to your product. The UsageRecord was not honored. Future\n                    UsageRecords for this customer will fail until the customer subscribes to your\n                    product.</p>\n            </li>\n            <li>\n                <p>\n                    <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid\n                    and not honored. A previously metered UsageRecord had the same customer,\n                    dimension, and time, but a different quantity.</p>\n            </li>\n         </ul>"
           }
         },
-        "UsageRecord": {
-          "target": "com.amazonaws.marketplacemetering#UsageRecord",
+        "MeteringRecordId": {
+          "target": "com.amazonaws.marketplacemetering#String",
           "traits": {
-            "smithy.api#documentation": "<p>The UsageRecord that was part of the BatchMeterUsage request.</p>"
+            "smithy.api#documentation": "<p>The MeteringRecordId is a unique identifier for this metering event.</p>"
           }
         }
       },

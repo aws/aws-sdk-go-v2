@@ -106,16 +106,22 @@
     "com.amazonaws.route53domains#BillingRecord": {
       "type": "structure",
       "members": {
-        "DomainName": {
-          "target": "com.amazonaws.route53domains#DomainName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the domain that the billing record applies to. If the domain name contains characters \n\t\t\tother than a-z, 0-9, and - (hyphen), such as an internationalized domain name, then this value is in Punycode. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html\">DNS Domain Name Format</a> \n\t\t\tin the <i>Amazon Route 53 Developer Guide</i>.</p>"
-          }
-        },
         "Operation": {
           "target": "com.amazonaws.route53domains#OperationType",
           "traits": {
             "smithy.api#documentation": "<p>The operation that you were charged for.</p>"
+          }
+        },
+        "InvoiceId": {
+          "target": "com.amazonaws.route53domains#InvoiceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the invoice that is associated with the billing record.</p>"
+          }
+        },
+        "DomainName": {
+          "target": "com.amazonaws.route53domains#DomainName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the domain that the billing record applies to. If the domain name contains characters \n\t\t\tother than a-z, 0-9, and - (hyphen), such as an internationalized domain name, then this value is in Punycode. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html\">DNS Domain Name Format</a> \n\t\t\tin the <i>Amazon Route 53 Developer Guide</i>.</p>"
           }
         },
         "Price": {
@@ -128,12 +134,6 @@
           "target": "com.amazonaws.route53domains#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The date that the operation was billed, in Unix format.</p>"
-          }
-        },
-        "InvoiceId": {
-          "target": "com.amazonaws.route53domains#InvoiceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the invoice that is associated with the billing record.</p>"
           }
         }
       },
@@ -225,17 +225,17 @@
     "com.amazonaws.route53domains#CheckDomainAvailabilityRequest": {
       "type": "structure",
       "members": {
-        "IdnLangCode": {
-          "target": "com.amazonaws.route53domains#LangCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Reserved for future use.</p>"
-          }
-        },
         "DomainName": {
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain that you want to get availability for. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. \n\t\t\tFor a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>\n\t\t       <p>Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports \n\t\t\tinternationalized domain names, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a>. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns\">Formatting Internationalized Domain Names</a>.\n\t\t</p>",
             "smithy.api#required": {}
+          }
+        },
+        "IdnLangCode": {
+          "target": "com.amazonaws.route53domains#LangCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Reserved for future use.</p>"
           }
         }
       },
@@ -281,17 +281,17 @@
     "com.amazonaws.route53domains#CheckDomainTransferabilityRequest": {
       "type": "structure",
       "members": {
-        "AuthCode": {
-          "target": "com.amazonaws.route53domains#DomainAuthCode",
-          "traits": {
-            "smithy.api#documentation": "<p>If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, \n\t\t\tthe code that you got from the current registrar for the domain.</p>"
-          }
-        },
         "DomainName": {
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. \n\t\t\tFor a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
+          }
+        },
+        "AuthCode": {
+          "target": "com.amazonaws.route53domains#DomainAuthCode",
+          "traits": {
+            "smithy.api#documentation": "<p>If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, \n\t\t\tthe code that you got from the current registrar for the domain.</p>"
           }
         }
       },
@@ -326,66 +326,6 @@
     "com.amazonaws.route53domains#ContactDetail": {
       "type": "structure",
       "members": {
-        "City": {
-          "target": "com.amazonaws.route53domains#City",
-          "traits": {
-            "smithy.api#documentation": "<p>The city of the contact's address.</p>"
-          }
-        },
-        "AddressLine1": {
-          "target": "com.amazonaws.route53domains#AddressLine",
-          "traits": {
-            "smithy.api#documentation": "<p>First line of the contact's address.</p>"
-          }
-        },
-        "PhoneNumber": {
-          "target": "com.amazonaws.route53domains#ContactNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number of the contact.</p>\n\t\t       <p>Constraints: Phone number must be specified in the format \"+[country\tdialing code].[number including any area code>]\". \n\t\t\tFor example, a US phone number might appear as <code>\"+1.1234567890\"</code>.</p>"
-          }
-        },
-        "AddressLine2": {
-          "target": "com.amazonaws.route53domains#AddressLine",
-          "traits": {
-            "smithy.api#documentation": "<p>Second line of contact's address, if any.</p>"
-          }
-        },
-        "ZipCode": {
-          "target": "com.amazonaws.route53domains#ZipCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The zip or postal code of the contact's address.</p>"
-          }
-        },
-        "LastName": {
-          "target": "com.amazonaws.route53domains#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>Last name of contact.</p>"
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.route53domains#State",
-          "traits": {
-            "smithy.api#documentation": "<p>The state or province of the contact's city.</p>"
-          }
-        },
-        "CountryCode": {
-          "target": "com.amazonaws.route53domains#CountryCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Code for the country of the contact's address.</p>"
-          }
-        },
-        "OrganizationName": {
-          "target": "com.amazonaws.route53domains#ContactName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the organization for contact types other than <code>PERSON</code>.</p>"
-          }
-        },
-        "ExtraParams": {
-          "target": "com.amazonaws.route53domains#ExtraParamList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of name-value pairs for parameters required by certain top-level domains.</p>"
-          }
-        },
         "Fax": {
           "target": "com.amazonaws.route53domains#ContactNumber",
           "traits": {
@@ -398,10 +338,70 @@
             "smithy.api#documentation": "<p>First name of contact.</p>"
           }
         },
+        "OrganizationName": {
+          "target": "com.amazonaws.route53domains#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of the organization for contact types other than <code>PERSON</code>.</p>"
+          }
+        },
         "Email": {
           "target": "com.amazonaws.route53domains#Email",
           "traits": {
             "smithy.api#documentation": "<p>Email address of the contact.</p>"
+          }
+        },
+        "AddressLine1": {
+          "target": "com.amazonaws.route53domains#AddressLine",
+          "traits": {
+            "smithy.api#documentation": "<p>First line of the contact's address.</p>"
+          }
+        },
+        "AddressLine2": {
+          "target": "com.amazonaws.route53domains#AddressLine",
+          "traits": {
+            "smithy.api#documentation": "<p>Second line of contact's address, if any.</p>"
+          }
+        },
+        "CountryCode": {
+          "target": "com.amazonaws.route53domains#CountryCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Code for the country of the contact's address.</p>"
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.route53domains#State",
+          "traits": {
+            "smithy.api#documentation": "<p>The state or province of the contact's city.</p>"
+          }
+        },
+        "PhoneNumber": {
+          "target": "com.amazonaws.route53domains#ContactNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number of the contact.</p>\n\t\t       <p>Constraints: Phone number must be specified in the format \"+[country\tdialing code].[number including any area code>]\". \n\t\t\tFor example, a US phone number might appear as <code>\"+1.1234567890\"</code>.</p>"
+          }
+        },
+        "LastName": {
+          "target": "com.amazonaws.route53domains#ContactName",
+          "traits": {
+            "smithy.api#documentation": "<p>Last name of contact.</p>"
+          }
+        },
+        "ExtraParams": {
+          "target": "com.amazonaws.route53domains#ExtraParamList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of name-value pairs for parameters required by certain top-level domains.</p>"
+          }
+        },
+        "City": {
+          "target": "com.amazonaws.route53domains#City",
+          "traits": {
+            "smithy.api#documentation": "<p>The city of the contact's address.</p>"
+          }
+        },
+        "ZipCode": {
+          "target": "com.amazonaws.route53domains#ZipCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The zip or postal code of the contact's address.</p>"
           }
         },
         "ContactType": {
@@ -1410,17 +1410,17 @@
             "smithy.api#documentation": "<p>Expiration date of the domain in Unix time format and Coordinated Universal Time (UTC).</p>"
           }
         },
+        "AutoRenew": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the domain is automatically renewed upon expiration.</p>"
+          }
+        },
         "DomainName": {
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain that the summary information applies to.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "AutoRenew": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the domain is automatically renewed upon expiration.</p>"
           }
         },
         "TransferLock": {
@@ -1839,16 +1839,53 @@
     "com.amazonaws.route53domains#GetDomainDetailResponse": {
       "type": "structure",
       "members": {
-        "Reseller": {
-          "target": "com.amazonaws.route53domains#Reseller",
+        "AutoRenew": {
+          "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Reseller of the domain. Domains registered or transferred using Route 53 domains will have <code>\"Amazon\"</code> \n\t\t\tas the reseller. </p>"
+            "smithy.api#documentation": "<p>Specifies whether the domain registration is set to renew automatically.</p>"
+          }
+        },
+        "AdminPrivacy": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.route53domains#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the domain was created as found in the response to a WHOIS query. The date and time is in \n\t\t\tUnix time format and Coordinated Universal time (UTC).</p>"
+          }
+        },
+        "AbuseContactEmail": {
+          "target": "com.amazonaws.route53domains#Email",
+          "traits": {
+            "smithy.api#documentation": "<p>Email address to contact to report incorrect contact information for a domain, to report that the domain \n\t\t\tis being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse.</p>"
+          }
+        },
+        "DomainName": {
+          "target": "com.amazonaws.route53domains#DomainName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a domain.</p>",
+            "smithy.api#required": {}
           }
         },
         "UpdatedDate": {
           "target": "com.amazonaws.route53domains#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>The last updated date of the domain as found in the response to a WHOIS query. The date and time is in \n\t\t\tUnix time format and Coordinated Universal time (UTC).</p>"
+          }
+        },
+        "Reseller": {
+          "target": "com.amazonaws.route53domains#Reseller",
+          "traits": {
+            "smithy.api#documentation": "<p>Reseller of the domain. Domains registered or transferred using Route 53 domains will have <code>\"Amazon\"</code> \n\t\t\tas the reseller. </p>"
+          }
+        },
+        "DnsSec": {
+          "target": "com.amazonaws.route53domains#DNSSec",
+          "traits": {
+            "smithy.api#documentation": "<p>Reserved for future use.</p>"
           }
         },
         "RegistrantContact": {
@@ -1864,60 +1901,10 @@
             "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>"
           }
         },
-        "TechContact": {
-          "target": "com.amazonaws.route53domains#ContactDetail",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides details about the domain technical contact.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.route53domains#DomainName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a domain.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AdminPrivacy": {
+        "RegistrantPrivacy": {
           "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>"
-          }
-        },
-        "AbuseContactEmail": {
-          "target": "com.amazonaws.route53domains#Email",
-          "traits": {
-            "smithy.api#documentation": "<p>Email address to contact to report incorrect contact information for a domain, to report that the domain \n\t\t\tis being used to send spam, to report that someone is cybersquatting on a domain name, or report some other type of abuse.</p>"
-          }
-        },
-        "CreationDate": {
-          "target": "com.amazonaws.route53domains#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date when the domain was created as found in the response to a WHOIS query. The date and time is in \n\t\t\tUnix time format and Coordinated Universal time (UTC).</p>"
-          }
-        },
-        "DnsSec": {
-          "target": "com.amazonaws.route53domains#DNSSec",
-          "traits": {
-            "smithy.api#documentation": "<p>Reserved for future use.</p>"
-          }
-        },
-        "AutoRenew": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the domain registration is set to renew automatically.</p>"
-          }
-        },
-        "RegistrarUrl": {
-          "target": "com.amazonaws.route53domains#RegistrarUrl",
-          "traits": {
-            "smithy.api#documentation": "<p>Web address of the registrar.</p>"
-          }
-        },
-        "WhoIsServer": {
-          "target": "com.amazonaws.route53domains#RegistrarWhoIsServer",
-          "traits": {
-            "smithy.api#documentation": "<p>The fully qualified name of the WHOIS server that can answer the WHOIS query for the domain.</p>"
+            "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>"
           }
         },
         "Nameservers": {
@@ -1927,10 +1914,35 @@
             "smithy.api#required": {}
           }
         },
-        "RegistrantPrivacy": {
-          "target": "com.amazonaws.route53domains#Boolean",
+        "TechContact": {
+          "target": "com.amazonaws.route53domains#ContactDetail",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>"
+            "smithy.api#documentation": "<p>Provides details about the domain technical contact.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WhoIsServer": {
+          "target": "com.amazonaws.route53domains#RegistrarWhoIsServer",
+          "traits": {
+            "smithy.api#documentation": "<p>The fully qualified name of the WHOIS server that can answer the WHOIS query for the domain.</p>"
+          }
+        },
+        "RegistrarUrl": {
+          "target": "com.amazonaws.route53domains#RegistrarUrl",
+          "traits": {
+            "smithy.api#documentation": "<p>Web address of the registrar.</p>"
+          }
+        },
+        "ExpirationDate": {
+          "target": "com.amazonaws.route53domains#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the registration for the domain is set to expire. The date and time is in \n\t\t\tUnix time format and Coordinated Universal time (UTC).</p>"
+          }
+        },
+        "AbuseContactPhone": {
+          "target": "com.amazonaws.route53domains#ContactNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>Phone number for reporting abuse.</p>"
           }
         },
         "StatusList": {
@@ -1945,10 +1957,10 @@
             "smithy.api#documentation": "<p>Reserved for future use.</p>"
           }
         },
-        "AbuseContactPhone": {
-          "target": "com.amazonaws.route53domains#ContactNumber",
+        "RegistrarName": {
+          "target": "com.amazonaws.route53domains#RegistrarName",
           "traits": {
-            "smithy.api#documentation": "<p>Phone number for reporting abuse.</p>"
+            "smithy.api#documentation": "<p>Name of the registrar of the domain as identified in the registry. Domains with a .com, .net, or .org TLD are registered by \n\t\t\tAmazon Registrar. All other domains are registered by our registrar associate, Gandi. The value for domains that are registered by \n\t\t\tGandi is <code>\"GANDI SAS\"</code>. </p>"
           }
         },
         "AdminContact": {
@@ -1956,18 +1968,6 @@
           "traits": {
             "smithy.api#documentation": "<p>Provides details about the domain administrative contact.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "ExpirationDate": {
-          "target": "com.amazonaws.route53domains#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date when the registration for the domain is set to expire. The date and time is in \n\t\t\tUnix time format and Coordinated Universal time (UTC).</p>"
-          }
-        },
-        "RegistrarName": {
-          "target": "com.amazonaws.route53domains#RegistrarName",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the registrar of the domain as identified in the registry. Domains with a .com, .net, or .org TLD are registered by \n\t\t\tAmazon Registrar. All other domains are registered by our registrar associate, Gandi. The value for domains that are registered by \n\t\t\tGandi is <code>\"GANDI SAS\"</code>. </p>"
           }
         }
       },
@@ -1998,6 +1998,13 @@
     "com.amazonaws.route53domains#GetDomainSuggestionsRequest": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "target": "com.amazonaws.route53domains#DomainName",
+          "traits": {
+            "smithy.api#documentation": "<p>A domain name that you want to use as the basis for a list of possible domain names. The top-level domain (TLD), such as .com, \n\t\t\tmust be a TLD that Route 53 supports. For a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>\n\t\t       <p>Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use \n\t\t\tsupports internationalized domain names, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a>. \n\t\t\t</p>",
+            "smithy.api#required": {}
+          }
+        },
         "SuggestionCount": {
           "target": "com.amazonaws.route53domains#Integer",
           "traits": {
@@ -2009,13 +2016,6 @@
           "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>If <code>OnlyAvailable</code> is <code>true</code>, Route 53 returns only domain names that are available. \n\t\t\tIf <code>OnlyAvailable</code> is <code>false</code>, Route 53 returns domain names without checking whether they're \n\t\t\tavailable to be registered. To determine whether the domain is available, you can call <code>checkDomainAvailability</code> \n\t\t\tfor each suggestion.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DomainName": {
-          "target": "com.amazonaws.route53domains#DomainName",
-          "traits": {
-            "smithy.api#documentation": "<p>A domain name that you want to use as the basis for a list of possible domain names. The top-level domain (TLD), such as .com, \n\t\t\tmust be a TLD that Route 53 supports. For a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>\n\t\t       <p>Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use \n\t\t\tsupports internationalized domain names, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a>. \n\t\t\t</p>",
             "smithy.api#required": {}
           }
         }
@@ -2067,22 +2067,16 @@
     "com.amazonaws.route53domains#GetOperationDetailResponse": {
       "type": "structure",
       "members": {
-        "Message": {
-          "target": "com.amazonaws.route53domains#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>Detailed information on the status including possible errors.</p>"
-          }
-        },
         "Type": {
           "target": "com.amazonaws.route53domains#OperationType",
           "traits": {
             "smithy.api#documentation": "<p>The type of operation that was requested.</p>"
           }
         },
-        "DomainName": {
-          "target": "com.amazonaws.route53domains#DomainName",
+        "Status": {
+          "target": "com.amazonaws.route53domains#OperationStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The name of a domain.</p>"
+            "smithy.api#documentation": "<p>The current status of the requested operation in the system.</p>"
           }
         },
         "SubmittedDate": {
@@ -2097,10 +2091,16 @@
             "smithy.api#documentation": "<p>The identifier for the operation.</p>"
           }
         },
-        "Status": {
-          "target": "com.amazonaws.route53domains#OperationStatus",
+        "DomainName": {
+          "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
-            "smithy.api#documentation": "<p>The current status of the requested operation in the system.</p>"
+            "smithy.api#documentation": "<p>The name of a domain.</p>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.route53domains#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Detailed information on the status including possible errors.</p>"
           }
         }
       },
@@ -2260,16 +2260,16 @@
             "smithy.api#documentation": "<p>For an initial request for a list of operations, omit this element. If the number of operations that are\n\t\t\tnot yet complete is greater than the value that you specified for <code>MaxItems</code>, you can use <code>Marker</code>\n\t\t\tto return additional operations. Get the value of <code>NextPageMarker</code> from the previous response,\n\t\t\tand submit another request that includes the value of <code>NextPageMarker</code> in the <code>Marker</code> element.</p>"
           }
         },
-        "MaxItems": {
-          "target": "com.amazonaws.route53domains#PageMaxItems",
-          "traits": {
-            "smithy.api#documentation": "<p>Number of domains to be returned.</p>\n\t\t       <p>Default: 20</p>"
-          }
-        },
         "SubmittedSince": {
           "target": "com.amazonaws.route53domains#Timestamp",
           "traits": {
             "smithy.api#documentation": "<p>An optional parameter that lets you get information about all the operations that you submitted after a specified date and time. \n\t\t\tSpecify the date and time in Unix time format and Coordinated Universal time (UTC).</p>"
+          }
+        },
+        "MaxItems": {
+          "target": "com.amazonaws.route53domains#PageMaxItems",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of domains to be returned.</p>\n\t\t       <p>Default: 20</p>"
           }
         }
       },
@@ -2435,17 +2435,17 @@
             "smithy.api#required": {}
           }
         },
-        "Status": {
-          "target": "com.amazonaws.route53domains#OperationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status of the requested operation in the system.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "Type": {
           "target": "com.amazonaws.route53domains#OperationType",
           "traits": {
             "smithy.api#documentation": "<p>Type of the action requested.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.route53domains#OperationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the requested operation in the system.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2628,10 +2628,11 @@
             "smithy.api#required": {}
           }
         },
-        "PrivacyProtectTechContact": {
-          "target": "com.amazonaws.route53domains#Boolean",
+        "DomainName": {
+          "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
-            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
+            "smithy.api#documentation": "<p>The domain name that you want to register. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. \n\t\t\tFor a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>\n\t\t       <p>Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports \n\t\t\tinternationalized domain names, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a>. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns\">Formatting Internationalized Domain Names</a>.\n\t\t</p>",
+            "smithy.api#required": {}
           }
         },
         "PrivacyProtectRegistrantContact": {
@@ -2640,29 +2641,16 @@
             "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (the domain owner).</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
           }
         },
-        "AutoRenew": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the domain will be automatically renewed (<code>true</code>) or not (<code>false</code>). \n\t\t\tAutorenewal only takes effect after the account is charged.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
-          }
-        },
         "PrivacyProtectAdminContact": {
           "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
           }
         },
-        "IdnLangCode": {
-          "target": "com.amazonaws.route53domains#LangCode",
+        "AutoRenew": {
+          "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
-            "smithy.api#documentation": "<p>Reserved for future use.</p>"
-          }
-        },
-        "RegistrantContact": {
-          "target": "com.amazonaws.route53domains#ContactDetail",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides detailed contact information. For information about the values that you specify for each element, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html\">ContactDetail</a>.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>Indicates whether the domain will be automatically renewed (<code>true</code>) or not (<code>false</code>). \n\t\t\tAutorenewal only takes effect after the account is charged.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
           }
         },
         "AdminContact": {
@@ -2672,10 +2660,22 @@
             "smithy.api#required": {}
           }
         },
-        "DomainName": {
-          "target": "com.amazonaws.route53domains#DomainName",
+        "IdnLangCode": {
+          "target": "com.amazonaws.route53domains#LangCode",
           "traits": {
-            "smithy.api#documentation": "<p>The domain name that you want to register. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. \n\t\t\tFor a list of supported TLDs, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>The domain name can contain only the following characters:</p>\n\t\t       <ul>\n            <li>\n               <p>Letters a through z. Domain names are not case sensitive.</p>\n            </li>\n            <li>\n               <p>Numbers 0 through 9.</p>\n            </li>\n            <li>\n               <p>Hyphen (-). You can't specify a hyphen at the beginning or end of a label. </p>\n            </li>\n            <li>\n               <p>Period (.) to separate the labels in the name, such as the <code>.</code> in <code>example.com</code>.</p>\n            </li>\n         </ul>\n\t\t       <p>Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports \n\t\t\tinternationalized domain names, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a>. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns\">Formatting Internationalized Domain Names</a>.\n\t\t</p>",
+            "smithy.api#documentation": "<p>Reserved for future use.</p>"
+          }
+        },
+        "PrivacyProtectTechContact": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
+          }
+        },
+        "RegistrantContact": {
+          "target": "com.amazonaws.route53domains#ContactDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides detailed contact information. For information about the values that you specify for each element, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html\">ContactDetail</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -2806,17 +2806,17 @@
             "smithy.api#required": {}
           }
         },
+        "DurationInYears": {
+          "target": "com.amazonaws.route53domains#DurationInYears",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. \n\t\t\tFor the range of valid values for your domain, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>Default: 1</p>"
+          }
+        },
         "CurrentExpiryYear": {
           "target": "com.amazonaws.route53domains#CurrentExpiryYear",
           "traits": {
             "smithy.api#documentation": "<p>The year when the registration for the domain is set to expire. This value must match the current expiration date for the domain.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "DurationInYears": {
-          "target": "com.amazonaws.route53domains#DurationInYears",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. \n\t\t\tFor the range of valid values for your domain, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that You Can Register with Amazon Route 53</a> in the \n\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>Default: 1</p>"
           }
         }
       },
@@ -2876,12 +2876,6 @@
     "com.amazonaws.route53domains#ResendContactReachabilityEmailResponse": {
       "type": "structure",
       "members": {
-        "isAlreadyVerified": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <code>True</code> if the email address for the registrant contact has already been verified, and <code>false</code> otherwise. \n\t\t\tIf the email address has already been verified, we don't send another confirmation email.</p>"
-          }
-        },
         "emailAddress": {
           "target": "com.amazonaws.route53domains#Email",
           "traits": {
@@ -2892,6 +2886,12 @@
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The domain name for which you requested a confirmation email.</p>"
+          }
+        },
+        "isAlreadyVerified": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <code>True</code> if the email address for the registrant contact has already been verified, and <code>false</code> otherwise. \n\t\t\tIf the email address has already been verified, we don't send another confirmation email.</p>"
           }
         }
       }
@@ -3040,7 +3040,7 @@
           "sdkId": "Route 53 Domains",
           "arnNamespace": "route53domains",
           "cloudFormationName": "Route53Domains",
-          "cloudTrailEventSource": "v20140515.route53domains.amazonaws.com"
+          "cloudTrailEventSource": "route53domains.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "route53domains"
@@ -3164,46 +3164,10 @@
             "smithy.api#required": {}
           }
         },
-        "PrivacyProtectTechContact": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
-          }
-        },
-        "AutoRenew": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect \n\t\t\tafter the account is charged.</p>\n\t\t       <p>Default: true</p>"
-          }
-        },
-        "Nameservers": {
-          "target": "com.amazonaws.route53domains#NameserverList",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details for the host and glue IP addresses.</p>"
-          }
-        },
-        "PrivacyProtectRegistrantContact": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
-          }
-        },
         "AuthCode": {
           "target": "com.amazonaws.route53domains#DomainAuthCode",
           "traits": {
             "smithy.api#documentation": "<p>The authorization code for the domain. You get this value from the current registrar.</p>"
-          }
-        },
-        "PrivacyProtectAdminContact": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
-          }
-        },
-        "IdnLangCode": {
-          "target": "com.amazonaws.route53domains#LangCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Reserved for future use.</p>"
           }
         },
         "DomainName": {
@@ -3213,6 +3177,12 @@
             "smithy.api#required": {}
           }
         },
+        "AutoRenew": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect \n\t\t\tafter the account is charged.</p>\n\t\t       <p>Default: true</p>"
+          }
+        },
         "AdminContact": {
           "target": "com.amazonaws.route53domains#ContactDetail",
           "traits": {
@@ -3220,14 +3190,44 @@
             "smithy.api#required": {}
           }
         },
-        "RegistrantContact": {
+        "PrivacyProtectRegistrantContact": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
+          }
+        },
+        "PrivacyProtectAdminContact": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
+          }
+        },
+        "Nameservers": {
+          "target": "com.amazonaws.route53domains#NameserverList",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details for the host and glue IP addresses.</p>"
+          }
+        },
+        "IdnLangCode": {
+          "target": "com.amazonaws.route53domains#LangCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Reserved for future use.</p>"
+          }
+        },
+        "PrivacyProtectTechContact": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>\n\t\t       <p>Default: <code>true</code>\n         </p>"
+          }
+        },
+        "TechContact": {
           "target": "com.amazonaws.route53domains#ContactDetail",
           "traits": {
             "smithy.api#documentation": "<p>Provides detailed contact information.</p>",
             "smithy.api#required": {}
           }
         },
-        "TechContact": {
+        "RegistrantContact": {
           "target": "com.amazonaws.route53domains#ContactDetail",
           "traits": {
             "smithy.api#documentation": "<p>Provides detailed contact information.</p>",
@@ -3422,6 +3422,12 @@
             "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the admin contact.</p>"
           }
         },
+        "RegistrantPrivacy": {
+          "target": "com.amazonaws.route53domains#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>"
+          }
+        },
         "DomainName": {
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
@@ -3433,12 +3439,6 @@
           "target": "com.amazonaws.route53domains#Boolean",
           "traits": {
             "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the technical contact.</p>"
-          }
-        },
-        "RegistrantPrivacy": {
-          "target": "com.amazonaws.route53domains#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, \n\t\t\tWHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) \n\t\t\tor for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, \n\t\t\tWHOIS queries return the information that you entered for the registrant contact (domain owner).</p>"
           }
         }
       },
@@ -3470,17 +3470,17 @@
             "smithy.api#documentation": "<p>Provides detailed contact information.</p>"
           }
         },
-        "RegistrantContact": {
-          "target": "com.amazonaws.route53domains#ContactDetail",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides detailed contact information.</p>"
-          }
-        },
         "DomainName": {
           "target": "com.amazonaws.route53domains#DomainName",
           "traits": {
             "smithy.api#documentation": "<p>The name of the domain that you want to update contact information for.</p>",
             "smithy.api#required": {}
+          }
+        },
+        "RegistrantContact": {
+          "target": "com.amazonaws.route53domains#ContactDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides detailed contact information.</p>"
           }
         },
         "TechContact": {
@@ -3682,16 +3682,16 @@
     "com.amazonaws.route53domains#ViewBillingResponse": {
       "type": "structure",
       "members": {
-        "BillingRecords": {
-          "target": "com.amazonaws.route53domains#BillingRecords",
-          "traits": {
-            "smithy.api#documentation": "<p>A summary of billing records.</p>"
-          }
-        },
         "NextPageMarker": {
           "target": "com.amazonaws.route53domains#PageMarker",
           "traits": {
             "smithy.api#documentation": "<p>If there are more billing records than you specified for <code>MaxItems</code> in the request, submit another \n\t\t\trequest and include the value of <code>NextPageMarker</code> in the value of <code>Marker</code>.</p>"
+          }
+        },
+        "BillingRecords": {
+          "target": "com.amazonaws.route53domains#BillingRecords",
+          "traits": {
+            "smithy.api#documentation": "<p>A summary of billing records.</p>"
           }
         }
       },
