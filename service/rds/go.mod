@@ -7,3 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v0.0.0-20201020212433-5fb7a9ec04bb
 	github.com/awslabs/smithy-go v0.2.0
 )
+
+replace github.com/aws/aws-sdk-go-v2 => ../../
+
+replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../service/internal/presigned-url/
