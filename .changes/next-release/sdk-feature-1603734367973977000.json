@@ -1,9 +1,0 @@
-{
- "ID": "sdk-feature-1603734367973977000",
- "SchemaVersion": 1,
- "Module": "/",
- "Type": "feature",
- "Description": "blob",
- "MinVersion": "",
- "AffectedModules": null
-}

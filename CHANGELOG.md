@@ -1,4 +1,4 @@
-# Pending Changes
+# Release 2020-10-26
 
 ## New Features
 * `service/s3`: Add support for Accelerate, and Dualstack ([#836](https://github.com/aws/aws-sdk-go-v2/pull/836))
@@ -17,7 +17,6 @@
 * `aws/protocol/restjson`: Fix unexpected JSON error response deserialization ([#837](https://github.com/aws/aws-sdk-go-v2/pull/837))
     * Fixes [#832](https://github.com/aws/aws-sdk-go-v2/issues/832)
 * `example/service/s3/listobjects`: Add example for Amazon S3 ListObjectsV2 ([#838](https://github.com/aws/aws-sdk-go-v2/pull/838))
-
 
 # Release 2020-10-16
 
