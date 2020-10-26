@@ -10,7 +10,7 @@ require (
 replace (
 	github.com/aws/aws-sdk-go-v2 => ../../../../
 	github.com/aws/aws-sdk-go-v2/config => ../../../../config/
-	github.com/aws/aws-sdk-go-v2/service/s3 => ../../
+	github.com/aws/aws-sdk-go-v2/service/s3 => ../../../../service/s3/
 )
 
 replace github.com/aws/aws-sdk-go-v2/credentials => ../../../../credentials/

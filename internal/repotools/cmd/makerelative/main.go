@@ -30,30 +30,33 @@ func main() {
 		log.Fatalf("go.mod not present at %v", gitRoot)
 	}
 
-	root := gitRoot
-	toProcess := []string{root}
+	registry := NewRegistry()
 
-	registry := make(Registry)
+	rootModulePath := registry.MustLoad(gitRoot).Module.Mod.Path
 
-	for len(toProcess) > 0 {
-		root, toProcess = toProcess[0], toProcess[1:]
+	subPaths, err := findSubModules(gitRoot)
+	if err != nil {
+		log.Fatalf("failed to find submodules: %v", err)
+	}
 
-		subs, err := findSubModules(root)
-		if err != nil {
-			log.Fatalf("failed to find submodules: %v", err)
-		}
+	// Load Discovered Modules into Registry
+	var modules []string
+	for _, sub := range subPaths {
+		m := registry.MustLoad(sub)
+		modules = append(modules, m.Module.Mod.Path)
+	}
 
-		err = addRelativeReplaces(root, subs, registry)
+	var module string
+	for len(modules) > 0 {
+		module, modules = modules[0], modules[1:]
+
+		err = addRelativeReplaces(rootModulePath, module, registry)
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		for i := range subs {
-			toProcess = append(toProcess, subs[i])
-		}
 	}
 
-	for _, module := range registry {
+	for _, module := range registry.Modules() {
 		if err := module.Write(); err != nil {
 			log.Fatal(err)
 		}
@@ -61,18 +64,70 @@ func main() {
 }
 
 // Registry is a map of module path to a module
-type Registry map[string]*Module
+type Registry struct {
+	dirToModule map[string]*Module
+	pathToDir   map[string]string
+}
 
-// Get loads or retrieves the Module from the registry for the given path.
-func (r Registry) Get(dir string) (module *Module, err error) {
-	module, ok := r[dir]
+// NewRegistry returns a new module registry.
+func NewRegistry() *Registry {
+	return &Registry{
+		dirToModule: map[string]*Module{},
+		pathToDir:   map[string]string{},
+	}
+}
+
+func (r *Registry) Modules() (m []*Module) {
+	for _, module := range r.dirToModule {
+		m = append(m, module)
+	}
+	return m
+}
+
+// MustGet retrieves the module identified by the given module path. Panics on failure.
+func (r *Registry) MustGet(path string) *Module {
+	module, err := r.Get(path)
+	if err != nil {
+		panic(err)
+	}
+	return module
+}
+
+// Get retrieves the module identified by the give module path.
+func (r *Registry) Get(path string) (*Module, error) {
+	dir, ok := r.pathToDir[path]
+	if !ok {
+		return nil, fmt.Errorf("module not found")
+	}
+
+	module, ok := r.dirToModule[dir]
+	if !ok {
+		return nil, fmt.Errorf("module missing or not loaded")
+	}
+
+	return module, nil
+}
+
+// MustLoad loads or retrieves the Module from the registry for the given path. Panics on failure.
+func (r *Registry) MustLoad(dir string) *Module {
+	module, err := r.Load(dir)
+	if err != nil {
+		panic(err)
+	}
+	return module
+}
+
+// Load loads or retrieves the Module from the registry for the given directory path.
+func (r *Registry) Load(dir string) (module *Module, err error) {
+	module, ok := r.dirToModule[dir]
 	if !ok {
 		m, err := loadGoMod(dir)
 		if err != nil {
 			return nil, err
 		}
 		module = &Module{File: m}
-		r[dir] = module
+		r.dirToModule[dir] = module
+		r.pathToDir[module.Module.Mod.Path] = dir
 	}
 
 	return module, nil
@@ -117,46 +172,44 @@ func (m *Module) AddReplace(oldPath, oldVers, newPath, newVers string) error {
 
 // addRelativeReplaces takes the given root and submodule paths and adds go.mod replace directives for any sub modules
 // that refer to the given root as a dependency.
-func addRelativeReplaces(root string, subs []string, registry Registry) error {
-	rootModule, err := registry.Get(root)
-	if err != nil {
-		return err
-	}
+func addRelativeReplaces(repoModule, module string, registry *Registry) error {
+	mod := registry.MustGet(module)
 
-	rootPath := rootModule.Module.Mod.Path
+	modRelativeToRoot := convertToDotted(makeRelativeTo(mod.Module.Mod.Path, repoModule))
 
-	for _, sub := range subs {
-		mod, err := registry.Get(sub)
+	seen := make(map[string]struct{})
+	var toProcess []*modfile.Require
+	var req *modfile.Require
+	toProcess = append(toProcess, mod.Require...)
+
+	for len(toProcess) > 0 {
+		req, toProcess = toProcess[0], toProcess[1:]
+
+		if _, ok := seen[req.Mod.Path]; ok {
+			continue
+		} else {
+			seen[req.Mod.Path] = struct{}{}
+		}
+
+		if !strings.HasPrefix(req.Mod.Path, repoModule) {
+			continue
+		}
+
+		reqMod := registry.MustGet(req.Mod.Path)
+
+		reqFromRoot := makeRelativeTo(req.Mod.Path, repoModule)
+		if reqFromRoot == "." {
+			reqFromRoot = ""
+		} else {
+			reqFromRoot += "/"
+		}
+
+		err := mod.AddReplace(req.Mod.Path, "", fmt.Sprintf("%s/%s", modRelativeToRoot, reqFromRoot), "")
 		if err != nil {
 			return err
 		}
 
-		modRelativeToRoot := convertToDotted(makeRelativeTo(mod.Module.Mod.Path, rootPath))
-
-		for _, req := range mod.Require {
-			if !strings.HasPrefix(req.Mod.Path, rootPath) {
-				continue
-			}
-
-			reqRelativeToNearestParent := makeRelativeTo(req.Mod.Path, rootPath)
-
-			var relToReq strings.Builder
-			if modRelativeToRoot != "." {
-				relToReq.WriteString(modRelativeToRoot)
-				if reqRelativeToNearestParent != "." {
-					relToReq.WriteRune('/')
-					relToReq.WriteString(reqRelativeToNearestParent)
-				}
-				relToReq.WriteRune('/')
-			} else {
-				relToReq.WriteString(reqRelativeToNearestParent)
-			}
-
-			err := mod.AddReplace(req.Mod.Path, "", relToReq.String(), "")
-			if err != nil {
-				return err
-			}
-		}
+		toProcess = append(toProcess, reqMod.Require...)
 	}
 
 	return nil
@@ -206,50 +259,6 @@ func loadGoMod(dir string) (*modfile.File, error) {
 	}
 
 	return parse, nil
-}
-
-// findGitRoot finds the .git in dir or one of dir's parent directories.
-func findGitRoot(dir string) (path string, err error) {
-	found := false
-	for {
-		err = filepath.Walk(dir, func(fPath string, info os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
-
-			if dir == fPath {
-				return nil
-			}
-
-			if info.IsDir() && info.Name() == ".git" {
-				found = true
-				path = dir
-				return filepath.SkipDir
-			} else if info.IsDir() {
-				return filepath.SkipDir
-			}
-
-			return nil
-		})
-		if err != nil {
-			return path, err
-		}
-		if !found && filepath.Base(dir) != "/" {
-			dir = filepath.Dir(dir)
-		} else {
-			break
-		}
-	}
-
-	if !found {
-		return "", fmt.Errorf(".git directory not found")
-	}
-
-	if path == "" {
-		path = "."
-	}
-
-	return path, nil
 }
 
 func findSubModules(dir string) (modules []string, err error) {
