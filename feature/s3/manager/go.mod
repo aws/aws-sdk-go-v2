@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v0.27.0
 	github.com/aws/aws-sdk-go-v2/config v0.2.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.27.0
-	github.com/awslabs/smithy-go v0.2.0
+	github.com/awslabs/smithy-go v0.2.1
 	github.com/google/go-cmp v0.4.1
 )
 
