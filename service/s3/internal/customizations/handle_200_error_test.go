@@ -14,9 +14,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
-type EndpointResolverFunc func(region string, options s3.ResolverOptions) (aws.Endpoint, error)
+type EndpointResolverFunc func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error)
 
-func (fn EndpointResolverFunc) ResolveEndpoint(region string, options s3.ResolverOptions) (endpoint aws.Endpoint, err error) {
+func (fn EndpointResolverFunc) ResolveEndpoint(region string, options s3.EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
 	return fn(region, options)
 }
 
@@ -73,7 +73,7 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 				Credentials: unit.StubCredentialsProvider{},
 				Retryer:     aws.NoOpRetryer{},
 				Region:      "mock-region",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err

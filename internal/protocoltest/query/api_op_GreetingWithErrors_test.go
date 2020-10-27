@@ -80,7 +80,7 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
@@ -166,7 +166,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
@@ -275,7 +275,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err

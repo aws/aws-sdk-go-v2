@@ -67,7 +67,7 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
 		client := s3.New(s3.Options{
-			EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
+			EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL: server.URL,
 				}, nil
@@ -95,7 +95,7 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 	defer server.Close()
 
 	client := s3.New(s3.Options{
-		EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
+		EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
 			return aws.Endpoint{
 				URL: server.URL,
 			}, nil

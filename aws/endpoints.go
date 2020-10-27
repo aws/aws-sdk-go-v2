@@ -4,12 +4,44 @@ import (
 	"fmt"
 )
 
-// Endpoint represents the endpoint a service client should make requests to.
+// Endpoint represents the endpoint a service client should make API operation
+// calls to.
+//
+// The SDK will automatically resolve these endpoints per API client using an
+// internal endpoint resolvers. If you'd like to provide custom endpoint
+// resolving behavior you can implement the EndpointResolver interface.
 type Endpoint struct {
-	// The URL of the endpoint.
+	// The base URL endpoint the SDK API clients will use to make API calls to.
+	// The SDK will suffix URI path and query elements to this endpoint.
 	URL string
 
-	// The endpoint partition
+	// Specifies if the endpoint's hostname can be modified by the SDK's API
+	// client.
+	//
+	// If the hostname is mutable the SDK API clients may modify any part of
+	// the hostname based on the requirements of the API, (e.g. adding, or
+	// removing content in the hostname). Such as, Amazon S3 API client
+	// prefixing "bucketname" to the hostname, or changing the
+	// hostname service name component from "s3." to "s3-accesspoint.dualstack."
+	// for the dualstack endpoint of an S3 Accesspoint resource.
+	//
+	// Care should be taken when providing a custom endpoint for an API. If the
+	// endpoint hostname is mutable, and the client cannot modify the endpoint
+	// correctly, the operation call will most likely fail, or have undefined
+	// behavior.
+	//
+	// If hostname is immutable, the SDK API clients will not modify the
+	// hostname of the URL. This may cause the API client not to function
+	// correctly if the API requires the operation specific hostname values
+	// to be used by the client.
+	//
+	// This flag does not modify the API client's behavior if this endpoint
+	// will be used instead of Endpoint Discovery, or if the endpoint will be
+	// used to perform Endpoint Discovery. That behavior is configured via the
+	// API Client's Options.
+	HostnameImmutable bool
+
+	// The AWS partition the endpoint belongs to.
 	PartitionID string
 
 	// The service name that should be used for signing the requests to the
@@ -24,9 +56,11 @@ type Endpoint struct {
 	SigningMethod string
 }
 
-// EndpointNotFoundError is a sentinel error to indicate that the EndpointResolver implementation was unable
-// to resolve an endpoint for the given service and region. Resolvers should use this to indicate that
-// a client should fallback and attempt to use it's default resolver to resolve the endpoint.
+// EndpointNotFoundError is a sentinel error to indicate that the
+// EndpointResolver implementation was unable to resolve an endpoint for the
+// given service and region. Resolvers should use this to indicate that an API
+// client should fallback and attempt to use it's internal default resolver to
+// resolve the endpoint.
 type EndpointNotFoundError struct {
 	Err error
 }
@@ -41,10 +75,12 @@ func (e *EndpointNotFoundError) Unwrap() error {
 	return e.Err
 }
 
-// EndpointResolver is an endpoint resolver that can be used to provide or override an endpoint for the given
-// service and region. Clients will attempt to use the EndpointResolver first to resolve an endpoint if available.
-// If the EndpointResolver returns an EndpointNotFoundError error, clients will fallback to attempting to resolve the endpoint
-// using their default endpoint resolver.
+// EndpointResolver is an endpoint resolver that can be used to provide or
+// override an endpoint for the given service and region. API clients will
+// attempt to use the EndpointResolver first to resolve an endpoint if
+// available. If the EndpointResolver returns an EndpointNotFoundError error,
+// API clients will fallback to attempting to resolve the endpoint using its
+// internal default endpoint resolver.
 type EndpointResolver interface {
 	ResolveEndpoint(service, region string) (Endpoint, error)
 }
@@ -52,7 +88,7 @@ type EndpointResolver interface {
 // EndpointResolverFunc wraps a function to satisfy the EndpointResolver interface.
 type EndpointResolverFunc func(service, region string) (Endpoint, error)
 
-// ResolveEndpoint calls the wrapped function and returns the results
+// ResolveEndpoint calls the wrapped function and returns the results.
 func (e EndpointResolverFunc) ResolveEndpoint(service, region string) (Endpoint, error) {
 	return e(service, region)
 }

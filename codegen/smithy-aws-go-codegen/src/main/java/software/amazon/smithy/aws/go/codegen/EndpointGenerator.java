@@ -48,7 +48,7 @@ final class EndpointGenerator implements Runnable {
     public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("add%sMiddleware", MIDDLEWARE_NAME);
     public static final String RESOLVER_INTERFACE_NAME = "EndpointResolver";
     public static final String RESOLVER_FUNC_NAME = "EndpointResolverFunc";
-    public static final String RESOLVER_OPTIONS = "ResolverOptions";
+    public static final String RESOLVER_OPTIONS = "EndpointResolverOptions";
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
     public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_HELPER = "WithEndpointResolver";
@@ -217,6 +217,7 @@ final class EndpointGenerator implements Runnable {
         w.addUseImports(SmithyGoDependency.FMT);
         w.addUseImports(SmithyGoDependency.NET_URL);
         w.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        w.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         w.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
 
         w.write("req, ok := in.Request.(*smithyhttp.Request)");
@@ -224,22 +225,26 @@ final class EndpointGenerator implements Runnable {
             w.write("return out, metadata, fmt.Errorf(\"unknown transport type %T\", in.Request)");
         });
         w.write("");
+
         w.openBlock("if m.Resolver == nil {", "}", () -> {
             w.write("return out, metadata, fmt.Errorf(\"expected endpoint resolver to not be nil\")");
         });
         w.write("");
+
         w.write("var endpoint $T", SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE)
                 .build());
         w.write("endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), m.Options)");
         w.openBlock("if err != nil {", "}", () -> {
-            w.write("return out, metadata, fmt.Errorf(\"failed to resolve service endpoint\")");
+            w.write("return out, metadata, fmt.Errorf(\"failed to resolve service endpoint, %w\", err)");
         });
         w.write("");
+
         w.write("req.URL, err = url.Parse(endpoint.URL)");
         w.openBlock("if err != nil {", "}", () -> {
             w.write("return out, metadata, fmt.Errorf(\"failed to parse endpoint URL: %w\", err)");
         });
         w.write("");
+
         w.openBlock("if len(awsmiddleware.GetSigningName(ctx)) == 0 {", "}", () -> {
             w.write("signingName := endpoint.SigningName");
             w.openBlock("if len(signingName) == 0 {", "}", () -> {
@@ -247,8 +252,12 @@ final class EndpointGenerator implements Runnable {
             });
             w.write("ctx = awsmiddleware.SetSigningName(ctx, signingName)");
         });
-        w.write("ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)");
         w.write("");
+
+        w.write("ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)");
+        w.write("ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)");
+        w.write("");
+
         w.write("return next.HandleSerialize(ctx, in)");
     }
 
@@ -387,6 +396,12 @@ final class EndpointGenerator implements Runnable {
         writer.write("");
         writer.writeDocs("ResolveEndpoint resolves the service endpoint for the given region and options");
         writeInternalResolveEndpointImplementation(writer, resolverImplSymbol, "r", () -> {
+            // Currently all APIs require a region to derive the endpoint for that API. If there are ever a truly
+            // region-less API then this should be gated at codegen.
+            writer.addUseImports(AwsGoDependency.AWS_CORE);
+            writer.write("if len(region) == 0 { return endpoint, &aws.MissingRegionError{} }");
+            writer.write("");
+
             Symbol sharedOptions = SymbolUtils.createPointableSymbolBuilder("Options",
                     AwsGoDependency.AWS_ENDPOINTS).build();
             writer.openBlock("opt := $T{", "}", sharedOptions, () -> {

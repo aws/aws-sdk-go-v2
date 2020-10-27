@@ -14,6 +14,12 @@ Since serializers serialize by default as path style url, we use customization
 to modify the endpoint url when `UsePathStyle` option on S3Client is unset or
 false. This flag will be ignored if `UseAccelerate` option is set to true.
 
+If UseAccelerate is not enabled, and the bucket name is not a valid hostname
+label, they SDK will fallback to forcing the request to be made as if
+UsePathStyle was enabled. This behavior is also used if UseDualStack is enabled.
+
+https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html#dual-stack-endpoints-description
+
 
 Transfer acceleration
 

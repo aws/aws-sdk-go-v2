@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/transport/http"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 )
@@ -78,7 +78,11 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	req, ok := in.Request.(*http.Request)
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown request type %T", req)
 	}
@@ -109,15 +113,23 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func (u updateEndpointMiddleware) updateEndpointFromConfig(req *http.Request, bucket string) error {
+func (u updateEndpointMiddleware) updateEndpointFromConfig(req *smithyhttp.Request, bucket string) error {
 	// do nothing if path style is enforced
 	if u.usePathStyle {
 		return nil
 	}
 
 	if !hostCompatibleBucketName(req.URL, bucket) {
-		// bucket name must be valid to put into the host
-		return fmt.Errorf("bucket name %s is not compatible with S3", bucket)
+		// bucket name must be valid to put into the host for accelerate operations.
+		// For non-accelerate operations the bucket name can stay in the path if
+		// not valid hostname.
+		var err error
+		if u.useAccelerate {
+			err = fmt.Errorf("bucket name %s is not compatible with S3", bucket)
+		}
+
+		// No-Op if not using accelerate.
+		return err
 	}
 
 	// accelerate is only supported if use path style is disabled

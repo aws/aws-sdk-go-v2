@@ -741,6 +741,7 @@ func TestSSE(t *testing.T) {
 func TestUploadWithContextCanceled(t *testing.T) {
 	u := manager.NewUploader(s3.New(s3.Options{
 		UsePathStyle: true,
+		Region:       "mock-region",
 	}))
 
 	params := s3.PutObjectInput{
@@ -878,7 +879,7 @@ func TestUploadRetry(t *testing.T) {
 			defer server.Close()
 
 			client := s3.New(s3.Options{
-				EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
+				EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
 					return aws.Endpoint{
 						URL: server.URL,
 					}, nil

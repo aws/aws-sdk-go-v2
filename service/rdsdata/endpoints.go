@@ -14,12 +14,12 @@ import (
 	"net/url"
 )
 
-// ResolverOptions is the service endpoint resolver options
-type ResolverOptions = internalendpoints.Options
+// EndpointResolverOptions is the service endpoint resolver options
+type EndpointResolverOptions = internalendpoints.Options
 
 // EndpointResolver interface for resolving service endpoints.
 type EndpointResolver interface {
-	ResolveEndpoint(region string, options ResolverOptions) (aws.Endpoint, error)
+	ResolveEndpoint(region string, options EndpointResolverOptions) (aws.Endpoint, error)
 }
 
 var _ EndpointResolver = &internalendpoints.Resolver{}
@@ -32,9 +32,9 @@ func NewDefaultEndpointResolver() *internalendpoints.Resolver {
 // EndpointResolverFunc is a helper utility that wraps a function so it satisfies
 // the EndpointResolver interface. This is useful when you want to add additional
 // endpoint resolving logic, or stub out specific endpoints with custom values.
-type EndpointResolverFunc func(region string, options ResolverOptions) (aws.Endpoint, error)
+type EndpointResolverFunc func(region string, options EndpointResolverOptions) (aws.Endpoint, error)
 
-func (fn EndpointResolverFunc) ResolveEndpoint(region string, options ResolverOptions) (endpoint aws.Endpoint, err error) {
+func (fn EndpointResolverFunc) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
 	return fn(region, options)
 }
 
@@ -47,7 +47,7 @@ func resolveDefaultEndpointConfiguration(o *Options) {
 
 type ResolveEndpoint struct {
 	Resolver EndpointResolver
-	Options  ResolverOptions
+	Options  EndpointResolverOptions
 }
 
 func (*ResolveEndpoint) ID() string {
@@ -69,7 +69,7 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	var endpoint aws.Endpoint
 	endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), m.Options)
 	if err != nil {
-		return out, metadata, fmt.Errorf("failed to resolve service endpoint")
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
 
 	req.URL, err = url.Parse(endpoint.URL)
@@ -84,7 +84,9 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}
+
 	ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)
 
 	return next.HandleSerialize(ctx, in)
 }
@@ -104,7 +106,7 @@ type wrappedEndpointResolver struct {
 	resolver    EndpointResolver
 }
 
-func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options ResolverOptions) (endpoint aws.Endpoint, err error) {
+func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
 	if w.awsResolver == nil {
 		goto fallback
 	}

@@ -52,7 +52,7 @@ type Options struct {
 	APIOptions []func(*middleware.Stack) error
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
-	EndpointOptions ResolverOptions
+	EndpointOptions EndpointResolverOptions
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
