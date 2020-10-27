@@ -138,6 +138,22 @@ type PostTextInput struct {
 
 type PostTextOutput struct {
 
+	// One to four alternative intents that may be applicable to the user's intent.
+	// Each alternative includes a score that indicates how confident Amazon Lex is
+	// that the intent matches the user's intent. The intents are sorted by the
+	// confidence score.
+	AlternativeIntents []*types.PredictedIntent
+
+	// The version of the bot that responded to the conversation. You can use this
+	// information to help determine if one version of a bot is performing better than
+	// another version. If you have enabled the new natural language understanding
+	// (NLU) model, you can use this to determine if the improvement is due to changes
+	// to the bot or changes to the NLU. For more information about enabling the new
+	// NLU, see the enableModelImprovements
+	// (https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements)
+	// parameter of the PutBot operation.
+	BotVersion *string
+
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
 	// information to customize the user interface.
@@ -208,6 +224,14 @@ type PostTextOutput struct {
 	// contains an escaped JSON object containing one or more messages from the groups
 	// that messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
+
+	// Provides a score that indicates how confident Amazon Lex is that the returned
+	// intent is the one that matches the user's intent. The score is between 0.0 and
+	// 1.0. For more information, see Confidence Scores
+	// (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html). The score is
+	// a relative score, not an absolute score. The score may change based on
+	// improvements to the Amazon Lex natural language understanding (NLU) model.
+	NluIntentConfidence *types.IntentConfidence
 
 	// Represents the options that the user has to respond to the current prompt.
 	// Response Card can come from the bot configuration (in the Amazon Lex console,

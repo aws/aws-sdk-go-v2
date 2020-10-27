@@ -345,6 +345,61 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+//
+type DefaultUserAssociatedToUserGroupFault struct {
+	Message *string
+}
+
+func (e *DefaultUserAssociatedToUserGroupFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DefaultUserAssociatedToUserGroupFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DefaultUserAssociatedToUserGroupFault) ErrorCode() string {
+	return "DefaultUserAssociatedToUserGroupFault"
+}
+func (e *DefaultUserAssociatedToUserGroupFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You must add default user to a user group.
+type DefaultUserRequired struct {
+	Message *string
+}
+
+func (e *DefaultUserRequired) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DefaultUserRequired) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DefaultUserRequired) ErrorCode() string             { return "DefaultUserRequired" }
+func (e *DefaultUserRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A user with this username already exists.
+type DuplicateUserNameFault struct {
+	Message *string
+}
+
+func (e *DuplicateUserNameFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DuplicateUserNameFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DuplicateUserNameFault) ErrorCode() string             { return "DuplicateUserNameFault" }
+func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The Global Datastore name already exists.
 type GlobalReplicationGroupAlreadyExistsFault struct {
 	Message *string
@@ -617,6 +672,40 @@ func (e *InvalidSubnet) ErrorMessage() string {
 }
 func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The user group is not in an active state.
+type InvalidUserGroupStateFault struct {
+	Message *string
+}
+
+func (e *InvalidUserGroupStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidUserGroupStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidUserGroupStateFault) ErrorCode() string             { return "InvalidUserGroupStateFault" }
+func (e *InvalidUserGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The user is not in active state.
+type InvalidUserStateFault struct {
+	Message *string
+}
+
+func (e *InvalidUserStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidUserStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidUserStateFault) ErrorCode() string             { return "InvalidUserStateFault" }
+func (e *InvalidUserStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The VPC network is in an invalid state.
 type InvalidVPCNetworkStateFault struct {
@@ -1026,6 +1115,26 @@ func (e *SubnetInUse) ErrorMessage() string {
 func (e *SubnetInUse) ErrorCode() string             { return "SubnetInUse" }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// At least one subnet ID does not match the other subnet IDs. This mismatch
+// typically occurs when a user sets one subnet ID to a regional Availability Zone
+// and a different one to an outpost. Or when a user sets the subnet ID to an
+// Outpost when not subscribed on this service.
+type SubnetNotAllowedFault struct {
+	Message *string
+}
+
+func (e *SubnetNotAllowedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SubnetNotAllowedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SubnetNotAllowedFault) ErrorCode() string             { return "SubnetNotAllowedFault" }
+func (e *SubnetNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The requested tag was not found on this resource.
 type TagNotFoundFault struct {
 	Message *string
@@ -1078,3 +1187,105 @@ func (e *TestFailoverNotAvailableFault) ErrorMessage() string {
 }
 func (e *TestFailoverNotAvailableFault) ErrorCode() string             { return "TestFailoverNotAvailableFault" }
 func (e *TestFailoverNotAvailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A user with this ID already exists.
+type UserAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *UserAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserAlreadyExistsFault) ErrorCode() string             { return "UserAlreadyExistsFault" }
+func (e *UserAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The user group with this ID already exists.
+type UserGroupAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *UserGroupAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserGroupAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserGroupAlreadyExistsFault) ErrorCode() string             { return "UserGroupAlreadyExistsFault" }
+func (e *UserGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The user group was not found or does not exist
+type UserGroupNotFoundFault struct {
+	Message *string
+}
+
+func (e *UserGroupNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserGroupNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserGroupNotFoundFault) ErrorCode() string             { return "UserGroupNotFoundFault" }
+func (e *UserGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of users exceeds the user group limit.
+type UserGroupQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *UserGroupQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserGroupQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserGroupQuotaExceededFault) ErrorCode() string             { return "UserGroupQuotaExceededFault" }
+func (e *UserGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The user does not exist or could not be found.
+type UserNotFoundFault struct {
+	Message *string
+}
+
+func (e *UserNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserNotFoundFault) ErrorCode() string             { return "UserNotFoundFault" }
+func (e *UserNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The quota of users has been exceeded.
+type UserQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *UserQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserQuotaExceededFault) ErrorCode() string             { return "UserQuotaExceededFault" }
+func (e *UserQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -31,8 +31,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ClientException struct {
 	Message *string
 
-	ClusterName   *string
 	NodegroupName *string
+	ClusterName   *string
 }
 
 func (e *ClientException) Error() string {
@@ -52,8 +52,8 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type InvalidParameterException struct {
 	Message *string
 
-	NodegroupName      *string
 	FargateProfileName *string
+	NodegroupName      *string
 	ClusterName        *string
 }
 
@@ -74,8 +74,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidRequestException struct {
 	Message *string
 
-	ClusterName   *string
 	NodegroupName *string
+	ClusterName   *string
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -132,8 +132,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceLimitExceededException struct {
 	Message *string
 
-	NodegroupName *string
 	ClusterName   *string
+	NodegroupName *string
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -154,9 +154,9 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 type ResourceNotFoundException struct {
 	Message *string
 
-	FargateProfileName *string
-	NodegroupName      *string
 	ClusterName        *string
+	NodegroupName      *string
+	FargateProfileName *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -175,8 +175,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServerException struct {
 	Message *string
 
-	ClusterName   *string
 	NodegroupName *string
+	ClusterName   *string
 }
 
 func (e *ServerException) Error() string {
@@ -215,9 +215,9 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 type UnsupportedAvailabilityZoneException struct {
 	Message *string
 
+	ValidZones    []*string
 	ClusterName   *string
 	NodegroupName *string
-	ValidZones    []*string
 }
 
 func (e *UnsupportedAvailabilityZoneException) Error() string {

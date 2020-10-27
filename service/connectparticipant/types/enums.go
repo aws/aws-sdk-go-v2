@@ -11,6 +11,17 @@ const (
 	ChatItemTypeConnection_ack ChatItemType = "CONNECTION_ACK"
 )
 
+// Values returns all known values for ChatItemType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChatItemType) Values() []ChatItemType {
+	return []ChatItemType{
+		"MESSAGE",
+		"EVENT",
+		"CONNECTION_ACK",
+	}
+}
+
 type ConnectionType string
 
 // Enum values for ConnectionType
@@ -18,6 +29,16 @@ const (
 	ConnectionTypeWebsocket              ConnectionType = "WEBSOCKET"
 	ConnectionTypeConnection_credentials ConnectionType = "CONNECTION_CREDENTIALS"
 )
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"WEBSOCKET",
+		"CONNECTION_CREDENTIALS",
+	}
+}
 
 type ParticipantRole string
 
@@ -28,6 +49,17 @@ const (
 	ParticipantRoleSystem   ParticipantRole = "SYSTEM"
 )
 
+// Values returns all known values for ParticipantRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRole) Values() []ParticipantRole {
+	return []ParticipantRole{
+		"AGENT",
+		"CUSTOMER",
+		"SYSTEM",
+	}
+}
+
 type ScanDirection string
 
 // Enum values for ScanDirection
@@ -36,6 +68,16 @@ const (
 	ScanDirectionBackward ScanDirection = "BACKWARD"
 )
 
+// Values returns all known values for ScanDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScanDirection) Values() []ScanDirection {
+	return []ScanDirection{
+		"FORWARD",
+		"BACKWARD",
+	}
+}
+
 type SortKey string
 
 // Enum values for SortKey
@@ -43,3 +85,13 @@ const (
 	SortKeyDescending SortKey = "DESCENDING"
 	SortKeyAscending  SortKey = "ASCENDING"
 )
+
+// Values returns all known values for SortKey. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortKey) Values() []SortKey {
+	return []SortKey{
+		"DESCENDING",
+		"ASCENDING",
+	}
+}

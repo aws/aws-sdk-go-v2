@@ -190,6 +190,21 @@ func validateNotificationChannel(v *types.NotificationChannel) error {
 	}
 }
 
+func validateOutputConfig(v *types.OutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 	if v == nil {
 		return nil
@@ -274,6 +289,11 @@ func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v.FeatureTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureTypes"))
 	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -286,13 +306,18 @@ func validateOpStartDocumentTextDetectionInput(v *StartDocumentTextDetectionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDocumentTextDetectionInput"}
-	if v.DocumentLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DocumentLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

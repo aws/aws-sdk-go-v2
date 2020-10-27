@@ -1604,28 +1604,28 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 		switch key {
 		case "DateCreated":
 			if value != nil {
-				jtv, ok := value.(string)
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
-				t, err := smithytime.ParseDateTime(jtv)
+				f64, err := jtv.Float64()
 				if err != nil {
 					return err
 				}
-				sv.DateCreated = &t
+				sv.DateCreated = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DateModified":
 			if value != nil {
-				jtv, ok := value.(string)
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
-				t, err := smithytime.ParseDateTime(jtv)
+				f64, err := jtv.Float64()
 				if err != nil {
 					return err
 				}
-				sv.DateModified = &t
+				sv.DateModified = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Description":

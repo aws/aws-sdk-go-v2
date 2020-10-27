@@ -899,11 +899,11 @@ func validateOpDescribeDeviceInput(v *DescribeDeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDeviceInput"}
-	if v.FleetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
-	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.FleetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1163,11 +1163,11 @@ func validateOpSignOutUserInput(v *SignOutUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignOutUserInput"}
-	if v.FleetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
-	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.FleetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1232,9 +1232,6 @@ func validateOpUpdateCompanyNetworkConfigurationInput(v *UpdateCompanyNetworkCon
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCompanyNetworkConfigurationInput"}
-	if v.FleetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
-	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
 	}
@@ -1243,6 +1240,9 @@ func validateOpUpdateCompanyNetworkConfigurationInput(v *UpdateCompanyNetworkCon
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.FleetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1271,11 +1271,11 @@ func validateOpUpdateDomainMetadataInput(v *UpdateDomainMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainMetadataInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

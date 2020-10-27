@@ -10,6 +10,16 @@ const (
 	AssignPublicIpDisabled AssignPublicIp = "DISABLED"
 )
 
+// Values returns all known values for AssignPublicIp. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssignPublicIp) Values() []AssignPublicIp {
+	return []AssignPublicIp{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type EventSourceState string
 
 // Enum values for EventSourceState
@@ -19,6 +29,17 @@ const (
 	EventSourceStateDeleted EventSourceState = "DELETED"
 )
 
+// Values returns all known values for EventSourceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceState) Values() []EventSourceState {
+	return []EventSourceState{
+		"PENDING",
+		"ACTIVE",
+		"DELETED",
+	}
+}
+
 type LaunchType string
 
 // Enum values for LaunchType
@@ -27,6 +48,16 @@ const (
 	LaunchTypeFargate LaunchType = "FARGATE"
 )
 
+// Values returns all known values for LaunchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LaunchType) Values() []LaunchType {
+	return []LaunchType{
+		"EC2",
+		"FARGATE",
+	}
+}
+
 type RuleState string
 
 // Enum values for RuleState
@@ -34,3 +65,13 @@ const (
 	RuleStateEnabled  RuleState = "ENABLED"
 	RuleStateDisabled RuleState = "DISABLED"
 )
+
+// Values returns all known values for RuleState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RuleState) Values() []RuleState {
+	return []RuleState{
+		"ENABLED",
+		"DISABLED",
+	}
+}

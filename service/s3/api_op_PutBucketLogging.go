@@ -36,18 +36,27 @@ import (
 // logging, you use an empty BucketLoggingStatus request element:  For more
 // information about server access logging, see Server Access Logging
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html). For more
-// information about creating a bucket, see CreateBucket. For more information
-// about returning the logging status of a bucket, see GetBucketLogging. The
+// information about creating a bucket, see CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html). For
+// more information about returning the logging status of a bucket, see
+// GetBucketLogging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html). The
 // following operations are related to PutBucketLogging:
 //
 //     * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
 //     *
 // DeleteBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 //
-//     * CreateBucket
+//     *
+// CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     * GetBucketLogging
+//     *
+// GetBucketLogging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html)
 func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingInput, optFns ...func(*Options)) (*PutBucketLoggingOutput, error) {
 	if params == nil {
 		params = &PutBucketLoggingInput{}
@@ -77,6 +86,10 @@ type PutBucketLoggingInput struct {
 
 	// The MD5 hash of the PutBucketLogging request body.
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketLoggingOutput struct {

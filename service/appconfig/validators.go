@@ -809,11 +809,6 @@ func validateOpCreateConfigurationProfileInput(v *CreateConfigurationProfileInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationProfileInput"}
-	if v.Validators != nil {
-		if err := validateValidatorList(v.Validators); err != nil {
-			invalidParams.AddNested("Validators", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -822,6 +817,11 @@ func validateOpCreateConfigurationProfileInput(v *CreateConfigurationProfileInpu
 	}
 	if v.LocationUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationUri"))
+	}
+	if v.Validators != nil {
+		if err := validateValidatorList(v.Validators); err != nil {
+			invalidParams.AddNested("Validators", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -859,11 +859,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -880,11 +880,11 @@ func validateOpCreateHostedConfigurationVersionInput(v *CreateHostedConfiguratio
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
-	if v.ContentType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
-	}
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
@@ -949,11 +949,11 @@ func validateOpDeleteEnvironmentInput(v *DeleteEnvironmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentInput"}
-	if v.EnvironmentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -967,14 +967,14 @@ func validateOpDeleteHostedConfigurationVersionInput(v *DeleteHostedConfiguratio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteHostedConfigurationVersionInput"}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	if v.ConfigurationProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
-	if v.ConfigurationProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1006,14 +1006,14 @@ func validateOpGetConfigurationInput(v *GetConfigurationInput) error {
 	if v.Environment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
 	}
-	if v.Configuration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1027,11 +1027,11 @@ func validateOpGetConfigurationProfileInput(v *GetConfigurationProfileInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationProfileInput"}
-	if v.ConfigurationProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ConfigurationProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1102,11 +1102,11 @@ func validateOpGetHostedConfigurationVersionInput(v *GetHostedConfigurationVersi
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1204,14 +1204,14 @@ func validateOpStartDeploymentInput(v *StartDeploymentInput) error {
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.ConfigurationVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationVersion"))
-	}
 	if v.DeploymentStrategyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategyId"))
 	}
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
+	}
+	if v.ConfigurationVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationVersion"))
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
@@ -1267,11 +1267,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1300,16 +1300,16 @@ func validateOpUpdateConfigurationProfileInput(v *UpdateConfigurationProfileInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationProfileInput"}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
-	if v.ConfigurationProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
-	}
 	if v.Validators != nil {
 		if err := validateValidatorList(v.Validators); err != nil {
 			invalidParams.AddNested("Validators", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ConfigurationProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
+	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1338,11 +1338,11 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentInput"}
-	if v.EnvironmentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1356,14 +1356,14 @@ func validateOpValidateConfigurationInput(v *ValidateConfigurationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ValidateConfigurationInput"}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
 	if v.ConfigurationVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationVersion"))
+	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

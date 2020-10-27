@@ -6591,6 +6591,932 @@ func awsRestjson1_deserializeDocumentAvailabilityZones(v *[]*types.AvailabilityZ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsApiGatewayAccessLogSettings(v **types.AwsApiGatewayAccessLogSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayAccessLogSettings
+	if *v == nil {
+		sv = &types.AwsApiGatewayAccessLogSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationArn = &jtv
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Format = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayCanarySettings(v **types.AwsApiGatewayCanarySettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayCanarySettings
+	if *v == nil {
+		sv = &types.AwsApiGatewayCanarySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeploymentId = &jtv
+			}
+
+		case "PercentTraffic":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.PercentTraffic = &f64
+			}
+
+		case "StageVariableOverrides":
+			if err := awsRestjson1_deserializeDocumentFieldMap(&sv.StageVariableOverrides, value); err != nil {
+				return err
+			}
+
+		case "UseStageCache":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseStageCache = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayEndpointConfiguration(v **types.AwsApiGatewayEndpointConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayEndpointConfiguration
+	if *v == nil {
+		sv = &types.AwsApiGatewayEndpointConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Types":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.Types, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayMethodSettings(v **types.AwsApiGatewayMethodSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayMethodSettings
+	if *v == nil {
+		sv = &types.AwsApiGatewayMethodSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CacheDataEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CacheDataEncrypted = &jtv
+			}
+
+		case "CacheTtlInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CacheTtlInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "CachingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CachingEnabled = &jtv
+			}
+
+		case "DataTraceEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DataTraceEnabled = &jtv
+			}
+
+		case "HttpMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HttpMethod = &jtv
+			}
+
+		case "LoggingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LoggingLevel = &jtv
+			}
+
+		case "MetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MetricsEnabled = &jtv
+			}
+
+		case "RequireAuthorizationForCacheControl":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RequireAuthorizationForCacheControl = &jtv
+			}
+
+		case "ResourcePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourcePath = &jtv
+			}
+
+		case "ThrottlingBurstLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThrottlingBurstLimit = ptr.Int32(int32(i64))
+			}
+
+		case "ThrottlingRateLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.ThrottlingRateLimit = &f64
+			}
+
+		case "UnauthorizedCacheControlHeaderStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UnauthorizedCacheControlHeaderStrategy = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayMethodSettingsList(v *[]*types.AwsApiGatewayMethodSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsApiGatewayMethodSettings
+	if *v == nil {
+		cv = []*types.AwsApiGatewayMethodSettings{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsApiGatewayMethodSettings
+		if err := awsRestjson1_deserializeDocumentAwsApiGatewayMethodSettings(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayRestApiDetails(v **types.AwsApiGatewayRestApiDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayRestApiDetails
+	if *v == nil {
+		sv = &types.AwsApiGatewayRestApiDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApiKeySource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySource = &jtv
+			}
+
+		case "BinaryMediaTypes":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.BinaryMediaTypes, value); err != nil {
+				return err
+			}
+
+		case "CreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedDate = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "EndpointConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayEndpointConfiguration(&sv.EndpointConfiguration, value); err != nil {
+				return err
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Id = &jtv
+			}
+
+		case "MinimumCompressionSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumCompressionSize = ptr.Int32(int32(i64))
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Version = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayStageDetails(v **types.AwsApiGatewayStageDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayStageDetails
+	if *v == nil {
+		sv = &types.AwsApiGatewayStageDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessLogSettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayAccessLogSettings(&sv.AccessLogSettings, value); err != nil {
+				return err
+			}
+
+		case "CacheClusterEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CacheClusterEnabled = &jtv
+			}
+
+		case "CacheClusterSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CacheClusterSize = &jtv
+			}
+
+		case "CacheClusterStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CacheClusterStatus = &jtv
+			}
+
+		case "CanarySettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayCanarySettings(&sv.CanarySettings, value); err != nil {
+				return err
+			}
+
+		case "ClientCertificateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClientCertificateId = &jtv
+			}
+
+		case "CreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedDate = &jtv
+			}
+
+		case "DeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeploymentId = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "DocumentationVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DocumentationVersion = &jtv
+			}
+
+		case "LastUpdatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastUpdatedDate = &jtv
+			}
+
+		case "MethodSettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayMethodSettingsList(&sv.MethodSettings, value); err != nil {
+				return err
+			}
+
+		case "StageName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StageName = &jtv
+			}
+
+		case "TracingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.TracingEnabled = &jtv
+			}
+
+		case "Variables":
+			if err := awsRestjson1_deserializeDocumentFieldMap(&sv.Variables, value); err != nil {
+				return err
+			}
+
+		case "WebAclArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.WebAclArn = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayV2ApiDetails(v **types.AwsApiGatewayV2ApiDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayV2ApiDetails
+	if *v == nil {
+		sv = &types.AwsApiGatewayV2ApiDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ApiEndpoint = &jtv
+			}
+
+		case "ApiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ApiId = &jtv
+			}
+
+		case "ApiKeySelectionExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySelectionExpression = &jtv
+			}
+
+		case "CorsConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsCorsConfiguration(&sv.CorsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "CreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedDate = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "ProtocolType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ProtocolType = &jtv
+			}
+
+		case "RouteSelectionExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RouteSelectionExpression = &jtv
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Version = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayV2RouteSettings(v **types.AwsApiGatewayV2RouteSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayV2RouteSettings
+	if *v == nil {
+		sv = &types.AwsApiGatewayV2RouteSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataTraceEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DataTraceEnabled = &jtv
+			}
+
+		case "DetailedMetricsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DetailedMetricsEnabled = &jtv
+			}
+
+		case "LoggingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LoggingLevel = &jtv
+			}
+
+		case "ThrottlingBurstLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThrottlingBurstLimit = ptr.Int32(int32(i64))
+			}
+
+		case "ThrottlingRateLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.ThrottlingRateLimit = &f64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsApiGatewayV2StageDetails(v **types.AwsApiGatewayV2StageDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsApiGatewayV2StageDetails
+	if *v == nil {
+		sv = &types.AwsApiGatewayV2StageDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessLogSettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayAccessLogSettings(&sv.AccessLogSettings, value); err != nil {
+				return err
+			}
+
+		case "ApiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
+		case "AutoDeploy":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoDeploy = &jtv
+			}
+
+		case "CreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedDate = &jtv
+			}
+
+		case "DefaultRouteSettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayV2RouteSettings(&sv.DefaultRouteSettings, value); err != nil {
+				return err
+			}
+
+		case "DeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeploymentId = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "LastDeploymentStatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastDeploymentStatusMessage = &jtv
+			}
+
+		case "LastUpdatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastUpdatedDate = &jtv
+			}
+
+		case "RouteSettings":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayV2RouteSettings(&sv.RouteSettings, value); err != nil {
+				return err
+			}
+
+		case "StageName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StageName = &jtv
+			}
+
+		case "StageVariables":
+			if err := awsRestjson1_deserializeDocumentFieldMap(&sv.StageVariables, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsAutoScalingAutoScalingGroupDetails(v **types.AwsAutoScalingAutoScalingGroupDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6667,6 +7593,787 @@ func awsRestjson1_deserializeDocumentAwsAutoScalingAutoScalingGroupDetails(v **t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDetails(v **types.AwsCertificateManagerCertificateDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateDetails
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateAuthorityArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CertificateAuthorityArn = &jtv
+			}
+
+		case "CreatedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedAt = &jtv
+			}
+
+		case "DomainName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DomainName = &jtv
+			}
+
+		case "DomainValidationOptions":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDomainValidationOptions(&sv.DomainValidationOptions, value); err != nil {
+				return err
+			}
+
+		case "ExtendedKeyUsages":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateExtendedKeyUsages(&sv.ExtendedKeyUsages, value); err != nil {
+				return err
+			}
+
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = &jtv
+			}
+
+		case "ImportedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ImportedAt = &jtv
+			}
+
+		case "InUseBy":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.InUseBy, value); err != nil {
+				return err
+			}
+
+		case "IssuedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IssuedAt = &jtv
+			}
+
+		case "Issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Issuer = &jtv
+			}
+
+		case "KeyAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KeyAlgorithm = &jtv
+			}
+
+		case "KeyUsages":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateKeyUsages(&sv.KeyUsages, value); err != nil {
+				return err
+			}
+
+		case "NotAfter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NotAfter = &jtv
+			}
+
+		case "NotBefore":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NotBefore = &jtv
+			}
+
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
+		case "RenewalEligibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RenewalEligibility = &jtv
+			}
+
+		case "RenewalSummary":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateRenewalSummary(&sv.RenewalSummary, value); err != nil {
+				return err
+			}
+
+		case "Serial":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Serial = &jtv
+			}
+
+		case "SignatureAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SignatureAlgorithm = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "Subject":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Subject = &jtv
+			}
+
+		case "SubjectAlternativeNames":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.SubjectAlternativeNames, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Type = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDomainValidationOption(v **types.AwsCertificateManagerCertificateDomainValidationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateDomainValidationOption
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateDomainValidationOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DomainName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DomainName = &jtv
+			}
+
+		case "ResourceRecord":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateResourceRecord(&sv.ResourceRecord, value); err != nil {
+				return err
+			}
+
+		case "ValidationDomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ValidationDomain = &jtv
+			}
+
+		case "ValidationEmails":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ValidationEmails, value); err != nil {
+				return err
+			}
+
+		case "ValidationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ValidationMethod = &jtv
+			}
+
+		case "ValidationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ValidationStatus = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDomainValidationOptions(v *[]*types.AwsCertificateManagerCertificateDomainValidationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsCertificateManagerCertificateDomainValidationOption
+	if *v == nil {
+		cv = []*types.AwsCertificateManagerCertificateDomainValidationOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsCertificateManagerCertificateDomainValidationOption
+		if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDomainValidationOption(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateExtendedKeyUsage(v **types.AwsCertificateManagerCertificateExtendedKeyUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateExtendedKeyUsage
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateExtendedKeyUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "OId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateExtendedKeyUsages(v *[]*types.AwsCertificateManagerCertificateExtendedKeyUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsCertificateManagerCertificateExtendedKeyUsage
+	if *v == nil {
+		cv = []*types.AwsCertificateManagerCertificateExtendedKeyUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsCertificateManagerCertificateExtendedKeyUsage
+		if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateExtendedKeyUsage(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateKeyUsage(v **types.AwsCertificateManagerCertificateKeyUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateKeyUsage
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateKeyUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateKeyUsages(v *[]*types.AwsCertificateManagerCertificateKeyUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsCertificateManagerCertificateKeyUsage
+	if *v == nil {
+		cv = []*types.AwsCertificateManagerCertificateKeyUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsCertificateManagerCertificateKeyUsage
+		if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateKeyUsage(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateOptions(v **types.AwsCertificateManagerCertificateOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateOptions
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateTransparencyLoggingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CertificateTransparencyLoggingPreference = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateRenewalSummary(v **types.AwsCertificateManagerCertificateRenewalSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateRenewalSummary
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateRenewalSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DomainValidationOptions":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDomainValidationOptions(&sv.DomainValidationOptions, value); err != nil {
+				return err
+			}
+
+		case "RenewalStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RenewalStatus = &jtv
+			}
+
+		case "RenewalStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RenewalStatusReason = &jtv
+			}
+
+		case "UpdatedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UpdatedAt = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateResourceRecord(v **types.AwsCertificateManagerCertificateResourceRecord, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCertificateManagerCertificateResourceRecord
+	if *v == nil {
+		sv = &types.AwsCertificateManagerCertificateResourceRecord{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Type = &jtv
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Value = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehavior(v **types.AwsCloudFrontDistributionCacheBehavior, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionCacheBehavior
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionCacheBehavior{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ViewerProtocolPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ViewerProtocolPolicy = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehaviors(v **types.AwsCloudFrontDistributionCacheBehaviors, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionCacheBehaviors
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionCacheBehaviors{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Items":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehaviorsItemList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehaviorsItemList(v *[]*types.AwsCloudFrontDistributionCacheBehavior, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsCloudFrontDistributionCacheBehavior
+	if *v == nil {
+		cv = []*types.AwsCloudFrontDistributionCacheBehavior{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsCloudFrontDistributionCacheBehavior
+		if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehavior(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionDefaultCacheBehavior(v **types.AwsCloudFrontDistributionDefaultCacheBehavior, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionDefaultCacheBehavior
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionDefaultCacheBehavior{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ViewerProtocolPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ViewerProtocolPolicy = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionDetails(v **types.AwsCloudFrontDistributionDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6689,6 +8396,25 @@ func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionDetails(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "CacheBehaviors":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionCacheBehaviors(&sv.CacheBehaviors, value); err != nil {
+				return err
+			}
+
+		case "DefaultCacheBehavior":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionDefaultCacheBehavior(&sv.DefaultCacheBehavior, value); err != nil {
+				return err
+			}
+
+		case "DefaultRootObject":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DefaultRootObject = &jtv
+			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6718,6 +8444,11 @@ func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionDetails(v **types.
 
 		case "Logging":
 			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionLogging(&sv.Logging, value); err != nil {
+				return err
+			}
+
+		case "OriginGroups":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroups(&sv.OriginGroups, value); err != nil {
 				return err
 			}
 
@@ -6820,6 +8551,235 @@ func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionLogging(v **types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroup(v **types.AwsCloudFrontDistributionOriginGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionOriginGroup
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionOriginGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailoverCriteria":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailover(&sv.FailoverCriteria, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailover(v **types.AwsCloudFrontDistributionOriginGroupFailover, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionOriginGroupFailover
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionOriginGroupFailover{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StatusCodes":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailoverStatusCodes(&sv.StatusCodes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailoverStatusCodes(v **types.AwsCloudFrontDistributionOriginGroupFailoverStatusCodes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionOriginGroupFailoverStatusCodes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Items":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "Quantity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Quantity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList(v *[]*int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*int32
+	if *v == nil {
+		cv = []*int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = ptr.Int32(int32(i64))
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroups(v **types.AwsCloudFrontDistributionOriginGroups, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionOriginGroups
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionOriginGroups{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Items":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupsItemList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroupsItemList(v *[]*types.AwsCloudFrontDistributionOriginGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsCloudFrontDistributionOriginGroup
+	if *v == nil {
+		cv = []*types.AwsCloudFrontDistributionOriginGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsCloudFrontDistributionOriginGroup
+		if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginGroup(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginItem(v **types.AwsCloudFrontDistributionOriginItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6867,6 +8827,11 @@ func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginItem(v **typ
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.OriginPath = &jtv
+			}
+
+		case "S3OriginConfig":
+			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginS3OriginConfig(&sv.S3OriginConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6935,6 +8900,212 @@ func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOrigins(v **types.
 		case "Items":
 			if err := awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginItemList(&sv.Items, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudFrontDistributionOriginS3OriginConfig(v **types.AwsCloudFrontDistributionOriginS3OriginConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudFrontDistributionOriginS3OriginConfig
+	if *v == nil {
+		sv = &types.AwsCloudFrontDistributionOriginS3OriginConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OriginAccessIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OriginAccessIdentity = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCloudTrailTrailDetails(v **types.AwsCloudTrailTrailDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCloudTrailTrailDetails
+	if *v == nil {
+		sv = &types.AwsCloudTrailTrailDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CloudWatchLogsLogGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CloudWatchLogsLogGroupArn = &jtv
+			}
+
+		case "CloudWatchLogsRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CloudWatchLogsRoleArn = &jtv
+			}
+
+		case "HasCustomEventSelectors":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HasCustomEventSelectors = &jtv
+			}
+
+		case "HomeRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HomeRegion = &jtv
+			}
+
+		case "IncludeGlobalServiceEvents":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeGlobalServiceEvents = &jtv
+			}
+
+		case "IsMultiRegionTrail":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMultiRegionTrail = &jtv
+			}
+
+		case "IsOrganizationTrail":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsOrganizationTrail = &jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "LogFileValidationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.LogFileValidationEnabled = &jtv
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "S3BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.S3BucketName = &jtv
+			}
+
+		case "S3KeyPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.S3KeyPrefix = &jtv
+			}
+
+		case "SnsTopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnsTopicArn = &jtv
+			}
+
+		case "SnsTopicName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnsTopicName = &jtv
+			}
+
+		case "TrailArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TrailArn = &jtv
 			}
 
 		default:
@@ -7241,6 +9412,1358 @@ func awsRestjson1_deserializeDocumentAwsCodeBuildProjectVpcConfig(v **types.AwsC
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.VpcId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsCorsConfiguration(v **types.AwsCorsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsCorsConfiguration
+	if *v == nil {
+		sv = &types.AwsCorsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowCredentials":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowCredentials = &jtv
+			}
+
+		case "AllowHeaders":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.AllowHeaders, value); err != nil {
+				return err
+			}
+
+		case "AllowMethods":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.AllowMethods, value); err != nil {
+				return err
+			}
+
+		case "AllowOrigins":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.AllowOrigins, value); err != nil {
+				return err
+			}
+
+		case "ExposeHeaders":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.ExposeHeaders, value); err != nil {
+				return err
+			}
+
+		case "MaxAge":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAge = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableAttributeDefinition(v **types.AwsDynamoDbTableAttributeDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableAttributeDefinition
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableAttributeDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = &jtv
+			}
+
+		case "AttributeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AttributeType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableAttributeDefinitionList(v *[]*types.AwsDynamoDbTableAttributeDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableAttributeDefinition
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableAttributeDefinition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableAttributeDefinition
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableAttributeDefinition(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableBillingModeSummary(v **types.AwsDynamoDbTableBillingModeSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableBillingModeSummary
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableBillingModeSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BillingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = &jtv
+			}
+
+		case "LastUpdateToPayPerRequestDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastUpdateToPayPerRequestDateTime = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableDetails(v **types.AwsDynamoDbTableDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableDetails
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeDefinitions":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableAttributeDefinitionList(&sv.AttributeDefinitions, value); err != nil {
+				return err
+			}
+
+		case "BillingModeSummary":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableBillingModeSummary(&sv.BillingModeSummary, value); err != nil {
+				return err
+			}
+
+		case "CreationDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreationDateTime = &jtv
+			}
+
+		case "GlobalSecondaryIndexes":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableGlobalSecondaryIndexList(&sv.GlobalSecondaryIndexes, value); err != nil {
+				return err
+			}
+
+		case "GlobalTableVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GlobalTableVersion = &jtv
+			}
+
+		case "ItemCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ItemCount = ptr.Int32(int32(i64))
+			}
+
+		case "KeySchema":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchemaList(&sv.KeySchema, value); err != nil {
+				return err
+			}
+
+		case "LatestStreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LatestStreamArn = &jtv
+			}
+
+		case "LatestStreamLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LatestStreamLabel = &jtv
+			}
+
+		case "LocalSecondaryIndexes":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableLocalSecondaryIndexList(&sv.LocalSecondaryIndexes, value); err != nil {
+				return err
+			}
+
+		case "ProvisionedThroughput":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughput(&sv.ProvisionedThroughput, value); err != nil {
+				return err
+			}
+
+		case "Replicas":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaList(&sv.Replicas, value); err != nil {
+				return err
+			}
+
+		case "RestoreSummary":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableRestoreSummary(&sv.RestoreSummary, value); err != nil {
+				return err
+			}
+
+		case "SseDescription":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableSseDescription(&sv.SseDescription, value); err != nil {
+				return err
+			}
+
+		case "StreamSpecification":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableStreamSpecification(&sv.StreamSpecification, value); err != nil {
+				return err
+			}
+
+		case "TableId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TableId = &jtv
+			}
+
+		case "TableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TableName = &jtv
+			}
+
+		case "TableSizeBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SizeBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TableSizeBytes = &i64
+			}
+
+		case "TableStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TableStatus = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableGlobalSecondaryIndex(v **types.AwsDynamoDbTableGlobalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableGlobalSecondaryIndex
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableGlobalSecondaryIndex{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Backfilling":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Backfilling = &jtv
+			}
+
+		case "IndexArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexArn = &jtv
+			}
+
+		case "IndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexName = &jtv
+			}
+
+		case "IndexSizeBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SizeBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IndexSizeBytes = &i64
+			}
+
+		case "IndexStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexStatus = &jtv
+			}
+
+		case "ItemCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ItemCount = ptr.Int32(int32(i64))
+			}
+
+		case "KeySchema":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchemaList(&sv.KeySchema, value); err != nil {
+				return err
+			}
+
+		case "Projection":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProjection(&sv.Projection, value); err != nil {
+				return err
+			}
+
+		case "ProvisionedThroughput":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughput(&sv.ProvisionedThroughput, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableGlobalSecondaryIndexList(v *[]*types.AwsDynamoDbTableGlobalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableGlobalSecondaryIndex
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableGlobalSecondaryIndex{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableGlobalSecondaryIndex
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableGlobalSecondaryIndex(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchema(v **types.AwsDynamoDbTableKeySchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableKeySchema
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableKeySchema{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = &jtv
+			}
+
+		case "KeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KeyType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchemaList(v *[]*types.AwsDynamoDbTableKeySchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableKeySchema
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableKeySchema{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableKeySchema
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchema(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableLocalSecondaryIndex(v **types.AwsDynamoDbTableLocalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableLocalSecondaryIndex
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableLocalSecondaryIndex{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IndexArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexArn = &jtv
+			}
+
+		case "IndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexName = &jtv
+			}
+
+		case "KeySchema":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableKeySchemaList(&sv.KeySchema, value); err != nil {
+				return err
+			}
+
+		case "Projection":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProjection(&sv.Projection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableLocalSecondaryIndexList(v *[]*types.AwsDynamoDbTableLocalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableLocalSecondaryIndex
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableLocalSecondaryIndex{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableLocalSecondaryIndex
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableLocalSecondaryIndex(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableProjection(v **types.AwsDynamoDbTableProjection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableProjection
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableProjection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NonKeyAttributes":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.NonKeyAttributes, value); err != nil {
+				return err
+			}
+
+		case "ProjectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ProjectionType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughput(v **types.AwsDynamoDbTableProvisionedThroughput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableProvisionedThroughput
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableProvisionedThroughput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LastDecreaseDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastDecreaseDateTime = &jtv
+			}
+
+		case "LastIncreaseDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastIncreaseDateTime = &jtv
+			}
+
+		case "NumberOfDecreasesToday":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfDecreasesToday = ptr.Int32(int32(i64))
+			}
+
+		case "ReadCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		case "WriteCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughputOverride(v **types.AwsDynamoDbTableProvisionedThroughputOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableProvisionedThroughputOverride
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableProvisionedThroughputOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReadCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableReplica(v **types.AwsDynamoDbTableReplica, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableReplica
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableReplica{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GlobalSecondaryIndexes":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaGlobalSecondaryIndexList(&sv.GlobalSecondaryIndexes, value); err != nil {
+				return err
+			}
+
+		case "KmsMasterKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsMasterKeyId = &jtv
+			}
+
+		case "ProvisionedThroughputOverride":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughputOverride(&sv.ProvisionedThroughputOverride, value); err != nil {
+				return err
+			}
+
+		case "RegionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RegionName = &jtv
+			}
+
+		case "ReplicaStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ReplicaStatus = &jtv
+			}
+
+		case "ReplicaStatusDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ReplicaStatusDescription = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaGlobalSecondaryIndex(v **types.AwsDynamoDbTableReplicaGlobalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableReplicaGlobalSecondaryIndex
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableReplicaGlobalSecondaryIndex{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IndexName = &jtv
+			}
+
+		case "ProvisionedThroughputOverride":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableProvisionedThroughputOverride(&sv.ProvisionedThroughputOverride, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaGlobalSecondaryIndexList(v *[]*types.AwsDynamoDbTableReplicaGlobalSecondaryIndex, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableReplicaGlobalSecondaryIndex
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableReplicaGlobalSecondaryIndex{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableReplicaGlobalSecondaryIndex
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaGlobalSecondaryIndex(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableReplicaList(v *[]*types.AwsDynamoDbTableReplica, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsDynamoDbTableReplica
+	if *v == nil {
+		cv = []*types.AwsDynamoDbTableReplica{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsDynamoDbTableReplica
+		if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableReplica(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableRestoreSummary(v **types.AwsDynamoDbTableRestoreSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableRestoreSummary
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableRestoreSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RestoreDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RestoreDateTime = &jtv
+			}
+
+		case "RestoreInProgress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RestoreInProgress = &jtv
+			}
+
+		case "SourceBackupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceBackupArn = &jtv
+			}
+
+		case "SourceTableArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceTableArn = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableSseDescription(v **types.AwsDynamoDbTableSseDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableSseDescription
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableSseDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InaccessibleEncryptionDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InaccessibleEncryptionDateTime = &jtv
+			}
+
+		case "KmsMasterKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsMasterKeyArn = &jtv
+			}
+
+		case "SseType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SseType = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsDynamoDbTableStreamSpecification(v **types.AwsDynamoDbTableStreamSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsDynamoDbTableStreamSpecification
+	if *v == nil {
+		sv = &types.AwsDynamoDbTableStreamSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StreamEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StreamEnabled = &jtv
+			}
+
+		case "StreamViewType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreamViewType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsEc2EipDetails(v **types.AwsEc2EipDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsEc2EipDetails
+	if *v == nil {
+		sv = &types.AwsEc2EipDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AllocationId = &jtv
+			}
+
+		case "AssociationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AssociationId = &jtv
+			}
+
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Domain = &jtv
+			}
+
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = &jtv
+			}
+
+		case "NetworkBorderGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NetworkBorderGroup = &jtv
+			}
+
+		case "NetworkInterfaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NetworkInterfaceId = &jtv
+			}
+
+		case "NetworkInterfaceOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NetworkInterfaceOwnerId = &jtv
+			}
+
+		case "PrivateIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PrivateIpAddress = &jtv
+			}
+
+		case "PublicIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PublicIp = &jtv
+			}
+
+		case "PublicIpv4Pool":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PublicIpv4Pool = &jtv
 			}
 
 		default:
@@ -8668,6 +12191,1072 @@ func awsRestjson1_deserializeDocumentAwsElasticsearchDomainVPCOptions(v **types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsElbAppCookieStickinessPolicies(v *[]*types.AwsElbAppCookieStickinessPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsElbAppCookieStickinessPolicy
+	if *v == nil {
+		cv = []*types.AwsElbAppCookieStickinessPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsElbAppCookieStickinessPolicy
+		if err := awsRestjson1_deserializeDocumentAwsElbAppCookieStickinessPolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbAppCookieStickinessPolicy(v **types.AwsElbAppCookieStickinessPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbAppCookieStickinessPolicy
+	if *v == nil {
+		sv = &types.AwsElbAppCookieStickinessPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CookieName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CookieName = &jtv
+			}
+
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLbCookieStickinessPolicies(v *[]*types.AwsElbLbCookieStickinessPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsElbLbCookieStickinessPolicy
+	if *v == nil {
+		cv = []*types.AwsElbLbCookieStickinessPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsElbLbCookieStickinessPolicy
+		if err := awsRestjson1_deserializeDocumentAwsElbLbCookieStickinessPolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLbCookieStickinessPolicy(v **types.AwsElbLbCookieStickinessPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLbCookieStickinessPolicy
+	if *v == nil {
+		sv = &types.AwsElbLbCookieStickinessPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CookieExpirationPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CookieExpirationPeriod = &i64
+			}
+
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerAccessLog(v **types.AwsElbLoadBalancerAccessLog, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerAccessLog
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerAccessLog{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EmitInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EmitInterval = ptr.Int32(int32(i64))
+			}
+
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = &jtv
+			}
+
+		case "S3BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.S3BucketName = &jtv
+			}
+
+		case "S3BucketPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.S3BucketPrefix = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerAttributes(v **types.AwsElbLoadBalancerAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerAttributes
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessLog":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerAccessLog(&sv.AccessLog, value); err != nil {
+				return err
+			}
+
+		case "ConnectionDraining":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerConnectionDraining(&sv.ConnectionDraining, value); err != nil {
+				return err
+			}
+
+		case "ConnectionSettings":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerConnectionSettings(&sv.ConnectionSettings, value); err != nil {
+				return err
+			}
+
+		case "CrossZoneLoadBalancing":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerCrossZoneLoadBalancing(&sv.CrossZoneLoadBalancing, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerBackendServerDescription(v **types.AwsElbLoadBalancerBackendServerDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerBackendServerDescription
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerBackendServerDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstancePort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancePort = ptr.Int32(int32(i64))
+			}
+
+		case "PolicyNames":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.PolicyNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerBackendServerDescriptions(v *[]*types.AwsElbLoadBalancerBackendServerDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsElbLoadBalancerBackendServerDescription
+	if *v == nil {
+		cv = []*types.AwsElbLoadBalancerBackendServerDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsElbLoadBalancerBackendServerDescription
+		if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerBackendServerDescription(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerConnectionDraining(v **types.AwsElbLoadBalancerConnectionDraining, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerConnectionDraining
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerConnectionDraining{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = &jtv
+			}
+
+		case "Timeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Timeout = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerConnectionSettings(v **types.AwsElbLoadBalancerConnectionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerConnectionSettings
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerConnectionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdleTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeout = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerCrossZoneLoadBalancing(v **types.AwsElbLoadBalancerCrossZoneLoadBalancing, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerCrossZoneLoadBalancing
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerCrossZoneLoadBalancing{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerDetails(v **types.AwsElbLoadBalancerDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerDetails
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZones":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
+		case "BackendServerDescriptions":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerBackendServerDescriptions(&sv.BackendServerDescriptions, value); err != nil {
+				return err
+			}
+
+		case "CanonicalHostedZoneName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CanonicalHostedZoneName = &jtv
+			}
+
+		case "CanonicalHostedZoneNameID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CanonicalHostedZoneNameID = &jtv
+			}
+
+		case "CreatedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreatedTime = &jtv
+			}
+
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DnsName = &jtv
+			}
+
+		case "HealthCheck":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerHealthCheck(&sv.HealthCheck, value); err != nil {
+				return err
+			}
+
+		case "Instances":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerInstances(&sv.Instances, value); err != nil {
+				return err
+			}
+
+		case "ListenerDescriptions":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerListenerDescriptions(&sv.ListenerDescriptions, value); err != nil {
+				return err
+			}
+
+		case "LoadBalancerAttributes":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerAttributes(&sv.LoadBalancerAttributes, value); err != nil {
+				return err
+			}
+
+		case "LoadBalancerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LoadBalancerName = &jtv
+			}
+
+		case "Policies":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerPolicies(&sv.Policies, value); err != nil {
+				return err
+			}
+
+		case "Scheme":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Scheme = &jtv
+			}
+
+		case "SecurityGroups":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.SecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "SourceSecurityGroup":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerSourceSecurityGroup(&sv.SourceSecurityGroup, value); err != nil {
+				return err
+			}
+
+		case "Subnets":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerHealthCheck(v **types.AwsElbLoadBalancerHealthCheck, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerHealthCheck
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerHealthCheck{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HealthyThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HealthyThreshold = ptr.Int32(int32(i64))
+			}
+
+		case "Interval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Interval = ptr.Int32(int32(i64))
+			}
+
+		case "Target":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Target = &jtv
+			}
+
+		case "Timeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Timeout = ptr.Int32(int32(i64))
+			}
+
+		case "UnhealthyThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnhealthyThreshold = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerInstance(v **types.AwsElbLoadBalancerInstance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerInstance
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerInstance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerInstances(v *[]*types.AwsElbLoadBalancerInstance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsElbLoadBalancerInstance
+	if *v == nil {
+		cv = []*types.AwsElbLoadBalancerInstance{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsElbLoadBalancerInstance
+		if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerInstance(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerListener(v **types.AwsElbLoadBalancerListener, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerListener
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerListener{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstancePort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancePort = ptr.Int32(int32(i64))
+			}
+
+		case "InstanceProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceProtocol = &jtv
+			}
+
+		case "LoadBalancerPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LoadBalancerPort = ptr.Int32(int32(i64))
+			}
+
+		case "Protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Protocol = &jtv
+			}
+
+		case "SslCertificateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SslCertificateId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerListenerDescription(v **types.AwsElbLoadBalancerListenerDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerListenerDescription
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerListenerDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Listener":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerListener(&sv.Listener, value); err != nil {
+				return err
+			}
+
+		case "PolicyNames":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.PolicyNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerListenerDescriptions(v *[]*types.AwsElbLoadBalancerListenerDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsElbLoadBalancerListenerDescription
+	if *v == nil {
+		cv = []*types.AwsElbLoadBalancerListenerDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsElbLoadBalancerListenerDescription
+		if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerListenerDescription(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerPolicies(v **types.AwsElbLoadBalancerPolicies, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerPolicies
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerPolicies{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AppCookieStickinessPolicies":
+			if err := awsRestjson1_deserializeDocumentAwsElbAppCookieStickinessPolicies(&sv.AppCookieStickinessPolicies, value); err != nil {
+				return err
+			}
+
+		case "LbCookieStickinessPolicies":
+			if err := awsRestjson1_deserializeDocumentAwsElbLbCookieStickinessPolicies(&sv.LbCookieStickinessPolicies, value); err != nil {
+				return err
+			}
+
+		case "OtherPolicies":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.OtherPolicies, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsElbLoadBalancerSourceSecurityGroup(v **types.AwsElbLoadBalancerSourceSecurityGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsElbLoadBalancerSourceSecurityGroup
+	if *v == nil {
+		sv = &types.AwsElbLoadBalancerSourceSecurityGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GroupName = &jtv
+			}
+
+		case "OwnerAlias":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OwnerAlias = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsElbv2LoadBalancerDetails(v **types.AwsElbv2LoadBalancerDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8799,6 +13388,24 @@ func awsRestjson1_deserializeDocumentAwsIamAccessKeyDetails(v **types.AwsIamAcce
 
 	for key, value := range shape {
 		switch key {
+		case "AccessKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AccessKeyId = &jtv
+			}
+
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AccountId = &jtv
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8835,6 +13442,11 @@ func awsRestjson1_deserializeDocumentAwsIamAccessKeyDetails(v **types.AwsIamAcce
 				sv.PrincipalType = &jtv
 			}
 
+		case "SessionContext":
+			if err := awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContext(&sv.SessionContext, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8862,7 +13474,7 @@ func awsRestjson1_deserializeDocumentAwsIamAccessKeyDetails(v **types.AwsIamAcce
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAwsIamRoleDetails(v **types.AwsIamRoleDetails, value interface{}) error {
+func awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContext(v **types.AwsIamAccessKeySessionContext, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8875,15 +13487,533 @@ func awsRestjson1_deserializeDocumentAwsIamRoleDetails(v **types.AwsIamRoleDetai
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.AwsIamRoleDetails
+	var sv *types.AwsIamAccessKeySessionContext
 	if *v == nil {
-		sv = &types.AwsIamRoleDetails{}
+		sv = &types.AwsIamAccessKeySessionContext{}
 	} else {
 		sv = *v
 	}
 
 	for key, value := range shape {
 		switch key {
+		case "Attributes":
+			if err := awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContextAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "SessionIssuer":
+			if err := awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContextSessionIssuer(&sv.SessionIssuer, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContextAttributes(v **types.AwsIamAccessKeySessionContextAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamAccessKeySessionContextAttributes
+	if *v == nil {
+		sv = &types.AwsIamAccessKeySessionContextAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreationDate = &jtv
+			}
+
+		case "MfaAuthenticated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MfaAuthenticated = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamAccessKeySessionContextSessionIssuer(v **types.AwsIamAccessKeySessionContextSessionIssuer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamAccessKeySessionContextSessionIssuer
+	if *v == nil {
+		sv = &types.AwsIamAccessKeySessionContextSessionIssuer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AccountId = &jtv
+			}
+
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Arn = &jtv
+			}
+
+		case "PrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PrincipalId = &jtv
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Type = &jtv
+			}
+
+		case "UserName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UserName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicy(v **types.AwsIamAttachedManagedPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamAttachedManagedPolicy
+	if *v == nil {
+		sv = &types.AwsIamAttachedManagedPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyArn = &jtv
+			}
+
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicyList(v *[]*types.AwsIamAttachedManagedPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamAttachedManagedPolicy
+	if *v == nil {
+		cv = []*types.AwsIamAttachedManagedPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamAttachedManagedPolicy
+		if err := awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamGroupDetails(v **types.AwsIamGroupDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamGroupDetails
+	if *v == nil {
+		sv = &types.AwsIamGroupDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachedManagedPolicies":
+			if err := awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicyList(&sv.AttachedManagedPolicies, value); err != nil {
+				return err
+			}
+
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "GroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GroupId = &jtv
+			}
+
+		case "GroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GroupName = &jtv
+			}
+
+		case "GroupPolicyList":
+			if err := awsRestjson1_deserializeDocumentAwsIamGroupPolicyList(&sv.GroupPolicyList, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Path = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamGroupPolicy(v **types.AwsIamGroupPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamGroupPolicy
+	if *v == nil {
+		sv = &types.AwsIamGroupPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamGroupPolicyList(v *[]*types.AwsIamGroupPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamGroupPolicy
+	if *v == nil {
+		cv = []*types.AwsIamGroupPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamGroupPolicy
+		if err := awsRestjson1_deserializeDocumentAwsIamGroupPolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamInstanceProfile(v **types.AwsIamInstanceProfile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamInstanceProfile
+	if *v == nil {
+		sv = &types.AwsIamInstanceProfile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Arn = &jtv
+			}
+
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "InstanceProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceProfileId = &jtv
+			}
+
+		case "InstanceProfileName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceProfileName = &jtv
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Path = &jtv
+			}
+
+		case "Roles":
+			if err := awsRestjson1_deserializeDocumentAwsIamInstanceProfileRoles(&sv.Roles, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamInstanceProfileList(v *[]*types.AwsIamInstanceProfile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamInstanceProfile
+	if *v == nil {
+		cv = []*types.AwsIamInstanceProfile{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamInstanceProfile
+		if err := awsRestjson1_deserializeDocumentAwsIamInstanceProfile(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamInstanceProfileRole(v **types.AwsIamInstanceProfileRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamInstanceProfileRole
+	if *v == nil {
+		sv = &types.AwsIamInstanceProfileRole{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Arn = &jtv
+			}
+
 		case "AssumeRolePolicyDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8900,19 +14030,6 @@ func awsRestjson1_deserializeDocumentAwsIamRoleDetails(v **types.AwsIamRoleDetai
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.CreateDate = &jtv
-			}
-
-		case "MaxSessionDuration":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.MaxSessionDuration = ptr.Int32(int32(i64))
 			}
 
 		case "Path":
@@ -8948,6 +14065,651 @@ func awsRestjson1_deserializeDocumentAwsIamRoleDetails(v **types.AwsIamRoleDetai
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamInstanceProfileRoles(v *[]*types.AwsIamInstanceProfileRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamInstanceProfileRole
+	if *v == nil {
+		cv = []*types.AwsIamInstanceProfileRole{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamInstanceProfileRole
+		if err := awsRestjson1_deserializeDocumentAwsIamInstanceProfileRole(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamPermissionsBoundary(v **types.AwsIamPermissionsBoundary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamPermissionsBoundary
+	if *v == nil {
+		sv = &types.AwsIamPermissionsBoundary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PermissionsBoundaryArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PermissionsBoundaryArn = &jtv
+			}
+
+		case "PermissionsBoundaryType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PermissionsBoundaryType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamPolicyDetails(v **types.AwsIamPolicyDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamPolicyDetails
+	if *v == nil {
+		sv = &types.AwsIamPolicyDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachmentCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttachmentCount = ptr.Int32(int32(i64))
+			}
+
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "DefaultVersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DefaultVersionId = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "IsAttachable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsAttachable = &jtv
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Path = &jtv
+			}
+
+		case "PermissionsBoundaryUsageCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PermissionsBoundaryUsageCount = ptr.Int32(int32(i64))
+			}
+
+		case "PolicyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyId = &jtv
+			}
+
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		case "PolicyVersionList":
+			if err := awsRestjson1_deserializeDocumentAwsIamPolicyVersionList(&sv.PolicyVersionList, value); err != nil {
+				return err
+			}
+
+		case "UpdateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UpdateDate = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamPolicyVersion(v **types.AwsIamPolicyVersion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamPolicyVersion
+	if *v == nil {
+		sv = &types.AwsIamPolicyVersion{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "IsDefaultVersion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsDefaultVersion = &jtv
+			}
+
+		case "VersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VersionId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamPolicyVersionList(v *[]*types.AwsIamPolicyVersion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamPolicyVersion
+	if *v == nil {
+		cv = []*types.AwsIamPolicyVersion{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamPolicyVersion
+		if err := awsRestjson1_deserializeDocumentAwsIamPolicyVersion(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamRoleDetails(v **types.AwsIamRoleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamRoleDetails
+	if *v == nil {
+		sv = &types.AwsIamRoleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssumeRolePolicyDocument":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsIamRoleAssumeRolePolicyDocument to be of type string, got %T instead", value)
+				}
+				sv.AssumeRolePolicyDocument = &jtv
+			}
+
+		case "AttachedManagedPolicies":
+			if err := awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicyList(&sv.AttachedManagedPolicies, value); err != nil {
+				return err
+			}
+
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "InstanceProfileList":
+			if err := awsRestjson1_deserializeDocumentAwsIamInstanceProfileList(&sv.InstanceProfileList, value); err != nil {
+				return err
+			}
+
+		case "MaxSessionDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxSessionDuration = ptr.Int32(int32(i64))
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Path = &jtv
+			}
+
+		case "PermissionsBoundary":
+			if err := awsRestjson1_deserializeDocumentAwsIamPermissionsBoundary(&sv.PermissionsBoundary, value); err != nil {
+				return err
+			}
+
+		case "RoleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RoleId = &jtv
+			}
+
+		case "RoleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RoleName = &jtv
+			}
+
+		case "RolePolicyList":
+			if err := awsRestjson1_deserializeDocumentAwsIamRolePolicyList(&sv.RolePolicyList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamRolePolicy(v **types.AwsIamRolePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamRolePolicy
+	if *v == nil {
+		sv = &types.AwsIamRolePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamRolePolicyList(v *[]*types.AwsIamRolePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamRolePolicy
+	if *v == nil {
+		cv = []*types.AwsIamRolePolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamRolePolicy
+		if err := awsRestjson1_deserializeDocumentAwsIamRolePolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamUserDetails(v **types.AwsIamUserDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamUserDetails
+	if *v == nil {
+		sv = &types.AwsIamUserDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachedManagedPolicies":
+			if err := awsRestjson1_deserializeDocumentAwsIamAttachedManagedPolicyList(&sv.AttachedManagedPolicies, value); err != nil {
+				return err
+			}
+
+		case "CreateDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreateDate = &jtv
+			}
+
+		case "GroupList":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.GroupList, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Path = &jtv
+			}
+
+		case "PermissionsBoundary":
+			if err := awsRestjson1_deserializeDocumentAwsIamPermissionsBoundary(&sv.PermissionsBoundary, value); err != nil {
+				return err
+			}
+
+		case "UserId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UserId = &jtv
+			}
+
+		case "UserName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.UserName = &jtv
+			}
+
+		case "UserPolicyList":
+			if err := awsRestjson1_deserializeDocumentAwsIamUserPolicyList(&sv.UserPolicyList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamUserPolicy(v **types.AwsIamUserPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsIamUserPolicy
+	if *v == nil {
+		sv = &types.AwsIamUserPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PolicyName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsIamUserPolicyList(v *[]*types.AwsIamUserPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsIamUserPolicy
+	if *v == nil {
+		cv = []*types.AwsIamUserPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsIamUserPolicy
+		if err := awsRestjson1_deserializeDocumentAwsIamUserPolicy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8993,6 +14755,15 @@ func awsRestjson1_deserializeDocumentAwsKmsKeyDetails(v **types.AwsKmsKeyDetails
 					return err
 				}
 				sv.CreationDate = &f64
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
 			}
 
 		case "KeyId":
@@ -9647,6 +15418,911 @@ func awsRestjson1_deserializeDocumentAwsLambdaLayerVersionDetails(v **types.AwsL
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterAssociatedRole(v **types.AwsRdsDbClusterAssociatedRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterAssociatedRole
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterAssociatedRole{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterAssociatedRoles(v *[]*types.AwsRdsDbClusterAssociatedRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbClusterAssociatedRole
+	if *v == nil {
+		cv = []*types.AwsRdsDbClusterAssociatedRole{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbClusterAssociatedRole
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterAssociatedRole(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterDetails(v **types.AwsRdsDbClusterDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterDetails
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActivityStreamStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ActivityStreamStatus = &jtv
+			}
+
+		case "AllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "AssociatedRoles":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterAssociatedRoles(&sv.AssociatedRoles, value); err != nil {
+				return err
+			}
+
+		case "AvailabilityZones":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
+		case "BackupRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "ClusterCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterCreateTime = &jtv
+			}
+
+		case "CopyTagsToSnapshot":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CopyTagsToSnapshot = &jtv
+			}
+
+		case "CrossAccountClone":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrossAccountClone = &jtv
+			}
+
+		case "CustomEndpoints":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.CustomEndpoints, value); err != nil {
+				return err
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = &jtv
+			}
+
+		case "DbClusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterIdentifier = &jtv
+			}
+
+		case "DbClusterMembers":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterMembers(&sv.DbClusterMembers, value); err != nil {
+				return err
+			}
+
+		case "DbClusterOptionGroupMemberships":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterOptionGroupMemberships(&sv.DbClusterOptionGroupMemberships, value); err != nil {
+				return err
+			}
+
+		case "DbClusterParameterGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterParameterGroup = &jtv
+			}
+
+		case "DbClusterResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterResourceId = &jtv
+			}
+
+		case "DbSubnetGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSubnetGroup = &jtv
+			}
+
+		case "DeletionProtection":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DeletionProtection = &jtv
+			}
+
+		case "DomainMemberships":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbDomainMemberships(&sv.DomainMemberships, value); err != nil {
+				return err
+			}
+
+		case "EnabledCloudWatchLogsExports":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.EnabledCloudWatchLogsExports, value); err != nil {
+				return err
+			}
+
+		case "Endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = &jtv
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Engine = &jtv
+			}
+
+		case "EngineMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EngineMode = &jtv
+			}
+
+		case "EngineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = &jtv
+			}
+
+		case "HostedZoneId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HostedZoneId = &jtv
+			}
+
+		case "HttpEndpointEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HttpEndpointEnabled = &jtv
+			}
+
+		case "IamDatabaseAuthenticationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IamDatabaseAuthenticationEnabled = &jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "MasterUsername":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUsername = &jtv
+			}
+
+		case "MultiAz":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MultiAz = &jtv
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "PreferredBackupWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreferredBackupWindow = &jtv
+			}
+
+		case "PreferredMaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreferredMaintenanceWindow = &jtv
+			}
+
+		case "ReaderEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ReaderEndpoint = &jtv
+			}
+
+		case "ReadReplicaIdentifiers":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ReadReplicaIdentifiers, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "StorageEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StorageEncrypted = &jtv
+			}
+
+		case "VpcSecurityGroups":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbInstanceVpcSecurityGroups(&sv.VpcSecurityGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterMember(v **types.AwsRdsDbClusterMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterMember
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DbClusterParameterGroupStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterParameterGroupStatus = &jtv
+			}
+
+		case "DbInstanceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceIdentifier = &jtv
+			}
+
+		case "IsClusterWriter":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsClusterWriter = &jtv
+			}
+
+		case "PromotionTier":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PromotionTier = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterMembers(v *[]*types.AwsRdsDbClusterMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbClusterMember
+	if *v == nil {
+		cv = []*types.AwsRdsDbClusterMember{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbClusterMember
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterMember(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterOptionGroupMembership(v **types.AwsRdsDbClusterOptionGroupMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterOptionGroupMembership
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterOptionGroupMembership{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DbClusterOptionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterOptionGroupName = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterOptionGroupMemberships(v *[]*types.AwsRdsDbClusterOptionGroupMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbClusterOptionGroupMembership
+	if *v == nil {
+		cv = []*types.AwsRdsDbClusterOptionGroupMembership{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbClusterOptionGroupMembership
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterOptionGroupMembership(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDetails(v **types.AwsRdsDbClusterSnapshotDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterSnapshotDetails
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterSnapshotDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "AvailabilityZones":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
+		case "ClusterCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterCreateTime = &jtv
+			}
+
+		case "DbClusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterIdentifier = &jtv
+			}
+
+		case "DbClusterSnapshotIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbClusterSnapshotIdentifier = &jtv
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Engine = &jtv
+			}
+
+		case "EngineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = &jtv
+			}
+
+		case "IamDatabaseAuthenticationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IamDatabaseAuthenticationEnabled = &jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "LicenseModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LicenseModel = &jtv
+			}
+
+		case "MasterUsername":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUsername = &jtv
+			}
+
+		case "PercentProgress":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PercentProgress = ptr.Int32(int32(i64))
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "SnapshotCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotCreateTime = &jtv
+			}
+
+		case "SnapshotType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotType = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "StorageEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StorageEncrypted = &jtv
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbDomainMembership(v **types.AwsRdsDbDomainMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbDomainMembership
+	if *v == nil {
+		sv = &types.AwsRdsDbDomainMembership{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Domain = &jtv
+			}
+
+		case "Fqdn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Fqdn = &jtv
+			}
+
+		case "IamRoleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IamRoleName = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbDomainMemberships(v *[]*types.AwsRdsDbDomainMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbDomainMembership
+	if *v == nil {
+		cv = []*types.AwsRdsDbDomainMembership{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbDomainMembership
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbDomainMembership(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsRdsDbInstanceAssociatedRole(v **types.AwsRdsDbInstanceAssociatedRole, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9759,9 +16435,53 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 
 	for key, value := range shape {
 		switch key {
+		case "AllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
 		case "AssociatedRoles":
 			if err := awsRestjson1_deserializeDocumentAwsRdsDbInstanceAssociatedRoles(&sv.AssociatedRoles, value); err != nil {
 				return err
+			}
+
+		case "AutoMinorVersionUpgrade":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoMinorVersionUpgrade = &jtv
+			}
+
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = &jtv
+			}
+
+		case "BackupRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
 		case "CACertificateIdentifier":
@@ -9771,6 +16491,24 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.CACertificateIdentifier = &jtv
+			}
+
+		case "CharacterSetName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CharacterSetName = &jtv
+			}
+
+		case "CopyTagsToSnapshot":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CopyTagsToSnapshot = &jtv
 			}
 
 		case "DBClusterIdentifier":
@@ -9813,6 +16551,15 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.DbInstancePort = ptr.Int32(int32(i64))
 			}
 
+		case "DbInstanceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceStatus = &jtv
+			}
+
 		case "DbiResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9831,6 +16578,21 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.DBName = &jtv
 			}
 
+		case "DbParameterGroups":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbParameterGroups(&sv.DbParameterGroups, value); err != nil {
+				return err
+			}
+
+		case "DbSecurityGroups":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.DbSecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "DbSubnetGroup":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroup(&sv.DbSubnetGroup, value); err != nil {
+				return err
+			}
+
 		case "DeletionProtection":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9838,6 +16600,16 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.DeletionProtection = &jtv
+			}
+
+		case "DomainMemberships":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbDomainMemberships(&sv.DomainMemberships, value); err != nil {
+				return err
+			}
+
+		case "EnabledCloudWatchLogsExports":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.EnabledCloudWatchLogsExports, value); err != nil {
+				return err
 			}
 
 		case "Endpoint":
@@ -9863,6 +16635,15 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.EngineVersion = &jtv
 			}
 
+		case "EnhancedMonitoringResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EnhancedMonitoringResourceArn = &jtv
+			}
+
 		case "IAMDatabaseAuthenticationEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9881,6 +16662,19 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.InstanceCreateTime = &jtv
 			}
 
+		case "Iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9888,6 +16682,159 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = &jtv
+			}
+
+		case "LatestRestorableTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LatestRestorableTime = &jtv
+			}
+
+		case "LicenseModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LicenseModel = &jtv
+			}
+
+		case "ListenerEndpoint":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbInstanceEndpoint(&sv.ListenerEndpoint, value); err != nil {
+				return err
+			}
+
+		case "MasterUsername":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUsername = &jtv
+			}
+
+		case "MaxAllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "MonitoringInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MonitoringInterval = ptr.Int32(int32(i64))
+			}
+
+		case "MonitoringRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MonitoringRoleArn = &jtv
+			}
+
+		case "MultiAz":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MultiAz = &jtv
+			}
+
+		case "OptionGroupMemberships":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbOptionGroupMemberships(&sv.OptionGroupMemberships, value); err != nil {
+				return err
+			}
+
+		case "PendingModifiedValues":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbPendingModifiedValues(&sv.PendingModifiedValues, value); err != nil {
+				return err
+			}
+
+		case "PerformanceInsightsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PerformanceInsightsEnabled = &jtv
+			}
+
+		case "PerformanceInsightsKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PerformanceInsightsKmsKeyId = &jtv
+			}
+
+		case "PerformanceInsightsRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PerformanceInsightsRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "PreferredBackupWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreferredBackupWindow = &jtv
+			}
+
+		case "PreferredMaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreferredMaintenanceWindow = &jtv
+			}
+
+		case "ProcessorFeatures":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeatures(&sv.ProcessorFeatures, value); err != nil {
+				return err
+			}
+
+		case "PromotionTier":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PromotionTier = ptr.Int32(int32(i64))
 			}
 
 		case "PubliclyAccessible":
@@ -9899,6 +16846,39 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.PubliclyAccessible = &jtv
 			}
 
+		case "ReadReplicaDBClusterIdentifiers":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ReadReplicaDBClusterIdentifiers, value); err != nil {
+				return err
+			}
+
+		case "ReadReplicaDBInstanceIdentifiers":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ReadReplicaDBInstanceIdentifiers, value); err != nil {
+				return err
+			}
+
+		case "ReadReplicaSourceDBInstanceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ReadReplicaSourceDBInstanceIdentifier = &jtv
+			}
+
+		case "SecondaryAvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SecondaryAvailabilityZone = &jtv
+			}
+
+		case "StatusInfos":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbStatusInfos(&sv.StatusInfos, value); err != nil {
+				return err
+			}
+
 		case "StorageEncrypted":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9908,6 +16888,15 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 				sv.StorageEncrypted = &jtv
 			}
 
+		case "StorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StorageType = &jtv
+			}
+
 		case "TdeCredentialArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9915,6 +16904,15 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(v **types.AwsRdsDbI
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.TdeCredentialArn = &jtv
+			}
+
+		case "Timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Timezone = &jtv
 			}
 
 		case "VpcSecurityGroups":
@@ -10065,6 +17063,2556 @@ func awsRestjson1_deserializeDocumentAwsRdsDbInstanceVpcSecurityGroups(v *[]*typ
 	for _, value := range shape {
 		var col *types.AwsRdsDbInstanceVpcSecurityGroup
 		if err := awsRestjson1_deserializeDocumentAwsRdsDbInstanceVpcSecurityGroup(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbOptionGroupMembership(v **types.AwsRdsDbOptionGroupMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbOptionGroupMembership
+	if *v == nil {
+		sv = &types.AwsRdsDbOptionGroupMembership{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OptionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OptionGroupName = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbOptionGroupMemberships(v *[]*types.AwsRdsDbOptionGroupMembership, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbOptionGroupMembership
+	if *v == nil {
+		cv = []*types.AwsRdsDbOptionGroupMembership{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbOptionGroupMembership
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbOptionGroupMembership(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbParameterGroup(v **types.AwsRdsDbParameterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbParameterGroup
+	if *v == nil {
+		sv = &types.AwsRdsDbParameterGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DbParameterGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbParameterGroupName = &jtv
+			}
+
+		case "ParameterApplyStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterApplyStatus = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbParameterGroups(v *[]*types.AwsRdsDbParameterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbParameterGroup
+	if *v == nil {
+		cv = []*types.AwsRdsDbParameterGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbParameterGroup
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbParameterGroup(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbPendingModifiedValues(v **types.AwsRdsDbPendingModifiedValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbPendingModifiedValues
+	if *v == nil {
+		sv = &types.AwsRdsDbPendingModifiedValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "BackupRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "CaCertificateIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CaCertificateIdentifier = &jtv
+			}
+
+		case "DbInstanceClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceClass = &jtv
+			}
+
+		case "DbInstanceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceIdentifier = &jtv
+			}
+
+		case "DbSubnetGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSubnetGroupName = &jtv
+			}
+
+		case "EngineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = &jtv
+			}
+
+		case "Iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case "LicenseModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LicenseModel = &jtv
+			}
+
+		case "MasterUserPassword":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUserPassword = &jtv
+			}
+
+		case "MultiAZ":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MultiAZ = &jtv
+			}
+
+		case "PendingCloudWatchLogsExports":
+			if err := awsRestjson1_deserializeDocumentAwsRdsPendingCloudWatchLogsExports(&sv.PendingCloudWatchLogsExports, value); err != nil {
+				return err
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ProcessorFeatures":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeatures(&sv.ProcessorFeatures, value); err != nil {
+				return err
+			}
+
+		case "StorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StorageType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeature(v **types.AwsRdsDbProcessorFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbProcessorFeature
+	if *v == nil {
+		sv = &types.AwsRdsDbProcessorFeature{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Value = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeatures(v *[]*types.AwsRdsDbProcessorFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbProcessorFeature
+	if *v == nil {
+		cv = []*types.AwsRdsDbProcessorFeature{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbProcessorFeature
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeature(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbSnapshotDetails(v **types.AwsRdsDbSnapshotDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbSnapshotDetails
+	if *v == nil {
+		sv = &types.AwsRdsDbSnapshotDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = &jtv
+			}
+
+		case "DbInstanceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceIdentifier = &jtv
+			}
+
+		case "DbiResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbiResourceId = &jtv
+			}
+
+		case "DbSnapshotIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSnapshotIdentifier = &jtv
+			}
+
+		case "Encrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Encrypted = &jtv
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Engine = &jtv
+			}
+
+		case "EngineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = &jtv
+			}
+
+		case "IamDatabaseAuthenticationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IamDatabaseAuthenticationEnabled = &jtv
+			}
+
+		case "InstanceCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceCreateTime = &jtv
+			}
+
+		case "Iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "LicenseModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LicenseModel = &jtv
+			}
+
+		case "MasterUsername":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUsername = &jtv
+			}
+
+		case "OptionGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OptionGroupName = &jtv
+			}
+
+		case "PercentProgress":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PercentProgress = ptr.Int32(int32(i64))
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ProcessorFeatures":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbProcessorFeatures(&sv.ProcessorFeatures, value); err != nil {
+				return err
+			}
+
+		case "SnapshotCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotCreateTime = &jtv
+			}
+
+		case "SnapshotType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotType = &jtv
+			}
+
+		case "SourceDbSnapshotIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceDbSnapshotIdentifier = &jtv
+			}
+
+		case "SourceRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceRegion = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "StorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StorageType = &jtv
+			}
+
+		case "TdeCredentialArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TdeCredentialArn = &jtv
+			}
+
+		case "Timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Timezone = &jtv
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbStatusInfo(v **types.AwsRdsDbStatusInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbStatusInfo
+	if *v == nil {
+		sv = &types.AwsRdsDbStatusInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Message = &jtv
+			}
+
+		case "Normal":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Normal = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "StatusType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StatusType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbStatusInfos(v *[]*types.AwsRdsDbStatusInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbStatusInfo
+	if *v == nil {
+		cv = []*types.AwsRdsDbStatusInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbStatusInfo
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbStatusInfo(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroup(v **types.AwsRdsDbSubnetGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbSubnetGroup
+	if *v == nil {
+		sv = &types.AwsRdsDbSubnetGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DbSubnetGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSubnetGroupArn = &jtv
+			}
+
+		case "DbSubnetGroupDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSubnetGroupDescription = &jtv
+			}
+
+		case "DbSubnetGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DbSubnetGroupName = &jtv
+			}
+
+		case "SubnetGroupStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SubnetGroupStatus = &jtv
+			}
+
+		case "Subnets":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnets(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnet(v **types.AwsRdsDbSubnetGroupSubnet, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbSubnetGroupSubnet
+	if *v == nil {
+		sv = &types.AwsRdsDbSubnetGroupSubnet{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SubnetAvailabilityZone":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnetAvailabilityZone(&sv.SubnetAvailabilityZone, value); err != nil {
+				return err
+			}
+
+		case "SubnetIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SubnetIdentifier = &jtv
+			}
+
+		case "SubnetStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SubnetStatus = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnetAvailabilityZone(v **types.AwsRdsDbSubnetGroupSubnetAvailabilityZone, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbSubnetGroupSubnetAvailabilityZone
+	if *v == nil {
+		sv = &types.AwsRdsDbSubnetGroupSubnetAvailabilityZone{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnets(v *[]*types.AwsRdsDbSubnetGroupSubnet, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRdsDbSubnetGroupSubnet
+	if *v == nil {
+		cv = []*types.AwsRdsDbSubnetGroupSubnet{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRdsDbSubnetGroupSubnet
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbSubnetGroupSubnet(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsPendingCloudWatchLogsExports(v **types.AwsRdsPendingCloudWatchLogsExports, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsPendingCloudWatchLogsExports
+	if *v == nil {
+		sv = &types.AwsRdsPendingCloudWatchLogsExports{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogTypesToDisable":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.LogTypesToDisable, value); err != nil {
+				return err
+			}
+
+		case "LogTypesToEnable":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.LogTypesToEnable, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterNode(v **types.AwsRedshiftClusterClusterNode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterClusterNode
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterClusterNode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NodeRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NodeRole = &jtv
+			}
+
+		case "PrivateIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PrivateIpAddress = &jtv
+			}
+
+		case "PublicIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PublicIpAddress = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterNodes(v *[]*types.AwsRedshiftClusterClusterNode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterClusterNode
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterClusterNode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterClusterNode
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterNode(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterGroup(v **types.AwsRedshiftClusterClusterParameterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterClusterParameterGroup
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterClusterParameterGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClusterParameterStatusList":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterStatusList(&sv.ClusterParameterStatusList, value); err != nil {
+				return err
+			}
+
+		case "ParameterApplyStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterApplyStatus = &jtv
+			}
+
+		case "ParameterGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterGroupName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterGroups(v *[]*types.AwsRedshiftClusterClusterParameterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterClusterParameterGroup
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterClusterParameterGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterClusterParameterGroup
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterGroup(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterStatus(v **types.AwsRedshiftClusterClusterParameterStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterClusterParameterStatus
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterClusterParameterStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ParameterApplyErrorDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterApplyErrorDescription = &jtv
+			}
+
+		case "ParameterApplyStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterApplyStatus = &jtv
+			}
+
+		case "ParameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ParameterName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterStatusList(v *[]*types.AwsRedshiftClusterClusterParameterStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterClusterParameterStatus
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterClusterParameterStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterClusterParameterStatus
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterStatus(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSecurityGroup(v **types.AwsRedshiftClusterClusterSecurityGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterClusterSecurityGroup
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterClusterSecurityGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClusterSecurityGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterSecurityGroupName = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSecurityGroups(v *[]*types.AwsRedshiftClusterClusterSecurityGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterClusterSecurityGroup
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterClusterSecurityGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterClusterSecurityGroup
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSecurityGroup(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSnapshotCopyStatus(v **types.AwsRedshiftClusterClusterSnapshotCopyStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterClusterSnapshotCopyStatus
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterClusterSnapshotCopyStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationRegion = &jtv
+			}
+
+		case "ManualSnapshotRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ManualSnapshotRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "RetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "SnapshotCopyGrantName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotCopyGrantName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterDeferredMaintenanceWindow(v **types.AwsRedshiftClusterDeferredMaintenanceWindow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterDeferredMaintenanceWindow
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterDeferredMaintenanceWindow{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeferMaintenanceEndTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeferMaintenanceEndTime = &jtv
+			}
+
+		case "DeferMaintenanceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeferMaintenanceIdentifier = &jtv
+			}
+
+		case "DeferMaintenanceStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeferMaintenanceStartTime = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterDeferredMaintenanceWindows(v *[]*types.AwsRedshiftClusterDeferredMaintenanceWindow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterDeferredMaintenanceWindow
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterDeferredMaintenanceWindow{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterDeferredMaintenanceWindow
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterDeferredMaintenanceWindow(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterDetails(v **types.AwsRedshiftClusterDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterDetails
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowVersionUpgrade":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowVersionUpgrade = &jtv
+			}
+
+		case "AutomatedSnapshotRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutomatedSnapshotRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "AvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = &jtv
+			}
+
+		case "ClusterAvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterAvailabilityStatus = &jtv
+			}
+
+		case "ClusterCreateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterCreateTime = &jtv
+			}
+
+		case "ClusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterIdentifier = &jtv
+			}
+
+		case "ClusterNodes":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterNodes(&sv.ClusterNodes, value); err != nil {
+				return err
+			}
+
+		case "ClusterParameterGroups":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterParameterGroups(&sv.ClusterParameterGroups, value); err != nil {
+				return err
+			}
+
+		case "ClusterPublicKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterPublicKey = &jtv
+			}
+
+		case "ClusterRevisionNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterRevisionNumber = &jtv
+			}
+
+		case "ClusterSecurityGroups":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSecurityGroups(&sv.ClusterSecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "ClusterSnapshotCopyStatus":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterClusterSnapshotCopyStatus(&sv.ClusterSnapshotCopyStatus, value); err != nil {
+				return err
+			}
+
+		case "ClusterStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterStatus = &jtv
+			}
+
+		case "ClusterSubnetGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterSubnetGroupName = &jtv
+			}
+
+		case "ClusterVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterVersion = &jtv
+			}
+
+		case "DBName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DBName = &jtv
+			}
+
+		case "DeferredMaintenanceWindows":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterDeferredMaintenanceWindows(&sv.DeferredMaintenanceWindows, value); err != nil {
+				return err
+			}
+
+		case "ElasticIpStatus":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterElasticIpStatus(&sv.ElasticIpStatus, value); err != nil {
+				return err
+			}
+
+		case "ElasticResizeNumberOfNodeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ElasticResizeNumberOfNodeOptions = &jtv
+			}
+
+		case "Encrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Encrypted = &jtv
+			}
+
+		case "Endpoint":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterEndpoint(&sv.Endpoint, value); err != nil {
+				return err
+			}
+
+		case "EnhancedVpcRouting":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnhancedVpcRouting = &jtv
+			}
+
+		case "ExpectedNextSnapshotScheduleTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ExpectedNextSnapshotScheduleTime = &jtv
+			}
+
+		case "ExpectedNextSnapshotScheduleTimeStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ExpectedNextSnapshotScheduleTimeStatus = &jtv
+			}
+
+		case "HsmStatus":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterHsmStatus(&sv.HsmStatus, value); err != nil {
+				return err
+			}
+
+		case "IamRoles":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterIamRoles(&sv.IamRoles, value); err != nil {
+				return err
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "MaintenanceTrackName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceTrackName = &jtv
+			}
+
+		case "ManualSnapshotRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ManualSnapshotRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "MasterUsername":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUsername = &jtv
+			}
+
+		case "NextMaintenanceWindowStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NextMaintenanceWindowStartTime = &jtv
+			}
+
+		case "NodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NodeType = &jtv
+			}
+
+		case "NumberOfNodes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
+			}
+
+		case "PendingActions":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.PendingActions, value); err != nil {
+				return err
+			}
+
+		case "PendingModifiedValues":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterPendingModifiedValues(&sv.PendingModifiedValues, value); err != nil {
+				return err
+			}
+
+		case "PreferredMaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreferredMaintenanceWindow = &jtv
+			}
+
+		case "PubliclyAccessible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PubliclyAccessible = &jtv
+			}
+
+		case "ResizeInfo":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterResizeInfo(&sv.ResizeInfo, value); err != nil {
+				return err
+			}
+
+		case "RestoreStatus":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterRestoreStatus(&sv.RestoreStatus, value); err != nil {
+				return err
+			}
+
+		case "SnapshotScheduleIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotScheduleIdentifier = &jtv
+			}
+
+		case "SnapshotScheduleState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnapshotScheduleState = &jtv
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = &jtv
+			}
+
+		case "VpcSecurityGroups":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterVpcSecurityGroups(&sv.VpcSecurityGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterElasticIpStatus(v **types.AwsRedshiftClusterElasticIpStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterElasticIpStatus
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterElasticIpStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ElasticIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ElasticIp = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterEndpoint(v **types.AwsRedshiftClusterEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterEndpoint
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Address = &jtv
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterHsmStatus(v **types.AwsRedshiftClusterHsmStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterHsmStatus
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterHsmStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HsmClientCertificateIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HsmClientCertificateIdentifier = &jtv
+			}
+
+		case "HsmConfigurationIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HsmConfigurationIdentifier = &jtv
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterIamRole(v **types.AwsRedshiftClusterIamRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterIamRole
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterIamRole{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApplyStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ApplyStatus = &jtv
+			}
+
+		case "IamRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IamRoleArn = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterIamRoles(v *[]*types.AwsRedshiftClusterIamRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterIamRole
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterIamRole{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterIamRole
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterIamRole(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterPendingModifiedValues(v **types.AwsRedshiftClusterPendingModifiedValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterPendingModifiedValues
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterPendingModifiedValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutomatedSnapshotRetentionPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutomatedSnapshotRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "ClusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterIdentifier = &jtv
+			}
+
+		case "ClusterType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterType = &jtv
+			}
+
+		case "ClusterVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ClusterVersion = &jtv
+			}
+
+		case "EncryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = &jtv
+			}
+
+		case "EnhancedVpcRouting":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnhancedVpcRouting = &jtv
+			}
+
+		case "MaintenanceTrackName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceTrackName = &jtv
+			}
+
+		case "MasterUserPassword":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MasterUserPassword = &jtv
+			}
+
+		case "NodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NodeType = &jtv
+			}
+
+		case "NumberOfNodes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfNodes = ptr.Int32(int32(i64))
+			}
+
+		case "PubliclyAccessible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PubliclyAccessible = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterResizeInfo(v **types.AwsRedshiftClusterResizeInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterResizeInfo
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterResizeInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowCancelResize":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowCancelResize = &jtv
+			}
+
+		case "ResizeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResizeType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterRestoreStatus(v **types.AwsRedshiftClusterRestoreStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterRestoreStatus
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterRestoreStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentRestoreRateInMegaBytesPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentRestoreRateInMegaBytesPerSecond = &f64
+			}
+
+		case "ElapsedTimeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ElapsedTimeInSeconds = &i64
+			}
+
+		case "EstimatedTimeToCompletionInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedTimeToCompletionInSeconds = &i64
+			}
+
+		case "ProgressInMegaBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProgressInMegaBytes = &i64
+			}
+
+		case "SnapshotSizeInMegaBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SnapshotSizeInMegaBytes = &i64
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterVpcSecurityGroup(v **types.AwsRedshiftClusterVpcSecurityGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRedshiftClusterVpcSecurityGroup
+	if *v == nil {
+		sv = &types.AwsRedshiftClusterVpcSecurityGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = &jtv
+			}
+
+		case "VpcSecurityGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcSecurityGroupId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRedshiftClusterVpcSecurityGroups(v *[]*types.AwsRedshiftClusterVpcSecurityGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AwsRedshiftClusterVpcSecurityGroup
+	if *v == nil {
+		cv = []*types.AwsRedshiftClusterVpcSecurityGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AwsRedshiftClusterVpcSecurityGroup
+		if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterVpcSecurityGroup(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
@@ -10375,6 +19923,149 @@ func awsRestjson1_deserializeDocumentAwsS3ObjectDetails(v **types.AwsS3ObjectDet
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsSecretsManagerSecretDetails(v **types.AwsSecretsManagerSecretDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsSecretsManagerSecretDetails
+	if *v == nil {
+		sv = &types.AwsSecretsManagerSecretDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Deleted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Deleted = &jtv
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = &jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "RotationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RotationEnabled = &jtv
+			}
+
+		case "RotationLambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RotationLambdaArn = &jtv
+			}
+
+		case "RotationOccurredWithinFrequency":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RotationOccurredWithinFrequency = &jtv
+			}
+
+		case "RotationRules":
+			if err := awsRestjson1_deserializeDocumentAwsSecretsManagerSecretRotationRules(&sv.RotationRules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsSecretsManagerSecretRotationRules(v **types.AwsSecretsManagerSecretRotationRules, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsSecretsManagerSecretRotationRules
+	if *v == nil {
+		sv = &types.AwsSecretsManagerSecretRotationRules{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutomaticallyAfterDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutomaticallyAfterDays = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsSecurityFinding(v **types.AwsSecurityFinding, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10508,6 +20199,11 @@ func awsRestjson1_deserializeDocumentAwsSecurityFinding(v **types.AwsSecurityFin
 
 		case "Note":
 			if err := awsRestjson1_deserializeDocumentNote(&sv.Note, value); err != nil {
+				return err
+			}
+
+		case "PatchSummary":
+			if err := awsRestjson1_deserializeDocumentPatchSummary(&sv.PatchSummary, value); err != nil {
 				return err
 			}
 
@@ -13973,6 +23669,160 @@ func awsRestjson1_deserializeDocumentNumberFilterList(v *[]*types.NumberFilter, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPatchSummary(v **types.PatchSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PatchSummary
+	if *v == nil {
+		sv = &types.PatchSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FailedCount = ptr.Int32(int32(i64))
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Id = &jtv
+			}
+
+		case "InstalledCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstalledCount = ptr.Int32(int32(i64))
+			}
+
+		case "InstalledOtherCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstalledOtherCount = ptr.Int32(int32(i64))
+			}
+
+		case "InstalledPendingReboot":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstalledPendingReboot = ptr.Int32(int32(i64))
+			}
+
+		case "InstalledRejectedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstalledRejectedCount = ptr.Int32(int32(i64))
+			}
+
+		case "MissingCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MissingCount = ptr.Int32(int32(i64))
+			}
+
+		case "Operation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Operation = &jtv
+			}
+
+		case "OperationEndTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OperationEndTime = &jtv
+			}
+
+		case "OperationStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OperationStartTime = &jtv
+			}
+
+		case "RebootOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RebootOption = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPortRange(v **types.PortRange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14583,6 +24433,15 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				sv.Region = &jtv
 			}
 
+		case "ResourceRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceRole = &jtv
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentFieldMap(&sv.Tags, value); err != nil {
 				return err
@@ -14677,8 +24536,33 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 
 	for key, value := range shape {
 		switch key {
+		case "AwsApiGatewayRestApi":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayRestApiDetails(&sv.AwsApiGatewayRestApi, value); err != nil {
+				return err
+			}
+
+		case "AwsApiGatewayStage":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayStageDetails(&sv.AwsApiGatewayStage, value); err != nil {
+				return err
+			}
+
+		case "AwsApiGatewayV2Api":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayV2ApiDetails(&sv.AwsApiGatewayV2Api, value); err != nil {
+				return err
+			}
+
+		case "AwsApiGatewayV2Stage":
+			if err := awsRestjson1_deserializeDocumentAwsApiGatewayV2StageDetails(&sv.AwsApiGatewayV2Stage, value); err != nil {
+				return err
+			}
+
 		case "AwsAutoScalingAutoScalingGroup":
 			if err := awsRestjson1_deserializeDocumentAwsAutoScalingAutoScalingGroupDetails(&sv.AwsAutoScalingAutoScalingGroup, value); err != nil {
+				return err
+			}
+
+		case "AwsCertificateManagerCertificate":
+			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDetails(&sv.AwsCertificateManagerCertificate, value); err != nil {
 				return err
 			}
 
@@ -14687,8 +24571,23 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsCloudTrailTrail":
+			if err := awsRestjson1_deserializeDocumentAwsCloudTrailTrailDetails(&sv.AwsCloudTrailTrail, value); err != nil {
+				return err
+			}
+
 		case "AwsCodeBuildProject":
 			if err := awsRestjson1_deserializeDocumentAwsCodeBuildProjectDetails(&sv.AwsCodeBuildProject, value); err != nil {
+				return err
+			}
+
+		case "AwsDynamoDbTable":
+			if err := awsRestjson1_deserializeDocumentAwsDynamoDbTableDetails(&sv.AwsDynamoDbTable, value); err != nil {
+				return err
+			}
+
+		case "AwsEc2Eip":
+			if err := awsRestjson1_deserializeDocumentAwsEc2EipDetails(&sv.AwsEc2Eip, value); err != nil {
 				return err
 			}
 
@@ -14722,6 +24621,11 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsElbLoadBalancer":
+			if err := awsRestjson1_deserializeDocumentAwsElbLoadBalancerDetails(&sv.AwsElbLoadBalancer, value); err != nil {
+				return err
+			}
+
 		case "AwsElbv2LoadBalancer":
 			if err := awsRestjson1_deserializeDocumentAwsElbv2LoadBalancerDetails(&sv.AwsElbv2LoadBalancer, value); err != nil {
 				return err
@@ -14732,8 +24636,23 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsIamGroup":
+			if err := awsRestjson1_deserializeDocumentAwsIamGroupDetails(&sv.AwsIamGroup, value); err != nil {
+				return err
+			}
+
+		case "AwsIamPolicy":
+			if err := awsRestjson1_deserializeDocumentAwsIamPolicyDetails(&sv.AwsIamPolicy, value); err != nil {
+				return err
+			}
+
 		case "AwsIamRole":
 			if err := awsRestjson1_deserializeDocumentAwsIamRoleDetails(&sv.AwsIamRole, value); err != nil {
+				return err
+			}
+
+		case "AwsIamUser":
+			if err := awsRestjson1_deserializeDocumentAwsIamUserDetails(&sv.AwsIamUser, value); err != nil {
 				return err
 			}
 
@@ -14752,8 +24671,28 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsRdsDbCluster":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterDetails(&sv.AwsRdsDbCluster, value); err != nil {
+				return err
+			}
+
+		case "AwsRdsDbClusterSnapshot":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDetails(&sv.AwsRdsDbClusterSnapshot, value); err != nil {
+				return err
+			}
+
 		case "AwsRdsDbInstance":
 			if err := awsRestjson1_deserializeDocumentAwsRdsDbInstanceDetails(&sv.AwsRdsDbInstance, value); err != nil {
+				return err
+			}
+
+		case "AwsRdsDbSnapshot":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbSnapshotDetails(&sv.AwsRdsDbSnapshot, value); err != nil {
+				return err
+			}
+
+		case "AwsRedshiftCluster":
+			if err := awsRestjson1_deserializeDocumentAwsRedshiftClusterDetails(&sv.AwsRedshiftCluster, value); err != nil {
 				return err
 			}
 
@@ -14764,6 +24703,11 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 
 		case "AwsS3Object":
 			if err := awsRestjson1_deserializeDocumentAwsS3ObjectDetails(&sv.AwsS3Object, value); err != nil {
+				return err
+			}
+
+		case "AwsSecretsManagerSecret":
+			if err := awsRestjson1_deserializeDocumentAwsSecretsManagerSecretDetails(&sv.AwsSecretsManagerSecret, value); err != nil {
 				return err
 			}
 

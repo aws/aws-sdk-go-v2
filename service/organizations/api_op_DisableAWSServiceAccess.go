@@ -32,7 +32,7 @@ import (
 // Organizations with Other AWS Services
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
-// organization's master account.
+// organization's management account.
 func (c *Client) DisableAWSServiceAccess(ctx context.Context, params *DisableAWSServiceAccessInput, optFns ...func(*Options)) (*DisableAWSServiceAccessOutput, error) {
 	if params == nil {
 		params = &DisableAWSServiceAccessInput{}

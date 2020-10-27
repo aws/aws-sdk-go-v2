@@ -853,6 +853,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.StateTransitionReason = &jtv
 			}
 
+		case "Topics":
+			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
+				return err
+			}
+
 		case "UUID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1631,6 +1636,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StateTransitionReason = &jtv
+			}
+
+		case "Topics":
+			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
+				return err
 			}
 
 		case "UUID":
@@ -2747,6 +2757,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StateTransitionReason = &jtv
+			}
+
+		case "Topics":
+			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
+				return err
 			}
 
 		case "UUID":
@@ -4872,6 +4887,8 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeOutput(v *InvokeOutput, respons
 		v.LogResult = ptr.String(headerValues[0])
 	}
 
+	v.StatusCode = ptr.Int32(int32(response.StatusCode))
+
 	return nil
 }
 func awsRestjson1_deserializeOpDocumentInvokeOutput(v *InvokeOutput, body io.ReadCloser) error {
@@ -4914,6 +4931,11 @@ func (m *awsRestjson1_deserializeOpInvokeAsync) HandleDeserialize(ctx context.Co
 	}
 	output := &InvokeAsyncOutput{}
 	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsInvokeAsyncOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
 
 	return out, metadata, err
 }
@@ -4982,6 +5004,16 @@ func awsRestjson1_deserializeOpErrorInvokeAsync(response *smithyhttp.Response, m
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsInvokeAsyncOutput(v *InvokeAsyncOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = ptr.Int32(int32(response.StatusCode))
+
+	return nil
 }
 
 type awsRestjson1_deserializeOpListAliases struct {
@@ -8530,6 +8562,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.StateTransitionReason = &jtv
 			}
 
+		case "Topics":
+			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
+				return err
+			}
+
 		case "UUID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11901,6 +11938,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.StateTransitionReason = &jtv
 			}
 
+		case "Topics":
+			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
+				return err
+			}
+
 		case "UUID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14211,6 +14253,42 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTopics(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Topic to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

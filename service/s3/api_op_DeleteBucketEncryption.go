@@ -26,8 +26,11 @@ import (
 //
 //     *
 // PutBucketEncryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html)
 //
-//     * GetBucketEncryption
+//
+// * GetBucketEncryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html)
 func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucketEncryptionInput, optFns ...func(*Options)) (*DeleteBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &DeleteBucketEncryptionInput{}
@@ -50,6 +53,10 @@ type DeleteBucketEncryptionInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketEncryptionOutput struct {

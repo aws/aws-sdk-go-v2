@@ -19,6 +19,19 @@ const (
 	AgentParameterFieldMax_stack_depth AgentParameterField = "MaxStackDepth"
 )
 
+// Values returns all known values for AgentParameterField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgentParameterField) Values() []AgentParameterField {
+	return []AgentParameterField{
+		"SamplingIntervalInMilliseconds",
+		"ReportingIntervalInMilliseconds",
+		"MinimumTimeForReportingInMilliseconds",
+		"MemoryUsageLimitPercent",
+		"MaxStackDepth",
+	}
+}
+
 type AggregationPeriod string
 
 // Enum values for AggregationPeriod
@@ -31,6 +44,17 @@ const (
 	AggregationPeriodP1d AggregationPeriod = "P1D"
 )
 
+// Values returns all known values for AggregationPeriod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationPeriod) Values() []AggregationPeriod {
+	return []AggregationPeriod{
+		"PT5M",
+		"PT1H",
+		"P1D",
+	}
+}
+
 type ComputePlatform string
 
 // Enum values for ComputePlatform
@@ -42,6 +66,16 @@ const (
 	ComputePlatformAwslambda ComputePlatform = "AWSLambda"
 )
 
+// Values returns all known values for ComputePlatform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputePlatform) Values() []ComputePlatform {
+	return []ComputePlatform{
+		"Default",
+		"AWSLambda",
+	}
+}
+
 type MetricType string
 
 // Enum values for MetricType
@@ -50,6 +84,15 @@ const (
 	// to the root frame.
 	MetricTypeAggregated_relative_total_time MetricType = "AGGREGATED_RELATIVE_TOTAL_TIME"
 )
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"AGGREGATED_RELATIVE_TOTAL_TIME",
+	}
+}
 
 type OrderBy string
 
@@ -60,6 +103,16 @@ const (
 	// Order by timestamp in ascending order.
 	OrderByTimestamp_ascending OrderBy = "TimestampAscending"
 )
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"TimestampDescending",
+		"TimestampAscending",
+	}
+}
 
 type MetadataField string
 
@@ -85,6 +138,23 @@ const (
 	MetadataFieldLambda_previous_execution_time_in_milliseconds MetadataField = "LambdaPreviousExecutionTimeInMilliseconds"
 )
 
+// Values returns all known values for MetadataField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataField) Values() []MetadataField {
+	return []MetadataField{
+		"ComputePlatform",
+		"AgentId",
+		"AwsRequestId",
+		"ExecutionEnvironment",
+		"LambdaFunctionArn",
+		"LambdaMemoryLimitInMB",
+		"LambdaRemainingTimeInMilliseconds",
+		"LambdaTimeGapBetweenInvokesInMilliseconds",
+		"LambdaPreviousExecutionTimeInMilliseconds",
+	}
+}
+
 type ActionGroup string
 
 // Enum values for ActionGroup
@@ -92,3 +162,12 @@ const (
 	// Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile
 	ActionGroupAgent_permissions ActionGroup = "agentPermissions"
 )
+
+// Values returns all known values for ActionGroup. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionGroup) Values() []ActionGroup {
+	return []ActionGroup{
+		"agentPermissions",
+	}
+}

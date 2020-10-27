@@ -49,16 +49,6 @@ func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *Put
 
 type PutOrganizationConformancePackInput struct {
 
-	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
-	// AWS Config stores intermediate files while processing conformance pack template.
-	// The delivery bucket name should start with awsconfigconforms. For example:
-	// "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see
-	// Permissions for cross account bucket access
-	// (https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html).
-	//
-	// This member is required.
-	DeliveryS3Bucket *string
-
 	// Name of the organization conformance pack you want to create.
 	//
 	// This member is required.
@@ -66,6 +56,14 @@ type PutOrganizationConformancePackInput struct {
 
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []*types.ConformancePackInputParameter
+
+	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
+	// AWS Config stores intermediate files while processing conformance pack template.
+	// The delivery bucket name should start with awsconfigconforms. For example:
+	// "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see
+	// Permissions for cross account bucket access
+	// (https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html).
+	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string

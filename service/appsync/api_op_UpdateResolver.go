@@ -39,11 +39,6 @@ type UpdateResolverInput struct {
 	// This member is required.
 	FieldName *string
 
-	// The new request mapping template.
-	//
-	// This member is required.
-	RequestMappingTemplate *string
-
 	// The new type name.
 	//
 	// This member is required.
@@ -69,6 +64,13 @@ type UpdateResolverInput struct {
 
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
+
+	// The new request mapping template. A resolver uses a request mapping template to
+	// convert a GraphQL expression into a format that a data source can understand.
+	// Mapping templates are written in Apache Velocity Template Language (VTL). VTL
+	// request mapping templates are optional when using a Lambda data source. For all
+	// other data sources, VTL request and response mapping templates are required.
+	RequestMappingTemplate *string
 
 	// The new response mapping template.
 	ResponseMappingTemplate *string

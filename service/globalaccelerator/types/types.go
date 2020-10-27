@@ -127,8 +127,8 @@ type ByoipCidr struct {
 	// The address range, in CIDR notation.
 	Cidr *string
 
-	// A history of status changes for an IP address range that that you bring to AWS
-	// Global Accelerator through bring your own IP address (BYOIP).
+	// A history of status changes for an IP address range that you bring to AWS Global
+	// Accelerator through bring your own IP address (BYOIP).
 	Events []*ByoipCidrEvent
 
 	// The state of the address pool.
@@ -168,7 +168,8 @@ type CidrAuthorizationContext struct {
 	Signature *string
 }
 
-// A complex type for endpoints.
+// A complex type for endpoints. A resource must be valid and active when you add
+// it as an endpoint.
 type EndpointConfiguration struct {
 
 	// Indicates whether client IP address preservation is enabled for an Application
@@ -185,8 +186,9 @@ type EndpointConfiguration struct {
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or
 	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
 	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-	// address allocation ID. For EC2 instances, this is the EC2 instance ID. An
-	// Application Load Balancer can be either internal or internet-facing.
+	// address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A
+	// resource must be valid and active when you add it as an endpoint. An Application
+	// Load Balancer can be either internal or internet-facing.
 	EndpointId *string
 
 	// The weight associated with the endpoint. When you add weights to endpoints, you
@@ -268,7 +270,7 @@ type EndpointGroup struct {
 	// The Amazon Resource Name (ARN) of the endpoint group.
 	EndpointGroupArn *string
 
-	// The AWS Region that this endpoint group belongs.
+	// The AWS Region where the endpoint group is located.
 	EndpointGroupRegion *string
 
 	// The time—10 seconds or 30 seconds—between health checks for each endpoint. The
@@ -289,6 +291,12 @@ type EndpointGroup struct {
 	// The protocol that Global Accelerator uses to perform health checks on endpoints
 	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol HealthCheckProtocol
+
+	// Allows you to override the destination ports used to route traffic to an
+	// endpoint. Using a port override lets you to map a list of external destination
+	// ports (that your users send traffic to) to a list of internal destination ports
+	// that you want an application endpoint to receive traffic on.
+	PortOverrides []*PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
 	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
@@ -319,7 +327,7 @@ type Listener struct {
 
 	// Client affinity lets you direct all requests from a user to the same endpoint,
 	// if you have stateful applications, regardless of the port and protocol of the
-	// client request. Clienty affinity gives you control over whether to always route
+	// client request. Client affinity gives you control over whether to always route
 	// each client to the same specific endpoint. AWS Global Accelerator uses a
 	// consistent-flow hashing algorithm to choose the optimal endpoint for a
 	// connection. If client affinity is NONE, Global Accelerator uses the "five-tuple"
@@ -342,6 +350,25 @@ type Listener struct {
 
 	// The protocol for the connections from clients to the accelerator.
 	Protocol Protocol
+}
+
+// Override specific listener ports used to route traffic to endpoints that are
+// part of an endpoint group. For example, you can create a port override in which
+// the listener receives user traffic on ports 80 and 443, but your accelerator
+// routes that traffic to ports 1080 and 1443, respectively, on the endpoints. For
+// more information, see  Port overrides
+// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
+// in the AWS Global Accelerator Developer Guide.
+type PortOverride struct {
+
+	// The endpoint port that you want a listener port to be mapped to. This is the
+	// port on the endpoint, such as the Application Load Balancer or Amazon EC2
+	// instance.
+	EndpointPort *int32
+
+	// The listener port that you want to map to a specific endpoint port. This is the
+	// port that user traffic arrives to the Global Accelerator on.
+	ListenerPort *int32
 }
 
 // A complex type for a range of ports for a listener.

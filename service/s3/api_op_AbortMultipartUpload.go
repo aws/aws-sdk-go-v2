@@ -18,23 +18,33 @@ import (
 // result, it might be necessary to abort a given multipart upload multiple times
 // in order to completely free all storage consumed by all parts. To verify that
 // all parts have been removed, so you don't get charged for the part storage, you
-// should call the ListParts operation and ensure that the parts list is empty. For
-// information about permissions required to use the multipart upload API, see
-// Multipart Upload API and Permissions
+// should call the ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html) operation
+// and ensure that the parts list is empty. For information about permissions
+// required to use the multipart upload API, see Multipart Upload API and
+// Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
 // following operations are related to AbortMultipartUpload:
 //
 //     *
 // CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//     * UploadPart
 //
-//     * CompleteMultipartUpload
+// * UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
-// ListParts
+// CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//     * ListMultipartUploads
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+//
+//     *
+// ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipartUploadInput, optFns ...func(*Options)) (*AbortMultipartUploadOutput, error) {
 	if params == nil {
 		params = &AbortMultipartUploadInput{}
@@ -56,11 +66,19 @@ type AbortMultipartUploadInput struct {
 	// an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -74,6 +92,10 @@ type AbortMultipartUploadInput struct {
 	//
 	// This member is required.
 	UploadId *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

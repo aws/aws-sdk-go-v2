@@ -519,9 +519,6 @@ func validateMappingRule(v *types.MappingRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MappingRule"}
-	if v.Claim == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Claim"))
-	}
 	if v.RoleARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
 	}
@@ -530,6 +527,9 @@ func validateMappingRule(v *types.MappingRule) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Claim == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Claim"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -616,11 +616,11 @@ func validateOpCreateIdentityPoolInput(v *CreateIdentityPoolInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIdentityPoolInput"}
-	if v.IdentityPoolName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
-	}
 	if v.AllowUnauthenticatedIdentities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowUnauthenticatedIdentities"))
+	}
+	if v.IdentityPoolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -739,11 +739,11 @@ func validateOpGetOpenIdTokenForDeveloperIdentityInput(v *GetOpenIdTokenForDevel
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetOpenIdTokenForDeveloperIdentityInput"}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
-	}
 	if v.Logins == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Logins"))
+	}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -772,11 +772,11 @@ func validateOpListIdentitiesInput(v *ListIdentitiesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentitiesInput"}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -835,17 +835,17 @@ func validateOpMergeDeveloperIdentitiesInput(v *MergeDeveloperIdentitiesInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MergeDeveloperIdentitiesInput"}
-	if v.DestinationUserIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationUserIdentifier"))
-	}
-	if v.DeveloperProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeveloperProviderName"))
-	}
 	if v.SourceUserIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceUserIdentifier"))
 	}
+	if v.DestinationUserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationUserIdentifier"))
+	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.DeveloperProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeveloperProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -859,16 +859,16 @@ func validateOpSetIdentityPoolRolesInput(v *SetIdentityPoolRolesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetIdentityPoolRolesInput"}
+	if v.RoleMappings != nil {
+		if err := validateRoleMappingMap(v.RoleMappings); err != nil {
+			invalidParams.AddNested("RoleMappings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Roles == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Roles"))
 	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
-	}
-	if v.RoleMappings != nil {
-		if err := validateRoleMappingMap(v.RoleMappings); err != nil {
-			invalidParams.AddNested("RoleMappings", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -900,17 +900,17 @@ func validateOpUnlinkDeveloperIdentityInput(v *UnlinkDeveloperIdentityInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnlinkDeveloperIdentityInput"}
+	if v.DeveloperProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeveloperProviderName"))
+	}
+	if v.DeveloperUserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeveloperUserIdentifier"))
+	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
-	}
-	if v.DeveloperUserIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeveloperUserIdentifier"))
-	}
-	if v.DeveloperProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeveloperProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -945,11 +945,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -966,11 +966,11 @@ func validateOpUpdateIdentityPoolInput(v *UpdateIdentityPoolInput) error {
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
-	if v.IdentityPoolName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
-	}
 	if v.AllowUnauthenticatedIdentities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowUnauthenticatedIdentities"))
+	}
+	if v.IdentityPoolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

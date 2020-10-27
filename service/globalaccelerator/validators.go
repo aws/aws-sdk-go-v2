@@ -585,11 +585,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -635,9 +635,6 @@ func validateOpCreateAcceleratorInput(v *CreateAcceleratorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAcceleratorInput"}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
-	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -645,6 +642,9 @@ func validateOpCreateAcceleratorInput(v *CreateAcceleratorInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -658,14 +658,14 @@ func validateOpCreateEndpointGroupInput(v *CreateEndpointGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointGroupInput"}
-	if v.ListenerArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
+	if v.EndpointGroupRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupRegion"))
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
-	if v.EndpointGroupRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupRegion"))
+	if v.ListenerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -679,17 +679,17 @@ func validateOpCreateListenerInput(v *CreateListenerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateListenerInput"}
-	if v.PortRanges == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PortRanges"))
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if v.AcceleratorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcceleratorArn"))
 	}
+	if v.PortRanges == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortRanges"))
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
-	if v.IdempotencyToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -890,15 +890,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -912,11 +912,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

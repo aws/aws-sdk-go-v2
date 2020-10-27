@@ -7,6 +7,25 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
+// The contact flow has not been published.
+type ContactFlowNotPublishedException struct {
+	Message *string
+}
+
+func (e *ContactFlowNotPublishedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ContactFlowNotPublishedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ContactFlowNotPublishedException) ErrorCode() string {
+	return "ContactFlowNotPublishedException"
+}
+func (e *ContactFlowNotPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The contact with the specified ID is not active or does not exist.
 type ContactNotFoundException struct {
 	Message *string
@@ -74,6 +93,25 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The contact flow is not valid.
+type InvalidContactFlowException struct {
+	Message *string
+
+	Problems []*ProblemDetail
+}
+
+func (e *InvalidContactFlowException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidContactFlowException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidContactFlowException) ErrorCode() string             { return "InvalidContactFlowException" }
+func (e *InvalidContactFlowException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified parameters are not valid.
 type InvalidParameterException struct {

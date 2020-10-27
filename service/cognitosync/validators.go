@@ -399,14 +399,14 @@ func validateRecordPatch(v *types.RecordPatch) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordPatch"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if len(v.Op) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Op"))
 	}
 	if v.SyncCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SyncCount"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -509,11 +509,11 @@ func validateOpDescribeIdentityUsageInput(v *DescribeIdentityUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeIdentityUsageInput"}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
-	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
+	}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -590,11 +590,11 @@ func validateOpListRecordsInput(v *ListRecordsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRecordsInput"}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
-	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
+	}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
@@ -716,13 +716,13 @@ func validateOpUpdateRecordsInput(v *UpdateRecordsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecordsInput"}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
 	if v.RecordPatches != nil {
 		if err := validateRecordPatchList(v.RecordPatches); err != nil {
 			invalidParams.AddNested("RecordPatches", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))

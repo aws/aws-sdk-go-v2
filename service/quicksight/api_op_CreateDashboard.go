@@ -15,9 +15,8 @@ import (
 // CreateTemplate API operation. A dashboard is an entity in QuickSight that
 // identifies QuickSight reports, created from analyses. You can share QuickSight
 // dashboards. With the right permissions, you can create scheduled email reports
-// from them. The CreateDashboard, DescribeDashboard, and ListDashboardsByUser API
-// operations act on the dashboard entity. If you have the correct permissions, you
-// can create a dashboard from a template that exists in a different AWS account.
+// from them. If you have the correct permissions, you can create a dashboard from
+// a template that exists in a different AWS account.
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -74,7 +73,7 @@ type CreateDashboardInput struct {
 	//
 	//     * AvailabilityStatus for
 	// ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual
-	// option to export data to .csv format isn't enabled when this is set to DISABLED.
+	// option to export data to .CSV format isn't enabled when this is set to DISABLED.
 	// This option is ENABLED by default.
 	//
 	//     * VisibilityState for
@@ -88,7 +87,8 @@ type CreateDashboardInput struct {
 	Parameters *types.Parameters
 
 	// A structure that contains the permissions of the dashboard. You can use this
-	// structure for granting permissions with principal and action information.
+	// structure for granting permissions by providing a list of IAM action information
+	// for each principal ARN. To specify no permissions, omit the permissions list.
 	Permissions []*types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
@@ -118,6 +118,9 @@ type CreateDashboardOutput struct {
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// The ARN of the dashboard, including the version number of the first version that
 	// is created.

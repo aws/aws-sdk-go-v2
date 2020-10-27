@@ -14,10 +14,13 @@ import (
 // Lists log events from the specified log group. You can list all the log events
 // or filter the results using a filter pattern, a time range, and the name of the
 // log stream. By default, this operation returns as many log events as can fit in
-// 1 MB (up to 10,000 log events), or all the events found within the time range
+// 1 MB (up to 10,000 log events) or all the events found within the time range
 // that you specify. If the results include a token, then there are more log events
 // available, and you can get additional results by specifying the token in a
-// subsequent call.
+// subsequent call. This operation can return empty results while there are more
+// log events available through the token. The returned log events are sorted by
+// event timestamp, the timestamp when the event was ingested by CloudWatch Logs,
+// and the ID of the PutLogEvents request.
 func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInput, optFns ...func(*Options)) (*FilterLogEventsOutput, error) {
 	if params == nil {
 		params = &FilterLogEventsInput{}
@@ -54,10 +57,9 @@ type FilterLogEventsInput struct {
 	// that contain events from multiple log streams within the log group, interleaved
 	// in a single response. If the value is false, all the matched log events in the
 	// first log stream are searched first, then those in the next log stream, and so
-	// on. The default is false. IMPORTANT: Starting on June 17, 2019, this parameter
-	// will be ignored and the value will be assumed to be true. The response from this
-	// operation will always interleave events from multiple log streams within a log
-	// group.
+	// on. The default is false. Important: Starting on June 17, 2019, this parameter
+	// is ignored and the value is assumed to be true. The response from this operation
+	// always interleaves events from multiple log streams within a log group.
 	Interleaved *bool
 
 	// The maximum number of events to return. The default is 10,000 events.
@@ -81,6 +83,8 @@ type FilterLogEventsInput struct {
 
 	// The start of the time range, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
+	// If you omit startTime and endTime the most recent log events are retrieved, to
+	// up 1 MB or 10,000 log events.
 	StartTime *int64
 }
 
@@ -93,8 +97,9 @@ type FilterLogEventsOutput struct {
 	// 24 hours.
 	NextToken *string
 
-	// Indicates which log streams have been searched and whether each has been
-	// searched completely.
+	// IMPORTANT Starting on May 15, 2020, this parameter will be deprecated. This
+	// parameter will be an empty list after the deprecation occurs. Indicates which
+	// log streams have been searched and whether each has been searched completely.
 	SearchedLogStreams []*types.SearchedLogStream
 
 	// Metadata pertaining to the operation's result.

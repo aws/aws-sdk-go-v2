@@ -81,7 +81,7 @@ type PutBotInput struct {
 
 	// When Amazon Lex can't understand the user's input in context, it tries to elicit
 	// the information a few times. After that, Amazon Lex sends the message defined in
-	// abortStatement to the user, and then aborts the conversation. To set the number
+	// abortStatement to the user, and then cancels the conversation. To set the number
 	// of retries, use the valueElicitationPrompt field for the slot type. For example,
 	// in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would
 	// you like?" If the user's response is not one of the expected responses (for
@@ -89,8 +89,8 @@ type PutBotInput struct {
 	// response a few more times. For example, in a pizza ordering application,
 	// OrderPizza might be one of the intents. This intent might require the CrustType
 	// slot. You specify the valueElicitationPrompt field when you create the CrustType
-	// slot. If you have defined a fallback intent the abort statement will not be sent
-	// to the user, the fallback intent is used instead. For more information, see
+	// slot. If you have defined a fallback intent the cancel statement will not be
+	// sent to the user, the fallback intent is used instead. For more information, see
 	// AMAZON.FallbackIntent
 	// (https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html).
 	AbortStatement *types.Statement
@@ -146,6 +146,41 @@ type PutBotInput struct {
 	// analysis. If you don't specify detectSentiment, the default is false.
 	DetectSentiment *bool
 
+	// Set to true to enable access to natural language understanding improvements.
+	// When you set the enableModelImprovements parameter to true you can use the
+	// nluIntentConfidenceThreshold parameter to configure confidence scores. For more
+	// information, see Confidence Scores
+	// (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html). You can only
+	// set the enableModelImprovements parameter in certain Regions. If you set the
+	// parameter to true, your bot has access to accuracy improvements. The Regions
+	// where you can set the enableModelImprovements parameter to true are:
+	//
+	//     * US
+	// East (N. Virginia) (us-east-1)
+	//
+	//     * US West (Oregon) (us-west-2)
+	//
+	//     * Asia
+	// Pacific (Sydney) (ap-southeast-2)
+	//
+	//     * EU (Ireland) (eu-west-1)
+	//
+	// In other
+	// Regions, the enableModelImprovements parameter is set to true by default. In
+	// these Regions setting the parameter to false throws a ValidationException
+	// exception.
+	//
+	//     * Asia Pacific (Singapore) (ap-southeast-1)
+	//
+	//     * Asia Pacific
+	// (Tokyo) (ap-northeast-1)
+	//
+	//     * EU (Frankfurt) (eu-central-1)
+	//
+	//     * EU (London)
+	// (eu-west-2)
+	EnableModelImprovements *bool
+
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
 	// conversation. A user interaction session remains active for the amount of time
 	// specified. If no conversation occurs during this time, the session expires and
@@ -162,6 +197,42 @@ type PutBotInput struct {
 	// express. For example, a pizza ordering bot might support an OrderPizza intent.
 	// For more information, see how-it-works.
 	Intents []*types.Intent
+
+	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent,
+	// AMAZON.KendraSearchIntent, or both when returning alternative intents in a
+	// PostContent
+	// (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) or
+	// PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+	// response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted
+	// if they are configured for the bot. You must set the enableModelImprovements
+	// parameter to true to use confidence scores.
+	//
+	//     * US East (N. Virginia)
+	// (us-east-1)
+	//
+	//     * US West (Oregon) (us-west-2)
+	//
+	//     * Asia Pacific (Sydney)
+	// (ap-southeast-2)
+	//
+	//     * EU (Ireland) (eu-west-1)
+	//
+	// In other Regions, the
+	// enableModelImprovements parameter is set to true by default. For example,
+	// suppose a bot is configured with the confidence threshold of 0.80 and the
+	// AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the
+	// following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The
+	// response from the PostText operation would be:
+	//
+	//     * AMAZON.FallbackIntent
+	//
+	//
+	// * IntentA
+	//
+	//     * IntentB
+	//
+	//     * IntentC
+	NluIntentConfidenceThreshold *float64
 
 	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
 	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but
@@ -183,7 +254,7 @@ type PutBotInput struct {
 
 type PutBotOutput struct {
 
-	// The message that Amazon Lex uses to abort a conversation. For more information,
+	// The message that Amazon Lex uses to cancel a conversation. For more information,
 	// see PutBot.
 	AbortStatement *types.Statement
 
@@ -233,6 +304,10 @@ type PutBotOutput struct {
 	// request, the detectSentiment field is false in the response.
 	DetectSentiment *bool
 
+	// Indicates whether the bot uses accuracy improvements. true indicates that the
+	// bot is using the improvements, otherwise, false.
+	EnableModelImprovements *bool
+
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build the
 	// bot.
 	FailureReason *string
@@ -253,6 +328,16 @@ type PutBotOutput struct {
 
 	// The name of the bot.
 	Name *string
+
+	// The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent,
+	// AMAZON.KendraSearchIntent, or both when returning alternative intents in a
+	// PostContent
+	// (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) or
+	// PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
+	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is
+	// configured for the bot.
+	NluIntentConfidenceThreshold *float64
 
 	// When you send a request to create a bot with processBehavior set to BUILD,
 	// Amazon Lex sets the status response element to BUILDING. In the

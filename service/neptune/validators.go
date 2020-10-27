@@ -1407,11 +1407,11 @@ func validateFilter(v *types.Filter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1442,11 +1442,11 @@ func validateOpAddRoleToDBClusterInput(v *AddRoleToDBClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddRoleToDBClusterInput"}
-	if v.DBClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1499,11 +1499,11 @@ func validateOpApplyPendingMaintenanceActionInput(v *ApplyPendingMaintenanceActi
 	if v.ApplyAction == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplyAction"))
 	}
-	if v.OptInType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
-	}
 	if v.ResourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if v.OptInType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1556,11 +1556,11 @@ func validateOpCopyDBParameterGroupInput(v *CopyDBParameterGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyDBParameterGroupInput"}
-	if v.TargetDBParameterGroupDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupDescription"))
-	}
 	if v.TargetDBParameterGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
+	}
+	if v.TargetDBParameterGroupDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupDescription"))
 	}
 	if v.SourceDBParameterGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceDBParameterGroupIdentifier"))
@@ -1577,11 +1577,11 @@ func validateOpCreateDBClusterInput(v *CreateDBClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBClusterInput"}
-	if v.DBClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
-	}
 	if v.Engine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1595,11 +1595,11 @@ func validateOpCreateDBClusterParameterGroupInput(v *CreateDBClusterParameterGro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBClusterParameterGroupInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.DBClusterParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.DBParameterGroupFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupFamily"))
@@ -1616,11 +1616,11 @@ func validateOpCreateDBClusterSnapshotInput(v *CreateDBClusterSnapshotInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBClusterSnapshotInput"}
-	if v.DBClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
-	}
 	if v.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterSnapshotIdentifier"))
+	}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,14 +1634,14 @@ func validateOpCreateDBInstanceInput(v *CreateDBInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBInstanceInput"}
-	if v.DBInstanceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
 	if v.DBInstanceClass == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceClass"))
 	}
-	if v.Engine == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	if v.DBInstanceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1679,11 +1679,11 @@ func validateOpCreateDBSubnetGroupInput(v *CreateDBSubnetGroupInput) error {
 	if v.DBSubnetGroupDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupDescription"))
 	}
-	if v.DBSubnetGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.DBSubnetGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1697,11 +1697,11 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
 	if v.SnsTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
+	}
+	if v.SubscriptionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1957,13 +1957,13 @@ func validateOpDescribeDBParametersInput(v *DescribeDBParametersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBParametersInput"}
-	if v.DBParameterGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DBParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2085,13 +2085,13 @@ func validateOpDescribeOrderableDBInstanceOptionsInput(v *DescribeOrderableDBIns
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeOrderableDBInstanceOptionsInput"}
-	if v.Engine == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2172,11 +2172,11 @@ func validateOpModifyDBClusterParameterGroupInput(v *ModifyDBClusterParameterGro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBClusterParameterGroupInput"}
-	if v.Parameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
-	}
 	if v.DBClusterParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2223,11 +2223,11 @@ func validateOpModifyDBParameterGroupInput(v *ModifyDBParameterGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBParameterGroupInput"}
-	if v.Parameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
-	}
 	if v.DBParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2241,11 +2241,11 @@ func validateOpModifyDBSubnetGroupInput(v *ModifyDBSubnetGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBSubnetGroupInput"}
-	if v.DBSubnetGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.DBSubnetGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2322,11 +2322,11 @@ func validateOpRemoveSourceIdentifierFromSubscriptionInput(v *RemoveSourceIdenti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
 	if v.SourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
+	}
+	if v.SubscriptionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

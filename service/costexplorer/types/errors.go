@@ -111,7 +111,7 @@ func (e *ResourceNotFoundException) ErrorCode() string             { return "Res
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of resources you can create, or exceeded
-// the size of an individual resources.
+// the size of an individual resource.
 type ServiceQuotaExceededException struct {
 	Message *string
 }
@@ -127,6 +127,40 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The cost anomaly monitor does not exist for the account.
+type UnknownMonitorException struct {
+	Message *string
+}
+
+func (e *UnknownMonitorException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnknownMonitorException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnknownMonitorException) ErrorCode() string             { return "UnknownMonitorException" }
+func (e *UnknownMonitorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The cost anomaly subscription does not exist for the account.
+type UnknownSubscriptionException struct {
+	Message *string
+}
+
+func (e *UnknownSubscriptionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnknownSubscriptionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnknownSubscriptionException) ErrorCode() string             { return "UnknownSubscriptionException" }
+func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cost Explorer was unable to identify the usage unit. Provide
 // UsageType/UsageTypeGroup filter selections that contain matching units, for

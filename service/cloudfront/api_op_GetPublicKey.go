@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Get the public key information.
+// Gets a public key.
 func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, optFns ...func(*Options)) (*GetPublicKeyOutput, error) {
 	if params == nil {
 		params = &GetPublicKeyInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, op
 
 type GetPublicKeyInput struct {
 
-	// Request the ID for the public key.
+	// The identifier of the public key you are getting.
 	//
 	// This member is required.
 	Id *string
@@ -37,10 +37,10 @@ type GetPublicKeyInput struct {
 
 type GetPublicKeyOutput struct {
 
-	// The current version of the public key. For example: E2QWRUHAPOMQZL.
+	// The identifier for this version of the public key.
 	ETag *string
 
-	// Return the public key.
+	// The public key.
 	PublicKey *types.PublicKey
 
 	// Metadata pertaining to the operation's result.

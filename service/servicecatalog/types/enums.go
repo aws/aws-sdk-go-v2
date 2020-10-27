@@ -11,6 +11,17 @@ const (
 	AccessLevelFilterKeyUser    AccessLevelFilterKey = "User"
 )
 
+// Values returns all known values for AccessLevelFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessLevelFilterKey) Values() []AccessLevelFilterKey {
+	return []AccessLevelFilterKey{
+		"Account",
+		"Role",
+		"User",
+	}
+}
+
 type AccessStatus string
 
 // Enum values for AccessStatus
@@ -19,6 +30,17 @@ const (
 	AccessStatusUnder_change AccessStatus = "UNDER_CHANGE"
 	AccessStatusDisabled     AccessStatus = "DISABLED"
 )
+
+// Values returns all known values for AccessStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AccessStatus) Values() []AccessStatus {
+	return []AccessStatus{
+		"ENABLED",
+		"UNDER_CHANGE",
+		"DISABLED",
+	}
+}
 
 type ChangeAction string
 
@@ -29,12 +51,32 @@ const (
 	ChangeActionRemove ChangeAction = "REMOVE"
 )
 
+// Values returns all known values for ChangeAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeAction) Values() []ChangeAction {
+	return []ChangeAction{
+		"ADD",
+		"MODIFY",
+		"REMOVE",
+	}
+}
+
 type CopyOption string
 
 // Enum values for CopyOption
 const (
 	CopyOptionCopytags CopyOption = "CopyTags"
 )
+
+// Values returns all known values for CopyOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CopyOption) Values() []CopyOption {
+	return []CopyOption{
+		"CopyTags",
+	}
+}
 
 type CopyProductStatus string
 
@@ -45,6 +87,17 @@ const (
 	CopyProductStatusFailed      CopyProductStatus = "FAILED"
 )
 
+// Values returns all known values for CopyProductStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CopyProductStatus) Values() []CopyProductStatus {
+	return []CopyProductStatus{
+		"SUCCEEDED",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -52,6 +105,16 @@ const (
 	EvaluationTypeStatic  EvaluationType = "STATIC"
 	EvaluationTypeDynamic EvaluationType = "DYNAMIC"
 )
+
+// Values returns all known values for EvaluationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationType) Values() []EvaluationType {
+	return []EvaluationType{
+		"STATIC",
+		"DYNAMIC",
+	}
+}
 
 type OrganizationNodeType string
 
@@ -62,6 +125,17 @@ const (
 	OrganizationNodeTypeAccount             OrganizationNodeType = "ACCOUNT"
 )
 
+// Values returns all known values for OrganizationNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationNodeType) Values() []OrganizationNodeType {
+	return []OrganizationNodeType{
+		"ORGANIZATION",
+		"ORGANIZATIONAL_UNIT",
+		"ACCOUNT",
+	}
+}
+
 type PortfolioShareType string
 
 // Enum values for PortfolioShareType
@@ -71,12 +145,32 @@ const (
 	PortfolioShareTypeAws_organizations  PortfolioShareType = "AWS_ORGANIZATIONS"
 )
 
+// Values returns all known values for PortfolioShareType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PortfolioShareType) Values() []PortfolioShareType {
+	return []PortfolioShareType{
+		"IMPORTED",
+		"AWS_SERVICECATALOG",
+		"AWS_ORGANIZATIONS",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
 const (
 	PrincipalTypeIam PrincipalType = "IAM"
 )
+
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"IAM",
+	}
+}
 
 type ProductSource string
 
@@ -85,6 +179,15 @@ const (
 	ProductSourceAccount ProductSource = "ACCOUNT"
 )
 
+// Values returns all known values for ProductSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProductSource) Values() []ProductSource {
+	return []ProductSource{
+		"ACCOUNT",
+	}
+}
+
 type ProductType string
 
 // Enum values for ProductType
@@ -92,6 +195,16 @@ const (
 	ProductTypeCloud_formation_template ProductType = "CLOUD_FORMATION_TEMPLATE"
 	ProductTypeMarketplace              ProductType = "MARKETPLACE"
 )
+
+// Values returns all known values for ProductType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProductType) Values() []ProductType {
+	return []ProductType{
+		"CLOUD_FORMATION_TEMPLATE",
+		"MARKETPLACE",
+	}
+}
 
 type ProductViewFilterBy string
 
@@ -103,6 +216,18 @@ const (
 	ProductViewFilterBySourceproductid ProductViewFilterBy = "SourceProductId"
 )
 
+// Values returns all known values for ProductViewFilterBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProductViewFilterBy) Values() []ProductViewFilterBy {
+	return []ProductViewFilterBy{
+		"FullTextSearch",
+		"Owner",
+		"ProductType",
+		"SourceProductId",
+	}
+}
+
 type ProductViewSortBy string
 
 // Enum values for ProductViewSortBy
@@ -112,12 +237,34 @@ const (
 	ProductViewSortByCreationdate ProductViewSortBy = "CreationDate"
 )
 
+// Values returns all known values for ProductViewSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProductViewSortBy) Values() []ProductViewSortBy {
+	return []ProductViewSortBy{
+		"Title",
+		"VersionCount",
+		"CreationDate",
+	}
+}
+
 type PropertyKey string
 
 // Enum values for PropertyKey
 const (
-	PropertyKeyOwner PropertyKey = "OWNER"
+	PropertyKeyOwner      PropertyKey = "OWNER"
+	PropertyKeyLaunchrole PropertyKey = "LAUNCH_ROLE"
 )
+
+// Values returns all known values for PropertyKey. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PropertyKey) Values() []PropertyKey {
+	return []PropertyKey{
+		"OWNER",
+		"LAUNCH_ROLE",
+	}
+}
 
 type ProvisionedProductPlanStatus string
 
@@ -131,12 +278,35 @@ const (
 	ProvisionedProductPlanStatusExecute_failed      ProvisionedProductPlanStatus = "EXECUTE_FAILED"
 )
 
+// Values returns all known values for ProvisionedProductPlanStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedProductPlanStatus) Values() []ProvisionedProductPlanStatus {
+	return []ProvisionedProductPlanStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_SUCCESS",
+		"CREATE_FAILED",
+		"EXECUTE_IN_PROGRESS",
+		"EXECUTE_SUCCESS",
+		"EXECUTE_FAILED",
+	}
+}
+
 type ProvisionedProductPlanType string
 
 // Enum values for ProvisionedProductPlanType
 const (
 	ProvisionedProductPlanTypeCloudformation ProvisionedProductPlanType = "CLOUDFORMATION"
 )
+
+// Values returns all known values for ProvisionedProductPlanType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedProductPlanType) Values() []ProvisionedProductPlanType {
+	return []ProvisionedProductPlanType{
+		"CLOUDFORMATION",
+	}
+}
 
 type ProvisionedProductStatus string
 
@@ -149,12 +319,35 @@ const (
 	ProvisionedProductStatusPlan_in_progress ProvisionedProductStatus = "PLAN_IN_PROGRESS"
 )
 
+// Values returns all known values for ProvisionedProductStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedProductStatus) Values() []ProvisionedProductStatus {
+	return []ProvisionedProductStatus{
+		"AVAILABLE",
+		"UNDER_CHANGE",
+		"TAINTED",
+		"ERROR",
+		"PLAN_IN_PROGRESS",
+	}
+}
+
 type ProvisionedProductViewFilterBy string
 
 // Enum values for ProvisionedProductViewFilterBy
 const (
 	ProvisionedProductViewFilterBySearchquery ProvisionedProductViewFilterBy = "SearchQuery"
 )
+
+// Values returns all known values for ProvisionedProductViewFilterBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ProvisionedProductViewFilterBy) Values() []ProvisionedProductViewFilterBy {
+	return []ProvisionedProductViewFilterBy{
+		"SearchQuery",
+	}
+}
 
 type ProvisioningArtifactGuidance string
 
@@ -164,12 +357,32 @@ const (
 	ProvisioningArtifactGuidanceDeprecated ProvisioningArtifactGuidance = "DEPRECATED"
 )
 
+// Values returns all known values for ProvisioningArtifactGuidance. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisioningArtifactGuidance) Values() []ProvisioningArtifactGuidance {
+	return []ProvisioningArtifactGuidance{
+		"DEFAULT",
+		"DEPRECATED",
+	}
+}
+
 type ProvisioningArtifactPropertyName string
 
 // Enum values for ProvisioningArtifactPropertyName
 const (
 	ProvisioningArtifactPropertyNameId ProvisioningArtifactPropertyName = "Id"
 )
+
+// Values returns all known values for ProvisioningArtifactPropertyName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ProvisioningArtifactPropertyName) Values() []ProvisioningArtifactPropertyName {
+	return []ProvisioningArtifactPropertyName{
+		"Id",
+	}
+}
 
 type ProvisioningArtifactType string
 
@@ -179,6 +392,17 @@ const (
 	ProvisioningArtifactTypeMarketplace_ami          ProvisioningArtifactType = "MARKETPLACE_AMI"
 	ProvisioningArtifactTypeMarketplace_car          ProvisioningArtifactType = "MARKETPLACE_CAR"
 )
+
+// Values returns all known values for ProvisioningArtifactType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisioningArtifactType) Values() []ProvisioningArtifactType {
+	return []ProvisioningArtifactType{
+		"CLOUD_FORMATION_TEMPLATE",
+		"MARKETPLACE_AMI",
+		"MARKETPLACE_CAR",
+	}
+}
 
 type RecordStatus string
 
@@ -191,6 +415,19 @@ const (
 	RecordStatusFailed               RecordStatus = "FAILED"
 )
 
+// Values returns all known values for RecordStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RecordStatus) Values() []RecordStatus {
+	return []RecordStatus{
+		"CREATED",
+		"IN_PROGRESS",
+		"IN_PROGRESS_IN_ERROR",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type Replacement string
 
 // Enum values for Replacement
@@ -200,6 +437,17 @@ const (
 	ReplacementConditional Replacement = "CONDITIONAL"
 )
 
+// Values returns all known values for Replacement. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Replacement) Values() []Replacement {
+	return []Replacement{
+		"TRUE",
+		"FALSE",
+		"CONDITIONAL",
+	}
+}
+
 type RequiresRecreation string
 
 // Enum values for RequiresRecreation
@@ -208,6 +456,17 @@ const (
 	RequiresRecreationConditionally RequiresRecreation = "CONDITIONALLY"
 	RequiresRecreationAlways        RequiresRecreation = "ALWAYS"
 )
+
+// Values returns all known values for RequiresRecreation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RequiresRecreation) Values() []RequiresRecreation {
+	return []RequiresRecreation{
+		"NEVER",
+		"CONDITIONALLY",
+		"ALWAYS",
+	}
+}
 
 type ResourceAttribute string
 
@@ -221,6 +480,20 @@ const (
 	ResourceAttributeTags           ResourceAttribute = "TAGS"
 )
 
+// Values returns all known values for ResourceAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceAttribute) Values() []ResourceAttribute {
+	return []ResourceAttribute{
+		"PROPERTIES",
+		"METADATA",
+		"CREATIONPOLICY",
+		"UPDATEPOLICY",
+		"DELETIONPOLICY",
+		"TAGS",
+	}
+}
+
 type ServiceActionAssociationErrorCode string
 
 // Enum values for ServiceActionAssociationErrorCode
@@ -232,6 +505,20 @@ const (
 	ServiceActionAssociationErrorCodeThrottlingexception        ServiceActionAssociationErrorCode = "THROTTLING"
 )
 
+// Values returns all known values for ServiceActionAssociationErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ServiceActionAssociationErrorCode) Values() []ServiceActionAssociationErrorCode {
+	return []ServiceActionAssociationErrorCode{
+		"DUPLICATE_RESOURCE",
+		"INTERNAL_FAILURE",
+		"LIMIT_EXCEEDED",
+		"RESOURCE_NOT_FOUND",
+		"THROTTLING",
+	}
+}
+
 type ServiceActionDefinitionKey string
 
 // Enum values for ServiceActionDefinitionKey
@@ -242,12 +529,33 @@ const (
 	ServiceActionDefinitionKeyParameters ServiceActionDefinitionKey = "Parameters"
 )
 
+// Values returns all known values for ServiceActionDefinitionKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceActionDefinitionKey) Values() []ServiceActionDefinitionKey {
+	return []ServiceActionDefinitionKey{
+		"Name",
+		"Version",
+		"AssumeRole",
+		"Parameters",
+	}
+}
+
 type ServiceActionDefinitionType string
 
 // Enum values for ServiceActionDefinitionType
 const (
 	ServiceActionDefinitionTypeSsmautomation ServiceActionDefinitionType = "SSM_AUTOMATION"
 )
+
+// Values returns all known values for ServiceActionDefinitionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceActionDefinitionType) Values() []ServiceActionDefinitionType {
+	return []ServiceActionDefinitionType{
+		"SSM_AUTOMATION",
+	}
+}
 
 type ShareStatus string
 
@@ -260,6 +568,19 @@ const (
 	ShareStatusError                 ShareStatus = "ERROR"
 )
 
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ShareStatus) Values() []ShareStatus {
+	return []ShareStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"ERROR",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -267,6 +588,16 @@ const (
 	SortOrderAscending  SortOrder = "ASCENDING"
 	SortOrderDescending SortOrder = "DESCENDING"
 )
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
 
 type StackInstanceStatus string
 
@@ -277,6 +608,17 @@ const (
 	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
 )
 
+// Values returns all known values for StackInstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackInstanceStatus) Values() []StackInstanceStatus {
+	return []StackInstanceStatus{
+		"CURRENT",
+		"OUTDATED",
+		"INOPERABLE",
+	}
+}
+
 type StackSetOperationType string
 
 // Enum values for StackSetOperationType
@@ -286,6 +628,17 @@ const (
 	StackSetOperationTypeDelete StackSetOperationType = "DELETE"
 )
 
+// Values returns all known values for StackSetOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetOperationType) Values() []StackSetOperationType {
+	return []StackSetOperationType{
+		"CREATE",
+		"UPDATE",
+		"DELETE",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -294,3 +647,14 @@ const (
 	StatusCreating  Status = "CREATING"
 	StatusFailed    Status = "FAILED"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"AVAILABLE",
+		"CREATING",
+		"FAILED",
+	}
+}

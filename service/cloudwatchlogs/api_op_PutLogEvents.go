@@ -16,22 +16,22 @@ import (
 // newly created log stream does not require a sequence token. You can also get the
 // sequence token in the expectedSequenceToken field from
 // InvalidSequenceTokenException. If you call PutLogEvents twice within a narrow
-// time period using the same value for sequenceToken, both calls may be
-// successful, or one may be rejected. The batch of events must satisfy the
+// time period using the same value for sequenceToken, both calls might be
+// successful or one might be rejected. The batch of events must satisfy the
 // following constraints:
 //
-//     * The maximum batch size is 1,048,576 bytes, and
-// this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes
-// for each log event.
+//     * The maximum batch size is 1,048,576 bytes. This
+// size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for
+// each log event.
 //
-//     * None of the log events in the batch can be more than
-// 2 hours in the future.
+//     * None of the log events in the batch can be more than 2
+// hours in the future.
 //
 //     * None of the log events in the batch can be older
 // than 14 days or older than the retention period of the log group.
 //
 //     * The log
-// events in the batch must be in chronological ordered by their timestamp. The
+// events in the batch must be in chronological order by their timestamp. The
 // timestamp is the time the event occurred, expressed as the number of
 // milliseconds after Jan 1, 1970 00:00:00 UTC. (In AWS Tools for PowerShell and
 // the AWS SDK for .NET, the timestamp is specified in .NET format:
@@ -87,7 +87,7 @@ type PutLogEventsInput struct {
 	// can also get the sequence token using DescribeLogStreams
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html).
 	// If you call PutLogEvents twice within a narrow time period using the same value
-	// for sequenceToken, both calls may be successful, or one may be rejected.
+	// for sequenceToken, both calls might be successful or one might be rejected.
 	SequenceToken *string
 }
 

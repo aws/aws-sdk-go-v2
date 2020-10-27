@@ -181,6 +181,9 @@ type EventSourceMappingConfiguration struct {
 	// user, or by the Lambda service.
 	StateTransitionReason *string
 
+	// (MSK) The name of the Kafka topic.
+	Topics []*string
+
 	// The identifier of the event source mapping.
 	UUID *string
 }

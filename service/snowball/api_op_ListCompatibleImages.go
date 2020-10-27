@@ -13,9 +13,9 @@ import (
 
 // This action returns a list of the different Amazon EC2 Amazon Machine Images
 // (AMIs) that are owned by your AWS account that would be supported for use on a
-// Snowball Edge device. Currently, supported AMIs are based on the CentOS 7
-// (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS
-// - Xenial (HVM) images, available on the AWS Marketplace.
+// Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with
+// Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM)
+// images, available on the AWS Marketplace.
 func (c *Client) ListCompatibleImages(ctx context.Context, params *ListCompatibleImagesInput, optFns ...func(*Options)) (*ListCompatibleImagesOutput, error) {
 	if params == nil {
 		params = &ListCompatibleImagesInput{}
@@ -46,7 +46,7 @@ type ListCompatibleImagesInput struct {
 type ListCompatibleImagesOutput struct {
 
 	// A JSON-formatted object that describes a compatible AMI, including the ID and
-	// name for a Snowball Edge AMI.
+	// name for a Snow device AMI.
 	CompatibleImages []*types.CompatibleImage
 
 	// Because HTTP requests are stateless, this is the starting point for your next

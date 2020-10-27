@@ -88,7 +88,7 @@ func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGam
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type StartGameSessionPlacementInput struct {
 
 	// Name of the queue to use to place the new game session. You can use either the
@@ -136,7 +136,7 @@ type StartGameSessionPlacementInput struct {
 	PlayerLatencies []*types.PlayerLatency
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type StartGameSessionPlacementOutput struct {
 
 	// Object that describes the newly created game session placement. This object

@@ -6,23 +6,23 @@ import (
 	"time"
 )
 
-// The address that you want the Snowball or Snowballs associated with a specific
-// job to be shipped to. Addresses are validated at the time of creation. The
-// address you provide must be located within the serviceable area of your region.
-// Although no individual elements of the Address are required, if the address is
-// invalid or unsupported, then an exception is thrown.
+// The address that you want the Snow device(s) associated with a specific job to
+// be shipped to. Addresses are validated at the time of creation. The address you
+// provide must be located within the serviceable area of your region. Although no
+// individual elements of the Address are required, if the address is invalid or
+// unsupported, then an exception is thrown.
 type Address struct {
 
 	// The unique ID for an address.
 	AddressId *string
 
-	// The city in an address that a Snowball is to be delivered to.
+	// The city in an address that a Snow device is to be delivered to.
 	City *string
 
-	// The name of the company to receive a Snowball at an address.
+	// The name of the company to receive a Snow device at an address.
 	Company *string
 
-	// The country in an address that a Snowball is to be delivered to.
+	// The country in an address that a Snow device is to be delivered to.
 	Country *string
 
 	// If the address you are creating is a primary address, then set this option to
@@ -32,29 +32,29 @@ type Address struct {
 	// This field is no longer used and the value is ignored.
 	Landmark *string
 
-	// The name of a person to receive a Snowball at an address.
+	// The name of a person to receive a Snow device at an address.
 	Name *string
 
-	// The phone number associated with an address that a Snowball is to be delivered
-	// to.
+	// The phone number associated with an address that a Snow device is to be
+	// delivered to.
 	PhoneNumber *string
 
-	// The postal code in an address that a Snowball is to be delivered to.
+	// The postal code in an address that a Snow device is to be delivered to.
 	PostalCode *string
 
 	// This field is no longer used and the value is ignored.
 	PrefectureOrDistrict *string
 
-	// The state or province in an address that a Snowball is to be delivered to.
+	// The state or province in an address that a Snow device is to be delivered to.
 	StateOrProvince *string
 
-	// The first line in a street address that a Snowball is to be delivered to.
+	// The first line in a street address that a Snow device is to be delivered to.
 	Street1 *string
 
-	// The second line in a street address that a Snowball is to be delivered to.
+	// The second line in a street address that a Snow device is to be delivered to.
 	Street2 *string
 
-	// The third line in a street address that a Snowball is to be delivered to.
+	// The third line in a street address that a Snow device is to be delivered to.
 	Street3 *string
 }
 
@@ -124,27 +124,27 @@ type ClusterMetadata struct {
 	RoleARN *string
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
-	// soon you'll get each Snowball Edge device, rather it represents how quickly each
-	// device moves to its destination while in transit. Regional shipping speeds are
-	// as follows:
+	// soon you'll get each device, rather it represents how quickly each device moves
+	// to its destination while in transit. Regional shipping speeds are as follows:
 	//
-	//     * In Australia, you have access to express shipping. Typically,
-	// devices shipped express are delivered in about a day.
 	//
-	//     * In the European
-	// Union (EU), you have access to express shipping. Typically, Snowball Edges
-	// shipped express are delivered in about a day. In addition, most countries in the
-	// EU have access to standard shipping, which typically takes less than a week, one
-	// way.
+	// * In Australia, you have access to express shipping. Typically, devices shipped
+	// express are delivered in about a day.
 	//
-	//     * In India, Snowball Edges are delivered in one to seven days.
+	//     * In the European Union (EU), you
+	// have access to express shipping. Typically, Snow devices shipped express are
+	// delivered in about a day. In addition, most countries in the EU have access to
+	// standard shipping, which typically takes less than a week, one way.
 	//
-	//     *
-	// In the US, you have access to one-day shipping and two-day shipping.
+	//     * In
+	// India, Snow devices are delivered in one to seven days.
+	//
+	//     * In the US, you
+	// have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
-	// The type of AWS Snowball device to use for this cluster. For cluster jobs, AWS
-	// Snowball currently supports only the EDGE device type.
+	// The type of AWS Snow device to use for this cluster. For cluster jobs, AWS Snow
+	// Family currently supports only the EDGE device type.
 	SnowballType SnowballType
 
 	// The tax documents required in your AWS Region.
@@ -152,35 +152,35 @@ type ClusterMetadata struct {
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
-// including the ID and name for a Snowball Edge AMI. This AMI is compatible with
-// the device's physical hardware requirements, and it should be able to be run in
-// an SBE1 instance on the device.
+// including the ID and name for a Snow device AMI. This AMI is compatible with the
+// device's physical hardware requirements, and it should be able to be run in an
+// SBE1 instance on the device.
 type CompatibleImage struct {
 
-	// The unique identifier for an individual Snowball Edge AMI.
+	// The unique identifier for an individual Snow device AMI.
 	AmiId *string
 
 	// The optional name of a compatible image.
 	Name *string
 }
 
-// Defines the real-time status of a Snowball's data transfer while the device is
-// at AWS. This data is only available while a job has a JobState value of
+// Defines the real-time status of a Snow device's data transfer while the device
+// is at AWS. This data is only available while a job has a JobState value of
 // InProgress, for both import and export jobs.
 type DataTransfer struct {
 
-	// The number of bytes transferred between a Snowball and Amazon S3.
+	// The number of bytes transferred between a Snow device and Amazon S3.
 	BytesTransferred *int64
 
-	// The number of objects transferred between a Snowball and Amazon S3.
+	// The number of objects transferred between a Snow device and Amazon S3.
 	ObjectsTransferred *int64
 
-	// The total bytes of data for a transfer between a Snowball and Amazon S3. This
+	// The total bytes of data for a transfer between a Snow device and Amazon S3. This
 	// value is set to 0 (zero) until all the keys that will be transferred have been
 	// listed.
 	TotalBytes *int64
 
-	// The total number of objects for a transfer between a Snowball and Amazon S3.
+	// The total number of objects for a transfer between a Snow device and Amazon S3.
 	// This value is set to 0 (zero) until all the keys that will be transferred have
 	// been listed.
 	TotalObjects *int64
@@ -194,7 +194,7 @@ type DeviceConfiguration struct {
 }
 
 // A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
-// including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these
+// including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these
 // two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.
 type Ec2AmiResource struct {
 
@@ -203,7 +203,7 @@ type Ec2AmiResource struct {
 	// This member is required.
 	AmiId *string
 
-	// The ID of the AMI on the Snowball Edge device.
+	// The ID of the AMI on the Snow device.
 	SnowballAmiId *string
 }
 
@@ -233,12 +233,12 @@ type JobListEntry struct {
 	// 2016-08-11.
 	Description *string
 
-	// A value that indicates that this job is a master job. A master job represents a
-	// successful request to create an export job. Master jobs aren't associated with
-	// any Snowballs. Instead, each master job will have at least one job part, and
-	// each job part is associated with a Snowball. It might take some time before the
-	// job parts associated with a particular master job are listed, because they are
-	// created after the master job is created.
+	// A value that indicates that this job is a main job. A main job represents a
+	// successful request to create an export job. Main jobs aren't associated with any
+	// Snowballs. Instead, each main job will have at least one job part, and each job
+	// part is associated with a Snowball. It might take some time before the job parts
+	// associated with a particular main job are listed, because they are created after
+	// the main job is created.
 	IsMaster *bool
 
 	// The automatically generated ID for a job, for example
@@ -255,15 +255,15 @@ type JobListEntry struct {
 	SnowballType SnowballType
 }
 
-// Contains job logs. Whenever Snowball is used to import data into or export data
-// out of Amazon S3, you'll have the option of downloading a PDF job report. Job
-// logs are returned as a part of the response syntax of the DescribeJob action in
-// the JobMetadata data type. The job logs can be accessed for up to 60 minutes
+// Contains job logs. Whenever a Snow device is used to import data into or export
+// data out of Amazon S3, you'll have the option of downloading a PDF job report.
+// Job logs are returned as a part of the response syntax of the DescribeJob action
+// in the JobMetadata data type. The job logs can be accessed for up to 60 minutes
 // after this request has been made. To access any of the job logs after 60 minutes
 // have passed, you'll have to make another call to the DescribeJob action. For
 // import jobs, the PDF job report becomes available at the end of the import
 // process. For export jobs, your job report typically becomes available while the
-// Snowball for your job part is being delivered to you. The job report provides
+// Snow device for your job part is being delivered to you. The job report provides
 // you insight into the state of your Amazon S3 data transfer. The report includes
 // details about your job or job part for your records. For deeper visibility into
 // the status of your transferred objects, you can look at the two associated logs:
@@ -287,7 +287,7 @@ type JobLogs struct {
 // the response syntax of the DescribeJob action.
 type JobMetadata struct {
 
-	// The ID for the address that you want the Snowball shipped to.
+	// The ID for the address that you want the Snow device shipped to.
 	AddressId *string
 
 	// The 39-character ID for the cluster, for example
@@ -297,7 +297,7 @@ type JobMetadata struct {
 	// The creation date for this job.
 	CreationDate *time.Time
 
-	// A value that defines the real-time status of a Snowball's data transfer while
+	// A value that defines the real-time status of a Snow device's data transfer while
 	// the device is at AWS. This data is only available while a job has a JobState
 	// value of InProgress, for both import and export jobs.
 	DataTransferProgress *DataTransfer
@@ -318,8 +318,8 @@ type JobMetadata struct {
 
 	// Links to Amazon S3 presigned URLs for the job report and logs. For import jobs,
 	// the PDF job report becomes available at the end of the import process. For
-	// export jobs, your job report typically becomes available while the Snowball for
-	// your job part is being delivered to you.
+	// export jobs, your job report typically becomes available while the Snow device
+	// for your job part is being delivered to you.
 	JobLogInfo *JobLogs
 
 	// The current status of the jobs.
@@ -352,9 +352,9 @@ type JobMetadata struct {
 	// and shipping speed options.
 	ShippingDetails *ShippingDetails
 
-	// The Snowball capacity preference for this job, specified at job creation. In US
-	// regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use
-	// 80 TB capacity Snowballs.
+	// The Snow device capacity preference for this job, specified at job creation. In
+	// US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions
+	// use 80 TB capacity Snowballs.
 	SnowballCapacityPreference SnowballCapacity
 
 	// The type of device used with this job.
@@ -455,7 +455,7 @@ type Shipment struct {
 	Status *string
 
 	// The tracking number for this job. Using this tracking number with your region's
-	// carrier's website, you can track a Snowball as the carrier transports it. For
+	// carrier's website, you can track a Snow device as the carrier transports it. For
 	// India, the carrier is Amazon Logistics. For all other regions, UPS is the
 	// carrier.
 	TrackingNumber *string
@@ -465,33 +465,33 @@ type Shipment struct {
 // and shipping speed options.
 type ShippingDetails struct {
 
-	// The Status and TrackingNumber values for a Snowball being returned to AWS for a
-	// particular job.
+	// The Status and TrackingNumber values for a Snow device being returned to AWS for
+	// a particular job.
 	InboundShipment *Shipment
 
-	// The Status and TrackingNumber values for a Snowball being delivered to the
+	// The Status and TrackingNumber values for a Snow device being delivered to the
 	// address that you specified for a particular job.
 	OutboundShipment *Shipment
 
 	// The shipping speed for a particular job. This speed doesn't dictate how soon
-	// you'll get the Snowball from the job's creation date. This speed represents how
-	// quickly it moves to its destination while in transit. Regional shipping speeds
-	// are as follows:
+	// you'll get the Snow device from the job's creation date. This speed represents
+	// how quickly it moves to its destination while in transit. Regional shipping
+	// speeds are as follows:
 	//
 	//     * In Australia, you have access to express shipping.
-	// Typically, Snowballs shipped express are delivered in about a day.
-	//
-	//     * In the
-	// European Union (EU), you have access to express shipping. Typically, Snowballs
-	// shipped express are delivered in about a day. In addition, most countries in the
-	// EU have access to standard shipping, which typically takes less than a week, one
-	// way.
-	//
-	//     * In India, Snowballs are delivered in one to seven days.
+	// Typically, Snow devices shipped express are delivered in about a day.
 	//
 	//     * In
-	// the United States of America (US), you have access to one-day shipping and
-	// two-day shipping.
+	// the European Union (EU), you have access to express shipping. Typically, Snow
+	// devices shipped express are delivered in about a day. In addition, most
+	// countries in the EU have access to standard shipping, which typically takes less
+	// than a week, one way.
+	//
+	//     * In India, Snow device are delivered in one to seven
+	// days.
+	//
+	//     * In the United States of America (US), you have access to one-day
+	// shipping and two-day shipping.
 	ShippingOption ShippingOption
 }
 

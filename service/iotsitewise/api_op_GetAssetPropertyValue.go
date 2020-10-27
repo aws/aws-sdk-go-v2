@@ -12,7 +12,7 @@ import (
 )
 
 // Gets an asset property's current value. For more information, see Querying
-// Current Property Values
+// current values
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
 // in the AWS IoT SiteWise User Guide. To identify an asset property, you must
 // specify one of the following:
@@ -46,7 +46,7 @@ type GetAssetPropertyValueInput struct {
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
+	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string

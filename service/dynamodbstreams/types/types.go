@@ -6,41 +6,52 @@ import (
 	"time"
 )
 
-// Represents the data for an attribute. You can set one, and only one, of the
-// elements. Each attribute in an item is a name-value pair. An attribute can be
-// single-valued or multi-valued set. For example, a book item can have title and
-// authors attributes. Each book has one title but can have many authors. The
-// multi-valued attribute is a set; duplicate values are not allowed.
+// Represents the data for an attribute. Each attribute value is described as a
+// name-value pair. The name is the data type, and the value is the data itself.
+// For more information, see Data Types
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
+// in the Amazon DynamoDB Developer Guide.
 type AttributeValue struct {
 
-	// A Binary data type.
+	// An attribute of type Binary. For example: "B":
+	// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
 	B []byte
 
-	// A Boolean data type.
+	// An attribute of type Boolean. For example: "BOOL": true
 	BOOL *bool
 
-	// A Binary Set data type.
+	// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
+	// "U25vd3k="]
 	BS [][]byte
 
-	// A List data type.
+	// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
+	// "Coffee"}, {"N", "3.14159"}]
 	L []*AttributeValue
 
-	// A Map data type.
+	// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
+	// "35"}}
 	M map[string]*AttributeValue
 
-	// A Number data type.
+	// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
+	// the network to DynamoDB as strings, to maximize compatibility across languages
+	// and libraries. However, DynamoDB treats them as number type attributes for
+	// mathematical operations.
 	N *string
 
-	// A Number Set data type.
+	// An attribute of type Number Set. For example: "NS": ["42.2", "-19", "7.5",
+	// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
+	// compatibility across languages and libraries. However, DynamoDB treats them as
+	// number type attributes for mathematical operations.
 	NS []*string
 
-	// A Null data type.
+	// An attribute of type Null. For example: "NULL": true
 	NULL *bool
 
-	// A String data type.
+	// An attribute of type String. For example: "S": "Hello"
 	S *string
 
-	// A String Set data type.
+	// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
+	// ,"Zebra"]
 	SS []*string
 }
 
@@ -58,16 +69,12 @@ type Identity struct {
 // Represents a single element of a key schema. A key schema specifies the
 // attributes that make up the primary key of a table, or the key attributes of an
 // index. A KeySchemaElement represents exactly one attribute of the primary key.
-// For example, a simple primary key (partition key) would be represented by one
-// KeySchemaElement. A composite primary key (partition key and sort key) would
-// require one KeySchemaElement for the partition key, and another KeySchemaElement
-// for the sort key. The partition key of an item is also known as its hash
-// attribute. The term "hash attribute" derives from DynamoDB's usage of an
-// internal hash function to evenly distribute data items across partitions, based
-// on their partition key values. The sort key of an item is also known as its
-// range attribute. The term "range attribute" derives from the way DynamoDB stores
-// items with the same partition key physically close together, in sorted order by
-// the sort key value.
+// For example, a simple primary key would be represented by one KeySchemaElement
+// (for the partition key). A composite primary key would require one
+// KeySchemaElement for the partition key, and another KeySchemaElement for the
+// sort key. A KeySchemaElement must be a scalar, top-level attribute (not a nested
+// attribute). The data type must be one of String, Number, or Binary. The
+// attribute cannot be nested within a List or a Map.
 type KeySchemaElement struct {
 
 	// The name of a key attribute.
@@ -75,7 +82,20 @@ type KeySchemaElement struct {
 	// This member is required.
 	AttributeName *string
 
-	// The attribute data, consisting of the data type and the attribute value itself.
+	// The role that this key attribute will assume:
+	//
+	//     * HASH - partition key
+	//
+	//     *
+	// RANGE - sort key
+	//
+	// The partition key of an item is also known as its hash
+	// attribute. The term "hash attribute" derives from DynamoDB's usage of an
+	// internal hash function to evenly distribute data items across partitions, based
+	// on their partition key values. The sort key of an item is also known as its
+	// range attribute. The term "range attribute" derives from the way DynamoDB stores
+	// items with the same partition key physically close together, in sorted order by
+	// the sort key value.
 	//
 	// This member is required.
 	KeyType KeyType
@@ -132,10 +152,12 @@ type Record struct {
 // within a shard.
 type SequenceNumberRange struct {
 
-	// The last sequence number.
+	// The last sequence number for the stream records contained within a shard. String
+	// contains numeric characters only.
 	EndingSequenceNumber *string
 
-	// The first sequence number.
+	// The first sequence number for the stream records contained within a shard.
+	// String contains numeric characters only.
 	StartingSequenceNumber *string
 }
 

@@ -10,6 +10,26 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpConfigureLogs struct {
+}
+
+func (*validateOpConfigureLogs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpConfigureLogs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ConfigureLogsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpConfigureLogsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateChannel struct {
 }
 
@@ -310,6 +330,10 @@ func (m *validateOpUpdateOriginEndpoint) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpConfigureLogsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConfigureLogs{}, middleware.After)
+}
+
 func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
@@ -429,14 +453,14 @@ func validateCmafPackageCreateOrUpdateParameters(v *types.CmafPackageCreateOrUpd
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CmafPackageCreateOrUpdateParameters"}
-	if v.HlsManifests != nil {
-		if err := validate__listOfHlsManifestCreateOrUpdateParameters(v.HlsManifests); err != nil {
-			invalidParams.AddNested("HlsManifests", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Encryption != nil {
 		if err := validateCmafEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HlsManifests != nil {
+		if err := validate__listOfHlsManifestCreateOrUpdateParameters(v.HlsManifests); err != nil {
+			invalidParams.AddNested("HlsManifests", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -601,11 +625,26 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 	if v.SystemIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SystemIds"))
 	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpConfigureLogsInput(v *ConfigureLogsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureLogsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -634,14 +673,14 @@ func validateOpCreateHarvestJobInput(v *CreateHarvestJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHarvestJobInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.OriginEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointId"))
-	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
@@ -665,22 +704,17 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOriginEndpointInput"}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
 	if v.DashPackage != nil {
 		if err := validateDashPackage(v.DashPackage); err != nil {
 			invalidParams.AddNested("DashPackage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ChannelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
-	}
 	if v.HlsPackage != nil {
 		if err := validateHlsPackage(v.HlsPackage); err != nil {
 			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CmafPackage != nil {
-		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Authorization != nil {
@@ -688,13 +722,18 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.CmafPackage != nil {
+		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.MssPackage != nil {
 		if err := validateMssPackage(v.MssPackage); err != nil {
 			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -813,11 +852,11 @@ func validateOpRotateIngestEndpointCredentialsInput(v *RotateIngestEndpointCrede
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RotateIngestEndpointCredentialsInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.IngestEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IngestEndpointId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -882,17 +921,9 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOriginEndpointInput"}
-	if v.CmafPackage != nil {
-		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.MssPackage != nil {
-		if err := validateMssPackage(v.MssPackage); err != nil {
-			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
+	if v.HlsPackage != nil {
+		if err := validateHlsPackage(v.HlsPackage); err != nil {
+			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DashPackage != nil {
@@ -900,9 +931,17 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 			invalidParams.AddNested("DashPackage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.HlsPackage != nil {
-		if err := validateHlsPackage(v.HlsPackage); err != nil {
-			invalidParams.AddNested("HlsPackage", err.(smithy.InvalidParamsError))
+	if v.MssPackage != nil {
+		if err := validateMssPackage(v.MssPackage); err != nil {
+			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.CmafPackage != nil {
+		if err := validateCmafPackageCreateOrUpdateParameters(v.CmafPackage); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Authorization != nil {

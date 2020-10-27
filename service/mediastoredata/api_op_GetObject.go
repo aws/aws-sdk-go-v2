@@ -57,6 +57,13 @@ type GetObjectInput struct {
 
 type GetObjectOutput struct {
 
+	// The HTML status code of the request. Status codes ranging from 200 to 299
+	// indicate success. All other status codes indicate the type of error that
+	// occurred.
+	//
+	// This member is required.
+	StatusCode *int32
+
 	// The bytes of the object.
 	Body io.ReadCloser
 

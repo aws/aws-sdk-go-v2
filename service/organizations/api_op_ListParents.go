@@ -18,9 +18,9 @@ import (
 // operation. These operations can occasionally return an empty set of results even
 // when there are more results available. The NextToken response parameter value is
 // null only when there are no more results to display. This operation can be
-// called only from the organization's master account or by a member account that
-// is a delegated administrator for an AWS service. In the current release, a child
-// can have only a single parent.
+// called only from the organization's management account or by a member account
+// that is a delegated administrator for an AWS service. In the current release, a
+// child can have only a single parent.
 func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optFns ...func(*Options)) (*ListParentsOutput, error) {
 	if params == nil {
 		params = &ListParentsInput{}

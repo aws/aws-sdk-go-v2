@@ -67,7 +67,7 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeRuntimeConfigurationInput struct {
 
 	// A unique identifier for a fleet to get the runtime configuration for. You can
@@ -77,7 +77,7 @@ type DescribeRuntimeConfigurationInput struct {
 	FleetId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeRuntimeConfigurationOutput struct {
 
 	// Instructions describing how server processes should be launched and maintained

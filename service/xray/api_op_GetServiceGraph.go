@@ -45,10 +45,11 @@ type GetServiceGraphInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The ARN of a group to generate a graph based on.
+	// The Amazon Resource Name (ARN) of a group based on which you want to generate a
+	// graph.
 	GroupARN *string
 
-	// The name of a group to generate a graph based on.
+	// The name of a group based on which you want to generate a graph.
 	GroupName *string
 
 	// Pagination token.

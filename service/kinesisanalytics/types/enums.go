@@ -14,6 +14,20 @@ const (
 	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
 )
 
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"DELETING",
+		"STARTING",
+		"STOPPING",
+		"READY",
+		"RUNNING",
+		"UPDATING",
+	}
+}
+
 type InputStartingPosition string
 
 // Enum values for InputStartingPosition
@@ -23,6 +37,17 @@ const (
 	InputStartingPositionLast_stopped_point InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
+// Values returns all known values for InputStartingPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputStartingPosition) Values() []InputStartingPosition {
+	return []InputStartingPosition{
+		"NOW",
+		"TRIM_HORIZON",
+		"LAST_STOPPED_POINT",
+	}
+}
+
 type RecordFormatType string
 
 // Enum values for RecordFormatType
@@ -30,3 +55,13 @@ const (
 	RecordFormatTypeJson RecordFormatType = "JSON"
 	RecordFormatTypeCsv  RecordFormatType = "CSV"
 )
+
+// Values returns all known values for RecordFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordFormatType) Values() []RecordFormatType {
+	return []RecordFormatType{
+		"JSON",
+		"CSV",
+	}
+}

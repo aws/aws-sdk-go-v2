@@ -15,11 +15,15 @@ import (
 // or more accounts in your organization in AWS Organizations, based on the filter
 // criteria. Entities can refer to individual customer resources, groups of
 // customer resources, or any other construct, depending on the AWS service. At
-// least one event ARN and account ID are required. Results are sorted by the
-// lastUpdatedTime of the entity, starting with the most recent. Before you can
-// call this operation, you must first enable AWS Health to work with AWS
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization
-// operation from your organization's master account.
+// least one event Amazon Resource Name (ARN) and account ID are required. Results
+// are sorted by the lastUpdatedTime of the entity, starting with the most recent.
+// Before you can call this operation, you must first enable AWS Health to work
+// with AWS Organizations. To do this, call the
+// EnableHealthServiceAccessForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// operation from your organization's master account. This API operation uses
+// pagination. Specify the nextToken parameter in the next request to return more
+// results.
 func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, params *DescribeAffectedEntitiesForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesForOrganizationInput{}
@@ -61,7 +65,7 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 type DescribeAffectedEntitiesForOrganizationOutput struct {
 
 	// A JSON set of elements including the awsAccountId and its entityArn, entityValue
-	// and its entityArn, lastUpdatedTime, statusCode, and tags.
+	// and its entityArn, lastUpdatedTime, and statusCode.
 	Entities []*types.AffectedEntity
 
 	// A JSON set of elements of the failed response, including the awsAccountId,

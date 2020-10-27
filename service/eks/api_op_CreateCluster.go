@@ -81,9 +81,9 @@ type CreateClusterInput struct {
 	// This member is required.
 	ResourcesVpcConfig *types.VpcConfigRequest
 
-	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
-	// Amazon EKS to make calls to other AWS API operations on your behalf. For more
-	// information, see Amazon EKS Service IAM Role
+	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for the
+	// Kubernetes control plane to make calls to AWS API operations on your behalf. For
+	// more information, see Amazon EKS Service IAM Role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html) in the
 	// Amazon EKS User Guide .
 	//
@@ -96,6 +96,9 @@ type CreateClusterInput struct {
 
 	// The encryption configuration for the cluster.
 	EncryptionConfig []*types.EncryptionConfig
+
+	// The Kubernetes network configuration for the cluster.
+	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
 	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to

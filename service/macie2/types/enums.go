@@ -10,12 +10,31 @@ const (
 	AdminStatusDisabling_in_progress AdminStatus = "DISABLING_IN_PROGRESS"
 )
 
+// Values returns all known values for AdminStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AdminStatus) Values() []AdminStatus {
+	return []AdminStatus{
+		"ENABLED",
+		"DISABLING_IN_PROGRESS",
+	}
+}
+
 type Currency string
 
 // Enum values for Currency
 const (
 	CurrencyUsd Currency = "USD"
 )
+
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Currency) Values() []Currency {
+	return []Currency{
+		"USD",
+	}
+}
 
 type DayOfWeek string
 
@@ -30,13 +49,40 @@ const (
 	DayOfWeekSaturday  DayOfWeek = "SATURDAY"
 )
 
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+	}
+}
+
 type EffectivePermission string
 
 // Enum values for EffectivePermission
 const (
 	EffectivePermissionPublic     EffectivePermission = "PUBLIC"
 	EffectivePermissionNot_public EffectivePermission = "NOT_PUBLIC"
+	EffectivePermissionUnknown    EffectivePermission = "UNKNOWN"
 )
+
+// Values returns all known values for EffectivePermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EffectivePermission) Values() []EffectivePermission {
+	return []EffectivePermission{
+		"PUBLIC",
+		"NOT_PUBLIC",
+		"UNKNOWN",
+	}
+}
 
 type EncryptionType string
 
@@ -48,6 +94,18 @@ const (
 	EncryptionTypeUnknown EncryptionType = "UNKNOWN"
 )
 
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"NONE",
+		"AES256",
+		"aws:kms",
+		"UNKNOWN",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -56,12 +114,31 @@ const (
 	ErrorCodeInternalerror ErrorCode = "InternalError"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"ClientError",
+		"InternalError",
+	}
+}
+
 type FindingActionType string
 
 // Enum values for FindingActionType
 const (
 	FindingActionTypeAws_api_call FindingActionType = "AWS_API_CALL"
 )
+
+// Values returns all known values for FindingActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingActionType) Values() []FindingActionType {
+	return []FindingActionType{
+		"AWS_API_CALL",
+	}
+}
 
 type FindingCategory string
 
@@ -70,6 +147,16 @@ const (
 	FindingCategoryClassification FindingCategory = "CLASSIFICATION"
 	FindingCategoryPolicy         FindingCategory = "POLICY"
 )
+
+// Values returns all known values for FindingCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingCategory) Values() []FindingCategory {
+	return []FindingCategory{
+		"CLASSIFICATION",
+		"POLICY",
+	}
+}
 
 type FindingPublishingFrequency string
 
@@ -80,6 +167,17 @@ const (
 	FindingPublishingFrequencySix_hours       FindingPublishingFrequency = "SIX_HOURS"
 )
 
+// Values returns all known values for FindingPublishingFrequency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingPublishingFrequency) Values() []FindingPublishingFrequency {
+	return []FindingPublishingFrequency{
+		"FIFTEEN_MINUTES",
+		"ONE_HOUR",
+		"SIX_HOURS",
+	}
+}
+
 type FindingsFilterAction string
 
 // Enum values for FindingsFilterAction
@@ -88,6 +186,16 @@ const (
 	FindingsFilterActionNoop    FindingsFilterAction = "NOOP"
 )
 
+// Values returns all known values for FindingsFilterAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingsFilterAction) Values() []FindingsFilterAction {
+	return []FindingsFilterAction{
+		"ARCHIVE",
+		"NOOP",
+	}
+}
+
 type FindingStatisticsSortAttributeName string
 
 // Enum values for FindingStatisticsSortAttributeName
@@ -95,6 +203,17 @@ const (
 	FindingStatisticsSortAttributeNameGroupkey FindingStatisticsSortAttributeName = "groupKey"
 	FindingStatisticsSortAttributeNameCount    FindingStatisticsSortAttributeName = "count"
 )
+
+// Values returns all known values for FindingStatisticsSortAttributeName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FindingStatisticsSortAttributeName) Values() []FindingStatisticsSortAttributeName {
+	return []FindingStatisticsSortAttributeName{
+		"groupKey",
+		"count",
+	}
+}
 
 type FindingType string
 
@@ -112,6 +231,24 @@ const (
 	FindingTypePolicy_iamuser_s3blockpublicaccessdisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
 )
 
+// Values returns all known values for FindingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FindingType) Values() []FindingType {
+	return []FindingType{
+		"SensitiveData:S3Object/Multiple",
+		"SensitiveData:S3Object/Financial",
+		"SensitiveData:S3Object/Personal",
+		"SensitiveData:S3Object/Credentials",
+		"SensitiveData:S3Object/CustomIdentifier",
+		"Policy:IAMUser/S3BucketPublic",
+		"Policy:IAMUser/S3BucketSharedExternally",
+		"Policy:IAMUser/S3BucketReplicatedExternally",
+		"Policy:IAMUser/S3BucketEncryptionDisabled",
+		"Policy:IAMUser/S3BlockPublicAccessDisabled",
+	}
+}
+
 type GroupBy string
 
 // Enum values for GroupBy
@@ -121,6 +258,18 @@ const (
 	GroupByClassificationdetails_jobid     GroupBy = "classificationDetails.jobId"
 	GroupBySeverity_description            GroupBy = "severity.description"
 )
+
+// Values returns all known values for GroupBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (GroupBy) Values() []GroupBy {
+	return []GroupBy{
+		"resourcesAffected.s3Bucket.name",
+		"type",
+		"classificationDetails.jobId",
+		"severity.description",
+	}
+}
 
 type JobComparator string
 
@@ -135,16 +284,46 @@ const (
 	JobComparatorContains JobComparator = "CONTAINS"
 )
 
+// Values returns all known values for JobComparator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobComparator) Values() []JobComparator {
+	return []JobComparator{
+		"EQ",
+		"GT",
+		"GTE",
+		"LT",
+		"LTE",
+		"NE",
+		"CONTAINS",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusRunning   JobStatus = "RUNNING"
-	JobStatusPaused    JobStatus = "PAUSED"
-	JobStatusCancelled JobStatus = "CANCELLED"
-	JobStatusComplete  JobStatus = "COMPLETE"
-	JobStatusIdle      JobStatus = "IDLE"
+	JobStatusRunning     JobStatus = "RUNNING"
+	JobStatusPaused      JobStatus = "PAUSED"
+	JobStatusCancelled   JobStatus = "CANCELLED"
+	JobStatusComplete    JobStatus = "COMPLETE"
+	JobStatusIdle        JobStatus = "IDLE"
+	JobStatusUser_paused JobStatus = "USER_PAUSED"
 )
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"RUNNING",
+		"PAUSED",
+		"CANCELLED",
+		"COMPLETE",
+		"IDLE",
+		"USER_PAUSED",
+	}
+}
 
 type JobType string
 
@@ -153,6 +332,16 @@ const (
 	JobTypeOne_time  JobType = "ONE_TIME"
 	JobTypeScheduled JobType = "SCHEDULED"
 )
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"ONE_TIME",
+		"SCHEDULED",
+	}
+}
 
 type ListJobsFilterKey string
 
@@ -164,6 +353,18 @@ const (
 	ListJobsFilterKeyName      ListJobsFilterKey = "name"
 )
 
+// Values returns all known values for ListJobsFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListJobsFilterKey) Values() []ListJobsFilterKey {
+	return []ListJobsFilterKey{
+		"jobType",
+		"jobStatus",
+		"createdAt",
+		"name",
+	}
+}
+
 type ListJobsSortAttributeName string
 
 // Enum values for ListJobsSortAttributeName
@@ -174,6 +375,18 @@ const (
 	ListJobsSortAttributeNameJobtype   ListJobsSortAttributeName = "jobType"
 )
 
+// Values returns all known values for ListJobsSortAttributeName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListJobsSortAttributeName) Values() []ListJobsSortAttributeName {
+	return []ListJobsSortAttributeName{
+		"createdAt",
+		"jobStatus",
+		"name",
+		"jobType",
+	}
+}
+
 type MacieStatus string
 
 // Enum values for MacieStatus
@@ -182,6 +395,16 @@ const (
 	MacieStatusEnabled MacieStatus = "ENABLED"
 )
 
+// Values returns all known values for MacieStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MacieStatus) Values() []MacieStatus {
+	return []MacieStatus{
+		"PAUSED",
+		"ENABLED",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -189,6 +412,16 @@ const (
 	OrderByAsc  OrderBy = "ASC"
 	OrderByDesc OrderBy = "DESC"
 )
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"ASC",
+		"DESC",
+	}
+}
 
 type RelationshipStatus string
 
@@ -206,6 +439,24 @@ const (
 	RelationshipStatusAccountsuspended            RelationshipStatus = "AccountSuspended"
 )
 
+// Values returns all known values for RelationshipStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationshipStatus) Values() []RelationshipStatus {
+	return []RelationshipStatus{
+		"Enabled",
+		"Paused",
+		"Invited",
+		"Created",
+		"Removed",
+		"Resigned",
+		"EmailVerificationInProgress",
+		"EmailVerificationFailed",
+		"RegionDisabled",
+		"AccountSuspended",
+	}
+}
+
 type ScopeFilterKey string
 
 // Enum values for ScopeFilterKey
@@ -217,6 +468,19 @@ const (
 	ScopeFilterKeyTag                       ScopeFilterKey = "TAG"
 )
 
+// Values returns all known values for ScopeFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeFilterKey) Values() []ScopeFilterKey {
+	return []ScopeFilterKey{
+		"BUCKET_CREATION_DATE",
+		"OBJECT_EXTENSION",
+		"OBJECT_LAST_MODIFIED_DATE",
+		"OBJECT_SIZE",
+		"TAG",
+	}
+}
+
 type SensitiveDataItemCategory string
 
 // Enum values for SensitiveDataItemCategory
@@ -227,6 +491,18 @@ const (
 	SensitiveDataItemCategoryCustom_identifier     SensitiveDataItemCategory = "CUSTOM_IDENTIFIER"
 )
 
+// Values returns all known values for SensitiveDataItemCategory. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SensitiveDataItemCategory) Values() []SensitiveDataItemCategory {
+	return []SensitiveDataItemCategory{
+		"FINANCIAL_INFORMATION",
+		"PERSONAL_INFORMATION",
+		"CREDENTIALS",
+		"CUSTOM_IDENTIFIER",
+	}
+}
+
 type SeverityDescription string
 
 // Enum values for SeverityDescription
@@ -236,6 +512,17 @@ const (
 	SeverityDescriptionHigh   SeverityDescription = "High"
 )
 
+// Values returns all known values for SeverityDescription. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SeverityDescription) Values() []SeverityDescription {
+	return []SeverityDescription{
+		"Low",
+		"Medium",
+		"High",
+	}
+}
+
 type SharedAccess string
 
 // Enum values for SharedAccess
@@ -243,7 +530,20 @@ const (
 	SharedAccessExternal   SharedAccess = "EXTERNAL"
 	SharedAccessInternal   SharedAccess = "INTERNAL"
 	SharedAccessNot_shared SharedAccess = "NOT_SHARED"
+	SharedAccessUnknown    SharedAccess = "UNKNOWN"
 )
+
+// Values returns all known values for SharedAccess. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SharedAccess) Values() []SharedAccess {
+	return []SharedAccess{
+		"EXTERNAL",
+		"INTERNAL",
+		"NOT_SHARED",
+		"UNKNOWN",
+	}
+}
 
 type StorageClass string
 
@@ -258,6 +558,21 @@ const (
 	StorageClassGlacier             StorageClass = "GLACIER"
 )
 
+// Values returns all known values for StorageClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageClass) Values() []StorageClass {
+	return []StorageClass{
+		"STANDARD",
+		"REDUCED_REDUNDANCY",
+		"STANDARD_IA",
+		"INTELLIGENT_TIERING",
+		"DEEP_ARCHIVE",
+		"ONEZONE_IA",
+		"GLACIER",
+	}
+}
+
 type TagTarget string
 
 // Enum values for TagTarget
@@ -265,12 +580,30 @@ const (
 	TagTargetS3_object TagTarget = "S3_OBJECT"
 )
 
+// Values returns all known values for TagTarget. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TagTarget) Values() []TagTarget {
+	return []TagTarget{
+		"S3_OBJECT",
+	}
+}
+
 type Unit string
 
 // Enum values for Unit
 const (
 	UnitTerabytes Unit = "TERABYTES"
 )
+
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Unit) Values() []Unit {
+	return []Unit{
+		"TERABYTES",
+	}
+}
 
 type UsageStatisticsFilterComparator string
 
@@ -285,6 +618,22 @@ const (
 	UsageStatisticsFilterComparatorContains UsageStatisticsFilterComparator = "CONTAINS"
 )
 
+// Values returns all known values for UsageStatisticsFilterComparator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UsageStatisticsFilterComparator) Values() []UsageStatisticsFilterComparator {
+	return []UsageStatisticsFilterComparator{
+		"GT",
+		"GTE",
+		"LT",
+		"LTE",
+		"EQ",
+		"NE",
+		"CONTAINS",
+	}
+}
+
 type UsageStatisticsFilterKey string
 
 // Enum values for UsageStatisticsFilterKey
@@ -294,6 +643,18 @@ const (
 	UsageStatisticsFilterKeyFreetrialstartdate UsageStatisticsFilterKey = "freeTrialStartDate"
 	UsageStatisticsFilterKeyTotal              UsageStatisticsFilterKey = "total"
 )
+
+// Values returns all known values for UsageStatisticsFilterKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageStatisticsFilterKey) Values() []UsageStatisticsFilterKey {
+	return []UsageStatisticsFilterKey{
+		"accountId",
+		"serviceLimit",
+		"freeTrialStartDate",
+		"total",
+	}
+}
 
 type UsageStatisticsSortKey string
 
@@ -305,6 +666,18 @@ const (
 	UsageStatisticsSortKeyFreetrialstartdate UsageStatisticsSortKey = "freeTrialStartDate"
 )
 
+// Values returns all known values for UsageStatisticsSortKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageStatisticsSortKey) Values() []UsageStatisticsSortKey {
+	return []UsageStatisticsSortKey{
+		"accountId",
+		"total",
+		"serviceLimitValue",
+		"freeTrialStartDate",
+	}
+}
+
 type UsageType string
 
 // Enum values for UsageType
@@ -312,6 +685,16 @@ const (
 	UsageTypeData_inventory_evaluation UsageType = "DATA_INVENTORY_EVALUATION"
 	UsageTypeSensitive_data_discovery  UsageType = "SENSITIVE_DATA_DISCOVERY"
 )
+
+// Values returns all known values for UsageType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UsageType) Values() []UsageType {
+	return []UsageType{
+		"DATA_INVENTORY_EVALUATION",
+		"SENSITIVE_DATA_DISCOVERY",
+	}
+}
 
 type UserIdentityType string
 
@@ -324,3 +707,17 @@ const (
 	UserIdentityTypeAwsaccount    UserIdentityType = "AWSAccount"
 	UserIdentityTypeAwsservice    UserIdentityType = "AWSService"
 )
+
+// Values returns all known values for UserIdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserIdentityType) Values() []UserIdentityType {
+	return []UserIdentityType{
+		"AssumedRole",
+		"IAMUser",
+		"FederatedUser",
+		"Root",
+		"AWSAccount",
+		"AWSService",
+	}
+}

@@ -133,6 +133,12 @@ type AutoBranchCreationConfig struct {
 	// Enables basic authorization for the autocreated branch.
 	EnableBasicAuth *bool
 
+	// Performance mode optimizes for faster hosting performance by keeping content
+	// cached at the edge for a longer interval. Enabling performance mode will mean
+	// that hosting configuration or code changes can take up to 10 minutes to roll
+	// out.
+	EnablePerformanceMode *bool
+
 	// Enables pull request preview for the autocreated branch.
 	EnablePullRequestPreview *bool
 
@@ -286,6 +292,12 @@ type Branch struct {
 	// The destination branch if the branch is a pull request branch.
 	DestinationBranch *string
 
+	// Performance mode optimizes for faster hosting performance by keeping content
+	// cached at the edge for a longer interval. Enabling performance mode will mean
+	// that hosting configuration or code changes can take up to 10 minutes to roll
+	// out.
+	EnablePerformanceMode *bool
+
 	// The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string
 
@@ -315,7 +327,11 @@ type CustomRule struct {
 	// The condition for a URL rewrite or redirect rule, such as a country code.
 	Condition *string
 
-	// The status code for a URL rewrite or redirect rule.
+	// The status code for a URL rewrite or redirect rule. 200 Represents a 200 rewrite
+	// rule. 301 Represents a 301 (moved pemanently) redirect rule. This and all future
+	// requests should be directed to the target URL. 302 Represents a 302 temporary
+	// redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents a 404
+	// rewrite rule.
 	Status *string
 }
 

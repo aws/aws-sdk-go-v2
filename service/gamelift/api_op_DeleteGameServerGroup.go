@@ -11,23 +11,31 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Terminates a game server group and
-// permanently deletes the game server group record. You have several options for
-// how these resources are impacted when deleting the game server group. Depending
-// on the type of delete action selected, this action may affect three types of
-// resources: the game server group, the corresponding Auto Scaling group, and all
-// game servers currently running in the group. To delete a game server group,
-// identify the game server group to delete and specify the type of delete action
-// to initiate. Game server groups can only be deleted if they are in ACTIVE or
-// ERROR status. If the delete request is successful, a series of actions are
-// kicked off. The game server group status is changed to DELETE_SCHEDULED, which
-// prevents new game servers from being registered and stops autoscaling activity.
-// Once all game servers in the game server group are de-registered, GameLift
-// FleetIQ can begin deleting resources. If any of the delete actions fail, the
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Terminates a game server group and permanently deletes the game server
+// group record. You have several options for how these resources are impacted when
+// deleting the game server group. Depending on the type of delete operation
+// selected, this operation might affect these resources:
+//
+//     * The game server
+// group
+//
+//     * The corresponding Auto Scaling group
+//
+//     * All game servers that
+// are currently running in the group
+//
+// To delete a game server group, identify the
+// game server group to delete and specify the type of delete operation to
+// initiate. Game server groups can only be deleted if they are in ACTIVE or ERROR
+// status. If the delete request is successful, a series of operations are kicked
+// off. The game server group status is changed to DELETE_SCHEDULED, which prevents
+// new game servers from being registered and stops automatic scaling activity.
+// Once all game servers in the game server group are deregistered, GameLift
+// FleetIQ can begin deleting resources. If any of the delete operations fail, the
 // game server group is placed in ERROR status. GameLift FleetIQ emits delete
 // events to Amazon CloudWatch. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * CreateGameServerGroup
@@ -44,7 +52,10 @@ import (
 //
 //     * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+//     *
+// SuspendGameServerGroup
+//
+//     * DescribeGameServerInstances
 func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameServerGroupInput, optFns ...func(*Options)) (*DeleteGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGameServerGroupInput{}
@@ -62,24 +73,24 @@ func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameSe
 
 type DeleteGameServerGroupInput struct {
 
-	// The unique identifier of the game server group to delete. Use either the
-	// GameServerGroup name or ARN value.
+	// A unique identifier for the game server group. Use either the GameServerGroup
+	// name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// The type of delete to perform. Options include:
+	// The type of delete to perform. Options include the following:
 	//
-	//     * SAFE_DELETE – Terminates
-	// the game server group and EC2 Auto Scaling group only when it has no game
-	// servers that are in IN_USE status.
+	//     * SAFE_DELETE
+	// – Terminates the game server group and EC2 Auto Scaling group only when it has
+	// no game servers that are in UTILIZED status.
 	//
-	//     * FORCE_DELETE – Terminates the game
-	// server group, including all active game servers regardless of their utilization
-	// status, and the EC2 Auto Scaling group.
+	//     * FORCE_DELETE – Terminates
+	// the game server group, including all active game servers regardless of their
+	// utilization status, and the EC2 Auto Scaling group.
 	//
-	//     * RETAIN – Does a safe delete of
-	// the game server group but retains the EC2 Auto Scaling group as is.
+	//     * RETAIN – Does a safe
+	// delete of the game server group but retains the EC2 Auto Scaling group as is.
 	DeleteOption types.GameServerGroupDeleteOption
 }
 

@@ -68,6 +68,8 @@ type PutParameterInput struct {
 
 	// The parameter value that you want to add to the system. Standard parameters have
 	// a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
+	// Parameters can't be referenced or nested in the values of other parameters. You
+	// can't include {{}} or {{ssm:parameter-name}} in a parameter value.
 	//
 	// This member is required.
 	Value *string
@@ -211,12 +213,12 @@ type PutParameterInput struct {
 	Tier types.ParameterTier
 
 	// The type of parameter that you want to add to the system. SecureString is not
-	// currently supported for AWS CloudFormation templates or in the China Regions.
-	// Items in a StringList must be separated by a comma (,). You can't use other
-	// punctuation or special character to escape items in the list. If you have a
-	// parameter value that requires a comma, then use the String data type. Specifying
-	// a parameter type is not required when updating a parameter. You must specify a
-	// parameter type when creating a parameter.
+	// currently supported for AWS CloudFormation templates. Items in a StringList must
+	// be separated by a comma (,). You can't use other punctuation or special
+	// character to escape items in the list. If you have a parameter value that
+	// requires a comma, then use the String data type. Specifying a parameter type is
+	// not required when updating a parameter. You must specify a parameter type when
+	// creating a parameter.
 	Type types.ParameterType
 }
 

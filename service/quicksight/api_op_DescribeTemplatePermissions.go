@@ -48,6 +48,9 @@ type DescribeTemplatePermissionsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
+	// The HTTP status of the request.
+	Status *int32
+
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string
 

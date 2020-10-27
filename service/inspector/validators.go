@@ -809,14 +809,14 @@ func validateFindingFilter(v *types.FindingFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FindingFilter"}
-	if v.Attributes != nil {
-		if err := validateAttributeList(v.Attributes); err != nil {
-			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.UserAttributes != nil {
 		if err := validateAttributeList(v.UserAttributes); err != nil {
 			invalidParams.AddNested("UserAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attributes != nil {
+		if err := validateAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -949,11 +949,11 @@ func validateOpCreateAssessmentTemplateInput(v *CreateAssessmentTemplateInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentTemplateInput"}
-	if v.RulesPackageArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RulesPackageArns"))
-	}
 	if v.AssessmentTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTemplateName"))
+	}
+	if v.RulesPackageArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesPackageArns"))
 	}
 	if v.AssessmentTargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTargetArn"))
@@ -1162,14 +1162,14 @@ func validateOpGetAssessmentReportInput(v *GetAssessmentReportInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAssessmentReportInput"}
-	if len(v.ReportFileFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ReportFileFormat"))
+	if len(v.ReportType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportType"))
 	}
 	if v.AssessmentRunArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentRunArn"))
 	}
-	if len(v.ReportType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ReportType"))
+	if len(v.ReportFileFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportFileFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1183,11 +1183,11 @@ func validateOpGetExclusionsPreviewInput(v *GetExclusionsPreviewInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetExclusionsPreviewInput"}
-	if v.AssessmentTemplateArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTemplateArn"))
-	}
 	if v.PreviewToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PreviewToken"))
+	}
+	if v.AssessmentTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1402,14 +1402,14 @@ func validateOpUnsubscribeFromEventInput(v *UnsubscribeFromEventInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnsubscribeFromEventInput"}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if len(v.Event) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Event"))
-	}
-	if v.TopicArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1423,11 +1423,11 @@ func validateOpUpdateAssessmentTargetInput(v *UpdateAssessmentTargetInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssessmentTargetInput"}
-	if v.AssessmentTargetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTargetArn"))
-	}
 	if v.AssessmentTargetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTargetName"))
+	}
+	if v.AssessmentTargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentTargetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

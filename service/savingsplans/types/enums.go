@@ -10,6 +10,16 @@ const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
 
+// Values returns all known values for CurrencyCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CurrencyCode) Values() []CurrencyCode {
+	return []CurrencyCode{
+		"CNY",
+		"USD",
+	}
+}
+
 type SavingsPlanOfferingFilterAttribute string
 
 // Enum values for SavingsPlanOfferingFilterAttribute
@@ -18,6 +28,17 @@ const (
 	SavingsPlanOfferingFilterAttributeInstancefamily SavingsPlanOfferingFilterAttribute = "instanceFamily"
 )
 
+// Values returns all known values for SavingsPlanOfferingFilterAttribute. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SavingsPlanOfferingFilterAttribute) Values() []SavingsPlanOfferingFilterAttribute {
+	return []SavingsPlanOfferingFilterAttribute{
+		"region",
+		"instanceFamily",
+	}
+}
+
 type SavingsPlanOfferingPropertyKey string
 
 // Enum values for SavingsPlanOfferingPropertyKey
@@ -25,6 +46,17 @@ const (
 	SavingsPlanOfferingPropertyKeyRegion          SavingsPlanOfferingPropertyKey = "region"
 	SavingsPlanOfferingPropertyKeyInstance_family SavingsPlanOfferingPropertyKey = "instanceFamily"
 )
+
+// Values returns all known values for SavingsPlanOfferingPropertyKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SavingsPlanOfferingPropertyKey) Values() []SavingsPlanOfferingPropertyKey {
+	return []SavingsPlanOfferingPropertyKey{
+		"region",
+		"instanceFamily",
+	}
+}
 
 type SavingsPlanPaymentOption string
 
@@ -35,6 +67,17 @@ const (
 	SavingsPlanPaymentOptionNo_upfront      SavingsPlanPaymentOption = "No Upfront"
 )
 
+// Values returns all known values for SavingsPlanPaymentOption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanPaymentOption) Values() []SavingsPlanPaymentOption {
+	return []SavingsPlanPaymentOption{
+		"All Upfront",
+		"Partial Upfront",
+		"No Upfront",
+	}
+}
+
 type SavingsPlanProductType string
 
 // Enum values for SavingsPlanProductType
@@ -43,6 +86,17 @@ const (
 	SavingsPlanProductTypeFargate SavingsPlanProductType = "Fargate"
 	SavingsPlanProductTypeLambda  SavingsPlanProductType = "Lambda"
 )
+
+// Values returns all known values for SavingsPlanProductType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanProductType) Values() []SavingsPlanProductType {
+	return []SavingsPlanProductType{
+		"EC2",
+		"Fargate",
+		"Lambda",
+	}
+}
 
 type SavingsPlanRateFilterAttribute string
 
@@ -55,6 +109,21 @@ const (
 	SavingsPlanRateFilterAttributeTenancy             SavingsPlanRateFilterAttribute = "tenancy"
 	SavingsPlanRateFilterAttributeProduct_id          SavingsPlanRateFilterAttribute = "productId"
 )
+
+// Values returns all known values for SavingsPlanRateFilterAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SavingsPlanRateFilterAttribute) Values() []SavingsPlanRateFilterAttribute {
+	return []SavingsPlanRateFilterAttribute{
+		"region",
+		"instanceFamily",
+		"instanceType",
+		"productDescription",
+		"tenancy",
+		"productId",
+	}
+}
 
 type SavingsPlanRateFilterName string
 
@@ -70,6 +139,22 @@ const (
 	SavingsPlanRateFilterNameOperation           SavingsPlanRateFilterName = "operation"
 )
 
+// Values returns all known values for SavingsPlanRateFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanRateFilterName) Values() []SavingsPlanRateFilterName {
+	return []SavingsPlanRateFilterName{
+		"region",
+		"instanceType",
+		"productDescription",
+		"tenancy",
+		"productType",
+		"serviceCode",
+		"usageType",
+		"operation",
+	}
+}
+
 type SavingsPlanRatePropertyKey string
 
 // Enum values for SavingsPlanRatePropertyKey
@@ -81,6 +166,19 @@ const (
 	SavingsPlanRatePropertyKeyTenancy             SavingsPlanRatePropertyKey = "tenancy"
 )
 
+// Values returns all known values for SavingsPlanRatePropertyKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanRatePropertyKey) Values() []SavingsPlanRatePropertyKey {
+	return []SavingsPlanRatePropertyKey{
+		"region",
+		"instanceType",
+		"instanceFamily",
+		"productDescription",
+		"tenancy",
+	}
+}
+
 type SavingsPlanRateServiceCode string
 
 // Enum values for SavingsPlanRateServiceCode
@@ -90,6 +188,17 @@ const (
 	SavingsPlanRateServiceCodeLambda  SavingsPlanRateServiceCode = "AWSLambda"
 )
 
+// Values returns all known values for SavingsPlanRateServiceCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanRateServiceCode) Values() []SavingsPlanRateServiceCode {
+	return []SavingsPlanRateServiceCode{
+		"AmazonEC2",
+		"AmazonECS",
+		"AWSLambda",
+	}
+}
+
 type SavingsPlanRateUnit string
 
 // Enum values for SavingsPlanRateUnit
@@ -98,6 +207,17 @@ const (
 	SavingsPlanRateUnitLambda_gb_second SavingsPlanRateUnit = "Lambda-GB-Second"
 	SavingsPlanRateUnitRequest          SavingsPlanRateUnit = "Request"
 )
+
+// Values returns all known values for SavingsPlanRateUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanRateUnit) Values() []SavingsPlanRateUnit {
+	return []SavingsPlanRateUnit{
+		"Hrs",
+		"Lambda-GB-Second",
+		"Request",
+	}
+}
 
 type SavingsPlansFilterName string
 
@@ -114,6 +234,23 @@ const (
 	SavingsPlansFilterNameEnd                 SavingsPlansFilterName = "end"
 )
 
+// Values returns all known values for SavingsPlansFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlansFilterName) Values() []SavingsPlansFilterName {
+	return []SavingsPlansFilterName{
+		"region",
+		"ec2-instance-family",
+		"commitment",
+		"upfront",
+		"term",
+		"savings-plan-type",
+		"payment-option",
+		"start",
+		"end",
+	}
+}
+
 type SavingsPlanState string
 
 // Enum values for SavingsPlanState
@@ -122,7 +259,23 @@ const (
 	SavingsPlanStatePayment_failed  SavingsPlanState = "payment-failed"
 	SavingsPlanStateActive          SavingsPlanState = "active"
 	SavingsPlanStateRetired         SavingsPlanState = "retired"
+	SavingsPlanStateQueued          SavingsPlanState = "queued"
+	SavingsPlanStateQueued_deleted  SavingsPlanState = "queued-deleted"
 )
+
+// Values returns all known values for SavingsPlanState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanState) Values() []SavingsPlanState {
+	return []SavingsPlanState{
+		"payment-pending",
+		"payment-failed",
+		"active",
+		"retired",
+		"queued",
+		"queued-deleted",
+	}
+}
 
 type SavingsPlanType string
 
@@ -131,3 +284,13 @@ const (
 	SavingsPlanTypeCompute      SavingsPlanType = "Compute"
 	SavingsPlanTypeEc2_instance SavingsPlanType = "EC2Instance"
 )
+
+// Values returns all known values for SavingsPlanType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlanType) Values() []SavingsPlanType {
+	return []SavingsPlanType{
+		"Compute",
+		"EC2Instance",
+	}
+}

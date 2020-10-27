@@ -29,7 +29,7 @@ func (c *Client) GetReplicationRuns(ctx context.Context, params *GetReplicationR
 
 type GetReplicationRunsInput struct {
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	//
 	// This member is required.
 	ReplicationJobId *string

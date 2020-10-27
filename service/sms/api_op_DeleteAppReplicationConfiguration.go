@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes existing replication configuration for an application.
+// Deletes the replication configuration for the specified application.
 func (c *Client) DeleteAppReplicationConfiguration(ctx context.Context, params *DeleteAppReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAppReplicationConfigurationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteAppReplicationConfiguration(ctx context.Context, params *
 
 type DeleteAppReplicationConfigurationInput struct {
 
-	// ID of the application associated with the replication configuration.
+	// The ID of the application.
 	AppId *string
 }
 

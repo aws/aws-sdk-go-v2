@@ -201,8 +201,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type UnableToDetectSchemaException struct {
 	Message *string
 
-	RawInputRecords       []*string
 	ProcessedInputRecords []*string
+	RawInputRecords       []*string
 }
 
 func (e *UnableToDetectSchemaException) Error() string {

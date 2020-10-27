@@ -11,6 +11,17 @@ const (
 	AttributeActionDelete AttributeAction = "DELETE"
 )
 
+// Values returns all known values for AttributeAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeAction) Values() []AttributeAction {
+	return []AttributeAction{
+		"ADD",
+		"PUT",
+		"DELETE",
+	}
+}
+
 type BackupStatus string
 
 // Enum values for BackupStatus
@@ -20,6 +31,17 @@ const (
 	BackupStatusAvailable BackupStatus = "AVAILABLE"
 )
 
+// Values returns all known values for BackupStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BackupStatus) Values() []BackupStatus {
+	return []BackupStatus{
+		"CREATING",
+		"DELETED",
+		"AVAILABLE",
+	}
+}
+
 type BackupType string
 
 // Enum values for BackupType
@@ -28,6 +50,17 @@ const (
 	BackupTypeSystem     BackupType = "SYSTEM"
 	BackupTypeAws_backup BackupType = "AWS_BACKUP"
 )
+
+// Values returns all known values for BackupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BackupType) Values() []BackupType {
+	return []BackupType{
+		"USER",
+		"SYSTEM",
+		"AWS_BACKUP",
+	}
+}
 
 type BackupTypeFilter string
 
@@ -39,6 +72,18 @@ const (
 	BackupTypeFilterAll        BackupTypeFilter = "ALL"
 )
 
+// Values returns all known values for BackupTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackupTypeFilter) Values() []BackupTypeFilter {
+	return []BackupTypeFilter{
+		"USER",
+		"SYSTEM",
+		"AWS_BACKUP",
+		"ALL",
+	}
+}
+
 type BillingMode string
 
 // Enum values for BillingMode
@@ -46,6 +91,16 @@ const (
 	BillingModeProvisioned     BillingMode = "PROVISIONED"
 	BillingModePay_per_request BillingMode = "PAY_PER_REQUEST"
 )
+
+// Values returns all known values for BillingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BillingMode) Values() []BillingMode {
+	return []BillingMode{
+		"PROVISIONED",
+		"PAY_PER_REQUEST",
+	}
+}
 
 type ComparisonOperator string
 
@@ -66,6 +121,27 @@ const (
 	ComparisonOperatorBegins_with  ComparisonOperator = "BEGINS_WITH"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"EQ",
+		"NE",
+		"IN",
+		"LE",
+		"LT",
+		"GE",
+		"GT",
+		"BETWEEN",
+		"NOT_NULL",
+		"NULL",
+		"CONTAINS",
+		"NOT_CONTAINS",
+		"BEGINS_WITH",
+	}
+}
+
 type ConditionalOperator string
 
 // Enum values for ConditionalOperator
@@ -73,6 +149,16 @@ const (
 	ConditionalOperatorAnd ConditionalOperator = "AND"
 	ConditionalOperatorOr  ConditionalOperator = "OR"
 )
+
+// Values returns all known values for ConditionalOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionalOperator) Values() []ConditionalOperator {
+	return []ConditionalOperator{
+		"AND",
+		"OR",
+	}
+}
 
 type ContinuousBackupsStatus string
 
@@ -82,6 +168,16 @@ const (
 	ContinuousBackupsStatusDisabled ContinuousBackupsStatus = "DISABLED"
 )
 
+// Values returns all known values for ContinuousBackupsStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContinuousBackupsStatus) Values() []ContinuousBackupsStatus {
+	return []ContinuousBackupsStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ContributorInsightsAction string
 
 // Enum values for ContributorInsightsAction
@@ -89,6 +185,16 @@ const (
 	ContributorInsightsActionEnable  ContributorInsightsAction = "ENABLE"
 	ContributorInsightsActionDisable ContributorInsightsAction = "DISABLE"
 )
+
+// Values returns all known values for ContributorInsightsAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContributorInsightsAction) Values() []ContributorInsightsAction {
+	return []ContributorInsightsAction{
+		"ENABLE",
+		"DISABLE",
+	}
+}
 
 type ContributorInsightsStatus string
 
@@ -101,6 +207,19 @@ const (
 	ContributorInsightsStatusFailed    ContributorInsightsStatus = "FAILED"
 )
 
+// Values returns all known values for ContributorInsightsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContributorInsightsStatus) Values() []ContributorInsightsStatus {
+	return []ContributorInsightsStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+		"FAILED",
+	}
+}
+
 type GlobalTableStatus string
 
 // Enum values for GlobalTableStatus
@@ -110,6 +229,18 @@ const (
 	GlobalTableStatusDeleting GlobalTableStatus = "DELETING"
 	GlobalTableStatusUpdating GlobalTableStatus = "UPDATING"
 )
+
+// Values returns all known values for GlobalTableStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalTableStatus) Values() []GlobalTableStatus {
+	return []GlobalTableStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"UPDATING",
+	}
+}
 
 type IndexStatus string
 
@@ -121,6 +252,18 @@ const (
 	IndexStatusActive   IndexStatus = "ACTIVE"
 )
 
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IndexStatus) Values() []IndexStatus {
+	return []IndexStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -129,6 +272,16 @@ const (
 	KeyTypeRange KeyType = "RANGE"
 )
 
+// Values returns all known values for KeyType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyType) Values() []KeyType {
+	return []KeyType{
+		"HASH",
+		"RANGE",
+	}
+}
+
 type PointInTimeRecoveryStatus string
 
 // Enum values for PointInTimeRecoveryStatus
@@ -136,6 +289,16 @@ const (
 	PointInTimeRecoveryStatusEnabled  PointInTimeRecoveryStatus = "ENABLED"
 	PointInTimeRecoveryStatusDisabled PointInTimeRecoveryStatus = "DISABLED"
 )
+
+// Values returns all known values for PointInTimeRecoveryStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PointInTimeRecoveryStatus) Values() []PointInTimeRecoveryStatus {
+	return []PointInTimeRecoveryStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type ProjectionType string
 
@@ -146,6 +309,17 @@ const (
 	ProjectionTypeInclude   ProjectionType = "INCLUDE"
 )
 
+// Values returns all known values for ProjectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectionType) Values() []ProjectionType {
+	return []ProjectionType{
+		"ALL",
+		"KEYS_ONLY",
+		"INCLUDE",
+	}
+}
+
 type ReplicaStatus string
 
 // Enum values for ReplicaStatus
@@ -155,7 +329,22 @@ const (
 	ReplicaStatusUpdating        ReplicaStatus = "UPDATING"
 	ReplicaStatusDeleting        ReplicaStatus = "DELETING"
 	ReplicaStatusActive          ReplicaStatus = "ACTIVE"
+	ReplicaStatusRegion_disabled ReplicaStatus = "REGION_DISABLED"
 )
+
+// Values returns all known values for ReplicaStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaStatus) Values() []ReplicaStatus {
+	return []ReplicaStatus{
+		"CREATING",
+		"CREATION_FAILED",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"REGION_DISABLED",
+	}
+}
 
 type ReturnConsumedCapacity string
 
@@ -166,6 +355,17 @@ const (
 	ReturnConsumedCapacityNone    ReturnConsumedCapacity = "NONE"
 )
 
+// Values returns all known values for ReturnConsumedCapacity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReturnConsumedCapacity) Values() []ReturnConsumedCapacity {
+	return []ReturnConsumedCapacity{
+		"INDEXES",
+		"TOTAL",
+		"NONE",
+	}
+}
+
 type ReturnItemCollectionMetrics string
 
 // Enum values for ReturnItemCollectionMetrics
@@ -173,6 +373,16 @@ const (
 	ReturnItemCollectionMetricsSize ReturnItemCollectionMetrics = "SIZE"
 	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
 )
+
+// Values returns all known values for ReturnItemCollectionMetrics. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReturnItemCollectionMetrics) Values() []ReturnItemCollectionMetrics {
+	return []ReturnItemCollectionMetrics{
+		"SIZE",
+		"NONE",
+	}
+}
 
 type ReturnValue string
 
@@ -185,6 +395,19 @@ const (
 	ReturnValueUpdated_new ReturnValue = "UPDATED_NEW"
 )
 
+// Values returns all known values for ReturnValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReturnValue) Values() []ReturnValue {
+	return []ReturnValue{
+		"NONE",
+		"ALL_OLD",
+		"UPDATED_OLD",
+		"ALL_NEW",
+		"UPDATED_NEW",
+	}
+}
+
 type ReturnValuesOnConditionCheckFailure string
 
 // Enum values for ReturnValuesOnConditionCheckFailure
@@ -192,6 +415,17 @@ const (
 	ReturnValuesOnConditionCheckFailureAll_old ReturnValuesOnConditionCheckFailure = "ALL_OLD"
 	ReturnValuesOnConditionCheckFailureNone    ReturnValuesOnConditionCheckFailure = "NONE"
 )
+
+// Values returns all known values for ReturnValuesOnConditionCheckFailure. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReturnValuesOnConditionCheckFailure) Values() []ReturnValuesOnConditionCheckFailure {
+	return []ReturnValuesOnConditionCheckFailure{
+		"ALL_OLD",
+		"NONE",
+	}
+}
 
 type ScalarAttributeType string
 
@@ -202,6 +436,17 @@ const (
 	ScalarAttributeTypeB ScalarAttributeType = "B"
 )
 
+// Values returns all known values for ScalarAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalarAttributeType) Values() []ScalarAttributeType {
+	return []ScalarAttributeType{
+		"S",
+		"N",
+		"B",
+	}
+}
+
 type Select string
 
 // Enum values for Select
@@ -211,6 +456,18 @@ const (
 	SelectSpecific_attributes      Select = "SPECIFIC_ATTRIBUTES"
 	SelectCount                    Select = "COUNT"
 )
+
+// Values returns all known values for Select. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Select) Values() []Select {
+	return []Select{
+		"ALL_ATTRIBUTES",
+		"ALL_PROJECTED_ATTRIBUTES",
+		"SPECIFIC_ATTRIBUTES",
+		"COUNT",
+	}
+}
 
 type SSEStatus string
 
@@ -223,6 +480,19 @@ const (
 	SSEStatusUpdating  SSEStatus = "UPDATING"
 )
 
+// Values returns all known values for SSEStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SSEStatus) Values() []SSEStatus {
+	return []SSEStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+		"UPDATING",
+	}
+}
+
 type SSEType string
 
 // Enum values for SSEType
@@ -230,6 +500,16 @@ const (
 	SSETypeAes256 SSEType = "AES256"
 	SSETypeKms    SSEType = "KMS"
 )
+
+// Values returns all known values for SSEType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SSEType) Values() []SSEType {
+	return []SSEType{
+		"AES256",
+		"KMS",
+	}
+}
 
 type StreamViewType string
 
@@ -240,6 +520,18 @@ const (
 	StreamViewTypeNew_and_old_images StreamViewType = "NEW_AND_OLD_IMAGES"
 	StreamViewTypeKeys_only          StreamViewType = "KEYS_ONLY"
 )
+
+// Values returns all known values for StreamViewType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StreamViewType) Values() []StreamViewType {
+	return []StreamViewType{
+		"NEW_IMAGE",
+		"OLD_IMAGE",
+		"NEW_AND_OLD_IMAGES",
+		"KEYS_ONLY",
+	}
+}
 
 type TableStatus string
 
@@ -254,6 +546,21 @@ const (
 	TableStatusArchived                            TableStatus = "ARCHIVED"
 )
 
+// Values returns all known values for TableStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TableStatus) Values() []TableStatus {
+	return []TableStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+		"ARCHIVING",
+		"ARCHIVED",
+	}
+}
+
 type TimeToLiveStatus string
 
 // Enum values for TimeToLiveStatus
@@ -263,3 +570,15 @@ const (
 	TimeToLiveStatusEnabled   TimeToLiveStatus = "ENABLED"
 	TimeToLiveStatusDisabled  TimeToLiveStatus = "DISABLED"
 )
+
+// Values returns all known values for TimeToLiveStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeToLiveStatus) Values() []TimeToLiveStatus {
+	return []TimeToLiveStatus{
+		"ENABLING",
+		"DISABLING",
+		"ENABLED",
+		"DISABLED",
+	}
+}

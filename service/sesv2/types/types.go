@@ -705,6 +705,17 @@ type EventDestinationDefinition struct {
 	SnsDestination *SnsDestination
 }
 
+// An object that contains the failure details about an import job.
+type FailureInfo struct {
+
+	// A message about why the import job failed.
+	ErrorMessage *string
+
+	// An Amazon S3 presigned URL that contains all the failed records and related
+	// information.
+	FailedRecordsS3Url *string
+}
+
 // Information about an email identity.
 type IdentityInfo struct {
 
@@ -728,6 +739,45 @@ type IdentityInfo struct {
 	// an identity, you have to demostrate that you own the identity, and that you
 	// authorize Amazon SES to send email from that identity.
 	SendingEnabled *bool
+}
+
+// An object that contains details about the data source of the import job.
+type ImportDataSource struct {
+
+	// The data format of the import job's data source.
+	//
+	// This member is required.
+	DataFormat DataFormat
+
+	// An Amazon S3 URL in the format s3:///.
+	//
+	// This member is required.
+	S3Url *string
+}
+
+// An object that contains details about the resource destination the import job is
+// going to target.
+type ImportDestination struct {
+
+	// An object that contains the action of the import job towards suppression list.
+	//
+	// This member is required.
+	SuppressionListDestination *SuppressionListDestination
+}
+
+// A summary of the import job.
+type ImportJobSummary struct {
+	CreatedTimestamp *time.Time
+
+	// An object that contains details about the resource destination the import job is
+	// going to target.
+	ImportDestination *ImportDestination
+
+	// A string that represents the import job ID.
+	JobId *string
+
+	// The status of the import job.
+	JobStatus JobStatus
 }
 
 // An object that contains information about the inbox placement data settings for
@@ -1115,6 +1165,22 @@ type SuppressionAttributes struct {
 	// list for your account when a message sent to that address results in a hard
 	// bounce.
 	SuppressedReasons []SuppressionListReason
+}
+
+// An object that contains details about the action of suppression list.
+type SuppressionListDestination struct {
+
+	// The type of action that you want to perform on the address. Acceptable values:
+	//
+	//
+	// * PUT: add the addresses to the suppression list. If the record already exists,
+	// it will override it with the new value.
+	//
+	//     * DELETE: remove the addresses from
+	// the suppression list.
+	//
+	// This member is required.
+	SuppressionListImportAction SuppressionListImportAction
 }
 
 // An object that contains information about the suppression list preferences for

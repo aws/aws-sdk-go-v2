@@ -64,6 +64,10 @@ type CreateConfigurationOutput struct {
 	// The name of the configuration.
 	Name *string
 
+	// The state of the configuration. The possible states are ACTIVE, DELETING, and
+	// DELETE_FAILED.
+	State types.ConfigurationState
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

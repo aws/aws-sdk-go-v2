@@ -1545,11 +1545,11 @@ func validateLocation(v *types.Location) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Location"}
-	if v.Longitude == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
-	}
 	if v.Latitude == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
+	}
+	if v.Longitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1633,11 +1633,11 @@ func validateOpCreateDevicePoolInput(v *CreateDevicePoolInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
-	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1750,14 +1750,14 @@ func validateOpCreateUploadInput(v *CreateUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUploadInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1771,11 +1771,11 @@ func validateOpCreateVPCEConfigurationInput(v *CreateVPCEConfigurationInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVPCEConfigurationInput"}
-	if v.VpceServiceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpceServiceName"))
-	}
 	if v.ServiceDnsName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceDnsName"))
+	}
+	if v.VpceServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpceServiceName"))
 	}
 	if v.VpceConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpceConfigurationName"))
@@ -1957,17 +1957,17 @@ func validateOpGetDevicePoolCompatibilityInput(v *GetDevicePoolCompatibilityInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDevicePoolCompatibilityInput"}
-	if v.Test != nil {
-		if err := validateScheduleRunTest(v.Test); err != nil {
-			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DevicePoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DevicePoolArn"))
 	}
 	if v.Configuration != nil {
 		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Test != nil {
+		if err := validateScheduleRunTest(v.Test); err != nil {
+			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2162,11 +2162,11 @@ func validateOpInstallToRemoteAccessSessionInput(v *InstallToRemoteAccessSession
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstallToRemoteAccessSessionInput"}
-	if v.AppArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
-	}
 	if v.RemoteAccessSessionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteAccessSessionArn"))
+	}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2408,12 +2408,11 @@ func validateOpScheduleRunInput(v *ScheduleRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleRunInput"}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
-	}
-	if v.Configuration != nil {
-		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
-			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+	if v.Test == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Test"))
+	} else if v.Test != nil {
+		if err := validateScheduleRunTest(v.Test); err != nil {
+			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DeviceSelectionConfiguration != nil {
@@ -2421,11 +2420,12 @@ func validateOpScheduleRunInput(v *ScheduleRunInput) error {
 			invalidParams.AddNested("DeviceSelectionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Test == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Test"))
-	} else if v.Test != nil {
-		if err := validateScheduleRunTest(v.Test); err != nil {
-			invalidParams.AddNested("Test", err.(smithy.InvalidParamsError))
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if v.Configuration != nil {
+		if err := validateScheduleRunConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2485,15 +2485,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2507,11 +2507,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

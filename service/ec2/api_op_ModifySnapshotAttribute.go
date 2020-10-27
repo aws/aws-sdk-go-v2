@@ -19,7 +19,7 @@ import (
 // snapshots and snapshots with AWS Marketplace product codes cannot be made
 // public. Snapshots encrypted with your default CMK cannot be shared with other
 // accounts. For more information about modifying snapshot permissions, see Sharing
-// Snapshots
+// snapshots
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) ModifySnapshotAttribute(ctx context.Context, params *ModifySnapshotAttributeInput, optFns ...func(*Options)) (*ModifySnapshotAttributeOutput, error) {

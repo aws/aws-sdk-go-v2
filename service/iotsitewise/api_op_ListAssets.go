@@ -46,17 +46,19 @@ type ListAssetsInput struct {
 	AssetModelId *string
 
 	// The filter for the requested list of assets. Choose one of the following
-	// options. Defaults to ALL.
+	// options:
 	//
-	//     * ALL – The list includes all assets for a given
-	// asset model ID. The assetModelId parameter is required if you filter by ALL.
+	//     * ALL – The list includes all assets for a given asset model ID.
+	// The assetModelId parameter is required if you filter by ALL.
 	//
+	//     * TOP_LEVEL –
+	// The list includes only top-level assets in the asset hierarchy tree.
 	//
-	// * TOP_LEVEL – The list includes only top-level assets in the asset hierarchy
-	// tree.
+	// Default:
+	// ALL
 	Filter types.ListAssetsFilter
 
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to be returned per paginated request. Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.

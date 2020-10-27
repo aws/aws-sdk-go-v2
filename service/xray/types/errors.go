@@ -24,6 +24,26 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The resource was not found. Verify that the name or Amazon Resource Name (ARN)
+// of the resource is correct.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ResourceName *string
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have reached the maximum number of sampling rules.
 type RuleLimitExceededException struct {
 	Message *string
@@ -57,3 +77,22 @@ func (e *ThrottledException) ErrorMessage() string {
 }
 func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have exceeded the maximum number of tags you can apply to this resource.
+type TooManyTagsException struct {
+	Message *string
+
+	ResourceName *string
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

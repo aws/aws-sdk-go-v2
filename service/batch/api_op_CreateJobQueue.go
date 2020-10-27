@@ -59,8 +59,16 @@ type CreateJobQueueInput struct {
 	Priority *int32
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able to
-	// accept jobs.
+	// accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the
+	// queue, but jobs already in the queue can finish.
 	State types.JQState
+
+	// The tags that you apply to the job queue to help you categorize and organize
+	// your resources. Each tag consists of a key and an optional value. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
+	// Reference.
+	Tags map[string]*string
 }
 
 type CreateJobQueueOutput struct {

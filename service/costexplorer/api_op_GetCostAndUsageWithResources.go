@@ -17,8 +17,8 @@ import (
 // group your data by various dimensions, such as SERVICE or AZ, in a specific time
 // range. For a complete list of valid dimensions, see the GetDimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Master accounts in an organization in AWS Organizations have access
-// to all member accounts. This API is currently available for the Amazon Elastic
+// operation. Master account in an organization in AWS Organizations have access to
+// all member accounts. This API is currently available for the Amazon Elastic
 // Compute Cloud – Compute service only. This is an opt-in only feature. You can
 // enable this feature from the Cost Explorer Settings page. For information on how
 // to access the Settings page, see Controlling Access for Cost Explorer
@@ -41,6 +41,19 @@ func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCo
 
 type GetCostAndUsageWithResourcesInput struct {
 
+	// Filters Amazon Web Services costs by different dimensions. For example, you can
+	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
+	// that account's usage of that service. You can nest Expression objects to define
+	// any combination of dimension filters. For more information, see Expression
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
+	// The GetCostAndUsageWithResources operation requires that you either group by or
+	// filter by a ResourceId. It requires the Expression
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)"SERVICE
+	// = Amazon Elastic Compute Cloud - Compute" in the filter.
+	//
+	// This member is required.
+	Filter *types.Expression
+
 	// Sets the start and end dates for retrieving Amazon Web Services costs. The range
 	// must be within the last 14 days (the start date cannot be earlier than 14 days
 	// ago). The start date is inclusive, but the end date is exclusive. For example,
@@ -51,22 +64,13 @@ type GetCostAndUsageWithResourcesInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// Filters Amazon Web Services costs by different dimensions. For example, you can
-	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
-	// that account's usage of that service. You can nest Expression objects to define
-	// any combination of dimension filters. For more information, see Expression
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
-	// The GetCostAndUsageWithResources operation requires that you either group by or
-	// filter by a ResourceId.
-	Filter *types.Expression
-
 	// Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't
 	// set, the response object doesn't include the Granularity, MONTHLY, DAILY, or
 	// HOURLY.
 	Granularity types.Granularity
 
-	// You can group Amazon Web Services costs using up to two different groups: either
-	// dimensions, tag keys, or both.
+	// You can group Amazon Web Services costs using up to two different groups:
+	// DIMENSION, TAG, COST_CATEGORY.
 	GroupBy []*types.GroupDefinition
 
 	// Which metrics are returned in the query. For more information about blended and

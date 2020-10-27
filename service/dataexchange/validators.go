@@ -495,11 +495,11 @@ func validateAssetDestinationEntry(v *types.AssetDestinationEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetDestinationEntry"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -513,11 +513,11 @@ func validateAssetSourceEntry(v *types.AssetSourceEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetSourceEntry"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -531,12 +531,8 @@ func validateExportAssetsToS3RequestDetails(v *types.ExportAssetsToS3RequestDeta
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportAssetsToS3RequestDetails"}
-	if v.AssetDestinations == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetDestinations"))
-	} else if v.AssetDestinations != nil {
-		if err := validateListOfAssetDestinationEntry(v.AssetDestinations); err != nil {
-			invalidParams.AddNested("AssetDestinations", err.(smithy.InvalidParamsError))
-		}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
@@ -546,8 +542,12 @@ func validateExportAssetsToS3RequestDetails(v *types.ExportAssetsToS3RequestDeta
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	if v.AssetDestinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetDestinations"))
+	} else if v.AssetDestinations != nil {
+		if err := validateListOfAssetDestinationEntry(v.AssetDestinations); err != nil {
+			invalidParams.AddNested("AssetDestinations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -561,14 +561,14 @@ func validateExportAssetToSignedUrlRequestDetails(v *types.ExportAssetToSignedUr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportAssetToSignedUrlRequestDetails"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -597,17 +597,17 @@ func validateImportAssetFromSignedUrlRequestDetails(v *types.ImportAssetFromSign
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportAssetFromSignedUrlRequestDetails"}
+	if v.AssetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetName"))
+	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
-	}
-	if v.Md5Hash == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Md5Hash"))
 	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
-	if v.AssetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetName"))
+	if v.Md5Hash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Md5Hash"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -621,18 +621,18 @@ func validateImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3Request
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportAssetsFromS3RequestDetails"}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
 	if v.AssetSources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetSources"))
 	} else if v.AssetSources != nil {
 		if err := validateListOfAssetSourceEntry(v.AssetSources); err != nil {
 			invalidParams.AddNested("AssetSources", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DataSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
-	}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -680,14 +680,14 @@ func validateRequestDetails(v *types.RequestDetails) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RequestDetails"}
+	if v.ExportAssetsToS3 != nil {
+		if err := validateExportAssetsToS3RequestDetails(v.ExportAssetsToS3); err != nil {
+			invalidParams.AddNested("ExportAssetsToS3", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ExportAssetToSignedUrl != nil {
 		if err := validateExportAssetToSignedUrlRequestDetails(v.ExportAssetToSignedUrl); err != nil {
 			invalidParams.AddNested("ExportAssetToSignedUrl", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ImportAssetsFromS3 != nil {
-		if err := validateImportAssetsFromS3RequestDetails(v.ImportAssetsFromS3); err != nil {
-			invalidParams.AddNested("ImportAssetsFromS3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ImportAssetFromSignedUrl != nil {
@@ -695,9 +695,9 @@ func validateRequestDetails(v *types.RequestDetails) error {
 			invalidParams.AddNested("ImportAssetFromSignedUrl", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ExportAssetsToS3 != nil {
-		if err := validateExportAssetsToS3RequestDetails(v.ExportAssetsToS3); err != nil {
-			invalidParams.AddNested("ExportAssetsToS3", err.(smithy.InvalidParamsError))
+	if v.ImportAssetsFromS3 != nil {
+		if err := validateImportAssetsFromS3RequestDetails(v.ImportAssetsFromS3); err != nil {
+			invalidParams.AddNested("ImportAssetsFromS3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -785,11 +785,11 @@ func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetInput"}
-	if v.DataSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
-	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
 	}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
@@ -821,11 +821,11 @@ func validateOpDeleteRevisionInput(v *DeleteRevisionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRevisionInput"}
-	if v.DataSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
-	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -839,14 +839,14 @@ func validateOpGetAssetInput(v *GetAssetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAssetInput"}
-	if v.AssetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
 	}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -890,11 +890,11 @@ func validateOpGetRevisionInput(v *GetRevisionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRevisionInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -923,11 +923,11 @@ func validateOpListRevisionAssetsInput(v *ListRevisionAssetsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRevisionAssetsInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1007,14 +1007,14 @@ func validateOpUpdateAssetInput(v *UpdateAssetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetInput"}
-	if v.AssetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
@@ -1046,11 +1046,11 @@ func validateOpUpdateRevisionInput(v *UpdateRevisionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRevisionInput"}
-	if v.DataSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
-	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

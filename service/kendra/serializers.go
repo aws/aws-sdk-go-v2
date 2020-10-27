@@ -2040,6 +2040,13 @@ func awsAwsjson11_serializeDocumentS3DataSourceConfiguration(v *types.S3DataSour
 		}
 	}
 
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InclusionPrefixes != nil {
 		ok := object.Key("InclusionPrefixes")
 		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPrefixes, ok); err != nil {
@@ -2784,6 +2791,11 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Configuration != nil {
 		ok := object.Key("Configuration")
 		if err := awsAwsjson11_serializeDocumentDataSourceConfiguration(v.Configuration, ok); err != nil {
@@ -2835,9 +2847,19 @@ func awsAwsjson11_serializeOpDocumentCreateFaqInput(v *CreateFaqInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if len(v.FileFormat) > 0 {
+		ok := object.Key("FileFormat")
+		ok.String(string(v.FileFormat))
 	}
 
 	if v.IndexId != nil {

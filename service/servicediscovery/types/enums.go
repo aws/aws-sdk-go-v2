@@ -10,6 +10,16 @@ const (
 	CustomHealthStatusUnhealthy CustomHealthStatus = "UNHEALTHY"
 )
 
+// Values returns all known values for CustomHealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomHealthStatus) Values() []CustomHealthStatus {
+	return []CustomHealthStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
+
 type FilterCondition string
 
 // Enum values for FilterCondition
@@ -18,6 +28,17 @@ const (
 	FilterConditionIn      FilterCondition = "IN"
 	FilterConditionBetween FilterCondition = "BETWEEN"
 )
+
+// Values returns all known values for FilterCondition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterCondition) Values() []FilterCondition {
+	return []FilterCondition{
+		"EQ",
+		"IN",
+		"BETWEEN",
+	}
+}
 
 type HealthCheckType string
 
@@ -28,6 +49,17 @@ const (
 	HealthCheckTypeTcp   HealthCheckType = "TCP"
 )
 
+// Values returns all known values for HealthCheckType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HealthCheckType) Values() []HealthCheckType {
+	return []HealthCheckType{
+		"HTTP",
+		"HTTPS",
+		"TCP",
+	}
+}
+
 type HealthStatus string
 
 // Enum values for HealthStatus
@@ -36,6 +68,17 @@ const (
 	HealthStatusUnhealthy HealthStatus = "UNHEALTHY"
 	HealthStatusUnknown   HealthStatus = "UNKNOWN"
 )
+
+// Values returns all known values for HealthStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HealthStatus) Values() []HealthStatus {
+	return []HealthStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+		"UNKNOWN",
+	}
+}
 
 type HealthStatusFilter string
 
@@ -46,12 +89,32 @@ const (
 	HealthStatusFilterAll       HealthStatusFilter = "ALL"
 )
 
+// Values returns all known values for HealthStatusFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HealthStatusFilter) Values() []HealthStatusFilter {
+	return []HealthStatusFilter{
+		"HEALTHY",
+		"UNHEALTHY",
+		"ALL",
+	}
+}
+
 type NamespaceFilterName string
 
 // Enum values for NamespaceFilterName
 const (
 	NamespaceFilterNameType NamespaceFilterName = "TYPE"
 )
+
+// Values returns all known values for NamespaceFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamespaceFilterName) Values() []NamespaceFilterName {
+	return []NamespaceFilterName{
+		"TYPE",
+	}
+}
 
 type NamespaceType string
 
@@ -61,6 +124,17 @@ const (
 	NamespaceTypeDns_private NamespaceType = "DNS_PRIVATE"
 	NamespaceTypeHttp        NamespaceType = "HTTP"
 )
+
+// Values returns all known values for NamespaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamespaceType) Values() []NamespaceType {
+	return []NamespaceType{
+		"DNS_PUBLIC",
+		"DNS_PRIVATE",
+		"HTTP",
+	}
+}
 
 type OperationFilterName string
 
@@ -73,6 +147,19 @@ const (
 	OperationFilterNameUpdate_date  OperationFilterName = "UPDATE_DATE"
 )
 
+// Values returns all known values for OperationFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationFilterName) Values() []OperationFilterName {
+	return []OperationFilterName{
+		"NAMESPACE_ID",
+		"SERVICE_ID",
+		"STATUS",
+		"TYPE",
+		"UPDATE_DATE",
+	}
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -83,6 +170,18 @@ const (
 	OperationStatusFail      OperationStatus = "FAIL"
 )
 
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"SUBMITTED",
+		"PENDING",
+		"SUCCESS",
+		"FAIL",
+	}
+}
+
 type OperationTargetType string
 
 // Enum values for OperationTargetType
@@ -91,6 +190,17 @@ const (
 	OperationTargetTypeService   OperationTargetType = "SERVICE"
 	OperationTargetTypeInstance  OperationTargetType = "INSTANCE"
 )
+
+// Values returns all known values for OperationTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationTargetType) Values() []OperationTargetType {
+	return []OperationTargetType{
+		"NAMESPACE",
+		"SERVICE",
+		"INSTANCE",
+	}
+}
 
 type OperationType string
 
@@ -103,6 +213,19 @@ const (
 	OperationTypeDeregister_instance OperationType = "DEREGISTER_INSTANCE"
 )
 
+// Values returns all known values for OperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationType) Values() []OperationType {
+	return []OperationType{
+		"CREATE_NAMESPACE",
+		"DELETE_NAMESPACE",
+		"UPDATE_SERVICE",
+		"REGISTER_INSTANCE",
+		"DEREGISTER_INSTANCE",
+	}
+}
+
 type RecordType string
 
 // Enum values for RecordType
@@ -113,6 +236,18 @@ const (
 	RecordTypeCname RecordType = "CNAME"
 )
 
+// Values returns all known values for RecordType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RecordType) Values() []RecordType {
+	return []RecordType{
+		"SRV",
+		"A",
+		"AAAA",
+		"CNAME",
+	}
+}
+
 type RoutingPolicy string
 
 // Enum values for RoutingPolicy
@@ -121,9 +256,28 @@ const (
 	RoutingPolicyWeighted   RoutingPolicy = "WEIGHTED"
 )
 
+// Values returns all known values for RoutingPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingPolicy) Values() []RoutingPolicy {
+	return []RoutingPolicy{
+		"MULTIVALUE",
+		"WEIGHTED",
+	}
+}
+
 type ServiceFilterName string
 
 // Enum values for ServiceFilterName
 const (
 	ServiceFilterNameNamespace_id ServiceFilterName = "NAMESPACE_ID"
 )
+
+// Values returns all known values for ServiceFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceFilterName) Values() []ServiceFilterName {
+	return []ServiceFilterName{
+		"NAMESPACE_ID",
+	}
+}

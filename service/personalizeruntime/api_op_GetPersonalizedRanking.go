@@ -38,7 +38,7 @@ type GetPersonalizedRankingInput struct {
 	// This member is required.
 	CampaignArn *string
 
-	// A list of items (itemId's) to rank. If an item was not included in the training
+	// A list of items (by itemId) to rank. If an item was not included in the training
 	// dataset, the item is appended to the end of the reranked list. The maximum is
 	// 500.
 	//
@@ -54,6 +54,10 @@ type GetPersonalizedRankingInput struct {
 	// includes any interaction information that might be relevant when getting a
 	// user's recommendations, such as the user's current location or device type.
 	Context map[string]*string
+
+	// The Amazon Resource Name (ARN) of a filter you created to include or exclude
+	// items from recommendations for a given user.
+	FilterArn *string
 }
 
 type GetPersonalizedRankingOutput struct {
@@ -61,6 +65,9 @@ type GetPersonalizedRankingOutput struct {
 	// A list of items in order of most likely interest to the user. The maximum is
 	// 500.
 	PersonalizedRanking []*types.PredictedItem
+
+	// The ID of the recommendation.
+	RecommendationId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

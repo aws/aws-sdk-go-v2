@@ -1345,6 +1345,28 @@ func awsAwsjson11_serializeDocumentPutRecordsRequestEntryList(v []*types.PutReco
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentShardFilter(v *types.ShardFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ShardId != nil {
+		ok := object.Key("ShardId")
+		ok.String(*v.ShardId)
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("Timestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStartingPosition(v *types.StartingPosition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1673,6 +1695,13 @@ func awsAwsjson11_serializeOpDocumentListShardsInput(v *ListShardsInput, value s
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.ShardFilter != nil {
+		ok := object.Key("ShardFilter")
+		if err := awsAwsjson11_serializeDocumentShardFilter(v.ShardFilter, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StreamCreationTimestamp != nil {

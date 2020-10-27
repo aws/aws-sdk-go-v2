@@ -158,6 +158,15 @@ func awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(v **GetPerso
 				return err
 			}
 
+		case "recommendationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationID to be of type string, got %T instead", value)
+				}
+				sv.RecommendationId = &jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -306,6 +315,15 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 		case "itemList":
 			if err := awsRestjson1_deserializeDocumentItemList(&sv.ItemList, value); err != nil {
 				return err
+			}
+
+		case "recommendationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationID to be of type string, got %T instead", value)
+				}
+				sv.RecommendationId = &jtv
 			}
 
 		default:

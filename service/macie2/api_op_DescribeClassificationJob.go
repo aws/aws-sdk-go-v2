@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves information about the status and settings for a classification job.
+// Retrieves the status and settings for a classification job.
 func (c *Client) DescribeClassificationJob(ctx context.Context, params *DescribeClassificationJobInput, optFns ...func(*Options)) (*DescribeClassificationJobOutput, error) {
 	if params == nil {
 		params = &DescribeClassificationJobInput{}
@@ -52,7 +52,8 @@ type DescribeClassificationJobOutput struct {
 	// The custom description of the job.
 	Description *string
 
-	// Specifies whether the job has run for the first time.
+	// Specifies whether the job is configured to analyze all existing, eligible
+	// objects immediately after it's created.
 	InitialRun *bool
 
 	// The Amazon Resource Name (ARN) of the job.
@@ -63,34 +64,38 @@ type DescribeClassificationJobOutput struct {
 
 	// The current status of the job. Possible values are:
 	//
-	//     * CANCELLED - The job
-	// was cancelled by you or a user of the master account for your organization. A
-	// job might also be cancelled if ownership of an S3 bucket changed while the job
-	// was running, and that change affected the job's access to the bucket.
+	//     * CANCELLED - You
+	// cancelled the job, or you paused the job and didn't resume it within 30 days of
+	// pausing it.
+	//
+	//     * COMPLETE - For a one-time job, Amazon Macie finished
+	// processing all the data specified for the job. This value doesn't apply to
+	// recurring jobs.
+	//
+	//     * IDLE - For a recurring job, the previous scheduled run is
+	// complete and the next scheduled run is pending. This value doesn't apply to
+	// one-time jobs.
+	//
+	//     * PAUSED - Amazon Macie started running the job but
+	// completion of the job would exceed one or more quotas for your account.
 	//
 	//     *
-	// COMPLETE - Amazon Macie finished processing all the data specified for the
-	// job.
+	// RUNNING - For a one-time job, the job is in progress. For a recurring job, a
+	// scheduled run is in progress.
 	//
-	//     * IDLE - For a recurring job, the previous scheduled run is complete
-	// and the next scheduled run is pending. This value doesn't apply to jobs that
-	// occur only once.
-	//
-	//     * PAUSED - Amazon Macie started the job, but completion of
-	// the job would exceed one or more quotas for your account.
-	//
-	//     * RUNNING - The
-	// job is in progress.
+	//     * USER_PAUSED - You paused the job. If you
+	// don't resume the job within 30 days of pausing it, the job will expire and be
+	// cancelled.
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
 	//
 	//     * ONE_TIME - The job
-	// ran or will run only once.
+	// runs only once.
 	//
-	//     * SCHEDULED - The job runs on a daily, weekly,
-	// or monthly basis. The scheduleFrequency property indicates the recurrence
-	// pattern for the job.
+	//     * SCHEDULED - The job runs on a daily, weekly, or monthly
+	// basis. The scheduleFrequency property indicates the recurrence pattern for the
+	// job.
 	JobType types.JobType
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job last ran.
@@ -103,8 +108,8 @@ type DescribeClassificationJobOutput struct {
 	// analysis.
 	S3JobDefinition *types.S3JobDefinition
 
-	// The sampling depth, as a percentage, that the job applies when it processes
-	// objects.
+	// The sampling depth, as a percentage, that determines the percentage of eligible
+	// objects that the job analyzes.
 	SamplingPercentage *int32
 
 	// The recurrence pattern for running the job. If the job is configured to run only
@@ -112,12 +117,17 @@ type DescribeClassificationJobOutput struct {
 	ScheduleFrequency *types.JobScheduleFrequency
 
 	// The number of times that the job has run and processing statistics for the job's
-	// most recent run.
+	// current run.
 	Statistics *types.Statistics
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the classification job.
 	Tags map[string]*string
+
+	// If the current status of the job is USER_PAUSED, specifies when the job was
+	// paused and when the job will expire and be cancelled if it isn't resumed. This
+	// value is present only if the value for jobStatus is USER_PAUSED.
+	UserPausedDetails *types.UserPausedDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

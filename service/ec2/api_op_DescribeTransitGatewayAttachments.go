@@ -52,17 +52,18 @@ type DescribeTransitGatewayAttachmentsInput struct {
 	// resource-owner-id - The ID of the AWS account that owns the resource.
 	//
 	//     *
-	// resource-type - The resource type (vpc | vpn).
+	// resource-type - The resource type. Valid values are vpc | vpn |
+	// direct-connect-gateway | peering.
 	//
-	//     * state - The state of the
-	// attachment (available | deleted | deleting | failed | modifying |
-	// pendingAcceptance | pending | rollingBack | rejected | rejecting).
+	//     * state - The state of the attachment.
+	// Valid values are available | deleted | deleting | failed | failing |
+	// initiatingRequest | modifying | pendingAcceptance | pending | rollingBack |
+	// rejected | rejecting.
 	//
-	//     *
-	// transit-gateway-attachment-id - The ID of the attachment.
+	//     * transit-gateway-attachment-id - The ID of the
+	// attachment.
 	//
-	//     *
-	// transit-gateway-id - The ID of the transit gateway.
+	//     * transit-gateway-id - The ID of the transit gateway.
 	//
 	//     *
 	// transit-gateway-owner-id - The ID of the AWS account that owns the transit

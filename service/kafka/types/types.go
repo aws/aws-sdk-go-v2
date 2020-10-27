@@ -107,6 +107,9 @@ type BrokerSoftwareInfo struct {
 // Includes all client authentication information.
 type ClientAuthentication struct {
 
+	// Details for ClientAuthentication using SASL.
+	Sasl *Sasl
+
 	// Details for ClientAuthentication using TLS.
 	Tls *Tls
 }
@@ -173,6 +176,9 @@ type ClusterInfo struct {
 
 	// The connection string to use to connect to the Apache ZooKeeper cluster.
 	ZookeeperConnectString *string
+
+	// The connection string to use to connect to zookeeper cluster on Tls port.
+	ZookeeperConnectStringTls *string
 }
 
 // Returns information about a cluster operation.
@@ -273,6 +279,12 @@ type Configuration struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The state of the configuration. The possible states are ACTIVE, DELETING, and
+	// DELETE_FAILED.
+	//
+	// This member is required.
+	State ConfigurationState
 }
 
 // Specifies the configuration to use for the brokers.
@@ -508,6 +520,20 @@ type S3 struct {
 	Prefix *string
 }
 
+// Details for client authentication using SASL.
+type Sasl struct {
+
+	// Details for SASL/SCRAM client authentication.
+	Scram *Scram
+}
+
+// Details for SASL/SCRAM client authentication.
+type Scram struct {
+
+	// SASL/SCRAM authentication is enabled or not.
+	Enabled *bool
+}
+
 type StateInfo struct {
 	Code *string
 
@@ -526,6 +552,19 @@ type Tls struct {
 
 	// List of ACM Certificate Authority ARNs.
 	CertificateAuthorityArnList []*string
+}
+
+// Error info for scram secret associate/disassociate failure.
+type UnprocessedScramSecret struct {
+
+	// Error code for associate/disassociate failure.
+	ErrorCode *string
+
+	// Error message for associate/disassociate failure.
+	ErrorMessage *string
+
+	// AWS Secrets Manager secret ARN.
+	SecretArn *string
 }
 
 // Zookeeper node information.

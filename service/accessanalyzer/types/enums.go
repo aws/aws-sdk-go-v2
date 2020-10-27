@@ -12,6 +12,18 @@ const (
 	AnalyzerStatusFailed   AnalyzerStatus = "FAILED"
 )
 
+// Values returns all known values for AnalyzerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyzerStatus) Values() []AnalyzerStatus {
+	return []AnalyzerStatus{
+		"ACTIVE",
+		"CREATING",
+		"DISABLED",
+		"FAILED",
+	}
+}
+
 type FindingSourceType string
 
 // Enum values for FindingSourceType
@@ -22,6 +34,18 @@ const (
 	FindingSourceTypeKms_grant       FindingSourceType = "KMS_GRANT"
 )
 
+// Values returns all known values for FindingSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingSourceType) Values() []FindingSourceType {
+	return []FindingSourceType{
+		"POLICY",
+		"BUCKET_ACL",
+		"S3_ACCESS_POINT",
+		"KMS_GRANT",
+	}
+}
+
 type FindingStatus string
 
 // Enum values for FindingStatus
@@ -31,6 +55,17 @@ const (
 	FindingStatusResolved FindingStatus = "RESOLVED"
 )
 
+// Values returns all known values for FindingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingStatus) Values() []FindingStatus {
+	return []FindingStatus{
+		"ACTIVE",
+		"ARCHIVED",
+		"RESOLVED",
+	}
+}
+
 type FindingStatusUpdate string
 
 // Enum values for FindingStatusUpdate
@@ -39,6 +74,16 @@ const (
 	FindingStatusUpdateArchived FindingStatusUpdate = "ARCHIVED"
 )
 
+// Values returns all known values for FindingStatusUpdate. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingStatusUpdate) Values() []FindingStatusUpdate {
+	return []FindingStatusUpdate{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -46,6 +91,16 @@ const (
 	OrderByAsc  OrderBy = "ASC"
 	OrderByDesc OrderBy = "DESC"
 )
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"ASC",
+		"DESC",
+	}
+}
 
 type ReasonCode string
 
@@ -56,6 +111,18 @@ const (
 	ReasonCodeOrganization_deleted                 ReasonCode = "ORGANIZATION_DELETED"
 	ReasonCodeService_linked_role_creation_failed  ReasonCode = "SERVICE_LINKED_ROLE_CREATION_FAILED"
 )
+
+// Values returns all known values for ReasonCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReasonCode) Values() []ReasonCode {
+	return []ReasonCode{
+		"AWS_SERVICE_ACCESS_DISABLED",
+		"DELEGATED_ADMINISTRATOR_DEREGISTERED",
+		"ORGANIZATION_DELETED",
+		"SERVICE_LINKED_ROLE_CREATION_FAILED",
+	}
+}
 
 type ResourceType string
 
@@ -69,6 +136,20 @@ const (
 	ResourceTypeAwsKmsKey             ResourceType = "AWS::KMS::Key"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"AWS::S3::Bucket",
+		"AWS::IAM::Role",
+		"AWS::SQS::Queue",
+		"AWS::Lambda::Function",
+		"AWS::Lambda::LayerVersion",
+		"AWS::KMS::Key",
+	}
+}
+
 type Type string
 
 // Enum values for Type
@@ -76,6 +157,16 @@ const (
 	TypeAccount      Type = "ACCOUNT"
 	TypeOrganization Type = "ORGANIZATION"
 )
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"ACCOUNT",
+		"ORGANIZATION",
+	}
+}
 
 type ValidationExceptionReason string
 
@@ -86,3 +177,15 @@ const (
 	ValidationExceptionReasonField_validation_failed ValidationExceptionReason = "fieldValidationFailed"
 	ValidationExceptionReasonOther                   ValidationExceptionReason = "other"
 )
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"unknownOperation",
+		"cannotParse",
+		"fieldValidationFailed",
+		"other",
+	}
+}

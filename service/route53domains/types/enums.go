@@ -13,6 +13,19 @@ const (
 	ContactTypeReseller    ContactType = "RESELLER"
 )
 
+// Values returns all known values for ContactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContactType) Values() []ContactType {
+	return []ContactType{
+		"PERSON",
+		"COMPANY",
+		"ASSOCIATION",
+		"PUBLIC_BODY",
+		"RESELLER",
+	}
+}
+
 type CountryCode string
 
 // Enum values for CountryCode
@@ -248,6 +261,243 @@ const (
 	CountryCodeZw CountryCode = "ZW"
 )
 
+// Values returns all known values for CountryCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CountryCode) Values() []CountryCode {
+	return []CountryCode{
+		"AD",
+		"AE",
+		"AF",
+		"AG",
+		"AI",
+		"AL",
+		"AM",
+		"AN",
+		"AO",
+		"AQ",
+		"AR",
+		"AS",
+		"AT",
+		"AU",
+		"AW",
+		"AZ",
+		"BA",
+		"BB",
+		"BD",
+		"BE",
+		"BF",
+		"BG",
+		"BH",
+		"BI",
+		"BJ",
+		"BL",
+		"BM",
+		"BN",
+		"BO",
+		"BR",
+		"BS",
+		"BT",
+		"BW",
+		"BY",
+		"BZ",
+		"CA",
+		"CC",
+		"CD",
+		"CF",
+		"CG",
+		"CH",
+		"CI",
+		"CK",
+		"CL",
+		"CM",
+		"CN",
+		"CO",
+		"CR",
+		"CU",
+		"CV",
+		"CX",
+		"CY",
+		"CZ",
+		"DE",
+		"DJ",
+		"DK",
+		"DM",
+		"DO",
+		"DZ",
+		"EC",
+		"EE",
+		"EG",
+		"ER",
+		"ES",
+		"ET",
+		"FI",
+		"FJ",
+		"FK",
+		"FM",
+		"FO",
+		"FR",
+		"GA",
+		"GB",
+		"GD",
+		"GE",
+		"GH",
+		"GI",
+		"GL",
+		"GM",
+		"GN",
+		"GQ",
+		"GR",
+		"GT",
+		"GU",
+		"GW",
+		"GY",
+		"HK",
+		"HN",
+		"HR",
+		"HT",
+		"HU",
+		"ID",
+		"IE",
+		"IL",
+		"IM",
+		"IN",
+		"IQ",
+		"IR",
+		"IS",
+		"IT",
+		"JM",
+		"JO",
+		"JP",
+		"KE",
+		"KG",
+		"KH",
+		"KI",
+		"KM",
+		"KN",
+		"KP",
+		"KR",
+		"KW",
+		"KY",
+		"KZ",
+		"LA",
+		"LB",
+		"LC",
+		"LI",
+		"LK",
+		"LR",
+		"LS",
+		"LT",
+		"LU",
+		"LV",
+		"LY",
+		"MA",
+		"MC",
+		"MD",
+		"ME",
+		"MF",
+		"MG",
+		"MH",
+		"MK",
+		"ML",
+		"MM",
+		"MN",
+		"MO",
+		"MP",
+		"MR",
+		"MS",
+		"MT",
+		"MU",
+		"MV",
+		"MW",
+		"MX",
+		"MY",
+		"MZ",
+		"NA",
+		"NC",
+		"NE",
+		"NG",
+		"NI",
+		"NL",
+		"NO",
+		"NP",
+		"NR",
+		"NU",
+		"NZ",
+		"OM",
+		"PA",
+		"PE",
+		"PF",
+		"PG",
+		"PH",
+		"PK",
+		"PL",
+		"PM",
+		"PN",
+		"PR",
+		"PT",
+		"PW",
+		"PY",
+		"QA",
+		"RO",
+		"RS",
+		"RU",
+		"RW",
+		"SA",
+		"SB",
+		"SC",
+		"SD",
+		"SE",
+		"SG",
+		"SH",
+		"SI",
+		"SK",
+		"SL",
+		"SM",
+		"SN",
+		"SO",
+		"SR",
+		"ST",
+		"SV",
+		"SY",
+		"SZ",
+		"TC",
+		"TD",
+		"TG",
+		"TH",
+		"TJ",
+		"TK",
+		"TL",
+		"TM",
+		"TN",
+		"TO",
+		"TR",
+		"TT",
+		"TV",
+		"TW",
+		"TZ",
+		"UA",
+		"UG",
+		"US",
+		"UY",
+		"UZ",
+		"VA",
+		"VC",
+		"VE",
+		"VG",
+		"VI",
+		"VN",
+		"VU",
+		"WF",
+		"WS",
+		"YE",
+		"YT",
+		"ZA",
+		"ZM",
+		"ZW",
+	}
+}
+
 type DomainAvailability string
 
 // Enum values for DomainAvailability
@@ -261,6 +511,22 @@ const (
 	DomainAvailabilityReserved               DomainAvailability = "RESERVED"
 	DomainAvailabilityDont_know              DomainAvailability = "DONT_KNOW"
 )
+
+// Values returns all known values for DomainAvailability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainAvailability) Values() []DomainAvailability {
+	return []DomainAvailability{
+		"AVAILABLE",
+		"AVAILABLE_RESERVED",
+		"AVAILABLE_PREORDER",
+		"UNAVAILABLE",
+		"UNAVAILABLE_PREMIUM",
+		"UNAVAILABLE_RESTRICTED",
+		"RESERVED",
+		"DONT_KNOW",
+	}
+}
 
 type ExtraParamName string
 
@@ -297,6 +563,43 @@ const (
 	ExtraParamNameUk_company_number                ExtraParamName = "UK_COMPANY_NUMBER"
 )
 
+// Values returns all known values for ExtraParamName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExtraParamName) Values() []ExtraParamName {
+	return []ExtraParamName{
+		"DUNS_NUMBER",
+		"BRAND_NUMBER",
+		"BIRTH_DEPARTMENT",
+		"BIRTH_DATE_IN_YYYY_MM_DD",
+		"BIRTH_COUNTRY",
+		"BIRTH_CITY",
+		"DOCUMENT_NUMBER",
+		"AU_ID_NUMBER",
+		"AU_ID_TYPE",
+		"CA_LEGAL_TYPE",
+		"CA_BUSINESS_ENTITY_TYPE",
+		"CA_LEGAL_REPRESENTATIVE",
+		"CA_LEGAL_REPRESENTATIVE_CAPACITY",
+		"ES_IDENTIFICATION",
+		"ES_IDENTIFICATION_TYPE",
+		"ES_LEGAL_FORM",
+		"FI_BUSINESS_NUMBER",
+		"FI_ID_NUMBER",
+		"FI_NATIONALITY",
+		"FI_ORGANIZATION_TYPE",
+		"IT_NATIONALITY",
+		"IT_PIN",
+		"IT_REGISTRANT_ENTITY_TYPE",
+		"RU_PASSPORT_DATA",
+		"SE_ID_NUMBER",
+		"SG_ID_NUMBER",
+		"VAT_NUMBER",
+		"UK_CONTACT_TYPE",
+		"UK_COMPANY_NUMBER",
+	}
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -307,6 +610,19 @@ const (
 	OperationStatusSuccessful  OperationStatus = "SUCCESSFUL"
 	OperationStatusFailed      OperationStatus = "FAILED"
 )
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"ERROR",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
 
 type OperationType string
 
@@ -332,6 +648,32 @@ const (
 	OperationTypeInternal_transfer_in_domain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
 )
 
+// Values returns all known values for OperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationType) Values() []OperationType {
+	return []OperationType{
+		"REGISTER_DOMAIN",
+		"DELETE_DOMAIN",
+		"TRANSFER_IN_DOMAIN",
+		"UPDATE_DOMAIN_CONTACT",
+		"UPDATE_NAMESERVER",
+		"CHANGE_PRIVACY_PROTECTION",
+		"DOMAIN_LOCK",
+		"ENABLE_AUTORENEW",
+		"DISABLE_AUTORENEW",
+		"ADD_DNSSEC",
+		"REMOVE_DNSSEC",
+		"EXPIRE_DOMAIN",
+		"TRANSFER_OUT_DOMAIN",
+		"CHANGE_DOMAIN_OWNER",
+		"RENEW_DOMAIN",
+		"PUSH_DOMAIN",
+		"INTERNAL_TRANSFER_OUT_DOMAIN",
+		"INTERNAL_TRANSFER_IN_DOMAIN",
+	}
+}
+
 type ReachabilityStatus string
 
 // Enum values for ReachabilityStatus
@@ -341,6 +683,17 @@ const (
 	ReachabilityStatusExpired ReachabilityStatus = "EXPIRED"
 )
 
+// Values returns all known values for ReachabilityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReachabilityStatus) Values() []ReachabilityStatus {
+	return []ReachabilityStatus{
+		"PENDING",
+		"DONE",
+		"EXPIRED",
+	}
+}
+
 type Transferable string
 
 // Enum values for Transferable
@@ -349,3 +702,14 @@ const (
 	TransferableUntransferable Transferable = "UNTRANSFERABLE"
 	TransferableDont_know      Transferable = "DONT_KNOW"
 )
+
+// Values returns all known values for Transferable. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Transferable) Values() []Transferable {
+	return []Transferable{
+		"TRANSFERABLE",
+		"UNTRANSFERABLE",
+		"DONT_KNOW",
+	}
+}

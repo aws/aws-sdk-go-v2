@@ -45,29 +45,44 @@ type GetBucketStatisticsOutput struct {
 	BucketCountByEffectivePermission *types.BucketCountByEffectivePermission
 
 	// The total number of buckets, grouped by server-side encryption type. This object
-	// also reports the total number of buckets that aren't encrypted.
+	// also reports the total number of buckets that don't encrypt objects by default.
 	BucketCountByEncryptionType *types.BucketCountByEncryptionType
 
 	// The total number of buckets that are shared with another AWS account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
-	// The total number of objects that Amazon Macie can analyze in all the buckets.
-	// These objects use a file format, file extension, or content type that Amazon
-	// Macie supports.
+	// The total number of objects that Amazon Macie can analyze in the buckets. These
+	// objects use a supported storage class and have a file name extension for a
+	// supported file or storage format.
 	ClassifiableObjectCount *int64
 
-	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last
-	// analyzed the buckets.
+	// The total storage size, in bytes, of all the objects that Amazon Macie can
+	// analyze in the buckets. These objects use a supported storage class and have a
+	// file name extension for a supported file or storage format.
+	ClassifiableSizeInBytes *int64
+
+	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
+	// recently retrieved data about the buckets from Amazon S3.
 	LastUpdated *time.Time
 
-	// The total number of objects in all the buckets.
+	// The total number of objects in the buckets.
 	ObjectCount *int64
 
-	// The total storage size, in bytes, of all the buckets.
+	// The total storage size, in bytes, of the buckets.
 	SizeInBytes *int64
 
-	// The total compressed storage size, in bytes, of all the buckets.
+	// The total compressed storage size, in bytes, of the buckets.
 	SizeInBytesCompressed *int64
+
+	// The total number of objects that Amazon Macie can't analyze in the buckets.
+	// These objects don't use a supported storage class or don't have a file name
+	// extension for a supported file or storage format.
+	UnclassifiableObjectCount *types.ObjectLevelStatistics
+
+	// The total storage size, in bytes, of all the objects that Amazon Macie can't
+	// analyze in the buckets. These objects don't use a supported storage class or
+	// don't have a file name extension for a supported file or storage format.
+	UnclassifiableObjectSizeInBytes *types.ObjectLevelStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

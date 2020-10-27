@@ -40,17 +40,16 @@ type CreateIntegrationInput struct {
 	// the Lambda function-invoking action. With the Lambda function-invoking action,
 	// this is referred to as the Lambda custom integration. With any other AWS service
 	// action, this is known as AWS integration. Supported only for WebSocket APIs.
-	// AWS_PROXY: for integrating the route or method request with the Lambda
-	// function-invoking action with the client request passed through as-is. This
-	// integration is also referred to as Lambda proxy integration. HTTP: for
-	// integrating the route or method request with an HTTP endpoint. This integration
-	// is also referred to as the HTTP custom integration. Supported only for WebSocket
-	// APIs. HTTP_PROXY: for integrating the route or method request with an HTTP
-	// endpoint, with the client request passed through as-is. This is also referred to
-	// as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY
-	// integration. MOCK: for integrating the route or method request with API Gateway
-	// as a "loopback" endpoint without invoking any backend. Supported only for
-	// WebSocket APIs.
+	// AWS_PROXY: for integrating the route or method request with a Lambda function or
+	// other AWS service action. This integration is also referred to as a Lambda proxy
+	// integration. HTTP: for integrating the route or method request with an HTTP
+	// endpoint. This integration is also referred to as the HTTP custom integration.
+	// Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or
+	// method request with an HTTP endpoint, with the client request passed through
+	// as-is. This is also referred to as HTTP proxy integration. For HTTP API private
+	// integrations, use an HTTP_PROXY integration. MOCK: for integrating the route or
+	// method request with API Gateway as a "loopback" endpoint without invoking any
+	// backend. Supported only for WebSocket APIs.
 	//
 	// This member is required.
 	IntegrationType types.IntegrationType
@@ -88,6 +87,11 @@ type CreateIntegrationInput struct {
 	// Specifies the integration's HTTP method type.
 	IntegrationMethod *string
 
+	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
+	// action to invoke. To learn more, see Integration subtype reference
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
+	IntegrationSubtype *string
+
 	// For a Lambda integration, specify the URI of a Lambda function. For an HTTP
 	// integration, specify a fully-qualified URL. For an HTTP API private integration,
 	// specify the ARN of an Application Load Balancer listener, Network Load Balancer
@@ -116,14 +120,19 @@ type CreateIntegrationInput struct {
 	// APIs.
 	PayloadFormatVersion *string
 
-	// A key-value map specifying request parameters that are passed from the method
-	// request to the backend. The key is an integration request parameter name and the
-	// associated value is a method request parameter value or static value that must
-	// be enclosed within single quotes and pre-encoded as required by the backend. The
-	// method request parameter value must match the pattern of
-	// method.request.{location}.{name} , where {location} is querystring, path, or
-	// header; and {name} must be a valid and unique method request parameter name.
-	// Supported only for WebSocket APIs.
+	// For WebSocket APIs, a key-value map specifying request parameters that are
+	// passed from the method request to the backend. The key is an integration request
+	// parameter name and the associated value is a method request parameter value or
+	// static value that must be enclosed within single quotes and pre-encoded as
+	// required by the backend. The method request parameter value must match the
+	// pattern of method.request.{location}.{name} , where {location} is querystring,
+	// path, or header; and {name} must be a valid and unique method request parameter
+	// name. For HTTP APIs, request parameters are a key-value map specifying
+	// parameters that are passed to AWS_PROXY integrations with a specified
+	// integrationSubtype. You can provide static values, or map request data, stage
+	// variables, or context variables that are evaluated at runtime. To learn more,
+	// see Working with AWS service integrations for HTTP APIs
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
 	RequestParameters map[string]*string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -194,21 +203,25 @@ type CreateIntegrationOutput struct {
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
 	IntegrationResponseSelectionExpression *string
 
+	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
+	// action to invoke. To learn more, see Integration subtype reference
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html).
+	IntegrationSubtype *string
+
 	// The integration type of an integration. One of the following: AWS: for
 	// integrating the route or method request with an AWS service action, including
 	// the Lambda function-invoking action. With the Lambda function-invoking action,
 	// this is referred to as the Lambda custom integration. With any other AWS service
 	// action, this is known as AWS integration. Supported only for WebSocket APIs.
-	// AWS_PROXY: for integrating the route or method request with the Lambda
-	// function-invoking action with the client request passed through as-is. This
-	// integration is also referred to as Lambda proxy integration. HTTP: for
-	// integrating the route or method request with an HTTP endpoint. This integration
-	// is also referred to as the HTTP custom integration. Supported only for WebSocket
-	// APIs. HTTP_PROXY: for integrating the route or method request with an HTTP
-	// endpoint, with the client request passed through as-is. This is also referred to
-	// as HTTP proxy integration. MOCK: for integrating the route or method request
-	// with API Gateway as a "loopback" endpoint without invoking any backend.
-	// Supported only for WebSocket APIs.
+	// AWS_PROXY: for integrating the route or method request with a Lambda function or
+	// other AWS service action. This integration is also referred to as a Lambda proxy
+	// integration. HTTP: for integrating the route or method request with an HTTP
+	// endpoint. This integration is also referred to as the HTTP custom integration.
+	// Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or
+	// method request with an HTTP endpoint, with the client request passed through
+	// as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating
+	// the route or method request with API Gateway as a "loopback" endpoint without
+	// invoking any backend. Supported only for WebSocket APIs.
 	IntegrationType types.IntegrationType
 
 	// For a Lambda integration, specify the URI of a Lambda function. For an HTTP
@@ -239,14 +252,19 @@ type CreateIntegrationOutput struct {
 	// APIs.
 	PayloadFormatVersion *string
 
-	// A key-value map specifying request parameters that are passed from the method
-	// request to the backend. The key is an integration request parameter name and the
-	// associated value is a method request parameter value or static value that must
-	// be enclosed within single quotes and pre-encoded as required by the backend. The
-	// method request parameter value must match the pattern of
-	// method.request.{location}.{name} , where {location} is querystring, path, or
-	// header; and {name} must be a valid and unique method request parameter name.
-	// Supported only for WebSocket APIs.
+	// For WebSocket APIs, a key-value map specifying request parameters that are
+	// passed from the method request to the backend. The key is an integration request
+	// parameter name and the associated value is a method request parameter value or
+	// static value that must be enclosed within single quotes and pre-encoded as
+	// required by the backend. The method request parameter value must match the
+	// pattern of method.request.{location}.{name} , where {location} is querystring,
+	// path, or header; and {name} must be a valid and unique method request parameter
+	// name. For HTTP APIs, request parameters are a key-value map specifying
+	// parameters that are passed to AWS_PROXY integrations with a specified
+	// integrationSubtype. You can provide static values, or map request data, stage
+	// variables, or context variables that are evaluated at runtime. To learn more,
+	// see Working with AWS service integrations for HTTP APIs
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
 	RequestParameters map[string]*string
 
 	// Represents a map of Velocity templates that are applied on the request payload

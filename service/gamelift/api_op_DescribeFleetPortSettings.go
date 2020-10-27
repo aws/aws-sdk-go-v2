@@ -67,7 +67,7 @@ func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeFleetPortSettingsInput struct {
 
 	// A unique identifier for a fleet to retrieve port settings for. You can use
@@ -77,7 +77,7 @@ type DescribeFleetPortSettingsInput struct {
 	FleetId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeFleetPortSettingsOutput struct {
 
 	// The port settings for the requested fleet ID.

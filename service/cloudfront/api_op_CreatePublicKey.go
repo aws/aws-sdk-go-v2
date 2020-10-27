@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Add a new public key to CloudFront to use, for example, for field-level
-// encryption. You can add a maximum of 10 public keys with one AWS account.
+// Uploads a public key to CloudFront that you can use with signed URLs and signed
+// cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+// or with field-level encryption
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 func (c *Client) CreatePublicKey(ctx context.Context, params *CreatePublicKeyInput, optFns ...func(*Options)) (*CreatePublicKeyOutput, error) {
 	if params == nil {
 		params = &CreatePublicKeyInput{}
@@ -30,7 +33,7 @@ func (c *Client) CreatePublicKey(ctx context.Context, params *CreatePublicKeyInp
 
 type CreatePublicKeyInput struct {
 
-	// The request to add a public key to CloudFront.
+	// A CloudFront public key configuration.
 	//
 	// This member is required.
 	PublicKeyConfig *types.PublicKeyConfig
@@ -38,13 +41,13 @@ type CreatePublicKeyInput struct {
 
 type CreatePublicKeyOutput struct {
 
-	// The current version of the public key. For example: E2QWRUHAPOMQZL.
+	// The identifier for this version of the public key.
 	ETag *string
 
-	// The fully qualified URI of the new public key resource just created.
+	// The URL of the public key.
 	Location *string
 
-	// Returned when you add a public key.
+	// The public key.
 	PublicKey *types.PublicKey
 
 	// Metadata pertaining to the operation's result.

@@ -35,9 +35,9 @@ type ListVocabulariesInput struct {
 	MaxResults *int32
 
 	// When specified, the vocabularies returned in the list are limited to
-	// vocabularies whose name contains the specified string. The search is
-	// case-insensitive, ListVocabularies returns both "vocabularyname" and
-	// "VocabularyName" in the response list.
+	// vocabularies whose name contains the specified string. The search is not case
+	// sensitive, ListVocabularies returns both "vocabularyname" and "VocabularyName"
+	// in the response list.
 	NameContains *string
 
 	// If the result of the previous request to ListVocabularies was truncated, include
@@ -52,10 +52,10 @@ type ListVocabulariesInput struct {
 type ListVocabulariesOutput struct {
 
 	// The ListVocabularies operation returns a page of vocabularies at a time. The
-	// maximum size of the page is set by the MaxResults parameter. If there are more
-	// jobs in the list than the page size, Amazon Transcribe returns the NextPage
-	// token. Include the token in the next request to the ListVocabularies operation
-	// to return in the next page of jobs.
+	// maximum size of the page is set in the MaxResults parameter. If there are more
+	// jobs in the list than will fit on the page, Amazon Transcribe returns the
+	// NextPage token. To return in the next page of jobs, include the token in the
+	// next request to the ListVocabularies operation.
 	NextToken *string
 
 	// The requested vocabulary state.

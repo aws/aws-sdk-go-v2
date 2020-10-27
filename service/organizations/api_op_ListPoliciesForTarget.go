@@ -18,7 +18,7 @@ import (
 // occasionally return an empty set of results even when there are more results
 // available. The NextToken response parameter value is null only when there are no
 // more results to display. This operation can be called only from the
-// organization's master account or by a member account that is a delegated
+// organization's management account or by a member account that is a delegated
 // administrator for an AWS service.
 func (c *Client) ListPoliciesForTarget(ctx context.Context, params *ListPoliciesForTargetInput, optFns ...func(*Options)) (*ListPoliciesForTargetOutput, error) {
 	if params == nil {
@@ -41,19 +41,19 @@ type ListPoliciesForTargetInput struct {
 	// specify one of the following values:
 	//
 	//     * AISERVICES_OPT_OUT_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
 	//
 	//
 	// * BACKUP_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
 	//
 	//
 	// * SERVICE_CONTROL_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 	//
 	//
 	// * TAG_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	Filter types.PolicyType

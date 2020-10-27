@@ -27,13 +27,18 @@ type AccessLog struct {
 	S3BucketPrefix *string
 }
 
-// This data type is reserved.
+// Information about additional load balancer attributes.
 type AdditionalAttribute struct {
 
-	// This parameter is reserved.
+	// The name of the attribute. The following attribute is supported.
+	//
+	//     *
+	// elb.http.desyncmitigationmode - Determines how the load balancer handles
+	// requests that might pose a security risk to your application. The possible
+	// values are monitor, defensive, and strictest. The default is defensive.
 	Key *string
 
-	// This parameter is reserved.
+	// This value of the attribute.
 	Value *string
 }
 
@@ -250,12 +255,13 @@ type Listener struct {
 	Protocol *string
 
 	// The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.
-	// If the front-end protocol is HTTP, HTTPS, TCP, or SSL, InstanceProtocol must be
-	// at the same protocol. If there is another listener with the same InstancePort
-	// whose InstanceProtocol is secure, (HTTPS or SSL), the listener's
-	// InstanceProtocol must also be secure. If there is another listener with the same
-	// InstancePort whose InstanceProtocol is HTTP or TCP, the listener's
-	// InstanceProtocol must be HTTP or TCP.
+	// If the front-end protocol is TCP or SSL, the back-end protocol must be TCP or
+	// SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be
+	// HTTP or HTTPS. If there is another listener with the same InstancePort whose
+	// InstanceProtocol is secure, (HTTPS or SSL), the listener's InstanceProtocol must
+	// also be secure. If there is another listener with the same InstancePort whose
+	// InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be HTTP or
+	// TCP.
 	InstanceProtocol *string
 
 	// The Amazon Resource Name (ARN) of the server certificate.
@@ -282,7 +288,7 @@ type LoadBalancerAttributes struct {
 	// in the Classic Load Balancers Guide.
 	AccessLog *AccessLog
 
-	// This parameter is reserved.
+	// Any additional attributes.
 	AdditionalAttributes []*AdditionalAttribute
 
 	// If enabled, the load balancer allows existing requests to complete before the

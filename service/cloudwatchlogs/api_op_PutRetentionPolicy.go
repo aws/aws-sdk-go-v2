@@ -37,7 +37,8 @@ type PutRetentionPolicyInput struct {
 
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// and 3653.
+	// and 3653. If you omit retentionInDays in a PutRetentionPolicy operation, the
+	// events in the log group are always retained and never expire.
 	//
 	// This member is required.
 	RetentionInDays *int32

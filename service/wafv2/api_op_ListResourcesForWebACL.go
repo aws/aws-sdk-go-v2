@@ -42,7 +42,8 @@ type ListResourcesForWebACLInput struct {
 	WebACLArn *string
 
 	// Used for web ACLs that are scoped for regional applications. A regional
-	// application can be an Application Load Balancer (ALB) or an API Gateway stage.
+	// application can be an Application Load Balancer (ALB), an API Gateway REST API,
+	// or an AppSync GraphQL API.
 	ResourceType types.ResourceType
 }
 

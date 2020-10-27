@@ -17,8 +17,8 @@ import (
 // operation. This is an asynchronous request that AWS performs in the background.
 // AWS recommends that you first use ListRoots to see the status of policy types
 // for a specified root, and then use this operation. This operation can be called
-// only from the organization's master account. You can enable a policy type in a
-// root only if that policy type is available in the organization. To view the
+// only from the organization's management account. You can enable a policy type in
+// a root only if that policy type is available in the organization. To view the
 // status of available policy types in the organization, use DescribeOrganization.
 func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeInput, optFns ...func(*Options)) (*EnablePolicyTypeOutput, error) {
 	if params == nil {
@@ -41,19 +41,19 @@ type EnablePolicyTypeInput struct {
 	// values:
 	//
 	//     * AISERVICES_OPT_OUT_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
 	//
 	//
 	// * BACKUP_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
 	//
 	//
 	// * SERVICE_CONTROL_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 	//
 	//
 	// * TAG_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	PolicyType types.PolicyType

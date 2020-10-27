@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// Contains an access policy that defines an AWS SSO identity's access to an AWS
-// IoT SiteWise Monitor resource.
+// Contains an access policy that defines an identity's access to an AWS IoT
+// SiteWise Monitor resource.
 type AccessPolicySummary struct {
 
 	// The ID of the access policy.
@@ -15,7 +15,7 @@ type AccessPolicySummary struct {
 	// This member is required.
 	Id *string
 
-	// The AWS SSO identity (a user or group).
+	// The identity (an AWS SSO user, an AWS SSO group, or an IAM user).
 	//
 	// This member is required.
 	Identity *Identity
@@ -104,7 +104,7 @@ type AssetHierarchy struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
 	// or UpdateAssetModel
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
-	// API.
+	// API operation.
 	//
 	// This member is required.
 	Name *string
@@ -128,7 +128,7 @@ type AssetModelHierarchy struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
 	// or UpdateAssetModel
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
-	// API.
+	// API operation.
 	//
 	// This member is required.
 	Name *string
@@ -146,11 +146,12 @@ type AssetModelHierarchyDefinition struct {
 	// This member is required.
 	ChildAssetModelId *string
 
-	// The name of the asset model hierarchy definition (as specified in
+	// The name of the asset model hierarchy definition (as specified in the
 	// CreateAssetModel
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
 	// or UpdateAssetModel
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)).
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html)
+	// API operation).
 	//
 	// This member is required.
 	Name *string
@@ -206,7 +207,7 @@ type AssetModelPropertyDefinition struct {
 }
 
 // Contains current status information for an asset model. For more information,
-// see Asset and Model States
+// see Asset and model states
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
 // in the AWS IoT SiteWise User Guide.
 type AssetModelStatus struct {
@@ -282,14 +283,14 @@ type AssetProperty struct {
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
+	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	Alias *string
 
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 	Notification *PropertyNotification
 
 	// The unit (such as Newtons or RPM) of the asset property.
@@ -314,7 +315,7 @@ type AssetPropertyValue struct {
 }
 
 // Contains information about the current status of an asset. For more information,
-// see Asset and Model States
+// see Asset and model states
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
 // in the AWS IoT SiteWise User Guide.
 type AssetStatus struct {
@@ -432,7 +433,7 @@ type Attribute struct {
 	// The default value of the asset model property attribute. All assets that you
 	// create from the asset model contain this attribute value. You can update an
 	// attribute's value after you create an asset. For more information, see Updating
-	// Attribute Values
+	// attribute values
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html)
 	// in the AWS IoT SiteWise User Guide.
 	DefaultValue *string
@@ -623,16 +624,34 @@ type GroupIdentity struct {
 	Id *string
 }
 
-// Contains an AWS SSO identity ID for a user or group. Currently, you can't use
-// AWS APIs to retrieve AWS SSO identity IDs. You can find the AWS SSO identity IDs
-// in the URL of user and group pages in the AWS SSO console
-// (https://console.aws.amazon.com/singlesignon).
+// Contains information about an AWS Identity and Access Management (IAM) user.
+type IAMUserIdentity struct {
+
+	// The ARN of the IAM user. IAM users must have the
+	// iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. For
+	// more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
+	// the IAM User Guide. If you delete the IAM user, access policies that contain
+	// this identity include an empty arn. You can delete the access policy for the IAM
+	// user that no longer exists.
+	//
+	// This member is required.
+	Arn *string
+}
+
+// Contains an identity that can access an AWS IoT SiteWise Monitor resource.
+// Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find
+// the AWS SSO identity IDs in the URL of user and group pages in the AWS SSO
+// console (https://console.aws.amazon.com/singlesignon).
 type Identity struct {
 
-	// A group identity.
+	// An AWS SSO group identity.
 	Group *GroupIdentity
 
-	// A user identity.
+	// An IAM user identity.
+	IamUser *IAMUserIdentity
+
+	// An AWS SSO user identity.
 	User *UserIdentity
 }
 
@@ -783,10 +802,20 @@ type PortalSummary struct {
 	// This member is required.
 	Name *string
 
-	// The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
+	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
+	// portals that use AWS SSO for authentication. For portals that use IAM for
+	// authentication, you must use the CreatePresignedPortalUrl
+	// (https://docs.aws.amazon.com/AWS IoT SiteWise API
+	// ReferenceAPI_CreatePresignedPortalUrl.html) operation to create a URL that you
+	// can use to access the portal.
 	//
 	// This member is required.
 	StartUrl *string
+
+	// Contains information about the current status of a portal.
+	//
+	// This member is required.
+	Status *PortalStatus
 
 	// The date the portal was created, in Unix epoch time.
 	CreationDate *time.Time
@@ -859,14 +888,14 @@ type Property struct {
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
+	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	Alias *string
 
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 	Notification *PropertyNotification
 
 	// The property type (see PropertyType). A property contains one type.
@@ -878,7 +907,7 @@ type Property struct {
 
 // Contains asset property value notification information. When the notification
 // state is enabled, AWS IoT SiteWise publishes property value updates to a unique
-// MQTT topic. For more information, see Interacting with Other Services
+// MQTT topic. For more information, see Interacting with other services
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
 // in the AWS IoT SiteWise User Guide.
 type PropertyNotification struct {
@@ -925,7 +954,7 @@ type PropertyType struct {
 // Contains a list of value updates for an asset property in the list of asset
 // entries consumed by the BatchPutAssetPropertyValue
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html)
-// API.
+// API operation.
 type PutAssetPropertyValueEntry struct {
 
 	// The user specified ID for the entry. You can use this ID to identify which
@@ -945,7 +974,7 @@ type PutAssetPropertyValueEntry struct {
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
+	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -1043,7 +1072,7 @@ type VariableValue struct {
 	// of a model ID because you can have several hierarchies using the same model and
 	// therefore the same propertyId. For example, you might have separately grouped
 	// assets that come from the same asset model. For more information, see Asset
-	// Hierarchies
+	// hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the AWS IoT SiteWise User Guide.
 	HierarchyId *string

@@ -39,27 +39,31 @@ type SearchTransitGatewayRoutesInput struct {
 	// gateway attachment.
 	//
 	//     * attachment.resource-type - The attachment resource
-	// type (vpc | vpn).
-	//
-	//     * route-search.exact-match - The exact match of the
-	// specified filter.
-	//
-	//     * route-search.longest-prefix-match - The longest prefix
-	// that matches the route.
-	//
-	//     * route-search.subnet-of-match - The routes with a
-	// subnet that match the specified CIDR filter.
+	// type. Valid values are vpc | vpn | direct-connect-gateway | peering.
 	//
 	//     *
-	// route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR
-	// filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your
-	// route table and you specify supernet-of-match as 10.0.1.0/30, then the result
-	// returns 10.0.1.0/29.
+	// prefix-list-id - The ID of the prefix list.
 	//
-	//     * state - The state of the route (active |
-	// blackhole).
+	//     * route-search.exact-match -
+	// The exact match of the specified filter.
 	//
-	//     * type - The type of route (propagated | static).
+	//     *
+	// route-search.longest-prefix-match - The longest prefix that matches the route.
+	//
+	//
+	// * route-search.subnet-of-match - The routes with a subnet that match the
+	// specified CIDR filter.
+	//
+	//     * route-search.supernet-of-match - The routes with a
+	// CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+	// 10.0.1.0/31 routes in your route table and you specify supernet-of-match as
+	// 10.0.1.0/30, then the result returns 10.0.1.0/29.
+	//
+	//     * state - The state of
+	// the route (active | blackhole).
+	//
+	//     * type - The type of route (propagated |
+	// static).
 	//
 	// This member is required.
 	Filters []*types.Filter

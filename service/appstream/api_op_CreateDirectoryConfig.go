@@ -43,8 +43,6 @@ type CreateDirectoryConfigInput struct {
 
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
-	//
-	// This member is required.
 	ServiceAccountCredentials *types.ServiceAccountCredentials
 }
 

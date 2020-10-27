@@ -15,7 +15,7 @@ import (
 // deleted has a VPC peering connection, you first need to get a valid
 // authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization. You
 // do not need to explicitly delete the VPC peering connection--this is done as
-// part of the delete fleet process. This action removes the fleet and its
+// part of the delete fleet process. This operation removes the fleet and its
 // resources. Once a fleet is deleted, you can no longer use any of the resource in
 // that fleet. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
@@ -49,7 +49,7 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteFleetInput struct {
 
 	// A unique identifier for a fleet to be deleted. You can use either the fleet ID

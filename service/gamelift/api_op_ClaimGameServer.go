@@ -11,36 +11,37 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Locates an available game server
-// and temporarily reserves it to host gameplay and players. This action is called
-// by a game client or client service (such as a matchmaker) to request hosting
-// resources for a new game session. In response, GameLift FleetIQ searches for an
-// available game server in the specified game server group, places the game server
-// in "claimed" status for 60 seconds, and returns connection information back to
-// the requester so that players can connect to the game server. There are two ways
-// you can claim a game server. For the first option, you provide a game server
-// group ID only, which prompts GameLift FleetIQ to search for an available game
-// server in the specified group and claim it. With this option, GameLift FleetIQ
-// attempts to consolidate gameplay on as few instances as possible to minimize
-// hosting costs. For the second option, you request a specific game server by its
-// ID. This option results in a less efficient claiming process because it does not
-// take advantage of consolidation and may fail if the requested game server is
-// unavailable. To claim a game server, identify a game server group and
-// (optionally) a game server ID. If your game requires that game data be provided
-// to the game server at the start of a game, such as a game map or player
-// information, you can provide it in your claim request. When a game server is
-// successfully claimed, connection information is returned. A claimed game
-// server's utilization status remains AVAILABLE, while the claim status is set to
-// CLAIMED for up to 60 seconds. This time period allows the game server to be
-// prompted to update its status to UTILIZED (using UpdateGameServer). If the game
-// server's status is not updated within 60 seconds, the game server reverts to
-// unclaimed status and is available to be claimed by another request. If you try
-// to claim a specific game server, this request will fail in the following cases:
-// (1) if the game server utilization status is UTILIZED, (2) if the game server
-// claim status is CLAIMED, or (3) if the instance that the game server is running
-// on is flagged as draining. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Locates an available game server and temporarily reserves it to host
+// gameplay and players. This operation is called from a game client or client
+// service (such as a matchmaker) to request hosting resources for a new game
+// session. In response, GameLift FleetIQ locates an available game server, places
+// it in CLAIMED status for 60 seconds, and returns connection information that
+// players can use to connect to the game server. To claim a game server, identify
+// a game server group. You can also specify a game server ID, although this
+// approach bypasses GameLift FleetIQ placement optimization. Optionally, include
+// game data to pass to the game server at the start of a game session, such as a
+// game map or player information. When a game server is successfully claimed,
+// connection information is returned. A claimed game server's utilization status
+// remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds.
+// This time period gives the game server time to update its status to UTILIZED
+// (using UpdateGameServer) once players join. If the game server's status is not
+// updated within 60 seconds, the game server reverts to unclaimed status and is
+// available to be claimed by another request. The claim time period is a fixed
+// value and is not configurable. If you try to claim a specific game server, this
+// request will fail in the following cases:
+//
+//     * If the game server utilization
+// status is UTILIZED.
+//
+//     * If the game server claim status is CLAIMED.
+//
+// When
+// claiming a specific game server, this request will succeed even if the game
+// server is running on an instance in DRAINING status. To avoid this, first check
+// the instance status by calling DescribeGameServerInstances. Learn more GameLift
+// FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * RegisterGameServer
@@ -73,17 +74,17 @@ func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInp
 
 type ClaimGameServerInput struct {
 
-	// An identifier for the game server group. When claiming a specific game server,
-	// this is the game server group whether the game server is located. When
-	// requesting that GameLift FleetIQ locate an available game server, this is the
-	// game server group to search on. You can use either the GameServerGroup name or
-	// ARN value.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.. If you are not specifying a
+	// game server to claim, this value identifies where you want GameLift FleetIQ to
+	// look for an available game server to claim.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// A set of custom game server properties, formatted as a single string value, to
-	// be passed to the claimed game server.
+	// A set of custom game server properties, formatted as a single string value. This
+	// data is passed to a game client or service when it requests information on game
+	// servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
 
 	// A custom string that uniquely identifies the game server to claim. If this
@@ -94,7 +95,7 @@ type ClaimGameServerInput struct {
 
 type ClaimGameServerOutput struct {
 
-	// Object that describes the newly claimed game server resource.
+	// Object that describes the newly claimed game server.
 	GameServer *types.GameServer
 
 	// Metadata pertaining to the operation's result.

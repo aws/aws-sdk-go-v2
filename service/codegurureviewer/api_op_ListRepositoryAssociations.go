@@ -62,8 +62,8 @@ type ListRepositoryAssociationsInput struct {
 
 	// List of owners to use as a filter. For AWS CodeCommit, it is the name of the
 	// CodeCommit account that was used to associate the repository. For other
-	// repository source providers, such as Bitbucket, this is name of the account that
-	// was used to associate the repository.
+	// repository source providers, such as Bitbucket and GitHub Enterprise Server,
+	// this is name of the account that was used to associate the repository.
 	Owners []*string
 
 	// List of provider types to use as a filter.
@@ -79,19 +79,19 @@ type ListRepositoryAssociationsInput struct {
 	//
 	//         * Setting up pull
 	// request notifications. This is required for pull requests to trigger a CodeGuru
-	// Reviewer review. If your repository ProviderType is GitHub or Bitbucket,
-	// CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru
-	// Reviewer reviews. If you delete these webhooks, reviews of code in your
-	// repository cannot be triggered.
+	// Reviewer review. If your repository ProviderType is GitHub, GitHub Enterprise
+	// Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to
+	// trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code
+	// in your repository cannot be triggered.
 	//
-	//         * Setting up source code access. This
-	// is required for CodeGuru Reviewer to securely clone code in your repository.
+	//         * Setting up source code
+	// access. This is required for CodeGuru Reviewer to securely clone code in your
+	// repository.
+	//
+	//     * Failed: The repository failed to associate or disassociate.
 	//
 	//
-	// * Failed: The repository failed to associate or disassociate.
-	//
-	//     *
-	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	// * Disassociating: CodeGuru Reviewer is removing the repository's pull request
 	// notifications and source code access.
 	States []types.RepositoryAssociationState
 }

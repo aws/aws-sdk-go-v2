@@ -94,6 +94,96 @@ func awsRestjson1_serializeOpDocumentAssociateRepositoryInput(v *AssociateReposi
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateCodeReview struct {
+}
+
+func (*awsRestjson1_serializeOpCreateCodeReview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateCodeReview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCodeReviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/codereviews")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateCodeReviewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateCodeReviewInput(v *CreateCodeReviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateCodeReviewInput(v *CreateCodeReviewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.RepositoryAssociationArn != nil {
+		ok := object.Key("RepositoryAssociationArn")
+		ok.String(*v.RepositoryAssociationArn)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		if err := awsRestjson1_serializeDocumentCodeReviewType(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeCodeReview struct {
 }
 
@@ -808,6 +898,20 @@ func awsRestjson1_serializeDocumentCodeCommitRepository(v *types.CodeCommitRepos
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCodeReviewType(v *types.CodeReviewType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RepositoryAnalysis != nil {
+		ok := object.Key("RepositoryAnalysis")
+		if err := awsRestjson1_serializeDocumentRepositoryAnalysis(v.RepositoryAnalysis, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentReactions(v []types.Reaction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -842,6 +946,32 @@ func awsRestjson1_serializeDocumentRepository(v *types.Repository, value smithyj
 		if err := awsRestjson1_serializeDocumentThirdPartySourceRepository(v.GitHubEnterpriseServer, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRepositoryAnalysis(v *types.RepositoryAnalysis, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RepositoryHead != nil {
+		ok := object.Key("RepositoryHead")
+		if err := awsRestjson1_serializeDocumentRepositoryHeadSourceCodeType(v.RepositoryHead, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRepositoryHeadSourceCodeType(v *types.RepositoryHeadSourceCodeType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BranchName != nil {
+		ok := object.Key("BranchName")
+		ok.String(*v.BranchName)
 	}
 
 	return nil

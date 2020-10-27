@@ -61,7 +61,10 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// multiple account IDs per request.
 	AccountIds []*string
 
-	// The recommendations data to include in the export file.
+	// The recommendations data to include in the export file. For more information
+	// about the fields that can be exported, see Exported files
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files)
+	// in the Compute Optimizer User Guide.
 	FieldsToExport []types.ExportableAutoScalingGroupField
 
 	// The format of the export file. The only export file format currently supported

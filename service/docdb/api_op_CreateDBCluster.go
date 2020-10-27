@@ -94,10 +94,17 @@ type CreateDBClusterInput struct {
 	DeletionProtection *bool
 
 	// A list of log types that need to be enabled for exporting to Amazon CloudWatch
-	// Logs.
+	// Logs. You can enable audit logs or profiler logs. For more information, see
+	// Auditing Amazon DocumentDB Events
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html)
+	// and  Profiling Amazon DocumentDB Operations
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html).
 	EnableCloudwatchLogsExports []*string
 
-	// The version number of the database engine to use.
+	// The version number of the database engine to use. The --engine-version will
+	// default to the latest major engine version. For production workloads, we
+	// recommend explicitly declaring this parameter with the intended major engine
+	// version.
 	EngineVersion *string
 
 	// The AWS KMS key identifier for an encrypted cluster. The AWS KMS key identifier
@@ -107,24 +114,19 @@ type CreateDBClusterInput struct {
 	// instead of the ARN for the AWS KMS encryption key. If an encryption key is not
 	// specified in KmsKeyId:
 	//
-	//     * If ReplicationSourceIdentifier identifies an
-	// encrypted source, then Amazon DocumentDB uses the encryption key that is used to
-	// encrypt the source. Otherwise, Amazon DocumentDB uses your default encryption
-	// key.
+	//     * If the StorageEncrypted parameter is true, Amazon
+	// DocumentDB uses your default encryption key.
 	//
-	//     * If the StorageEncrypted parameter is true and
-	// ReplicationSourceIdentifier is not specified, Amazon DocumentDB uses your
-	// default encryption key.
-	//
-	// AWS KMS creates the default encryption key for your AWS
-	// account. Your AWS account has a different default encryption key for each AWS
-	// Region. If you create a replica of an encrypted cluster in another AWS Region,
-	// you must set KmsKeyId to a KMS key ID that is valid in the destination AWS
-	// Region. This key is used to encrypt the replica in that AWS Region.
+	// AWS KMS creates the default
+	// encryption key for your AWS account. Your AWS account has a different default
+	// encryption key for each AWS Region.
 	KmsKeyId *string
 
 	// The port number on which the instances in the cluster accept connections.
 	Port *int32
+
+	// Not currently supported.
+	PreSignedUrl *string
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a

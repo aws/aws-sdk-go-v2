@@ -16,20 +16,29 @@ import (
 // bucket. A 200 OK response can contain valid or invalid XML. Be sure to design
 // your application to parse the contents of the response and handle it
 // appropriately. This API has been revised. We recommend that you use the newer
-// version, ListObjectsV2, when developing applications. For backward
-// compatibility, Amazon S3 continues to support ListObjects. The following
-// operations are related to ListObjects:
+// version, ListObjectsV2
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), when
+// developing applications. For backward compatibility, Amazon S3 continues to
+// support ListObjects. The following operations are related to ListObjects:
 //
-//     * ListObjectsV2
+//     *
+// ListObjectsV2
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
 //
-//     * GetObject
+//     *
+// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
 //
 // * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     * CreateBucket
+//     *
+// CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     * ListBuckets
+//     *
+// ListBuckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
 func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optFns ...func(*Options)) (*ListObjectsOutput, error) {
 	if params == nil {
 		params = &ListObjectsInput{}
@@ -47,7 +56,23 @@ func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optF
 
 type ListObjectsInput struct {
 
-	// The name of the bucket containing the objects.
+	// The name of the bucket containing the objects. When using this API with an
+	// access point, you must direct requests to the access point hostname. The access
+	// point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -62,6 +87,10 @@ type ListObjectsInput struct {
 	// can add this parameter to request that Amazon S3 encode the keys in the
 	// response.
 	EncodingType types.EncodingType
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Specifies the key to start with when listing objects in a bucket.
 	Marker *string
@@ -117,14 +146,14 @@ type ListObjectsOutput struct {
 	// The maximum number of keys returned in the response body.
 	MaxKeys *int32
 
-	// Bucket name.
+	// The bucket name.
 	Name *string
 
 	// When response is truncated (the IsTruncated element value in the response is
 	// true), you can use the key name in this field as marker in the subsequent
 	// request to get next set of objects. Amazon S3 lists objects in alphabetical
 	// order Note: This element is returned only if you have delimiter request
-	// parameter specified. If response does not include the NextMaker and it is
+	// parameter specified. If response does not include the NextMarker and it is
 	// truncated, you can use the value of the last Key in the response as the marker
 	// in the subsequent request to get the next set of object keys.
 	NextMarker *string

@@ -15,8 +15,10 @@ import (
 // a key-value pair. You can associate tags with an object by sending a PUT request
 // against the tagging subresource that is associated with the object. You can
 // retrieve tags by sending a GET request. For more information, see
-// GetObjectTagging. For tagging-related restrictions related to characters and
-// encodings, see Tag Restrictions
+// GetObjectTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html). For
+// tagging-related restrictions related to characters and encodings, see Tag
+// Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html).
 // Note that Amazon S3 limits the maximum number of tags to 10 tags per object. To
 // use this operation, you must have permission to perform the s3:PutObjectTagging
@@ -55,6 +57,7 @@ import (
 //
 //     *
 // GetObjectTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
 func (c *Client) PutObjectTagging(ctx context.Context, params *PutObjectTaggingInput, optFns ...func(*Options)) (*PutObjectTaggingOutput, error) {
 	if params == nil {
 		params = &PutObjectTaggingInput{}
@@ -75,16 +78,24 @@ type PutObjectTaggingInput struct {
 	// The bucket name containing the object. When using this API with an access point,
 	// you must direct requests to the access point hostname. The access point hostname
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
-	// When using this operation using an access point through the AWS SDKs, you
-	// provide the access point ARN in place of the bucket name. For more information
-	// about access point ARNs, see Using Access Points
+	// When using this operation with an access point through the AWS SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
 
-	// Name of the tag.
+	// Name of the object key.
 	//
 	// This member is required.
 	Key *string
@@ -96,6 +107,10 @@ type PutObjectTaggingInput struct {
 
 	// The MD5 hash for the request body.
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// The versionId of the object that the tag-set will be added to.
 	VersionId *string

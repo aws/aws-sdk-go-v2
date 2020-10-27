@@ -59,7 +59,7 @@ import (
 // millisecond precision. There are no guarantees about the time stamp accuracy, or
 // that the time stamp is always increasing. For example, records in a shard or
 // across a stream might have time stamps that are out of order. This operation has
-// a limit of five transactions per second per account.
+// a limit of five transactions per second per shard.
 func (c *Client) GetRecords(ctx context.Context, params *GetRecordsInput, optFns ...func(*Options)) (*GetRecordsOutput, error) {
 	if params == nil {
 		params = &GetRecordsInput{}
@@ -87,7 +87,7 @@ type GetRecordsInput struct {
 
 	// The maximum number of records to return. Specify a value of up to 10,000. If you
 	// specify a value that is greater than 10,000, GetRecords throws
-	// InvalidArgumentException.
+	// InvalidArgumentException. The default value is 10,000.
 	Limit *int32
 }
 
@@ -98,6 +98,8 @@ type GetRecordsOutput struct {
 	//
 	// This member is required.
 	Records []*types.Record
+
+	ChildShards []*types.ChildShard
 
 	// The number of milliseconds the GetRecords response is from the tip of the
 	// stream, indicating how far behind current time the consumer is. A value of zero

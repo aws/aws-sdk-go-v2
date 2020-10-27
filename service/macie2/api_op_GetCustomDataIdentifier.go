@@ -11,8 +11,7 @@ import (
 	"time"
 )
 
-// Retrieves information about the criteria and other settings for a custom data
-// identifier.
+// Retrieves the criteria and other settings for a custom data identifier.
 func (c *Client) GetCustomDataIdentifier(ctx context.Context, params *GetCustomDataIdentifierInput, optFns ...func(*Options)) (*GetCustomDataIdentifierOutput, error) {
 	if params == nil {
 		params = &GetCustomDataIdentifierInput{}
@@ -59,11 +58,12 @@ type GetCustomDataIdentifierOutput struct {
 
 	// An array that lists specific character sequences (ignore words) to exclude from
 	// the results. If the text matched by the regular expression is the same as any
-	// string in this array, Amazon Macie ignores it.
+	// string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
 	IgnoreWords []*string
 
 	// An array that lists specific character sequences (keywords), one of which must
 	// be within proximity (maximumMatchDistance) of the regular expression to match.
+	// Keywords aren't case sensitive.
 	Keywords []*string
 
 	// The maximum number of characters that can exist between text that matches the

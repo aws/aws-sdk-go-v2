@@ -10,6 +10,26 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpAssociateConnectionAlias struct {
+}
+
+func (*validateOpAssociateConnectionAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateConnectionAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateConnectionAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateConnectionAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateIpGroups struct {
 }
 
@@ -70,6 +90,26 @@ func (m *validateOpCopyWorkspaceImage) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnectionAlias struct {
+}
+
+func (*validateOpCreateConnectionAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnectionAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectionAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectionAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIpGroup struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpCreateWorkspaces) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkspacesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnectionAlias struct {
+}
+
+func (*validateOpDeleteConnectionAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnectionAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectionAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectionAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpDescribeClientProperties) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeConnectionAliasPermissions struct {
+}
+
+func (*validateOpDescribeConnectionAliasPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnectionAliasPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectionAliasPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectionAliasPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTags struct {
 }
 
@@ -285,6 +365,26 @@ func (m *validateOpDescribeWorkspaceSnapshots) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeWorkspaceSnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateConnectionAlias struct {
+}
+
+func (*validateOpDisassociateConnectionAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateConnectionAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateConnectionAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateConnectionAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +750,26 @@ func (m *validateOpTerminateWorkspaces) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectionAliasPermission struct {
+}
+
+func (*validateOpUpdateConnectionAliasPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectionAliasPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectionAliasPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectionAliasPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRulesOfIpGroup struct {
 }
 
@@ -690,6 +810,10 @@ func (m *validateOpUpdateWorkspaceImagePermission) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateConnectionAlias{}, middleware.After)
+}
+
 func addOpAssociateIpGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateIpGroups{}, middleware.After)
 }
@@ -702,6 +826,10 @@ func addOpCopyWorkspaceImageValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCopyWorkspaceImage{}, middleware.After)
 }
 
+func addOpCreateConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnectionAlias{}, middleware.After)
+}
+
 func addOpCreateIpGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIpGroup{}, middleware.After)
 }
@@ -712,6 +840,10 @@ func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
+}
+
+func addOpDeleteConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnectionAlias{}, middleware.After)
 }
 
 func addOpDeleteIpGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -734,6 +866,10 @@ func addOpDescribeClientPropertiesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeClientProperties{}, middleware.After)
 }
 
+func addOpDescribeConnectionAliasPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnectionAliasPermissions{}, middleware.After)
+}
+
 func addOpDescribeTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTags{}, middleware.After)
 }
@@ -744,6 +880,10 @@ func addOpDescribeWorkspaceImagePermissionsValidationMiddleware(stack *middlewar
 
 func addOpDescribeWorkspaceSnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkspaceSnapshots{}, middleware.After)
+}
+
+func addOpDisassociateConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateConnectionAlias{}, middleware.After)
 }
 
 func addOpDisassociateIpGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -818,12 +958,34 @@ func addOpTerminateWorkspacesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpTerminateWorkspaces{}, middleware.After)
 }
 
+func addOpUpdateConnectionAliasPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectionAliasPermission{}, middleware.After)
+}
+
 func addOpUpdateRulesOfIpGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRulesOfIpGroup{}, middleware.After)
 }
 
 func addOpUpdateWorkspaceImagePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspaceImagePermission{}, middleware.After)
+}
+
+func validateConnectionAliasPermission(v *types.ConnectionAliasPermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectionAliasPermission"}
+	if v.SharedAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedAccountId"))
+	}
+	if v.AllowAssociation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowAssociation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateRebootRequest(v *types.RebootRequest) error {
@@ -959,16 +1121,16 @@ func validateWorkspaceRequest(v *types.WorkspaceRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceRequest"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
@@ -997,16 +1159,34 @@ func validateWorkspaceRequestList(v []*types.WorkspaceRequest) error {
 	}
 }
 
+func validateOpAssociateConnectionAliasInput(v *AssociateConnectionAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateConnectionAliasInput"}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateIpGroupsInput(v *AssociateIpGroupsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateIpGroupsInput"}
-	if v.GroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupIds"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.GroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1020,11 +1200,11 @@ func validateOpAuthorizeIpRulesInput(v *AuthorizeIpRulesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeIpRulesInput"}
-	if v.UserRules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserRules"))
-	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.UserRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserRules"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1038,19 +1218,39 @@ func validateOpCopyWorkspaceImageInput(v *CopyWorkspaceImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyWorkspaceImageInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.SourceRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
 	}
 	if v.SourceImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceImageId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectionAliasInput(v *CreateConnectionAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionAliasInput"}
+	if v.ConnectionString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionString"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1064,13 +1264,13 @@ func validateOpCreateIpGroupInput(v *CreateIpGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIpGroupInput"}
-	if v.GroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.GroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1112,6 +1312,21 @@ func validateOpCreateWorkspacesInput(v *CreateWorkspacesInput) error {
 		if err := validateWorkspaceRequestList(v.Workspaces); err != nil {
 			invalidParams.AddNested("Workspaces", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectionAliasInput(v *DeleteConnectionAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionAliasInput"}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1198,6 +1413,21 @@ func validateOpDescribeClientPropertiesInput(v *DescribeClientPropertiesInput) e
 	}
 }
 
+func validateOpDescribeConnectionAliasPermissionsInput(v *DescribeConnectionAliasPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectionAliasPermissionsInput"}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTagsInput(v *DescribeTagsInput) error {
 	if v == nil {
 		return nil
@@ -1243,16 +1473,31 @@ func validateOpDescribeWorkspaceSnapshotsInput(v *DescribeWorkspaceSnapshotsInpu
 	}
 }
 
+func validateOpDisassociateConnectionAliasInput(v *DisassociateConnectionAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateConnectionAliasInput"}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateIpGroupsInput(v *DisassociateIpGroupsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIpGroupsInput"}
-	if v.GroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupIds"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.GroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1266,22 +1511,22 @@ func validateOpImportWorkspaceImageInput(v *ImportWorkspaceImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportWorkspaceImageInput"}
-	if v.Ec2ImageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ec2ImageId"))
-	}
-	if v.ImageDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageDescription"))
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ImageDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageDescription"))
+	}
+	if v.Ec2ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ec2ImageId"))
+	}
 	if len(v.IngestionProcess) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IngestionProcess"))
-	}
-	if v.ImageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1364,11 +1609,11 @@ func validateOpModifyWorkspaceAccessPropertiesInput(v *ModifyWorkspaceAccessProp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyWorkspaceAccessPropertiesInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.WorkspaceAccessProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceAccessProperties"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1418,11 +1663,11 @@ func validateOpModifyWorkspaceStateInput(v *ModifyWorkspaceStateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyWorkspaceStateInput"}
-	if len(v.WorkspaceState) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceState"))
-	}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if len(v.WorkspaceState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1474,16 +1719,16 @@ func validateOpRegisterWorkspaceDirectoryInput(v *RegisterWorkspaceDirectoryInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterWorkspaceDirectoryInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.EnableWorkDocs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableWorkDocs"))
 	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
-	if v.EnableWorkDocs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnableWorkDocs"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1565,6 +1810,28 @@ func validateOpTerminateWorkspacesInput(v *TerminateWorkspacesInput) error {
 	} else if v.TerminateWorkspaceRequests != nil {
 		if err := validateTerminateWorkspaceRequests(v.TerminateWorkspaceRequests); err != nil {
 			invalidParams.AddNested("TerminateWorkspaceRequests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectionAliasPermissionInput(v *UpdateConnectionAliasPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionAliasPermissionInput"}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if v.ConnectionAliasPermission == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionAliasPermission"))
+	} else if v.ConnectionAliasPermission != nil {
+		if err := validateConnectionAliasPermission(v.ConnectionAliasPermission); err != nil {
+			invalidParams.AddNested("ConnectionAliasPermission", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

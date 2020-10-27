@@ -9,6 +9,15 @@ const (
 	AssetTypeS3_snapshot AssetType = "S3_SNAPSHOT"
 )
 
+// Values returns all known values for AssetType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AssetType) Values() []AssetType {
+	return []AssetType{
+		"S3_SNAPSHOT",
+	}
+}
+
 type Code string
 
 // Enum values for Code
@@ -22,6 +31,21 @@ const (
 	CodeMalware_scan_encrypted_file      Code = "MALWARE_SCAN_ENCRYPTED_FILE"
 )
 
+// Values returns all known values for Code. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Code) Values() []Code {
+	return []Code{
+		"ACCESS_DENIED_EXCEPTION",
+		"INTERNAL_SERVER_EXCEPTION",
+		"MALWARE_DETECTED",
+		"RESOURCE_NOT_FOUND_EXCEPTION",
+		"SERVICE_QUOTA_EXCEEDED_EXCEPTION",
+		"VALIDATION_EXCEPTION",
+		"MALWARE_SCAN_ENCRYPTED_FILE",
+	}
+}
+
 type JobErrorLimitName string
 
 // Enum values for JobErrorLimitName
@@ -30,6 +54,16 @@ const (
 	JobErrorLimitNameAsset_size_in_gb    JobErrorLimitName = "Asset size in GB"
 )
 
+// Values returns all known values for JobErrorLimitName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobErrorLimitName) Values() []JobErrorLimitName {
+	return []JobErrorLimitName{
+		"Assets per revision",
+		"Asset size in GB",
+	}
+}
+
 type JobErrorResourceTypes string
 
 // Enum values for JobErrorResourceTypes
@@ -37,6 +71,16 @@ const (
 	JobErrorResourceTypesRevision JobErrorResourceTypes = "REVISION"
 	JobErrorResourceTypesAsset    JobErrorResourceTypes = "ASSET"
 )
+
+// Values returns all known values for JobErrorResourceTypes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobErrorResourceTypes) Values() []JobErrorResourceTypes {
+	return []JobErrorResourceTypes{
+		"REVISION",
+		"ASSET",
+	}
+}
 
 type LimitName string
 
@@ -56,6 +100,26 @@ const (
 	LimitNameConcurrent_in_progress_jobs_to_export_assets_to_a_signed_url   LimitName = "Concurrent in progress jobs to export assets to a signed URL"
 )
 
+// Values returns all known values for LimitName. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LimitName) Values() []LimitName {
+	return []LimitName{
+		"Products per account",
+		"Data sets per account",
+		"Data sets per product",
+		"Revisions per data set",
+		"Assets per revision",
+		"Assets per import job from Amazon S3",
+		"Asset per export job from Amazon S3",
+		"Asset size in GB",
+		"Concurrent in progress jobs to import assets from Amazon S3",
+		"Concurrent in progress jobs to import assets from a signed URL",
+		"Concurrent in progress jobs to export assets to Amazon S3",
+		"Concurrent in progress jobs to export assets to a signed URL",
+	}
+}
+
 type Origin string
 
 // Enum values for Origin
@@ -63,6 +127,16 @@ const (
 	OriginOwned    Origin = "OWNED"
 	OriginEntitled Origin = "ENTITLED"
 )
+
+// Values returns all known values for Origin. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Origin) Values() []Origin {
+	return []Origin{
+		"OWNED",
+		"ENTITLED",
+	}
+}
 
 type ResourceType string
 
@@ -74,6 +148,18 @@ const (
 	ResourceTypeJob      ResourceType = "JOB"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"DATA_SET",
+		"REVISION",
+		"ASSET",
+		"JOB",
+	}
+}
+
 type ServerSideEncryptionTypes string
 
 // Enum values for ServerSideEncryptionTypes
@@ -81,6 +167,16 @@ const (
 	ServerSideEncryptionTypesAws_kms ServerSideEncryptionTypes = "aws:kms"
 	ServerSideEncryptionTypesAes256  ServerSideEncryptionTypes = "AES256"
 )
+
+// Values returns all known values for ServerSideEncryptionTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerSideEncryptionTypes) Values() []ServerSideEncryptionTypes {
+	return []ServerSideEncryptionTypes{
+		"aws:kms",
+		"AES256",
+	}
+}
 
 type State string
 
@@ -94,6 +190,20 @@ const (
 	StateTimed_out   State = "TIMED_OUT"
 )
 
+// Values returns all known values for State. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"WAITING",
+		"IN_PROGRESS",
+		"ERROR",
+		"COMPLETED",
+		"CANCELLED",
+		"TIMED_OUT",
+	}
+}
+
 type Type string
 
 // Enum values for Type
@@ -103,3 +213,15 @@ const (
 	TypeExport_assets_to_s3          Type = "EXPORT_ASSETS_TO_S3"
 	TypeExport_asset_to_signed_url   Type = "EXPORT_ASSET_TO_SIGNED_URL"
 )
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"IMPORT_ASSETS_FROM_S3",
+		"IMPORT_ASSET_FROM_SIGNED_URL",
+		"EXPORT_ASSETS_TO_S3",
+		"EXPORT_ASSET_TO_SIGNED_URL",
+	}
+}

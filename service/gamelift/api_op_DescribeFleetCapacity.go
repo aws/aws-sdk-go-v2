@@ -19,7 +19,7 @@ import (
 // multiple fleets, use the pagination parameters to retrieve results as a set of
 // sequential pages. If successful, a FleetCapacity object is returned for each
 // requested fleet ID. When a list of fleet IDs is provided, attribute objects are
-// returned only for fleets that currently exist. Some API actions may limit the
+// returned only for fleets that currently exist. Some API operations may limit the
 // number of fleet IDs allowed in one request. If a request exceeds this limit, the
 // request fails and the error message includes the maximum allowed. Learn more
 // Setting up GameLift Fleets
@@ -73,7 +73,7 @@ func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFlee
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeFleetCapacityInput struct {
 
 	// A unique identifier for a fleet(s) to retrieve capacity information for. You can
@@ -86,13 +86,13 @@ type DescribeFleetCapacityInput struct {
 	Limit *int32
 
 	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
 	NextToken *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects containing capacity information for each requested fleet
@@ -100,7 +100,7 @@ type DescribeFleetCapacityOutput struct {
 	FleetCapacity []*types.FleetCapacity
 
 	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
+	// operation. If no token is returned, these results represent the end of the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

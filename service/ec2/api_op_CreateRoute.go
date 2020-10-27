@@ -51,6 +51,10 @@ type CreateRouteInput struct {
 	// This member is required.
 	RouteTableId *string
 
+	// The ID of the carrier gateway. You can only use this option when the VPC
+	// contains a subnet which is associated with a Wavelength Zone.
+	CarrierGatewayId *string
+
 	// The IPv4 CIDR address block used for the destination match. Routing decisions
 	// are based on the most specific match. We modify the specified CIDR block to its
 	// canonical form; for example, if you specify 100.68.0.18/18, we modify it to

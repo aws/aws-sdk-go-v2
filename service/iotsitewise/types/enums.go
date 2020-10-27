@@ -14,12 +14,35 @@ const (
 	AggregateTypeStandard_deviation AggregateType = "STANDARD_DEVIATION"
 )
 
+// Values returns all known values for AggregateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregateType) Values() []AggregateType {
+	return []AggregateType{
+		"AVERAGE",
+		"COUNT",
+		"MAXIMUM",
+		"MINIMUM",
+		"SUM",
+		"STANDARD_DEVIATION",
+	}
+}
+
 type AssetErrorCode string
 
 // Enum values for AssetErrorCode
 const (
 	AssetErrorCodeInternal_failure AssetErrorCode = "INTERNAL_FAILURE"
 )
+
+// Values returns all known values for AssetErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetErrorCode) Values() []AssetErrorCode {
+	return []AssetErrorCode{
+		"INTERNAL_FAILURE",
+	}
+}
 
 type AssetModelState string
 
@@ -33,6 +56,20 @@ const (
 	AssetModelStateFailed      AssetModelState = "FAILED"
 )
 
+// Values returns all known values for AssetModelState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetModelState) Values() []AssetModelState {
+	return []AssetModelState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"PROPAGATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type AssetState string
 
 // Enum values for AssetState
@@ -43,6 +80,37 @@ const (
 	AssetStateDeleting AssetState = "DELETING"
 	AssetStateFailed   AssetState = "FAILED"
 )
+
+// Values returns all known values for AssetState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AssetState) Values() []AssetState {
+	return []AssetState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type AuthMode string
+
+// Enum values for AuthMode
+const (
+	AuthModeIam AuthMode = "IAM"
+	AuthModeSso AuthMode = "SSO"
+)
+
+// Values returns all known values for AuthMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AuthMode) Values() []AuthMode {
+	return []AuthMode{
+		"IAM",
+		"SSO",
+	}
+}
 
 type BatchPutAssetPropertyValueErrorCode string
 
@@ -59,6 +127,24 @@ const (
 	BatchPutAssetPropertyValueErrorCodeAccessdeniedexception         BatchPutAssetPropertyValueErrorCode = "AccessDeniedException"
 )
 
+// Values returns all known values for BatchPutAssetPropertyValueErrorCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchPutAssetPropertyValueErrorCode) Values() []BatchPutAssetPropertyValueErrorCode {
+	return []BatchPutAssetPropertyValueErrorCode{
+		"ResourceNotFoundException",
+		"InvalidRequestException",
+		"InternalFailureException",
+		"ServiceUnavailableException",
+		"ThrottlingException",
+		"LimitExceededException",
+		"ConflictingOperationException",
+		"TimestampOutOfRangeException",
+		"AccessDeniedException",
+	}
+}
+
 type CapabilitySyncStatus string
 
 // Enum values for CapabilitySyncStatus
@@ -68,6 +154,17 @@ const (
 	CapabilitySyncStatusSync_failed CapabilitySyncStatus = "SYNC_FAILED"
 )
 
+// Values returns all known values for CapabilitySyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
+	return []CapabilitySyncStatus{
+		"IN_SYNC",
+		"OUT_OF_SYNC",
+		"SYNC_FAILED",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -76,13 +173,35 @@ const (
 	ErrorCodeInternal_failure ErrorCode = "INTERNAL_FAILURE"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"VALIDATION_ERROR",
+		"INTERNAL_FAILURE",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
 const (
 	IdentityTypeUser  IdentityType = "USER"
 	IdentityTypeGroup IdentityType = "GROUP"
+	IdentityTypeIam   IdentityType = "IAM"
 )
+
+// Values returns all known values for IdentityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"USER",
+		"GROUP",
+		"IAM",
+	}
+}
 
 type ImageFileType string
 
@@ -91,6 +210,15 @@ const (
 	ImageFileTypePng ImageFileType = "PNG"
 )
 
+// Values returns all known values for ImageFileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageFileType) Values() []ImageFileType {
+	return []ImageFileType{
+		"PNG",
+	}
+}
+
 type ListAssetsFilter string
 
 // Enum values for ListAssetsFilter
@@ -98,6 +226,16 @@ const (
 	ListAssetsFilterAll       ListAssetsFilter = "ALL"
 	ListAssetsFilterTop_level ListAssetsFilter = "TOP_LEVEL"
 )
+
+// Values returns all known values for ListAssetsFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListAssetsFilter) Values() []ListAssetsFilter {
+	return []ListAssetsFilter{
+		"ALL",
+		"TOP_LEVEL",
+	}
+}
 
 type LoggingLevel string
 
@@ -108,12 +246,36 @@ const (
 	LoggingLevelOff   LoggingLevel = "OFF"
 )
 
+// Values returns all known values for LoggingLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LoggingLevel) Values() []LoggingLevel {
+	return []LoggingLevel{
+		"ERROR",
+		"INFO",
+		"OFF",
+	}
+}
+
 type MonitorErrorCode string
 
 // Enum values for MonitorErrorCode
 const (
 	MonitorErrorCodeInternal_failure MonitorErrorCode = "INTERNAL_FAILURE"
+	MonitorErrorCodeValidation_error MonitorErrorCode = "VALIDATION_ERROR"
+	MonitorErrorCodeLimit_exceeded   MonitorErrorCode = "LIMIT_EXCEEDED"
 )
+
+// Values returns all known values for MonitorErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MonitorErrorCode) Values() []MonitorErrorCode {
+	return []MonitorErrorCode{
+		"INTERNAL_FAILURE",
+		"VALIDATION_ERROR",
+		"LIMIT_EXCEEDED",
+	}
+}
 
 type Permission string
 
@@ -122,6 +284,16 @@ const (
 	PermissionAdministrator Permission = "ADMINISTRATOR"
 	PermissionViewer        Permission = "VIEWER"
 )
+
+// Values returns all known values for Permission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Permission) Values() []Permission {
+	return []Permission{
+		"ADMINISTRATOR",
+		"VIEWER",
+	}
+}
 
 type PortalState string
 
@@ -134,6 +306,19 @@ const (
 	PortalStateFailed   PortalState = "FAILED"
 )
 
+// Values returns all known values for PortalState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PortalState) Values() []PortalState {
+	return []PortalState{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
 type PropertyDataType string
 
 // Enum values for PropertyDataType
@@ -144,6 +329,18 @@ const (
 	PropertyDataTypeBoolean PropertyDataType = "BOOLEAN"
 )
 
+// Values returns all known values for PropertyDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyDataType) Values() []PropertyDataType {
+	return []PropertyDataType{
+		"STRING",
+		"INTEGER",
+		"DOUBLE",
+		"BOOLEAN",
+	}
+}
+
 type PropertyNotificationState string
 
 // Enum values for PropertyNotificationState
@@ -151,6 +348,16 @@ const (
 	PropertyNotificationStateEnabled  PropertyNotificationState = "ENABLED"
 	PropertyNotificationStateDisabled PropertyNotificationState = "DISABLED"
 )
+
+// Values returns all known values for PropertyNotificationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyNotificationState) Values() []PropertyNotificationState {
+	return []PropertyNotificationState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Quality string
 
@@ -161,6 +368,17 @@ const (
 	QualityUncertain Quality = "UNCERTAIN"
 )
 
+// Values returns all known values for Quality. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Quality) Values() []Quality {
+	return []Quality{
+		"GOOD",
+		"BAD",
+		"UNCERTAIN",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -169,6 +387,16 @@ const (
 	ResourceTypeProject ResourceType = "PROJECT"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"PORTAL",
+		"PROJECT",
+	}
+}
+
 type TimeOrdering string
 
 // Enum values for TimeOrdering
@@ -176,3 +404,31 @@ const (
 	TimeOrderingAscending  TimeOrdering = "ASCENDING"
 	TimeOrderingDescending TimeOrdering = "DESCENDING"
 )
+
+// Values returns all known values for TimeOrdering. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TimeOrdering) Values() []TimeOrdering {
+	return []TimeOrdering{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
+
+type TraversalDirection string
+
+// Enum values for TraversalDirection
+const (
+	TraversalDirectionParent TraversalDirection = "PARENT"
+	TraversalDirectionChild  TraversalDirection = "CHILD"
+)
+
+// Values returns all known values for TraversalDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TraversalDirection) Values() []TraversalDirection {
+	return []TraversalDirection{
+		"PARENT",
+		"CHILD",
+	}
+}

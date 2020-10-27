@@ -42,6 +42,10 @@ type GetExecutionHistoryInput struct {
 	// This member is required.
 	ExecutionArn *string
 
+	// You can select whether execution data (input or output of a history event) is
+	// returned. The default is true.
+	IncludeExecutionData *bool
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
 	// page size is 1000. A value of 0 uses the default. This is only an upper limit.

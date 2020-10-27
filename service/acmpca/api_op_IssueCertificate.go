@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Uses your private certificate authority (CA) to issue a client certificate. This
-// action returns the Amazon Resource Name (ARN) of the certificate. You can
-// retrieve the certificate by calling the GetCertificate action and specifying the
-// ARN. You cannot use the ACM ListCertificateAuthorities action to retrieve the
-// ARNs of the certificates that you issue by using ACM Private CA.
+// Uses your private certificate authority (CA), or one that has been shared with
+// you, to issue a client certificate. This action returns the Amazon Resource Name
+// (ARN) of the certificate. You can retrieve the certificate by calling the
+// GetCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html)
+// action and specifying the ARN. You cannot use the ACM ListCertificateAuthorities
+// action to retrieve the ARNs of the certificates that you issue by using ACM
+// Private CA.
 func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateInput, optFns ...func(*Options)) (*IssueCertificateOutput, error) {
 	if params == nil {
 		params = &IssueCertificateInput{}
@@ -34,7 +37,9 @@ func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateI
 type IssueCertificateInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority. This must be of the form:
+	// CreateCertificateAuthority
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html).
+	// This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
@@ -47,18 +52,26 @@ type IssueCertificateInput struct {
 	// configuration file, you can use the following OpenSSL command. The usr_cert
 	// block in the configuration file contains your X509 version 3 extensions. openssl
 	// req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days
-	// -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr
+	// -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr Note: A CSR
+	// must provide either a subject name or a subject alternative name or the request
+	// will be rejected.
 	//
 	// This member is required.
 	Csr []byte
 
 	// The name of the algorithm that will be used to sign the certificate to be
-	// issued.
+	// issued. This parameter should not be confused with the SigningAlgorithm
+	// parameter used to sign a CSR.
 	//
 	// This member is required.
 	SigningAlgorithm types.SigningAlgorithm
 
-	// The type of the validity period.
+	// Information describing the validity period of the certificate. When issuing a
+	// certificate, ACM Private CA sets the "Not Before" date in the validity field to
+	// date and time minus 60 minutes. This is intended to compensate for time
+	// inconsistencies across systems of 60 minutes or less. The validity period
+	// configured on a certificate must not exceed the limit set by its parents in the
+	// CA hierarchy.
 	//
 	// This member is required.
 	Validity *types.Validity
@@ -73,11 +86,46 @@ type IssueCertificateInput struct {
 
 	// Specifies a custom configuration template to use when issuing a certificate. If
 	// this parameter is not provided, ACM Private CA defaults to the
-	// EndEntityCertificate/V1 template. The following service-owned TemplateArn values
-	// are supported by ACM Private CA:
+	// EndEntityCertificate/V1 template. For CA certificates, you should choose the
+	// shortest path length that meets your needs. The path length is indicated by the
+	// PathLenN portion of the ARN, where N is the CA depth
+	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth).
+	// Note: The CA depth configured on a subordinate CA certificate must not exceed
+	// the limit set by its parents in the CA hierarchy. The following service-owned
+	// TemplateArn values are supported by ACM Private CA:
+	//
+	//     *
+	// arn:aws:acm-pca:::template/CodeSigningCertificate/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1
 	//
 	//     *
 	// arn:aws:acm-pca:::template/EndEntityCertificate/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1
+	//
+	//
+	// * arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1
+	//
+	//
+	// * arn:aws:acm-pca:::template/OCSPSigningCertificate/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1
+	//
+	//     *
+	// arn:aws:acm-pca:::template/RootCACertificate/V1
 	//
 	//     *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1
@@ -91,11 +139,8 @@ type IssueCertificateInput struct {
 	//     *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1
 	//
-	//     *
-	// arn:aws:acm-pca:::template/RootCACertificate/V1
-	//
-	// For more information, see Using
-	// Templates
+	// For more
+	// information, see Using Templates
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html).
 	TemplateArn *string
 }

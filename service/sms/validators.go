@@ -29,6 +29,26 @@ func (m *validateOpCreateReplicationJob) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAppValidationConfiguration struct {
+}
+
+func (*validateOpDeleteAppValidationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppValidationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppValidationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteReplicationJob struct {
 }
 
@@ -69,6 +89,46 @@ func (m *validateOpDisassociateConnector) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAppValidationConfiguration struct {
+}
+
+func (*validateOpGetAppValidationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAppValidationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAppValidationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAppValidationOutput struct {
+}
+
+func (*validateOpGetAppValidationOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAppValidationOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAppValidationOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAppValidationOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetReplicationRuns struct {
 }
 
@@ -84,6 +144,66 @@ func (m *validateOpGetReplicationRuns) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetReplicationRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpNotifyAppValidationOutput struct {
+}
+
+func (*validateOpNotifyAppValidationOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpNotifyAppValidationOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*NotifyAppValidationOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpNotifyAppValidationOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAppValidationConfiguration struct {
+}
+
+func (*validateOpPutAppValidationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAppValidationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAppValidationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartOnDemandAppReplication struct {
+}
+
+func (*validateOpStartOnDemandAppReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOnDemandAppReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOnDemandAppReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOnDemandAppReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -133,6 +253,10 @@ func addOpCreateReplicationJobValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateReplicationJob{}, middleware.After)
 }
 
+func addOpDeleteAppValidationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppValidationConfiguration{}, middleware.After)
+}
+
 func addOpDeleteReplicationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteReplicationJob{}, middleware.After)
 }
@@ -141,8 +265,28 @@ func addOpDisassociateConnectorValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDisassociateConnector{}, middleware.After)
 }
 
+func addOpGetAppValidationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAppValidationConfiguration{}, middleware.After)
+}
+
+func addOpGetAppValidationOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAppValidationOutput{}, middleware.After)
+}
+
 func addOpGetReplicationRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReplicationRuns{}, middleware.After)
+}
+
+func addOpNotifyAppValidationOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpNotifyAppValidationOutput{}, middleware.After)
+}
+
+func addOpPutAppValidationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAppValidationConfiguration{}, middleware.After)
+}
+
+func addOpStartOnDemandAppReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOnDemandAppReplication{}, middleware.After)
 }
 
 func addOpStartOnDemandReplicationRunValidationMiddleware(stack *middleware.Stack) error {
@@ -163,6 +307,21 @@ func validateOpCreateReplicationJobInput(v *CreateReplicationJobInput) error {
 	}
 	if v.SeedReplicationTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SeedReplicationTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppValidationConfigurationInput(v *DeleteAppValidationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppValidationConfigurationInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -201,6 +360,36 @@ func validateOpDisassociateConnectorInput(v *DisassociateConnectorInput) error {
 	}
 }
 
+func validateOpGetAppValidationConfigurationInput(v *GetAppValidationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAppValidationConfigurationInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAppValidationOutputInput(v *GetAppValidationOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAppValidationOutputInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetReplicationRunsInput(v *GetReplicationRunsInput) error {
 	if v == nil {
 		return nil
@@ -208,6 +397,51 @@ func validateOpGetReplicationRunsInput(v *GetReplicationRunsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetReplicationRunsInput"}
 	if v.ReplicationJobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpNotifyAppValidationOutputInput(v *NotifyAppValidationOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyAppValidationOutputInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAppValidationConfigurationInput(v *PutAppValidationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAppValidationConfigurationInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOnDemandAppReplicationInput(v *StartOnDemandAppReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOnDemandAppReplicationInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

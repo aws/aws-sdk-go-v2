@@ -678,11 +678,11 @@ func validateOpBatchCheckLayerAvailabilityInput(v *BatchCheckLayerAvailabilityIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchCheckLayerAvailabilityInput"}
-	if v.LayerDigests == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerDigests"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.LayerDigests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerDigests"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -696,11 +696,11 @@ func validateOpBatchDeleteImageInput(v *BatchDeleteImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteImageInput"}
-	if v.ImageIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageIds"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -714,11 +714,11 @@ func validateOpBatchGetImageInput(v *BatchGetImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetImageInput"}
-	if v.ImageIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageIds"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -732,14 +732,14 @@ func validateOpCompleteLayerUploadInput(v *CompleteLayerUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteLayerUploadInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.LayerDigests == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerDigests"))
 	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -753,13 +753,13 @@ func validateOpCreateRepositoryInput(v *CreateRepositoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRepositoryInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -818,11 +818,11 @@ func validateOpDescribeImageScanFindingsInput(v *DescribeImageScanFindingsInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeImageScanFindingsInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.ImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -977,11 +977,11 @@ func validateOpPutImageScanningConfigurationInput(v *PutImageScanningConfigurati
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutImageScanningConfigurationInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.ImageScanningConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageScanningConfiguration"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1082,11 +1082,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1100,11 +1100,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1118,20 +1118,20 @@ func validateOpUploadLayerPartInput(v *UploadLayerPartInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UploadLayerPartInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
-	if v.PartFirstByte == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartFirstByte"))
-	}
-	if v.PartLastByte == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartLastByte"))
+	if v.LayerPartBlob == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerPartBlob"))
 	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
-	if v.LayerPartBlob == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerPartBlob"))
+	if v.PartFirstByte == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartFirstByte"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.PartLastByte == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartLastByte"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

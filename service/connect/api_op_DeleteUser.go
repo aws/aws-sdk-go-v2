@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a user account from the specified Amazon Connect instance.
+// Deletes a user account from the specified Amazon Connect instance. For
+// information about what happens to a user's data when their account is deleted,
+// see Delete Users from Your Amazon Connect Instance
+// (https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html) in the
+// Amazon Connect Administrator Guide.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

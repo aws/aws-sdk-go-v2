@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Records user interaction event data.
+// Records user interaction event data. For more information see event-record-api.
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
 		params = &PutEventsInput{}
@@ -34,7 +34,10 @@ type PutEventsInput struct {
 	// This member is required.
 	EventList []*types.Event
 
-	// The session ID associated with the user's visit.
+	// The session ID associated with the user's visit. Your application generates the
+	// sessionId when a user first visits your website or uses your application. Amazon
+	// Personalize uses the sessionId to associate events with the user before they log
+	// in. For more information see event-record-api.
 	//
 	// This member is required.
 	SessionId *string

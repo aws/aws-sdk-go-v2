@@ -10,6 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+// Deletes a saved CloudWatch Logs Insights query definition. A query definition
+// contains details about a saved CloudWatch Logs Insights query. Each
+// DeleteQueryDefinition operation can delete one query definition. You must have
+// the logs:DeleteQueryDefinition permission to be able to perform this operation.
 func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryDefinitionInput, optFns ...func(*Options)) (*DeleteQueryDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteQueryDefinitionInput{}
@@ -26,10 +30,20 @@ func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryD
 }
 
 type DeleteQueryDefinitionInput struct {
+
+	// The ID of the query definition that you want to delete. You can use
+	// DescribeQueryDefinitions
+	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
+	// to retrieve the IDs of your saved query definitions.
+	//
+	// This member is required.
 	QueryDefinitionId *string
 }
 
 type DeleteQueryDefinitionOutput struct {
+
+	// A value of TRUE indicates that the operation succeeded. FALSE indicates that the
+	// operation failed.
 	Success *bool
 
 	// Metadata pertaining to the operation's result.

@@ -31,7 +31,8 @@ func (c *Client) SendTaskSuccess(ctx context.Context, params *SendTaskSuccessInp
 
 type SendTaskSuccessInput struct {
 
-	// The JSON output of the task.
+	// The JSON output of the task. Length constraints apply to the payload size, and
+	// are expressed as bytes in UTF-8 encoding.
 	//
 	// This member is required.
 	Output *string

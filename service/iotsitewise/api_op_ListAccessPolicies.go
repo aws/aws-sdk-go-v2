@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of access policies for an AWS SSO identity (a user or
-// group) or an AWS IoT SiteWise Monitor resource (a portal or project).
+// Retrieves a paginated list of access policies for an identity (an AWS SSO user,
+// an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a
+// portal or project).
 func (c *Client) ListAccessPolicies(ctx context.Context, params *ListAccessPoliciesInput, optFns ...func(*Options)) (*ListAccessPoliciesOutput, error) {
 	if params == nil {
 		params = &ListAccessPoliciesInput{}
@@ -30,14 +31,21 @@ func (c *Client) ListAccessPolicies(ctx context.Context, params *ListAccessPolic
 
 type ListAccessPoliciesInput struct {
 
-	// The ID of the identity. This parameter is required if you specify identityType.
+	// The ARN of the IAM user. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
+	// the IAM User Guide. This parameter is required if you specify IAM for
+	// identityType.
+	IamArn *string
+
+	// The ID of the identity. This parameter is required if you specify USER or GROUP
+	// for identityType.
 	IdentityId *string
 
-	// The type of identity (user or group). This parameter is required if you specify
-	// identityId.
+	// The type of identity (AWS SSO user, AWS SSO group, or IAM user). This parameter
+	// is required if you specify identityId.
 	IdentityType types.IdentityType
 
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to be returned per paginated request. Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.

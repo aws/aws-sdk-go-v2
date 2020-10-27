@@ -12,6 +12,18 @@ const (
 	AppAttributesKeysAwsflowrubysettings AppAttributesKeys = "AwsFlowRubySettings"
 )
 
+// Values returns all known values for AppAttributesKeys. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppAttributesKeys) Values() []AppAttributesKeys {
+	return []AppAttributesKeys{
+		"DocumentRoot",
+		"RailsEnv",
+		"AutoBundleOnDeploy",
+		"AwsFlowRubySettings",
+	}
+}
+
 type AppType string
 
 // Enum values for AppType
@@ -25,6 +37,21 @@ const (
 	AppTypeOther       AppType = "other"
 )
 
+// Values returns all known values for AppType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AppType) Values() []AppType {
+	return []AppType{
+		"aws-flow-ruby",
+		"java",
+		"rails",
+		"php",
+		"nodejs",
+		"static",
+		"other",
+	}
+}
+
 type Architecture string
 
 // Enum values for Architecture
@@ -33,6 +60,16 @@ const (
 	ArchitectureI386   Architecture = "i386"
 )
 
+// Values returns all known values for Architecture. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Architecture) Values() []Architecture {
+	return []Architecture{
+		"x86_64",
+		"i386",
+	}
+}
+
 type AutoScalingType string
 
 // Enum values for AutoScalingType
@@ -40,6 +77,16 @@ const (
 	AutoScalingTypeLoad  AutoScalingType = "load"
 	AutoScalingTypeTimer AutoScalingType = "timer"
 )
+
+// Values returns all known values for AutoScalingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoScalingType) Values() []AutoScalingType {
+	return []AutoScalingType{
+		"load",
+		"timer",
+	}
+}
 
 type CloudWatchLogsEncoding string
 
@@ -139,6 +186,106 @@ const (
 	CloudWatchLogsEncodingUtf_8_sig       CloudWatchLogsEncoding = "utf_8_sig"
 )
 
+// Values returns all known values for CloudWatchLogsEncoding. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CloudWatchLogsEncoding) Values() []CloudWatchLogsEncoding {
+	return []CloudWatchLogsEncoding{
+		"ascii",
+		"big5",
+		"big5hkscs",
+		"cp037",
+		"cp424",
+		"cp437",
+		"cp500",
+		"cp720",
+		"cp737",
+		"cp775",
+		"cp850",
+		"cp852",
+		"cp855",
+		"cp856",
+		"cp857",
+		"cp858",
+		"cp860",
+		"cp861",
+		"cp862",
+		"cp863",
+		"cp864",
+		"cp865",
+		"cp866",
+		"cp869",
+		"cp874",
+		"cp875",
+		"cp932",
+		"cp949",
+		"cp950",
+		"cp1006",
+		"cp1026",
+		"cp1140",
+		"cp1250",
+		"cp1251",
+		"cp1252",
+		"cp1253",
+		"cp1254",
+		"cp1255",
+		"cp1256",
+		"cp1257",
+		"cp1258",
+		"euc_jp",
+		"euc_jis_2004",
+		"euc_jisx0213",
+		"euc_kr",
+		"gb2312",
+		"gbk",
+		"gb18030",
+		"hz",
+		"iso2022_jp",
+		"iso2022_jp_1",
+		"iso2022_jp_2",
+		"iso2022_jp_2004",
+		"iso2022_jp_3",
+		"iso2022_jp_ext",
+		"iso2022_kr",
+		"latin_1",
+		"iso8859_2",
+		"iso8859_3",
+		"iso8859_4",
+		"iso8859_5",
+		"iso8859_6",
+		"iso8859_7",
+		"iso8859_8",
+		"iso8859_9",
+		"iso8859_10",
+		"iso8859_13",
+		"iso8859_14",
+		"iso8859_15",
+		"iso8859_16",
+		"johab",
+		"koi8_r",
+		"koi8_u",
+		"mac_cyrillic",
+		"mac_greek",
+		"mac_iceland",
+		"mac_latin2",
+		"mac_roman",
+		"mac_turkish",
+		"ptcp154",
+		"shift_jis",
+		"shift_jis_2004",
+		"shift_jisx0213",
+		"utf_32",
+		"utf_32_be",
+		"utf_32_le",
+		"utf_16",
+		"utf_16_be",
+		"utf_16_le",
+		"utf_7",
+		"utf_8",
+		"utf_8_sig",
+	}
+}
+
 type CloudWatchLogsInitialPosition string
 
 // Enum values for CloudWatchLogsInitialPosition
@@ -147,6 +294,17 @@ const (
 	CloudWatchLogsInitialPositionEnd_of_file   CloudWatchLogsInitialPosition = "end_of_file"
 )
 
+// Values returns all known values for CloudWatchLogsInitialPosition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchLogsInitialPosition) Values() []CloudWatchLogsInitialPosition {
+	return []CloudWatchLogsInitialPosition{
+		"start_of_file",
+		"end_of_file",
+	}
+}
+
 type CloudWatchLogsTimeZone string
 
 // Enum values for CloudWatchLogsTimeZone
@@ -154,6 +312,16 @@ const (
 	CloudWatchLogsTimeZoneLocal CloudWatchLogsTimeZone = "LOCAL"
 	CloudWatchLogsTimeZoneUtc   CloudWatchLogsTimeZone = "UTC"
 )
+
+// Values returns all known values for CloudWatchLogsTimeZone. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CloudWatchLogsTimeZone) Values() []CloudWatchLogsTimeZone {
+	return []CloudWatchLogsTimeZone{
+		"LOCAL",
+		"UTC",
+	}
+}
 
 type DeploymentCommandName string
 
@@ -172,6 +340,26 @@ const (
 	DeploymentCommandNameRestart                 DeploymentCommandName = "restart"
 	DeploymentCommandNameUndeploy                DeploymentCommandName = "undeploy"
 )
+
+// Values returns all known values for DeploymentCommandName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentCommandName) Values() []DeploymentCommandName {
+	return []DeploymentCommandName{
+		"install_dependencies",
+		"update_dependencies",
+		"update_custom_cookbooks",
+		"execute_recipes",
+		"configure",
+		"setup",
+		"deploy",
+		"rollback",
+		"start",
+		"stop",
+		"restart",
+		"undeploy",
+	}
+}
 
 type LayerAttributesKeys string
 
@@ -204,6 +392,39 @@ const (
 	LayerAttributesKeysJavaappserverversion        LayerAttributesKeys = "JavaAppServerVersion"
 )
 
+// Values returns all known values for LayerAttributesKeys. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LayerAttributesKeys) Values() []LayerAttributesKeys {
+	return []LayerAttributesKeys{
+		"EcsClusterArn",
+		"EnableHaproxyStats",
+		"HaproxyStatsUrl",
+		"HaproxyStatsUser",
+		"HaproxyStatsPassword",
+		"HaproxyHealthCheckUrl",
+		"HaproxyHealthCheckMethod",
+		"MysqlRootPassword",
+		"MysqlRootPasswordUbiquitous",
+		"GangliaUrl",
+		"GangliaUser",
+		"GangliaPassword",
+		"MemcachedMemory",
+		"NodejsVersion",
+		"RubyVersion",
+		"RubygemsVersion",
+		"ManageBundler",
+		"BundlerVersion",
+		"RailsStack",
+		"PassengerVersion",
+		"Jvm",
+		"JvmVersion",
+		"JvmOptions",
+		"JavaAppServer",
+		"JavaAppServerVersion",
+	}
+}
+
 type LayerType string
 
 // Enum values for LayerType
@@ -222,6 +443,26 @@ const (
 	LayerTypeCustom           LayerType = "custom"
 )
 
+// Values returns all known values for LayerType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LayerType) Values() []LayerType {
+	return []LayerType{
+		"aws-flow-ruby",
+		"ecs-cluster",
+		"java-app",
+		"lb",
+		"web",
+		"php-app",
+		"rails-app",
+		"nodejs-app",
+		"memcached",
+		"db-master",
+		"monitoring-master",
+		"custom",
+	}
+}
+
 type RootDeviceType string
 
 // Enum values for RootDeviceType
@@ -229,6 +470,16 @@ const (
 	RootDeviceTypeEbs           RootDeviceType = "ebs"
 	RootDeviceTypeInstanceStore RootDeviceType = "instance-store"
 )
+
+// Values returns all known values for RootDeviceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RootDeviceType) Values() []RootDeviceType {
+	return []RootDeviceType{
+		"ebs",
+		"instance-store",
+	}
+}
 
 type SourceType string
 
@@ -240,12 +491,33 @@ const (
 	SourceTypeS3      SourceType = "s3"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"git",
+		"svn",
+		"archive",
+		"s3",
+	}
+}
+
 type StackAttributesKeys string
 
 // Enum values for StackAttributesKeys
 const (
 	StackAttributesKeysColor StackAttributesKeys = "Color"
 )
+
+// Values returns all known values for StackAttributesKeys. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackAttributesKeys) Values() []StackAttributesKeys {
+	return []StackAttributesKeys{
+		"Color",
+	}
+}
 
 type VirtualizationType string
 
@@ -255,6 +527,16 @@ const (
 	VirtualizationTypeHvm         VirtualizationType = "hvm"
 )
 
+// Values returns all known values for VirtualizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualizationType) Values() []VirtualizationType {
+	return []VirtualizationType{
+		"paravirtual",
+		"hvm",
+	}
+}
+
 type VolumeType string
 
 // Enum values for VolumeType
@@ -263,3 +545,14 @@ const (
 	VolumeTypeIo1      VolumeType = "io1"
 	VolumeTypeStandard VolumeType = "standard"
 )
+
+// Values returns all known values for VolumeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeType) Values() []VolumeType {
+	return []VolumeType{
+		"gp2",
+		"io1",
+		"standard",
+	}
+}

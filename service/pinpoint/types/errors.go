@@ -27,6 +27,25 @@ func (e *BadRequestException) ErrorCode() string             { return "BadReques
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
+type ConflictException struct {
+	Message *string
+
+	RequestID *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Provides information about an API request or response.
 type ForbiddenException struct {
 	Message *string
 

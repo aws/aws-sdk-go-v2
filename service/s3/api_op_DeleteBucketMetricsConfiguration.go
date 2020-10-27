@@ -27,13 +27,18 @@ import (
 //
 //     *
 // GetBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
 //
-//     * PutBucketMetricsConfiguration
 //
-//     *
-// ListBucketMetricsConfigurations
+// * PutBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
 //
-//     * Monitoring Metrics with Amazon CloudWatch
+//
+// * ListBucketMetricsConfigurations
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html)
+//
+//
+// * Monitoring Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 func (c *Client) DeleteBucketMetricsConfiguration(ctx context.Context, params *DeleteBucketMetricsConfigurationInput, optFns ...func(*Options)) (*DeleteBucketMetricsConfigurationOutput, error) {
 	if params == nil {
@@ -61,6 +66,10 @@ type DeleteBucketMetricsConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketMetricsConfigurationOutput struct {

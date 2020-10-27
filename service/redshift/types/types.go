@@ -904,6 +904,8 @@ type Parameter struct {
 	Source *string
 }
 
+// Describes a pause cluster operation. For example, a scheduled action to run the
+// PauseCluster API operation.
 type PauseClusterMessage struct {
 
 	// The identifier of the cluster to be paused.
@@ -928,8 +930,7 @@ type PendingModifiedValues struct {
 	// The pending or in-progress change of the service version.
 	ClusterVersion *string
 
-	// The encryption type for a cluster. Possible values are: KMS and None. For the
-	// China region the possible values are None, and Legacy.
+	// The encryption type for a cluster. Possible values are: KMS and None.
 	EncryptionType *string
 
 	// An option that specifies whether to create the cluster with enhanced VPC routing
@@ -1067,6 +1068,8 @@ type ReservedNodeOffering struct {
 	UsagePrice *float64
 }
 
+// Describes a resize cluster operation. For example, a scheduled action to run the
+// ResizeCluster API operation.
 type ResizeClusterMessage struct {
 
 	// The unique identifier for the cluster to resize.
@@ -1086,7 +1089,8 @@ type ResizeClusterMessage struct {
 	// current node type is used.
 	NodeType *string
 
-	// The new number of nodes for the cluster.
+	// The new number of nodes for the cluster. If not specified, the cluster's current
+	// number of nodes is used.
 	NumberOfNodes *int32
 }
 
@@ -1132,6 +1136,8 @@ type RestoreStatus struct {
 	Status *string
 }
 
+// Describes a resume cluster operation. For example, a scheduled action to run the
+// ResumeCluster API operation.
 type ResumeClusterMessage struct {
 
 	// The identifier of the cluster to be resumed.

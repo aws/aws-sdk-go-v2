@@ -43,7 +43,7 @@ func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateAliasInput struct {
 
 	// A unique identifier for the alias that you want to update. You can use either
@@ -64,7 +64,7 @@ type UpdateAliasInput struct {
 	RoutingStrategy *types.RoutingStrategy
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateAliasOutput struct {
 
 	// The updated alias resource.

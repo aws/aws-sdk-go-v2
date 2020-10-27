@@ -23,7 +23,7 @@ type ApiCache struct {
 	//     * FULL_REQUEST_CACHING: All requests are fully cached.
 	//
 	//
-	// * PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.
+	// * PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.
 	ApiCachingBehavior ApiCachingBehavior
 
 	// At rest encryption flag for cache. This setting cannot be updated after
@@ -53,25 +53,48 @@ type ApiCache struct {
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
 	Ttl *int64
 
-	// The cache instance type.
+	// The cache instance type. Valid values are
 	//
-	//     * T2_SMALL: A t2.small instance type.
+	//     * SMALL
+	//
+	//     * MEDIUM
 	//
 	//     *
-	// T2_MEDIUM: A t2.medium instance type.
+	// LARGE
 	//
-	//     * R4_LARGE: A r4.large instance
-	// type.
+	//     * XLARGE
+	//
+	//     * LARGE_2X
+	//
+	//     * LARGE_4X
+	//
+	//     * LARGE_8X (not
+	// available in all regions)
+	//
+	//     * LARGE_12X
+	//
+	// Historically, instance types were
+	// identified by an EC2-style value. As of July 2020, this is deprecated, and the
+	// generic identifiers above should be used. The following legacy instance types
+	// are available, but their use is discouraged:
+	//
+	//     * T2_SMALL: A t2.small
+	// instance type.
+	//
+	//     * T2_MEDIUM: A t2.medium instance type.
+	//
+	//     * R4_LARGE: A
+	// r4.large instance type.
 	//
 	//     * R4_XLARGE: A r4.xlarge instance type.
 	//
-	//     * R4_2XLARGE: A
-	// r4.2xlarge instance type.
-	//
-	//     * R4_4XLARGE: A r4.4xlarge instance type.
-	//
 	//     *
-	// R4_8XLARGE: A r4.8xlarge instance type.
+	// R4_2XLARGE: A r4.2xlarge instance type.
+	//
+	//     * R4_4XLARGE: A r4.4xlarge instance
+	// type.
+	//
+	//     * R4_8XLARGE: A r4.8xlarge instance type.
 	Type ApiCacheType
 }
 
@@ -102,22 +125,32 @@ type ApiCache struct {
 // introduced in February 2018 when AppSync added support to extend key
 // expiration.
 //
-//     * ListApiKeys returns the expiration time in seconds.
+//     * ListApiKeys returns the expiration time and deletion time in
+// seconds.
+//
+//     * CreateApiKey returns the expiration time and deletion time in
+// seconds and accepts a user-provided expiration time in seconds.
 //
 //     *
-// CreateApiKey returns the expiration time in seconds and accepts a user-provided
-// expiration time in seconds.
+// UpdateApiKey returns the expiration time and and deletion time in seconds and
+// accepts a user-provided expiration time in seconds. Expired API keys are kept
+// for 60 days after the expiration time. Key expiration time can be updated while
+// the key is not deleted.
 //
-//     * UpdateApiKey returns the expiration time in
-// seconds and accepts a user-provided expiration time in seconds. Key expiration
-// can only be updated while the key has not expired.
+//     * DeleteApiKey deletes the item from the table.
 //
-//     * DeleteApiKey deletes
-// the item from the table.
 //
-//     * Expiration is stored in Amazon DynamoDB as
-// seconds.
+// * Expiration is stored in Amazon DynamoDB as seconds. After the expiration time,
+// using the key to authenticate will fail. But the key can be reinstated before
+// deletion.
+//
+//     * Deletion is stored in Amazon DynamoDB as seconds. The key will
+// be deleted after deletion time.
 type ApiKey struct {
+
+	// The time after which the API key is deleted. The date is represented as seconds
+	// since the epoch, rounded down to the nearest hour.
+	Deletes *int64
 
 	// A description of the purpose of the API key.
 	Description *string
@@ -353,6 +386,10 @@ type GraphqlApi struct {
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig
+
+	// The ARN of the AWS Web Application Firewall (WAF) ACL associated with this
+	// GraphqlApi, if one exists.
+	WafWebAclArn *string
 
 	// A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
 	XrayEnabled *bool

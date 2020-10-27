@@ -14,6 +14,20 @@ const (
 	AgentStatusShutdown    AgentStatus = "SHUTDOWN"
 )
 
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AgentStatus) Values() []AgentStatus {
+	return []AgentStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+		"RUNNING",
+		"UNKNOWN",
+		"BLACKLISTED",
+		"SHUTDOWN",
+	}
+}
+
 type BatchDeleteImportDataErrorCode string
 
 // Enum values for BatchDeleteImportDataErrorCode
@@ -22,6 +36,18 @@ const (
 	BatchDeleteImportDataErrorCodeInternal_server_error BatchDeleteImportDataErrorCode = "INTERNAL_SERVER_ERROR"
 	BatchDeleteImportDataErrorCodeOver_limit            BatchDeleteImportDataErrorCode = "OVER_LIMIT"
 )
+
+// Values returns all known values for BatchDeleteImportDataErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchDeleteImportDataErrorCode) Values() []BatchDeleteImportDataErrorCode {
+	return []BatchDeleteImportDataErrorCode{
+		"NOT_FOUND",
+		"INTERNAL_SERVER_ERROR",
+		"OVER_LIMIT",
+	}
+}
 
 type ConfigurationItemType string
 
@@ -32,6 +58,18 @@ const (
 	ConfigurationItemTypeConnections ConfigurationItemType = "CONNECTION"
 	ConfigurationItemTypeApplication ConfigurationItemType = "APPLICATION"
 )
+
+// Values returns all known values for ConfigurationItemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationItemType) Values() []ConfigurationItemType {
+	return []ConfigurationItemType{
+		"SERVER",
+		"PROCESS",
+		"CONNECTION",
+		"APPLICATION",
+	}
+}
 
 type ContinuousExportStatus string
 
@@ -46,12 +84,36 @@ const (
 	ContinuousExportStatusInactive          ContinuousExportStatus = "INACTIVE"
 )
 
+// Values returns all known values for ContinuousExportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContinuousExportStatus) Values() []ContinuousExportStatus {
+	return []ContinuousExportStatus{
+		"START_IN_PROGRESS",
+		"START_FAILED",
+		"ACTIVE",
+		"ERROR",
+		"STOP_IN_PROGRESS",
+		"STOP_FAILED",
+		"INACTIVE",
+	}
+}
+
 type DataSource string
 
 // Enum values for DataSource
 const (
 	DataSourceAgent DataSource = "AGENT"
 )
+
+// Values returns all known values for DataSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataSource) Values() []DataSource {
+	return []DataSource{
+		"AGENT",
+	}
+}
 
 type ExportDataFormat string
 
@@ -61,6 +123,16 @@ const (
 	ExportDataFormatGraphml ExportDataFormat = "GRAPHML"
 )
 
+// Values returns all known values for ExportDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportDataFormat) Values() []ExportDataFormat {
+	return []ExportDataFormat{
+		"CSV",
+		"GRAPHML",
+	}
+}
+
 type ExportStatus string
 
 // Enum values for ExportStatus
@@ -69,6 +141,17 @@ const (
 	ExportStatusSucceeded   ExportStatus = "SUCCEEDED"
 	ExportStatusIn_progress ExportStatus = "IN_PROGRESS"
 )
+
+// Values returns all known values for ExportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"FAILED",
+		"SUCCEEDED",
+		"IN_PROGRESS",
+	}
+}
 
 type ImportStatus string
 
@@ -87,6 +170,25 @@ const (
 	ImportStatusInternal_error                      ImportStatus = "INTERNAL_ERROR"
 )
 
+// Values returns all known values for ImportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"IMPORT_IN_PROGRESS",
+		"IMPORT_COMPLETE",
+		"IMPORT_COMPLETE_WITH_ERRORS",
+		"IMPORT_FAILED",
+		"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED",
+		"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_COMPLETE",
+		"DELETE_FAILED",
+		"DELETE_FAILED_LIMIT_EXCEEDED",
+		"INTERNAL_ERROR",
+	}
+}
+
 type ImportTaskFilterName string
 
 // Enum values for ImportTaskFilterName
@@ -96,6 +198,17 @@ const (
 	ImportTaskFilterNameName           ImportTaskFilterName = "NAME"
 )
 
+// Values returns all known values for ImportTaskFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportTaskFilterName) Values() []ImportTaskFilterName {
+	return []ImportTaskFilterName{
+		"IMPORT_TASK_ID",
+		"STATUS",
+		"NAME",
+	}
+}
+
 type OrderString string
 
 // Enum values for OrderString
@@ -103,3 +216,13 @@ const (
 	OrderStringAsc  OrderString = "ASC"
 	OrderStringDesc OrderString = "DESC"
 )
+
+// Values returns all known values for OrderString. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OrderString) Values() []OrderString {
+	return []OrderString{
+		"ASC",
+		"DESC",
+	}
+}

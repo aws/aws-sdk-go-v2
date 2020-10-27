@@ -12,6 +12,18 @@ const (
 	ErrorCodeService_quota_not_available_error ErrorCode = "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"DEPENDENCY_ACCESS_DENIED_ERROR",
+		"DEPENDENCY_THROTTLING_ERROR",
+		"DEPENDENCY_SERVICE_ERROR",
+		"SERVICE_QUOTA_NOT_AVAILABLE_ERROR",
+	}
+}
+
 type PeriodUnit string
 
 // Enum values for PeriodUnit
@@ -25,6 +37,21 @@ const (
 	PeriodUnitWeek        PeriodUnit = "WEEK"
 )
 
+// Values returns all known values for PeriodUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PeriodUnit) Values() []PeriodUnit {
+	return []PeriodUnit{
+		"MICROSECOND",
+		"MILLISECOND",
+		"SECOND",
+		"MINUTE",
+		"HOUR",
+		"DAY",
+		"WEEK",
+	}
+}
+
 type RequestStatus string
 
 // Enum values for RequestStatus
@@ -36,6 +63,19 @@ const (
 	RequestStatusCase_closed RequestStatus = "CASE_CLOSED"
 )
 
+// Values returns all known values for RequestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RequestStatus) Values() []RequestStatus {
+	return []RequestStatus{
+		"PENDING",
+		"CASE_OPENED",
+		"APPROVED",
+		"DENIED",
+		"CASE_CLOSED",
+	}
+}
+
 type ServiceQuotaTemplateAssociationStatus string
 
 // Enum values for ServiceQuotaTemplateAssociationStatus
@@ -43,3 +83,14 @@ const (
 	ServiceQuotaTemplateAssociationStatusAssociated    ServiceQuotaTemplateAssociationStatus = "ASSOCIATED"
 	ServiceQuotaTemplateAssociationStatusDisassociated ServiceQuotaTemplateAssociationStatus = "DISASSOCIATED"
 )
+
+// Values returns all known values for ServiceQuotaTemplateAssociationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ServiceQuotaTemplateAssociationStatus) Values() []ServiceQuotaTemplateAssociationStatus {
+	return []ServiceQuotaTemplateAssociationStatus{
+		"ASSOCIATED",
+		"DISASSOCIATED",
+	}
+}

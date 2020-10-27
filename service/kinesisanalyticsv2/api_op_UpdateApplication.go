@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Kinesis Data Analytics application. Using this
-// operation, you can update application code, input configuration, and output
-// configuration. Kinesis Data Analytics updates the ApplicationVersionId each time
-// you update your application.
+// Updates an existing Kinesis Data Analytics application. Using this operation,
+// you can update application code, input configuration, and output configuration.
+// Kinesis Data Analytics updates the ApplicationVersionId each time you update
+// your application. You cannot update the RuntimeEnvironment of an existing
+// application. If you need to update an application's RuntimeEnvironment, you must
+// delete the application and create it again.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}

@@ -110,7 +110,7 @@ func (e *AccountNotRegisteredException) ErrorCode() string             { return 
 func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't invite an existing account to your organization until you verify that
-// you own the email address associated with the master account. For more
+// you own the email address associated with the management account. For more
 // information, see Email Address Verification
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification)
 // in the AWS Organizations User Guide.
@@ -217,14 +217,15 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // or operation.
 //
 //     * ACCOUNT_CANNOT_LEAVE_ORGANIZAION: You attempted to remove
-// the master account from the organization. You can't remove the master account.
-// Instead, after you remove all member accounts, delete the organization itself.
+// the management account from the organization. You can't remove the management
+// account. Instead, after you remove all member accounts, delete the organization
+// itself.
 //
-//
-// * ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account from the
-// organization that doesn't yet have enough information to exist as a standalone
-// account. This account requires you to first agree to the AWS Customer Agreement.
-// Follow the steps at Removing a member account from your organization
+//     * ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an
+// account from the organization that doesn't yet have enough information to exist
+// as a standalone account. This account requires you to first agree to the AWS
+// Customer Agreement. Follow the steps at Removing a member account from your
+// organization
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)in
 // the AWS Organizations User Guide.
 //
@@ -255,9 +256,9 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 //
 //
 // * CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register
-// the master account of the organization as a delegated administrator for an AWS
-// service integrated with Organizations. You can designate only a member account
-// as a delegated administrator.
+// the management account of the organization as a delegated administrator for an
+// AWS service integrated with Organizations. You can designate only a member
+// account as a delegated administrator.
 //
 //     *
 // CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an
@@ -285,32 +286,33 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 //
 //     *
 // MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this
-// organization, you first must migrate the organization's master account to the
-// marketplace that corresponds to the master account's address. For example,
-// accounts with India addresses must be associated with the AISPL marketplace. All
-// accounts in an organization must be associated with the same marketplace.
+// organization, you first must migrate the organization's management account to
+// the marketplace that corresponds to the management account's address. For
+// example, accounts with India addresses must be associated with the AISPL
+// marketplace. All accounts in an organization must be associated with the same
+// marketplace.
 //
-//     *
-// MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the AWS Regions in
-// China. To create an organization, the master must have an valid business
-// license. For more information, contact customer support.
+//     * MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the
+// AWS Regions in China. To create an organization, the master must have an valid
+// business license. For more information, contact customer support.
 //
 //     *
 // MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must first
-// provide a valid contact address and phone number for the master account. Then
-// try the operation again.
+// provide a valid contact address and phone number for the management account.
+// Then try the operation again.
 //
-//     * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete
-// this operation, the master account must have an associated account in the AWS
-// GovCloud (US-West) Region. For more information, see AWS Organizations
+//     * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To
+// complete this operation, the management account must have an associated account
+// in the AWS GovCloud (US-West) Region. For more information, see AWS
+// Organizations
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
 // in the AWS GovCloud User Guide.
 //
 //     *
 // MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this
-// master account, you first must associate a valid payment instrument, such as a
-// credit card, with the account. Follow the steps at To leave an organization when
-// all required account information has not yet been provided
+// management account, you first must associate a valid payment instrument, such as
+// a credit card, with the account. Follow the steps at To leave an organization
+// when all required account information has not yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
@@ -520,10 +522,10 @@ func (e *DuplicatePolicyException) ErrorMessage() string {
 func (e *DuplicatePolicyException) ErrorCode() string             { return "DuplicatePolicyException" }
 func (e *DuplicatePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// If you ran this action on the master account, this policy type is not enabled.
-// If you ran the action on a member account, the account doesn't have an effective
-// policy of this type. Contact the administrator of your organization about
-// attaching a policy of this type to the account.
+// If you ran this action on the management account, this policy type is not
+// enabled. If you ran the action on a member account, the account doesn't have an
+// effective policy of this type. Contact the administrator of your organization
+// about attaching a policy of this type to the account.
 type EffectivePolicyNotFoundException struct {
 	Message *string
 }
@@ -694,13 +696,19 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 // following list might not be applicable to this specific API or operation.
 //
 //     *
-// IMMUTABLE_POLICY: You specified a policy that is managed by AWS and can't be
-// modified.
+// DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
+// entity.
 //
-//     * INPUT_REQUIRED: You must include a value for all required
-// parameters.
+//     * IMMUTABLE_POLICY: You specified a policy that is managed by AWS
+// and can't be modified.
+//
+//     * INPUT_REQUIRED: You must include a value for all
+// required parameters.
 //
 //     * INVALID_ENUM: You specified an invalid value.
+//
+//     *
+// INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type string.
 //
 //     *
 // INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid
@@ -757,6 +765,13 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //     *
 // MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between
 // entities in the same root.
+//
+//     * TARGET_NOT_SUPPORTED: You can't perform the
+// specified operation on that target entity.
+//
+//     *
+// UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
+// recognized.
 type InvalidInputException struct {
 	Message *string
 
@@ -798,9 +813,9 @@ func (e *MalformedPolicyDocumentException) ErrorCode() string {
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't remove a master account from an organization. If you want the master
-// account to become a member account in another organization, you must first
-// delete the current organization of the master account.
+// You can't remove a management account from an organization. If you want the
+// management account to become a member account in another organization, you must
+// first delete the current organization of the management account.
 type MasterCannotLeaveOrganizationException struct {
 	Message *string
 }
@@ -865,7 +880,8 @@ func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 }
 
 // The organization isn't empty. To delete an organization, you must first remove
-// all accounts except the master account, delete all OUs, and delete all policies.
+// all accounts except the management account, delete all OUs, and delete all
+// policies.
 type OrganizationNotEmptyException struct {
 	Message *string
 }
@@ -1090,7 +1106,8 @@ func (e *SourceParentNotFoundException) ErrorMessage() string {
 func (e *SourceParentNotFoundException) ErrorCode() string             { return "SourceParentNotFoundException" }
 func (e *SourceParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find a root, OU, or account with the TargetId that you specified.
+// We can't find a root, OU, account, or policy with the TargetId that you
+// specified.
 type TargetNotFoundException struct {
 	Message *string
 }

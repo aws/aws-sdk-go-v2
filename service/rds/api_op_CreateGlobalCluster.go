@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Aurora global database spread across multiple regions. The global
+// Creates an Aurora global database spread across multiple AWS Regions. The global
 // database contains a single primary cluster with read-write capability, and a
 // read-only secondary cluster that receives data from the primary cluster through
 // high-speed replication performed by the Aurora storage subsystem. You can create
@@ -45,7 +45,7 @@ type CreateGlobalClusterInput struct {
 	// can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
-	// Provides the name of the database engine to be used for this DB cluster.
+	// The name of the database engine to be used for this DB cluster.
 	Engine *string
 
 	// The engine version of the Aurora global database.

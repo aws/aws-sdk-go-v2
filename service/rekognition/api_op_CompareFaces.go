@@ -34,17 +34,15 @@ import (
 // detected faces that don’t meet a required quality bar. The quality bar is based
 // on a variety of common use cases. Use QualityFilter to set the quality bar by
 // specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces,
-// specify NONE. The default value is NONE. To use quality filtering, you need a
-// collection associated with version 3 of the face model or higher. To get the
-// version of the face model associated with a collection, call DescribeCollection.
-// If the image doesn't contain Exif metadata, CompareFaces returns orientation
-// information for the source and target images. Use these values to display the
-// images with the correct image orientation. If no faces are detected in the
-// source or target images, CompareFaces returns an InvalidParameterException
-// error. This is a stateless API operation. That is, data returned by this
-// operation doesn't persist. For an example, see Comparing Faces in Images in the
-// Amazon Rekognition Developer Guide. This operation requires permissions to
-// perform the rekognition:CompareFaces action.
+// specify NONE. The default value is NONE. If the image doesn't contain Exif
+// metadata, CompareFaces returns orientation information for the source and target
+// images. Use these values to display the images with the correct image
+// orientation. If no faces are detected in the source or target images,
+// CompareFaces returns an InvalidParameterException error. This is a stateless API
+// operation. That is, data returned by this operation doesn't persist. For an
+// example, see Comparing Faces in Images in the Amazon Rekognition Developer
+// Guide. This operation requires permissions to perform the
+// rekognition:CompareFaces action.
 func (c *Client) CompareFaces(ctx context.Context, params *CompareFacesInput, optFns ...func(*Options)) (*CompareFacesOutput, error) {
 	if params == nil {
 		params = &CompareFacesInput{}

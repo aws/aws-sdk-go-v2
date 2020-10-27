@@ -389,6 +389,8 @@ func awsRestjson1_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, r
 		v.LastModified = ptr.Time(t)
 	}
 
+	v.StatusCode = ptr.Int32(int32(response.StatusCode))
+
 	return nil
 }
 func awsRestjson1_deserializeOpDocumentGetObjectOutput(v *GetObjectOutput, body io.ReadCloser) error {

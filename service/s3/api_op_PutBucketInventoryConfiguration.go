@@ -67,11 +67,15 @@ import (
 // Related Resources
 //
 //     * GetBucketInventoryConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
 //
-//     *
-// DeleteBucketInventoryConfiguration
 //
-//     * ListBucketInventoryConfigurations
+// * DeleteBucketInventoryConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
+//
+//
+// * ListBucketInventoryConfigurations
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
 func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *PutBucketInventoryConfigurationInput, optFns ...func(*Options)) (*PutBucketInventoryConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketInventoryConfigurationInput{}
@@ -103,6 +107,10 @@ type PutBucketInventoryConfigurationInput struct {
 	//
 	// This member is required.
 	InventoryConfiguration *types.InventoryConfiguration
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketInventoryConfigurationOutput struct {

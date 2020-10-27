@@ -10,6 +10,46 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpCreateAnomalyMonitor struct {
+}
+
+func (*validateOpCreateAnomalyMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnomalyMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnomalyMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAnomalySubscription struct {
+}
+
+func (*validateOpCreateAnomalySubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnomalySubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnomalySubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCostCategoryDefinition struct {
 }
 
@@ -25,6 +65,46 @@ func (m *validateOpCreateCostCategoryDefinition) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCostCategoryDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAnomalyMonitor struct {
+}
+
+func (*validateOpDeleteAnomalyMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAnomalyMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAnomalyMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAnomalySubscription struct {
+}
+
+func (*validateOpDeleteAnomalySubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAnomalySubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAnomalySubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -65,6 +145,26 @@ func (m *validateOpDescribeCostCategoryDefinition) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCostCategoryDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAnomalies struct {
+}
+
+func (*validateOpGetAnomalies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnomalies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnomaliesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnomaliesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +450,66 @@ func (m *validateOpGetUsageForecast) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpProvideAnomalyFeedback struct {
+}
+
+func (*validateOpProvideAnomalyFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpProvideAnomalyFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ProvideAnomalyFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpProvideAnomalyFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAnomalyMonitor struct {
+}
+
+func (*validateOpUpdateAnomalyMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnomalyMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnomalyMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAnomalySubscription struct {
+}
+
+func (*validateOpUpdateAnomalySubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnomalySubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnomalySubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCostCategoryDefinition struct {
 }
 
@@ -370,8 +530,24 @@ func (m *validateOpUpdateCostCategoryDefinition) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAnomalyMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnomalyMonitor{}, middleware.After)
+}
+
+func addOpCreateAnomalySubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnomalySubscription{}, middleware.After)
+}
+
 func addOpCreateCostCategoryDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCostCategoryDefinition{}, middleware.After)
+}
+
+func addOpDeleteAnomalyMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAnomalyMonitor{}, middleware.After)
+}
+
+func addOpDeleteAnomalySubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAnomalySubscription{}, middleware.After)
 }
 
 func addOpDeleteCostCategoryDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -380,6 +556,10 @@ func addOpDeleteCostCategoryDefinitionValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeCostCategoryDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCostCategoryDefinition{}, middleware.After)
+}
+
+func addOpGetAnomaliesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnomalies{}, middleware.After)
 }
 
 func addOpGetCostAndUsageValidationMiddleware(stack *middleware.Stack) error {
@@ -438,8 +618,80 @@ func addOpGetUsageForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUsageForecast{}, middleware.After)
 }
 
+func addOpProvideAnomalyFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpProvideAnomalyFeedback{}, middleware.After)
+}
+
+func addOpUpdateAnomalyMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnomalyMonitor{}, middleware.After)
+}
+
+func addOpUpdateAnomalySubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnomalySubscription{}, middleware.After)
+}
+
 func addOpUpdateCostCategoryDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCostCategoryDefinition{}, middleware.After)
+}
+
+func validateAnomalyDateInterval(v *types.AnomalyDateInterval) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnomalyDateInterval"}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnomalyMonitor(v *types.AnomalyMonitor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnomalyMonitor"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if len(v.MonitorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnomalySubscription(v *types.AnomalySubscription) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnomalySubscription"}
+	if v.SubscriptionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if v.Subscribers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
+	}
+	if len(v.Frequency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Frequency"))
+	}
+	if v.MonitorArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArnList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCostCategoryRule(v *types.CostCategoryRule) error {
@@ -447,11 +699,11 @@ func validateCostCategoryRule(v *types.CostCategoryRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CostCategoryRule"}
-	if v.Rule == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -482,11 +734,11 @@ func validateDateInterval(v *types.DateInterval) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DateInterval"}
-	if v.Start == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Start"))
-	}
 	if v.End == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("End"))
+	}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -500,11 +752,67 @@ func validateRightsizingRecommendationConfiguration(v *types.RightsizingRecommen
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RightsizingRecommendationConfiguration"}
+	if len(v.RecommendationTarget) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationTarget"))
+	}
 	if v.BenefitsConsidered == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BenefitsConsidered"))
 	}
-	if len(v.RecommendationTarget) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RecommendationTarget"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTotalImpactFilter(v *types.TotalImpactFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TotalImpactFilter"}
+	if len(v.NumericOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NumericOperator"))
+	}
+	if v.StartValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAnomalyMonitorInput(v *CreateAnomalyMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnomalyMonitorInput"}
+	if v.AnomalyMonitor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyMonitor"))
+	} else if v.AnomalyMonitor != nil {
+		if err := validateAnomalyMonitor(v.AnomalyMonitor); err != nil {
+			invalidParams.AddNested("AnomalyMonitor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAnomalySubscriptionInput(v *CreateAnomalySubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnomalySubscriptionInput"}
+	if v.AnomalySubscription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalySubscription"))
+	} else if v.AnomalySubscription != nil {
+		if err := validateAnomalySubscription(v.AnomalySubscription); err != nil {
+			invalidParams.AddNested("AnomalySubscription", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -518,11 +826,11 @@ func validateOpCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinition
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCostCategoryDefinitionInput"}
-	if len(v.RuleVersion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.RuleVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
@@ -530,6 +838,36 @@ func validateOpCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinition
 		if err := validateCostCategoryRulesList(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAnomalyMonitorInput(v *DeleteAnomalyMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnomalyMonitorInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAnomalySubscriptionInput(v *DeleteAnomalySubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnomalySubscriptionInput"}
+	if v.SubscriptionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -568,11 +906,38 @@ func validateOpDescribeCostCategoryDefinitionInput(v *DescribeCostCategoryDefini
 	}
 }
 
+func validateOpGetAnomaliesInput(v *GetAnomaliesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnomaliesInput"}
+	if v.DateInterval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DateInterval"))
+	} else if v.DateInterval != nil {
+		if err := validateAnomalyDateInterval(v.DateInterval); err != nil {
+			invalidParams.AddNested("DateInterval", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TotalImpact != nil {
+		if err := validateTotalImpactFilter(v.TotalImpact); err != nil {
+			invalidParams.AddNested("TotalImpact", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCostAndUsageInput(v *GetCostAndUsageInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCostAndUsageInput"}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	}
 	if v.TimePeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
 	} else if v.TimePeriod != nil {
@@ -592,6 +957,9 @@ func validateOpGetCostAndUsageWithResourcesInput(v *GetCostAndUsageWithResources
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCostAndUsageWithResourcesInput"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
 	if v.TimePeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
 	} else if v.TimePeriod != nil {
@@ -636,15 +1004,15 @@ func validateOpGetDimensionValuesInput(v *GetDimensionValuesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDimensionValuesInput"}
+	if len(v.Dimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
+	}
 	if v.TimePeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
 	} else if v.TimePeriod != nil {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Dimension) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -750,17 +1118,17 @@ func validateOpGetSavingsPlansPurchaseRecommendationInput(v *GetSavingsPlansPurc
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSavingsPlansPurchaseRecommendationInput"}
-	if len(v.TermInYears) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TermInYears"))
-	}
-	if len(v.PaymentOption) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PaymentOption"))
+	if len(v.LookbackPeriodInDays) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LookbackPeriodInDays"))
 	}
 	if len(v.SavingsPlansType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SavingsPlansType"))
 	}
-	if len(v.LookbackPeriodInDays) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LookbackPeriodInDays"))
+	if len(v.PaymentOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentOption"))
+	}
+	if len(v.TermInYears) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TermInYears"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -831,9 +1199,6 @@ func validateOpGetUsageForecastInput(v *GetUsageForecastInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUsageForecastInput"}
-	if len(v.Granularity) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
-	}
 	if len(v.Metric) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
 	}
@@ -843,6 +1208,57 @@ func validateOpGetUsageForecastInput(v *GetUsageForecastInput) error {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpProvideAnomalyFeedbackInput(v *ProvideAnomalyFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvideAnomalyFeedbackInput"}
+	if v.AnomalyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyId"))
+	}
+	if len(v.Feedback) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnomalyMonitorInput(v *UpdateAnomalyMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnomalyMonitorInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnomalySubscriptionInput(v *UpdateAnomalySubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnomalySubscriptionInput"}
+	if v.SubscriptionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -856,6 +1272,9 @@ func validateOpUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinition
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCostCategoryDefinitionInput"}
+	if len(v.RuleVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
+	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
 	} else if v.Rules != nil {
@@ -865,9 +1284,6 @@ func validateOpUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinition
 	}
 	if v.CostCategoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CostCategoryArn"))
-	}
-	if len(v.RuleVersion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

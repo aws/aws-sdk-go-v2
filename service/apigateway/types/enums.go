@@ -9,6 +9,15 @@ const (
 	ApiKeysFormatCsv ApiKeysFormat = "csv"
 )
 
+// Values returns all known values for ApiKeysFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiKeysFormat) Values() []ApiKeysFormat {
+	return []ApiKeysFormat{
+		"csv",
+	}
+}
+
 type ApiKeySourceType string
 
 // Enum values for ApiKeySourceType
@@ -16,6 +25,16 @@ const (
 	ApiKeySourceTypeHeader     ApiKeySourceType = "HEADER"
 	ApiKeySourceTypeAuthorizer ApiKeySourceType = "AUTHORIZER"
 )
+
+// Values returns all known values for ApiKeySourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiKeySourceType) Values() []ApiKeySourceType {
+	return []ApiKeySourceType{
+		"HEADER",
+		"AUTHORIZER",
+	}
+}
 
 type AuthorizerType string
 
@@ -25,6 +44,17 @@ const (
 	AuthorizerTypeRequest            AuthorizerType = "REQUEST"
 	AuthorizerTypeCognito_user_pools AuthorizerType = "COGNITO_USER_POOLS"
 )
+
+// Values returns all known values for AuthorizerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizerType) Values() []AuthorizerType {
+	return []AuthorizerType{
+		"TOKEN",
+		"REQUEST",
+		"COGNITO_USER_POOLS",
+	}
+}
 
 type CacheClusterSize string
 
@@ -40,6 +70,22 @@ const (
 	CacheClusterSizeSize_237_gb        CacheClusterSize = "237"
 )
 
+// Values returns all known values for CacheClusterSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CacheClusterSize) Values() []CacheClusterSize {
+	return []CacheClusterSize{
+		"0.5",
+		"1.6",
+		"6.1",
+		"13.5",
+		"28.4",
+		"58.2",
+		"118",
+		"237",
+	}
+}
+
 type CacheClusterStatus string
 
 // Enum values for CacheClusterStatus
@@ -51,6 +97,19 @@ const (
 	CacheClusterStatusFlush_in_progress  CacheClusterStatus = "FLUSH_IN_PROGRESS"
 )
 
+// Values returns all known values for CacheClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CacheClusterStatus) Values() []CacheClusterStatus {
+	return []CacheClusterStatus{
+		"CREATE_IN_PROGRESS",
+		"AVAILABLE",
+		"DELETE_IN_PROGRESS",
+		"NOT_AVAILABLE",
+		"FLUSH_IN_PROGRESS",
+	}
+}
+
 type ConnectionType string
 
 // Enum values for ConnectionType
@@ -59,6 +118,16 @@ const (
 	ConnectionTypeVpc_link ConnectionType = "VPC_LINK"
 )
 
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"INTERNET",
+		"VPC_LINK",
+	}
+}
+
 type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
@@ -66,6 +135,16 @@ const (
 	ContentHandlingStrategyConvert_to_binary ContentHandlingStrategy = "CONVERT_TO_BINARY"
 	ContentHandlingStrategyConvert_to_text   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
+
+// Values returns all known values for ContentHandlingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentHandlingStrategy) Values() []ContentHandlingStrategy {
+	return []ContentHandlingStrategy{
+		"CONVERT_TO_BINARY",
+		"CONVERT_TO_TEXT",
+	}
+}
 
 type DocumentationPartType string
 
@@ -85,6 +164,26 @@ const (
 	DocumentationPartTypeResponse_body   DocumentationPartType = "RESPONSE_BODY"
 )
 
+// Values returns all known values for DocumentationPartType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentationPartType) Values() []DocumentationPartType {
+	return []DocumentationPartType{
+		"API",
+		"AUTHORIZER",
+		"MODEL",
+		"RESOURCE",
+		"METHOD",
+		"PATH_PARAMETER",
+		"QUERY_PARAMETER",
+		"REQUEST_HEADER",
+		"REQUEST_BODY",
+		"RESPONSE",
+		"RESPONSE_HEADER",
+		"RESPONSE_BODY",
+	}
+}
+
 type DomainNameStatus string
 
 // Enum values for DomainNameStatus
@@ -94,6 +193,17 @@ const (
 	DomainNameStatusPending   DomainNameStatus = "PENDING"
 )
 
+// Values returns all known values for DomainNameStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainNameStatus) Values() []DomainNameStatus {
+	return []DomainNameStatus{
+		"AVAILABLE",
+		"UPDATING",
+		"PENDING",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType
@@ -102,6 +212,17 @@ const (
 	EndpointTypeEdge     EndpointType = "EDGE"
 	EndpointTypePrivate  EndpointType = "PRIVATE"
 )
+
+// Values returns all known values for EndpointType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"REGIONAL",
+		"EDGE",
+		"PRIVATE",
+	}
+}
 
 type GatewayResponseType string
 
@@ -129,6 +250,34 @@ const (
 	GatewayResponseTypeQuota_exceeded                 GatewayResponseType = "QUOTA_EXCEEDED"
 )
 
+// Values returns all known values for GatewayResponseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayResponseType) Values() []GatewayResponseType {
+	return []GatewayResponseType{
+		"DEFAULT_4XX",
+		"DEFAULT_5XX",
+		"RESOURCE_NOT_FOUND",
+		"UNAUTHORIZED",
+		"INVALID_API_KEY",
+		"ACCESS_DENIED",
+		"AUTHORIZER_FAILURE",
+		"AUTHORIZER_CONFIGURATION_ERROR",
+		"INVALID_SIGNATURE",
+		"EXPIRED_TOKEN",
+		"MISSING_AUTHENTICATION_TOKEN",
+		"INTEGRATION_FAILURE",
+		"INTEGRATION_TIMEOUT",
+		"API_CONFIGURATION_ERROR",
+		"UNSUPPORTED_MEDIA_TYPE",
+		"BAD_REQUEST_PARAMETERS",
+		"BAD_REQUEST_BODY",
+		"REQUEST_TOO_LARGE",
+		"THROTTLED",
+		"QUOTA_EXCEEDED",
+	}
+}
+
 type IntegrationType string
 
 // Enum values for IntegrationType
@@ -140,6 +289,19 @@ const (
 	IntegrationTypeAws_proxy  IntegrationType = "AWS_PROXY"
 )
 
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"HTTP",
+		"AWS",
+		"MOCK",
+		"HTTP_PROXY",
+		"AWS_PROXY",
+	}
+}
+
 type LocationStatusType string
 
 // Enum values for LocationStatusType
@@ -147,6 +309,16 @@ const (
 	LocationStatusTypeDocumented   LocationStatusType = "DOCUMENTED"
 	LocationStatusTypeUndocumented LocationStatusType = "UNDOCUMENTED"
 )
+
+// Values returns all known values for LocationStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LocationStatusType) Values() []LocationStatusType {
+	return []LocationStatusType{
+		"DOCUMENTED",
+		"UNDOCUMENTED",
+	}
+}
 
 type Op string
 
@@ -160,6 +332,20 @@ const (
 	OpTest    Op = "test"
 )
 
+// Values returns all known values for Op. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Op) Values() []Op {
+	return []Op{
+		"add",
+		"remove",
+		"replace",
+		"move",
+		"copy",
+		"test",
+	}
+}
+
 type PutMode string
 
 // Enum values for PutMode
@@ -167,6 +353,16 @@ const (
 	PutModeMerge     PutMode = "merge"
 	PutModeOverwrite PutMode = "overwrite"
 )
+
+// Values returns all known values for PutMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PutMode) Values() []PutMode {
+	return []PutMode{
+		"merge",
+		"overwrite",
+	}
+}
 
 type QuotaPeriodType string
 
@@ -177,6 +373,17 @@ const (
 	QuotaPeriodTypeMonth QuotaPeriodType = "MONTH"
 )
 
+// Values returns all known values for QuotaPeriodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaPeriodType) Values() []QuotaPeriodType {
+	return []QuotaPeriodType{
+		"DAY",
+		"WEEK",
+		"MONTH",
+	}
+}
+
 type SecurityPolicy string
 
 // Enum values for SecurityPolicy
@@ -184,6 +391,16 @@ const (
 	SecurityPolicyTls_1_0 SecurityPolicy = "TLS_1_0"
 	SecurityPolicyTls_1_2 SecurityPolicy = "TLS_1_2"
 )
+
+// Values returns all known values for SecurityPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicy) Values() []SecurityPolicy {
+	return []SecurityPolicy{
+		"TLS_1_0",
+		"TLS_1_2",
+	}
+}
 
 type UnauthorizedCacheControlHeaderStrategy string
 
@@ -194,6 +411,18 @@ const (
 	UnauthorizedCacheControlHeaderStrategySucceed_without_response_header UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
 )
 
+// Values returns all known values for UnauthorizedCacheControlHeaderStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UnauthorizedCacheControlHeaderStrategy) Values() []UnauthorizedCacheControlHeaderStrategy {
+	return []UnauthorizedCacheControlHeaderStrategy{
+		"FAIL_WITH_403",
+		"SUCCEED_WITH_RESPONSE_HEADER",
+		"SUCCEED_WITHOUT_RESPONSE_HEADER",
+	}
+}
+
 type VpcLinkStatus string
 
 // Enum values for VpcLinkStatus
@@ -203,3 +432,15 @@ const (
 	VpcLinkStatusDeleting  VpcLinkStatus = "DELETING"
 	VpcLinkStatusFailed    VpcLinkStatus = "FAILED"
 )
+
+// Values returns all known values for VpcLinkStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcLinkStatus) Values() []VpcLinkStatus {
+	return []VpcLinkStatus{
+		"AVAILABLE",
+		"PENDING",
+		"DELETING",
+		"FAILED",
+	}
+}

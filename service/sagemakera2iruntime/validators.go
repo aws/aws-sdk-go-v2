@@ -213,19 +213,19 @@ func validateOpStartHumanLoopInput(v *StartHumanLoopInput) error {
 	if v.FlowDefinitionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowDefinitionArn"))
 	}
-	if v.HumanLoopInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HumanLoopInput"))
-	} else if v.HumanLoopInput != nil {
-		if err := validateHumanLoopInput(v.HumanLoopInput); err != nil {
-			invalidParams.AddNested("HumanLoopInput", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.HumanLoopName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HumanLoopName"))
 	}
 	if v.DataAttributes != nil {
 		if err := validateHumanLoopDataAttributes(v.DataAttributes); err != nil {
 			invalidParams.AddNested("DataAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HumanLoopInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HumanLoopInput"))
+	} else if v.HumanLoopInput != nil {
+		if err := validateHumanLoopInput(v.HumanLoopInput); err != nil {
+			invalidParams.AddNested("HumanLoopInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

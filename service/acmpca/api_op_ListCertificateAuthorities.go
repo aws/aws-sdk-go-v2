@@ -12,7 +12,9 @@ import (
 )
 
 // Lists the private certificate authorities that you created by using the
-// CreateCertificateAuthority action.
+// CreateCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// action.
 func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
 	if params == nil {
 		params = &ListCertificateAuthoritiesInput{}
@@ -40,6 +42,10 @@ type ListCertificateAuthoritiesInput struct {
 	// receive a response with truncated results. Set it to the value of the NextToken
 	// parameter from the response you just received.
 	NextToken *string
+
+	// Use this parameter to filter the returned set of certificate authorities based
+	// on their owner. The default is SELF.
+	ResourceOwner types.ResourceOwner
 }
 
 type ListCertificateAuthoritiesOutput struct {

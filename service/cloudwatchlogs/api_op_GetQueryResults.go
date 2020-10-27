@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the results from the specified query. Only the fields requested in the
-// query are returned, along with a @ptr field which is the identifier for the log
+// query are returned, along with a @ptr field, which is the identifier for the log
 // record. You can use the value of @ptr in a GetLogRecord
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
 // operation to get the full log record. GetQueryResults does not start a query
@@ -54,13 +54,13 @@ type GetQueryResultsOutput struct {
 
 	// Includes the number of log events scanned by the query, the number of log events
 	// that matched the query criteria, and the total number of bytes in the log events
-	// that were scanned.
+	// that were scanned. These values reflect the full raw results of the query.
 	Statistics *types.QueryStatistics
 
 	// The status of the most recent running of the query. Possible values are
 	// Cancelled, Complete, Failed, Running, Scheduled, Timeout, and Unknown. Queries
 	// time out after 15 minutes of execution. To avoid having your queries time out,
-	// reduce the time range being searched, or partition your query into a number of
+	// reduce the time range being searched or partition your query into a number of
 	// queries.
 	Status types.QueryStatus
 

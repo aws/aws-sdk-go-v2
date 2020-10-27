@@ -265,14 +265,14 @@ func validateSchedule(v *types.Schedule) error {
 			invalidParams.AddNested("FastRestoreRule", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TagsToAdd != nil {
-		if err := validateTagsToAddList(v.TagsToAdd); err != nil {
-			invalidParams.AddNested("TagsToAdd", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.VariableTags != nil {
 		if err := validateVariableTagsList(v.VariableTags); err != nil {
 			invalidParams.AddNested("VariableTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagsToAdd != nil {
+		if err := validateTagsToAddList(v.TagsToAdd); err != nil {
+			invalidParams.AddNested("TagsToAdd", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -376,18 +376,18 @@ func validateOpCreateLifecyclePolicyInput(v *CreateLifecyclePolicyInput) error {
 	if v.ExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
-	if len(v.State) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("State"))
-	}
 	if v.PolicyDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDetails"))
 	} else if v.PolicyDetails != nil {
 		if err := validatePolicyDetails(v.PolicyDetails); err != nil {
 			invalidParams.AddNested("PolicyDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -464,11 +464,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -135,19 +135,19 @@ func validateCustomizedLoadMetricSpecification(v *types.CustomizedLoadMetricSpec
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedLoadMetricSpecification"}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
-	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -161,19 +161,19 @@ func validateCustomizedScalingMetricSpecification(v *types.CustomizedScalingMetr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedScalingMetricSpecification"}
-	if v.Dimensions != nil {
-		if err := validateMetricDimensions(v.Dimensions); err != nil {
-			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
 	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Dimensions != nil {
+		if err := validateMetricDimensions(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -187,11 +187,11 @@ func validateMetricDimension(v *types.MetricDimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimension"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -255,16 +255,24 @@ func validateScalingInstruction(v *types.ScalingInstruction) error {
 	if v.MinCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinCapacity"))
 	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if len(v.ServiceNamespace) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
-	}
 	if v.CustomizedLoadMetricSpecification != nil {
 		if err := validateCustomizedLoadMetricSpecification(v.CustomizedLoadMetricSpecification); err != nil {
 			invalidParams.AddNested("CustomizedLoadMetricSpecification", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.ServiceNamespace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.PredefinedLoadMetricSpecification != nil {
+		if err := validatePredefinedLoadMetricSpecification(v.PredefinedLoadMetricSpecification); err != nil {
+			invalidParams.AddNested("PredefinedLoadMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaxCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxCapacity"))
 	}
 	if v.TargetTrackingConfigurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetTrackingConfigurations"))
@@ -275,14 +283,6 @@ func validateScalingInstruction(v *types.ScalingInstruction) error {
 	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
-	}
-	if v.PredefinedLoadMetricSpecification != nil {
-		if err := validatePredefinedLoadMetricSpecification(v.PredefinedLoadMetricSpecification); err != nil {
-			invalidParams.AddNested("PredefinedLoadMetricSpecification", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.MaxCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -355,6 +355,9 @@ func validateOpCreateScalingPlanInput(v *CreateScalingPlanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateScalingPlanInput"}
+	if v.ApplicationSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationSource"))
+	}
 	if v.ScalingPlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
 	}
@@ -364,9 +367,6 @@ func validateOpCreateScalingPlanInput(v *CreateScalingPlanInput) error {
 		if err := validateScalingInstructions(v.ScalingInstructions); err != nil {
 			invalidParams.AddNested("ScalingInstructions", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -380,11 +380,11 @@ func validateOpDeleteScalingPlanInput(v *DeleteScalingPlanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteScalingPlanInput"}
-	if v.ScalingPlanName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
-	}
 	if v.ScalingPlanVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanVersion"))
+	}
+	if v.ScalingPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -398,11 +398,11 @@ func validateOpDescribeScalingPlanResourcesInput(v *DescribeScalingPlanResources
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeScalingPlanResourcesInput"}
-	if v.ScalingPlanName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
-	}
 	if v.ScalingPlanVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanVersion"))
+	}
+	if v.ScalingPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -419,26 +419,26 @@ func validateOpGetScalingPlanResourceForecastDataInput(v *GetScalingPlanResource
 	if v.ScalingPlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
 	}
+	if len(v.ServiceNamespace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
+	}
+	if v.ScalingPlanVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanVersion"))
+	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
-	if v.ScalingPlanVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanVersion"))
-	}
-	if len(v.ForecastDataType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ForecastDataType"))
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
-	if len(v.ServiceNamespace) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	if len(v.ForecastDataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastDataType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -452,16 +452,16 @@ func validateOpUpdateScalingPlanInput(v *UpdateScalingPlanInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateScalingPlanInput"}
-	if v.ScalingInstructions != nil {
-		if err := validateScalingInstructions(v.ScalingInstructions); err != nil {
-			invalidParams.AddNested("ScalingInstructions", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ScalingPlanVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanVersion"))
 	}
 	if v.ScalingPlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingPlanName"))
+	}
+	if v.ScalingInstructions != nil {
+		if err := validateScalingInstructions(v.ScalingInstructions); err != nil {
+			invalidParams.AddNested("ScalingInstructions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

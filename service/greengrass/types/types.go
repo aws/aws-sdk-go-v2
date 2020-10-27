@@ -590,6 +590,13 @@ type ResourceDownloadOwnerSetting struct {
 	GroupPermission Permission
 }
 
+// Runtime configuration for a thing.
+type RuntimeConfiguration struct {
+
+	// Configuration for telemetry service.
+	TelemetryConfiguration *TelemetryConfiguration
+}
+
 // Attributes that define an Amazon S3 machine learning resource.
 type S3MachineLearningModelResourceData struct {
 
@@ -668,6 +675,28 @@ type SubscriptionDefinitionVersion struct {
 
 	// A list of subscriptions.
 	Subscriptions []*Subscription
+}
+
+// Configuration settings for running telemetry.
+type TelemetryConfiguration struct {
+
+	// Configure telemetry to be on or off.
+	//
+	// This member is required.
+	Telemetry Telemetry
+
+	// Synchronization status of the device reported configuration with the desired
+	// configuration.
+	ConfigurationSyncStatus ConfigurationSyncStatus
+}
+
+// Configuration settings for running telemetry.
+type TelemetryConfigurationUpdate struct {
+
+	// Configure telemetry to be on or off.
+	//
+	// This member is required.
+	Telemetry Telemetry
 }
 
 // Information about a version.

@@ -7,7 +7,8 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
-// You aren't authorized to perform the action.
+// You aren't authorized to perform the action. Use the Amazon Resource Name (ARN)
+// of an authorized user or IAM role to perform the operation.
 type AccessDeniedException struct {
 	Message *string
 
@@ -26,7 +27,8 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Textract isn't able to read the document.
+// Amazon Textract isn't able to read the document. For more information on the
+// document limits in Amazon Textract, see limits.
 type BadDocumentException struct {
 	Message *string
 
@@ -73,8 +75,8 @@ type HumanLoopQuotaExceededException struct {
 
 	Code         *string
 	ResourceType *string
-	QuotaCode    *string
 	ServiceCode  *string
+	QuotaCode    *string
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -178,7 +180,10 @@ func (e *InvalidParameterException) ErrorCode() string             { return "Inv
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Textract is unable to access the S3 object that's specified in the
-// request.
+// request. for more information, Configure Access to Amazon S3
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) For
+// troubleshooting information, see Troubleshooting Amazon S3
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 type InvalidS3ObjectException struct {
 	Message *string
 

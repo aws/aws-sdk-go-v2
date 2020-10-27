@@ -26,15 +26,21 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). This
 // section describes the latest revision of the API. We recommend that you use this
 // revised API for application development. For backward compatibility, Amazon S3
-// continues to support the prior version of this API, ListObjects. To get a list
-// of your buckets, see ListBuckets. The following operations are related to
-// ListObjectsV2:
+// continues to support the prior version of this API, ListObjects
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html). To get a
+// list of your buckets, see ListBuckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html). The
+// following operations are related to ListObjectsV2:
 //
 //     * GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     * PutObject
+//     *
+// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     * CreateBucket
+//
+// * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, optFns ...func(*Options)) (*ListObjectsV2Output, error) {
 	if params == nil {
 		params = &ListObjectsV2Input{}
@@ -55,11 +61,19 @@ type ListObjectsV2Input struct {
 	// Bucket name to list. When using this API with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -73,6 +87,10 @@ type ListObjectsV2Input struct {
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
 	EncodingType types.EncodingType
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// The owner field is not present in listV2 by default, if you want to return owner
 	// field with each key in the result then set the fetch owner field to true.
@@ -143,14 +161,22 @@ type ListObjectsV2Output struct {
 	// never contain more.
 	MaxKeys *int32
 
-	// Bucket name. When using this API with an access point, you must direct requests
-	// to the access point hostname. The access point hostname takes the form
+	// The bucket name. When using this API with an access point, you must direct
+	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	Name *string
 
 	// NextContinuationToken is sent when isTruncated is true, which means there are

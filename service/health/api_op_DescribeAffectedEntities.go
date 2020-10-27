@@ -17,7 +17,9 @@ import (
 // depending on the AWS service. Events that have impact beyond that of the
 // affected entities, or where the extent of impact is unknown, include at least
 // one entity indicating this. At least one event ARN is required. Results are
-// sorted by the lastUpdatedTime of the entity, starting with the most recent.
+// sorted by the lastUpdatedTime of the entity, starting with the most recent. This
+// API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
 func (c *Client) DescribeAffectedEntities(ctx context.Context, params *DescribeAffectedEntitiesInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesInput{}

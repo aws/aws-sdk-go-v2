@@ -164,6 +164,11 @@ func awsRestjson1_deserializeOpDocumentCreateBackupPlanOutput(v **CreateBackupPl
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedBackupSettings(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
 		case "BackupPlanArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1406,6 +1411,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 				sv.BackupJobId = &jtv
 			}
 
+		case "BackupOptions":
+			if err := awsRestjson1_deserializeDocumentBackupOptions(&sv.BackupOptions, value); err != nil {
+				return err
+			}
+
 		case "BackupSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1417,6 +1427,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 					return err
 				}
 				sv.BackupSizeInBytes = &i64
+			}
+
+		case "BackupType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupType = &jtv
 			}
 
 		case "BackupVaultArn":
@@ -3174,6 +3193,11 @@ func awsRestjson1_deserializeOpDocumentGetBackupPlanOutput(v **GetBackupPlanOutp
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedBackupSettings(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
 		case "BackupPlan":
 			if err := awsRestjson1_deserializeDocumentBackupPlan(&sv.BackupPlan, value); err != nil {
 				return err
@@ -7547,6 +7571,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBackupPlanOutput(v **UpdateBackupPl
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedBackupSettings(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
 		case "BackupPlanArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8152,6 +8181,83 @@ func awsRestjson1_deserializeErrorServiceUnavailableException(response *smithyht
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAdvancedBackupSetting(v **types.AdvancedBackupSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedBackupSetting
+	if *v == nil {
+		sv = &types.AdvancedBackupSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupOptions":
+			if err := awsRestjson1_deserializeDocumentBackupOptions(&sv.BackupOptions, value); err != nil {
+				return err
+			}
+
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdvancedBackupSettings(v *[]*types.AdvancedBackupSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.AdvancedBackupSetting
+	if *v == nil {
+		cv = []*types.AdvancedBackupSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.AdvancedBackupSetting
+		if err := awsRestjson1_deserializeDocumentAdvancedBackupSetting(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAlreadyExistsException(v **types.AlreadyExistsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8277,6 +8383,11 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 				sv.BackupJobId = &jtv
 			}
 
+		case "BackupOptions":
+			if err := awsRestjson1_deserializeDocumentBackupOptions(&sv.BackupOptions, value); err != nil {
+				return err
+			}
+
 		case "BackupSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8288,6 +8399,15 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 					return err
 				}
 				sv.BackupSizeInBytes = &i64
+			}
+
+		case "BackupType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupType = &jtv
 			}
 
 		case "BackupVaultArn":
@@ -8482,6 +8602,42 @@ func awsRestjson1_deserializeDocumentBackupJobsList(v *[]*types.BackupJob, value
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBackupOptions(v *map[string]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]*string
+	if *v == nil {
+		mv = map[string]*string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected BackupOptionValue to be of type string, got %T instead", value)
+			}
+			parsedVal = &jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBackupPlan(v **types.BackupPlan, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8504,6 +8660,11 @@ func awsRestjson1_deserializeDocumentBackupPlan(v **types.BackupPlan, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedBackupSettings(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
 		case "BackupPlanName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8581,6 +8742,11 @@ func awsRestjson1_deserializeDocumentBackupPlansListMember(v **types.BackupPlans
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAdvancedBackupSettings(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
 		case "BackupPlanArn":
 			if value != nil {
 				jtv, ok := value.(string)

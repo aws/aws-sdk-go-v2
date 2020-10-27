@@ -24,15 +24,19 @@ import (
 // (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number
 // sign)
 //
-// If you associate a AWS Key Management Service (AWS KMS) customer master
-// key (CMK) with the log group, ingested data is encrypted using the CMK. This
+// When you create a log group, by default the log events in the log group
+// never expire. To set a retention policy so that events expire and are deleted
+// after a specified time, use PutRetentionPolicy
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html).
+// If you associate a AWS Key Management Service (AWS KMS) customer master key
+// (CMK) with the log group, ingested data is encrypted using the CMK. This
 // association is stored as long as the data encrypted with the CMK is still within
 // Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data
 // whenever it is requested. If you attempt to associate a CMK with the log group
-// but the CMK does not exist or the CMK is disabled, you will receive an
-// InvalidParameterException error. Important: CloudWatch Logs supports only
-// symmetric CMKs. Do not associate an asymmetric CMK with your log group. For more
-// information, see Using Symmetric and Asymmetric Keys
+// but the CMK does not exist or the CMK is disabled, you receive an
+// InvalidParameterException error. CloudWatch Logs supports only symmetric CMKs.
+// Do not associate an asymmetric CMK with your log group. For more information,
+// see Using Symmetric and Asymmetric Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
 func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput, optFns ...func(*Options)) (*CreateLogGroupOutput, error) {
 	if params == nil {

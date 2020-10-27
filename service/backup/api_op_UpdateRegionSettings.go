@@ -11,10 +11,10 @@ import (
 )
 
 // Updates the current service opt-in settings for the Region. If the service has a
-// value set to true, AWS Backup attempts to protect that service's resources in
-// this Region, when included in an on-demand backup or scheduled backup plan. If
-// the value is set to false for a service, AWS Backup does not attempt to protect
-// that service's resources in this Region.
+// value set to true, AWS Backup tries to protect that service's resources in this
+// Region, when included in an on-demand backup or scheduled backup plan. If the
+// value is set to false for a service, AWS Backup does not try to protect that
+// service's resources in this Region.
 func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionSettingsInput, optFns ...func(*Options)) (*UpdateRegionSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateRegionSettingsInput{}
@@ -32,7 +32,7 @@ func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionS
 
 type UpdateRegionSettingsInput struct {
 
-	// Updates the list of services along with the opt-in preferences for the region.
+	// Updates the list of services along with the opt-in preferences for the Region.
 	ResourceTypeOptInPreference map[string]*bool
 }
 

@@ -207,6 +207,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// word for the chosen database engine.
 	MasterUsername *string
 
+	// The upper limit to which Amazon RDS can automatically scale the storage of the
+	// DB instance.
+	MaxAllocatedStorage *int32
+
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
 	// metrics, specify 0. If MonitoringRoleArn is specified, then you must also set

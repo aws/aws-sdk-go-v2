@@ -6,33 +6,47 @@ import (
 	"time"
 )
 
-// A complex type that lists the AWS accounts, if any, that you included in the
-// TrustedSigners complex type for this distribution. These are the accounts that
-// you want to allow to create signed URLs for private content. The Signer complex
-// type lists the AWS account number of the trusted signer or self if the signer is
-// the AWS account that created the distribution. The Signer element also includes
-// the IDs of any active CloudFront key pairs that are associated with the trusted
-// signer's AWS account. If no KeyPairId element appears for a Signer, that signer
-// can't create signed URLs. For more information, see Serving Private Content
-// through CloudFront
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-// in the Amazon CloudFront Developer Guide.
-type ActiveTrustedSigners struct {
+// A list of key groups, and the public keys in each key group, that CloudFront can
+// use to verify the signatures of signed URLs and signed cookies.
+type ActiveTrustedKeyGroups struct {
 
-	// Enabled is true if any of the AWS accounts listed in the TrustedSigners complex
-	// type for this distribution have active CloudFront key pairs. If not, Enabled is
-	// false.
+	// This field is true if any of the key groups have public keys that CloudFront can
+	// use to verify the signatures of signed URLs and signed cookies. If not, this
+	// field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of trusted signers specified in the TrustedSigners complex type.
+	// The number of key groups in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A complex type that contains one Signer complex type for each trusted signer
-	// that is specified in the TrustedSigners complex type.
+	// A list of key groups, including the identifiers of the public keys in each key
+	// group that CloudFront can use to verify the signatures of signed URLs and signed
+	// cookies.
+	Items []*KGKeyPairIds
+}
+
+// A list of AWS accounts and the active CloudFront key pairs in each account that
+// CloudFront can use to verify the signatures of signed URLs and signed cookies.
+type ActiveTrustedSigners struct {
+
+	// This field is true if any of the AWS accounts in the list have active CloudFront
+	// key pairs that CloudFront can use to verify the signatures of signed URLs and
+	// signed cookies. If not, this field is false.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The number of AWS accounts in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// A list of AWS accounts and the identifiers of active CloudFront key pairs in
+	// each account that CloudFront can use to verify the signatures of signed URLs and
+	// signed cookies.
 	Items []*Signer
 }
 
@@ -176,23 +190,6 @@ type CacheBehavior struct {
 	//
 	// This member is required.
 	TargetOriginId *string
-
-	// A complex type that specifies the AWS accounts, if any, that you want to allow
-	// to create signed URLs for private content. If you want to require signed URLs in
-	// requests for objects in the target origin that match the PathPattern for this
-	// cache behavior, specify true for Enabled, and specify the applicable values for
-	// Quantity and Items. For more information, see Serving Private Content with
-	// Signed URLs and Signed Cookies
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-	// in the Amazon CloudFront Developer Guide. If you don’t want to require signed
-	// URLs in requests for objects that match PathPattern, specify false for Enabled
-	// and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted
-	// signers, change Enabled to true (if it’s currently false), change Quantity as
-	// applicable, and specify all of the trusted signers that you want to include in
-	// the updated distribution.
-	//
-	// This member is required.
-	TrustedSigners *TrustedSigners
 
 	// The protocol that viewers can use to access the files in the origin specified by
 	// TargetOriginId when a request matches the path pattern in PathPattern. You can
@@ -343,12 +340,41 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	OriginRequestPolicyId *string
 
+	// The Amazon Resource Name (ARN) of the real-time log configuration that is
+	// attached to this cache behavior. For more information, see Real-time logs
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
+	// in the Amazon CloudFront Developer Guide.
+	RealtimeLogConfigArn *string
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
 	// SmoothStreaming, you can still distribute other content using this cache
 	// behavior if the content matches the value of PathPattern.
 	SmoothStreaming *bool
+
+	// A list of key groups that CloudFront can use to validate signed URLs or signed
+	// cookies. When a cache behavior contains trusted key groups, CloudFront requires
+	// signed URLs or signed cookies for all requests that match the cache behavior.
+	// The URLs or cookies must be signed with a private key whose corresponding public
+	// key is in the key group. The signed URL or cookie contains information about
+	// which public key CloudFront should use to verify the signature. For more
+	// information, see Serving private content
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
+	TrustedKeyGroups *TrustedKeyGroups
+
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of AWS
+	// account IDs whose public keys CloudFront can use to validate signed URLs or
+	// signed cookies. When a cache behavior contains trusted signers, CloudFront
+	// requires signed URLs or signed cookies for all requests that match the cache
+	// behavior. The URLs or cookies must be signed with the private key of a
+	// CloudFront key pair in the trusted signer’s AWS account. The signed URL or
+	// cookie contains information about which public key CloudFront should use to
+	// verify the signature. For more information, see Serving private content
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
+	TrustedSigners *TrustedSigners
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
@@ -801,12 +827,12 @@ type CookieNames struct {
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
 // request policy instead of this field. If you want to include cookies in the
-// cache key, use CookiesConfig in a cache policy. See CreateCachePolicy. If you
-// want to send cookies to the origin but not include them in the cache key, use
-// CookiesConfig in an origin request policy. See CreateOriginRequestPolicy. A
-// complex type that specifies whether you want CloudFront to forward cookies to
-// the origin and, if so, which ones. For more information about forwarding cookies
-// to the origin, see Caching Content Based on Cookies
+// cache key, use CookiesConfig in a cache policy. See CachePolicy. If you want to
+// send cookies to the origin but not include them in the cache key, use
+// CookiesConfig in an origin request policy. See OriginRequestPolicy. A complex
+// type that specifies whether you want CloudFront to forward cookies to the origin
+// and, if so, which ones. For more information about forwarding cookies to the
+// origin, see Caching Content Based on Cookies
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
 type CookiePreference struct {
@@ -1037,23 +1063,6 @@ type DefaultCacheBehavior struct {
 	// This member is required.
 	TargetOriginId *string
 
-	// A complex type that specifies the AWS accounts, if any, that you want to allow
-	// to create signed URLs for private content. If you want to require signed URLs in
-	// requests for objects in the target origin that match the PathPattern for this
-	// cache behavior, specify true for Enabled, and specify the applicable values for
-	// Quantity and Items. For more information, see Serving Private Content with
-	// Signed URLs and Signed Cookies
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-	// in the Amazon CloudFront Developer Guide. If you don’t want to require signed
-	// URLs in requests for objects that match PathPattern, specify false for Enabled
-	// and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted
-	// signers, change Enabled to true (if it’s currently false), change Quantity as
-	// applicable, and specify all of the trusted signers that you want to include in
-	// the updated distribution.
-	//
-	// This member is required.
-	TrustedSigners *TrustedSigners
-
 	// The protocol that viewers can use to access the files in the origin specified by
 	// TargetOriginId when a request matches the path pattern in PathPattern. You can
 	// specify the following options:
@@ -1204,12 +1213,41 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	OriginRequestPolicyId *string
 
+	// The Amazon Resource Name (ARN) of the real-time log configuration that is
+	// attached to this cache behavior. For more information, see Real-time logs
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
+	// in the Amazon CloudFront Developer Guide.
+	RealtimeLogConfigArn *string
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
 	// SmoothStreaming, you can still distribute other content using this cache
 	// behavior if the content matches the value of PathPattern.
 	SmoothStreaming *bool
+
+	// A list of key groups that CloudFront can use to validate signed URLs or signed
+	// cookies. When a cache behavior contains trusted key groups, CloudFront requires
+	// signed URLs or signed cookies for all requests that match the cache behavior.
+	// The URLs or cookies must be signed with a private key whose corresponding public
+	// key is in the key group. The signed URL or cookie contains information about
+	// which public key CloudFront should use to verify the signature. For more
+	// information, see Serving private content
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
+	TrustedKeyGroups *TrustedKeyGroups
+
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of AWS
+	// account IDs whose public keys CloudFront can use to validate signed URLs or
+	// signed cookies. When a cache behavior contains trusted signers, CloudFront
+	// requires signed URLs or signed cookies for all requests that match the cache
+	// behavior. The URLs or cookies must be signed with the private key of a
+	// CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie
+	// contains information about which public key CloudFront should use to verify the
+	// signature. For more information, see Serving private content
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
+	TrustedSigners *TrustedSigners
 }
 
 // A distribution tells CloudFront where you want content to be delivered from, and
@@ -1222,18 +1260,6 @@ type Distribution struct {
 	//
 	// This member is required.
 	ARN *string
-
-	// CloudFront automatically adds this element to the response only if you've set up
-	// the distribution to serve private content with signed URLs. The element lists
-	// the key pair IDs that CloudFront is aware of for each trusted signer. The Signer
-	// child element lists the AWS account number of the trusted signer (or an empty
-	// Self element if the signer is you). The Signer element also includes the IDs of
-	// any active key pairs associated with the trusted signer's AWS account. If no
-	// KeyPairId element appears for a Signer, that signer can't create working signed
-	// URLs.
-	//
-	// This member is required.
-	ActiveTrustedSigners *ActiveTrustedSigners
 
 	// The current configuration information for the distribution. Send a GET request
 	// to the /CloudFront API version/distribution ID/config resource.
@@ -1268,6 +1294,21 @@ type Distribution struct {
 	//
 	// This member is required.
 	Status *string
+
+	// CloudFront automatically adds this field to the response if you’ve configured a
+	// cache behavior in this distribution to serve private content using key groups.
+	// This field contains a list of key groups and the public keys in each key group
+	// that CloudFront can use to verify the signatures of signed URLs or signed
+	// cookies.
+	ActiveTrustedKeyGroups *ActiveTrustedKeyGroups
+
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. CloudFront
+	// automatically adds this field to the response if you’ve configured a cache
+	// behavior in this distribution to serve private content using trusted signers.
+	// This field contains a list of AWS account IDs and the active CloudFront key
+	// pairs in each account that CloudFront can use to verify the signatures of signed
+	// URLs or signed cookies.
+	ActiveTrustedSigners *ActiveTrustedSigners
 
 	// AWS services in China customers must file for an Internet Content Provider (ICP)
 	// recordal if they want to serve content publicly on an alternate domain name,
@@ -1420,8 +1461,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide. For information about CloudFront
 	// pricing, including how price classes (such as Price Class 100) map to CloudFront
 	// regions, see Amazon CloudFront Pricing
-	// (http://aws.amazon.com/cloudfront/pricing/). For price class information, scroll
-	// down to see the table at the bottom of the page.
+	// (http://aws.amazon.com/cloudfront/pricing/).
 	PriceClass PriceClass
 
 	// A complex type that identifies ways in which you want to restrict distribution
@@ -1692,6 +1732,21 @@ type EncryptionEntity struct {
 	//
 	// This member is required.
 	PublicKeyId *string
+}
+
+// Contains information about the Amazon Kinesis data stream where you are sending
+// real-time log data in a real-time log configuration.
+type EndPoint struct {
+
+	// The type of data stream where you are sending real-time log data. The only valid
+	// value is Kinesis.
+	//
+	// This member is required.
+	StreamType *string
+
+	// Contains information about the Amazon Kinesis data stream where you are sending
+	// real-time log data.
+	KinesisStreamConfig *KinesisStreamConfig
 }
 
 // A complex data type that includes the profile configurations and other options
@@ -2153,22 +2208,119 @@ type InvalidationSummary struct {
 	Status *string
 }
 
-// A complex type that lists the active CloudFront key pairs, if any, that are
-// associated with AwsAccountNumber. For more information, see ActiveTrustedSigners
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
-type KeyPairIds struct {
+// A key group. A key group contains a list of public keys that you can use with
+// CloudFront signed URLs and signed cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html).
+type KeyGroup struct {
 
-	// The number of active CloudFront key pairs for AwsAccountNumber. For more
-	// information, see ActiveTrustedSigners
-	// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
+	// The identifier for the key group.
+	//
+	// This member is required.
+	Id *string
+
+	// The key group configuration.
+	//
+	// This member is required.
+	KeyGroupConfig *KeyGroupConfig
+
+	// The date and time when the key group was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+}
+
+// A key group configuration. A key group contains a list of public keys that you
+// can use with CloudFront signed URLs and signed cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html).
+type KeyGroupConfig struct {
+
+	// A list of the identifiers of the public keys in the key group.
+	//
+	// This member is required.
+	Items []*string
+
+	// A name to identify the key group.
+	//
+	// This member is required.
+	Name *string
+
+	// A comment to describe the key group.
+	Comment *string
+}
+
+// A list of key groups.
+type KeyGroupList struct {
+
+	// The maximum number of key groups requested.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The number of key groups returned in the response.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A complex type that lists the active CloudFront key pairs, if any, that are
-	// associated with AwsAccountNumber. For more information, see ActiveTrustedSigners
-	// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
+	// A list of key groups.
+	Items []*KeyGroupSummary
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value that you should use in the Marker field of a
+	// subsequent request to continue listing key groups.
+	NextMarker *string
+}
+
+// Contains information about a key group.
+type KeyGroupSummary struct {
+
+	// A key group.
+	//
+	// This member is required.
+	KeyGroup *KeyGroup
+}
+
+// A list of CloudFront key pair identifiers.
+type KeyPairIds struct {
+
+	// The number of key pair identifiers in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// A list of CloudFront key pair identifiers.
 	Items []*string
+}
+
+// A list of identifiers for the public keys that CloudFront can use to verify the
+// signatures of signed URLs and signed cookies.
+type KGKeyPairIds struct {
+
+	// The identifier of the key group that contains the public keys.
+	KeyGroupId *string
+
+	// A list of CloudFront key pair identifiers.
+	KeyPairIds *KeyPairIds
+}
+
+// Contains information about the Amazon Kinesis data stream where you are sending
+// real-time log data.
+type KinesisStreamConfig struct {
+
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that CloudFront can use to send real-time log data to your Kinesis data
+	// stream. For more information the IAM role, see Real-time log configuration IAM
+	// role
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
+	RoleARN *string
+
+	// The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending
+	// real-time log data.
+	//
+	// This member is required.
+	StreamARN *string
 }
 
 // A complex type that contains a Lambda function association.
@@ -2272,33 +2424,40 @@ type LoggingConfig struct {
 	Prefix *string
 }
 
+// A monitoring subscription. This structure contains information about whether
+// additional CloudWatch metrics are enabled for a given CloudFront distribution.
+type MonitoringSubscription struct {
+
+	// A subscription configuration for additional CloudWatch metrics.
+	RealtimeMetricsSubscriptionConfig *RealtimeMetricsSubscriptionConfig
+}
+
 // An origin. An origin is the location where content is stored, and from which
 // CloudFront gets content to serve to viewers. To specify an origin:
 //
 //     * Use
-// the S3OriginConfig type to specify an Amazon S3 bucket that is not configured
-// with static website hosting.
+// S3OriginConfig to specify an Amazon S3 bucket that is not configured with static
+// website hosting.
 //
-//     * Use the CustomOriginConfig type to specify
-// various other kinds of content containers or HTTP servers, including:
+//     * Use CustomOriginConfig to specify all other kinds of
+// origins, including:
 //
-//         *
-// An Amazon S3 bucket that is configured with static website hosting
+//         * An Amazon S3 bucket that is configured with
+// static website hosting
 //
-//         * An
-// Elastic Load Balancing load balancer
+//         * An Elastic Load Balancing load balancer
 //
-//         * An AWS Elemental MediaPackage
-// origin
 //
-//         * An AWS Elemental MediaStore container
+// * An AWS Elemental MediaPackage endpoint
 //
-//         * Any other
-// HTTP server, running on an Amazon EC2 instance or any other kind of host
+//         * An AWS Elemental MediaStore
+// container
 //
-// For
-// the current maximum number of origins that you can specify per distribution, see
-// General Quotas on Web Distributions
+//         * Any other HTTP server, running on an Amazon EC2 instance or
+// any other kind of host
+//
+// For the current maximum number of origins that you can
+// specify per distribution, see General Quotas on Web Distributions
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions)
 // in the Amazon CloudFront Developer Guide (quotas were formerly referred to as
 // limits).
@@ -2338,17 +2497,17 @@ type Origin struct {
 	// in the Amazon CloudFront Developer Guide.
 	ConnectionTimeout *int32
 
-	// A list of HTTP header names and values that CloudFront adds to requests it sends
-	// to the origin. For more information, see Adding Custom Headers to Origin
-	// Requests
+	// A list of HTTP header names and values that CloudFront adds to the requests that
+	// it sends to the origin. For more information, see Adding Custom Headers to
+	// Origin Requests
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html)
 	// in the Amazon CloudFront Developer Guide.
 	CustomHeaders *CustomHeaders
 
-	// Use this type to specify an origin that is a content container or HTTP server,
-	// including an Amazon S3 bucket that is configured with static website hosting. To
-	// specify an Amazon S3 bucket that is not configured with static website hosting,
-	// use the S3OriginConfig type instead.
+	// Use this type to specify an origin that is not an Amazon S3 bucket, with one
+	// exception. If the Amazon S3 bucket is configured with static website hosting,
+	// use this type. If the Amazon S3 bucket is not configured with static website
+	// hosting, use the S3OriginConfig type instead.
 	CustomOriginConfig *CustomOriginConfig
 
 	// An optional path that CloudFront appends to the origin domain name when
@@ -2357,6 +2516,12 @@ type Origin struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath)
 	// in the Amazon CloudFront Developer Guide.
 	OriginPath *string
+
+	// CloudFront Origin Shield. Using Origin Shield can help reduce the load on your
+	// origin. For more information, see Using Origin Shield
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html)
+	// in the Amazon CloudFront Developer Guide.
+	OriginShield *OriginShield
 
 	// Use this type to specify an origin that is an Amazon S3 bucket that is not
 	// configured with static website hosting. To specify any other type of origin,
@@ -2474,7 +2639,7 @@ type OriginGroups struct {
 //
 // CloudFront sends a request when it can’t find an
 // object in its cache that matches the request. If you want to send values to the
-// origin and also include them in the cache key, use CreateCachePolicy.
+// origin and also include them in the cache key, use CachePolicy.
 type OriginRequestPolicy struct {
 
 	// The unique identifier for the origin request policy.
@@ -2512,7 +2677,7 @@ type OriginRequestPolicy struct {
 // CloudFront sends a
 // request when it can’t find an object in its cache that matches the request. If
 // you want to send values to the origin and also include them in the cache key,
-// use CreateCachePolicy.
+// use CachePolicy.
 type OriginRequestPolicyConfig struct {
 
 	// The cookies from viewer requests to include in origin requests.
@@ -2664,19 +2829,43 @@ type OriginRequestPolicySummary struct {
 	Type OriginRequestPolicyType
 }
 
-// A complex type that contains information about origins and origin groups for
-// this distribution.
+// Contains information about the origins for this distribution.
 type Origins struct {
 
-	// A complex type that contains origins or origin groups for this distribution.
+	// A list of origins.
 	//
 	// This member is required.
 	Items []*Origin
 
-	// The number of origins or origin groups for this distribution.
+	// The number of origins for this distribution.
 	//
 	// This member is required.
 	Quantity *int32
+}
+
+// CloudFront Origin Shield. Using Origin Shield can help reduce the load on your
+// origin. For more information, see Using Origin Shield
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html)
+// in the Amazon CloudFront Developer Guide.
+type OriginShield struct {
+
+	// A flag that specifies whether Origin Shield is enabled. When it’s enabled,
+	// CloudFront routes all requests through Origin Shield, which can help protect
+	// your origin. When it’s disabled, CloudFront might send requests directly to your
+	// origin from multiple edge locations or regional edge caches.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The AWS Region for Origin Shield. Specify the AWS Region that has the lowest
+	// latency to your origin. To specify a region, use the region code, not the region
+	// name. For example, specify the US East (Ohio) region as us-east-2. When you
+	// enable CloudFront Origin Shield, you must specify the AWS Region for Origin
+	// Shield. For the list of AWS Regions that you can specify, and for help choosing
+	// the best Region for your origin, see Choosing the AWS Region for Origin Shield
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region)
+	// in the Amazon CloudFront Developer Guide.
+	OriginShieldRegion *string
 }
 
 // A complex type that contains information about the SSL/TLS protocols that
@@ -2702,7 +2891,7 @@ type OriginSslProtocols struct {
 // cache key are automatically included in requests that CloudFront sends to the
 // origin. CloudFront sends a request when it can’t find an object in its cache
 // that matches the request’s cache key. If you want to send values to the origin
-// but not include them in the cache key, use CreateOriginRequestPolicy.
+// but not include them in the cache key, use OriginRequestPolicy.
 type ParametersInCacheKeyAndForwardedToOrigin struct {
 
 	// An object that determines whether any cookies in viewer requests (and if so,
@@ -2712,29 +2901,33 @@ type ParametersInCacheKeyAndForwardedToOrigin struct {
 	// This member is required.
 	CookiesConfig *CachePolicyCookiesConfig
 
-	// A flag that determines whether the Accept-Encoding HTTP header is included in
-	// the cache key and included in requests that CloudFront sends to the origin. If
-	// this field is true and the viewer request includes the Accept-Encoding header,
-	// then CloudFront normalizes the value of the viewer’s Accept-Encoding header to
-	// one of the following:
+	// A flag that can affect whether the Accept-Encoding HTTP header is included in
+	// the cache key and included in requests that CloudFront sends to the origin. This
+	// field is related to the EnableAcceptEncodingBrotli field. If one or both of
+	// these fields is true and the viewer request includes the Accept-Encoding header,
+	// then CloudFront does the following:
 	//
-	//     * Accept-Encoding: gzip (if gzip is in the viewer’s
-	// Accept-Encoding header)
+	//     * Normalizes the value of the viewer’s
+	// Accept-Encoding header
 	//
-	//     * Accept-Encoding: identity (if gzip is not in the
-	// viewer’s Accept-Encoding header)
+	//     * Includes the normalized header in the cache key
 	//
-	// CloudFront includes the normalized header in
-	// the cache key and includes it in requests that CloudFront sends to the origin.
-	// If this field is false, then CloudFront treats the Accept-Encoding header the
-	// same as any other HTTP header in the viewer request. By default, it’s not
-	// included in the cache key and it’s not included in origin requests. You can
-	// manually add Accept-Encoding to the headers whitelist like any other HTTP
-	// header. When this field is true, you should not whitelist the Accept-Encoding
-	// header in the cache policy or in an origin request policy attached to the same
-	// cache behavior. For more information, see Cache compressed objects
+	//
+	// * Includes the normalized header in the request to the origin, if a request is
+	// necessary
+	//
+	// For more information, see Compression support
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects)
-	// in the Amazon CloudFront Developer Guide.
+	// in the Amazon CloudFront Developer Guide. If you set this value to true, and
+	// this cache behavior also has an origin request policy attached, do not include
+	// the Accept-Encoding header in the origin request policy. CloudFront always
+	// includes the Accept-Encoding header in origin requests when the value of this
+	// field is true, so including this header in an origin request policy has no
+	// effect. If both of these fields are false, then CloudFront treats the
+	// Accept-Encoding header the same as any other HTTP header in the viewer request.
+	// By default, it’s not included in the cache key and it’s not included in origin
+	// requests. In this case, you can manually add Accept-Encoding to the headers
+	// whitelist like any other HTTP header.
 	//
 	// This member is required.
 	EnableAcceptEncodingGzip *bool
@@ -2752,6 +2945,35 @@ type ParametersInCacheKeyAndForwardedToOrigin struct {
 	//
 	// This member is required.
 	QueryStringsConfig *CachePolicyQueryStringsConfig
+
+	// A flag that can affect whether the Accept-Encoding HTTP header is included in
+	// the cache key and included in requests that CloudFront sends to the origin. This
+	// field is related to the EnableAcceptEncodingGzip field. If one or both of these
+	// fields is true and the viewer request includes the Accept-Encoding header, then
+	// CloudFront does the following:
+	//
+	//     * Normalizes the value of the viewer’s
+	// Accept-Encoding header
+	//
+	//     * Includes the normalized header in the cache key
+	//
+	//
+	// * Includes the normalized header in the request to the origin, if a request is
+	// necessary
+	//
+	// For more information, see Compression support
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects)
+	// in the Amazon CloudFront Developer Guide. If you set this value to true, and
+	// this cache behavior also has an origin request policy attached, do not include
+	// the Accept-Encoding header in the origin request policy. CloudFront always
+	// includes the Accept-Encoding header in origin requests when the value of this
+	// field is true, so including this header in an origin request policy has no
+	// effect. If both of these fields are false, then CloudFront treats the
+	// Accept-Encoding header the same as any other HTTP header in the viewer request.
+	// By default, it’s not included in the cache key and it’s not included in origin
+	// requests. In this case, you can manually add Accept-Encoding to the headers
+	// whitelist like any other HTTP header.
+	EnableAcceptEncodingBrotli *bool
 }
 
 // A complex type that contains information about the objects that you want to
@@ -2770,69 +2992,79 @@ type Paths struct {
 	Items []*string
 }
 
-// A complex data type of public keys you add to CloudFront to use with features
-// like field-level encryption.
+// A public key that you can use with signed URLs and signed cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+// or with field-level encryption
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 type PublicKey struct {
 
-	// A time you added a public key to CloudFront.
+	// The date and time when the public key was uploaded.
 	//
 	// This member is required.
 	CreatedTime *time.Time
 
-	// A unique ID assigned to a public key you've added to CloudFront.
+	// The identifier of the public key.
 	//
 	// This member is required.
 	Id *string
 
-	// A complex data type for a public key you add to CloudFront to use with features
-	// like field-level encryption.
+	// Configuration information about a public key that you can use with signed URLs
+	// and signed cookies
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+	// or with field-level encryption
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 	//
 	// This member is required.
 	PublicKeyConfig *PublicKeyConfig
 }
 
-// Information about a public key you add to CloudFront to use with features like
-// field-level encryption.
+// Configuration information about a public key that you can use with signed URLs
+// and signed cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+// or with field-level encryption
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 type PublicKeyConfig struct {
 
-	// A unique number that ensures that the request can't be replayed.
+	// A string included in the request to help make sure that the request can’t be
+	// replayed.
 	//
 	// This member is required.
 	CallerReference *string
 
-	// The encoded public key that you want to add to CloudFront to use with features
-	// like field-level encryption.
+	// The public key that you can use with signed URLs and signed cookies
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+	// or with field-level encryption
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 	//
 	// This member is required.
 	EncodedKey *string
 
-	// The name for a public key you add to CloudFront to use with features like
-	// field-level encryption.
+	// A name to help identify the public key.
 	//
 	// This member is required.
 	Name *string
 
-	// An optional comment about a public key.
+	// A comment to describe the public key.
 	Comment *string
 }
 
-// A list of public keys you've added to CloudFront to use with features like
-// field-level encryption.
+// A list of public keys that you can use with signed URLs and signed cookies
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html),
+// or with field-level encryption
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 type PublicKeyList struct {
 
-	// The maximum number of public keys you want in the response body.
+	// The maximum number of public keys you want in the response.
 	//
 	// This member is required.
 	MaxItems *int32
 
-	// The number of public keys you added to CloudFront to use with features like
-	// field-level encryption.
+	// The number of public keys in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// An array of information about a public key you add to CloudFront to use with
-	// features like field-level encryption.
+	// A list of public keys.
 	Items []*PublicKeySummary
 
 	// If there are more elements to be listed, this element is present and contains
@@ -2841,30 +3073,30 @@ type PublicKeyList struct {
 	NextMarker *string
 }
 
-// A complex data type for public key information.
+// Contains information about a public key.
 type PublicKeySummary struct {
 
-	// Creation time for public key information summary.
+	// The date and time when the public key was uploaded.
 	//
 	// This member is required.
 	CreatedTime *time.Time
 
-	// Encoded key for public key information summary.
+	// The public key.
 	//
 	// This member is required.
 	EncodedKey *string
 
-	// ID for public key information summary.
+	// The identifier of the public key.
 	//
 	// This member is required.
 	Id *string
 
-	// Name for public key information summary.
+	// A name to help identify the public key.
 	//
 	// This member is required.
 	Name *string
 
-	// Comment for public key information summary.
+	// A comment to describe the public key.
 	Comment *string
 }
 
@@ -2912,12 +3144,11 @@ type QueryArgProfiles struct {
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
 // request policy instead of this field. If you want to include query strings in
-// the cache key, use QueryStringsConfig in a cache policy. See CreateCachePolicy.
-// If you want to send query strings to the origin but not include them in the
-// cache key, use QueryStringsConfig in an origin request policy. See
-// CreateOriginRequestPolicy. A complex type that contains information about the
-// query string parameters that you want CloudFront to use for caching for a cache
-// behavior.
+// the cache key, use QueryStringsConfig in a cache policy. See CachePolicy. If you
+// want to send query strings to the origin but not include them in the cache key,
+// use QueryStringsConfig in an origin request policy. See OriginRequestPolicy. A
+// complex type that contains information about the query string parameters that
+// you want CloudFront to use for caching for a cache behavior.
 type QueryStringCacheKeys struct {
 
 	// The number of whitelisted query string parameters for a cache behavior.
@@ -2941,6 +3172,84 @@ type QueryStringNames struct {
 
 	// A list of query string names.
 	Items []*string
+}
+
+// A real-time log configuration.
+type RealtimeLogConfig struct {
+
+	// The Amazon Resource Name (ARN) of this real-time log configuration.
+	//
+	// This member is required.
+	ARN *string
+
+	// Contains information about the Amazon Kinesis data stream where you are sending
+	// real-time log data for this real-time log configuration.
+	//
+	// This member is required.
+	EndPoints []*EndPoint
+
+	// A list of fields that are included in each real-time log record. In an API
+	// response, the fields are provided in the same order in which they are sent to
+	// the Amazon Kinesis data stream. For more information about fields, see Real-time
+	// log configuration fields
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
+	Fields []*string
+
+	// The unique name of this real-time log configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The sampling rate for this real-time log configuration. The sampling rate
+	// determines the percentage of viewer requests that are represented in the
+	// real-time log data. The sampling rate is an integer between 1 and 100,
+	// inclusive.
+	//
+	// This member is required.
+	SamplingRate *int64
+}
+
+// A list of real-time log configurations.
+type RealtimeLogConfigs struct {
+
+	// A flag that indicates whether there are more real-time log configurations than
+	// are contained in this list.
+	//
+	// This member is required.
+	IsTruncated *bool
+
+	// This parameter indicates where this list of real-time log configurations begins.
+	// This list includes real-time log configurations that occur after the marker.
+	//
+	// This member is required.
+	Marker *string
+
+	// The maximum number of real-time log configurations requested.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// Contains the list of real-time log configurations.
+	Items []*RealtimeLogConfig
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value that you should use in the Marker field of a
+	// subsequent request to continue listing real-time log configurations where you
+	// left off.
+	NextMarker *string
+}
+
+// A subscription configuration for additional CloudWatch metrics.
+type RealtimeMetricsSubscriptionConfig struct {
+
+	// A flag that indicates whether additional CloudWatch metrics are enabled for a
+	// given CloudFront distribution.
+	//
+	// This member is required.
+	RealtimeMetricsSubscriptionStatus RealtimeMetricsSubscriptionStatus
 }
 
 // A complex type that identifies ways in which you want to restrict distribution
@@ -3005,22 +3314,17 @@ type S3OriginConfig struct {
 	OriginAccessIdentity *string
 }
 
-// A complex type that lists the AWS accounts that were included in the
-// TrustedSigners complex type, as well as their active CloudFront key pair IDs, if
-// any.
+// A list of AWS accounts and the active CloudFront key pairs in each account that
+// CloudFront can use to verify the signatures of signed URLs and signed cookies.
 type Signer struct {
 
-	// An AWS account that is included in the TrustedSigners complex type for this
-	// distribution. Valid values include:
-	//
-	//     * self, which is the AWS account used
-	// to create the distribution.
-	//
-	//     * An AWS account number.
+	// An AWS account number that contains active CloudFront key pairs that CloudFront
+	// can use to verify the signatures of signed URLs and signed cookies. If the AWS
+	// account that owns the key pairs is the same account that owns the CloudFront
+	// distribution, the value of this field is self.
 	AwsAccountNumber *string
 
-	// A complex type that lists the active CloudFront key pairs, if any, that are
-	// associated with AwsAccountNumber.
+	// A list of CloudFront key pair identifiers.
 	KeyPairIds *KeyPairIds
 }
 
@@ -3334,37 +3638,43 @@ type Tags struct {
 	Items []*Tag
 }
 
-// A complex type that specifies the AWS accounts, if any, that you want to allow
-// to create signed URLs for private content. If you want to require signed URLs in
-// requests for objects in the target origin that match the PathPattern for this
-// cache behavior, specify true for Enabled, and specify the applicable values for
-// Quantity and Items. For more information, see Serving Private Content through
-// CloudFront
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-// in the Amazon CloudFront Developer Guide. If you don't want to require signed
-// URLs in requests for objects that match PathPattern, specify false for Enabled
-// and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted
-// signers, change Enabled to true (if it's currently false), change Quantity as
-// applicable, and specify all of the trusted signers that you want to include in
-// the updated distribution. For more information about updating the distribution
-// configuration, see DistributionConfig
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html)
-// in the Amazon CloudFront API Reference.
-type TrustedSigners struct {
+// A list of key groups whose public keys CloudFront can use to verify the
+// signatures of signed URLs and signed cookies.
+type TrustedKeyGroups struct {
 
-	// Specifies whether you want to require viewers to use signed URLs to access the
-	// files specified by PathPattern and TargetOriginId.
+	// This field is true if any of the key groups in the list have public keys that
+	// CloudFront can use to verify the signatures of signed URLs and signed cookies.
+	// If not, this field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of trusted signers for this cache behavior.
+	// The number of key groups in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// Optional: A complex type that contains trusted signers for this cache behavior.
-	// If Quantity is 0, you can omit Items.
+	// A list of key groups identifiers.
+	Items []*string
+}
+
+// A list of AWS accounts whose public keys CloudFront can use to verify the
+// signatures of signed URLs and signed cookies.
+type TrustedSigners struct {
+
+	// This field is true if any of the AWS accounts have public keys that CloudFront
+	// can use to verify the signatures of signed URLs and signed cookies. If not, this
+	// field is false.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The number of AWS accounts in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// A list of AWS account identifiers.
 	Items []*string
 }
 
@@ -3508,7 +3818,14 @@ type ViewerCertificate struct {
 	// don’t support SNI. This is not recommended, and results in additional monthly
 	// charges from CloudFront.
 	//
-	// If the distribution uses the CloudFront domain name
-	// such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
+	//     * static-ip - Do not specify this value unless
+	// your distribution has been enabled for this feature by the CloudFront team. If
+	// you have a use case that requires static IP addresses for a distribution,
+	// contact CloudFront through the AWS Support Center
+	// (https://console.aws.amazon.com/support/home).
+	//
+	// If the distribution uses the
+	// CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value
+	// for this field.
 	SSLSupportMethod SSLSupportMethod
 }

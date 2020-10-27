@@ -88,7 +88,8 @@ type GetDocumentTextDetectionOutput struct {
 	// results.
 	NextToken *string
 
-	// The current status of an asynchronous text-detection operation for the document.
+	// Returns if the detection job could not be completed. Contains explanation for
+	// what error occured.
 	StatusMessage *string
 
 	// A list of warnings that occurred during the text-detection operation for the

@@ -44,10 +44,11 @@ type ListShardsInput struct {
 	ExclusiveStartShardId *string
 
 	// The maximum number of shards to return in a single call to ListShards. The
-	// minimum value you can specify for this parameter is 1, and the maximum is 1,000,
-	// which is also the default. When the number of shards to be listed is greater
-	// than the value of MaxResults, the response contains a NextToken value that you
-	// can use in a subsequent call to ListShards to list the next set of shards.
+	// minimum value you can specify for this parameter is 1, and the maximum is
+	// 10,000, which is also the default. When the number of shards to be listed is
+	// greater than the value of MaxResults, the response contains a NextToken value
+	// that you can use in a subsequent call to ListShards to list the next set of
+	// shards.
 	MaxResults *int32
 
 	// When the number of shards in the data stream is greater than the default value
@@ -66,6 +67,8 @@ type ListShardsInput struct {
 	// you have 300 seconds to use that value. If you specify an expired token in a
 	// call to ListShards, you get ExpiredNextTokenException.
 	NextToken *string
+
+	ShardFilter *types.ShardFilter
 
 	// Specify this input parameter to distinguish data streams that have the same
 	// name. For example, if you create a data stream and then delete it, and you later
@@ -122,6 +125,7 @@ func addOperationListShardsMiddlewares(stack *middleware.Stack, options Options)
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListShardsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListShards(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)

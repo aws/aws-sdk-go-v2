@@ -39,7 +39,7 @@ type GetJobOutput struct {
 
 	// Each job converts an input file into an output file or files. For more
 	// information, see the User Guide at
-	// http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 	Job *types.Job
 
 	// Metadata pertaining to the operation's result.

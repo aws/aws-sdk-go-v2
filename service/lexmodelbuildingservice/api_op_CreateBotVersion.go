@@ -53,7 +53,7 @@ type CreateBotVersionInput struct {
 
 type CreateBotVersionOutput struct {
 
-	// The message that Amazon Lex uses to abort a conversation. For more information,
+	// The message that Amazon Lex uses to cancel a conversation. For more information,
 	// see PutBot.
 	AbortStatement *types.Statement
 
@@ -96,6 +96,10 @@ type CreateBotVersionOutput struct {
 	// Indicates whether utterances entered by the user should be sent to Amazon
 	// Comprehend for sentiment analysis.
 	DetectSentiment *bool
+
+	// Indicates whether the bot uses accuracy improvements. true indicates that the
+	// bot is using the improvements, otherwise, false.
+	EnableModelImprovements *bool
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build the
 	// bot.

@@ -64,7 +64,7 @@ func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetE
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeFleetEventsInput struct {
 
 	// A unique identifier for a fleet to get event logs for. You can use either the
@@ -83,7 +83,7 @@ type DescribeFleetEventsInput struct {
 	Limit *int32
 
 	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
@@ -94,14 +94,14 @@ type DescribeFleetEventsInput struct {
 	StartTime *time.Time
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeFleetEventsOutput struct {
 
 	// A collection of objects containing event log entries for the specified fleet.
 	Events []*types.Event
 
 	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
+	// operation. If no token is returned, these results represent the end of the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

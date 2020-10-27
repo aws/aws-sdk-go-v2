@@ -528,7 +528,7 @@ type FleetAttributes struct {
 	//     * TERMINATED -- The fleet no longer exists.
 	Status FleetStatus
 
-	// List of fleet actions that have been suspended using StopFleetActions. This
+	// List of fleet activity that have been suspended using StopFleetActions. This
 	// includes auto-scaling.
 	StoppedActions []FleetAction
 
@@ -629,39 +629,49 @@ type GameProperty struct {
 	Value *string
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. Properties describing a game
-// server resource. A game server resource is created by a successful call to
-// RegisterGameServer and deleted by calling DeregisterGameServer.
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Properties describing a game server that is running on an instance in a
+// GameServerGroup. A game server is created by a successful call to
+// RegisterGameServer and deleted by calling DeregisterGameServer. A game server is
+// claimed to host a game session by calling ClaimGameServer.
+//
+//     *
+// RegisterGameServer
+//
+//     * ListGameServers
+//
+//     * ClaimGameServer
+//
+//     *
+// DescribeGameServer
+//
+//     * UpdateGameServer
+//
+//     * DeregisterGameServer
 type GameServer struct {
 
-	// Indicates when an available game server has been reserved but has not yet
-	// started hosting a game. Once it is claimed, game server remains in CLAIMED
-	// status for a maximum of one minute. During this time, game clients must connect
-	// to the game server and start the game, which triggers the game server to update
-	// its utilization status. After one minute, the game server claim status reverts
-	// to null.
+	// Indicates when an available game server has been reserved for gameplay but has
+	// not yet started hosting a game. Once it is claimed, the game server remains in
+	// CLAIMED status for a maximum of one minute. During this time, game clients
+	// connect to the game server to start the game and trigger the game server to
+	// update its utilization status. After one minute, the game server claim status
+	// reverts to null.
 	ClaimStatus GameServerClaimStatus
 
 	// The port and IP address that must be used to establish a client connection to
 	// the game server.
 	ConnectionInfo *string
 
-	// A game server tag that can be used to request sorted lists of game servers when
-	// calling ListGameServers. Custom sort keys are developer-defined. This property
-	// can be updated using UpdateGameServer.
-	CustomSortKey *string
-
 	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service in response to requests
-	// ListGameServers or ClaimGameServer. This property can be updated using
-	// UpdateGameServer.
+	// data is passed to a game client or service when it requests information on game
+	// servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
 
 	// The ARN identifier for the game server group where the game server is located.
 	GameServerGroupArn *string
 
-	// The name identifier for the game server group where the game server is located.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.
 	GameServerGroupName *string
 
 	// A custom string that uniquely identifies the game server. Game server IDs are
@@ -669,24 +679,26 @@ type GameServer struct {
 	// account.
 	GameServerId *string
 
-	// The unique identifier for the instance where the game server is located.
+	// The unique identifier for the instance where the game server is running. This ID
+	// is available in the instance metadata. EC2 instance IDs use a 17-character
+	// format, for example: i-1234567890abcdef0.
 	InstanceId *string
 
-	// Time stamp indicating the last time the game server was claimed with a
-	// ClaimGameServer request. Format is a number expressed in Unix time as
+	// Timestamp that indicates the last time the game server was claimed with a
+	// ClaimGameServer request. The format is a number expressed in Unix time as
 	// milliseconds (for example "1469498468.057"). This value is used to calculate
-	// when the game server's claim status.
+	// when a claimed game server's status should revert to null.
 	LastClaimTime *time.Time
 
-	// Time stamp indicating the last time the game server was updated with health
-	// status using an UpdateGameServer request. Format is a number expressed in Unix
-	// time as milliseconds (for example "1469498468.057"). After game server
+	// Timestamp that indicates the last time the game server was updated with health
+	// status using an UpdateGameServer request. The format is a number expressed in
+	// Unix time as milliseconds (for example "1469498468.057"). After game server
 	// registration, this property is only changed when a game server update specifies
 	// a health check value.
 	LastHealthCheckTime *time.Time
 
-	// Time stamp indicating when the game server resource was created with a
-	// RegisterGameServer request. Format is a number expressed in Unix time as
+	// Timestamp that indicates when the game server was created with a
+	// RegisterGameServer request. The format is a number expressed in Unix time as
 	// milliseconds (for example "1469498468.057").
 	RegistrationTime *time.Time
 
@@ -697,73 +709,96 @@ type GameServer struct {
 	// to be claimed. A game server that has been claimed remains in this status until
 	// it reports game hosting activity.
 	//
-	//     * IN_USE - The game server is currently
+	//     * UTILIZED - The game server is currently
 	// hosting a game session with players.
 	UtilizationStatus GameServerUtilizationStatus
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. Properties describing a game
-// server group resource. A game server group manages certain properties of a
-// corresponding EC2 Auto Scaling group. A game server group is created by a
-// successful call to CreateGameServerGroup and deleted by calling
-// DeleteGameServerGroup. Game server group activity can be temporarily suspended
-// and resumed by calling SuspendGameServerGroup and ResumeGameServerGroup.
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Properties that describe a game server group resource. A game server group
+// manages certain properties related to a corresponding EC2 Auto Scaling group. A
+// game server group is created by a successful call to CreateGameServerGroup and
+// deleted by calling DeleteGameServerGroup. Game server group activity can be
+// temporarily suspended and resumed by calling SuspendGameServerGroup and
+// ResumeGameServerGroup, respectively.
+//
+//     * CreateGameServerGroup
+//
+//     *
+// ListGameServerGroups
+//
+//     * DescribeGameServerGroup
+//
+//     *
+// UpdateGameServerGroup
+//
+//     * DeleteGameServerGroup
+//
+//     *
+// ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
+//
+//     *
+// DescribeGameServerInstances
 type GameServerGroup struct {
 
-	// A generated unique ID for the EC2 Auto Scaling group with is associated with
+	// A generated unique ID for the EC2 Auto Scaling group that is associated with
 	// this game server group.
 	AutoScalingGroupArn *string
 
-	// The fallback balancing method to use for the game server group when Spot
-	// instances in a Region become unavailable or are not viable for game hosting.
-	// Once triggered, this method remains active until Spot instances can once again
-	// be used. Method options include:
+	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
+	// Instances in the game server group. Method options include the following:
 	//
-	//     * SPOT_ONLY -- If Spot instances are
-	// unavailable, the game server group provides no hosting capacity. No new
-	// instances are started, and the existing nonviable Spot instances are terminated
-	// (once current gameplay ends) and not replaced.
+	//     *
+	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
+	// Instances are unavailable or not viable for game hosting, the game server group
+	// provides no hosting capacity until Spot Instances can again be used. Until then,
+	// no new instances are started, and the existing nonviable Spot Instances are
+	// terminated (after current gameplay ends) and are not replaced.
 	//
-	//     * SPOT_PREFERRED -- If Spot
-	// instances are unavailable, the game server group continues to provide hosting
-	// capacity by using On-Demand instances. Existing nonviable Spot instances are
-	// terminated (once current gameplay ends) and replaced with new On-Demand
-	// instances.
+	//     *
+	// SPOT_PREFERRED - (default value) Spot Instances are used whenever available in
+	// the game server group. If Spot Instances are unavailable, the game server group
+	// continues to provide hosting capacity by falling back to On-Demand Instances.
+	// Existing nonviable Spot Instances are terminated (after current gameplay ends)
+	// and are replaced with new On-Demand Instances.
+	//
+	//     * ON_DEMAND_ONLY - Only
+	// On-Demand Instances are used in the game server group. No Spot Instances are
+	// used, even when available, while this balancing strategy is in force.
 	BalancingStrategy BalancingStrategy
 
-	// A time stamp indicating when this data object was created. Format is a number
+	// A timestamp that indicates when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time
 
 	// A generated unique ID for the game server group.
 	GameServerGroupArn *string
 
-	// A developer-defined identifier for the game server group. The name is unique per
-	// Region per AWS account.
+	// A developer-defined identifier for the game server group. The name is unique for
+	// each Region in each AWS account.
 	GameServerGroupName *string
 
 	// A flag that indicates whether instances in the game server group are protected
 	// from early termination. Unprotected instances that have active game servers
-	// running may be terminated during a scale-down event, causing players to be
+	// running might be terminated during a scale-down event, causing players to be
 	// dropped from the game. Protected instances cannot be terminated while there are
 	// active game servers running except in the event of a forced game server group
-	// deletion (see DeleteGameServerGroup). An exception to this is Spot Instances,
-	// which may be terminated by AWS regardless of protection status.
+	// deletion (see ). An exception to this is with Spot Instances, which can be
+	// terminated by AWS regardless of protection status.
 	GameServerProtectionPolicy GameServerProtectionPolicy
 
-	// The set of EC2 instance types that GameLift FleetIQ can use when rebalancing and
-	// autoscaling instances in the group.
+	// The set of EC2 instance types that GameLift FleetIQ can use when balancing and
+	// automatically scaling instances in the corresponding Auto Scaling group.
 	InstanceDefinitions []*InstanceDefinition
 
-	// A time stamp indicating when this game server group was last updated.
+	// A timestamp that indicates when this game server group was last updated.
 	LastUpdatedTime *time.Time
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
-	// submitted role is validated to ensure that it contains the necessary permissions
-	// for game server groups.
+	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
 	RoleArn *string
 
 	// The current status of the game server group. Possible statuses include:
@@ -773,7 +808,7 @@ type GameServerGroup struct {
 	//
 	//     *
 	// ACTIVATING - GameLift FleetIQ is setting up a game server group, which includes
-	// creating an autoscaling group in your AWS account.
+	// creating an Auto Scaling group in your AWS account.
 	//
 	//     * ACTIVE - The game
 	// server group has been successfully created.
@@ -784,7 +819,7 @@ type GameServerGroup struct {
 	//     * DELETING - GameLift
 	// FleetIQ has received a valid DeleteGameServerGroup() request and is processing
 	// it. GameLift FleetIQ must first complete and release hosts before it deletes the
-	// autoscaling group and the game server group.
+	// Auto Scaling group and the game server group.
 	//
 	//     * DELETED - The game server
 	// group has been successfully deleted.
@@ -795,7 +830,7 @@ type GameServerGroup struct {
 	Status GameServerGroupStatus
 
 	// Additional information about the current game server group status. This
-	// information may provide additional insight on groups that in ERROR status.
+	// information might provide additional insight on groups that are in ERROR status.
 	StatusReason *string
 
 	// A list of activities that are currently suspended for this game server group. If
@@ -803,13 +838,13 @@ type GameServerGroup struct {
 	SuspendedActions []GameServerGroupAction
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. Configuration settings for
-// intelligent autoscaling that uses target tracking. An autoscaling policy can be
-// specified when a new game server group is created with CreateGameServerGroup. If
-// a group has an autoscaling policy, the Auto Scaling group takes action based on
-// this policy, in addition to (and potentially in conflict with) any other
-// autoscaling policies that are separately applied to the Auto Scaling group.
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Configuration settings for intelligent automatic scaling that uses target
+// tracking. These settings are used to add an Auto Scaling policy when creating
+// the corresponding Auto Scaling group with CreateGameServerGroup. After the Auto
+// Scaling group is created, all updates to Auto Scaling policies, including
+// changing this policy and adding or removing other policies, is done directly on
+// the Auto Scaling group.
 type GameServerGroupAutoScalingPolicy struct {
 
 	// Settings for a target-based scaling policy applied to Auto Scaling group. These
@@ -824,8 +859,67 @@ type GameServerGroupAutoScalingPolicy struct {
 	// Length of time, in seconds, it takes for a new instance to start new game server
 	// processes and register with GameLift FleetIQ. Specifying a warm-up time can be
 	// useful, particularly with game servers that take a long time to start up,
-	// because it avoids prematurely starting new instances
+	// because it avoids prematurely starting new instances.
 	EstimatedInstanceWarmup *int32
+}
+
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Additional properties, including status, that describe an EC2 instance in a game
+// server group. Instance configurations are set with game server group properties
+// (see DescribeGameServerGroup and with the EC2 launch template that was used when
+// creating the game server group. Retrieve game server instances for a game server
+// group by calling DescribeGameServerInstances.
+//
+//     * CreateGameServerGroup
+//
+//
+// * ListGameServerGroups
+//
+//     * DescribeGameServerGroup
+//
+//     *
+// UpdateGameServerGroup
+//
+//     * DeleteGameServerGroup
+//
+//     *
+// ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
+//
+//     *
+// DescribeGameServerInstances
+type GameServerInstance struct {
+
+	// A generated unique identifier for the game server group that includes the game
+	// server instance.
+	GameServerGroupArn *string
+
+	// A developer-defined identifier for the game server group that includes the game
+	// server instance. The name is unique for each Region in each AWS account.
+	GameServerGroupName *string
+
+	// The unique identifier for the instance where the game server is running. This ID
+	// is available in the instance metadata. EC2 instance IDs use a 17-character
+	// format, for example: i-1234567890abcdef0.
+	InstanceId *string
+
+	// Current status of the game server instance.
+	//
+	//     * ACTIVE -- The instance is
+	// viable for hosting game servers.
+	//
+	//     * DRAINING -- The instance is not viable
+	// for hosting game servers. Existing game servers are in the process of ending,
+	// and new game servers are not started on this instance unless no other resources
+	// are available. When the instance is put in DRAINING, a new instance is started
+	// up to replace it. Once the instance has no UTILIZED game servers, it will be
+	// terminated in favor of the new instance.
+	//
+	//     * SPOT_TERMINATING -- The instance
+	// is in the process of shutting down due to a Spot instance interruption. No new
+	// game servers are started on this instance.
+	InstanceStatus GameServerInstanceStatus
 }
 
 // Properties describing a game session. A game session in ACTIVE status can host
@@ -1320,11 +1414,11 @@ type InstanceCredentials struct {
 	UserName *string
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. An allowed instance type for
-// your game server group. GameLift FleetIQ periodically evaluates each defined
-// instance type for viability. It then updates the Auto Scaling group with the
-// list of viable instance types.
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// An allowed instance type for a GameServerGroup. All game server groups must have
+// at least two instance types defined for it. GameLift FleetIQ periodically
+// evaluates each defined instance type for viability. It then updates the Auto
+// Scaling group with the list of viable instance types.
 type InstanceDefinition struct {
 
 	// An EC2 instance type designation.
@@ -1376,10 +1470,10 @@ type IpPermission struct {
 	ToPort *int32
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. An EC2 launch template that
-// contains configuration settings and game server code to be deployed to all
-// instances in a game server group.
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// An EC2 launch template that contains configuration settings and game server code
+// to be deployed to all instances in a game server group. The launch template is
+// specified when creating a new game server group with CreateGameServerGroup.
 type LaunchTemplateSpecification struct {
 
 	// A unique identifier for an existing EC2 launch template.
@@ -1389,8 +1483,8 @@ type LaunchTemplateSpecification struct {
 	LaunchTemplateName *string
 
 	// The version of the EC2 launch template to use. If no version is specified, the
-	// default version will be used. EC2 allows you to specify a default version for a
-	// launch template, if none is set, the default is the first version created.
+	// default version will be used. With Amazon EC2, you can specify a default version
+	// for a launch template. If none is set, the default is the first version created.
 	Version *string
 }
 
@@ -1958,7 +2052,8 @@ type RuntimeConfiguration struct {
 // UpdateScript requests.
 type S3Location struct {
 
-	// An S3 bucket identifier. This is the name of the S3 bucket.
+	// An S3 bucket identifier. This is the name of the S3 bucket. GameLift currently
+	// does not support uploading from S3 buckets with names that contain a dot (.).
 	Bucket *string
 
 	// The name of the zip file that contains the build files or script files.
@@ -2273,10 +2368,10 @@ type TargetConfiguration struct {
 	TargetValue *float64
 }
 
-// This data type is part of Amazon GameLift FleetIQ with game server groups, which
-// is in preview release and is subject to change. Settings for a target-based
-// scaling policy applied to Auto Scaling group. These settings are used to create
-// a target-based policy that tracks the GameLift FleetIQ metric
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Settings for a target-based scaling policy as part of a
+// GameServerGroupAutoScalingPolicy. These settings are used to create a
+// target-based policy that tracks the GameLift FleetIQ metric
 // "PercentUtilizedGameServers" and specifies a target value for the metric. As
 // player usage changes, the policy triggers to adjust the game server group
 // capacity so that the metric returns to the target value.

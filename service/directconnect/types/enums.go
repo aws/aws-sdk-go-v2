@@ -10,6 +10,16 @@ const (
 	AddressFamilyIpv6 AddressFamily = "ipv6"
 )
 
+// Values returns all known values for AddressFamily. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddressFamily) Values() []AddressFamily {
+	return []AddressFamily{
+		"ipv4",
+		"ipv6",
+	}
+}
+
 type BGPPeerState string
 
 // Enum values for BGPPeerState
@@ -21,6 +31,19 @@ const (
 	BGPPeerStateDeleted   BGPPeerState = "deleted"
 )
 
+// Values returns all known values for BGPPeerState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BGPPeerState) Values() []BGPPeerState {
+	return []BGPPeerState{
+		"verifying",
+		"pending",
+		"available",
+		"deleting",
+		"deleted",
+	}
+}
+
 type BGPStatus string
 
 // Enum values for BGPStatus
@@ -29,6 +52,17 @@ const (
 	BGPStatusDown    BGPStatus = "down"
 	BGPStatusUnknown BGPStatus = "unknown"
 )
+
+// Values returns all known values for BGPStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BGPStatus) Values() []BGPStatus {
+	return []BGPStatus{
+		"up",
+		"down",
+		"unknown",
+	}
+}
 
 type ConnectionState string
 
@@ -45,6 +79,23 @@ const (
 	ConnectionStateUnknown   ConnectionState = "unknown"
 )
 
+// Values returns all known values for ConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionState) Values() []ConnectionState {
+	return []ConnectionState{
+		"ordering",
+		"requested",
+		"pending",
+		"available",
+		"down",
+		"deleting",
+		"deleted",
+		"rejected",
+		"unknown",
+	}
+}
+
 type DirectConnectGatewayAssociationProposalState string
 
 // Enum values for DirectConnectGatewayAssociationProposalState
@@ -53,6 +104,18 @@ const (
 	DirectConnectGatewayAssociationProposalStateAccepted  DirectConnectGatewayAssociationProposalState = "accepted"
 	DirectConnectGatewayAssociationProposalStateDeleted   DirectConnectGatewayAssociationProposalState = "deleted"
 )
+
+// Values returns all known values for
+// DirectConnectGatewayAssociationProposalState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DirectConnectGatewayAssociationProposalState) Values() []DirectConnectGatewayAssociationProposalState {
+	return []DirectConnectGatewayAssociationProposalState{
+		"requested",
+		"accepted",
+		"deleted",
+	}
+}
 
 type DirectConnectGatewayAssociationState string
 
@@ -65,6 +128,20 @@ const (
 	DirectConnectGatewayAssociationStateUpdating       DirectConnectGatewayAssociationState = "updating"
 )
 
+// Values returns all known values for DirectConnectGatewayAssociationState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DirectConnectGatewayAssociationState) Values() []DirectConnectGatewayAssociationState {
+	return []DirectConnectGatewayAssociationState{
+		"associating",
+		"associated",
+		"disassociating",
+		"disassociated",
+		"updating",
+	}
+}
+
 type DirectConnectGatewayAttachmentState string
 
 // Enum values for DirectConnectGatewayAttachmentState
@@ -75,6 +152,19 @@ const (
 	DirectConnectGatewayAttachmentStateDetached  DirectConnectGatewayAttachmentState = "detached"
 )
 
+// Values returns all known values for DirectConnectGatewayAttachmentState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DirectConnectGatewayAttachmentState) Values() []DirectConnectGatewayAttachmentState {
+	return []DirectConnectGatewayAttachmentState{
+		"attaching",
+		"attached",
+		"detaching",
+		"detached",
+	}
+}
+
 type DirectConnectGatewayAttachmentType string
 
 // Enum values for DirectConnectGatewayAttachmentType
@@ -82,6 +172,17 @@ const (
 	DirectConnectGatewayAttachmentTypeTransitvirtualinterface DirectConnectGatewayAttachmentType = "TransitVirtualInterface"
 	DirectConnectGatewayAttachmentTypePrivatevirtualinterface DirectConnectGatewayAttachmentType = "PrivateVirtualInterface"
 )
+
+// Values returns all known values for DirectConnectGatewayAttachmentType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DirectConnectGatewayAttachmentType) Values() []DirectConnectGatewayAttachmentType {
+	return []DirectConnectGatewayAttachmentType{
+		"TransitVirtualInterface",
+		"PrivateVirtualInterface",
+	}
+}
 
 type DirectConnectGatewayState string
 
@@ -93,6 +194,18 @@ const (
 	DirectConnectGatewayStateDeleted   DirectConnectGatewayState = "deleted"
 )
 
+// Values returns all known values for DirectConnectGatewayState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DirectConnectGatewayState) Values() []DirectConnectGatewayState {
+	return []DirectConnectGatewayState{
+		"pending",
+		"available",
+		"deleting",
+		"deleted",
+	}
+}
+
 type GatewayType string
 
 // Enum values for GatewayType
@@ -100,6 +213,16 @@ const (
 	GatewayTypeVirtualprivategateway GatewayType = "virtualPrivateGateway"
 	GatewayTypeTransitgateway        GatewayType = "transitGateway"
 )
+
+// Values returns all known values for GatewayType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GatewayType) Values() []GatewayType {
+	return []GatewayType{
+		"virtualPrivateGateway",
+		"transitGateway",
+	}
+}
 
 type HasLogicalRedundancy string
 
@@ -109,6 +232,17 @@ const (
 	HasLogicalRedundancyYes     HasLogicalRedundancy = "yes"
 	HasLogicalRedundancyNo      HasLogicalRedundancy = "no"
 )
+
+// Values returns all known values for HasLogicalRedundancy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HasLogicalRedundancy) Values() []HasLogicalRedundancy {
+	return []HasLogicalRedundancy{
+		"unknown",
+		"yes",
+		"no",
+	}
+}
 
 type InterconnectState string
 
@@ -123,6 +257,21 @@ const (
 	InterconnectStateUnknown   InterconnectState = "unknown"
 )
 
+// Values returns all known values for InterconnectState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InterconnectState) Values() []InterconnectState {
+	return []InterconnectState{
+		"requested",
+		"pending",
+		"available",
+		"down",
+		"deleting",
+		"deleted",
+		"unknown",
+	}
+}
+
 type LagState string
 
 // Enum values for LagState
@@ -136,12 +285,36 @@ const (
 	LagStateUnknown   LagState = "unknown"
 )
 
+// Values returns all known values for LagState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LagState) Values() []LagState {
+	return []LagState{
+		"requested",
+		"pending",
+		"available",
+		"down",
+		"deleting",
+		"deleted",
+		"unknown",
+	}
+}
+
 type LoaContentType string
 
 // Enum values for LoaContentType
 const (
 	LoaContentTypePdf LoaContentType = "application/pdf"
 )
+
+// Values returns all known values for LoaContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoaContentType) Values() []LoaContentType {
+	return []LoaContentType{
+		"application/pdf",
+	}
+}
 
 type VirtualInterfaceState string
 
@@ -157,3 +330,20 @@ const (
 	VirtualInterfaceStateRejected   VirtualInterfaceState = "rejected"
 	VirtualInterfaceStateUnknown    VirtualInterfaceState = "unknown"
 )
+
+// Values returns all known values for VirtualInterfaceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VirtualInterfaceState) Values() []VirtualInterfaceState {
+	return []VirtualInterfaceState{
+		"confirming",
+		"verifying",
+		"pending",
+		"available",
+		"down",
+		"deleting",
+		"deleted",
+		"rejected",
+		"unknown",
+	}
+}

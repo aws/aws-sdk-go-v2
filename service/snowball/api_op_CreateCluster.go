@@ -62,33 +62,34 @@ type CreateClusterInput struct {
 	// as follows:
 	//
 	//     * In Australia, you have access to express shipping. Typically,
-	// Snowballs shipped express are delivered in about a day.
+	// Snow devices shipped express are delivered in about a day.
 	//
-	//     * In the European
-	// Union (EU), you have access to express shipping. Typically, Snowballs shipped
-	// express are delivered in about a day. In addition, most countries in the EU have
-	// access to standard shipping, which typically takes less than a week, one way.
+	//     * In the
+	// European Union (EU), you have access to express shipping. Typically, Snow
+	// devices shipped express are delivered in about a day. In addition, most
+	// countries in the EU have access to standard shipping, which typically takes less
+	// than a week, one way.
+	//
+	//     * In India, Snow device are delivered in one to seven
+	// days.
+	//
+	//     * In the United States of America (US), you have access to one-day
+	// shipping and two-day shipping.
+	//
+	//     * In Australia, you have access to express
+	// shipping. Typically, devices shipped express are delivered in about a day.
 	//
 	//
-	// * In India, Snowballs are delivered in one to seven days.
+	// * In the European Union (EU), you have access to express shipping. Typically,
+	// Snow devices shipped express are delivered in about a day. In addition, most
+	// countries in the EU have access to standard shipping, which typically takes less
+	// than a week, one way.
 	//
-	//     * In the United
-	// States of America (US), you have access to one-day shipping and two-day
+	//     * In India, Snow device are delivered in one to seven
+	// days.
+	//
+	//     * In the US, you have access to one-day shipping and two-day
 	// shipping.
-	//
-	//     * In Australia, you have access to express shipping. Typically,
-	// devices shipped express are delivered in about a day.
-	//
-	//     * In the European
-	// Union (EU), you have access to express shipping. Typically, Snowball Edges
-	// shipped express are delivered in about a day. In addition, most countries in the
-	// EU have access to standard shipping, which typically takes less than a week, one
-	// way.
-	//
-	//     * In India, Snowball Edges are delivered in one to seven days.
-	//
-	//     *
-	// In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption
@@ -111,8 +112,8 @@ type CreateClusterInput struct {
 	// this cluster.
 	Notification *types.Notification
 
-	// The type of AWS Snowball device to use for this cluster. For cluster jobs, AWS
-	// Snowball currently supports only the EDGE device type.
+	// The type of AWS Snow Family device to use for this cluster. For cluster jobs,
+	// AWS Snow Family currently supports only the EDGE device type.
 	SnowballType types.SnowballType
 
 	// The tax documents required in your AWS Region.

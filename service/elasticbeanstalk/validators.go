@@ -657,11 +657,11 @@ func validateSourceBuildInformation(v *types.SourceBuildInformation) error {
 	if v.SourceLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
 	}
-	if len(v.SourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
-	}
 	if len(v.SourceRepository) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRepository"))
+	}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -748,9 +748,6 @@ func validateOpCreateApplicationVersionInput(v *CreateApplicationVersionInput) e
 			invalidParams.AddNested("BuildConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.SourceBuildInformation != nil {
 		if err := validateSourceBuildInformation(v.SourceBuildInformation); err != nil {
 			invalidParams.AddNested("SourceBuildInformation", err.(smithy.InvalidParamsError))
@@ -758,6 +755,9 @@ func validateOpCreateApplicationVersionInput(v *CreateApplicationVersionInput) e
 	}
 	if v.VersionLabel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -804,11 +804,11 @@ func validateOpCreatePlatformVersionInput(v *CreatePlatformVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlatformVersionInput"}
-	if v.PlatformVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlatformVersion"))
-	}
 	if v.PlatformDefinitionBundle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformDefinitionBundle"))
+	}
+	if v.PlatformVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformVersion"))
 	}
 	if v.PlatformName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformName"))
@@ -876,11 +876,11 @@ func validateOpDeleteEnvironmentConfigurationInput(v *DeleteEnvironmentConfigura
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentConfigurationInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1006,11 +1006,11 @@ func validateOpUpdateApplicationVersionInput(v *UpdateApplicationVersionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationVersionInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.VersionLabel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

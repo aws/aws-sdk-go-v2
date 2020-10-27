@@ -12,17 +12,21 @@ import (
 )
 
 // Returns the access control list (ACL) of an object. To use this operation, you
-// must have READ_ACP access to the object. Versioning By default, GET returns ACL
-// information about the current version of an object. To return ACL information
-// about a different version, use the versionId subresource. The following
-// operations are related to GetObjectAcl:
+// must have READ_ACP access to the object. This action is not supported by Amazon
+// S3 on Outposts. Versioning By default, GET returns ACL information about the
+// current version of an object. To return ACL information about a different
+// version, use the versionId subresource. The following operations are related to
+// GetObjectAcl:
 //
 //     * GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     * DeleteObject
+//     *
+// DeleteObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 //
-//
-// * PutObject
+//     *
+// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, optFns ...func(*Options)) (*GetObjectAclOutput, error) {
 	if params == nil {
 		params = &GetObjectAclInput{}
@@ -44,7 +48,7 @@ type GetObjectAclInput struct {
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
@@ -57,6 +61,10 @@ type GetObjectAclInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

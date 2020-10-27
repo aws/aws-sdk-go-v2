@@ -30,7 +30,13 @@ import (
 // element. You can filter objects based on an object key prefix, one or more
 // object tags, or both. When you add the Filter element in the configuration, you
 // must also add the following elements: DeleteMarkerReplication, Status, and
-// Priority. For information about enabling versioning on a bucket, see Using
+// Priority. The latest version of the replication configuration XML is V2. XML V2
+// replication configurations are those that contain the Filter element for rules,
+// and rules that specify S3 Replication Time Control (S3 RTC). In XML V2
+// replication configurations, Amazon S3 doesn't replicate delete markers.
+// Therefore, you must set the DeleteMarkerReplication element to Disabled. For
+// backward compatibility, Amazon S3 continues to support the XML V1 replication
+// configuration. For information about enabling versioning on a bucket, see Using
 // Versioning (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). By
 // default, a resource owner, in this case the AWS account that created the bucket,
 // can perform this operation. The resource owner can also grant others permissions
@@ -47,13 +53,18 @@ import (
 // configuration, see Replicating Objects Created with SSE Using CMKs stored in AWS
 // KMS
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
-// For information on PutBucketReplication errors, see ReplicationErrorCodeList The
-// following operations are related to PutBucketReplication:
+// For information on PutBucketReplication errors, see List of replication-related
+// error codes
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
+// The following operations are related to PutBucketReplication:
 //
 //     *
 // GetBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html)
 //
-//     * DeleteBucketReplication
+//
+// * DeleteBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
 func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketReplicationInput, optFns ...func(*Options)) (*PutBucketReplicationOutput, error) {
 	if params == nil {
 		params = &PutBucketReplicationInput{}
@@ -87,6 +98,10 @@ type PutBucketReplicationInput struct {
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	//
 	Token *string

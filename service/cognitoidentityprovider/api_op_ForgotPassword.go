@@ -14,10 +14,12 @@ import (
 // code that is required to change the user's password. For the Username parameter,
 // you can use the username or user alias. The method used to send the confirmation
 // code is sent according to the specified AccountRecoverySetting. For more
-// information, see Recovering User Accounts in the Amazon Cognito Developer Guide.
-// If neither a verified phone number nor a verified email exists, an
-// InvalidParameterException is thrown. To use the confirmation code for resetting
-// the password, call .
+// information, see Recovering User Accounts
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html)
+// in the Amazon Cognito Developer Guide. If neither a verified phone number nor a
+// verified email exists, an InvalidParameterException is thrown. To use the
+// confirmation code for resetting the password, call ConfirmForgotPassword
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html).
 func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput, optFns ...func(*Options)) (*ForgotPasswordOutput, error) {
 	if params == nil {
 		params = &ForgotPasswordInput{}

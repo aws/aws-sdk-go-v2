@@ -824,11 +824,11 @@ func validateOpBatchGetApplicationRevisionsInput(v *BatchGetApplicationRevisions
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetApplicationRevisionsInput"}
-	if v.Revisions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Revisions"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.Revisions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revisions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -857,11 +857,11 @@ func validateOpBatchGetDeploymentGroupsInput(v *BatchGetDeploymentGroupsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDeploymentGroupsInput"}
-	if v.DeploymentGroupNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupNames"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.DeploymentGroupNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -875,11 +875,11 @@ func validateOpBatchGetDeploymentInstancesInput(v *BatchGetDeploymentInstancesIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDeploymentInstancesInput"}
-	if v.InstanceIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
-	}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if v.InstanceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -953,14 +953,14 @@ func validateOpCreateDeploymentGroupInput(v *CreateDeploymentGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeploymentGroupInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
 	if v.DeploymentGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if v.ServiceRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceRoleArn"))
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1019,11 +1019,11 @@ func validateOpDeleteDeploymentGroupInput(v *DeleteDeploymentGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeploymentGroupInput"}
-	if v.DeploymentGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupName"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.DeploymentGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1067,11 +1067,11 @@ func validateOpGetApplicationRevisionInput(v *GetApplicationRevisionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationRevisionInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.Revision == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1133,11 +1133,11 @@ func validateOpGetDeploymentInstanceInput(v *GetDeploymentInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentInstanceInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1292,11 +1292,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1328,11 +1328,11 @@ func validateOpUpdateDeploymentGroupInput(v *UpdateDeploymentGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeploymentGroupInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.CurrentDeploymentGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentDeploymentGroupName"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

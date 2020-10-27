@@ -1064,11 +1064,11 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAliasInput"}
-	if v.AliasName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
-	}
 	if v.TargetKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetKeyId"))
+	}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1082,17 +1082,17 @@ func validateOpCreateCustomKeyStoreInput(v *CreateCustomKeyStoreInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomKeyStoreInput"}
-	if v.CloudHsmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudHsmClusterId"))
-	}
 	if v.CustomKeyStoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomKeyStoreName"))
 	}
-	if v.TrustAnchorCertificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchorCertificate"))
-	}
 	if v.KeyStorePassword == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyStorePassword"))
+	}
+	if v.CloudHsmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudHsmClusterId"))
+	}
+	if v.TrustAnchorCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchorCertificate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1106,14 +1106,14 @@ func validateOpCreateGrantInput(v *CreateGrantInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGrantInput"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
 	if v.Operations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Operations"))
 	}
 	if v.GranteePrincipal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GranteePrincipal"))
-	}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1294,11 +1294,11 @@ func validateOpEncryptInput(v *EncryptInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.Plaintext == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Plaintext"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1327,11 +1327,11 @@ func validateOpGenerateDataKeyPairInput(v *GenerateDataKeyPairInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GenerateDataKeyPairInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if len(v.KeyPairSpec) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyPairSpec"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1345,11 +1345,11 @@ func validateOpGenerateDataKeyPairWithoutPlaintextInput(v *GenerateDataKeyPairWi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GenerateDataKeyPairWithoutPlaintextInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if len(v.KeyPairSpec) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyPairSpec"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1378,11 +1378,11 @@ func validateOpGetKeyPolicyInput(v *GetKeyPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetKeyPolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1531,11 +1531,11 @@ func validateOpPutKeyPolicyInput(v *PutKeyPolicyInput) error {
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
-	if v.Policy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1549,11 +1549,11 @@ func validateOpReEncryptInput(v *ReEncryptInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReEncryptInput"}
-	if v.CiphertextBlob == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CiphertextBlob"))
-	}
 	if v.DestinationKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationKeyId"))
+	}
+	if v.CiphertextBlob == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CiphertextBlob"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1600,14 +1600,14 @@ func validateOpSignInput(v *SignInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignInput"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
-	}
-	if v.Message == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Message"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1621,15 +1621,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1643,11 +1643,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1661,11 +1661,11 @@ func validateOpUpdateAliasInput(v *UpdateAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAliasInput"}
-	if v.TargetKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetKeyId"))
-	}
 	if v.AliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if v.TargetKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1694,11 +1694,11 @@ func validateOpUpdateKeyDescriptionInput(v *UpdateKeyDescriptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyDescriptionInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1712,17 +1712,17 @@ func validateOpVerifyInput(v *VerifyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VerifyInput"}
-	if v.Message == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Message"))
-	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
 	}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.Signature == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Signature"))
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

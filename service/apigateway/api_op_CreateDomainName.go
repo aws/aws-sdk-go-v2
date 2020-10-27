@@ -67,6 +67,11 @@ type CreateDomainNameInput struct {
 	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
+	// If specified, API Gateway performs two-way authentication between the client and
+	// the server. Clients must present a trusted certificate to access your custom
+	// domain name.
+	MutualTlsAuthentication *types.MutualTlsAuthenticationInput
+
 	Name *string
 
 	// The reference to an AWS-managed certificate that will be used by regional
@@ -151,6 +156,11 @@ type CreateDomainNameOutput struct {
 	// The endpoint configuration of this DomainName showing the endpoint types of the
 	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
+
+	// The mutual TLS authentication configuration for a custom domain name. If
+	// specified, API Gateway performs two-way authentication between the client and
+	// the server. Clients must present a trusted certificate to access your API.
+	MutualTlsAuthentication *types.MutualTlsAuthentication
 
 	// The reference to an AWS-managed certificate that will be used for validating the
 	// regional domain name. AWS Certificate Manager is the only supported source.

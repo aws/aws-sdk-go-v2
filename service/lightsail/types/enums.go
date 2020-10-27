@@ -10,12 +10,31 @@ const (
 	AccessDirectionOutbound AccessDirection = "outbound"
 )
 
+// Values returns all known values for AccessDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDirection) Values() []AccessDirection {
+	return []AccessDirection{
+		"inbound",
+		"outbound",
+	}
+}
+
 type AddOnType string
 
 // Enum values for AddOnType
 const (
 	AddOnTypeAutosnapshot AddOnType = "AutoSnapshot"
 )
+
+// Values returns all known values for AddOnType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AddOnType) Values() []AddOnType {
+	return []AddOnType{
+		"AutoSnapshot",
+	}
+}
 
 type AlarmState string
 
@@ -25,6 +44,17 @@ const (
 	AlarmStateAlarm             AlarmState = "ALARM"
 	AlarmStateInsufficient_data AlarmState = "INSUFFICIENT_DATA"
 )
+
+// Values returns all known values for AlarmState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AlarmState) Values() []AlarmState {
+	return []AlarmState{
+		"OK",
+		"ALARM",
+		"INSUFFICIENT_DATA",
+	}
+}
 
 type AutoSnapshotStatus string
 
@@ -36,6 +66,18 @@ const (
 	AutoSnapshotStatusNot_found   AutoSnapshotStatus = "NotFound"
 )
 
+// Values returns all known values for AutoSnapshotStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoSnapshotStatus) Values() []AutoSnapshotStatus {
+	return []AutoSnapshotStatus{
+		"Success",
+		"Failed",
+		"InProgress",
+		"NotFound",
+	}
+}
+
 type BehaviorEnum string
 
 // Enum values for BehaviorEnum
@@ -44,6 +86,16 @@ const (
 	BehaviorEnumCachesetting     BehaviorEnum = "cache"
 )
 
+// Values returns all known values for BehaviorEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BehaviorEnum) Values() []BehaviorEnum {
+	return []BehaviorEnum{
+		"dont-cache",
+		"cache",
+	}
+}
+
 type BlueprintType string
 
 // Enum values for BlueprintType
@@ -51,6 +103,16 @@ const (
 	BlueprintTypeOs  BlueprintType = "os"
 	BlueprintTypeApp BlueprintType = "app"
 )
+
+// Values returns all known values for BlueprintType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintType) Values() []BlueprintType {
+	return []BlueprintType{
+		"os",
+		"app",
+	}
+}
 
 type CertificateStatus string
 
@@ -65,12 +127,37 @@ const (
 	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
 
+// Values returns all known values for CertificateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateStatus) Values() []CertificateStatus {
+	return []CertificateStatus{
+		"PENDING_VALIDATION",
+		"ISSUED",
+		"INACTIVE",
+		"EXPIRED",
+		"VALIDATION_TIMED_OUT",
+		"REVOKED",
+		"FAILED",
+	}
+}
+
 type CloudFormationStackRecordSourceType string
 
 // Enum values for CloudFormationStackRecordSourceType
 const (
 	CloudFormationStackRecordSourceTypeExportsnapshotrecord CloudFormationStackRecordSourceType = "ExportSnapshotRecord"
 )
+
+// Values returns all known values for CloudFormationStackRecordSourceType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudFormationStackRecordSourceType) Values() []CloudFormationStackRecordSourceType {
+	return []CloudFormationStackRecordSourceType{
+		"ExportSnapshotRecord",
+	}
+}
 
 type ComparisonOperator string
 
@@ -82,6 +169,18 @@ const (
 	ComparisonOperatorLessthanorequaltothreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GreaterThanOrEqualToThreshold",
+		"GreaterThanThreshold",
+		"LessThanThreshold",
+		"LessThanOrEqualToThreshold",
+	}
+}
+
 type ContactMethodStatus string
 
 // Enum values for ContactMethodStatus
@@ -91,12 +190,33 @@ const (
 	ContactMethodStatusInvalid             ContactMethodStatus = "Invalid"
 )
 
+// Values returns all known values for ContactMethodStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactMethodStatus) Values() []ContactMethodStatus {
+	return []ContactMethodStatus{
+		"PendingVerification",
+		"Valid",
+		"Invalid",
+	}
+}
+
 type ContactMethodVerificationProtocol string
 
 // Enum values for ContactMethodVerificationProtocol
 const (
 	ContactMethodVerificationProtocolEmail ContactMethodVerificationProtocol = "Email"
 )
+
+// Values returns all known values for ContactMethodVerificationProtocol. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContactMethodVerificationProtocol) Values() []ContactMethodVerificationProtocol {
+	return []ContactMethodVerificationProtocol{
+		"Email",
+	}
+}
 
 type ContactProtocol string
 
@@ -105,6 +225,16 @@ const (
 	ContactProtocolEmail ContactProtocol = "Email"
 	ContactProtocolSms   ContactProtocol = "SMS"
 )
+
+// Values returns all known values for ContactProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactProtocol) Values() []ContactProtocol {
+	return []ContactProtocol{
+		"Email",
+		"SMS",
+	}
+}
 
 type DiskSnapshotState string
 
@@ -116,6 +246,18 @@ const (
 	DiskSnapshotStateUnknown   DiskSnapshotState = "unknown"
 )
 
+// Values returns all known values for DiskSnapshotState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DiskSnapshotState) Values() []DiskSnapshotState {
+	return []DiskSnapshotState{
+		"pending",
+		"completed",
+		"error",
+		"unknown",
+	}
+}
+
 type DiskState string
 
 // Enum values for DiskState
@@ -126,6 +268,19 @@ const (
 	DiskStateInuse     DiskState = "in-use"
 	DiskStateUnknown   DiskState = "unknown"
 )
+
+// Values returns all known values for DiskState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DiskState) Values() []DiskState {
+	return []DiskState{
+		"pending",
+		"error",
+		"available",
+		"in-use",
+		"unknown",
+	}
+}
 
 type DistributionMetricName string
 
@@ -139,6 +294,20 @@ const (
 	DistributionMetricNameHttp5xxerrorrate DistributionMetricName = "Http5xxErrorRate"
 )
 
+// Values returns all known values for DistributionMetricName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DistributionMetricName) Values() []DistributionMetricName {
+	return []DistributionMetricName{
+		"Requests",
+		"BytesDownloaded",
+		"BytesUploaded",
+		"TotalErrorRate",
+		"Http4xxErrorRate",
+		"Http5xxErrorRate",
+	}
+}
+
 type ExportSnapshotRecordSourceType string
 
 // Enum values for ExportSnapshotRecordSourceType
@@ -146,6 +315,17 @@ const (
 	ExportSnapshotRecordSourceTypeInstancesnapshot ExportSnapshotRecordSourceType = "InstanceSnapshot"
 	ExportSnapshotRecordSourceTypeDisksnapshot     ExportSnapshotRecordSourceType = "DiskSnapshot"
 )
+
+// Values returns all known values for ExportSnapshotRecordSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ExportSnapshotRecordSourceType) Values() []ExportSnapshotRecordSourceType {
+	return []ExportSnapshotRecordSourceType{
+		"InstanceSnapshot",
+		"DiskSnapshot",
+	}
+}
 
 type ForwardValues string
 
@@ -155,6 +335,17 @@ const (
 	ForwardValuesAllowlist ForwardValues = "allow-list"
 	ForwardValuesAll       ForwardValues = "all"
 )
+
+// Values returns all known values for ForwardValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ForwardValues) Values() []ForwardValues {
+	return []ForwardValues{
+		"none",
+		"allow-list",
+		"all",
+	}
+}
 
 type HeaderEnum string
 
@@ -177,6 +368,29 @@ const (
 	HeaderEnumReferer                   HeaderEnum = "Referer"
 )
 
+// Values returns all known values for HeaderEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HeaderEnum) Values() []HeaderEnum {
+	return []HeaderEnum{
+		"Accept",
+		"Accept-Charset",
+		"Accept-Datetime",
+		"Accept-Encoding",
+		"Accept-Language",
+		"Authorization",
+		"CloudFront-Forwarded-Proto",
+		"CloudFront-Is-Desktop-Viewer",
+		"CloudFront-Is-Mobile-Viewer",
+		"CloudFront-Is-SmartTV-Viewer",
+		"CloudFront-Is-Tablet-Viewer",
+		"CloudFront-Viewer-Country",
+		"Host",
+		"Origin",
+		"Referer",
+	}
+}
+
 type InstanceAccessProtocol string
 
 // Enum values for InstanceAccessProtocol
@@ -184,6 +398,16 @@ const (
 	InstanceAccessProtocolSsh InstanceAccessProtocol = "ssh"
 	InstanceAccessProtocolRdp InstanceAccessProtocol = "rdp"
 )
+
+// Values returns all known values for InstanceAccessProtocol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceAccessProtocol) Values() []InstanceAccessProtocol {
+	return []InstanceAccessProtocol{
+		"ssh",
+		"rdp",
+	}
+}
 
 type InstanceHealthReason string
 
@@ -202,6 +426,25 @@ const (
 	InstanceHealthReasonInstanceipunusable               InstanceHealthReason = "Instance.IpUnusable"
 )
 
+// Values returns all known values for InstanceHealthReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthReason) Values() []InstanceHealthReason {
+	return []InstanceHealthReason{
+		"Lb.RegistrationInProgress",
+		"Lb.InitialHealthChecking",
+		"Lb.InternalError",
+		"Instance.ResponseCodeMismatch",
+		"Instance.Timeout",
+		"Instance.FailedHealthChecks",
+		"Instance.NotRegistered",
+		"Instance.NotInUse",
+		"Instance.DeregistrationInProgress",
+		"Instance.InvalidState",
+		"Instance.IpUnusable",
+	}
+}
+
 type InstanceHealthState string
 
 // Enum values for InstanceHealthState
@@ -213,6 +456,20 @@ const (
 	InstanceHealthStateDraining    InstanceHealthState = "draining"
 	InstanceHealthStateUnavailable InstanceHealthState = "unavailable"
 )
+
+// Values returns all known values for InstanceHealthState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthState) Values() []InstanceHealthState {
+	return []InstanceHealthState{
+		"initial",
+		"healthy",
+		"unhealthy",
+		"unused",
+		"draining",
+		"unavailable",
+	}
+}
 
 type InstanceMetricName string
 
@@ -228,6 +485,22 @@ const (
 	InstanceMetricNameBurstcapacitypercentage    InstanceMetricName = "BurstCapacityPercentage"
 )
 
+// Values returns all known values for InstanceMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceMetricName) Values() []InstanceMetricName {
+	return []InstanceMetricName{
+		"CPUUtilization",
+		"NetworkIn",
+		"NetworkOut",
+		"StatusCheckFailed",
+		"StatusCheckFailed_Instance",
+		"StatusCheckFailed_System",
+		"BurstCapacityTime",
+		"BurstCapacityPercentage",
+	}
+}
+
 type InstancePlatform string
 
 // Enum values for InstancePlatform
@@ -235,6 +508,16 @@ const (
 	InstancePlatformLinuxunix InstancePlatform = "LINUX_UNIX"
 	InstancePlatformWindows   InstancePlatform = "WINDOWS"
 )
+
+// Values returns all known values for InstancePlatform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstancePlatform) Values() []InstancePlatform {
+	return []InstancePlatform{
+		"LINUX_UNIX",
+		"WINDOWS",
+	}
+}
 
 type InstanceSnapshotState string
 
@@ -245,6 +528,17 @@ const (
 	InstanceSnapshotStateAvailable InstanceSnapshotState = "available"
 )
 
+// Values returns all known values for InstanceSnapshotState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceSnapshotState) Values() []InstanceSnapshotState {
+	return []InstanceSnapshotState{
+		"pending",
+		"error",
+		"available",
+	}
+}
+
 type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
@@ -253,6 +547,17 @@ const (
 	LoadBalancerAttributeNameSessionstickinessenabled                   LoadBalancerAttributeName = "SessionStickinessEnabled"
 	LoadBalancerAttributeNameSessionstickiness_lb_cookiedurationseconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
 )
+
+// Values returns all known values for LoadBalancerAttributeName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerAttributeName) Values() []LoadBalancerAttributeName {
+	return []LoadBalancerAttributeName{
+		"HealthCheckPath",
+		"SessionStickinessEnabled",
+		"SessionStickiness_LB_CookieDurationSeconds",
+	}
+}
 
 type LoadBalancerMetricName string
 
@@ -272,6 +577,26 @@ const (
 	LoadBalancerMetricNameRequestcount                   LoadBalancerMetricName = "RequestCount"
 )
 
+// Values returns all known values for LoadBalancerMetricName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerMetricName) Values() []LoadBalancerMetricName {
+	return []LoadBalancerMetricName{
+		"ClientTLSNegotiationErrorCount",
+		"HealthyHostCount",
+		"UnhealthyHostCount",
+		"HTTPCode_LB_4XX_Count",
+		"HTTPCode_LB_5XX_Count",
+		"HTTPCode_Instance_2XX_Count",
+		"HTTPCode_Instance_3XX_Count",
+		"HTTPCode_Instance_4XX_Count",
+		"HTTPCode_Instance_5XX_Count",
+		"InstanceResponseTime",
+		"RejectedConnectionCount",
+		"RequestCount",
+	}
+}
+
 type LoadBalancerProtocol string
 
 // Enum values for LoadBalancerProtocol
@@ -279,6 +604,16 @@ const (
 	LoadBalancerProtocolHttp_https LoadBalancerProtocol = "HTTP_HTTPS"
 	LoadBalancerProtocolHttp       LoadBalancerProtocol = "HTTP"
 )
+
+// Values returns all known values for LoadBalancerProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerProtocol) Values() []LoadBalancerProtocol {
+	return []LoadBalancerProtocol{
+		"HTTP_HTTPS",
+		"HTTP",
+	}
+}
 
 type LoadBalancerState string
 
@@ -291,6 +626,19 @@ const (
 	LoadBalancerStateUnknown        LoadBalancerState = "unknown"
 )
 
+// Values returns all known values for LoadBalancerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerState) Values() []LoadBalancerState {
+	return []LoadBalancerState{
+		"active",
+		"provisioning",
+		"active_impaired",
+		"failed",
+		"unknown",
+	}
+}
+
 type LoadBalancerTlsCertificateDomainStatus string
 
 // Enum values for LoadBalancerTlsCertificateDomainStatus
@@ -299,6 +647,18 @@ const (
 	LoadBalancerTlsCertificateDomainStatusFailed            LoadBalancerTlsCertificateDomainStatus = "FAILED"
 	LoadBalancerTlsCertificateDomainStatusSuccess           LoadBalancerTlsCertificateDomainStatus = "SUCCESS"
 )
+
+// Values returns all known values for LoadBalancerTlsCertificateDomainStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoadBalancerTlsCertificateDomainStatus) Values() []LoadBalancerTlsCertificateDomainStatus {
+	return []LoadBalancerTlsCertificateDomainStatus{
+		"PENDING_VALIDATION",
+		"FAILED",
+		"SUCCESS",
+	}
+}
 
 type LoadBalancerTlsCertificateFailureReason string
 
@@ -311,6 +671,20 @@ const (
 	LoadBalancerTlsCertificateFailureReasonOther                          LoadBalancerTlsCertificateFailureReason = "OTHER"
 )
 
+// Values returns all known values for LoadBalancerTlsCertificateFailureReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoadBalancerTlsCertificateFailureReason) Values() []LoadBalancerTlsCertificateFailureReason {
+	return []LoadBalancerTlsCertificateFailureReason{
+		"NO_AVAILABLE_CONTACTS",
+		"ADDITIONAL_VERIFICATION_REQUIRED",
+		"DOMAIN_NOT_ALLOWED",
+		"INVALID_PUBLIC_DOMAIN",
+		"OTHER",
+	}
+}
+
 type LoadBalancerTlsCertificateRenewalStatus string
 
 // Enum values for LoadBalancerTlsCertificateRenewalStatus
@@ -320,6 +694,19 @@ const (
 	LoadBalancerTlsCertificateRenewalStatusSuccess            LoadBalancerTlsCertificateRenewalStatus = "SUCCESS"
 	LoadBalancerTlsCertificateRenewalStatusFailed             LoadBalancerTlsCertificateRenewalStatus = "FAILED"
 )
+
+// Values returns all known values for LoadBalancerTlsCertificateRenewalStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoadBalancerTlsCertificateRenewalStatus) Values() []LoadBalancerTlsCertificateRenewalStatus {
+	return []LoadBalancerTlsCertificateRenewalStatus{
+		"PENDING_AUTO_RENEWAL",
+		"PENDING_VALIDATION",
+		"SUCCESS",
+		"FAILED",
+	}
+}
 
 type LoadBalancerTlsCertificateRevocationReason string
 
@@ -337,6 +724,25 @@ const (
 	LoadBalancerTlsCertificateRevocationReasonAacompromise         LoadBalancerTlsCertificateRevocationReason = "A_A_COMPROMISE"
 )
 
+// Values returns all known values for LoadBalancerTlsCertificateRevocationReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoadBalancerTlsCertificateRevocationReason) Values() []LoadBalancerTlsCertificateRevocationReason {
+	return []LoadBalancerTlsCertificateRevocationReason{
+		"UNSPECIFIED",
+		"KEY_COMPROMISE",
+		"CA_COMPROMISE",
+		"AFFILIATION_CHANGED",
+		"SUPERCEDED",
+		"CESSATION_OF_OPERATION",
+		"CERTIFICATE_HOLD",
+		"REMOVE_FROM_CRL",
+		"PRIVILEGE_WITHDRAWN",
+		"A_A_COMPROMISE",
+	}
+}
+
 type LoadBalancerTlsCertificateStatus string
 
 // Enum values for LoadBalancerTlsCertificateStatus
@@ -350,6 +756,23 @@ const (
 	LoadBalancerTlsCertificateStatusFailed             LoadBalancerTlsCertificateStatus = "FAILED"
 	LoadBalancerTlsCertificateStatusUnknown            LoadBalancerTlsCertificateStatus = "UNKNOWN"
 )
+
+// Values returns all known values for LoadBalancerTlsCertificateStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoadBalancerTlsCertificateStatus) Values() []LoadBalancerTlsCertificateStatus {
+	return []LoadBalancerTlsCertificateStatus{
+		"PENDING_VALIDATION",
+		"ISSUED",
+		"INACTIVE",
+		"EXPIRED",
+		"VALIDATION_TIMED_OUT",
+		"REVOKED",
+		"FAILED",
+		"UNKNOWN",
+	}
+}
 
 type MetricName string
 
@@ -382,6 +805,39 @@ const (
 	MetricNameBurstcapacitypercentage        MetricName = "BurstCapacityPercentage"
 )
 
+// Values returns all known values for MetricName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricName) Values() []MetricName {
+	return []MetricName{
+		"CPUUtilization",
+		"NetworkIn",
+		"NetworkOut",
+		"StatusCheckFailed",
+		"StatusCheckFailed_Instance",
+		"StatusCheckFailed_System",
+		"ClientTLSNegotiationErrorCount",
+		"HealthyHostCount",
+		"UnhealthyHostCount",
+		"HTTPCode_LB_4XX_Count",
+		"HTTPCode_LB_5XX_Count",
+		"HTTPCode_Instance_2XX_Count",
+		"HTTPCode_Instance_3XX_Count",
+		"HTTPCode_Instance_4XX_Count",
+		"HTTPCode_Instance_5XX_Count",
+		"InstanceResponseTime",
+		"RejectedConnectionCount",
+		"RequestCount",
+		"DatabaseConnections",
+		"DiskQueueDepth",
+		"FreeStorageSpace",
+		"NetworkReceiveThroughput",
+		"NetworkTransmitThroughput",
+		"BurstCapacityTime",
+		"BurstCapacityPercentage",
+	}
+}
+
 type MetricStatistic string
 
 // Enum values for MetricStatistic
@@ -392,6 +848,19 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticSamplecount MetricStatistic = "SampleCount"
 )
+
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Minimum",
+		"Maximum",
+		"Sum",
+		"Average",
+		"SampleCount",
+	}
+}
 
 type MetricUnit string
 
@@ -426,6 +895,41 @@ const (
 	MetricUnitNone            MetricUnit = "None"
 )
 
+// Values returns all known values for MetricUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricUnit) Values() []MetricUnit {
+	return []MetricUnit{
+		"Seconds",
+		"Microseconds",
+		"Milliseconds",
+		"Bytes",
+		"Kilobytes",
+		"Megabytes",
+		"Gigabytes",
+		"Terabytes",
+		"Bits",
+		"Kilobits",
+		"Megabits",
+		"Gigabits",
+		"Terabits",
+		"Percent",
+		"Count",
+		"Bytes/Second",
+		"Kilobytes/Second",
+		"Megabytes/Second",
+		"Gigabytes/Second",
+		"Terabytes/Second",
+		"Bits/Second",
+		"Kilobits/Second",
+		"Megabits/Second",
+		"Gigabits/Second",
+		"Terabits/Second",
+		"Count/Second",
+		"None",
+	}
+}
+
 type NetworkProtocol string
 
 // Enum values for NetworkProtocol
@@ -435,6 +939,18 @@ const (
 	NetworkProtocolUdp  NetworkProtocol = "udp"
 	NetworkProtocolIcmp NetworkProtocol = "icmp"
 )
+
+// Values returns all known values for NetworkProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkProtocol) Values() []NetworkProtocol {
+	return []NetworkProtocol{
+		"tcp",
+		"all",
+		"udp",
+		"icmp",
+	}
+}
 
 type OperationStatus string
 
@@ -446,6 +962,19 @@ const (
 	OperationStatusCompleted  OperationStatus = "Completed"
 	OperationStatusSucceeded  OperationStatus = "Succeeded"
 )
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"NotStarted",
+		"Started",
+		"Failed",
+		"Completed",
+		"Succeeded",
+	}
+}
 
 type OperationType string
 
@@ -517,6 +1046,78 @@ const (
 	OperationTypeDeletecertificate                    OperationType = "DeleteCertificate"
 )
 
+// Values returns all known values for OperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationType) Values() []OperationType {
+	return []OperationType{
+		"DeleteKnownHostKeys",
+		"DeleteInstance",
+		"CreateInstance",
+		"StopInstance",
+		"StartInstance",
+		"RebootInstance",
+		"OpenInstancePublicPorts",
+		"PutInstancePublicPorts",
+		"CloseInstancePublicPorts",
+		"AllocateStaticIp",
+		"ReleaseStaticIp",
+		"AttachStaticIp",
+		"DetachStaticIp",
+		"UpdateDomainEntry",
+		"DeleteDomainEntry",
+		"CreateDomain",
+		"DeleteDomain",
+		"CreateInstanceSnapshot",
+		"DeleteInstanceSnapshot",
+		"CreateInstancesFromSnapshot",
+		"CreateLoadBalancer",
+		"DeleteLoadBalancer",
+		"AttachInstancesToLoadBalancer",
+		"DetachInstancesFromLoadBalancer",
+		"UpdateLoadBalancerAttribute",
+		"CreateLoadBalancerTlsCertificate",
+		"DeleteLoadBalancerTlsCertificate",
+		"AttachLoadBalancerTlsCertificate",
+		"CreateDisk",
+		"DeleteDisk",
+		"AttachDisk",
+		"DetachDisk",
+		"CreateDiskSnapshot",
+		"DeleteDiskSnapshot",
+		"CreateDiskFromSnapshot",
+		"CreateRelationalDatabase",
+		"UpdateRelationalDatabase",
+		"DeleteRelationalDatabase",
+		"CreateRelationalDatabaseFromSnapshot",
+		"CreateRelationalDatabaseSnapshot",
+		"DeleteRelationalDatabaseSnapshot",
+		"UpdateRelationalDatabaseParameters",
+		"StartRelationalDatabase",
+		"RebootRelationalDatabase",
+		"StopRelationalDatabase",
+		"EnableAddOn",
+		"DisableAddOn",
+		"PutAlarm",
+		"GetAlarms",
+		"DeleteAlarm",
+		"TestAlarm",
+		"CreateContactMethod",
+		"GetContactMethods",
+		"SendContactMethodVerification",
+		"DeleteContactMethod",
+		"CreateDistribution",
+		"UpdateDistribution",
+		"DeleteDistribution",
+		"ResetDistributionCache",
+		"AttachCertificateToDistribution",
+		"DetachCertificateFromDistribution",
+		"UpdateDistributionBundle",
+		"CreateCertificate",
+		"DeleteCertificate",
+	}
+}
+
 type OriginProtocolPolicyEnum string
 
 // Enum values for OriginProtocolPolicyEnum
@@ -525,6 +1126,16 @@ const (
 	OriginProtocolPolicyEnumHttpsonly OriginProtocolPolicyEnum = "https-only"
 )
 
+// Values returns all known values for OriginProtocolPolicyEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OriginProtocolPolicyEnum) Values() []OriginProtocolPolicyEnum {
+	return []OriginProtocolPolicyEnum{
+		"http-only",
+		"https-only",
+	}
+}
+
 type PortAccessType string
 
 // Enum values for PortAccessType
@@ -532,6 +1143,16 @@ const (
 	PortAccessTypePublic  PortAccessType = "Public"
 	PortAccessTypePrivate PortAccessType = "Private"
 )
+
+// Values returns all known values for PortAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PortAccessType) Values() []PortAccessType {
+	return []PortAccessType{
+		"Public",
+		"Private",
+	}
+}
 
 type PortInfoSourceType string
 
@@ -543,6 +1164,18 @@ const (
 	PortInfoSourceTypeClosed   PortInfoSourceType = "CLOSED"
 )
 
+// Values returns all known values for PortInfoSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PortInfoSourceType) Values() []PortInfoSourceType {
+	return []PortInfoSourceType{
+		"DEFAULT",
+		"INSTANCE",
+		"NONE",
+		"CLOSED",
+	}
+}
+
 type PortState string
 
 // Enum values for PortState
@@ -550,6 +1183,16 @@ const (
 	PortStateOpen   PortState = "open"
 	PortStateClosed PortState = "closed"
 )
+
+// Values returns all known values for PortState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PortState) Values() []PortState {
+	return []PortState{
+		"open",
+		"closed",
+	}
+}
 
 type RecordState string
 
@@ -559,6 +1202,17 @@ const (
 	RecordStateSucceeded RecordState = "Succeeded"
 	RecordStateFailed    RecordState = "Failed"
 )
+
+// Values returns all known values for RecordState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RecordState) Values() []RecordState {
+	return []RecordState{
+		"Started",
+		"Succeeded",
+		"Failed",
+	}
+}
 
 type RegionName string
 
@@ -580,12 +1234,43 @@ const (
 	RegionNameAp_northeast_2 RegionName = "ap-northeast-2"
 )
 
+// Values returns all known values for RegionName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RegionName) Values() []RegionName {
+	return []RegionName{
+		"us-east-1",
+		"us-east-2",
+		"us-west-1",
+		"us-west-2",
+		"eu-west-1",
+		"eu-west-2",
+		"eu-west-3",
+		"eu-central-1",
+		"ca-central-1",
+		"ap-south-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"ap-northeast-2",
+	}
+}
+
 type RelationalDatabaseEngine string
 
 // Enum values for RelationalDatabaseEngine
 const (
 	RelationalDatabaseEngineMysql RelationalDatabaseEngine = "mysql"
 )
+
+// Values returns all known values for RelationalDatabaseEngine. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationalDatabaseEngine) Values() []RelationalDatabaseEngine {
+	return []RelationalDatabaseEngine{
+		"mysql",
+	}
+}
 
 type RelationalDatabaseMetricName string
 
@@ -599,6 +1284,20 @@ const (
 	RelationalDatabaseMetricNameNetworktransmitthroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
 )
 
+// Values returns all known values for RelationalDatabaseMetricName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelationalDatabaseMetricName) Values() []RelationalDatabaseMetricName {
+	return []RelationalDatabaseMetricName{
+		"CPUUtilization",
+		"DatabaseConnections",
+		"DiskQueueDepth",
+		"FreeStorageSpace",
+		"NetworkReceiveThroughput",
+		"NetworkTransmitThroughput",
+	}
+}
+
 type RelationalDatabasePasswordVersion string
 
 // Enum values for RelationalDatabasePasswordVersion
@@ -607,6 +1306,18 @@ const (
 	RelationalDatabasePasswordVersionPrevious RelationalDatabasePasswordVersion = "PREVIOUS"
 	RelationalDatabasePasswordVersionPending  RelationalDatabasePasswordVersion = "PENDING"
 )
+
+// Values returns all known values for RelationalDatabasePasswordVersion. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RelationalDatabasePasswordVersion) Values() []RelationalDatabasePasswordVersion {
+	return []RelationalDatabasePasswordVersion{
+		"CURRENT",
+		"PREVIOUS",
+		"PENDING",
+	}
+}
 
 type RenewalStatus string
 
@@ -617,6 +1328,18 @@ const (
 	RenewalStatusSuccess            RenewalStatus = "Success"
 	RenewalStatusFailed             RenewalStatus = "Failed"
 )
+
+// Values returns all known values for RenewalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RenewalStatus) Values() []RenewalStatus {
+	return []RenewalStatus{
+		"PendingAutoRenewal",
+		"PendingValidation",
+		"Success",
+		"Failed",
+	}
+}
 
 type ResourceType string
 
@@ -642,6 +1365,32 @@ const (
 	ResourceTypeCertificate                ResourceType = "Certificate"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"Instance",
+		"StaticIp",
+		"KeyPair",
+		"InstanceSnapshot",
+		"Domain",
+		"PeeredVpc",
+		"LoadBalancer",
+		"LoadBalancerTlsCertificate",
+		"Disk",
+		"DiskSnapshot",
+		"RelationalDatabase",
+		"RelationalDatabaseSnapshot",
+		"ExportSnapshotRecord",
+		"CloudFormationStackRecord",
+		"Alarm",
+		"ContactMethod",
+		"Distribution",
+		"Certificate",
+	}
+}
+
 type TreatMissingData string
 
 // Enum values for TreatMissingData
@@ -651,3 +1400,15 @@ const (
 	TreatMissingDataIgnore       TreatMissingData = "ignore"
 	TreatMissingDataMissing      TreatMissingData = "missing"
 )
+
+// Values returns all known values for TreatMissingData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TreatMissingData) Values() []TreatMissingData {
+	return []TreatMissingData{
+		"breaching",
+		"notBreaching",
+		"ignore",
+		"missing",
+	}
+}

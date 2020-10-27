@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified resource.
+// Lists the tags for the specified resource. For sample policies that use tags,
+// see Amazon Connect Identity-Based Policy Examples
+// (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

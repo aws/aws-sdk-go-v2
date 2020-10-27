@@ -31,8 +31,8 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 type CreateEndpointInput struct {
 
 	// The database endpoint identifier. Identifiers must begin with a letter and must
-	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or
-	// contain two consecutive hyphens.
+	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen,
+	// or contain two consecutive hyphens.
 	//
 	// This member is required.
 	EndpointIdentifier *string
@@ -45,7 +45,7 @@ type CreateEndpointInput struct {
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType
 	// value, include "mysql", "oracle", "postgres", "mariadb", "aurora",
 	// "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb",
-	// "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and
+	// "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and
 	// "neptune".
 	//
 	// This member is required.
@@ -106,8 +106,8 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source IBM Db2 LUW endpoint. For information
 	// about other available settings, see Extra connection attributes when using Db2
 	// LUW as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html) in the
+	// AWS Database Migration Service User Guide.
 	IBMDb2Settings *types.IBMDb2Settings
 
 	// Settings in JSON format for the target Apache Kafka endpoint. For more
@@ -134,10 +134,10 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source and target Microsoft SQL Server endpoint.
 	// For information about other available settings, see Extra connection attributes
 	// when using SQL Server as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib)
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html)
 	// and  Extra connection attributes when using SQL Server as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html) in
+	// the AWS Database Migration Service User Guide.
 	MicrosoftSQLServerSettings *types.MicrosoftSQLServerSettings
 
 	// Settings in JSON format for the source MongoDB endpoint. For more information
@@ -150,11 +150,11 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source and target MySQL endpoint. For
 	// information about other available settings, see Extra connection attributes when
 	// using MySQL as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib)
-	// and Extra connection attributes when using a MySQL-compatible database as a
-	// target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html) and
+	// Extra connection attributes when using a MySQL-compatible database as a target
+	// for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html) in the
+	// AWS Database Migration Service User Guide.
 	MySQLSettings *types.MySQLSettings
 
 	// Settings in JSON format for the target Amazon Neptune endpoint. For more
@@ -167,10 +167,10 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source and target Oracle endpoint. For
 	// information about other available settings, see Extra connection attributes when
 	// using Oracle as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib)
-	// and  Extra connection attributes when using Oracle as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html) and
+	// Extra connection attributes when using Oracle as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html) in
+	// the AWS Database Migration Service User Guide.
 	OracleSettings *types.OracleSettings
 
 	// The password to be used to log in to the endpoint database.
@@ -182,14 +182,25 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source and target PostgreSQL endpoint. For
 	// information about other available settings, see Extra connection attributes when
 	// using PostgreSQL as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib)
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html)
 	// and  Extra connection attributes when using PostgreSQL as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib)
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html)
 	// in the AWS Database Migration Service User Guide.
 	PostgreSQLSettings *types.PostgreSQLSettings
 
 	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *types.RedshiftSettings
+
+	// A friendly name for the resource identifier at the end of the EndpointArn
+	// response parameter that is returned in the created Endpoint object. The value
+	// for this parameter can have up to 31 characters. It can contain only ASCII
+	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
+	// two consecutive hyphens, and can only begin with a letter, such as
+	// Example-App-ARN1. For example, this value might result in the EndpointArn value
+	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
+	// ResourceIdentifier value, AWS DMS generates a default identifier value for the
+	// end of EndpointArn.
+	ResourceIdentifier *string
 
 	// Settings in JSON format for the target Amazon S3 endpoint. For more information
 	// about the available settings, see Extra Connection Attributes When Using Amazon
@@ -212,10 +223,10 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source and target SAP ASE endpoint. For
 	// information about other available settings, see Extra connection attributes when
 	// using SAP ASE as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib)
-	// and Extra connection attributes when using SAP ASE as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html) and
+	// Extra connection attributes when using SAP ASE as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html) in the
+	// AWS Database Migration Service User Guide.
 	SybaseSettings *types.SybaseSettings
 
 	// One or more tags to be assigned to the endpoint.

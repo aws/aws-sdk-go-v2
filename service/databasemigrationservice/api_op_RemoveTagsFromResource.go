@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes metadata tags from a DMS resource.
+// Removes metadata tags from an AWS DMS resource, including replication instance,
+// endpoint, security group, and migration task. For more information, see Tag
+// (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data type
+// description.
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}

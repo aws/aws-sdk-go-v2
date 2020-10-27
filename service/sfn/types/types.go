@@ -62,8 +62,12 @@ type ActivityScheduledEventDetails struct {
 	// The maximum allowed duration between two heartbeats for the activity task.
 	HeartbeatInSeconds *int64
 
-	// The JSON data input to the activity task.
+	// The JSON data input to the activity task. Length constraints apply to the
+	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
+
+	// Contains details about the input for an execution history event.
+	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the activity task.
 	TimeoutInSeconds *int64
@@ -92,8 +96,12 @@ type ActivityStartedEventDetails struct {
 // execution.
 type ActivitySucceededEventDetails struct {
 
-	// The JSON data output by the activity task.
+	// The JSON data output by the activity task. Length constraints apply to the
+	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about an activity timeout that occurred during an execution.
@@ -104,6 +112,14 @@ type ActivityTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+}
+
+// Provides details about execution input or output.
+type CloudWatchEventsExecutionDataDetails struct {
+
+	// Indicates whether input or output was included in the response. Always true for
+	// API calls.
+	Included *bool
 }
 
 //
@@ -185,8 +201,12 @@ type ExecutionListItem struct {
 // Contains details about the start of the execution.
 type ExecutionStartedEventDetails struct {
 
-	// The JSON data input to the execution.
+	// The JSON data input to the execution. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
+
+	// Contains details about the input for an execution history event.
+	InputDetails *HistoryEventExecutionDataDetails
 
 	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
 	// tasks.
@@ -196,8 +216,12 @@ type ExecutionStartedEventDetails struct {
 // Contains details about the successful termination of the execution.
 type ExecutionSucceededEventDetails struct {
 
-	// The JSON data output by the execution.
+	// The JSON data output by the execution. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about the execution timeout that occurred during the execution.
@@ -334,6 +358,14 @@ type HistoryEvent struct {
 	TaskTimedOutEventDetails *TaskTimedOutEventDetails
 }
 
+// Provides details about input or output in an execution history event.
+type HistoryEventExecutionDataDetails struct {
+
+	// Indicates whether input or output was truncated in the response. Always false
+	// for API calls.
+	Truncated *bool
+}
+
 // Contains details about a lambda function that failed during an execution.
 type LambdaFunctionFailedEventDetails struct {
 
@@ -352,8 +384,12 @@ type LambdaFunctionScheduledEventDetails struct {
 	// This member is required.
 	Resource *string
 
-	// The JSON data input to the lambda function.
+	// The JSON data input to the lambda function. Length constraints apply to the
+	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
+
+	// Contains details about input for an execution history event.
+	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the lambda function.
 	TimeoutInSeconds *int64
@@ -385,8 +421,12 @@ type LambdaFunctionStartFailedEventDetails struct {
 // execution.
 type LambdaFunctionSucceededEventDetails struct {
 
-	// The JSON data output by the lambda function.
+	// The JSON data output by the lambda function. Length constraints apply to the
+	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about a lambda function timeout that occurred during an
@@ -417,7 +457,7 @@ type LoggingConfiguration struct {
 	// logged. Limited to size 1. Required, if your log level is not set to OFF.
 	Destinations []*LogDestination
 
-	// Determines whether execution data is included in your log. When set to FALSE,
+	// Determines whether execution data is included in your log. When set to false,
 	// data is excluded.
 	IncludeExecutionData *bool
 
@@ -450,8 +490,12 @@ type StateEnteredEventDetails struct {
 	// This member is required.
 	Name *string
 
-	// The string that contains the JSON input data for the state.
+	// The string that contains the JSON input data for the state. Length constraints
+	// apply to the payload size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
+
+	// Contains details about the input for an execution history event.
+	InputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about an exit from a state during an execution.
@@ -478,8 +522,12 @@ type StateExitedEventDetails struct {
 	// This member is required.
 	Name *string
 
-	// The JSON output data of the state.
+	// The JSON output data of the state. Length constraints apply to the payload size,
+	// and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about the state machine.
@@ -563,7 +611,9 @@ type TaskFailedEventDetails struct {
 // Contains details about a task scheduled during an execution.
 type TaskScheduledEventDetails struct {
 
-	// The JSON data passed to the resource referenced in a task state.
+	// The JSON data passed to the resource referenced in a task state. Length
+	// constraints apply to the payload size, and are expressed as bytes in UTF-8
+	// encoding.
 	//
 	// This member is required.
 	Parameters *string
@@ -582,6 +632,9 @@ type TaskScheduledEventDetails struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	// The maximum allowed duration between two heartbeats for the task.
+	HeartbeatInSeconds *int64
 
 	// The maximum allowed duration of the task.
 	TimeoutInSeconds *int64
@@ -654,8 +707,12 @@ type TaskSubmittedEventDetails struct {
 	// This member is required.
 	ResourceType *string
 
-	// The response from a resource when a task has started.
+	// The response from a resource when a task has started. Length constraints apply
+	// to the payload size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about the successful completion of a task state.
@@ -672,8 +729,12 @@ type TaskSucceededEventDetails struct {
 	ResourceType *string
 
 	// The full JSON response from a resource when a task has succeeded. This response
-	// becomes the output of the related task.
+	// becomes the output of the related task. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
+
+	// Contains details about the output of an execution history event.
+	OutputDetails *HistoryEventExecutionDataDetails
 }
 
 // Contains details about a resource timeout that occurred during an execution.
@@ -694,4 +755,12 @@ type TaskTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+}
+
+// Selects whether or not the state machine's AWS X-Ray tracing is enabled. Default
+// is false
+type TracingConfiguration struct {
+
+	// When set to true, AWS X-Ray tracing is enabled.
+	Enabled *bool
 }

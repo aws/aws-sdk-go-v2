@@ -80,7 +80,7 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	if len(awsmiddleware.GetSigningName(ctx)) == 0 {
 		signingName := endpoint.SigningName
 		if len(signingName) == 0 {
-			signingName = "execute-api"
+			signingName = "connect"
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}

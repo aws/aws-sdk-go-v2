@@ -2293,6 +2293,52 @@ func (m *awsAwsjson11_serializeOpGetAWSOrganizationsAccessStatus) HandleSerializ
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetProvisionedProductOutputs struct {
+}
+
+func (*awsAwsjson11_serializeOpGetProvisionedProductOutputs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetProvisionedProductOutputs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetProvisionedProductOutputsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.GetProvisionedProductOutputs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetProvisionedProductOutputsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListAcceptedPortfolioShares struct {
 }
 
@@ -3958,6 +4004,21 @@ func awsAwsjson11_serializeDocumentOrganizationNode(v *types.OrganizationNode, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOutputKeys(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentProductViewFilters(v map[string][]*string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5257,6 +5318,11 @@ func awsAwsjson11_serializeOpDocumentDescribeProvisionedProductInput(v *Describe
 		ok.String(*v.Id)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	return nil
 }
 
@@ -5622,6 +5688,45 @@ func awsAwsjson11_serializeOpDocumentExecuteProvisionedProductServiceActionInput
 func awsAwsjson11_serializeOpDocumentGetAWSOrganizationsAccessStatusInput(v *GetAWSOrganizationsAccessStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetProvisionedProductOutputsInput(v *GetProvisionedProductOutputsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceptLanguage != nil {
+		ok := object.Key("AcceptLanguage")
+		ok.String(*v.AcceptLanguage)
+	}
+
+	if v.OutputKeys != nil {
+		ok := object.Key("OutputKeys")
+		if err := awsAwsjson11_serializeDocumentOutputKeys(v.OutputKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
+	}
+
+	if v.PageToken != nil {
+		ok := object.Key("PageToken")
+		ok.String(*v.PageToken)
+	}
+
+	if v.ProvisionedProductId != nil {
+		ok := object.Key("ProvisionedProductId")
+		ok.String(*v.ProvisionedProductId)
+	}
+
+	if v.ProvisionedProductName != nil {
+		ok := object.Key("ProvisionedProductName")
+		ok.String(*v.ProvisionedProductName)
+	}
 
 	return nil
 }

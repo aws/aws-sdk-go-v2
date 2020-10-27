@@ -18,7 +18,7 @@ import (
 // subsegments. Segments must include the following fields. For the full segment
 // document schema, see AWS X-Ray Segment Documents
 // (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
-// in the AWS X-Ray Developer Guide. Required Segment Document Fields
+// in the AWS X-Ray Developer Guide. Required segment document fields
 //
 //     * name -
 // The name of the service that handled the request.
@@ -40,24 +40,24 @@ import (
 // in_progress.
 //
 //     * in_progress - Set to true instead of specifying an end_time
-// to record that a segment has been started, but is not complete. Send an in
-// progress segment when your application receives a request that will take a long
-// time to serve, to trace the fact that the request was received. When the
-// response is sent, send the complete segment to overwrite the in-progress
-// segment.
+// to record that a segment has been started, but is not complete. Send an
+// in-progress segment when your application receives a request that will take a
+// long time to serve, to trace that the request was received. When the response is
+// sent, send the complete segment to overwrite the in-progress segment.
 //
-// A trace_id consists of three numbers separated by hyphens. For
-// example, 1-58406520-a006649127e371903a2de979. This includes: Trace ID Format
+// A
+// trace_id consists of three numbers separated by hyphens. For example,
+// 1-58406520-a006649127e371903a2de979. This includes: Trace ID Format
 //
+//     * The
+// version number, for instance, 1.
 //
-// * The version number, i.e. 1.
+//     * The time of the original request, in
+// Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd,
+// 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.
 //
-//     * The time of the original request, in Unix
-// epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST
-// in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.
-//
-//     * A 96-bit
-// identifier for the trace, globally unique, in 24 hexadecimal digits.
+//     *
+// A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.
 func (c *Client) PutTraceSegments(ctx context.Context, params *PutTraceSegmentsInput, optFns ...func(*Options)) (*PutTraceSegmentsOutput, error) {
 	if params == nil {
 		params = &PutTraceSegmentsInput{}

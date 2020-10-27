@@ -29,10 +29,18 @@ import (
 //
 //     * MaxErrors
 //
-// If a parameter is null, then
-// the corresponding field is not modified. Also, if you set Replace to true, then
-// all fields required by the RegisterTaskWithMaintenanceWindow action are required
-// for this request. Optional fields that aren't specified are set to null.
+// If the value for a parameter in
+// UpdateMaintenanceWindowTask is null, then the corresponding field is not
+// modified. If you set Replace to true, then all fields required by the
+// RegisterTaskWithMaintenanceWindow action are required for this request. Optional
+// fields that aren't specified are set to null. When you update a maintenance
+// window task that has options specified in TaskInvocationParameters, you must
+// provide again all the TaskInvocationParameters values that you want to retain.
+// The values you do not specify again are removed. For example, suppose that when
+// you registered a Run Command task, you specified TaskInvocationParameters values
+// for Comment, NotificationConfig, and OutputS3BucketName. If you update the
+// maintenance window task and specify only a different OutputS3BucketName value,
+// the values for Comment and NotificationConfig are removed.
 func (c *Client) UpdateMaintenanceWindowTask(ctx context.Context, params *UpdateMaintenanceWindowTaskInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTaskOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceWindowTaskInput{}
@@ -87,7 +95,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	Priority *int32
 
 	// If True, then all fields that are required by the
-	// RegisterTaskWithMaintenanceWndow action are also required for this API request.
+	// RegisterTaskWithMaintenanceWindow action are also required for this API request.
 	// Optional fields that are not specified are set to null.
 	Replace *bool
 
@@ -117,7 +125,15 @@ type UpdateMaintenanceWindowTaskInput struct {
 	TaskArn *string
 
 	// The parameters that the task should use during execution. Populate only the
-	// fields that match the task type. All other fields should be empty.
+	// fields that match the task type. All other fields should be empty. When you
+	// update a maintenance window task that has options specified in
+	// TaskInvocationParameters, you must provide again all the
+	// TaskInvocationParameters values that you want to retain. The values you do not
+	// specify again are removed. For example, suppose that when you registered a Run
+	// Command task, you specified TaskInvocationParameters values for Comment,
+	// NotificationConfig, and OutputS3BucketName. If you update the maintenance window
+	// task and specify only a different OutputS3BucketName value, the values for
+	// Comment and NotificationConfig are removed.
 	TaskInvocationParameters *types.MaintenanceWindowTaskInvocationParameters
 
 	// The parameters to modify. TaskParameters has been deprecated. To specify

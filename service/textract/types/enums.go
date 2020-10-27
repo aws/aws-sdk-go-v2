@@ -15,6 +15,21 @@ const (
 	BlockTypeSelection_element BlockType = "SELECTION_ELEMENT"
 )
 
+// Values returns all known values for BlockType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BlockType) Values() []BlockType {
+	return []BlockType{
+		"KEY_VALUE_SET",
+		"PAGE",
+		"LINE",
+		"WORD",
+		"TABLE",
+		"CELL",
+		"SELECTION_ELEMENT",
+	}
+}
+
 type ContentClassifier string
 
 // Enum values for ContentClassifier
@@ -22,6 +37,16 @@ const (
 	ContentClassifierFree_of_personally_identifiable_information ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
 	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
 )
+
+// Values returns all known values for ContentClassifier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentClassifier) Values() []ContentClassifier {
+	return []ContentClassifier{
+		"FreeOfPersonallyIdentifiableInformation",
+		"FreeOfAdultContent",
+	}
+}
 
 type EntityType string
 
@@ -31,6 +56,16 @@ const (
 	EntityTypeValue EntityType = "VALUE"
 )
 
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"KEY",
+		"VALUE",
+	}
+}
+
 type FeatureType string
 
 // Enum values for FeatureType
@@ -38,6 +73,16 @@ const (
 	FeatureTypeTables FeatureType = "TABLES"
 	FeatureTypeForms  FeatureType = "FORMS"
 )
+
+// Values returns all known values for FeatureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FeatureType) Values() []FeatureType {
+	return []FeatureType{
+		"TABLES",
+		"FORMS",
+	}
+}
 
 type JobStatus string
 
@@ -49,13 +94,37 @@ const (
 	JobStatusPartial_success JobStatus = "PARTIAL_SUCCESS"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"PARTIAL_SUCCESS",
+	}
+}
+
 type RelationshipType string
 
 // Enum values for RelationshipType
 const (
-	RelationshipTypeValue RelationshipType = "VALUE"
-	RelationshipTypeChild RelationshipType = "CHILD"
+	RelationshipTypeValue            RelationshipType = "VALUE"
+	RelationshipTypeChild            RelationshipType = "CHILD"
+	RelationshipTypeComplex_features RelationshipType = "COMPLEX_FEATURES"
 )
+
+// Values returns all known values for RelationshipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationshipType) Values() []RelationshipType {
+	return []RelationshipType{
+		"VALUE",
+		"CHILD",
+		"COMPLEX_FEATURES",
+	}
+}
 
 type SelectionStatus string
 
@@ -64,3 +133,13 @@ const (
 	SelectionStatusSelected     SelectionStatus = "SELECTED"
 	SelectionStatusNot_selected SelectionStatus = "NOT_SELECTED"
 )
+
+// Values returns all known values for SelectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelectionStatus) Values() []SelectionStatus {
+	return []SelectionStatus{
+		"SELECTED",
+		"NOT_SELECTED",
+	}
+}

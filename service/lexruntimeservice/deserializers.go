@@ -512,6 +512,20 @@ func awsRestjson1_deserializeOpHttpBindingsPostContentOutput(v *PostContentOutpu
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
 
+	if headerValues := response.Header.Values("x-amz-lex-alternative-intents"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.AlternativeIntents = ptr.String(string(b))
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-bot-version"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.BotVersion = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.ContentType = ptr.String(headerValues[0])
@@ -540,6 +554,15 @@ func awsRestjson1_deserializeOpHttpBindingsPostContentOutput(v *PostContentOutpu
 	if headerValues := response.Header.Values("x-amz-lex-message-format"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.MessageFormat = types.MessageFormatType(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-nlu-intent-confidence"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.NluIntentConfidence = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-sentiment"); len(headerValues) != 0 {
@@ -740,6 +763,20 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 
 	for key, value := range shape {
 		switch key {
+		case "alternativeIntents":
+			if err := awsRestjson1_deserializeDocumentIntentList(&sv.AlternativeIntents, value); err != nil {
+				return err
+			}
+
+		case "botVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BotVersion to be of type string, got %T instead", value)
+				}
+				sv.BotVersion = &jtv
+			}
+
 		case "dialogState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -774,6 +811,11 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 					return fmt.Errorf("expected MessageFormatType to be of type string, got %T instead", value)
 				}
 				sv.MessageFormat = types.MessageFormatType(jtv)
+			}
+
+		case "nluIntentConfidence":
+			if err := awsRestjson1_deserializeDocumentIntentConfidence(&sv.NluIntentConfidence, value); err != nil {
+				return err
 			}
 
 		case "responseCard":
@@ -1821,6 +1863,82 @@ func awsRestjson1_deserializeDocumentGenericAttachmentList(v *[]*types.GenericAt
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIntentConfidence(v **types.IntentConfidence, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntentConfidence
+	if *v == nil {
+		sv = &types.IntentConfidence{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "score":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Double to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.Score = &f64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntentList(v *[]*types.PredictedIntent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.PredictedIntent
+	if *v == nil {
+		cv = []*types.PredictedIntent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.PredictedIntent
+		if err := awsRestjson1_deserializeDocumentPredictedIntent(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2173,6 +2291,56 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPredictedIntent(v **types.PredictedIntent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictedIntent
+	if *v == nil {
+		sv = &types.PredictedIntent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IntentName to be of type string, got %T instead", value)
+				}
+				sv.IntentName = &jtv
+			}
+
+		case "nluIntentConfidence":
+			if err := awsRestjson1_deserializeDocumentIntentConfidence(&sv.NluIntentConfidence, value); err != nil {
+				return err
+			}
+
+		case "slots":
+			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Slots, value); err != nil {
+				return err
 			}
 
 		default:

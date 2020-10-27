@@ -10,6 +10,66 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpAssociateRoutingProfileQueues struct {
+}
+
+func (*validateOpAssociateRoutingProfileQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateRoutingProfileQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateRoutingProfileQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateRoutingProfileQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateContactFlow struct {
+}
+
+func (*validateOpCreateContactFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContactFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContactFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRoutingProfile struct {
+}
+
+func (*validateOpCreateRoutingProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRoutingProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRoutingProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRoutingProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUser struct {
 }
 
@@ -45,6 +105,46 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeContactFlow struct {
+}
+
+func (*validateOpDescribeContactFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContactFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContactFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRoutingProfile struct {
+}
+
+func (*validateOpDescribeRoutingProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRoutingProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRoutingProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRoutingProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +205,26 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateRoutingProfileQueues struct {
+}
+
+func (*validateOpDisassociateRoutingProfileQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateRoutingProfileQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateRoutingProfileQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateRoutingProfileQueuesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +370,26 @@ func (m *validateOpListPhoneNumbers) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPrompts struct {
+}
+
+func (*validateOpListPrompts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPrompts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPromptsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPromptsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListQueues struct {
 }
 
@@ -265,6 +405,26 @@ func (m *validateOpListQueues) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRoutingProfileQueues struct {
+}
+
+func (*validateOpListRoutingProfileQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRoutingProfileQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRoutingProfileQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRoutingProfileQueuesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +730,126 @@ func (m *validateOpUpdateContactAttributes) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContactFlowContent struct {
+}
+
+func (*validateOpUpdateContactFlowContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContactFlowContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactFlowContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactFlowContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateContactFlowName struct {
+}
+
+func (*validateOpUpdateContactFlowName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContactFlowName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactFlowNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactFlowNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRoutingProfileConcurrency struct {
+}
+
+func (*validateOpUpdateRoutingProfileConcurrency) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoutingProfileConcurrency) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRoutingProfileConcurrencyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRoutingProfileConcurrencyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRoutingProfileDefaultOutboundQueue struct {
+}
+
+func (*validateOpUpdateRoutingProfileDefaultOutboundQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoutingProfileDefaultOutboundQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRoutingProfileDefaultOutboundQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRoutingProfileDefaultOutboundQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRoutingProfileName struct {
+}
+
+func (*validateOpUpdateRoutingProfileName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoutingProfileName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRoutingProfileNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRoutingProfileNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRoutingProfileQueues struct {
+}
+
+func (*validateOpUpdateRoutingProfileQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoutingProfileQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRoutingProfileQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRoutingProfileQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserHierarchy struct {
 }
 
@@ -670,12 +950,32 @@ func (m *validateOpUpdateUserSecurityProfiles) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateRoutingProfileQueues{}, middleware.After)
+}
+
+func addOpCreateContactFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContactFlow{}, middleware.After)
+}
+
+func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
+}
+
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
+func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContactFlow{}, middleware.After)
+}
+
+func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRoutingProfile{}, middleware.After)
 }
 
 func addOpDescribeUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -688,6 +988,10 @@ func addOpDescribeUserHierarchyStructureValidationMiddleware(stack *middleware.S
 
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
+}
+
+func addOpDisassociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateRoutingProfileQueues{}, middleware.After)
 }
 
 func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -718,8 +1022,16 @@ func addOpListPhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPhoneNumbers{}, middleware.After)
 }
 
+func addOpListPromptsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPrompts{}, middleware.After)
+}
+
 func addOpListQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListQueues{}, middleware.After)
+}
+
+func addOpListRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRoutingProfileQueues{}, middleware.After)
 }
 
 func addOpListRoutingProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -782,6 +1094,30 @@ func addOpUpdateContactAttributesValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateContactAttributes{}, middleware.After)
 }
 
+func addOpUpdateContactFlowContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContactFlowContent{}, middleware.After)
+}
+
+func addOpUpdateContactFlowNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContactFlowName{}, middleware.After)
+}
+
+func addOpUpdateRoutingProfileConcurrencyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoutingProfileConcurrency{}, middleware.After)
+}
+
+func addOpUpdateRoutingProfileDefaultOutboundQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoutingProfileDefaultOutboundQueue{}, middleware.After)
+}
+
+func addOpUpdateRoutingProfileNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoutingProfileName{}, middleware.After)
+}
+
+func addOpUpdateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoutingProfileQueues{}, middleware.After)
+}
+
 func addOpUpdateUserHierarchyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserHierarchy{}, middleware.After)
 }
@@ -807,11 +1143,46 @@ func validateChatMessage(v *types.ChatMessage) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChatMessage"}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
-	if v.ContentType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaConcurrencies(v []*types.MediaConcurrency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConcurrencies"}
+	for i := range v {
+		if err := validateMediaConcurrency(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaConcurrency(v *types.MediaConcurrency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConcurrency"}
+	if v.Concurrency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Concurrency"))
+	}
+	if len(v.Channel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -835,6 +1206,83 @@ func validateParticipantDetails(v *types.ParticipantDetails) error {
 	}
 }
 
+func validateRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueConfig"}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Delay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Delay"))
+	}
+	if v.QueueReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueReference"))
+	} else if v.QueueReference != nil {
+		if err := validateRoutingProfileQueueReference(v.QueueReference); err != nil {
+			invalidParams.AddNested("QueueReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingProfileQueueConfigList(v []*types.RoutingProfileQueueConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueConfigList"}
+	for i := range v {
+		if err := validateRoutingProfileQueueConfig(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingProfileQueueReference(v *types.RoutingProfileQueueReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueReference"}
+	if len(v.Channel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingProfileQueueReferenceList(v []*types.RoutingProfileQueueReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueReferenceList"}
+	for i := range v {
+		if err := validateRoutingProfileQueueReference(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserPhoneConfig(v *types.UserPhoneConfig) error {
 	if v == nil {
 		return nil
@@ -842,6 +1290,91 @@ func validateUserPhoneConfig(v *types.UserPhoneConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserPhoneConfig"}
 	if len(v.PhoneType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateRoutingProfileQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueConfigs"))
+	} else if v.QueueConfigs != nil {
+		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
+			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContactFlowInput"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRoutingProfileInput"}
+	if v.DefaultOutboundQueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.QueueConfigs != nil {
+		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
+			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaConcurrencies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaConcurrencies"))
+	} else if v.MediaConcurrencies != nil {
+		if err := validateMediaConcurrencies(v.MediaConcurrencies); err != nil {
+			invalidParams.AddNested("MediaConcurrencies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -858,15 +1391,15 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	if v.SecurityProfileIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileIds"))
 	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.PhoneConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneConfig"))
 	} else if v.PhoneConfig != nil {
 		if err := validateUserPhoneConfig(v.PhoneConfig); err != nil {
 			invalidParams.AddNested("PhoneConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
@@ -886,11 +1419,47 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeContactFlowInput(v *DescribeContactFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactFlowInput"}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRoutingProfileInput(v *DescribeRoutingProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRoutingProfileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -937,11 +1506,36 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUserInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateRoutingProfileQueuesInput(v *DisassociateRoutingProfileQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateRoutingProfileQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if v.QueueReferences == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueReferences"))
+	} else if v.QueueReferences != nil {
+		if err := validateRoutingProfileQueueReferenceList(v.QueueReferences); err != nil {
+			invalidParams.AddNested("QueueReferences", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -955,11 +1549,11 @@ func validateOpGetContactAttributesInput(v *GetContactAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetContactAttributesInput"}
-	if v.InitialContactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.InitialContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -976,11 +1570,11 @@ func validateOpGetCurrentMetricDataInput(v *GetCurrentMetricDataInput) error {
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
-	if v.CurrentMetrics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentMetrics"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.CurrentMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentMetrics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1009,17 +1603,17 @@ func validateOpGetMetricDataInput(v *GetMetricDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMetricDataInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.HistoricalMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HistoricalMetrics"))
 	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
@@ -1076,11 +1670,44 @@ func validateOpListPhoneNumbersInput(v *ListPhoneNumbersInput) error {
 	}
 }
 
+func validateOpListPromptsInput(v *ListPromptsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPromptsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListQueuesInput(v *ListQueuesInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRoutingProfileQueuesInput(v *ListRoutingProfileQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingProfileQueuesInput"}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -1171,14 +1798,14 @@ func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeContactRecordingInput"}
-	if v.ContactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
-	}
 	if v.InitialContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1192,16 +1819,16 @@ func validateOpStartChatContactInput(v *StartChatContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartChatContactInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if v.InitialMessage != nil {
 		if err := validateChatMessage(v.InitialMessage); err != nil {
 			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ContactFlowId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if v.ParticipantDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantDetails"))
@@ -1249,11 +1876,11 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 	if v.DestinationPhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
 	}
-	if v.ContactFlowId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1267,11 +1894,11 @@ func validateOpStopContactInput(v *StopContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopContactInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1379,16 +2006,144 @@ func validateOpUpdateContactAttributesInput(v *UpdateContactAttributesInput) err
 	}
 }
 
+func validateOpUpdateContactFlowContentInput(v *UpdateContactFlowContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactFlowContentInput"}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContactFlowNameInput(v *UpdateContactFlowNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactFlowNameInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRoutingProfileConcurrencyInput(v *UpdateRoutingProfileConcurrencyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileConcurrencyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if v.MediaConcurrencies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaConcurrencies"))
+	} else if v.MediaConcurrencies != nil {
+		if err := validateMediaConcurrencies(v.MediaConcurrencies); err != nil {
+			invalidParams.AddNested("MediaConcurrencies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRoutingProfileDefaultOutboundQueueInput(v *UpdateRoutingProfileDefaultOutboundQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileDefaultOutboundQueueInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.DefaultOutboundQueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutboundQueueId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRoutingProfileNameInput(v *UpdateRoutingProfileNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileNameInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRoutingProfileQueuesInput(v *UpdateRoutingProfileQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileQueuesInput"}
+	if v.QueueConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueConfigs"))
+	} else if v.QueueConfigs != nil {
+		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
+			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateUserHierarchyInput(v *UpdateUserHierarchyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserHierarchyInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1448,14 +2203,14 @@ func validateOpUpdateUserRoutingProfileInput(v *UpdateUserRoutingProfileInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserRoutingProfileInput"}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.RoutingProfileId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1469,14 +2224,14 @@ func validateOpUpdateUserSecurityProfilesInput(v *UpdateUserSecurityProfilesInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserSecurityProfilesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
 	if v.SecurityProfileIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileIds"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

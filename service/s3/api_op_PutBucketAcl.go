@@ -140,11 +140,15 @@ import (
 // Related Resources
 //
 //     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     * DeleteBucket
+//     *
+// DeleteBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 //
-//
-// * GetObjectAcl
+//     *
+// GetObjectAcl
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
 func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, optFns ...func(*Options)) (*PutBucketAclOutput, error) {
 	if params == nil {
 		params = &PutBucketAclInput{}
@@ -178,6 +182,10 @@ type PutBucketAclInput struct {
 	// transit. For more information, go to RFC 1864.
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
 	// bucket.

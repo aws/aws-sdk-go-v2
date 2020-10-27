@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes IP addresses from an inbound or an outbound resolver endpoint. If you
+// Removes IP addresses from an inbound or an outbound Resolver endpoint. If you
 // want to remove more than one IP address, submit one
 // DisassociateResolverEndpointIpAddress request for each IP address. To add an IP
-// address to an endpoint, see AssociateResolverEndpointIpAddress.
+// address to an endpoint, see AssociateResolverEndpointIpAddress
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverEndpointIpAddress.html).
 func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, params *DisassociateResolverEndpointIpAddressInput, optFns ...func(*Options)) (*DisassociateResolverEndpointIpAddressOutput, error) {
 	if params == nil {
 		params = &DisassociateResolverEndpointIpAddressInput{}
@@ -32,12 +33,12 @@ func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, para
 
 type DisassociateResolverEndpointIpAddressInput struct {
 
-	// The IPv4 address that you want to remove from a resolver endpoint.
+	// The IPv4 address that you want to remove from a Resolver endpoint.
 	//
 	// This member is required.
 	IpAddress *types.IpAddressUpdate
 
-	// The ID of the resolver endpoint that you want to disassociate an IP address
+	// The ID of the Resolver endpoint that you want to disassociate an IP address
 	// from.
 	//
 	// This member is required.

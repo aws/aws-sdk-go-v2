@@ -30,16 +30,16 @@ func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSe
 
 type GenerateChangeSetInput struct {
 
-	// ID of the application associated with the change set.
+	// The ID of the application associated with the change set.
 	AppId *string
 
-	// Format for the change set.
+	// The format for the change set.
 	ChangesetFormat types.OutputFormat
 }
 
 type GenerateChangeSetOutput struct {
 
-	// Location of the Amazon S3 object.
+	// The location of the Amazon S3 object.
 	S3Location *types.S3Location
 
 	// Metadata pertaining to the operation's result.

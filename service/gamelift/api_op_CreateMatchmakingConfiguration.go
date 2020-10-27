@@ -20,16 +20,14 @@ import (
 // configuration, at a minimum you must specify the following: configuration name;
 // a rule set that governs how to evaluate players and find acceptable matches; a
 // game session queue to use when placing a new game session for the match; and the
-// maximum time allowed for a matchmaking attempt. There are two ways to track the
-// progress of matchmaking tickets: (1) polling ticket status with
-// DescribeMatchmaking; or (2) receiving notifications with Amazon Simple
-// Notification Service (SNS). To use notifications, you first need to set up an
-// SNS topic to receive the notifications, and provide the topic ARN in the
-// matchmaking configuration. Since notifications promise only "best effort"
-// delivery, we recommend calling DescribeMatchmaking if no notifications are
-// received within 30 seconds. Learn more  Design a FlexMatch Matchmaker
+// maximum time allowed for a matchmaking attempt. To track the progress of
+// matchmaking tickets, set up an Amazon Simple Notification Service (SNS) to
+// receive notifications, and provide the topic ARN in the matchmaking
+// configuration. An alternative method, continuously poling ticket status with
+// DescribeMatchmaking, should only be used for games in development with low
+// matchmaking usage. Learn more  Design a FlexMatch Matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
-// Setting up Notifications for Matchmaking
+// Set Up FlexMatch Event Notification
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
 // Related operations
 //
@@ -67,7 +65,7 @@ func (c *Client) CreateMatchmakingConfiguration(ctx context.Context, params *Cre
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateMatchmakingConfigurationInput struct {
 
 	// A flag that determines whether a match that was created with this configuration
@@ -163,7 +161,7 @@ type CreateMatchmakingConfigurationInput struct {
 	Tags []*types.Tag
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateMatchmakingConfigurationOutput struct {
 
 	// Object that describes the newly created matchmaking configuration.

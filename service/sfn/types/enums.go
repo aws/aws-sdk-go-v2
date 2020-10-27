@@ -13,6 +13,19 @@ const (
 	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
 )
 
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+		"ABORTED",
+	}
+}
+
 type HistoryEventType string
 
 // Enum values for HistoryEventType
@@ -74,6 +87,69 @@ const (
 	HistoryEventTypeWaitstateexited              HistoryEventType = "WaitStateExited"
 )
 
+// Values returns all known values for HistoryEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HistoryEventType) Values() []HistoryEventType {
+	return []HistoryEventType{
+		"ActivityFailed",
+		"ActivityScheduled",
+		"ActivityScheduleFailed",
+		"ActivityStarted",
+		"ActivitySucceeded",
+		"ActivityTimedOut",
+		"ChoiceStateEntered",
+		"ChoiceStateExited",
+		"ExecutionAborted",
+		"ExecutionFailed",
+		"ExecutionStarted",
+		"ExecutionSucceeded",
+		"ExecutionTimedOut",
+		"FailStateEntered",
+		"LambdaFunctionFailed",
+		"LambdaFunctionScheduled",
+		"LambdaFunctionScheduleFailed",
+		"LambdaFunctionStarted",
+		"LambdaFunctionStartFailed",
+		"LambdaFunctionSucceeded",
+		"LambdaFunctionTimedOut",
+		"MapIterationAborted",
+		"MapIterationFailed",
+		"MapIterationStarted",
+		"MapIterationSucceeded",
+		"MapStateAborted",
+		"MapStateEntered",
+		"MapStateExited",
+		"MapStateFailed",
+		"MapStateStarted",
+		"MapStateSucceeded",
+		"ParallelStateAborted",
+		"ParallelStateEntered",
+		"ParallelStateExited",
+		"ParallelStateFailed",
+		"ParallelStateStarted",
+		"ParallelStateSucceeded",
+		"PassStateEntered",
+		"PassStateExited",
+		"SucceedStateEntered",
+		"SucceedStateExited",
+		"TaskFailed",
+		"TaskScheduled",
+		"TaskStarted",
+		"TaskStartFailed",
+		"TaskStateAborted",
+		"TaskStateEntered",
+		"TaskStateExited",
+		"TaskSubmitFailed",
+		"TaskSubmitted",
+		"TaskSucceeded",
+		"TaskTimedOut",
+		"WaitStateAborted",
+		"WaitStateEntered",
+		"WaitStateExited",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -84,6 +160,18 @@ const (
 	LogLevelOff   LogLevel = "OFF"
 )
 
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogLevel) Values() []LogLevel {
+	return []LogLevel{
+		"ALL",
+		"ERROR",
+		"FATAL",
+		"OFF",
+	}
+}
+
 type StateMachineStatus string
 
 // Enum values for StateMachineStatus
@@ -92,6 +180,16 @@ const (
 	StateMachineStatusDeleting StateMachineStatus = "DELETING"
 )
 
+// Values returns all known values for StateMachineStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StateMachineStatus) Values() []StateMachineStatus {
+	return []StateMachineStatus{
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type StateMachineType string
 
 // Enum values for StateMachineType
@@ -99,3 +197,13 @@ const (
 	StateMachineTypeStandard StateMachineType = "STANDARD"
 	StateMachineTypeExpress  StateMachineType = "EXPRESS"
 )
+
+// Values returns all known values for StateMachineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StateMachineType) Values() []StateMachineType {
+	return []StateMachineType{
+		"STANDARD",
+		"EXPRESS",
+	}
+}

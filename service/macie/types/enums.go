@@ -9,6 +9,16 @@ const (
 	S3ContinuousClassificationTypeFull S3ContinuousClassificationType = "FULL"
 )
 
+// Values returns all known values for S3ContinuousClassificationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (S3ContinuousClassificationType) Values() []S3ContinuousClassificationType {
+	return []S3ContinuousClassificationType{
+		"FULL",
+	}
+}
+
 type S3OneTimeClassificationType string
 
 // Enum values for S3OneTimeClassificationType
@@ -16,3 +26,13 @@ const (
 	S3OneTimeClassificationTypeFull S3OneTimeClassificationType = "FULL"
 	S3OneTimeClassificationTypeNone S3OneTimeClassificationType = "NONE"
 )
+
+// Values returns all known values for S3OneTimeClassificationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3OneTimeClassificationType) Values() []S3OneTimeClassificationType {
+	return []S3OneTimeClassificationType{
+		"FULL",
+		"NONE",
+	}
+}

@@ -12,6 +12,19 @@ const (
 	AccountTakeoverEventActionTypeNo_action         AccountTakeoverEventActionType = "NO_ACTION"
 )
 
+// Values returns all known values for AccountTakeoverEventActionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AccountTakeoverEventActionType) Values() []AccountTakeoverEventActionType {
+	return []AccountTakeoverEventActionType{
+		"BLOCK",
+		"MFA_IF_CONFIGURED",
+		"MFA_REQUIRED",
+		"NO_ACTION",
+	}
+}
+
 type AdvancedSecurityModeType string
 
 // Enum values for AdvancedSecurityModeType
@@ -20,6 +33,17 @@ const (
 	AdvancedSecurityModeTypeAudit    AdvancedSecurityModeType = "AUDIT"
 	AdvancedSecurityModeTypeEnforced AdvancedSecurityModeType = "ENFORCED"
 )
+
+// Values returns all known values for AdvancedSecurityModeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedSecurityModeType) Values() []AdvancedSecurityModeType {
+	return []AdvancedSecurityModeType{
+		"OFF",
+		"AUDIT",
+		"ENFORCED",
+	}
+}
 
 type AliasAttributeType string
 
@@ -30,6 +54,17 @@ const (
 	AliasAttributeTypePreferred_username AliasAttributeType = "preferred_username"
 )
 
+// Values returns all known values for AliasAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AliasAttributeType) Values() []AliasAttributeType {
+	return []AliasAttributeType{
+		"phone_number",
+		"email",
+		"preferred_username",
+	}
+}
+
 type AttributeDataType string
 
 // Enum values for AttributeDataType
@@ -39,6 +74,18 @@ const (
 	AttributeDataTypeDatetime AttributeDataType = "DateTime"
 	AttributeDataTypeBoolean  AttributeDataType = "Boolean"
 )
+
+// Values returns all known values for AttributeDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeDataType) Values() []AttributeDataType {
+	return []AttributeDataType{
+		"String",
+		"Number",
+		"DateTime",
+		"Boolean",
+	}
+}
 
 type AuthFlowType string
 
@@ -53,6 +100,21 @@ const (
 	AuthFlowTypeAdmin_user_password_auth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
 )
 
+// Values returns all known values for AuthFlowType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AuthFlowType) Values() []AuthFlowType {
+	return []AuthFlowType{
+		"USER_SRP_AUTH",
+		"REFRESH_TOKEN_AUTH",
+		"REFRESH_TOKEN",
+		"CUSTOM_AUTH",
+		"ADMIN_NO_SRP_AUTH",
+		"USER_PASSWORD_AUTH",
+		"ADMIN_USER_PASSWORD_AUTH",
+	}
+}
+
 type ChallengeName string
 
 // Enum values for ChallengeName
@@ -60,6 +122,16 @@ const (
 	ChallengeNamePassword ChallengeName = "Password"
 	ChallengeNameMfa      ChallengeName = "Mfa"
 )
+
+// Values returns all known values for ChallengeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChallengeName) Values() []ChallengeName {
+	return []ChallengeName{
+		"Password",
+		"Mfa",
+	}
+}
 
 type ChallengeNameType string
 
@@ -77,6 +149,24 @@ const (
 	ChallengeNameTypeNew_password_required    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
 )
 
+// Values returns all known values for ChallengeNameType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChallengeNameType) Values() []ChallengeNameType {
+	return []ChallengeNameType{
+		"SMS_MFA",
+		"SOFTWARE_TOKEN_MFA",
+		"SELECT_MFA_TYPE",
+		"MFA_SETUP",
+		"PASSWORD_VERIFIER",
+		"CUSTOM_CHALLENGE",
+		"DEVICE_SRP_AUTH",
+		"DEVICE_PASSWORD_VERIFIER",
+		"ADMIN_NO_SRP_AUTH",
+		"NEW_PASSWORD_REQUIRED",
+	}
+}
+
 type ChallengeResponse string
 
 // Enum values for ChallengeResponse
@@ -84,6 +174,16 @@ const (
 	ChallengeResponseSuccess ChallengeResponse = "Success"
 	ChallengeResponseFailure ChallengeResponse = "Failure"
 )
+
+// Values returns all known values for ChallengeResponse. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChallengeResponse) Values() []ChallengeResponse {
+	return []ChallengeResponse{
+		"Success",
+		"Failure",
+	}
+}
 
 type CompromisedCredentialsEventActionType string
 
@@ -93,6 +193,17 @@ const (
 	CompromisedCredentialsEventActionTypeNo_action CompromisedCredentialsEventActionType = "NO_ACTION"
 )
 
+// Values returns all known values for CompromisedCredentialsEventActionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CompromisedCredentialsEventActionType) Values() []CompromisedCredentialsEventActionType {
+	return []CompromisedCredentialsEventActionType{
+		"BLOCK",
+		"NO_ACTION",
+	}
+}
+
 type DefaultEmailOptionType string
 
 // Enum values for DefaultEmailOptionType
@@ -100,6 +211,16 @@ const (
 	DefaultEmailOptionTypeConfirm_with_link DefaultEmailOptionType = "CONFIRM_WITH_LINK"
 	DefaultEmailOptionTypeConfirm_with_code DefaultEmailOptionType = "CONFIRM_WITH_CODE"
 )
+
+// Values returns all known values for DefaultEmailOptionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultEmailOptionType) Values() []DefaultEmailOptionType {
+	return []DefaultEmailOptionType{
+		"CONFIRM_WITH_LINK",
+		"CONFIRM_WITH_CODE",
+	}
+}
 
 type DeliveryMediumType string
 
@@ -109,6 +230,16 @@ const (
 	DeliveryMediumTypeEmail DeliveryMediumType = "EMAIL"
 )
 
+// Values returns all known values for DeliveryMediumType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeliveryMediumType) Values() []DeliveryMediumType {
+	return []DeliveryMediumType{
+		"SMS",
+		"EMAIL",
+	}
+}
+
 type DeviceRememberedStatusType string
 
 // Enum values for DeviceRememberedStatusType
@@ -116,6 +247,16 @@ const (
 	DeviceRememberedStatusTypeRemembered     DeviceRememberedStatusType = "remembered"
 	DeviceRememberedStatusTypeNot_remembered DeviceRememberedStatusType = "not_remembered"
 )
+
+// Values returns all known values for DeviceRememberedStatusType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceRememberedStatusType) Values() []DeviceRememberedStatusType {
+	return []DeviceRememberedStatusType{
+		"remembered",
+		"not_remembered",
+	}
+}
 
 type DomainStatusType string
 
@@ -128,6 +269,19 @@ const (
 	DomainStatusTypeFailed   DomainStatusType = "FAILED"
 )
 
+// Values returns all known values for DomainStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainStatusType) Values() []DomainStatusType {
+	return []DomainStatusType{
+		"CREATING",
+		"DELETING",
+		"UPDATING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
 type EmailSendingAccountType string
 
 // Enum values for EmailSendingAccountType
@@ -135,6 +289,16 @@ const (
 	EmailSendingAccountTypeCognito_default EmailSendingAccountType = "COGNITO_DEFAULT"
 	EmailSendingAccountTypeDeveloper       EmailSendingAccountType = "DEVELOPER"
 )
+
+// Values returns all known values for EmailSendingAccountType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EmailSendingAccountType) Values() []EmailSendingAccountType {
+	return []EmailSendingAccountType{
+		"COGNITO_DEFAULT",
+		"DEVELOPER",
+	}
+}
 
 type EventFilterType string
 
@@ -145,6 +309,17 @@ const (
 	EventFilterTypeSign_up         EventFilterType = "SIGN_UP"
 )
 
+// Values returns all known values for EventFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventFilterType) Values() []EventFilterType {
+	return []EventFilterType{
+		"SIGN_IN",
+		"PASSWORD_CHANGE",
+		"SIGN_UP",
+	}
+}
+
 type EventResponseType string
 
 // Enum values for EventResponseType
@@ -152,6 +327,16 @@ const (
 	EventResponseTypeSuccess EventResponseType = "Success"
 	EventResponseTypeFailure EventResponseType = "Failure"
 )
+
+// Values returns all known values for EventResponseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventResponseType) Values() []EventResponseType {
+	return []EventResponseType{
+		"Success",
+		"Failure",
+	}
+}
 
 type EventType string
 
@@ -161,6 +346,17 @@ const (
 	EventTypeSignup         EventType = "SignUp"
 	EventTypeForgotpassword EventType = "ForgotPassword"
 )
+
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"SignIn",
+		"SignUp",
+		"ForgotPassword",
+	}
+}
 
 type ExplicitAuthFlowsType string
 
@@ -176,6 +372,22 @@ const (
 	ExplicitAuthFlowsTypeAllow_refresh_token_auth       ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
 )
 
+// Values returns all known values for ExplicitAuthFlowsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
+	return []ExplicitAuthFlowsType{
+		"ADMIN_NO_SRP_AUTH",
+		"CUSTOM_AUTH_FLOW_ONLY",
+		"USER_PASSWORD_AUTH",
+		"ALLOW_ADMIN_USER_PASSWORD_AUTH",
+		"ALLOW_CUSTOM_AUTH",
+		"ALLOW_USER_PASSWORD_AUTH",
+		"ALLOW_USER_SRP_AUTH",
+		"ALLOW_REFRESH_TOKEN_AUTH",
+	}
+}
+
 type FeedbackValueType string
 
 // Enum values for FeedbackValueType
@@ -183,6 +395,16 @@ const (
 	FeedbackValueTypeValid   FeedbackValueType = "Valid"
 	FeedbackValueTypeInvalid FeedbackValueType = "Invalid"
 )
+
+// Values returns all known values for FeedbackValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackValueType) Values() []FeedbackValueType {
+	return []FeedbackValueType{
+		"Valid",
+		"Invalid",
+	}
+}
 
 type IdentityProviderTypeType string
 
@@ -196,6 +418,20 @@ const (
 	IdentityProviderTypeTypeOidc            IdentityProviderTypeType = "OIDC"
 )
 
+// Values returns all known values for IdentityProviderTypeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityProviderTypeType) Values() []IdentityProviderTypeType {
+	return []IdentityProviderTypeType{
+		"SAML",
+		"Facebook",
+		"Google",
+		"LoginWithAmazon",
+		"SignInWithApple",
+		"OIDC",
+	}
+}
+
 type MessageActionType string
 
 // Enum values for MessageActionType
@@ -203,6 +439,16 @@ const (
 	MessageActionTypeResend   MessageActionType = "RESEND"
 	MessageActionTypeSuppress MessageActionType = "SUPPRESS"
 )
+
+// Values returns all known values for MessageActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessageActionType) Values() []MessageActionType {
+	return []MessageActionType{
+		"RESEND",
+		"SUPPRESS",
+	}
+}
 
 type OAuthFlowType string
 
@@ -213,6 +459,17 @@ const (
 	OAuthFlowTypeClient_credentials OAuthFlowType = "client_credentials"
 )
 
+// Values returns all known values for OAuthFlowType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthFlowType) Values() []OAuthFlowType {
+	return []OAuthFlowType{
+		"code",
+		"implicit",
+		"client_credentials",
+	}
+}
+
 type PreventUserExistenceErrorTypes string
 
 // Enum values for PreventUserExistenceErrorTypes
@@ -220,6 +477,17 @@ const (
 	PreventUserExistenceErrorTypesLegacy  PreventUserExistenceErrorTypes = "LEGACY"
 	PreventUserExistenceErrorTypesEnabled PreventUserExistenceErrorTypes = "ENABLED"
 )
+
+// Values returns all known values for PreventUserExistenceErrorTypes. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PreventUserExistenceErrorTypes) Values() []PreventUserExistenceErrorTypes {
+	return []PreventUserExistenceErrorTypes{
+		"LEGACY",
+		"ENABLED",
+	}
+}
 
 type RecoveryOptionNameType string
 
@@ -230,6 +498,17 @@ const (
 	RecoveryOptionNameTypeAdmin_only            RecoveryOptionNameType = "admin_only"
 )
 
+// Values returns all known values for RecoveryOptionNameType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryOptionNameType) Values() []RecoveryOptionNameType {
+	return []RecoveryOptionNameType{
+		"verified_email",
+		"verified_phone_number",
+		"admin_only",
+	}
+}
+
 type RiskDecisionType string
 
 // Enum values for RiskDecisionType
@@ -238,6 +517,17 @@ const (
 	RiskDecisionTypeAccounttakeover RiskDecisionType = "AccountTakeover"
 	RiskDecisionTypeBlock           RiskDecisionType = "Block"
 )
+
+// Values returns all known values for RiskDecisionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RiskDecisionType) Values() []RiskDecisionType {
+	return []RiskDecisionType{
+		"NoRisk",
+		"AccountTakeover",
+		"Block",
+	}
+}
 
 type RiskLevelType string
 
@@ -248,6 +538,17 @@ const (
 	RiskLevelTypeHigh   RiskLevelType = "High"
 )
 
+// Values returns all known values for RiskLevelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RiskLevelType) Values() []RiskLevelType {
+	return []RiskLevelType{
+		"Low",
+		"Medium",
+		"High",
+	}
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -255,6 +556,38 @@ const (
 	StatusTypeEnabled  StatusType = "Enabled"
 	StatusTypeDisabled StatusType = "Disabled"
 )
+
+// Values returns all known values for StatusType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusType) Values() []StatusType {
+	return []StatusType{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type TimeUnitsType string
+
+// Enum values for TimeUnitsType
+const (
+	TimeUnitsTypeSeconds TimeUnitsType = "seconds"
+	TimeUnitsTypeMinutes TimeUnitsType = "minutes"
+	TimeUnitsTypeHours   TimeUnitsType = "hours"
+	TimeUnitsTypeDays    TimeUnitsType = "days"
+)
+
+// Values returns all known values for TimeUnitsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeUnitsType) Values() []TimeUnitsType {
+	return []TimeUnitsType{
+		"seconds",
+		"minutes",
+		"hours",
+		"days",
+	}
+}
 
 type UserImportJobStatusType string
 
@@ -270,6 +603,22 @@ const (
 	UserImportJobStatusTypeSucceeded  UserImportJobStatusType = "Succeeded"
 )
 
+// Values returns all known values for UserImportJobStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserImportJobStatusType) Values() []UserImportJobStatusType {
+	return []UserImportJobStatusType{
+		"Created",
+		"Pending",
+		"InProgress",
+		"Stopping",
+		"Expired",
+		"Stopped",
+		"Failed",
+		"Succeeded",
+	}
+}
+
 type UsernameAttributeType string
 
 // Enum values for UsernameAttributeType
@@ -277,6 +626,16 @@ const (
 	UsernameAttributeTypePhone_number UsernameAttributeType = "phone_number"
 	UsernameAttributeTypeEmail        UsernameAttributeType = "email"
 )
+
+// Values returns all known values for UsernameAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsernameAttributeType) Values() []UsernameAttributeType {
+	return []UsernameAttributeType{
+		"phone_number",
+		"email",
+	}
+}
 
 type UserPoolMfaType string
 
@@ -286,6 +645,17 @@ const (
 	UserPoolMfaTypeOn       UserPoolMfaType = "ON"
 	UserPoolMfaTypeOptional UserPoolMfaType = "OPTIONAL"
 )
+
+// Values returns all known values for UserPoolMfaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserPoolMfaType) Values() []UserPoolMfaType {
+	return []UserPoolMfaType{
+		"OFF",
+		"ON",
+		"OPTIONAL",
+	}
+}
 
 type UserStatusType string
 
@@ -300,6 +670,21 @@ const (
 	UserStatusTypeForce_change_password UserStatusType = "FORCE_CHANGE_PASSWORD"
 )
 
+// Values returns all known values for UserStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserStatusType) Values() []UserStatusType {
+	return []UserStatusType{
+		"UNCONFIRMED",
+		"CONFIRMED",
+		"ARCHIVED",
+		"COMPROMISED",
+		"UNKNOWN",
+		"RESET_REQUIRED",
+		"FORCE_CHANGE_PASSWORD",
+	}
+}
+
 type VerifiedAttributeType string
 
 // Enum values for VerifiedAttributeType
@@ -308,6 +693,16 @@ const (
 	VerifiedAttributeTypeEmail        VerifiedAttributeType = "email"
 )
 
+// Values returns all known values for VerifiedAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerifiedAttributeType) Values() []VerifiedAttributeType {
+	return []VerifiedAttributeType{
+		"phone_number",
+		"email",
+	}
+}
+
 type VerifySoftwareTokenResponseType string
 
 // Enum values for VerifySoftwareTokenResponseType
@@ -315,3 +710,14 @@ const (
 	VerifySoftwareTokenResponseTypeSuccess VerifySoftwareTokenResponseType = "SUCCESS"
 	VerifySoftwareTokenResponseTypeError   VerifySoftwareTokenResponseType = "ERROR"
 )
+
+// Values returns all known values for VerifySoftwareTokenResponseType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VerifySoftwareTokenResponseType) Values() []VerifySoftwareTokenResponseType {
+	return []VerifySoftwareTokenResponseType{
+		"SUCCESS",
+		"ERROR",
+	}
+}

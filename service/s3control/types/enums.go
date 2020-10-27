@@ -12,6 +12,18 @@ const (
 	BucketCannedACLAuthenticatedRead BucketCannedACL = "authenticated-read"
 )
 
+// Values returns all known values for BucketCannedACL. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BucketCannedACL) Values() []BucketCannedACL {
+	return []BucketCannedACL{
+		"private",
+		"public-read",
+		"public-read-write",
+		"authenticated-read",
+	}
+}
+
 type BucketLocationConstraint string
 
 // Enum values for BucketLocationConstraint
@@ -29,6 +41,25 @@ const (
 	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
 )
 
+// Values returns all known values for BucketLocationConstraint. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BucketLocationConstraint) Values() []BucketLocationConstraint {
+	return []BucketLocationConstraint{
+		"EU",
+		"eu-west-1",
+		"us-west-1",
+		"us-west-2",
+		"ap-south-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"sa-east-1",
+		"cn-north-1",
+		"eu-central-1",
+	}
+}
+
 type ExpirationStatus string
 
 // Enum values for ExpirationStatus
@@ -36,6 +67,16 @@ const (
 	ExpirationStatusEnabled  ExpirationStatus = "Enabled"
 	ExpirationStatusDisabled ExpirationStatus = "Disabled"
 )
+
+// Values returns all known values for ExpirationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExpirationStatus) Values() []ExpirationStatus {
+	return []ExpirationStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
 
 type JobManifestFieldName string
 
@@ -47,6 +88,18 @@ const (
 	JobManifestFieldNameVersionid JobManifestFieldName = "VersionId"
 )
 
+// Values returns all known values for JobManifestFieldName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobManifestFieldName) Values() []JobManifestFieldName {
+	return []JobManifestFieldName{
+		"Ignore",
+		"Bucket",
+		"Key",
+		"VersionId",
+	}
+}
+
 type JobManifestFormat string
 
 // Enum values for JobManifestFormat
@@ -55,12 +108,31 @@ const (
 	JobManifestFormatS3inventoryreport_csv_20161130 JobManifestFormat = "S3InventoryReport_CSV_20161130"
 )
 
+// Values returns all known values for JobManifestFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobManifestFormat) Values() []JobManifestFormat {
+	return []JobManifestFormat{
+		"S3BatchOperations_CSV_20180820",
+		"S3InventoryReport_CSV_20161130",
+	}
+}
+
 type JobReportFormat string
 
 // Enum values for JobReportFormat
 const (
 	JobReportFormatReport_csv_20180820 JobReportFormat = "Report_CSV_20180820"
 )
+
+// Values returns all known values for JobReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobReportFormat) Values() []JobReportFormat {
+	return []JobReportFormat{
+		"Report_CSV_20180820",
+	}
+}
 
 type JobReportScope string
 
@@ -69,6 +141,16 @@ const (
 	JobReportScopeAlltasks        JobReportScope = "AllTasks"
 	JobReportScopeFailedtasksonly JobReportScope = "FailedTasksOnly"
 )
+
+// Values returns all known values for JobReportScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobReportScope) Values() []JobReportScope {
+	return []JobReportScope{
+		"AllTasks",
+		"FailedTasksOnly",
+	}
+}
 
 type JobStatus string
 
@@ -89,6 +171,27 @@ const (
 	JobStatusSuspended  JobStatus = "Suspended"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"Active",
+		"Cancelled",
+		"Cancelling",
+		"Complete",
+		"Completing",
+		"Failed",
+		"Failing",
+		"New",
+		"Paused",
+		"Pausing",
+		"Preparing",
+		"Ready",
+		"Suspended",
+	}
+}
+
 type NetworkOrigin string
 
 // Enum values for NetworkOrigin
@@ -96,6 +199,16 @@ const (
 	NetworkOriginInternet NetworkOrigin = "Internet"
 	NetworkOriginVpc      NetworkOrigin = "VPC"
 )
+
+// Values returns all known values for NetworkOrigin. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkOrigin) Values() []NetworkOrigin {
+	return []NetworkOrigin{
+		"Internet",
+		"VPC",
+	}
+}
 
 type OperationName string
 
@@ -110,6 +223,21 @@ const (
 	OperationNameS3putobjectretention    OperationName = "S3PutObjectRetention"
 )
 
+// Values returns all known values for OperationName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationName) Values() []OperationName {
+	return []OperationName{
+		"LambdaInvoke",
+		"S3PutObjectCopy",
+		"S3PutObjectAcl",
+		"S3PutObjectTagging",
+		"S3InitiateRestoreObject",
+		"S3PutObjectLegalHold",
+		"S3PutObjectRetention",
+	}
+}
+
 type RequestedJobStatus string
 
 // Enum values for RequestedJobStatus
@@ -117,6 +245,16 @@ const (
 	RequestedJobStatusCancelled RequestedJobStatus = "Cancelled"
 	RequestedJobStatusReady     RequestedJobStatus = "Ready"
 )
+
+// Values returns all known values for RequestedJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RequestedJobStatus) Values() []RequestedJobStatus {
+	return []RequestedJobStatus{
+		"Cancelled",
+		"Ready",
+	}
+}
 
 type S3CannedAccessControlList string
 
@@ -131,6 +269,21 @@ const (
 	S3CannedAccessControlListBucket_owner_full_control S3CannedAccessControlList = "bucket-owner-full-control"
 )
 
+// Values returns all known values for S3CannedAccessControlList. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3CannedAccessControlList) Values() []S3CannedAccessControlList {
+	return []S3CannedAccessControlList{
+		"private",
+		"public-read",
+		"public-read-write",
+		"aws-exec-read",
+		"authenticated-read",
+		"bucket-owner-read",
+		"bucket-owner-full-control",
+	}
+}
+
 type S3GlacierJobTier string
 
 // Enum values for S3GlacierJobTier
@@ -138,6 +291,16 @@ const (
 	S3GlacierJobTierBulk     S3GlacierJobTier = "BULK"
 	S3GlacierJobTierStandard S3GlacierJobTier = "STANDARD"
 )
+
+// Values returns all known values for S3GlacierJobTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3GlacierJobTier) Values() []S3GlacierJobTier {
+	return []S3GlacierJobTier{
+		"BULK",
+		"STANDARD",
+	}
+}
 
 type S3GranteeTypeIdentifier string
 
@@ -148,6 +311,17 @@ const (
 	S3GranteeTypeIdentifierGroup         S3GranteeTypeIdentifier = "uri"
 )
 
+// Values returns all known values for S3GranteeTypeIdentifier. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3GranteeTypeIdentifier) Values() []S3GranteeTypeIdentifier {
+	return []S3GranteeTypeIdentifier{
+		"id",
+		"emailAddress",
+		"uri",
+	}
+}
+
 type S3MetadataDirective string
 
 // Enum values for S3MetadataDirective
@@ -155,6 +329,16 @@ const (
 	S3MetadataDirectiveCopy    S3MetadataDirective = "COPY"
 	S3MetadataDirectiveReplace S3MetadataDirective = "REPLACE"
 )
+
+// Values returns all known values for S3MetadataDirective. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3MetadataDirective) Values() []S3MetadataDirective {
+	return []S3MetadataDirective{
+		"COPY",
+		"REPLACE",
+	}
+}
 
 type S3ObjectLockLegalHoldStatus string
 
@@ -164,6 +348,16 @@ const (
 	S3ObjectLockLegalHoldStatusOn  S3ObjectLockLegalHoldStatus = "ON"
 )
 
+// Values returns all known values for S3ObjectLockLegalHoldStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectLockLegalHoldStatus) Values() []S3ObjectLockLegalHoldStatus {
+	return []S3ObjectLockLegalHoldStatus{
+		"OFF",
+		"ON",
+	}
+}
+
 type S3ObjectLockMode string
 
 // Enum values for S3ObjectLockMode
@@ -172,6 +366,16 @@ const (
 	S3ObjectLockModeGovernance S3ObjectLockMode = "GOVERNANCE"
 )
 
+// Values returns all known values for S3ObjectLockMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectLockMode) Values() []S3ObjectLockMode {
+	return []S3ObjectLockMode{
+		"COMPLIANCE",
+		"GOVERNANCE",
+	}
+}
+
 type S3ObjectLockRetentionMode string
 
 // Enum values for S3ObjectLockRetentionMode
@@ -179,6 +383,16 @@ const (
 	S3ObjectLockRetentionModeCompliance S3ObjectLockRetentionMode = "COMPLIANCE"
 	S3ObjectLockRetentionModeGovernance S3ObjectLockRetentionMode = "GOVERNANCE"
 )
+
+// Values returns all known values for S3ObjectLockRetentionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectLockRetentionMode) Values() []S3ObjectLockRetentionMode {
+	return []S3ObjectLockRetentionMode{
+		"COMPLIANCE",
+		"GOVERNANCE",
+	}
+}
 
 type S3Permission string
 
@@ -191,6 +405,19 @@ const (
 	S3PermissionWrite_acp    S3Permission = "WRITE_ACP"
 )
 
+// Values returns all known values for S3Permission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (S3Permission) Values() []S3Permission {
+	return []S3Permission{
+		"FULL_CONTROL",
+		"READ",
+		"WRITE",
+		"READ_ACP",
+		"WRITE_ACP",
+	}
+}
+
 type S3SSEAlgorithm string
 
 // Enum values for S3SSEAlgorithm
@@ -198,6 +425,16 @@ const (
 	S3SSEAlgorithmAes256 S3SSEAlgorithm = "AES256"
 	S3SSEAlgorithmKms    S3SSEAlgorithm = "KMS"
 )
+
+// Values returns all known values for S3SSEAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3SSEAlgorithm) Values() []S3SSEAlgorithm {
+	return []S3SSEAlgorithm{
+		"AES256",
+		"KMS",
+	}
+}
 
 type S3StorageClass string
 
@@ -211,6 +448,20 @@ const (
 	S3StorageClassDeep_archive        S3StorageClass = "DEEP_ARCHIVE"
 )
 
+// Values returns all known values for S3StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3StorageClass) Values() []S3StorageClass {
+	return []S3StorageClass{
+		"STANDARD",
+		"STANDARD_IA",
+		"ONEZONE_IA",
+		"GLACIER",
+		"INTELLIGENT_TIERING",
+		"DEEP_ARCHIVE",
+	}
+}
+
 type TransitionStorageClass string
 
 // Enum values for TransitionStorageClass
@@ -221,3 +472,16 @@ const (
 	TransitionStorageClassIntelligent_tiering TransitionStorageClass = "INTELLIGENT_TIERING"
 	TransitionStorageClassDeep_archive        TransitionStorageClass = "DEEP_ARCHIVE"
 )
+
+// Values returns all known values for TransitionStorageClass. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransitionStorageClass) Values() []TransitionStorageClass {
+	return []TransitionStorageClass{
+		"GLACIER",
+		"STANDARD_IA",
+		"ONEZONE_IA",
+		"INTELLIGENT_TIERING",
+		"DEEP_ARCHIVE",
+	}
+}

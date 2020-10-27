@@ -1239,14 +1239,14 @@ func validateDirectoryConnectSettings(v *types.DirectoryConnectSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DirectoryConnectSettings"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.CustomerDnsIps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomerDnsIps"))
 	}
 	if v.CustomerUserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomerUserName"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
@@ -1281,11 +1281,11 @@ func validateShareTarget(v *types.ShareTarget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ShareTarget"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1299,11 +1299,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1334,11 +1334,11 @@ func validateUnshareTarget(v *types.UnshareTarget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnshareTarget"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1385,15 +1385,15 @@ func validateOpAddTagsToResourceInput(v *AddTagsToResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1407,11 +1407,11 @@ func validateOpCancelSchemaExtensionInput(v *CancelSchemaExtensionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelSchemaExtensionInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.SchemaExtensionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaExtensionId"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1425,14 +1425,10 @@ func validateOpConnectDirectoryInput(v *ConnectDirectoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectDirectoryInput"}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
-	if len(v.Size) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ConnectSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectSettings"))
@@ -1441,10 +1437,14 @@ func validateOpConnectDirectoryInput(v *ConnectDirectoryInput) error {
 			invalidParams.AddNested("ConnectSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if len(v.Size) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1458,11 +1458,11 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAliasInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.Alias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1476,14 +1476,14 @@ func validateOpCreateComputerInput(v *CreateComputerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateComputerInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.ComputerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputerName"))
 	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1497,14 +1497,14 @@ func validateOpCreateConditionalForwarderInput(v *CreateConditionalForwarderInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConditionalForwarderInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	if v.RemoteDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
 	}
 	if v.DnsIpAddrs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
 	}
-	if v.RemoteDomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1518,24 +1518,24 @@ func validateOpCreateDirectoryInput(v *CreateDirectoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDirectoryInput"}
-	if len(v.Size) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.VpcSettings != nil {
 		if err := validateDirectoryVpcSettings(v.VpcSettings); err != nil {
 			invalidParams.AddNested("VpcSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if len(v.Size) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1549,11 +1549,11 @@ func validateOpCreateLogSubscriptionInput(v *CreateLogSubscriptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLogSubscriptionInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1567,23 +1567,23 @@ func validateOpCreateMicrosoftADInput(v *CreateMicrosoftADInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMicrosoftADInput"}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.VpcSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcSettings"))
 	} else if v.VpcSettings != nil {
 		if err := validateDirectoryVpcSettings(v.VpcSettings); err != nil {
 			invalidParams.AddNested("VpcSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1612,17 +1612,17 @@ func validateOpCreateTrustInput(v *CreateTrustInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTrustInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.RemoteDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
 	}
-	if len(v.TrustDirection) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TrustDirection"))
-	}
 	if v.TrustPassword == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustPassword"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if len(v.TrustDirection) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustDirection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1636,11 +1636,11 @@ func validateOpDeleteConditionalForwarderInput(v *DeleteConditionalForwarderInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConditionalForwarderInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.RemoteDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1750,11 +1750,11 @@ func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateInput"}
-	if v.CertificateId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.CertificateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1828,11 +1828,11 @@ func validateOpDisableLDAPSInput(v *DisableLDAPSInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisableLDAPSInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1876,11 +1876,11 @@ func validateOpEnableLDAPSInput(v *EnableLDAPSInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableLDAPSInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1894,11 +1894,11 @@ func validateOpEnableRadiusInput(v *EnableRadiusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableRadiusInput"}
-	if v.RadiusSettings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RadiusSettings"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.RadiusSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RadiusSettings"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2002,11 +2002,11 @@ func validateOpRegisterCertificateInput(v *RegisterCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterCertificateInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.CertificateData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateData"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2053,11 +2053,11 @@ func validateOpRemoveIpRoutesInput(v *RemoveIpRoutesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveIpRoutesInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.CidrIps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CidrIps"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2071,11 +2071,11 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsFromResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2089,14 +2089,14 @@ func validateOpResetUserPasswordInput(v *ResetUserPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResetUserPasswordInput"}
-	if v.NewPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewPassword"))
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	if v.NewPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewPassword"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2125,6 +2125,9 @@ func validateOpShareDirectoryInput(v *ShareDirectoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ShareDirectoryInput"}
+	if len(v.ShareMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareMethod"))
+	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
@@ -2134,9 +2137,6 @@ func validateOpShareDirectoryInput(v *ShareDirectoryInput) error {
 		if err := validateShareTarget(v.ShareTarget); err != nil {
 			invalidParams.AddNested("ShareTarget", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.ShareMethod) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ShareMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2150,17 +2150,17 @@ func validateOpStartSchemaExtensionInput(v *StartSchemaExtensionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartSchemaExtensionInput"}
-	if v.LdifContent == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LdifContent"))
-	}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.CreateSnapshotBeforeSchemaExtension == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
+	}
+	if v.LdifContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LdifContent"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2174,15 +2174,15 @@ func validateOpUnshareDirectoryInput(v *UnshareDirectoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnshareDirectoryInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.UnshareTarget == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UnshareTarget"))
 	} else if v.UnshareTarget != nil {
 		if err := validateUnshareTarget(v.UnshareTarget); err != nil {
 			invalidParams.AddNested("UnshareTarget", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2196,14 +2196,14 @@ func validateOpUpdateConditionalForwarderInput(v *UpdateConditionalForwarderInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConditionalForwarderInput"}
+	if v.DnsIpAddrs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
+	}
 	if v.RemoteDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
 	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
-	if v.DnsIpAddrs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2217,11 +2217,11 @@ func validateOpUpdateNumberOfDomainControllersInput(v *UpdateNumberOfDomainContr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNumberOfDomainControllersInput"}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
-	}
 	if v.DesiredNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesiredNumber"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

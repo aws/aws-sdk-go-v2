@@ -33,7 +33,9 @@ type GetEffectivePoliciesInput struct {
 	// The Cognito identity pool ID.
 	CognitoIdentityPoolId *string
 
-	// The principal.
+	// The principal. Valid principals are CertificateArn
+	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
+	// (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
 	Principal *string
 
 	// The thing name.

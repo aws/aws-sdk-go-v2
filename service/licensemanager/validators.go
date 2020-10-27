@@ -351,11 +351,11 @@ func validateInventoryFilter(v *types.InventoryFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryFilter"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.Condition) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -433,15 +433,15 @@ func validateProductInformation(v *types.ProductInformation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProductInformation"}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
 	if v.ProductInformationFilterList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterList"))
 	} else if v.ProductInformationFilterList != nil {
 		if err := validateProductInformationFilterList(v.ProductInformationFilterList); err != nil {
 			invalidParams.AddNested("ProductInformationFilterList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -455,11 +455,11 @@ func validateProductInformationFilter(v *types.ProductInformationFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProductInformationFilter"}
-	if v.ProductInformationFilterComparator == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterComparator"))
-	}
 	if v.ProductInformationFilterValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterValue"))
+	}
+	if v.ProductInformationFilterComparator == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterComparator"))
 	}
 	if v.ProductInformationFilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterName"))
@@ -515,11 +515,11 @@ func validateOpCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInpu
 			invalidParams.AddNested("ProductInformationList", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.LicenseCountingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseCountingType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -655,11 +655,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

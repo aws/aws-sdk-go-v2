@@ -11,8 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
-	ClassName *string
 	Code      *int32
+	ClassName *string
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,12 +27,32 @@ func (e *BadRequestException) ErrorMessage() string {
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A conflict occurred.
-type ConflictException struct {
+// A concurrent access issue occurred.
+type ConcurrentAccessException struct {
 	Message *string
 
 	Code      *int32
 	ClassName *string
+}
+
+func (e *ConcurrentAccessException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConcurrentAccessException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConcurrentAccessException) ErrorCode() string             { return "ConcurrentAccessException" }
+func (e *ConcurrentAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A conflict occurred.
+type ConflictException struct {
+	Message *string
+
+	ClassName *string
+	Code      *int32
 }
 
 func (e *ConflictException) Error() string {
@@ -51,8 +71,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type ForbiddenException struct {
 	Message *string
 
-	Code      *int32
 	ClassName *string
+	Code      *int32
 }
 
 func (e *ForbiddenException) Error() string {

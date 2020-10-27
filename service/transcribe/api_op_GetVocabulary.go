@@ -30,8 +30,8 @@ func (c *Client) GetVocabulary(ctx context.Context, params *GetVocabularyInput, 
 
 type GetVocabularyInput struct {
 
-	// The name of the vocabulary to return information about. The name is
-	// case-sensitive.
+	// The name of the vocabulary to return information about. The name is case
+	// sensitive.
 	//
 	// This member is required.
 	VocabularyName *string

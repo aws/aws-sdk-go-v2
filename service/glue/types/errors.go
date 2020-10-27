@@ -96,6 +96,23 @@ func (e *ConditionCheckFailureException) ErrorMessage() string {
 func (e *ConditionCheckFailureException) ErrorCode() string             { return "ConditionCheckFailureException" }
 func (e *ConditionCheckFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The CreatePartitions API was called on a table that has indexes enabled.
+type ConflictException struct {
+	Message *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified crawler is not running.
 type CrawlerNotRunningException struct {
 	Message *string

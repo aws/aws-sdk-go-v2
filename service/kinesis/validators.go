@@ -230,6 +230,26 @@ func (m *validateOpIncreaseStreamRetentionPeriod) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListShards struct {
+}
+
+func (*validateOpListShards) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListShards) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListShardsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListShardsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListStreamConsumers struct {
 }
 
@@ -514,6 +534,10 @@ func addOpIncreaseStreamRetentionPeriodValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpIncreaseStreamRetentionPeriod{}, middleware.After)
 }
 
+func addOpListShardsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListShards{}, middleware.After)
+}
+
 func addOpListStreamConsumersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStreamConsumers{}, middleware.After)
 }
@@ -567,11 +591,11 @@ func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordsRequestEntry"}
-	if v.PartitionKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionKey"))
-	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.PartitionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -589,6 +613,21 @@ func validatePutRecordsRequestEntryList(v []*types.PutRecordsRequestEntry) error
 		if err := validatePutRecordsRequestEntry(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateShardFilter(v *types.ShardFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ShardFilter"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -617,11 +656,11 @@ func validateOpAddTagsToStreamInput(v *AddTagsToStreamInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToStreamInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -635,11 +674,11 @@ func validateOpCreateStreamInput(v *CreateStreamInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamInput"}
-	if v.ShardCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShardCount"))
-	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if v.ShardCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShardCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -653,11 +692,11 @@ func validateOpDecreaseStreamRetentionPeriodInput(v *DecreaseStreamRetentionPeri
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecreaseStreamRetentionPeriodInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.RetentionPeriodHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriodHours"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -716,11 +755,11 @@ func validateOpDisableEnhancedMonitoringInput(v *DisableEnhancedMonitoringInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisableEnhancedMonitoringInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.ShardLevelMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardLevelMetrics"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -767,14 +806,14 @@ func validateOpGetShardIteratorInput(v *GetShardIteratorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetShardIteratorInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if len(v.ShardIteratorType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardIteratorType"))
 	}
 	if v.ShardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -793,6 +832,23 @@ func validateOpIncreaseStreamRetentionPeriodInput(v *IncreaseStreamRetentionPeri
 	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListShardsInput(v *ListShardsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListShardsInput"}
+	if v.ShardFilter != nil {
+		if err := validateShardFilter(v.ShardFilter); err != nil {
+			invalidParams.AddNested("ShardFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -839,11 +895,11 @@ func validateOpMergeShardsInput(v *MergeShardsInput) error {
 	if v.AdjacentShardToMerge == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdjacentShardToMerge"))
 	}
-	if v.ShardToMerge == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShardToMerge"))
-	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if v.ShardToMerge == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShardToMerge"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -878,15 +934,15 @@ func validateOpPutRecordsInput(v *PutRecordsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordsInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.Records == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Records"))
 	} else if v.Records != nil {
 		if err := validatePutRecordsRequestEntryList(v.Records); err != nil {
 			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -900,11 +956,11 @@ func validateOpRegisterStreamConsumerInput(v *RegisterStreamConsumerInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterStreamConsumerInput"}
-	if v.StreamARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
-	}
 	if v.ConsumerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConsumerName"))
+	}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -936,11 +992,11 @@ func validateOpSplitShardInput(v *SplitShardInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SplitShardInput"}
-	if v.NewStartingHashKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewStartingHashKey"))
-	}
 	if v.ShardToSplit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardToSplit"))
+	}
+	if v.NewStartingHashKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewStartingHashKey"))
 	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
@@ -957,14 +1013,14 @@ func validateOpStartStreamEncryptionInput(v *StartStreamEncryptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartStreamEncryptionInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if len(v.EncryptionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
 	}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -978,14 +1034,14 @@ func validateOpStopStreamEncryptionInput(v *StopStreamEncryptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopStreamEncryptionInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if len(v.EncryptionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -999,9 +1055,6 @@ func validateOpSubscribeToShardInput(v *SubscribeToShardInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubscribeToShardInput"}
-	if v.ConsumerARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConsumerARN"))
-	}
 	if v.ShardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
 	}
@@ -1011,6 +1064,9 @@ func validateOpSubscribeToShardInput(v *SubscribeToShardInput) error {
 		if err := validateStartingPosition(v.StartingPosition); err != nil {
 			invalidParams.AddNested("StartingPosition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ConsumerARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1024,14 +1080,14 @@ func validateOpUpdateShardCountInput(v *UpdateShardCountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateShardCountInput"}
+	if len(v.ScalingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingType"))
+	}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if v.TargetShardCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetShardCount"))
-	}
-	if len(v.ScalingType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalingType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

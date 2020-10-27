@@ -15,27 +15,30 @@ import (
 // log group. Subscription filters allow you to subscribe to a real-time stream of
 // log events ingested through PutLogEvents
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
-// and have them delivered to a specific destination. Currently, the supported
-// destinations are:
-//
-//     * An Amazon Kinesis stream belonging to the same account
-// as the subscription filter, for same-account delivery.
-//
-//     * A logical
-// destination that belongs to a different account, for cross-account delivery.
+// and have them delivered to a specific destination. When log events are sent to
+// the receiving service, they are Base64 encoded and compressed with the gzip
+// format. The following destinations are supported for subscription filters:
 //
 //
-// * An Amazon Kinesis Firehose delivery stream that belongs to the same account as
-// the subscription filter, for same-account delivery.
+// * An Amazon Kinesis stream belonging to the same account as the subscription
+// filter, for same-account delivery.
 //
-//     * An AWS Lambda
-// function that belongs to the same account as the subscription filter, for
-// same-account delivery.
+//     * A logical destination that belongs to
+// a different account, for cross-account delivery.
 //
-// There can only be one subscription filter associated
-// with a log group. If you are updating an existing filter, you must specify the
-// correct name in filterName. Otherwise, the call fails because you cannot
-// associate a second filter with a log group.
+//     * An Amazon Kinesis
+// Firehose delivery stream that belongs to the same account as the subscription
+// filter, for same-account delivery.
+//
+//     * An AWS Lambda function that belongs to
+// the same account as the subscription filter, for same-account delivery.
+//
+// There
+// can only be one subscription filter associated with a log group. If you are
+// updating an existing filter, you must specify the correct name in filterName.
+// Otherwise, the call fails because you cannot associate a second filter with a
+// log group. To perform a PutSubscriptionFilter operation, you must also have the
+// iam:PassRole permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}
@@ -92,7 +95,7 @@ type PutSubscriptionFilterInput struct {
 	// This member is required.
 	LogGroupName *string
 
-	// The method used to distribute log data to the destination. By default log data
+	// The method used to distribute log data to the destination. By default, log data
 	// is grouped by log stream, but the grouping can be set to random for a more even
 	// distribution. This property is only applicable when the destination is an Amazon
 	// Kinesis stream.

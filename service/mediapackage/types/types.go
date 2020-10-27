@@ -28,11 +28,17 @@ type Channel struct {
 	// A short text description of the Channel.
 	Description *string
 
+	// Configure egress access logging.
+	EgressAccessLogs *EgressAccessLogs
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *HlsIngest
 
 	// The ID of the Channel.
 	Id *string
+
+	// Configure ingress access logging.
+	IngressAccessLogs *IngressAccessLogs
 
 	// A collection of tags associated with a resource
 	Tags map[string]*string
@@ -174,6 +180,21 @@ type DashPackage struct {
 
 	// Duration (in seconds) to delay live content before presentation.
 	SuggestedPresentationDelaySeconds *int32
+
+	// Determines the type of UTCTiming included in the Media Presentation Description
+	// (MPD)
+	UtcTiming UtcTiming
+
+	// Specifies the value attribute of the UTCTiming field when utcTiming is set to
+	// HTTP-ISO or HTTP-HEAD
+	UtcTimingUri *string
+}
+
+// Configure egress access logging.
+type EgressAccessLogs struct {
+
+	// Customize the log group name.
+	LogGroupName *string
 }
 
 // A HarvestJob resource configuration
@@ -431,6 +452,13 @@ type IngestEndpoint struct {
 
 	// The system generated username for ingest authentication.
 	Username *string
+}
+
+// Configure ingress access logging.
+type IngressAccessLogs struct {
+
+	// Customize the log group name.
+	LogGroupName *string
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.

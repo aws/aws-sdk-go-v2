@@ -75,11 +75,25 @@ type Ac3Settings struct {
 	MetadataControl Ac3MetadataControl
 }
 
+// Ancillary Source Settings
+type AncillarySourceSettings struct {
+
+	// Specifies the number (1 to 4) of the captions channel you want to extract from
+	// the ancillary captions. If you plan to convert the ancillary captions to another
+	// format, complete this field. If you plan to choose Embedded as the captions
+	// destination in the output (to pass through all the channels in the ancillary
+	// captions), leave this field blank because MediaLive ignores the field.
+	SourceAncillaryChannelNumber *int32
+}
+
 // Archive Container Settings
 type ArchiveContainerSettings struct {
 
 	// M2ts Settings
 	M2tsSettings *M2tsSettings
+
+	// Raw Settings
+	RawSettings *RawSettings
 }
 
 // Archive Group Settings
@@ -152,6 +166,9 @@ type AudioCodecSettings struct {
 
 	// Pass Through Settings
 	PassThroughSettings *PassThroughSettings
+
+	// Wav Settings
+	WavSettings *WavSettings
 }
 
 // Audio Description
@@ -319,7 +336,7 @@ type AudioTrack struct {
 // Audio Track Selection
 type AudioTrackSelection struct {
 
-	// Selects one or more unique audio tracks from within an mp4 source.
+	// Selects one or more unique audio tracks from within a source.
 	//
 	// This member is required.
 	Tracks []*AudioTrack
@@ -367,6 +384,22 @@ type AvailSettings struct {
 	Scte35TimeSignalApos *Scte35TimeSignalApos
 }
 
+// Details from a failed operation
+type BatchFailedResultModel struct {
+
+	// ARN of the resource
+	Arn *string
+
+	// Error code for the failed operation
+	Code *string
+
+	// ID of the resource
+	Id *string
+
+	// Error message for the failed operation
+	Message *string
+}
+
 // A list of schedule actions to create (in a request) or that have been created
 // (in a response).
 type BatchScheduleActionCreateRequest struct {
@@ -402,6 +435,19 @@ type BatchScheduleActionDeleteResult struct {
 	//
 	// This member is required.
 	ScheduleActions []*ScheduleAction
+}
+
+// Details from a successful operation
+type BatchSuccessfulResultModel struct {
+
+	// ARN of the resource
+	Arn *string
+
+	// ID of the resource
+	Id *string
+
+	// Current state of the resource
+	State *string
 }
 
 // Blackout Slate
@@ -643,6 +689,9 @@ type CaptionSelector struct {
 // Caption Selector Settings
 type CaptionSelectorSettings struct {
 
+	// Ancillary Source Settings
+	AncillarySourceSettings *AncillarySourceSettings
+
 	// Arib Source Settings
 	AribSourceSettings *AribSourceSettings
 
@@ -662,11 +711,21 @@ type CaptionSelectorSettings struct {
 	TeletextSourceSettings *TeletextSourceSettings
 }
 
+// Placeholder documentation for CdiInputSpecification
+type CdiInputSpecification struct {
+
+	// Maximum CDI input resolution
+	Resolution CdiInputResolution
+}
+
 // Placeholder documentation for Channel
 type Channel struct {
 
 	// The unique arn of the channel.
 	Arn *string
+
+	// Specification of CDI inputs for this channel
+	CdiInputSpecification *CdiInputSpecification
 
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
@@ -689,7 +748,7 @@ type Channel struct {
 	// List of input attachments for channel.
 	InputAttachments []*InputAttachment
 
-	// Placeholder documentation for InputSpecification
+	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
 
 	// The log level being written to CloudWatch Logs.
@@ -727,6 +786,9 @@ type ChannelSummary struct {
 	// The unique arn of the channel.
 	Arn *string
 
+	// Specification of CDI inputs for this channel
+	CdiInputSpecification *CdiInputSpecification
+
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass ChannelClass
@@ -745,7 +807,7 @@ type ChannelSummary struct {
 	// List of input attachments for channel.
 	InputAttachments []*InputAttachment
 
-	// Placeholder documentation for InputSpecification
+	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
 
 	// The log level being written to CloudWatch Logs.
@@ -1208,12 +1270,12 @@ type FrameCaptureGroupSettings struct {
 
 	// The destination for the frame capture files. Either the URI for an Amazon S3
 	// bucket and object, plus a file name prefix (for example,
-	// s3ssl://sportsDelivery/highlights/20180820/curling_) or the URI for a MediaStore
+	// s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore
 	// container, plus a file name prefix (for example,
-	// mediastoressl://sportsDelivery/20180820/curling_). The final file names consist
-	// of the prefix from the destination field (for example, "curling_") + name
+	// mediastoressl://sportsDelivery/20180820/curling-). The final file names consist
+	// of the prefix from the destination field (for example, "curling-") + name
 	// modifier + the counter (5 digits, starting from 00001) + extension (which is
-	// always .jpg). For example, curlingLow.00001.jpg
+	// always .jpg). For example, curling-low.00001.jpg
 	//
 	// This member is required.
 	Destination *OutputLocationRef
@@ -1840,7 +1902,7 @@ type HlsGroupSettings struct {
 
 	// Applies only if Mode field is LIVE. Specifies the maximum number of segments in
 	// the media manifest file. After this maximum, older segments are removed from the
-	// media manifest. This number must be less than or equal to the Keep Segments
+	// media manifest. This number must be smaller than the number in the Keep Segments
 	// field.
 	IndexNSegments *int32
 
@@ -1859,8 +1921,13 @@ type HlsGroupSettings struct {
 	// value.
 	IvSource HlsIvSource
 
-	// Applies only if Mode field is LIVE. Specifies the number of media segments (.ts
-	// files) to retain in the destination directory.
+	// Applies only if Mode field is LIVE. Specifies the number of media segments to
+	// retain in the destination directory. This number should be bigger than
+	// indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
+	// If this "keep segments" number is too low, the following might happen: the
+	// player is still reading a media manifest file that lists this segment, but that
+	// segment has been removed from the destination directory (as directed by
+	// indexNSegments). This situation would result in a 404 HTTP error on the player.
 	KeepSegments *int32
 
 	// The value specifies how the key is represented in the resource identified by the
@@ -2624,9 +2691,11 @@ type M2tsSettings struct {
 	// the muxer automatically determine the appropriate bitrate.
 	Bitrate *int32
 
-	// If set to multiplex, use multiplex buffer model for accurate interleaving.
-	// Setting to bufferModel to none can lead to lower latency, but low-memory devices
-	// may not be able to play back the stream without interruptions.
+	// Controls the timing accuracy for output network traffic. Leave as MULTIPLEX to
+	// ensure accurate network packet timing. Or set to NONE, which might result in
+	// lower latency but will result in more variability in output network packet
+	// timing. This variability might cause interruptions, jitter, or bursty behavior
+	// in your playback or receiving devices.
 	BufferModel M2tsBufferModel
 
 	// When set to enabled, generates captionServiceDescriptor in PMT.
@@ -2933,6 +3002,110 @@ type Mp2Settings struct {
 	SampleRate *float64
 }
 
+// Mpeg2 Filter Settings
+type Mpeg2FilterSettings struct {
+
+	// Temporal Filter Settings
+	TemporalFilterSettings *TemporalFilterSettings
+}
+
+// Mpeg2 Settings
+type Mpeg2Settings struct {
+
+	// description": "The framerate denominator. For example, 1001. The framerate is
+	// the numerator divided by the denominator. For example, 24000 / 1001 = 23.976
+	// FPS.
+	//
+	// This member is required.
+	FramerateDenominator *int32
+
+	// The framerate numerator. For example, 24000. The framerate is the numerator
+	// divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
+	//
+	// This member is required.
+	FramerateNumerator *int32
+
+	// Choose Off to disable adaptive quantization. Or choose another value to enable
+	// the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium,
+	// High. When you enable this field, MediaLive allows intra-frame quantizers to
+	// vary, which might improve visual quality.
+	AdaptiveQuantization Mpeg2AdaptiveQuantization
+
+	// Indicates the AFD values that MediaLive will write into the video encode. If you
+	// do not know what AFD signaling is, or if your downstream system has not given
+	// you guidance, choose AUTO. AUTO: MediaLive will try to preserve the input AFD
+	// value (in cases where multiple AFD values are valid). FIXED: MediaLive will use
+	// the value you specify in fixedAFD.
+	AfdSignaling AfdSignaling
+
+	// Specifies whether to include the color space metadata. The metadata describes
+	// the color space that applies to the video (the colorSpace field). We recommend
+	// that you insert the metadata.
+	ColorMetadata Mpeg2ColorMetadata
+
+	// Choose the type of color space conversion to apply to the output. For detailed
+	// information on setting up both the input and the output to obtain the desired
+	// color space in the output, see the section on "MediaLive Features - Video -
+	// color space" in the MediaLive User Guide. PASSTHROUGH: Keep the color space of
+	// the input content - do not convert it. AUTO:Convert all content that is SD to
+	// rec 601, and convert all content that is HD to rec 709.
+	ColorSpace Mpeg2ColorSpace
+
+	// Sets the pixel aspect ratio for the encode.
+	DisplayAspectRatio Mpeg2DisplayRatio
+
+	// Optionally specify a noise reduction filter, which can improve quality of
+	// compressed content. If you do not choose a filter, no filter will be applied.
+	// TEMPORAL: This filter is useful for both source content that is noisy (when it
+	// has excessive digital artifacts) and source content that is clean. When the
+	// content is noisy, the filter cleans up the source content before the encoding
+	// phase, with these two effects: First, it improves the output video quality
+	// because the content has been cleaned up. Secondly, it decreases the bandwidth
+	// because MediaLive does not waste bits on encoding noise. When the content is
+	// reasonably clean, the filter tends to decrease the bitrate.
+	FilterSettings *Mpeg2FilterSettings
+
+	// Complete this field only when afdSignaling is set to FIXED. Enter the AFD value
+	// (4 bits) to write on all frames of the video encode.
+	FixedAfd FixedAfd
+
+	// MPEG2: default is open GOP.
+	GopClosedCadence *int32
+
+	// Relates to the GOP structure. The number of B-frames between reference frames.
+	// If you do not know what a B-frame is, use the default.
+	GopNumBFrames *int32
+
+	// Relates to the GOP structure. The GOP size (keyframe interval) in the units
+	// specified in gopSizeUnits. If you do not know what GOP is, use the default. If
+	// gopSizeUnits is frames, then the gopSize must be an integer and must be greater
+	// than or equal to 1. If gopSizeUnits is seconds, the gopSize must be greater than
+	// 0, but does not need to be an integer.
+	GopSize *float64
+
+	// Relates to the GOP structure. Specifies whether the gopSize is specified in
+	// frames or seconds. If you do not plan to change the default gopSize, leave the
+	// default. If you specify SECONDS, MediaLive will internally convert the gop size
+	// to a frame count.
+	GopSizeUnits Mpeg2GopSizeUnits
+
+	// Set the scan type of the output to PROGRESSIVE or INTERLACED (top field first).
+	ScanType Mpeg2ScanType
+
+	// Relates to the GOP structure. If you do not know what GOP is, use the default.
+	// FIXED: Set the number of B-frames in each sub-GOP to the value in gopNumBFrames.
+	// DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to
+	// improve visual quality.
+	SubgopLength Mpeg2SubGopLength
+
+	// Determines how MediaLive inserts timecodes in the output video. For detailed
+	// information about setting up the input and the output for a timecode, see the
+	// section on "MediaLive Features - Timecode configuration" in the MediaLive User
+	// Guide. DISABLED: do not include timecodes. GOP_TIMECODE: Include timecode
+	// metadata in the GOP header.
+	TimecodeInsertion Mpeg2TimecodeInsertionBehavior
+}
+
 // Ms Smooth Group Settings
 type MsSmoothGroupSettings struct {
 
@@ -3123,6 +3296,12 @@ type MultiplexProgram struct {
 	// The packet identifier map for this multiplex program.
 	PacketIdentifiersMap *MultiplexProgramPacketIdentifiersMap
 
+	// Contains information about the current sources for the specified program in the
+	// specified multiplex. Keep in mind that each multiplex pipeline connects to both
+	// pipelines in a given source channel (the channel identified by the program). But
+	// only one of those channel pipelines is ever active at one time.
+	PipelineDetails []*MultiplexProgramPipelineDetail
+
 	// The name of the multiplex program.
 	ProgramName *string
 }
@@ -3183,6 +3362,17 @@ type MultiplexProgramPacketIdentifiersMap struct {
 
 	// Placeholder documentation for __integer
 	VideoPid *int32
+}
+
+// The current source for one of the pipelines in the multiplex.
+type MultiplexProgramPipelineDetail struct {
+
+	// Identifies the channel pipeline that is currently active for the pipeline
+	// (identified by PipelineId) in the multiplex.
+	ActiveChannelPipeline *string
+
+	// Identifies a specific pipeline in the multiplex.
+	PipelineId *string
 }
 
 // Transport stream service descriptor configuration for the Multiplex program.
@@ -3262,6 +3452,13 @@ type MultiplexStatmuxVideoSettings struct {
 
 	// Minimum statmux bitrate.
 	MinimumBitrate *int32
+
+	// The purpose of the priority is to use a combination of the\nmultiplex rate
+	// control algorithm and the QVBR capability of the\nencoder to prioritize the
+	// video quality of some channels in a\nmultiplex over others. Channels that have a
+	// higher priority will\nget higher video quality at the expense of the video
+	// quality of\nother channels in the multiplex with lower priority.
+	Priority *int32
 }
 
 // Placeholder documentation for MultiplexSummary
@@ -3541,6 +3738,10 @@ type PipelinePauseStateSettings struct {
 	//
 	// This member is required.
 	PipelineId PipelineId
+}
+
+// Raw Settings
+type RawSettings struct {
 }
 
 // Rec601 Settings
@@ -4176,6 +4377,22 @@ type TimecodeConfig struct {
 	SyncThreshold *int32
 }
 
+// Details about the input device that is being transferred.
+type TransferringInputDeviceSummary struct {
+
+	// The unique ID of the input device.
+	Id *string
+
+	// The optional message that the sender has attached to the transfer.
+	Message *string
+
+	// The AWS account ID for the recipient of the input device transfer.
+	TargetCustomerId *string
+
+	// The type (direction) of the input device transfer.
+	TransferType InputDeviceTransferType
+}
+
 // Ttml Destination Settings
 type TtmlDestinationSettings struct {
 
@@ -4256,6 +4473,9 @@ type VideoCodecSettings struct {
 
 	// H265 Settings
 	H265Settings *H265Settings
+
+	// Mpeg2 Settings
+	Mpeg2Settings *Mpeg2Settings
 }
 
 // Video settings for this stream.
@@ -4277,13 +4497,16 @@ type VideoDescription struct {
 	// recommended. For the Frame Capture codec, height and width are required.
 	Height *int32
 
-	// Indicates how to respond to the AFD values in the input stream. RESPOND causes
-	// input video to be clipped, depending on the AFD value, input display aspect
-	// ratio, and output display aspect ratio, and (except for FRAME_CAPTURE codec)
-	// includes the values in the output. PASSTHROUGH (does not apply to FRAME_CAPTURE
-	// codec) ignores the AFD values and includes the values in the output, so input
-	// video is not clipped. NONE ignores the AFD values and does not include the
-	// values through to the output, so input video is not clipped.
+	// Indicates how MediaLive will respond to the AFD values that might be in the
+	// input video. If you do not know what AFD signaling is, or if your downstream
+	// system has not given you guidance, choose PASSTHROUGH. RESPOND: MediaLive clips
+	// the input video using a formula that uses the AFD values (configured in
+	// afdSignaling ), the input display aspect ratio, and the output display aspect
+	// ratio. MediaLive also includes the AFD values in the output, unless the codec
+	// for this encode is FRAME_CAPTURE. PASSTHROUGH: MediaLive ignores the AFD values
+	// and does not clip the video. But MediaLive does include the values in the
+	// output. NONE: MediaLive does not clip the input video and does not include the
+	// AFD values in the output
 	RespondToAfd VideoDescriptionRespondToAfd
 
 	// STRETCH_TO_OUTPUT configures the output position to stretch the video to the
@@ -4350,6 +4573,20 @@ type VideoSelectorSettings struct {
 
 	// Video Selector Program Id
 	VideoSelectorProgramId *VideoSelectorProgramId
+}
+
+// Wav Settings
+type WavSettings struct {
+
+	// Bits per sample.
+	BitDepth *float64
+
+	// The audio coding mode for the WAV audio. The mode determines the number of
+	// channels in the audio.
+	CodingMode WavCodingMode
+
+	// Sample rate in Hz.
+	SampleRate *float64
 }
 
 // Webvtt Destination Settings

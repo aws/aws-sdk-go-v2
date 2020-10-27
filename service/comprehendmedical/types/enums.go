@@ -12,6 +12,18 @@ const (
 	AttributeNameNegation  AttributeName = "NEGATION"
 )
 
+// Values returns all known values for AttributeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeName) Values() []AttributeName {
+	return []AttributeName{
+		"SIGN",
+		"SYMPTOM",
+		"DIAGNOSIS",
+		"NEGATION",
+	}
+}
+
 type EntitySubType string
 
 // Enum values for EntitySubType
@@ -52,6 +64,48 @@ const (
 	EntitySubTypeTime_to_treatment_name  EntitySubType = "TIME_TO_TREATMENT_NAME"
 )
 
+// Values returns all known values for EntitySubType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntitySubType) Values() []EntitySubType {
+	return []EntitySubType{
+		"NAME",
+		"DOSAGE",
+		"ROUTE_OR_MODE",
+		"FORM",
+		"FREQUENCY",
+		"DURATION",
+		"GENERIC_NAME",
+		"BRAND_NAME",
+		"STRENGTH",
+		"RATE",
+		"ACUITY",
+		"TEST_NAME",
+		"TEST_VALUE",
+		"TEST_UNITS",
+		"PROCEDURE_NAME",
+		"TREATMENT_NAME",
+		"DATE",
+		"AGE",
+		"CONTACT_POINT",
+		"EMAIL",
+		"IDENTIFIER",
+		"URL",
+		"ADDRESS",
+		"PROFESSION",
+		"SYSTEM_ORGAN_SITE",
+		"DIRECTION",
+		"QUALITY",
+		"QUANTITY",
+		"TIME_EXPRESSION",
+		"TIME_TO_MEDICATION_NAME",
+		"TIME_TO_DX_NAME",
+		"TIME_TO_TEST_NAME",
+		"TIME_TO_PROCEDURE_NAME",
+		"TIME_TO_TREATMENT_NAME",
+	}
+}
+
 type EntityType string
 
 // Enum values for EntityType
@@ -64,6 +118,20 @@ const (
 	EntityTypeTime_expression              EntityType = "TIME_EXPRESSION"
 )
 
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"MEDICATION",
+		"MEDICAL_CONDITION",
+		"PROTECTED_HEALTH_INFORMATION",
+		"TEST_TREATMENT_PROCEDURE",
+		"ANATOMY",
+		"TIME_EXPRESSION",
+	}
+}
+
 type ICD10CMAttributeType string
 
 // Enum values for ICD10CMAttributeType
@@ -75,6 +143,19 @@ const (
 	ICD10CMAttributeTypeQuantity          ICD10CMAttributeType = "QUANTITY"
 )
 
+// Values returns all known values for ICD10CMAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICD10CMAttributeType) Values() []ICD10CMAttributeType {
+	return []ICD10CMAttributeType{
+		"ACUITY",
+		"DIRECTION",
+		"SYSTEM_ORGAN_SITE",
+		"QUALITY",
+		"QUANTITY",
+	}
+}
+
 type ICD10CMEntityCategory string
 
 // Enum values for ICD10CMEntityCategory
@@ -82,12 +163,30 @@ const (
 	ICD10CMEntityCategoryMedical_condition ICD10CMEntityCategory = "MEDICAL_CONDITION"
 )
 
+// Values returns all known values for ICD10CMEntityCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICD10CMEntityCategory) Values() []ICD10CMEntityCategory {
+	return []ICD10CMEntityCategory{
+		"MEDICAL_CONDITION",
+	}
+}
+
 type ICD10CMEntityType string
 
 // Enum values for ICD10CMEntityType
 const (
 	ICD10CMEntityTypeDx_name ICD10CMEntityType = "DX_NAME"
 )
+
+// Values returns all known values for ICD10CMEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICD10CMEntityType) Values() []ICD10CMEntityType {
+	return []ICD10CMEntityType{
+		"DX_NAME",
+	}
+}
 
 type ICD10CMTraitName string
 
@@ -98,6 +197,18 @@ const (
 	ICD10CMTraitNameSign      ICD10CMTraitName = "SIGN"
 	ICD10CMTraitNameSymptom   ICD10CMTraitName = "SYMPTOM"
 )
+
+// Values returns all known values for ICD10CMTraitName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICD10CMTraitName) Values() []ICD10CMTraitName {
+	return []ICD10CMTraitName{
+		"NEGATION",
+		"DIAGNOSIS",
+		"SIGN",
+		"SYMPTOM",
+	}
+}
 
 type JobStatus string
 
@@ -112,12 +223,36 @@ const (
 	JobStatusStopped         JobStatus = "STOPPED"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"PARTIAL_SUCCESS",
+		"FAILED",
+		"STOP_REQUESTED",
+		"STOPPED",
+	}
+}
+
 type LanguageCode string
 
 // Enum values for LanguageCode
 const (
 	LanguageCodeEn LanguageCode = "en"
 )
+
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en",
+	}
+}
 
 type RelationshipType string
 
@@ -143,6 +278,32 @@ const (
 	RelationshipTypeSystem_organ_site RelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
+// Values returns all known values for RelationshipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationshipType) Values() []RelationshipType {
+	return []RelationshipType{
+		"EVERY",
+		"WITH_DOSAGE",
+		"ADMINISTERED_VIA",
+		"FOR",
+		"NEGATIVE",
+		"OVERLAP",
+		"DOSAGE",
+		"ROUTE_OR_MODE",
+		"FORM",
+		"FREQUENCY",
+		"DURATION",
+		"STRENGTH",
+		"RATE",
+		"ACUITY",
+		"TEST_VALUE",
+		"TEST_UNITS",
+		"DIRECTION",
+		"SYSTEM_ORGAN_SITE",
+	}
+}
+
 type RxNormAttributeType string
 
 // Enum values for RxNormAttributeType
@@ -156,12 +317,36 @@ const (
 	RxNormAttributeTypeStrength      RxNormAttributeType = "STRENGTH"
 )
 
+// Values returns all known values for RxNormAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RxNormAttributeType) Values() []RxNormAttributeType {
+	return []RxNormAttributeType{
+		"DOSAGE",
+		"DURATION",
+		"FORM",
+		"FREQUENCY",
+		"RATE",
+		"ROUTE_OR_MODE",
+		"STRENGTH",
+	}
+}
+
 type RxNormEntityCategory string
 
 // Enum values for RxNormEntityCategory
 const (
 	RxNormEntityCategoryMedication RxNormEntityCategory = "MEDICATION"
 )
+
+// Values returns all known values for RxNormEntityCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RxNormEntityCategory) Values() []RxNormEntityCategory {
+	return []RxNormEntityCategory{
+		"MEDICATION",
+	}
+}
 
 type RxNormEntityType string
 
@@ -171,9 +356,28 @@ const (
 	RxNormEntityTypeGeneric_name RxNormEntityType = "GENERIC_NAME"
 )
 
+// Values returns all known values for RxNormEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RxNormEntityType) Values() []RxNormEntityType {
+	return []RxNormEntityType{
+		"BRAND_NAME",
+		"GENERIC_NAME",
+	}
+}
+
 type RxNormTraitName string
 
 // Enum values for RxNormTraitName
 const (
 	RxNormTraitNameNegation RxNormTraitName = "NEGATION"
 )
+
+// Values returns all known values for RxNormTraitName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RxNormTraitName) Values() []RxNormTraitName {
+	return []RxNormTraitName{
+		"NEGATION",
+	}
+}

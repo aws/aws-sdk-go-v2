@@ -12,7 +12,8 @@ import (
 )
 
 // Retrieves an object's retention settings. For more information, see Locking
-// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
+// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This
+// action is not supported by Amazon S3 on Outposts.
 func (c *Client) GetObjectRetention(ctx context.Context, params *GetObjectRetentionInput, optFns ...func(*Options)) (*GetObjectRetentionOutput, error) {
 	if params == nil {
 		params = &GetObjectRetentionInput{}
@@ -34,7 +35,7 @@ type GetObjectRetentionInput struct {
 	// retrieve. When using this API with an access point, you must direct requests to
 	// the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
@@ -47,6 +48,10 @@ type GetObjectRetentionInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

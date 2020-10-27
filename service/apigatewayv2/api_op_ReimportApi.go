@@ -60,6 +60,11 @@ type ReimportApiOutput struct {
 	// deployed API stage.
 	ApiEndpoint *string
 
+	// Specifies whether an API is managed by API Gateway. You can't update or delete a
+	// managed API by using API Gateway. A managed API can be deleted only through the
+	// tooling or service that created it.
+	ApiGatewayManaged *bool
+
 	// The API ID.
 	ApiId *string
 
@@ -76,6 +81,13 @@ type ReimportApiOutput struct {
 
 	// The description of the API.
 	Description *string
+
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
 
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.

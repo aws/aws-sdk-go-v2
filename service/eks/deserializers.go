@@ -3931,6 +3931,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				return err
 			}
 
+		case "kubernetesNetworkConfig":
+			if err := awsRestjson1_deserializeDocumentKubernetesNetworkConfigResponse(&sv.KubernetesNetworkConfig, value); err != nil {
+				return err
+			}
+
 		case "logging":
 			if err := awsRestjson1_deserializeDocumentLogging(&sv.Logging, value); err != nil {
 				return err
@@ -4623,6 +4628,46 @@ func awsRestjson1_deserializeDocumentIssueList(v *[]*types.Issue, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKubernetesNetworkConfigResponse(v **types.KubernetesNetworkConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KubernetesNetworkConfigResponse
+	if *v == nil {
+		sv = &types.KubernetesNetworkConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "serviceIpv4Cidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceIpv4Cidr = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLabelsMap(v *map[string]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4656,6 +4701,64 @@ func awsRestjson1_deserializeDocumentLabelsMap(v *map[string]*string, value inte
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLaunchTemplateSpecification(v **types.LaunchTemplateSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LaunchTemplateSpecification
+	if *v == nil {
+		sv = &types.LaunchTemplateSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = &jtv
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Version = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4886,6 +4989,11 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 
 		case "labels":
 			if err := awsRestjson1_deserializeDocumentLabelsMap(&sv.Labels, value); err != nil {
+				return err
+			}
+
+		case "launchTemplate":
+			if err := awsRestjson1_deserializeDocumentLaunchTemplateSpecification(&sv.LaunchTemplate, value); err != nil {
 				return err
 			}
 

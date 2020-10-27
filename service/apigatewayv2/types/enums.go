@@ -12,6 +12,18 @@ const (
 	AuthorizationTypeJwt     AuthorizationType = "JWT"
 )
 
+// Values returns all known values for AuthorizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationType) Values() []AuthorizationType {
+	return []AuthorizationType{
+		"NONE",
+		"AWS_IAM",
+		"CUSTOM",
+		"JWT",
+	}
+}
+
 type AuthorizerType string
 
 // Enum values for AuthorizerType
@@ -19,6 +31,16 @@ const (
 	AuthorizerTypeRequest AuthorizerType = "REQUEST"
 	AuthorizerTypeJwt     AuthorizerType = "JWT"
 )
+
+// Values returns all known values for AuthorizerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizerType) Values() []AuthorizerType {
+	return []AuthorizerType{
+		"REQUEST",
+		"JWT",
+	}
+}
 
 type ConnectionType string
 
@@ -28,6 +50,16 @@ const (
 	ConnectionTypeVpc_link ConnectionType = "VPC_LINK"
 )
 
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"INTERNET",
+		"VPC_LINK",
+	}
+}
+
 type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
@@ -35,6 +67,16 @@ const (
 	ContentHandlingStrategyConvert_to_binary ContentHandlingStrategy = "CONVERT_TO_BINARY"
 	ContentHandlingStrategyConvert_to_text   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
+
+// Values returns all known values for ContentHandlingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentHandlingStrategy) Values() []ContentHandlingStrategy {
+	return []ContentHandlingStrategy{
+		"CONVERT_TO_BINARY",
+		"CONVERT_TO_TEXT",
+	}
+}
 
 type DeploymentStatus string
 
@@ -45,6 +87,17 @@ const (
 	DeploymentStatusDeployed DeploymentStatus = "DEPLOYED"
 )
 
+// Values returns all known values for DeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStatus) Values() []DeploymentStatus {
+	return []DeploymentStatus{
+		"PENDING",
+		"FAILED",
+		"DEPLOYED",
+	}
+}
+
 type DomainNameStatus string
 
 // Enum values for DomainNameStatus
@@ -53,6 +106,16 @@ const (
 	DomainNameStatusUpdating  DomainNameStatus = "UPDATING"
 )
 
+// Values returns all known values for DomainNameStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainNameStatus) Values() []DomainNameStatus {
+	return []DomainNameStatus{
+		"AVAILABLE",
+		"UPDATING",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType
@@ -60,6 +123,16 @@ const (
 	EndpointTypeRegional EndpointType = "REGIONAL"
 	EndpointTypeEdge     EndpointType = "EDGE"
 )
+
+// Values returns all known values for EndpointType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"REGIONAL",
+		"EDGE",
+	}
+}
 
 type IntegrationType string
 
@@ -72,6 +145,19 @@ const (
 	IntegrationTypeAws_proxy  IntegrationType = "AWS_PROXY"
 )
 
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"AWS",
+		"HTTP",
+		"MOCK",
+		"HTTP_PROXY",
+		"AWS_PROXY",
+	}
+}
+
 type LoggingLevel string
 
 // Enum values for LoggingLevel
@@ -80,6 +166,17 @@ const (
 	LoggingLevelInfo  LoggingLevel = "INFO"
 	LoggingLevelOff   LoggingLevel = "OFF"
 )
+
+// Values returns all known values for LoggingLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LoggingLevel) Values() []LoggingLevel {
+	return []LoggingLevel{
+		"ERROR",
+		"INFO",
+		"OFF",
+	}
+}
 
 type PassthroughBehavior string
 
@@ -90,6 +187,17 @@ const (
 	PassthroughBehaviorWhen_no_templates PassthroughBehavior = "WHEN_NO_TEMPLATES"
 )
 
+// Values returns all known values for PassthroughBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughBehavior) Values() []PassthroughBehavior {
+	return []PassthroughBehavior{
+		"WHEN_NO_MATCH",
+		"NEVER",
+		"WHEN_NO_TEMPLATES",
+	}
+}
+
 type ProtocolType string
 
 // Enum values for ProtocolType
@@ -98,6 +206,16 @@ const (
 	ProtocolTypeHttp      ProtocolType = "HTTP"
 )
 
+// Values returns all known values for ProtocolType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProtocolType) Values() []ProtocolType {
+	return []ProtocolType{
+		"WEBSOCKET",
+		"HTTP",
+	}
+}
+
 type SecurityPolicy string
 
 // Enum values for SecurityPolicy
@@ -105,6 +223,16 @@ const (
 	SecurityPolicyTls_1_0 SecurityPolicy = "TLS_1_0"
 	SecurityPolicyTls_1_2 SecurityPolicy = "TLS_1_2"
 )
+
+// Values returns all known values for SecurityPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicy) Values() []SecurityPolicy {
+	return []SecurityPolicy{
+		"TLS_1_0",
+		"TLS_1_2",
+	}
+}
 
 type VpcLinkStatus string
 
@@ -117,9 +245,31 @@ const (
 	VpcLinkStatusInactive  VpcLinkStatus = "INACTIVE"
 )
 
+// Values returns all known values for VpcLinkStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcLinkStatus) Values() []VpcLinkStatus {
+	return []VpcLinkStatus{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"FAILED",
+		"INACTIVE",
+	}
+}
+
 type VpcLinkVersion string
 
 // Enum values for VpcLinkVersion
 const (
 	VpcLinkVersionV2 VpcLinkVersion = "V2"
 )
+
+// Values returns all known values for VpcLinkVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcLinkVersion) Values() []VpcLinkVersion {
+	return []VpcLinkVersion{
+		"V2",
+	}
+}

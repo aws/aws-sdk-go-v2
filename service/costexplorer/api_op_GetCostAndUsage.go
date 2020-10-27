@@ -17,8 +17,8 @@ import (
 // dimensions, such as SERVICE or AZ, in a specific time range. For a complete list
 // of valid dimensions, see the GetDimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Master accounts in an organization in AWS Organizations have access
-// to all member accounts.
+// operation. Master account in an organization in AWS Organizations have access to
+// all member accounts.
 func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInput, optFns ...func(*Options)) (*GetCostAndUsageOutput, error) {
 	if params == nil {
 		params = &GetCostAndUsageInput{}
@@ -35,6 +35,22 @@ func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInp
 }
 
 type GetCostAndUsageInput struct {
+
+	// Which metrics are returned in the query. For more information about blended and
+	// unblended rates, see Why does the "blended" annotation appear on some line items
+	// in my bill?
+	// (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
+	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity. If you return the
+	// UsageQuantity metric, the service aggregates all usage numbers without taking
+	// into account the units. For example, if you aggregate usageQuantity across all
+	// of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours
+	// and data transfer are measured in different units (for example, hours vs. GB).
+	// To get more meaningful UsageQuantity metrics, filter by UsageType or
+	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
+	//
+	// This member is required.
+	Metrics []*string
 
 	// Sets the start and end dates for retrieving AWS costs. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
@@ -57,25 +73,11 @@ type GetCostAndUsageInput struct {
 	Granularity types.Granularity
 
 	// You can group AWS costs using up to two different groups, either dimensions, tag
-	// keys, or both. When you group by tag key, you get all tag values, including
-	// empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME,
-	// LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY,
-	// RECORD_TYPE, and USAGE_TYPE.
+	// keys, cost categories, or any two group by types. When you group by tag key, you
+	// get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE,
+	// LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE,
+	// TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
 	GroupBy []*types.GroupDefinition
-
-	// Which metrics are returned in the query. For more information about blended and
-	// unblended rates, see Why does the "blended" annotation appear on some line items
-	// in my bill?
-	// (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
-	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
-	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity. If you return the
-	// UsageQuantity metric, the service aggregates all usage numbers without taking
-	// into account the units. For example, if you aggregate usageQuantity across all
-	// of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours
-	// and data transfer are measured in different units (for example, hours vs. GB).
-	// To get more meaningful UsageQuantity metrics, filter by UsageType or
-	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
-	Metrics []*string
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.

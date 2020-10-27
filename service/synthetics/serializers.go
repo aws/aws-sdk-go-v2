@@ -1139,6 +1139,11 @@ func awsRestjson1_serializeDocumentCanaryRunConfigInput(v *types.CanaryRunConfig
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActiveTracing != nil {
+		ok := object.Key("ActiveTracing")
+		ok.Boolean(*v.ActiveTracing)
+	}
+
 	if v.MemoryInMB != nil {
 		ok := object.Key("MemoryInMB")
 		ok.Integer(*v.MemoryInMB)

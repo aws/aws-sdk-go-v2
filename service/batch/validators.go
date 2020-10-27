@@ -150,6 +150,26 @@ func (m *validateOpDescribeJobs) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterJobDefinition struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpSubmitJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTerminateJob struct {
 }
 
@@ -205,6 +245,26 @@ func (m *validateOpTerminateJob) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTerminateJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -278,6 +338,10 @@ func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpRegisterJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterJobDefinition{}, middleware.After)
 }
@@ -286,8 +350,16 @@ func addOpSubmitJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSubmitJob{}, middleware.After)
 }
 
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
 func addOpTerminateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJob{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -303,11 +375,11 @@ func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeEnvironmentOrder"}
-	if v.Order == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Order"))
-	}
 	if v.ComputeEnvironment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironment"))
+	}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -338,23 +410,23 @@ func validateComputeResource(v *types.ComputeResource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeResource"}
-	if v.Subnets == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.InstanceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceRole"))
 	}
 	if v.InstanceTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceTypes"))
 	}
-	if v.MaxvCpus == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.MinvCpus == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinvCpus"))
 	}
-	if v.InstanceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceRole"))
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.MaxvCpus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -385,11 +457,6 @@ func validateContainerProperties(v *types.ContainerProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerProperties"}
-	if v.LinuxParameters != nil {
-		if err := validateLinuxParameters(v.LinuxParameters); err != nil {
-			invalidParams.AddNested("LinuxParameters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Ulimits != nil {
 		if err := validateUlimits(v.Ulimits); err != nil {
 			invalidParams.AddNested("Ulimits", err.(smithy.InvalidParamsError))
@@ -398,6 +465,21 @@ func validateContainerProperties(v *types.ContainerProperties) error {
 	if v.ResourceRequirements != nil {
 		if err := validateResourceRequirements(v.ResourceRequirements); err != nil {
 			invalidParams.AddNested("ResourceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LinuxParameters != nil {
+		if err := validateLinuxParameters(v.LinuxParameters); err != nil {
+			invalidParams.AddNested("LinuxParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogConfiguration != nil {
+		if err := validateLogConfiguration(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Secrets != nil {
+		if err := validateSecretList(v.Secrets); err != nil {
+			invalidParams.AddNested("Secrets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -439,15 +521,72 @@ func validateDevicesList(v []*types.Device) error {
 	}
 }
 
+func validateEvaluateOnExit(v *types.EvaluateOnExit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateOnExit"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluateOnExitList(v []*types.EvaluateOnExit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateOnExitList"}
+	for i := range v {
+		if err := validateEvaluateOnExit(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLinuxParameters(v *types.LinuxParameters) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LinuxParameters"}
+	if v.Tmpfs != nil {
+		if err := validateTmpfsList(v.Tmpfs); err != nil {
+			invalidParams.AddNested("Tmpfs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Devices != nil {
 		if err := validateDevicesList(v.Devices); err != nil {
 			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogConfiguration(v *types.LogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogConfiguration"}
+	if v.SecretOptions != nil {
+		if err := validateSecretList(v.SecretOptions); err != nil {
+			invalidParams.AddNested("SecretOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.LogDriver) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogDriver"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -485,11 +624,11 @@ func validateNodeProperties(v *types.NodeProperties) error {
 			invalidParams.AddNested("NodeRangeProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.MainNode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MainNode"))
-	}
 	if v.NumNodes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NumNodes"))
+	}
+	if v.MainNode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MainNode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -503,13 +642,13 @@ func validateNodePropertyOverride(v *types.NodePropertyOverride) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodePropertyOverride"}
-	if v.TargetNodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
-	}
 	if v.ContainerOverrides != nil {
 		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
 			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.TargetNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -577,11 +716,11 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirement"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -607,19 +746,106 @@ func validateResourceRequirements(v []*types.ResourceRequirement) error {
 	}
 }
 
+func validateRetryStrategy(v *types.RetryStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryStrategy"}
+	if v.EvaluateOnExit != nil {
+		if err := validateEvaluateOnExitList(v.EvaluateOnExit); err != nil {
+			invalidParams.AddNested("EvaluateOnExit", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecret(v *types.Secret) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Secret"}
+	if v.ValueFrom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueFrom"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecretList(v []*types.Secret) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecretList"}
+	for i := range v {
+		if err := validateSecret(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTmpfs(v *types.Tmpfs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tmpfs"}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
+	if v.ContainerPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTmpfsList(v []*types.Tmpfs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TmpfsList"}
+	for i := range v {
+		if err := validateTmpfs(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUlimit(v *types.Ulimit) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimit"}
-	if v.HardLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HardLimit"))
-	}
 	if v.SoftLimit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SoftLimit"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.HardLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HardLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -650,11 +876,11 @@ func validateOpCancelJobInput(v *CancelJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelJobInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.Reason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -668,19 +894,19 @@ func validateOpCreateComputeEnvironmentInput(v *CreateComputeEnvironmentInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateComputeEnvironmentInput"}
-	if v.ServiceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	if v.ComputeEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironmentName"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.ComputeResources != nil {
 		if err := validateComputeResource(v.ComputeResources); err != nil {
 			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ComputeEnvironmentName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironmentName"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -694,6 +920,9 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobQueueInput"}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
 	if v.JobQueueName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueueName"))
 	}
@@ -703,9 +932,6 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 		if err := validateComputeEnvironmentOrders(v.ComputeEnvironmentOrder); err != nil {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -774,11 +1000,29 @@ func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterJobDefinitionInput(v *RegisterJobDefinitionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterJobDefinitionInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if v.NodeProperties != nil {
 		if err := validateNodeProperties(v.NodeProperties); err != nil {
 			invalidParams.AddNested("NodeProperties", err.(smithy.InvalidParamsError))
@@ -789,8 +1033,10 @@ func validateOpRegisterJobDefinitionInput(v *RegisterJobDefinitionInput) error {
 			invalidParams.AddNested("ContainerProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	if v.RetryStrategy != nil {
+		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
+			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.JobDefinitionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
@@ -807,16 +1053,6 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubmitJobInput"}
-	if v.ContainerOverrides != nil {
-		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
-			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.NodeOverrides != nil {
-		if err := validateNodeOverrides(v.NodeOverrides); err != nil {
-			invalidParams.AddNested("NodeOverrides", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.JobQueue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
 	}
@@ -825,6 +1061,39 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 	}
 	if v.JobDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobDefinition"))
+	}
+	if v.NodeOverrides != nil {
+		if err := validateNodeOverrides(v.NodeOverrides); err != nil {
+			invalidParams.AddNested("NodeOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetryStrategy != nil {
+		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
+			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerOverrides != nil {
+		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
+			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -838,11 +1107,29 @@ func validateOpTerminateJobInput(v *TerminateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
 	if v.Reason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
 	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

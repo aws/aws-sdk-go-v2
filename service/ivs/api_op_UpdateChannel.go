@@ -36,6 +36,9 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Arn *string
 
+	// Whether the channel is authorized. Default: false.
+	Authorized *bool
+
 	// Channel latency mode. Default: LOW.
 	LatencyMode types.ChannelLatencyMode
 

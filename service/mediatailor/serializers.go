@@ -379,6 +379,13 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 		}
 	}
 
+	if v.ManifestProcessingRules != nil {
+		ok := object.Key("ManifestProcessingRules")
+		if err := awsRestjson1_serializeDocumentManifestProcessingRules(v.ManifestProcessingRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -595,6 +602,18 @@ func awsRestjson1_serializeDocument__mapOf__string(v map[string]*string, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdMarkerPassthrough(v *types.AdMarkerPassthrough, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailSuppression(v *types.AvailSuppression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -675,6 +694,20 @@ func awsRestjson1_serializeDocumentLivePreRollConfiguration(v *types.LivePreRoll
 	if v.MaxDurationSeconds != nil {
 		ok := object.Key("MaxDurationSeconds")
 		ok.Integer(*v.MaxDurationSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManifestProcessingRules(v *types.ManifestProcessingRules, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdMarkerPassthrough != nil {
+		ok := object.Key("AdMarkerPassthrough")
+		if err := awsRestjson1_serializeDocumentAdMarkerPassthrough(v.AdMarkerPassthrough, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -53,7 +53,7 @@ func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerS
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreatePlayerSessionsInput struct {
 
 	// A unique identifier for the game session to add players to.
@@ -73,7 +73,7 @@ type CreatePlayerSessionsInput struct {
 	PlayerDataMap map[string]*string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreatePlayerSessionsOutput struct {
 
 	// A collection of player session objects created for the added players.

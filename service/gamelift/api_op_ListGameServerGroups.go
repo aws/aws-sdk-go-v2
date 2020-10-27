@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Retrieves information on all game
-// servers groups that exist in the current AWS account for the selected region.
-// Use the pagination parameters to retrieve results in a set of sequential pages.
-// Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Retrieves information on all game servers groups that exist in the
+// current AWS account for the selected Region. Use the pagination parameters to
+// retrieve results in a set of sequential segments. Learn more GameLift FleetIQ
+// Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * CreateGameServerGroup
@@ -33,7 +32,10 @@ import (
 //
 //     * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+//     *
+// SuspendGameServerGroup
+//
+//     * DescribeGameServerInstances
 func (c *Client) ListGameServerGroups(ctx context.Context, params *ListGameServerGroupsInput, optFns ...func(*Options)) (*ListGameServerGroupsOutput, error) {
 	if params == nil {
 		params = &ListGameServerGroupsInput{}
@@ -52,11 +54,11 @@ func (c *Client) ListGameServerGroups(ctx context.Context, params *ListGameServe
 type ListGameServerGroupsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// get results as a set of sequential segments.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// A token that indicates the start of the next sequential segment of results. Use
+	// the token returned with the previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 }
@@ -67,7 +69,7 @@ type ListGameServerGroupsOutput struct {
 	GameServerGroups []*types.GameServerGroup
 
 	// A token that indicates where to resume retrieving results on the next call to
-	// this action. If no token is returned, these results represent the end of the
+	// this operation. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
 

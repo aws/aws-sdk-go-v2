@@ -171,6 +171,15 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -214,6 +223,15 @@ func awsRestjson1_deserializeOpDocumentCreateApiOutput(v **CreateApiOutput, valu
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -632,6 +650,15 @@ func awsRestjson1_deserializeOpDocumentCreateAuthorizerOutput(v **CreateAuthoriz
 				sv.AuthorizerId = &jtv
 			}
 
+		case "authorizerPayloadFormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And64 to be of type string, got %T instead", value)
+				}
+				sv.AuthorizerPayloadFormatVersion = &jtv
+			}
+
 		case "authorizerResultTtlInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -661,6 +688,15 @@ func awsRestjson1_deserializeOpDocumentCreateAuthorizerOutput(v **CreateAuthoriz
 					return fmt.Errorf("expected UriWithLengthBetween1And2048 to be of type string, got %T instead", value)
 				}
 				sv.AuthorizerUri = &jtv
+			}
+
+		case "enableSimpleResponses":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSimpleResponses = &jtv
 			}
 
 		case "identitySource":
@@ -1077,6 +1113,11 @@ func awsRestjson1_deserializeOpDocumentCreateDomainNameOutput(v **CreateDomainNa
 				return err
 			}
 
+		case "mutualTlsAuthentication":
+			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -1312,6 +1353,15 @@ func awsRestjson1_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 					return fmt.Errorf("expected SelectionExpression to be of type string, got %T instead", value)
 				}
 				sv.IntegrationResponseSelectionExpression = &jtv
+			}
+
+		case "integrationSubtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And128 to be of type string, got %T instead", value)
+				}
+				sv.IntegrationSubtype = &jtv
 			}
 
 		case "integrationType":
@@ -4349,6 +4399,15 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4392,6 +4451,15 @@ func awsRestjson1_deserializeOpDocumentGetApiOutput(v **GetApiOutput, value inte
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -5125,6 +5193,15 @@ func awsRestjson1_deserializeOpDocumentGetAuthorizerOutput(v **GetAuthorizerOutp
 				sv.AuthorizerId = &jtv
 			}
 
+		case "authorizerPayloadFormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And64 to be of type string, got %T instead", value)
+				}
+				sv.AuthorizerPayloadFormatVersion = &jtv
+			}
+
 		case "authorizerResultTtlInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5154,6 +5231,15 @@ func awsRestjson1_deserializeOpDocumentGetAuthorizerOutput(v **GetAuthorizerOutp
 					return fmt.Errorf("expected UriWithLengthBetween1And2048 to be of type string, got %T instead", value)
 				}
 				sv.AuthorizerUri = &jtv
+			}
+
+		case "enableSimpleResponses":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSimpleResponses = &jtv
 			}
 
 		case "identitySource":
@@ -5879,6 +5965,11 @@ func awsRestjson1_deserializeOpDocumentGetDomainNameOutput(v **GetDomainNameOutp
 				return err
 			}
 
+		case "mutualTlsAuthentication":
+			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -6270,6 +6361,15 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 					return fmt.Errorf("expected SelectionExpression to be of type string, got %T instead", value)
 				}
 				sv.IntegrationResponseSelectionExpression = &jtv
+			}
+
+		case "integrationSubtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And128 to be of type string, got %T instead", value)
+				}
+				sv.IntegrationSubtype = &jtv
 			}
 
 		case "integrationType":
@@ -9236,6 +9336,15 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9279,6 +9388,15 @@ func awsRestjson1_deserializeOpDocumentImportApiOutput(v **ImportApiOutput, valu
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -9501,6 +9619,15 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9544,6 +9671,15 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -9613,6 +9749,92 @@ func awsRestjson1_deserializeOpDocumentReimportApiOutput(v **ReimportApiOutput, 
 	}
 	*v = sv
 	return nil
+}
+
+type awsRestjson1_deserializeOpResetAuthorizersCache struct {
+}
+
+func (*awsRestjson1_deserializeOpResetAuthorizersCache) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpResetAuthorizersCache) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorResetAuthorizersCache(response, &metadata)
+	}
+	output := &ResetAuthorizersCacheOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorResetAuthorizersCache(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
 }
 
 type awsRestjson1_deserializeOpTagResource struct {
@@ -9950,6 +10172,15 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9993,6 +10224,15 @@ func awsRestjson1_deserializeOpDocumentUpdateApiOutput(v **UpdateApiOutput, valu
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -10411,6 +10651,15 @@ func awsRestjson1_deserializeOpDocumentUpdateAuthorizerOutput(v **UpdateAuthoriz
 				sv.AuthorizerId = &jtv
 			}
 
+		case "authorizerPayloadFormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And64 to be of type string, got %T instead", value)
+				}
+				sv.AuthorizerPayloadFormatVersion = &jtv
+			}
+
 		case "authorizerResultTtlInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10440,6 +10689,15 @@ func awsRestjson1_deserializeOpDocumentUpdateAuthorizerOutput(v **UpdateAuthoriz
 					return fmt.Errorf("expected UriWithLengthBetween1And2048 to be of type string, got %T instead", value)
 				}
 				sv.AuthorizerUri = &jtv
+			}
+
+		case "enableSimpleResponses":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSimpleResponses = &jtv
 			}
 
 		case "identitySource":
@@ -10853,6 +11111,11 @@ func awsRestjson1_deserializeOpDocumentUpdateDomainNameOutput(v **UpdateDomainNa
 				return err
 			}
 
+		case "mutualTlsAuthentication":
+			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -11088,6 +11351,15 @@ func awsRestjson1_deserializeOpDocumentUpdateIntegrationOutput(v **UpdateIntegra
 					return fmt.Errorf("expected SelectionExpression to be of type string, got %T instead", value)
 				}
 				sv.IntegrationResponseSelectionExpression = &jtv
+			}
+
+		case "integrationSubtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And128 to be of type string, got %T instead", value)
+				}
+				sv.IntegrationSubtype = &jtv
 			}
 
 		case "integrationType":
@@ -13215,6 +13487,15 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 				sv.ApiEndpoint = &jtv
 			}
 
+		case "apiGatewayManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApiGatewayManaged = &jtv
+			}
+
 		case "apiId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13258,6 +13539,15 @@ func awsRestjson1_deserializeDocumentApi(v **types.Api, value interface{}) error
 					return fmt.Errorf("expected StringWithLengthBetween0And1024 to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "disableSchemaValidation":
@@ -13472,6 +13762,15 @@ func awsRestjson1_deserializeDocumentAuthorizer(v **types.Authorizer, value inte
 				sv.AuthorizerId = &jtv
 			}
 
+		case "authorizerPayloadFormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And64 to be of type string, got %T instead", value)
+				}
+				sv.AuthorizerPayloadFormatVersion = &jtv
+			}
+
 		case "authorizerResultTtlInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13501,6 +13800,15 @@ func awsRestjson1_deserializeDocumentAuthorizer(v **types.Authorizer, value inte
 					return fmt.Errorf("expected UriWithLengthBetween1And2048 to be of type string, got %T instead", value)
 				}
 				sv.AuthorizerUri = &jtv
+			}
+
+		case "enableSimpleResponses":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableSimpleResponses = &jtv
 			}
 
 		case "identitySource":
@@ -13935,6 +14243,11 @@ func awsRestjson1_deserializeDocumentDomainName(v **types.DomainName, value inte
 				return err
 			}
 
+		case "mutualTlsAuthentication":
+			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -14234,6 +14547,15 @@ func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value in
 					return fmt.Errorf("expected SelectionExpression to be of type string, got %T instead", value)
 				}
 				sv.IntegrationResponseSelectionExpression = &jtv
+			}
+
+		case "integrationSubtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And128 to be of type string, got %T instead", value)
+				}
+				sv.IntegrationSubtype = &jtv
 			}
 
 		case "integrationType":
@@ -14541,6 +14863,60 @@ func awsRestjson1_deserializeDocumentModel(v **types.Model, value interface{}) e
 					return fmt.Errorf("expected StringWithLengthBetween0And32K to be of type string, got %T instead", value)
 				}
 				sv.Schema = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMutualTlsAuthentication(v **types.MutualTlsAuthentication, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MutualTlsAuthentication
+	if *v == nil {
+		sv = &types.MutualTlsAuthentication{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "truststoreUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriWithLengthBetween1And2048 to be of type string, got %T instead", value)
+				}
+				sv.TruststoreUri = &jtv
+			}
+
+		case "truststoreVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithLengthBetween1And64 to be of type string, got %T instead", value)
+				}
+				sv.TruststoreVersion = &jtv
+			}
+
+		case "truststoreWarnings":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.TruststoreWarnings, value); err != nil {
+				return err
 			}
 
 		default:

@@ -1783,9 +1783,9 @@ func validateScheduledActionType(v *types.ScheduledActionType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduledActionType"}
-	if v.ResizeCluster != nil {
-		if err := validateResizeClusterMessage(v.ResizeCluster); err != nil {
-			invalidParams.AddNested("ResizeCluster", err.(smithy.InvalidParamsError))
+	if v.PauseCluster != nil {
+		if err := validatePauseClusterMessage(v.PauseCluster); err != nil {
+			invalidParams.AddNested("PauseCluster", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ResumeCluster != nil {
@@ -1793,9 +1793,9 @@ func validateScheduledActionType(v *types.ScheduledActionType) error {
 			invalidParams.AddNested("ResumeCluster", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.PauseCluster != nil {
-		if err := validatePauseClusterMessage(v.PauseCluster); err != nil {
-			invalidParams.AddNested("PauseCluster", err.(smithy.InvalidParamsError))
+	if v.ResizeCluster != nil {
+		if err := validateResizeClusterMessage(v.ResizeCluster); err != nil {
+			invalidParams.AddNested("ResizeCluster", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1942,11 +1942,11 @@ func validateOpCopyClusterSnapshotInput(v *CopyClusterSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyClusterSnapshotInput"}
-	if v.SourceSnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotIdentifier"))
-	}
 	if v.TargetSnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetSnapshotIdentifier"))
+	}
+	if v.SourceSnapshotIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1966,11 +1966,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.NodeType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
 	}
-	if v.MasterUsername == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
-	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.MasterUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1984,14 +1984,14 @@ func validateOpCreateClusterParameterGroupInput(v *CreateClusterParameterGroupIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterParameterGroupInput"}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
 	if v.ParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterGroupName"))
 	}
 	if v.ParameterGroupFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterGroupFamily"))
-	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2005,11 +2005,11 @@ func validateOpCreateClusterSecurityGroupInput(v *CreateClusterSecurityGroupInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterSecurityGroupInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.ClusterSecurityGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterSecurityGroupName"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2044,11 +2044,11 @@ func validateOpCreateClusterSubnetGroupInput(v *CreateClusterSubnetGroupInput) e
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
-	if v.ClusterSubnetGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
-	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.ClusterSubnetGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2095,23 +2095,23 @@ func validateOpCreateHsmConfigurationInput(v *CreateHsmConfigurationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHsmConfigurationInput"}
-	if v.HsmIpAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HsmIpAddress"))
-	}
-	if v.HsmServerPublicCertificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HsmServerPublicCertificate"))
-	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
-	if v.HsmPartitionPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HsmPartitionPassword"))
-	}
 	if v.HsmPartitionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HsmPartitionName"))
 	}
 	if v.HsmConfigurationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HsmConfigurationIdentifier"))
+	}
+	if v.HsmIpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HsmIpAddress"))
+	}
+	if v.HsmPartitionPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HsmPartitionPassword"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.HsmServerPublicCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HsmServerPublicCertificate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2135,11 +2135,11 @@ func validateOpCreateScheduledActionInput(v *CreateScheduledActionInput) error {
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
 	}
-	if v.ScheduledActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
-	}
 	if v.Schedule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
+	}
+	if v.ScheduledActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2186,14 +2186,14 @@ func validateOpCreateUsageLimitInput(v *CreateUsageLimitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUsageLimitInput"}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
 	if len(v.FeatureType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureType"))
 	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
-	if v.Amount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
 	}
 	if len(v.LimitType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LimitType"))
@@ -2375,11 +2375,11 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2547,11 +2547,11 @@ func validateOpEnableLoggingInput(v *EnableLoggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableLoggingInput"}
-	if v.BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
-	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2565,11 +2565,11 @@ func validateOpEnableSnapshotCopyInput(v *EnableSnapshotCopyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableSnapshotCopyInput"}
-	if v.DestinationRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
-	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.DestinationRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2583,11 +2583,11 @@ func validateOpGetClusterCredentialsInput(v *GetClusterCredentialsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetClusterCredentialsInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.DbUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbUser"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2727,11 +2727,11 @@ func validateOpModifyClusterSubnetGroupInput(v *ModifyClusterSubnetGroupInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyClusterSubnetGroupInput"}
-	if v.ClusterSubnetGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.ClusterSubnetGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2780,11 +2780,11 @@ func validateOpModifySnapshotCopyRetentionPeriodInput(v *ModifySnapshotCopyReten
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifySnapshotCopyRetentionPeriodInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.RetentionPeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriod"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2798,11 +2798,11 @@ func validateOpModifySnapshotScheduleInput(v *ModifySnapshotScheduleInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifySnapshotScheduleInput"}
-	if v.ScheduleIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduleIdentifier"))
-	}
 	if v.ScheduleDefinitions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleDefinitions"))
+	}
+	if v.ScheduleIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2906,11 +2906,11 @@ func validateOpRestoreFromClusterSnapshotInput(v *RestoreFromClusterSnapshotInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreFromClusterSnapshotInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.SnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2924,20 +2924,20 @@ func validateOpRestoreTableFromClusterSnapshotInput(v *RestoreTableFromClusterSn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreTableFromClusterSnapshotInput"}
-	if v.SnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
-	}
 	if v.SourceDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceDatabaseName"))
 	}
 	if v.SourceTableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceTableName"))
 	}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.NewTableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewTableName"))
+	}
+	if v.SnapshotIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2981,11 +2981,11 @@ func validateOpRevokeSnapshotAccessInput(v *RevokeSnapshotAccessInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeSnapshotAccessInput"}
-	if v.SnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
-	}
 	if v.AccountWithRestoreAccess == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountWithRestoreAccess"))
+	}
+	if v.SnapshotIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

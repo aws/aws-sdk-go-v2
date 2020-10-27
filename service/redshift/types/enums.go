@@ -11,6 +11,17 @@ const (
 	ActionTypeResize_cluster        ActionType = "resize-cluster"
 )
 
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"restore-cluster",
+		"recommend-node-config",
+		"resize-cluster",
+	}
+}
+
 type Mode string
 
 // Enum values for Mode
@@ -18,6 +29,16 @@ const (
 	ModeStandard         Mode = "standard"
 	ModeHigh_performance Mode = "high-performance"
 )
+
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Mode) Values() []Mode {
+	return []Mode{
+		"standard",
+		"high-performance",
+	}
+}
 
 type NodeConfigurationOptionsFilterName string
 
@@ -28,6 +49,19 @@ const (
 	NodeConfigurationOptionsFilterNameEstimated_disk_utilization_percent NodeConfigurationOptionsFilterName = "EstimatedDiskUtilizationPercent"
 	NodeConfigurationOptionsFilterNameMode                               NodeConfigurationOptionsFilterName = "Mode"
 )
+
+// Values returns all known values for NodeConfigurationOptionsFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NodeConfigurationOptionsFilterName) Values() []NodeConfigurationOptionsFilterName {
+	return []NodeConfigurationOptionsFilterName{
+		"NodeType",
+		"NumberOfNodes",
+		"EstimatedDiskUtilizationPercent",
+		"Mode",
+	}
+}
 
 type OperatorType string
 
@@ -42,6 +76,21 @@ const (
 	OperatorTypeBetween OperatorType = "between"
 )
 
+// Values returns all known values for OperatorType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OperatorType) Values() []OperatorType {
+	return []OperatorType{
+		"eq",
+		"lt",
+		"gt",
+		"le",
+		"ge",
+		"in",
+		"between",
+	}
+}
+
 type ParameterApplyType string
 
 // Enum values for ParameterApplyType
@@ -49,6 +98,16 @@ const (
 	ParameterApplyTypeStatic  ParameterApplyType = "static"
 	ParameterApplyTypeDynamic ParameterApplyType = "dynamic"
 )
+
+// Values returns all known values for ParameterApplyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterApplyType) Values() []ParameterApplyType {
+	return []ParameterApplyType{
+		"static",
+		"dynamic",
+	}
+}
 
 type ReservedNodeOfferingType string
 
@@ -58,6 +117,16 @@ const (
 	ReservedNodeOfferingTypeUpgradable ReservedNodeOfferingType = "Upgradable"
 )
 
+// Values returns all known values for ReservedNodeOfferingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReservedNodeOfferingType) Values() []ReservedNodeOfferingType {
+	return []ReservedNodeOfferingType{
+		"Regular",
+		"Upgradable",
+	}
+}
+
 type ScheduledActionFilterName string
 
 // Enum values for ScheduledActionFilterName
@@ -66,6 +135,16 @@ const (
 	ScheduledActionFilterNameIam_role           ScheduledActionFilterName = "iam-role"
 )
 
+// Values returns all known values for ScheduledActionFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduledActionFilterName) Values() []ScheduledActionFilterName {
+	return []ScheduledActionFilterName{
+		"cluster-identifier",
+		"iam-role",
+	}
+}
+
 type ScheduledActionState string
 
 // Enum values for ScheduledActionState
@@ -73,6 +152,16 @@ const (
 	ScheduledActionStateActive   ScheduledActionState = "ACTIVE"
 	ScheduledActionStateDisabled ScheduledActionState = "DISABLED"
 )
+
+// Values returns all known values for ScheduledActionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduledActionState) Values() []ScheduledActionState {
+	return []ScheduledActionState{
+		"ACTIVE",
+		"DISABLED",
+	}
+}
 
 type ScheduledActionTypeValues string
 
@@ -83,6 +172,17 @@ const (
 	ScheduledActionTypeValuesResume_cluster ScheduledActionTypeValues = "ResumeCluster"
 )
 
+// Values returns all known values for ScheduledActionTypeValues. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduledActionTypeValues) Values() []ScheduledActionTypeValues {
+	return []ScheduledActionTypeValues{
+		"ResizeCluster",
+		"PauseCluster",
+		"ResumeCluster",
+	}
+}
+
 type ScheduleState string
 
 // Enum values for ScheduleState
@@ -91,6 +191,17 @@ const (
 	ScheduleStateActive    ScheduleState = "ACTIVE"
 	ScheduleStateFailed    ScheduleState = "FAILED"
 )
+
+// Values returns all known values for ScheduleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleState) Values() []ScheduleState {
+	return []ScheduleState{
+		"MODIFYING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
 
 type SnapshotAttributeToSortBy string
 
@@ -101,6 +212,17 @@ const (
 	SnapshotAttributeToSortByCreate_time SnapshotAttributeToSortBy = "CREATE_TIME"
 )
 
+// Values returns all known values for SnapshotAttributeToSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotAttributeToSortBy) Values() []SnapshotAttributeToSortBy {
+	return []SnapshotAttributeToSortBy{
+		"SOURCE_TYPE",
+		"TOTAL_SIZE",
+		"CREATE_TIME",
+	}
+}
+
 type SortByOrder string
 
 // Enum values for SortByOrder
@@ -108,6 +230,16 @@ const (
 	SortByOrderAscending  SortByOrder = "ASC"
 	SortByOrderDescending SortByOrder = "DESC"
 )
+
+// Values returns all known values for SortByOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SortByOrder) Values() []SortByOrder {
+	return []SortByOrder{
+		"ASC",
+		"DESC",
+	}
+}
 
 type SourceType string
 
@@ -120,6 +252,19 @@ const (
 	SourceTypeScheduledAction       SourceType = "scheduled-action"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"cluster",
+		"cluster-parameter-group",
+		"cluster-security-group",
+		"cluster-snapshot",
+		"scheduled-action",
+	}
+}
+
 type TableRestoreStatusType string
 
 // Enum values for TableRestoreStatusType
@@ -131,6 +276,19 @@ const (
 	TableRestoreStatusTypeCanceled    TableRestoreStatusType = "CANCELED"
 )
 
+// Values returns all known values for TableRestoreStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableRestoreStatusType) Values() []TableRestoreStatusType {
+	return []TableRestoreStatusType{
+		"PENDING",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
 type UsageLimitBreachAction string
 
 // Enum values for UsageLimitBreachAction
@@ -140,6 +298,17 @@ const (
 	UsageLimitBreachActionDisable     UsageLimitBreachAction = "disable"
 )
 
+// Values returns all known values for UsageLimitBreachAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageLimitBreachAction) Values() []UsageLimitBreachAction {
+	return []UsageLimitBreachAction{
+		"log",
+		"emit-metric",
+		"disable",
+	}
+}
+
 type UsageLimitFeatureType string
 
 // Enum values for UsageLimitFeatureType
@@ -147,6 +316,16 @@ const (
 	UsageLimitFeatureTypeSpectrum            UsageLimitFeatureType = "spectrum"
 	UsageLimitFeatureTypeConcurrency_scaling UsageLimitFeatureType = "concurrency-scaling"
 )
+
+// Values returns all known values for UsageLimitFeatureType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageLimitFeatureType) Values() []UsageLimitFeatureType {
+	return []UsageLimitFeatureType{
+		"spectrum",
+		"concurrency-scaling",
+	}
+}
 
 type UsageLimitLimitType string
 
@@ -156,6 +335,16 @@ const (
 	UsageLimitLimitTypeData_scanned UsageLimitLimitType = "data-scanned"
 )
 
+// Values returns all known values for UsageLimitLimitType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageLimitLimitType) Values() []UsageLimitLimitType {
+	return []UsageLimitLimitType{
+		"time",
+		"data-scanned",
+	}
+}
+
 type UsageLimitPeriod string
 
 // Enum values for UsageLimitPeriod
@@ -164,3 +353,14 @@ const (
 	UsageLimitPeriodWeekly  UsageLimitPeriod = "weekly"
 	UsageLimitPeriodMonthly UsageLimitPeriod = "monthly"
 )
+
+// Values returns all known values for UsageLimitPeriod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageLimitPeriod) Values() []UsageLimitPeriod {
+	return []UsageLimitPeriod{
+		"daily",
+		"weekly",
+		"monthly",
+	}
+}

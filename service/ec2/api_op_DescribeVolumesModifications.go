@@ -18,7 +18,7 @@ import (
 // check the status of a modification to an EBS volume. For information about
 // CloudWatch Events, see the Amazon CloudWatch Events User Guide
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/). For more
-// information, see Monitoring Volume Modifications
+// information, see Monitoring volume modifications
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeVolumesModifications(ctx context.Context, params *DescribeVolumesModificationsInput, optFns ...func(*Options)) (*DescribeVolumesModificationsOutput, error) {
@@ -56,28 +56,28 @@ type DescribeVolumesModificationsInput struct {
 	// the volume, in GiB.
 	//
 	//     * original-volume-type - The original volume type of
-	// the volume (standard | io1 | gp2 | sc1 | st1).
-	//
-	//     * originalMultiAttachEnabled
-	// - Indicates whether Multi-Attach support was enabled (true | false).
+	// the volume (standard | io1 | io2 | gp2 | sc1 | st1).
 	//
 	//     *
-	// start-time - The modification start time.
+	// originalMultiAttachEnabled - Indicates whether Multi-Attach support was enabled
+	// (true | false).
 	//
-	//     * target-iops - The target IOPS
-	// rate of the volume.
+	//     * start-time - The modification start time.
 	//
-	//     * target-size - The target size of the volume, in
-	// GiB.
+	//     *
+	// target-iops - The target IOPS rate of the volume.
 	//
-	//     * target-volume-type - The target volume type of the volume (standard
-	// | io1 | gp2 | sc1 | st1).
+	//     * target-size - The
+	// target size of the volume, in GiB.
 	//
-	//     * targetMultiAttachEnabled - Indicates whether
-	// Multi-Attach support is to be enabled (true | false).
+	//     * target-volume-type - The target volume
+	// type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).
 	//
-	//     * volume-id - The ID
-	// of the volume.
+	//     *
+	// targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be
+	// enabled (true | false).
+	//
+	//     * volume-id - The ID of the volume.
 	Filters []*types.Filter
 
 	// The maximum number of results (up to a limit of 500) to be returned in a

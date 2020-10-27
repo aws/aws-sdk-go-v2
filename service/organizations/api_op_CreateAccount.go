@@ -19,13 +19,13 @@ import (
 // access the account. To check the status of the request, do one of the
 // following:
 //
-//     * Use the OperationId response element from this operation to
-// provide as a parameter to the DescribeCreateAccountStatus operation.
+//     * Use the Id member of the CreateAccountStatus response element
+// from this operation to provide as a parameter to the DescribeCreateAccountStatus
+// operation.
 //
-//     *
-// Check the AWS CloudTrail log for the CreateAccountResult event. For information
-// on using AWS CloudTrail with AWS Organizations, see Monitoring the Activity in
-// Your Organization
+//     * Check the AWS CloudTrail log for the CreateAccountResult
+// event. For information on using AWS CloudTrail with AWS Organizations, see
+// Monitoring the Activity in Your Organization
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 // in the AWS Organizations User Guide.
 //
@@ -35,14 +35,16 @@ import (
 // service-linked role named AWSServiceRoleForOrganizations. For more information,
 // see AWS Organizations and Service-Linked Roles
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
-// in the AWS Organizations User Guide. AWS Organizations preconfigures the new
-// member account with a role (named OrganizationAccountAccessRole by default) that
-// grants users in the master account administrator permissions in the new member
-// account. Principals in the master account can assume the role. AWS Organizations
-// clones the company name and address information for the new account from the
-// organization's master account. This operation can be called only from the
-// organization's master account. For more information about creating accounts, see
-// Creating an AWS Account in Your Organization
+// in the AWS Organizations User Guide. If the request includes tags, then the
+// requester must have the organizations:TagResource permission. AWS Organizations
+// preconfigures the new member account with a role (named
+// OrganizationAccountAccessRole by default) that grants users in the management
+// account administrator permissions in the new member account. Principals in the
+// management account can assume the role. AWS Organizations clones the company
+// name and address information for the new account from the organization's
+// management account. This operation can be called only from the organization's
+// management account. For more information about creating accounts, see Creating
+// an AWS Account in Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the AWS Organizations User Guide.
 //
@@ -123,15 +125,15 @@ type CreateAccountInput struct {
 	IamUserAccessToBilling types.IAMUserAccessToBilling
 
 	// (Optional) The name of an IAM role that AWS Organizations automatically
-	// preconfigures in the new member account. This role trusts the master account,
-	// allowing users in the master account to assume the role, as permitted by the
-	// master account administrator. The role has administrator permissions in the new
-	// member account. If you don't specify this parameter, the role name defaults to
-	// OrganizationAccountAccessRole. For more information about how to use this role
-	// to access the member account, see the following links:
+	// preconfigures in the new member account. This role trusts the management
+	// account, allowing users in the management account to assume the role, as
+	// permitted by the management account administrator. The role has administrator
+	// permissions in the new member account. If you don't specify this parameter, the
+	// role name defaults to OrganizationAccountAccessRole. For more information about
+	// how to use this role to access the member account, see the following links:
 	//
-	//     * Accessing and
-	// Administering the Member Accounts in Your Organization
+	//
+	// * Accessing and Administering the Member Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the AWS Organizations User Guide
 	//
@@ -145,6 +147,16 @@ type CreateAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
+
+	// A list of tags that you want to attach to the newly created account. For each
+	// tag in the list, you must specify both a tag key and a value. You can set the
+	// value to an empty string, but you can't set it to null. For more information
+	// about tagging, see Tagging AWS Organizations resources
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
+	// exceed the allowed number of tags for an account, then the entire request fails
+	// and the account is not created.
+	Tags []*types.Tag
 }
 
 type CreateAccountOutput struct {

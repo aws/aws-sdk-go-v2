@@ -375,11 +375,11 @@ func validateLookupAttribute(v *types.LookupAttribute) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LookupAttribute"}
-	if len(v.AttributeKey) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeKey"))
-	}
 	if v.AttributeValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeValue"))
+	}
+	if len(v.AttributeKey) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -442,13 +442,13 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.TagsList != nil {
 		if err := validateTagsList(v.TagsList); err != nil {
 			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -462,16 +462,16 @@ func validateOpCreateTrailInput(v *CreateTrailInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTrailInput"}
-	if v.S3BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.TagsList != nil {
 		if err := validateTagsList(v.TagsList); err != nil {
 			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -592,11 +592,11 @@ func validateOpPutEventSelectorsInput(v *PutEventSelectorsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEventSelectorsInput"}
-	if v.EventSelectors == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventSelectors"))
-	}
 	if v.TrailName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrailName"))
+	}
+	if v.EventSelectors == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSelectors"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -610,11 +610,11 @@ func validateOpPutInsightSelectorsInput(v *PutInsightSelectorsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutInsightSelectorsInput"}
-	if v.TrailName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrailName"))
-	}
 	if v.InsightSelectors == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InsightSelectors"))
+	}
+	if v.TrailName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrailName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

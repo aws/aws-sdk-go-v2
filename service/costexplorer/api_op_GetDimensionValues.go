@@ -93,69 +93,72 @@ type GetDimensionValuesInput struct {
 	// usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for
 	// this operation includes a unit attribute.
 	//
-	//     * RECORD_TYPE - The different
-	// types of charges such as RI fees, usage costs, tax refunds, and credits.
-	//
-	//     *
-	// RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in
-	// feature only available for last 14 days for EC2-Compute Service.
-	//
-	// If you set the
-	// context to RESERVATIONS, you can use the following dimensions for searching:
-	//
-	//
-	// * AZ - The Availability Zone. An example is us-east-1a.
-	//
-	//     * CACHE_ENGINE -
-	// The Amazon ElastiCache operating system. Examples are Windows or Linux.
-	//
-	//     *
-	// DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.
-	// Valid values are SingleAZ and MultiAZ.
-	//
-	//     * INSTANCE_TYPE - The type of Amazon
-	// EC2 instance. An example is m4.xlarge.
-	//
-	//     * LINKED_ACCOUNT - The description
-	// in the attribute map that includes the full name of the member account. The
-	// value field contains the AWS ID of the member account.
-	//
-	//     * PLATFORM - The
-	// Amazon EC2 operating system. Examples are Windows or Linux.
-	//
-	//     * REGION - The
-	// AWS Region.
-	//
-	//     * SCOPE (Utilization only) - The scope of a Reserved Instance
-	// (RI). Values are regional or a single Availability Zone.
-	//
-	//     * TAG (Coverage
-	// only) - The tags that are associated with a Reserved Instance (RI).
-	//
-	//     *
-	// TENANCY - The tenancy of a resource. Examples are shared or dedicated.
-	//
-	// If you
-	// set the context to SAVINGS_PLANS, you can use the following dimensions for
-	// searching:
-	//
-	//     * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or
-	// Compute)
-	//
-	//     * PAYMENT_OPTION - Payment option for the given Savings Plans (for
-	// example, All Upfront)
-	//
 	//     * REGION - The AWS Region.
 	//
 	//     *
-	// INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
+	// RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax
+	// refunds, and credits.
+	//
+	//     * RESOURCE_ID - The unique identifier of the
+	// resource. ResourceId is an opt-in feature only available for last 14 days for
+	// EC2-Compute Service.
+	//
+	// If you set the context to RESERVATIONS, you can use the
+	// following dimensions for searching:
+	//
+	//     * AZ - The Availability Zone. An
+	// example is us-east-1a.
+	//
+	//     * CACHE_ENGINE - The Amazon ElastiCache operating
+	// system. Examples are Windows or Linux.
+	//
+	//     * DEPLOYMENT_OPTION - The scope of
+	// Amazon Relational Database Service deployments. Valid values are SingleAZ and
+	// MultiAZ.
+	//
+	//     * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is
+	// m4.xlarge.
+	//
+	//     * LINKED_ACCOUNT - The description in the attribute map that
+	// includes the full name of the member account. The value field contains the AWS
+	// ID of the member account.
+	//
+	//     * PLATFORM - The Amazon EC2 operating system.
+	// Examples are Windows or Linux.
+	//
+	//     * REGION - The AWS Region.
+	//
+	//     * SCOPE
+	// (Utilization only) - The scope of a Reserved Instance (RI). Values are regional
+	// or a single Availability Zone.
+	//
+	//     * TAG (Coverage only) - The tags that are
+	// associated with a Reserved Instance (RI).
+	//
+	//     * TENANCY - The tenancy of a
+	// resource. Examples are shared or dedicated.
+	//
+	// If you set the context to
+	// SAVINGS_PLANS, you can use the following dimensions for searching:
 	//
 	//     *
-	// LINKED_ACCOUNT - The description in the attribute map that includes the full
-	// name of the member account. The value field contains the AWS ID of the member
-	// account.
+	// SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)
 	//
-	//     * SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan
+	//     *
+	// PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All
+	// Upfront)
+	//
+	//     * REGION - The AWS Region.
+	//
+	//     * INSTANCE_TYPE_FAMILY - The
+	// family of instances (For example, m5)
+	//
+	//     * LINKED_ACCOUNT - The description in
+	// the attribute map that includes the full name of the member account. The value
+	// field contains the AWS ID of the member account.
+	//
+	//     * SAVINGS_PLAN_ARN - The
+	// unique identifier for your Savings Plan
 	Context types.Context
 
 	// The token to retrieve the next set of results. AWS provides the token when the

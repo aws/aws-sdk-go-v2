@@ -10,6 +10,16 @@ const (
 	AdminStatusDisable_in_progress AdminStatus = "DISABLE_IN_PROGRESS"
 )
 
+// Values returns all known values for AdminStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AdminStatus) Values() []AdminStatus {
+	return []AdminStatus{
+		"ENABLED",
+		"DISABLE_IN_PROGRESS",
+	}
+}
+
 type DataSource string
 
 // Enum values for DataSource
@@ -20,6 +30,18 @@ const (
 	DataSourceS3_logs     DataSource = "S3_LOGS"
 )
 
+// Values returns all known values for DataSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataSource) Values() []DataSource {
+	return []DataSource{
+		"FLOW_LOGS",
+		"CLOUD_TRAIL",
+		"DNS_LOGS",
+		"S3_LOGS",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
@@ -28,12 +50,31 @@ const (
 	DataSourceStatusDisabled DataSourceStatus = "DISABLED"
 )
 
+// Values returns all known values for DataSourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceStatus) Values() []DataSourceStatus {
+	return []DataSourceStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType
 const (
 	DestinationTypeS3 DestinationType = "S3"
 )
+
+// Values returns all known values for DestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationType) Values() []DestinationType {
+	return []DestinationType{
+		"S3",
+	}
+}
 
 type DetectorStatus string
 
@@ -43,6 +84,16 @@ const (
 	DetectorStatusDisabled DetectorStatus = "DISABLED"
 )
 
+// Values returns all known values for DetectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetectorStatus) Values() []DetectorStatus {
+	return []DetectorStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Feedback string
 
 // Enum values for Feedback
@@ -51,6 +102,16 @@ const (
 	FeedbackNot_useful Feedback = "NOT_USEFUL"
 )
 
+// Values returns all known values for Feedback. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Feedback) Values() []Feedback {
+	return []Feedback{
+		"USEFUL",
+		"NOT_USEFUL",
+	}
+}
+
 type FilterAction string
 
 // Enum values for FilterAction
@@ -58,6 +119,16 @@ const (
 	FilterActionNoop    FilterAction = "NOOP"
 	FilterActionArchive FilterAction = "ARCHIVE"
 )
+
+// Values returns all known values for FilterAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FilterAction) Values() []FilterAction {
+	return []FilterAction{
+		"NOOP",
+		"ARCHIVE",
+	}
+}
 
 type FindingPublishingFrequency string
 
@@ -68,12 +139,32 @@ const (
 	FindingPublishingFrequencySix_hours       FindingPublishingFrequency = "SIX_HOURS"
 )
 
+// Values returns all known values for FindingPublishingFrequency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingPublishingFrequency) Values() []FindingPublishingFrequency {
+	return []FindingPublishingFrequency{
+		"FIFTEEN_MINUTES",
+		"ONE_HOUR",
+		"SIX_HOURS",
+	}
+}
+
 type FindingStatisticType string
 
 // Enum values for FindingStatisticType
 const (
 	FindingStatisticTypeCount_by_severity FindingStatisticType = "COUNT_BY_SEVERITY"
 )
+
+// Values returns all known values for FindingStatisticType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingStatisticType) Values() []FindingStatisticType {
+	return []FindingStatisticType{
+		"COUNT_BY_SEVERITY",
+	}
+}
 
 type IpSetFormat string
 
@@ -86,6 +177,20 @@ const (
 	IpSetFormatProof_point IpSetFormat = "PROOF_POINT"
 	IpSetFormatFire_eye    IpSetFormat = "FIRE_EYE"
 )
+
+// Values returns all known values for IpSetFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IpSetFormat) Values() []IpSetFormat {
+	return []IpSetFormat{
+		"TXT",
+		"STIX",
+		"OTX_CSV",
+		"ALIEN_VAULT",
+		"PROOF_POINT",
+		"FIRE_EYE",
+	}
+}
 
 type IpSetStatus string
 
@@ -100,6 +205,21 @@ const (
 	IpSetStatusDeleted        IpSetStatus = "DELETED"
 )
 
+// Values returns all known values for IpSetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IpSetStatus) Values() []IpSetStatus {
+	return []IpSetStatus{
+		"INACTIVE",
+		"ACTIVATING",
+		"ACTIVE",
+		"DEACTIVATING",
+		"ERROR",
+		"DELETE_PENDING",
+		"DELETED",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -107,6 +227,16 @@ const (
 	OrderByAsc  OrderBy = "ASC"
 	OrderByDesc OrderBy = "DESC"
 )
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"ASC",
+		"DESC",
+	}
+}
 
 type PublishingStatus string
 
@@ -117,6 +247,18 @@ const (
 	PublishingStatusUnable_to_publish_fix_destination_property PublishingStatus = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
 	PublishingStatusStopped                                    PublishingStatus = "STOPPED"
 )
+
+// Values returns all known values for PublishingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PublishingStatus) Values() []PublishingStatus {
+	return []PublishingStatus{
+		"PENDING_VERIFICATION",
+		"PUBLISHING",
+		"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
+		"STOPPED",
+	}
+}
 
 type ThreatIntelSetFormat string
 
@@ -129,6 +271,20 @@ const (
 	ThreatIntelSetFormatProof_point ThreatIntelSetFormat = "PROOF_POINT"
 	ThreatIntelSetFormatFire_eye    ThreatIntelSetFormat = "FIRE_EYE"
 )
+
+// Values returns all known values for ThreatIntelSetFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatIntelSetFormat) Values() []ThreatIntelSetFormat {
+	return []ThreatIntelSetFormat{
+		"TXT",
+		"STIX",
+		"OTX_CSV",
+		"ALIEN_VAULT",
+		"PROOF_POINT",
+		"FIRE_EYE",
+	}
+}
 
 type ThreatIntelSetStatus string
 
@@ -143,6 +299,21 @@ const (
 	ThreatIntelSetStatusDeleted        ThreatIntelSetStatus = "DELETED"
 )
 
+// Values returns all known values for ThreatIntelSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatIntelSetStatus) Values() []ThreatIntelSetStatus {
+	return []ThreatIntelSetStatus{
+		"INACTIVE",
+		"ACTIVATING",
+		"ACTIVE",
+		"DEACTIVATING",
+		"ERROR",
+		"DELETE_PENDING",
+		"DELETED",
+	}
+}
+
 type UsageStatisticType string
 
 // Enum values for UsageStatisticType
@@ -152,3 +323,15 @@ const (
 	UsageStatisticTypeSum_by_resource    UsageStatisticType = "SUM_BY_RESOURCE"
 	UsageStatisticTypeTop_resources      UsageStatisticType = "TOP_RESOURCES"
 )
+
+// Values returns all known values for UsageStatisticType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UsageStatisticType) Values() []UsageStatisticType {
+	return []UsageStatisticType{
+		"SUM_BY_ACCOUNT",
+		"SUM_BY_DATA_SOURCE",
+		"SUM_BY_RESOURCE",
+		"TOP_RESOURCES",
+	}
+}

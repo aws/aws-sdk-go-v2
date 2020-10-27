@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes existing launch configuration for an application.
+// Deletes the launch configuration for the specified application.
 func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *DeleteAppLaunchConfigurationInput, optFns ...func(*Options)) (*DeleteAppLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAppLaunchConfigurationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *Delet
 
 type DeleteAppLaunchConfigurationInput struct {
 
-	// ID of the application associated with the launch configuration.
+	// The ID of the application.
 	AppId *string
 }
 

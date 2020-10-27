@@ -18,10 +18,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html). The
 // following operations are related to PutBucketRequestPayment:
 //
-//     *
-// CreateBucket
+//     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     * GetBucketRequestPayment
+//     *
+// GetBucketRequestPayment
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketRequestPayment.html)
 func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketRequestPaymentInput, optFns ...func(*Options)) (*PutBucketRequestPaymentOutput, error) {
 	if params == nil {
 		params = &PutBucketRequestPaymentInput{}
@@ -54,6 +56,10 @@ type PutBucketRequestPaymentInput struct {
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketRequestPaymentOutput struct {

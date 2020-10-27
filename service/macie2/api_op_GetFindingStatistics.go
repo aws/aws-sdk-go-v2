@@ -39,7 +39,7 @@ type GetFindingStatisticsInput struct {
 	// the S3 bucket that the finding applies to.
 	//
 	//     * severity.description - The
-	// severity of the finding, such as High or Medium.
+	// severity level of the finding, such as High or Medium.
 	//
 	//     * type - The type of
 	// finding, such as Policy:IAMUser/S3BucketPublic and

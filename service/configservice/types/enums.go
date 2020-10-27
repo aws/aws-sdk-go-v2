@@ -11,6 +11,17 @@ const (
 	AggregatedSourceStatusTypeOutdated  AggregatedSourceStatusType = "OUTDATED"
 )
 
+// Values returns all known values for AggregatedSourceStatusType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregatedSourceStatusType) Values() []AggregatedSourceStatusType {
+	return []AggregatedSourceStatusType{
+		"FAILED",
+		"SUCCEEDED",
+		"OUTDATED",
+	}
+}
+
 type AggregatedSourceType string
 
 // Enum values for AggregatedSourceType
@@ -19,6 +30,16 @@ const (
 	AggregatedSourceTypeOrganization AggregatedSourceType = "ORGANIZATION"
 )
 
+// Values returns all known values for AggregatedSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregatedSourceType) Values() []AggregatedSourceType {
+	return []AggregatedSourceType{
+		"ACCOUNT",
+		"ORGANIZATION",
+	}
+}
+
 type ChronologicalOrder string
 
 // Enum values for ChronologicalOrder
@@ -26,6 +47,16 @@ const (
 	ChronologicalOrderReverse ChronologicalOrder = "Reverse"
 	ChronologicalOrderForward ChronologicalOrder = "Forward"
 )
+
+// Values returns all known values for ChronologicalOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChronologicalOrder) Values() []ChronologicalOrder {
+	return []ChronologicalOrder{
+		"Reverse",
+		"Forward",
+	}
+}
 
 type ComplianceType string
 
@@ -37,6 +68,18 @@ const (
 	ComplianceTypeInsufficient_data ComplianceType = "INSUFFICIENT_DATA"
 )
 
+// Values returns all known values for ComplianceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComplianceType) Values() []ComplianceType {
+	return []ComplianceType{
+		"COMPLIANT",
+		"NON_COMPLIANT",
+		"NOT_APPLICABLE",
+		"INSUFFICIENT_DATA",
+	}
+}
+
 type ConfigRuleComplianceSummaryGroupKey string
 
 // Enum values for ConfigRuleComplianceSummaryGroupKey
@@ -44,6 +87,17 @@ const (
 	ConfigRuleComplianceSummaryGroupKeyAccount_id ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"
 	ConfigRuleComplianceSummaryGroupKeyAws_region ConfigRuleComplianceSummaryGroupKey = "AWS_REGION"
 )
+
+// Values returns all known values for ConfigRuleComplianceSummaryGroupKey. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConfigRuleComplianceSummaryGroupKey) Values() []ConfigRuleComplianceSummaryGroupKey {
+	return []ConfigRuleComplianceSummaryGroupKey{
+		"ACCOUNT_ID",
+		"AWS_REGION",
+	}
+}
 
 type ConfigRuleState string
 
@@ -54,6 +108,18 @@ const (
 	ConfigRuleStateDeleting_results ConfigRuleState = "DELETING_RESULTS"
 	ConfigRuleStateEvaluating       ConfigRuleState = "EVALUATING"
 )
+
+// Values returns all known values for ConfigRuleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigRuleState) Values() []ConfigRuleState {
+	return []ConfigRuleState{
+		"ACTIVE",
+		"DELETING",
+		"DELETING_RESULTS",
+		"EVALUATING",
+	}
+}
 
 type ConfigurationItemStatus string
 
@@ -66,6 +132,19 @@ const (
 	ConfigurationItemStatusResourcedeletednotrecorded ConfigurationItemStatus = "ResourceDeletedNotRecorded"
 )
 
+// Values returns all known values for ConfigurationItemStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationItemStatus) Values() []ConfigurationItemStatus {
+	return []ConfigurationItemStatus{
+		"OK",
+		"ResourceDiscovered",
+		"ResourceNotRecorded",
+		"ResourceDeleted",
+		"ResourceDeletedNotRecorded",
+	}
+}
+
 type ConformancePackComplianceType string
 
 // Enum values for ConformancePackComplianceType
@@ -73,6 +152,17 @@ const (
 	ConformancePackComplianceTypeCompliant     ConformancePackComplianceType = "COMPLIANT"
 	ConformancePackComplianceTypeNon_compliant ConformancePackComplianceType = "NON_COMPLIANT"
 )
+
+// Values returns all known values for ConformancePackComplianceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConformancePackComplianceType) Values() []ConformancePackComplianceType {
+	return []ConformancePackComplianceType{
+		"COMPLIANT",
+		"NON_COMPLIANT",
+	}
+}
 
 type ConformancePackState string
 
@@ -85,6 +175,19 @@ const (
 	ConformancePackStateDelete_failed      ConformancePackState = "DELETE_FAILED"
 )
 
+// Values returns all known values for ConformancePackState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConformancePackState) Values() []ConformancePackState {
+	return []ConformancePackState{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -94,12 +197,32 @@ const (
 	DeliveryStatusNot_applicable DeliveryStatus = "Not_Applicable"
 )
 
+// Values returns all known values for DeliveryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeliveryStatus) Values() []DeliveryStatus {
+	return []DeliveryStatus{
+		"Success",
+		"Failure",
+		"Not_Applicable",
+	}
+}
+
 type EventSource string
 
 // Enum values for EventSource
 const (
 	EventSourceAws_config EventSource = "aws.config"
 )
+
+// Values returns all known values for EventSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EventSource) Values() []EventSource {
+	return []EventSource{
+		"aws.config",
+	}
+}
 
 type MaximumExecutionFrequency string
 
@@ -111,6 +234,19 @@ const (
 	MaximumExecutionFrequencyTwelve_hours     MaximumExecutionFrequency = "Twelve_Hours"
 	MaximumExecutionFrequencyTwentyfour_hours MaximumExecutionFrequency = "TwentyFour_Hours"
 )
+
+// Values returns all known values for MaximumExecutionFrequency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaximumExecutionFrequency) Values() []MaximumExecutionFrequency {
+	return []MaximumExecutionFrequency{
+		"One_Hour",
+		"Three_Hours",
+		"Six_Hours",
+		"Twelve_Hours",
+		"TwentyFour_Hours",
+	}
+}
 
 type MemberAccountRuleStatus string
 
@@ -127,6 +263,23 @@ const (
 	MemberAccountRuleStatusUpdate_failed      MemberAccountRuleStatus = "UPDATE_FAILED"
 )
 
+// Values returns all known values for MemberAccountRuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MemberAccountRuleStatus) Values() []MemberAccountRuleStatus {
+	return []MemberAccountRuleStatus{
+		"CREATE_SUCCESSFUL",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_SUCCESSFUL",
+		"DELETE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+	}
+}
+
 type MessageType string
 
 // Enum values for MessageType
@@ -137,6 +290,18 @@ const (
 	MessageTypeOversizedconfigurationitemchangenotification MessageType = "OversizedConfigurationItemChangeNotification"
 )
 
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MessageType) Values() []MessageType {
+	return []MessageType{
+		"ConfigurationItemChangeNotification",
+		"ConfigurationSnapshotDeliveryCompleted",
+		"ScheduledNotification",
+		"OversizedConfigurationItemChangeNotification",
+	}
+}
+
 type OrganizationConfigRuleTriggerType string
 
 // Enum values for OrganizationConfigRuleTriggerType
@@ -145,6 +310,18 @@ const (
 	OrganizationConfigRuleTriggerTypeOversized_configuration_item_change_notifcation OrganizationConfigRuleTriggerType = "OversizedConfigurationItemChangeNotification"
 	OrganizationConfigRuleTriggerTypeScheduled_notification                          OrganizationConfigRuleTriggerType = "ScheduledNotification"
 )
+
+// Values returns all known values for OrganizationConfigRuleTriggerType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationConfigRuleTriggerType) Values() []OrganizationConfigRuleTriggerType {
+	return []OrganizationConfigRuleTriggerType{
+		"ConfigurationItemChangeNotification",
+		"OversizedConfigurationItemChangeNotification",
+		"ScheduledNotification",
+	}
+}
 
 type OrganizationResourceDetailedStatus string
 
@@ -161,6 +338,24 @@ const (
 	OrganizationResourceDetailedStatusUpdate_failed      OrganizationResourceDetailedStatus = "UPDATE_FAILED"
 )
 
+// Values returns all known values for OrganizationResourceDetailedStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationResourceDetailedStatus) Values() []OrganizationResourceDetailedStatus {
+	return []OrganizationResourceDetailedStatus{
+		"CREATE_SUCCESSFUL",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_SUCCESSFUL",
+		"DELETE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+	}
+}
+
 type OrganizationResourceStatus string
 
 // Enum values for OrganizationResourceStatus
@@ -175,6 +370,23 @@ const (
 	OrganizationResourceStatusUpdate_in_progress OrganizationResourceStatus = "UPDATE_IN_PROGRESS"
 	OrganizationResourceStatusUpdate_failed      OrganizationResourceStatus = "UPDATE_FAILED"
 )
+
+// Values returns all known values for OrganizationResourceStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationResourceStatus) Values() []OrganizationResourceStatus {
+	return []OrganizationResourceStatus{
+		"CREATE_SUCCESSFUL",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_SUCCESSFUL",
+		"DELETE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+	}
+}
 
 type OrganizationRuleStatus string
 
@@ -191,6 +403,23 @@ const (
 	OrganizationRuleStatusUpdate_failed      OrganizationRuleStatus = "UPDATE_FAILED"
 )
 
+// Values returns all known values for OrganizationRuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationRuleStatus) Values() []OrganizationRuleStatus {
+	return []OrganizationRuleStatus{
+		"CREATE_SUCCESSFUL",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_SUCCESSFUL",
+		"DELETE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+	}
+}
+
 type Owner string
 
 // Enum values for Owner
@@ -198,6 +427,16 @@ const (
 	OwnerCustom_lambda Owner = "CUSTOM_LAMBDA"
 	OwnerAws           Owner = "AWS"
 )
+
+// Values returns all known values for Owner. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Owner) Values() []Owner {
+	return []Owner{
+		"CUSTOM_LAMBDA",
+		"AWS",
+	}
+}
 
 type RecorderStatus string
 
@@ -207,6 +446,17 @@ const (
 	RecorderStatusSuccess RecorderStatus = "Success"
 	RecorderStatusFailure RecorderStatus = "Failure"
 )
+
+// Values returns all known values for RecorderStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecorderStatus) Values() []RecorderStatus {
+	return []RecorderStatus{
+		"Pending",
+		"Success",
+		"Failure",
+	}
+}
 
 type RemediationExecutionState string
 
@@ -218,6 +468,18 @@ const (
 	RemediationExecutionStateFailed      RemediationExecutionState = "FAILED"
 )
 
+// Values returns all known values for RemediationExecutionState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationExecutionState) Values() []RemediationExecutionState {
+	return []RemediationExecutionState{
+		"QUEUED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type RemediationExecutionStepState string
 
 // Enum values for RemediationExecutionStepState
@@ -227,12 +489,33 @@ const (
 	RemediationExecutionStepStateFailed    RemediationExecutionStepState = "FAILED"
 )
 
+// Values returns all known values for RemediationExecutionStepState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RemediationExecutionStepState) Values() []RemediationExecutionStepState {
+	return []RemediationExecutionStepState{
+		"SUCCEEDED",
+		"PENDING",
+		"FAILED",
+	}
+}
+
 type RemediationTargetType string
 
 // Enum values for RemediationTargetType
 const (
 	RemediationTargetTypeSsm_document RemediationTargetType = "SSM_DOCUMENT"
 )
+
+// Values returns all known values for RemediationTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationTargetType) Values() []RemediationTargetType {
+	return []RemediationTargetType{
+		"SSM_DOCUMENT",
+	}
+}
 
 type ResourceCountGroupKey string
 
@@ -242,6 +525,17 @@ const (
 	ResourceCountGroupKeyAccount_id    ResourceCountGroupKey = "ACCOUNT_ID"
 	ResourceCountGroupKeyAws_region    ResourceCountGroupKey = "AWS_REGION"
 )
+
+// Values returns all known values for ResourceCountGroupKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCountGroupKey) Values() []ResourceCountGroupKey {
+	return []ResourceCountGroupKey{
+		"RESOURCE_TYPE",
+		"ACCOUNT_ID",
+		"AWS_REGION",
+	}
+}
 
 type ResourceType string
 
@@ -342,9 +636,119 @@ const (
 	ResourceTypeFiledata                         ResourceType = "AWS::SSM::FileData"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"AWS::EC2::CustomerGateway",
+		"AWS::EC2::EIP",
+		"AWS::EC2::Host",
+		"AWS::EC2::Instance",
+		"AWS::EC2::InternetGateway",
+		"AWS::EC2::NetworkAcl",
+		"AWS::EC2::NetworkInterface",
+		"AWS::EC2::RouteTable",
+		"AWS::EC2::SecurityGroup",
+		"AWS::EC2::Subnet",
+		"AWS::CloudTrail::Trail",
+		"AWS::EC2::Volume",
+		"AWS::EC2::VPC",
+		"AWS::EC2::VPNConnection",
+		"AWS::EC2::VPNGateway",
+		"AWS::EC2::RegisteredHAInstance",
+		"AWS::EC2::NatGateway",
+		"AWS::EC2::EgressOnlyInternetGateway",
+		"AWS::EC2::VPCEndpoint",
+		"AWS::EC2::VPCEndpointService",
+		"AWS::EC2::FlowLog",
+		"AWS::EC2::VPCPeeringConnection",
+		"AWS::Elasticsearch::Domain",
+		"AWS::IAM::Group",
+		"AWS::IAM::Policy",
+		"AWS::IAM::Role",
+		"AWS::IAM::User",
+		"AWS::ElasticLoadBalancingV2::LoadBalancer",
+		"AWS::ACM::Certificate",
+		"AWS::RDS::DBInstance",
+		"AWS::RDS::DBSubnetGroup",
+		"AWS::RDS::DBSecurityGroup",
+		"AWS::RDS::DBSnapshot",
+		"AWS::RDS::DBCluster",
+		"AWS::RDS::DBClusterSnapshot",
+		"AWS::RDS::EventSubscription",
+		"AWS::S3::Bucket",
+		"AWS::S3::AccountPublicAccessBlock",
+		"AWS::Redshift::Cluster",
+		"AWS::Redshift::ClusterSnapshot",
+		"AWS::Redshift::ClusterParameterGroup",
+		"AWS::Redshift::ClusterSecurityGroup",
+		"AWS::Redshift::ClusterSubnetGroup",
+		"AWS::Redshift::EventSubscription",
+		"AWS::SSM::ManagedInstanceInventory",
+		"AWS::CloudWatch::Alarm",
+		"AWS::CloudFormation::Stack",
+		"AWS::ElasticLoadBalancing::LoadBalancer",
+		"AWS::AutoScaling::AutoScalingGroup",
+		"AWS::AutoScaling::LaunchConfiguration",
+		"AWS::AutoScaling::ScalingPolicy",
+		"AWS::AutoScaling::ScheduledAction",
+		"AWS::DynamoDB::Table",
+		"AWS::CodeBuild::Project",
+		"AWS::WAF::RateBasedRule",
+		"AWS::WAF::Rule",
+		"AWS::WAF::RuleGroup",
+		"AWS::WAF::WebACL",
+		"AWS::WAFRegional::RateBasedRule",
+		"AWS::WAFRegional::Rule",
+		"AWS::WAFRegional::RuleGroup",
+		"AWS::WAFRegional::WebACL",
+		"AWS::CloudFront::Distribution",
+		"AWS::CloudFront::StreamingDistribution",
+		"AWS::Lambda::Function",
+		"AWS::ElasticBeanstalk::Application",
+		"AWS::ElasticBeanstalk::ApplicationVersion",
+		"AWS::ElasticBeanstalk::Environment",
+		"AWS::WAFv2::WebACL",
+		"AWS::WAFv2::RuleGroup",
+		"AWS::WAFv2::IPSet",
+		"AWS::WAFv2::RegexPatternSet",
+		"AWS::WAFv2::ManagedRuleSet",
+		"AWS::XRay::EncryptionConfig",
+		"AWS::SSM::AssociationCompliance",
+		"AWS::SSM::PatchCompliance",
+		"AWS::Shield::Protection",
+		"AWS::ShieldRegional::Protection",
+		"AWS::Config::ResourceCompliance",
+		"AWS::ApiGateway::Stage",
+		"AWS::ApiGateway::RestApi",
+		"AWS::ApiGatewayV2::Stage",
+		"AWS::ApiGatewayV2::Api",
+		"AWS::CodePipeline::Pipeline",
+		"AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+		"AWS::ServiceCatalog::CloudFormationProduct",
+		"AWS::ServiceCatalog::Portfolio",
+		"AWS::SQS::Queue",
+		"AWS::KMS::Key",
+		"AWS::QLDB::Ledger",
+		"AWS::SecretsManager::Secret",
+		"AWS::SNS::Topic",
+		"AWS::SSM::FileData",
+	}
+}
+
 type ResourceValueType string
 
 // Enum values for ResourceValueType
 const (
 	ResourceValueTypeResource_id ResourceValueType = "RESOURCE_ID"
 )
+
+// Values returns all known values for ResourceValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceValueType) Values() []ResourceValueType {
+	return []ResourceValueType{
+		"RESOURCE_ID",
+	}
+}

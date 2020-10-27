@@ -43,7 +43,7 @@ type DescribeDBEngineVersionsInput struct {
 	// The database engine to return.
 	Engine *string
 
-	// The database engine version to return. Example: 5.1.49
+	// The database engine version to return. Example: 3.6.0
 	EngineVersion *string
 
 	// This parameter is not currently supported.

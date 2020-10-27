@@ -6793,6 +6793,15 @@ func awsAwsjson11_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 				return err
 			}
 
+		case "ManagedByFirewallManager":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ManagedByFirewallManager = &jtv
+			}
+
 		case "RedactedFields":
 			if err := awsAwsjson11_deserializeDocumentRedactedFields(&sv.RedactedFields, value); err != nil {
 				return err

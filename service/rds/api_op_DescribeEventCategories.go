@@ -13,9 +13,9 @@ import (
 
 // Displays a list of categories for all event source types, or, if specified, for
 // a specified source type. You can see a list of the event categories and source
-// types in the  Events
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) topic
-// in the Amazon RDS User Guide.
+// types in  Events
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the
+// Amazon RDS User Guide.
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
 		params = &DescribeEventCategoriesInput{}
@@ -38,11 +38,12 @@ type DescribeEventCategoriesInput struct {
 	Filters []*types.Filter
 
 	// The type of source that is generating the events. Valid values: db-instance |
-	// db-parameter-group | db-security-group | db-snapshot
+	// db-cluster | db-parameter-group | db-security-group | db-snapshot |
+	// db-cluster-snapshot
 	SourceType *string
 }
 
-// Data returned from the DescribeEventCategories action.
+// Data returned from the DescribeEventCategories operation.
 type DescribeEventCategoriesOutput struct {
 
 	// A list of EventCategoriesMap data types.

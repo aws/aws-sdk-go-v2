@@ -34,10 +34,10 @@ type CreateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// A list of metrics whose data is retained (stored). By default, data is retained
+	// Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
+	// list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here. Note: This API field is deprecated. Please use
-	// CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+	// metric specified here.
 	AdditionalMetricsToRetain []*string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained

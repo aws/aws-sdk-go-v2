@@ -25,12 +25,15 @@ import (
 //
 //     *
 // MaximumRecordAgeInSeconds - Discard records older than the specified age.
+// Default -1 (infinite). Minimum 60. Maximum 604800.
 //
-//     *
-// MaximumRetryAttempts - Discard records after the specified number of retries.
+//     * MaximumRetryAttempts -
+// Discard records after the specified number of retries. Default -1 (infinite).
+// Minimum 0. Maximum 10000. When infinite, failed records will be retried until
+// the record expires.
 //
-//
-// * ParallelizationFactor - Process multiple batches from each shard concurrently.
+//     * ParallelizationFactor - Process multiple batches from
+// each shard concurrently.
 func (c *Client) UpdateEventSourceMapping(ctx context.Context, params *UpdateEventSourceMappingInput, optFns ...func(*Options)) (*UpdateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &UpdateEventSourceMappingInput{}
@@ -62,6 +65,9 @@ type UpdateEventSourceMappingInput struct {
 	// 1,000.
 	//
 	//     * Amazon Simple Queue Service - Default 10. Max 10.
+	//
+	//     * Amazon
+	// Managed Streaming for Apache Kafka - Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams) If the function returns an error, split the batch in two and retry.
@@ -71,7 +77,8 @@ type UpdateEventSourceMappingInput struct {
 	// records.
 	DestinationConfig *types.DestinationConfig
 
-	// Disables the event source mapping to pause polling and invocation.
+	// If true, the event source mapping is active. Set to false to pause polling and
+	// invocation.
 	Enabled *bool
 
 	// The name of the Lambda function. Name formats
@@ -97,12 +104,13 @@ type UpdateEventSourceMappingInput struct {
 	// function, in seconds.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams) The maximum age of a record that Lambda sends to a function for
-	// processing.
+	// (Streams) Discard records older than the specified age. The default value is
+	// infinite (-1).
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams) The maximum number of times to retry when the function returns an
-	// error.
+	// (Streams) Discard records after the specified number of retries. The default
+	// value is infinite (-1). When set to infinite (-1), failed records will be
+	// retried until the record expires.
 	MaximumRetryAttempts *int32
 
 	// (Streams) The number of batches to process from each shard concurrently.
@@ -157,6 +165,9 @@ type UpdateEventSourceMappingOutput struct {
 	// Indicates whether the last change to the event source mapping was made by a
 	// user, or by the Lambda service.
 	StateTransitionReason *string
+
+	// (MSK) The name of the Kafka topic.
+	Topics []*string
 
 	// The identifier of the event source mapping.
 	UUID *string

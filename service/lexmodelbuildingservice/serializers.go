@@ -2556,6 +2556,11 @@ func awsRestjson1_serializeOpDocumentPutBotInput(v *PutBotInput, value smithyjso
 		ok.Boolean(*v.DetectSentiment)
 	}
 
+	if v.EnableModelImprovements != nil {
+		ok := object.Key("enableModelImprovements")
+		ok.Boolean(*v.EnableModelImprovements)
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -2571,6 +2576,11 @@ func awsRestjson1_serializeOpDocumentPutBotInput(v *PutBotInput, value smithyjso
 	if len(v.Locale) > 0 {
 		ok := object.Key("locale")
 		ok.String(string(v.Locale))
+	}
+
+	if v.NluIntentConfidenceThreshold != nil {
+		ok := object.Key("nluIntentConfidenceThreshold")
+		ok.Double(*v.NluIntentConfidenceThreshold)
 	}
 
 	if len(v.ProcessBehavior) > 0 {

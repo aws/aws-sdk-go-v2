@@ -30,6 +30,26 @@ func (m *validateOpAssociateRepository) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCodeReview struct {
+}
+
+func (*validateOpCreateCodeReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCodeReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCodeReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCodeReviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCodeReview struct {
 }
 
@@ -194,6 +214,10 @@ func addOpAssociateRepositoryValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpAssociateRepository{}, middleware.After)
 }
 
+func addOpCreateCodeReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCodeReview{}, middleware.After)
+}
+
 func addOpDescribeCodeReviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCodeReview{}, middleware.After)
 }
@@ -241,6 +265,25 @@ func validateCodeCommitRepository(v *types.CodeCommitRepository) error {
 	}
 }
 
+func validateCodeReviewType(v *types.CodeReviewType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeReviewType"}
+	if v.RepositoryAnalysis == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryAnalysis"))
+	} else if v.RepositoryAnalysis != nil {
+		if err := validateRepositoryAnalysis(v.RepositoryAnalysis); err != nil {
+			invalidParams.AddNested("RepositoryAnalysis", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRepository(v *types.Repository) error {
 	if v == nil {
 		return nil
@@ -251,15 +294,49 @@ func validateRepository(v *types.Repository) error {
 			invalidParams.AddNested("GitHubEnterpriseServer", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CodeCommit != nil {
+		if err := validateCodeCommitRepository(v.CodeCommit); err != nil {
+			invalidParams.AddNested("CodeCommit", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Bitbucket != nil {
 		if err := validateThirdPartySourceRepository(v.Bitbucket); err != nil {
 			invalidParams.AddNested("Bitbucket", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CodeCommit != nil {
-		if err := validateCodeCommitRepository(v.CodeCommit); err != nil {
-			invalidParams.AddNested("CodeCommit", err.(smithy.InvalidParamsError))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryAnalysis(v *types.RepositoryAnalysis) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryAnalysis"}
+	if v.RepositoryHead == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryHead"))
+	} else if v.RepositoryHead != nil {
+		if err := validateRepositoryHeadSourceCodeType(v.RepositoryHead); err != nil {
+			invalidParams.AddNested("RepositoryHead", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryHeadSourceCodeType(v *types.RepositoryHeadSourceCodeType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryHeadSourceCodeType"}
+	if v.BranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -273,14 +350,14 @@ func validateThirdPartySourceRepository(v *types.ThirdPartySourceRepository) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ThirdPartySourceRepository"}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
 	if v.Owner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.ConnectionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -299,6 +376,31 @@ func validateOpAssociateRepositoryInput(v *AssociateRepositoryInput) error {
 	} else if v.Repository != nil {
 		if err := validateRepository(v.Repository); err != nil {
 			invalidParams.AddNested("Repository", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeReviewInput"}
+	if v.RepositoryAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryAssociationArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	} else if v.Type != nil {
+		if err := validateCodeReviewType(v.Type); err != nil {
+			invalidParams.AddNested("Type", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -421,14 +523,14 @@ func validateOpPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecommendationFeedbackInput"}
-	if v.Reactions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Reactions"))
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
 	}
 	if v.CodeReviewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewArn"))
 	}
-	if v.RecommendationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	if v.Reactions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reactions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

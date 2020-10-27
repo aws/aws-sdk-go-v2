@@ -11,10 +11,7 @@ import (
 )
 
 // Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the
-// gateway's files remain in your gateway's file system. For more information, see
-// Data retention
-// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-retention.html)
-// in the AWS IoT SiteWise User Guide.
+// gateway's files remain in your gateway's file system.
 func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, optFns ...func(*Options)) (*DeleteGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayInput{}

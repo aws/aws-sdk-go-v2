@@ -45,11 +45,6 @@ type DescribeExecutionOutput struct {
 	// This member is required.
 	ExecutionArn *string
 
-	// The string that contains the JSON input data of the execution.
-	//
-	// This member is required.
-	Input *string
-
 	// The date the execution is started.
 	//
 	// This member is required.
@@ -64,6 +59,14 @@ type DescribeExecutionOutput struct {
 	//
 	// This member is required.
 	Status types.ExecutionStatus
+
+	// The string that contains the JSON input data of the execution. Length
+	// constraints apply to the payload size, and are expressed as bytes in UTF-8
+	// encoding.
+	Input *string
+
+	// Provides details about execution input or output.
+	InputDetails *types.CloudWatchEventsExecutionDataDetails
 
 	// The name of the execution. A name must not contain:
 	//
@@ -84,12 +87,19 @@ type DescribeExecutionOutput struct {
 	// contain 0-9, A-Z, a-z, - and _.
 	Name *string
 
-	// The JSON output data of the execution. This field is set only if the execution
-	// succeeds. If the execution fails, this field is null.
+	// The JSON output data of the execution. Length constraints apply to the payload
+	// size, and are expressed as bytes in UTF-8 encoding. This field is set only if
+	// the execution succeeds. If the execution fails, this field is null.
 	Output *string
+
+	// Provides details about execution input or output.
+	OutputDetails *types.CloudWatchEventsExecutionDataDetails
 
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time
+
+	// The AWS X-Ray trace header which was passed to the execution.
+	TraceHeader *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

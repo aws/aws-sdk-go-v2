@@ -1198,6 +1198,29 @@ func (e *InstanceQuotaExceededFault) ErrorMessage() string {
 func (e *InstanceQuotaExceededFault) ErrorCode() string             { return "InstanceQuotaExceededFault" }
 func (e *InstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested operation can't be performed because there aren't enough available
+// IP addresses in the proxy's subnets. Add more CIDR blocks to the VPC or remove
+// IP address that aren't required from the subnets.
+type InsufficientAvailableIPsInSubnetFault struct {
+	Message *string
+}
+
+func (e *InsufficientAvailableIPsInSubnetFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InsufficientAvailableIPsInSubnetFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InsufficientAvailableIPsInSubnetFault) ErrorCode() string {
+	return "InsufficientAvailableIPsInSubnetFault"
+}
+func (e *InsufficientAvailableIPsInSubnetFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The DB cluster doesn't have enough capacity for the current operation.
 type InsufficientDBClusterCapacityFault struct {
 	Message *string

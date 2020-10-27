@@ -31,7 +31,7 @@ func (c *Client) DeleteReplicationJob(ctx context.Context, params *DeleteReplica
 
 type DeleteReplicationJobInput struct {
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	//
 	// This member is required.
 	ReplicationJobId *string

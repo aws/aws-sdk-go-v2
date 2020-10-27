@@ -133,7 +133,9 @@ type CreateDBClusterInput struct {
 	// The values in the list depend on the DB engine being used. For more information,
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Aurora MySQL Possible values are audit, error,
+	// general, and slowquery. Aurora PostgreSQL Possible values are postgresql and
+	// upgrade.
 	EnableCloudwatchLogsExports []*string
 
 	// A value that indicates whether to enable write operations to be forwarded from
@@ -160,15 +162,19 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
-	// The DB engine mode of the DB cluster, either provisioned, serverless,
-	// parallelquery, global, or multimaster. global engine mode only applies for
-	// global database clusters created with Aurora MySQL version 5.6.10a. For higher
-	// Aurora MySQL versions, the clusters in a global database use provisioned engine
-	// mode. Limitations and requirements apply to some DB engine modes. For more
-	// information, see the following sections in the Amazon Aurora User Guide:
+	// The DB engine mode of the DB cluster, either provisionedserverless,
+	// parallelquery, global, or multimaster. The parallelquery engine mode isn't
+	// required for Aurora MySQL version 1.23 and higher 1.x versions, and version 2.09
+	// and higher 2.x versions. The global engine mode isn't required for Aurora MySQL
+	// version 1.22 and higher 1.x versions, and global engine mode isn't required for
+	// any 2.x versions. The multimaster engine mode only applies for DB clusters
+	// created with Aurora MySQL version 5.6.10a. For Aurora PostgreSQL, the global
+	// engine mode isn't required, and both the parallelquery and the multimaster
+	// engine modes currently aren't supported. Limitations and requirements apply to
+	// some DB engine modes. For more information, see the following sections in the
+	// Amazon Aurora User Guide:
 	//
-	//     *
-	// Limitations of Aurora Serverless
+	//     * Limitations of Aurora Serverless
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//
 	//
@@ -176,7 +182,7 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations)
 	//
 	//
-	// * Requirements for Aurora Global Databases
+	// * Limitations of Aurora Global Databases
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations)
 	//
 	//

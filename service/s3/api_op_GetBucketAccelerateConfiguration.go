@@ -24,16 +24,18 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
 // Amazon Simple Storage Service Developer Guide. You set the Transfer Acceleration
 // state of an existing bucket to Enabled or Suspended by using the
-// PutBucketAccelerateConfiguration operation. A GET accelerate request does not
-// return a state value for a bucket that has no transfer acceleration state. A
-// bucket has no Transfer Acceleration state if a state has never been set on the
-// bucket. For more information about transfer acceleration, see Transfer
-// Acceleration
+// PutBucketAccelerateConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
+// operation. A GET accelerate request does not return a state value for a bucket
+// that has no transfer acceleration state. A bucket has no Transfer Acceleration
+// state if a state has never been set on the bucket. For more information about
+// transfer acceleration, see Transfer Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
 // the Amazon Simple Storage Service Developer Guide. Related Resources
 //
 //     *
 // PutBucketAccelerateConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketAccelerateConfigurationInput{}
@@ -51,10 +53,14 @@ func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *G
 
 type GetBucketAccelerateConfigurationInput struct {
 
-	// Name of the bucket for which the accelerate configuration is retrieved.
+	// The name of the bucket for which the accelerate configuration is retrieved.
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketAccelerateConfigurationOutput struct {

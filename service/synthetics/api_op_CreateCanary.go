@@ -77,7 +77,7 @@ type CreateCanaryInput struct {
 	//     *
 	// logs:CreateLogStream
 	//
-	//     * logs:CreateLogStream
+	//     * logs:PutLogEvents
 	//
 	// This member is required.
 	ExecutionRoleArn *string
@@ -93,8 +93,8 @@ type CreateCanaryInput struct {
 	Name *string
 
 	// Specifies the runtime version to use for the canary. Currently, the only valid
-	// value is syn-1.0. For more information about runtime versions, see  Canary
-	// Runtime Versions
+	// values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more
+	// information about runtime versions, see  Canary Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	//
 	// This member is required.

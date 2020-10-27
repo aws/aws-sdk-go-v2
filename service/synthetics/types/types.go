@@ -36,12 +36,12 @@ type Canary struct {
 	// The name of the canary.
 	Name *string
 
-	// A structure that contains information for a canary run.
+	// A structure that contains information about a canary run.
 	RunConfig *CanaryRunConfigOutput
 
 	// Specifies the runtime version to use for the canary. Currently, the only valid
-	// value is syn-1.0. For more information about runtime versions, see  Canary
-	// Runtime Versions
+	// values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more
+	// information about runtime versions, see  Canary Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	RuntimeVersion *string
 
@@ -129,6 +129,9 @@ type CanaryRun struct {
 	// the log file, screenshots, and HAR files.
 	ArtifactS3Location *string
 
+	// A unique ID that identifies this canary run.
+	Id *string
+
 	// The name of the canary.
 	Name *string
 
@@ -142,23 +145,35 @@ type CanaryRun struct {
 // A structure that contains input information for a canary run.
 type CanaryRunConfigInput struct {
 
-	// How long the canary is allowed to run before it must stop. If you omit this
-	// field, the frequency of the canary is used as this value, up to a maximum of 14
-	// minutes.
-	//
-	// This member is required.
-	TimeoutInSeconds *int32
+	// Specifies whether this canary is to use active AWS X-Ray tracing when it runs.
+	// Active tracing enables this canary run to be displayed in the ServiceLens and
+	// X-Ray service maps even if the canary does not hit an endpoint that has X-ray
+	// tracing enabled. Using X-Ray tracing incurs charges. For more information, see
+	// Canaries and X-Ray tracing
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html).
+	// You can enable active tracing only for canaries that use version syn-nodejs-2.0
+	// or later for their canary runtime.
+	ActiveTracing *bool
 
 	// The maximum amount of memory available to the canary while it is running, in MB.
-	// The value you specify must be a multiple of 64.
+	// This value must be a multiple of 64.
 	MemoryInMB *int32
+
+	// How long the canary is allowed to run before it must stop. You can't set this
+	// time to be longer than the frequency of the runs of this canary. If you omit
+	// this field, the frequency of the canary is used as this value, up to a maximum
+	// of 14 minutes.
+	TimeoutInSeconds *int32
 }
 
-// A structure that contains information for a canary run.
+// A structure that contains information about a canary run.
 type CanaryRunConfigOutput struct {
 
+	// Displays whether this canary run used active AWS X-Ray tracing.
+	ActiveTracing *bool
+
 	// The maximum amount of memory available to the canary while it is running, in MB.
-	// The value you must be a multiple of 64.
+	// This value must be a multiple of 64.
 	MemoryInMB *int32
 
 	// How long the canary is allowed to run before it must stop.
@@ -273,9 +288,8 @@ type RuntimeVersion struct {
 	// The date that the runtime version was released.
 	ReleaseDate *time.Time
 
-	// The name of the runtime version. Currently, the only valid value is syn-1.0.
-	// Specifies the runtime version to use for the canary. Currently, the only valid
-	// value is syn-1.0.
+	// The name of the runtime version. Currently, the only valid values are
+	// syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0.
 	VersionName *string
 }
 

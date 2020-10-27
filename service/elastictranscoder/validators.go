@@ -404,14 +404,14 @@ func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePipelineInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if v.InputBucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputBucket"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -425,11 +425,11 @@ func validateOpCreatePresetInput(v *CreatePresetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePresetInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Container == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Container"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -548,17 +548,17 @@ func validateOpTestRoleInput(v *TestRoleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TestRoleInput"}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
 	if v.OutputBucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputBucket"))
 	}
-	if v.Topics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Topics"))
-	}
 	if v.InputBucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputBucket"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Topics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Topics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -587,11 +587,11 @@ func validateOpUpdatePipelineNotificationsInput(v *UpdatePipelineNotificationsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineNotificationsInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Notifications == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Notifications"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

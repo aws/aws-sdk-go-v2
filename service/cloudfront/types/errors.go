@@ -775,6 +775,24 @@ func (e *InvalidWebACLId) ErrorMessage() string {
 func (e *InvalidWebACLId) ErrorCode() string             { return "InvalidWebACLId" }
 func (e *InvalidWebACLId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A key group with this name already exists. You must provide a unique name. To
+// modify an existing key group, use UpdateKeyGroup.
+type KeyGroupAlreadyExists struct {
+	Message *string
+}
+
+func (e *KeyGroupAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *KeyGroupAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *KeyGroupAlreadyExists) ErrorCode() string             { return "KeyGroupAlreadyExists" }
+func (e *KeyGroupAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This operation requires a body. Ensure that the body is present and the
 // Content-Type header is set.
 type MissingBody struct {
@@ -954,6 +972,23 @@ func (e *NoSuchPublicKey) ErrorMessage() string {
 func (e *NoSuchPublicKey) ErrorCode() string             { return "NoSuchPublicKey" }
 func (e *NoSuchPublicKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The real-time log configuration does not exist.
+type NoSuchRealtimeLogConfig struct {
+	Message *string
+}
+
+func (e *NoSuchRealtimeLogConfig) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchRealtimeLogConfig) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchRealtimeLogConfig) ErrorCode() string             { return "NoSuchRealtimeLogConfig" }
+func (e *NoSuchRealtimeLogConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A resource that was specified is not valid.
 type NoSuchResource struct {
 	Message *string
@@ -1095,6 +1130,60 @@ func (e *QueryArgProfileEmpty) ErrorMessage() string {
 }
 func (e *QueryArgProfileEmpty) ErrorCode() string             { return "QueryArgProfileEmpty" }
 func (e *QueryArgProfileEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A real-time log configuration with this name already exists. You must provide a
+// unique name. To modify an existing real-time log configuration, use
+// UpdateRealtimeLogConfig.
+type RealtimeLogConfigAlreadyExists struct {
+	Message *string
+}
+
+func (e *RealtimeLogConfigAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RealtimeLogConfigAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RealtimeLogConfigAlreadyExists) ErrorCode() string             { return "RealtimeLogConfigAlreadyExists" }
+func (e *RealtimeLogConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Cannot delete the real-time log configuration because it is attached to one or
+// more cache behaviors.
+type RealtimeLogConfigInUse struct {
+	Message *string
+}
+
+func (e *RealtimeLogConfigInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RealtimeLogConfigInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RealtimeLogConfigInUse) ErrorCode() string             { return "RealtimeLogConfigInUse" }
+func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Cannot delete this resource because it is in use.
+type ResourceInUse struct {
+	Message *string
+}
+
+func (e *ResourceInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
+func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller reference you attempted to create the streaming distribution with is
 // associated with another distribution
@@ -1354,6 +1443,30 @@ func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorCode()
 	return "TooManyDistributionsAssociatedToFieldLevelEncryptionConfig"
 }
 func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The number of distributions that reference this key group is more than the
+// maximum allowed. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyDistributionsAssociatedToKeyGroup struct {
+	Message *string
+}
+
+func (e *TooManyDistributionsAssociatedToKeyGroup) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorCode() string {
+	return "TooManyDistributionsAssociatedToKeyGroup"
+}
+func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
@@ -1637,6 +1750,50 @@ func (e *TooManyInvalidationsInProgress) ErrorMessage() string {
 func (e *TooManyInvalidationsInProgress) ErrorCode() string             { return "TooManyInvalidationsInProgress" }
 func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You have reached the maximum number of key groups for this AWS account. For more
+// information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyKeyGroups struct {
+	Message *string
+}
+
+func (e *TooManyKeyGroups) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyKeyGroups) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyKeyGroups) ErrorCode() string             { return "TooManyKeyGroups" }
+func (e *TooManyKeyGroups) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of key groups referenced by this distribution is more than the
+// maximum allowed. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyKeyGroupsAssociatedToDistribution struct {
+	Message *string
+}
+
+func (e *TooManyKeyGroupsAssociatedToDistribution) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorCode() string {
+	return "TooManyKeyGroupsAssociatedToDistribution"
+}
+func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Your request contains more Lambda function associations than are allowed per
 // distribution.
 type TooManyLambdaFunctionAssociations struct {
@@ -1751,6 +1908,26 @@ func (e *TooManyPublicKeys) ErrorMessage() string {
 func (e *TooManyPublicKeys) ErrorCode() string             { return "TooManyPublicKeys" }
 func (e *TooManyPublicKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The number of public keys in this key group is more than the maximum allowed.
+// For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyPublicKeysInKeyGroup struct {
+	Message *string
+}
+
+func (e *TooManyPublicKeysInKeyGroup) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyPublicKeysInKeyGroup) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyPublicKeysInKeyGroup) ErrorCode() string             { return "TooManyPublicKeysInKeyGroup" }
+func (e *TooManyPublicKeysInKeyGroup) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your request contains too many query string parameters.
 type TooManyQueryStringParameters struct {
 	Message *string
@@ -1814,6 +1991,26 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// You have reached the maximum number of real-time log configurations for this AWS
+// account. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyRealtimeLogConfigs struct {
+	Message *string
+}
+
+func (e *TooManyRealtimeLogConfigs) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRealtimeLogConfigs) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRealtimeLogConfigs) ErrorCode() string             { return "TooManyRealtimeLogConfigs" }
+func (e *TooManyRealtimeLogConfigs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyStreamingDistributionCNAMEs struct {
 	Message *string
@@ -1869,6 +2066,23 @@ func (e *TooManyTrustedSigners) ErrorMessage() string {
 }
 func (e *TooManyTrustedSigners) ErrorCode() string             { return "TooManyTrustedSigners" }
 func (e *TooManyTrustedSigners) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified key group does not exist.
+type TrustedKeyGroupDoesNotExist struct {
+	Message *string
+}
+
+func (e *TrustedKeyGroupDoesNotExist) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TrustedKeyGroupDoesNotExist) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TrustedKeyGroupDoesNotExist) ErrorCode() string             { return "TrustedKeyGroupDoesNotExist" }
+func (e *TrustedKeyGroupDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of your trusted signers don't exist.
 type TrustedSignerDoesNotExist struct {

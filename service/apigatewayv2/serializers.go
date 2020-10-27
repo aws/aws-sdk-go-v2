@@ -102,6 +102,11 @@ func awsRestjson1_serializeOpDocumentCreateApiInput(v *CreateApiInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.DisableExecuteApiEndpoint != nil {
+		ok := object.Key("disableExecuteApiEndpoint")
+		ok.Boolean(*v.DisableExecuteApiEndpoint)
+	}
+
 	if v.DisableSchemaValidation != nil {
 		ok := object.Key("disableSchemaValidation")
 		ok.Boolean(*v.DisableSchemaValidation)
@@ -332,6 +337,11 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 		ok.String(*v.AuthorizerCredentialsArn)
 	}
 
+	if v.AuthorizerPayloadFormatVersion != nil {
+		ok := object.Key("authorizerPayloadFormatVersion")
+		ok.String(*v.AuthorizerPayloadFormatVersion)
+	}
+
 	if v.AuthorizerResultTtlInSeconds != nil {
 		ok := object.Key("authorizerResultTtlInSeconds")
 		ok.Integer(*v.AuthorizerResultTtlInSeconds)
@@ -345,6 +355,11 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 	if v.AuthorizerUri != nil {
 		ok := object.Key("authorizerUri")
 		ok.String(*v.AuthorizerUri)
+	}
+
+	if v.EnableSimpleResponses != nil {
+		ok := object.Key("enableSimpleResponses")
+		ok.Boolean(*v.EnableSimpleResponses)
 	}
 
 	if v.IdentitySource != nil {
@@ -545,6 +560,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		}
 	}
 
+	if v.MutualTlsAuthentication != nil {
+		ok := object.Key("mutualTlsAuthentication")
+		if err := awsRestjson1_serializeDocumentMutualTlsAuthenticationInput(v.MutualTlsAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -664,6 +686,11 @@ func awsRestjson1_serializeOpDocumentCreateIntegrationInput(v *CreateIntegration
 	if v.IntegrationMethod != nil {
 		ok := object.Key("integrationMethod")
 		ok.String(*v.IntegrationMethod)
+	}
+
+	if v.IntegrationSubtype != nil {
+		ok := object.Key("integrationSubtype")
+		ok.String(*v.IntegrationSubtype)
 	}
 
 	if len(v.IntegrationType) > 0 {
@@ -4920,6 +4947,84 @@ func awsRestjson1_serializeOpDocumentReimportApiInput(v *ReimportApiInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpResetAuthorizersCache struct {
+}
+
+func (*awsRestjson1_serializeOpResetAuthorizersCache) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetAuthorizersCache) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetAuthorizersCacheInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/apis/{ApiId}/stages/{StageName}/cache/authorizers")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsResetAuthorizersCacheInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetAuthorizersCacheInput(v *ResetAuthorizersCacheInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApiId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApiId must not be empty")}
+	}
+	if v.ApiId != nil {
+		if len(*v.ApiId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApiId must not be empty")}
+		}
+		if err := encoder.SetURI("ApiId").String(*v.ApiId); err != nil {
+			return err
+		}
+	}
+
+	if v.StageName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member StageName must not be empty")}
+	}
+	if v.StageName != nil {
+		if len(*v.StageName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member StageName must not be empty")}
+		}
+		if err := encoder.SetURI("StageName").String(*v.StageName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -5189,6 +5294,11 @@ func awsRestjson1_serializeOpDocumentUpdateApiInput(v *UpdateApiInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.DisableExecuteApiEndpoint != nil {
+		ok := object.Key("disableExecuteApiEndpoint")
+		ok.Boolean(*v.DisableExecuteApiEndpoint)
+	}
+
 	if v.DisableSchemaValidation != nil {
 		ok := object.Key("disableSchemaValidation")
 		ok.Boolean(*v.DisableSchemaValidation)
@@ -5431,6 +5541,11 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 		ok.String(*v.AuthorizerCredentialsArn)
 	}
 
+	if v.AuthorizerPayloadFormatVersion != nil {
+		ok := object.Key("authorizerPayloadFormatVersion")
+		ok.String(*v.AuthorizerPayloadFormatVersion)
+	}
+
 	if v.AuthorizerResultTtlInSeconds != nil {
 		ok := object.Key("authorizerResultTtlInSeconds")
 		ok.Integer(*v.AuthorizerResultTtlInSeconds)
@@ -5444,6 +5559,11 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 	if v.AuthorizerUri != nil {
 		ok := object.Key("authorizerUri")
 		ok.String(*v.AuthorizerUri)
+	}
+
+	if v.EnableSimpleResponses != nil {
+		ok := object.Key("enableSimpleResponses")
+		ok.Boolean(*v.EnableSimpleResponses)
 	}
 
 	if v.IdentitySource != nil {
@@ -5662,6 +5782,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainNameInput(v *UpdateDomainNameIn
 		}
 	}
 
+	if v.MutualTlsAuthentication != nil {
+		ok := object.Key("mutualTlsAuthentication")
+		if err := awsRestjson1_serializeDocumentMutualTlsAuthenticationInput(v.MutualTlsAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5786,6 +5913,11 @@ func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegration
 	if v.IntegrationMethod != nil {
 		ok := object.Key("integrationMethod")
 		ok.String(*v.IntegrationMethod)
+	}
+
+	if v.IntegrationSubtype != nil {
+		ok := object.Key("integrationSubtype")
+		ok.String(*v.IntegrationSubtype)
 	}
 
 	if len(v.IntegrationType) > 0 {
@@ -6867,6 +6999,23 @@ func awsRestjson1_serializeDocumentJWTConfiguration(v *types.JWTConfiguration, v
 	if v.Issuer != nil {
 		ok := object.Key("issuer")
 		ok.String(*v.Issuer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMutualTlsAuthenticationInput(v *types.MutualTlsAuthenticationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TruststoreUri != nil {
+		ok := object.Key("truststoreUri")
+		ok.String(*v.TruststoreUri)
+	}
+
+	if v.TruststoreVersion != nil {
+		ok := object.Key("truststoreVersion")
+		ok.String(*v.TruststoreVersion)
 	}
 
 	return nil

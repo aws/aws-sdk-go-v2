@@ -270,6 +270,46 @@ func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUserGroup struct {
+}
+
+func (*validateOpCreateUserGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUserGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUserGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUserGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateUser struct {
+}
+
+func (*validateOpCreateUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDecreaseNodeGroupsInGlobalReplicationGroup struct {
 }
 
@@ -450,6 +490,46 @@ func (m *validateOpDeleteSnapshot) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteUserGroup struct {
+}
+
+func (*validateOpDeleteUserGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteUser struct {
+}
+
+func (*validateOpDeleteUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCacheParameters struct {
 }
 
@@ -485,6 +565,26 @@ func (m *validateOpDescribeEngineDefaultParameters) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeEngineDefaultParametersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeUsers struct {
+}
+
+func (*validateOpDescribeUsers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeUsers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeUsersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeUsersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +810,46 @@ func (m *validateOpModifyReplicationGroupShardConfiguration) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyUserGroup struct {
+}
+
+func (*validateOpModifyUserGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyUserGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyUserGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyUserGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyUser struct {
+}
+
+func (*validateOpModifyUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPurchaseReservedCacheNodesOffering struct {
 }
 
@@ -922,6 +1062,14 @@ func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSnapshot{}, middleware.After)
 }
 
+func addOpCreateUserGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUserGroup{}, middleware.After)
+}
+
+func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
+}
+
 func addOpDecreaseNodeGroupsInGlobalReplicationGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDecreaseNodeGroupsInGlobalReplicationGroup{}, middleware.After)
 }
@@ -958,12 +1106,24 @@ func addOpDeleteSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSnapshot{}, middleware.After)
 }
 
+func addOpDeleteUserGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserGroup{}, middleware.After)
+}
+
+func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
 func addOpDescribeCacheParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCacheParameters{}, middleware.After)
 }
 
 func addOpDescribeEngineDefaultParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEngineDefaultParameters{}, middleware.After)
+}
+
+func addOpDescribeUsersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeUsers{}, middleware.After)
 }
 
 func addOpDisassociateGlobalReplicationGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1008,6 +1168,14 @@ func addOpModifyReplicationGroupValidationMiddleware(stack *middleware.Stack) er
 
 func addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyReplicationGroupShardConfiguration{}, middleware.After)
+}
+
+func addOpModifyUserGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyUserGroup{}, middleware.After)
+}
+
+func addOpModifyUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyUser{}, middleware.After)
 }
 
 func addOpPurchaseReservedCacheNodesOfferingValidationMiddleware(stack *middleware.Stack) error {
@@ -1060,16 +1228,51 @@ func validateConfigureShard(v *types.ConfigureShard) error {
 	}
 }
 
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterList(v []*types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
+	for i := range v {
+		if err := validateFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegionalConfiguration(v *types.RegionalConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegionalConfiguration"}
-	if v.ReplicationGroupRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupRegion"))
-	}
 	if v.ReshardingConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReshardingConfiguration"))
+	}
+	if v.ReplicationGroupRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupRegion"))
 	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
@@ -1120,11 +1323,11 @@ func validateOpAddTagsToResourceInput(v *AddTagsToResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1237,14 +1440,14 @@ func validateOpCreateCacheParameterGroupInput(v *CreateCacheParameterGroupInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCacheParameterGroupInput"}
-	if v.CacheParameterGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CacheParameterGroupName"))
-	}
 	if v.CacheParameterGroupFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CacheParameterGroupFamily"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.CacheParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1258,11 +1461,11 @@ func validateOpCreateCacheSecurityGroupInput(v *CreateCacheSecurityGroupInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCacheSecurityGroupInput"}
-	if v.CacheSecurityGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CacheSecurityGroupName"))
-	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.CacheSecurityGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1276,14 +1479,14 @@ func validateOpCreateCacheSubnetGroupInput(v *CreateCacheSubnetGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCacheSubnetGroupInput"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.CacheSubnetGroupDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CacheSubnetGroupDescription"))
 	}
 	if v.CacheSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CacheSubnetGroupName"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1315,11 +1518,11 @@ func validateOpCreateReplicationGroupInput(v *CreateReplicationGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationGroupInput"}
-	if v.ReplicationGroupDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupDescription"))
-	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	}
+	if v.ReplicationGroupDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupDescription"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1335,6 +1538,48 @@ func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotInput"}
 	if v.SnapshotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUserGroupInput(v *CreateUserGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUserGroupInput"}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.UserGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUserInput(v *CreateUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.AccessString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessString"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1369,16 +1614,16 @@ func validateOpDecreaseReplicaCountInput(v *DecreaseReplicaCountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecreaseReplicaCountInput"}
-	if v.ApplyImmediately == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	if v.ReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
 	}
 	if v.ReplicaConfiguration != nil {
 		if err := validateReplicaConfigurationList(v.ReplicaConfiguration); err != nil {
 			invalidParams.AddNested("ReplicaConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1452,11 +1697,11 @@ func validateOpDeleteGlobalReplicationGroupInput(v *DeleteGlobalReplicationGroup
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlobalReplicationGroupInput"}
-	if v.GlobalReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
-	}
 	if v.RetainPrimaryReplicationGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetainPrimaryReplicationGroup"))
+	}
+	if v.GlobalReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1495,6 +1740,36 @@ func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
 	}
 }
 
+func validateOpDeleteUserGroupInput(v *DeleteUserGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserGroupInput"}
+	if v.UserGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteUserInput(v *DeleteUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCacheParametersInput(v *DescribeCacheParametersInput) error {
 	if v == nil {
 		return nil
@@ -1525,19 +1800,36 @@ func validateOpDescribeEngineDefaultParametersInput(v *DescribeEngineDefaultPara
 	}
 }
 
+func validateOpDescribeUsersInput(v *DescribeUsersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeUsersInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateGlobalReplicationGroupInput(v *DisassociateGlobalReplicationGroupInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGlobalReplicationGroupInput"}
+	if v.GlobalReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
+	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
 	}
 	if v.ReplicationGroupRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupRegion"))
-	}
-	if v.GlobalReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1551,14 +1843,14 @@ func validateOpFailoverGlobalReplicationGroupInput(v *FailoverGlobalReplicationG
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FailoverGlobalReplicationGroupInput"}
-	if v.PrimaryReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrimaryReplicationGroupId"))
-	}
 	if v.GlobalReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
 	if v.PrimaryRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrimaryRegion"))
+	}
+	if v.PrimaryReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryReplicationGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1572,19 +1864,19 @@ func validateOpIncreaseNodeGroupsInGlobalReplicationGroupInput(v *IncreaseNodeGr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IncreaseNodeGroupsInGlobalReplicationGroupInput"}
-	if v.NodeGroupCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
-	}
-	if v.ApplyImmediately == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	if v.GlobalReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
 	if v.RegionalConfigurations != nil {
 		if err := validateRegionalConfigurationList(v.RegionalConfigurations); err != nil {
 			invalidParams.AddNested("RegionalConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GlobalReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
+	if v.NodeGroupCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1598,16 +1890,16 @@ func validateOpIncreaseReplicaCountInput(v *IncreaseReplicaCountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IncreaseReplicaCountInput"}
-	if v.ReplicaConfiguration != nil {
-		if err := validateReplicaConfigurationList(v.ReplicaConfiguration); err != nil {
-			invalidParams.AddNested("ReplicaConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
 	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
 	}
-	if v.ApplyImmediately == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	if v.ReplicaConfiguration != nil {
+		if err := validateReplicaConfigurationList(v.ReplicaConfiguration); err != nil {
+			invalidParams.AddNested("ReplicaConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1684,11 +1976,11 @@ func validateOpModifyGlobalReplicationGroupInput(v *ModifyGlobalReplicationGroup
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyGlobalReplicationGroupInput"}
-	if v.GlobalReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
-	}
 	if v.ApplyImmediately == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
+	if v.GlobalReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalReplicationGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1717,14 +2009,44 @@ func validateOpModifyReplicationGroupShardConfigurationInput(v *ModifyReplicatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyReplicationGroupShardConfigurationInput"}
-	if v.ApplyImmediately == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	if v.ReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
 	}
 	if v.NodeGroupCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupCount"))
 	}
-	if v.ReplicationGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	if v.ApplyImmediately == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyUserGroupInput(v *ModifyUserGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyUserGroupInput"}
+	if v.UserGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyUserInput(v *ModifyUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyUserInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1789,11 +2111,11 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsFromResourceInput"}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1822,14 +2144,14 @@ func validateOpRevokeCacheSecurityGroupIngressInput(v *RevokeCacheSecurityGroupI
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeCacheSecurityGroupIngressInput"}
+	if v.EC2SecurityGroupOwnerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EC2SecurityGroupOwnerId"))
+	}
 	if v.CacheSecurityGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 	if v.EC2SecurityGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EC2SecurityGroupName"))
-	}
-	if v.EC2SecurityGroupOwnerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EC2SecurityGroupOwnerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1843,11 +2165,11 @@ func validateOpStartMigrationInput(v *StartMigrationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMigrationInput"}
-	if v.CustomerNodeEndpointList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerNodeEndpointList"))
-	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	}
+	if v.CustomerNodeEndpointList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerNodeEndpointList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1861,11 +2183,11 @@ func validateOpTestFailoverInput(v *TestFailoverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TestFailoverInput"}
-	if v.NodeGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupId"))
-	}
 	if v.ReplicationGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	}
+	if v.NodeGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

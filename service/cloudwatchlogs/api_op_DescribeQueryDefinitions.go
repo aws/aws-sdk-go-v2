@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+// This operation returns a paginated list of your saved CloudWatch Logs Insights
+// query definitions. You can use the queryDefinitionNamePrefix parameter to limit
+// the results to only the query definitions that have names that start with a
+// certain string.
 func (c *Client) DescribeQueryDefinitions(ctx context.Context, params *DescribeQueryDefinitionsInput, optFns ...func(*Options)) (*DescribeQueryDefinitionsOutput, error) {
 	if params == nil {
 		params = &DescribeQueryDefinitionsInput{}
@@ -27,11 +31,15 @@ func (c *Client) DescribeQueryDefinitions(ctx context.Context, params *DescribeQ
 }
 
 type DescribeQueryDefinitionsInput struct {
+
+	// Limits the number of returned query definitions to the specified number.
 	MaxResults *int32
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
+	// Use this parameter to filter your results to only the query definitions that
+	// have names that start with the prefix you specify.
 	QueryDefinitionNamePrefix *string
 }
 
@@ -40,6 +48,7 @@ type DescribeQueryDefinitionsOutput struct {
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
+	// The list of query definitions that match your request.
 	QueryDefinitions []*types.QueryDefinition
 
 	// Metadata pertaining to the operation's result.

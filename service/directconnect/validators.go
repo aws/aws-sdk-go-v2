@@ -1002,11 +1002,11 @@ func validateNewPrivateVirtualInterface(v *types.NewPrivateVirtualInterface) err
 	if v.VirtualInterfaceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceName"))
 	}
-	if v.Vlan == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
-	}
 	if v.Asn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	}
+	if v.Vlan == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1025,19 +1025,19 @@ func validateNewPrivateVirtualInterfaceAllocation(v *types.NewPrivateVirtualInte
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NewPrivateVirtualInterfaceAllocation"}
-	if v.Vlan == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
-	}
 	if v.Asn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
 	}
-	if v.VirtualInterfaceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceName"))
+	if v.Vlan == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.VirtualInterfaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1080,16 +1080,16 @@ func validateNewPublicVirtualInterfaceAllocation(v *types.NewPublicVirtualInterf
 	if v.Vlan == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
 	}
-	if v.VirtualInterfaceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceName"))
+	if v.Asn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Asn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Asn"))
+	if v.VirtualInterfaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1169,14 +1169,14 @@ func validateOpAcceptDirectConnectGatewayAssociationProposalInput(v *AcceptDirec
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptDirectConnectGatewayAssociationProposalInput"}
-	if v.DirectConnectGatewayId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectConnectGatewayId"))
-	}
 	if v.AssociatedGatewayOwnerAccount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociatedGatewayOwnerAccount"))
 	}
 	if v.ProposalId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProposalId"))
+	}
+	if v.DirectConnectGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectConnectGatewayId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1190,20 +1190,20 @@ func validateOpAllocateConnectionOnInterconnectInput(v *AllocateConnectionOnInte
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AllocateConnectionOnInterconnectInput"}
-	if v.ConnectionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	if v.OwnerAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwnerAccount"))
 	}
 	if v.Vlan == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
 	}
-	if v.Bandwidth == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
 	}
 	if v.InterconnectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InterconnectId"))
 	}
-	if v.OwnerAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OwnerAccount"))
+	if v.Bandwidth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1228,11 +1228,11 @@ func validateOpAllocateHostedConnectionInput(v *AllocateHostedConnectionInput) e
 	if v.ConnectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
 	}
-	if v.Vlan == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
-	}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if v.Vlan == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Vlan"))
 	}
 	if v.Bandwidth == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
@@ -1441,11 +1441,11 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionInput"}
-	if v.Bandwidth == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
-	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if v.Bandwidth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1524,13 +1524,13 @@ func validateOpCreateInterconnectInput(v *CreateInterconnectInput) error {
 	if v.InterconnectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InterconnectName"))
 	}
-	if v.Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Location"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1557,14 +1557,14 @@ func validateOpCreateLagInput(v *CreateLagInput) error {
 			invalidParams.AddNested("ChildConnectionTags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Location"))
-	}
 	if v.ConnectionsBandwidth == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionsBandwidth"))
 	}
 	if v.LagName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LagName"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

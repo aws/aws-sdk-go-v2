@@ -33,7 +33,7 @@ func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinatio
 type PutDestinationPolicyInput struct {
 
 	// An IAM policy document that authorizes cross-account users to deliver their log
-	// events to the associated destination.
+	// events to the associated destination. This can be up to 5120 bytes.
 	//
 	// This member is required.
 	AccessPolicy *string

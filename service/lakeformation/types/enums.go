@@ -19,6 +19,25 @@ const (
 	ComparisonOperatorBetween      ComparisonOperator = "BETWEEN"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"EQ",
+		"NE",
+		"LE",
+		"LT",
+		"GE",
+		"GT",
+		"CONTAINS",
+		"NOT_CONTAINS",
+		"BEGINS_WITH",
+		"IN",
+		"BETWEEN",
+	}
+}
+
 type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
@@ -29,6 +48,18 @@ const (
 	DataLakeResourceTypeData_location DataLakeResourceType = "DATA_LOCATION"
 )
 
+// Values returns all known values for DataLakeResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataLakeResourceType) Values() []DataLakeResourceType {
+	return []DataLakeResourceType{
+		"CATALOG",
+		"DATABASE",
+		"TABLE",
+		"DATA_LOCATION",
+	}
+}
+
 type FieldNameString string
 
 // Enum values for FieldNameString
@@ -37,6 +68,17 @@ const (
 	FieldNameStringRole_arn      FieldNameString = "ROLE_ARN"
 	FieldNameStringLast_modified FieldNameString = "LAST_MODIFIED"
 )
+
+// Values returns all known values for FieldNameString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FieldNameString) Values() []FieldNameString {
+	return []FieldNameString{
+		"RESOURCE_ARN",
+		"ROLE_ARN",
+		"LAST_MODIFIED",
+	}
+}
 
 type Permission string
 
@@ -53,3 +95,21 @@ const (
 	PermissionCreate_table         Permission = "CREATE_TABLE"
 	PermissionData_location_access Permission = "DATA_LOCATION_ACCESS"
 )
+
+// Values returns all known values for Permission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Permission) Values() []Permission {
+	return []Permission{
+		"ALL",
+		"SELECT",
+		"ALTER",
+		"DROP",
+		"DELETE",
+		"INSERT",
+		"DESCRIBE",
+		"CREATE_DATABASE",
+		"CREATE_TABLE",
+		"DATA_LOCATION_ACCESS",
+	}
+}

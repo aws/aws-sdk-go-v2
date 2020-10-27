@@ -11,16 +11,22 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Restricts access to tasks assigned to workers in the specified workforce to
-// those within specific ranges of IP addresses. You specify allowed IP addresses
-// by creating a list of up to ten CIDRs
-// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html). By default,
-// a workforce isn't restricted to specific IP addresses. If you specify a range of
-// IP addresses, workers who attempt to access tasks using any IP address outside
-// the specified range are denied access and get a Not Found error message on the
-// worker portal. After restricting access with this operation, you can see the
-// allowed IP values for a private workforce with the operation. This operation
-// applies only to private workforces.
+// Use this operation to update your workforce. You can use this operation to
+// require that workers use specific IP addresses to work on tasks and to update
+// your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration. Use
+// SourceIpConfig to restrict worker access to tasks to a specific range of IP
+// addresses. You specify allowed IP addresses by creating a list of up to ten
+// CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html). By
+// default, a workforce isn't restricted to specific IP addresses. If you specify a
+// range of IP addresses, workers who attempt to access tasks using any IP address
+// outside the specified range are denied and get a Not Found error message on the
+// worker portal. Use OidcConfig to update the configuration of a workforce created
+// using your own OIDC IdP. You can only update your OIDC IdP configuration when
+// there are no work teams associated with your workforce. You can delete work
+// teams using the operation. After restricting access to a range of IP addresses
+// or updating your OIDC IdP configuration with this operation, you can view
+// details about your update workforce using the operation. This operation only
+// applies to private workforces.
 func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInput, optFns ...func(*Options)) (*UpdateWorkforceOutput, error) {
 	if params == nil {
 		params = &UpdateWorkforceInput{}
@@ -38,9 +44,8 @@ func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInp
 
 type UpdateWorkforceInput struct {
 
-	// The name of the private workforce whose access you want to restrict.
-	// WorkforceName is automatically set to default when a workforce is created and
-	// cannot be modified.
+	// The name of the private workforce that you want to update. You can find your
+	// workforce name by using the operation.
 	//
 	// This member is required.
 	WorkforceName *string
@@ -57,8 +62,7 @@ type UpdateWorkforceInput struct {
 
 type UpdateWorkforceOutput struct {
 
-	// A single private workforce, which is automatically created when you create your
-	// first private work team. You can create one private work force in each AWS
+	// A single private workforce. You can create one private work force in each AWS
 	// Region. By default, any workforce-related API operation used in a specific
 	// region will apply to the workforce created in that region. To learn how to
 	// create a private workforce, see Create a Private Workforce

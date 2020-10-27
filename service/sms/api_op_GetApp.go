@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieve information about an application.
+// Retrieve information about the specified application.
 func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func(*Options)) (*GetAppOutput, error) {
 	if params == nil {
 		params = &GetAppInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func
 
 type GetAppInput struct {
 
-	// ID of the application whose information is being retrieved.
+	// The ID of the application.
 	AppId *string
 }
 
@@ -38,10 +38,10 @@ type GetAppOutput struct {
 	// Information about the application.
 	AppSummary *types.AppSummary
 
-	// List of server groups belonging to the application.
+	// The server groups that belong to the application.
 	ServerGroups []*types.ServerGroup
 
-	// List of tags associated with the application.
+	// The tags associated with the application.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

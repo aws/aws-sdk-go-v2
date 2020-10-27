@@ -43,7 +43,7 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateBuildInput struct {
 
 	// A unique identifier for a build to update. You can use either the build ID or
@@ -61,7 +61,7 @@ type UpdateBuildInput struct {
 	Version *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateBuildOutput struct {
 
 	// The updated build resource.

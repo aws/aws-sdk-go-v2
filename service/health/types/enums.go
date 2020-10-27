@@ -11,12 +11,32 @@ const (
 	EntityStatusCodeUnknown    EntityStatusCode = "UNKNOWN"
 )
 
+// Values returns all known values for EntityStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntityStatusCode) Values() []EntityStatusCode {
+	return []EntityStatusCode{
+		"IMPAIRED",
+		"UNIMPAIRED",
+		"UNKNOWN",
+	}
+}
+
 type EventAggregateField string
 
 // Enum values for EventAggregateField
 const (
 	EventAggregateFieldEventtypecategory EventAggregateField = "eventTypeCategory"
 )
+
+// Values returns all known values for EventAggregateField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventAggregateField) Values() []EventAggregateField {
+	return []EventAggregateField{
+		"eventTypeCategory",
+	}
+}
 
 type EventScopeCode string
 
@@ -27,6 +47,17 @@ const (
 	EventScopeCodeNone             EventScopeCode = "NONE"
 )
 
+// Values returns all known values for EventScopeCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventScopeCode) Values() []EventScopeCode {
+	return []EventScopeCode{
+		"PUBLIC",
+		"ACCOUNT_SPECIFIC",
+		"NONE",
+	}
+}
+
 type EventStatusCode string
 
 // Enum values for EventStatusCode
@@ -35,6 +66,17 @@ const (
 	EventStatusCodeClosed   EventStatusCode = "closed"
 	EventStatusCodeUpcoming EventStatusCode = "upcoming"
 )
+
+// Values returns all known values for EventStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventStatusCode) Values() []EventStatusCode {
+	return []EventStatusCode{
+		"open",
+		"closed",
+		"upcoming",
+	}
+}
 
 type EventTypeCategory string
 
@@ -45,3 +87,15 @@ const (
 	EventTypeCategoryScheduled_change     EventTypeCategory = "scheduledChange"
 	EventTypeCategoryInvestigation        EventTypeCategory = "investigation"
 )
+
+// Values returns all known values for EventTypeCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventTypeCategory) Values() []EventTypeCategory {
+	return []EventTypeCategory{
+		"issue",
+		"accountNotification",
+		"scheduledChange",
+		"investigation",
+	}
+}

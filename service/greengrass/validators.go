@@ -1030,6 +1030,26 @@ func (m *validateOpGetSubscriptionDefinitionVersion) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetThingRuntimeConfiguration struct {
+}
+
+func (*validateOpGetThingRuntimeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetThingRuntimeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetThingRuntimeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetThingRuntimeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBulkDeploymentDetailedReports struct {
 }
 
@@ -1570,6 +1590,26 @@ func (m *validateOpUpdateSubscriptionDefinition) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateThingRuntimeConfiguration struct {
+}
+
+func (*validateOpUpdateThingRuntimeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThingRuntimeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThingRuntimeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThingRuntimeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateRoleToGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateRoleToGroup{}, middleware.After)
 }
@@ -1774,6 +1814,10 @@ func addOpGetSubscriptionDefinitionVersionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpGetSubscriptionDefinitionVersion{}, middleware.After)
 }
 
+func addOpGetThingRuntimeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetThingRuntimeConfiguration{}, middleware.After)
+}
+
 func addOpListBulkDeploymentDetailedReportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBulkDeploymentDetailedReports{}, middleware.After)
 }
@@ -1880,6 +1924,10 @@ func addOpUpdateResourceDefinitionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateSubscriptionDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSubscriptionDefinition{}, middleware.After)
+}
+
+func addOpUpdateThingRuntimeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThingRuntimeConfiguration{}, middleware.After)
 }
 
 func validate__listOfConnector(v []*types.Connector) error {
@@ -2058,14 +2106,14 @@ func validateCore(v *types.Core) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Core"}
+	if v.ThingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingArn"))
+	}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.ThingArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThingArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2096,11 +2144,11 @@ func validateDevice(v *types.Device) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Device"}
-	if v.ThingArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThingArn"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ThingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingArn"))
 	}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
@@ -2205,17 +2253,17 @@ func validateLogger(v *types.Logger) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Logger"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if len(v.Level) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Level"))
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if len(v.Component) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Component"))
 	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if len(v.Level) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Level"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2246,18 +2294,18 @@ func validateResource(v *types.Resource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ResourceDataContainer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceDataContainer"))
 	} else if v.ResourceDataContainer != nil {
 		if err := validateResourceDataContainer(v.ResourceDataContainer); err != nil {
 			invalidParams.AddNested("ResourceDataContainer", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2325,11 +2373,11 @@ func validateResourceDownloadOwnerSetting(v *types.ResourceDownloadOwnerSetting)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceDownloadOwnerSetting"}
-	if len(v.GroupPermission) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupPermission"))
-	}
 	if v.GroupOwner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupOwner"))
+	}
+	if len(v.GroupPermission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupPermission"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2377,17 +2425,17 @@ func validateSubscription(v *types.Subscription) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Subscription"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
-	}
-	if v.Target == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
 	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2405,6 +2453,21 @@ func validateSubscriptionDefinitionVersion(v *types.SubscriptionDefinitionVersio
 		if err := validate__listOfSubscription(v.Subscriptions); err != nil {
 			invalidParams.AddNested("Subscriptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetryConfigurationUpdate(v *types.TelemetryConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetryConfigurationUpdate"}
+	if len(v.Telemetry) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Telemetry"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2505,13 +2568,13 @@ func validateOpCreateCoreDefinitionVersionInput(v *CreateCoreDefinitionVersionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCoreDefinitionVersionInput"}
+	if v.CoreDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDefinitionId"))
+	}
 	if v.Cores != nil {
 		if err := validate__listOfCore(v.Cores); err != nil {
 			invalidParams.AddNested("Cores", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CoreDefinitionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CoreDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2560,13 +2623,13 @@ func validateOpCreateDeviceDefinitionVersionInput(v *CreateDeviceDefinitionVersi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeviceDefinitionVersionInput"}
-	if v.DeviceDefinitionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceDefinitionId"))
-	}
 	if v.Devices != nil {
 		if err := validate__listOfDevice(v.Devices); err != nil {
 			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DeviceDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2721,11 +2784,8 @@ func validateOpCreateSoftwareUpdateJobInput(v *CreateSoftwareUpdateJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSoftwareUpdateJobInput"}
-	if len(v.UpdateTargetsOperatingSystem) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdateTargetsOperatingSystem"))
-	}
-	if v.S3UrlSignerRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3UrlSignerRole"))
+	if len(v.SoftwareToUpdate) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SoftwareToUpdate"))
 	}
 	if v.UpdateTargets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateTargets"))
@@ -2733,8 +2793,11 @@ func validateOpCreateSoftwareUpdateJobInput(v *CreateSoftwareUpdateJobInput) err
 	if len(v.UpdateTargetsArchitecture) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateTargetsArchitecture"))
 	}
-	if len(v.SoftwareToUpdate) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SoftwareToUpdate"))
+	if len(v.UpdateTargetsOperatingSystem) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateTargetsOperatingSystem"))
+	}
+	if v.S3UrlSignerRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3UrlSignerRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3013,11 +3076,11 @@ func validateOpGetCoreDefinitionVersionInput(v *GetCoreDefinitionVersionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCoreDefinitionVersionInput"}
-	if v.CoreDefinitionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CoreDefinitionId"))
-	}
 	if v.CoreDefinitionVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CoreDefinitionVersionId"))
+	}
+	if v.CoreDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3031,11 +3094,11 @@ func validateOpGetDeploymentStatusInput(v *GetDeploymentStatusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentStatusInput"}
-	if v.DeploymentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
-	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3064,11 +3127,11 @@ func validateOpGetDeviceDefinitionVersionInput(v *GetDeviceDefinitionVersionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeviceDefinitionVersionInput"}
-	if v.DeviceDefinitionVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceDefinitionVersionId"))
-	}
 	if v.DeviceDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceDefinitionId"))
+	}
+	if v.DeviceDefinitionVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceDefinitionVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3115,11 +3178,11 @@ func validateOpGetGroupCertificateAuthorityInput(v *GetGroupCertificateAuthority
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetGroupCertificateAuthorityInput"}
-	if v.CertificateAuthorityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityId"))
-	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.CertificateAuthorityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3196,11 +3259,11 @@ func validateOpGetLoggerDefinitionVersionInput(v *GetLoggerDefinitionVersionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLoggerDefinitionVersionInput"}
-	if v.LoggerDefinitionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoggerDefinitionId"))
-	}
 	if v.LoggerDefinitionVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoggerDefinitionVersionId"))
+	}
+	if v.LoggerDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoggerDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3267,6 +3330,21 @@ func validateOpGetSubscriptionDefinitionVersionInput(v *GetSubscriptionDefinitio
 	}
 	if v.SubscriptionDefinitionVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionDefinitionVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetThingRuntimeConfigurationInput(v *GetThingRuntimeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetThingRuntimeConfigurationInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3475,11 +3553,11 @@ func validateOpStartBulkDeploymentInput(v *StartBulkDeploymentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartBulkDeploymentInput"}
-	if v.InputFileUri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputFileUri"))
-	}
 	if v.ExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.InputFileUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputFileUri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3523,11 +3601,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3678,6 +3756,26 @@ func validateOpUpdateSubscriptionDefinitionInput(v *UpdateSubscriptionDefinition
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriptionDefinitionInput"}
 	if v.SubscriptionDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionDefinitionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThingRuntimeConfigurationInput(v *UpdateThingRuntimeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThingRuntimeConfigurationInput"}
+	if v.TelemetryConfiguration != nil {
+		if err := validateTelemetryConfigurationUpdate(v.TelemetryConfiguration); err != nil {
+			invalidParams.AddNested("TelemetryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

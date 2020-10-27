@@ -45,10 +45,334 @@ type AvailabilityZone struct {
 	ZoneName *string
 }
 
+// Contains information about settings for logging access for the stage.
+type AwsApiGatewayAccessLogSettings struct {
+
+	// The ARN of the CloudWatch Logs log group that receives the access logs.
+	DestinationArn *string
+
+	// A single-line format of the access logs of data, as specified by selected
+	// $context variables. The format must include at least $context.requestId.
+	Format *string
+}
+
+// Contains information about settings for canary deployment in the stage.
+type AwsApiGatewayCanarySettings struct {
+
+	// The deployment identifier for the canary deployment.
+	DeploymentId *string
+
+	// The percentage of traffic that is diverted to a canary deployment.
+	PercentTraffic *float64
+
+	// Stage variables that are overridden in the canary release deployment. The
+	// variables include new stage variables that are introduced in the canary. Each
+	// variable is represented as a string-to-string map between the stage variable
+	// name and the variable value.
+	StageVariableOverrides map[string]*string
+
+	// Indicates whether the canary deployment uses the stage cache.
+	UseStageCache *bool
+}
+
+// Contains information about the endpoints for the API.
+type AwsApiGatewayEndpointConfiguration struct {
+
+	// A list of endpoint types for the REST API. For an edge-optimized API, the
+	// endpoint type is EDGE. For a Regional API, the endpoint type is REGIONAL. For a
+	// private API, the endpoint type is PRIVATE.
+	Types []*string
+}
+
+// Defines settings for a method for the stage.
+type AwsApiGatewayMethodSettings struct {
+
+	// Indicates whether the cached responses are encrypted.
+	CacheDataEncrypted *bool
+
+	// Specifies the time to live (TTL), in seconds, for cached responses. The higher
+	// the TTL, the longer the response is cached.
+	CacheTtlInSeconds *int32
+
+	// Indicates whether responses are cached and returned for requests. For responses
+	// to be cached, a cache cluster must be enabled on the stage.
+	CachingEnabled *bool
+
+	// Indicates whether data trace logging is enabled for the method. Data trace
+	// logging affects the log entries that are pushed to CloudWatch Logs.
+	DataTraceEnabled *bool
+
+	// The HTTP method. You can use an asterisk (*) as a wildcard to apply method
+	// settings to multiple methods.
+	HttpMethod *string
+
+	// The logging level for this method. The logging level affects the log entries
+	// that are pushed to CloudWatch Logs. If the logging level is ERROR, then the logs
+	// only include error-level entries. If the logging level is INFO, then the logs
+	// include both ERROR events and extra informational events. Valid values: OFF |
+	// ERROR | INFO
+	LoggingLevel *string
+
+	// Indicates whether CloudWatch metrics are enabled for the method.
+	MetricsEnabled *bool
+
+	// Indicates whether authorization is required for a cache invalidation request.
+	RequireAuthorizationForCacheControl *bool
+
+	// The resource path for this method. Forward slashes (/) are encoded as ~1 . The
+	// initial slash must include a forward slash. For example, the path value
+	// /resource/subresource must be encoded as /~1resource~1subresource. To specify
+	// the root path, use only a slash (/). You can use an asterisk (*) as a wildcard
+	// to apply method settings to multiple methods.
+	ResourcePath *string
+
+	// The throttling burst limit for the method.
+	ThrottlingBurstLimit *int32
+
+	// The throttling rate limit for the method.
+	ThrottlingRateLimit *float64
+
+	// Indicates how to handle unauthorized requests for cache invalidation. Valid
+	// values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER |
+	// SUCCEED_WITHOUT_RESPONSE_HEADER
+	UnauthorizedCacheControlHeaderStrategy *string
+}
+
+// contains information about a REST API in version 1 of Amazon API Gateway.
+type AwsApiGatewayRestApiDetails struct {
+
+	// The source of the API key for metering requests according to a usage plan.
+	// HEADER indicates whether to read the API key from the X-API-Key header of a
+	// request. AUTHORIZER indicates whether to read the API key from the
+	// UsageIdentifierKey from a custom authorizer.
+	ApiKeySource *string
+
+	// The list of binary media types supported by the REST API.
+	BinaryMediaTypes []*string
+
+	// Indicates when the API was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedDate *string
+
+	// A description of the REST API.
+	Description *string
+
+	// The endpoint configuration of the REST API.
+	EndpointConfiguration *AwsApiGatewayEndpointConfiguration
+
+	// The identifier of the REST API.
+	Id *string
+
+	// The minimum size in bytes of a payload before compression is enabled. If null,
+	// then compression is disabled. If 0, then all payloads are compressed.
+	MinimumCompressionSize *int32
+
+	// The name of the REST API.
+	Name *string
+
+	// The version identifier for the REST API.
+	Version *string
+}
+
+// Provides information about a version 1 Amazon API Gateway stage.
+type AwsApiGatewayStageDetails struct {
+
+	// Settings for logging access for the stage.
+	AccessLogSettings *AwsApiGatewayAccessLogSettings
+
+	// Indicates whether a cache cluster is enabled for the stage.
+	CacheClusterEnabled *bool
+
+	// If a cache cluster is enabled, the size of the cache cluster.
+	CacheClusterSize *string
+
+	// If a cache cluster is enabled, the status of the cache cluster.
+	CacheClusterStatus *string
+
+	// Information about settings for canary deployment in the stage.
+	CanarySettings *AwsApiGatewayCanarySettings
+
+	// The identifier of the client certificate for the stage.
+	ClientCertificateId *string
+
+	// Indicates when the stage was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedDate *string
+
+	// The identifier of the deployment that the stage points to.
+	DeploymentId *string
+
+	// A description of the stage.
+	Description *string
+
+	// The version of the API documentation that is associated with the stage.
+	DocumentationVersion *string
+
+	// Indicates when the stage was most recently updated. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastUpdatedDate *string
+
+	// Defines the method settings for the stage.
+	MethodSettings []*AwsApiGatewayMethodSettings
+
+	// The name of the stage.
+	StageName *string
+
+	// Indicates whether active tracing with AWS X-Ray is enabled for the stage.
+	TracingEnabled *bool
+
+	// A map that defines the stage variables for the stage. Variable names can have
+	// alphanumeric and underscore characters. Variable values can contain the
+	// following characters:
+	//
+	//     * Uppercase and lowercase letters
+	//
+	//     * Numbers
+	//
+	//
+	// * Special characters -._~:/?#&=,
+	Variables map[string]*string
+
+	// The ARN of the web ACL associated with the stage.
+	WebAclArn *string
+}
+
+// Contains information about a version 2 API in Amazon API Gateway.
+type AwsApiGatewayV2ApiDetails struct {
+
+	// The URI of the API. Uses the format  .execute-api..amazonaws.com The stage name
+	// is typically appended to the URI to form a complete path to a deployed API
+	// stage.
+	ApiEndpoint *string
+
+	// The identifier of the API.
+	ApiId *string
+
+	// An API key selection expression. Supported only for WebSocket APIs.
+	ApiKeySelectionExpression *string
+
+	// A cross-origin resource sharing (CORS) configuration. Supported only for HTTP
+	// APIs.
+	CorsConfiguration *AwsCorsConfiguration
+
+	// Indicates when the API was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedDate *string
+
+	// A description of the API.
+	Description *string
+
+	// The name of the API.
+	Name *string
+
+	// The API protocol for the API. Valid values: WEBSOCKET | HTTP
+	ProtocolType *string
+
+	// The route selection expression for the API. For HTTP APIs, must be
+	// ${request.method} ${request.path}. This is the default value for HTTP APIs. For
+	// WebSocket APIs, there is no default value.
+	RouteSelectionExpression *string
+
+	// The version identifier for the API.
+	Version *string
+}
+
+// Contains route settings for a stage.
+type AwsApiGatewayV2RouteSettings struct {
+
+	// Indicates whether data trace logging is enabled. Data trace logging affects the
+	// log entries that are pushed to CloudWatch Logs. Supported only for WebSocket
+	// APIs.
+	DataTraceEnabled *bool
+
+	// Indicates whether detailed metrics are enabled.
+	DetailedMetricsEnabled *bool
+
+	// The logging level. The logging level affects the log entries that are pushed to
+	// CloudWatch Logs. Supported only for WebSocket APIs. If the logging level is
+	// ERROR, then the logs only include error-level entries. If the logging level is
+	// INFO, then the logs include both ERROR events and extra informational events.
+	// Valid values: OFF | ERROR | INFO
+	LoggingLevel *string
+
+	// The throttling burst limit.
+	ThrottlingBurstLimit *int32
+
+	// The throttling rate limit.
+	ThrottlingRateLimit *float64
+}
+
+// Contains information about a version 2 stage for Amazon API Gateway.
+type AwsApiGatewayV2StageDetails struct {
+
+	// Information about settings for logging access for the stage.
+	AccessLogSettings *AwsApiGatewayAccessLogSettings
+
+	// Indicates whether the stage is managed by API Gateway.
+	ApiGatewayManaged *bool
+
+	// Indicates whether updates to an API automatically trigger a new deployment.
+	AutoDeploy *bool
+
+	// Indicates when the stage was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedDate *string
+
+	// Default route settings for the stage.
+	DefaultRouteSettings *AwsApiGatewayV2RouteSettings
+
+	// The identifier of the deployment that the stage is associated with.
+	DeploymentId *string
+
+	// The description of the stage.
+	Description *string
+
+	// The status of the last deployment of a stage. Supported only if the stage has
+	// automatic deployment enabled.
+	LastDeploymentStatusMessage *string
+
+	// Indicates when the stage was most recently updated. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastUpdatedDate *string
+
+	// The route settings for the stage.
+	RouteSettings *AwsApiGatewayV2RouteSettings
+
+	// The name of the stage.
+	StageName *string
+
+	// A map that defines the stage variables for the stage. Variable names can have
+	// alphanumeric and underscore characters. Variable values can contain the
+	// following characters:
+	//
+	//     * Uppercase and lowercase letters
+	//
+	//     * Numbers
+	//
+	//
+	// * Special characters -._~:/?#&=,
+	StageVariables map[string]*string
+}
+
 // Provides details about an auto scaling group.
 type AwsAutoScalingAutoScalingGroupDetails struct {
 
-	// The datetime when the auto scaling group was created.
+	// Indicates when the auto scaling group was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it
@@ -65,8 +389,276 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	LoadBalancerNames []*string
 }
 
+// Provides details about an AWS Certificate Manager certificate.
+type AwsCertificateManagerCertificateDetails struct {
+
+	// The ARN of the private certificate authority (CA) that will be used to issue the
+	// certificate.
+	CertificateAuthorityArn *string
+
+	// Indicates when the certificate was requested. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedAt *string
+
+	// The fully qualified domain name (FQDN), such as www.example.com, that is secured
+	// by the certificate.
+	DomainName *string
+
+	// Contains information about the initial validation of each domain name that
+	// occurs as a result of the RequestCertificate request. Only provided if the
+	// certificate type is AMAZON_ISSUED.
+	DomainValidationOptions []*AwsCertificateManagerCertificateDomainValidationOption
+
+	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
+	// specifies a purpose for which the certificate public key can be used and
+	// consists of a name and an object identifier (OID).
+	ExtendedKeyUsages []*AwsCertificateManagerCertificateExtendedKeyUsage
+
+	// For a failed certificate request, the reason for the failure. Valid values:
+	// NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED |
+	// INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR |
+	// PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED |
+	// PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS |
+	// PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
+	FailureReason *string
+
+	// Indicates when the certificate was imported. Provided if the certificate type is
+	// IMPORTED. Uses the date-time format specified in RFC 3339 section 5.6, Internet
+	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
+	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	ImportedAt *string
+
+	// The list of ARNs for the AWS resources that use the certificate.
+	InUseBy []*string
+
+	// Indicates when the certificate was issued. Provided if the certificate type is
+	// AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6,
+	// Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The
+	// value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	IssuedAt *string
+
+	// The name of the certificate authority that issued and signed the certificate.
+	Issuer *string
+
+	// The algorithm that was used to generate the public-private key pair. Valid
+	// values: RSA_2048 | RSA_1024 | RSA_4096 | EC_prime256v1 | EC_secp384r1 |
+	// EC_secp521r1
+	KeyAlgorithm *string
+
+	// A list of key usage X.509 v3 extension objects.
+	KeyUsages []*AwsCertificateManagerCertificateKeyUsage
+
+	// The time after which the certificate becomes invalid. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	NotAfter *string
+
+	// The time before which the certificate is not valid. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	NotBefore *string
+
+	// Provides a value that specifies whether to add the certificate to a transparency
+	// log.
+	Options *AwsCertificateManagerCertificateOptions
+
+	// Whether the certificate is eligible for renewal. Valid values: ELIGIBLE |
+	// INELIGIBLE
+	RenewalEligibility *string
+
+	// Information about the status of the AWS Certificate Manager managed renewal for
+	// the certificate. Provided only when the certificate type is AMAZON_ISSUED.
+	RenewalSummary *AwsCertificateManagerCertificateRenewalSummary
+
+	// The serial number of the certificate.
+	Serial *string
+
+	// The algorithm that was used to sign the certificate.
+	SignatureAlgorithm *string
+
+	// The status of the certificate. Valid values: PENDING_VALIDATION | ISSUED |
+	// INACTIVE | EXPIRED | VALIDATION_TIMED_OUT | REVOKED | FAILED
+	Status *string
+
+	// The name of the entity that is associated with the public key contained in the
+	// certificate.
+	Subject *string
+
+	// One or more domain names (subject alternative names) included in the
+	// certificate. This list contains the domain names that are bound to the public
+	// key that is contained in the certificate. The subject alternative names include
+	// the canonical domain name (CN) of the certificate and additional domain names
+	// that can be used to connect to the website.
+	SubjectAlternativeNames []*string
+
+	// The source of the certificate. For certificates that AWS Certificate Manager
+	// provides, Type is AMAZON_ISSUED. For certificates that are imported with
+	// ImportCertificate, Type is IMPORTED. Valid values: IMPORTED | AMAZON_ISSUED |
+	// PRIVATE
+	Type *string
+}
+
+// Contains information about one of the following:
+//
+//     * The initial validation
+// of each domain name that occurs as a result of the RequestCertificate request
+//
+//
+// * The validation of each domain name in the certificate, as it pertains to AWS
+// Certificate Manager managed renewal
+type AwsCertificateManagerCertificateDomainValidationOption struct {
+
+	// A fully qualified domain name (FQDN) in the certificate.
+	DomainName *string
+
+	// The CNAME record that is added to the DNS database for domain validation.
+	ResourceRecord *AwsCertificateManagerCertificateResourceRecord
+
+	// The domain name that AWS Certificate Manager uses to send domain validation
+	// emails.
+	ValidationDomain *string
+
+	// A list of email addresses that AWS Certificate Manager uses to send domain
+	// validation emails.
+	ValidationEmails []*string
+
+	// The method used to validate the domain name.
+	ValidationMethod *string
+
+	// The validation status of the domain name.
+	ValidationStatus *string
+}
+
+// Contains information about an extended key usage X.509 v3 extension object.
+type AwsCertificateManagerCertificateExtendedKeyUsage struct {
+
+	// The name of an extension value. Indicates the purpose for which the certificate
+	// public key can be used.
+	Name *string
+
+	// An object identifier (OID) for the extension value. The format is numbers
+	// separated by periods.
+	OId *string
+}
+
+// Contains information about a key usage X.509 v3 extension object.
+type AwsCertificateManagerCertificateKeyUsage struct {
+
+	// The key usage extension name.
+	Name *string
+}
+
+// Contains other options for the certificate.
+type AwsCertificateManagerCertificateOptions struct {
+
+	// Whether to add the certificate to a transparency log. Valid values: DISABLED |
+	// ENABLED
+	CertificateTransparencyLoggingPreference *string
+}
+
+// Contains information about the AWS Certificate Manager managed renewal for an
+// AMAZON_ISSUED certificate.
+type AwsCertificateManagerCertificateRenewalSummary struct {
+
+	// Information about the validation of each domain name in the certificate, as it
+	// pertains to AWS Certificate Manager managed renewal. Provided only when the
+	// certificate type is AMAZON_ISSUED.
+	DomainValidationOptions []*AwsCertificateManagerCertificateDomainValidationOption
+
+	// The status of the AWS Certificate Manager managed renewal of the certificate.
+	// Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED
+	RenewalStatus *string
+
+	// The reason that a renewal request was unsuccessful. Valid values:
+	// NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED |
+	// INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR |
+	// PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED |
+	// PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS |
+	// PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
+	RenewalStatusReason *string
+
+	// Indicates when the renewal summary was last updated. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	UpdatedAt *string
+}
+
+// Provides details about the CNAME record that is added to the DNS database for
+// domain validation.
+type AwsCertificateManagerCertificateResourceRecord struct {
+
+	// The name of the resource.
+	Name *string
+
+	// The type of resource.
+	Type *string
+
+	// The value of the resource.
+	Value *string
+}
+
+// Information about a cache behavior for the distribution.
+type AwsCloudFrontDistributionCacheBehavior struct {
+
+	// The protocol that viewers can use to access the files in an origin. You can
+	// specify the following options:
+	//
+	//     * allow-all - Viewers can use HTTP or
+	// HTTPS.
+	//
+	//     * redirect-to-https - CloudFront responds to HTTP requests with an
+	// HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then
+	// uses the new URL to resubmit.
+	//
+	//     * https-only - CloudFront responds to HTTP
+	// request with an HTTP status code of 403 (Forbidden).
+	ViewerProtocolPolicy *string
+}
+
+// Provides information about caching for the distribution.
+type AwsCloudFrontDistributionCacheBehaviors struct {
+
+	// The cache behaviors for the distribution.
+	Items []*AwsCloudFrontDistributionCacheBehavior
+}
+
+// Contains information about the default cache configuration for the distribution.
+type AwsCloudFrontDistributionDefaultCacheBehavior struct {
+
+	// The protocol that viewers can use to access the files in an origin. You can
+	// specify the following options:
+	//
+	//     * allow-all - Viewers can use HTTP or
+	// HTTPS.
+	//
+	//     * redirect-to-https - CloudFront responds to HTTP requests with an
+	// HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then
+	// uses the new URL to resubmit.
+	//
+	//     * https-only - CloudFront responds to HTTP
+	// request with an HTTP status code of 403 (Forbidden).
+	ViewerProtocolPolicy *string
+}
+
 // A distribution configuration.
 type AwsCloudFrontDistributionDetails struct {
+
+	// Provides information about the cache configuration for the distribution.
+	CacheBehaviors *AwsCloudFrontDistributionCacheBehaviors
+
+	// The default cache behavior for the configuration.
+	DefaultCacheBehavior *AwsCloudFrontDistributionDefaultCacheBehavior
+
+	// The object that CloudFront sends in response to requests from the origin (for
+	// example, index.html) when a viewer requests the root URL for the distribution
+	// (http://www.example.com) instead of an object in your distribution
+	// (http://www.example.com/product-description.html).
+	DefaultRootObject *string
 
 	// The domain name corresponding to the distribution.
 	DomainName *string
@@ -74,12 +666,18 @@ type AwsCloudFrontDistributionDetails struct {
 	// The entity tag is a hash of the object.
 	ETag *string
 
-	// The date and time that the distribution was last modified.
+	// Indicates when that the distribution was last modified. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastModifiedTime *string
 
 	// A complex type that controls whether access logs are written for the
 	// distribution.
 	Logging *AwsCloudFrontDistributionLogging
+
+	// Provides information about the origin groups in the distribution.
+	OriginGroups *AwsCloudFrontDistributionOriginGroups
 
 	// A complex type that contains information about origins for this distribution.
 	Origins *AwsCloudFrontDistributionOrigins
@@ -110,6 +708,38 @@ type AwsCloudFrontDistributionLogging struct {
 	Prefix *string
 }
 
+// Information about an origin group for the distribution.
+type AwsCloudFrontDistributionOriginGroup struct {
+
+	// Provides the criteria for an origin group to fail over.
+	FailoverCriteria *AwsCloudFrontDistributionOriginGroupFailover
+}
+
+// Provides information about when an origin group fails over.
+type AwsCloudFrontDistributionOriginGroupFailover struct {
+
+	// Information about the status codes that cause an origin group to fail over.
+	StatusCodes *AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
+}
+
+// The status codes that cause an origin group to fail over.
+type AwsCloudFrontDistributionOriginGroupFailoverStatusCodes struct {
+
+	// The list of status code values that can cause a failover to the next origin.
+	Items []*int32
+
+	// The number of status codes that can cause a failover.
+	Quantity *int32
+}
+
+// Provides information about origin groups that are associated with the
+// distribution.
+type AwsCloudFrontDistributionOriginGroups struct {
+
+	// The list of origin groups.
+	Items []*AwsCloudFrontDistributionOriginGroup
+}
+
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
 // web server), Amazon Elemental MediaStore, or other server from which CloudFront
 // gets your files.
@@ -125,6 +755,10 @@ type AwsCloudFrontDistributionOriginItem struct {
 	// An optional element that causes CloudFront to request your content from a
 	// directory in your Amazon S3 bucket or your custom origin.
 	OriginPath *string
+
+	// An origin that is an S3 bucket that is not configured with static website
+	// hosting.
+	S3OriginConfig *AwsCloudFrontDistributionOriginS3OriginConfig
 }
 
 // A complex type that contains information about origins and origin groups for
@@ -133,6 +767,68 @@ type AwsCloudFrontDistributionOrigins struct {
 
 	// A complex type that contains origins or origin groups for this distribution.
 	Items []*AwsCloudFrontDistributionOriginItem
+}
+
+// Information about an origin that is an S3 bucket that is not configured with
+// static website hosting.
+type AwsCloudFrontDistributionOriginS3OriginConfig struct {
+
+	// The CloudFront origin access identity to associate with the origin.
+	OriginAccessIdentity *string
+}
+
+// Provides details about a CloudTrail trail.
+type AwsCloudTrailTrailDetails struct {
+
+	// The ARN of the log group that CloudTrail logs are delivered to.
+	CloudWatchLogsLogGroupArn *string
+
+	// The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to
+	// the log group.
+	CloudWatchLogsRoleArn *string
+
+	// Indicates whether the trail has custom event selectors.
+	HasCustomEventSelectors *bool
+
+	// The Region where the trail was created.
+	HomeRegion *string
+
+	// Indicates whether the trail publishes events from global services such as IAM to
+	// the log files.
+	IncludeGlobalServiceEvents *bool
+
+	// Indicates whether the trail applies only to the current Region or to all
+	// Regions.
+	IsMultiRegionTrail *bool
+
+	// Whether the trail is created for all accounts in an organization in AWS
+	// Organizations, or only for the current AWS account.
+	IsOrganizationTrail *bool
+
+	// The AWS KMS key ID to use to encrypt the logs.
+	KmsKeyId *string
+
+	// Indicates whether CloudTrail log file validation is enabled.
+	LogFileValidationEnabled *bool
+
+	// The name of the trail.
+	Name *string
+
+	// The name of the S3 bucket where the log files are published.
+	S3BucketName *string
+
+	// The S3 key prefix. The key prefix is added after the name of the S3 bucket where
+	// the log files are published.
+	S3KeyPrefix *string
+
+	// The ARN of the SNS topic that is used for notifications of log file delivery.
+	SnsTopicArn *string
+
+	// The name of the SNS topic that is used for notifications of log file delivery.
+	SnsTopicName *string
+
+	// The ARN of the trail.
+	TrailArn *string
 }
 
 // Information about an AWS CodeBuild project.
@@ -295,6 +991,345 @@ type AwsCodeBuildProjectVpcConfig struct {
 	VpcId *string
 }
 
+// Contains the cross-origin resource sharing (CORS) configuration for the API.
+// CORS is only supported for HTTP APIs.
+type AwsCorsConfiguration struct {
+
+	// Indicates whether the CORS request includes credentials.
+	AllowCredentials *bool
+
+	// The allowed headers for CORS requests.
+	AllowHeaders []*string
+
+	// The allowed methods for CORS requests.
+	AllowMethods []*string
+
+	// The allowed origins for CORS requests.
+	AllowOrigins []*string
+
+	// The exposed headers for CORS requests.
+	ExposeHeaders []*string
+
+	// The number of seconds for which the browser caches preflight request results.
+	MaxAge *int32
+}
+
+// Contains a definition of an attribute for the table.
+type AwsDynamoDbTableAttributeDefinition struct {
+
+	// The name of the attribute.
+	AttributeName *string
+
+	// The type of the attribute.
+	AttributeType *string
+}
+
+// Provides information about the billing for read/write capacity on the table.
+type AwsDynamoDbTableBillingModeSummary struct {
+
+	// The method used to charge for read and write throughput and to manage capacity.
+	BillingMode *string
+
+	// If the billing mode is PAY_PER_REQUEST, indicates when the billing mode was set
+	// to that value. Uses the date-time format specified in RFC 3339 section 5.6,
+	// Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The
+	// value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastUpdateToPayPerRequestDateTime *string
+}
+
+// Provides details about a DynamoDB table.
+type AwsDynamoDbTableDetails struct {
+
+	// A list of attribute definitions for the table.
+	AttributeDefinitions []*AwsDynamoDbTableAttributeDefinition
+
+	// Information about the billing for read/write capacity on the table.
+	BillingModeSummary *AwsDynamoDbTableBillingModeSummary
+
+	// Indicates when the table was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreationDateTime *string
+
+	// List of global secondary indexes for the table.
+	GlobalSecondaryIndexes []*AwsDynamoDbTableGlobalSecondaryIndex
+
+	// The version of global tables being used.
+	GlobalTableVersion *string
+
+	// The number of items in the table.
+	ItemCount *int32
+
+	// The primary key structure for the table.
+	KeySchema []*AwsDynamoDbTableKeySchema
+
+	// The ARN of the latest stream for the table.
+	LatestStreamArn *string
+
+	// The label of the latest stream. The label is not a unique identifier.
+	LatestStreamLabel *string
+
+	// The list of local secondary indexes for the table.
+	LocalSecondaryIndexes []*AwsDynamoDbTableLocalSecondaryIndex
+
+	// Information about the provisioned throughput for the table.
+	ProvisionedThroughput *AwsDynamoDbTableProvisionedThroughput
+
+	// The list of replicas of this table.
+	Replicas []*AwsDynamoDbTableReplica
+
+	// Information about the restore for the table.
+	RestoreSummary *AwsDynamoDbTableRestoreSummary
+
+	// Information about the server-side encryption for the table.
+	SseDescription *AwsDynamoDbTableSseDescription
+
+	// The current DynamoDB Streams configuration for the table.
+	StreamSpecification *AwsDynamoDbTableStreamSpecification
+
+	// The identifier of the table.
+	TableId *string
+
+	// The name of the table.
+	TableName *string
+
+	// The total size of the table in bytes.
+	TableSizeBytes *int64
+
+	// The current status of the table.
+	TableStatus *string
+}
+
+// Information abut a global secondary index for the table.
+type AwsDynamoDbTableGlobalSecondaryIndex struct {
+
+	// Whether the index is currently backfilling.
+	Backfilling *bool
+
+	// The ARN of the index.
+	IndexArn *string
+
+	// The name of the index.
+	IndexName *string
+
+	// The total size in bytes of the index.
+	IndexSizeBytes *int64
+
+	// The current status of the index.
+	IndexStatus *string
+
+	// The number of items in the index.
+	ItemCount *int32
+
+	// The key schema for the index.
+	KeySchema []*AwsDynamoDbTableKeySchema
+
+	// Attributes that are copied from the table into an index.
+	Projection *AwsDynamoDbTableProjection
+
+	// Information about the provisioned throughput settings for the indexes.
+	ProvisionedThroughput *AwsDynamoDbTableProvisionedThroughput
+}
+
+// A component of the key schema for the DynamoDB table, a global secondary index,
+// or a local secondary index.
+type AwsDynamoDbTableKeySchema struct {
+
+	// The name of the key schema attribute.
+	AttributeName *string
+
+	// The type of key used for the key schema attribute.
+	KeyType *string
+}
+
+// Information about a local secondary index for a DynamoDB table.
+type AwsDynamoDbTableLocalSecondaryIndex struct {
+
+	// The ARN of the index.
+	IndexArn *string
+
+	// The name of the index.
+	IndexName *string
+
+	// The complete key schema for the index.
+	KeySchema []*AwsDynamoDbTableKeySchema
+
+	// Attributes that are copied from the table into the index. These are in addition
+	// to the primary key attributes and index key attributes, which are automatically
+	// projected.
+	Projection *AwsDynamoDbTableProjection
+}
+
+// For global and local secondary indexes, identifies the attributes that are
+// copied from the table into the index.
+type AwsDynamoDbTableProjection struct {
+
+	// The nonkey attributes that are projected into the index. For each attribute,
+	// provide the attribute name.
+	NonKeyAttributes []*string
+
+	// The types of attributes that are projected into the index.
+	ProjectionType *string
+}
+
+// Information about the provisioned throughput for the table or for a global
+// secondary index.
+type AwsDynamoDbTableProvisionedThroughput struct {
+
+	// Indicates when the provisioned throughput was last decreased. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastDecreaseDateTime *string
+
+	// Indicates when the provisioned throughput was last increased. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastIncreaseDateTime *string
+
+	// The number of times during the current UTC calendar day that the provisioned
+	// throughput was decreased.
+	NumberOfDecreasesToday *int32
+
+	// The maximum number of strongly consistent reads consumed per second before
+	// DynamoDB returns a ThrottlingException.
+	ReadCapacityUnits *int32
+
+	// The maximum number of writes consumed per second before DynamoDB returns a
+	// ThrottlingException.
+	WriteCapacityUnits *int32
+}
+
+// Replica-specific configuration for the provisioned throughput.
+type AwsDynamoDbTableProvisionedThroughputOverride struct {
+
+	// The read capacity units for the replica.
+	ReadCapacityUnits *int32
+}
+
+// Information about a replica of a DynamoDB table.
+type AwsDynamoDbTableReplica struct {
+
+	// List of global secondary indexes for the replica.
+	GlobalSecondaryIndexes []*AwsDynamoDbTableReplicaGlobalSecondaryIndex
+
+	// The identifier of the AWS KMS customer master key (CMK) that will be used for
+	// AWS KMS encryption for the replica.
+	KmsMasterKeyId *string
+
+	// Replica-specific configuration for the provisioned throughput.
+	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride
+
+	// The name of the Region where the replica is located.
+	RegionName *string
+
+	// The current status of the replica.
+	ReplicaStatus *string
+
+	// Detailed information about the replica status.
+	ReplicaStatusDescription *string
+}
+
+// Information about a global secondary index for a DynamoDB table replica.
+type AwsDynamoDbTableReplicaGlobalSecondaryIndex struct {
+
+	// The name of the index.
+	IndexName *string
+
+	// Replica-specific configuration for the provisioned throughput for the index.
+	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride
+}
+
+// Information about the restore for the table.
+type AwsDynamoDbTableRestoreSummary struct {
+
+	// Indicates the point in time that the table was restored to. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	RestoreDateTime *string
+
+	// Whether a restore is currently in progress.
+	RestoreInProgress *bool
+
+	// The ARN of the source backup from which the table was restored.
+	SourceBackupArn *string
+
+	// The ARN of the source table for the backup.
+	SourceTableArn *string
+}
+
+// Information about the server-side encryption for the table.
+type AwsDynamoDbTableSseDescription struct {
+
+	// If the key is inaccessible, the date and time when DynamoDB detected that the
+	// key was inaccessible. Uses the date-time format specified in RFC 3339 section
+	// 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	InaccessibleEncryptionDateTime *string
+
+	// The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS
+	// encryption.
+	KmsMasterKeyArn *string
+
+	// The type of server-side encryption.
+	SseType *string
+
+	// The status of the server-side encryption.
+	Status *string
+}
+
+// The current DynamoDB Streams configuration for the table.
+type AwsDynamoDbTableStreamSpecification struct {
+
+	// Indicates whether DynamoDB Streams is enabled on the table.
+	StreamEnabled *bool
+
+	// Determines the information that is written to the table.
+	StreamViewType *string
+}
+
+// Information about an Elastic IP address.
+type AwsEc2EipDetails struct {
+
+	// The identifier that AWS assigns to represent the allocation of the Elastic IP
+	// address for use with Amazon VPC.
+	AllocationId *string
+
+	// The identifier that represents the association of the Elastic IP address with an
+	// EC2 instance.
+	AssociationId *string
+
+	// The domain in which to allocate the address. If the address is for use with EC2
+	// instances in a VPC, then Domain is vpc. Otherwise, Domain is standard.
+	Domain *string
+
+	// The identifier of the EC2 instance.
+	InstanceId *string
+
+	// The name of the location from which the Elastic IP address is advertised.
+	NetworkBorderGroup *string
+
+	// The identifier of the network interface.
+	NetworkInterfaceId *string
+
+	// The AWS account ID of the owner of the network interface.
+	NetworkInterfaceOwnerId *string
+
+	// The private IP address that is associated with the Elastic IP address.
+	PrivateIpAddress *string
+
+	// A public IP address that is associated with the EC2 instance.
+	PublicIp *string
+
+	// The identifier of an IP address pool. This parameter allows Amazon EC2 to select
+	// an IP address from the address pool.
+	PublicIpv4Pool *string
+}
+
 // The details of an Amazon EC2 instance.
 type AwsEc2InstanceDetails struct {
 
@@ -313,7 +1348,10 @@ type AwsEc2InstanceDetails struct {
 	// The key name associated with the instance.
 	KeyName *string
 
-	// The date/time the instance was launched.
+	// Indicates when the instance was launched. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// The identifier of the subnet that the instance was launched in.
@@ -329,7 +1367,10 @@ type AwsEc2InstanceDetails struct {
 // Information about the network interface attachment.
 type AwsEc2NetworkInterfaceAttachment struct {
 
-	// The timestamp indicating when the attachment initiated.
+	// Indicates when the attachment initiated. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	AttachTime *string
 
 	// The identifier of the network interface attachment
@@ -509,7 +1550,10 @@ type AwsEc2VolumeDetails struct {
 	// The volume attachments.
 	Attachments []*AwsEc2VolumeAttachment
 
-	// The datetime when the volume was created.
+	// Indicates when the volume was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreateTime *string
 
 	// Whether the volume is encrypted.
@@ -635,6 +1679,268 @@ type AwsElasticsearchDomainVPCOptions struct {
 	VPCId *string
 }
 
+// Contains information about a stickiness policy that was created using
+// CreateAppCookieStickinessPolicy.
+type AwsElbAppCookieStickinessPolicy struct {
+
+	// The name of the application cookie used for stickiness.
+	CookieName *string
+
+	// The mnemonic name for the policy being created. The name must be unique within
+	// the set of policies for the load balancer.
+	PolicyName *string
+}
+
+// Contains information about a stickiness policy that was created using
+// CreateLBCookieStickinessPolicy.
+type AwsElbLbCookieStickinessPolicy struct {
+
+	// The amount of time, in seconds, after which the cookie is considered stale. If
+	// an expiration period is not specified, the stickiness session lasts for the
+	// duration of the browser session.
+	CookieExpirationPeriod *int64
+
+	// The name of the policy. The name must be unique within the set of policies for
+	// the load balancer.
+	PolicyName *string
+}
+
+// Contains information about the access log configuration for the load balancer.
+type AwsElbLoadBalancerAccessLog struct {
+
+	// The interval in minutes for publishing the access logs. You can publish access
+	// logs either every 5 minutes or every 60 minutes.
+	EmitInterval *int32
+
+	// Indicates whether access logs are enabled for the load balancer.
+	Enabled *bool
+
+	// The name of the S3 bucket where the access logs are stored.
+	S3BucketName *string
+
+	// The logical hierarchy that was created for the S3 bucket. If a prefix is not
+	// provided, the log is placed at the root level of the bucket.
+	S3BucketPrefix *string
+}
+
+// Contains attributes for the load balancer.
+type AwsElbLoadBalancerAttributes struct {
+
+	// Information about the access log configuration for the load balancer. If the
+	// access log is enabled, the load balancer captures detailed information about all
+	// requests. It delivers the information to a specified S3 bucket.
+	AccessLog *AwsElbLoadBalancerAccessLog
+
+	// Information about the connection draining configuration for the load balancer.
+	// If connection draining is enabled, the load balancer allows existing requests to
+	// complete before it shifts traffic away from a deregistered or unhealthy
+	// instance.
+	ConnectionDraining *AwsElbLoadBalancerConnectionDraining
+
+	// Connection settings for the load balancer. If an idle timeout is configured, the
+	// load balancer allows connections to remain idle for the specified duration. When
+	// a connection is idle, no data is sent over the connection.
+	ConnectionSettings *AwsElbLoadBalancerConnectionSettings
+
+	// Cross-zone load balancing settings for the load balancer. If cross-zone load
+	// balancing is enabled, the load balancer routes the request traffic evenly across
+	// all instances regardless of the Availability Zones.
+	CrossZoneLoadBalancing *AwsElbLoadBalancerCrossZoneLoadBalancing
+}
+
+// Provides information about the configuration of an EC2 instance for the load
+// balancer.
+type AwsElbLoadBalancerBackendServerDescription struct {
+
+	// The port on which the EC2 instance is listening.
+	InstancePort *int32
+
+	// The names of the policies that are enabled for the EC2 instance.
+	PolicyNames []*string
+}
+
+// Contains information about the connection draining configuration for the load
+// balancer.
+type AwsElbLoadBalancerConnectionDraining struct {
+
+	// Indicates whether connection draining is enabled for the load balancer.
+	Enabled *bool
+
+	// The maximum time, in seconds, to keep the existing connections open before
+	// deregistering the instances.
+	Timeout *int32
+}
+
+// Contains connection settings for the load balancer.
+type AwsElbLoadBalancerConnectionSettings struct {
+
+	// The time, in seconds, that the connection can be idle (no data is sent over the
+	// connection) before it is closed by the load balancer.
+	IdleTimeout *int32
+}
+
+// Contains cross-zone load balancing settings for the load balancer.
+type AwsElbLoadBalancerCrossZoneLoadBalancing struct {
+
+	// Indicates whether cross-zone load balancing is enabled for the load balancer.
+	Enabled *bool
+}
+
+// Contains details about a Classic Load Balancer.
+type AwsElbLoadBalancerDetails struct {
+
+	// The list of Availability Zones for the load balancer.
+	AvailabilityZones []*string
+
+	// Information about the configuration of the EC2 instances.
+	BackendServerDescriptions []*AwsElbLoadBalancerBackendServerDescription
+
+	// The name of the Amazon Route 53 hosted zone for the load balancer.
+	CanonicalHostedZoneName *string
+
+	// The ID of the Amazon Route 53 hosted zone for the load balancer.
+	CanonicalHostedZoneNameID *string
+
+	// Indicates when the load balancer was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedTime *string
+
+	// The DNS name of the load balancer.
+	DnsName *string
+
+	// Information about the health checks that are conducted on the load balancer.
+	HealthCheck *AwsElbLoadBalancerHealthCheck
+
+	// List of EC2 instances for the load balancer.
+	Instances []*AwsElbLoadBalancerInstance
+
+	// The policies that are enabled for the load balancer listeners.
+	ListenerDescriptions []*AwsElbLoadBalancerListenerDescription
+
+	// The attributes for a load balancer.
+	LoadBalancerAttributes *AwsElbLoadBalancerAttributes
+
+	// The name of the load balancer.
+	LoadBalancerName *string
+
+	// The policies for a load balancer.
+	Policies *AwsElbLoadBalancerPolicies
+
+	// The type of load balancer. Only provided if the load balancer is in a VPC. If
+	// Scheme is internet-facing, the load balancer has a public DNS name that resolves
+	// to a public IP address. If Scheme is internal, the load balancer has a public
+	// DNS name that resolves to a private IP address.
+	Scheme *string
+
+	// The security groups for the load balancer. Only provided if the load balancer is
+	// in a VPC.
+	SecurityGroups []*string
+
+	// Information about the security group for the load balancer. This is the security
+	// group that is used for inbound rules.
+	SourceSecurityGroup *AwsElbLoadBalancerSourceSecurityGroup
+
+	// The list of subnet identifiers for the load balancer.
+	Subnets []*string
+
+	// The identifier of the VPC for the load balancer.
+	VpcId *string
+}
+
+// Contains information about the health checks that are conducted on the load
+// balancer.
+type AwsElbLoadBalancerHealthCheck struct {
+
+	// The number of consecutive health check successes required before the instance is
+	// moved to the Healthy state.
+	HealthyThreshold *int32
+
+	// The approximate interval, in seconds, between health checks of an individual
+	// instance.
+	Interval *int32
+
+	// The instance that is being checked. The target specifies the protocol and port.
+	// The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports
+	// is 1 through 65535. For the HTTP and HTTPS protocols, the target also specifies
+	// the ping path. For the TCP protocol, the target is specified as TCP: . For the
+	// SSL protocol, the target is specified as SSL. . For the HTTP and HTTPS
+	// protocols, the target is specified as  :/ .
+	Target *string
+
+	// The amount of time, in seconds, during which no response means a failed health
+	// check.
+	Timeout *int32
+
+	// The number of consecutive health check failures that must occur before the
+	// instance is moved to the Unhealthy state.
+	UnhealthyThreshold *int32
+}
+
+// Provides information about an EC2 instance for a load balancer.
+type AwsElbLoadBalancerInstance struct {
+
+	// The instance identifier.
+	InstanceId *string
+}
+
+// Information about a load balancer listener.
+type AwsElbLoadBalancerListener struct {
+
+	// The port on which the instance is listening.
+	InstancePort *int32
+
+	// The protocol to use to route traffic to instances. Valid values: HTTP | HTTPS |
+	// TCP | SSL
+	InstanceProtocol *string
+
+	// The port on which the load balancer is listening. On EC2-VPC, you can specify
+	// any port from the range 1-65535. On EC2-Classic, you can specify any port from
+	// the following list: 25, 80, 443, 465, 587, 1024-65535.
+	LoadBalancerPort *int32
+
+	// The load balancer transport protocol to use for routing. Valid values: HTTP |
+	// HTTPS | TCP | SSL
+	Protocol *string
+
+	// The ARN of the server certificate.
+	SslCertificateId *string
+}
+
+// Lists the policies that are enabled for a load balancer listener.
+type AwsElbLoadBalancerListenerDescription struct {
+
+	// Information about the listener.
+	Listener *AwsElbLoadBalancerListener
+
+	// The policies enabled for the listener.
+	PolicyNames []*string
+}
+
+// Contains information about the policies for a load balancer.
+type AwsElbLoadBalancerPolicies struct {
+
+	// The stickiness policies that are created using CreateAppCookieStickinessPolicy.
+	AppCookieStickinessPolicies []*AwsElbAppCookieStickinessPolicy
+
+	// The stickiness policies that are created using CreateLBCookieStickinessPolicy.
+	LbCookieStickinessPolicies []*AwsElbLbCookieStickinessPolicy
+
+	// The policies other than the stickiness policies.
+	OtherPolicies []*string
+}
+
+// Contains information about the security group for the load balancer.
+type AwsElbLoadBalancerSourceSecurityGroup struct {
+
+	// The name of the security group.
+	GroupName *string
+
+	// The owner of the security group.
+	OwnerAlias *string
+}
+
 // Information about a load balancer.
 type AwsElbv2LoadBalancerDetails struct {
 
@@ -644,7 +1950,10 @@ type AwsElbv2LoadBalancerDetails struct {
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
 
-	// The date and time the load balancer was created.
+	// Indicates when the load balancer was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedTime *string
 
 	// The public DNS name of the load balancer.
@@ -674,7 +1983,16 @@ type AwsElbv2LoadBalancerDetails struct {
 // IAM access key details related to a finding.
 type AwsIamAccessKeyDetails struct {
 
-	// The creation date/time of the IAM access key related to a finding.
+	// The identifier of the access key.
+	AccessKeyId *string
+
+	// The AWS account ID of the account for the key.
+	AccountId *string
+
+	// Indicates when the IAM access key was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
 	// The ID of the principal associated with an access key.
@@ -686,6 +2004,9 @@ type AwsIamAccessKeyDetails struct {
 	// The type of principal associated with an access key.
 	PrincipalType *string
 
+	// Information about the session that the key was used for.
+	SessionContext *AwsIamAccessKeySessionContext
+
 	// The status of the IAM access key related to a finding.
 	Status AwsIamAccessKeyStatus
 
@@ -695,14 +2016,229 @@ type AwsIamAccessKeyDetails struct {
 	UserName *string
 }
 
+// Provides information about the session that the key was used for.
+type AwsIamAccessKeySessionContext struct {
+
+	// Attributes of the session that the key was used for.
+	Attributes *AwsIamAccessKeySessionContextAttributes
+
+	// Information about the entity that created the session.
+	SessionIssuer *AwsIamAccessKeySessionContextSessionIssuer
+}
+
+// Attributes of the session that the key was used for.
+type AwsIamAccessKeySessionContextAttributes struct {
+
+	// Indicates when the session was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreationDate *string
+
+	// Indicates whether the session used multi-factor authentication (MFA).
+	MfaAuthenticated *bool
+}
+
+// Information about the entity that created the session.
+type AwsIamAccessKeySessionContextSessionIssuer struct {
+
+	// The identifier of the AWS account that created the session.
+	AccountId *string
+
+	// The ARN of the session.
+	Arn *string
+
+	// The principal ID of the principal (user, role, or group) that created the
+	// session.
+	PrincipalId *string
+
+	// The type of principal (user, role, or group) that created the session.
+	Type *string
+
+	// The name of the principal that created the session.
+	UserName *string
+}
+
+// A managed policy that is attached to an IAM principal.
+type AwsIamAttachedManagedPolicy struct {
+
+	// The ARN of the policy.
+	PolicyArn *string
+
+	// The name of the policy.
+	PolicyName *string
+}
+
+// Contains details about an IAM group.
+type AwsIamGroupDetails struct {
+
+	// A list of the managed policies that are attached to the IAM group.
+	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+
+	// Indicates when the IAM group was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// The identifier of the IAM group.
+	GroupId *string
+
+	// The name of the IAM group.
+	GroupName *string
+
+	// The list of inline policies that are embedded in the group.
+	GroupPolicyList []*AwsIamGroupPolicy
+
+	// The path to the group.
+	Path *string
+}
+
+// A managed policy that is attached to the IAM group.
+type AwsIamGroupPolicy struct {
+
+	// The name of the policy.
+	PolicyName *string
+}
+
+// Information about an instance profile.
+type AwsIamInstanceProfile struct {
+
+	// The ARN of the instance profile.
+	Arn *string
+
+	// Indicates when the instance profile was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// The identifier of the instance profile.
+	InstanceProfileId *string
+
+	// The name of the instance profile.
+	InstanceProfileName *string
+
+	// The path to the instance profile.
+	Path *string
+
+	// The roles associated with the instance profile.
+	Roles []*AwsIamInstanceProfileRole
+}
+
+// Information about a role associated with an instance profile.
+type AwsIamInstanceProfileRole struct {
+
+	// The ARN of the role.
+	Arn *string
+
+	// The policy that grants an entity permission to assume the role.
+	AssumeRolePolicyDocument *string
+
+	// Indicates when the role was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// The path to the role.
+	Path *string
+
+	// The identifier of the role.
+	RoleId *string
+
+	// The name of the role.
+	RoleName *string
+}
+
+// Information about the policy used to set the permissions boundary for an IAM
+// principal.
+type AwsIamPermissionsBoundary struct {
+
+	// The ARN of the policy used to set the permissions boundary.
+	PermissionsBoundaryArn *string
+
+	// The usage type for the permissions boundary.
+	PermissionsBoundaryType *string
+}
+
+// Represents an IAM permissions policy.
+type AwsIamPolicyDetails struct {
+
+	// The number of users, groups, and roles that the policy is attached to.
+	AttachmentCount *int32
+
+	// When the policy was created. Uses the date-time format specified in RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// The identifier of the default version of the policy.
+	DefaultVersionId *string
+
+	// A description of the policy.
+	Description *string
+
+	// Whether the policy can be attached to a user, group, or role.
+	IsAttachable *bool
+
+	// The path to the policy.
+	Path *string
+
+	// The number of users and roles that use the policy to set the permissions
+	// boundary.
+	PermissionsBoundaryUsageCount *int32
+
+	// The unique identifier of the policy.
+	PolicyId *string
+
+	// The name of the policy.
+	PolicyName *string
+
+	// List of versions of the policy.
+	PolicyVersionList []*AwsIamPolicyVersion
+
+	// When the policy was most recently updated. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	UpdateDate *string
+}
+
+// A version of an IAM policy.
+type AwsIamPolicyVersion struct {
+
+	// Indicates when the version was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// Whether the version is the default version.
+	IsDefaultVersion *bool
+
+	// The identifier of the policy version.
+	VersionId *string
+}
+
 // Contains information about an IAM role, including all of the role's policies.
 type AwsIamRoleDetails struct {
 
 	// The trust policy that grants permission to assume the role.
 	AssumeRolePolicyDocument *string
 
-	// The date and time, in ISO 8601 date-time format, when the role was created.
+	// The list of the managed policies that are attached to the role.
+	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+
+	// Indicates when the role was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreateDate *string
+
+	// The list of instance profiles that contain this role.
+	InstanceProfileList []*AwsIamInstanceProfile
 
 	// The maximum session duration (in seconds) that you want to set for the specified
 	// role.
@@ -711,11 +2247,63 @@ type AwsIamRoleDetails struct {
 	// The path to the role.
 	Path *string
 
+	// Information about the policy used to set the permissions boundary for an IAM
+	// principal.
+	PermissionsBoundary *AwsIamPermissionsBoundary
+
 	// The stable and unique string identifying the role.
 	RoleId *string
 
 	// The friendly name that identifies the role.
 	RoleName *string
+
+	// The list of inline policies that are embedded in the role.
+	RolePolicyList []*AwsIamRolePolicy
+}
+
+// An inline policy that is embedded in the role.
+type AwsIamRolePolicy struct {
+
+	// The name of the policy.
+	PolicyName *string
+}
+
+// Information about an IAM user.
+type AwsIamUserDetails struct {
+
+	// A list of the managed policies that are attached to the user.
+	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+
+	// Indicates when the user was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreateDate *string
+
+	// A list of IAM groups that the user belongs to.
+	GroupList []*string
+
+	// The path to the user.
+	Path *string
+
+	// The permissions boundary for the user.
+	PermissionsBoundary *AwsIamPermissionsBoundary
+
+	// The unique identifier for the user.
+	UserId *string
+
+	// The name of the user.
+	UserName *string
+
+	// The list of inline policies that are embedded in the user.
+	UserPolicyList []*AwsIamUserPolicy
+}
+
+// Information about an inline policy that is embedded in the user.
+type AwsIamUserPolicy struct {
+
+	// The name of the policy.
+	PolicyName *string
 }
 
 // Contains metadata about a customer master key (CMK).
@@ -724,8 +2312,14 @@ type AwsKmsKeyDetails struct {
 	// The twelve-digit account ID of the AWS account that owns the CMK.
 	AWSAccountId *string
 
-	// The date and time when the CMK was created.
+	// Indicates when the CMK was created. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreationDate *float64
+
+	// A description of the key.
+	Description *string
 
 	// The globally unique identifier for the CMK.
 	KeyId *string
@@ -796,8 +2390,10 @@ type AwsLambdaFunctionDetails struct {
 	// key is only returned if you've configured a customer managed CMK.
 	KmsKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// Indicates when the function was last updated. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastModified *string
 
 	// The function's layers.
@@ -890,12 +2486,264 @@ type AwsLambdaLayerVersionDetails struct {
 	// python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided
 	CompatibleRuntimes []*string
 
-	// The date that the version was created, in ISO 8601 format. For example,
-	// 2018-11-27T15:10:45.123+0000.
+	// Indicates when the version was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedDate *string
 
 	// The version number.
 	Version *int64
+}
+
+// An IAM role that is associated with the Amazon RDS DB cluster.
+type AwsRdsDbClusterAssociatedRole struct {
+
+	// The ARN of the IAM role.
+	RoleArn *string
+
+	// The status of the association between the IAM role and the DB cluster.
+	Status *string
+}
+
+// Information about an Amazon RDS DB cluster.
+type AwsRdsDbClusterDetails struct {
+
+	// The status of the database activity stream.
+	ActivityStreamStatus *string
+
+	// For all database engines except Aurora, specifies the allocated storage size in
+	// gibibytes (GiB).
+	AllocatedStorage *int32
+
+	// A list of the IAM roles that are associated with the DB cluster.
+	AssociatedRoles []*AwsRdsDbClusterAssociatedRole
+
+	// A list of Availability Zones (AZs) where instances in the DB cluster can be
+	// created.
+	AvailabilityZones []*string
+
+	// The number of days for which automated backups are retained.
+	BackupRetentionPeriod *int32
+
+	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
+	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
+	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
+	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	ClusterCreateTime *string
+
+	// Whether tags are copied from the DB cluster to snapshots of the DB cluster.
+	CopyTagsToSnapshot *bool
+
+	// Whether the DB cluster is a clone of a DB cluster owned by a different AWS
+	// account.
+	CrossAccountClone *bool
+
+	// A list of custom endpoints for the DB cluster.
+	CustomEndpoints []*string
+
+	// The name of the database.
+	DatabaseName *string
+
+	// The DB cluster identifier that the user assigned to the cluster. This identifier
+	// is the unique key that identifies a DB cluster.
+	DbClusterIdentifier *string
+
+	// The list of instances that make up the DB cluster.
+	DbClusterMembers []*AwsRdsDbClusterMember
+
+	// The list of option group memberships for this DB cluster.
+	DbClusterOptionGroupMemberships []*AwsRdsDbClusterOptionGroupMembership
+
+	// The name of the DB cluster parameter group for the DB cluster.
+	DbClusterParameterGroup *string
+
+	// The identifier of the DB cluster. The identifier must be unique within each AWS
+	// Region and is immutable.
+	DbClusterResourceId *string
+
+	// The subnet group that is associated with the DB cluster, including the name,
+	// description, and subnets in the subnet group.
+	DbSubnetGroup *string
+
+	// Whether the DB cluster has deletion protection enabled.
+	DeletionProtection *bool
+
+	// The Active Directory domain membership records that are associated with the DB
+	// cluster.
+	DomainMemberships []*AwsRdsDbDomainMembership
+
+	// A list of log types that this DB cluster is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudWatchLogsExports []*string
+
+	// The connection endpoint for the primary instance of the DB cluster.
+	Endpoint *string
+
+	// The name of the database engine to use for this DB cluster.
+	Engine *string
+
+	// The database engine mode of the DB cluster.
+	EngineMode *string
+
+	// The version number of the database engine to use.
+	EngineVersion *string
+
+	// Specifies the identifier that Amazon Route 53 assigns when you create a hosted
+	// zone.
+	HostedZoneId *string
+
+	// Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.
+	HttpEndpointEnabled *bool
+
+	// Whether the mapping of IAM accounts to database accounts is enabled.
+	IamDatabaseAuthenticationEnabled *bool
+
+	// The ARN of the AWS KMS master key that is used to encrypt the database instances
+	// in the DB cluster.
+	KmsKeyId *string
+
+	// The name of the master user for the DB cluster.
+	MasterUsername *string
+
+	// Whether the DB cluster has instances in multiple Availability Zones.
+	MultiAz *bool
+
+	// The port number on which the DB instances in the DB cluster accept connections.
+	Port *int32
+
+	// The range of time each day when automated backups are created, if automated
+	// backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
+	PreferredBackupWindow *string
+
+	// The weekly time range during which system maintenance can occur, in Universal
+	// Coordinated Time (UTC). Uses the format :HH:MM-:HH:MM. For the day values, use
+	// mon|tue|wed|thu|fri|sat|sun. For example, sun:09:32-sun:10:02.
+	PreferredMaintenanceWindow *string
+
+	// The identifiers of the read replicas that are associated with this DB cluster.
+	ReadReplicaIdentifiers []*string
+
+	// The reader endpoint for the DB cluster.
+	ReaderEndpoint *string
+
+	// The current status of this DB cluster.
+	Status *string
+
+	// Whether the DB cluster is encrypted.
+	StorageEncrypted *bool
+
+	// A list of VPC security groups that the DB cluster belongs to.
+	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
+}
+
+// Information about an instance in the DB cluster.
+type AwsRdsDbClusterMember struct {
+
+	// The status of the DB cluster parameter group for this member of the DB cluster.
+	DbClusterParameterGroupStatus *string
+
+	// The instance identifier for this member of the DB cluster.
+	DbInstanceIdentifier *string
+
+	// Whether the cluster member is the primary instance for the DB cluster.
+	IsClusterWriter *bool
+
+	// Specifies the order in which an Aurora replica is promoted to the primary
+	// instance when the existing primary instance fails.
+	PromotionTier *int32
+}
+
+// Information about an option group membership for a DB cluster.
+type AwsRdsDbClusterOptionGroupMembership struct {
+
+	// The name of the DB cluster option group.
+	DbClusterOptionGroupName *string
+
+	// The status of the DB cluster option group.
+	Status *string
+}
+
+// Information about an Amazon RDS DB cluster snapshot.
+type AwsRdsDbClusterSnapshotDetails struct {
+
+	// Specifies the allocated storage size in gibibytes (GiB).
+	AllocatedStorage *int32
+
+	// A list of Availability Zones where instances in the DB cluster can be created.
+	AvailabilityZones []*string
+
+	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
+	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
+	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
+	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	ClusterCreateTime *string
+
+	// The DB cluster identifier.
+	DbClusterIdentifier *string
+
+	// The identifier of the DB cluster snapshot.
+	DbClusterSnapshotIdentifier *string
+
+	//
+	Engine *string
+
+	// The version of the database engine to use.
+	EngineVersion *string
+
+	// Whether mapping of IAM accounts to database accounts is enabled.
+	IamDatabaseAuthenticationEnabled *bool
+
+	// The ARN of the AWS KMS master key that is used to encrypt the database instances
+	// in the DB cluster.
+	KmsKeyId *string
+
+	// The license model information for this DB cluster snapshot.
+	LicenseModel *string
+
+	// The name of the master user for the DB cluster.
+	MasterUsername *string
+
+	// Specifies the percentage of the estimated data that has been transferred.
+	PercentProgress *int32
+
+	// The port number on which the DB instances in the DB cluster accept connections.
+	Port *int32
+
+	// Indicates when the snapshot was taken. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	SnapshotCreateTime *string
+
+	// The type of DB cluster snapshot.
+	SnapshotType *string
+
+	// The status of this DB cluster snapshot.
+	Status *string
+
+	// Whether the DB cluster is encrypted.
+	StorageEncrypted *bool
+
+	// The VPC ID that is associated with the DB cluster snapshot.
+	VpcId *string
+}
+
+// Information about an Active Directory domain membership record associated with
+// the DB instance.
+type AwsRdsDbDomainMembership struct {
+
+	// The identifier of the Active Directory domain.
+	Domain *string
+
+	// The fully qualified domain name of the Active Directory domain.
+	Fqdn *string
+
+	// The name of the IAM role to use when making API calls to the Directory Service.
+	IamRoleName *string
+
+	// The status of the Active Directory Domain membership for the DB instance.
+	Status *string
 }
 
 // An AWS Identity and Access Management (IAM) role associated with the DB
@@ -928,12 +2776,30 @@ type AwsRdsDbInstanceAssociatedRole struct {
 // Contains the details of an Amazon RDS DB instance.
 type AwsRdsDbInstanceDetails struct {
 
+	// The amount of storage (in gigabytes) to initially allocate for the DB instance.
+	AllocatedStorage *int32
+
 	// The AWS Identity and Access Management (IAM) roles associated with the DB
 	// instance.
 	AssociatedRoles []*AwsRdsDbInstanceAssociatedRole
 
+	// Indicates whether minor version patches are applied automatically.
+	AutoMinorVersionUpgrade *bool
+
+	// The Availability Zone where the DB instance will be created.
+	AvailabilityZone *string
+
+	// The number of days for which to retain automated backups.
+	BackupRetentionPeriod *int32
+
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
+
+	// The name of the character set that this DB instance is associated with.
+	CharacterSetName *string
+
+	// Whether to copy resource tags to snapshots of the DB instance.
+	CopyTagsToSnapshot *bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
@@ -958,6 +2824,18 @@ type AwsRdsDbInstanceDetails struct {
 	// of a DB cluster, this can be a different port than the DB cluster port.
 	DbInstancePort *int32
 
+	// The current status of the DB instance.
+	DbInstanceStatus *string
+
+	// A list of the DB parameter groups to assign to the DB instance.
+	DbParameterGroups []*AwsRdsDbParameterGroup
+
+	// A list of the DB security groups to assign to the DB instance.
+	DbSecurityGroups []*string
+
+	// Information about the subnet group that is associated with the DB instance.
+	DbSubnetGroup *AwsRdsDbSubnetGroup
+
 	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
 	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
 	// instance is accessed.
@@ -967,6 +2845,13 @@ type AwsRdsDbInstanceDetails struct {
 	// protection is enabled, the database cannot be deleted.
 	DeletionProtection *bool
 
+	// The Active Directory domain membership records associated with the DB instance.
+	DomainMemberships []*AwsRdsDbDomainMembership
+
+	// A list of log types that this DB instance is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudWatchLogsExports []*string
+
 	// Specifies the connection endpoint.
 	Endpoint *AwsRdsDbInstanceEndpoint
 
@@ -975,6 +2860,10 @@ type AwsRdsDbInstanceDetails struct {
 
 	// Indicates the database engine version.
 	EngineVersion *string
+
+	// The ARN of the CloudWatch Logs log stream that receives the enhanced monitoring
+	// metrics data for the DB instance.
+	EnhancedMonitoringResourceArn *string
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false. IAM database authentication can be
@@ -989,12 +2878,80 @@ type AwsRdsDbInstanceDetails struct {
 	// Aurora 5.6 or higher
 	IAMDatabaseAuthenticationEnabled *bool
 
-	// Provides the date and time the DB instance was created.
+	// Indicates when the DB instance was created. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	InstanceCreateTime *string
+
+	// Specifies the provisioned IOPS (I/O operations per second) for this DB instance.
+	Iops *int32
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
 	// instance.
 	KmsKeyId *string
+
+	// Specifies the latest time to which a database can be restored with point-in-time
+	// restore. Uses the date-time format specified in RFC 3339 section 5.6, Internet
+	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
+	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+	LatestRestorableTime *string
+
+	// License model information for this DB instance.
+	LicenseModel *string
+
+	// Specifies the connection endpoint.
+	ListenerEndpoint *AwsRdsDbInstanceEndpoint
+
+	// The master user name of the DB instance.
+	MasterUsername *string
+
+	// The upper limit to which Amazon RDS can automatically scale the storage of the
+	// DB instance.
+	MaxAllocatedStorage *int32
+
+	// The interval, in seconds, between points when enhanced monitoring metrics are
+	// collected for the DB instance.
+	MonitoringInterval *int32
+
+	// The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring
+	// metrics to CloudWatch Logs.
+	MonitoringRoleArn *string
+
+	// Whether the DB instance is a multiple Availability Zone deployment.
+	MultiAz *bool
+
+	// The list of option group memberships for this DB instance.
+	OptionGroupMemberships []*AwsRdsDbOptionGroupMembership
+
+	// Changes to the DB instance that are currently pending.
+	PendingModifiedValues *AwsRdsDbPendingModifiedValues
+
+	// Indicates whether Performance Insights is enabled for the DB instance.
+	PerformanceInsightsEnabled *bool
+
+	// The identifier of the AWS KMS key used to encrypt the Performance Insights data.
+	PerformanceInsightsKmsKeyId *string
+
+	// The number of days to retain Performance Insights data.
+	PerformanceInsightsRetentionPeriod *int32
+
+	// The range of time each day when automated backups are created, if automated
+	// backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
+	PreferredBackupWindow *string
+
+	// The weekly time range during which system maintenance can occur, in Universal
+	// Coordinated Time (UTC). Uses the format :HH:MM-:HH:MM. For the day values, use
+	// mon|tue|wed|thu|fri|sat|sun. For example, sun:09:32-sun:10:02.
+	PreferredMaintenanceWindow *string
+
+	// The number of CPU cores and the number of threads per core for the DB instance
+	// class of the DB instance.
+	ProcessorFeatures []*AwsRdsDbProcessorFeature
+
+	// The order in which to promote an Aurora replica to the primary instance after a
+	// failure of the existing primary instance.
+	PromotionTier *int32
 
 	// Specifies the accessibility options for the DB instance. A value of true
 	// specifies an Internet-facing instance with a publicly resolvable DNS name, which
@@ -1002,12 +2959,37 @@ type AwsRdsDbInstanceDetails struct {
 	// with a DNS name that resolves to a private IP address.
 	PubliclyAccessible *bool
 
+	// List of identifiers of Aurora DB clusters to which the RDS DB instance is
+	// replicated as a read replica.
+	ReadReplicaDBClusterIdentifiers []*string
+
+	// List of identifiers of the read replicas associated with this DB instance.
+	ReadReplicaDBInstanceIdentifiers []*string
+
+	// If this DB instance is a read replica, contains the identifier of the source DB
+	// instance.
+	ReadReplicaSourceDBInstanceIdentifier *string
+
+	// For a DB instance with multi-Availability Zone support, the name of the
+	// secondary Availability Zone.
+	SecondaryAvailabilityZone *string
+
+	// The status of a read replica. If the instance isn't a read replica, this is
+	// empty.
+	StatusInfos []*AwsRdsDbStatusInfo
+
 	// Specifies whether the DB instance is encrypted.
 	StorageEncrypted *bool
+
+	// The storage type for the DB instance.
+	StorageType *string
 
 	// The ARN from the key store with which the instance is associated for TDE
 	// encryption.
 	TdeCredentialArn *string
+
+	// The time zone of the DB instance.
+	Timezone *string
 
 	// A list of VPC security groups that the DB instance belongs to.
 	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
@@ -1036,10 +3018,662 @@ type AwsRdsDbInstanceVpcSecurityGroup struct {
 	VpcSecurityGroupId *string
 }
 
+//
+type AwsRdsDbOptionGroupMembership struct {
+
+	//
+	OptionGroupName *string
+
+	//
+	Status *string
+}
+
+//
+type AwsRdsDbParameterGroup struct {
+
+	//
+	DbParameterGroupName *string
+
+	//
+	ParameterApplyStatus *string
+}
+
+//
+type AwsRdsDbPendingModifiedValues struct {
+
+	//
+	AllocatedStorage *int32
+
+	//
+	BackupRetentionPeriod *int32
+
+	//
+	CaCertificateIdentifier *string
+
+	//
+	DbInstanceClass *string
+
+	//
+	DbInstanceIdentifier *string
+
+	//
+	DbSubnetGroupName *string
+
+	//
+	EngineVersion *string
+
+	//
+	Iops *int32
+
+	//
+	LicenseModel *string
+
+	//
+	MasterUserPassword *string
+
+	//
+	MultiAZ *bool
+
+	//
+	PendingCloudWatchLogsExports *AwsRdsPendingCloudWatchLogsExports
+
+	//
+	Port *int32
+
+	//
+	ProcessorFeatures []*AwsRdsDbProcessorFeature
+
+	//
+	StorageType *string
+}
+
+//
+type AwsRdsDbProcessorFeature struct {
+
+	//
+	Name *string
+
+	//
+	Value *string
+}
+
+//
+type AwsRdsDbSnapshotDetails struct {
+
+	//
+	AllocatedStorage *int32
+
+	//
+	AvailabilityZone *string
+
+	//
+	DbInstanceIdentifier *string
+
+	//
+	DbSnapshotIdentifier *string
+
+	//
+	DbiResourceId *string
+
+	//
+	Encrypted *bool
+
+	//
+	Engine *string
+
+	//
+	EngineVersion *string
+
+	//
+	IamDatabaseAuthenticationEnabled *bool
+
+	//
+	InstanceCreateTime *string
+
+	//
+	Iops *int32
+
+	//
+	KmsKeyId *string
+
+	//
+	LicenseModel *string
+
+	//
+	MasterUsername *string
+
+	//
+	OptionGroupName *string
+
+	//
+	PercentProgress *int32
+
+	//
+	Port *int32
+
+	//
+	ProcessorFeatures []*AwsRdsDbProcessorFeature
+
+	//
+	SnapshotCreateTime *string
+
+	//
+	SnapshotType *string
+
+	//
+	SourceDbSnapshotIdentifier *string
+
+	//
+	SourceRegion *string
+
+	//
+	Status *string
+
+	//
+	StorageType *string
+
+	//
+	TdeCredentialArn *string
+
+	//
+	Timezone *string
+
+	//
+	VpcId *string
+}
+
+// Information about the status of a read replica.
+type AwsRdsDbStatusInfo struct {
+
+	// If the read replica is currently in an error state, provides the error details.
+	Message *string
+
+	// Whether the read replica instance is operating normally.
+	Normal *bool
+
+	// The status of the read replica instance.
+	Status *string
+
+	// The type of status. For a read replica, the status type is read replication.
+	StatusType *string
+}
+
+// Information about the subnet group for the database instance.
+type AwsRdsDbSubnetGroup struct {
+
+	// The ARN of the subnet group.
+	DbSubnetGroupArn *string
+
+	// The description of the subnet group.
+	DbSubnetGroupDescription *string
+
+	// The name of the subnet group.
+	DbSubnetGroupName *string
+
+	// The status of the subnet group.
+	SubnetGroupStatus *string
+
+	// A list of subnets in the subnet group.
+	Subnets []*AwsRdsDbSubnetGroupSubnet
+
+	// The VPC ID of the subnet group.
+	VpcId *string
+}
+
+// Information about a subnet in a subnet group.
+type AwsRdsDbSubnetGroupSubnet struct {
+
+	// Information about the Availability Zone for a subnet in the subnet group.
+	SubnetAvailabilityZone *AwsRdsDbSubnetGroupSubnetAvailabilityZone
+
+	// The identifier of a subnet in the subnet group.
+	SubnetIdentifier *string
+
+	// The status of a subnet in the subnet group.
+	SubnetStatus *string
+}
+
+// An Availability Zone for a subnet in a subnet group.
+type AwsRdsDbSubnetGroupSubnetAvailabilityZone struct {
+
+	// The name of the Availability Zone for a subnet in the subnet group.
+	Name *string
+}
+
+// Identifies the log types to enable and disable.
+type AwsRdsPendingCloudWatchLogsExports struct {
+
+	// A list of log types that are being disabled.
+	LogTypesToDisable []*string
+
+	// A list of log types that are being enabled.
+	LogTypesToEnable []*string
+}
+
+// A node in an Amazon Redshift cluster.
+type AwsRedshiftClusterClusterNode struct {
+
+	// The role of the node. A node might be a leader node or a compute node.
+	NodeRole *string
+
+	// The private IP address of the node.
+	PrivateIpAddress *string
+
+	// The public IP address of the node.
+	PublicIpAddress *string
+}
+
+// A cluster parameter group that is associated with an Amazon Redshift cluster.
+type AwsRedshiftClusterClusterParameterGroup struct {
+
+	// The list of parameter statuses.
+	ClusterParameterStatusList []*AwsRedshiftClusterClusterParameterStatus
+
+	// The status of updates to the parameters.
+	ParameterApplyStatus *string
+
+	// The name of the parameter group.
+	ParameterGroupName *string
+}
+
+// The status of a parameter in a cluster parameter group for an Amazon Redshift
+// cluster.
+type AwsRedshiftClusterClusterParameterStatus struct {
+
+	// The error that prevented the parameter from being applied to the database.
+	ParameterApplyErrorDescription *string
+
+	// The status of the parameter. Indicates whether the parameter is in sync with the
+	// database, waiting for a cluster reboot, or encountered an error when it was
+	// applied. Valid values: in-sync | pending-reboot | applying | invalid-parameter |
+	// apply-deferred | apply-error | unknown-error
+	ParameterApplyStatus *string
+
+	// The name of the parameter.
+	ParameterName *string
+}
+
+// A security group that is associated with the cluster.
+type AwsRedshiftClusterClusterSecurityGroup struct {
+
+	// The name of the cluster security group.
+	ClusterSecurityGroupName *string
+
+	// The status of the cluster security group.
+	Status *string
+}
+
+// Information about a cross-Region snapshot copy.
+type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
+
+	// The destination Region that snapshots are automatically copied to when
+	// cross-Region snapshot copy is enabled.
+	DestinationRegion *string
+
+	// The number of days that manual snapshots are retained in the destination region
+	// after they are copied from a source region. If the value is -1, then the manual
+	// snapshot is retained indefinitely. Valid values: Either -1 or an integer between
+	// 1 and 3,653
+	ManualSnapshotRetentionPeriod *int32
+
+	// The number of days to retain automated snapshots in the destination Region after
+	// they are copied from a source Region.
+	RetentionPeriod *int32
+
+	// The name of the snapshot copy grant.
+	SnapshotCopyGrantName *string
+}
+
+// A time windows during which maintenance was deferred for an Amazon Redshift
+// cluster.
+type AwsRedshiftClusterDeferredMaintenanceWindow struct {
+
+	// The end of the time window for which maintenance was deferred. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	DeferMaintenanceEndTime *string
+
+	// The identifier of the maintenance window.
+	DeferMaintenanceIdentifier *string
+
+	// The start of the time window for which maintenance was deferred. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	DeferMaintenanceStartTime *string
+}
+
+// Details about an Amazon Redshift cluster.
+type AwsRedshiftClusterDetails struct {
+
+	// Indicates whether major version upgrades are applied automatically to the
+	// cluster during the maintenance window.
+	AllowVersionUpgrade *bool
+
+	// The number of days that automatic cluster snapshots are retained.
+	AutomatedSnapshotRetentionPeriod *int32
+
+	// The name of the Availability Zone in which the cluster is located.
+	AvailabilityZone *string
+
+	// The availability status of the cluster for queries. Possible values are the
+	// following:
+	//
+	//     * Available - The cluster is available for queries.
+	//
+	//     *
+	// Unavailable - The cluster is not available for queries.
+	//
+	//     * Maintenance - The
+	// cluster is intermittently available for queries due to maintenance activities.
+	//
+	//
+	// * Modifying -The cluster is intermittently available for queries due to changes
+	// that modify the cluster.
+	//
+	//     * Failed - The cluster failed and is not available
+	// for queries.
+	ClusterAvailabilityStatus *string
+
+	// Indicates when the cluster was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	ClusterCreateTime *string
+
+	// The unique identifier of the cluster.
+	ClusterIdentifier *string
+
+	// The nodes in the cluster.
+	ClusterNodes []*AwsRedshiftClusterClusterNode
+
+	// The list of cluster parameter groups that are associated with this cluster.
+	ClusterParameterGroups []*AwsRedshiftClusterClusterParameterGroup
+
+	// The public key for the cluster.
+	ClusterPublicKey *string
+
+	// The specific revision number of the database in the cluster.
+	ClusterRevisionNumber *string
+
+	// A list of cluster security groups that are associated with the cluster.
+	ClusterSecurityGroups []*AwsRedshiftClusterClusterSecurityGroup
+
+	// Information about the destination Region and retention period for the
+	// cross-Region snapshot copy.
+	ClusterSnapshotCopyStatus *AwsRedshiftClusterClusterSnapshotCopyStatus
+
+	// The current status of the cluster. Valid values: available | available,
+	// prep-for-resize | available, resize-cleanup | cancelling-resize | creating |
+	// deleting | final-snapshot | hardware-failure | incompatible-hsm |
+	// incompatible-network | incompatible-parameters | incompatible-restore |
+	// modifying | paused | rebooting | renaming | resizing | rotating-keys |
+	// storage-full | updating-hsm
+	ClusterStatus *string
+
+	// The name of the subnet group that is associated with the cluster. This parameter
+	// is valid only when the cluster is in a VPC.
+	ClusterSubnetGroupName *string
+
+	// The version ID of the Amazon Redshift engine that runs on the cluster.
+	ClusterVersion *string
+
+	// The name of the initial database that was created when the cluster was created.
+	// The same name is returned for the life of the cluster. If an initial database is
+	// not specified, a database named devdev is created by default.
+	DBName *string
+
+	// List of time windows during which maintenance was deferred.
+	DeferredMaintenanceWindows []*AwsRedshiftClusterDeferredMaintenanceWindow
+
+	// Information about the status of the Elastic IP (EIP) address.
+	ElasticIpStatus *AwsRedshiftClusterElasticIpStatus
+
+	// The number of nodes that you can use the elastic resize method to resize the
+	// cluster to.
+	ElasticResizeNumberOfNodeOptions *string
+
+	// Indicates whether the data in the cluster is encrypted at rest.
+	Encrypted *bool
+
+	// The connection endpoint.
+	Endpoint *AwsRedshiftClusterEndpoint
+
+	// Indicates whether to create the cluster with enhanced VPC routing enabled.
+	EnhancedVpcRouting *bool
+
+	// Indicates when the next snapshot is expected to be taken. The cluster must have
+	// a valid snapshot schedule and have backups enabled. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	ExpectedNextSnapshotScheduleTime *string
+
+	// The status of the next expected snapshot. Valid values: OnTrack | Pending
+	ExpectedNextSnapshotScheduleTimeStatus *string
+
+	// Information about whether the Amazon Redshift cluster finished applying any
+	// changes to hardware security module (HSM) settings that were specified in a
+	// modify cluster command.
+	HsmStatus *AwsRedshiftClusterHsmStatus
+
+	// A list of IAM roles that the cluster can use to access other AWS services.
+	IamRoles []*AwsRedshiftClusterIamRole
+
+	// The identifier of the AWS KMS encryption key that is used to encrypt data in the
+	// cluster.
+	KmsKeyId *string
+
+	// The name of the maintenance track for the cluster.
+	MaintenanceTrackName *string
+
+	// The default number of days to retain a manual snapshot. If the value is -1, the
+	// snapshot is retained indefinitely. This setting doesn't change the retention
+	// period of existing snapshots. Valid values: Either -1 or an integer between 1
+	// and 3,653
+	ManualSnapshotRetentionPeriod *int32
+
+	// The master user name for the cluster. This name is used to connect to the
+	// database that is specified in as the value of DBName.
+	MasterUsername *string
+
+	// Indicates the start of the next maintenance window. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	NextMaintenanceWindowStartTime *string
+
+	// The node type for the nodes in the cluster.
+	NodeType *string
+
+	// The number of compute nodes in the cluster.
+	NumberOfNodes *int32
+
+	// A list of cluster operations that are waiting to start.
+	PendingActions []*string
+
+	// A list of changes to the cluster that are currently pending.
+	PendingModifiedValues *AwsRedshiftClusterPendingModifiedValues
+
+	// The weekly time range, in Universal Coordinated Time (UTC), during which system
+	// maintenance can occur. Format:  :HH:MM-:HH:MM For the day values, use mon | tue
+	// | wed | thu | fri | sat | sun For example, sun:09:32-sun:10:02
+	PreferredMaintenanceWindow *string
+
+	// Whether the cluster can be accessed from a public network.
+	PubliclyAccessible *bool
+
+	// Information about the resize operation for the cluster.
+	ResizeInfo *AwsRedshiftClusterResizeInfo
+
+	// Information about the status of a cluster restore action. Only applies to a
+	// cluster that was created by restoring a snapshot.
+	RestoreStatus *AwsRedshiftClusterRestoreStatus
+
+	// A unique identifier for the cluster snapshot schedule.
+	SnapshotScheduleIdentifier *string
+
+	// The current state of the cluster snapshot schedule. Valid values: MODIFYING |
+	// ACTIVE | FAILED
+	SnapshotScheduleState *string
+
+	// The identifier of the VPC that the cluster is in, if the cluster is in a VPC.
+	VpcId *string
+
+	// The list of VPC security groups that the cluster belongs to, if the cluster is
+	// in a VPC.
+	VpcSecurityGroups []*AwsRedshiftClusterVpcSecurityGroup
+}
+
+// The status of the elastic IP (EIP) address for an Amazon Redshift cluster.
+type AwsRedshiftClusterElasticIpStatus struct {
+
+	// The elastic IP address for the cluster.
+	ElasticIp *string
+
+	// The status of the elastic IP address.
+	Status *string
+}
+
+// The connection endpoint for an Amazon Redshift cluster.
+type AwsRedshiftClusterEndpoint struct {
+
+	// The DNS address of the cluster.
+	Address *string
+
+	// The port that the database engine listens on.
+	Port *int32
+}
+
+// Information about whether an Amazon Redshift cluster finished applying any
+// hardware changes to security module (HSM) settings that were specified in a
+// modify cluster command.
+type AwsRedshiftClusterHsmStatus struct {
+
+	// The name of the HSM client certificate that the Amazon Redshift cluster uses to
+	// retrieve the data encryption keys that are stored in an HSM.
+	HsmClientCertificateIdentifier *string
+
+	// The name of the HSM configuration that contains the information that the Amazon
+	// Redshift cluster can use to retrieve and store keys in an HSM.
+	HsmConfigurationIdentifier *string
+
+	// Indicates whether the Amazon Redshift cluster has finished applying any HSM
+	// settings changes specified in a modify cluster command. Type: String Valid
+	// values: active | applying
+	Status *string
+}
+
+// An IAM role that the cluster can use to access other AWS services.
+type AwsRedshiftClusterIamRole struct {
+
+	// The status of the IAM role's association with the cluster. Valid values: in-sync
+	// | adding | removing
+	ApplyStatus *string
+
+	// The ARN of the IAM role.
+	IamRoleArn *string
+}
+
+// Changes to the Amazon Redshift cluster that are currently pending.
+type AwsRedshiftClusterPendingModifiedValues struct {
+
+	// The pending or in-progress change to the automated snapshot retention period.
+	AutomatedSnapshotRetentionPeriod *int32
+
+	// The pending or in-progress change to the identifier for the cluster.
+	ClusterIdentifier *string
+
+	// The pending or in-progress change to the cluster type.
+	ClusterType *string
+
+	// The pending or in-progress change to the service version.
+	ClusterVersion *string
+
+	// The encryption type for a cluster.
+	EncryptionType *string
+
+	// Indicates whether to create the cluster with enhanced VPC routing enabled.
+	EnhancedVpcRouting *bool
+
+	// The name of the maintenance track that the cluster changes to during the next
+	// maintenance window.
+	MaintenanceTrackName *string
+
+	// The pending or in-progress change to the master user password for the cluster.
+	MasterUserPassword *string
+
+	// The pending or in-progress change to the cluster's node type.
+	NodeType *string
+
+	// The pending or in-progress change to the number of nodes in the cluster.
+	NumberOfNodes *int32
+
+	// The pending or in-progress change to whether the cluster can be connected to
+	// from the public network.
+	PubliclyAccessible *bool
+}
+
+// Information about the resize operation for the cluster.
+type AwsRedshiftClusterResizeInfo struct {
+
+	// Indicates whether the resize operation can be canceled.
+	AllowCancelResize *bool
+
+	// The type of resize operation. Valid values: ClassicResize
+	ResizeType *string
+}
+
+// Information about the status of a cluster restore action. It only applies if the
+// cluster was created by restoring a snapshot.
+type AwsRedshiftClusterRestoreStatus struct {
+
+	// The number of megabytes per second being transferred from the backup storage.
+	// Returns the average rate for a completed backup. This field is only updated when
+	// you restore to DC2 and DS2 node types.
+	CurrentRestoreRateInMegaBytesPerSecond *float64
+
+	// The amount of time an in-progress restore has been running, or the amount of
+	// time it took a completed restore to finish. This field is only updated when you
+	// restore to DC2 and DS2 node types.
+	ElapsedTimeInSeconds *int64
+
+	// The estimate of the time remaining before the restore is complete. Returns 0 for
+	// a completed restore. This field is only updated when you restore to DC2 and DS2
+	// node types.
+	EstimatedTimeToCompletionInSeconds *int64
+
+	// The number of megabytes that were transferred from snapshot storage. This field
+	// is only updated when you restore to DC2 and DS2 node types.
+	ProgressInMegaBytes *int64
+
+	// The size of the set of snapshot data that was used to restore the cluster. This
+	// field is only updated when you restore to DC2 and DS2 node types.
+	SnapshotSizeInMegaBytes *int64
+
+	// The status of the restore action. Valid values: starting | restoring | completed
+	// | failed
+	Status *string
+}
+
+// A VPC security group that the cluster belongs to, if the cluster is in a VPC.
+type AwsRedshiftClusterVpcSecurityGroup struct {
+
+	// The status of the VPC security group.
+	Status *string
+
+	// The identifier of the VPC security group.
+	VpcSecurityGroupId *string
+}
+
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 
-	// The date and time when the S3 bucket was created.
+	// Indicates when the S3 bucket was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
 	// The canonical user ID of the owner of the S3 bucket.
@@ -1089,7 +3723,10 @@ type AwsS3ObjectDetails struct {
 	// resource found at a URL.
 	ETag *string
 
-	// The date and time when the object was last modified.
+	// Indicates when the object was last modified. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastModified *string
 
 	// The identifier of the AWS Key Management Service (AWS KMS) symmetric customer
@@ -1102,6 +3739,42 @@ type AwsS3ObjectDetails struct {
 
 	// The version of the object.
 	VersionId *string
+}
+
+// Details about an AWS Secrets Manager secret.
+type AwsSecretsManagerSecretDetails struct {
+
+	// Whether the secret is deleted.
+	Deleted *bool
+
+	// The user-provided description of the secret.
+	Description *string
+
+	// The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to
+	// encrypt the SecretString or SecretBinary values for versions of this secret.
+	KmsKeyId *string
+
+	// The name of the secret.
+	Name *string
+
+	// Whether rotation is enabled.
+	RotationEnabled *bool
+
+	// The ARN of the Lambda function that rotates the secret.
+	RotationLambdaArn *string
+
+	// Whether the rotation occurred within the specified rotation frequency.
+	RotationOccurredWithinFrequency *bool
+
+	// Defines the rotation schedule for the secret.
+	RotationRules *AwsSecretsManagerSecretRotationRules
+}
+
+// Defines the rotation schedule for the secret.
+type AwsSecretsManagerSecretRotationRules struct {
+
+	// The number of days after the previous rotation to rotate the secret.
+	AutomaticallyAfterDays *int32
 }
 
 // Provides consistent format for the contents of the Security Hub-aggregated
@@ -1117,8 +3790,11 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider created the potential security issue that a finding captured.
+	// Indicates when the security-findings provider created the potential security
+	// issue that a finding captured. Uses the date-time format specified in RFC 3339
+	// section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	CreatedAt *string
@@ -1175,8 +3851,10 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	Types []*string
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider last updated the finding record.
+	// Indicates when the security-findings provider last updated the finding record.
+	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
+	// Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot
+	// contain spaces. For example, 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	UpdatedAt *string
@@ -1197,13 +3875,18 @@ type AwsSecurityFinding struct {
 	// of 100 is reserved for the most critical resources.
 	Criticality *int32
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider first observed the potential security issue that a finding captured.
+	// Indicates when the security-findings provider first observed the potential
+	// security issue that a finding captured. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	FirstObservedAt *string
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider most recently observed the potential security issue that a finding
-	// captured.
+	// Indicates when the security-findings provider most recently observed the
+	// potential security issue that a finding captured. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastObservedAt *string
 
 	// A list of malware related to a finding.
@@ -1218,6 +3901,10 @@ type AwsSecurityFinding struct {
 
 	// A user-defined note added to a finding.
 	Note *Note
+
+	// Provides an overview of the patch compliance status for an instance against a
+	// selected compliance standard.
+	PatchSummary *PatchSummary
 
 	// The details of process-related information about a finding.
 	Process *ProcessDetails
@@ -1262,7 +3949,8 @@ type AwsSecurityFinding struct {
 
 // A collection of attributes that are applied to all active Security
 // Hub-aggregated findings and that result in a subset of findings that are
-// included in this insight.
+// included in this insight. You can filter by up to 10 finding attributes. For
+// each attribute, you can provide up to 20 filter values.
 type AwsSecurityFindingFilters struct {
 
 	// The AWS account ID that a finding is generated in.
@@ -1754,7 +4442,10 @@ type ContainerDetails struct {
 	// The name of the image related to a finding.
 	ImageName *string
 
-	// The date and time when the container started.
+	// Indicates when the container started. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// The name of the container related to a finding.
@@ -1955,17 +4646,30 @@ type Malware struct {
 	Type MalwareType
 }
 
-// The map filter for querying findings.
+// A map filter for querying findings. Each map filter provides the field to check,
+// the value to look for, and the comparison operator.
 type MapFilter struct {
 
-	// The condition to apply to a key value when querying for findings with a map
-	// filter.
+	// The condition to apply to the key value when querying for findings with a map
+	// filter. To search for values that exactly match the filter value, use EQUALS.
+	// For example, for the ResourceTags field, the filter Department EQUALS Security
+	// matches findings that have the value Security for the tag Department. To search
+	// for values other than the filter value, use NOT_EQUALS. For example, for the
+	// ResourceTags field, the filter Department NOT_EQUALS Finance matches findings
+	// that do not have the value Finance for the tag Department. EQUALS filters on the
+	// same field are joined by OR. A finding matches if it matches any one of those
+	// filters. NOT_EQUALS filters on the same field are joined by AND. A finding
+	// matches only if it matches all of those filters. You cannot have both an EQUALS
+	// filter and a NOT_EQUALS filter on the same field.
 	Comparison MapFilterComparison
 
-	// The key of the map filter.
+	// The key of the map filter. For example, for ResourceTags, Key identifies the
+	// name of the tag. For UserDefinedFields, Key is the name of the field.
 	Key *string
 
-	// The value for the key in the map filter.
+	// The value for the key in the map filter. Filter values are case sensitive. For
+	// example, one of the values for a tag called Department might be Security. If you
+	// provide security as the filter value, then there is no match.
 	Value *string
 }
 
@@ -1987,7 +4691,27 @@ type Member struct {
 	MasterId *string
 
 	// The status of the relationship between the member account and its master
-	// account.
+	// account. The status can have one of the following values:
+	//
+	//     * CREATED -
+	// Indicates that the master account added the member account, but has not yet
+	// invited the member account.
+	//
+	//     * INVITED - Indicates that the master account
+	// invited the member account. The member account has not yet responded to the
+	// invitation.
+	//
+	//     * ASSOCIATED - Indicates that the member account accepted the
+	// invitation.
+	//
+	//     * REMOVED - Indicates that the master account disassociated the
+	// member account.
+	//
+	//     * RESIGNED - Indicates that the member account
+	// disassociated themselves from the master account.
+	//
+	//     * DELETED - Indicates
+	// that the master account deleted the member account.
 	MemberStatus *string
 
 	// The timestamp for the date and time when the member account was updated.
@@ -2085,7 +4809,10 @@ type Note struct {
 	// This member is required.
 	Text *string
 
-	// The timestamp of when the note was updated.
+	// The timestamp of when the note was updated. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	//
 	// This member is required.
 	UpdatedAt *string
@@ -2126,6 +4853,58 @@ type NumberFilter struct {
 	Lte *float64
 }
 
+// Provides an overview of the patch compliance status for an instance against a
+// selected compliance standard.
+type PatchSummary struct {
+
+	// The identifier of the compliance standard that was used to determine the patch
+	// compliance status.
+	//
+	// This member is required.
+	Id *string
+
+	// The number of patches from the compliance standard that failed to install.
+	FailedCount *int32
+
+	// The number of patches from the compliance standard that were installed
+	// successfully.
+	InstalledCount *int32
+
+	// The number of installed patches that are not part of the compliance standard.
+	InstalledOtherCount *int32
+
+	// The number of patches that were applied, but that require the instance to be
+	// rebooted in order to be marked as installed.
+	InstalledPendingReboot *int32
+
+	// The number of patches that are installed but are also on a list of patches that
+	// the customer rejected.
+	InstalledRejectedCount *int32
+
+	// The number of patches that are part of the compliance standard but are not
+	// installed. The count includes patches that failed to install.
+	MissingCount *int32
+
+	// The type of patch operation performed. For Patch Manager, the values are SCAN
+	// and INSTALL.
+	Operation *string
+
+	// Indicates when the operation completed. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	OperationEndTime *string
+
+	// Indicates when the operation started. Uses the date-time format specified in RFC
+	// 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	OperationStartTime *string
+
+	// The reboot option specified for the instance.
+	RebootOption *string
+}
+
 // A range of ports.
 type PortRange struct {
 
@@ -2139,7 +4918,10 @@ type PortRange struct {
 // The details of process-related information about a finding.
 type ProcessDetails struct {
 
-	// The date/time that the process was launched.
+	// Indicates when the process was launched. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
 	// The name of the process.
@@ -2154,7 +4936,10 @@ type ProcessDetails struct {
 	// The process ID.
 	Pid *int32
 
-	// The date and time when the process was terminated.
+	// Indicates when the process was terminated. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	TerminatedAt *string
 }
 
@@ -2257,6 +5042,9 @@ type Resource struct {
 	// The canonical AWS external Region name where this resource is located.
 	Region *string
 
+	//
+	ResourceRole *string
+
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
 	Tags map[string]*string
@@ -2271,14 +5059,38 @@ type Resource struct {
 // the selected type does not have a corresponding object.
 type ResourceDetails struct {
 
+	//
+	AwsApiGatewayRestApi *AwsApiGatewayRestApiDetails
+
+	//
+	AwsApiGatewayStage *AwsApiGatewayStageDetails
+
+	//
+	AwsApiGatewayV2Api *AwsApiGatewayV2ApiDetails
+
+	//
+	AwsApiGatewayV2Stage *AwsApiGatewayV2StageDetails
+
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
+
+	//
+	AwsCertificateManagerCertificate *AwsCertificateManagerCertificateDetails
 
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails
 
+	//
+	AwsCloudTrailTrail *AwsCloudTrailTrailDetails
+
 	// Details for an AWS CodeBuild project.
 	AwsCodeBuildProject *AwsCodeBuildProjectDetails
+
+	// Details about a DynamoDB table.
+	AwsDynamoDbTable *AwsDynamoDbTableDetails
+
+	// Details about an Elastic IP address.
+	AwsEc2Eip *AwsEc2EipDetails
 
 	// Details about an Amazon EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
@@ -2298,14 +5110,26 @@ type ResourceDetails struct {
 	// Details for an Elasticsearch domain.
 	AwsElasticsearchDomain *AwsElasticsearchDomainDetails
 
+	//
+	AwsElbLoadBalancer *AwsElbLoadBalancerDetails
+
 	// Details about a load balancer.
 	AwsElbv2LoadBalancer *AwsElbv2LoadBalancerDetails
 
 	// Details about an IAM access key related to a finding.
 	AwsIamAccessKey *AwsIamAccessKeyDetails
 
+	//
+	AwsIamGroup *AwsIamGroupDetails
+
+	// Details about an IAM permissions policy.
+	AwsIamPolicy *AwsIamPolicyDetails
+
 	// Details about an IAM role.
 	AwsIamRole *AwsIamRoleDetails
+
+	// Details about an IAM user.
+	AwsIamUser *AwsIamUserDetails
 
 	// Details about a KMS key.
 	AwsKmsKey *AwsKmsKeyDetails
@@ -2316,14 +5140,29 @@ type ResourceDetails struct {
 	// Details for a Lambda layer version.
 	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
 
-	// Details for an Amazon RDS database instance.
+	// Details about an Amazon RDS database cluster.
+	AwsRdsDbCluster *AwsRdsDbClusterDetails
+
+	// Details about an Amazon RDS database cluster snapshot.
+	AwsRdsDbClusterSnapshot *AwsRdsDbClusterSnapshotDetails
+
+	// Details about an Amazon RDS database instance.
 	AwsRdsDbInstance *AwsRdsDbInstanceDetails
+
+	// Details about an Amazon RDS database snapshot.
+	AwsRdsDbSnapshot *AwsRdsDbSnapshotDetails
+
+	//
+	AwsRedshiftCluster *AwsRedshiftClusterDetails
 
 	// Details about an Amazon S3 bucket related to a finding.
 	AwsS3Bucket *AwsS3BucketDetails
 
 	// Details about an Amazon S3 object related to a finding.
 	AwsS3Object *AwsS3ObjectDetails
+
+	// Details about a Secrets Manager secret.
+	AwsSecretsManagerSecret *AwsSecretsManagerSecretDetails
 
 	// Details about an SNS topic.
 	AwsSnsTopic *AwsSnsTopicDetails
@@ -2614,10 +5453,64 @@ type StatusReason struct {
 // A string filter for querying findings.
 type StringFilter struct {
 
-	// The condition to be applied to a string value when querying for findings.
+	// The condition to apply to a string value when querying for findings. To search
+	// for values that contain the filter criteria value, use one of the following
+	// comparison operators:
+	//
+	//     * To search for values that exactly match the filter
+	// value, use EQUALS. For example, the filter ResourceType EQUALS
+	// AwsEc2SecurityGroup only matches findings that have a resource type of
+	// AwsEc2SecurityGroup.
+	//
+	//     * To search for values that start with the filter
+	// value, use PREFIX. For example, the filter ResourceType PREFIX AwsIam matches
+	// findings that have a resource type that starts with AwsIam. Findings with a
+	// resource type of AwsIamPolicy, AwsIamRole, or AwsIamUser would all
+	// match.
+	//
+	// EQUALS and PREFIX filters on the same field are joined by OR. A finding
+	// matches if it matches any one of those filters. To search for values that do not
+	// contain the filter criteria value, use one of the following comparison
+	// operators:
+	//
+	//     * To search for values that do not exactly match the filter
+	// value, use NOT_EQUALS. For example, the filter ResourceType NOT_EQUALS
+	// AwsIamPolicy matches findings that have a resource type other than
+	// AwsIamPolicy.
+	//
+	//     * To search for values that do not start with the filter
+	// value, use PREFIX_NOT_EQUALS. For example, the filter ResourceType
+	// PREFIX_NOT_EQUALS AwsIam matches findings that have a resource type that does
+	// not start with AwsIam. Findings with a resource type of AwsIamPolicy,
+	// AwsIamRole, or AwsIamUser would all be excluded from the results.
+	//
+	// NOT_EQUALS
+	// and PREFIX_NOT_EQUALS filters on the same field are joined by AND. A finding
+	// matches only if it matches all of those filters. For filters on the same field,
+	// you cannot provide both an EQUALS filter and a NOT_EQUALS or PREFIX_NOT_EQUALS
+	// filter. Combining filters in this way always returns an error, even if the
+	// provided filter values would return valid results. You can combine PREFIX
+	// filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for the same field.
+	// Security Hub first processes the PREFIX filters, then the NOT_EQUALS or
+	// PREFIX_NOT_EQUALS filters. For example, for the following filter, Security Hub
+	// first identifies findings that have resource types that start with either AwsIAM
+	// or AwsEc2. It then excludes findings that have a resource type of AwsIamPolicy
+	// and findings that have a resource type of AwsEc2NetworkInterface.
+	//
+	//     *
+	// ResourceType PREFIX AwsIam
+	//
+	//     * ResourceType PREFIX AwsEc2
+	//
+	//     * ResourceType
+	// NOT_EQUALS AwsIamPolicy
+	//
+	//     * ResourceType NOT_EQUALS AwsEc2NetworkInterface
 	Comparison StringFilterComparison
 
-	// The string filter value.
+	// The string filter value. Filter values are case sensitive. For example, the
+	// product name for control-based findings is Security Hub. If you provide security
+	// hub as the filter text, then there is no match.
 	Value *string
 }
 
@@ -2627,8 +5520,10 @@ type ThreatIntelIndicator struct {
 	// The category of a threat intelligence indicator.
 	Category ThreatIntelIndicatorCategory
 
-	// The date and time when the most recent instance of a threat intelligence
-	// indicator was observed.
+	// Indicates when the most recent instance of a threat intelligence indicator was
+	// observed. Uses the date-time format specified in RFC 3339 section 5.6, Internet
+	// Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The value
+	// cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastObservedAt *string
 
 	// The source of the threat intelligence indicator.
@@ -2680,13 +5575,19 @@ type VulnerabilityVendor struct {
 	// The URL of the vulnerability advisory.
 	Url *string
 
-	// The datetime when the vulnerability advisory was created.
+	// Indicates when the vulnerability advisory was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	VendorCreatedAt *string
 
 	// The severity that the vendor assigned to the vulnerability.
 	VendorSeverity *string
 
-	// The datetime when the vulnerability advisory was last updated.
+	// Indicates when the vulnerability advisory was last updated. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	VendorUpdatedAt *string
 }
 

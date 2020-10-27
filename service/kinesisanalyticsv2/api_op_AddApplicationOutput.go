@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds an external destination to your SQL-based Amazon Kinesis Data Analytics
+// Adds an external destination to your SQL-based Kinesis Data Analytics
 // application. If you want Kinesis Data Analytics to deliver data from an
 // in-application stream within your application to an external destination (such
 // as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS

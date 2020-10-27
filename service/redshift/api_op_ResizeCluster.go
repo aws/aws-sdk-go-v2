@@ -20,22 +20,27 @@ import (
 //     * You can only resize clusters
 // of the following types:
 //
+//         * dc1.large (if your cluster is in a VPC)
+//
+//
+// * dc1.8xlarge (if your cluster is in a VPC)
+//
 //         * dc2.large
 //
-//         * dc2.8xlarge
-//
 //         *
-// ds2.xlarge
+// dc2.8xlarge
+//
+//         * ds2.xlarge
 //
 //         * ds2.8xlarge
 //
-//         * ra3.4xlarge
-//
 //         *
-// ra3.16xlarge
+// ra3.4xlarge
 //
-//     * The type of nodes that you add must match the node type for
-// the cluster.
+//         * ra3.16xlarge
+//
+//     * The type of nodes that you add must
+// match the node type for the cluster.
 func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, optFns ...func(*Options)) (*ResizeClusterOutput, error) {
 	if params == nil {
 		params = &ResizeClusterInput{}
@@ -51,6 +56,8 @@ func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, 
 	return out, nil
 }
 
+// Describes a resize cluster operation. For example, a scheduled action to run the
+// ResizeCluster API operation.
 type ResizeClusterInput struct {
 
 	// The unique identifier for the cluster to resize.
@@ -70,7 +77,8 @@ type ResizeClusterInput struct {
 	// current node type is used.
 	NodeType *string
 
-	// The new number of nodes for the cluster.
+	// The new number of nodes for the cluster. If not specified, the cluster's current
+	// number of nodes is used.
 	NumberOfNodes *int32
 }
 

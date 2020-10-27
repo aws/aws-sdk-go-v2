@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Launches an application stack.
+// Launches the specified application as a stack in AWS CloudFormation.
 func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns ...func(*Options)) (*LaunchAppOutput, error) {
 	if params == nil {
 		params = &LaunchAppInput{}
@@ -28,7 +28,7 @@ func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns .
 
 type LaunchAppInput struct {
 
-	// ID of the application to launch.
+	// The ID of the application.
 	AppId *string
 }
 

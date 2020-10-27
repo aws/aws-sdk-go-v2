@@ -579,11 +579,11 @@ func validatePosixUser(v *types.PosixUser) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PosixUser"}
-	if v.Gid == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Gid"))
-	}
 	if v.Uid == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uid"))
+	}
+	if v.Gid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gid"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -649,26 +649,26 @@ func validateOpCreateAccessPointInput(v *CreateAccessPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPointInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RootDirectory != nil {
 		if err := validateRootDirectory(v.RootDirectory); err != nil {
 			invalidParams.AddNested("RootDirectory", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.PosixUser != nil {
 		if err := validatePosixUser(v.PosixUser); err != nil {
 			invalidParams.AddNested("PosixUser", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -682,13 +682,13 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemInput"}
+	if v.CreationToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreationToken"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CreationToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreationToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -720,15 +720,15 @@ func validateOpCreateTagsInput(v *CreateTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTagsInput"}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -925,15 +925,15 @@ func validateOpPutBackupPolicyInput(v *PutBackupPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBackupPolicyInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
 	if v.BackupPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupPolicy"))
 	} else if v.BackupPolicy != nil {
 		if err := validateBackupPolicy(v.BackupPolicy); err != nil {
 			invalidParams.AddNested("BackupPolicy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -947,11 +947,11 @@ func validateOpPutFileSystemPolicyInput(v *PutFileSystemPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutFileSystemPolicyInput"}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -965,11 +965,11 @@ func validateOpPutLifecycleConfigurationInput(v *PutLifecycleConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutLifecycleConfigurationInput"}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
 	if v.LifecyclePolicies == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecyclePolicies"))
+	}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

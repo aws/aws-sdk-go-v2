@@ -26,7 +26,7 @@ import (
 // account, you must have permissions for the CMK used to encrypt the snapshot.
 // Snapshots created by copying another snapshot have an arbitrary volume ID that
 // should not be used for any purpose. For more information, see Copying an Amazon
-// EBS Snapshot
+// EBS snapshot
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*Options)) (*CopySnapshotOutput, error) {

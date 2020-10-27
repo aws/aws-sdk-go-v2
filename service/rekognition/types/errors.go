@@ -32,11 +32,11 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
-	ResourceType *string
 	QuotaCode    *string
+	ServiceCode  *string
 	Logref       *string
 	Code         *string
-	ServiceCode  *string
+	ResourceType *string
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -84,8 +84,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 type ImageTooLargeException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ImageTooLargeException) Error() string {
@@ -144,8 +144,8 @@ func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return sm
 type InvalidPaginationTokenException struct {
 	Message *string
 
-	Code   *string
 	Logref *string
+	Code   *string
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -232,8 +232,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
-	Code   *string
 	Logref *string
+	Code   *string
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -276,8 +276,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 type ResourceInUseException struct {
 	Message *string
 
-	Code   *string
 	Logref *string
+	Code   *string
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -333,13 +333,34 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The size of the collection exceeds the allowed limit. For more information, see
+// Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	Code   *string
+	Logref *string
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Amazon Rekognition is temporarily unable to process the request. Try your call
 // again.
 type ThrottlingException struct {
 	Message *string
 
-	Logref *string
 	Code   *string
+	Logref *string
 }
 
 func (e *ThrottlingException) Error() string {
@@ -359,8 +380,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type VideoTooLargeException struct {
 	Message *string
 
-	Code   *string
 	Logref *string
+	Code   *string
 }
 
 func (e *VideoTooLargeException) Error() string {

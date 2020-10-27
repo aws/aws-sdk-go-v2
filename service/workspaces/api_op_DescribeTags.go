@@ -30,8 +30,8 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 type DescribeTagsInput struct {
 
 	// The identifier of the WorkSpaces resource. The supported resource types are
-	// WorkSpaces, registered directories, images, custom bundles, and IP access
-	// control groups.
+	// WorkSpaces, registered directories, images, custom bundles, IP access control
+	// groups, and connection aliases.
 	//
 	// This member is required.
 	ResourceId *string

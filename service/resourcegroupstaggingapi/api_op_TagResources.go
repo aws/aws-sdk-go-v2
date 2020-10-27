@@ -31,6 +31,12 @@ import (
 // you need the necessary permissions for the service that the resource belongs to
 // as well as permissions for adding tags. For more information, see this list
 // (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
+//
+// Do
+// not store personally identifiable information (PII) or other confidential or
+// sensitive information in tags. We use tags to provide you with billing and
+// administration services. Tags are not intended to be used for private or
+// sensitive data.
 func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, optFns ...func(*Options)) (*TagResourcesOutput, error) {
 	if params == nil {
 		params = &TagResourcesInput{}

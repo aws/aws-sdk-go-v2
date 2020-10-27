@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Returns metadata about a self-managed object storage server location.
+// Returns metadata about a self-managed object storage server location. For more
+// information about self-managed object storage locations, see
+// create-object-location.
 func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *DescribeLocationObjectStorageInput, optFns ...func(*Options)) (*DescribeLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &DescribeLocationObjectStorageInput{}
@@ -42,7 +44,9 @@ type DescribeLocationObjectStorageInput struct {
 type DescribeLocationObjectStorageOutput struct {
 
 	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server.
+	// self-managed object storage server. If your object storage requires a user name
+	// and password to authenticate, use AccessKey and SecretKey to provide the user
+	// name and password, respectively.
 	AccessKey *string
 
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed

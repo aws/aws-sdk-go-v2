@@ -27,29 +27,33 @@
 // resources provided by your own applications or services
 //
 //     * Amazon Comprehend
-// document classification endpoints
+// document classification and entity recognizer endpoints
 //
-//     * AWS Lambda function provisioned
-// concurrency
+//     * AWS Lambda
+// function provisioned concurrency
 //
-//     * Amazon Keyspaces (for Apache Cassandra) tables
+//     * Amazon Keyspaces (for Apache Cassandra)
+// tables
 //
-// API Summary
-// The Application Auto Scaling service API includes three key sets of actions:
+//     * Amazon Managed Streaming for Apache Kafka cluster storage
 //
+// API
+// Summary The Application Auto Scaling service API includes three key sets of
+// actions:
 //
-// * Register and manage scalable targets - Register AWS or custom resources as
-// scalable targets (a resource that Application Auto Scaling can scale), set
-// minimum and maximum capacity limits, and retrieve information on existing
-// scalable targets.
+//     * Register and manage scalable targets - Register AWS or custom
+// resources as scalable targets (a resource that Application Auto Scaling can
+// scale), set minimum and maximum capacity limits, and retrieve information on
+// existing scalable targets.
 //
-//     * Configure and manage automatic scaling - Define scaling
-// policies to dynamically scale your resources in response to CloudWatch alarms,
-// schedule one-time or recurring scaling actions, and retrieve your recent scaling
-// activity history.
+//     * Configure and manage automatic scaling -
+// Define scaling policies to dynamically scale your resources in response to
+// CloudWatch alarms, schedule one-time or recurring scaling actions, and retrieve
+// your recent scaling activity history.
 //
-//     * Suspend and resume scaling - Temporarily suspend and
-// later resume automatic scaling by calling the RegisterScalableTarget
+//     * Suspend and resume scaling -
+// Temporarily suspend and later resume automatic scaling by calling the
+// RegisterScalableTarget
 // (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html)
 // API action for any Application Auto Scaling scalable target. You can suspend and
 // resume (individually or in combination) scale-out activities that are triggered

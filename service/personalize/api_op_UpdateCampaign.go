@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -37,6 +38,9 @@ type UpdateCampaignInput struct {
 	//
 	// This member is required.
 	CampaignArn *string
+
+	// The configuration details of a campaign.
+	CampaignConfig *types.CampaignConfig
 
 	// Specifies the requested minimum provisioned transactions (recommendations) per
 	// second that Amazon Personalize will support.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves the reservation utilization for your account. Master accounts in an
+// Retrieves the reservation utilization for your account. Master account in an
 // organization have access to member accounts. You can filter data by dimensions
 // in a time period. You can use GetDimensionValues to determine the possible
 // dimension values. Currently, you can group only by SUBSCRIPTION_ID.

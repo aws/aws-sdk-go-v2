@@ -10,12 +10,31 @@ const (
 	DomainStatusDeleted DomainStatus = "Deleted"
 )
 
+// Values returns all known values for DomainStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DomainStatus) Values() []DomainStatus {
+	return []DomainStatus{
+		"Active",
+		"Deleted",
+	}
+}
+
 type ExternalConnectionStatus string
 
 // Enum values for ExternalConnectionStatus
 const (
 	ExternalConnectionStatusAvailable ExternalConnectionStatus = "Available"
 )
+
+// Values returns all known values for ExternalConnectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalConnectionStatus) Values() []ExternalConnectionStatus {
+	return []ExternalConnectionStatus{
+		"Available",
+	}
+}
 
 type HashAlgorithm string
 
@@ -27,6 +46,18 @@ const (
 	HashAlgorithmSha512 HashAlgorithm = "SHA-512"
 )
 
+// Values returns all known values for HashAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HashAlgorithm) Values() []HashAlgorithm {
+	return []HashAlgorithm{
+		"MD5",
+		"SHA-1",
+		"SHA-256",
+		"SHA-512",
+	}
+}
+
 type PackageFormat string
 
 // Enum values for PackageFormat
@@ -35,6 +66,17 @@ const (
 	PackageFormatPypi  PackageFormat = "pypi"
 	PackageFormatMaven PackageFormat = "maven"
 )
+
+// Values returns all known values for PackageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageFormat) Values() []PackageFormat {
+	return []PackageFormat{
+		"npm",
+		"pypi",
+		"maven",
+	}
+}
 
 type PackageVersionErrorCode string
 
@@ -48,12 +90,35 @@ const (
 	PackageVersionErrorCodeSkipped             PackageVersionErrorCode = "SKIPPED"
 )
 
+// Values returns all known values for PackageVersionErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageVersionErrorCode) Values() []PackageVersionErrorCode {
+	return []PackageVersionErrorCode{
+		"ALREADY_EXISTS",
+		"MISMATCHED_REVISION",
+		"MISMATCHED_STATUS",
+		"NOT_ALLOWED",
+		"NOT_FOUND",
+		"SKIPPED",
+	}
+}
+
 type PackageVersionSortType string
 
 // Enum values for PackageVersionSortType
 const (
 	PackageVersionSortTypePublished_time PackageVersionSortType = "PUBLISHED_TIME"
 )
+
+// Values returns all known values for PackageVersionSortType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageVersionSortType) Values() []PackageVersionSortType {
+	return []PackageVersionSortType{
+		"PUBLISHED_TIME",
+	}
+}
 
 type PackageVersionStatus string
 
@@ -67,6 +132,20 @@ const (
 	PackageVersionStatusDeleted    PackageVersionStatus = "Deleted"
 )
 
+// Values returns all known values for PackageVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageVersionStatus) Values() []PackageVersionStatus {
+	return []PackageVersionStatus{
+		"Published",
+		"Unfinished",
+		"Unlisted",
+		"Archived",
+		"Disposed",
+		"Deleted",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -78,6 +157,19 @@ const (
 	ResourceTypeAsset           ResourceType = "asset"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"domain",
+		"repository",
+		"package",
+		"package-version",
+		"asset",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
@@ -88,3 +180,16 @@ const (
 	ValidationExceptionReasonUnknown_operation       ValidationExceptionReason = "UNKNOWN_OPERATION"
 	ValidationExceptionReasonOther                   ValidationExceptionReason = "OTHER"
 )
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"CANNOT_PARSE",
+		"ENCRYPTION_KEY_ERROR",
+		"FIELD_VALIDATION_FAILED",
+		"UNKNOWN_OPERATION",
+		"OTHER",
+	}
+}

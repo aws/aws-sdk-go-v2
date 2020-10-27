@@ -168,15 +168,15 @@ func validateS3ResourceClassification(v *types.S3ResourceClassification) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3ResourceClassification"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
 	if v.ClassificationType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClassificationType"))
 	} else if v.ClassificationType != nil {
 		if err := validateClassificationType(v.ClassificationType); err != nil {
 			invalidParams.AddNested("ClassificationType", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -190,11 +190,11 @@ func validateS3ResourceClassificationUpdate(v *types.S3ResourceClassificationUpd
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3ResourceClassificationUpdate"}
-	if v.ClassificationTypeUpdate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClassificationTypeUpdate"))
-	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.ClassificationTypeUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClassificationTypeUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

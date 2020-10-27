@@ -21,12 +21,17 @@ type AutomaticTapeCreationPolicyInfo struct {
 }
 
 // An automatic tape creation policy consists of automatic tape creation rules
-// where each rule defines when and how to create new tapes.
+// where each rule defines when and how to create new tapes. For more information
+// about automatic tape creation, see Creating Tapes Automatically
+// (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically).
 type AutomaticTapeCreationRule struct {
 
 	// The minimum number of available virtual tapes that the gateway maintains at all
 	// times. If the number of tapes on the gateway goes below this value, the gateway
 	// creates as many new tapes as are needed to have MinimumNumTapes on the gateway.
+	// For more information about automatic tape creation, see Creating Tapes
+	// Automatically
+	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically).
 	//
 	// This member is required.
 	MinimumNumTapes *int32
@@ -51,6 +56,10 @@ type AutomaticTapeCreationRule struct {
 	//
 	// This member is required.
 	TapeSizeInBytes *int64
+
+	// Set to true to indicate that tapes are to be archived as write-once-read-many
+	// (WORM). Set to false when WORM is not enabled for tapes.
+	Worm *bool
 }
 
 // Lists refresh cache information.
@@ -68,7 +77,7 @@ type CacheAttributes struct {
 type CachediSCSIVolume struct {
 
 	// The date the volume was created. Volumes created prior to March 28, 2017 don’t
-	// have this time stamp.
+	// have this timestamp.
 	CreatedDate *time.Time
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -77,7 +86,7 @@ type CachediSCSIVolume struct {
 	KMSKey *string
 
 	// If the cached volume was created from a snapshot, this field contains the
-	// snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
+	// snapshot ID used, e.g., snap-78e22663. Otherwise, this field is not included.
 	SourceSnapshotId *string
 
 	// The name of the iSCSI target used by an initiator to connect to a volume and
@@ -97,7 +106,7 @@ type CachediSCSIVolume struct {
 	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume).
 	VolumeAttachmentStatus *string
 
-	// The unique identifier of the volume, e.g. vol-AE4B946D.
+	// The unique identifier of the volume, e.g., vol-AE4B946D.
 	VolumeId *string
 
 	// Represents the percentage complete if the volume is restoring or bootstrapping
@@ -140,7 +149,7 @@ type ChapInfo struct {
 	SecretToAuthenticateInitiator *string
 
 	// The secret key that the target must provide to participate in mutual CHAP with
-	// the initiator (e.g. Windows client).
+	// the initiator (e.g., Windows client).
 	SecretToAuthenticateTarget *string
 
 	// The Amazon Resource Name (ARN) of the volume. Valid Values: 50 to 500 lowercase
@@ -388,6 +397,38 @@ type NFSFileShareInfo struct {
 	Tags []*Tag
 }
 
+// Describes a custom tape pool.
+type PoolInfo struct {
+
+	// The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools
+	// operation to return a list of custom tape pools for your account and AWS Region.
+	PoolARN *string
+
+	// The name of the custom tape pool. PoolName can use all ASCII characters, except
+	// '/' and '\'.
+	PoolName *string
+
+	// Status of the custom tape pool. Pool can be ACTIVE or DELETED.
+	PoolStatus PoolStatus
+
+	// Tape retention lock time is set in days. Tape retention lock can be enabled for
+	// up to 100 years (36,500 days).
+	RetentionLockTimeInDays *int32
+
+	// Tape retention lock type, which can be configured in two modes. When configured
+	// in governance mode, AWS accounts with specific IAM permissions are authorized to
+	// remove the tape retention lock from archived virtual tapes. When configured in
+	// compliance mode, the tape retention lock cannot be removed by any user,
+	// including the root AWS account.
+	RetentionLockType RetentionLockType
+
+	// The storage class that is associated with the custom pool. When you use your
+	// backup application to eject the tape, the tape is archived directly into the
+	// storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
+	// pool.
+	StorageClass TapeStorageClass
+}
+
 // The Windows file permissions and ownership information assigned, by default, to
 // native S3 objects when file gateway discovers them in S3 buckets. This operation
 // is only supported for file gateways.
@@ -521,7 +562,7 @@ type StorageGatewayError struct {
 type StorediSCSIVolume struct {
 
 	// The date the volume was created. Volumes created prior to March 28, 2017 don’t
-	// have this time stamp.
+	// have this timestamp.
 	CreatedDate *time.Time
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -559,7 +600,7 @@ type StorediSCSIVolume struct {
 	// operation.
 	VolumeDiskId *string
 
-	// The unique identifier of the volume, e.g. vol-AE4B946D.
+	// The unique identifier of the volume, e.g., vol-AE4B946D.
 	VolumeId *string
 
 	// Represents the percentage complete if the volume is restoring or bootstrapping
@@ -614,6 +655,9 @@ type Tape struct {
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
 
+	// The date that the tape enters a custom tape pool.
+	PoolEntryDate *time.Time
+
 	// The ID of the pool that contains tapes that will be archived. The tapes in this
 	// pool are archived in the S3 storage class that is associated with the pool. When
 	// you use your backup application to eject the tape, the tape is archived directly
@@ -624,6 +668,9 @@ type Tape struct {
 	// For archiving virtual tapes, indicates how much data remains to be uploaded
 	// before archiving is complete. Range: 0 (not started) to 100 (complete).
 	Progress *float64
+
+	// The date that the tape is first archived with tape retention lock enabled.
+	RetentionStartDate *time.Time
 
 	// The Amazon Resource Name (ARN) of the virtual tape.
 	TapeARN *string
@@ -646,13 +693,16 @@ type Tape struct {
 
 	// The virtual tape library (VTL) device that the virtual tape is associated with.
 	VTLDevice *string
+
+	// If the tape is archived as write-once-read-many (WORM), this value is true.
+	Worm *bool
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
 type TapeArchive struct {
 
-	// The time that the archiving of the virtual tape was completed. The default time
-	// stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+	// The time that the archiving of the virtual tape was completed. The default
+	// timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	CompletionTime *time.Time
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -660,10 +710,18 @@ type TapeArchive struct {
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
 
+	// The time that the tape entered the custom tape pool. The default timestamp
+	// format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+	PoolEntryDate *time.Time
+
 	// The ID of the pool that was used to archive the tape. The tapes in this pool are
 	// archived in the S3 storage class that is associated with the pool. Valid Values:
 	// GLACIER | DEEP_ARCHIVE
 	PoolId *string
+
+	// If the archived tape is subject to tape retention lock, the date that the
+	// archived tape started being retained.
+	RetentionStartDate *time.Time
 
 	// The Amazon Resource Name (ARN) of the tape gateway that the virtual tape is
 	// being retrieved to. The virtual tape is retrieved from the virtual tape shelf
@@ -688,6 +746,9 @@ type TapeArchive struct {
 	// The size, in bytes, of data stored on the virtual tape. This value is not
 	// available for tapes created prior to May 13, 2015.
 	TapeUsedInBytes *int64
+
+	// Set to true if the archived tape is stored as write-once-read-many (WORM).
+	Worm *bool
 }
 
 // Describes a virtual tape.
@@ -697,12 +758,19 @@ type TapeInfo struct {
 	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
+	// The date that the tape entered the custom tape pool with tape retention lock
+	// enabled.
+	PoolEntryDate *time.Time
+
 	// The ID of the pool that you want to add your tape to for archiving. The tape in
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
 	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
 	// corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
 	PoolId *string
+
+	// The date that the tape became subject to tape retention lock.
+	RetentionStartDate *time.Time
 
 	// The Amazon Resource Name (ARN) of a virtual tape.
 	TapeARN *string
@@ -724,7 +792,7 @@ type TapeRecoveryPointInfo struct {
 	TapeARN *string
 
 	// The time when the point-in-time view of the virtual tape was replicated for
-	// later recovery. The default time stamp format of the tape recovery point time is
+	// later recovery. The default timestamp format of the tape recovery point time is
 	// in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	TapeRecoveryPointTime *time.Time
 

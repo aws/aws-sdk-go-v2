@@ -45,6 +45,7 @@ import (
 // PutBucketNotificationConfiguration:
 //
 //     * GetBucketNotificationConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
 func (c *Client) PutBucketNotificationConfiguration(ctx context.Context, params *PutBucketNotificationConfigurationInput, optFns ...func(*Options)) (*PutBucketNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketNotificationConfigurationInput{}
@@ -72,6 +73,10 @@ type PutBucketNotificationConfigurationInput struct {
 	//
 	// This member is required.
 	NotificationConfiguration *types.NotificationConfiguration
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketNotificationConfigurationOutput struct {

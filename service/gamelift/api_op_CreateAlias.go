@@ -52,7 +52,7 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateAliasInput struct {
 
 	// A descriptive label that is associated with an alias. Alias names do not need to
@@ -81,7 +81,7 @@ type CreateAliasInput struct {
 	Tags []*types.Tag
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateAliasOutput struct {
 
 	// The newly created alias resource.

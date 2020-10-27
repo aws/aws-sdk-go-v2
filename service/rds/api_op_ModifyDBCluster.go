@@ -107,7 +107,9 @@ type ModifyDBClusterInput struct {
 
 	// The Active Directory directory ID to move the DB cluster to. Specify none to
 	// remove the cluster from its current domain. The domain must be created prior to
-	// this operation.
+	// this operation. For more information, see Kerberos Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
+	// in the Amazon Aurora User Guide.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the

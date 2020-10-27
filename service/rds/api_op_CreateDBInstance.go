@@ -226,15 +226,22 @@ type CreateDBInstanceInput struct {
 	//
 	//     * Must contain 1 to 64 letters or numbers.
 	//
-	//     * Can't be a
-	// word reserved by the specified database engine
+	//     * Must begin
+	// with a letter. Subsequent characters can be letters, underscores, or digits
+	// (0-9).
 	//
-	// MariaDB The name of the database
-	// to create when the DB instance is created. If this parameter isn't specified, no
-	// database is created in the DB instance. Constraints:
+	//     * Can't be a word reserved by the specified database engine
 	//
-	//     * Must contain 1 to 64
-	// letters or numbers.
+	// MariaDB
+	// The name of the database to create when the DB instance is created. If this
+	// parameter isn't specified, no database is created in the DB instance.
+	// Constraints:
+	//
+	//     * Must contain 1 to 64 letters or numbers.
+	//
+	//     * Must begin
+	// with a letter. Subsequent characters can be letters, underscores, or digits
+	// (0-9).
 	//
 	//     * Can't be a word reserved by the specified database
 	// engine
@@ -246,22 +253,22 @@ type CreateDBInstanceInput struct {
 	//     * Must contain 1 to 63 letters,
 	// numbers, or underscores.
 	//
-	//     * Must begin with a letter or an underscore.
-	// Subsequent characters can be letters, underscores, or digits (0-9).
+	//     * Must begin with a letter. Subsequent characters
+	// can be letters, underscores, or digits (0-9).
 	//
-	//     * Can't
-	// be a word reserved by the specified database engine
+	//     * Can't be a word reserved by
+	// the specified database engine
 	//
-	// Oracle The Oracle System ID
-	// (SID) of the created DB instance. If you specify null, the default value ORCL is
-	// used. You can't specify the string NULL, or any other reserved word, for DBName.
-	// Default: ORCL Constraints:
+	// Oracle The Oracle System ID (SID) of the created
+	// DB instance. If you specify null, the default value ORCL is used. You can't
+	// specify the string NULL, or any other reserved word, for DBName. Default: ORCL
+	// Constraints:
 	//
 	//     * Can't be longer than 8 characters
 	//
-	// SQL Server
-	// Not applicable. Must be null. Amazon Aurora The name of the database to create
-	// when the primary instance of the DB cluster is created. If this parameter isn't
+	// SQL Server Not
+	// applicable. Must be null. Amazon Aurora The name of the database to create when
+	// the primary instance of the DB cluster is created. If this parameter isn't
 	// specified, no database is created in the DB instance. Constraints:
 	//
 	//     * Must
@@ -304,18 +311,11 @@ type CreateDBInstanceInput struct {
 	DeletionProtection *bool
 
 	// The Active Directory directory ID to create the DB instance in. Currently, only
-	// Microsoft SQL Server and Oracle DB instances can be created in an Active
-	// Directory Domain. For Microsoft SQL Server DB instances, Amazon RDS can use
-	// Windows Authentication to authenticate users that connect to the DB instance.
-	// For more information, see  Using Windows Authentication with an Amazon RDS DB
-	// Instance Running Microsoft SQL Server
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
-	// in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use
-	// Kerberos Authentication to authenticate users that connect to the DB instance.
-	// For more information, see  Using Kerberos Authentication with Amazon RDS for
-	// Oracle
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html) in
-	// the Amazon RDS User Guide.
+	// MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created
+	// in an Active Directory Domain. For more information, see  Kerberos
+	// Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
+	// in the Amazon RDS User Guide.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
@@ -326,7 +326,12 @@ type CreateDBInstanceInput struct {
 	// The values in the list depend on the DB engine being used. For more information,
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Relational Database Service User Guide.
+	// in the Amazon Relational Database Service User Guide. Amazon Aurora Not
+	// applicable. CloudWatch Logs exports are managed by the DB cluster. MariaDB
+	// Possible values are audit, error, general, and slowquery. Microsoft SQL Server
+	// Possible values are agent and error. MySQL Possible values are audit, error,
+	// general, and slowquery. Oracle Possible values are alert, audit, listener, and
+	// trace. PostgreSQL Possible values are postgresql and upgrade.
 	EnableCloudwatchLogsExports []*string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
@@ -373,9 +378,9 @@ type CreateDBInstanceInput struct {
 	// database engine to be used by the DB instance is managed by the DB cluster.
 	// MariaDB See MariaDB on Amazon RDS Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
-	// in the Amazon RDS User Guide. Microsoft SQL Server See Version and Feature
-	// Support on Amazon RDS
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)
+	// in the Amazon RDS User Guide. Microsoft SQL Server See Microsoft SQL Server
+	// Versions on Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport)
 	// in the Amazon RDS User Guide. MySQL See MySQL on Amazon RDS Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. Oracle See Oracle Database Engine Release Notes
@@ -508,6 +513,9 @@ type CreateDBInstanceInput struct {
 	// can't set the AvailabilityZone parameter if the DB instance is a Multi-AZ
 	// deployment.
 	MultiAZ *bool
+
+	// The name of the NCHAR character set for the Oracle DB instance.
+	NcharCharacterSetName *string
 
 	// Indicates that the DB instance should be associated with the specified option
 	// group. Permanent options, such as the TDE option for Oracle Advanced Security

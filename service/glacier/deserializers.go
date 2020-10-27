@@ -1821,6 +1821,8 @@ func awsRestjson1_deserializeOpHttpBindingsGetJobOutputOutput(v *GetJobOutputOut
 		v.ContentType = ptr.String(headerValues[0])
 	}
 
+	v.Status = ptr.Int32(int32(response.StatusCode))
+
 	return nil
 }
 func awsRestjson1_deserializeOpDocumentGetJobOutputOutput(v *GetJobOutputOutput, body io.ReadCloser) error {

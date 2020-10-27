@@ -849,15 +849,15 @@ func validateConversationLogsRequest(v *types.ConversationLogsRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConversationLogsRequest"}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if v.LogSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogSettings"))
 	} else if v.LogSettings != nil {
 		if err := validateLogSettingsRequestList(v.LogSettings); err != nil {
 			invalidParams.AddNested("LogSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -903,18 +903,18 @@ func validateFollowUpPrompt(v *types.FollowUpPrompt) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FollowUpPrompt"}
-	if v.RejectionStatement == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RejectionStatement"))
-	} else if v.RejectionStatement != nil {
-		if err := validateStatement(v.RejectionStatement); err != nil {
-			invalidParams.AddNested("RejectionStatement", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Prompt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Prompt"))
 	} else if v.Prompt != nil {
 		if err := validatePrompt(v.Prompt); err != nil {
 			invalidParams.AddNested("Prompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RejectionStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RejectionStatement"))
+	} else if v.RejectionStatement != nil {
+		if err := validateStatement(v.RejectionStatement); err != nil {
+			invalidParams.AddNested("RejectionStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -984,11 +984,11 @@ func validateKendraConfiguration(v *types.KendraConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KendraConfiguration"}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
 	if v.KendraIndex == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KendraIndex"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1002,11 +1002,11 @@ func validateLogSettingsRequest(v *types.LogSettingsRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogSettingsRequest"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if len(v.Destination) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if len(v.LogType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LogType"))
@@ -1040,11 +1040,11 @@ func validateMessage(v *types.Message) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Message"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if len(v.ContentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1075,15 +1075,15 @@ func validatePrompt(v *types.Prompt) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Prompt"}
+	if v.MaxAttempts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxAttempts"))
+	}
 	if v.Messages == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
 	} else if v.Messages != nil {
 		if err := validateMessageList(v.Messages); err != nil {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MaxAttempts == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxAttempts"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1097,16 +1097,16 @@ func validateSlot(v *types.Slot) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Slot"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if len(v.SlotConstraint) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SlotConstraint"))
 	}
 	if v.ValueElicitationPrompt != nil {
 		if err := validatePrompt(v.ValueElicitationPrompt); err != nil {
 			invalidParams.AddNested("ValueElicitationPrompt", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.SlotConstraint) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SlotConstraint"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1285,11 +1285,11 @@ func validateOpDeleteBotAliasInput(v *DeleteBotAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBotAliasInput"}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1303,14 +1303,14 @@ func validateOpDeleteBotChannelAssociationInput(v *DeleteBotChannelAssociationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBotChannelAssociationInput"}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
-	}
 	if v.BotAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1339,11 +1339,11 @@ func validateOpDeleteBotVersionInput(v *DeleteBotVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBotVersionInput"}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1372,11 +1372,11 @@ func validateOpDeleteIntentVersionInput(v *DeleteIntentVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntentVersionInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1456,11 +1456,11 @@ func validateOpGetBotAliasInput(v *GetBotAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBotAliasInput"}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1474,14 +1474,14 @@ func validateOpGetBotChannelAssociationInput(v *GetBotChannelAssociationInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBotChannelAssociationInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
 	if v.BotAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1567,11 +1567,11 @@ func validateOpGetExportInput(v *GetExportInput) error {
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1600,11 +1600,11 @@ func validateOpGetIntentInput(v *GetIntentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetIntentInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1633,11 +1633,11 @@ func validateOpGetSlotTypeInput(v *GetSlotTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSlotTypeInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1666,14 +1666,14 @@ func validateOpGetUtterancesViewInput(v *GetUtterancesViewInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUtterancesViewInput"}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
 	if len(v.StatusType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusType"))
 	}
 	if v.BotVersions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotVersions"))
-	}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1705,8 +1705,10 @@ func validateOpPutBotAliasInput(v *PutBotAliasInput) error {
 	if v.BotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
-	if v.BotVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	if v.ConversationLogs != nil {
+		if err := validateConversationLogsRequest(v.ConversationLogs); err != nil {
+			invalidParams.AddNested("ConversationLogs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1716,10 +1718,8 @@ func validateOpPutBotAliasInput(v *PutBotAliasInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ConversationLogs != nil {
-		if err := validateConversationLogsRequest(v.ConversationLogs); err != nil {
-			invalidParams.AddNested("ConversationLogs", err.(smithy.InvalidParamsError))
-		}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1733,8 +1733,18 @@ func validateOpPutBotInput(v *PutBotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBotInput"}
+	if v.ClarificationPrompt != nil {
+		if err := validatePrompt(v.ClarificationPrompt); err != nil {
+			invalidParams.AddNested("ClarificationPrompt", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ChildDirected == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChildDirected"))
+	}
+	if v.Intents != nil {
+		if err := validateIntentList(v.Intents); err != nil {
+			invalidParams.AddNested("Intents", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AbortStatement != nil {
 		if err := validateStatement(v.AbortStatement); err != nil {
@@ -1744,23 +1754,13 @@ func validateOpPutBotInput(v *PutBotInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ClarificationPrompt != nil {
-		if err := validatePrompt(v.ClarificationPrompt); err != nil {
-			invalidParams.AddNested("ClarificationPrompt", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Intents != nil {
-		if err := validateIntentList(v.Intents); err != nil {
-			invalidParams.AddNested("Intents", err.(smithy.InvalidParamsError))
-		}
-	}
-	if len(v.Locale) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Locale"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Locale) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Locale"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1774,6 +1774,29 @@ func validateOpPutIntentInput(v *PutIntentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutIntentInput"}
+	if v.ConclusionStatement != nil {
+		if err := validateStatement(v.ConclusionStatement); err != nil {
+			invalidParams.AddNested("ConclusionStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RejectionStatement != nil {
+		if err := validateStatement(v.RejectionStatement); err != nil {
+			invalidParams.AddNested("RejectionStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Slots != nil {
+		if err := validateSlotList(v.Slots); err != nil {
+			invalidParams.AddNested("Slots", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DialogCodeHook != nil {
+		if err := validateCodeHook(v.DialogCodeHook); err != nil {
+			invalidParams.AddNested("DialogCodeHook", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.KendraConfiguration != nil {
 		if err := validateKendraConfiguration(v.KendraConfiguration); err != nil {
 			invalidParams.AddNested("KendraConfiguration", err.(smithy.InvalidParamsError))
@@ -1784,37 +1807,14 @@ func validateOpPutIntentInput(v *PutIntentInput) error {
 			invalidParams.AddNested("FulfillmentActivity", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Slots != nil {
-		if err := validateSlotList(v.Slots); err != nil {
-			invalidParams.AddNested("Slots", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RejectionStatement != nil {
-		if err := validateStatement(v.RejectionStatement); err != nil {
-			invalidParams.AddNested("RejectionStatement", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.DialogCodeHook != nil {
-		if err := validateCodeHook(v.DialogCodeHook); err != nil {
-			invalidParams.AddNested("DialogCodeHook", err.(smithy.InvalidParamsError))
+	if v.ConfirmationPrompt != nil {
+		if err := validatePrompt(v.ConfirmationPrompt); err != nil {
+			invalidParams.AddNested("ConfirmationPrompt", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.FollowUpPrompt != nil {
 		if err := validateFollowUpPrompt(v.FollowUpPrompt); err != nil {
 			invalidParams.AddNested("FollowUpPrompt", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ConclusionStatement != nil {
-		if err := validateStatement(v.ConclusionStatement); err != nil {
-			invalidParams.AddNested("ConclusionStatement", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ConfirmationPrompt != nil {
-		if err := validatePrompt(v.ConfirmationPrompt); err != nil {
-			invalidParams.AddNested("ConfirmationPrompt", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1829,6 +1829,11 @@ func validateOpPutSlotTypeInput(v *PutSlotTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutSlotTypeInput"}
+	if v.EnumerationValues != nil {
+		if err := validateEnumerationValues(v.EnumerationValues); err != nil {
+			invalidParams.AddNested("EnumerationValues", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SlotTypeConfigurations != nil {
 		if err := validateSlotTypeConfigurations(v.SlotTypeConfigurations); err != nil {
 			invalidParams.AddNested("SlotTypeConfigurations", err.(smithy.InvalidParamsError))
@@ -1836,11 +1841,6 @@ func validateOpPutSlotTypeInput(v *PutSlotTypeInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.EnumerationValues != nil {
-		if err := validateEnumerationValues(v.EnumerationValues); err != nil {
-			invalidParams.AddNested("EnumerationValues", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1862,11 +1862,11 @@ func validateOpStartImportInput(v *StartImportInput) error {
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
-	if v.Payload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
-	}
 	if len(v.MergeStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MergeStrategy"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1902,11 +1902,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

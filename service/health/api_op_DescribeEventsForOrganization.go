@@ -11,18 +11,36 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about events across your organization in AWS Organizations,
-// meeting the specified filter criteria. Events are returned in a summary form and
-// do not include the accounts impacted, detailed description, any additional
-// metadata that depends on the event type, or any affected resources. To retrieve
-// that information, use the DescribeAffectedAccountsForOrganization,
-// DescribeEventDetailsForOrganization, and DescribeAffectedEntitiesForOrganization
-// operations. If no filter criteria are specified, all events across your
-// organization are returned. Results are sorted by lastModifiedTime, starting with
-// the most recent. Before you can call this operation, you must first enable
-// Health to work with AWS Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization operation from your organization's
-// master account.
+// Returns information about events across your organization in AWS Organizations.
+// You can use thefilters parameter to specify the events that you want to return.
+// Events are returned in a summary form and don't include the affected accounts,
+// detailed description, any additional metadata that depends on the event type, or
+// any affected resources. To retrieve that information, use the following
+// operations:
+//
+//     * DescribeAffectedAccountsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html)
+//
+//
+// * DescribeEventDetailsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
+//
+//
+// * DescribeAffectedEntitiesForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+//
+// If
+// you don't specify a filter, the DescribeEventsForOrganizations returns all
+// events across your organization. Results are sorted by lastModifiedTime,
+// starting with the most recent event. For more information about the different
+// types of AWS Health events, see Event
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html). Before
+// you can call this operation, you must first enable AWS Health to work with AWS
+// Organizations. To do this, call the EnableHealthServiceAccessForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// operation from your organization's master AWS account. This API operation uses
+// pagination. Specify the nextToken parameter in the next request to return more
+// results.
 func (c *Client) DescribeEventsForOrganization(ctx context.Context, params *DescribeEventsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventsForOrganizationInput{}

@@ -9,6 +9,16 @@ const (
 	AccessDeniedForDependencyExceptionReasonAccess_denied_during_create_service_linked_role AccessDeniedForDependencyExceptionReason = "ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE"
 )
 
+// Values returns all known values for AccessDeniedForDependencyExceptionReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AccessDeniedForDependencyExceptionReason) Values() []AccessDeniedForDependencyExceptionReason {
+	return []AccessDeniedForDependencyExceptionReason{
+		"ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE",
+	}
+}
+
 type AccountJoinedMethod string
 
 // Enum values for AccountJoinedMethod
@@ -17,6 +27,16 @@ const (
 	AccountJoinedMethodCreated AccountJoinedMethod = "CREATED"
 )
 
+// Values returns all known values for AccountJoinedMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountJoinedMethod) Values() []AccountJoinedMethod {
+	return []AccountJoinedMethod{
+		"INVITED",
+		"CREATED",
+	}
+}
+
 type AccountStatus string
 
 // Enum values for AccountStatus
@@ -24,6 +44,16 @@ const (
 	AccountStatusActive    AccountStatus = "ACTIVE"
 	AccountStatusSuspended AccountStatus = "SUSPENDED"
 )
+
+// Values returns all known values for AccountStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountStatus) Values() []AccountStatus {
+	return []AccountStatus{
+		"ACTIVE",
+		"SUSPENDED",
+	}
+}
 
 type ActionType string
 
@@ -35,6 +65,18 @@ const (
 	ActionTypeAdd_organizations_service_linked_role ActionType = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
 )
 
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"INVITE",
+		"ENABLE_ALL_FEATURES",
+		"APPROVE_ALL_FEATURES",
+		"ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE",
+	}
+}
+
 type ChildType string
 
 // Enum values for ChildType
@@ -42,6 +84,16 @@ const (
 	ChildTypeAccount             ChildType = "ACCOUNT"
 	ChildTypeOrganizational_unit ChildType = "ORGANIZATIONAL_UNIT"
 )
+
+// Values returns all known values for ChildType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ChildType) Values() []ChildType {
+	return []ChildType{
+		"ACCOUNT",
+		"ORGANIZATIONAL_UNIT",
+	}
+}
 
 type ConstraintViolationExceptionReason string
 
@@ -77,6 +129,43 @@ const (
 	ConstraintViolationExceptionReasonMaster_account_missing_business_license                 ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
 )
 
+// Values returns all known values for ConstraintViolationExceptionReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptionReason {
+	return []ConstraintViolationExceptionReason{
+		"ACCOUNT_NUMBER_LIMIT_EXCEEDED",
+		"HANDSHAKE_RATE_LIMIT_EXCEEDED",
+		"OU_NUMBER_LIMIT_EXCEEDED",
+		"OU_DEPTH_LIMIT_EXCEEDED",
+		"POLICY_NUMBER_LIMIT_EXCEEDED",
+		"POLICY_CONTENT_LIMIT_EXCEEDED",
+		"MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
+		"MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
+		"ACCOUNT_CANNOT_LEAVE_ORGANIZATION",
+		"ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA",
+		"ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION",
+		"MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
+		"MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
+		"ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED",
+		"MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE",
+		"MASTER_ACCOUNT_MISSING_CONTACT_INFO",
+		"MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED",
+		"ORGANIZATION_NOT_IN_ALL_FEATURES_MODE",
+		"CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION",
+		"EMAIL_VERIFICATION_CODE_EXPIRED",
+		"WAIT_PERIOD_ACTIVE",
+		"MAX_TAG_LIMIT_EXCEEDED",
+		"TAG_POLICY_VIOLATION",
+		"MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED",
+		"CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR",
+		"CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG",
+		"DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE",
+		"MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE",
+	}
+}
+
 type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
@@ -88,7 +177,26 @@ const (
 	CreateAccountFailureReasonConcurrent_account_modification CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
 	CreateAccountFailureReasonInternal_failure                CreateAccountFailureReason = "INTERNAL_FAILURE"
 	CreateAccountFailureReasonGovcloud_account_already_exists CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+	CreateAccountFailureReasonMissing_business_validation     CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonMissing_payment_instrument      CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
 )
+
+// Values returns all known values for CreateAccountFailureReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CreateAccountFailureReason) Values() []CreateAccountFailureReason {
+	return []CreateAccountFailureReason{
+		"ACCOUNT_LIMIT_EXCEEDED",
+		"EMAIL_ALREADY_EXISTS",
+		"INVALID_ADDRESS",
+		"INVALID_EMAIL",
+		"CONCURRENT_ACCOUNT_MODIFICATION",
+		"INTERNAL_FAILURE",
+		"GOVCLOUD_ACCOUNT_ALREADY_EXISTS",
+		"MISSING_BUSINESS_VALIDATION",
+		"MISSING_PAYMENT_INSTRUMENT",
+	}
+}
 
 type CreateAccountState string
 
@@ -99,6 +207,17 @@ const (
 	CreateAccountStateFailed      CreateAccountState = "FAILED"
 )
 
+// Values returns all known values for CreateAccountState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CreateAccountState) Values() []CreateAccountState {
+	return []CreateAccountState{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type EffectivePolicyType string
 
 // Enum values for EffectivePolicyType
@@ -107,6 +226,17 @@ const (
 	EffectivePolicyTypeBackup_policy             EffectivePolicyType = "BACKUP_POLICY"
 	EffectivePolicyTypeAiservices_opt_out_policy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
+
+// Values returns all known values for EffectivePolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EffectivePolicyType) Values() []EffectivePolicyType {
+	return []EffectivePolicyType{
+		"TAG_POLICY",
+		"BACKUP_POLICY",
+		"AISERVICES_OPT_OUT_POLICY",
+	}
+}
 
 type HandshakeConstraintViolationExceptionReason string
 
@@ -122,6 +252,23 @@ const (
 	HandshakeConstraintViolationExceptionReasonOrganization_membership_change_rate_limit_exceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 )
 
+// Values returns all known values for HandshakeConstraintViolationExceptionReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstraintViolationExceptionReason {
+	return []HandshakeConstraintViolationExceptionReason{
+		"ACCOUNT_NUMBER_LIMIT_EXCEEDED",
+		"HANDSHAKE_RATE_LIMIT_EXCEEDED",
+		"ALREADY_IN_AN_ORGANIZATION",
+		"ORGANIZATION_ALREADY_HAS_ALL_FEATURES",
+		"INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES",
+		"PAYMENT_INSTRUMENT_REQUIRED",
+		"ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD",
+		"ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED",
+	}
+}
+
 type HandshakePartyType string
 
 // Enum values for HandshakePartyType
@@ -130,6 +277,17 @@ const (
 	HandshakePartyTypeOrganization HandshakePartyType = "ORGANIZATION"
 	HandshakePartyTypeEmail        HandshakePartyType = "EMAIL"
 )
+
+// Values returns all known values for HandshakePartyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HandshakePartyType) Values() []HandshakePartyType {
+	return []HandshakePartyType{
+		"ACCOUNT",
+		"ORGANIZATION",
+		"EMAIL",
+	}
+}
 
 type HandshakeResourceType string
 
@@ -145,6 +303,22 @@ const (
 	HandshakeResourceTypeParent_handshake         HandshakeResourceType = "PARENT_HANDSHAKE"
 )
 
+// Values returns all known values for HandshakeResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HandshakeResourceType) Values() []HandshakeResourceType {
+	return []HandshakeResourceType{
+		"ACCOUNT",
+		"ORGANIZATION",
+		"ORGANIZATION_FEATURE_SET",
+		"EMAIL",
+		"MASTER_EMAIL",
+		"MASTER_NAME",
+		"NOTES",
+		"PARENT_HANDSHAKE",
+	}
+}
+
 type HandshakeState string
 
 // Enum values for HandshakeState
@@ -157,6 +331,20 @@ const (
 	HandshakeStateExpired   HandshakeState = "EXPIRED"
 )
 
+// Values returns all known values for HandshakeState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HandshakeState) Values() []HandshakeState {
+	return []HandshakeState{
+		"REQUESTED",
+		"OPEN",
+		"CANCELED",
+		"ACCEPTED",
+		"DECLINED",
+		"EXPIRED",
+	}
+}
+
 type IAMUserAccessToBilling string
 
 // Enum values for IAMUserAccessToBilling
@@ -164,6 +352,16 @@ const (
 	IAMUserAccessToBillingAllow IAMUserAccessToBilling = "ALLOW"
 	IAMUserAccessToBillingDeny  IAMUserAccessToBilling = "DENY"
 )
+
+// Values returns all known values for IAMUserAccessToBilling. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IAMUserAccessToBilling) Values() []IAMUserAccessToBilling {
+	return []IAMUserAccessToBilling{
+		"ALLOW",
+		"DENY",
+	}
+}
 
 type InvalidInputExceptionReason string
 
@@ -190,8 +388,40 @@ const (
 	InvalidInputExceptionReasonUnrecognized_service_principal         InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
 	InvalidInputExceptionReasonInvalid_role_name                      InvalidInputExceptionReason = "INVALID_ROLE_NAME"
 	InvalidInputExceptionReasonInvalid_system_tags_parameter          InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
+	InvalidInputExceptionReasonDuplicate_tag_key                      InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
 	InvalidInputExceptionReasonTarget_not_supported                   InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
 )
+
+// Values returns all known values for InvalidInputExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
+	return []InvalidInputExceptionReason{
+		"INVALID_PARTY_TYPE_TARGET",
+		"INVALID_SYNTAX_ORGANIZATION_ARN",
+		"INVALID_SYNTAX_POLICY_ID",
+		"INVALID_ENUM",
+		"INVALID_ENUM_POLICY_TYPE",
+		"INVALID_LIST_MEMBER",
+		"MAX_LENGTH_EXCEEDED",
+		"MAX_VALUE_EXCEEDED",
+		"MIN_LENGTH_EXCEEDED",
+		"MIN_VALUE_EXCEEDED",
+		"IMMUTABLE_POLICY",
+		"INVALID_PATTERN",
+		"INVALID_PATTERN_TARGET_ID",
+		"INPUT_REQUIRED",
+		"INVALID_NEXT_TOKEN",
+		"MAX_LIMIT_EXCEEDED_FILTER",
+		"MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS",
+		"INVALID_FULL_NAME_TARGET",
+		"UNRECOGNIZED_SERVICE_PRINCIPAL",
+		"INVALID_ROLE_NAME",
+		"INVALID_SYSTEM_TAGS_PARAMETER",
+		"DUPLICATE_TAG_KEY",
+		"TARGET_NOT_SUPPORTED",
+	}
+}
 
 type OrganizationFeatureSet string
 
@@ -201,6 +431,16 @@ const (
 	OrganizationFeatureSetConsolidated_billing OrganizationFeatureSet = "CONSOLIDATED_BILLING"
 )
 
+// Values returns all known values for OrganizationFeatureSet. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationFeatureSet) Values() []OrganizationFeatureSet {
+	return []OrganizationFeatureSet{
+		"ALL",
+		"CONSOLIDATED_BILLING",
+	}
+}
+
 type ParentType string
 
 // Enum values for ParentType
@@ -208,6 +448,16 @@ const (
 	ParentTypeRoot                ParentType = "ROOT"
 	ParentTypeOrganizational_unit ParentType = "ORGANIZATIONAL_UNIT"
 )
+
+// Values returns all known values for ParentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ParentType) Values() []ParentType {
+	return []ParentType{
+		"ROOT",
+		"ORGANIZATIONAL_UNIT",
+	}
+}
 
 type PolicyType string
 
@@ -219,6 +469,18 @@ const (
 	PolicyTypeAiservices_opt_out_policy PolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
 
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"SERVICE_CONTROL_POLICY",
+		"TAG_POLICY",
+		"BACKUP_POLICY",
+		"AISERVICES_OPT_OUT_POLICY",
+	}
+}
+
 type PolicyTypeStatus string
 
 // Enum values for PolicyTypeStatus
@@ -228,6 +490,17 @@ const (
 	PolicyTypeStatusPending_disable PolicyTypeStatus = "PENDING_DISABLE"
 )
 
+// Values returns all known values for PolicyTypeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyTypeStatus) Values() []PolicyTypeStatus {
+	return []PolicyTypeStatus{
+		"ENABLED",
+		"PENDING_ENABLE",
+		"PENDING_DISABLE",
+	}
+}
+
 type TargetType string
 
 // Enum values for TargetType
@@ -236,3 +509,14 @@ const (
 	TargetTypeOrganizational_unit TargetType = "ORGANIZATIONAL_UNIT"
 	TargetTypeRoot                TargetType = "ROOT"
 )
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"ACCOUNT",
+		"ORGANIZATIONAL_UNIT",
+		"ROOT",
+	}
+}

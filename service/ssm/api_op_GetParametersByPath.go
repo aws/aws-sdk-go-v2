@@ -51,7 +51,9 @@ type GetParametersByPathInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
-	// Filters to limit the request results.
+	// Filters to limit the request results. For GetParametersByPath, the following
+	// filter Key names are supported: Type, KeyId, Label, and DataType. The following
+	// Key values are not supported for GetParametersByPath: tag, Name, Path, and Tier.
 	ParameterFilters []*types.ParameterStringFilter
 
 	// Retrieve all parameters within a hierarchy. If a user has access to a path, then

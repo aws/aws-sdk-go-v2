@@ -18,7 +18,7 @@ import (
 // the name or ARN of the consumer that you want to describe, you can use the
 // ListStreamConsumers operation to get a list of the descriptions of all the
 // consumers that are currently registered with a given data stream. This operation
-// has a limit of 20 transactions per second per account.
+// has a limit of 20 transactions per second per stream.
 func (c *Client) DescribeStreamConsumer(ctx context.Context, params *DescribeStreamConsumerInput, optFns ...func(*Options)) (*DescribeStreamConsumerOutput, error) {
 	if params == nil {
 		params = &DescribeStreamConsumerInput{}

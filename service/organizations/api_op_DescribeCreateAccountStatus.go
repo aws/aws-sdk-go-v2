@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves the current status of an asynchronous request to create an account.
-// This operation can be called only from the organization's master account or by a
-// member account that is a delegated administrator for an AWS service.
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an AWS service.
 func (c *Client) DescribeCreateAccountStatus(ctx context.Context, params *DescribeCreateAccountStatusInput, optFns ...func(*Options)) (*DescribeCreateAccountStatusOutput, error) {
 	if params == nil {
 		params = &DescribeCreateAccountStatusInput{}
@@ -31,10 +31,10 @@ func (c *Client) DescribeCreateAccountStatus(ctx context.Context, params *Descri
 
 type DescribeCreateAccountStatusInput struct {
 
-	// Specifies the operationId that uniquely identifies the request. You can get the
-	// ID from the response to an earlier CreateAccount request, or from the
-	// ListCreateAccountStatus operation. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for a create account request ID string
+	// Specifies the Id value that uniquely identifies the CreateAccount request. You
+	// can get the value from the CreateAccountStatus.Id response in an earlier
+	// CreateAccount request, or from the ListCreateAccountStatus operation. The regex
+	// pattern (http://wikipedia.org/wiki/regex) for a create account request ID string
 	// requires "car-" followed by from 8 to 32 lowercase letters or digits.
 	//
 	// This member is required.

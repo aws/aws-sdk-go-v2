@@ -19,20 +19,21 @@ import (
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
 //
 //     *
-// You already have an account in the AWS GovCloud (US) Region that is associated
-// with your master account in the commercial Region.
+// You already have an account in the AWS GovCloud (US) Region that is paired with
+// a management account of an organization in the commercial Region.
 //
-//     * You call this action
-// from the master account of your organization in the commercial Region.
+//     * You
+// call this action from the management account of your organization in the
+// commercial Region.
 //
-//     *
-// You have the organizations:CreateGovCloudAccount permission. AWS Organizations
-// creates the required service-linked role named AWSServiceRoleForOrganizations.
-// For more information, see AWS Organizations and Service-Linked Roles
+//     * You have the organizations:CreateGovCloudAccount
+// permission.
+//
+// AWS Organizations automatically creates the required service-linked
+// role named AWSServiceRoleForOrganizations. For more information, see AWS
+// Organizations and Service-Linked Roles
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
-// in the AWS Organizations User Guide.
-//
-// AWS automatically enables AWS CloudTrail
+// in the AWS Organizations User Guide. AWS automatically enables AWS CloudTrail
 // for AWS GovCloud (US) accounts, but you should also do the following:
 //
 //     *
@@ -44,12 +45,17 @@ import (
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
 // in the AWS GovCloud User Guide.
 //
-// You call this action from the master account of
-// your organization in the commercial Region to create a standalone AWS account in
-// the AWS GovCloud (US) Region. After the account is created, the master account
-// of an organization in the AWS GovCloud (US) Region can invite it to that
-// organization. For more information on inviting standalone accounts in the AWS
-// GovCloud (US) to join an organization, see AWS Organizations
+// If the request includes tags, then the
+// requester must have the organizations:TagResource permission. The tags are
+// attached to the commercial account associated with the GovCloud account, rather
+// than the GovCloud account itself. To add tags to the GovCloud account, call the
+// TagResource operation in the GovCloud Region after the new GovCloud account
+// exists. You call this action from the management account of your organization in
+// the commercial Region to create a standalone AWS account in the AWS GovCloud
+// (US) Region. After the account is created, the management account of an
+// organization in the AWS GovCloud (US) Region can invite it to that organization.
+// For more information on inviting standalone accounts in the AWS GovCloud (US) to
+// join an organization, see AWS Organizations
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
 // in the AWS GovCloud User Guide. Calling CreateGovCloudAccount is an asynchronous
 // request that AWS performs in the background. Because CreateGovCloudAccount
@@ -74,13 +80,13 @@ import (
 // support purposes. The account in the commercial Region is automatically a member
 // of the organization whose credentials made the request. Both accounts are
 // associated with the same email address. A role is created in the new account in
-// the commercial Region that allows the master account in the organization in the
-// commercial Region to assume it. An AWS GovCloud (US) account is then created and
-// associated with the commercial account that you just created. A role is created
-// in the new AWS GovCloud (US) account that can be assumed by the AWS GovCloud
-// (US) account that is associated with the master account of the commercial
-// organization. For more information and to view a diagram that explains how
-// account access works, see AWS Organizations
+// the commercial Region that allows the management account in the organization in
+// the commercial Region to assume it. An AWS GovCloud (US) account is then created
+// and associated with the commercial account that you just created. A role is also
+// created in the new AWS GovCloud (US) account that can be assumed by the AWS
+// GovCloud (US) account that is associated with the management account of the
+// commercial organization. For more information and to view a diagram that
+// explains how account access works, see AWS Organizations
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
 // in the AWS GovCloud User Guide. For more information about creating accounts,
 // see Creating an AWS Account in Your Organization
@@ -170,12 +176,12 @@ type CreateGovCloudAccountInput struct {
 
 	// (Optional) The name of an IAM role that AWS Organizations automatically
 	// preconfigures in the new member accounts in both the AWS GovCloud (US) Region
-	// and in the commercial Region. This role trusts the master account, allowing
-	// users in the master account to assume the role, as permitted by the master
-	// account administrator. The role has administrator permissions in the new member
-	// account. If you don't specify this parameter, the role name defaults to
-	// OrganizationAccountAccessRole. For more information about how to use this role
-	// to access the member account, see Accessing and Administering the Member
+	// and in the commercial Region. This role trusts the management account, allowing
+	// users in the management account to assume the role, as permitted by the
+	// management account administrator. The role has administrator permissions in the
+	// new member account. If you don't specify this parameter, the role name defaults
+	// to OrganizationAccountAccessRole. For more information about how to use this
+	// role to access the member account, see Accessing and Administering the Member
 	// Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the AWS Organizations User Guide and steps 2 and 3 in Tutorial: Delegate
@@ -186,6 +192,19 @@ type CreateGovCloudAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
+
+	// A list of tags that you want to attach to the newly created account. These tags
+	// are attached to the commercial account associated with the GovCloud account, and
+	// not to the GovCloud account itself. To add tags to the actual GovCloud account,
+	// call the TagResource operation in the GovCloud region after the new GovCloud
+	// account exists. For each tag in the list, you must specify both a tag key and a
+	// value. You can set the value to an empty string, but you can't set it to null.
+	// For more information about tagging, see Tagging AWS Organizations resources
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
+	// exceed the allowed number of tags for an account, then the entire request fails
+	// and the account is not created.
+	Tags []*types.Tag
 }
 
 type CreateGovCloudAccountOutput struct {

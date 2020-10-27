@@ -120,10 +120,10 @@ func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InvalidLayerPartException struct {
 	Message *string
 
+	RepositoryName        *string
 	UploadId              *string
 	RegistryId            *string
 	LastValidByteReceived *int64
-	RepositoryName        *string
 }
 
 func (e *InvalidLayerPartException) Error() string {

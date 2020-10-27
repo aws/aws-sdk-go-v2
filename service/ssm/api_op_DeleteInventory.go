@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Delete a custom inventory type, or the data associated with a custom Inventory
+// Delete a custom inventory type or the data associated with a custom Inventory
 // type. Deleting a custom inventory type is also referred to as deleting a custom
 // inventory schema.
 func (c *Client) DeleteInventory(ctx context.Context, params *DeleteInventoryInput, optFns ...func(*Options)) (*DeleteInventoryOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) DeleteInventory(ctx context.Context, params *DeleteInventoryInp
 type DeleteInventoryInput struct {
 
 	// The name of the custom inventory type for which you want to delete either all
-	// previously collected data, or the inventory type itself.
+	// previously collected data or the inventory type itself.
 	//
 	// This member is required.
 	TypeName *string

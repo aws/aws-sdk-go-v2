@@ -58,7 +58,9 @@ type RequestSpotInstancesInput struct {
 	// ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for
 	// termination and provides a Spot Instance termination notice, which gives the
 	// instance a two-minute warning before it terminates. You can't specify an
-	// Availability Zone group or a launch group if you specify a duration.
+	// Availability Zone group or a launch group if you specify a duration. New
+	// accounts or accounts with no previous billing history with AWS are not eligible
+	// for Spot Instances with a defined duration (also known as Spot blocks).
 	BlockDurationMinutes *int32
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
@@ -110,10 +112,16 @@ type RequestSpotInstancesInput struct {
 	// occurs after the current date and time.
 	ValidFrom *time.Time
 
-	// The end date of the request. If this is a one-time request, the request remains
-	// active until all instances launch, the request is canceled, or this date is
-	// reached. If the request is persistent, it remains active until it is canceled or
-	// this date is reached. The default end date is 7 days from the current date.
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	//
+	//     * For a
+	// persistent request, the request remains active until the ValidUntil date and
+	// time is reached. Otherwise, the request remains active until you cancel it.
+	//
+	//
+	// * For a one-time request, the request remains active until all instances launch,
+	// the request is canceled, or the ValidUntil date and time is reached. By default,
+	// the request is valid for 7 days from the date the request was created.
 	ValidUntil *time.Time
 }
 

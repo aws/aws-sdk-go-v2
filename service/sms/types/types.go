@@ -9,40 +9,49 @@ import (
 // Information about the application.
 type AppSummary struct {
 
-	// Unique ID of the application.
+	// The unique ID of the application.
 	AppId *string
 
-	// Time of creation of this application.
+	// The creation time of the application.
 	CreationTime *time.Time
 
-	// Description of the application.
+	// The description of the application.
 	Description *string
 
-	// Timestamp of the application's creation.
+	// The ID of the application.
+	ImportedAppId *string
+
+	// The last modified time of the application.
 	LastModified *time.Time
 
-	// Timestamp of the application's most recent successful replication.
+	// The timestamp of the application's most recent successful replication.
 	LatestReplicationTime *time.Time
+
+	// Status of the launch configuration.
+	LaunchConfigurationStatus AppLaunchConfigurationStatus
 
 	// Details about the latest launch of the application.
 	LaunchDetails *LaunchDetails
 
-	// Launch status of the application.
+	// The launch status of the application.
 	LaunchStatus AppLaunchStatus
 
 	// A message related to the launch status of the application.
 	LaunchStatusMessage *string
 
-	// Name of the application.
+	// The name of the application.
 	Name *string
 
-	// Replication status of the application.
+	// Status of the replication configuration.
+	ReplicationConfigurationStatus AppReplicationConfigurationStatus
+
+	// The replication status of the application.
 	ReplicationStatus AppReplicationStatus
 
 	// A message related to the replication status of the application.
 	ReplicationStatusMessage *string
 
-	// Name of the service role in the customer's account used by AWS SMS.
+	// The name of the service role in the customer's account used by AWS SMS.
 	RoleName *string
 
 	// Status of the application.
@@ -51,11 +60,34 @@ type AppSummary struct {
 	// A message related to the status of the application
 	StatusMessage *string
 
-	// Number of server groups present in the application.
+	// The number of server groups present in the application.
 	TotalServerGroups *int32
 
-	// Number of servers present in the application.
+	// The number of servers present in the application.
 	TotalServers *int32
+}
+
+// Configuration for validating an application.
+type AppValidationConfiguration struct {
+
+	// The validation strategy.
+	AppValidationStrategy AppValidationStrategy
+
+	// The name of the configuration.
+	Name *string
+
+	// The validation parameters.
+	SsmValidationParameters *SSMValidationParameters
+
+	// The ID of the validation.
+	ValidationId *string
+}
+
+// Output from validating an application.
+type AppValidationOutput struct {
+
+	// Output from using SSM to validate the application.
+	SsmOutput *SSMOutput
 }
 
 // Represents a connector.
@@ -67,7 +99,7 @@ type Connector struct {
 	// The capabilities of the connector.
 	CapabilityList []ConnectorCapability
 
-	// The identifier of the connector.
+	// The ID of the connector.
 	ConnectorId *string
 
 	// The IP address of the connector.
@@ -82,7 +114,7 @@ type Connector struct {
 	// The connector version.
 	Version *string
 
-	// The identifier of the VM manager.
+	// The ID of the VM manager.
 	VmManagerId *string
 
 	// The name of the VM manager.
@@ -95,14 +127,27 @@ type Connector struct {
 // Details about the latest launch of an application.
 type LaunchDetails struct {
 
-	// Latest time this application was launched successfully.
+	// The latest time that this application was launched successfully.
 	LatestLaunchTime *time.Time
 
-	// Identifier of the latest stack launched for this application.
+	// The ID of the latest stack launched for this application.
 	StackId *string
 
-	// Name of the latest stack launched for this application.
+	// The name of the latest stack launched for this application.
 	StackName *string
+}
+
+// Contains the status of validating an application.
+type NotificationContext struct {
+
+	// The status of the validation.
+	Status ValidationStatus
+
+	// The status message.
+	StatusMessage *string
+
+	// The ID of the validation.
+	ValidationId *string
 }
 
 // Represents a replication job.
@@ -111,27 +156,27 @@ type ReplicationJob struct {
 	// The description of the replication job.
 	Description *string
 
-	// Whether the replication job should produce encrypted AMIs or not. See also
-	// KmsKeyId below.
+	// Indicates whether the replication job should produce encrypted AMIs.
 	Encrypted *bool
 
 	// The time between consecutive replication runs, in hours.
 	Frequency *int32
 
-	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
-	// following:
+	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
+	// value can be any of the following:
 	//
 	//     * KMS key ID
 	//
 	//     * KMS key alias
 	//
-	//     * ARN referring to KMS
-	// key ID
+	//     *
+	// ARN referring to the KMS key ID
 	//
-	//     * ARN referring to KMS key alias
+	//     * ARN referring to the KMS key alias
 	//
-	// If encrypted is true but a KMS key
-	// id is not specified, the customer's default KMS key for EBS is used.
+	// If
+	// encrypted is enabled but a KMS key ID is not specified, the customer's default
+	// KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
 	// The ID of the latest Amazon Machine Image (AMI).
@@ -143,26 +188,26 @@ type ReplicationJob struct {
 	// The start time of the next replication run.
 	NextReplicationRunStartTime *time.Time
 
-	// Number of recent AMIs to keep in the customer's account for a replication job.
-	// By default the value is set to zero, meaning that all AMIs are kept.
+	// The number of recent AMIs to keep in the customer's account for a replication
+	// job. By default, the value is set to zero, meaning that all AMIs are kept.
 	NumberOfRecentAmisToKeep *int32
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	ReplicationJobId *string
 
 	// Information about the replication runs.
 	ReplicationRunList []*ReplicationRun
 
-	// The name of the IAM role to be used by the Server Migration Service.
+	// The name of the IAM role to be used by AWS SMS.
 	RoleName *string
 
-	//
+	// Indicates whether to run the replication job one time.
 	RunOnce *bool
 
 	// The seed replication time.
 	SeedReplicationTime *time.Time
 
-	// The identifier of the server.
+	// The ID of the server.
 	ServerId *string
 
 	// The type of server.
@@ -181,7 +226,7 @@ type ReplicationJob struct {
 // Represents a replication run.
 type ReplicationRun struct {
 
-	// The identifier of the Amazon Machine Image (AMI) from the replication run.
+	// The ID of the Amazon Machine Image (AMI) from the replication run.
 	AmiId *string
 
 	// The completion time of the last replication run.
@@ -190,33 +235,33 @@ type ReplicationRun struct {
 	// The description of the replication run.
 	Description *string
 
-	// Whether the replication run should produce encrypted AMI or not. See also
-	// KmsKeyId below.
+	// Indicates whether the replication run should produce an encrypted AMI.
 	Encrypted *bool
 
-	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
-	// following:
+	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
+	// value can be any of the following:
 	//
 	//     * KMS key ID
 	//
 	//     * KMS key alias
 	//
-	//     * ARN referring to KMS
-	// key ID
+	//     *
+	// ARN referring to the KMS key ID
 	//
-	//     * ARN referring to KMS key alias
+	//     * ARN referring to the KMS key alias
 	//
-	// If encrypted is true but a KMS key
-	// id is not specified, the customer's default KMS key for EBS is used.
+	// If
+	// encrypted is true but a KMS key ID is not specified, the customer's default KMS
+	// key for Amazon EBS is used.
 	KmsKeyId *string
 
-	// The identifier of the replication run.
+	// The ID of the replication run.
 	ReplicationRunId *string
 
 	// The start time of the next replication run.
 	ScheduledStartTime *time.Time
 
-	// Details of the current stage of the replication run.
+	// Details about the current stage of the replication run.
 	StageDetails *ReplicationRunStageDetails
 
 	// The state of the replication run.
@@ -232,33 +277,33 @@ type ReplicationRun struct {
 // Details of the current stage of a replication run.
 type ReplicationRunStageDetails struct {
 
-	// String describing the current stage of a replication run.
+	// The current stage of a replication run.
 	Stage *string
 
-	// String describing the progress of the current stage of a replication run.
+	// The progress of the current stage of a replication run.
 	StageProgress *string
 }
 
-// Location of the Amazon S3 object in the customer's account.
+// Location of an Amazon S3 object.
 type S3Location struct {
 
-	// Amazon S3 bucket name.
+	// The Amazon S3 bucket name.
 	Bucket *string
 
-	// Amazon S3 bucket key.
+	// The Amazon S3 bucket key.
 	Key *string
 }
 
 // Represents a server.
 type Server struct {
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	ReplicationJobId *string
 
 	// Indicates whether the replication job is deleted or failed.
 	ReplicationJobTerminated *bool
 
-	// The identifier of the server.
+	// The ID of the server.
 	ServerId *string
 
 	// The type of server.
@@ -268,129 +313,215 @@ type Server struct {
 	VmServer *VmServer
 }
 
-// A logical grouping of servers.
+// Logical grouping of servers.
 type ServerGroup struct {
 
-	// Name of a server group.
+	// The name of a server group.
 	Name *string
 
-	// Identifier of a server group.
+	// The ID of a server group.
 	ServerGroupId *string
 
-	// List of servers belonging to a server group.
+	// The servers that belong to a server group.
 	ServerList []*Server
 }
 
 // Launch configuration for a server group.
 type ServerGroupLaunchConfiguration struct {
 
-	// Launch order of servers in the server group.
+	// The launch order of servers in the server group.
 	LaunchOrder *int32
 
-	// Identifier of the server group the launch configuration is associated with.
+	// The ID of the server group with which the launch configuration is associated.
 	ServerGroupId *string
 
-	// Launch configuration for servers in the server group.
+	// The launch configuration for servers in the server group.
 	ServerLaunchConfigurations []*ServerLaunchConfiguration
 }
 
 // Replication configuration for a server group.
 type ServerGroupReplicationConfiguration struct {
 
-	// Identifier of the server group this replication configuration is associated
-	// with.
+	// The ID of the server group with which this replication configuration is
+	// associated.
 	ServerGroupId *string
 
-	// Replication configuration for servers in the server group.
+	// The replication configuration for servers in the server group.
 	ServerReplicationConfigurations []*ServerReplicationConfiguration
+}
+
+// Configuration for validating an instance.
+type ServerGroupValidationConfiguration struct {
+
+	// The ID of the server group.
+	ServerGroupId *string
+
+	// The validation configuration.
+	ServerValidationConfigurations []*ServerValidationConfiguration
 }
 
 // Launch configuration for a server.
 type ServerLaunchConfiguration struct {
 
-	// If true, a publicly accessible IP address is created when launching the server.
+	// Indicates whether a publicly accessible IP address is created when launching the
+	// server.
 	AssociatePublicIpAddress *bool
 
-	// Name of the EC2 SSH Key to be used for connecting to the launched server.
+	// Location of an Amazon S3 object.
+	ConfigureScript *S3Location
+
+	// The type of configuration script.
+	ConfigureScriptType ScriptType
+
+	// The name of the Amazon EC2 SSH key to be used for connecting to the launched
+	// server.
 	Ec2KeyName *string
 
-	// Instance type to be used for launching the server.
+	// The name of the IAM instance profile.
+	IamInstanceProfileName *string
+
+	// The instance type to use when launching the server.
 	InstanceType *string
 
-	// Logical ID of the server in the Amazon CloudFormation template.
+	// The logical ID of the server in the AWS CloudFormation template.
 	LogicalId *string
 
-	// Identifier of the security group that applies to the launched server.
+	// The ID of the security group that applies to the launched server.
 	SecurityGroup *string
 
-	// Identifier of the server the launch configuration is associated with.
+	// The ID of the server with which the launch configuration is associated.
 	Server *Server
 
-	// Identifier of the subnet the server should be launched into.
+	// The ID of the subnet the server should be launched into.
 	Subnet *string
 
 	// Location of the user-data script to be executed when launching the server.
 	UserData *UserData
 
-	// Identifier of the VPC the server should be launched into.
+	// The ID of the VPC into which the server should be launched.
 	Vpc *string
 }
 
 // Replication configuration of a server.
 type ServerReplicationConfiguration struct {
 
-	// Identifier of the server this replication configuration is associated with.
+	// The ID of the server with which this replication configuration is associated.
 	Server *Server
 
-	// Parameters for replicating the server.
+	// The parameters for replicating the server.
 	ServerReplicationParameters *ServerReplicationParameters
 }
 
-// Replication parameters for replicating a server.
+// The replication parameters for replicating a server.
 type ServerReplicationParameters struct {
 
-	// When true, the replication job produces encrypted AMIs. See also KmsKeyId below.
+	// Indicates whether the replication job produces encrypted AMIs.
 	Encrypted *bool
 
-	// Frequency of creating replication jobs for the server.
+	// The frequency of creating replication jobs for the server.
 	Frequency *int32
 
-	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
-	// following:
+	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
+	// value can be any of the following:
 	//
 	//     * KMS key ID
 	//
 	//     * KMS key alias
 	//
-	//     * ARN referring to KMS
-	// key ID
+	//     *
+	// ARN referring to the KMS key ID
 	//
-	//     * ARN referring to KMS key alias
+	//     * ARN referring to the KMS key alias
 	//
-	// If encrypted is true but a KMS key
-	// id is not specified, the customer's default KMS key for EBS is used.
+	// If
+	// encrypted is enabled but a KMS key ID is not specified, the customer's default
+	// KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
-	// License type for creating a replication job for the server.
+	// The license type for creating a replication job for the server.
 	LicenseType LicenseType
 
-	// Number of recent AMIs to keep when creating a replication job for this server.
+	// The number of recent AMIs to keep when creating a replication job for this
+	// server.
 	NumberOfRecentAmisToKeep *int32
 
-	//
+	// Indicates whether to run the replication job one time.
 	RunOnce *bool
 
-	// Seed time for creating a replication job for the server.
+	// The seed time for creating a replication job for the server.
 	SeedTime *time.Time
 }
 
-// A label that can be assigned to an application.
+// Configuration for validating an instance.
+type ServerValidationConfiguration struct {
+
+	// The name of the configuration.
+	Name *string
+
+	// Represents a server.
+	Server *Server
+
+	// The validation strategy.
+	ServerValidationStrategy ServerValidationStrategy
+
+	// The validation parameters.
+	UserDataValidationParameters *UserDataValidationParameters
+
+	// The ID of the validation.
+	ValidationId *string
+}
+
+// Contains output from validating an instance.
+type ServerValidationOutput struct {
+
+	// Represents a server.
+	Server *Server
+}
+
+// Contains the location of a validation script.
+type Source struct {
+
+	// Location of an Amazon S3 object.
+	S3Location *S3Location
+}
+
+// Contains the location of validation output.
+type SSMOutput struct {
+
+	// Location of an Amazon S3 object.
+	S3Location *S3Location
+}
+
+// Contains validation parameters.
+type SSMValidationParameters struct {
+
+	// The command to run the validation script
+	Command *string
+
+	// The timeout interval, in seconds.
+	ExecutionTimeoutSeconds *int32
+
+	// The ID of the instance. The instance must have the following tag:
+	// UserForSMSApplicationValidation=true.
+	InstanceId *string
+
+	// The name of the S3 bucket for output.
+	OutputS3BucketName *string
+
+	// The type of validation script.
+	ScriptType ScriptType
+
+	// The location of the validation script.
+	Source *Source
+}
+
+// Key/value pair that can be assigned to an application.
 type Tag struct {
 
-	// Tag key.
+	// The tag key.
 	Key *string
 
-	// Tag value.
+	// The tag value.
 	Value *string
 }
 
@@ -400,6 +531,41 @@ type UserData struct {
 
 	// Amazon S3 location of the user-data script.
 	S3Location *S3Location
+}
+
+// Contains validation parameters.
+type UserDataValidationParameters struct {
+
+	// The type of validation script.
+	ScriptType ScriptType
+
+	// The location of the validation script.
+	Source *Source
+}
+
+// Contains validation output.
+type ValidationOutput struct {
+
+	// The output from validating an application.
+	AppValidationOutput *AppValidationOutput
+
+	// The latest time that the validation was performed.
+	LatestValidationTime *time.Time
+
+	// The name of the validation.
+	Name *string
+
+	// The output from validation an instance.
+	ServerValidationOutput *ServerValidationOutput
+
+	// The status of the validation.
+	Status ValidationStatus
+
+	// The status message.
+	StatusMessage *string
+
+	// The ID of the validation.
+	ValidationId *string
 }
 
 // Represents a VM server.
@@ -417,16 +583,16 @@ type VmServer struct {
 	// The VM folder path in the vCenter Server virtual machine inventory tree.
 	VmPath *string
 
-	// Information about the VM server location.
+	// The VM server location.
 	VmServerAddress *VmServerAddress
 }
 
 // Represents a VM server location.
 type VmServerAddress struct {
 
-	// The identifier of the VM.
+	// The ID of the VM.
 	VmId *string
 
-	// The identifier of the VM manager.
+	// The ID of the VM manager.
 	VmManagerId *string
 }

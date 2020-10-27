@@ -19,7 +19,7 @@ import (
 // Organizations, see Integrating AWS Organizations with Other AWS Services
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
-// organization's master account or by a member account that is a delegated
+// organization's management account or by a member account that is a delegated
 // administrator for an AWS service.
 func (c *Client) ListAWSServiceAccessForOrganization(ctx context.Context, params *ListAWSServiceAccessForOrganizationInput, optFns ...func(*Options)) (*ListAWSServiceAccessForOrganizationOutput, error) {
 	if params == nil {

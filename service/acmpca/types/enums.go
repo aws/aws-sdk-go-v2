@@ -11,6 +11,17 @@ const (
 	ActionTypeListpermissions  ActionType = "ListPermissions"
 )
 
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"IssueCertificate",
+		"GetCertificate",
+		"ListPermissions",
+	}
+}
+
 type AuditReportResponseFormat string
 
 // Enum values for AuditReportResponseFormat
@@ -18,6 +29,16 @@ const (
 	AuditReportResponseFormatJson AuditReportResponseFormat = "JSON"
 	AuditReportResponseFormatCsv  AuditReportResponseFormat = "CSV"
 )
+
+// Values returns all known values for AuditReportResponseFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuditReportResponseFormat) Values() []AuditReportResponseFormat {
+	return []AuditReportResponseFormat{
+		"JSON",
+		"CSV",
+	}
+}
 
 type AuditReportStatus string
 
@@ -27,6 +48,17 @@ const (
 	AuditReportStatusSuccess  AuditReportStatus = "SUCCESS"
 	AuditReportStatusFailed   AuditReportStatus = "FAILED"
 )
+
+// Values returns all known values for AuditReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditReportStatus) Values() []AuditReportStatus {
+	return []AuditReportStatus{
+		"CREATING",
+		"SUCCESS",
+		"FAILED",
+	}
+}
 
 type CertificateAuthorityStatus string
 
@@ -41,6 +73,21 @@ const (
 	CertificateAuthorityStatusFailed              CertificateAuthorityStatus = "FAILED"
 )
 
+// Values returns all known values for CertificateAuthorityStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityStatus) Values() []CertificateAuthorityStatus {
+	return []CertificateAuthorityStatus{
+		"CREATING",
+		"PENDING_CERTIFICATE",
+		"ACTIVE",
+		"DELETED",
+		"DISABLED",
+		"EXPIRED",
+		"FAILED",
+	}
+}
+
 type CertificateAuthorityType string
 
 // Enum values for CertificateAuthorityType
@@ -48,6 +95,16 @@ const (
 	CertificateAuthorityTypeRoot        CertificateAuthorityType = "ROOT"
 	CertificateAuthorityTypeSubordinate CertificateAuthorityType = "SUBORDINATE"
 )
+
+// Values returns all known values for CertificateAuthorityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityType) Values() []CertificateAuthorityType {
+	return []CertificateAuthorityType{
+		"ROOT",
+		"SUBORDINATE",
+	}
+}
 
 type FailureReason string
 
@@ -58,6 +115,17 @@ const (
 	FailureReasonOther                 FailureReason = "OTHER"
 )
 
+// Values returns all known values for FailureReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailureReason) Values() []FailureReason {
+	return []FailureReason{
+		"REQUEST_TIMED_OUT",
+		"UNSUPPORTED_ALGORITHM",
+		"OTHER",
+	}
+}
+
 type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
@@ -67,6 +135,36 @@ const (
 	KeyAlgorithmEc_prime256v1 KeyAlgorithm = "EC_prime256v1"
 	KeyAlgorithmEc_secp384r1  KeyAlgorithm = "EC_secp384r1"
 )
+
+// Values returns all known values for KeyAlgorithm. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (KeyAlgorithm) Values() []KeyAlgorithm {
+	return []KeyAlgorithm{
+		"RSA_2048",
+		"RSA_4096",
+		"EC_prime256v1",
+		"EC_secp384r1",
+	}
+}
+
+type ResourceOwner string
+
+// Enum values for ResourceOwner
+const (
+	ResourceOwnerSelf           ResourceOwner = "SELF"
+	ResourceOwnerOther_accounts ResourceOwner = "OTHER_ACCOUNTS"
+)
+
+// Values returns all known values for ResourceOwner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceOwner) Values() []ResourceOwner {
+	return []ResourceOwner{
+		"SELF",
+		"OTHER_ACCOUNTS",
+	}
+}
 
 type RevocationReason string
 
@@ -82,6 +180,22 @@ const (
 	RevocationReasonA_a_compromise                   RevocationReason = "A_A_COMPROMISE"
 )
 
+// Values returns all known values for RevocationReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RevocationReason) Values() []RevocationReason {
+	return []RevocationReason{
+		"UNSPECIFIED",
+		"KEY_COMPROMISE",
+		"CERTIFICATE_AUTHORITY_COMPROMISE",
+		"AFFILIATION_CHANGED",
+		"SUPERSEDED",
+		"CESSATION_OF_OPERATION",
+		"PRIVILEGE_WITHDRAWN",
+		"A_A_COMPROMISE",
+	}
+}
+
 type SigningAlgorithm string
 
 // Enum values for SigningAlgorithm
@@ -94,6 +208,20 @@ const (
 	SigningAlgorithmSha512withrsa   SigningAlgorithm = "SHA512WITHRSA"
 )
 
+// Values returns all known values for SigningAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SigningAlgorithm) Values() []SigningAlgorithm {
+	return []SigningAlgorithm{
+		"SHA256WITHECDSA",
+		"SHA384WITHECDSA",
+		"SHA512WITHECDSA",
+		"SHA256WITHRSA",
+		"SHA384WITHRSA",
+		"SHA512WITHRSA",
+	}
+}
+
 type ValidityPeriodType string
 
 // Enum values for ValidityPeriodType
@@ -104,3 +232,16 @@ const (
 	ValidityPeriodTypeMonths   ValidityPeriodType = "MONTHS"
 	ValidityPeriodTypeYears    ValidityPeriodType = "YEARS"
 )
+
+// Values returns all known values for ValidityPeriodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValidityPeriodType) Values() []ValidityPeriodType {
+	return []ValidityPeriodType{
+		"END_DATE",
+		"ABSOLUTE",
+		"DAYS",
+		"MONTHS",
+		"YEARS",
+	}
+}

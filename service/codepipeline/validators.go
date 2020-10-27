@@ -827,6 +827,11 @@ func validateActionDeclaration(v *types.ActionDeclaration) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.OutputArtifacts != nil {
+		if err := validateOutputArtifactList(v.OutputArtifacts); err != nil {
+			invalidParams.AddNested("OutputArtifacts", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ActionTypeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionTypeId"))
 	} else if v.ActionTypeId != nil {
@@ -837,11 +842,6 @@ func validateActionDeclaration(v *types.ActionDeclaration) error {
 	if v.InputArtifacts != nil {
 		if err := validateInputArtifactList(v.InputArtifacts); err != nil {
 			invalidParams.AddNested("InputArtifacts", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OutputArtifacts != nil {
-		if err := validateOutputArtifactList(v.OutputArtifacts); err != nil {
-			invalidParams.AddNested("OutputArtifacts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -856,14 +856,14 @@ func validateActionRevision(v *types.ActionRevision) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActionRevision"}
+	if v.Created == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Created"))
+	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if v.RevisionChangeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionChangeId"))
-	}
-	if v.Created == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Created"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -937,9 +937,6 @@ func validateArtifactStore(v *types.ArtifactStore) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ArtifactStore"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.EncryptionKey != nil {
 		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
 			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
@@ -947,6 +944,9 @@ func validateArtifactStore(v *types.ArtifactStore) error {
 	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -977,11 +977,11 @@ func validateBlockerDeclaration(v *types.BlockerDeclaration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BlockerDeclaration"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1031,11 +1031,11 @@ func validateFailureDetails(v *types.FailureDetails) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FailureDetails"}
-	if v.Message == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Message"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1113,6 +1113,13 @@ func validatePipelineDeclaration(v *types.PipelineDeclaration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PipelineDeclaration"}
+	if v.Stages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
+	} else if v.Stages != nil {
+		if err := validatePipelineStageDeclarationList(v.Stages); err != nil {
+			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -1121,20 +1128,13 @@ func validatePipelineDeclaration(v *types.PipelineDeclaration) error {
 			invalidParams.AddNested("ArtifactStores", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Stages == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
-	} else if v.Stages != nil {
-		if err := validatePipelineStageDeclarationList(v.Stages); err != nil {
-			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.ArtifactStore != nil {
 		if err := validateArtifactStore(v.ArtifactStore); err != nil {
 			invalidParams.AddNested("ArtifactStore", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1199,6 +1199,13 @@ func validateStageDeclaration(v *types.StageDeclaration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StageDeclaration"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validateStageActionDeclarationList(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Blockers != nil {
 		if err := validateStageBlockerDeclarationList(v.Blockers); err != nil {
 			invalidParams.AddNested("Blockers", err.(smithy.InvalidParamsError))
@@ -1206,13 +1213,6 @@ func validateStageDeclaration(v *types.StageDeclaration) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Actions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
-	} else if v.Actions != nil {
-		if err := validateStageActionDeclarationList(v.Actions); err != nil {
-			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1261,20 +1261,14 @@ func validateWebhookDefinition(v *types.WebhookDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WebhookDefinition"}
-	if v.TargetAction == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetAction"))
-	}
 	if v.TargetPipeline == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetPipeline"))
-	}
-	if len(v.Authentication) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Authentication"))
 	}
 	if v.AuthenticationConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationConfiguration"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if len(v.Authentication) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Authentication"))
 	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
@@ -1282,6 +1276,12 @@ func validateWebhookDefinition(v *types.WebhookDefinition) error {
 		if err := validateWebhookFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TargetAction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1345,14 +1345,14 @@ func validateOpAcknowledgeThirdPartyJobInput(v *AcknowledgeThirdPartyJobInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeThirdPartyJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Nonce == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Nonce"))
-	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1380,24 +1380,24 @@ func validateOpCreateCustomActionTypeInput(v *CreateCustomActionTypeInput) error
 			invalidParams.AddNested("OutputArtifactDetails", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Provider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
 	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
 	}
 	if v.ConfigurationProperties != nil {
 		if err := validateActionConfigurationPropertyList(v.ConfigurationProperties); err != nil {
 			invalidParams.AddNested("ConfigurationProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Category) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Category"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1489,14 +1489,14 @@ func validateOpDisableStageTransitionInput(v *DisableStageTransitionInput) error
 	if len(v.TransitionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitionType"))
 	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
 	if v.StageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
-	}
-	if v.Reason == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1510,11 +1510,11 @@ func validateOpEnableStageTransitionInput(v *EnableStageTransitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableStageTransitionInput"}
-	if len(v.TransitionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TransitionType"))
-	}
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if len(v.TransitionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitionType"))
 	}
 	if v.StageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
@@ -1594,11 +1594,11 @@ func validateOpGetThirdPartyJobDetailsInput(v *GetThirdPartyJobDetailsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetThirdPartyJobDetailsInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1701,15 +1701,15 @@ func validateOpPutActionRevisionInput(v *PutActionRevisionInput) error {
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
 	}
-	if v.ActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
-	}
 	if v.ActionRevision == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionRevision"))
 	} else if v.ActionRevision != nil {
 		if err := validateActionRevision(v.ActionRevision); err != nil {
 			invalidParams.AddNested("ActionRevision", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1733,14 +1733,14 @@ func validateOpPutApprovalResultInput(v *PutApprovalResultInput) error {
 			invalidParams.AddNested("Result", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
 	if v.ActionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if v.Token == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Token"))
-	}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1754,15 +1754,15 @@ func validateOpPutJobFailureResultInput(v *PutJobFailureResultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutJobFailureResultInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.FailureDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FailureDetails"))
 	} else if v.FailureDetails != nil {
 		if err := validateFailureDetails(v.FailureDetails); err != nil {
 			invalidParams.AddNested("FailureDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1776,13 +1776,13 @@ func validateOpPutJobSuccessResultInput(v *PutJobSuccessResultInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutJobSuccessResultInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
 	if v.CurrentRevision != nil {
 		if err := validateCurrentRevision(v.CurrentRevision); err != nil {
 			invalidParams.AddNested("CurrentRevision", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1796,11 +1796,11 @@ func validateOpPutThirdPartyJobFailureResultInput(v *PutThirdPartyJobFailureResu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutThirdPartyJobFailureResultInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.FailureDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FailureDetails"))
@@ -1826,11 +1826,11 @@ func validateOpPutThirdPartyJobSuccessResultInput(v *PutThirdPartyJobSuccessResu
 			invalidParams.AddNested("CurrentRevision", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1868,8 +1868,8 @@ func validateOpRetryStageExecutionInput(v *RetryStageExecutionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetryStageExecutionInput"}
-	if v.PipelineExecutionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionId"))
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
 	}
 	if v.StageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
@@ -1877,8 +1877,8 @@ func validateOpRetryStageExecutionInput(v *RetryStageExecutionInput) error {
 	if len(v.RetryMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RetryMode"))
 	}
-	if v.PipelineName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	if v.PipelineExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1947,11 +1947,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

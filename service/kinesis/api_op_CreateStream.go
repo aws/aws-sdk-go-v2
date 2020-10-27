@@ -15,9 +15,9 @@ import (
 // Scale-out within a stream is explicitly supported by means of shards, which are
 // uniquely identified groups of data records in a stream. You specify and control
 // the number of shards that a stream is composed of. Each shard can support reads
-// up to five transactions per second, up to a maximum data read total of 2 MB per
+// up to five transactions per second, up to a maximum data read total of 2 MiB per
 // second. Each shard can support writes up to 1,000 records per second, up to a
-// maximum data write total of 1 MB per second. If the amount of data input
+// maximum data write total of 1 MiB per second. If the amount of data input
 // increases or decreases, you can add or remove shards. The stream name identifies
 // the stream. The name is scoped to the AWS account used by the application. It is
 // also scoped by AWS Region. That is, two streams in two different accounts can
@@ -64,7 +64,7 @@ type CreateStreamInput struct {
 
 	// The number of shards that the stream will use. The throughput of the stream is a
 	// function of the number of shards; more shards are required for greater
-	// provisioned throughput. DefaultShardLimit;
+	// provisioned throughput.
 	//
 	// This member is required.
 	ShardCount *int32

@@ -7023,6 +7023,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(*v.Image)
 	}
 
+	if v.ImageConfig != nil {
+		ok := object.Key("ImageConfig")
+		if err := awsAwsjson11_serializeDocumentImageConfig(v.ImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Mode) > 0 {
 		ok := object.Key("Mode")
 		ok.String(string(v.Mode))
@@ -8107,6 +8114,18 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningJobWarmStartConfig(v *typ
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentImageConfig(v *types.ImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RepositoryAccessMode) > 0 {
+		ok := object.Key("RepositoryAccessMode")
+		ok.String(string(v.RepositoryAccessMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceSpecification(v *types.InferenceSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8352,6 +8371,13 @@ func awsAwsjson11_serializeDocumentLabelingJobDataSource(v *types.LabelingJobDat
 		}
 	}
 
+	if v.SnsDataSource != nil {
+		ok := object.Key("SnsDataSource")
+		if err := awsAwsjson11_serializeDocumentLabelingJobSnsDataSource(v.SnsDataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8390,6 +8416,11 @@ func awsAwsjson11_serializeDocumentLabelingJobOutputConfig(v *types.LabelingJobO
 		ok.String(*v.S3OutputPath)
 	}
 
+	if v.SnsTopicArn != nil {
+		ok := object.Key("SnsTopicArn")
+		ok.String(*v.SnsTopicArn)
+	}
+
 	return nil
 }
 
@@ -8412,6 +8443,18 @@ func awsAwsjson11_serializeDocumentLabelingJobS3DataSource(v *types.LabelingJobS
 	if v.ManifestS3Uri != nil {
 		ok := object.Key("ManifestS3Uri")
 		ok.String(*v.ManifestS3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLabelingJobSnsDataSource(v *types.LabelingJobSnsDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SnsTopicArn != nil {
+		ok := object.Key("SnsTopicArn")
+		ok.String(*v.SnsTopicArn)
 	}
 
 	return nil
@@ -10908,6 +10951,11 @@ func awsAwsjson11_serializeOpDocumentCreateCompilationJobInput(v *CreateCompilat
 func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AppNetworkAccessType) > 0 {
+		ok := object.Key("AppNetworkAccessType")
+		ok.String(string(v.AppNetworkAccessType))
+	}
 
 	if len(v.AuthMode) > 0 {
 		ok := object.Key("AuthMode")

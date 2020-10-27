@@ -2,6 +2,177 @@
 
 package types
 
+// An unusual cost pattern. This consists of the detailed metadata and the current
+// status of the anomaly object.
+type Anomaly struct {
+
+	// The unique identifier for the anomaly.
+	//
+	// This member is required.
+	AnomalyId *string
+
+	// The latest and maximum score for the anomaly.
+	//
+	// This member is required.
+	AnomalyScore *AnomalyScore
+
+	// The dollar impact for the anomaly.
+	//
+	// This member is required.
+	Impact *Impact
+
+	// The Amazon Resource Name (ARN) for the cost monitor that generated this anomaly.
+	//
+	// This member is required.
+	MonitorArn *string
+
+	// The last day the anomaly is detected.
+	AnomalyEndDate *string
+
+	// The first day the anomaly is detected.
+	AnomalyStartDate *string
+
+	// The dimension for the anomaly. For example, an AWS service in a service monitor.
+	DimensionValue *string
+
+	// The feedback value.
+	Feedback AnomalyFeedbackType
+
+	// The list of identified root causes for the anomaly.
+	RootCauses []*RootCause
+}
+
+// The time period for an anomaly.
+type AnomalyDateInterval struct {
+
+	// The first date an anomaly was observed.
+	//
+	// This member is required.
+	StartDate *string
+
+	// The last date an anomaly was observed.
+	EndDate *string
+}
+
+// This object continuously inspects your account's cost data for anomalies, based
+// on MonitorType and MonitorSpecification. The content consists of detailed
+// metadata and the current status of the monitor object.
+type AnomalyMonitor struct {
+
+	// The name of the monitor.
+	//
+	// This member is required.
+	MonitorName *string
+
+	// The possible type values.
+	//
+	// This member is required.
+	MonitorType MonitorType
+
+	// The date when the monitor was created.
+	CreationDate *string
+
+	// The value for evaluated dimensions.
+	DimensionalValueCount *int32
+
+	// The date when the monitor last evaluated for anomalies.
+	LastEvaluatedDate *string
+
+	// The date when the monitor was last updated.
+	LastUpdatedDate *string
+
+	// The Amazon Resource Name (ARN) value.
+	MonitorArn *string
+
+	// The dimensions to evaluate.
+	MonitorDimension MonitorDimension
+
+	// Use Expression to filter by cost or by usage. There are two patterns:
+	//
+	//     *
+	// Simple dimension values - You can set the dimension name and values for the
+	// filters that you plan to use. For example, you can filter for REGION==us-east-1
+	// OR REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full
+	// name (for example, REGION==US East (N. Virginia). The Expression example looks
+	// like: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ]
+	// } } The list of dimension values are OR'd together to retrieve cost or usage
+	// data. You can create Expression and DimensionValues objects using either with*
+	// methods or set* methods in multiple lines.
+	//
+	//     * Compound dimension values with
+	// logical operations - You can use multiple Expression types and the logical
+	// operators AND/OR/NOT to create a list of one or more Expression objects. This
+	// allows you to filter on more advanced options. For example, you can filter on
+	// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
+	// (USAGE_TYPE != DataTransfer). The Expression for that looks like this: { "And":
+	// [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+	// "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]},
+	// {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+	// Because each Expression can have only one operator, the service returns an error
+	// if more than one is specified. The following example shows an Expression object
+	// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
+	// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+	//
+	// For GetRightsizingRecommendation
+	// action, a combination of OR and NOT is not supported. OR is not supported
+	// between different dimensions, or dimensions and tags. NOT operators aren't
+	// supported. Dimensions are also limited to LINKED_ACCOUNT, REGION, or
+	// RIGHTSIZING_TYPE.
+	MonitorSpecification *Expression
+}
+
+// Quantifies the anomaly. The higher score means that it is more anomalous.
+type AnomalyScore struct {
+
+	// The last observed score.
+	//
+	// This member is required.
+	CurrentScore *float64
+
+	// The maximum score observed during the AnomalyDateInterval.
+	//
+	// This member is required.
+	MaxScore *float64
+}
+
+// The association between a monitor, threshold, and list of subscribers used to
+// deliver notifications about anomalies detected by a monitor that exceeds a
+// threshold. The content consists of the detailed metadata and the current status
+// of the AnomalySubscription object.
+type AnomalySubscription struct {
+
+	// The frequency at which anomaly reports are sent over email.
+	//
+	// This member is required.
+	Frequency AnomalySubscriptionFrequency
+
+	// A list of cost anomaly monitors.
+	//
+	// This member is required.
+	MonitorArnList []*string
+
+	// A list of subscribers to notify.
+	//
+	// This member is required.
+	Subscribers []*Subscriber
+
+	// The name for the subscription.
+	//
+	// This member is required.
+	SubscriptionName *string
+
+	// The dollar value that triggers a notification if the threshold is exceeded.
+	//
+	// This member is required.
+	Threshold *float64
+
+	// Your unique account identifier.
+	AccountId *string
+
+	// The AnomalySubscription Amazon Resource Name (ARN).
+	SubscriptionArn *string
+}
+
 // The structure of Cost Categories. This includes detailed metadata and the set of
 // rules for the CostCategory object.
 type CostCategory struct {
@@ -35,6 +206,21 @@ type CostCategory struct {
 
 	// The Cost Category's effective end date.
 	EffectiveEnd *string
+
+	// The list of processing statuses for Cost Management products for a specific cost
+	// category.
+	ProcessingStatus []*CostCategoryProcessingStatus
+}
+
+// The list of processing statuses for Cost Management products for a specific cost
+// category.
+type CostCategoryProcessingStatus struct {
+
+	// The Cost Management product name of the applied status.
+	Component CostCategoryStatusComponent
+
+	// The process status for a specific cost category.
+	Status CostCategoryStatus
 }
 
 // A reference to a Cost Category containing only enough information to identify
@@ -56,6 +242,13 @@ type CostCategoryReference struct {
 
 	// The number of rules associated with a specific Cost Category.
 	NumberOfRules *int32
+
+	// The list of processing statuses for Cost Management products for a specific cost
+	// category.
+	ProcessingStatus []*CostCategoryProcessingStatus
+
+	// A list of unique cost category values in a specific cost category.
+	Values []*string
 }
 
 // Rules are processed in order. If there are multiple rules that match the line
@@ -65,7 +258,7 @@ type CostCategoryRule struct {
 
 	// An Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object used to categorize costs. This supports dimensions, Tags, and nested
+	// object used to categorize costs. This supports dimensions, tags, and nested
 	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT,
 	// SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR is not
 	// supported. We recommend that you create a separate rule instead. RECORD_TYPE is
@@ -90,6 +283,11 @@ type CostCategoryValues struct {
 
 	// The unique name of the Cost Category.
 	Key *string
+
+	// The match options that you can use to filter your results. MatchOptions is only
+	// applicable for only applicable for actions related to cost category. The default
+	// values for MatchOptions is EQUALS and CASE_SENSITIVE.
+	MatchOptions []MatchOption
 
 	// The specific value of the Cost Category.
 	Values []*string
@@ -173,18 +371,17 @@ type CoverageNormalizedUnits struct {
 // Context about the current instance.
 type CurrentInstance struct {
 
-	// The currency code that Amazon Web Services used to calculate the costs for this
-	// instance.
+	// The currency code that AWS used to calculate the costs for this instance.
 	CurrencyCode *string
 
 	// The name you've given an instance. This field will show as blank if you haven't
 	// given the instance a name.
 	InstanceName *string
 
-	// Current On Demand cost of operating this instance on a monthly basis.
+	// Current On-Demand cost of operating this instance on a monthly basis.
 	MonthlyCost *string
 
-	// Number of hours during the lookback period billed at On Demand rates.
+	// Number of hours during the lookback period billed at On-Demand rates.
 	OnDemandHoursInLookbackPeriod *string
 
 	// Number of hours during the lookback period covered by reservations.
@@ -237,7 +434,7 @@ type DimensionValues struct {
 
 	// The match options that you can use to filter your results. MatchOptions is only
 	// applicable for actions related to Cost Category. The default values for
-	// MatchOptions is EQUALS and CASE_SENSITIVE.
+	// MatchOptions are EQUALS and CASE_SENSITIVE.
 	MatchOptions []MatchOption
 
 	// The metadata values that you can use to filter and group your results. You can
@@ -254,6 +451,23 @@ type DimensionValuesWithAttributes struct {
 
 	// The value of a dimension with a specific attribute.
 	Value *string
+}
+
+// The EBS field that contains a list of EBS metrics associated with the current
+// instance.
+type EBSResourceUtilization struct {
+
+	// The maximum size of read operations per second
+	EbsReadBytesPerSecond *string
+
+	// The maximum number of read operations per second.
+	EbsReadOpsPerSecond *string
+
+	// The maximum size of write operations per second.
+	EbsWriteBytesPerSecond *string
+
+	// The maximum number of write operations per second.
+	EbsWriteOpsPerSecond *string
 }
 
 // Details about the Amazon EC2 instances that AWS recommends that you purchase.
@@ -288,37 +502,41 @@ type EC2InstanceDetails struct {
 // Details on the Amazon EC2 Resource.
 type EC2ResourceDetails struct {
 
-	// Hourly public On Demand rate for the instance type.
+	// Hourly public On-Demand rate for the instance type.
 	HourlyOnDemandRate *string
 
-	// The type of Amazon Web Services instance.
+	// The type of AWS instance.
 	InstanceType *string
 
-	// Memory capacity of Amazon Web Services instance.
+	// Memory capacity of the AWS instance.
 	Memory *string
 
-	// Network performance capacity of the Amazon Web Services instance.
+	// Network performance capacity of the AWS instance.
 	NetworkPerformance *string
 
-	// The platform of the Amazon Web Services instance. The platform is the specific
-	// combination of operating system, license model, and software on an instance.
+	// The platform of the AWS instance. The platform is the specific combination of
+	// operating system, license model, and software on an instance.
 	Platform *string
 
-	// The Amazon Web Services Region of the instance.
+	// The AWS Region of the instance.
 	Region *string
 
 	// The SKU of the product.
 	Sku *string
 
-	// The disk storage of the Amazon Web Services instance (Not EBS storage).
+	// The disk storage of the AWS instance (not EBS storage).
 	Storage *string
 
-	// Number of VCPU cores in the Amazon Web Services instance type.
+	// Number of VCPU cores in the AWS instance type.
 	Vcpu *string
 }
 
 // Utilization metrics of the instance.
 type EC2ResourceUtilization struct {
+
+	// The EBS field that contains a list of EBS metrics associated with the current
+	// instance.
+	EBSResourceUtilization *EBSResourceUtilization
 
 	// Maximum observed or expected CPU utilization of the instance.
 	MaxCpuUtilizationPercentage *string
@@ -386,30 +604,32 @@ type ESInstanceDetails struct {
 //     *
 // Simple dimension values - You can set the dimension name and values for the
 // filters that you plan to use. For example, you can filter for REGION==us-east-1
-// OR REGION==us-west-1. The Expression for that looks like this: { "Dimensions": {
-// "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } } The list of
-// dimension values are OR'd together to retrieve cost or usage data. You can
-// create Expression and DimensionValues objects using either with* methods or set*
-// methods in multiple lines.
+// OR REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full
+// name (for example, REGION==US East (N. Virginia). The Expression example looks
+// like: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ]
+// } } The list of dimension values are OR'd together to retrieve cost or usage
+// data. You can create Expression and DimensionValues objects using either with*
+// methods or set* methods in multiple lines.
 //
-//     * Compound dimension values with logical
-// operations - You can use multiple Expression types and the logical operators
-// AND/OR/NOT to create a list of one or more Expression objects. This allows you
-// to filter on more advanced options. For example, you can filter on ((REGION ==
-// us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
-// DataTransfer). The Expression for that looks like this: { "And": [ {"Or": [
-// {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }},
-// {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
-// { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }  Because each
-// Expression can have only one operator, the service returns an error if more than
-// one is specified. The following example shows an Expression object that creates
-// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
-// "Values": [ "DataTransfer" ] } }
+//     * Compound dimension values with
+// logical operations - You can use multiple Expression types and the logical
+// operators AND/OR/NOT to create a list of one or more Expression objects. This
+// allows you to filter on more advanced options. For example, you can filter on
+// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
+// (USAGE_TYPE != DataTransfer). The Expression for that looks like this: { "And":
+// [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+// "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]},
+// {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+// Because each Expression can have only one operator, the service returns an error
+// if more than one is specified. The following example shows an Expression object
+// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
+// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
 //
-// For GetRightsizingRecommendation action, a
-// combination of OR and NOT is not supported. OR is not supported between
-// different dimensions, or dimensions and tags. NOT operators aren't supported.
-// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
+// For GetRightsizingRecommendation
+// action, a combination of OR and NOT is not supported. OR is not supported
+// between different dimensions, or dimensions and tags. NOT operators aren't
+// supported. Dimensions are also limited to LINKED_ACCOUNT, REGION, or
+// RIGHTSIZING_TYPE.
 type Expression struct {
 
 	// Return results that match both Dimension objects.
@@ -468,6 +688,18 @@ type GroupDefinition struct {
 	Type GroupDefinitionType
 }
 
+// The anomaly's dollar value.
+type Impact struct {
+
+	// The maximum dollar value observed for an anomaly.
+	//
+	// This member is required.
+	MaxImpact *float64
+
+	// The cumulative dollar value observed for an anomaly.
+	TotalImpact *float64
+}
+
 // Details about the instances that AWS recommends that you purchase.
 type InstanceDetails struct {
 
@@ -500,8 +732,7 @@ type MetricValue struct {
 // Details on the modification recommendation.
 type ModifyRecommendationDetail struct {
 
-	// Identifies whether this instance type is the Amazon Web Services default
-	// recommendation.
+	// Identifies whether this instance type is the AWS default recommendation.
 	TargetInstances []*TargetInstance
 }
 
@@ -779,7 +1010,7 @@ type ResourceDetails struct {
 // Resource utilization of current resource.
 type ResourceUtilization struct {
 
-	// Utilization of current Amazon EC2 Instance
+	// Utilization of current Amazon EC2 instance.
 	EC2ResourceUtilization *EC2ResourceUtilization
 }
 
@@ -842,11 +1073,11 @@ type RightsizingRecommendationConfiguration struct {
 // Metadata for this recommendation set.
 type RightsizingRecommendationMetadata struct {
 
-	// The timestamp for when Amazon Web Services made this recommendation.
+	// The timestamp for when AWS made this recommendation.
 	GenerationTimestamp *string
 
-	// How many days of previous usage that Amazon Web Services considers when making
-	// this recommendation.
+	// How many days of previous usage that AWS considers when making this
+	// recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays
 
 	// The ID for this specific recommendation.
@@ -859,7 +1090,7 @@ type RightsizingRecommendationSummary struct {
 	// Estimated total savings resulting from modifications, on a monthly basis.
 	EstimatedTotalMonthlySavingsAmount *string
 
-	// The currency code that Amazon Web Services used to calculate the savings.
+	// The currency code that AWS used to calculate the savings.
 	SavingsCurrencyCode *string
 
 	// Savings percentage based on the recommended modifications, relative to the total
@@ -868,6 +1099,23 @@ type RightsizingRecommendationSummary struct {
 
 	// Total number of instance recommendations.
 	TotalRecommendationCount *string
+}
+
+// The combination of AWS service, linked account, Region, and usage type where a
+// cost anomaly is observed.
+type RootCause struct {
+
+	// The linked account value associated with the cost anomaly.
+	LinkedAccount *string
+
+	// The AWS Region associated with the cost anomaly.
+	Region *string
+
+	// The AWS service name associated with the cost anomaly.
+	Service *string
+
+	// The UsageType value associated with the cost anomaly.
+	UsageType *string
 }
 
 // The amortized amount of Savings Plans purchased in a specific account during a
@@ -909,14 +1157,13 @@ type SavingsPlansCoverageData struct {
 	// your eligible Savings Plans usage in an account(or set of accounts).
 	CoveragePercentage *string
 
-	// The cost of your Amazon Web Services usage at the public On-Demand rate.
+	// The cost of your AWS usage at the public On-Demand rate.
 	OnDemandCost *string
 
-	// The amount of your Amazon Web Services usage that is covered by a Savings Plans.
+	// The amount of your AWS usage that is covered by a Savings Plans.
 	SpendCoveredBySavingsPlans *string
 
-	// The total cost of your Amazon Web Services usage, regardless of your purchase
-	// option.
+	// The total cost of your AWS usage, regardless of your purchase option.
 	TotalCost *string
 }
 
@@ -939,9 +1186,9 @@ type SavingsPlansDetails struct {
 type SavingsPlansPurchaseRecommendation struct {
 
 	// The account scope that you want your recommendations for. Amazon Web Services
-	// calculates recommendations including the payer account and linked accounts if
+	// calculates recommendations including the master account and member accounts if
 	// the value is set to PAYER. If the value is LINKED, recommendations are
-	// calculated for individual linked accounts only.
+	// calculated for individual member accounts only.
 	AccountScope AccountScope
 
 	// The lookback period in days, used to generate the recommendation.
@@ -971,8 +1218,8 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// The AccountID the recommendation is generated for.
 	AccountId *string
 
-	// The currency code Amazon Web Services used to generate the recommendations and
-	// present potential savings.
+	// The currency code AWS used to generate the recommendations and present potential
+	// savings.
 	CurrencyCode *string
 
 	// The average value of hourly On-Demand spend over the lookback period of the
@@ -1042,8 +1289,8 @@ type SavingsPlansPurchaseRecommendationMetadata struct {
 // Summary metrics for your Savings Plans Purchase Recommendations.
 type SavingsPlansPurchaseRecommendationSummary struct {
 
-	// The currency code Amazon Web Services used to generate the recommendations and
-	// present potential savings.
+	// The currency code AWS used to generate the recommendations and present potential
+	// savings.
 	CurrencyCode *string
 
 	// The current total on demand spend of the applicable usage types over the
@@ -1164,7 +1411,7 @@ type SavingsPlansUtilizationByTime struct {
 }
 
 // A single daily or monthly Savings Plans utilization rate, and details for your
-// account. Master accounts in an organization have access to member accounts. You
+// account. A master account in an organization have access to member accounts. You
 // can use GetDimensionValues to determine the possible dimension values.
 type SavingsPlansUtilizationDetail struct {
 
@@ -1196,6 +1443,19 @@ type ServiceSpecification struct {
 	EC2Specification *EC2Specification
 }
 
+// The recipient of AnomalySubscription notifications.
+type Subscriber struct {
+
+	// The email address or SNS Amazon Resource Name (ARN), depending on the Type.
+	Address *string
+
+	// Indicates if the subscriber accepts the notifications.
+	Status SubscriberStatus
+
+	// The notification delivery channel.
+	Type SubscriberType
+}
+
 // The values that are available for a tag.
 type TagValues struct {
 
@@ -1203,8 +1463,8 @@ type TagValues struct {
 	Key *string
 
 	// The match options that you can use to filter your results. MatchOptions is only
-	// applicable for only applicable for actions related to Cost Category. The default
-	// values for MatchOptions is EQUALS and CASE_SENSITIVE.
+	// applicable for actions related to Cost Category. The default values for
+	// MatchOptions are EQUALS and CASE_SENSITIVE.
 	MatchOptions []MatchOption
 
 	// The specific value of the tag.
@@ -1214,12 +1474,10 @@ type TagValues struct {
 // Details on recommended instance.
 type TargetInstance struct {
 
-	// The currency code that Amazon Web Services used to calculate the costs for this
-	// instance.
+	// The currency code that AWS used to calculate the costs for this instance.
 	CurrencyCode *string
 
-	// Indicates whether or not this recommendation is the defaulted Amazon Web
-	// Services recommendation.
+	// Indicates whether this recommendation is the defaulted AWS recommendation.
 	DefaultTargetInstance *bool
 
 	// Expected cost to operate this instance type on a monthly basis.
@@ -1238,12 +1496,28 @@ type TargetInstance struct {
 // Details on termination recommendation.
 type TerminateRecommendationDetail struct {
 
-	// The currency code that Amazon Web Services used to calculate the costs for this
-	// instance.
+	// The currency code that AWS used to calculate the costs for this instance.
 	CurrencyCode *string
 
 	// Estimated savings resulting from modification, on a monthly basis.
 	EstimatedMonthlySavings *string
+}
+
+// Filters cost anomalies based on the total impact.
+type TotalImpactFilter struct {
+
+	// The comparing value used in the filter.
+	//
+	// This member is required.
+	NumericOperator NumericOperator
+
+	// The lower bound dollar value used in the filter.
+	//
+	// This member is required.
+	StartValue *float64
+
+	// The upper bound dollar value used in the filter.
+	EndValue *float64
 }
 
 // The amount of utilization, in hours.

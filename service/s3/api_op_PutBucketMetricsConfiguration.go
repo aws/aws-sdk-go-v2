@@ -30,22 +30,27 @@ import (
 //
 //     *
 // DeleteBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html)
 //
-//     * PutBucketMetricsConfiguration
 //
-//     *
-// ListBucketMetricsConfigurations
+// * PutBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
 //
-// GetBucketLifecycle has the following special
-// error:
+//
+// * ListBucketMetricsConfigurations
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html)
+//
+// GetBucketLifecycle
+// has the following special error:
 //
 //     * Error code: TooManyConfigurations
 //
-//         * Description: You are
-// attempting to create a new configuration but have already reached the
-// 1,000-configuration limit.
 //
-//         * HTTP Status Code: HTTP 400 Bad Request
+// * Description: You are attempting to create a new configuration but have already
+// reached the 1,000-configuration limit.
+//
+//         * HTTP Status Code: HTTP 400 Bad
+// Request
 func (c *Client) PutBucketMetricsConfiguration(ctx context.Context, params *PutBucketMetricsConfigurationInput, optFns ...func(*Options)) (*PutBucketMetricsConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketMetricsConfigurationInput{}
@@ -77,6 +82,10 @@ type PutBucketMetricsConfigurationInput struct {
 	//
 	// This member is required.
 	MetricsConfiguration *types.MetricsConfiguration
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketMetricsConfigurationOutput struct {

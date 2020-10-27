@@ -24,6 +24,28 @@ type ContentRedaction struct {
 	RedactionType RedactionType
 }
 
+// The object that contains the Amazon S3 object location and access role required
+// to train and tune your custom language model.
+type InputDataConfig struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the permissions you've
+	// given Amazon Transcribe to access your Amazon S3 buckets containing your media
+	// files or text data.
+	//
+	// This member is required.
+	DataAccessRoleArn *string
+
+	// The Amazon S3 prefix you specify to access the plain text files that you use to
+	// train your custom language model.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The Amazon S3 prefix you specify to access the plain text files that you use to
+	// tune your custom language model.
+	TuningDataS3Uri *string
+}
+
 // Provides information about when a transcription job should be executed.
 type JobExecutionSettings struct {
 
@@ -42,6 +64,42 @@ type JobExecutionSettings struct {
 	// specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
 	// field.
 	DataAccessRoleArn *string
+}
+
+// The structure used to describe a custom language model.
+type LanguageModel struct {
+
+	// The Amazon Transcribe standard language model, or base model used to create the
+	// custom language model.
+	BaseModelName BaseModelName
+
+	// The time the custom language model was created.
+	CreateTime *time.Time
+
+	// The reason why the custom language model couldn't be created.
+	FailureReason *string
+
+	// The data access role and Amazon S3 prefixes for the input files used to train
+	// the custom language model.
+	InputDataConfig *InputDataConfig
+
+	// The language code you used to create your custom language model.
+	LanguageCode CLMLanguageCode
+
+	// The most recent time the custom language model was modified.
+	LastModifiedTime *time.Time
+
+	// The name of the custom language model.
+	ModelName *string
+
+	// The creation status of a custom language model. When the status is COMPLETED the
+	// model is ready for use.
+	ModelStatus ModelStatus
+
+	// Whether the base model used for the custom language model is up to date. If this
+	// field is true then you are running the most up-to-date version of the base model
+	// in your custom language model.
+	UpgradeAvailability *bool
 }
 
 // Describes the input media file in a transcription request.
@@ -64,7 +122,7 @@ type MedicalTranscript struct {
 	TranscriptFileUri *string
 }
 
-// The data structure that containts the information for a medical transcription
+// The data structure that contains the information for a medical transcription
 // job.
 type MedicalTranscriptionJob struct {
 
@@ -100,7 +158,7 @@ type MedicalTranscriptionJob struct {
 	//     *
 	// Invalid file size: file size too large- The size of your audio file is larger
 	// than what Amazon Transcribe Medical can process. For more information, see
-	// Guidlines and Quotas
+	// Guidelines and Quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
 	// in the Amazon Transcribe Medical Guide
 	//
@@ -228,7 +286,7 @@ type MedicalTranscriptionSetting struct {
 	ShowAlternatives *bool
 
 	// Determines whether the transcription job uses speaker recognition to identify
-	// different speakers in the input audio. Speaker recongition labels individual
+	// different speakers in the input audio. Speaker recognition labels individual
 	// speakers in the audio file. If you set the ShowSpeakerLabels field to true, you
 	// must also set the maximum number of speaker labels in the MaxSpeakerLabels
 	// field. You can't set both ShowSpeakerLabels and ChannelIdentification in the
@@ -237,6 +295,13 @@ type MedicalTranscriptionSetting struct {
 
 	// The name of the vocabulary to use when processing a medical transcription job.
 	VocabularyName *string
+}
+
+// The object used to call your custom language model to your transcription job.
+type ModelSettings struct {
+
+	// The name of your custom language model.
+	LanguageModelName *string
 }
 
 // Provides optional settings for the StartTranscriptionJob operation.
@@ -293,17 +358,17 @@ type Settings struct {
 type Transcript struct {
 
 	// The S3 object location of the redacted transcript. Use this URI to access the
-	// redacated transcript. If you specified an S3 bucket in the OutputBucketName
-	// field when you created the job, this is the URI of that bucket. If you chose to
-	// store the transcript in Amazon Transcribe, this is a shareable URL that provides
+	// redacted transcript. If you specified an S3 bucket in the OutputBucketName field
+	// when you created the job, this is the URI of that bucket. If you chose to store
+	// the transcript in Amazon Transcribe, this is a shareable URL that provides
 	// secure access to that location.
 	RedactedTranscriptFileUri *string
 
-	// The S3 object location of the the transcript. Use this URI to access the
-	// transcript. If you specified an S3 bucket in the OutputBucketName field when you
-	// created the job, this is the URI of that bucket. If you chose to store the
-	// transcript in Amazon Transcribe, this is a shareable URL that provides secure
-	// access to that location.
+	// The S3 object location of the transcript. Use this URI to access the transcript.
+	// If you specified an S3 bucket in the OutputBucketName field when you created the
+	// job, this is the URI of that bucket. If you chose to store the transcript in
+	// Amazon Transcribe, this is a shareable URL that provides secure access to that
+	// location.
 	TranscriptFileUri *string
 }
 
@@ -357,11 +422,24 @@ type TranscriptionJob struct {
 	// in the Amazon Web Services General Reference.
 	FailureReason *string
 
+	// A value between zero and one that Amazon Transcribe assigned to the language
+	// that it identified in the source audio. Larger values indicate that Amazon
+	// Transcribe has higher confidence in the language it identified.
+	IdentifiedLanguageScore *float32
+
+	// A value that shows if automatic language identification was enabled for a
+	// transcription job.
+	IdentifyLanguage *bool
+
 	// Provides information about how a transcription job is executed.
 	JobExecutionSettings *JobExecutionSettings
 
 	// The language code for the input speech.
 	LanguageCode LanguageCode
+
+	// An object that shows the optional array of languages inputted for transcription
+	// jobs with automatic language identification enabled.
+	LanguageOptions []LanguageCode
 
 	// An object that describes the input media for the transcription job.
 	Media *Media
@@ -371,6 +449,9 @@ type TranscriptionJob struct {
 
 	// The sample rate, in Hertz, of the audio track in the input media file.
 	MediaSampleRateHertz *int32
+
+	// An object containing the details of your custom language model.
+	ModelSettings *ModelSettings
 
 	// Optional settings for the transcription job. Use these settings to turn on
 	// speaker recognition, to set the maximum number of speakers that should be
@@ -406,8 +487,19 @@ type TranscriptionJobSummary struct {
 	// If the TranscriptionJobStatus field is FAILED, a description of the error.
 	FailureReason *string
 
+	// A value between zero and one that Amazon Transcribe assigned to the language it
+	// identified in the source audio. A higher score indicates that Amazon Transcribe
+	// is more confident in the language it identified.
+	IdentifiedLanguageScore *float32
+
+	// Whether automatic language identification was enabled for a transcription job.
+	IdentifyLanguage *bool
+
 	// The language code for the input speech.
 	LanguageCode LanguageCode
+
+	// The object used to call your custom language model to your transcription job.
+	ModelSettings *ModelSettings
 
 	// Indicates the location of the output of the transcription job. If the value is
 	// CUSTOMER_BUCKET then the location is the S3 bucket specified in the

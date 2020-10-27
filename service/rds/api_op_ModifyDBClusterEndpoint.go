@@ -97,7 +97,9 @@ type ModifyDBClusterEndpointOutput struct {
 	StaticMembers []*string
 
 	// The current status of the endpoint. One of: creating, available, deleting,
-	// modifying.
+	// inactive, modifying. The inactive state applies to an endpoint that can't be
+	// used for a certain kind of cluster, such as a writer endpoint for a read-only
+	// secondary cluster in a global database.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

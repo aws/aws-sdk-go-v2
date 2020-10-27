@@ -84,8 +84,8 @@ type DescribeSpotInstanceRequestsInput struct {
 	// volume, in GiB.
 	//
 	//     * launch.block-device-mapping.volume-type - The type of EBS
-	// volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for
-	// Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.
+	// volume: gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1
+	// for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.
 	//
 	//     *
 	// launch.group-id - The ID of the security group for the instance.

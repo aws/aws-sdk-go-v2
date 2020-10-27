@@ -395,11 +395,11 @@ func validateApplicationPolicyStatement(v *types.ApplicationPolicyStatement) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationPolicyStatement"}
-	if v.Actions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
-	}
 	if v.Principals == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -448,11 +448,11 @@ func validateRollbackTrigger(v *types.RollbackTrigger) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RollbackTrigger"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -466,11 +466,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -484,14 +484,14 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.Author == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Author"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -505,11 +505,11 @@ func validateOpCreateApplicationVersionInput(v *CreateApplicationVersionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationVersionInput"}
-	if v.SemanticVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.SemanticVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -536,13 +536,13 @@ func validateOpCreateCloudFormationChangeSetInput(v *CreateCloudFormationChangeS
 			invalidParams.AddNested("RollbackConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
 	if v.ParameterOverrides != nil {
 		if err := validate__listOfParameterValue(v.ParameterOverrides); err != nil {
 			invalidParams.AddNested("ParameterOverrides", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -664,15 +664,15 @@ func validateOpPutApplicationPolicyInput(v *PutApplicationPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationPolicyInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
 	if v.Statements == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statements"))
 	} else if v.Statements != nil {
 		if err := validate__listOfApplicationPolicyStatement(v.Statements); err != nil {
 			invalidParams.AddNested("Statements", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -686,11 +686,11 @@ func validateOpUnshareApplicationInput(v *UnshareApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnshareApplicationInput"}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

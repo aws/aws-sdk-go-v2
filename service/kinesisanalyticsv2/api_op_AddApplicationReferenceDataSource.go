@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds a reference data source to an existing SQL-based Amazon Kinesis Data
-// Analytics application. Kinesis Data Analytics reads reference data (that is, an
-// Amazon S3 object) and creates an in-application table within your application.
-// In the request, you provide the source (S3 bucket name and object key name),
-// name of the in-application table to create, and the necessary mapping
-// information that describes how data in an Amazon S3 object maps to columns in
-// the resulting in-application table.
+// Adds a reference data source to an existing SQL-based Kinesis Data Analytics
+// application. Kinesis Data Analytics reads reference data (that is, an Amazon S3
+// object) and creates an in-application table within your application. In the
+// request, you provide the source (S3 bucket name and object key name), name of
+// the in-application table to create, and the necessary mapping information that
+// describes how data in an Amazon S3 object maps to columns in the resulting
+// in-application table.
 func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *AddApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*AddApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &AddApplicationReferenceDataSourceInput{}
@@ -62,8 +62,8 @@ type AddApplicationReferenceDataSourceOutput struct {
 	// The application Amazon Resource Name (ARN).
 	ApplicationARN *string
 
-	// The updated application version ID. Amazon Kinesis Data Analytics increments
-	// this ID when the application is updated.
+	// The updated application version ID. Kinesis Data Analytics increments this ID
+	// when the application is updated.
 	ApplicationVersionId *int64
 
 	// Describes reference data sources configured for the application.

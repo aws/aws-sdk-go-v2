@@ -17,7 +17,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
 // Storage Service Developer Guide. Related Resources:
 //
-//     * RESTOPTIONSobject
+//     * PutBucketCors
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
+//
+//     *
+// RESTOPTIONSobject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
 func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsInput, optFns ...func(*Options)) (*DeleteBucketCorsOutput, error) {
 	if params == nil {
 		params = &DeleteBucketCorsInput{}
@@ -39,6 +44,10 @@ type DeleteBucketCorsInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketCorsOutput struct {

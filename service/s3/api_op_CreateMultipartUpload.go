@@ -15,9 +15,11 @@ import (
 // This operation initiates a multipart upload and returns an upload ID. This
 // upload ID is used to associate all of the parts in the specific multipart
 // upload. You specify this upload ID in each of your subsequent upload part
-// requests (see UploadPart). You also include this upload ID in the final request
-// to either complete or abort the multipart upload request. For more information
-// about multipart uploads, see Multipart Upload Overview
+// requests (see UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)). You also
+// include this upload ID in the final request to either complete or abort the
+// multipart upload request. For more information about multipart uploads, see
+// Multipart Upload Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html). If you have
 // configured a lifecycle rule to abort incomplete multipart uploads, the upload
 // must complete within the number of days specified in the bucket lifecycle
@@ -44,19 +46,19 @@ import (
 // its data centers and decrypts it when you access it. You can provide your own
 // encryption key, or use AWS Key Management Service (AWS KMS) customer master keys
 // (CMKs) or Amazon S3-managed encryption keys. If you choose to provide your own
-// encryption key, the request headers you provide in UploadPart) and
-// UploadPartCopy) requests must match the headers you used in the request to
-// initiate the upload by using CreateMultipartUpload. To perform a multipart
-// upload with encryption using an AWS KMS CMK, the requester must have permission
-// to the kms:Encrypt, kms:Decrypt, kms:ReEncrypt*, kms:GenerateDataKey*, and
-// kms:DescribeKey actions on the key. These permissions are required because
-// Amazon S3 must decrypt and read data from the encrypted file parts before it
-// completes the multipart upload. If your AWS Identity and Access Management (IAM)
-// user or role is in the same AWS account as the AWS KMS CMK, then you must have
-// these permissions on the key policy. If your IAM user or role belongs to a
-// different account than the key, then you must have the permissions on both the
-// key policy and your IAM user or role. For more information, see Protecting Data
-// Using Server-Side Encryption
+// encryption key, the request headers you provide in UploadPart and UploadPartCopy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
+// requests must match the headers you used in the request to initiate the upload
+// by using CreateMultipartUpload. To perform a multipart upload with encryption
+// using an AWS KMS CMK, the requester must have permission to the kms:Encrypt,
+// kms:Decrypt, kms:ReEncrypt*, kms:GenerateDataKey*, and kms:DescribeKey actions
+// on the key. These permissions are required because Amazon S3 must decrypt and
+// read data from the encrypted file parts before it completes the multipart
+// upload. If your AWS Identity and Access Management (IAM) user or role is in the
+// same AWS account as the AWS KMS CMK, then you must have these permissions on the
+// key policy. If your IAM user or role belongs to a different account than the
+// key, then you must have the permissions on both the key policy and your IAM user
+// or role. For more information, see Protecting Data Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
 // Access Permissions When copying an object, you can optionally specify the
 // accounts or groups that should be granted specific permissions on the new
@@ -208,15 +210,23 @@ import (
 // CreateMultipartUpload:
 //
 //     * UploadPart
-//
-//     * CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
-// AbortMultipartUpload
+// CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//     * ListParts
 //
-//     * ListMultipartUploads
+// * AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+//
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+//
+//     *
+// ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultipartUploadInput, optFns ...func(*Options)) (*CreateMultipartUploadOutput, error) {
 	if params == nil {
 		params = &CreateMultipartUploadInput{}
@@ -234,7 +244,23 @@ func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultip
 
 type CreateMultipartUploadInput struct {
 
-	// The name of the bucket to which to initiate the upload
+	// The name of the bucket to which to initiate the upload When using this API with
+	// an access point, you must direct requests to the access point hostname. The
+	// access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -244,7 +270,8 @@ type CreateMultipartUploadInput struct {
 	// This member is required.
 	Key *string
 
-	// The canned ACL to apply to the object.
+	// The canned ACL to apply to the object. This action is not supported by Amazon S3
+	// on Outposts.
 	ACL types.ObjectCannedACL
 
 	// Specifies caching behavior along the request/reply chain.
@@ -264,19 +291,27 @@ type CreateMultipartUploadInput struct {
 	// A standard MIME type describing the format of the object data.
 	ContentType *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
+
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object. This
+	// action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
-	// Allows grantee to read the object data and its metadata.
+	// Allows grantee to read the object data and its metadata. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantRead *string
 
-	// Allows grantee to read the object ACL.
+	// Allows grantee to read the object ACL. This action is not supported by Amazon S3
+	// on Outposts.
 	GrantReadACP *string
 
-	// Allows grantee to write the ACL for the applicable object.
+	// Allows grantee to write the ACL for the applicable object. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
@@ -333,7 +368,13 @@ type CreateMultipartUploadInput struct {
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
-	// The type of storage to use for the object. Defaults to 'STANDARD'.
+	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
+	// objects. The STANDARD storage class provides high durability and high
+	// availability. Depending on performance needs, you can specify a different
+	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
+	// more information, see Storage Classes
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
+	// the Amazon S3 Service Developer Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
@@ -363,15 +404,23 @@ type CreateMultipartUploadOutput struct {
 	// incomplete multipart uploads.
 	AbortRuleId *string
 
-	// Name of the bucket to which the multipart upload was initiated. When using this
-	// API with an access point, you must direct requests to the access point hostname.
-	// The access point hostname takes the form
+	// The name of the bucket to which the multipart upload was initiated. When using
+	// this API with an access point, you must direct requests to the access point
+	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
 
 	// Object key for which the multipart upload was initiated.

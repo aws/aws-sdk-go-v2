@@ -8341,6 +8341,15 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 
 	for key, value := range shape {
 		switch key {
+		case "CurrentLsn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CurrentLsn = &jtv
+			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8348,6 +8357,19 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = &jtv
+			}
+
+		case "MaxKBytesPerRead":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxKBytesPerRead = ptr.Int32(int32(i64))
 			}
 
 		case "Password":
@@ -8379,6 +8401,15 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = &jtv
+			}
+
+		case "SetDataCaptureChanges":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.SetDataCaptureChanges = &jtv
 			}
 
 		case "Username":
@@ -8635,6 +8666,15 @@ func awsAwsjson11_deserializeDocumentKafkaSettings(v **types.KafkaSettings, valu
 				sv.IncludeControlDetails = &jtv
 			}
 
+		case "IncludeNullAndEmpty":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeNullAndEmpty = &jtv
+			}
+
 		case "IncludePartitionValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8669,6 +8709,19 @@ func awsAwsjson11_deserializeDocumentKafkaSettings(v **types.KafkaSettings, valu
 					return fmt.Errorf("expected MessageFormatValue to be of type string, got %T instead", value)
 				}
 				sv.MessageFormat = types.MessageFormatValue(jtv)
+			}
+
+		case "MessageMaxBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MessageMaxBytes = ptr.Int32(int32(i64))
 			}
 
 		case "PartitionIncludeSchemaTable":
@@ -8727,6 +8780,15 @@ func awsAwsjson11_deserializeDocumentKinesisSettings(v **types.KinesisSettings, 
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
 				}
 				sv.IncludeControlDetails = &jtv
+			}
+
+		case "IncludeNullAndEmpty":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeNullAndEmpty = &jtv
 			}
 
 		case "IncludePartitionValue":
@@ -9103,6 +9165,28 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 
 	for key, value := range shape {
 		switch key {
+		case "BcpPacketSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BcpPacketSize = ptr.Int32(int32(i64))
+			}
+
+		case "ControlTablesFileGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ControlTablesFileGroup = &jtv
+			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9134,6 +9218,24 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "ReadBackupOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ReadBackupOnly = &jtv
+			}
+
+		case "SafeguardPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SafeguardPolicy to be of type string, got %T instead", value)
+				}
+				sv.SafeguardPolicy = types.SafeguardPolicy(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9141,6 +9243,15 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = &jtv
+			}
+
+		case "UseBcpFullLoad":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseBcpFullLoad = &jtv
 			}
 
 		case "Username":
@@ -9326,6 +9437,15 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AfterConnectScript":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AfterConnectScript = &jtv
+			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9333,6 +9453,45 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = &jtv
+			}
+
+		case "EventsPollInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EventsPollInterval = ptr.Int32(int32(i64))
+			}
+
+		case "MaxFileSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFileSize = ptr.Int32(int32(i64))
+			}
+
+		case "ParallelLoadThreads":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ParallelLoadThreads = ptr.Int32(int32(i64))
 			}
 
 		case "Password":
@@ -9364,6 +9523,24 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = &jtv
+			}
+
+		case "ServerTimezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerTimezone = &jtv
+			}
+
+		case "TargetDbType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetDbType to be of type string, got %T instead", value)
+				}
+				sv.TargetDbType = types.TargetDbType(jtv)
 			}
 
 		case "Username":
@@ -9512,6 +9689,68 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 
 	for key, value := range shape {
 		switch key {
+		case "AccessAlternateDirectly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.AccessAlternateDirectly = &jtv
+			}
+
+		case "AdditionalArchivedLogDestId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AdditionalArchivedLogDestId = ptr.Int32(int32(i64))
+			}
+
+		case "AddSupplementalLogging":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.AddSupplementalLogging = &jtv
+			}
+
+		case "AllowSelectNestedTables":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.AllowSelectNestedTables = &jtv
+			}
+
+		case "ArchivedLogDestId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ArchivedLogDestId = ptr.Int32(int32(i64))
+			}
+
+		case "ArchivedLogsOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ArchivedLogsOnly = &jtv
+			}
+
 		case "AsmPassword":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9539,6 +9778,15 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 				sv.AsmUser = &jtv
 			}
 
+		case "CharLengthSemantics":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CharLengthSemantics to be of type string, got %T instead", value)
+				}
+				sv.CharLengthSemantics = types.CharLengthSemantics(jtv)
+			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9546,6 +9794,77 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = &jtv
+			}
+
+		case "DirectPathNoLog":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.DirectPathNoLog = &jtv
+			}
+
+		case "DirectPathParallelLoad":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.DirectPathParallelLoad = &jtv
+			}
+
+		case "EnableHomogenousTablespace":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.EnableHomogenousTablespace = &jtv
+			}
+
+		case "FailTasksOnLobTruncation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.FailTasksOnLobTruncation = &jtv
+			}
+
+		case "NumberDatatypeScale":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberDatatypeScale = ptr.Int32(int32(i64))
+			}
+
+		case "OraclePathPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OraclePathPrefix = &jtv
+			}
+
+		case "ParallelAsmReadThreads":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ParallelAsmReadThreads = ptr.Int32(int32(i64))
 			}
 
 		case "Password":
@@ -9568,6 +9887,50 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ReadAheadBlocks":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadAheadBlocks = ptr.Int32(int32(i64))
+			}
+
+		case "ReadTableSpaceName":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ReadTableSpaceName = &jtv
+			}
+
+		case "ReplacePathPrefix":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ReplacePathPrefix = &jtv
+			}
+
+		case "RetryInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryInterval = ptr.Int32(int32(i64))
 			}
 
 		case "SecurityDbEncryption":
@@ -9595,6 +9958,24 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = &jtv
+			}
+
+		case "UseAlternateFolderForOnline":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseAlternateFolderForOnline = &jtv
+			}
+
+		case "UsePathPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UsePathPrefix = &jtv
 			}
 
 		case "Username":
@@ -9954,6 +10335,24 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 
 	for key, value := range shape {
 		switch key {
+		case "AfterConnectScript":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AfterConnectScript = &jtv
+			}
+
+		case "CaptureDdls":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.CaptureDdls = &jtv
+			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9961,6 +10360,50 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = &jtv
+			}
+
+		case "DdlArtifactsSchema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DdlArtifactsSchema = &jtv
+			}
+
+		case "ExecuteTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExecuteTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "FailTasksOnLobTruncation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.FailTasksOnLobTruncation = &jtv
+			}
+
+		case "MaxFileSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFileSize = ptr.Int32(int32(i64))
 			}
 
 		case "Password":
@@ -9992,6 +10435,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServerName = &jtv
+			}
+
+		case "SlotName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SlotName = &jtv
 			}
 
 		case "Username":
@@ -10070,6 +10522,24 @@ func awsAwsjson11_deserializeDocumentRedshiftSettings(v **types.RedshiftSettings
 				sv.BucketName = &jtv
 			}
 
+		case "CaseSensitiveNames":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.CaseSensitiveNames = &jtv
+			}
+
+		case "CompUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.CompUpdate = &jtv
+			}
+
 		case "ConnectionTimeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10117,6 +10587,15 @@ func awsAwsjson11_deserializeDocumentRedshiftSettings(v **types.RedshiftSettings
 					return fmt.Errorf("expected EncryptionModeValue to be of type string, got %T instead", value)
 				}
 				sv.EncryptionMode = types.EncryptionModeValue(jtv)
+			}
+
+		case "ExplicitIds":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ExplicitIds = &jtv
 			}
 
 		case "FileTransferUploadStreams":
@@ -12247,6 +12726,33 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 					return err
 				}
 				sv.DataPageSize = ptr.Int32(int32(i64))
+			}
+
+		case "DatePartitionDelimiter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatePartitionDelimiterValue to be of type string, got %T instead", value)
+				}
+				sv.DatePartitionDelimiter = types.DatePartitionDelimiterValue(jtv)
+			}
+
+		case "DatePartitionEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.DatePartitionEnabled = &jtv
+			}
+
+		case "DatePartitionSequence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatePartitionSequenceValue to be of type string, got %T instead", value)
+				}
+				sv.DatePartitionSequence = types.DatePartitionSequenceValue(jtv)
 			}
 
 		case "DictPageSizeLimit":

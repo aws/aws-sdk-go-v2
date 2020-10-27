@@ -265,21 +265,6 @@ func validateCanaryCodeInput(v *types.CanaryCodeInput) error {
 	}
 }
 
-func validateCanaryRunConfigInput(v *types.CanaryRunConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CanaryRunConfigInput"}
-	if v.TimeoutInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TimeoutInSeconds"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateCanaryScheduleInput(v *types.CanaryScheduleInput) error {
 	if v == nil {
 		return nil
@@ -300,13 +285,21 @@ func validateOpCreateCanaryInput(v *CreateCanaryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCanaryInput"}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	} else if v.Code != nil {
+		if err := validateCanaryCodeInput(v.Code); err != nil {
+			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ArtifactS3Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ArtifactS3Location"))
-	}
-	if v.RunConfig != nil {
-		if err := validateCanaryRunConfigInput(v.RunConfig); err != nil {
-			invalidParams.AddNested("RunConfig", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Schedule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
@@ -317,19 +310,6 @@ func validateOpCreateCanaryInput(v *CreateCanaryInput) error {
 	}
 	if v.RuntimeVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuntimeVersion"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
-	}
-	if v.Code == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Code"))
-	} else if v.Code != nil {
-		if err := validateCanaryCodeInput(v.Code); err != nil {
-			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -451,11 +431,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -474,18 +454,13 @@ func validateOpUpdateCanaryInput(v *UpdateCanaryInput) error {
 			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.RunConfig != nil {
-		if err := validateCanaryRunConfigInput(v.RunConfig); err != nil {
-			invalidParams.AddNested("RunConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Schedule != nil {
 		if err := validateCanaryScheduleInput(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

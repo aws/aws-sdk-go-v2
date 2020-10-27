@@ -567,11 +567,19 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFinding"}
-	if v.Types == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Types"))
-	}
 	if v.ProductArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
+	}
+	if v.CreatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatedAt"))
+	}
+	if v.Compliance != nil {
+		if err := validateCompliance(v.Compliance); err != nil {
+			invalidParams.AddNested("Compliance", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
@@ -581,17 +589,19 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 			invalidParams.AddNested("Vulnerabilities", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Resources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
-	} else if v.Resources != nil {
-		if err := validateResourceList(v.Resources); err != nil {
-			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
-		}
+	if v.Types == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Types"))
 	}
 	if v.Malware != nil {
 		if err := validateMalwareList(v.Malware); err != nil {
 			invalidParams.AddNested("Malware", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.SchemaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.RelatedFindings != nil {
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
@@ -601,36 +611,31 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 	if v.Severity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
 	}
-	if v.SchemaVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
-	if v.AwsAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.GeneratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GeneratorId"))
 	}
 	if v.UpdatedAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
-	}
-	if v.Compliance != nil {
-		if err := validateCompliance(v.Compliance); err != nil {
-			invalidParams.AddNested("Compliance", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Note != nil {
 		if err := validateNote(v.Note); err != nil {
 			invalidParams.AddNested("Note", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CreatedAt == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatedAt"))
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
-	if v.GeneratorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GeneratorId"))
+	if v.Resources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
+	} else if v.Resources != nil {
+		if err := validateResourceList(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PatchSummary != nil {
+		if err := validatePatchSummary(v.PatchSummary); err != nil {
+			invalidParams.AddNested("PatchSummary", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -644,11 +649,11 @@ func validateAwsSecurityFindingIdentifier(v *types.AwsSecurityFindingIdentifier)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFindingIdentifier"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.ProductArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -745,14 +750,14 @@ func validateNote(v *types.Note) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Note"}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
-	}
 	if v.UpdatedAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
 	}
 	if v.UpdatedBy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedBy"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -766,11 +771,26 @@ func validateNoteUpdate(v *types.NoteUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NoteUpdate"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
 	if v.UpdatedBy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedBy"))
 	}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePatchSummary(v *types.PatchSummary) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PatchSummary"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -819,11 +839,11 @@ func validateResource(v *types.Resource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
-	if v.Type == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -918,13 +938,13 @@ func validateVulnerability(v *types.Vulnerability) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Vulnerability"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Vendor != nil {
 		if err := validateVulnerabilityVendor(v.Vendor); err != nil {
 			invalidParams.AddNested("Vendor", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1070,14 +1090,14 @@ func validateOpCreateActionTargetInput(v *CreateActionTargetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateActionTargetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1094,11 +1114,11 @@ func validateOpCreateInsightInput(v *CreateInsightInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.GroupByAttribute == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupByAttribute"))
-	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if v.GroupByAttribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupByAttribute"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1262,11 +1282,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1280,11 +1300,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1313,13 +1333,13 @@ func validateOpUpdateFindingsInput(v *UpdateFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFindingsInput"}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
 	if v.Note != nil {
 		if err := validateNoteUpdate(v.Note); err != nil {
 			invalidParams.AddNested("Note", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

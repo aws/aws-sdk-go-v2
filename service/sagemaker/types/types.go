@@ -413,7 +413,7 @@ type AppSpecification struct {
 	ContainerEntrypoint []*string
 }
 
-// An AutoPilot job will return recommendations, or candidates. Each candidate has
+// An Autopilot job returns recommendations, or candidates. Each candidate has
 // futher details about the steps involed, and the status.
 type AutoMLCandidate struct {
 
@@ -453,7 +453,7 @@ type AutoMLCandidate struct {
 	// The failure reason.
 	FailureReason *string
 
-	// The candidate result from a job.
+	// The best candidate result from an AutoML training job.
 	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric
 
 	// The inference containers.
@@ -517,11 +517,11 @@ type AutoMLContainerDefinition struct {
 	Environment map[string]*string
 }
 
-// The data source for the AutoPilot job.
+// The data source for the Autopilot job.
 type AutoMLDataSource struct {
 
 	// The Amazon S3 location of the input data. The input data must be in CSV format
-	// and contain at least 1000 rows.
+	// and contain at least 500 rows.
 	//
 	// This member is required.
 	S3DataSource *AutoMLS3DataSource
@@ -563,10 +563,76 @@ type AutoMLJobConfig struct {
 	SecurityConfig *AutoMLSecurityConfig
 }
 
-// Applies a metric to minimize or maximize for the job's objective.
+// Specifies a metric to minimize or maximize as the objective of a job.
 type AutoMLJobObjective struct {
 
-	// The name of the metric.
+	// The name of the objective metric used to measure the predictive quality of a
+	// machine learning system. This metric is optimized during training to provide the
+	// best estimate for model parameter values from data. Here are the options:
+	//
+	//     *
+	// MSE: The mean squared error (MSE) is the average of the squared differences
+	// between the predicted and actual values. It is used for regression. MSE values
+	// are always positive, the better a model is at predicting the actual values the
+	// smaller the MSE value. When the data contains outliers, they tend to dominate
+	// the MSE which might cause subpar prediction performance.
+	//
+	//     * Accuracy: The
+	// ratio of the number correctly classified items to the total number (correctly
+	// and incorrectly) classified. It is used for binary and multiclass
+	// classification. Measures how close the predicted class values are to the actual
+	// values. Accuracy values vary between zero and one, one being perfect accuracy
+	// and zero perfect inaccuracy.
+	//
+	//     * F1: The F1 score is the harmonic mean of the
+	// precision and recall. It is used for binary classification into classes
+	// traditionally referred to as positive and negative. Predictions are said to be
+	// true when they match their actual (correct) class; false when they do not.
+	// Precision is the ratio of the true positive predictions to all positive
+	// predictions (including the false positives) in a data set and measures the
+	// quality of the prediction when it predicts the positive class. Recall (or
+	// sensitivity) is the ratio of the true positive predictions to all actual
+	// positive instances and measures how completely a model predicts the actual class
+	// members in a data set. The standard F1 score weighs precision and recall
+	// equally. But which metric is paramount typically depends on specific aspects of
+	// a problem. F1 scores vary between zero and one, one being the best possible
+	// performance and zero the worst.
+	//
+	//     * AUC: The area under the curve (AUC)
+	// metric is used to compare and evaluate binary classification by algorithms such
+	// as logistic regression that return probabilities. A threshold is needed to map
+	// the probabilities into classifications. The relevant curve is the receiver
+	// operating characteristic curve that plots the true positive rate (TPR) of
+	// predictions (or recall) against the false positive rate (FPR) as a function of
+	// the threshold value, above which a prediction is considered positive. Increasing
+	// the threshold results in fewer false positives but more false negatives. AUC is
+	// the area under this receiver operating characteristic curve and so provides an
+	// aggregated measure of the model performance across all possible classification
+	// thresholds. The AUC score can also be interpreted as the probability that a
+	// randomly selected positive data point is more likely to be predicted positive
+	// than a randomly selected negative example. AUC scores vary between zero and one,
+	// one being perfect accuracy and one half not better than a random classifier.
+	// Values less that one half predict worse than a random predictor and such
+	// consistently bad predictors can be inverted to obtain better than random
+	// predictors.
+	//
+	//     * F1macro: The F1macro score applies F1 scoring to multiclass
+	// classification. In this context, you have multiple classes to predict. You just
+	// calculate the precision and recall for each class as you did for the positive
+	// class in binary classification. Then used these values to calculate the F1 score
+	// for each class and average them to obtain the F1macro score. F1macro scores vary
+	// between zero and one, one being the best possible performance and zero the
+	// worst.
+	//
+	// If you do not specify a metric explicitly, the default behavior is to
+	// automatically use:
+	//
+	//     * MSE: for regression.
+	//
+	//     * F1: for binary
+	// classification
+	//
+	//     * Accuracy: for multiclass classification.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -605,10 +671,10 @@ type AutoMLJobSummary struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The end time.
+	// The end time of an AutoML job.
 	EndTime *time.Time
 
-	// The failure reason.
+	// The failure reason of a job.
 	FailureReason *string
 }
 
@@ -952,14 +1018,22 @@ type ContainerDefinition struct {
 	// up to 16 entries in the map.
 	Environment map[string]*string
 
-	// The Amazon EC2 Container Registry (Amazon ECR) path where inference code is
-	// stored. If you are using your own custom algorithm instead of an algorithm
-	// provided by Amazon SageMaker, the inference code must meet Amazon SageMaker
-	// requirements. Amazon SageMaker supports both registry/repository[:tag] and
-	// registry/repository[@digest] image path formats. For more information, see Using
-	// Your Own Algorithms with Amazon SageMaker
+	// The path where inference code is stored. This can be either in Amazon EC2
+	// Container Registry or in a Docker registry that is accessible from the same VPC
+	// that you configure for your endpoint. If you are using your own custom algorithm
+	// instead of an algorithm provided by Amazon SageMaker, the inference code must
+	// meet Amazon SageMaker requirements. Amazon SageMaker supports both
+	// registry/repository[:tag] and registry/repository[@digest] image path formats.
+	// For more information, see Using Your Own Algorithms with Amazon SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
 	Image *string
+
+	// Specifies whether the model container is in Amazon ECR or a private Docker
+	// registry accessible from your Amazon Virtual Private Cloud (VPC). For
+	// information about storing containers in a private Docker registry, see Use a
+	// Private Docker Registry for Real-Time Inference Containers
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html)
+	ImageConfig *ImageConfig
 
 	// Whether the container hosts a single model or multiple models.
 	Mode ContainerMode
@@ -970,11 +1044,13 @@ type ContainerDefinition struct {
 	// not if you use your own algorithms. For more information on built-in algorithms,
 	// see Common Parameters
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
-	// If you provide a value for this parameter, Amazon SageMaker uses AWS Security
-	// Token Service to download model artifacts from the S3 path you provide. AWS STS
-	// is activated in your IAM user account by default. If you previously deactivated
-	// AWS STS for a region, you need to reactivate AWS STS for that region. For more
-	// information, see Activating and Deactivating AWS STS in an AWS Region
+	// The model artifacts must be in an S3 bucket that is in the same region as the
+	// model or endpoint you are creating. If you provide a value for this parameter,
+	// Amazon SageMaker uses AWS Security Token Service to download model artifacts
+	// from the S3 path you provide. AWS STS is activated in your IAM user account by
+	// default. If you previously deactivated AWS STS for a region, you need to
+	// reactivate AWS STS for that region. For more information, see Activating and
+	// Deactivating AWS STS in an AWS Region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the AWS Identity and Access Management User Guide. If you use a built-in
 	// algorithm to create a model, Amazon SageMaker requires that you provide a S3
@@ -1598,20 +1674,21 @@ type Filter struct {
 	Value *string
 }
 
-// The candidate result from a job.
+// The best candidate result from an AutoML training job.
 type FinalAutoMLJobObjectiveMetric struct {
 
-	// The name of the metric.
+	// The name of the metric with the best result. For a description of the possible
+	// objective metrics, see AutoMLJobObjective$MetricName.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
 
-	// The value of the metric.
+	// The value of the metric with the best result.
 	//
 	// This member is required.
 	Value *float32
 
-	// The metric type used.
+	// The type of metric with the best result.
 	Type AutoMLJobObjectiveType
 }
 
@@ -1988,13 +2065,14 @@ type HumanLoopConfig struct {
 	//     * 0.012
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
 
-	// The length of time that a task remains available for labeling by human workers.
+	// The length of time that a task remains available for review by human workers.
 	TaskAvailabilityLifetimeInSeconds *int32
 
 	// Keywords used to describe the task so that workers can discover the task.
 	TaskKeywords []*string
 
-	// The amount of time that a worker has to complete a task.
+	// The amount of time that a worker has to complete a task. The default value is
+	// 3,600 seconds (1 hour)
 	TaskTimeLimitInSeconds *int32
 }
 
@@ -3539,6 +3617,22 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	WarmStartType HyperParameterTuningJobWarmStartType
 }
 
+// Specifies whether the model container is in Amazon ECR or a private Docker
+// registry accessible from your Amazon Virtual Private Cloud (VPC).
+type ImageConfig struct {
+
+	// Set this to one of the following values:
+	//
+	//     * Platform - The model image is
+	// hosted in Amazon ECR.
+	//
+	//     * Vpc - The model image is hosted in a private Docker
+	// registry in your VPC.
+	//
+	// This member is required.
+	RepositoryAccessMode RepositoryAccessMode
+}
+
 // Defines how to perform inference generation after a training job is run.
 type InferenceSpecification struct {
 
@@ -3676,6 +3770,76 @@ type InputConfig struct {
 	//
 	//     *
 	// XGBOOST: input data name and shape are not needed.
+	//
+	// DataInputConfig supports the
+	// following parameters for CoreMLOutputConfig$TargetDevice (ML Model format):
+	//
+	//
+	// * shape: Input shape, for example {"input_1": {"shape": [1,224,224,3]}}. In
+	// addition to static input shapes, CoreML converter supports Flexible input
+	// shapes:
+	//
+	//         * Range Dimension. You can use the Range Dimension feature if
+	// you know the input shape will be within some specific interval in that
+	// dimension, for example: {"input_1": {"shape": ["1..10", 224, 224, 3]}}
+	//
+	//
+	// * Enumerated shapes. Sometimes, the models are trained to work only on a select
+	// set of inputs. You can enumerate all supported input shapes, for example:
+	// {"input_1": {"shape": [[1, 224, 224, 3], [1, 160, 160, 3]]}}
+	//
+	//     *
+	// default_shape: Default input shape. You can set a default shape during
+	// conversion for both Range Dimension and Enumerated Shapes. For example
+	// {"input_1": {"shape": ["1..10", 224, 224, 3], "default_shape": [1, 224, 224,
+	// 3]}}
+	//
+	//     * type: Input type. Allowed values: Image and Tensor. By default, the
+	// converter generates an ML Model with inputs of type Tensor (MultiArray). User
+	// can set input type to be Image. Image input type requires additional input
+	// parameters such as bias and scale.
+	//
+	//     * bias: If the input type is an Image,
+	// you need to provide the bias vector.
+	//
+	//     * scale: If the input type is an
+	// Image, you need to provide a scale factor.
+	//
+	// CoreML ClassifierConfig parameters
+	// can be specified using OutputConfig$CompilerOptions. CoreML converter supports
+	// Tensorflow and PyTorch models. CoreML conversion examples:
+	//
+	//     * Tensor type
+	// input:
+	//
+	//         * "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
+	// [1,160,160,3]], "default_shape": [1,224,224,3]}}
+	//
+	//     * Tensor type input
+	// without input name (PyTorch):
+	//
+	//         * "DataInputConfig": [{"shape":
+	// [[1,3,224,224], [1,3,160,160]], "default_shape": [1,3,224,224]}]
+	//
+	//     * Image
+	// type input:
+	//
+	//         * "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
+	// [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image", "bias":
+	// [-1,-1,-1], "scale": 0.007843137255}}
+	//
+	//         * "CompilerOptions":
+	// {"class_labels": "imagenet_labels_1000.txt"}
+	//
+	//     * Image type input without
+	// input name (PyTorch):
+	//
+	//         * "DataInputConfig": [{"shape": [[1,3,224,224],
+	// [1,3,160,160]], "default_shape": [1,3,224,224], "type": "Image", "bias":
+	// [-1,-1,-1], "scale": 0.007843137255}]
+	//
+	//         * "CompilerOptions":
+	// {"class_labels": "imagenet_labels_1000.txt"}
 	//
 	// This member is required.
 	DataInputConfig *string
@@ -3815,10 +3979,10 @@ type LabelingJobAlgorithmsConfig struct {
 	// This member is required.
 	LabelingJobAlgorithmSpecificationArn *string
 
-	// At the end of an auto-label job Amazon SageMaker Ground Truth sends the Amazon
-	// Resource Nam (ARN) of the final model used for auto-labeling. You can use this
-	// model as the starting point for subsequent similar jobs by providing the ARN of
-	// the model here.
+	// At the end of an auto-label job Ground Truth sends the Amazon Resource Name
+	// (ARN) of the final model used for auto-labeling. You can use this model as the
+	// starting point for subsequent similar jobs by providing the ARN of the model
+	// here.
 	InitialActiveLearningModelArn *string
 
 	// Provides configuration information for a labeling job.
@@ -3835,11 +3999,20 @@ type LabelingJobDataAttributes struct {
 	ContentClassifiers []ContentClassifier
 }
 
-// Provides information about the location of input data.
+// Provides information about the location of input data. You must specify at least
+// one of the following: S3DataSource or SnsDataSource. Use SnsDataSource to
+// specify an SNS input topic for a streaming labeling job. If you do not specify
+// and SNS input topic ARN, Ground Truth will create a one-time labeling job. Use
+// S3DataSource to specify an input manifest file for both streaming and one-time
+// labeling jobs. Adding an S3DataSource is optional if you use SnsDataSource to
+// create a streaming labeling job.
 type LabelingJobDataSource struct {
 
 	// The Amazon S3 location of the input data objects.
 	S3DataSource *LabelingJobS3DataSource
+
+	// An Amazon SNS data source used for streaming labeling jobs.
+	SnsDataSource *LabelingJobSnsDataSource
 }
 
 // Provides summary information for a work team.
@@ -3920,6 +4093,13 @@ type LabelingJobOutputConfig struct {
 	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// AWS Key Management Service Developer Guide.
 	KmsKeyId *string
+
+	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. When
+	// workers complete labeling tasks, Ground Truth will send labeling task output
+	// data to the SNS output topic you specify here. You must provide a value for this
+	// parameter if you provide an Amazon SNS input topic in SnsDataSource in
+	// InputConfig.
+	SnsTopicArn *string
 }
 
 // Provides configuration information for labeling jobs.
@@ -3946,6 +4126,18 @@ type LabelingJobS3DataSource struct {
 	//
 	// This member is required.
 	ManifestS3Uri *string
+}
+
+// An Amazon SNS data source used for streaming labeling jobs.
+type LabelingJobSnsDataSource struct {
+
+	// The Amazon SNS input topic Amazon Resource Name (ARN). Specify the ARN of the
+	// input topic you will use to send new data objects to a streaming labeling job.
+	// If you specify an input topic for SnsTopicArn in InputConfig, you must specify a
+	// value for SnsTopicArn in OutputConfig.
+	//
+	// This member is required.
+	SnsTopicArn *string
 }
 
 // A set of conditions for stopping a labeling job. If any of the conditions are
@@ -4022,7 +4214,8 @@ type LabelingJobSummary struct {
 	LabelingJobOutput *LabelingJobOutput
 }
 
-// Defines the Amazon Cognito user group that is part of a work team.
+// Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work
+// team.
 type MemberDefinition struct {
 
 	// The Amazon Cognito user group that is part of the work team.
@@ -4117,7 +4310,8 @@ type ModelPackageContainerDefinition struct {
 
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
-	// (.tar.gz suffix).
+	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
+	// same region as the model package.
 	ModelDataUrl *string
 
 	// The AWS Marketplace product ID of the model package.
@@ -4730,7 +4924,7 @@ type OidcConfig struct {
 	UserInfoEndpoint *string
 }
 
-// Your Amazon Cognito workforce configuration.
+// Your OIDC IdP workforce configuration.
 type OidcConfigForResponse struct {
 
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
@@ -4756,8 +4950,8 @@ type OidcConfigForResponse struct {
 	UserInfoEndpoint *string
 }
 
-// A list user groups that exist in your OIDC Identity Provider (IdP). One to ten
-// groups can be used to create a single private work team. When you add a user
+// A list of user groups that exist in your OIDC Identity Provider (IdP). One to
+// ten groups can be used to create a single private work team. When you add a user
 // group to the list of Groups, you can add that user group to one or more private
 // work teams. If you add a user group to a private work team, all workers in that
 // user group are added to the work team.
@@ -4787,7 +4981,7 @@ type OutputConfig struct {
 
 	// Specifies additional parameters for compiler options in JSON format. The
 	// compiler options are TargetPlatform specific. It is required for NVIDIA
-	// accelerators and highly recommended for CPU compliations. For any other cases,
+	// accelerators and highly recommended for CPU compilations. For any other cases,
 	// it is optional to specify CompilerOptions.
 	//
 	//     * CPU: Compilation for CPU
@@ -4831,6 +5025,14 @@ type OutputConfig struct {
 	//         * mattr: Add
 	// {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform
 	// with NEON support.
+	//
+	//     * CoreML: Compilation for the CoreML
+	// OutputConfig$TargetDevice supports the following compiler options:
+	//
+	//         *
+	// class_labels: Specifies the classification labels file name inside input tar.gz
+	// file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside
+	// the txt file should be separated by newlines.
 	CompilerOptions *string
 
 	// Identifies the target device or the machine learning instance that you want to
@@ -5607,7 +5809,7 @@ type RenderingError struct {
 // The resolved attributes.
 type ResolvedAttributes struct {
 
-	// Applies a metric to minimize or maximize for the job's objective.
+	// Specifies a metric to minimize or maximize as the objective of a job.
 	AutoMLJobObjective *AutoMLJobObjective
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -5997,7 +6199,7 @@ type SharingSettings struct {
 	S3KmsKeyId *string
 
 	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to save the
-	// notebook cell output. If S3OutputPath isn't specified, a default bucket is used.
+	// notebook cell output.
 	S3OutputPath *string
 }
 
@@ -6035,7 +6237,8 @@ type SourceAlgorithm struct {
 
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
-	// (.tar.gz suffix).
+	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
+	// same region as the algorithm.
 	ModelDataUrl *string
 }
 
@@ -6050,8 +6253,9 @@ type SourceAlgorithmSpecification struct {
 
 // A list of IP address ranges (CIDRs
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)). Used to
-// create an allow list of IP addresses for a private workforce. For more
-// information, see .
+// create an allow list of IP addresses for a private workforce. Workers will only
+// be able to login to their worker portal from an IP address within this range. By
+// default, a workforce isn't restricted to specific IP addresses.
 type SourceIpConfig struct {
 
 	// A list of one to ten Classless Inter-Domain Routing
@@ -6605,7 +6809,14 @@ type TransformInput struct {
 	// None, which indicates that input data files are not split, and request payloads
 	// contain the entire contents of an input object. Set the value of this parameter
 	// to Line to split records on a newline character boundary. SplitType also
-	// supports a number of record-oriented binary data formats. When splitting is
+	// supports a number of record-oriented binary data formats. Currently, the
+	// supported record formats are:
+	//
+	//     * RecordIO
+	//
+	//     * TFRecord
+	//
+	// When splitting is
 	// enabled, the size of a mini-batch depends on the values of the BatchStrategy and
 	// MaxPayloadInMB parameters. When the value of BatchStrategy is MultiRecord,
 	// Amazon SageMaker sends the maximum number of records in each request, up to the
@@ -7163,7 +7374,7 @@ type TrialComponentSourceDetail struct {
 	// Information about a training job that's the source of a trial component.
 	TrainingJob *TrainingJob
 
-	// Information about a transform job that's the source of the trial component.
+	// Information about a transform job that's the source of a trial component.
 	TransformJob *TransformJob
 }
 
@@ -7262,7 +7473,7 @@ type TrialSummary struct {
 // The job completion criteria.
 type TuningJobCompletionCriteria struct {
 
-	// The objective metric's value.
+	// The value of the objective metric.
 	//
 	// This member is required.
 	TargetObjectiveMetricValue *float32
@@ -7492,7 +7703,8 @@ type Workforce struct {
 
 	// A list of one to ten IP address ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to be added
-	// to the workforce allow list.
+	// to the workforce allow list. By default, a workforce isn't restricted to
+	// specific IP addresses.
 	SourceIpConfig *SourceIpConfig
 
 	// The subdomain for your OIDC Identity Provider.
@@ -7507,7 +7719,11 @@ type Workteam struct {
 	// This member is required.
 	Description *string
 
-	// The Amazon Cognito user groups that make up the work team.
+	// A list of MemberDefinition objects that contains objects that identify the
+	// workers that make up the work team. Workforces can be created using Amazon
+	// Cognito or your own OIDC Identity Provider (IdP). For private workforces created
+	// using Amazon Cognito use CognitoMemberDefinition. For workforces created using
+	// your own OIDC identity provider (IdP) use OidcMemberDefinition.
 	//
 	// This member is required.
 	MemberDefinitions []*MemberDefinition

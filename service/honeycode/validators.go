@@ -121,22 +121,22 @@ func validateOpInvokeScreenAutomationInput(v *InvokeScreenAutomationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeScreenAutomationInput"}
-	if v.ScreenAutomationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScreenAutomationId"))
+	if v.WorkbookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkbookId"))
+	}
+	if v.ScreenId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenId"))
 	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
-	if v.WorkbookId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkbookId"))
+	if v.ScreenAutomationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenAutomationId"))
 	}
 	if v.Variables != nil {
 		if err := validateVariableValueMap(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ScreenId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScreenId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

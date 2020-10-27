@@ -42,9 +42,7 @@ type CreateUserPoolInput struct {
 	// setting, SMS does not qualify for a valid password recovery mechanism if the
 	// user also has SMS MFA enabled. In the absence of this setting, Cognito uses the
 	// legacy behavior to determine the recovery method where SMS is preferred over
-	// email. Starting February 1, 2020, the value of AccountRecoverySetting will
-	// default to verified_email first and verified_phone_number as the second option
-	// for newly created user pools if no value is provided.
+	// email.
 	AccountRecoverySetting *types.AccountRecoverySettingType
 
 	// The configuration for AdminCreateUser requests.
@@ -114,7 +112,8 @@ type CreateUserPoolInput struct {
 	// You can choose to set case sensitivity on the username input for the selected
 	// sign-in option. For example, when this is set to False, users will be able to
 	// sign in using either "username" or "Username". This configuration is immutable
-	// once it has been set. For more information, see .
+	// once it has been set. For more information, see UsernameConfigurationType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html).
 	UsernameConfiguration *types.UsernameConfigurationType
 
 	// The template for the verification message that the user sees when the app

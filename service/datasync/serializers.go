@@ -1522,6 +1522,21 @@ func awsAwsjson11_serializeDocumentFilterRule(v *types.FilterRule, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFilterValues(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputTagList(v []*types.TagListEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1533,6 +1548,47 @@ func awsAwsjson11_serializeDocumentInputTagList(v []*types.TagListEntry, value s
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentTagListEntry(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLocationFilter(v *types.LocationFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLocationFilters(v []*types.LocationFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentLocationFilter(v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1720,6 +1776,47 @@ func awsAwsjson11_serializeDocumentTagListEntry(v *types.TagListEntry, value smi
 		ok.String(*v.Value)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskFilter(v *types.TaskFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskFilters(v []*types.TaskFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentTaskFilter(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1964,6 +2061,13 @@ func awsAwsjson11_serializeOpDocumentCreateLocationObjectStorageInput(v *CreateL
 func awsAwsjson11_serializeOpDocumentCreateLocationS3Input(v *CreateLocationS3Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AgentArns != nil {
+		ok := object.Key("AgentArns")
+		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.S3BucketArn != nil {
 		ok := object.Key("S3BucketArn")
@@ -2270,6 +2374,13 @@ func awsAwsjson11_serializeOpDocumentListLocationsInput(v *ListLocationsInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentLocationFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -2330,6 +2441,13 @@ func awsAwsjson11_serializeOpDocumentListTaskExecutionsInput(v *ListTaskExecutio
 func awsAwsjson11_serializeOpDocumentListTasksInput(v *ListTasksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentTaskFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")

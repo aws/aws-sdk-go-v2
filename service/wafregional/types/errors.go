@@ -190,8 +190,8 @@ type WAFInvalidParameterException struct {
 	Message *string
 
 	Parameter *string
-	Field     ParameterExceptionField
 	Reason    ParameterExceptionReason
+	Field     ParameterExceptionField
 }
 
 func (e *WAFInvalidParameterException) Error() string {

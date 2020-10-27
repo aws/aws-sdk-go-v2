@@ -159,11 +159,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -197,13 +197,13 @@ func validateOpAssumeRoleInput(v *AssumeRoleInput) error {
 	if v.RoleSessionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleSessionName"))
 	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
 	if v.Tags != nil {
 		if err := validateTagListType(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -217,11 +217,11 @@ func validateOpAssumeRoleWithSAMLInput(v *AssumeRoleWithSAMLInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssumeRoleWithSAMLInput"}
-	if v.PrincipalArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalArn"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.PrincipalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalArn"))
 	}
 	if v.SAMLAssertion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SAMLAssertion"))
@@ -238,14 +238,14 @@ func validateOpAssumeRoleWithWebIdentityInput(v *AssumeRoleWithWebIdentityInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssumeRoleWithWebIdentityInput"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.WebIdentityToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebIdentityToken"))
 	}
 	if v.RoleSessionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleSessionName"))
 	}
-	if v.WebIdentityToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WebIdentityToken"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -289,13 +289,13 @@ func validateOpGetFederationTokenInput(v *GetFederationTokenInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFederationTokenInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Tags != nil {
 		if err := validateTagListType(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

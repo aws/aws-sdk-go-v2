@@ -165,6 +165,9 @@ type RunJobFlowInput struct {
 	// launch the cluster with the Ganglia Monitoring System installed.
 	NewSupportedProducts []*types.SupportedProductConfig
 
+	// The specified placement group configuration for an Amazon EMR cluster.
+	PlacementGroupConfigs []*types.PlacementGroupConfig
+
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
 	// emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For

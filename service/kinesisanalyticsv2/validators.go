@@ -615,13 +615,13 @@ func validateApplicationCodeConfiguration(v *types.ApplicationCodeConfiguration)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationCodeConfiguration"}
-	if len(v.CodeContentType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("CodeContentType"))
-	}
 	if v.CodeContent != nil {
 		if err := validateCodeContent(v.CodeContent); err != nil {
 			invalidParams.AddNested("CodeContent", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.CodeContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeContentType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -635,26 +635,16 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationConfiguration"}
-	if v.ApplicationCodeConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCodeConfiguration"))
-	} else if v.ApplicationCodeConfiguration != nil {
-		if err := validateApplicationCodeConfiguration(v.ApplicationCodeConfiguration); err != nil {
-			invalidParams.AddNested("ApplicationCodeConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.FlinkApplicationConfiguration != nil {
-		if err := validateFlinkApplicationConfiguration(v.FlinkApplicationConfiguration); err != nil {
-			invalidParams.AddNested("FlinkApplicationConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.EnvironmentProperties != nil {
 		if err := validateEnvironmentProperties(v.EnvironmentProperties); err != nil {
 			invalidParams.AddNested("EnvironmentProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ApplicationSnapshotConfiguration != nil {
-		if err := validateApplicationSnapshotConfiguration(v.ApplicationSnapshotConfiguration); err != nil {
-			invalidParams.AddNested("ApplicationSnapshotConfiguration", err.(smithy.InvalidParamsError))
+	if v.ApplicationCodeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCodeConfiguration"))
+	} else if v.ApplicationCodeConfiguration != nil {
+		if err := validateApplicationCodeConfiguration(v.ApplicationCodeConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationCodeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VpcConfigurations != nil {
@@ -665,6 +655,16 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 	if v.SqlApplicationConfiguration != nil {
 		if err := validateSqlApplicationConfiguration(v.SqlApplicationConfiguration); err != nil {
 			invalidParams.AddNested("SqlApplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FlinkApplicationConfiguration != nil {
+		if err := validateFlinkApplicationConfiguration(v.FlinkApplicationConfiguration); err != nil {
+			invalidParams.AddNested("FlinkApplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApplicationSnapshotConfiguration != nil {
+		if err := validateApplicationSnapshotConfiguration(v.ApplicationSnapshotConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationSnapshotConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -679,14 +679,9 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationConfigurationUpdate"}
-	if v.VpcConfigurationUpdates != nil {
-		if err := validateVpcConfigurationUpdates(v.VpcConfigurationUpdates); err != nil {
-			invalidParams.AddNested("VpcConfigurationUpdates", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ApplicationSnapshotConfigurationUpdate != nil {
-		if err := validateApplicationSnapshotConfigurationUpdate(v.ApplicationSnapshotConfigurationUpdate); err != nil {
-			invalidParams.AddNested("ApplicationSnapshotConfigurationUpdate", err.(smithy.InvalidParamsError))
+	if v.EnvironmentPropertyUpdates != nil {
+		if err := validateEnvironmentPropertyUpdates(v.EnvironmentPropertyUpdates); err != nil {
+			invalidParams.AddNested("EnvironmentPropertyUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SqlApplicationConfigurationUpdate != nil {
@@ -694,9 +689,14 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 			invalidParams.AddNested("SqlApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EnvironmentPropertyUpdates != nil {
-		if err := validateEnvironmentPropertyUpdates(v.EnvironmentPropertyUpdates); err != nil {
-			invalidParams.AddNested("EnvironmentPropertyUpdates", err.(smithy.InvalidParamsError))
+	if v.ApplicationSnapshotConfigurationUpdate != nil {
+		if err := validateApplicationSnapshotConfigurationUpdate(v.ApplicationSnapshotConfigurationUpdate); err != nil {
+			invalidParams.AddNested("ApplicationSnapshotConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfigurationUpdates != nil {
+		if err := validateVpcConfigurationUpdates(v.VpcConfigurationUpdates); err != nil {
+			invalidParams.AddNested("VpcConfigurationUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -852,11 +852,11 @@ func validateCSVMappingParameters(v *types.CSVMappingParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CSVMappingParameters"}
-	if v.RecordRowDelimiter == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecordRowDelimiter"))
-	}
 	if v.RecordColumnDelimiter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecordColumnDelimiter"))
+	}
+	if v.RecordRowDelimiter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordRowDelimiter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -950,13 +950,6 @@ func validateInput(v *types.Input) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Input"}
-	if v.InputSchema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputSchema"))
-	} else if v.InputSchema != nil {
-		if err := validateSourceSchema(v.InputSchema); err != nil {
-			invalidParams.AddNested("InputSchema", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.KinesisStreamsInput != nil {
 		if err := validateKinesisStreamsInput(v.KinesisStreamsInput); err != nil {
 			invalidParams.AddNested("KinesisStreamsInput", err.(smithy.InvalidParamsError))
@@ -965,14 +958,21 @@ func validateInput(v *types.Input) error {
 	if v.NamePrefix == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamePrefix"))
 	}
-	if v.InputProcessingConfiguration != nil {
-		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
-			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.KinesisFirehoseInput != nil {
 		if err := validateKinesisFirehoseInput(v.KinesisFirehoseInput); err != nil {
 			invalidParams.AddNested("KinesisFirehoseInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSchema"))
+	} else if v.InputSchema != nil {
+		if err := validateSourceSchema(v.InputSchema); err != nil {
+			invalidParams.AddNested("InputSchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputProcessingConfiguration != nil {
+		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
+			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1109,20 +1109,18 @@ func validateInputUpdate(v *types.InputUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputUpdate"}
-	if v.InputSchemaUpdate != nil {
-		if err := validateInputSchemaUpdate(v.InputSchemaUpdate); err != nil {
-			invalidParams.AddNested("InputSchemaUpdate", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.KinesisFirehoseInputUpdate != nil {
 		if err := validateKinesisFirehoseInputUpdate(v.KinesisFirehoseInputUpdate); err != nil {
 			invalidParams.AddNested("KinesisFirehoseInputUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.KinesisStreamsInputUpdate != nil {
-		if err := validateKinesisStreamsInputUpdate(v.KinesisStreamsInputUpdate); err != nil {
-			invalidParams.AddNested("KinesisStreamsInputUpdate", err.(smithy.InvalidParamsError))
+	if v.InputSchemaUpdate != nil {
+		if err := validateInputSchemaUpdate(v.InputSchemaUpdate); err != nil {
+			invalidParams.AddNested("InputSchemaUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.InputId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
 	}
 	if v.InputProcessingConfigurationUpdate != nil {
 		if err := validateInputProcessingConfigurationUpdate(v.InputProcessingConfigurationUpdate); err != nil {
@@ -1134,8 +1132,10 @@ func validateInputUpdate(v *types.InputUpdate) error {
 			invalidParams.AddNested("InputParallelismUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InputId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
+	if v.KinesisStreamsInputUpdate != nil {
+		if err := validateKinesisStreamsInputUpdate(v.KinesisStreamsInputUpdate); err != nil {
+			invalidParams.AddNested("KinesisStreamsInputUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1331,14 +1331,14 @@ func validateMappingParameters(v *types.MappingParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MappingParameters"}
-	if v.CSVMappingParameters != nil {
-		if err := validateCSVMappingParameters(v.CSVMappingParameters); err != nil {
-			invalidParams.AddNested("CSVMappingParameters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.JSONMappingParameters != nil {
 		if err := validateJSONMappingParameters(v.JSONMappingParameters); err != nil {
 			invalidParams.AddNested("JSONMappingParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CSVMappingParameters != nil {
+		if err := validateCSVMappingParameters(v.CSVMappingParameters); err != nil {
+			invalidParams.AddNested("CSVMappingParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1368,19 +1368,22 @@ func validateOutput(v *types.Output) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Output"}
-	if v.KinesisFirehoseOutput != nil {
-		if err := validateKinesisFirehoseOutput(v.KinesisFirehoseOutput); err != nil {
-			invalidParams.AddNested("KinesisFirehoseOutput", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LambdaOutput != nil {
 		if err := validateLambdaOutput(v.LambdaOutput); err != nil {
 			invalidParams.AddNested("LambdaOutput", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.KinesisStreamsOutput != nil {
 		if err := validateKinesisStreamsOutput(v.KinesisStreamsOutput); err != nil {
 			invalidParams.AddNested("KinesisStreamsOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KinesisFirehoseOutput != nil {
+		if err := validateKinesisFirehoseOutput(v.KinesisFirehoseOutput); err != nil {
+			invalidParams.AddNested("KinesisFirehoseOutput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DestinationSchema == nil {
@@ -1389,9 +1392,6 @@ func validateOutput(v *types.Output) error {
 		if err := validateDestinationSchema(v.DestinationSchema); err != nil {
 			invalidParams.AddNested("DestinationSchema", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1422,14 +1422,6 @@ func validateOutputUpdate(v *types.OutputUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputUpdate"}
-	if v.OutputId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputId"))
-	}
-	if v.LambdaOutputUpdate != nil {
-		if err := validateLambdaOutputUpdate(v.LambdaOutputUpdate); err != nil {
-			invalidParams.AddNested("LambdaOutputUpdate", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.KinesisStreamsOutputUpdate != nil {
 		if err := validateKinesisStreamsOutputUpdate(v.KinesisStreamsOutputUpdate); err != nil {
 			invalidParams.AddNested("KinesisStreamsOutputUpdate", err.(smithy.InvalidParamsError))
@@ -1440,9 +1432,17 @@ func validateOutputUpdate(v *types.OutputUpdate) error {
 			invalidParams.AddNested("DestinationSchemaUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OutputId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputId"))
+	}
 	if v.KinesisFirehoseOutputUpdate != nil {
 		if err := validateKinesisFirehoseOutputUpdate(v.KinesisFirehoseOutputUpdate); err != nil {
 			invalidParams.AddNested("KinesisFirehoseOutputUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaOutputUpdate != nil {
+		if err := validateLambdaOutputUpdate(v.LambdaOutputUpdate); err != nil {
+			invalidParams.AddNested("LambdaOutputUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1489,11 +1489,11 @@ func validatePropertyGroup(v *types.PropertyGroup) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PropertyGroup"}
-	if v.PropertyGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PropertyGroupId"))
-	}
 	if v.PropertyMap == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PropertyMap"))
+	}
+	if v.PropertyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1524,11 +1524,11 @@ func validateRecordColumn(v *types.RecordColumn) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordColumn"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SqlType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1559,13 +1559,13 @@ func validateRecordFormat(v *types.RecordFormat) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordFormat"}
-	if len(v.RecordFormatType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RecordFormatType"))
-	}
 	if v.MappingParameters != nil {
 		if err := validateMappingParameters(v.MappingParameters); err != nil {
 			invalidParams.AddNested("MappingParameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.RecordFormatType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordFormatType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1618,13 +1618,13 @@ func validateReferenceDataSourceUpdate(v *types.ReferenceDataSourceUpdate) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReferenceDataSourceUpdate"}
+	if v.ReferenceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
+	}
 	if v.ReferenceSchemaUpdate != nil {
 		if err := validateSourceSchema(v.ReferenceSchemaUpdate); err != nil {
 			invalidParams.AddNested("ReferenceSchemaUpdate", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ReferenceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1655,14 +1655,14 @@ func validateRunConfiguration(v *types.RunConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RunConfiguration"}
-	if v.ApplicationRestoreConfiguration != nil {
-		if err := validateApplicationRestoreConfiguration(v.ApplicationRestoreConfiguration); err != nil {
-			invalidParams.AddNested("ApplicationRestoreConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SqlRunConfigurations != nil {
 		if err := validateSqlRunConfigurations(v.SqlRunConfigurations); err != nil {
 			invalidParams.AddNested("SqlRunConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApplicationRestoreConfiguration != nil {
+		if err := validateApplicationRestoreConfiguration(v.ApplicationRestoreConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationRestoreConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1730,18 +1730,18 @@ func validateSourceSchema(v *types.SourceSchema) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceSchema"}
-	if v.RecordFormat == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecordFormat"))
-	} else if v.RecordFormat != nil {
-		if err := validateRecordFormat(v.RecordFormat); err != nil {
-			invalidParams.AddNested("RecordFormat", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RecordColumns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecordColumns"))
 	} else if v.RecordColumns != nil {
 		if err := validateRecordColumns(v.RecordColumns); err != nil {
 			invalidParams.AddNested("RecordColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecordFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordFormat"))
+	} else if v.RecordFormat != nil {
+		if err := validateRecordFormat(v.RecordFormat); err != nil {
+			invalidParams.AddNested("RecordFormat", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1783,11 +1783,6 @@ func validateSqlApplicationConfigurationUpdate(v *types.SqlApplicationConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SqlApplicationConfigurationUpdate"}
-	if v.InputUpdates != nil {
-		if err := validateInputUpdates(v.InputUpdates); err != nil {
-			invalidParams.AddNested("InputUpdates", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.OutputUpdates != nil {
 		if err := validateOutputUpdates(v.OutputUpdates); err != nil {
 			invalidParams.AddNested("OutputUpdates", err.(smithy.InvalidParamsError))
@@ -1796,6 +1791,11 @@ func validateSqlApplicationConfigurationUpdate(v *types.SqlApplicationConfigurat
 	if v.ReferenceDataSourceUpdates != nil {
 		if err := validateReferenceDataSourceUpdates(v.ReferenceDataSourceUpdates); err != nil {
 			invalidParams.AddNested("ReferenceDataSourceUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputUpdates != nil {
+		if err := validateInputUpdates(v.InputUpdates); err != nil {
+			invalidParams.AddNested("InputUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1810,11 +1810,11 @@ func validateSqlRunConfiguration(v *types.SqlRunConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SqlRunConfiguration"}
-	if v.InputStartingPositionConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputStartingPositionConfiguration"))
-	}
 	if v.InputId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
+	}
+	if v.InputStartingPositionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputStartingPositionConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1877,11 +1877,11 @@ func validateVpcConfiguration(v *types.VpcConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1944,18 +1944,18 @@ func validateOpAddApplicationCloudWatchLoggingOptionInput(v *AddApplicationCloud
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddApplicationCloudWatchLoggingOptionInput"}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
 	if v.CloudWatchLoggingOption == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLoggingOption"))
 	} else if v.CloudWatchLoggingOption != nil {
 		if err := validateCloudWatchLoggingOption(v.CloudWatchLoggingOption); err != nil {
 			invalidParams.AddNested("CloudWatchLoggingOption", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1969,18 +1969,18 @@ func validateOpAddApplicationInputInput(v *AddApplicationInputInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddApplicationInputInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
 	} else if v.Input != nil {
 		if err := validateInput(v.Input); err != nil {
 			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1997,18 +1997,18 @@ func validateOpAddApplicationInputProcessingConfigurationInput(v *AddApplication
 	if v.CurrentApplicationVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.InputId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
+	}
 	if v.InputProcessingConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputProcessingConfiguration"))
 	} else if v.InputProcessingConfiguration != nil {
 		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
 			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.InputId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2022,6 +2022,9 @@ func validateOpAddApplicationOutputInput(v *AddApplicationOutputInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddApplicationOutputInput"}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
@@ -2031,9 +2034,6 @@ func validateOpAddApplicationOutputInput(v *AddApplicationOutputInput) error {
 		if err := validateOutput(v.Output); err != nil {
 			invalidParams.AddNested("Output", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2047,15 +2047,15 @@ func validateOpAddApplicationReferenceDataSourceInput(v *AddApplicationReference
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddApplicationReferenceDataSourceInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.ReferenceDataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReferenceDataSource"))
 	} else if v.ReferenceDataSource != nil {
 		if err := validateReferenceDataSource(v.ReferenceDataSource); err != nil {
 			invalidParams.AddNested("ReferenceDataSource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if v.CurrentApplicationVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
@@ -2072,6 +2072,9 @@ func validateOpAddApplicationVpcConfigurationInput(v *AddApplicationVpcConfigura
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddApplicationVpcConfigurationInput"}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
@@ -2081,9 +2084,6 @@ func validateOpAddApplicationVpcConfigurationInput(v *AddApplicationVpcConfigura
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2097,29 +2097,29 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
-	if len(v.RuntimeEnvironment) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RuntimeEnvironment"))
-	}
 	if v.ApplicationConfiguration != nil {
 		if err := validateApplicationConfiguration(v.ApplicationConfiguration); err != nil {
 			invalidParams.AddNested("ApplicationConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ServiceExecutionRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRole"))
-	}
-	if v.CloudWatchLoggingOptions != nil {
-		if err := validateCloudWatchLoggingOptions(v.CloudWatchLoggingOptions); err != nil {
-			invalidParams.AddNested("CloudWatchLoggingOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		if err := validateCloudWatchLoggingOptions(v.CloudWatchLoggingOptions); err != nil {
+			invalidParams.AddNested("CloudWatchLoggingOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if len(v.RuntimeEnvironment) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeEnvironment"))
+	}
+	if v.ServiceExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2154,11 +2154,11 @@ func validateOpDeleteApplicationCloudWatchLoggingOptionInput(v *DeleteApplicatio
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.CloudWatchLoggingOptionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLoggingOptionId"))
-	}
 	if v.CurrentApplicationVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
+	if v.CloudWatchLoggingOptionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLoggingOptionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2190,14 +2190,14 @@ func validateOpDeleteApplicationInputProcessingConfigurationInput(v *DeleteAppli
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInputProcessingConfigurationInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
 	if v.InputId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
 	}
 	if v.CurrentApplicationVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2211,14 +2211,14 @@ func validateOpDeleteApplicationOutputInput(v *DeleteApplicationOutputInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationOutputInput"}
-	if v.OutputId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputId"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if v.CurrentApplicationVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
+	if v.OutputId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2232,14 +2232,14 @@ func validateOpDeleteApplicationReferenceDataSourceInput(v *DeleteApplicationRef
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationReferenceDataSourceInput"}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
 	if v.ReferenceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
 	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2253,14 +2253,14 @@ func validateOpDeleteApplicationSnapshotInput(v *DeleteApplicationSnapshotInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationSnapshotInput"}
-	if v.SnapshotCreationTimestamp == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotCreationTimestamp"))
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
 	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.SnapshotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	if v.SnapshotCreationTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotCreationTimestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2333,13 +2333,13 @@ func validateOpDiscoverInputSchemaInput(v *DiscoverInputSchemaInput) error {
 			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ServiceExecutionRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRole"))
-	}
 	if v.InputProcessingConfiguration != nil {
 		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
 			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ServiceExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2383,15 +2383,15 @@ func validateOpStartApplicationInput(v *StartApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartApplicationInput"}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
 	if v.RunConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RunConfiguration"))
 	} else if v.RunConfiguration != nil {
 		if err := validateRunConfiguration(v.RunConfiguration); err != nil {
 			invalidParams.AddNested("RunConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2420,15 +2420,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2442,11 +2442,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2465,20 +2465,20 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 			invalidParams.AddNested("CloudWatchLoggingOptionUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if v.RunConfigurationUpdate != nil {
-		if err := validateRunConfigurationUpdate(v.RunConfigurationUpdate); err != nil {
-			invalidParams.AddNested("RunConfigurationUpdate", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if v.ApplicationConfigurationUpdate != nil {
 		if err := validateApplicationConfigurationUpdate(v.ApplicationConfigurationUpdate); err != nil {
 			invalidParams.AddNested("ApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RunConfigurationUpdate != nil {
+		if err := validateRunConfigurationUpdate(v.RunConfigurationUpdate); err != nil {
+			invalidParams.AddNested("RunConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

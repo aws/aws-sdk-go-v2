@@ -11,6 +11,17 @@ const (
 	ChannelStatusDeleting ChannelStatus = "DELETING"
 )
 
+// Values returns all known values for ChannelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelStatus) Values() []ChannelStatus {
+	return []ChannelStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
@@ -19,6 +30,16 @@ const (
 	ComputeTypeAcu_2 ComputeType = "ACU_2"
 )
 
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ComputeType) Values() []ComputeType {
+	return []ComputeType{
+		"ACU_1",
+		"ACU_2",
+	}
+}
+
 type DatasetActionType string
 
 // Enum values for DatasetActionType
@@ -26,6 +47,16 @@ const (
 	DatasetActionTypeQuery     DatasetActionType = "QUERY"
 	DatasetActionTypeContainer DatasetActionType = "CONTAINER"
 )
+
+// Values returns all known values for DatasetActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetActionType) Values() []DatasetActionType {
+	return []DatasetActionType{
+		"QUERY",
+		"CONTAINER",
+	}
+}
 
 type DatasetContentState string
 
@@ -36,6 +67,17 @@ const (
 	DatasetContentStateFailed    DatasetContentState = "FAILED"
 )
 
+// Values returns all known values for DatasetContentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetContentState) Values() []DatasetContentState {
+	return []DatasetContentState{
+		"CREATING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type DatasetStatus string
 
 // Enum values for DatasetStatus
@@ -44,6 +86,17 @@ const (
 	DatasetStatusActive   DatasetStatus = "ACTIVE"
 	DatasetStatusDeleting DatasetStatus = "DELETING"
 )
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+	}
+}
 
 type DatastoreStatus string
 
@@ -54,12 +107,32 @@ const (
 	DatastoreStatusDeleting DatastoreStatus = "DELETING"
 )
 
+// Values returns all known values for DatastoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatastoreStatus) Values() []DatastoreStatus {
+	return []DatastoreStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type LoggingLevel string
 
 // Enum values for LoggingLevel
 const (
 	LoggingLevelError LoggingLevel = "ERROR"
 )
+
+// Values returns all known values for LoggingLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LoggingLevel) Values() []LoggingLevel {
+	return []LoggingLevel{
+		"ERROR",
+	}
+}
 
 type ReprocessingStatus string
 
@@ -70,3 +143,15 @@ const (
 	ReprocessingStatusCancelled ReprocessingStatus = "CANCELLED"
 	ReprocessingStatusFailed    ReprocessingStatus = "FAILED"
 )
+
+// Values returns all known values for ReprocessingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReprocessingStatus) Values() []ReprocessingStatus {
+	return []ReprocessingStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"CANCELLED",
+		"FAILED",
+	}
+}

@@ -991,28 +991,28 @@ type ApplicationSettingsResource struct {
 	// modified.
 	LastModifiedDate *string
 
-	// The default sending limits for campaigns and journeys in the application.
+	// The default sending limits for campaigns in the application.
 	Limits *CampaignLimits
 
-	// The default quiet time for campaigns and journeys in the application. Quiet time
-	// is a specific time range when messages aren't sent to endpoints, if all the
-	// following conditions are met:
+	// The default quiet time for campaigns in the application. Quiet time is a
+	// specific time range when messages aren't sent to endpoints, if all the following
+	// conditions are met:
 	//
-	//     * The EndpointDemographic.Timezone property
-	// of the endpoint is set to a valid value.
+	//     * The EndpointDemographic.Timezone property of the
+	// endpoint is set to a valid value.
 	//
-	//     * The current time in the
-	// endpoint's time zone is later than or equal to the time specified by the
-	// QuietTime.Start property for the application (or a campaign or journey that has
-	// custom quiet time settings).
+	//     * The current time in the endpoint's time
+	// zone is later than or equal to the time specified by the QuietTime.Start
+	// property for the application (or a campaign or journey that has custom quiet
+	// time settings).
 	//
-	//     * The current time in the endpoint's time zone
-	// is earlier than or equal to the time specified by the QuietTime.End property for
-	// the application (or a campaign or journey that has custom quiet time
-	// settings).
+	//     * The current time in the endpoint's time zone is earlier
+	// than or equal to the time specified by the QuietTime.End property for the
+	// application (or a campaign or journey that has custom quiet time settings).
 	//
-	// If any of the preceding conditions isn't met, the endpoint will
-	// receive messages from a campaign or journey, even if quiet time is enabled.
+	// If
+	// any of the preceding conditions isn't met, the endpoint will receive messages
+	// from a campaign or journey, even if quiet time is enabled.
 	QuietTime *QuietTime
 }
 
@@ -1341,8 +1341,8 @@ type CampaignHook struct {
 }
 
 // For a campaign, specifies limits on the messages that the campaign can send. For
-// an application, specifies the default limits for messages that campaigns and
-// journeys in the application can send.
+// an application, specifies the default limits for messages that campaigns in the
+// application can send.
 type CampaignLimits struct {
 
 	// The maximum number of messages that a campaign can send to a single endpoint
@@ -1358,8 +1358,8 @@ type CampaignLimits struct {
 
 	// The maximum number of messages that a campaign can send each second. For an
 	// application, this value specifies the default limit for the number of messages
-	// that campaigns and journeys can send each second. The minimum value is 50. The
-	// maximum value is 20,000.
+	// that campaigns can send each second. The minimum value is 50. The maximum value
+	// is 20,000.
 	MessagesPerSecond *int32
 
 	// The maximum number of messages that a campaign can send to a single endpoint
@@ -1571,7 +1571,13 @@ type Condition struct {
 
 // Specifies the settings for a yes/no split activity in a journey. This type of
 // activity sends participants down one of two paths in a journey, based on
-// conditions that you specify.
+// conditions that you specify. To create yes/no split activities that send
+// participants down different paths based on push notification events (such as
+// Open or Received events), your mobile app has to specify the User ID and
+// Endpoint ID values. For more information, see Integrating Amazon Pinpoint with
+// your application
+// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html) in
+// the Amazon Pinpoint Developer Guide.
 type ConditionalSplitActivity struct {
 
 	// The conditions that define the paths for the activity, and the relationship
@@ -1745,15 +1751,15 @@ type CustomDeliveryConfiguration struct {
 // Lambda function or web hook that sends messages to participants.
 type CustomMessageActivity struct {
 
-	// The destination to send the custom message to. This value can be one of the
-	// following:
+	// The destination to send the campaign or treatment to. This value can be one of
+	// the following:
 	//
 	//     * The name or Amazon Resource Name (ARN) of an AWS Lambda
-	// function to invoke to handle delivery of the custom message.
+	// function to invoke to handle delivery of the campaign or treatment.
 	//
-	//     * The URL for
-	// a web application or service that supports HTTPS and can receive the message.
-	// The URL has to be a full URL, including the HTTPS protocol.
+	//     * The
+	// URL for a web application or service that supports HTTPS and can receive the
+	// message. The URL has to be a full URL, including the HTTPS protocol.
 	DeliveryUri *string
 
 	// The types of endpoints to send the custom message to. Each valid value maps to a
@@ -2652,6 +2658,25 @@ type EventDimensions struct {
 	Metrics map[string]*MetricDimension
 }
 
+// Specifies the settings for an event that causes a campaign to be sent or a
+// journey activity to be performed.
+type EventFilter struct {
+
+	// The dimensions for the event filter to use for the campaign or the journey
+	// activity.
+	//
+	// This member is required.
+	Dimensions *EventDimensions
+
+	// The type of event that causes the campaign to be sent or the journey activity to
+	// be performed. Valid values are: SYSTEM, sends the campaign or performs the
+	// activity when a system event occurs; and, ENDPOINT, sends the campaign or
+	// performs the activity when an endpoint event (Events resource) occurs.
+	//
+	// This member is required.
+	FilterType FilterType
+}
+
 // Provides the status code and message that result from processing an event.
 type EventItemResponse struct {
 
@@ -2699,6 +2724,16 @@ type EventsResponse struct {
 	// request was processed successfully; or 400, the payload wasn't valid or required
 	// fields were missing.
 	Results map[string]*ItemResponse
+}
+
+// Specifies the settings for an event that causes a journey activity to start.
+type EventStartCondition struct {
+
+	// Specifies the settings for an event that causes a campaign to be sent or a
+	// journey activity to be performed.
+	EventFilter *EventFilter
+
+	SegmentId *string
 }
 
 // Specifies settings for publishing event data to an Amazon Kinesis data stream or
@@ -3446,7 +3481,7 @@ type JourneyExecutionMetricsResponse struct {
 
 	// A JSON object that contains the results of the query. For information about the
 	// structure and contents of the results, see the Amazon Pinpoint Developer Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	// (https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// This member is required.
 	Metrics map[string]*string
@@ -3616,7 +3651,7 @@ type JourneySMSMessage struct {
 	// The sender ID to display as the sender of the message on a recipient's device.
 	// Support for sender IDs varies by country or region. For more information, see
 	// Supported Countries and Regions
-	// (https://docs.aws.amazon.com.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html)
+	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html)
 	// in the Amazon Pinpoint User Guide.
 	SenderId *string
 }
@@ -3791,10 +3826,13 @@ type MessageRequest struct {
 	MessageConfiguration *DirectMessageConfiguration
 
 	// A map of key-value pairs, where each key is an address and each value is an
-	// AddressConfiguration object. An address can be a push notification token, a
-	// phone number, or an email address. You can use an AddressConfiguration object to
-	// tailor the message for an address by specifying settings such as content
-	// overrides and message variables.
+	// AddressConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
+	// object. An address can be a push notification token, a phone number, or an email
+	// address. You can use an AddressConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration)
+	// object to tailor the message for an address by specifying settings such as
+	// content overrides and message variables.
 	Addresses map[string]*AddressConfiguration
 
 	// A map of custom attributes to attach to the message. For a push notification,
@@ -3803,7 +3841,10 @@ type MessageRequest struct {
 	Context map[string]*string
 
 	// A map of key-value pairs, where each key is an endpoint ID and each value is an
-	// EndpointSendConfiguration object. You can use an EndpointSendConfiguration
+	// EndpointSendConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// object. You can use an EndpointSendConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
 	// object to tailor the message for an endpoint by specifying settings such as
 	// content overrides and message variables.
 	Endpoints map[string]*EndpointSendConfiguration
@@ -3922,7 +3963,13 @@ type MultiConditionalBranch struct {
 
 // Specifies the settings for a multivariate split activity in a journey. This type
 // of activity sends participants down one of as many as five paths (including a
-// default Else path) in a journey, based on conditions that you specify.
+// default Else path) in a journey, based on conditions that you specify. To create
+// multivariate split activities that send participants down different paths based
+// on push notification events (such as Open or Received events), your mobile app
+// has to specify the User ID and Endpoint ID values. For more information, see
+// Integrating Amazon Pinpoint with your application
+// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html) in
+// the Amazon Pinpoint Developer Guide.
 type MultiConditionalSplitActivity struct {
 
 	// The paths for the activity, including the conditions for entering each path and
@@ -4729,9 +4776,12 @@ type SendUsersMessageRequest struct {
 	// This member is required.
 	MessageConfiguration *DirectMessageConfiguration
 
-	// A map that associates user IDs with EndpointSendConfiguration objects. You can
-	// use an EndpointSendConfiguration object to tailor the message for a user by
-	// specifying settings such as content overrides and message variables.
+	// A map that associates user IDs with EndpointSendConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// objects. You can use an EndpointSendConfiguration
+	// (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration)
+	// object to tailor the message for a user by specifying settings such as content
+	// overrides and message variables.
 	//
 	// This member is required.
 	Users map[string]*EndpointSendConfiguration
@@ -4926,7 +4976,7 @@ type SMSMessage struct {
 	// dedicated number.
 	Keyword *string
 
-	// The URL of an image or video to display in the SMS message.
+	// This field is reserved for future use.
 	MediaUrl *string
 
 	// The SMS message type. Valid values are TRANSACTIONAL (for messages that are
@@ -5068,6 +5118,9 @@ type StartCondition struct {
 
 	// The custom description of the condition.
 	Description *string
+
+	// Specifies the settings for an event that causes a journey activity to start.
+	EventStartCondition *EventStartCondition
 
 	// The segment that's associated with the first activity in the journey. This
 	// segment determines which users are participants in the journey.
@@ -5636,33 +5689,35 @@ type WriteApplicationSettingsRequest struct {
 	// Specifies whether to enable application-related alarms in Amazon CloudWatch.
 	CloudWatchMetricsEnabled *bool
 
-	// The default sending limits for campaigns and journeys in the application. To
-	// override these limits and define custom limits for a specific campaign or
-	// journey, use the Campaign resource or the Journey resource, respectively.
+	EventTaggingEnabled *bool
+
+	// The default sending limits for campaigns in the application. To override these
+	// limits and define custom limits for a specific campaign or journey, use the
+	// Campaign resource or the Journey resource, respectively.
 	Limits *CampaignLimits
 
-	// The default quiet time for campaigns and journeys in the application. Quiet time
-	// is a specific time range when messages aren't sent to endpoints, if all the
-	// following conditions are met:
+	// The default quiet time for campaigns in the application. Quiet time is a
+	// specific time range when messages aren't sent to endpoints, if all the following
+	// conditions are met:
 	//
-	//     * The EndpointDemographic.Timezone property
-	// of the endpoint is set to a valid value.
+	//     * The EndpointDemographic.Timezone property of the
+	// endpoint is set to a valid value.
 	//
-	//     * The current time in the
-	// endpoint's time zone is later than or equal to the time specified by the
-	// QuietTime.Start property for the application (or a campaign or journey that has
-	// custom quiet time settings).
+	//     * The current time in the endpoint's time
+	// zone is later than or equal to the time specified by the QuietTime.Start
+	// property for the application (or a campaign or journey that has custom quiet
+	// time settings).
 	//
-	//     * The current time in the endpoint's time zone
-	// is earlier than or equal to the time specified by the QuietTime.End property for
-	// the application (or a campaign or journey that has custom quiet time
-	// settings).
+	//     * The current time in the endpoint's time zone is earlier
+	// than or equal to the time specified by the QuietTime.End property for the
+	// application (or a campaign or journey that has custom quiet time settings).
 	//
-	// If any of the preceding conditions isn't met, the endpoint will
-	// receive messages from a campaign or journey, even if quiet time is enabled. To
-	// override the default quiet time settings for a specific campaign or journey, use
-	// the Campaign resource or the Journey resource to define a custom quiet time for
-	// the campaign or journey.
+	// If
+	// any of the preceding conditions isn't met, the endpoint will receive messages
+	// from a campaign or journey, even if quiet time is enabled. To override the
+	// default quiet time settings for a specific campaign or journey, use the Campaign
+	// resource or the Journey resource to define a custom quiet time for the campaign
+	// or journey.
 	QuietTime *QuietTime
 }
 

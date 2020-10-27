@@ -414,22 +414,22 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.ReplicationFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationFactor"))
+	if v.NodeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if v.SSESpecification != nil {
 		if err := validateSSESpecification(v.SSESpecification); err != nil {
 			invalidParams.AddNested("SSESpecification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ClusterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	if v.ReplicationFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationFactor"))
 	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
-	if v.NodeType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -458,11 +458,11 @@ func validateOpCreateSubnetGroupInput(v *CreateSubnetGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSubnetGroupInput"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.SubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetGroupName"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -554,11 +554,11 @@ func validateOpIncreaseReplicationFactorInput(v *IncreaseReplicationFactorInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IncreaseReplicationFactorInput"}
-	if v.NewReplicationFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewReplicationFactor"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NewReplicationFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewReplicationFactor"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -587,11 +587,11 @@ func validateOpRebootNodeInput(v *RebootNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RebootNodeInput"}
-	if v.NodeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -623,11 +623,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

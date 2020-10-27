@@ -778,18 +778,16 @@ type ConformancePackDetail struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// Conformance pack template that is used to create a pack. The delivery bucket
-	// name should start with awsconfigconforms. For example: "Resource":
-	// "arn:aws:s3:::your_bucket_name/*".
-	//
-	// This member is required.
-	DeliveryS3Bucket *string
-
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []*ConformancePackInputParameter
 
 	// AWS service that created the conformance pack.
 	CreatedBy *string
+
+	// Conformance pack template that is used to create a pack. The delivery bucket
+	// name should start with awsconfigconforms. For example: "Resource":
+	// "arn:aws:s3:::your_bucket_name/*".
+	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string
@@ -1318,12 +1316,6 @@ type OrganizationConfigRuleStatus struct {
 // that AWS Config creates in member accounts.
 type OrganizationConformancePack struct {
 
-	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
-	// and conformance pack template that is used to create a pack.
-	//
-	// This member is required.
-	DeliveryS3Bucket *string
-
 	// Last time when organization conformation pack was updated.
 	//
 	// This member is required.
@@ -1341,6 +1333,10 @@ type OrganizationConformancePack struct {
 
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []*ConformancePackInputParameter
+
+	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
+	// and conformance pack template that is used to create a pack.
+	DeliveryS3Bucket *string
 
 	// Any folder structure you want to add to an Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string

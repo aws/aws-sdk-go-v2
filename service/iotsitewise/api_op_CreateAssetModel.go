@@ -16,7 +16,7 @@ import (
 // create assets from asset models. With asset models, you can easily create assets
 // of the same type that have standardized definitions. Each asset created from a
 // model inherits the asset model's property and hierarchy definitions. For more
-// information, see Defining Asset Models
+// information, see Defining asset models
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html)
 // in the AWS IoT SiteWise User Guide.
 func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelInput, optFns ...func(*Options)) (*CreateAssetModelOutput, error) {
@@ -46,7 +46,7 @@ type CreateAssetModelInput struct {
 
 	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
 	// model whose assets can be children of any other assets created from this asset
-	// model. For more information, see Asset Hierarchies
+	// model. For more information, see Asset hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per
 	// asset model. For more information, see Quotas
@@ -55,7 +55,7 @@ type CreateAssetModelInput struct {
 	AssetModelHierarchies []*types.AssetModelHierarchyDefinition
 
 	// The property definitions of the asset model. For more information, see Asset
-	// Properties
+	// properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
 	// in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per
 	// asset model. For more information, see Quotas

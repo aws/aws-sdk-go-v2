@@ -11,6 +11,17 @@ const (
 	ApplicationStatusCompleted   ApplicationStatus = "COMPLETED"
 )
 
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+	}
+}
+
 type ResourceAttributeType string
 
 // Enum values for ResourceAttributeType
@@ -27,6 +38,24 @@ const (
 	ResourceAttributeTypeMotherboard_serial_number   ResourceAttributeType = "MOTHERBOARD_SERIAL_NUMBER"
 )
 
+// Values returns all known values for ResourceAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceAttributeType) Values() []ResourceAttributeType {
+	return []ResourceAttributeType{
+		"IPV4_ADDRESS",
+		"IPV6_ADDRESS",
+		"MAC_ADDRESS",
+		"FQDN",
+		"VM_MANAGER_ID",
+		"VM_MANAGED_OBJECT_REFERENCE",
+		"VM_NAME",
+		"VM_PATH",
+		"BIOS_ID",
+		"MOTHERBOARD_SERIAL_NUMBER",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -36,3 +65,15 @@ const (
 	StatusFailed      Status = "FAILED"
 	StatusCompleted   Status = "COMPLETED"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}

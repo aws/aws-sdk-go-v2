@@ -30,19 +30,24 @@ import (
 // * Suspended – Disables accelerated data transfers to the bucket.
 //
 // The
-// GetBucketAccelerateConfiguration operation returns the transfer acceleration
-// state of a bucket. After setting the Transfer Acceleration state of a bucket to
-// Enabled, it might take up to thirty minutes before the data transfer rates to
-// the bucket increase. The name of the bucket used for Transfer Acceleration must
-// be DNS-compliant and must not contain periods ("."). For more information about
-// transfer acceleration, see Transfer Acceleration
+// GetBucketAccelerateConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAccelerateConfiguration.html)
+// operation returns the transfer acceleration state of a bucket. After setting the
+// Transfer Acceleration state of a bucket to Enabled, it might take up to thirty
+// minutes before the data transfer rates to the bucket increase. The name of the
+// bucket used for Transfer Acceleration must be DNS-compliant and must not contain
+// periods ("."). For more information about transfer acceleration, see Transfer
+// Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
 // The following operations are related to PutBucketAccelerateConfiguration:
 //
 //     *
 // GetBucketAccelerateConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAccelerateConfiguration.html)
 //
-//     * CreateBucket
+//
+// * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) PutBucketAccelerateConfiguration(ctx context.Context, params *PutBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*PutBucketAccelerateConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketAccelerateConfigurationInput{}
@@ -65,10 +70,14 @@ type PutBucketAccelerateConfigurationInput struct {
 	// This member is required.
 	AccelerateConfiguration *types.AccelerateConfiguration
 
-	// Name of the bucket for which the accelerate configuration is set.
+	// The name of the bucket for which the accelerate configuration is set.
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketAccelerateConfigurationOutput struct {

@@ -64,6 +64,11 @@ type StartDocumentTextDetectionInput struct {
 	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
 	// status of the operation to.
 	NotificationChannel *types.NotificationChannel
+
+	// Sets if the output will go to a customer defined bucket. By default Amazon
+	// Textract will save the results internally to be accessed with the
+	// GetDocumentTextDetection operation.
+	OutputConfig *types.OutputConfig
 }
 
 type StartDocumentTextDetectionOutput struct {

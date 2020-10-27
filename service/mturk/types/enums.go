@@ -11,6 +11,17 @@ const (
 	AssignmentStatusRejected  AssignmentStatus = "Rejected"
 )
 
+// Values returns all known values for AssignmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssignmentStatus) Values() []AssignmentStatus {
+	return []AssignmentStatus{
+		"Submitted",
+		"Approved",
+		"Rejected",
+	}
+}
+
 type Comparator string
 
 // Enum values for Comparator
@@ -26,6 +37,24 @@ const (
 	ComparatorIn                   Comparator = "In"
 	ComparatorNotin                Comparator = "NotIn"
 )
+
+// Values returns all known values for Comparator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Comparator) Values() []Comparator {
+	return []Comparator{
+		"LessThan",
+		"LessThanOrEqualTo",
+		"GreaterThan",
+		"GreaterThanOrEqualTo",
+		"EqualTo",
+		"NotEqualTo",
+		"Exists",
+		"DoesNotExist",
+		"In",
+		"NotIn",
+	}
+}
 
 type EventType string
 
@@ -45,6 +74,26 @@ const (
 	EventTypePing                EventType = "Ping"
 )
 
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"AssignmentAccepted",
+		"AssignmentAbandoned",
+		"AssignmentReturned",
+		"AssignmentSubmitted",
+		"AssignmentRejected",
+		"AssignmentApproved",
+		"HITCreated",
+		"HITExpired",
+		"HITReviewable",
+		"HITExtended",
+		"HITDisposed",
+		"Ping",
+	}
+}
+
 type HITAccessActions string
 
 // Enum values for HITAccessActions
@@ -53,6 +102,17 @@ const (
 	HITAccessActionsPreviewandaccept         HITAccessActions = "PreviewAndAccept"
 	HITAccessActionsDiscoverpreviewandaccept HITAccessActions = "DiscoverPreviewAndAccept"
 )
+
+// Values returns all known values for HITAccessActions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HITAccessActions) Values() []HITAccessActions {
+	return []HITAccessActions{
+		"Accept",
+		"PreviewAndAccept",
+		"DiscoverPreviewAndAccept",
+	}
+}
 
 type HITReviewStatus string
 
@@ -63,6 +123,18 @@ const (
 	HITReviewStatusReviewedappropriate   HITReviewStatus = "ReviewedAppropriate"
 	HITReviewStatusReviewedinappropriate HITReviewStatus = "ReviewedInappropriate"
 )
+
+// Values returns all known values for HITReviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HITReviewStatus) Values() []HITReviewStatus {
+	return []HITReviewStatus{
+		"NotReviewed",
+		"MarkedForReview",
+		"ReviewedAppropriate",
+		"ReviewedInappropriate",
+	}
+}
 
 type HITStatus string
 
@@ -75,6 +147,19 @@ const (
 	HITStatusDisposed     HITStatus = "Disposed"
 )
 
+// Values returns all known values for HITStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (HITStatus) Values() []HITStatus {
+	return []HITStatus{
+		"Assignable",
+		"Unassignable",
+		"Reviewable",
+		"Reviewing",
+		"Disposed",
+	}
+}
+
 type NotificationTransport string
 
 // Enum values for NotificationTransport
@@ -84,6 +169,17 @@ const (
 	NotificationTransportSns   NotificationTransport = "SNS"
 )
 
+// Values returns all known values for NotificationTransport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationTransport) Values() []NotificationTransport {
+	return []NotificationTransport{
+		"Email",
+		"SQS",
+		"SNS",
+	}
+}
+
 type NotifyWorkersFailureCode string
 
 // Enum values for NotifyWorkersFailureCode
@@ -91,6 +187,16 @@ const (
 	NotifyWorkersFailureCodeSoftfailure NotifyWorkersFailureCode = "SoftFailure"
 	NotifyWorkersFailureCodeHardfailure NotifyWorkersFailureCode = "HardFailure"
 )
+
+// Values returns all known values for NotifyWorkersFailureCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyWorkersFailureCode) Values() []NotifyWorkersFailureCode {
+	return []NotifyWorkersFailureCode{
+		"SoftFailure",
+		"HardFailure",
+	}
+}
 
 type QualificationStatus string
 
@@ -100,6 +206,16 @@ const (
 	QualificationStatusRevoked QualificationStatus = "Revoked"
 )
 
+// Values returns all known values for QualificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QualificationStatus) Values() []QualificationStatus {
+	return []QualificationStatus{
+		"Granted",
+		"Revoked",
+	}
+}
+
 type QualificationTypeStatus string
 
 // Enum values for QualificationTypeStatus
@@ -108,6 +224,16 @@ const (
 	QualificationTypeStatusInactive QualificationTypeStatus = "Inactive"
 )
 
+// Values returns all known values for QualificationTypeStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QualificationTypeStatus) Values() []QualificationTypeStatus {
+	return []QualificationTypeStatus{
+		"Active",
+		"Inactive",
+	}
+}
+
 type ReviewableHITStatus string
 
 // Enum values for ReviewableHITStatus
@@ -115,6 +241,16 @@ const (
 	ReviewableHITStatusReviewable ReviewableHITStatus = "Reviewable"
 	ReviewableHITStatusReviewing  ReviewableHITStatus = "Reviewing"
 )
+
+// Values returns all known values for ReviewableHITStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewableHITStatus) Values() []ReviewableHITStatus {
+	return []ReviewableHITStatus{
+		"Reviewable",
+		"Reviewing",
+	}
+}
 
 type ReviewActionStatus string
 
@@ -126,6 +262,18 @@ const (
 	ReviewActionStatusCancelled ReviewActionStatus = "Cancelled"
 )
 
+// Values returns all known values for ReviewActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewActionStatus) Values() []ReviewActionStatus {
+	return []ReviewActionStatus{
+		"Intended",
+		"Succeeded",
+		"Failed",
+		"Cancelled",
+	}
+}
+
 type ReviewPolicyLevel string
 
 // Enum values for ReviewPolicyLevel
@@ -133,3 +281,13 @@ const (
 	ReviewPolicyLevelAssignment ReviewPolicyLevel = "Assignment"
 	ReviewPolicyLevelHit        ReviewPolicyLevel = "HIT"
 )
+
+// Values returns all known values for ReviewPolicyLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewPolicyLevel) Values() []ReviewPolicyLevel {
+	return []ReviewPolicyLevel{
+		"Assignment",
+		"HIT",
+	}
+}

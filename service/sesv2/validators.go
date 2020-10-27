@@ -170,6 +170,26 @@ func (m *validateOpCreateEmailTemplate) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateImportJob struct {
+}
+
+func (*validateOpCreateImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConfigurationSetEventDestination struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpGetEmailTemplate) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEmailTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetImportJob struct {
+}
+
+func (*validateOpGetImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1122,6 +1162,10 @@ func addOpCreateEmailTemplateValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateEmailTemplate{}, middleware.After)
 }
 
+func addOpCreateImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateImportJob{}, middleware.After)
+}
+
 func addOpDeleteConfigurationSetEventDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfigurationSetEventDestination{}, middleware.After)
 }
@@ -1196,6 +1240,10 @@ func addOpGetEmailIdentityPoliciesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetEmailTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEmailTemplate{}, middleware.After)
+}
+
+func addOpGetImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImportJob{}, middleware.After)
 }
 
 func addOpGetSuppressedDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -1442,11 +1490,11 @@ func validateDkimSigningAttributes(v *types.DkimSigningAttributes) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DkimSigningAttributes"}
-	if v.DomainSigningSelector == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainSigningSelector"))
-	}
 	if v.DomainSigningPrivateKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainSigningPrivateKey"))
+	}
+	if v.DomainSigningSelector == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainSigningSelector"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1504,16 +1552,53 @@ func validateEventDestinationDefinition(v *types.EventDestinationDefinition) err
 	}
 }
 
+func validateImportDataSource(v *types.ImportDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportDataSource"}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
+	}
+	if v.S3Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportDestination(v *types.ImportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportDestination"}
+	if v.SuppressionListDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuppressionListDestination"))
+	} else if v.SuppressionListDestination != nil {
+		if err := validateSuppressionListDestination(v.SuppressionListDestination); err != nil {
+			invalidParams.AddNested("SuppressionListDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKinesisFirehoseDestination(v *types.KinesisFirehoseDestination) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KinesisFirehoseDestination"}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if v.DeliveryStreamArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamArn"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1613,6 +1698,21 @@ func validateSnsDestination(v *types.SnsDestination) error {
 	}
 }
 
+func validateSuppressionListDestination(v *types.SuppressionListDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuppressionListDestination"}
+	if len(v.SuppressionListImportAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SuppressionListImportAction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1668,15 +1768,15 @@ func validateOpCreateConfigurationSetEventDestinationInput(v *CreateConfiguratio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationSetEventDestinationInput"}
-	if v.ConfigurationSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
-	}
 	if v.EventDestination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventDestination"))
 	} else if v.EventDestination != nil {
 		if err := validateEventDestinationDefinition(v.EventDestination); err != nil {
 			invalidParams.AddNested("EventDestination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if v.EventDestinationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventDestinationName"))
@@ -1698,13 +1798,13 @@ func validateOpCreateConfigurationSetInput(v *CreateConfigurationSetInput) error
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ConfigurationSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
-	}
 	if v.TrackingOptions != nil {
 		if err := validateTrackingOptions(v.TrackingOptions); err != nil {
 			invalidParams.AddNested("TrackingOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1724,6 +1824,9 @@ func validateOpCreateCustomVerificationEmailTemplateInput(v *CreateCustomVerific
 	if v.TemplateContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateContent"))
 	}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
 	if v.FailureRedirectionURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FailureRedirectionURL"))
 	}
@@ -1732,9 +1835,6 @@ func validateOpCreateCustomVerificationEmailTemplateInput(v *CreateCustomVerific
 	}
 	if v.FromEmailAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
-	}
-	if v.TemplateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1775,13 +1875,13 @@ func validateOpCreateDeliverabilityTestReportInput(v *CreateDeliverabilityTestRe
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FromEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FromEmailAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1846,6 +1946,32 @@ func validateOpCreateEmailTemplateInput(v *CreateEmailTemplateInput) error {
 	}
 	if v.TemplateContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateImportJobInput(v *CreateImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateImportJobInput"}
+	if v.ImportDataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportDataSource"))
+	} else if v.ImportDataSource != nil {
+		if err := validateImportDataSource(v.ImportDataSource); err != nil {
+			invalidParams.AddNested("ImportDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImportDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportDestination"))
+	} else if v.ImportDestination != nil {
+		if err := validateImportDestination(v.ImportDestination); err != nil {
+			invalidParams.AddNested("ImportDestination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2151,6 +2277,21 @@ func validateOpGetEmailTemplateInput(v *GetEmailTemplateInput) error {
 	}
 }
 
+func validateOpGetImportJobInput(v *GetImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSuppressedDestinationInput(v *GetSuppressedDestinationInput) error {
 	if v == nil {
 		return nil
@@ -2174,11 +2315,11 @@ func validateOpListDomainDeliverabilityCampaignsInput(v *ListDomainDeliverabilit
 	if v.EndDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
 	}
-	if v.SubscribedDomain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscribedDomain"))
-	}
 	if v.StartDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.SubscribedDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscribedDomain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2321,11 +2462,11 @@ func validateOpPutDedicatedIpWarmupAttributesInput(v *PutDedicatedIpWarmupAttrib
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutDedicatedIpWarmupAttributesInput"}
-	if v.Ip == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ip"))
-	}
 	if v.WarmupPercentage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WarmupPercentage"))
+	}
+	if v.Ip == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ip"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2445,15 +2586,15 @@ func validateOpSendBulkEmailInput(v *SendBulkEmailInput) error {
 			invalidParams.AddNested("DefaultEmailTags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DefaultContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultContent"))
+	}
 	if v.BulkEmailEntries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BulkEmailEntries"))
 	} else if v.BulkEmailEntries != nil {
 		if err := validateBulkEmailEntryList(v.BulkEmailEntries); err != nil {
 			invalidParams.AddNested("BulkEmailEntries", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DefaultContent == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultContent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2570,15 +2711,15 @@ func validateOpUpdateConfigurationSetEventDestinationInput(v *UpdateConfiguratio
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
+	if v.EventDestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDestinationName"))
+	}
 	if v.EventDestination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventDestination"))
 	} else if v.EventDestination != nil {
 		if err := validateEventDestinationDefinition(v.EventDestination); err != nil {
 			invalidParams.AddNested("EventDestination", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.EventDestinationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventDestinationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2595,11 +2736,11 @@ func validateOpUpdateCustomVerificationEmailTemplateInput(v *UpdateCustomVerific
 	if v.FromEmailAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
 	}
-	if v.TemplateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
-	}
 	if v.TemplateSubject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateSubject"))
+	}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if v.FailureRedirectionURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FailureRedirectionURL"))

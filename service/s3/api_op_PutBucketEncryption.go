@@ -31,8 +31,11 @@ import (
 //
 //     *
 // GetBucketEncryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html)
 //
-//     * DeleteBucketEncryption
+//
+// * DeleteBucketEncryption
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html)
 func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncryptionInput, optFns ...func(*Options)) (*PutBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &PutBucketEncryptionInput{}
@@ -69,6 +72,10 @@ type PutBucketEncryptionInput struct {
 	// configuration. This parameter is auto-populated when using the command from the
 	// CLI.
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketEncryptionOutput struct {

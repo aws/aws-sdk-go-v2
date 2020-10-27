@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a DBSnapshot. The source DBInstance must be in "available" state.
+// Creates a snapshot of a DB instance. The source DB instance must be in the
+// available or storage-optimizationstate.
 func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotInput, optFns ...func(*Options)) (*CreateDBSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDBSnapshotInput{}

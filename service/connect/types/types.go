@@ -20,7 +20,37 @@ type ChatMessage struct {
 	ContentType *string
 }
 
-// Contains summary information about a contact flow.
+// Contains information about a contact flow.
+type ContactFlow struct {
+
+	// The Amazon Resource Name (ARN) of the contact flow.
+	Arn *string
+
+	// The content of the contact flow.
+	Content *string
+
+	// The description of the contact flow.
+	Description *string
+
+	// The identifier of the contact flow.
+	Id *string
+
+	// The name of the contact flow.
+	Name *string
+
+	// One or more tags.
+	Tags map[string]*string
+
+	// The type of the contact flow. For descriptions of the available types, see
+	// Choose a Contact Flow Type
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
+	// in the Amazon Connect Administrator Guide.
+	Type ContactFlowType
+}
+
+// Contains summary information about a contact flow. You can also create and
+// update contact flows using the Amazon Connect Flow language
+// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 type ContactFlowSummary struct {
 
 	// The Amazon Resource Name (ARN) of the contact flow.
@@ -242,6 +272,21 @@ type HoursOfOperationSummary struct {
 	Name *string
 }
 
+// Contains information about which channels are supported, and how many contacts
+// an agent can have on a channel simultaneously.
+type MediaConcurrency struct {
+
+	// The channels that agents can handle in the Contact Control Panel (CCP).
+	//
+	// This member is required.
+	Channel Channel
+
+	// The number of contacts an agent can have on a channel simultaneously.
+	//
+	// This member is required.
+	Concurrency *int32
+}
+
 // The customer's details.
 type ParticipantDetails struct {
 
@@ -270,6 +315,26 @@ type PhoneNumberSummary struct {
 	PhoneNumberType PhoneNumberType
 }
 
+// Information about a problem detail.
+type ProblemDetail struct {
+
+	// The problem detail's message.
+	Message *string
+}
+
+// Contains information about the prompt.
+type PromptSummary struct {
+
+	// The Amazon Resource Name (ARN) of the prompt.
+	Arn *string
+
+	// The identifier of the prompt.
+	Id *string
+
+	// The name of the prompt.
+	Name *string
+}
+
 // Contains information about a queue resource for which metrics are returned.
 type QueueReference struct {
 
@@ -294,6 +359,115 @@ type QueueSummary struct {
 
 	// The type of queue.
 	QueueType QueueType
+}
+
+// Contains information about a routing profile.
+type RoutingProfile struct {
+
+	// The identifier of the default outbound queue for this routing profile.
+	DefaultOutboundQueueId *string
+
+	// The description of the routing profile.
+	Description *string
+
+	// The identifier of the Amazon Connect instance.
+	InstanceId *string
+
+	// The channels agents can handle in the Contact Control Panel (CCP) for this
+	// routing profile.
+	MediaConcurrencies []*MediaConcurrency
+
+	// The name of the routing profile.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the routing profile.
+	RoutingProfileArn *string
+
+	// The identifier of the routing profile.
+	RoutingProfileId *string
+
+	// One or more tags.
+	Tags map[string]*string
+}
+
+// Contains information about the queue and channel for which priority and delay
+// can be set.
+type RoutingProfileQueueConfig struct {
+
+	// The delay, in seconds, a contact should be in the queue before they are routed
+	// to an available agent. For more information, see Queues: priority and delay
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html)
+	// in the Amazon Connect Administrator Guide.
+	//
+	// This member is required.
+	Delay *int32
+
+	// The order in which contacts are to be handled for the queue. For more
+	// information, see Queues: priority and delay
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html).
+	//
+	// This member is required.
+	Priority *int32
+
+	// Contains information about a queue resource.
+	//
+	// This member is required.
+	QueueReference *RoutingProfileQueueReference
+}
+
+// Contains summary information about a routing profile queue.
+type RoutingProfileQueueConfigSummary struct {
+
+	// The channels this queue supports.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The delay, in seconds, that a contact should be in the queue before they are
+	// routed to an available agent. For more information, see Queues: priority and
+	// delay
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html)
+	// in the Amazon Connect Administrator Guide.
+	//
+	// This member is required.
+	Delay *int32
+
+	// The order in which contacts are to be handled for the queue. For more
+	// information, see Queues: priority and delay
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html).
+	//
+	// This member is required.
+	Priority *int32
+
+	// The Amazon Resource Name (ARN) of the queue.
+	//
+	// This member is required.
+	QueueArn *string
+
+	// The identifier of the queue.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The name of the queue.
+	//
+	// This member is required.
+	QueueName *string
+}
+
+// Contains the channel and queue identifier for a routing profile.
+type RoutingProfileQueueReference struct {
+
+	// The channels agents can handle in the Contact Control Panel (CCP) for this
+	// routing profile.
+	//
+	// This member is required.
+	Channel Channel
+
+	// The identifier of the queue.
+	//
+	// This member is required.
+	QueueId *string
 }
 
 // Contains summary information about a routing profile.

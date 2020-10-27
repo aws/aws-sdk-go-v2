@@ -37,7 +37,7 @@ type ListAuditTasksInput struct {
 	EndTime *time.Time
 
 	// The beginning of the time period. Audit information is retained for a limited
-	// time (180 days). Requesting a start time prior to what is retained results in an
+	// time (90 days). Requesting a start time prior to what is retained results in an
 	// "InvalidRequestException".
 	//
 	// This member is required.

@@ -40,7 +40,9 @@ type StartExecutionInput struct {
 
 	// The string that contains the JSON input data for the execution, for example:
 	// "input": "{\"first_name\" : \"test\"}" If you don't include any JSON input data,
-	// you still must include the two braces, for example: "input": "{}"
+	// you still must include the two braces, for example: "input": "{}" Length
+	// constraints apply to the payload size, and are expressed as bytes in UTF-8
+	// encoding.
 	Input *string
 
 	// The name of the execution. This name must be unique for your AWS account,
@@ -65,6 +67,10 @@ type StartExecutionInput struct {
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
 	Name *string
+
+	// Passes the AWS X-Ray trace header. The trace header can also be passed in the
+	// request payload.
+	TraceHeader *string
 }
 
 type StartExecutionOutput struct {

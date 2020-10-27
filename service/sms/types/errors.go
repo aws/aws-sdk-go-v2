@@ -7,6 +7,24 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
+// The user has the required permissions, so the request would have succeeded, but
+// a dry run was performed.
+type DryRunOperationException struct {
+	Message *string
+}
+
+func (e *DryRunOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DryRunOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DryRunOperationException) ErrorCode() string             { return "DryRunOperationException" }
+func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal error occurred.
 type InternalError struct {
 	Message *string

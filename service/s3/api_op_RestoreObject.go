@@ -11,19 +11,20 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Restores an archived copy of an object back into Amazon S3 This operation
-// performs the following types of requests:
+// Restores an archived copy of an object back into Amazon S3 This action is not
+// supported by Amazon S3 on Outposts. This action performs the following types of
+// requests:
 //
-//     * select - Perform a select query
-// on an archived object
+//     * select - Perform a select query on an archived object
 //
-//     * restore an archive - Restore an archived object
+//     *
+// restore an archive - Restore an archived object
 //
-// To
-// use this operation, you must have permissions to perform the s3:RestoreObject
-// action. The bucket owner has this permission by default and can grant this
-// permission to others. For more information about permissions, see Permissions
-// Related to Bucket Subresource Operations
+// To use this operation, you must
+// have permissions to perform the s3:RestoreObject action. The bucket owner has
+// this permission by default and can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
@@ -49,9 +50,10 @@ import (
 // the S3 structure in the request body, see the following:
 //
 //         * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//
-// * Managing Access with ACLs
+//         *
+// Managing Access with ACLs
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) in the
 // Amazon Simple Storage Service Developer Guide
 //
@@ -175,6 +177,7 @@ import (
 // example, if you restore an object copy for 10 days, but the object is scheduled
 // to expire in 3 days, Amazon S3 deletes the object in 3 days. For more
 // information about lifecycle configuration, see PutBucketLifecycleConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 // and Object Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
 // Amazon Simple Storage Service Developer Guide. Responses A successful operation
@@ -217,12 +220,14 @@ import (
 // Related Resources
 //
 //     * PutBucketLifecycleConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 //
-//     *
-// GetBucketNotificationConfiguration
 //
-//     * SQL Reference for Amazon S3 Select and
-// S3 Glacier Select
+// * GetBucketNotificationConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
+//
+//
+// * SQL Reference for Amazon S3 Select and S3 Glacier Select
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
 // in the Amazon Simple Storage Service Developer Guide
 func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, optFns ...func(*Options)) (*RestoreObjectOutput, error) {
@@ -246,11 +251,19 @@ type RestoreObjectInput struct {
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -259,6 +272,10 @@ type RestoreObjectInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

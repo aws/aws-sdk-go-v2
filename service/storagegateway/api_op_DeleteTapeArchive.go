@@ -35,6 +35,12 @@ type DeleteTapeArchiveInput struct {
 	//
 	// This member is required.
 	TapeARN *string
+
+	// Set to TRUE to delete an archived tape that belongs to a custom pool with tape
+	// retention lock. Only archived tapes with tape retention lock set to governance
+	// can be deleted. Archived tapes with tape retention lock set to compliance can't
+	// be deleted.
+	BypassGovernanceRetention *bool
 }
 
 // DeleteTapeArchiveOutput

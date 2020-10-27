@@ -3430,6 +3430,11 @@ func awsAwsjson11_serializeOpDocumentStopApplicationInput(v *StopApplicationInpu
 		ok.String(*v.ApplicationName)
 	}
 
+	if v.Force != nil {
+		ok := object.Key("Force")
+		ok.Boolean(*v.Force)
+	}
+
 	return nil
 }
 

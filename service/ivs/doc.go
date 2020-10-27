@@ -56,89 +56,115 @@
 //     * Stream key — An identifier
 // assigned by Amazon IVS when you create a channel, which is then used to
 // authorize streaming. See the StreamKey endpoints for more information. Treat the
-// stream key like a secret, since it allows anyone to stream to the
-// channel.
+// stream key like a secret, since it allows anyone to stream to the channel.
 //
-// Tagging A tag is a metadata label that you assign to an AWS resource.
-// A tag comprises a key and a value, both set by you. For example, you might set a
-// tag as topic:nature to label a particular video category. See Tagging AWS
-// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for
-// more information, including restrictions that apply to tags. Tags can help you
+//
+// * Playback key pair — Video playback may be restricted using
+// playback-authorization tokens, which use public-key encryption. A playback key
+// pair is the public-private pair of keys used to sign and validate the
+// playback-authorization token. See the PlaybackKeyPair endpoints for more
+// information.
+//
+// Tagging A tag is a metadata label that you assign to an AWS
+// resource. A tag comprises a key and a value, both set by you. For example, you
+// might set a tag as topic:nature to label a particular video category. See
+// Tagging AWS Resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+// information, including restrictions that apply to tags. Tags can help you
 // identify and organize your AWS resources. For example, you can use the same tag
 // for different resources to indicate that they are related. You can also use tags
 // to manage access (see  Access Tags
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)). The Amazon
 // IVS API has these tag-related endpoints: TagResource, UntagResource, and
-// ListTagsForResource. The following resources support tagging: Channels and
-// Stream Keys. API Endpoints Channel:
+// ListTagsForResource. The following resources support tagging: Channels, Stream
+// Keys, and Playback Key Pairs. Channel Endpoints
 //
-//     * CreateChannel — Creates a new channel
-// and an associated stream key to start streaming.
+//     * CreateChannel — Creates a
+// new channel and an associated stream key to start streaming.
 //
-//     * GetChannel — Gets the
-// channel configuration for the specified channel ARN (Amazon Resource Name).
+//     * GetChannel —
+// Gets the channel configuration for the specified channel ARN (Amazon Resource
+// Name).
 //
+//     * BatchGetChannel — Performs GetChannel on multiple ARNs
+// simultaneously.
 //
-// * BatchGetChannel — Performs GetChannel on multiple ARNs simultaneously.
+//     * ListChannels — Gets summary information about all
+// channels in your account, in the AWS region where the API request is processed.
+// This list can be filtered to match a specified string.
 //
-//     *
-// ListChannels — Gets summary information about all channels in your account, in
-// the AWS region where the API request is processed. This list can be filtered to
-// match a specified string.
+//     * UpdateChannel —
+// Updates a channel's configuration. This does not affect an ongoing stream of
+// this channel. You must stop and restart the stream for the changes to take
+// effect.
 //
-//     * UpdateChannel — Updates a channel's
-// configuration. This does not affect an ongoing stream of this channel. You must
-// stop and restart the stream for the changes to take effect.
+//     * DeleteChannel — Deletes the specified channel.
 //
-//     * DeleteChannel
-// — Deletes the specified channel.
+// StreamKey
+// Endpoints
 //
-// StreamKey:
+//     * CreateStreamKey — Creates a stream key, used to initiate a
+// stream, for the specified channel ARN.
 //
-//     * CreateStreamKey — Creates a
-// stream key, used to initiate a stream, for the specified channel ARN.
+//     * GetStreamKey — Gets stream key
+// information for the specified ARN.
 //
-//     *
-// GetStreamKey — Gets stream key information for the specified ARN.
+//     * BatchGetStreamKey — Performs
+// GetStreamKey on multiple ARNs simultaneously.
 //
-//     *
-// BatchGetStreamKey — Performs GetStreamKey on multiple ARNs simultaneously.
-//
-//
-// * ListStreamKeys — Gets summary information about stream keys for the specified
-// channel.
-//
-//     * DeleteStreamKey — Deletes the stream key for the specified ARN,
-// so it can no longer be used to stream.
-//
-// Stream:
-//
-//     * GetStream — Gets
-// information about the active (live) stream on a specified channel.
+//     * ListStreamKeys — Gets
+// summary information about stream keys for the specified channel.
 //
 //     *
-// ListStreams — Gets summary information about live streams in your account, in
-// the AWS region where the API request is processed.
+// DeleteStreamKey — Deletes the stream key for the specified ARN, so it can no
+// longer be used to stream.
 //
-//     * StopStream —
-// Disconnects the incoming RTMPS stream for the specified channel. Can be used in
-// conjunction with DeleteStreamKey to prevent further streaming to a channel.
+// Stream Endpoints
 //
+//     * GetStream — Gets information
+// about the active (live) stream on a specified channel.
 //
-// * PutMetadata — Inserts metadata into an RTMPS stream for the specified channel.
-// A maximum of 5 requests per second per channel is allowed, each with a maximum
-// 1KB payload.
+//     * ListStreams — Gets
+// summary information about live streams in your account, in the AWS region where
+// the API request is processed.
 //
-// AWS Tags
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html):
+//     * StopStream — Disconnects the incoming RTMPS
+// stream for the specified channel. Can be used in conjunction with
+// DeleteStreamKey to prevent further streaming to a channel.
+//
+//     * PutMetadata —
+// Inserts metadata into an RTMPS stream for the specified channel. A maximum of 5
+// requests per second per channel is allowed, each with a maximum 1KB
+// payload.
+//
+// PlaybackKeyPair Endpoints
+//
+//     * ImportPlaybackKeyPair — Imports the
+// public portion of a new key pair and returns its arn and fingerprint. The
+// privateKey can then be used to generate viewer authorization tokens, to grant
+// viewers access to authorized channels.
+//
+//     * GetPlaybackKeyPair — Gets a
+// specified playback authorization key pair and returns the arn and fingerprint.
+// The privateKey held by the caller can be used to generate viewer authorization
+// tokens, to grant viewers access to authorized channels.
 //
 //     *
-// TagResource — Adds or updates tags for the AWS resource with the specified
-// ARN.
+// ListPlaybackKeyPairs — Gets summary information about playback key pairs.
 //
-//     * UntagResource — Removes tags from the resource with the specified
-// ARN.
+//     *
+// DeletePlaybackKeyPair — Deletes a specified authorization key pair. This
+// invalidates future viewer tokens generated using the key pair’s privateKey.
 //
-//     * ListTagsForResource — Gets information about AWS tags for the
-// specified ARN.
+// AWS
+// Tags Endpoints
+//
+//     * TagResource — Adds or updates tags for the AWS resource
+// with the specified ARN.
+//
+//     * UntagResource — Removes tags from the resource
+// with the specified ARN.
+//
+//     * ListTagsForResource — Gets information about AWS
+// tags for the specified ARN.
 package ivs

@@ -314,16 +314,16 @@ func validateOpCopyBackupToRegionInput(v *CopyBackupToRegionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyBackupToRegionInput"}
-	if v.TagList != nil {
-		if err := validateTagList(v.TagList); err != nil {
-			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
-		}
+	if v.BackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
 	}
 	if v.DestinationRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
 	}
-	if v.BackupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -342,11 +342,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.HsmType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HsmType"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -360,11 +360,11 @@ func validateOpCreateHsmInput(v *CreateHsmInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHsmInput"}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -423,14 +423,14 @@ func validateOpInitializeClusterInput(v *InitializeClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InitializeClusterInput"}
-	if v.SignedCert == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SignedCert"))
-	}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
 	if v.TrustAnchor == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchor"))
+	}
+	if v.SignedCert == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignedCert"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

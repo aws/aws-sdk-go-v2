@@ -27,7 +27,8 @@ import (
 //
 // You can
 // specify that the query return only one type of result using the
-// QueryResultTypeConfig parameter.
+// QueryResultTypeConfig parameter. Each query returns the 100 most relevant
+// results.
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -108,8 +109,9 @@ type QueryOutput struct {
 	// The results of the search.
 	ResultItems []*types.QueryResultItem
 
-	// The number of items returned by the search. Use this to determine when you have
-	// requested the last set of results.
+	// The total number of items found by the search; however, you can only retrieve up
+	// to 100 items. For example, if the search found 192 items, you can only retrieve
+	// the first 100 of the items.
 	TotalNumberOfResults *int32
 
 	// Metadata pertaining to the operation's result.

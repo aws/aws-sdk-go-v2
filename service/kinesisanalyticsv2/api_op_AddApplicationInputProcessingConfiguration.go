@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics
+// Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics
 // application. An input processor pre-processes records on the input stream before
 // the application's SQL code executes. Currently, the only input processor
-// available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context, params *AddApplicationInputProcessingConfigurationInput, optFns ...func(*Options)) (*AddApplicationInputProcessingConfigurationOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputProcessingConfigurationInput{}
@@ -68,8 +68,8 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	ApplicationVersionId *int64
 
 	// The input ID that is associated with the application input. This is the ID that
-	// Amazon Kinesis Data Analytics assigns to each input configuration that you add
-	// to your application.
+	// Kinesis Data Analytics assigns to each input configuration that you add to your
+	// application.
 	InputId *string
 
 	// The description of the preprocessor that executes on records in this input

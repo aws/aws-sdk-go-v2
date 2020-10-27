@@ -32,8 +32,8 @@
 // request parameters, response elements, possible errors, and examples of requests
 // and responses.
 //
-//     * AWS Storage Gateway endpoints and quotas:
-// (https://docs.aws.amazon.com/general/latest/gr/sg.html) Provides a list of each
+//     * AWS Storage Gateway endpoints and quotas
+// (https://docs.aws.amazon.com/general/latest/gr/sg.html): Provides a list of each
 // AWS Region and the endpoints available for use with AWS Storage Gateway.
 //
 // AWS

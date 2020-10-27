@@ -1523,9 +1523,9 @@ func (e *OpsItemInvalidParameterException) ErrorFault() smithy.ErrorFault { retu
 type OpsItemLimitExceededException struct {
 	Message *string
 
+	LimitType     *string
 	Limit         *int32
 	ResourceTypes []*string
-	LimitType     *string
 }
 
 func (e *OpsItemLimitExceededException) Error() string {
@@ -1929,7 +1929,9 @@ func (e *TargetInUseException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // with Session Manager. For more information, see Getting started with Session
 // Manager
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html)
-// in the AWS Systems Manager User Guide.
+// in the AWS Systems Manager User Guide. This error is also returned if you
+// attempt to start a session on an instance that is located in a different account
+// or Region
 type TargetNotConnected struct {
 	Message *string
 }
@@ -2093,8 +2095,7 @@ func (e *UnsupportedInventorySchemaVersionException) ErrorFault() smithy.ErrorFa
 }
 
 // The operating systems you specified is not supported, or the operation is not
-// supported for the operating system. Valid operating systems include: Windows,
-// AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.
+// supported for the operating system.
 type UnsupportedOperatingSystem struct {
 	Message *string
 }

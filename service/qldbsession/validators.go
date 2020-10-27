@@ -39,11 +39,11 @@ func validateCommitTransactionRequest(v *types.CommitTransactionRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CommitTransactionRequest"}
-	if v.TransactionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
-	}
 	if v.CommitDigest == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CommitDigest"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -108,6 +108,11 @@ func validateOpSendCommandInput(v *SendCommandInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendCommandInput"}
+	if v.FetchPage != nil {
+		if err := validateFetchPageRequest(v.FetchPage); err != nil {
+			invalidParams.AddNested("FetchPage", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.StartSession != nil {
 		if err := validateStartSessionRequest(v.StartSession); err != nil {
 			invalidParams.AddNested("StartSession", err.(smithy.InvalidParamsError))
@@ -116,11 +121,6 @@ func validateOpSendCommandInput(v *SendCommandInput) error {
 	if v.CommitTransaction != nil {
 		if err := validateCommitTransactionRequest(v.CommitTransaction); err != nil {
 			invalidParams.AddNested("CommitTransaction", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.FetchPage != nil {
-		if err := validateFetchPageRequest(v.FetchPage); err != nil {
-			invalidParams.AddNested("FetchPage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ExecuteStatement != nil {

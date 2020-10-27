@@ -56,7 +56,7 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type GetGameSessionLogUrlInput struct {
 
 	// A unique identifier for the game session to get logs for.
@@ -65,7 +65,7 @@ type GetGameSessionLogUrlInput struct {
 	GameSessionId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type GetGameSessionLogUrlOutput struct {
 
 	// Location of the requested game session logs, available for download. This URL is

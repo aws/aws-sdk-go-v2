@@ -249,6 +249,8 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 		return i.Bucket, true
 	case *DeleteBucketMetricsConfigurationInput:
 		return i.Bucket, true
+	case *DeleteBucketOwnershipControlsInput:
+		return i.Bucket, true
 	case *DeleteBucketPolicyInput:
 		return i.Bucket, true
 	case *DeleteBucketReplicationInput:
@@ -284,6 +286,8 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 	case *GetBucketMetricsConfigurationInput:
 		return i.Bucket, true
 	case *GetBucketNotificationConfigurationInput:
+		return i.Bucket, true
+	case *GetBucketOwnershipControlsInput:
 		return i.Bucket, true
 	case *GetBucketPolicyInput:
 		return i.Bucket, true
@@ -355,6 +359,8 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 		return i.Bucket, true
 	case *PutBucketNotificationConfigurationInput:
 		return i.Bucket, true
+	case *PutBucketOwnershipControlsInput:
+		return i.Bucket, true
 	case *PutBucketPolicyInput:
 		return i.Bucket, true
 	case *PutBucketReplicationInput:
@@ -382,6 +388,8 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 	case *PutPublicAccessBlockInput:
 		return i.Bucket, true
 	case *RestoreObjectInput:
+		return i.Bucket, true
+	case *SelectObjectContentInput:
 		return i.Bucket, true
 	case *UploadPartInput:
 		return i.Bucket, true

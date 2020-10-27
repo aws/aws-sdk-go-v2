@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a virtual tape by using your own barcode. You write data to the virtual
-// tape and then archive the tape. A barcode is unique and can not be reused if it
+// tape and then archive the tape. A barcode is unique and cannot be reused if it
 // has already been used on a tape. This applies to barcodes used on deleted tapes.
 // This operation is only supported in the tape gateway type. Cache storage must be
 // allocated to the gateway before you can create a virtual tape. Use the AddCache
@@ -76,6 +76,10 @@ type CreateTapeWithBarcodeInput struct {
 	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256.
 	Tags []*types.Tag
+
+	// Set to TRUE if the tape you are creating is to be configured as a
+	// write-once-read-many (WORM) tape.
+	Worm *bool
 }
 
 // CreateTapeOutput

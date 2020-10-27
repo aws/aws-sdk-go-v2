@@ -40,7 +40,7 @@ func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, op
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type ResolveAliasInput struct {
 
 	// The unique identifier of the alias that you want to retrieve a fleet ID for. You
@@ -50,7 +50,7 @@ type ResolveAliasInput struct {
 	AliasId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type ResolveAliasOutput struct {
 
 	// The Amazon Resource Name (ARN

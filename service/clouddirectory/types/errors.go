@@ -28,8 +28,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type BatchWriteException struct {
 	Message *string
 
-	Index *int32
 	Type  BatchWriteExceptionType
+	Index *int32
 }
 
 func (e *BatchWriteException) Error() string {

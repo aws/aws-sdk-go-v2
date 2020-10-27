@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Retrieves information for a game
-// server resource. Information includes the game server statuses, health check
-// info, and the instance the game server is running on. To retrieve game server
-// information, specify the game server ID. If successful, the requested game
-// server object is returned. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Retrieves information for a registered game server. Information includes
+// game server status, health check info, and the instance that the game server is
+// running on. To retrieve game server information, specify the game server ID. If
+// successful, the requested game server object is returned. Learn more GameLift
+// FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * RegisterGameServer
@@ -50,13 +50,14 @@ func (c *Client) DescribeGameServer(ctx context.Context, params *DescribeGameSer
 
 type DescribeGameServerInput struct {
 
-	// An identifier for the game server group where the game server is running. Use
-	// either the GameServerGroup name or ARN value.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// The identifier for the game server to be retrieved.
+	// A custom string that uniquely identifies the game server information to be
+	// retrieved.
 	//
 	// This member is required.
 	GameServerId *string
@@ -64,7 +65,7 @@ type DescribeGameServerInput struct {
 
 type DescribeGameServerOutput struct {
 
-	// Object that describes the requested game server resource.
+	// Object that describes the requested game server.
 	GameServer *types.GameServer
 
 	// Metadata pertaining to the operation's result.

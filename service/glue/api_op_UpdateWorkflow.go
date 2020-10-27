@@ -38,6 +38,12 @@ type UpdateWorkflowInput struct {
 
 	// The description of the workflow.
 	Description *string
+
+	// You can use this parameter to prevent unwanted multiple updates to data, to
+	// control costs, or in some cases, to prevent exceeding the maximum number of
+	// concurrent runs of any of the component jobs. If you leave this parameter blank,
+	// there is no limit to the number of concurrent workflow runs.
+	MaxConcurrentRuns *int32
 }
 
 type UpdateWorkflowOutput struct {

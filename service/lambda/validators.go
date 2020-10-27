@@ -1095,11 +1095,11 @@ func validateFileSystemConfig(v *types.FileSystemConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FileSystemConfig"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.LocalMountPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocalMountPath"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1130,20 +1130,20 @@ func validateOpAddLayerVersionPermissionInput(v *AddLayerVersionPermissionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddLayerVersionPermissionInput"}
-	if v.Action == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}
-	if v.Principal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	if v.LayerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
-	if v.LayerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1163,11 +1163,11 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1181,14 +1181,14 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAliasInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if v.FunctionVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1202,11 +1202,11 @@ func validateOpCreateEventSourceMappingInput(v *CreateEventSourceMappingInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSourceMappingInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.EventSourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1220,25 +1220,25 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFunctionInput"}
-	if v.Handler == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Handler"))
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
-	if v.Code == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Code"))
-	}
-	if len(v.Runtime) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if v.FileSystemConfigs != nil {
 		if err := validateFileSystemConfigList(v.FileSystemConfigs); err != nil {
 			invalidParams.AddNested("FileSystemConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
 	}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.Handler == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Handler"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1330,11 +1330,11 @@ func validateOpDeleteLayerVersionInput(v *DeleteLayerVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLayerVersionInput"}
-	if v.LayerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
-	}
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
+	if v.LayerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1366,11 +1366,11 @@ func validateOpGetAliasInput(v *GetAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAliasInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1474,11 +1474,11 @@ func validateOpGetLayerVersionInput(v *GetLayerVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLayerVersionInput"}
-	if v.LayerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
-	}
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
+	if v.LayerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1525,11 +1525,11 @@ func validateOpGetProvisionedConcurrencyConfigInput(v *GetProvisionedConcurrency
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetProvisionedConcurrencyConfigInput"}
-	if v.Qualifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Qualifier"))
-	}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if v.Qualifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Qualifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1543,11 +1543,11 @@ func validateOpInvokeAsyncInput(v *InvokeAsyncInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeAsyncInput"}
-	if v.InvokeArgs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InvokeArgs"))
-	}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if v.InvokeArgs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvokeArgs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1732,14 +1732,14 @@ func validateOpPutProvisionedConcurrencyConfigInput(v *PutProvisionedConcurrency
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutProvisionedConcurrencyConfigInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
 	if v.ProvisionedConcurrentExecutions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedConcurrentExecutions"))
 	}
 	if v.Qualifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Qualifier"))
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1756,11 +1756,11 @@ func validateOpRemoveLayerVersionPermissionInput(v *RemoveLayerVersionPermission
 	if v.VersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
-	if v.LayerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
-	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
+	}
+	if v.LayerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1876,13 +1876,13 @@ func validateOpUpdateFunctionConfigurationInput(v *UpdateFunctionConfigurationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionConfigurationInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
 	if v.FileSystemConfigs != nil {
 		if err := validateFileSystemConfigList(v.FileSystemConfigs); err != nil {
 			invalidParams.AddNested("FileSystemConfigs", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

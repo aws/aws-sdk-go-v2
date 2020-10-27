@@ -33,8 +33,8 @@ type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
 	Agents          []*AgentAlreadyRunningAssessment
-	AgentsTruncated *bool
 	CanRetry        *bool
+	AgentsTruncated *bool
 }
 
 func (e *AgentsAlreadyRunningAssessmentException) Error() string {
@@ -58,9 +58,9 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault
 type AssessmentRunInProgressException struct {
 	Message *string
 
+	CanRetry                   *bool
 	AssessmentRunArns          []*string
 	AssessmentRunArnsTruncated *bool
-	CanRetry                   *bool
 }
 
 func (e *AssessmentRunInProgressException) Error() string {
@@ -101,8 +101,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidCrossAccountRoleException struct {
 	Message *string
 
-	ErrorCode_ InvalidCrossAccountRoleErrorCode
 	CanRetry   *bool
+	ErrorCode_ InvalidCrossAccountRoleErrorCode
 }
 
 func (e *InvalidCrossAccountRoleException) Error() string {
@@ -145,8 +145,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type LimitExceededException struct {
 	Message *string
 
-	ErrorCode_ LimitExceededErrorCode
 	CanRetry   *bool
+	ErrorCode_ LimitExceededErrorCode
 }
 
 func (e *LimitExceededException) Error() string {

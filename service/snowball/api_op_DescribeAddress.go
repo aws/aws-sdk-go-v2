@@ -38,8 +38,8 @@ type DescribeAddressInput struct {
 
 type DescribeAddressOutput struct {
 
-	// The address that you want the Snowball or Snowballs associated with a specific
-	// job to be shipped to.
+	// The address that you want the Snow device(s) associated with a specific job to
+	// be shipped to.
 	Address *types.Address
 
 	// Metadata pertaining to the operation's result.

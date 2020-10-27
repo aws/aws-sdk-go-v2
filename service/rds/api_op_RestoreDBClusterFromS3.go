@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket.
-// Amazon RDS must be authorized to access the Amazon S3 bucket and the data must
-// be created using the Percona XtraBackup utility as described in  Migrating Data
-// to an Amazon Aurora MySQL DB Cluster
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html)
+// Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3
+// bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the
+// data must be created using the Percona XtraBackup utility as described in
+// Migrating Data from MySQL by Using an Amazon S3 Bucket
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3)
 // in the Amazon Aurora User Guide. This action only restores the DB cluster, not
 // the DB instances for that DB cluster. You must invoke the CreateDBInstance
 // action to create DB instances for the restored DB cluster, specifying the
@@ -25,6 +25,7 @@ import (
 // Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// The source DB engine must be MySQL.
 func (c *Client) RestoreDBClusterFromS3(ctx context.Context, params *RestoreDBClusterFromS3Input, optFns ...func(*Options)) (*RestoreDBClusterFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBClusterFromS3Input{}
@@ -59,8 +60,9 @@ type RestoreDBClusterFromS3Input struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The name of the database engine to be used for the restored DB cluster. Valid
-	// Values: aurora, aurora-postgresql
+	// The name of the database engine to be used for this DB cluster. Valid Values:
+	// aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible
+	// Aurora), and aurora-postgresql
 	//
 	// This member is required.
 	Engine *string
@@ -104,7 +106,7 @@ type RestoreDBClusterFromS3Input struct {
 	SourceEngine *string
 
 	// The version of the database that the backup files were created from. MySQL
-	// versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40
+	// versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40, 5.7.28
 	//
 	// This member is required.
 	SourceEngineVersion *string

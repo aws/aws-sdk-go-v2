@@ -53,8 +53,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type LimitExceededException struct {
 	Message *string
 
-	Type *string
 	Code *string
+	Type *string
 }
 
 func (e *LimitExceededException) Error() string {
@@ -73,8 +73,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MissingParameterValueException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *MissingParameterValueException) Error() string {
@@ -115,8 +115,8 @@ func (e *PolicyEnforcedException) ErrorFault() smithy.ErrorFault { return smithy
 type RequestTimeoutException struct {
 	Message *string
 
-	Type *string
 	Code *string
+	Type *string
 }
 
 func (e *RequestTimeoutException) Error() string {
@@ -156,8 +156,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceUnavailableException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *ServiceUnavailableException) Error() string {

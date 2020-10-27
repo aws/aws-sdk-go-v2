@@ -132,7 +132,7 @@ type Message struct {
 
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]*MessageAttributeValue
 
@@ -156,7 +156,7 @@ type MessageAttributeValue struct {
 	// Amazon SQS supports the following logical data types: String, Number, and
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// This member is required.
@@ -187,7 +187,7 @@ type MessageSystemAttributeValue struct {
 	// Amazon SQS supports the following logical data types: String, Number, and
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// This member is required.
@@ -235,7 +235,7 @@ type SendMessageBatchRequestEntry struct {
 
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]*MessageAttributeValue
 

@@ -51,6 +51,9 @@ type DeleteTemplateOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
+	// The HTTP status of the request.
+	Status *int32
+
 	// An ID for the template.
 	TemplateId *string
 

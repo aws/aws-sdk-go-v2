@@ -30,8 +30,8 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource is already in a state that indicates an action is happening that must
-// complete before a new update can be applied.
+// A resource is already in a state that indicates an operation is happening that
+// must complete before a new update can be applied.
 type ConcurrentUpdatingException struct {
 	Message *string
 
@@ -172,8 +172,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type LimitExceededException struct {
 	Message *string
 
-	RequestId    *string
 	ResourceType ExceptionResourceType
+	RequestId    *string
 }
 
 func (e *LimitExceededException) Error() string {
@@ -254,8 +254,8 @@ func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy
 type ResourceNotFoundException struct {
 	Message *string
 
-	RequestId    *string
 	ResourceType ExceptionResourceType
+	RequestId    *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -274,8 +274,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceUnavailableException struct {
 	Message *string
 
-	ResourceType ExceptionResourceType
 	RequestId    *string
+	ResourceType ExceptionResourceType
 }
 
 func (e *ResourceUnavailableException) Error() string {

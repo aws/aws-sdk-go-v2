@@ -13,7 +13,7 @@ import (
 // Starts an on-demand replication run for the specified replication job. This
 // replication run starts immediately. This replication run is in addition to the
 // ones already scheduled. There is a limit on the number of on-demand replications
-// runs you can request in a 24-hour period.
+// runs that you can request in a 24-hour period.
 func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartOnDemandReplicationRunInput, optFns ...func(*Options)) (*StartOnDemandReplicationRunOutput, error) {
 	if params == nil {
 		params = &StartOnDemandReplicationRunInput{}
@@ -31,7 +31,7 @@ func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartO
 
 type StartOnDemandReplicationRunInput struct {
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	//
 	// This member is required.
 	ReplicationJobId *string
@@ -42,7 +42,7 @@ type StartOnDemandReplicationRunInput struct {
 
 type StartOnDemandReplicationRunOutput struct {
 
-	// The identifier of the replication run.
+	// The ID of the replication run.
 	ReplicationRunId *string
 
 	// Metadata pertaining to the operation's result.

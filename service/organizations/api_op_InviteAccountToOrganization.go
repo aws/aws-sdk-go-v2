@@ -17,9 +17,9 @@ import (
 // Handshake whose details are in the response.
 //
 //     * You can invite AWS accounts
-// only from the same seller as the master account. For example, if your
-// organization's master account was created by Amazon Internet Services Pvt. Ltd
-// (AISPL), an AWS seller in India, you can invite only other AISPL accounts to
+// only from the same seller as the management account. For example, if your
+// organization's management account was created by Amazon Internet Services Pvt.
+// Ltd (AISPL), an AWS seller in India, you can invite only other AISPL accounts to
 // your organization. You can't combine accounts from AISPL and AWS or from any
 // other AWS seller. For more information, see Consolidated Billing in India
 // (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html).
@@ -31,8 +31,9 @@ import (
 // error persists after an hour, contact AWS Support
 // (https://console.aws.amazon.com/support/home#/).
 //
-// This operation can be called
-// only from the organization's master account.
+// If the request includes tags,
+// then the requester must have the organizations:TagResource permission. This
+// operation can be called only from the organization's management account.
 func (c *Client) InviteAccountToOrganization(ctx context.Context, params *InviteAccountToOrganizationInput, optFns ...func(*Options)) (*InviteAccountToOrganizationOutput, error) {
 	if params == nil {
 		params = &InviteAccountToOrganizationInput{}
@@ -65,6 +66,23 @@ type InviteAccountToOrganizationInput struct {
 	// Additional information that you want to include in the generated email to the
 	// recipient account owner.
 	Notes *string
+
+	// A list of tags that you want to attach to the account when it becomes a member
+	// of the organization. For each tag in the list, you must specify both a tag key
+	// and a value. You can set the value to an empty string, but you can't set it to
+	// null. For more information about tagging, see Tagging AWS Organizations
+	// resources
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// in the AWS Organizations User Guide. Any tags in the request are checked for
+	// compliance with any applicable tag policies when the request is made. The
+	// request is rejected if the tags in the request don't match the requirements of
+	// the policy at that time. Tag policy compliance is not checked again when the
+	// invitation is accepted and the tags are actually attached to the account. That
+	// means that if the tag policy changes between the invitation and the acceptance,
+	// then that tags could potentially be non-compliant. If any one of the tags is
+	// invalid or if you exceed the allowed number of tags for an account, then the
+	// entire request fails and invitations are not sent.
+	Tags []*types.Tag
 }
 
 type InviteAccountToOrganizationOutput struct {

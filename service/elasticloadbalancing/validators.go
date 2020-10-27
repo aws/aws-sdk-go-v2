@@ -675,20 +675,20 @@ func validateHealthCheck(v *types.HealthCheck) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HealthCheck"}
-	if v.Target == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Target"))
-	}
 	if v.HealthyThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
 	}
 	if v.UnhealthyThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
 	}
-	if v.Timeout == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Timeout"))
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if v.Interval == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if v.Timeout == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timeout"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,14 +740,14 @@ func validateLoadBalancerAttributes(v *types.LoadBalancerAttributes) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LoadBalancerAttributes"}
-	if v.ConnectionSettings != nil {
-		if err := validateConnectionSettings(v.ConnectionSettings); err != nil {
-			invalidParams.AddNested("ConnectionSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AccessLog != nil {
 		if err := validateAccessLog(v.AccessLog); err != nil {
 			invalidParams.AddNested("AccessLog", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectionSettings != nil {
+		if err := validateConnectionSettings(v.ConnectionSettings); err != nil {
+			invalidParams.AddNested("ConnectionSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CrossZoneLoadBalancing != nil {
@@ -804,15 +804,15 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
+	if v.LoadBalancerNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerNames"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.LoadBalancerNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -826,11 +826,11 @@ func validateOpApplySecurityGroupsToLoadBalancerInput(v *ApplySecurityGroupsToLo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplySecurityGroupsToLoadBalancerInput"}
-	if v.SecurityGroups == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.SecurityGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -884,14 +884,14 @@ func validateOpCreateAppCookieStickinessPolicyInput(v *CreateAppCookieStickiness
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAppCookieStickinessPolicyInput"}
-	if v.CookieName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CookieName"))
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	if v.CookieName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CookieName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -905,11 +905,11 @@ func validateOpCreateLBCookieStickinessPolicyInput(v *CreateLBCookieStickinessPo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLBCookieStickinessPolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -923,9 +923,6 @@ func validateOpCreateLoadBalancerInput(v *CreateLoadBalancerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -937,6 +934,9 @@ func validateOpCreateLoadBalancerInput(v *CreateLoadBalancerInput) error {
 		if err := validateListeners(v.Listeners); err != nil {
 			invalidParams.AddNested("Listeners", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -950,15 +950,15 @@ func validateOpCreateLoadBalancerListenersInput(v *CreateLoadBalancerListenersIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerListenersInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.Listeners == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Listeners"))
 	} else if v.Listeners != nil {
 		if err := validateListeners(v.Listeners); err != nil {
 			invalidParams.AddNested("Listeners", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -972,11 +972,11 @@ func validateOpCreateLoadBalancerPolicyInput(v *CreateLoadBalancerPolicyInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerPolicyInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if v.PolicyTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyTypeName"))
@@ -1044,11 +1044,11 @@ func validateOpDeregisterInstancesFromLoadBalancerInput(v *DeregisterInstancesFr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterInstancesFromLoadBalancerInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.Instances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Instances"))
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1143,11 +1143,11 @@ func validateOpEnableAvailabilityZonesForLoadBalancerInput(v *EnableAvailability
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableAvailabilityZonesForLoadBalancerInput"}
-	if v.AvailabilityZones == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZones"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.AvailabilityZones == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZones"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1183,11 +1183,11 @@ func validateOpRegisterInstancesWithLoadBalancerInput(v *RegisterInstancesWithLo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterInstancesWithLoadBalancerInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
 	if v.Instances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Instances"))
+	}
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1219,14 +1219,14 @@ func validateOpSetLoadBalancerListenerSSLCertificateInput(v *SetLoadBalancerList
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetLoadBalancerListenerSSLCertificateInput"}
-	if v.LoadBalancerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	if v.LoadBalancerPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if v.SSLCertificateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SSLCertificateId"))
 	}
-	if v.LoadBalancerPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
+	if v.LoadBalancerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1240,14 +1240,14 @@ func validateOpSetLoadBalancerPoliciesForBackendServerInput(v *SetLoadBalancerPo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetLoadBalancerPoliciesForBackendServerInput"}
+	if v.PolicyNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyNames"))
+	}
 	if v.InstancePort == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
 	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
-	if v.PolicyNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1261,14 +1261,14 @@ func validateOpSetLoadBalancerPoliciesOfListenerInput(v *SetLoadBalancerPolicies
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetLoadBalancerPoliciesOfListenerInput"}
-	if v.LoadBalancerPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
-	}
 	if v.PolicyNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyNames"))
 	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.LoadBalancerPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -42,8 +42,9 @@ type CodeReview struct {
 	Name *string
 
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
+	// account ID of the account that owns the repository. For a GitHub, GitHub
+	// Enterprise Server, or Bitbucket repository, this is the username for the account
+	// that owns the repository.
 	Owner *string
 
 	// The type of repository that contains the reviewed code (for example, GitHub or
@@ -102,8 +103,9 @@ type CodeReviewSummary struct {
 	Name *string
 
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
+	// account ID of the account that owns the repository. For a GitHub, GitHub
+	// Enterprise Server, or Bitbucket repository, this is the username for the account
+	// that owns the repository.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -133,13 +135,39 @@ type CodeReviewSummary struct {
 	Type Type
 }
 
-// The commit diff for the pull request.
+// The type of a code review. There are two code review types:
+//
+//     * PullRequest -
+// A code review that is automatically triggered by a pull request on an assocaited
+// repository. Because this type of code review is automatically generated, you
+// cannot specify this code review type using CreateCodeReview
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
+//
+//
+// * RepositoryAnalysis - A code review that analyzes all code under a specified
+// branch in an associated respository. The assocated repository is specified using
+// its ARN in CreateCodeReview
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
+type CodeReviewType struct {
+
+	// A code review that analyzes all code under a specified branch in an associated
+	// respository. The assocated repository is specified using its ARN in
+	// CreateCodeReview
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview)
+	//
+	// This member is required.
+	RepositoryAnalysis *RepositoryAnalysis
+}
+
+// A type of SourceCodeType
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+// that specifies the commit diff for a pull request on an associated repository.
 type CommitDiffSourceCodeType struct {
 
-	// The SHA of the destination commit.
+	// The SHA of the destination commit used to generate a commit diff.
 	DestinationCommit *string
 
-	// The SHA of the source commit.
+	// The SHA of the source commit used to generate a commit diff.
 	SourceCommit *string
 }
 
@@ -271,6 +299,20 @@ type Repository struct {
 	GitHubEnterpriseServer *ThirdPartySourceRepository
 }
 
+// A code review type that analyzes all code under a specified branch in an
+// associated respository. The assocated repository is specified using its ARN when
+// you call CreateCodeReview
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
+type RepositoryAnalysis struct {
+
+	// A SourceCodeType
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+	// that specifies the tip of a branch in an associated repository.
+	//
+	// This member is required.
+	RepositoryHead *RepositoryHeadSourceCodeType
+}
+
 // Information about a repository association. The DescribeRepositoryAssociation
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html)
 // operation returns a RepositoryAssociation object.
@@ -302,8 +344,9 @@ type RepositoryAssociation struct {
 	Name *string
 
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
+	// account ID of the account that owns the repository. For a GitHub, GitHub
+	// Enterprise Server, or Bitbucket repository, this is the username for the account
+	// that owns the repository.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -319,20 +362,20 @@ type RepositoryAssociation struct {
 	//
 	//         * Setting up pull request
 	// notifications. This is required for pull requests to trigger a CodeGuru Reviewer
-	// review. If your repository ProviderType is GitHub or Bitbucket, CodeGuru
-	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
-	// reviews. If you delete these webhooks, reviews of code in your repository cannot
-	// be triggered.
+	// review. If your repository ProviderType is GitHub, GitHub Enterprise Server, or
+	// Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger
+	// CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
+	// repository cannot be triggered.
 	//
-	//         * Setting up source code access. This is required for
-	// CodeGuru Reviewer to securely clone code in your repository.
+	//         * Setting up source code access. This
+	// is required for CodeGuru Reviewer to securely clone code in your repository.
 	//
-	//     * Failed: The
-	// repository failed to associate or disassociate.
 	//
-	//     * Disassociating: CodeGuru
-	// Reviewer is removing the repository's pull request notifications and source code
-	// access.
+	// * Failed: The repository failed to associate or disassociate.
+	//
+	//     *
+	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	// notifications and source code access.
 	State RepositoryAssociationState
 
 	// A description of why the repository association is in the current state.
@@ -347,7 +390,7 @@ type RepositoryAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object.
+	// object. You can retrieve this ARN by calling ListRepositories.
 	AssociationArn *string
 
 	// The repository association ID.
@@ -369,8 +412,9 @@ type RepositoryAssociationSummary struct {
 	Name *string
 
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
+	// account ID of the account that owns the repository. For a GitHub, GitHub
+	// Enterprise Server, or Bitbucket repository, this is the username for the account
+	// that owns the repository.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -386,28 +430,50 @@ type RepositoryAssociationSummary struct {
 	//
 	//         * Setting up pull request
 	// notifications. This is required for pull requests to trigger a CodeGuru Reviewer
-	// review. If your repository ProviderType is GitHub or Bitbucket, CodeGuru
-	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
-	// reviews. If you delete these webhooks, reviews of code in your repository cannot
-	// be triggered.
+	// review. If your repository ProviderType is GitHub, GitHub Enterprise Server, or
+	// Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger
+	// CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
+	// repository cannot be triggered.
 	//
-	//         * Setting up source code access. This is required for
-	// CodeGuru Reviewer to securely clone code in your repository.
+	//         * Setting up source code access. This
+	// is required for CodeGuru Reviewer to securely clone code in your repository.
 	//
-	//     * Failed: The
-	// repository failed to associate or disassociate.
 	//
-	//     * Disassociating: CodeGuru
-	// Reviewer is removing the repository's pull request notifications and source code
-	// access.
+	// * Failed: The repository failed to associate or disassociate.
+	//
+	//     *
+	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
+	// notifications and source code access.
 	State RepositoryAssociationState
 }
 
-// Information about the source code type.
+// A SourceCodeType
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+// that specifies the tip of a branch in an associated repository.
+type RepositoryHeadSourceCodeType struct {
+
+	// The name of the branch in an associated repository. The
+	// RepositoryHeadSourceCodeType specifies the tip of this branch.
+	//
+	// This member is required.
+	BranchName *string
+}
+
+// Specifies the source code that is analyzed in a code review. A code review can
+// analyze the source code that is specified using a pull request diff or a branch
+// in an associated repository.
 type SourceCodeType struct {
 
-	// The commit diff for the pull request.
+	// A SourceCodeType
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+	// that specifies a commit diff created by a pull request on an associated
+	// repository.
 	CommitDiff *CommitDiffSourceCodeType
+
+	// A SourceCodeType
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+	// that specifies the tip of a branch in an associated repository.
+	RepositoryHead *RepositoryHeadSourceCodeType
 }
 
 // Information about a third-party source repository connected to CodeGuru

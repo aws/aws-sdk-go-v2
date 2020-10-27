@@ -12,7 +12,7 @@ import (
 
 // Moves an account from its current source parent root or organizational unit (OU)
 // to the specified destination parent root or OU. This operation can be called
-// only from the organization's master account.
+// only from the organization's management account.
 func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optFns ...func(*Options)) (*MoveAccountOutput, error) {
 	if params == nil {
 		params = &MoveAccountInput{}

@@ -314,8 +314,8 @@ func (e *RegistrationCodeValidationException) ErrorFault() smithy.ErrorFault {
 type ResourceAlreadyExistsException struct {
 	Message *string
 
-	ResourceId  *string
 	ResourceArn *string
+	ResourceId  *string
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {

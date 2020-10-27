@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"time"
 )
 
 // Creates a Savings Plan.
@@ -43,6 +44,10 @@ type CreateSavingsPlanInput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
+	// The time at which to purchase the Savings Plan, in UTC format
+	// (YYYY-MM-DDTHH:MM:SSZ).
+	PurchaseTime *time.Time
 
 	// One or more tags.
 	Tags map[string]*string

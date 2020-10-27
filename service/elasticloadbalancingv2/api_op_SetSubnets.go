@@ -56,7 +56,7 @@ type SetSubnetsInput struct {
 
 type SetSubnetsOutput struct {
 
-	// Information about the subnet and Availability Zone.
+	// Information about the subnets.
 	AvailabilityZones []*types.AvailabilityZone
 
 	// Metadata pertaining to the operation's result.

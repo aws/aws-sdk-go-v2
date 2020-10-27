@@ -49,11 +49,17 @@ type RotateIngestEndpointCredentialsOutput struct {
 	// A short text description of the Channel.
 	Description *string
 
+	// Configure egress access logging.
+	EgressAccessLogs *types.EgressAccessLogs
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
 
 	// The ID of the Channel.
 	Id *string
+
+	// Configure ingress access logging.
+	IngressAccessLogs *types.IngressAccessLogs
 
 	// A collection of tags associated with a resource
 	Tags map[string]*string

@@ -65,11 +65,11 @@ func validateOpGetPersonalizedRankingInput(v *GetPersonalizedRankingInput) error
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.InputList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputList"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

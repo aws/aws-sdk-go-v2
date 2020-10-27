@@ -30,28 +30,26 @@ func (c *Client) ListServers(ctx context.Context, params *ListServersInput, optF
 
 type ListServersInput struct {
 
-	// Specifies the number of file transfer protocol-enabled servers to return as a
-	// response to the ListServers query.
+	// Specifies the number of servers to return as a response to the ListServers
+	// query.
 	MaxResults *int32
 
-	// When additional results are obtained from theListServers command, a NextToken
+	// When additional results are obtained from the ListServers command, a NextToken
 	// parameter is returned in the output. You can then pass the NextToken parameter
-	// in a subsequent command to continue listing additional file transfer
-	// protocol-enabled servers.
+	// in a subsequent command to continue listing additional servers.
 	NextToken *string
 }
 
 type ListServersOutput struct {
 
-	// An array of file transfer protocol-enabled servers that were listed.
+	// An array of servers that were listed.
 	//
 	// This member is required.
 	Servers []*types.ListedServer
 
 	// When you can get additional results from the ListServers operation, a NextToken
 	// parameter is returned in the output. In a following command, you can pass in the
-	// NextToken parameter to continue listing additional file transfer
-	// protocol-enabled servers.
+	// NextToken parameter to continue listing additional servers.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Disables an account as a delegated administrator of Amazon Macie for an AWS
-// organization.
+// Disables an account as the delegated Amazon Macie administrator account for an
+// AWS organization.
 func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *DisableOrganizationAdminAccountInput, optFns ...func(*Options)) (*DisableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisableOrganizationAdminAccountInput{}

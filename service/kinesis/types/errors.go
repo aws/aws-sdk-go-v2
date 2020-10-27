@@ -41,6 +41,8 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The processing of the request failed because of an unknown error, exception, or
+// failure.
 type InternalFailureException struct {
 	Message *string
 }

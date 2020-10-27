@@ -177,10 +177,14 @@ type CharacterSet struct {
 // CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes and
 // DisableLogTypes arrays determine which logs will be exported (or not exported)
 // to CloudWatch Logs. The values within these arrays depend on the DB engine being
-// used. For more information, see Publishing Database Logs to Amazon CloudWatch
-// Logs
+// used. For more information about exporting CloudWatch Logs for Amazon RDS DB
+// instances, see Publishing Database Logs to Amazon CloudWatch Logs
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-// in the Amazon RDS User Guide.
+// in the Amazon RDS User Guide. For more information about exporting CloudWatch
+// Logs for Amazon Aurora DB clusters, see Publishing Database Logs to Amazon
+// CloudWatch Logs
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+// in the Amazon Aurora User Guide.
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
@@ -418,16 +422,13 @@ type DBCluster struct {
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string
 
-	// Provides the name of the database engine to be used for this DB cluster.
+	// The name of the database engine to be used for this DB cluster.
 	Engine *string
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
-	// parallelquery, global, or multimaster. global engine mode only applies for
-	// global database clusters created with Aurora MySQL version 5.6.10a. For higher
-	// Aurora MySQL versions, the clusters in a global database use provisioned engine
-	// mode. To check if a DB cluster is part of a global database, use
-	// DescribeGlobalClusters instead of checking the EngineMode return value from
-	// DescribeDBClusters.
+	// parallelquery, global, or multimaster. For more information, see
+	// CreateDBCluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html).
 	EngineMode *string
 
 	// Indicates the database engine version.
@@ -518,6 +519,11 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []*Tag
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []*VpcSecurityGroupMembership
@@ -611,7 +617,9 @@ type DBClusterEndpoint struct {
 	StaticMembers []*string
 
 	// The current status of the endpoint. One of: creating, available, deleting,
-	// modifying.
+	// inactive, modifying. The inactive state applies to an endpoint that can't be
+	// used for a certain kind of cluster, such as a writer endpoint for a read-only
+	// secondary cluster in a global database.
 	Status *string
 }
 
@@ -654,11 +662,11 @@ type DBClusterParameterGroup struct {
 	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
 	DBClusterParameterGroupArn *string
 
-	// Provides the name of the DB cluster parameter group.
+	// The name of the DB cluster parameter group.
 	DBClusterParameterGroupName *string
 
-	// Provides the name of the DB parameter group family that this DB cluster
-	// parameter group is compatible with.
+	// The name of the DB parameter group family that this DB cluster parameter group
+	// is compatible with.
 	DBParameterGroupFamily *string
 
 	// Provides the customer-specified description for this DB cluster parameter group.
@@ -763,6 +771,11 @@ type DBClusterSnapshot struct {
 	// Specifies whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool
 
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []*Tag
+
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
 }
@@ -832,13 +845,10 @@ type DBEngineVersion struct {
 	Status *string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
-	// parameter of the CreateDBInstance action.
+	// parameter of the CreateDBInstance operation.
 	SupportedCharacterSets []*CharacterSet
 
-	// A list of the supported DB engine modes. global engine mode only applies for
-	// global database clusters created with Aurora MySQL version 5.6.10a. For higher
-	// Aurora MySQL versions, the clusters in a global database use provisioned engine
-	// mode.
+	// A list of the supported DB engine modes.
 	SupportedEngineModes []*string
 
 	// A list of features supported by the DB engine. Supported feature names include
@@ -846,6 +856,10 @@ type DBEngineVersion struct {
 	//
 	//     * s3Import
 	SupportedFeatureNames []*string
+
+	// A list of the character sets supported by the Oracle DB engine for the
+	// NcharCharacterSetName parameter of the CreateDBInstance operation.
+	SupportedNcharCharacterSets []*CharacterSet
 
 	// A list of the time zones supported by this engine for the Timezone parameter of
 	// the CreateDBInstance action.
@@ -971,7 +985,7 @@ type DBInstance struct {
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint
 
-	// Provides the name of the database engine to be used for this DB instance.
+	// The name of the database engine to be used for this DB instance.
 	Engine *string
 
 	// Indicates the database engine version.
@@ -1032,6 +1046,11 @@ type DBInstance struct {
 
 	// Specifies if the DB instance is a Multi-AZ deployment.
 	MultiAZ *bool
+
+	// The name of the NCHAR character set for the Oracle DB instance. This character
+	// set specifies the Unicode encoding for data stored in table columns of type
+	// NCHAR, NCLOB, or NVARCHAR2.
+	NcharCharacterSetName *string
 
 	// Provides the list of option group memberships for this DB instance.
 	OptionGroupMemberships []*OptionGroupMembership
@@ -1099,6 +1118,13 @@ type DBInstance struct {
 	// replica.
 	ReadReplicaSourceDBInstanceIdentifier *string
 
+	// The open mode of an Oracle read replica. The default is open-read-only. For more
+	// information, see Working with Oracle Read Replicas for Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
+	// in the Amazon RDS User Guide. This attribute is only supported in RDS for
+	// Oracle.
+	ReplicaMode ReplicaMode
+
 	// If present, specifies the name of the secondary Availability Zone for a DB
 	// instance with multi-AZ support.
 	SecondaryAvailabilityZone *string
@@ -1112,6 +1138,11 @@ type DBInstance struct {
 
 	// Specifies the storage type associated with DB instance.
 	StorageType *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []*Tag
 
 	// The ARN from the key store with which the instance is associated for TDE
 	// encryption.
@@ -1277,11 +1308,11 @@ type DBParameterGroup struct {
 	// The Amazon Resource Name (ARN) for the DB parameter group.
 	DBParameterGroupArn *string
 
-	// Provides the name of the DB parameter group family that this DB parameter group
-	// is compatible with.
+	// The name of the DB parameter group family that this DB parameter group is
+	// compatible with.
 	DBParameterGroupFamily *string
 
-	// Provides the name of the DB parameter group.
+	// The name of the DB parameter group.
 	DBParameterGroupName *string
 
 	// Provides the customer-specified description for this DB parameter group.
@@ -1580,6 +1611,11 @@ type DBSnapshot struct {
 	// Specifies the storage type associated with DB snapshot.
 	StorageType *string
 
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []*Tag
+
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
 	TdeCredentialArn *string
@@ -1781,7 +1817,7 @@ type Event struct {
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
-// action.
+// operation.
 type EventCategoriesMap struct {
 
 	// The event categories for the specified source type
@@ -2357,10 +2393,7 @@ type OrderableDBInstanceOption struct {
 	// Indicates the storage type for a DB instance.
 	StorageType *string
 
-	// A list of the supported DB engine modes. global engine mode only applies for
-	// global database clusters created with Aurora MySQL version 5.6.10a. For higher
-	// Aurora MySQL versions, the clusters in a global database use provisioned engine
-	// mode.
+	// A list of the supported DB engine modes.
 	SupportedEngineModes []*string
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
@@ -2481,9 +2514,10 @@ type PendingMaintenanceAction struct {
 	// A description providing more detail about the maintenance action.
 	Description *string
 
-	// The date when the maintenance action is automatically applied. The maintenance
-	// action is applied to the resource on this date regardless of the maintenance
-	// window for the resource.
+	// The date when the maintenance action is automatically applied. On this date, the
+	// maintenance action is applied to the resource as soon as possible, regardless of
+	// the maintenance window for the resource. There might be a delay of one or more
+	// days from this date before the maintenance action is applied.
 	ForcedApplyDate *time.Time
 
 	// Indicates the type of opt-in request that has been received for the resource.
@@ -2578,8 +2612,21 @@ type PendingModifiedValues struct {
 //
 //     * DescribeValidDBInstanceModifications
 //
-// For more
-// information, see Configuring the Processor of the DB Instance Class
+// If you call
+// DescribeDBInstances, ProcessorFeature returns non-null values only if the
+// following conditions are met:
+//
+//     * You are accessing an Oracle DB instance.
+//
+//
+// * Your Oracle DB instance class supports configuring the number of CPU cores and
+// threads per core.
+//
+//     * The current number CPU cores and threads is set to a
+// non-default value.
+//
+// For more information, see Configuring the Processor of the
+// DB Instance Class
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor)
 // in the Amazon RDS User Guide.
 type ProcessorFeature struct {
@@ -2837,13 +2884,15 @@ type Tag struct {
 	// A key is the required name of the tag. The string value can be from 1 to 128
 	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
 	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Key *string
 
 	// A value is the optional value of the tag. The string value can be from 1 to 256
 	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
 	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Value *string
 }
 

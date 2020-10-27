@@ -66,7 +66,7 @@ type DescribeImagesInput struct {
 	// volume, in GiB.
 	//
 	//     * block-device-mapping.volume-type - The volume type of the
-	// EBS volume (gp2 | io1 | st1 | sc1 | standard).
+	// EBS volume (gp2 | io1 | io2 | st1 | sc1 | standard).
 	//
 	//     *
 	// block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume

@@ -2404,6 +2404,16 @@ func awsAwsquery_serializeOpDocumentPublishInput(v *PublishInput, value query.Va
 		}
 	}
 
+	if v.MessageDeduplicationId != nil {
+		objectKey := object.Key("MessageDeduplicationId")
+		objectKey.String(*v.MessageDeduplicationId)
+	}
+
+	if v.MessageGroupId != nil {
+		objectKey := object.Key("MessageGroupId")
+		objectKey.String(*v.MessageGroupId)
+	}
+
 	if v.MessageStructure != nil {
 		objectKey := object.Key("MessageStructure")
 		objectKey.String(*v.MessageStructure)

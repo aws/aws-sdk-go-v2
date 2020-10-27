@@ -1724,11 +1724,11 @@ func validateCreateEndOfMeetingReminder(v *types.CreateEndOfMeetingReminder) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEndOfMeetingReminder"}
-	if len(v.ReminderType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ReminderType"))
-	}
 	if v.ReminderAtMinutes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReminderAtMinutes"))
+	}
+	if len(v.ReminderType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReminderType"))
 	}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
@@ -1745,11 +1745,11 @@ func validateCreateInstantBooking(v *types.CreateInstantBooking) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstantBooking"}
-	if v.DurationInMinutes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DurationInMinutes"))
-	}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.DurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInMinutes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1763,14 +1763,14 @@ func validateCreateMeetingRoomConfiguration(v *types.CreateMeetingRoomConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMeetingRoomConfiguration"}
-	if v.InstantBooking != nil {
-		if err := validateCreateInstantBooking(v.InstantBooking); err != nil {
-			invalidParams.AddNested("InstantBooking", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RequireCheckIn != nil {
 		if err := validateCreateRequireCheckIn(v.RequireCheckIn); err != nil {
 			invalidParams.AddNested("RequireCheckIn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstantBooking != nil {
+		if err := validateCreateInstantBooking(v.InstantBooking); err != nil {
+			invalidParams.AddNested("InstantBooking", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EndOfMeetingReminder != nil {
@@ -1808,11 +1808,11 @@ func validateFilter(v *types.Filter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1843,11 +1843,11 @@ func validateIPDialIn(v *types.IPDialIn) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IPDialIn"}
-	if v.Endpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
-	}
 	if len(v.CommsProtocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CommsProtocol"))
+	}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1876,11 +1876,11 @@ func validatePhoneNumber(v *types.PhoneNumber) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumber"}
-	if v.Number == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Number"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Number == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Number"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1911,17 +1911,17 @@ func validatePSTNDialIn(v *types.PSTNDialIn) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PSTNDialIn"}
-	if v.OneClickPinDelay == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OneClickPinDelay"))
-	}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
-	if v.CountryCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	if v.OneClickPinDelay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OneClickPinDelay"))
 	}
 	if v.OneClickIdDelay == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OneClickIdDelay"))
+	}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1953,11 +1953,11 @@ func validateSipAddress(v *types.SipAddress) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SipAddress"}
-	if v.Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2023,11 +2023,11 @@ func validateSsml(v *types.Ssml) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ssml"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Locale) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Locale"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2058,11 +2058,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2093,11 +2093,11 @@ func validateText(v *types.Text) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Text"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Locale) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Locale"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2231,13 +2231,13 @@ func validateOpCreateBusinessReportScheduleInput(v *CreateBusinessReportSchedule
 			invalidParams.AddNested("ContentRange", err.(smithy.InvalidParamsError))
 		}
 	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2251,15 +2251,21 @@ func validateOpCreateConferenceProviderInput(v *CreateConferenceProviderInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConferenceProviderInput"}
+	if v.PSTNDialIn != nil {
+		if err := validatePSTNDialIn(v.PSTNDialIn); err != nil {
+			invalidParams.AddNested("PSTNDialIn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ConferenceProviderType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderType"))
+	}
 	if v.IPDialIn != nil {
 		if err := validateIPDialIn(v.IPDialIn); err != nil {
 			invalidParams.AddNested("IPDialIn", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.PSTNDialIn != nil {
-		if err := validatePSTNDialIn(v.PSTNDialIn); err != nil {
-			invalidParams.AddNested("PSTNDialIn", err.(smithy.InvalidParamsError))
-		}
+	if v.ConferenceProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderName"))
 	}
 	if v.MeetingSetting == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingSetting"))
@@ -2267,12 +2273,6 @@ func validateOpCreateConferenceProviderInput(v *CreateConferenceProviderInput) e
 		if err := validateMeetingSetting(v.MeetingSetting); err != nil {
 			invalidParams.AddNested("MeetingSetting", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConferenceProviderName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderName"))
-	}
-	if len(v.ConferenceProviderType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2286,9 +2286,6 @@ func validateOpCreateContactInput(v *CreateContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateContactInput"}
-	if v.FirstName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FirstName"))
-	}
 	if v.PhoneNumbers != nil {
 		if err := validatePhoneNumberList(v.PhoneNumbers); err != nil {
 			invalidParams.AddNested("PhoneNumbers", err.(smithy.InvalidParamsError))
@@ -2298,6 +2295,9 @@ func validateOpCreateContactInput(v *CreateContactInput) error {
 		if err := validateSipAddressList(v.SipAddresses); err != nil {
 			invalidParams.AddNested("SipAddresses", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.FirstName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirstName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2311,11 +2311,11 @@ func validateOpCreateGatewayGroupInput(v *CreateGatewayGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGatewayGroupInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2329,17 +2329,17 @@ func validateOpCreateNetworkProfileInput(v *CreateNetworkProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNetworkProfileInput"}
-	if v.Ssid == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ssid"))
-	}
 	if len(v.SecurityType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityType"))
 	}
-	if v.NetworkProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkProfileName"))
+	if v.Ssid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ssid"))
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.NetworkProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2353,33 +2353,33 @@ func validateOpCreateProfileInput(v *CreateProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProfileInput"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
-	}
-	if len(v.TemperatureUnit) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TemperatureUnit"))
-	}
 	if v.MeetingRoomConfiguration != nil {
 		if err := validateCreateMeetingRoomConfiguration(v.MeetingRoomConfiguration); err != nil {
 			invalidParams.AddNested("MeetingRoomConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Address == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Address"))
-	}
 	if v.Timezone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timezone"))
+	}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
 	}
 	if len(v.DistanceUnit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DistanceUnit"))
 	}
+	if len(v.TemperatureUnit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemperatureUnit"))
+	}
 	if len(v.WakeWord) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("WakeWord"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Address == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Address"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2413,13 +2413,13 @@ func validateOpCreateSkillGroupInput(v *CreateSkillGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSkillGroupInput"}
-	if v.SkillGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SkillGroupName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.SkillGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SkillGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2528,11 +2528,11 @@ func validateOpDeleteDeviceUsageDataInput(v *DeleteDeviceUsageDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeviceUsageDataInput"}
-	if v.DeviceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceArn"))
-	}
 	if len(v.DeviceUsageType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceUsageType"))
+	}
+	if v.DeviceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2576,11 +2576,11 @@ func validateOpDeleteRoomSkillParameterInput(v *DeleteRoomSkillParameterInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRoomSkillParameterInput"}
-	if v.SkillId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
-	}
 	if v.ParameterKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterKey"))
+	}
+	if v.SkillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2777,11 +2777,11 @@ func validateOpGetRoomSkillParameterInput(v *GetRoomSkillParameterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRoomSkillParameterInput"}
-	if v.ParameterKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParameterKey"))
-	}
 	if v.SkillId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
+	}
+	if v.ParameterKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2885,15 +2885,15 @@ func validateOpPutRoomSkillParameterInput(v *PutRoomSkillParameterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRoomSkillParameterInput"}
+	if v.SkillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
+	}
 	if v.RoomSkillParameter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoomSkillParameter"))
 	} else if v.RoomSkillParameter != nil {
 		if err := validateRoomSkillParameter(v.RoomSkillParameter); err != nil {
 			invalidParams.AddNested("RoomSkillParameter", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SkillId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2907,11 +2907,11 @@ func validateOpPutSkillAuthorizationInput(v *PutSkillAuthorizationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutSkillAuthorizationInput"}
-	if v.SkillId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
-	}
 	if v.AuthorizationResult == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationResult"))
+	}
+	if v.SkillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2925,9 +2925,6 @@ func validateOpRegisterAVSDeviceInput(v *RegisterAVSDeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterAVSDeviceInput"}
-	if v.AmazonId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AmazonId"))
-	}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
@@ -2936,6 +2933,9 @@ func validateOpRegisterAVSDeviceInput(v *RegisterAVSDeviceInput) error {
 	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.AmazonId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AmazonId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2964,11 +2964,11 @@ func validateOpResolveRoomInput(v *ResolveRoomInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResolveRoomInput"}
-	if v.SkillId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
-	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.SkillId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SkillId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2982,14 +2982,14 @@ func validateOpSearchAddressBooksInput(v *SearchAddressBooksInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchAddressBooksInput"}
-	if v.Filters != nil {
-		if err := validateFilterList(v.Filters); err != nil {
-			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SortCriteria != nil {
 		if err := validateSortList(v.SortCriteria); err != nil {
 			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3026,14 +3026,14 @@ func validateOpSearchDevicesInput(v *SearchDevicesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchDevicesInput"}
-	if v.SortCriteria != nil {
-		if err := validateSortList(v.SortCriteria); err != nil {
-			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortCriteria != nil {
+		if err := validateSortList(v.SortCriteria); err != nil {
+			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3048,14 +3048,14 @@ func validateOpSearchNetworkProfilesInput(v *SearchNetworkProfilesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchNetworkProfilesInput"}
-	if v.SortCriteria != nil {
-		if err := validateSortList(v.SortCriteria); err != nil {
-			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortCriteria != nil {
+		if err := validateSortList(v.SortCriteria); err != nil {
+			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3092,14 +3092,14 @@ func validateOpSearchRoomsInput(v *SearchRoomsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchRoomsInput"}
-	if v.Filters != nil {
-		if err := validateFilterList(v.Filters); err != nil {
-			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SortCriteria != nil {
 		if err := validateSortList(v.SortCriteria); err != nil {
 			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3136,14 +3136,14 @@ func validateOpSearchUsersInput(v *SearchUsersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchUsersInput"}
-	if v.SortCriteria != nil {
-		if err := validateSortList(v.SortCriteria); err != nil {
-			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortCriteria != nil {
+		if err := validateSortList(v.SortCriteria); err != nil {
+			invalidParams.AddNested("SortCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3158,13 +3158,6 @@ func validateOpSendAnnouncementInput(v *SendAnnouncementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendAnnouncementInput"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	} else if v.Content != nil {
-		if err := validateContent(v.Content); err != nil {
-			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
@@ -3173,6 +3166,13 @@ func validateOpSendAnnouncementInput(v *SendAnnouncementInput) error {
 	} else if v.RoomFilters != nil {
 		if err := validateFilterList(v.RoomFilters); err != nil {
 			invalidParams.AddNested("RoomFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3217,15 +3217,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3239,11 +3239,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3287,13 +3287,18 @@ func validateOpUpdateConferenceProviderInput(v *UpdateConferenceProviderInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConferenceProviderInput"}
-	if v.ConferenceProviderArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderArn"))
-	}
 	if v.IPDialIn != nil {
 		if err := validateIPDialIn(v.IPDialIn); err != nil {
 			invalidParams.AddNested("IPDialIn", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.PSTNDialIn != nil {
+		if err := validatePSTNDialIn(v.PSTNDialIn); err != nil {
+			invalidParams.AddNested("PSTNDialIn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConferenceProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderArn"))
 	}
 	if v.MeetingSetting == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingSetting"))
@@ -3304,11 +3309,6 @@ func validateOpUpdateConferenceProviderInput(v *UpdateConferenceProviderInput) e
 	}
 	if len(v.ConferenceProviderType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ConferenceProviderType"))
-	}
-	if v.PSTNDialIn != nil {
-		if err := validatePSTNDialIn(v.PSTNDialIn); err != nil {
-			invalidParams.AddNested("PSTNDialIn", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3322,6 +3322,9 @@ func validateOpUpdateContactInput(v *UpdateContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactInput"}
+	if v.ContactArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactArn"))
+	}
 	if v.SipAddresses != nil {
 		if err := validateSipAddressList(v.SipAddresses); err != nil {
 			invalidParams.AddNested("SipAddresses", err.(smithy.InvalidParamsError))
@@ -3331,9 +3334,6 @@ func validateOpUpdateContactInput(v *UpdateContactInput) error {
 		if err := validatePhoneNumberList(v.PhoneNumbers); err != nil {
 			invalidParams.AddNested("PhoneNumbers", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ContactArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContactArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

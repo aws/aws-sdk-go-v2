@@ -125,12 +125,17 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "pinpoint-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-west-1": endpoints.Endpoint{
 				Hostname: "pinpoint.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
 			},
-			"us-gov-west-1": endpoints.Endpoint{},
 		},
 	},
 }

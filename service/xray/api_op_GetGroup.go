@@ -39,7 +39,8 @@ type GetGroupInput struct {
 type GetGroupOutput struct {
 
 	// The group that was requested. Contains the name of the group, the ARN of the
-	// group, and the filter expression that assigned to the group.
+	// group, the filter expression, and the insight configuration assigned to the
+	// group.
 	Group *types.Group
 
 	// Metadata pertaining to the operation's result.

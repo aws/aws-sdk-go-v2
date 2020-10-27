@@ -13,7 +13,7 @@ import (
 // Deletes the specified policy from your organization. Before you perform this
 // operation, you must first detach the policy from all organizational units (OUs),
 // roots, and accounts. This operation can be called only from the organization's
-// master account.
+// management account.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}

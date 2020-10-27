@@ -34,11 +34,15 @@ import (
 //
 //
 // * GetBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html)
 //
-//     * DeleteBucketAnalyticsConfiguration
+//
+// * DeleteBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
 //
 //
 // * PutBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
 func (c *Client) ListBucketAnalyticsConfigurations(ctx context.Context, params *ListBucketAnalyticsConfigurationsInput, optFns ...func(*Options)) (*ListBucketAnalyticsConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListBucketAnalyticsConfigurationsInput{}
@@ -64,6 +68,10 @@ type ListBucketAnalyticsConfigurationsInput struct {
 	// The ContinuationToken that represents a placeholder from where this request
 	// should begin.
 	ContinuationToken *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type ListBucketAnalyticsConfigurationsOutput struct {

@@ -105,7 +105,7 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type PutScalingPolicyInput struct {
 
 	// A unique identifier for a fleet to apply this policy to. You can use either the
@@ -212,7 +212,7 @@ type PutScalingPolicyInput struct {
 	Threshold *float64
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type PutScalingPolicyOutput struct {
 
 	// A descriptive label that is associated with a scaling policy. Policy names do

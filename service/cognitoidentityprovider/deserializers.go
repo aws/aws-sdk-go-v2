@@ -3699,6 +3699,9 @@ func awsAwsjson11_deserializeOpErrorAssociateSoftwareToken(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -14752,6 +14755,15 @@ func awsAwsjson11_deserializeDocumentAnalyticsConfigurationType(v **types.Analyt
 
 	for key, value := range shape {
 		switch key {
+		case "ApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.ApplicationArn = &jtv
+			}
+
 		case "ApplicationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19020,6 +19032,64 @@ func awsAwsjson11_deserializeDocumentSupportedIdentityProvidersListType(v *[]*st
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTokenValidityUnitsType(v **types.TokenValidityUnitsType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TokenValidityUnitsType
+	if *v == nil {
+		sv = &types.TokenValidityUnitsType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeUnitsType to be of type string, got %T instead", value)
+				}
+				sv.AccessToken = types.TimeUnitsType(jtv)
+			}
+
+		case "IdToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeUnitsType to be of type string, got %T instead", value)
+				}
+				sv.IdToken = types.TimeUnitsType(jtv)
+			}
+
+		case "RefreshToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeUnitsType to be of type string, got %T instead", value)
+				}
+				sv.RefreshToken = types.TimeUnitsType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTooManyFailedAttemptsException(v **types.TooManyFailedAttemptsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20030,6 +20100,19 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 
 	for key, value := range shape {
 		switch key {
+		case "AccessTokenValidity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AccessTokenValidityType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AccessTokenValidity = ptr.Int32(int32(i64))
+			}
+
 		case "AllowedOAuthFlows":
 			if err := awsAwsjson11_deserializeDocumentOAuthFlowsType(&sv.AllowedOAuthFlows, value); err != nil {
 				return err
@@ -20113,6 +20196,19 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 				return err
 			}
 
+		case "IdTokenValidity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdTokenValidityType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdTokenValidity = ptr.Int32(int32(i64))
+			}
+
 		case "LastModifiedDate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20160,6 +20256,11 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 
 		case "SupportedIdentityProviders":
 			if err := awsAwsjson11_deserializeDocumentSupportedIdentityProvidersListType(&sv.SupportedIdentityProviders, value); err != nil {
+				return err
+			}
+
+		case "TokenValidityUnits":
+			if err := awsAwsjson11_deserializeDocumentTokenValidityUnitsType(&sv.TokenValidityUnits, value); err != nil {
 				return err
 			}
 

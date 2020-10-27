@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an access policy that grants the specified AWS Single Sign-On identity
-// access to the specified AWS IoT SiteWise Monitor resource. You can use this
-// operation to revoke access to an AWS IoT SiteWise Monitor resource.
+// Deletes an access policy that grants the specified identity access to the
+// specified AWS IoT SiteWise Monitor resource. You can use this operation to
+// revoke access to an AWS IoT SiteWise Monitor resource.
 func (c *Client) DeleteAccessPolicy(ctx context.Context, params *DeleteAccessPolicyInput, optFns ...func(*Options)) (*DeleteAccessPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPolicyInput{}

@@ -57,6 +57,70 @@ type ComputeType struct {
 	Name Compute
 }
 
+// Describes a connection alias. Connection aliases are used for cross-Region
+// redirection. For more information, see  Cross-Region Redirection for Amazon
+// WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAlias struct {
+
+	// The identifier of the connection alias.
+	AliasId *string
+
+	// The association status of the connection alias.
+	Associations []*ConnectionAliasAssociation
+
+	// The connection string specified for the connection alias. The connection string
+	// must be in the form of a fully qualified domain name (FQDN), such as
+	// www.example.com.
+	ConnectionString *string
+
+	// The identifier of the AWS account that owns the connection alias.
+	OwnerAccountId *string
+
+	// The current state of the connection alias.
+	State ConnectionAliasState
+}
+
+// Describes a connection alias association that is used for cross-Region
+// redirection. For more information, see  Cross-Region Redirection for Amazon
+// WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAliasAssociation struct {
+
+	// The identifier of the AWS account that associated the connection alias with a
+	// directory.
+	AssociatedAccountId *string
+
+	// The association status of the connection alias.
+	AssociationStatus AssociationStatus
+
+	// The identifier of the connection alias association. You use the connection
+	// identifier in the DNS TXT record when you're configuring your DNS routing
+	// policies.
+	ConnectionIdentifier *string
+
+	// The identifier of the directory associated with a connection alias.
+	ResourceId *string
+}
+
+// Describes the permissions for a connection alias. Connection aliases are used
+// for cross-Region redirection. For more information, see  Cross-Region
+// Redirection for Amazon WorkSpaces
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
+type ConnectionAliasPermission struct {
+
+	// Indicates whether the specified AWS account is allowed to associate the
+	// connection alias with a directory.
+	//
+	// This member is required.
+	AllowAssociation *bool
+
+	// The identifier of the AWS account that the connection alias is shared with.
+	//
+	// This member is required.
+	SharedAccountId *string
+}
+
 // Describes the default values that are used to create WorkSpaces. For more
 // information, see Update Directory Details for Your WorkSpaces
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
@@ -126,7 +190,9 @@ type FailedWorkspaceChangeRequest struct {
 }
 
 // Describes the AWS accounts that have been granted permission to use a shared
-// image.
+// image. For more information about sharing images, see  Share or Unshare a Custom
+// WorkSpaces Image
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
 type ImagePermission struct {
 
 	// The identifier of the AWS account that an image has been shared with.
@@ -264,7 +330,9 @@ type Workspace struct {
 	// The identifier of the bundle used to create the WorkSpace.
 	BundleId *string
 
-	// The name of the WorkSpace, as seen by the operating system.
+	// The name of the WorkSpace, as seen by the operating system. The format of this
+	// name varies. For more information, see  Launch a WorkSpace
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html).
 	ComputerName *string
 
 	// The identifier of the AWS Directory Service directory for the WorkSpace.
@@ -286,7 +354,13 @@ type Workspace struct {
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool
 
-	// The operational state of the WorkSpace.
+	// The operational state of the WorkSpace. After a WorkSpace is terminated, the
+	// TERMINATED state is returned only briefly before the WorkSpace directory
+	// metadata is cleaned up, so this state is rarely returned. To confirm that a
+	// WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces
+	// (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html).
+	// If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
+	// terminated.
 	State WorkspaceState
 
 	// The identifier of the subnet for the WorkSpace.
@@ -402,7 +476,21 @@ type WorkspaceCreationProperties struct {
 	// The identifier of your custom security group.
 	CustomSecurityGroupId *string
 
-	// The default organizational unit (OU) for your WorkSpace directories.
+	// The default organizational unit (OU) for your WorkSpaces directories. This
+	// string must be the full Lightweight Directory Access Protocol (LDAP)
+	// distinguished name for the target domain and OU. It must be in the form
+	// "OU=value,DC=value,DC=value", where value is any string of characters, and the
+	// number of domain components (DCs) is two or more. For example,
+	// OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.
+	//
+	//     * To avoid errors,
+	// certain characters in the distinguished name must be escaped. For more
+	// information, see  Distinguished Names
+	// (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names)
+	// in the Microsoft documentation.
+	//
+	//     * The API doesn't validate whether the OU
+	// exists.
 	DefaultOu *string
 
 	// Indicates whether internet access is enabled for your WorkSpaces.
@@ -412,6 +500,23 @@ type WorkspaceCreationProperties struct {
 	// information, see WorkSpace Maintenance
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
 	EnableMaintenanceMode *bool
+
+	// Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
+	//
+	// If WorkDocs
+	// is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces
+	// launched in the directory will not have WorkDocs enabled. However, WorkDocs
+	// remains enabled for any existing WorkSpaces, unless you either disable users'
+	// access to WorkDocs or you delete the WorkDocs site. To disable users' access to
+	// WorkDocs, see Disabling Users
+	// (https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html) in
+	// the Amazon WorkDocs Administration Guide. To delete a WorkDocs site, see
+	// Deleting a Site
+	// (https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html) in
+	// the Amazon WorkDocs Administration Guide. If you enable WorkDocs on a directory
+	// that already has existing WorkSpaces, the existing WorkSpaces and any new
+	// WorkSpaces that are launched in the directory will have WorkDocs enabled.
+	EnableWorkDocs *bool
 
 	// Indicates whether users are local administrators of their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
@@ -452,7 +557,14 @@ type WorkspaceDirectory struct {
 	// The default self-service permissions for WorkSpaces in the directory.
 	SelfservicePermissions *SelfservicePermissions
 
-	// The state of the directory's registration with Amazon WorkSpaces.
+	// The state of the directory's registration with Amazon WorkSpaces. After a
+	// directory is deregistered, the DEREGISTERED state is returned very briefly
+	// before the directory metadata is cleaned up, so this state is rarely returned.
+	// To confirm that a directory is deregistered, check for the directory ID by using
+	// DescribeWorkspaceDirectories
+	// (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html).
+	// If the directory ID isn't returned, then the directory has been successfully
+	// deregistered.
 	State WorkspaceDirectoryState
 
 	// The identifiers of the subnets used with the directory.

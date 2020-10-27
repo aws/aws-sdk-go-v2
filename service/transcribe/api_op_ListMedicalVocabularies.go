@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of vocabularies that match the specified criteria. You get the
-// entire list of vocabularies if you don't enter a value in any of the request
-// parameters.
+// Returns a list of vocabularies that match the specified criteria. If you don't
+// enter a value in any of the request parameters, returns the entire list of
+// vocabularies.
 func (c *Client) ListMedicalVocabularies(ctx context.Context, params *ListMedicalVocabulariesInput, optFns ...func(*Options)) (*ListMedicalVocabulariesOutput, error) {
 	if params == nil {
 		params = &ListMedicalVocabulariesInput{}
@@ -34,34 +34,36 @@ type ListMedicalVocabulariesInput struct {
 	// The maximum number of vocabularies to return in the response.
 	MaxResults *int32
 
-	// Returns vocabularies in the list whose name contains the specified string. The
-	// search is case-insensitive, ListMedicalVocabularies returns both
-	// "vocabularyname" and "VocabularyName" in the response list.
+	// Returns vocabularies whose names contain the specified string. The search is not
+	// case sensitive. ListMedicalVocabularies returns both "vocabularyname" and
+	// "VocabularyName".
 	NameContains *string
 
 	// If the result of your previous request to ListMedicalVocabularies was truncated,
-	// include the NextToken to fetch the next set of jobs.
+	// include the NextToken to fetch the next set of vocabularies.
 	NextToken *string
 
-	// When specified, only returns vocabularies with the VocabularyState equal to the
-	// specified vocabulary state.
+	// When specified, returns only vocabularies with the VocabularyState equal to the
+	// specified vocabulary state. Use this field to see which vocabularies are ready
+	// for your medical transcription jobs.
 	StateEquals types.VocabularyState
 }
 
 type ListMedicalVocabulariesOutput struct {
 
 	// The ListMedicalVocabularies operation returns a page of vocabularies at a time.
-	// The maximum size of the page is set by the MaxResults parameter. If there are
-	// more jobs in the list than the page size, Amazon Transcribe Medical returns the
-	// NextPage token. Include the token in the next request to the
-	// ListMedicalVocabularies operation to return the next page of jobs.
+	// You set the maximum number of vocabularies to return on a page with the
+	// MaxResults parameter. If there are more jobs in the list will fit on a page,
+	// Amazon Transcribe Medical returns the NextPage token. To return the next page of
+	// vocabularies, include the token in the next request to the
+	// ListMedicalVocabularies operation .
 	NextToken *string
 
 	// The requested vocabulary state.
 	Status types.VocabularyState
 
-	// A list of objects that describe the vocabularies that match the search criteria
-	// in the request.
+	// A list of objects that describe the vocabularies that match your search
+	// criteria.
 	Vocabularies []*types.VocabularyInfo
 
 	// Metadata pertaining to the operation's result.

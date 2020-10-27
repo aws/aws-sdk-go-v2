@@ -58,7 +58,8 @@ type GetCostForecastInput struct {
 	// This member is required.
 	Metric types.Metric
 
-	// The period of time that you want the forecast to cover.
+	// The period of time that you want the forecast to cover. The start date must be
+	// equal to or no later than the current date to avoid a validation error.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval

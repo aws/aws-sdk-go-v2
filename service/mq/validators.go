@@ -470,11 +470,11 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -521,11 +521,11 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserInput"}
-	if v.BrokerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
-	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.BrokerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -569,11 +569,11 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConfigurationRevisionInput"}
-	if v.ConfigurationRevision == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRevision"))
-	}
 	if v.ConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
+	}
+	if v.ConfigurationRevision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRevision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -587,11 +587,11 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -695,11 +695,11 @@ func validateOpUpdateUserInput(v *UpdateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

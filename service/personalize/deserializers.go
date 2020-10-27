@@ -1212,6 +1212,9 @@ func awsAwsjson11_deserializeOpErrorCreateSolutionVersion(response *smithyhttp.R
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
@@ -1796,6 +1799,9 @@ func awsAwsjson11_deserializeOpErrorDeleteFilter(response *smithyhttp.Response, 
 	switch {
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -5532,6 +5538,11 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJob(v **types.BatchInferenceJ
 				sv.BatchInferenceJobArn = &jtv
 			}
 
+		case "batchInferenceJobConfig":
+			if err := awsAwsjson11_deserializeDocumentBatchInferenceJobConfig(&sv.BatchInferenceJobConfig, value); err != nil {
+				return err
+			}
+
 		case "creationDateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5633,6 +5644,42 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJob(v **types.BatchInferenceJ
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchInferenceJobConfig(v **types.BatchInferenceJobConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchInferenceJobConfig
+	if *v == nil {
+		sv = &types.BatchInferenceJobConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "itemExplorationConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5881,6 +5928,11 @@ func awsAwsjson11_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				sv.CampaignArn = &jtv
 			}
 
+		case "campaignConfig":
+			if err := awsAwsjson11_deserializeDocumentCampaignConfig(&sv.CampaignConfig, value); err != nil {
+				return err
+			}
+
 		case "creationDateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5959,6 +6011,42 @@ func awsAwsjson11_deserializeDocumentCampaign(v **types.Campaign, value interfac
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCampaignConfig(v **types.CampaignConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CampaignConfig
+	if *v == nil {
+		sv = &types.CampaignConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "itemExplorationConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6117,6 +6205,11 @@ func awsAwsjson11_deserializeDocumentCampaignUpdateSummary(v **types.CampaignUpd
 
 	for key, value := range shape {
 		switch key {
+		case "campaignConfig":
+			if err := awsAwsjson11_deserializeDocumentCampaignConfig(&sv.CampaignConfig, value); err != nil {
+				return err
+			}
+
 		case "creationDateTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)

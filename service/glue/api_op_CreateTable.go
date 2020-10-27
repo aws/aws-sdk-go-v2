@@ -43,6 +43,9 @@ type CreateTableInput struct {
 	// The ID of the Data Catalog in which to create the Table. If none is supplied,
 	// the AWS account ID is used by default.
 	CatalogId *string
+
+	// A list of partition indexes, PartitionIndex structures, to create in the table.
+	PartitionIndexes []*types.PartitionIndex
 }
 
 type CreateTableOutput struct {

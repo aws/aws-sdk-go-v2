@@ -27,7 +27,7 @@ import (
 // in the AWS Organizations User Guide.
 //
 //     * Enable all features final
-// confirmation handshake: only a principal from the master account. For more
+// confirmation handshake: only a principal from the management account. For more
 // information about invitations, see Inviting an AWS Account to Join Your
 // Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)

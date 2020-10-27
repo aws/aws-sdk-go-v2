@@ -73,12 +73,16 @@ type ASN1Subject struct {
 // CA can issue and revoke X.509 digital certificates. Digital certificates verify
 // that the entity named in the certificate Subject field owns or controls the
 // public key contained in the Subject Public Key Info field. Call the
-// CreateCertificateAuthority action to create your private CA. You must then call
-// the GetCertificateAuthorityCertificate action to retrieve a private CA
-// certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted
-// or on-premises root or subordinate CA certificate. Call the
-// ImportCertificateAuthorityCertificate action to import the signed certificate
-// into AWS Certificate Manager (ACM).
+// CreateCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// action to create your private CA. You must then call the
+// GetCertificateAuthorityCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html)
+// action to retrieve a private CA certificate signing request (CSR). Sign the CSR
+// with your ACM Private CA-hosted or on-premises root or subordinate CA
+// certificate. Call the ImportCertificateAuthorityCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
+// action to import the signed certificate into AWS Certificate Manager (ACM).
 type CertificateAuthority struct {
 
 	// Amazon Resource Name (ARN) for your private certificate authority (CA). The
@@ -103,9 +107,14 @@ type CertificateAuthority struct {
 	// Date and time before which your private CA certificate is not valid.
 	NotBefore *time.Time
 
+	// The AWS account ID that owns the certificate authority.
+	OwnerAccount *string
+
 	// The period during which a deleted CA can be restored. For more information, see
 	// the PermanentDeletionTimeInDays parameter of the
-	// DeleteCertificateAuthorityRequest action.
+	// DeleteCertificateAuthorityRequest
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html)
+	// action.
 	RestorableUntil *time.Time
 
 	// Information about the certificate revocation list (CRL) created and maintained
@@ -127,7 +136,9 @@ type CertificateAuthority struct {
 // pair that your private CA creates when it issues a certificate. It also includes
 // the signature algorithm that it uses when issuing certificates, and its X.500
 // distinguished name. You must specify this information when you call the
-// CreateCertificateAuthority action.
+// CreateCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// action.
 type CertificateAuthorityConfiguration struct {
 
 	// Type of the public key algorithm and size, in bits, of the key pair that your CA
@@ -137,7 +148,9 @@ type CertificateAuthorityConfiguration struct {
 	// This member is required.
 	KeyAlgorithm KeyAlgorithm
 
-	// Name of the algorithm your private CA uses to sign certificate requests.
+	// Name of the algorithm your private CA uses to sign certificate requests. This
+	// parameter should not be confused with the SigningAlgorithm parameter used to
+	// sign certificates when they are issued.
 	//
 	// This member is required.
 	SigningAlgorithm SigningAlgorithm
@@ -157,11 +170,14 @@ type CertificateAuthorityConfiguration struct {
 // by specifying a value for the CustomCname parameter. Your private CA copies the
 // CNAME or the S3 bucket name to the CRL Distribution Points extension of each
 // certificate it issues. Your S3 bucket policy must give write permission to ACM
-// Private CA. Your private CA uses the value in the ExpirationInDays parameter to
-// calculate the nextUpdate field in the CRL. The CRL is refreshed at 1/2 the age
-// of next update or when a certificate is revoked. When a certificate is revoked,
-// it is recorded in the next CRL that is generated and in the next audit report.
-// Only time valid certificates are listed in the CRL. Expired certificates are not
+// Private CA. ACM Private CAA assets that are stored in Amazon S3 can be protected
+// with encryption. For more information, see Encrypting Your CRLs
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
+// Your private CA uses the value in the ExpirationInDays parameter to calculate
+// the nextUpdate field in the CRL. The CRL is refreshed at 1/2 the age of next
+// update or when a certificate is revoked. When a certificate is revoked, it is
+// recorded in the next CRL that is generated and in the next audit report. Only
+// time valid certificates are listed in the CRL. Expired certificates are not
 // included. CRLs contain the following fields:
 //
 //     * Version: The current version
@@ -217,8 +233,11 @@ type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
 	// enabled. You can use this value to enable certificate revocation for a new CA
-	// when you call the CreateCertificateAuthority action or for an existing CA when
-	// you call the UpdateCertificateAuthority action.
+	// when you call the CreateCertificateAuthority
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+	// action or for an existing CA when you call the UpdateCertificateAuthority
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+	// action.
 	//
 	// This member is required.
 	Enabled *bool
@@ -234,9 +253,10 @@ type CrlConfiguration struct {
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for
 	// the CustomCname argument, the name of your S3 bucket is placed into the CRL
 	// Distribution Points extension of the issued certificate. You can change the name
-	// of your bucket by calling the UpdateCertificateAuthority action. You must
-	// specify a bucket policy that allows ACM Private CA to write the CRL to your
-	// bucket.
+	// of your bucket by calling the UpdateCertificateAuthority
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+	// action. You must specify a bucket policy that allows ACM Private CA to write the
+	// CRL to your bucket.
 	S3BucketName *string
 }
 
@@ -244,8 +264,13 @@ type CrlConfiguration struct {
 // service or entity. In order for ACM to automatically renew private certificates,
 // you must give the ACM service principal all available permissions
 // (IssueCertificate, GetCertificate, and ListPermissions). Permissions can be
-// assigned with the CreatePermission action, removed with the DeletePermission
-// action, and listed with the ListPermissions action.
+// assigned with the CreatePermission
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html)
+// action, removed with the DeletePermission
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html)
+// action, and listed with the ListPermissions
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html)
+// action.
 type Permission struct {
 
 	// The private CA actions that can be performed by the designated AWS service.
@@ -269,11 +294,14 @@ type Permission struct {
 	SourceAccount *string
 }
 
-// Certificate revocation information used by the CreateCertificateAuthority and
-// UpdateCertificateAuthority actions. Your private certificate authority (CA) can
-// create and maintain a certificate revocation list (CRL). A CRL contains
-// information about certificates revoked by your CA. For more information, see
-// RevokeCertificate.
+// Certificate revocation information used by the CreateCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// and UpdateCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
+// actions. Your private certificate authority (CA) can create and maintain a
+// certificate revocation list (CRL). A CRL contains information about certificates
+// revoked by your CA. For more information, see RevokeCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html).
 type RevocationConfiguration struct {
 
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
@@ -284,8 +312,11 @@ type RevocationConfiguration struct {
 // Tags are labels that you can use to identify and organize your private CAs. Each
 // tag consists of a key and an optional value. You can associate up to 50 tags
 // with a private CA. To add one or more tags to a private CA, call the
-// TagCertificateAuthority action. To remove a tag, call the
-// UntagCertificateAuthority action.
+// TagCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html)
+// action. To remove a tag, call the UntagCertificateAuthority
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html)
+// action.
 type Tag struct {
 
 	// Key (name) of the tag.
@@ -297,17 +328,52 @@ type Tag struct {
 	Value *string
 }
 
-// Length of time for which the certificate issued by your private certificate
-// authority (CA), or by the private CA itself, is valid in days, months, or years.
-// You can issue a certificate by calling the IssueCertificate action.
+// Validity specifies the period of time during which a certificate is valid.
+// Validity can be expressed as an explicit date and time when the certificate
+// expires, or as a span of time after issuance, stated in days, months, or years.
+// For more information, see Validity
+// (https://tools.ietf.org/html/rfc5280#section-4.1.2.5) in RFC 5280. You can issue
+// a certificate by calling the IssueCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)
+// action.
 type Validity struct {
 
-	// Specifies whether the Value parameter represents days, months, or years.
+	// Determines how ACM Private CA interprets the Value parameter, an integer.
+	// Supported validity types include those listed below. Type definitions with
+	// values include a sample input value and the resulting output. END_DATE: The
+	// specific date and time when the certificate will expire, expressed using UTCTime
+	// (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used,
+	// if the year field (YY) is greater than or equal to 50, the year is interpreted
+	// as 19YY. If the year field is less than 50, the year is interpreted as 20YY.
+	//
+	//
+	// * Sample input value: 491231235959 (UTCTime format)
+	//
+	//     * Output expiration
+	// date/time: 12/31/2049 23:59:59
+	//
+	// ABSOLUTE: The specific date and time when the
+	// certificate will expire, expressed in seconds since the Unix Epoch.
+	//
+	//     *
+	// Sample input value: 2524608000
+	//
+	//     * Output expiration date/time: 01/01/2050
+	// 00:00:00
+	//
+	// DAYS, MONTHS, YEARS: The relative time from the moment of issuance
+	// until the certificate will expire, expressed in days, months, or years. Example
+	// if DAYS, issued on 10/12/2020 at 12:34:54 UTC:
+	//
+	//     * Sample input value: 90
+	//
+	//
+	// * Output expiration date: 01/10/2020 12:34:54 UTC
 	//
 	// This member is required.
 	Type ValidityPeriodType
 
-	// Time period.
+	// A long integer interpreted according to the value of Type, below.
 	//
 	// This member is required.
 	Value *int64

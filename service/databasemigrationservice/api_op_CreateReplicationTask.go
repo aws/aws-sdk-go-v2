@@ -95,8 +95,8 @@ type CreateReplicationTaskInput struct {
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
-	// --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
+	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
 	CdcStopPosition *string
 
 	// Overall settings for the task, in JSON format. For more information, see
@@ -104,6 +104,17 @@ type CreateReplicationTaskInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
 	// in the AWS Database Migration User Guide.
 	ReplicationTaskSettings *string
+
+	// A friendly name for the resource identifier at the end of the EndpointArn
+	// response parameter that is returned in the created Endpoint object. The value
+	// for this parameter can have up to 31 characters. It can contain only ASCII
+	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
+	// two consecutive hyphens, and can only begin with a letter, such as
+	// Example-App-ARN1. For example, this value might result in the EndpointArn value
+	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
+	// ResourceIdentifier value, AWS DMS generates a default identifier value for the
+	// end of EndpointArn.
+	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication task.
 	Tags []*types.Tag

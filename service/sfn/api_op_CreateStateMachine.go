@@ -22,9 +22,9 @@ import (
 // The results are best effort and may not reflect very recent updates and changes.
 // CreateStateMachine is an idempotent API. Subsequent requests won’t create a
 // duplicate resource if it was already created. CreateStateMachine's idempotency
-// check is based on the state machine name, definition, type, and
-// LoggingConfiguration. If a following request has a different roleArn or tags,
-// Step Functions will ignore these differences and treat it as an idempotent
+// check is based on the state machine name, definition, type, LoggingConfiguration
+// and TracingConfiguration. If a following request has a different roleArn or
+// tags, Step Functions will ignore these differences and treat it as an idempotent
 // request of the previous. In this case, roleArn and tags will not be updated,
 // even if they are different.
 func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMachineInput, optFns ...func(*Options)) (*CreateStateMachineOutput, error) {
@@ -92,6 +92,9 @@ type CreateStateMachineInput struct {
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
 	Tags []*types.Tag
+
+	// Selects whether AWS X-Ray tracing is enabled.
+	TracingConfiguration *types.TracingConfiguration
 
 	// Determines whether a Standard or Express state machine is created. The default
 	// is STANDARD. You cannot update the type of a state machine once it has been

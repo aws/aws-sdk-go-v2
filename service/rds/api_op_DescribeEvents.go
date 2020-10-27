@@ -12,11 +12,12 @@ import (
 	"time"
 )
 
-// Returns events related to DB instances, DB security groups, DB snapshots, and DB
-// parameter groups for the past 14 days. Events specific to a particular DB
-// instance, DB security group, database snapshot, or DB parameter group can be
-// obtained by providing the name as a parameter. By default, the past hour of
-// events are returned.
+// Returns events related to DB instances, DB clusters, DB parameter groups, DB
+// security groups, DB snapshots, and DB cluster snapshots for the past 14 days.
+// Events specific to a particular DB instances, DB clusters, DB parameter groups,
+// DB security groups, DB snapshots, and DB cluster snapshots group can be obtained
+// by providing the name as a parameter. By default, the past hour of events are
+// returned.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -68,19 +69,27 @@ type DescribeEventsInput struct {
 	// SourceIdentifier is supplied, SourceType must also be provided.
 	//
 	//     * If the
-	// source type is DBInstance, then a DBInstanceIdentifier must be supplied.
-	//
-	//     *
-	// If the source type is DBSecurityGroup, a DBSecurityGroupName must be supplied.
+	// source type is a DB instance, a DBInstanceIdentifier value must be supplied.
 	//
 	//
-	// * If the source type is DBParameterGroup, a DBParameterGroupName must be
+	// * If the source type is a DB cluster, a DBClusterIdentifier value must be
 	// supplied.
 	//
-	//     * If the source type is DBSnapshot, a DBSnapshotIdentifier must
-	// be supplied.
+	//     * If the source type is a DB parameter group, a
+	// DBParameterGroupName value must be supplied.
 	//
-	//     * Can't end with a hyphen or contain two consecutive hyphens.
+	//     * If the source type is a DB
+	// security group, a DBSecurityGroupName value must be supplied.
+	//
+	//     * If the
+	// source type is a DB snapshot, a DBSnapshotIdentifier value must be supplied.
+	//
+	//
+	// * If the source type is a DB cluster snapshot, a DBClusterSnapshotIdentifier
+	// value must be supplied.
+	//
+	//     * Can't end with a hyphen or contain two
+	// consecutive hyphens.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events

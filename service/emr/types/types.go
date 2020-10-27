@@ -306,6 +306,9 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
 	OutpostArn *string
 
+	// Placement group configured for an Amazon EMR cluster.
+	PlacementGroups []*PlacementGroupConfig
+
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
 	// emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For
@@ -618,6 +621,27 @@ type Ec2InstanceAttributes struct {
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
 	ServiceAccessSecurityGroup *string
+}
+
+// Specifies the execution engine (cluster) to run the notebook and perform the
+// notebook execution, for example, an EMR cluster.
+type ExecutionEngineConfig struct {
+
+	// The unique identifier of the execution engine. For an EMR cluster, this is the
+	// cluster ID.
+	//
+	// This member is required.
+	Id *string
+
+	// An optional unique ID of an EC2 security group to associate with the master
+	// instance of the EMR cluster for this notebook execution. For more information
+	// see Specifying EC2 Security Groups for EMR Notebooks
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html)
+	// in the EMR Management Guide.
+	MasterInstanceSecurityGroupId *string
+
+	// The type of execution engine. A value of EMR specifies an EMR cluster.
+	Type ExecutionEngineType
 }
 
 // The details of the step failure. The service attempts to detect the root cause
@@ -1643,6 +1667,145 @@ type MetricDimension struct {
 	Value *string
 }
 
+// A notebook execution. An execution is a specific instance that an EMR Notebook
+// is run using the StartNotebookExecution action.
+type NotebookExecution struct {
+
+	// The Amazon Resource Name (ARN) of the notebook execution.
+	Arn *string
+
+	// The unique identifier of the EMR Notebook that is used for the notebook
+	// execution.
+	EditorId *string
+
+	// The timestamp when notebook execution ended.
+	EndTime *time.Time
+
+	// The execution engine, such as an EMR cluster, used to run the EMR notebook and
+	// perform the notebook execution.
+	ExecutionEngine *ExecutionEngineConfig
+
+	// The reason for the latest status change of the notebook execution.
+	LastStateChangeReason *string
+
+	// The unique identifier of a notebook execution.
+	NotebookExecutionId *string
+
+	// A name for the notebook execution.
+	NotebookExecutionName *string
+
+	// The unique identifier of the EC2 security group associated with the EMR Notebook
+	// instance. For more information see Specifying EC2 Security Groups for EMR
+	// Notebooks
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html)
+	// in the EMR Management Guide.
+	NotebookInstanceSecurityGroupId *string
+
+	// Input parameters in JSON format passed to the EMR Notebook at runtime for
+	// execution.
+	NotebookParams *string
+
+	// The location of the notebook execution's output file in Amazon S3.
+	OutputNotebookURI *string
+
+	// The timestamp when notebook execution started.
+	StartTime *time.Time
+
+	// The status of the notebook execution.
+	//
+	//     * START_PENDING indicates that the
+	// cluster has received the execution request but execution has not begun.
+	//
+	//     *
+	// STARTING indicates that the execution is starting on the cluster.
+	//
+	//     * RUNNING
+	// indicates that the execution is being processed by the cluster.
+	//
+	//     * FINISHING
+	// indicates that execution processing is in the final stages.
+	//
+	//     * FINISHED
+	// indicates that the execution has completed without error.
+	//
+	//     * FAILING
+	// indicates that the execution is failing and will not finish successfully.
+	//
+	//     *
+	// FAILED indicates that the execution failed.
+	//
+	//     * STOP_PENDING indicates that
+	// the cluster has received a StopNotebookExecution request and the stop is
+	// pending.
+	//
+	//     * STOPPING indicates that the cluster is in the process of
+	// stopping the execution as a result of a StopNotebookExecution request.
+	//
+	//     *
+	// STOPPED indicates that the execution stopped because of a StopNotebookExecution
+	// request.
+	Status NotebookExecutionStatus
+
+	// A list of tags associated with a notebook execution. Tags are user-defined key
+	// value pairs that consist of a required key string with a maximum of 128
+	// characters and an optional value string with a maximum of 256 characters.
+	Tags []*Tag
+}
+
+//
+type NotebookExecutionSummary struct {
+
+	// The unique identifier of the editor associated with the notebook execution.
+	EditorId *string
+
+	// The timestamp when notebook execution started.
+	EndTime *time.Time
+
+	// The unique identifier of the notebook execution.
+	NotebookExecutionId *string
+
+	// The name of the notebook execution.
+	NotebookExecutionName *string
+
+	// The timestamp when notebook execution started.
+	StartTime *time.Time
+
+	// The status of the notebook execution.
+	//
+	//     * START_PENDING indicates that the
+	// cluster has received the execution request but execution has not begun.
+	//
+	//     *
+	// STARTING indicates that the execution is starting on the cluster.
+	//
+	//     * RUNNING
+	// indicates that the execution is being processed by the cluster.
+	//
+	//     * FINISHING
+	// indicates that execution processing is in the final stages.
+	//
+	//     * FINISHED
+	// indicates that the execution has completed without error.
+	//
+	//     * FAILING
+	// indicates that the execution is failing and will not finish successfully.
+	//
+	//     *
+	// FAILED indicates that the execution failed.
+	//
+	//     * STOP_PENDING indicates that
+	// the cluster has received a StopNotebookExecution request and the stop is
+	// pending.
+	//
+	//     * STOPPING indicates that the cluster is in the process of
+	// stopping the execution as a result of a StopNotebookExecution request.
+	//
+	//     *
+	// STOPPED indicates that the execution stopped because of a StopNotebookExecution
+	// request.
+	Status NotebookExecutionStatus
+}
+
 // The launch specification for On-Demand instances in the instance fleet, which
 // determines the allocation strategy. The instance fleet configuration is
 // available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
@@ -1656,6 +1819,24 @@ type OnDemandProvisioningSpecification struct {
 	//
 	// This member is required.
 	AllocationStrategy OnDemandProvisioningAllocationStrategy
+}
+
+// Placement group configuration for an Amazon EMR cluster. The configuration
+// specifies the placement strategy that can be applied to instance roles during
+// cluster creation. To use this configuration, consider attaching managed policy
+// AmazonElasticMapReducePlacementGroupPolicy to the EMR role.
+type PlacementGroupConfig struct {
+
+	// Role of the instance in the cluster. Starting with Amazon EMR version 5.23.0,
+	// the only supported instance role is MASTER.
+	//
+	// This member is required.
+	InstanceRole InstanceRoleType
+
+	// EC2 Placement Group strategy associated with instance role. Starting with Amazon
+	// EMR version 5.23.0, the only supported placement strategy is SPREAD for the
+	// MASTER instance role.
+	PlacementStrategy PlacementGroupStrategy
 }
 
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).

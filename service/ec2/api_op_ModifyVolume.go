@@ -15,33 +15,33 @@ import (
 // size, volume type, and IOPS capacity. If your EBS volume is attached to a
 // current-generation EC2 instance type, you may be able to apply these changes
 // without stopping the instance or detaching the volume from it. For more
-// information about modifying an EBS volume running Linux, see Modifying the Size,
-// IOPS, or Type of an EBS Volume on Linux
+// information about modifying an EBS volume running Linux, see Modifying the size,
+// IOPS, or type of an EBS volume on Linux
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html).
 // For more information about modifying an EBS volume running Windows, see
-// Modifying the Size, IOPS, or Type of an EBS Volume on Windows
+// Modifying the size, IOPS, or type of an EBS volume on Windows
 // (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html).
 // When you complete a resize operation on your volume, you need to extend the
 // volume's file-system size to take advantage of the new storage capacity. For
-// information about extending a Linux file system, see Extending a Linux File
-// System
+// information about extending a Linux file system, see Extending a Linux file
+// system
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux).
 // For information about extending a Windows file system, see Extending a Windows
-// File System
+// file system
 // (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows).
 // You can use CloudWatch Events to check the status of a modification to an EBS
 // volume. For information about CloudWatch Events, see the Amazon CloudWatch
 // Events User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/).
 // You can also track the status of a modification using
 // DescribeVolumesModifications. For information about tracking status changes
-// using either method, see Monitoring Volume Modifications
+// using either method, see Monitoring volume modifications
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#monitoring_mods).
 // With previous-generation instance types, resizing an EBS volume may require
 // detaching and reattaching the volume or stopping and restarting the instance.
-// For more information, see Modifying the Size, IOPS, or Type of an EBS Volume on
+// For more information, see Modifying the size, IOPS, or type of an EBS volume on
 // Linux
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html) and
-// Modifying the Size, IOPS, or Type of an EBS Volume on Windows
+// Modifying the size, IOPS, or type of an EBS volume on Windows
 // (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html).
 // If you reach the maximum volume modification rate per volume limit, you will
 // need to wait at least six hours before applying further modifications to the
@@ -75,7 +75,8 @@ type ModifyVolumeInput struct {
 	DryRun *bool
 
 	// The target IOPS rate of the volume. This is only valid for Provisioned IOPS SSD
-	// (io1) volumes. For more information, see Provisioned IOPS SSD (io1) Volumes
+	// (io1 and io2) volumes. For moreinformation, see  Provisioned IOPS SSD (io1 and
+	// io2) volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops).
 	// Default: If no IOPS value is specified, the existing value is retained.
 	Iops *int32

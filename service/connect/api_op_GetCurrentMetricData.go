@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Gets the real-time metric data from the specified Amazon Connect instance. For
-// more information, see Real-time Metrics Reports
-// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html)
+// Gets the real-time metric data from the specified Amazon Connect instance. For a
+// description of each metric, see Real-time Metrics Definitions
+// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMetricDataInput, optFns ...func(*Options)) (*GetCurrentMetricDataOutput, error) {
 	if params == nil {
@@ -34,15 +34,41 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 type GetCurrentMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name and unit for each metric. The
-	// following metrics are available. For a description of each metric, see Real-time
-	// Metrics Definitions
+	// following metrics are available. For a description of all the metrics, see
+	// Real-time Metrics Definitions
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
 	// in the Amazon Connect Administrator Guide. AGENTS_AFTER_CONTACT_WORK Unit: COUNT
-	// AGENTS_AVAILABLE Unit: COUNT AGENTS_ERROR Unit: COUNT AGENTS_NON_PRODUCTIVE
-	// Unit: COUNT AGENTS_ON_CALL Unit: COUNT AGENTS_ON_CONTACT Unit: COUNT
-	// AGENTS_ONLINE Unit: COUNT AGENTS_STAFFED Unit: COUNT CONTACTS_IN_QUEUE Unit:
-	// COUNT CONTACTS_SCHEDULED Unit: COUNT OLDEST_CONTACT_AGE Unit: SECONDS
-	// SLOTS_ACTIVE Unit: COUNT SLOTS_AVAILABLE Unit: COUNT
+	// Name in real-time metrics report: ACW
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time)
+	// AGENTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Available
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time)
+	// AGENTS_ERROR Unit: COUNT Name in real-time metrics report: Error
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time)
+	// AGENTS_NON_PRODUCTIVE Unit: COUNT Name in real-time metrics report: NPT
+	// (Non-Productive Time)
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time)
+	// AGENTS_ON_CALL Unit: COUNT Name in real-time metrics report: On contact
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
+	// AGENTS_ON_CONTACT Unit: COUNT Name in real-time metrics report: On contact
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
+	// AGENTS_ONLINE Unit: COUNT Name in real-time metrics report: Online
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time)
+	// AGENTS_STAFFED Unit: COUNT Name in real-time metrics report: Staffed
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time)
+	// CONTACTS_IN_QUEUE Unit: COUNT Name in real-time metrics report: In queue
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time)
+	// CONTACTS_SCHEDULED Unit: COUNT Name in real-time metrics report: Scheduled
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time)
+	// OLDEST_CONTACT_AGE Unit: SECONDS When you use groupings, Unit says SECONDS but
+	// the Value is returned in MILLISECONDS. For example, if you get a response like
+	// this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value":
+	// 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds. Name in real-time metrics
+	// report: Oldest
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
+	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)
+	// SLOTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Availability
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
 	//
 	// This member is required.
 	CurrentMetrics []*types.CurrentMetric
@@ -50,7 +76,7 @@ type GetCurrentMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. The only supported channel is VOICE.
+	// in the same request. Both VOICE and CHAT channels are supported.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -62,9 +88,9 @@ type GetCurrentMetricDataInput struct {
 
 	// The grouping applied to the metrics returned. For example, when grouped by
 	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
-	// queues. If you group by CHANNEL, you should include a Channels filter. The only
-	// supported channel is VOICE. If no Grouping is included in the request, a summary
-	// of metrics is returned.
+	// queues. If you group by CHANNEL, you should include a Channels filter. Both
+	// VOICE and CHAT channels are supported. If no Grouping is included in the
+	// request, a summary of metrics is returned.
 	Groupings []types.Grouping
 
 	// The maximimum number of results to return per page.

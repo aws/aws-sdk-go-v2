@@ -13,6 +13,19 @@ const (
 	DeploymentStatusEligible       DeploymentStatus = "ELIGIBLE"
 )
 
+// Values returns all known values for DeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStatus) Values() []DeploymentStatus {
+	return []DeploymentStatus{
+		"PENDING_UPDATE",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"NOT_ELIGIBLE",
+		"ELIGIBLE",
+	}
+}
+
 type DescribePackagesFilterName string
 
 // Enum values for DescribePackagesFilterName
@@ -21,6 +34,17 @@ const (
 	DescribePackagesFilterNamePackagename   DescribePackagesFilterName = "PackageName"
 	DescribePackagesFilterNamePackagestatus DescribePackagesFilterName = "PackageStatus"
 )
+
+// Values returns all known values for DescribePackagesFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
+	return []DescribePackagesFilterName{
+		"PackageID",
+		"PackageName",
+		"PackageStatus",
+	}
+}
 
 type DomainPackageStatus string
 
@@ -32,6 +56,19 @@ const (
 	DomainPackageStatusDissociating        DomainPackageStatus = "DISSOCIATING"
 	DomainPackageStatusDissociation_failed DomainPackageStatus = "DISSOCIATION_FAILED"
 )
+
+// Values returns all known values for DomainPackageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainPackageStatus) Values() []DomainPackageStatus {
+	return []DomainPackageStatus{
+		"ASSOCIATING",
+		"ASSOCIATION_FAILED",
+		"ACTIVE",
+		"DISSOCIATING",
+		"DISSOCIATION_FAILED",
+	}
+}
 
 type ESPartitionInstanceType string
 
@@ -97,6 +134,72 @@ const (
 	ESPartitionInstanceTypeI316xlargeElasticsearch       ESPartitionInstanceType = "i3.16xlarge.elasticsearch"
 )
 
+// Values returns all known values for ESPartitionInstanceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ESPartitionInstanceType) Values() []ESPartitionInstanceType {
+	return []ESPartitionInstanceType{
+		"m3.medium.elasticsearch",
+		"m3.large.elasticsearch",
+		"m3.xlarge.elasticsearch",
+		"m3.2xlarge.elasticsearch",
+		"m4.large.elasticsearch",
+		"m4.xlarge.elasticsearch",
+		"m4.2xlarge.elasticsearch",
+		"m4.4xlarge.elasticsearch",
+		"m4.10xlarge.elasticsearch",
+		"m5.large.elasticsearch",
+		"m5.xlarge.elasticsearch",
+		"m5.2xlarge.elasticsearch",
+		"m5.4xlarge.elasticsearch",
+		"m5.12xlarge.elasticsearch",
+		"r5.large.elasticsearch",
+		"r5.xlarge.elasticsearch",
+		"r5.2xlarge.elasticsearch",
+		"r5.4xlarge.elasticsearch",
+		"r5.12xlarge.elasticsearch",
+		"c5.large.elasticsearch",
+		"c5.xlarge.elasticsearch",
+		"c5.2xlarge.elasticsearch",
+		"c5.4xlarge.elasticsearch",
+		"c5.9xlarge.elasticsearch",
+		"c5.18xlarge.elasticsearch",
+		"ultrawarm1.medium.elasticsearch",
+		"ultrawarm1.large.elasticsearch",
+		"t2.micro.elasticsearch",
+		"t2.small.elasticsearch",
+		"t2.medium.elasticsearch",
+		"r3.large.elasticsearch",
+		"r3.xlarge.elasticsearch",
+		"r3.2xlarge.elasticsearch",
+		"r3.4xlarge.elasticsearch",
+		"r3.8xlarge.elasticsearch",
+		"i2.xlarge.elasticsearch",
+		"i2.2xlarge.elasticsearch",
+		"d2.xlarge.elasticsearch",
+		"d2.2xlarge.elasticsearch",
+		"d2.4xlarge.elasticsearch",
+		"d2.8xlarge.elasticsearch",
+		"c4.large.elasticsearch",
+		"c4.xlarge.elasticsearch",
+		"c4.2xlarge.elasticsearch",
+		"c4.4xlarge.elasticsearch",
+		"c4.8xlarge.elasticsearch",
+		"r4.large.elasticsearch",
+		"r4.xlarge.elasticsearch",
+		"r4.2xlarge.elasticsearch",
+		"r4.4xlarge.elasticsearch",
+		"r4.8xlarge.elasticsearch",
+		"r4.16xlarge.elasticsearch",
+		"i3.large.elasticsearch",
+		"i3.xlarge.elasticsearch",
+		"i3.2xlarge.elasticsearch",
+		"i3.4xlarge.elasticsearch",
+		"i3.8xlarge.elasticsearch",
+		"i3.16xlarge.elasticsearch",
+	}
+}
+
 type ESWarmPartitionInstanceType string
 
 // Enum values for ESWarmPartitionInstanceType
@@ -104,6 +207,16 @@ const (
 	ESWarmPartitionInstanceTypeUltrawarm1MediumElasticsearch ESWarmPartitionInstanceType = "ultrawarm1.medium.elasticsearch"
 	ESWarmPartitionInstanceTypeUltrawarm1LargeElasticsearch  ESWarmPartitionInstanceType = "ultrawarm1.large.elasticsearch"
 )
+
+// Values returns all known values for ESWarmPartitionInstanceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ESWarmPartitionInstanceType) Values() []ESWarmPartitionInstanceType {
+	return []ESWarmPartitionInstanceType{
+		"ultrawarm1.medium.elasticsearch",
+		"ultrawarm1.large.elasticsearch",
+	}
+}
 
 type InboundCrossClusterSearchConnectionStatusCode string
 
@@ -117,6 +230,21 @@ const (
 	InboundCrossClusterSearchConnectionStatusCodeDeleted            InboundCrossClusterSearchConnectionStatusCode = "DELETED"
 )
 
+// Values returns all known values for
+// InboundCrossClusterSearchConnectionStatusCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (InboundCrossClusterSearchConnectionStatusCode) Values() []InboundCrossClusterSearchConnectionStatusCode {
+	return []InboundCrossClusterSearchConnectionStatusCode{
+		"PENDING_ACCEPTANCE",
+		"APPROVED",
+		"REJECTING",
+		"REJECTED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -124,7 +252,20 @@ const (
 	LogTypeIndex_slow_logs     LogType = "INDEX_SLOW_LOGS"
 	LogTypeSearch_slow_logs    LogType = "SEARCH_SLOW_LOGS"
 	LogTypeEs_application_logs LogType = "ES_APPLICATION_LOGS"
+	LogTypeAudit_logs          LogType = "AUDIT_LOGS"
 )
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"INDEX_SLOW_LOGS",
+		"SEARCH_SLOW_LOGS",
+		"ES_APPLICATION_LOGS",
+		"AUDIT_LOGS",
+	}
+}
 
 type OptionState string
 
@@ -134,6 +275,17 @@ const (
 	OptionStateProcessing             OptionState = "Processing"
 	OptionStateActive                 OptionState = "Active"
 )
+
+// Values returns all known values for OptionState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OptionState) Values() []OptionState {
+	return []OptionState{
+		"RequiresIndexDocuments",
+		"Processing",
+		"Active",
+	}
+}
 
 type OutboundCrossClusterSearchConnectionStatusCode string
 
@@ -149,6 +301,23 @@ const (
 	OutboundCrossClusterSearchConnectionStatusCodeDeleted            OutboundCrossClusterSearchConnectionStatusCode = "DELETED"
 )
 
+// Values returns all known values for
+// OutboundCrossClusterSearchConnectionStatusCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OutboundCrossClusterSearchConnectionStatusCode) Values() []OutboundCrossClusterSearchConnectionStatusCode {
+	return []OutboundCrossClusterSearchConnectionStatusCode{
+		"PENDING_ACCEPTANCE",
+		"VALIDATING",
+		"VALIDATION_FAILED",
+		"PROVISIONING",
+		"ACTIVE",
+		"REJECTED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type PackageStatus string
 
 // Enum values for PackageStatus
@@ -163,12 +332,37 @@ const (
 	PackageStatusDelete_failed     PackageStatus = "DELETE_FAILED"
 )
 
+// Values returns all known values for PackageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageStatus) Values() []PackageStatus {
+	return []PackageStatus{
+		"COPYING",
+		"COPY_FAILED",
+		"VALIDATING",
+		"VALIDATION_FAILED",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
+		"DELETE_FAILED",
+	}
+}
+
 type PackageType string
 
 // Enum values for PackageType
 const (
 	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
 )
+
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PackageType) Values() []PackageType {
+	return []PackageType{
+		"TXT-DICTIONARY",
+	}
+}
 
 type ReservedElasticsearchInstancePaymentOption string
 
@@ -179,6 +373,18 @@ const (
 	ReservedElasticsearchInstancePaymentOptionNo_upfront      ReservedElasticsearchInstancePaymentOption = "NO_UPFRONT"
 )
 
+// Values returns all known values for ReservedElasticsearchInstancePaymentOption.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReservedElasticsearchInstancePaymentOption) Values() []ReservedElasticsearchInstancePaymentOption {
+	return []ReservedElasticsearchInstancePaymentOption{
+		"ALL_UPFRONT",
+		"PARTIAL_UPFRONT",
+		"NO_UPFRONT",
+	}
+}
+
 type TLSSecurityPolicy string
 
 // Enum values for TLSSecurityPolicy
@@ -186,6 +392,16 @@ const (
 	TLSSecurityPolicyPolicy_min_tls_1_0_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
 	TLSSecurityPolicyPolicy_min_tls_1_2_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
 )
+
+// Values returns all known values for TLSSecurityPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
+	return []TLSSecurityPolicy{
+		"Policy-Min-TLS-1-0-2019-07",
+		"Policy-Min-TLS-1-2-2019-07",
+	}
+}
 
 type UpgradeStatus string
 
@@ -197,6 +413,18 @@ const (
 	UpgradeStatusFailed                UpgradeStatus = "FAILED"
 )
 
+// Values returns all known values for UpgradeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpgradeStatus) Values() []UpgradeStatus {
+	return []UpgradeStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"SUCCEEDED_WITH_ISSUES",
+		"FAILED",
+	}
+}
+
 type UpgradeStep string
 
 // Enum values for UpgradeStep
@@ -206,6 +434,17 @@ const (
 	UpgradeStepUpgrade           UpgradeStep = "UPGRADE"
 )
 
+// Values returns all known values for UpgradeStep. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpgradeStep) Values() []UpgradeStep {
+	return []UpgradeStep{
+		"PRE_UPGRADE_CHECK",
+		"SNAPSHOT",
+		"UPGRADE",
+	}
+}
+
 type VolumeType string
 
 // Enum values for VolumeType
@@ -214,3 +453,14 @@ const (
 	VolumeTypeGp2      VolumeType = "gp2"
 	VolumeTypeIo1      VolumeType = "io1"
 )
+
+// Values returns all known values for VolumeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeType) Values() []VolumeType {
+	return []VolumeType{
+		"standard",
+		"gp2",
+		"io1",
+	}
+}

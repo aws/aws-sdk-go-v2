@@ -78,7 +78,7 @@ type StartBuildInput struct {
 	// output artifacts. You can use a cross-account KMS key to encrypt the build
 	// output artifacts if your service role has permission to that key. You can
 	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/alias-name ).
+	// CMK's alias (using the format alias/).
 	EncryptionKeyOverride *string
 
 	// A container type for this build that overrides the one specified in the build

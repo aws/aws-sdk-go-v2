@@ -6481,6 +6481,15 @@ func awsRestjson1_deserializeDocumentAutoBranchCreationConfig(v **types.AutoBran
 				sv.EnableBasicAuth = &jtv
 			}
 
+		case "enablePerformanceMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnablePerformanceMode to be of type *bool, got %T instead", value)
+				}
+				sv.EnablePerformanceMode = &jtv
+			}
+
 		case "enablePullRequestPreview":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6919,6 +6928,15 @@ func awsRestjson1_deserializeDocumentBranch(v **types.Branch, value interface{})
 					return fmt.Errorf("expected EnableNotification to be of type *bool, got %T instead", value)
 				}
 				sv.EnableNotification = &jtv
+			}
+
+		case "enablePerformanceMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnablePerformanceMode to be of type *bool, got %T instead", value)
+				}
+				sv.EnablePerformanceMode = &jtv
 			}
 
 		case "enablePullRequestPreview":

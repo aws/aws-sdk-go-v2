@@ -52,7 +52,7 @@ func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *Upd
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateMatchmakingConfigurationInput struct {
 
 	// A unique identifier for a matchmaking configuration to update. You can use
@@ -132,7 +132,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	RuleSetName *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateMatchmakingConfigurationOutput struct {
 
 	// The updated matchmaking configuration.

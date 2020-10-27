@@ -21,10 +21,10 @@ import (
 //     * a Persistent deployment type
 //
 //     * is not
-// linked to an Amazon S3 data respository.
+// linked to a data respository.
 //
-// For more information about backing up
-// Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups
+// For more information about backing up Amazon FSx
+// for Lustre file systems, see Working with FSx for Lustre backups
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html). For
 // more information about backing up Amazon FSx for Lustre file systems, see
 // Working with FSx for Windows backups
@@ -74,15 +74,16 @@ type CreateBackupInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
-	// creation. This string is automatically filled on your behalf when you use the
-	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+	// idempotent creation. This string is automatically filled on your behalf when you
+	// use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
 
-	// The tags to apply to the backup at backup creation. The key value of the Name
-	// tag appears in the console as the backup name. If you have set CopyTagsToBackups
-	// to true, and you specify one or more tags using the CreateBackup action, no
-	// existing tags on the file system are copied from the file system to the backup.
+	// (Optional) The tags to apply to the backup at backup creation. The key value of
+	// the Name tag appears in the console as the backup name. If you have set
+	// CopyTagsToBackups to true, and you specify one or more tags using the
+	// CreateBackup action, no existing file system tags are copied from the file
+	// system to the backup.
 	Tags []*types.Tag
 }
 

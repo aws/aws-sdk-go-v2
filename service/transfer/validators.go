@@ -110,6 +110,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSecurityPolicy struct {
+}
+
+func (*validateOpDescribeSecurityPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSecurityPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSecurityPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSecurityPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeServer struct {
 }
 
@@ -370,6 +390,10 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
 
+func addOpDescribeSecurityPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSecurityPolicy{}, middleware.After)
+}
+
 func addOpDescribeServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeServer{}, middleware.After)
 }
@@ -423,11 +447,11 @@ func validateHomeDirectoryMapEntry(v *types.HomeDirectoryMapEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HomeDirectoryMapEntry"}
-	if v.Target == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Target"))
-	}
 	if v.Entry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entry"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -510,23 +534,23 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
+	if v.HomeDirectoryMappings != nil {
+		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
+			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
-	if v.HomeDirectoryMappings != nil {
-		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
-			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -556,11 +580,11 @@ func validateOpDeleteSshPublicKeyInput(v *DeleteSshPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSshPublicKeyInput"}
-	if v.SshPublicKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeyId"))
-	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.SshPublicKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeyId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
@@ -582,6 +606,21 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSecurityPolicyInput(v *DescribeSecurityPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSecurityPolicyInput"}
+	if v.SecurityPolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityPolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -628,14 +667,14 @@ func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportSshPublicKeyInput"}
-	if v.SshPublicKeyBody == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeyBody"))
-	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.SshPublicKeyBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeyBody"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -709,15 +748,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -782,16 +821,16 @@ func validateOpUpdateUserInput(v *UpdateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserInput"}
+	if v.HomeDirectoryMappings != nil {
+		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
+			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
-	if v.HomeDirectoryMappings != nil {
-		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
-			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns metadata associated with creating a backup of a resource.
+// Returns backup job details for the specified BackupJobId.
 func (c *Client) DescribeBackupJob(ctx context.Context, params *DescribeBackupJobInput, optFns ...func(*Options)) (*DescribeBackupJobOutput, error) {
 	if params == nil {
 		params = &DescribeBackupJobInput{}
@@ -44,8 +44,16 @@ type DescribeBackupJobOutput struct {
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string
 
+	// Represents the options specified as part of backup plan or on-demand backup job.
+	BackupOptions map[string]*string
+
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64
+
+	// Represents the actual backup type selected for a backup job. For example, if a
+	// successful WindowsVSS backup was taken, BackupType returns “WindowsVSS”. If
+	// BackupType is empty, then it is a regular backup.
+	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
 	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.

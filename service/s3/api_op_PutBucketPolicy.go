@@ -25,9 +25,11 @@ import (
 // following operations are related to PutBucketPolicy:
 //
 //     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
 //     *
 // DeleteBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInput, optFns ...func(*Options)) (*PutBucketPolicyOutput, error) {
 	if params == nil {
 		params = &PutBucketPolicyInput{}
@@ -61,6 +63,10 @@ type PutBucketPolicyInput struct {
 
 	// The MD5 hash of the request body.
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketPolicyOutput struct {

@@ -294,13 +294,13 @@ func validateCreateFileSystemWindowsConfiguration(v *types.CreateFileSystemWindo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemWindowsConfiguration"}
-	if v.ThroughputCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
-	}
 	if v.SelfManagedActiveDirectoryConfiguration != nil {
 		if err := validateSelfManagedActiveDirectoryConfiguration(v.SelfManagedActiveDirectoryConfiguration); err != nil {
 			invalidParams.AddNested("SelfManagedActiveDirectoryConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ThroughputCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -348,9 +348,6 @@ func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveD
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SelfManagedActiveDirectoryConfiguration"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -359,6 +356,9 @@ func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveD
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -372,11 +372,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -445,20 +445,20 @@ func validateOpCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput) e
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Report == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Report"))
 	} else if v.Report != nil {
 		if err := validateCompletionReport(v.Report); err != nil {
 			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -472,11 +472,6 @@ func validateOpCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemFromBackupInput"}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
@@ -486,6 +481,11 @@ func validateOpCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInpu
 	if v.WindowsConfiguration != nil {
 		if err := validateCreateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -500,24 +500,24 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemInput"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.WindowsConfiguration != nil {
 		if err := validateCreateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if len(v.FileSystemType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemType"))
 	}
 	if v.StorageCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
-	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -546,6 +546,11 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileSystemInput"}
+	if v.LustreConfiguration != nil {
+		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.WindowsConfiguration != nil {
 		if err := validateDeleteFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
@@ -553,11 +558,6 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
-	if v.LustreConfiguration != nil {
-		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
-			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,15 +586,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -608,11 +608,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

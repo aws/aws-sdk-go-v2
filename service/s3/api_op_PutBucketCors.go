@@ -45,11 +45,15 @@ import (
 // Storage Service Developer Guide. Related Resources
 //
 //     * GetBucketCors
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketCors.html)
 //
 //     *
 // DeleteBucketCors
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html)
 //
-//     * RESTOPTIONSobject
+//
+// * RESTOPTIONSobject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
 func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, optFns ...func(*Options)) (*PutBucketCorsOutput, error) {
 	if params == nil {
 		params = &PutBucketCorsInput{}
@@ -85,6 +89,10 @@ type PutBucketCorsInput struct {
 	// transit. For more information, go to RFC 1864.
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketCorsOutput struct {

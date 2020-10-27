@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Specifies the Resolver operations and resources that you want to allow another
-// AWS account to be able to use.
+// Specifies an AWS account that you want to share rules with, the Resolver rules
+// that you want to share, and the operations that you want the account to be able
+// to perform on those rules.
 func (c *Client) PutResolverRulePolicy(ctx context.Context, params *PutResolverRulePolicyInput, optFns ...func(*Options)) (*PutResolverRulePolicyOutput, error) {
 	if params == nil {
 		params = &PutResolverRulePolicyInput{}
@@ -29,14 +30,33 @@ func (c *Client) PutResolverRulePolicy(ctx context.Context, params *PutResolverR
 
 type PutResolverRulePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the account that you want to grant permissions
-	// to.
+	// The Amazon Resource Name (ARN) of the account that you want to share rules with.
 	//
 	// This member is required.
 	Arn *string
 
-	// An AWS Identity and Access Management policy statement that lists the
-	// permissions that you want to grant to another AWS account.
+	// An AWS Identity and Access Management policy statement that lists the rules that
+	// you want to share with another AWS account and the operations that you want the
+	// account to be able to perform. You can specify the following operations in the
+	// Actions section of the statement:
+	//
+	//     * route53resolver:GetResolverRule
+	//
+	//     *
+	// route53resolver:AssociateResolverRule
+	//
+	//     *
+	// route53resolver:DisassociateResolverRule
+	//
+	//     *
+	// route53resolver:ListResolverRules
+	//
+	//     *
+	// route53resolver:ListResolverRuleAssociations
+	//
+	// In the Resource section of the
+	// statement, you specify the ARNs for the rules that you want to share with the
+	// account that you specified in Arn.
 	//
 	// This member is required.
 	ResolverRulePolicy *string

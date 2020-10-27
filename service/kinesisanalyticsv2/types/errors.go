@@ -152,7 +152,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Discovery failed to get a record from the streaming source because of the Amazon
+// Discovery failed to get a record from the streaming source because of the
 // Kinesis Streams ProvisionedThroughputExceededException. For more information,
 // see GetRecords
 // (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html) in
@@ -213,13 +213,13 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The data format is not valid. Amazon Kinesis Data Analytics cannot detect the
-// schema for the given streaming source.
+// The data format is not valid. Kinesis Data Analytics cannot detect the schema
+// for the given streaming source.
 type UnableToDetectSchemaException struct {
 	Message *string
 
-	RawInputRecords       []*string
 	ProcessedInputRecords []*string
+	RawInputRecords       []*string
 }
 
 func (e *UnableToDetectSchemaException) Error() string {

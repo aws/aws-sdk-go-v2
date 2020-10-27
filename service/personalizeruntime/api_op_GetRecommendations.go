@@ -51,7 +51,9 @@ type GetRecommendationsInput struct {
 	Context map[string]*string
 
 	// The ARN of the filter to apply to the returned recommendations. For more
-	// information, see Using Filters with Amazon Personalize.
+	// information, see Using Filters with Amazon Personalize
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filters.html). When using
+	// this parameter, be sure the filter resource is ACTIVE.
 	FilterArn *string
 
 	// The item ID to provide recommendations for. Required for RELATED_ITEMS recipe
@@ -71,6 +73,9 @@ type GetRecommendationsOutput struct {
 	// A list of recommendations sorted in ascending order by prediction score. There
 	// can be a maximum of 500 items in the list.
 	ItemList []*types.PredictedItem
+
+	// The ID of the recommendation.
+	RecommendationId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

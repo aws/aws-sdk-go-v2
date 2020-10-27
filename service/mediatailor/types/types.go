@@ -2,6 +2,18 @@
 
 package types
 
+// The configuration for Ad Marker Passthrough. Ad marker passthrough can be used
+// to pass ad markers from the origin to the customized manifest.
+type AdMarkerPassthrough struct {
+
+	// For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
+	// EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest
+	// to the MediaTailor personalized manifest.No logic is applied to these ad
+	// markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled
+	// for that ad break, MediaTailor will not set the value to 0.
+	Enabled *bool
+}
+
 // The configuration for Avail Suppression. Ad suppression can be used to turn off
 // ad personalization in a long manifest, or if a viewer joins mid-break.
 type AvailSuppression struct {
@@ -115,6 +127,15 @@ type LivePreRollConfiguration struct {
 	MaxDurationSeconds *int32
 }
 
+// The configuration for manifest processing rules. Manifest processing rules
+// enable customization of the personalized manifests created by MediaTailor.
+type ManifestProcessingRules struct {
+
+	// The configuration for Ad Marker Passthrough. Ad marker passthrough can be used
+	// to pass ad markers from the origin to the customized manifest.
+	AdMarkerPassthrough *AdMarkerPassthrough
+}
+
 // The AWSMediaTailor configuration.
 type PlaybackConfiguration struct {
 
@@ -142,6 +163,10 @@ type PlaybackConfiguration struct {
 
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration
+
+	// The configuration for manifest processing rules. Manifest processing rules
+	// enable customization of the personalized manifests created by MediaTailor.
+	ManifestProcessingRules *ManifestProcessingRules
 
 	// The identifier for the playback configuration.
 	Name *string

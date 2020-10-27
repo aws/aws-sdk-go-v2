@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Applies a pending maintenance action to a resource (for example, to a DB
-// instance).
+// Applies a pending maintenance action to a resource (for example, to an Amazon
+// DocumentDB instance).
 func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *ApplyPendingMaintenanceActionInput, optFns ...func(*Options)) (*ApplyPendingMaintenanceActionOutput, error) {
 	if params == nil {
 		params = &ApplyPendingMaintenanceActionInput{}

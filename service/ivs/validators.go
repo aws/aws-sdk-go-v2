@@ -89,6 +89,26 @@ func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePlaybackKeyPair struct {
+}
+
+func (*validateOpDeletePlaybackKeyPair) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePlaybackKeyPair) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePlaybackKeyPairInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePlaybackKeyPairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStreamKey struct {
 }
 
@@ -129,6 +149,26 @@ func (m *validateOpGetChannel) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPlaybackKeyPair struct {
+}
+
+func (*validateOpGetPlaybackKeyPair) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPlaybackKeyPair) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPlaybackKeyPairInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPlaybackKeyPairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStream struct {
 }
 
@@ -164,6 +204,26 @@ func (m *validateOpGetStreamKey) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetStreamKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportPlaybackKeyPair struct {
+}
+
+func (*validateOpImportPlaybackKeyPair) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportPlaybackKeyPair) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportPlaybackKeyPairInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportPlaybackKeyPairInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +385,10 @@ func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
 }
 
+func addOpDeletePlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePlaybackKeyPair{}, middleware.After)
+}
+
 func addOpDeleteStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStreamKey{}, middleware.After)
 }
@@ -333,12 +397,20 @@ func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
 }
 
+func addOpGetPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPlaybackKeyPair{}, middleware.After)
+}
+
 func addOpGetStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStream{}, middleware.After)
 }
 
 func addOpGetStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamKey{}, middleware.After)
+}
+
+func addOpImportPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportPlaybackKeyPair{}, middleware.After)
 }
 
 func addOpListStreamKeysValidationMiddleware(stack *middleware.Stack) error {
@@ -429,6 +501,21 @@ func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	}
 }
 
+func validateOpDeletePlaybackKeyPairInput(v *DeletePlaybackKeyPairInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePlaybackKeyPairInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStreamKeyInput(v *DeleteStreamKeyInput) error {
 	if v == nil {
 		return nil
@@ -449,6 +536,21 @@ func validateOpGetChannelInput(v *GetChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetChannelInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPlaybackKeyPairInput(v *GetPlaybackKeyPairInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPlaybackKeyPairInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -481,6 +583,21 @@ func validateOpGetStreamKeyInput(v *GetStreamKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStreamKeyInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportPlaybackKeyPairInput(v *ImportPlaybackKeyPairInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportPlaybackKeyPairInput"}
+	if v.PublicKeyMaterial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyMaterial"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -524,11 +641,11 @@ func validateOpPutMetadataInput(v *PutMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMetadataInput"}
-	if v.Metadata == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
-	}
 	if v.ChannelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.Metadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -557,11 +674,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

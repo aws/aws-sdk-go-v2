@@ -40,6 +40,9 @@ type ListEventSourceMappingsInput struct {
 	//
 	//     * Amazon Simple Queue Service - The ARN of the
 	// queue.
+	//
+	//     * Amazon Managed Streaming for Apache Kafka - The ARN of the
+	// cluster.
 	EventSourceArn *string
 
 	// The name of the Lambda function. Name formats

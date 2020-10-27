@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes the Availability Zones and Local Zones that are available to you. If
-// there is an event impacting an Availability Zone or Local Zone, you can use this
-// request to view the state and any provided messages for that Availability Zone
-// or Local Zone. For more information about Availability Zones and Local Zones,
-// see Regions and Availability Zones
+// Describes the Availability Zones, Local Zones, and Wavelength Zones that are
+// available to you. If there is an event impacting a zone, you can use this
+// request to view the state and any provided messages for that zone. For more
+// information about Availability Zones, Local Zones, and Wavelength Zones, see
+// Regions, Zones and Outposts
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeAvailabilityZones(ctx context.Context, params *DescribeAvailabilityZonesInput, optFns ...func(*Options)) (*DescribeAvailabilityZonesOutput, error) {
@@ -35,9 +35,9 @@ func (c *Client) DescribeAvailabilityZones(ctx context.Context, params *Describe
 
 type DescribeAvailabilityZonesInput struct {
 
-	// Include all Availability Zones and Local Zones regardless of your opt in status.
-	// If you do not use this parameter, the results include only the zones for the
-	// Regions where you have chosen the option to opt in.
+	// Include all Availability Zones, Local Zones, and Wavelength Zones regardless of
+	// your opt-in status. If you do not use this parameter, the results include only
+	// the zones for the Regions where you have chosen the option to opt in.
 	AllAvailabilityZones *bool
 
 	// Checks whether you have the required permissions for the action, without
@@ -50,47 +50,55 @@ type DescribeAvailabilityZonesInput struct {
 	//
 	//     * group-name - For Availability Zones, use the Region name.
 	// For Local Zones, use the name of the group associated with the Local Zone (for
-	// example, us-west-2-lax-1).
+	// example, us-west-2-lax-1) For Wavelength Zones, use the name of the group
+	// associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).
 	//
-	//     * message - The Zone message.
 	//
-	//     *
-	// opt-in-status - The opt in status (opted-in, and not-opted-in |
-	// opt-in-not-required).
+	// * message - The Zone message.
 	//
-	//     * The ID of the zone that handles some of the Local
-	// Zone control plane operations, such as API calls.
+	//     * opt-in-status - The opt-in status
+	// (opted-in, and not-opted-in | opt-in-not-required).
 	//
-	//     * region-name - The name
-	// of the Region for the Zone (for example, us-east-1).
+	//     * parent-zoneID - The
+	// ID of the zone that handles some of the Local Zone and Wavelength Zone control
+	// plane operations, such as API calls.
 	//
-	//     * state - The state of
-	// the Availability Zone or Local Zone (available | information | impaired |
-	// unavailable).
+	//     * parent-zoneName - The ID of the zone
+	// that handles some of the Local Zone and Wavelength Zone control plane
+	// operations, such as API calls.
+	//
+	//     * region-name - The name of the Region for
+	// the Zone (for example, us-east-1).
+	//
+	//     * state - The state of the Availability
+	// Zone, the Local Zone, or the Wavelength Zone (available | information | impaired
+	// | unavailable).
 	//
 	//     * zone-id - The ID of the Availability Zone (for example,
-	// use1-az1) or the Local Zone (for example, use usw2-lax1-az1).
+	// use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone
+	// (for example, us-east-1-wl1-bos-wlz-1).
 	//
-	//     * zone-type -
-	// The type of zone, for example, local-zone.
+	//     * zone-type - The type of zone, for
+	// example, local-zone.
 	//
-	//     * zone-name - The name of the
-	// Availability Zone (for example, us-east-1a) or the Local Zone (for example, use
-	// us-west-2-lax-1a).
+	//     * zone-name - The name of the Availability Zone (for
+	// example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the
+	// Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).
 	//
-	//     * zone-type - The type of zone, for example, local-zone.
+	//     * zone-type - The
+	// type of zone, for example, local-zone.
 	Filters []*types.Filter
 
-	// The IDs of the Zones.
+	// The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
 	ZoneIds []*string
 
-	// The names of the Zones.
+	// The names of the Availability Zones, Local Zones, and Wavelength Zones.
 	ZoneNames []*string
 }
 
 type DescribeAvailabilityZonesOutput struct {
 
-	// Information about the Zones.
+	// Information about the Availability Zones, Local Zones, and Wavelength Zones.
 	AvailabilityZones []*types.AvailabilityZone
 
 	// Metadata pertaining to the operation's result.

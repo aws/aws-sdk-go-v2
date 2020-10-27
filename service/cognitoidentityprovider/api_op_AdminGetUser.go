@@ -59,7 +59,7 @@ type AdminGetUserOutput struct {
 	// This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about TOTP software
 	// token MFA configurations. To look up information about either type of MFA
-	// configuration, use the AdminGetUserResponse$UserMFASettingList response instead.
+	// configuration, use UserMFASettingList instead.
 	MFAOptions []*types.MFAOptionType
 
 	// The user's preferred MFA setting.

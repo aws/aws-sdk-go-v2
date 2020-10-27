@@ -66,7 +66,7 @@ func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameS
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateGameSessionQueueInput struct {
 
 	// A descriptive label that is associated with game session queue. Queue names must
@@ -109,7 +109,7 @@ type CreateGameSessionQueueInput struct {
 	TimeoutInSeconds *int32
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateGameSessionQueueOutput struct {
 
 	// An object that describes the newly created game session queue.

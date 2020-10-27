@@ -162,6 +162,10 @@ type GetJobOutputOutput struct {
 	// JSON, and the Content-Type is application/json.
 	ContentType *string
 
+	// The HTTP response code for a job output request. The value depends on whether a
+	// range was specified in the request.
+	Status *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

@@ -120,7 +120,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	DeletionProtection *bool
 
 	// Specify the Active Directory directory ID to restore the DB cluster in. The
-	// domain must be created prior to this operation.
+	// domain must be created prior to this operation. Currently, only MySQL, Microsoft
+	// SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active
+	// Directory Domain. For more information, see  Kerberos Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
+	// in the Amazon RDS User Guide.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
@@ -142,7 +146,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	EnableIAMDatabaseAuthentication *bool
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
-	// parallelquery, global, or multimaster.
+	// parallelquery, global, or multimaster. For more information, see
+	// CreateDBCluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html).
 	EngineMode *string
 
 	// The version of the database engine to use for the new DB cluster. To list all of

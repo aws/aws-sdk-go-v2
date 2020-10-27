@@ -27,6 +27,10 @@ import (
 // AWS Lambda with Amazon SQS
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
 //
+//     * Using AWS
+// Lambda with Amazon MSK
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
+//
 // The following
 // error handling options are only available for stream sources (DynamoDB and
 // Kinesis):
@@ -39,12 +43,15 @@ import (
 //
 //     *
 // MaximumRecordAgeInSeconds - Discard records older than the specified age.
+// Default -1 (infinite). Minimum 60. Maximum 604800.
 //
-//     *
-// MaximumRetryAttempts - Discard records after the specified number of retries.
+//     * MaximumRetryAttempts -
+// Discard records after the specified number of retries. Default -1 (infinite).
+// Minimum 0. Maximum 10000. When infinite, failed records will be retried until
+// the record expires.
 //
-//
-// * ParallelizationFactor - Process multiple batches from each shard concurrently.
+//     * ParallelizationFactor - Process multiple batches from
+// each shard concurrently.
 func (c *Client) CreateEventSourceMapping(ctx context.Context, params *CreateEventSourceMappingInput, optFns ...func(*Options)) (*CreateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &CreateEventSourceMappingInput{}
@@ -72,6 +79,9 @@ type CreateEventSourceMappingInput struct {
 	//
 	//     * Amazon Simple Queue Service - The ARN of the
 	// queue.
+	//
+	//     * Amazon Managed Streaming for Apache Kafka - The ARN of the
+	// cluster.
 	//
 	// This member is required.
 	EventSourceArn *string
@@ -106,6 +116,9 @@ type CreateEventSourceMappingInput struct {
 	// 1,000.
 	//
 	//     * Amazon Simple Queue Service - Default 10. Max 10.
+	//
+	//     * Amazon
+	// Managed Streaming for Apache Kafka - Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams) If the function returns an error, split the batch in two and retry.
@@ -115,31 +128,36 @@ type CreateEventSourceMappingInput struct {
 	// records.
 	DestinationConfig *types.DestinationConfig
 
-	// Disables the event source mapping to pause polling and invocation.
+	// If true, the event source mapping is active. Set to false to pause polling and
+	// invocation.
 	Enabled *bool
 
 	// (Streams) The maximum amount of time to gather records before invoking the
 	// function, in seconds.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams) The maximum age of a record that Lambda sends to a function for
-	// processing.
+	// (Streams) Discard records older than the specified age. The default value is
+	// infinite (-1).
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams) The maximum number of times to retry when the function returns an
-	// error.
+	// (Streams) Discard records after the specified number of retries. The default
+	// value is infinite (-1). When set to infinite (-1), failed records will be
+	// retried until the record expires.
 	MaximumRetryAttempts *int32
 
 	// (Streams) The number of batches to process from each shard concurrently.
 	ParallelizationFactor *int32
 
 	// The position in a stream from which to start reading. Required for Amazon
-	// Kinesis and Amazon DynamoDB Streams sources. AT_TIMESTAMP is only supported for
-	// Amazon Kinesis streams.
+	// Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is only
+	// supported for Amazon Kinesis streams.
 	StartingPosition types.EventSourcePosition
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
 	StartingPositionTimestamp *time.Time
+
+	// (MSK) The name of the Kafka topic.
+	Topics []*string
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
@@ -190,6 +208,9 @@ type CreateEventSourceMappingOutput struct {
 	// Indicates whether the last change to the event source mapping was made by a
 	// user, or by the Lambda service.
 	StateTransitionReason *string
+
+	// (MSK) The name of the Kafka topic.
+	Topics []*string
 
 	// The identifier of the event source mapping.
 	UUID *string

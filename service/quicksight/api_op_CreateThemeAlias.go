@@ -57,6 +57,9 @@ type CreateThemeAliasOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
+	// The HTTP status of the request.
+	Status *int32
+
 	// Information about the theme alias.
 	ThemeAlias *types.ThemeAlias
 

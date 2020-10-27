@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a resolver rule. Before you can delete a resolver rule, you must
-// disassociate it from all the VPCs that you associated the resolver rule with.
-// For more infomation, see DisassociateResolverRule.
+// Deletes a Resolver rule. Before you can delete a Resolver rule, you must
+// disassociate it from all the VPCs that you associated the Resolver rule with.
+// For more information, see DisassociateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html).
 func (c *Client) DeleteResolverRule(ctx context.Context, params *DeleteResolverRuleInput, optFns ...func(*Options)) (*DeleteResolverRuleOutput, error) {
 	if params == nil {
 		params = &DeleteResolverRuleInput{}
@@ -31,7 +32,7 @@ func (c *Client) DeleteResolverRule(ctx context.Context, params *DeleteResolverR
 
 type DeleteResolverRuleInput struct {
 
-	// The ID of the resolver rule that you want to delete.
+	// The ID of the Resolver rule that you want to delete.
 	//
 	// This member is required.
 	ResolverRuleId *string

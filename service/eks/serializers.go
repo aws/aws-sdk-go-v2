@@ -91,6 +91,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.KubernetesNetworkConfig != nil {
+		ok := object.Key("kubernetesNetworkConfig")
+		if err := awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v.KubernetesNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Logging != nil {
 		ok := object.Key("logging")
 		if err := awsRestjson1_serializeDocumentLogging(v.Logging, ok); err != nil {
@@ -356,6 +363,13 @@ func awsRestjson1_serializeOpDocumentCreateNodegroupInput(v *CreateNodegroupInpu
 	if v.Labels != nil {
 		ok := object.Key("labels")
 		if err := awsRestjson1_serializeDocumentLabelsMap(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LaunchTemplate != nil {
+		ok := object.Key("launchTemplate")
+		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
 			return err
 		}
 	}
@@ -1872,6 +1886,13 @@ func awsRestjson1_serializeOpDocumentUpdateNodegroupVersionInput(v *UpdateNodegr
 		ok.Boolean(*v.Force)
 	}
 
+	if v.LaunchTemplate != nil {
+		ok := object.Key("launchTemplate")
+		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReleaseVersion != nil {
 		ok := object.Key("releaseVersion")
 		ok.String(*v.ReleaseVersion)
@@ -1974,6 +1995,18 @@ func awsRestjson1_serializeDocumentFargateProfileSelectors(v []*types.FargatePro
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v *types.KubernetesNetworkConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServiceIpv4Cidr != nil {
+		ok := object.Key("serviceIpv4Cidr")
+		ok.String(*v.ServiceIpv4Cidr)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLabelsKeyList(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2001,6 +2034,28 @@ func awsRestjson1_serializeDocumentLabelsMap(v map[string]*string, value smithyj
 		}
 		om.String(*v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchTemplateSpecification(v *types.LaunchTemplateSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
+	}
+
 	return nil
 }
 

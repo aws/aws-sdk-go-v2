@@ -12,8 +12,8 @@ import (
 type ConflictingOperationException struct {
 	Message *string
 
-	ResourceId  *string
 	ResourceArn *string
+	ResourceId  *string
 }
 
 func (e *ConflictingOperationException) Error() string {

@@ -16,13 +16,13 @@ import (
 // minutes have passed, you'll have to make another call to the GetJobManifest
 // action. The manifest is an encrypted file that you can download after your job
 // enters the WithCustomer status. The manifest is decrypted by using the
-// UnlockCode code value, when you pass both values to the Snowball through the
+// UnlockCode code value, when you pass both values to the Snow device through the
 // Snowball client when the client is started for the first time. As a best
 // practice, we recommend that you don't save a copy of an UnlockCode value in the
 // same location as the manifest file for that job. Saving these separately helps
-// prevent unauthorized parties from gaining access to the Snowball associated with
-// that job. The credentials of a given job, including its manifest file and unlock
-// code, expire 90 days after the job is created.
+// prevent unauthorized parties from gaining access to the Snow device associated
+// with that job. The credentials of a given job, including its manifest file and
+// unlock code, expire 90 days after the job is created.
 func (c *Client) GetJobManifest(ctx context.Context, params *GetJobManifestInput, optFns ...func(*Options)) (*GetJobManifestOutput, error) {
 	if params == nil {
 		params = &GetJobManifestInput{}

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets a list of work teams that you have defined in a region. The list may be
-// empty if no work team satisfies the filter specified in the NameContains
+// Gets a list of private work teams that you have defined in a region. The list
+// may be empty if no work team satisfies the filter specified in the NameContains
 // parameter.
 func (c *Client) ListWorkteams(ctx context.Context, params *ListWorkteamsInput, optFns ...func(*Options)) (*ListWorkteamsOutput, error) {
 	if params == nil {

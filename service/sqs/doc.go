@@ -7,31 +7,35 @@
 // Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing
 // messages as they travel between applications or microservices. Amazon SQS moves
 // data between distributed application components and helps you decouple these
-// components. You can use AWS SDKs (http://aws.amazon.com/tools/#sdk) to access
-// Amazon SQS using your favorite programming language. The SDKs perform tasks such
-// as the following automatically:
+// components. For information on the permissions you need to use this API, see
+// Identity and access management
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html)
+// in the Amazon Simple Queue Service Developer Guide. You can use AWS SDKs
+// (http://aws.amazon.com/tools/#sdk) to access Amazon SQS using your favorite
+// programming language. The SDKs perform tasks such as the following
+// automatically:
 //
-//     * Cryptographically sign your service
+//     * Cryptographically sign your service requests
+//
+//     * Retry
 // requests
-//
-//     * Retry requests
 //
 //     * Handle error responses
 //
-// Additional
-// Information
+// Additional Information
 //
-//     * Amazon SQS Product Page (http://aws.amazon.com/sqs/)
+//     * Amazon SQS
+// Product Page (http://aws.amazon.com/sqs/)
 //
-//     *
-// Amazon Simple Queue Service Developer Guide
+//     * Amazon Simple Queue Service
+// Developer Guide
 //
 //         * Making API Requests
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html)
 //
 //
 // * Amazon SQS Message Attributes
-// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 //
 //
 // * Amazon SQS Dead-Letter Queues

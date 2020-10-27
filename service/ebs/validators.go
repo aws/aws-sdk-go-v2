@@ -158,11 +158,11 @@ func validateOpCompleteSnapshotInput(v *CompleteSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteSnapshotInput"}
-	if v.SnapshotId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
-	}
 	if v.ChangedBlocksCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangedBlocksCount"))
+	}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -176,14 +176,14 @@ func validateOpGetSnapshotBlockInput(v *GetSnapshotBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSnapshotBlockInput"}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
 	if v.BlockToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockToken"))
 	}
 	if v.BlockIndex == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockIndex"))
-	}
-	if v.SnapshotId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -227,8 +227,8 @@ func validateOpPutSnapshotBlockInput(v *PutSnapshotBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutSnapshotBlockInput"}
-	if v.DataLength == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataLength"))
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if v.BlockIndex == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockIndex"))
@@ -236,14 +236,14 @@ func validateOpPutSnapshotBlockInput(v *PutSnapshotBlockInput) error {
 	if v.Checksum == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Checksum"))
 	}
-	if v.SnapshotId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	if v.BlockData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlockData"))
+	}
+	if v.DataLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataLength"))
 	}
 	if len(v.ChecksumAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ChecksumAlgorithm"))
-	}
-	if v.BlockData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlockData"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

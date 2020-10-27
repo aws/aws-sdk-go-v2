@@ -19,7 +19,8 @@ import (
 // key name prefix, one or more object tags, or a combination of both. Accordingly,
 // this section describes the latest API. The previous version of the API supported
 // filtering based only on an object key name prefix, which is supported for
-// backward compatibility. For the related API description, see PutBucketLifecycle.
+// backward compatibility. For the related API description, see PutBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
 // Rules You specify the lifecycle configuration in your request body. The
 // lifecycle configuration is specified as XML consisting of one or more rules.
 // Each rule consists of the following:
@@ -72,8 +73,11 @@ import (
 //
 //
 // * GetBucketLifecycleConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
 //
-//     * DeleteBucketLifecycle
+//
+// * DeleteBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *PutBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*PutBucketLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketLifecycleConfigurationInput{}
@@ -95,6 +99,10 @@ type PutBucketLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Container for lifecycle rules. You can add as many as 1,000 rules.
 	LifecycleConfiguration *types.BucketLifecycleConfiguration

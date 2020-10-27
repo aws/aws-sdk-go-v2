@@ -25,6 +25,9 @@ type Channel struct {
 	// Channel ARN.
 	Arn *string
 
+	// Whether the channel is authorized.
+	Authorized *bool
+
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
@@ -65,6 +68,9 @@ type ChannelSummary struct {
 	// Channel ARN.
 	Arn *string
 
+	// Whether the channel is authorized.
+	Authorized *bool
+
 	// Channel latency mode. Default: LOW.
 	LatencyMode ChannelLatencyMode
 
@@ -72,6 +78,35 @@ type ChannelSummary struct {
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]*string
+}
+
+// A key pair used to sign and validate a playback authorization token.
+type PlaybackKeyPair struct {
+
+	// Key-pair ARN.
+	Arn *string
+
+	// Key-pair identifier.
+	Fingerprint *string
+
+	// Key-pair name.
+	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]*string
+}
+
+// Summary information about a playback key pair.
+type PlaybackKeyPairSummary struct {
+
+	// Key-pair ARN.
+	Arn *string
+
+	// Key-pair name.
+	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value)
 	Tags map[string]*string
 }
 
@@ -107,7 +142,7 @@ type StreamKey struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value)
+	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]*string
 
 	// Stream-key value.
@@ -123,7 +158,7 @@ type StreamKeySummary struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value)
+	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]*string
 }
 

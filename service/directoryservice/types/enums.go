@@ -14,6 +14,20 @@ const (
 	CertificateStateDeregister_failed CertificateState = "DeregisterFailed"
 )
 
+// Values returns all known values for CertificateState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateState) Values() []CertificateState {
+	return []CertificateState{
+		"Registering",
+		"Registered",
+		"RegisterFailed",
+		"Deregistering",
+		"Deregistered",
+		"DeregisterFailed",
+	}
+}
+
 type DirectoryEdition string
 
 // Enum values for DirectoryEdition
@@ -22,6 +36,16 @@ const (
 	DirectoryEditionStandard   DirectoryEdition = "Standard"
 )
 
+// Values returns all known values for DirectoryEdition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DirectoryEdition) Values() []DirectoryEdition {
+	return []DirectoryEdition{
+		"Enterprise",
+		"Standard",
+	}
+}
+
 type DirectorySize string
 
 // Enum values for DirectorySize
@@ -29,6 +53,16 @@ const (
 	DirectorySizeSmall DirectorySize = "Small"
 	DirectorySizeLarge DirectorySize = "Large"
 )
+
+// Values returns all known values for DirectorySize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DirectorySize) Values() []DirectorySize {
+	return []DirectorySize{
+		"Small",
+		"Large",
+	}
+}
 
 type DirectoryStage string
 
@@ -47,6 +81,25 @@ const (
 	DirectoryStageFailed        DirectoryStage = "Failed"
 )
 
+// Values returns all known values for DirectoryStage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DirectoryStage) Values() []DirectoryStage {
+	return []DirectoryStage{
+		"Requested",
+		"Creating",
+		"Created",
+		"Active",
+		"Inoperable",
+		"Impaired",
+		"Restoring",
+		"RestoreFailed",
+		"Deleting",
+		"Deleted",
+		"Failed",
+	}
+}
+
 type DirectoryType string
 
 // Enum values for DirectoryType
@@ -56,6 +109,18 @@ const (
 	DirectoryTypeMicrosoft_ad        DirectoryType = "MicrosoftAD"
 	DirectoryTypeShared_microsoft_ad DirectoryType = "SharedMicrosoftAD"
 )
+
+// Values returns all known values for DirectoryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DirectoryType) Values() []DirectoryType {
+	return []DirectoryType{
+		"SimpleAD",
+		"ADConnector",
+		"MicrosoftAD",
+		"SharedMicrosoftAD",
+	}
+}
 
 type DomainControllerStatus string
 
@@ -70,6 +135,21 @@ const (
 	DomainControllerStatusFailed    DomainControllerStatus = "Failed"
 )
 
+// Values returns all known values for DomainControllerStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DomainControllerStatus) Values() []DomainControllerStatus {
+	return []DomainControllerStatus{
+		"Creating",
+		"Active",
+		"Impaired",
+		"Restoring",
+		"Deleting",
+		"Deleted",
+		"Failed",
+	}
+}
+
 type IpRouteStatusMsg string
 
 // Enum values for IpRouteStatusMsg
@@ -82,6 +162,20 @@ const (
 	IpRouteStatusMsgRemove_failed IpRouteStatusMsg = "RemoveFailed"
 )
 
+// Values returns all known values for IpRouteStatusMsg. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpRouteStatusMsg) Values() []IpRouteStatusMsg {
+	return []IpRouteStatusMsg{
+		"Adding",
+		"Added",
+		"Removing",
+		"Removed",
+		"AddFailed",
+		"RemoveFailed",
+	}
+}
+
 type LDAPSStatus string
 
 // Enum values for LDAPSStatus
@@ -92,12 +186,33 @@ const (
 	LDAPSStatusDisabled      LDAPSStatus = "Disabled"
 )
 
+// Values returns all known values for LDAPSStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LDAPSStatus) Values() []LDAPSStatus {
+	return []LDAPSStatus{
+		"Enabling",
+		"Enabled",
+		"EnableFailed",
+		"Disabled",
+	}
+}
+
 type LDAPSType string
 
 // Enum values for LDAPSType
 const (
 	LDAPSTypeClient LDAPSType = "Client"
 )
+
+// Values returns all known values for LDAPSType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LDAPSType) Values() []LDAPSType {
+	return []LDAPSType{
+		"Client",
+	}
+}
 
 type RadiusAuthenticationProtocol string
 
@@ -109,6 +224,18 @@ const (
 	RadiusAuthenticationProtocolMschapv2 RadiusAuthenticationProtocol = "MS-CHAPv2"
 )
 
+// Values returns all known values for RadiusAuthenticationProtocol. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RadiusAuthenticationProtocol) Values() []RadiusAuthenticationProtocol {
+	return []RadiusAuthenticationProtocol{
+		"PAP",
+		"CHAP",
+		"MS-CHAPv1",
+		"MS-CHAPv2",
+	}
+}
+
 type RadiusStatus string
 
 // Enum values for RadiusStatus
@@ -118,12 +245,32 @@ const (
 	RadiusStatusFailed    RadiusStatus = "Failed"
 )
 
+// Values returns all known values for RadiusStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RadiusStatus) Values() []RadiusStatus {
+	return []RadiusStatus{
+		"Creating",
+		"Completed",
+		"Failed",
+	}
+}
+
 type ReplicationScope string
 
 // Enum values for ReplicationScope
 const (
 	ReplicationScopeDomain ReplicationScope = "Domain"
 )
+
+// Values returns all known values for ReplicationScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationScope) Values() []ReplicationScope {
+	return []ReplicationScope{
+		"Domain",
+	}
+}
 
 type SchemaExtensionStatus string
 
@@ -140,6 +287,23 @@ const (
 	SchemaExtensionStatusCompleted            SchemaExtensionStatus = "Completed"
 )
 
+// Values returns all known values for SchemaExtensionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaExtensionStatus) Values() []SchemaExtensionStatus {
+	return []SchemaExtensionStatus{
+		"Initializing",
+		"CreatingSnapshot",
+		"UpdatingSchema",
+		"Replicating",
+		"CancelInProgress",
+		"RollbackInProgress",
+		"Cancelled",
+		"Failed",
+		"Completed",
+	}
+}
+
 type SelectiveAuth string
 
 // Enum values for SelectiveAuth
@@ -148,6 +312,16 @@ const (
 	SelectiveAuthDisabled SelectiveAuth = "Disabled"
 )
 
+// Values returns all known values for SelectiveAuth. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelectiveAuth) Values() []SelectiveAuth {
+	return []SelectiveAuth{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ShareMethod string
 
 // Enum values for ShareMethod
@@ -155,6 +329,16 @@ const (
 	ShareMethodOrganizations ShareMethod = "ORGANIZATIONS"
 	ShareMethodHandshake     ShareMethod = "HANDSHAKE"
 )
+
+// Values returns all known values for ShareMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ShareMethod) Values() []ShareMethod {
+	return []ShareMethod{
+		"ORGANIZATIONS",
+		"HANDSHAKE",
+	}
+}
 
 type ShareStatus string
 
@@ -171,6 +355,23 @@ const (
 	ShareStatusDeleting           ShareStatus = "Deleting"
 )
 
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ShareStatus) Values() []ShareStatus {
+	return []ShareStatus{
+		"Shared",
+		"PendingAcceptance",
+		"Rejected",
+		"Rejecting",
+		"RejectFailed",
+		"Sharing",
+		"ShareFailed",
+		"Deleted",
+		"Deleting",
+	}
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus
@@ -180,6 +381,17 @@ const (
 	SnapshotStatusFailed    SnapshotStatus = "Failed"
 )
 
+// Values returns all known values for SnapshotStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotStatus) Values() []SnapshotStatus {
+	return []SnapshotStatus{
+		"Creating",
+		"Completed",
+		"Failed",
+	}
+}
+
 type SnapshotType string
 
 // Enum values for SnapshotType
@@ -188,12 +400,31 @@ const (
 	SnapshotTypeManual SnapshotType = "Manual"
 )
 
+// Values returns all known values for SnapshotType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SnapshotType) Values() []SnapshotType {
+	return []SnapshotType{
+		"Auto",
+		"Manual",
+	}
+}
+
 type TargetType string
 
 // Enum values for TargetType
 const (
 	TargetTypeAccount TargetType = "ACCOUNT"
 )
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"ACCOUNT",
+	}
+}
 
 type TopicStatus string
 
@@ -205,6 +436,18 @@ const (
 	TopicStatusDeleted         TopicStatus = "Deleted"
 )
 
+// Values returns all known values for TopicStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TopicStatus) Values() []TopicStatus {
+	return []TopicStatus{
+		"Registered",
+		"Topic not found",
+		"Failed",
+		"Deleted",
+	}
+}
+
 type TrustDirection string
 
 // Enum values for TrustDirection
@@ -213,6 +456,17 @@ const (
 	TrustDirectionOne_way_incoming TrustDirection = "One-Way: Incoming"
 	TrustDirectionTwo_way          TrustDirection = "Two-Way"
 )
+
+// Values returns all known values for TrustDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrustDirection) Values() []TrustDirection {
+	return []TrustDirection{
+		"One-Way: Outgoing",
+		"One-Way: Incoming",
+		"Two-Way",
+	}
+}
 
 type TrustState string
 
@@ -231,6 +485,25 @@ const (
 	TrustStateFailed        TrustState = "Failed"
 )
 
+// Values returns all known values for TrustState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TrustState) Values() []TrustState {
+	return []TrustState{
+		"Creating",
+		"Created",
+		"Verifying",
+		"VerifyFailed",
+		"Verified",
+		"Updating",
+		"UpdateFailed",
+		"Updated",
+		"Deleting",
+		"Deleted",
+		"Failed",
+	}
+}
+
 type TrustType string
 
 // Enum values for TrustType
@@ -238,3 +511,13 @@ const (
 	TrustTypeForest   TrustType = "Forest"
 	TrustTypeExternal TrustType = "External"
 )
+
+// Values returns all known values for TrustType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TrustType) Values() []TrustType {
+	return []TrustType{
+		"Forest",
+		"External",
+	}
+}

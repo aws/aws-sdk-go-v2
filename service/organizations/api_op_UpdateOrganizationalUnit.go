@@ -14,7 +14,7 @@ import (
 // Renames the specified organizational unit (OU). The ID and ARN don't change. The
 // child OUs and accounts remain in place, and any attached policies of the OU
 // remain attached. This operation can be called only from the organization's
-// master account.
+// management account.
 func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrganizationalUnitInput, optFns ...func(*Options)) (*UpdateOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationalUnitInput{}

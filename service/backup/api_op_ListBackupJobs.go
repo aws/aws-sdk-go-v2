@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns metadata about your backup jobs.
+// Returns a list of existing backup jobs for an authenticated account.
 func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput, optFns ...func(*Options)) (*ListBackupJobsOutput, error) {
 	if params == nil {
 		params = &ListBackupJobsInput{}

@@ -12,6 +12,9 @@ import (
 )
 
 // Provides information about the queues for the specified Amazon Connect instance.
+// For more information about queues, see Queues: Standard and Agent
+// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns ...func(*Options)) (*ListQueuesOutput, error) {
 	if params == nil {
 		params = &ListQueuesInput{}

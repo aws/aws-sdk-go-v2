@@ -13,13 +13,34 @@ import (
 
 // Returns detailed information about one or more specified events for one or more
 // accounts in your organization. Information includes standard event data (Region,
-// service, and so on, as returned by DescribeEventsForOrganization, a detailed
-// event description, and possible additional metadata that depends upon the nature
-// of the event. Affected entities are not included; to retrieve those, use the
-// DescribeAffectedEntitiesForOrganization operation. Before you can call this
-// operation, you must first enable AWS Health to work with AWS Organizations. To
-// do this, call the EnableHealthServiceAccessForOrganization operation from your
-// organization's master account.
+// service, and so on, as returned by DescribeEventsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html)),
+// a detailed event description, and possible additional metadata that depends upon
+// the nature of the event. Affected entities are not included; to retrieve those,
+// use the DescribeAffectedEntitiesForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+// operation. Before you can call this operation, you must first enable AWS Health
+// to work with AWS Organizations. To do this, call the
+// EnableHealthServiceAccessForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// operation from your organization's master account. When you call the
+// DescribeEventDetailsForOrganization operation, you specify the
+// organizationEventDetailFilters object in the request. Depending on the AWS
+// Health event type, note the following differences:
+//
+//     * If the event is
+// public, the awsAccountId parameter must be empty. If you specify an account ID
+// for a public event, then an error message is returned. That's because the event
+// might apply to all AWS accounts and isn't specific to an account in your
+// organization.
+//
+//     * If the event is specific to an account, then you must
+// specify the awsAccountId parameter in the request. If you don't specify an
+// account ID, an error message returns because the event is specific to an AWS
+// account in your organization.
+//
+// For more information, see Event
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html).
 func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params *DescribeEventDetailsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventDetailsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventDetailsForOrganizationInput{}

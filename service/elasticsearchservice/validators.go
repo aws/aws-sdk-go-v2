@@ -702,11 +702,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -752,15 +752,15 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
-	if v.ARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ARN"))
-	}
 	if v.TagList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagList"))
 	} else if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
 			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -822,6 +822,13 @@ func validateOpCreateOutboundCrossClusterSearchConnectionInput(v *CreateOutbound
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOutboundCrossClusterSearchConnectionInput"}
+	if v.DestinationDomainInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationDomainInfo"))
+	} else if v.DestinationDomainInfo != nil {
+		if err := validateDomainInformation(v.DestinationDomainInfo); err != nil {
+			invalidParams.AddNested("DestinationDomainInfo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SourceDomainInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceDomainInfo"))
 	} else if v.SourceDomainInfo != nil {
@@ -831,13 +838,6 @@ func validateOpCreateOutboundCrossClusterSearchConnectionInput(v *CreateOutbound
 	}
 	if v.ConnectionAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionAlias"))
-	}
-	if v.DestinationDomainInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationDomainInfo"))
-	} else if v.DestinationDomainInfo != nil {
-		if err := validateDomainInformation(v.DestinationDomainInfo); err != nil {
-			invalidParams.AddNested("DestinationDomainInfo", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -851,14 +851,14 @@ func validateOpCreatePackageInput(v *CreatePackageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePackageInput"}
-	if v.PackageSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
-	}
 	if v.PackageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
 	}
 	if len(v.PackageType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageType"))
+	}
+	if v.PackageSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -977,11 +977,11 @@ func validateOpDescribeElasticsearchInstanceTypeLimitsInput(v *DescribeElasticse
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeElasticsearchInstanceTypeLimitsInput"}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.ElasticsearchVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ElasticsearchVersion"))
+	}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -995,11 +995,11 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DissociatePackageInput"}
-	if v.PackageID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PackageID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1184,11 +1184,11 @@ func validateOpUpgradeElasticsearchDomainInput(v *UpgradeElasticsearchDomainInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpgradeElasticsearchDomainInput"}
-	if v.TargetVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetVersion"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.TargetVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

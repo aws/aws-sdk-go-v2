@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Query a list of all parameters used by the AWS account.
+// Retrieves the history of all changes to a parameter.
 func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHistoryInput, optFns ...func(*Options)) (*GetParameterHistoryOutput, error) {
 	if params == nil {
 		params = &GetParameterHistoryInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHi
 
 type GetParameterHistoryInput struct {
 
-	// The name of a parameter you want to query.
+	// The name of the parameter for which you want to review history.
 	//
 	// This member is required.
 	Name *string

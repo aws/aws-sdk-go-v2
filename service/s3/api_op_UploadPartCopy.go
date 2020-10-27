@@ -20,15 +20,16 @@ import (
 // For more information about multipart upload limits, go to Quick Facts
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html) in the Amazon
 // Simple Storage Service Developer Guide. Instead of using an existing object as
-// part data, you might use the UploadPart operation and provide data in your
-// request. You must initiate a multipart upload before you can upload any part. In
-// response to your initiate request. Amazon S3 returns a unique identifier, the
-// upload ID, that you must include in your upload part request. For more
-// information about using the UploadPartCopy operation, see the following:
+// part data, you might use the UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) operation
+// and provide data in your request. You must initiate a multipart upload before
+// you can upload any part. In response to your initiate request. Amazon S3 returns
+// a unique identifier, the upload ID, that you must include in your upload part
+// request. For more information about using the UploadPartCopy operation, see the
+// following:
 //
-//     *
-// For conceptual information about multipart uploads, see Uploading Objects Using
-// Multipart Upload
+//     * For conceptual information about multipart uploads, see
+// Uploading Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in the
 // Amazon Simple Storage Service Developer Guide.
 //
@@ -46,11 +47,15 @@ import (
 //
 //     * For information about
 // using server-side encryption with customer-provided encryption keys with the
-// UploadPartCopy operation, see CopyObject and UploadPart.
+// UploadPartCopy operation, see CopyObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) and
+// UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html).
 //
-// Note the following
-// additional considerations about the request headers x-amz-copy-source-if-match,
-// x-amz-copy-source-if-none-match, x-amz-copy-source-if-unmodified-since, and
+// Note the
+// following additional considerations about the request headers
+// x-amz-copy-source-if-match, x-amz-copy-source-if-none-match,
+// x-amz-copy-source-if-unmodified-since, and
 // x-amz-copy-source-if-modified-since:
 //
 //     * Consideration 1 - If both of the
@@ -99,18 +104,27 @@ import (
 // Resources
 //
 //     * CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//     * UploadPart
+//
+// * UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
 // CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//     * AbortMultipartUpload
 //
-//     * ListParts
+// * AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+//
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
 //
 //     *
 // ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput, optFns ...func(*Options)) (*UploadPartCopyOutput, error) {
 	if params == nil {
 		params = &UploadPartCopyInput{}
@@ -128,13 +142,59 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 
 type UploadPartCopyInput struct {
 
-	// The bucket name.
+	// The bucket name. When using this API with an access point, you must direct
+	// requests to the access point hostname. The access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The name of the source bucket and key name of the source object, separated by a
-	// slash (/). Must be URL-encoded.
+	// Specifies the source object for the copy operation. You specify the value in one
+	// of two formats, depending on whether you want to access the source object
+	// through an access point
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html):
+	//
+	//     * For
+	// objects not accessed through an access point, specify the name of the source
+	// bucket and key of the source object, separated by a slash (/). For example, to
+	// copy the object reports/january.pdf from the bucket awsexamplebucket, use
+	// awsexamplebucket/reports/january.pdf. The value must be URL encoded.
+	//
+	//     * For
+	// objects accessed through access points, specify the Amazon Resource Name (ARN)
+	// of the object as accessed through the access point, in the format
+	// arn:aws:s3:::accesspoint//object/. For example, to copy the object
+	// reports/january.pdf through access point my-access-point owned by account
+	// 123456789012 in Region us-west-2, use the URL encoding of
+	// arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf.
+	// The value must be URL encoded. Amazon S3 supports copy operations using access
+	// points only when the source and destination buckets are in the same AWS Region.
+	// Alternatively, for objects accessed through Amazon S3 on Outposts, specify the
+	// ARN of the object as accessed in the format
+	// arn:aws:s3-outposts:::outpost//object/. For example, to copy the object
+	// reports/january.pdf through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf.
+	// The value must be URL encoded.
+	//
+	// To copy a specific version of an object, append
+	// ?versionId= to the value (for example,
+	// awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893).
+	// If you don't specify a version ID, Amazon S3 copies the latest version of the
+	// source object.
 	//
 	// This member is required.
 	CopySource *string
@@ -187,6 +247,16 @@ type UploadPartCopyInput struct {
 	// Amazon S3 uses this header for a message integrity check to ensure that the
 	// encryption key was transmitted without error.
 	CopySourceSSECustomerKeyMD5 *string
+
+	// The account id of the expected destination bucket owner. If the destination
+	// bucket is owned by a different account, the request will fail with an HTTP 403
+	// (Access Denied) error.
+	ExpectedBucketOwner *string
+
+	// The account id of the expected source bucket owner. If the source bucket is
+	// owned by a different account, the request will fail with an HTTP 403 (Access
+	// Denied) error.
+	ExpectedSourceBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

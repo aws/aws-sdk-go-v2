@@ -57,7 +57,7 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateGameSessionInput struct {
 
 	// A unique identifier for the game session to update.
@@ -87,7 +87,7 @@ type UpdateGameSessionInput struct {
 	ProtectionPolicy types.ProtectionPolicy
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateGameSessionOutput struct {
 
 	// The updated game session metadata.

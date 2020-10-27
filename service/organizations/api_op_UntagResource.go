@@ -10,9 +10,21 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes a tag from the specified resource. Currently, you can tag and untag
-// accounts in AWS Organizations. This operation can be called only from the
-// organization's master account.
+// Removes any tags with the specified keys from the specified resource. You can
+// attach tags to the following resources in AWS Organizations.
+//
+//     * AWS
+// account
+//
+//     * Organization root
+//
+//     * Organizational unit (OU)
+//
+//     * Policy
+// (any type)
+//
+// This operation can be called only from the organization's management
+// account.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,12 +42,25 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ID of the resource to remove the tag from.
+	// The ID of the resource to remove a tag from. You can specify any of the
+	// following taggable resources.
+	//
+	//     * AWS account – specify the account ID
+	// number.
+	//
+	//     * Organizational unit – specify the OU ID that begins with ou- and
+	// looks similar to: ou-1a2b-34uvwxyz
+	//
+	//     * Root – specify the root ID that begins
+	// with r- and looks similar to: r-1a2b
+	//
+	//     * Policy – specify the policy ID that
+	// begins with p- andlooks similar to: p-12abcdefg3
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The tag to remove from the specified resource.
+	// The list of keys for tags to remove from the specified resource.
 	//
 	// This member is required.
 	TagKeys []*string

@@ -49,6 +49,9 @@ type ListTemplatesOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
+	// The HTTP status of the request.
+	Status *int32
+
 	// A structure containing information about the templates in the list.
 	TemplateSummaryList []*types.TemplateSummary
 

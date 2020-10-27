@@ -32,7 +32,7 @@ func (c *Client) TestMetricFilter(ctx context.Context, params *TestMetricFilterI
 type TestMetricFilterInput struct {
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in each
-	// log event. For example, a log event may contain timestamps, IP addresses,
+	// log event. For example, a log event can contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for in
 	// the log event message.
 	//

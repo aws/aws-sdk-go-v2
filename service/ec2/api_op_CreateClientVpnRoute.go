@@ -50,14 +50,15 @@ type CreateClientVpnRouteInput struct {
 	// add a route for an on-premises network, enter the AWS Site-to-Site VPN
 	// connection's IPv4 CIDR range
 	//
-	// Route address ranges cannot overlap with the CIDR
-	// range specified for client allocation.
+	//     * To add a route for the local network, enter
+	// the client CIDR range
 	//
 	// This member is required.
 	DestinationCidrBlock *string
 
 	// The ID of the subnet through which you want to route traffic. The specified
 	// subnet must be an existing target network of the Client VPN endpoint.
+	// Alternatively, if you're adding a route for the local network, specify local.
 	//
 	// This member is required.
 	TargetVpcSubnetId *string

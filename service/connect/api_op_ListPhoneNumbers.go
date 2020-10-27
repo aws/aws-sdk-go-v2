@@ -12,7 +12,10 @@ import (
 )
 
 // Provides information about the phone numbers for the specified Amazon Connect
-// instance.
+// instance. For more information about phone numbers, see Set Up Phone Numbers for
+// Your Contact Center
+// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersInput, optFns ...func(*Options)) (*ListPhoneNumbersOutput, error) {
 	if params == nil {
 		params = &ListPhoneNumbersInput{}

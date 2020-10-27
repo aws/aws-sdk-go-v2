@@ -79,7 +79,8 @@ func (e *InvalidArnException) ErrorCode() string             { return "InvalidAr
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The token specified in the NextToken argument is not valid. Use the token
-// returned from your previous call to ListCertificateAuthorities.
+// returned from your previous call to ListCertificateAuthorities
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html).
 type InvalidNextTokenException struct {
 	Message *string
 }
@@ -96,8 +97,10 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The S3 bucket policy is not valid. The policy must give ACM Private CA rights to
-// read from and write to the bucket and find the bucket location.
+// The resource policy is invalid or is missing a required statement. For general
+// information about IAM policy and statement structure, see Overview of JSON
+// Policies
+// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
 type InvalidPolicyException struct {
 	Message *string
 }
@@ -131,8 +134,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The private CA is in a state during which a report or certificate cannot be
-// generated.
+// The state of the private CA does not allow this action to occur.
 type InvalidStateException struct {
 	Message *string
 }
@@ -167,8 +169,8 @@ func (e *InvalidTagException) ErrorMessage() string {
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An ACM Private CA limit has been exceeded. See the exception message returned to
-// determine the limit that was exceeded.
+// An ACM Private CA quota has been exceeded. See the exception message returned to
+// determine the quota that was exceeded.
 type LimitExceededException struct {
 	Message *string
 }
@@ -184,6 +186,25 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The current action was prevented because it would lock the caller out from
+// performing subsequent actions. Verify that the specified parameters would not
+// result in the caller being denied access to the resource.
+type LockoutPreventedException struct {
+	Message *string
+}
+
+func (e *LockoutPreventedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LockoutPreventedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LockoutPreventedException) ErrorCode() string             { return "LockoutPreventedException" }
+func (e *LockoutPreventedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more fields in the certificate are invalid.
 type MalformedCertificateException struct {
@@ -291,8 +312,8 @@ func (e *RequestInProgressException) ErrorMessage() string {
 func (e *RequestInProgressException) ErrorCode() string             { return "RequestInProgressException" }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource such as a private CA, S3 bucket, certificate, or audit report cannot
-// be found.
+// A resource such as a private CA, S3 bucket, certificate, audit report, or policy
+// cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
 }

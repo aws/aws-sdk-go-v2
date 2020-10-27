@@ -1269,6 +1269,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ConcurrentAccessException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentAccessException(response, errorBody)
+
 	case strings.EqualFold("InternalServerErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerErrorException(response, errorBody)
 
@@ -1385,6 +1388,9 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ConcurrentAccessException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentAccessException(response, errorBody)
 
 	case strings.EqualFold("InternalServerErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerErrorException(response, errorBody)
@@ -1695,6 +1701,41 @@ func awsAwsjson11_deserializeErrorBadRequestException(response *smithyhttp.Respo
 	return output
 }
 
+func awsAwsjson11_deserializeErrorConcurrentAccessException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ConcurrentAccessException{}
+	err := awsAwsjson11_deserializeDocumentConcurrentAccessException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1967,6 +2008,68 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConcurrentAccessException(v **types.ConcurrentAccessException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConcurrentAccessException
+	if *v == nil {
+		sv = &types.ConcurrentAccessException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "className":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClassName = &jtv
+			}
+
+		case "code":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Code = ptr.Int32(int32(i64))
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2058,6 +2161,15 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = &jtv
+			}
+
+		case "connectionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionType to be of type string, got %T instead", value)
+				}
+				sv.ConnectionType = types.ConnectionType(jtv)
 			}
 
 		case "description":

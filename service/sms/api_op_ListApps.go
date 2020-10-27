@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of summaries for all applications.
+// Retrieves summaries for all applications.
 func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...func(*Options)) (*ListAppsOutput, error) {
 	if params == nil {
 		params = &ListAppsInput{}
@@ -29,11 +29,11 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 
 type ListAppsInput struct {
 
-	//
+	// The unique application IDs.
 	AppIds []*string
 
 	// The maximum number of results to return in a single call. The default value is
-	// 50. To retrieve the remaining results, make another call with the returned
+	// 100. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
 	MaxResults *int32
 
@@ -43,7 +43,7 @@ type ListAppsInput struct {
 
 type ListAppsOutput struct {
 
-	// A list of application summaries.
+	// The application summaries.
 	Apps []*types.AppSummary
 
 	// The token required to retrieve the next set of results. This value is null when

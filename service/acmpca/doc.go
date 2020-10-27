@@ -10,9 +10,8 @@
 // response. Alternatively, you can use one of the AWS SDKs to access an API that's
 // tailored to the programming language or platform that you're using. For more
 // information, see AWS SDKs (https://aws.amazon.com/tools/#SDKs). Each ACM Private
-// CA API action has a throttling limit which determines the number of times the
-// action can be called per second. For more information, see API Rate Limits in
-// ACM Private CA
+// CA API action has a quota that determines the number of times the action can be
+// called per second. For more information, see API Rate Quotas in ACM Private CA
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api)
 // in the ACM Private CA user guide.
 package acmpca

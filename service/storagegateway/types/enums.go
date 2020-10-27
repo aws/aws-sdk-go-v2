@@ -15,6 +15,21 @@ const (
 	ActiveDirectoryStatusUnknown_error ActiveDirectoryStatus = "UNKNOWN_ERROR"
 )
 
+// Values returns all known values for ActiveDirectoryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
+	return []ActiveDirectoryStatus{
+		"ACCESS_DENIED",
+		"DETACHED",
+		"JOINED",
+		"JOINING",
+		"NETWORK_ERROR",
+		"TIMEOUT",
+		"UNKNOWN_ERROR",
+	}
+}
+
 type AvailabilityMonitorTestStatus string
 
 // Enum values for AvailabilityMonitorTestStatus
@@ -24,6 +39,18 @@ const (
 	AvailabilityMonitorTestStatusPending  AvailabilityMonitorTestStatus = "PENDING"
 )
 
+// Values returns all known values for AvailabilityMonitorTestStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AvailabilityMonitorTestStatus) Values() []AvailabilityMonitorTestStatus {
+	return []AvailabilityMonitorTestStatus{
+		"COMPLETE",
+		"FAILED",
+		"PENDING",
+	}
+}
+
 type CaseSensitivity string
 
 // Enum values for CaseSensitivity
@@ -31,6 +58,16 @@ const (
 	CaseSensitivityClientspecified CaseSensitivity = "ClientSpecified"
 	CaseSensitivityCasesensitive   CaseSensitivity = "CaseSensitive"
 )
+
+// Values returns all known values for CaseSensitivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CaseSensitivity) Values() []CaseSensitivity {
+	return []CaseSensitivity{
+		"ClientSpecified",
+		"CaseSensitive",
+	}
+}
 
 type ErrorCode string
 
@@ -100,6 +137,76 @@ const (
 	ErrorCodeVolumenotready                    ErrorCode = "VolumeNotReady"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"ActivationKeyExpired",
+		"ActivationKeyInvalid",
+		"ActivationKeyNotFound",
+		"GatewayInternalError",
+		"GatewayNotConnected",
+		"GatewayNotFound",
+		"GatewayProxyNetworkConnectionBusy",
+		"AuthenticationFailure",
+		"BandwidthThrottleScheduleNotFound",
+		"Blocked",
+		"CannotExportSnapshot",
+		"ChapCredentialNotFound",
+		"DiskAlreadyAllocated",
+		"DiskDoesNotExist",
+		"DiskSizeGreaterThanVolumeMaxSize",
+		"DiskSizeLessThanVolumeSize",
+		"DiskSizeNotGigAligned",
+		"DuplicateCertificateInfo",
+		"DuplicateSchedule",
+		"EndpointNotFound",
+		"IAMNotSupported",
+		"InitiatorInvalid",
+		"InitiatorNotFound",
+		"InternalError",
+		"InvalidGateway",
+		"InvalidEndpoint",
+		"InvalidParameters",
+		"InvalidSchedule",
+		"LocalStorageLimitExceeded",
+		"LunAlreadyAllocated ",
+		"LunInvalid",
+		"JoinDomainInProgress",
+		"MaximumContentLengthExceeded",
+		"MaximumTapeCartridgeCountExceeded",
+		"MaximumVolumeCountExceeded",
+		"NetworkConfigurationChanged",
+		"NoDisksAvailable",
+		"NotImplemented",
+		"NotSupported",
+		"OperationAborted",
+		"OutdatedGateway",
+		"ParametersNotImplemented",
+		"RegionInvalid",
+		"RequestTimeout",
+		"ServiceUnavailable",
+		"SnapshotDeleted",
+		"SnapshotIdInvalid",
+		"SnapshotInProgress",
+		"SnapshotNotFound",
+		"SnapshotScheduleNotFound",
+		"StagingAreaFull",
+		"StorageFailure",
+		"TapeCartridgeNotFound",
+		"TargetAlreadyExists",
+		"TargetInvalid",
+		"TargetNotFound",
+		"UnauthorizedOperation",
+		"VolumeAlreadyExists",
+		"VolumeIdInvalid",
+		"VolumeInUse",
+		"VolumeNotFound",
+		"VolumeNotReady",
+	}
+}
+
 type FileShareType string
 
 // Enum values for FileShareType
@@ -107,6 +214,16 @@ const (
 	FileShareTypeNfs FileShareType = "NFS"
 	FileShareTypeSmb FileShareType = "SMB"
 )
+
+// Values returns all known values for FileShareType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileShareType) Values() []FileShareType {
+	return []FileShareType{
+		"NFS",
+		"SMB",
+	}
+}
 
 type HostEnvironment string
 
@@ -118,6 +235,19 @@ const (
 	HostEnvironmentKvm    HostEnvironment = "KVM"
 	HostEnvironmentOther  HostEnvironment = "OTHER"
 )
+
+// Values returns all known values for HostEnvironment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HostEnvironment) Values() []HostEnvironment {
+	return []HostEnvironment{
+		"VMWARE",
+		"HYPER-V",
+		"EC2",
+		"KVM",
+		"OTHER",
+	}
+}
 
 type ObjectACL string
 
@@ -132,6 +262,59 @@ const (
 	ObjectACLAwsExecRead            ObjectACL = "aws-exec-read"
 )
 
+// Values returns all known values for ObjectACL. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ObjectACL) Values() []ObjectACL {
+	return []ObjectACL{
+		"private",
+		"public-read",
+		"public-read-write",
+		"authenticated-read",
+		"bucket-owner-read",
+		"bucket-owner-full-control",
+		"aws-exec-read",
+	}
+}
+
+type PoolStatus string
+
+// Enum values for PoolStatus
+const (
+	PoolStatusActive  PoolStatus = "ACTIVE"
+	PoolStatusDeleted PoolStatus = "DELETED"
+)
+
+// Values returns all known values for PoolStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PoolStatus) Values() []PoolStatus {
+	return []PoolStatus{
+		"ACTIVE",
+		"DELETED",
+	}
+}
+
+type RetentionLockType string
+
+// Enum values for RetentionLockType
+const (
+	RetentionLockTypeCompliance RetentionLockType = "COMPLIANCE"
+	RetentionLockTypeGovernance RetentionLockType = "GOVERNANCE"
+	RetentionLockTypeNone       RetentionLockType = "NONE"
+)
+
+// Values returns all known values for RetentionLockType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetentionLockType) Values() []RetentionLockType {
+	return []RetentionLockType{
+		"COMPLIANCE",
+		"GOVERNANCE",
+		"NONE",
+	}
+}
+
 type SMBSecurityStrategy string
 
 // Enum values for SMBSecurityStrategy
@@ -140,3 +323,32 @@ const (
 	SMBSecurityStrategyMandatorysigning    SMBSecurityStrategy = "MandatorySigning"
 	SMBSecurityStrategyMandatoryencryption SMBSecurityStrategy = "MandatoryEncryption"
 )
+
+// Values returns all known values for SMBSecurityStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SMBSecurityStrategy) Values() []SMBSecurityStrategy {
+	return []SMBSecurityStrategy{
+		"ClientSpecified",
+		"MandatorySigning",
+		"MandatoryEncryption",
+	}
+}
+
+type TapeStorageClass string
+
+// Enum values for TapeStorageClass
+const (
+	TapeStorageClassDeep_archive TapeStorageClass = "DEEP_ARCHIVE"
+	TapeStorageClassGlacier      TapeStorageClass = "GLACIER"
+)
+
+// Values returns all known values for TapeStorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TapeStorageClass) Values() []TapeStorageClass {
+	return []TapeStorageClass{
+		"DEEP_ARCHIVE",
+		"GLACIER",
+	}
+}

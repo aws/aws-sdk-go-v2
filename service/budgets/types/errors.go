@@ -143,3 +143,21 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request was received and recognized by the server, but the server rejected
+// that particular method for the requested resource.
+type ResourceLockedException struct {
+	Message *string
+}
+
+func (e *ResourceLockedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceLockedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceLockedException) ErrorCode() string             { return "ResourceLockedException" }
+func (e *ResourceLockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

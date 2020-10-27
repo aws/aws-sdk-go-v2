@@ -57,6 +57,10 @@ type InvokeAsyncInput struct {
 // A success response (202 Accepted) indicates that the request is queued for
 // invocation.
 type InvokeAsyncOutput struct {
+
+	// The status code.
+	Status *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

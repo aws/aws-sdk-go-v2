@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns Amazon EC2 instance recommendations. AWS Compute Optimizer currently
-// generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) and
-// Amazon EC2 Auto Scaling. It generates recommendations for M, C, R, T, and X
-// instance families. For more information, see the AWS Compute Optimizer User
-// Guide (https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html).
+// Returns Amazon EC2 instance recommendations. AWS Compute Optimizer generates
+// recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that
+// meet a specific set of requirements. For more information, see the Supported
+// resources and requirements
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
+// the AWS Compute Optimizer User Guide.
 func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetEC2InstanceRecommendationsInput, optFns ...func(*Options)) (*GetEC2InstanceRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetEC2InstanceRecommendationsInput{}

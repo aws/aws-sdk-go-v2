@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Update an endpoint group. To see an AWS CLI example of updating an endpoint
-// group, scroll down to Example.
+// Update an endpoint group. A resource must be valid and active when you add it as
+// an endpoint. To see an AWS CLI example of updating an endpoint group, scroll
+// down to Example.
 func (c *Client) UpdateEndpointGroup(ctx context.Context, params *UpdateEndpointGroupInput, optFns ...func(*Options)) (*UpdateEndpointGroupOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointGroupInput{}
@@ -35,7 +36,8 @@ type UpdateEndpointGroupInput struct {
 	// This member is required.
 	EndpointGroupArn *string
 
-	// The list of endpoint objects.
+	// The list of endpoint objects. A resource must be valid and active when you add
+	// it as an endpoint.
 	EndpointConfigurations []*types.EndpointConfiguration
 
 	// The time—10 seconds or 30 seconds—between each health check for an endpoint. The
@@ -55,6 +57,15 @@ type UpdateEndpointGroupInput struct {
 	// The protocol that AWS Global Accelerator uses to check the health of endpoints
 	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol types.HealthCheckProtocol
+
+	// Override specific listener ports used to route traffic to endpoints that are
+	// part of this endpoint group. For example, you can create a port override in
+	// which the listener receives user traffic on ports 80 and 443, but your
+	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
+	// endpoints. For more information, see  Port overrides
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
+	// in the AWS Global Accelerator Developer Guide.
+	PortOverrides []*types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
 	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default

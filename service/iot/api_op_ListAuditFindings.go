@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the findings (results) of a Device Defender audit or of the audits
-// performed during a specified time period. (Findings are retained for 180 days.)
+// performed during a specified time period. (Findings are retained for 90 days.)
 func (c *Client) ListAuditFindings(ctx context.Context, params *ListAuditFindingsInput, optFns ...func(*Options)) (*ListAuditFindingsOutput, error) {
 	if params == nil {
 		params = &ListAuditFindingsInput{}
@@ -37,6 +37,11 @@ type ListAuditFindingsInput struct {
 	// A filter to limit results to those found before the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
 	EndTime *time.Time
+
+	// Boolean flag indicating whether only the suppressed findings or the unsuppressed
+	// findings should be listed. If this parameter isn't provided, the response will
+	// list both suppressed and unsuppressed findings.
+	ListSuppressedFindings *bool
 
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32

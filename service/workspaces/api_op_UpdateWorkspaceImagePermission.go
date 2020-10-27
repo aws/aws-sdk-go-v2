@@ -13,15 +13,18 @@ import (
 // Shares or unshares an image with one account by specifying whether that account
 // has permission to copy the image. If the copy image permission is granted, the
 // image is shared with that account. If the copy image permission is revoked, the
-// image is unshared with the account.
+// image is unshared with the account. For more information about sharing images,
+// see  Share or Unshare a Custom WorkSpaces Image
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
 //
-//     * To delete an image that has been
-// shared, you must unshare the image before you delete it.
 //
-//     * Sharing Bring
-// Your Own License (BYOL) images across AWS accounts isn't supported at this time
-// in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in
-// the AWS GovCloud (US-West) Region, contact AWS Support.
+// * To delete an image that has been shared, you must unshare the image before you
+// delete it.
+//
+//     * Sharing Bring Your Own License (BYOL) images across AWS
+// accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To
+// share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact
+// AWS Support.
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceImagePermissionInput{}
@@ -50,7 +53,8 @@ type UpdateWorkspaceImagePermissionInput struct {
 	// This member is required.
 	ImageId *string
 
-	// The identifier of the AWS account to share or unshare the image with.
+	// The identifier of the AWS account to share or unshare the image with. Before
+	// sharing the image, confirm that you are sharing to the correct AWS account ID.
 	//
 	// This member is required.
 	SharedAccountId *string

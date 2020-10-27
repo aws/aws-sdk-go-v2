@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Retrieves information on a game
-// server group. To get attributes for a game server group, provide a group name or
-// ARN value. If successful, a GameServerGroup object is returned. Learn more
-// GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Retrieves information on a game server group. This operation returns
+// only properties related to GameLift FleetIQ. To view or update properties for
+// the corresponding Auto Scaling group, such as launch template, auto scaling
+// policies, and maximum/minimum group size, access the Auto Scaling group
+// directly. To get attributes for a game server group, provide a group name or ARN
+// value. If successful, a GameServerGroup object is returned. Learn more GameLift
+// FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * CreateGameServerGroup
@@ -33,7 +36,10 @@ import (
 //
 //     * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+//     *
+// SuspendGameServerGroup
+//
+//     * DescribeGameServerInstances
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}
@@ -51,8 +57,8 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 
 type DescribeGameServerGroupInput struct {
 
-	// The unique identifier for the game server group being requested. Use either the
-	// GameServerGroup name or ARN value.
+	// A unique identifier for the game server group. Use either the GameServerGroup
+	// name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -60,7 +66,8 @@ type DescribeGameServerGroupInput struct {
 
 type DescribeGameServerGroupOutput struct {
 
-	// An object that describes the requested game server group resource.
+	// An object with the property settings for the requested game server group
+	// resource.
 	GameServerGroup *types.GameServerGroup
 
 	// Metadata pertaining to the operation's result.

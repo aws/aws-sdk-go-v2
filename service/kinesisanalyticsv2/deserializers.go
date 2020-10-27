@@ -741,6 +741,9 @@ func awsAwsjson11_deserializeOpErrorAddApplicationVpcConfiguration(response *smi
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("InvalidApplicationConfigurationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidApplicationConfigurationException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -987,6 +990,9 @@ func awsAwsjson11_deserializeOpErrorCreateApplicationSnapshot(response *smithyht
 	}
 
 	switch {
+	case strings.EqualFold("InvalidApplicationConfigurationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidApplicationConfigurationException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -1859,6 +1865,9 @@ func awsAwsjson11_deserializeOpErrorDeleteApplicationVpcConfiguration(response *
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("InvalidApplicationConfigurationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidApplicationConfigurationException(response, errorBody)
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
@@ -2799,6 +2808,9 @@ func awsAwsjson11_deserializeOpErrorStopApplication(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InvalidApplicationConfigurationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidApplicationConfigurationException(response, errorBody)
 
@@ -4592,6 +4604,46 @@ func awsAwsjson11_deserializeDocumentFlinkApplicationConfigurationDescription(v 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFlinkRunConfiguration(v **types.FlinkRunConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlinkRunConfiguration
+	if *v == nil {
+		sv = &types.FlinkRunConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowNonRestoredState":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.AllowNonRestoredState = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInAppStreamNames(v *[]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6269,6 +6321,11 @@ func awsAwsjson11_deserializeDocumentRunConfigurationDescription(v **types.RunCo
 		switch key {
 		case "ApplicationRestoreConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentApplicationRestoreConfiguration(&sv.ApplicationRestoreConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		case "FlinkRunConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentFlinkRunConfiguration(&sv.FlinkRunConfigurationDescription, value); err != nil {
 				return err
 			}
 

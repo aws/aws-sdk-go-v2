@@ -6529,6 +6529,19 @@ func awsRestjson1_deserializeDocumentApiKey(v **types.ApiKey, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "deletes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Deletes = &i64
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7615,6 +7628,15 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 		case "userPoolConfig":
 			if err := awsRestjson1_deserializeDocumentUserPoolConfig(&sv.UserPoolConfig, value); err != nil {
 				return err
+			}
+
+		case "wafWebAclArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.WafWebAclArn = &jtv
 			}
 
 		case "xrayEnabled":

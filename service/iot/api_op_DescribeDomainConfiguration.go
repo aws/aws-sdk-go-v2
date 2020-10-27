@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"time"
 )
 
 // Gets summary information about a domain configuration. The domain configuration
@@ -55,6 +56,9 @@ type DescribeDomainConfigurationOutput struct {
 
 	// The type of the domain.
 	DomainType types.DomainType
+
+	// The date and time the domain configuration's status was last changed.
+	LastStatusChangeDate *time.Time
 
 	// A list containing summary information about the server certificate included in
 	// the domain configuration.

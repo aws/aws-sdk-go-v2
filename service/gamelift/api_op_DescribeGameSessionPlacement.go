@@ -53,7 +53,7 @@ func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeGameSessionPlacementInput struct {
 
 	// A unique identifier for a game session placement to retrieve.
@@ -62,7 +62,7 @@ type DescribeGameSessionPlacementInput struct {
 	PlacementId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeGameSessionPlacementOutput struct {
 
 	// Object that describes the requested game session placement.

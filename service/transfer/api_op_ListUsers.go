@@ -30,8 +30,7 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 
 type ListUsersInput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server
-	// that has users assigned to it.
+	// A system-assigned unique identifier for a server that has users assigned to it.
 	//
 	// This member is required.
 	ServerId *string
@@ -47,8 +46,7 @@ type ListUsersInput struct {
 
 type ListUsersOutput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server
-	// that the users are assigned to.
+	// A system-assigned unique identifier for a server that the users are assigned to.
 	//
 	// This member is required.
 	ServerId *string

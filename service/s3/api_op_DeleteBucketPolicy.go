@@ -26,9 +26,11 @@ import (
 // following operations are related to DeleteBucketPolicy
 //
 //     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//
-// * DeleteObject
+//     *
+// DeleteObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPolicyInput, optFns ...func(*Options)) (*DeleteBucketPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteBucketPolicyInput{}
@@ -50,6 +52,10 @@ type DeleteBucketPolicyInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketPolicyOutput struct {

@@ -30,7 +30,7 @@ func (c *Client) UpdateReplicationJob(ctx context.Context, params *UpdateReplica
 
 type UpdateReplicationJobInput struct {
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	//
 	// This member is required.
 	ReplicationJobId *string
@@ -38,27 +38,28 @@ type UpdateReplicationJobInput struct {
 	// The description of the replication job.
 	Description *string
 
-	// When true, the replication job produces encrypted AMIs . See also KmsKeyId
-	// below.
+	// When true, the replication job produces encrypted AMIs. For more information,
+	// KmsKeyId.
 	Encrypted *bool
 
 	// The time between consecutive replication runs, in hours.
 	Frequency *int32
 
-	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
-	// following:
+	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
+	// value can be any of the following:
 	//
 	//     * KMS key ID
 	//
 	//     * KMS key alias
 	//
-	//     * ARN referring to KMS
-	// key ID
+	//     *
+	// ARN referring to the KMS key ID
 	//
-	//     * ARN referring to KMS key alias
+	//     * ARN referring to the KMS key alias
 	//
-	// If encrypted is true but a KMS key
-	// id is not specified, the customer's default KMS key for EBS is used.
+	// If
+	// encrypted is enabled but a KMS key ID is not specified, the customer's default
+	// KMS key for Amazon EBS is used.
 	KmsKeyId *string
 
 	// The license type to be used for the AMI created by a successful replication run.
@@ -67,8 +68,8 @@ type UpdateReplicationJobInput struct {
 	// The start time of the next replication run.
 	NextReplicationRunStartTime *time.Time
 
-	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
-	// once the maximum number is reached and a new AMI is created.
+	// The maximum number of SMS-created AMIs to retain. The oldest is deleted after
+	// the maximum number is reached and a new AMI is created.
 	NumberOfRecentAmisToKeep *int32
 
 	// The name of the IAM role to be used by AWS SMS.

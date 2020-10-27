@@ -77,6 +77,7 @@ func NewRegistry() *Registry {
 	}
 }
 
+// Modules returns the modules that were registered.
 func (r *Registry) Modules() (m []*Module) {
 	for _, module := range r.dirToModule {
 		m = append(m, module)

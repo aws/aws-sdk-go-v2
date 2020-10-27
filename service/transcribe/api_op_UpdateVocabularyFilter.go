@@ -31,7 +31,7 @@ func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocab
 type UpdateVocabularyFilterInput struct {
 
 	// The name of the vocabulary filter to update. If you try to update a vocabulary
-	// filter with the same name as a previous vocabulary filter you will receive a
+	// filter with the same name as another vocabulary filter, you get a
 	// ConflictException error.
 	//
 	// This member is required.

@@ -15,6 +15,21 @@ const (
 	PlatformJavascript Platform = "JAVASCRIPT"
 )
 
+// Values returns all known values for Platform. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Platform) Values() []Platform {
+	return []Platform{
+		"OSX",
+		"WINDOWS",
+		"LINUX",
+		"OBJC",
+		"SWIFT",
+		"ANDROID",
+		"JAVASCRIPT",
+	}
+}
+
 type ProjectState string
 
 // Enum values for ProjectState
@@ -23,3 +38,14 @@ const (
 	ProjectStateSyncing   ProjectState = "SYNCING"
 	ProjectStateImporting ProjectState = "IMPORTING"
 )
+
+// Values returns all known values for ProjectState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProjectState) Values() []ProjectState {
+	return []ProjectState{
+		"NORMAL",
+		"SYNCING",
+		"IMPORTING",
+	}
+}

@@ -10,13 +10,16 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves a certificate from your private CA. The ARN of the certificate is
-// returned when you call the IssueCertificate action. You must specify both the
-// ARN of your private CA and the ARN of the issued certificate when calling the
-// GetCertificate action. You can retrieve the certificate if it is in the ISSUED
-// state. You can call the CreateCertificateAuthorityAuditReport action to create a
-// report that contains information about all of the certificates issued and
-// revoked by your private CA.
+// Retrieves a certificate from your private CA or one that has been shared with
+// you. The ARN of the certificate is returned when you call the IssueCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)
+// action. You must specify both the ARN of your private CA and the ARN of the
+// issued certificate when calling the GetCertificate action. You can retrieve the
+// certificate if it is in the ISSUED state. You can call the
+// CreateCertificateAuthorityAuditReport
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+// action to create a report that contains information about all of the
+// certificates issued and revoked by your private CA.
 func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput, optFns ...func(*Options)) (*GetCertificateOutput, error) {
 	if params == nil {
 		params = &GetCertificateInput{}
@@ -42,7 +45,9 @@ type GetCertificateInput struct {
 	CertificateArn *string
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority. This must be of the form:
+	// CreateCertificateAuthority
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html).
+	// This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
 	//

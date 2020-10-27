@@ -13,8 +13,9 @@ import (
 )
 
 // Create an endpoint group for the specified listener. An endpoint group is a
-// collection of endpoints in one AWS Region. To see an AWS CLI example of creating
-// an endpoint group, scroll down to Example.
+// collection of endpoints in one AWS Region. A resource must be valid and active
+// when you add it as an endpoint. To see an AWS CLI example of creating an
+// endpoint group, scroll down to Example.
 func (c *Client) CreateEndpointGroup(ctx context.Context, params *CreateEndpointGroupInput, optFns ...func(*Options)) (*CreateEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateEndpointGroupInput{}
@@ -32,8 +33,8 @@ func (c *Client) CreateEndpointGroup(ctx context.Context, params *CreateEndpoint
 
 type CreateEndpointGroupInput struct {
 
-	// The name of the AWS Region where the endpoint group is located. A listener can
-	// have only one endpoint group in a specific Region.
+	// The AWS Region where the endpoint group is located. A listener can have only one
+	// endpoint group in a specific Region.
 	//
 	// This member is required.
 	EndpointGroupRegion *string
@@ -69,6 +70,15 @@ type CreateEndpointGroupInput struct {
 	// The protocol that AWS Global Accelerator uses to check the health of endpoints
 	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol types.HealthCheckProtocol
+
+	// Override specific listener ports used to route traffic to endpoints that are
+	// part of this endpoint group. For example, you can create a port override in
+	// which the listener receives user traffic on ports 80 and 443, but your
+	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
+	// endpoints. For more information, see  Port overrides
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
+	// in the AWS Global Accelerator Developer Guide.
+	PortOverrides []*types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
 	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default

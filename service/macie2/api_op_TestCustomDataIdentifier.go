@@ -43,13 +43,14 @@ type TestCustomDataIdentifierInput struct {
 	// An array that lists specific character sequences (ignore words) to exclude from
 	// the results. If the text matched by the regular expression is the same as any
 	// string in this array, Amazon Macie ignores it. The array can contain as many as
-	// 10 ignore words. Each ignore word can contain 4 - 90 characters.
+	// 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words
+	// are case sensitive.
 	IgnoreWords []*string
 
 	// An array that lists specific character sequences (keywords), one of which must
 	// be within proximity (maximumMatchDistance) of the regular expression to match.
 	// The array can contain as many as 50 keywords. Each keyword can contain 4 - 90
-	// characters.
+	// characters. Keywords aren't case sensitive.
 	Keywords []*string
 
 	// The maximum number of characters that can exist between text that matches the

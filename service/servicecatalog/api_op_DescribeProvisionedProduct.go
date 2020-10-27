@@ -27,12 +27,11 @@ func (c *Client) DescribeProvisionedProduct(ctx context.Context, params *Describ
 	return out, nil
 }
 
+// DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The
+// language code for localization. Id - [Optional] The provisioned product
+// identifier. Name - [Optional] Another provisioned product identifier. Customers
+// must provide either Id or Name.
 type DescribeProvisionedProductInput struct {
-
-	// The provisioned product identifier.
-	//
-	// This member is required.
-	Id *string
 
 	// The language code.
 	//
@@ -43,6 +42,16 @@ type DescribeProvisionedProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The provisioned product identifier. You must provide the name or ID, but not
+	// both. If you do not provide a name or ID, or you provide both name and ID, an
+	// InvalidParametersException will occur.
+	Id *string
+
+	// The name of the provisioned product. You must provide the name or ID, but not
+	// both. If you do not provide a name or ID, or you provide both name and ID, an
+	// InvalidParametersException will occur.
+	Name *string
 }
 
 type DescribeProvisionedProductOutput struct {
@@ -76,7 +85,6 @@ func addOperationDescribeProvisionedProductMiddlewares(stack *middleware.Stack, 
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDescribeProvisionedProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisionedProduct(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)

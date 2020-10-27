@@ -14,7 +14,7 @@ import (
 // Writes a single data record into an Amazon Kinesis data stream. Call PutRecord
 // to send data into the stream for real-time ingestion and subsequent processing,
 // one record at a time. Each shard can support writes up to 1,000 records per
-// second, up to a maximum data write total of 1 MB per second. You must specify
+// second, up to a maximum data write total of 1 MiB per second. You must specify
 // the name of the stream that captures, stores, and transports the data; a
 // partition key; and the data blob itself. The data blob can be any type of data;
 // for example, a segment from a log file, geographic/location data, website
@@ -37,9 +37,10 @@ import (
 // SequenceNumberForOrdering parameter. For more information, see Adding Data to a
 // Stream
 // (https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
-// in the Amazon Kinesis Data Streams Developer Guide. If a PutRecord request
-// cannot be processed because of insufficient provisioned throughput on the shard
-// involved in the request, PutRecord throws
+// in the Amazon Kinesis Data Streams Developer Guide. After you write a record to
+// a stream, you cannot modify that record or its order within the stream. If a
+// PutRecord request cannot be processed because of insufficient provisioned
+// throughput on the shard involved in the request, PutRecord throws
 // ProvisionedThroughputExceededException. By default, data records are accessible
 // for 24 hours from the time that they are added to a stream. You can use
 // IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to modify this
@@ -65,7 +66,7 @@ type PutRecordInput struct {
 	// The data blob to put into the record, which is base64-encoded when the blob is
 	// serialized. When the data blob (the payload before base64-encoding) is added to
 	// the partition key size, the total size must not exceed the maximum record size
-	// (1 MB).
+	// (1 MiB).
 	//
 	// This member is required.
 	Data []byte

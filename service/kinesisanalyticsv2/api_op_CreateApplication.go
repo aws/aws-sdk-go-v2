@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an Amazon Kinesis Data Analytics application. For information about
-// creating a Kinesis Data Analytics application, see Creating an Application
+// Creates a Kinesis Data Analytics application. For information about creating a
+// Kinesis Data Analytics application, see Creating an Application
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
+	// The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
 	//
 	// This member is required.
 	RuntimeEnvironment types.RuntimeEnvironment

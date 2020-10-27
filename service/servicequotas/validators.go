@@ -254,14 +254,14 @@ func validateOpDeleteServiceQuotaIncreaseRequestFromTemplateInput(v *DeleteServi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceQuotaIncreaseRequestFromTemplateInput"}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
 	if v.QuotaCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
 	}
 	if v.ServiceCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
-	}
-	if v.AwsRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -275,11 +275,11 @@ func validateOpGetAWSDefaultServiceQuotaInput(v *GetAWSDefaultServiceQuotaInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAWSDefaultServiceQuotaInput"}
-	if v.QuotaCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
-	}
 	if v.ServiceCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
+	if v.QuotaCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -329,11 +329,11 @@ func validateOpGetServiceQuotaInput(v *GetServiceQuotaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceQuotaInput"}
-	if v.ServiceCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
-	}
 	if v.QuotaCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
+	}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -362,11 +362,11 @@ func validateOpListRequestedServiceQuotaChangeHistoryByQuotaInput(v *ListRequest
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRequestedServiceQuotaChangeHistoryByQuotaInput"}
-	if v.ServiceCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
-	}
 	if v.QuotaCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
+	}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -395,17 +395,17 @@ func validateOpPutServiceQuotaIncreaseRequestIntoTemplateInput(v *PutServiceQuot
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutServiceQuotaIncreaseRequestIntoTemplateInput"}
-	if v.DesiredValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DesiredValue"))
-	}
-	if v.AwsRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	if v.QuotaCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
 	}
 	if v.ServiceCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
 	}
-	if v.QuotaCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if v.DesiredValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -422,11 +422,11 @@ func validateOpRequestServiceQuotaIncreaseInput(v *RequestServiceQuotaIncreaseIn
 	if v.DesiredValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesiredValue"))
 	}
-	if v.ServiceCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
-	}
 	if v.QuotaCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuotaCode"))
+	}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

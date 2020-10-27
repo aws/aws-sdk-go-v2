@@ -978,6 +978,92 @@ func awsRestjson1_serializeOpHttpBindingsDescribeSchemaInput(v *DescribeSchemaIn
 	return nil
 }
 
+type awsRestjson1_serializeOpExportSchema struct {
+}
+
+func (*awsRestjson1_serializeOpExportSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpExportSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExportSchemaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/export")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsExportSchemaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsExportSchemaInput(v *ExportSchemaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.RegistryName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+	}
+	if v.RegistryName != nil {
+		if len(*v.RegistryName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member RegistryName must not be empty")}
+		}
+		if err := encoder.SetURI("RegistryName").String(*v.RegistryName); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+	}
+	if v.SchemaName != nil {
+		if len(*v.SchemaName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SchemaName must not be empty")}
+		}
+		if err := encoder.SetURI("SchemaName").String(*v.SchemaName); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaVersion != nil {
+		encoder.SetQuery("schemaVersion").String(*v.SchemaVersion)
+	}
+
+	if v.Type != nil {
+		encoder.SetQuery("type").String(*v.Type)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetCodeBindingSource struct {
 }
 

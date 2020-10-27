@@ -92,8 +92,7 @@ type CancelResizeOutput struct {
 	TargetClusterType *string
 
 	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None. In the China region possible values are: Legacy and
-	// None.
+	// values are KMS and None.
 	TargetEncryptionType *string
 
 	// The node type that the cluster will have after the resize operation is complete.

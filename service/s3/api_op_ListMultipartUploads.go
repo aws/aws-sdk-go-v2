@@ -34,15 +34,23 @@ import (
 //
 //     *
 // CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//     * UploadPart
 //
-//     * CompleteMultipartUpload
+// * UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
-// ListParts
+// CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//     * AbortMultipartUpload
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+//
+//     *
+// AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
 func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipartUploadsInput, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {
 	if params == nil {
 		params = &ListMultipartUploadsInput{}
@@ -60,15 +68,23 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 
 type ListMultipartUploadsInput struct {
 
-	// Name of the bucket to which the multipart upload was initiated. When using this
-	// API with an access point, you must direct requests to the access point hostname.
-	// The access point hostname takes the form
+	// The name of the bucket to which the multipart upload was initiated. When using
+	// this API with an access point, you must direct requests to the access point
+	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -88,6 +104,10 @@ type ListMultipartUploadsInput struct {
 	// can add this parameter to request that Amazon S3 encode the keys in the
 	// response.
 	EncodingType types.EncodingType
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Together with upload-id-marker, this parameter specifies the multipart upload
 	// after which listing should begin. If upload-id-marker is not specified, only the
@@ -118,7 +138,7 @@ type ListMultipartUploadsInput struct {
 
 type ListMultipartUploadsOutput struct {
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// The name of the bucket to which the multipart upload was initiated.
 	Bucket *string
 
 	// If you specify a delimiter in the request, then the result returns each distinct

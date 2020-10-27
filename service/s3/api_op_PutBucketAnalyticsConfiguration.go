@@ -64,6 +64,18 @@ import (
 // set the configuration on the bucket.
 //
 // Related Resources
+//
+//     *
+// GetBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html)
+//
+//
+// * DeleteBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
+//
+//
+// * ListBucketAnalyticsConfigurations
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)
 func (c *Client) PutBucketAnalyticsConfiguration(ctx context.Context, params *PutBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*PutBucketAnalyticsConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketAnalyticsConfigurationInput{}
@@ -95,6 +107,10 @@ type PutBucketAnalyticsConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type PutBucketAnalyticsConfigurationOutput struct {

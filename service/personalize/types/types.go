@@ -81,6 +81,9 @@ type BatchInferenceJob struct {
 	// The Amazon Resource Name (ARN) of the batch inference job.
 	BatchInferenceJobArn *string
 
+	// A string to string map of the configuration details of a batch inference job.
+	BatchInferenceJobConfig *BatchInferenceJobConfig
+
 	// The time at which the batch inference job was created.
 	CreationDateTime *time.Time
 
@@ -127,6 +130,14 @@ type BatchInferenceJob struct {
 	//
 	//     * CREATE FAILED
 	Status *string
+}
+
+// The configuration details of a batch inference job.
+type BatchInferenceJobConfig struct {
+
+	// A string to string map specifying the inference hyperparameters you wish to use
+	// for hyperparameter optimization. See customizing-solution-config-hpo.
+	ItemExplorationConfig map[string]*string
 }
 
 // The input configuration of a batch inference job.
@@ -192,6 +203,9 @@ type Campaign struct {
 	// The Amazon Resource Name (ARN) of the campaign.
 	CampaignArn *string
 
+	// The configuration details of a campaign.
+	CampaignConfig *CampaignConfig
+
 	// The date and time (in Unix format) that the campaign was created.
 	CreationDateTime *time.Time
 
@@ -223,6 +237,14 @@ type Campaign struct {
 	//     * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+}
+
+// The configuration details of a campaign.
+type CampaignConfig struct {
+
+	// A string to string map specifying the inference hyperparameters you wish to use
+	// for hyperparameter optimization. See customizing-solution-config-hpo.
+	ItemExplorationConfig map[string]*string
 }
 
 // Provides a summary of the properties of a campaign. For a complete listing, call
@@ -257,6 +279,9 @@ type CampaignSummary struct {
 // Provides a summary of the properties of a campaign update. For a complete
 // listing, call the DescribeCampaign API.
 type CampaignUpdateSummary struct {
+
+	// The configuration details of a campaign.
+	CampaignConfig *CampaignConfig
 
 	// The date and time (in Unix time) that the campaign update was created.
 	CreationDateTime *time.Time
@@ -741,7 +766,7 @@ type Filter struct {
 	// The filter expression must follow the following format: EXCLUDE itemId WHERE
 	// INTERACTIONS.event_type in ("EVENT_TYPE") Where "EVENT_TYPE" is the type of
 	// event to filter out. For more information, see Using Filters with Amazon
-	// Personalize.
+	// Personalize (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
 	FilterExpression *string
 
 	// The time at which the filter was last updated.

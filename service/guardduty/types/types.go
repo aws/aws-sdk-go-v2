@@ -85,7 +85,7 @@ type AdminAccount struct {
 	AdminStatus AdminStatus
 }
 
-// Contains information about the API operation.
+// Contains information about the API action.
 type AwsApiCallAction struct {
 
 	// The AWS API name.
@@ -97,7 +97,10 @@ type AwsApiCallAction struct {
 	// The domain information for the AWS API call.
 	DomainDetails *DomainDetails
 
-	// The remote IP information of the connection.
+	// The error code of the failed AWS API action.
+	ErrorCode *string
+
+	// The remote IP information of the connection that initiated the AWS API call.
 	RemoteIpDetails *RemoteIpDetails
 
 	// The AWS service name whose API was invoked.
@@ -264,7 +267,7 @@ type DataSourceConfigurationsResult struct {
 
 // Contains information on the server side encryption method used in the S3 bucket.
 // See S3 Server-Side Encryption
-// (https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html) for
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) for
 // more information.
 type DefaultServerSideEncryption struct {
 

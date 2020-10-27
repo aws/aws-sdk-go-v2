@@ -10,11 +10,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of your queues. The maximum number of queues that can be returned
-// is 1,000. If you specify a value for the optional QueueNamePrefix parameter,
-// only queues with a name that begins with the specified value are returned.
-// Cross-account permissions don't apply to this action. For more information, see
-// Grant Cross-Account Permissions to a Role and a User Name
+// Returns a list of your queues in the current region. The response includes a
+// maximum of 1,000 results. If you specify a value for the optional
+// QueueNamePrefix parameter, only queues with a name that begins with the
+// specified value are returned. The listQueues methods supports pagination. Set
+// parameter MaxResults in the request to specify the maximum number of results to
+// be returned in the response. If you do not set MaxResults, the response includes
+// a maximum of 1,000 results. If you set MaxResults and there are additional
+// results to display, the response includes a value for NextToken. Use NextToken
+// as a parameter in your next request to listQueues to receive the next page of
+// results. Cross-account permissions don't apply to this action. For more
+// information, see Grant Cross-Account Permissions to a Role and a User Name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns ...func(*Options)) (*ListQueuesOutput, error) {
@@ -35,7 +41,8 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 //
 type ListQueuesInput struct {
 
-	// Maximum number of results to include in the response.
+	// Maximum number of results to include in the response. Value range is 1 to 1000.
+	// You must set MaxResults to receive a value for NextToken in the response.
 	MaxResults *int32
 
 	// Pagination token to request the next set of results.
@@ -50,7 +57,9 @@ type ListQueuesInput struct {
 // A list of your queues.
 type ListQueuesOutput struct {
 
-	// Pagination token to include in the next request.
+	// Pagination token to include in the next request. Token value is null if there
+	// are no additional results to request, or if you did not set MaxResults in the
+	// request.
 	NextToken *string
 
 	// A list of queue URLs, up to 1,000 entries, or the value of MaxResults that you

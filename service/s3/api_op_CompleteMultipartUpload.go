@@ -14,9 +14,10 @@ import (
 
 // Completes a multipart upload by assembling previously uploaded parts. You first
 // initiate the multipart upload and then upload all parts using the UploadPart
-// operation. After successfully uploading all relevant parts of an upload, you
-// call this operation to complete the upload. Upon receiving this request, Amazon
-// S3 concatenates all the parts in ascending order by part number to create a new
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) operation.
+// After successfully uploading all relevant parts of an upload, you call this
+// operation to complete the upload. Upon receiving this request, Amazon S3
+// concatenates all the parts in ascending order by part number to create a new
 // object. In the Complete Multipart Upload request, you must provide the parts
 // list. You must ensure that the parts list is complete. This operation
 // concatenates the parts that you provide in the list. For each part in the list,
@@ -36,7 +37,7 @@ import (
 // For information about permissions required to use the multipart upload API, see
 // Multipart Upload API and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
-// GetBucketLifecycle has the following special errors:
+// CompleteMultipartUpload has the following special errors:
 //
 //     * Error code:
 // EntityTooSmall
@@ -78,15 +79,23 @@ import (
 //
 //     *
 // CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//     * UploadPart
 //
-//     * AbortMultipartUpload
+// * UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
-// ListParts
+// AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
 //
-//     * ListMultipartUploads
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+//
+//     *
+// ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMultipartUploadInput, optFns ...func(*Options)) (*CompleteMultipartUploadOutput, error) {
 	if params == nil {
 		params = &CompleteMultipartUploadInput{}
@@ -119,6 +128,10 @@ type CompleteMultipartUploadInput struct {
 	// This member is required.
 	UploadId *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
+
 	// The container for the multipart upload request information.
 	MultipartUpload *types.CompletedMultipartUpload
 
@@ -133,7 +146,23 @@ type CompleteMultipartUploadInput struct {
 
 type CompleteMultipartUploadOutput struct {
 
-	// The name of the bucket that contains the newly created object.
+	// The name of the bucket that contains the newly created object. When using this
+	// API with an access point, you must direct requests to the access point hostname.
+	// The access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
 
 	// Entity tag that identifies the newly created object's data. Objects with

@@ -1374,11 +1374,11 @@ func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariable"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1409,11 +1409,11 @@ func validateSslConfiguration(v *types.SslConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SslConfiguration"}
-	if v.Certificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
-	}
 	if v.PrivateKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	}
+	if v.Certificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1427,14 +1427,14 @@ func validateVolumeConfiguration(v *types.VolumeConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VolumeConfiguration"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if v.MountPoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MountPoint"))
 	}
 	if v.NumberOfDisks == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NumberOfDisks"))
+	}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1549,15 +1549,8 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInput"}
-	if v.SslConfiguration != nil {
-		if err := validateSslConfiguration(v.SslConfiguration); err != nil {
-			invalidParams.AddNested("SslConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Environment != nil {
-		if err := validateEnvironmentVariables(v.Environment); err != nil {
-			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
-		}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -1565,8 +1558,15 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 	if v.StackId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.Environment != nil {
+		if err := validateEnvironmentVariables(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SslConfiguration != nil {
+		if err := validateSslConfiguration(v.SslConfiguration); err != nil {
+			invalidParams.AddNested("SslConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1580,15 +1580,15 @@ func validateOpCreateDeploymentInput(v *CreateDeploymentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeploymentInput"}
-	if v.StackId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
-	}
 	if v.Command == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Command"))
 	} else if v.Command != nil {
 		if err := validateDeploymentCommand(v.Command); err != nil {
 			invalidParams.AddNested("Command", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.StackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1602,11 +1602,11 @@ func validateOpCreateInstanceInput(v *CreateInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceInput"}
-	if v.StackId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
-	}
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.StackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
 	}
 	if v.LayerIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerIds"))
@@ -1623,11 +1623,13 @@ func validateOpCreateLayerInput(v *CreateLayerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLayerInput"}
-	if v.StackId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VolumeConfigurations != nil {
+		if err := validateVolumeConfigurations(v.VolumeConfigurations); err != nil {
+			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Shortname == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Shortname"))
@@ -1635,10 +1637,8 @@ func validateOpCreateLayerInput(v *CreateLayerInput) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.VolumeConfigurations != nil {
-		if err := validateVolumeConfigurations(v.VolumeConfigurations); err != nil {
-			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
-		}
+	if v.StackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1655,14 +1655,14 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 	if v.ServiceRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceRoleArn"))
 	}
-	if v.DefaultInstanceProfileArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultInstanceProfileArn"))
-	}
 	if v.Region == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Region"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DefaultInstanceProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultInstanceProfileArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2063,14 +2063,14 @@ func validateOpRegisterRdsDbInstanceInput(v *RegisterRdsDbInstanceInput) error {
 	if v.RdsDbInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RdsDbInstanceArn"))
 	}
-	if v.DbPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DbPassword"))
+	if v.StackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
 	}
 	if v.DbUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbUser"))
 	}
-	if v.StackId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
+	if v.DbPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbPassword"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2114,11 +2114,11 @@ func validateOpSetPermissionInput(v *SetPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetPermissionInput"}
-	if v.IamUserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamUserArn"))
-	}
 	if v.StackId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackId"))
+	}
+	if v.IamUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamUserArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2207,11 +2207,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2273,17 +2273,17 @@ func validateOpUpdateAppInput(v *UpdateAppInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInput"}
-	if v.Environment != nil {
-		if err := validateEnvironmentVariables(v.Environment); err != nil {
-			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if v.SslConfiguration != nil {
 		if err := validateSslConfiguration(v.SslConfiguration); err != nil {
 			invalidParams.AddNested("SslConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Environment != nil {
+		if err := validateEnvironmentVariables(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

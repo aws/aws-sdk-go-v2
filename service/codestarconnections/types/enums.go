@@ -11,10 +11,33 @@ const (
 	ConnectionStatusError     ConnectionStatus = "ERROR"
 )
 
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"PENDING",
+		"AVAILABLE",
+		"ERROR",
+	}
+}
+
 type ProviderType string
 
 // Enum values for ProviderType
 const (
 	ProviderTypeBitbucket                ProviderType = "Bitbucket"
+	ProviderTypeGithub                   ProviderType = "GitHub"
 	ProviderTypeGithub_enterprise_server ProviderType = "GitHubEnterpriseServer"
 )
+
+// Values returns all known values for ProviderType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProviderType) Values() []ProviderType {
+	return []ProviderType{
+		"Bitbucket",
+		"GitHub",
+		"GitHubEnterpriseServer",
+	}
+}

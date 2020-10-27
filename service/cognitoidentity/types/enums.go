@@ -10,6 +10,16 @@ const (
 	AmbiguousRoleResolutionTypeDeny               AmbiguousRoleResolutionType = "Deny"
 )
 
+// Values returns all known values for AmbiguousRoleResolutionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmbiguousRoleResolutionType) Values() []AmbiguousRoleResolutionType {
+	return []AmbiguousRoleResolutionType{
+		"AuthenticatedRole",
+		"Deny",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -17,6 +27,16 @@ const (
 	ErrorCodeAccess_denied         ErrorCode = "AccessDenied"
 	ErrorCodeInternal_server_error ErrorCode = "InternalServerError"
 )
+
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"AccessDenied",
+		"InternalServerError",
+	}
+}
 
 type MappingRuleMatchType string
 
@@ -28,6 +48,18 @@ const (
 	MappingRuleMatchTypeNot_equal   MappingRuleMatchType = "NotEqual"
 )
 
+// Values returns all known values for MappingRuleMatchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MappingRuleMatchType) Values() []MappingRuleMatchType {
+	return []MappingRuleMatchType{
+		"Equals",
+		"Contains",
+		"StartsWith",
+		"NotEqual",
+	}
+}
+
 type RoleMappingType string
 
 // Enum values for RoleMappingType
@@ -35,3 +67,13 @@ const (
 	RoleMappingTypeToken RoleMappingType = "Token"
 	RoleMappingTypeRules RoleMappingType = "Rules"
 )
+
+// Values returns all known values for RoleMappingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RoleMappingType) Values() []RoleMappingType {
+	return []RoleMappingType{
+		"Token",
+		"Rules",
+	}
+}

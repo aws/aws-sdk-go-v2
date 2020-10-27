@@ -109,19 +109,11 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	DeletionProtection *bool
 
 	// Specify the Active Directory directory ID to restore the DB instance in. The
-	// domain must be created prior to this operation. Currently, only Microsoft SQL
-	// Server and Oracle DB instances can be created in an Active Directory Domain. For
-	// Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to
-	// authenticate users that connect to the DB instance. For more information, see
-	// Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft
-	// SQL Server
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
-	// in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use
-	// Kerberos authentication to authenticate users that connect to the DB instance.
-	// For more information, see  Using Kerberos Authentication with Amazon RDS for
-	// Oracle
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html) in
-	// the Amazon RDS User Guide.
+	// domain must be created prior to this operation. Currently, only MySQL, Microsoft
+	// SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active
+	// Directory Domain. For more information, see  Kerberos Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
+	// in the Amazon RDS User Guide.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
@@ -182,6 +174,10 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// License model information for the restored DB instance. Default: Same as source.
 	// Valid values: license-included | bring-your-own-license | general-public-license
 	LicenseModel *string
+
+	// The upper limit to which Amazon RDS can automatically scale the storage of the
+	// DB instance.
+	MaxAllocatedStorage *int32
 
 	// A value that indicates whether the DB instance is a Multi-AZ deployment.
 	// Constraint: You can't specify the AvailabilityZone parameter if the DB instance

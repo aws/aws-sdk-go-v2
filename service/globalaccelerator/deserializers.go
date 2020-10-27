@@ -4362,6 +4362,11 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				sv.HealthCheckProtocol = types.HealthCheckProtocol(jtv)
 			}
 
+		case "PortOverrides":
+			if err := awsAwsjson11_deserializeDocumentPortOverrides(&sv.PortOverrides, value); err != nil {
+				return err
+			}
+
 		case "ThresholdCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4988,6 +4993,95 @@ func awsAwsjson11_deserializeDocumentListeners(v *[]*types.Listener, value inter
 	for _, value := range shape {
 		var col *types.Listener
 		if err := awsAwsjson11_deserializeDocumentListener(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPortOverride(v **types.PortOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PortOverride
+	if *v == nil {
+		sv = &types.PortOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PortNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndpointPort = ptr.Int32(int32(i64))
+			}
+
+		case "ListenerPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PortNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ListenerPort = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPortOverrides(v *[]*types.PortOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.PortOverride
+	if *v == nil {
+		cv = []*types.PortOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.PortOverride
+		if err := awsAwsjson11_deserializeDocumentPortOverride(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)

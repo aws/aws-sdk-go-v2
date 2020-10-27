@@ -721,7 +721,7 @@ type CreateGlobalSecondaryIndexAction struct {
 
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
-	// see Limits
+	// see Service, Account, and Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughput
@@ -1094,7 +1094,7 @@ type GlobalSecondaryIndex struct {
 
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
-	// see Limits
+	// see Service, Account, and Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughput
@@ -1181,7 +1181,7 @@ type GlobalSecondaryIndexDescription struct {
 
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
-	// see Limits
+	// see Service, Account, and Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughputDescription
@@ -1609,9 +1609,9 @@ type Projection struct {
 	//     * KEYS_ONLY - Only
 	// the index and primary keys are projected into the index.
 	//
-	//     * INCLUDE - Only
-	// the specified table attributes are projected into the index. The list of
-	// projected attributes is in NonKeyAttributes.
+	//     * INCLUDE - In
+	// addition to the attributes described in KEYS_ONLY, the secondary index will
+	// include other non-key attributes that you specify.
 	//
 	//     * ALL - All of the table
 	// attributes are projected into the index.
@@ -1620,7 +1620,8 @@ type Projection struct {
 
 // Represents the provisioned throughput settings for a specified table or index.
 // The settings can be modified using the UpdateTable operation. For current
-// minimum and maximum provisioned throughput values, see Limits
+// minimum and maximum provisioned throughput values, see Service, Account, and
+// Table Quotas
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 // in the Amazon DynamoDB Developer Guide.
 type ProvisionedThroughput struct {
@@ -1658,7 +1659,7 @@ type ProvisionedThroughputDescription struct {
 
 	// The number of provisioned throughput decreases for this table during this UTC
 	// calendar day. For current maximums on provisioned throughput decreases, see
-	// Limits
+	// Service, Account, and Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	NumberOfDecreasesToday *int64
@@ -1800,6 +1801,10 @@ type ReplicaDescription struct {
 	// The name of the Region.
 	RegionName *string
 
+	// The time at which the replica was first detected as inaccessible. To determine
+	// cause of inaccessibility check the ReplicaStatus property.
+	ReplicaInaccessibleDateTime *time.Time
+
 	// The current state of the replica:
 	//
 	//     * CREATING - The replica is being
@@ -1811,6 +1816,12 @@ type ReplicaDescription struct {
 	// replica is being deleted.
 	//
 	//     * ACTIVE - The replica is ready for use.
+	//
+	//     *
+	// REGION_DISABLED - The replica is inaccessible because the AWS Region has been
+	// disabled. If the AWS Region remains inaccessible for more than 20 hours,
+	// DynamoDB will remove this replica from the replication group. The replica will
+	// not be deleted and replication will stop from and to this region.
 	ReplicaStatus ReplicaStatus
 
 	// Detailed information about the replica status.
@@ -2335,26 +2346,26 @@ type TableDescription struct {
 	//             * KEYS_ONLY - Only the index and primary keys are
 	// projected into the index.
 	//
-	//             * INCLUDE - Only the specified table
-	// attributes are projected into the index. The list of projected attributes is in
-	// NonKeyAttributes.
+	//             * INCLUDE - In addition to the attributes
+	// described in KEYS_ONLY, the secondary index will include other non-key
+	// attributes that you specify.
 	//
-	//             * ALL - All of the table attributes are projected
-	// into the index.
+	//             * ALL - All of the table attributes
+	// are projected into the index.
 	//
-	//         * NonKeyAttributes - A list of one or more non-key
-	// attribute names that are projected into the secondary index. The total count of
-	// attributes provided in NonKeyAttributes, summed across all of the secondary
-	// indexes, must not exceed 20. If you project the same attribute into two
-	// different indexes, this counts as two distinct attributes when determining the
-	// total.
+	//         * NonKeyAttributes - A list of one or
+	// more non-key attribute names that are projected into the secondary index. The
+	// total count of attributes provided in NonKeyAttributes, summed across all of the
+	// secondary indexes, must not exceed 20. If you project the same attribute into
+	// two different indexes, this counts as two distinct attributes when determining
+	// the total.
 	//
-	//     * ProvisionedThroughput - The provisioned throughput settings for
-	// the global secondary index, consisting of read and write capacity units, along
-	// with data about increases and decreases.
+	//     * ProvisionedThroughput - The provisioned throughput settings
+	// for the global secondary index, consisting of read and write capacity units,
+	// along with data about increases and decreases.
 	//
-	// If the table is in the DELETING state,
-	// no information about indexes will be returned.
+	// If the table is in the DELETING
+	// state, no information about indexes will be returned.
 	GlobalSecondaryIndexes []*GlobalSecondaryIndexDescription
 
 	// Represents the version of global tables
@@ -2642,7 +2653,7 @@ type UpdateGlobalSecondaryIndexAction struct {
 
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
-	// see Limits
+	// see Service, Account, and Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	//

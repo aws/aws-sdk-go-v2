@@ -82,7 +82,7 @@ type DescribeVolumesInput struct {
 	//     * snapshot-id - The snapshot from
 	// which the volume was created.
 	//
-	//     * status - The status of the volume (creating
+	//     * status - The state of the volume (creating
 	// | available | in-use | deleting | deleted | error).
 	//
 	//     * tag: - The key/value
@@ -99,8 +99,8 @@ type DescribeVolumesInput struct {
 	// volume ID.
 	//
 	//     * volume-type - The Amazon EBS volume type. This can be gp2 for
-	// General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized
-	// HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
+	// General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput
+	// Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
 	Filters []*types.Filter
 
 	// The maximum number of volume results returned by DescribeVolumes in paginated

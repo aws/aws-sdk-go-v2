@@ -105,6 +105,20 @@ type Backup struct {
 
 	// The lifecycle status of the backup.
 	//
+	//     * AVAILABLE - The backup is fully
+	// available.
+	//
+	//     * CREATING - FSx is creating the backup.
+	//
+	//     * TRANSFERRING -
+	// For Lustre file systems only; FSx is transferring the backup to S3.
+	//
+	//     *
+	// DELETED - The backup was deleted is no longer available.
+	//
+	//     * FAILED - Amazon
+	// FSx could not complete the backup.
+	//
 	// This member is required.
 	Lifecycle BackupLifecycle
 
@@ -120,9 +134,8 @@ type Backup struct {
 	// Details explaining any failures that occur when creating a backup.
 	FailureDetails *BackupFailureDetails
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this
-	// backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx for
-	// Lustre does not support KMS encryption.
+	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
+	// backup of the Amazon FSx file system's data at rest.
 	KmsKeyId *string
 
 	// The current percent of progress of an asynchronous task.
@@ -182,27 +195,25 @@ type CompletionReport struct {
 // The Lustre configuration for the file system being created.
 type CreateFileSystemLustreConfiguration struct {
 
-	// (Optional) Use this property to configure the AutoImport feature on the file
-	// system's linked Amazon S3 data repository. You use AutoImport to update the
-	// contents of your FSx for Lustre file system automatically with changes that
-	// occur in the linked S3 data repository. AutoImportPolicy can have the following
-	// values:
+	// (Optional) When you create your file system, your existing S3 objects appear as
+	// file and directory listings. Use this property to choose how Amazon FSx keeps
+	// your file and directory listings up to date as you add or modify objects in your
+	// linked S3 bucket. AutoImportPolicy can have the following values:
 	//
-	//     * NONE - (Default) AutoImport is off. Changes in the linked data
-	// repository are not reflected on the FSx file system.
+	//     * NONE -
+	// (Default) AutoImport is off. Amazon FSx only updates file and directory listings
+	// from the linked S3 bucket when the file system is created. FSx does not update
+	// file and directory listings for any new or changed objects after choosing this
+	// option.
 	//
-	//     * NEW - AutoImport is
-	// on. New files in the linked data repository that do not currently exist in the
-	// FSx file system are automatically imported. Updates to existing FSx files are
-	// not imported to the FSx file system. Files deleted from the linked data
-	// repository are not deleted from the FSx file system.
+	//     * NEW - AutoImport is on. Amazon FSx automatically imports
+	// directory listings of any new objects added to the linked S3 bucket that do not
+	// currently exist in the FSx file system.
 	//
-	//     * NEW_CHANGED -
-	// AutoImport is on. New files in the linked S3 data repository that do not
-	// currently exist in the FSx file system are automatically imported. Changes to
-	// existing FSx files in the linked repository are also automatically imported to
-	// the FSx file system. Files deleted from the linked data repository are not
-	// deleted from the FSx file system.
+	//     * NEW_CHANGED - AutoImport is on.
+	// Amazon FSx automatically imports file and directory listings of any new objects
+	// added to the S3 bucket and any existing objects that are changed in the S3
+	// bucket after you choose this option.
 	//
 	// For more information, see Automatically
 	// import updates from your S3 bucket
@@ -210,17 +221,19 @@ type CreateFileSystemLustreConfiguration struct {
 	AutoImportPolicy AutoImportPolicyType
 
 	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
 	// The default is 0.
 	AutomaticBackupRetentionDays *int32
 
-	// A boolean flag indicating whether tags for the file system should be copied to
-	// backups. This value defaults to false. If it's set to true, all tags for the
-	// file system are copied to all automatic and user-initiated backups where the
-	// user doesn't specify tags. If this value is true, and you specify one or more
-	// tags, only the specified tags are copied to backups. If you specify one or more
-	// tags when creating a user-initiated backup, no tags are copied from the file
-	// system, regardless of this value. For more information, see Working with backups
+	// (Optional) Not available to use with file systems that are linked to a data
+	// repository. A boolean flag indicating whether tags for the file system should be
+	// copied to backups. The default value is false. If it's set to true, all file
+	// system tags are copied to all automatic and user-initiated backups when the user
+	// doesn't specify any backup-specific tags. If this value is true, and you specify
+	// one or more backup tags, only the specified tags are copied to backups. If you
+	// specify one or more tags when creating a user-initiated backup, no tags are
+	// copied from the file system, regardless of this value. For more information, see
+	// Working with backups
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
 	CopyTagsToBackups *bool
 
@@ -245,6 +258,13 @@ type CreateFileSystemLustreConfiguration struct {
 	// Data in Transit
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html).
 	DeploymentType LustreDeploymentType
+
+	// The type of drive cache used by PERSISTENT_1 file systems that are provisioned
+	// with HDD storage devices. This parameter is required when storage type is HDD.
+	// Set to READ, improve the performance for frequently accessed files and allows
+	// 20% of the total storage capacity of the file system to be cached. This
+	// parameter is required when StorageType is set to HDD.
+	DriveCacheType DriveCacheType
 
 	// (Optional) The path in Amazon S3 where the root of your Amazon FSx file system
 	// is exported. The path must use the same Amazon S3 bucket as specified in
@@ -282,14 +302,15 @@ type CreateFileSystemLustreConfiguration struct {
 	// write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system
 	// throughput capacity is calculated by multiplying ﬁle system storage capacity
 	// (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
-	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle
+	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s of ﬁle
 	// system throughput. You pay for the amount of throughput that you provision.
-	// Valid values are 50, 100, 200.
+	// Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12,
+	// 40.
 	PerUnitStorageThroughput *int32
 
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
-	// Monday and ending with Sunday.
+	// (Optional) The preferred start time to perform weekly maintenance, formatted
+	// d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7,
+	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
 }
 
@@ -309,7 +330,7 @@ type CreateFileSystemWindowsConfiguration struct {
 
 	// The number of days to retain automatic backups. The default is to retain backups
 	// for 7 days. Setting this value to 0 disables the creation of automatic backups.
-	// The maximum retention period for backups is 35 days.
+	// The maximum retention period for backups is 90 days.
 	AutomaticBackupRetentionDays *int32
 
 	// A boolean flag indicating whether tags for the file system should be copied to
@@ -369,28 +390,27 @@ type CreateFileSystemWindowsConfiguration struct {
 type DataRepositoryConfiguration struct {
 
 	// Describes the file system's linked S3 data repository's AutoImportPolicy. The
-	// AutoImportPolicy configures how your FSx for Lustre file system automatically
-	// updates its contents with changes that occur in the linked S3 data repository.
+	// AutoImportPolicy configures how Amazon FSx keeps your file and directory
+	// listings up to date as you add or modify objects in your linked S3 bucket.
 	// AutoImportPolicy can have the following values:
 	//
 	//     * NONE - (Default)
-	// AutoImport is off. Changes in the linked data repository are not reflected on
-	// the FSx file system.
+	// AutoImport is off. Amazon FSx only updates file and directory listings from the
+	// linked S3 bucket when the file system is created. FSx does not update file and
+	// directory listings for any new or changed objects after choosing this option.
 	//
-	//     * NEW - AutoImport is on. New files in the linked data
-	// repository that do not currently exist in the FSx file system are automatically
-	// imported. Updates to existing FSx files are not imported to the FSx file system.
-	// Files deleted from the linked data repository are not deleted from the FSx file
-	// system.
 	//
-	//     * NEW_CHANGED - AutoImport is on. New files in the linked S3 data
-	// repository that do not currently exist in the FSx file system are automatically
-	// imported. Changes to existing FSx files in the linked repository are also
-	// automatically imported to the FSx file system. Files deleted from the linked
-	// data repository are not deleted from the FSx file system.
+	// * NEW - AutoImport is on. Amazon FSx automatically imports directory listings of
+	// any new objects added to the linked S3 bucket that do not currently exist in the
+	// FSx file system.
 	//
-	// For more information,
-	// see Automatically import updates from your S3 bucket
+	//     * NEW_CHANGED - AutoImport is on. Amazon FSx automatically
+	// imports file and directory listings of any new objects added to the S3 bucket
+	// and any existing objects that are changed in the S3 bucket after you choose this
+	// option.
+	//
+	// For more information, see Automatically import updates from your S3
+	// bucket
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html).
 	AutoImportPolicy AutoImportPolicyType
 
@@ -782,7 +802,7 @@ type Filter struct {
 type LustreFileSystemConfiguration struct {
 
 	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
 	// The default is 0.
 	AutomaticBackupRetentionDays *int32
 
@@ -816,6 +836,13 @@ type LustreFileSystemConfiguration struct {
 	// (Default = SCRATCH_1)
 	DeploymentType LustreDeploymentType
 
+	// The type of drive cache used by PERSISTENT_1 file systems that are provisioned
+	// with HDD storage devices. This parameter is required when storage type is HDD.
+	// Set to READ, improve the performance for frequently accessed files and allows
+	// 20% of the total storage capacity of the file system to be cached. This
+	// parameter is required when StorageType is set to HDD.
+	DriveCacheType DriveCacheType
+
 	// You use the MountName value when mounting the file system. For the SCRATCH_1
 	// deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1
 	// deployment types, this value is a string that is unique within an AWS Region.
@@ -825,7 +852,7 @@ type LustreFileSystemConfiguration struct {
 	// throughput per 1 tebibyte of storage provisioned. File system throughput
 	// capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput
 	// (MB/s/TiB). This option is only valid for PERSISTENT_1 deployment types. Valid
-	// values are 50, 100, 200.
+	// values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40.
 	PerUnitStorageThroughput *int32
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
@@ -961,27 +988,25 @@ type Tag struct {
 // UpdateFileSystem operation.
 type UpdateFileSystemLustreConfiguration struct {
 
-	// (Optional) Use this property to configure the AutoImport feature on the file
-	// system's linked Amazon S3 data repository. You use AutoImport to update the
-	// contents of your FSx for Lustre file system automatically with changes that
-	// occur in the linked S3 data repository. AutoImportPolicy can have the following
-	// values:
+	// (Optional) When you create your file system, your existing S3 objects appear as
+	// file and directory listings. Use this property to choose how Amazon FSx keeps
+	// your file and directory listing up to date as you add or modify objects in your
+	// linked S3 bucket. AutoImportPolicy can have the following values:
 	//
-	//     * NONE - (Default) AutoImport is off. Changes in the linked data
-	// repository are not reflected on the FSx file system.
+	//     * NONE -
+	// (Default) AutoImport is off. Amazon FSx only updates file and directory listings
+	// from the linked S3 bucket when the file system is created. FSx does not update
+	// the file and directory listing for any new or changed objects after choosing
+	// this option.
 	//
-	//     * NEW - AutoImport is
-	// on. New files in the linked data repository that do not currently exist in the
-	// FSx file system are automatically imported. Updates to existing FSx files are
-	// not imported to the FSx file system. Files deleted from the linked data
-	// repository are not deleted from the FSx file system.
+	//     * NEW - AutoImport is on. Amazon FSx automatically imports
+	// directory listings of any new objects added to the linked S3 bucket that do not
+	// currently exist in the FSx file system.
 	//
-	//     * NEW_CHANGED -
-	// AutoImport is on. New files in the linked S3 data repository that do not
-	// currently exist in the FSx file system are automatically imported. Changes to
-	// existing FSx files in the linked repository are also automatically imported to
-	// the FSx file system. Files deleted from the linked data repository are not
-	// deleted from the FSx file system.
+	//     * NEW_CHANGED - AutoImport is on.
+	// Amazon FSx automatically imports file and directory listings of any new objects
+	// added to the S3 bucket and any existing objects that are changed in the S3
+	// bucket after you choose this option.
 	//
 	// For more information, see Automatically
 	// import updates from your S3 bucket
@@ -989,7 +1014,7 @@ type UpdateFileSystemLustreConfiguration struct {
 	AutoImportPolicy AutoImportPolicyType
 
 	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
 	// The default is 0.
 	AutomaticBackupRetentionDays *int32
 
@@ -998,9 +1023,9 @@ type UpdateFileSystemLustreConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
-	// and ending with Sunday.
+	// (Optional) The preferred start time to perform weekly maintenance, formatted
+	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,
+	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
 }
 
@@ -1011,7 +1036,7 @@ type UpdateFileSystemWindowsConfiguration struct {
 
 	// The number of days to retain automatic daily backups. Setting this to zero (0)
 	// disables automatic daily backups. You can retain automatic daily backups for a
-	// maximum of 35 days. For more information, see Working with Automatic Daily
+	// maximum of 90 days. For more information, see Working with Automatic Daily
 	// Backups
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups).
 	AutomaticBackupRetentionDays *int32
@@ -1048,7 +1073,7 @@ type WindowsFileSystemConfiguration struct {
 	ActiveDirectoryId *string
 
 	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
 	AutomaticBackupRetentionDays *int32
 
 	// A boolean flag indicating whether tags on the file system should be copied to

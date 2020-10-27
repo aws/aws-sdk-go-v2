@@ -51,14 +51,12 @@ type CreateFunctionInput struct {
 	// This member is required.
 	Name *string
 
-	// The Function request mapping template. Functions support only the 2018-05-29
-	// version of the request mapping template.
-	//
-	// This member is required.
-	RequestMappingTemplate *string
-
 	// The Function description.
 	Description *string
+
+	// The Function request mapping template. Functions support only the 2018-05-29
+	// version of the request mapping template.
+	RequestMappingTemplate *string
 
 	// The Function response mapping template.
 	ResponseMappingTemplate *string

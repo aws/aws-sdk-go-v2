@@ -109,6 +109,16 @@ type GenericAttachment struct {
 	Title *string
 }
 
+// Provides a score that indicates the confidence that Amazon Lex has that an
+// intent is the one that satisfies the user's intent.
+type IntentConfidence struct {
+
+	// A score that indicates how confident Amazon Lex is that an intent satisfies the
+	// user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
+	// confidence.
+	Score *float64
+}
+
 // Provides information about the state of an intent. You can use this information
 // to get the current state of an intent so that you can process the intent, or so
 // that you can return the intent to its previous state.
@@ -178,6 +188,22 @@ type IntentSummary struct {
 	SlotToElicit *string
 
 	// Map of the slots that have been gathered and their values.
+	Slots map[string]*string
+}
+
+// An intent that Amazon Lex suggests satisfies the user's intent. Includes the
+// name of the intent, the confidence that Amazon Lex has that the user's intent is
+// satisfied, and the slots defined for the intent.
+type PredictedIntent struct {
+
+	// The name of the intent that Amazon Lex suggests satisfies the user's intent.
+	IntentName *string
+
+	// Indicates how confident Amazon Lex is that an intent satisfies the user's
+	// intent.
+	NluIntentConfidence *IntentConfidence
+
+	// The slot and slot values associated with the predicted intent.
 	Slots map[string]*string
 }
 

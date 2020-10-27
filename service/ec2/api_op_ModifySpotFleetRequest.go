@@ -62,6 +62,12 @@ type ModifySpotFleetRequestInput struct {
 	// Spot Fleet.
 	ExcessCapacityTerminationPolicy types.ExcessCapacityTerminationPolicy
 
+	// The launch template and overrides. You can only use this parameter if you
+	// specified a launch template (LaunchTemplateConfigs) in your Spot Fleet request.
+	// If you specified LaunchSpecifications in your Spot Fleet request, then omit this
+	// parameter.
+	LaunchTemplateConfigs []*types.LaunchTemplateConfig
+
 	// The number of On-Demand Instances in the fleet.
 	OnDemandTargetCapacity *int32
 

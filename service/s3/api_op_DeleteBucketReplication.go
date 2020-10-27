@@ -25,8 +25,11 @@ import (
 // DeleteBucketReplication:
 //
 //     * PutBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html)
 //
-//     * GetBucketReplication
+//
+// * GetBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html)
 func (c *Client) DeleteBucketReplication(ctx context.Context, params *DeleteBucketReplicationInput, optFns ...func(*Options)) (*DeleteBucketReplicationOutput, error) {
 	if params == nil {
 		params = &DeleteBucketReplicationInput{}
@@ -48,6 +51,10 @@ type DeleteBucketReplicationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketReplicationOutput struct {

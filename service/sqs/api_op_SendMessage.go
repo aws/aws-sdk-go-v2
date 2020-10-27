@@ -34,11 +34,11 @@ func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optF
 //
 type SendMessageInput struct {
 
-	// The message to send. The maximum string size is 256 KB. A message can include
-	// only XML, JSON, and unformatted text. The following Unicode characters are
-	// allowed: #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to
-	// #x10FFFF Any characters not included in this list will be rejected. For more
-	// information, see the W3C specification for characters
+	// The message to send. The minimum size is one character. The maximum size is 256
+	// KB. A message can include only XML, JSON, and unformatted text. The following
+	// Unicode characters are allowed: #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to
+	// #xFFFD | #x10000 to #x10FFFF Any characters not included in this list will be
+	// rejected. For more information, see the W3C specification for characters
 	// (http://www.w3.org/TR/REC-xml/#charsets).
 	//
 	// This member is required.
@@ -60,7 +60,7 @@ type SendMessageInput struct {
 
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]*types.MessageAttributeValue
 

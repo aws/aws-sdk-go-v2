@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an endpoint for a self-managed object storage bucket.
+// Creates an endpoint for a self-managed object storage bucket. For more
+// information about self-managed object storage locations, see
+// create-object-location.
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
@@ -50,11 +52,15 @@ type CreateLocationObjectStorageInput struct {
 	ServerHostname *string
 
 	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server.
+	// self-managed object storage server. If your object storage requires a user name
+	// and password to authenticate, use AccessKey and SecretKey to provide the user
+	// name and password, respectively.
 	AccessKey *string
 
 	// Optional. The secret key is used if credentials are required to access the
-	// self-managed object storage server.
+	// self-managed object storage server. If your object storage requires a user name
+	// and password to authenticate, use AccessKey and SecretKey to provide the user
+	// name and password, respectively.
 	SecretKey *string
 
 	// The port that your self-managed object storage server accepts inbound network

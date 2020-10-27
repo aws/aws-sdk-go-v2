@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves properties, including the protection policy in force, for one or more
-// game sessions. This action can be used in several ways: (1) provide a
+// game sessions. This operation can be used in several ways: (1) provide a
 // GameSessionId or GameSessionArn to request details for a specific game session;
 // (2) provide either a FleetId or an AliasId to request properties for all game
 // sessions running on a fleet. To get game session record(s), specify just one of
@@ -59,7 +59,7 @@ func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeGameSessionDetailsInput struct {
 
 	// A unique identifier for an alias associated with the fleet to retrieve all game
@@ -78,7 +78,7 @@ type DescribeGameSessionDetailsInput struct {
 	Limit *int32
 
 	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
@@ -87,7 +87,7 @@ type DescribeGameSessionDetailsInput struct {
 	StatusFilter *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeGameSessionDetailsOutput struct {
 
 	// A collection of objects containing game session properties and the protection
@@ -95,7 +95,7 @@ type DescribeGameSessionDetailsOutput struct {
 	GameSessionDetails []*types.GameSessionDetail
 
 	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
+	// operation. If no token is returned, these results represent the end of the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

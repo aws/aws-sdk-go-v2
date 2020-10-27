@@ -10,6 +10,16 @@ const (
 	AuthenticationStrategyLdap   AuthenticationStrategy = "LDAP"
 )
 
+// Values returns all known values for AuthenticationStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationStrategy) Values() []AuthenticationStrategy {
+	return []AuthenticationStrategy{
+		"SIMPLE",
+		"LDAP",
+	}
+}
+
 type BrokerState string
 
 // Enum values for BrokerState
@@ -21,6 +31,19 @@ const (
 	BrokerStateReboot_in_progress   BrokerState = "REBOOT_IN_PROGRESS"
 )
 
+// Values returns all known values for BrokerState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BrokerState) Values() []BrokerState {
+	return []BrokerState{
+		"CREATION_IN_PROGRESS",
+		"CREATION_FAILED",
+		"DELETION_IN_PROGRESS",
+		"RUNNING",
+		"REBOOT_IN_PROGRESS",
+	}
+}
+
 type BrokerStorageType string
 
 // Enum values for BrokerStorageType
@@ -28,6 +51,16 @@ const (
 	BrokerStorageTypeEbs BrokerStorageType = "EBS"
 	BrokerStorageTypeEfs BrokerStorageType = "EFS"
 )
+
+// Values returns all known values for BrokerStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BrokerStorageType) Values() []BrokerStorageType {
+	return []BrokerStorageType{
+		"EBS",
+		"EFS",
+	}
+}
 
 type ChangeType string
 
@@ -37,6 +70,17 @@ const (
 	ChangeTypeUpdate ChangeType = "UPDATE"
 	ChangeTypeDelete ChangeType = "DELETE"
 )
+
+// Values returns all known values for ChangeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeType) Values() []ChangeType {
+	return []ChangeType{
+		"CREATE",
+		"UPDATE",
+		"DELETE",
+	}
+}
 
 type DayOfWeek string
 
@@ -51,6 +95,21 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type DeploymentMode string
 
 // Enum values for DeploymentMode
@@ -59,12 +118,31 @@ const (
 	DeploymentModeActive_standby_multi_az DeploymentMode = "ACTIVE_STANDBY_MULTI_AZ"
 )
 
+// Values returns all known values for DeploymentMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentMode) Values() []DeploymentMode {
+	return []DeploymentMode{
+		"SINGLE_INSTANCE",
+		"ACTIVE_STANDBY_MULTI_AZ",
+	}
+}
+
 type EngineType string
 
 // Enum values for EngineType
 const (
 	EngineTypeActivemq EngineType = "ACTIVEMQ"
 )
+
+// Values returns all known values for EngineType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EngineType) Values() []EngineType {
+	return []EngineType{
+		"ACTIVEMQ",
+	}
+}
 
 type SanitizationWarningReason string
 
@@ -74,3 +152,14 @@ const (
 	SanitizationWarningReasonDisallowed_attribute_removed    SanitizationWarningReason = "DISALLOWED_ATTRIBUTE_REMOVED"
 	SanitizationWarningReasonInvalid_attribute_value_removed SanitizationWarningReason = "INVALID_ATTRIBUTE_VALUE_REMOVED"
 )
+
+// Values returns all known values for SanitizationWarningReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SanitizationWarningReason) Values() []SanitizationWarningReason {
+	return []SanitizationWarningReason{
+		"DISALLOWED_ELEMENT_REMOVED",
+		"DISALLOWED_ATTRIBUTE_REMOVED",
+		"INVALID_ATTRIBUTE_VALUE_REMOVED",
+	}
+}

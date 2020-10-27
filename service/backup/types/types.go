@@ -6,6 +6,24 @@ import (
 	"time"
 )
 
+// A list of backup options for each resource type.
+type AdvancedBackupSetting struct {
+
+	// Specifies the backup option for a selected resource. This option is only
+	// available for Windows VSS backup jobs. Valid values: Set to
+	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
+	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The
+	// WindowsVSS option is not enabled by default. If you specify an invalid option,
+	// you get an InvalidParameterValueException exception. For more information about
+	// Windows VSS backups, see Creating a VSS-Enabled Windows Backup
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html).
+	BackupOptions map[string]*string
+
+	// The type of AWS resource to be backed up. For VSS Windows backups, the only
+	// supported resource type is Amazon EC2. Valid values: EC2.
+	ResourceType *string
+}
+
 // Contains detailed information about a backup job.
 type BackupJob struct {
 
@@ -15,8 +33,19 @@ type BackupJob struct {
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string
 
+	// Specifies the backup option for a selected resource. This option is only
+	// available for Windows VSS backup jobs. Valid values: Set to
+	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
+	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If
+	// you specify an invalid option, you get an InvalidParameterValueException
+	// exception.
+	BackupOptions map[string]*string
+
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64
+
+	// Represents the type of backup for a backup job.
+	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
 	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
@@ -73,7 +102,8 @@ type BackupJob struct {
 
 	// The type of AWS resource to be backed up; for example, an Amazon Elastic Block
 	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// database. For VSS Windows backups, the only supported resource type is Amazon
+	// EC2.
 	ResourceType *string
 
 	// Specifies the time in Unix format and Coordinated Universal Time (UTC) when a
@@ -107,6 +137,9 @@ type BackupPlan struct {
 	//
 	// This member is required.
 	Rules []*BackupRule
+
+	// Contains a list of BackupOptions for each resource type.
+	AdvancedBackupSettings []*AdvancedBackupSetting
 }
 
 // Contains an optional backup plan display name and an array of BackupRule
@@ -124,10 +157,17 @@ type BackupPlanInput struct {
 	//
 	// This member is required.
 	Rules []*BackupRuleInput
+
+	// Specifies a list of BackupOptions for each resource type. These settings are
+	// only available for Windows VSS backup jobs.
+	AdvancedBackupSettings []*AdvancedBackupSetting
 }
 
 // Contains metadata about a backup plan.
 type BackupPlansListMember struct {
+
+	// Contains a list of BackupOptions for a resource type.
+	AdvancedBackupSettings []*AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,
@@ -147,7 +187,7 @@ type BackupPlansListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
+	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// The date and time a backup plan is deleted, in Unix format and Coordinated
@@ -156,7 +196,7 @@ type BackupPlansListMember struct {
 	// 12:11:30.087 AM.
 	DeletionDate *time.Time
 
-	// The last time a job to back up resources was executed with this rule. A date and
+	// The last time a job to back up resources was run with this rule. A date and
 	// time, in Unix format and Coordinated Universal Time (UTC). The value of
 	// LastExecutionDate is accurate to milliseconds. For example, the value
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
@@ -218,7 +258,12 @@ type BackupRule struct {
 	// resources.
 	RuleId *string
 
-	// A CRON expression specifying when AWS Backup initiates a backup job.
+	// A CRON expression specifying when AWS Backup initiates a backup job. For more
+	// information about cron expressions, see Schedule Expressions for Rules
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
+	// in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for
+	// this parameter, we recommend testing your cron expression using one of the many
+	// available cron generator and testing tools.
 	ScheduleExpression *string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
@@ -274,7 +319,7 @@ type BackupRuleInput struct {
 // Used to specify a set of resources to a backup plan.
 type BackupSelection struct {
 
-	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring the
+	// The ARN of the IAM role that AWS Backup uses to authenticate when backing up the
 	// target resource; for example, arn:aws:iam::123456789012:role/S3Access.
 	//
 	// This member is required.
@@ -286,7 +331,7 @@ type BackupSelection struct {
 	SelectionName *string
 
 	// An array of conditions used to specify a set of resources to assign to a backup
-	// plan; for example, "STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting".
+	// plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
 	ListOfTags []*Condition
 
 	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
@@ -307,7 +352,7 @@ type BackupSelectionsListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
+	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// Specifies the IAM role Amazon Resource Name (ARN) to create the target recovery
@@ -341,7 +386,7 @@ type BackupVaultListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
+	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// The server-side encryption key that is used to protect your backups; for
@@ -372,7 +417,7 @@ type CalculatedLifecycle struct {
 }
 
 // Contains an array of triplets made up of a condition type (such as
-// STRINGEQUALS), a key, and a value. Conditions are used to filter resources in a
+// StringEquals), a key, and a value. Conditions are used to filter resources in a
 // selection that is assigned to a backup plan.
 type Condition struct {
 
@@ -382,7 +427,7 @@ type Condition struct {
 	// This member is required.
 	ConditionKey *string
 
-	// An operation, such as STRINGEQUALS, that is applied to a key-value pair used to
+	// An operation, such as StringEquals, that is applied to a key-value pair used to
 	// filter resources in a selection.
 	//
 	// This member is required.
@@ -512,7 +557,8 @@ type ProtectedResource struct {
 	ResourceArn *string
 
 	// The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon
-	// EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+	// EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For
+	// VSS Windows backups, the only supported resource type is Amazon EC2.
 	ResourceType *string
 }
 
@@ -593,7 +639,8 @@ type RecoveryPointByBackupVault struct {
 
 	// The type of AWS resource saved as a recovery point; for example, an Amazon
 	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
-	// (Amazon RDS) database.
+	// (Amazon RDS) database. For VSS Windows backups, the only supported resource type
+	// is Amazon EC2.
 	ResourceType *string
 
 	// A status code specifying the state of the recovery point.
@@ -696,7 +743,8 @@ type RestoreJobsListMember struct {
 
 	// The resource type of the listed restore jobs; for example, an Amazon Elastic
 	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
-	// RDS) database.
+	// RDS) database. For VSS Windows backups, the only supported resource type is
+	// Amazon EC2.
 	ResourceType *string
 
 	// Uniquely identifies the job that restores a recovery point.

@@ -52,7 +52,7 @@ type ListTagsForResourceOutput struct {
 	// of tags.
 	Marker *string
 
-	// he Amazon Resource Name (ARN) of the resource for which you want to list tags.
+	// The Amazon Resource Name (ARN) of the resource for which you want to list tags.
 	ResourceARN *string
 
 	// An array that contains the tags for the specified resource.

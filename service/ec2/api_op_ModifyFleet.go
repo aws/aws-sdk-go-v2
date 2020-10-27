@@ -70,6 +70,9 @@ type ModifyFleetInput struct {
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
+
+	// The launch template and overrides.
+	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
 }
 
 type ModifyFleetOutput struct {
