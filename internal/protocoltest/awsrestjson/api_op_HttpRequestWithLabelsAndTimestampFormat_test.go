@@ -80,7 +80,7 @@ func TestClient_HttpRequestWithLabelsAndTimestampFormat_awsRestjson1Serialize(t 
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err

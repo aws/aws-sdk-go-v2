@@ -66,12 +66,40 @@ func addOperationDeleteAccessPolicyMiddlewares(stack *middleware.Stack, options 
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opDeleteAccessPolicyMiddleware(stack)
 	addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack, options)
 	addOpDeleteAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPolicy(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opDeleteAccessPolicyMiddleware struct {
+}
+
+func (*endpointPrefix_opDeleteAccessPolicyMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDeleteAccessPolicyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.HostPrefix = "monitor."
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opDeleteAccessPolicyMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opDeleteAccessPolicyMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 type idempotencyToken_initializeOpDeleteAccessPolicy struct {

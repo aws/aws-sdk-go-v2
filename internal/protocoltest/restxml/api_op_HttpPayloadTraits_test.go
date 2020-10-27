@@ -97,7 +97,7 @@ func TestClient_HttpPayloadTraits_awsRestxmlSerialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
@@ -201,7 +201,7 @@ func TestClient_HttpPayloadTraits_awsRestxmlDeserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err

@@ -4,11 +4,14 @@ package s3control
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
+	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"strings"
 )
 
 // Updates the status for the specified job. Use this operation to confirm that you
@@ -103,6 +106,7 @@ func addOperationUpdateJobStatusMiddlewares(stack *middleware.Stack, options Opt
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opUpdateJobStatusMiddleware(stack)
 	addOpUpdateJobStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJobStatus(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
@@ -110,6 +114,47 @@ func addOperationUpdateJobStatusMiddlewares(stack *middleware.Stack, options Opt
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opUpdateJobStatusMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdateJobStatusMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdateJobStatusMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*UpdateJobStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.HostPrefix = prefix.String()
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opUpdateJobStatusMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateJobStatusMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateJobStatus(region string) awsmiddleware.RegisterServiceMetadata {

@@ -80,12 +80,40 @@ func addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Opt
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opUpdateDashboardMiddleware(stack)
 	addIdempotencyToken_opUpdateDashboardMiddleware(stack, options)
 	addOpUpdateDashboardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDashboard(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opUpdateDashboardMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdateDashboardMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdateDashboardMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.HostPrefix = "monitor."
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opUpdateDashboardMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateDashboardMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 type idempotencyToken_initializeOpUpdateDashboard struct {

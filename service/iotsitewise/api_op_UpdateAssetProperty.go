@@ -92,12 +92,40 @@ func addOperationUpdateAssetPropertyMiddlewares(stack *middleware.Stack, options
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opUpdateAssetPropertyMiddleware(stack)
 	addIdempotencyToken_opUpdateAssetPropertyMiddleware(stack, options)
 	addOpUpdateAssetPropertyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssetProperty(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opUpdateAssetPropertyMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdateAssetPropertyMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdateAssetPropertyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.HostPrefix = "model."
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opUpdateAssetPropertyMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateAssetPropertyMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 type idempotencyToken_initializeOpUpdateAssetProperty struct {

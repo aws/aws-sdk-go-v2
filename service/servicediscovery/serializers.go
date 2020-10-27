@@ -356,7 +356,6 @@ func (m *awsAwsjson11_serializeOpDiscoverInstances) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	request.HostPrefix = "data-"
 	request.Request.URL.Path = "/"
 	request.Request.Method = "POST"
 	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)

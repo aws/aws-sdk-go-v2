@@ -4,6 +4,7 @@ package iotsitewise
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
@@ -106,11 +107,39 @@ func addOperationUpdateGatewayCapabilityConfigurationMiddlewares(stack *middlewa
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware(stack)
 	addOpUpdateGatewayCapabilityConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewayCapabilityConfiguration(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.HostPrefix = "edge."
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateGatewayCapabilityConfiguration(region string) awsmiddleware.RegisterServiceMetadata {

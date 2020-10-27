@@ -73,7 +73,7 @@ type Options struct {
 	EnableAcceptEncodingGzip bool
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
-	EndpointOptions ResolverOptions
+	EndpointOptions EndpointResolverOptions
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver

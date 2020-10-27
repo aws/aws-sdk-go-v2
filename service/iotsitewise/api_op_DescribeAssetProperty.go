@@ -4,6 +4,7 @@ package iotsitewise
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
@@ -91,11 +92,39 @@ func addOperationDescribeAssetPropertyMiddlewares(stack *middleware.Stack, optio
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opDescribeAssetPropertyMiddleware(stack)
 	addOpDescribeAssetPropertyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetProperty(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opDescribeAssetPropertyMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeAssetPropertyMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeAssetPropertyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.HostPrefix = "model."
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opDescribeAssetPropertyMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opDescribeAssetPropertyMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDescribeAssetProperty(region string) awsmiddleware.RegisterServiceMetadata {

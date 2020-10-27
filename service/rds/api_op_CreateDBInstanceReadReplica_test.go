@@ -71,7 +71,7 @@ func TestClientCreateDBInstanceReadReplica_presignURLCustomization(t *testing.T)
 					return smithyhttp.NopClient{}.Do(r)
 				}),
 				EndpointResolver: EndpointResolverFunc(
-					func(region string, options ResolverOptions) (aws.Endpoint, error) {
+					func(region string, options EndpointResolverOptions) (aws.Endpoint, error) {
 						return aws.Endpoint{
 							URL:           "https://service." + region + ".amazonaws.com",
 							SigningRegion: c.ClientRegion,

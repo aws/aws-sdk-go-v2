@@ -20,6 +20,10 @@ type Resolver struct {
 
 // ResolveEndpoint resolves the service endpoint for the given region and options
 func (r *Resolver) ResolveEndpoint(region string, options Options) (endpoint aws.Endpoint, err error) {
+	if len(region) == 0 {
+		return endpoint, &aws.MissingRegionError{}
+	}
+
 	opt := endpoints.Options{
 		DisableHTTPS: options.DisableHTTPS,
 	}

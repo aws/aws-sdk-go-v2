@@ -4,11 +4,14 @@ package s3control
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
+	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"strings"
 )
 
 // Indicates whether the specified access point currently has a policy that allows
@@ -72,6 +75,7 @@ func addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, 
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addEndpointPrefix_opGetAccessPointPolicyStatusMiddleware(stack)
 	addOpGetAccessPointPolicyStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(options.Region), middleware.Before)
 	addMetadataRetrieverMiddleware(stack)
@@ -79,6 +83,47 @@ func addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, 
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	return nil
+}
+
+type endpointPrefix_opGetAccessPointPolicyStatusMiddleware struct {
+}
+
+func (*endpointPrefix_opGetAccessPointPolicyStatusMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetAccessPointPolicyStatusMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*GetAccessPointPolicyStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.HostPrefix = prefix.String()
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opGetAccessPointPolicyStatusMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointPolicyStatusMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(region string) awsmiddleware.RegisterServiceMetadata {
